@@ -1,0 +1,6176 @@
+# Gujarati translation for skychart
+# Copyright (c) 2022 Rosetta Contributors and Canonical Ltd 2022
+# This file is distributed under the same license as the skychart package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2022.
+msgid ""
+msgstr ""
+"Project-Id-Version: skychart\n"
+"Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
+"POT-Creation-Date: 2021-12-21 13:09+0000\n"
+"PO-Revision-Date: 2022-01-28 18:17+0000\n"
+"Last-Translator: Bhargav Joshi <Unknown>\n"
+"Language-Team: Gujarati <gu@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Launchpad-Export-Date: 2022-02-13 14:56+0000\n"
+"X-Generator: Launchpad (build 619f92fce32b9c4e9124c2dcf63f8ea9f3342386)\n"
+
+#: u_translation.rs102cddss
+msgid "102 CD DSS"
+msgstr "102 CD DSS"
+
+#: u_translation.rs184recommend
+msgid "184 (recommended up to 1,000,000 objects)"
+msgstr "184 (100,000 પદાર્થ સુધી ભલામણ કરેલ)"
+
+#: u_translation.rs50recommende
+msgid "50   (recommended up to 100,000 objects)"
+msgstr "50 (100,000 પદાર્થ સુધી ભલામણ કરેલ)"
+
+#: u_translation.rs732recommend
+msgid "732 (recommended up to 5,000,000 objects)"
+msgstr "732 (5,000,000 પદાર્થ સુધી ભલામણ કરેલ)"
+
+#: u_translation.rs9537largerda
+msgid "9537 (larger datasets)"
+msgstr "9537 (લાંબો ડેટાસેટ)"
+
+#: u_translation.rsabandonyourc
+msgid "Abandon your changes?"
+msgstr "તમારા ફેરફારો છોડી દો?"
+
+#: u_translation.rsabbreviation
+msgid "Abbreviation"
+msgstr "ટુંકાણ"
+
+#: u_translation.rsabort
+msgid "Abort"
+msgstr "છોડી દો"
+
+#: u_translation.rsabortedbyuse
+msgid "Aborted by user"
+msgstr "વપરાશ કરતાં દ્વારા બંધ કરેલ છે"
+
+#: u_translation.rsabortslew
+msgid "Abort Slew"
+msgstr "ફરવાનું રદ કરો"
+
+#: u_translation.rsabout
+msgid "About"
+msgstr "વિશે"
+
+#: u_translation.rsabout2
+#, object-pascal-format
+msgid "About %s"
+msgstr "%s વિશે"
+
+#: u_translation.rsabove
+#, object-pascal-format
+msgid "Above %s"
+msgstr "ઉપર %s"
+
+#: u_translation.rsabrevasteroid
+msgid "Ast"
+msgstr "Ast"
+
+#: u_translation.rsabrevclusternebula
+msgid "C+N"
+msgstr "C+N"
+
+#: u_translation.rsabrevcomet
+msgid "Com"
+msgstr "Com"
+
+#: u_translation.rsabrevdark
+msgid "Drk"
+msgstr "Drk"
+
+#: u_translation.rsabrevdouble
+msgid "Dbl"
+msgstr "Dbl"
+
+#: u_translation.rsabrevgalaxy
+msgid "Gx"
+msgstr "Gx"
+
+#: u_translation.rsabrevgalaxycluster
+msgid "Gcl"
+msgstr "Gcl"
+
+#: u_translation.rsabrevglobularcluster
+msgid "Gb"
+msgstr "Gb"
+
+#: u_translation.rsabrevnebula
+msgid "Nb"
+msgstr "Nb"
+
+#: u_translation.rsabrevopencluster
+msgid "OC"
+msgstr "OC"
+
+#: u_translation.rsabrevplanetarynebula
+msgid "Pl"
+msgstr "Pl"
+
+#: u_translation.rsabrevvariable
+msgid "Var"
+msgstr "Var"
+
+#: u_translation.rsaction
+msgid "Action"
+msgstr "ક્રિયા"
+
+#: u_translation.rsactivateallt
+msgid "Activate all the functions when hidden"
+msgstr "જ્યારે છુપાયેલ હોય ત્યારે તમામ કાર્યોને સક્રિય કરો"
+
+#: u_translation.rsactivatethet
+msgid "Activate the timer event when hidden"
+msgstr "જ્યારે છુપાયેલ હોય ત્યારે સમય ઘટના ને સક્રિય કરો"
+
+#: u_translation.rsactivatevoic
+msgid "Activate voice"
+msgstr "અવાજ સક્રિય કરો"
+
+#: u_translation.rsactualsystem
+msgid "Actual system time"
+msgstr "વાસ્તવિક સિસ્ટમ સમય"
+
+#: u_translation.rsad
+msgid "AD"
+msgstr "AD"
+
+#: u_translation.rsadd
+msgid "Add"
+msgstr "ઉમેરો"
+
+#: u_translation.rsaddasingleel
+msgid "Add a single element to the database. All fields are mandatory."
+msgstr "ડેટાબેઝમાં એક જ તત્વ ઉમેરો. બધા ક્ષેત્રો ફરજિયાત છે."
+
+#: u_translation.rsaddcursorpos
+msgid "Add cursor position"
+msgstr "કર્સર ની સ્થિતિ ઉમેરો"
+
+#: u_translation.rsaddequatoria
+msgid "Show equatorial grid"
+msgstr "વિષુવવૃત્તીય જાળી બતાવો"
+
+#: u_translation.rsadditionalff
+msgid "Additional ffmpeg options"
+msgstr "વધારાના ffmpeg વિકલ્પો"
+
+#: u_translation.rsaddlabel
+msgid "Add label"
+msgstr "નામપટ્ટી દાખલ કરો"
+
+#: u_translation.rsaddlabelfore
+msgid "Add label for every object in the list"
+msgstr "સૂચિમાં દરેક પદાર્થ  માટે નામપટ્ટી ઉમેરો"
+
+#: u_translation.rsaddtelescope
+msgid "Add telescope position"
+msgstr "ટેલિસ્કોપ ની સ્થિતિ ઉમેરો"
+
+#: u_translation.rsaddthealtern
+msgid "Add the alternative names to the index"
+msgstr "વૈકલ્પિક નામ અનુક્રમણિકા માં દાખલ કરો"
+
+#: u_translation.rsaddtoobservi
+#, object-pascal-format
+msgid "Add %s to observing list"
+msgstr "અવલોકન સૂચિમાં %s ઉમેરો"
+
+#: u_translation.rsadjustcolour
+msgid "Adjust colour brightness"
+msgstr "રંગની તેજસ્વીતાને સમાયોજિત કરો"
+
+#: u_translation.rsadjustthevis
+msgid "Adjust the visualisation scale"
+msgstr "વિઝ્યુલાઇઝેશન સ્કેલને સમાયોજિત કરો"
+
+#: u_translation.rsadjustthewin
+msgid "Adjust the window size to the screen DPI"
+msgstr "સ્ક્રીન DPI પર વિન્ડોની સાઇઝ એડજસ્ટ કરો"
+
+#: u_translation.rsadministrato
+msgid "administrator"
+msgstr "વહીવટકર્તા"
+
+#: u_translation.rsadvanced
+msgid "Advanced"
+msgstr "વિગતવાર"
+
+#: u_translation.rsadvancedsear
+msgid "Advanced search"
+msgstr "અગ્રિમ શોધ"
+
+#: u_translation.rsadvancedsett2
+msgid "Advanced setting"
+msgstr "ઊંડાણ માં ગોઠવણ"
+
+#: u_translation.rsage
+msgid "Age"
+msgstr "ઉંમર"
+
+#: u_translation.rsairmass
+msgid "Airmass"
+msgstr "એરમાસ"
+
+#: u_translation.rsalignment
+msgid "Alignment"
+msgstr "ગોઠવણી"
+
+#: u_translation.rsall
+msgid "All"
+msgstr "બધુ"
+
+#: u_translation.rsallconfigura
+msgid "All configuration options"
+msgstr "બધા રૂપરેખાંકન વિકલ્પો"
+
+#: u_translation.rsallobjectsat
+msgid "All the objects at this position"
+msgstr "આ સ્થાન પરના તમામ પદાર્થો"
+
+#: u_translation.rsallsampclien
+msgid "All SAMP clients"
+msgstr "બધા SAMP ક્લાઇન્ટ્સ"
+
+#: u_translation.rsalltablesstr
+#, object-pascal-format
+msgid "%sAll table structures exist."
+msgstr "%s બધા ટેબલ માળખા અસ્તિત્વમાં છે."
+
+#: u_translation.rsalltoolsbar
+msgid "All toolbars"
+msgstr "બધા સાધનપટ્ટી"
+
+#: u_translation.rsalsobesureth
+#, object-pascal-format
+msgid "%sAlso be sure the required database software is installed.%sPlease consult the documentation if you are unsure.%sDo you want to continue?"
+msgstr "%s એ પણ ખાતરી કરો કે જરૂરી ડેટાબેઝ સોફ્ટવેર ઇન્સ્ટોલ કરેલું છે. %s જો તમને ખાતરી ન હોય તો કૃપા કરીને દસ્તાવેજોનો સંપર્ક કરો. %s શું તમે ચાલુ રાખવા માંગો છો?"
+
+#: u_translation.rsalt
+msgid "Alt"
+msgstr "ઉચ"
+
+#: u_translation.rsaltazcoord
+msgid "Alt/Az coord. "
+msgstr "Alt/Az યામો "
+
+#: u_translation.rsaltazcoord2
+msgid "Alt/Az coord."
+msgstr "Alt/Az યામો"
+
+#: u_translation.rsaltazcoordin
+msgid "Alt-Az coordinates"
+msgstr "ઉદ્ધવિગંશ યામો"
+
+#: u_translation.rsaltazmount
+msgid "Alt/Az mount"
+msgstr "Alt/Az  માઉન્ટ"
+
+#: u_translation.rsaltitude
+msgid "Altitude"
+msgstr "ઊંચાઈ"
+
+#: u_translation.rsaltturns
+#, object-pascal-format
+msgid "%sAlt turns:"
+msgstr "%sAlt  વળાંક:"
+
+#: u_translation.rsalways
+msgid "always"
+msgstr "હમેશા"
+
+#: u_translation.rsalwaysaddmer
+msgid "Always add meridian"
+msgstr "હમેશા યમોતર ઉમેરો"
+
+#: u_translation.rsalwaysontop
+msgid "Always on top"
+msgstr "હંમેશા ઉપર"
+
+#: u_translation.rsalwayssavewi
+msgid "Always save without asking."
+msgstr "હમેશા પૂછ્યા વગર સાચવો."
+
+#: u_translation.rsamaximumoffi
+#, object-pascal-format
+msgid "A maximum of %s files can be selected"
+msgstr "મહત્તમ %s ફાઇલો પસંદ કરી શકાય છે"
+
+#: u_translation.rsamplitudemax
+msgid "Amplitude max."
+msgstr "કંપનવિસ્તાર વધુ માં વધુ"
+
+#: u_translation.rsamplitudemin
+msgid "Amplitude min."
+msgstr "કંપનવિસ્તાર ઓછામાં ઓછો"
+
+#: u_translation.rsanewversiono
+#, object-pascal-format
+msgid "A new version %s of Skychart is available.%sDo you want to download it now?"
+msgstr "આકાશી નકશા નું  નવું સંસ્કરણ %s ઉપલબ્ધ છે. %s શું તમે તેને હમણાં ડાઉનલોડ કરવા માંગો છો?"
+
+#: u_translation.rsanimation
+msgid "Animation"
+msgstr "એનિમેશન"
+
+#: u_translation.rsannualproper
+msgid "Annual proper motion"
+msgstr "વાર્ષિક બરાબર ગતિ"
+
+#: u_translation.rsanonymouspas
+msgid "Anonymous password"
+msgstr "અનામી પાસવર્ડ"
+
+#: u_translation.rsantialiasdra
+msgid "Anti Alias drawing"
+msgstr "વિરોધી ઉપનામ ચિત્ર"
+
+#: u_translation.rsapparent
+msgid "Apparent"
+msgstr "દેખીતું"
+
+#: u_translation.rsappearance
+msgid "Appearance"
+msgstr "દેખાવ"
+
+#: u_translation.rsappendtoanex
+msgid "Append to an existing catalog "
+msgstr "હાલની સૂચિમાં ઉમેરો "
+
+#: u_translation.rsappendtocurr
+msgid "Append to current file"
+msgstr "વર્તમાન ફાઇલમાં ઉમેરો"
+
+#: u_translation.rsapply
+msgid "Apply"
+msgstr "લાગુ કરો"
+
+#: u_translation.rsapplychanget
+msgid "Apply changes to all charts"
+msgstr "બધા નકશા માં ફેરફાર અંકિત કરો"
+
+#: u_translation.rsapril
+msgid "April"
+msgstr "એપ્રિલ"
+
+#: u_translation.rsarchivethisi
+msgid "Archive this image?"
+msgstr "આર્કાઇવ આ છબી"
+
+#: u_translation.rsarchivetodir
+msgid "Archive to directory:"
+msgstr "નિર્દેશિકા માં આર્કાઇવ"
+
+#: u_translation.rsargumentofpe
+msgid "Argument of perihelion"
+msgstr "સુર્ય નજીક ની ચર્ચા"
+
+#: u_translation.rsaroundcurren
+msgid "Around current position"
+msgstr "વર્તમાન સ્થિતિની આસપાસ"
+
+#: u_translation.rsartificialsa
+msgid "Artificial satellites"
+msgstr "કૃત્રિમ ઉપગ્રહો"
+
+#: u_translation.rsartificialsa2
+msgid "Artificial satellite"
+msgstr "કૃત્રિમ ઉપગ્રહો"
+
+#: u_translation.rsartificialsa3
+msgid "Artificial satellites TLE (one URL by line)"
+msgstr "કૃત્રિમ ઉપગ્રહો TLE ( લાઇન દ્વારા એક  URL)"
+
+#: u_translation.rsasampapplica
+msgid "A SAMP application send a table to load"
+msgstr "SAMP એપ્લિકેશન લોડ કરવા માટે ટેબલ મોકલે છે"
+
+#: u_translation.rsasampapplica2
+msgid "A SAMP application send an image to load"
+msgstr "SAMP એપ્લિકેશન લોડ કરવા માટે એક છબી મોકલે છે"
+
+#: u_translation.rsasampapplica3
+msgid "A SAMP application send coordinates location"
+msgstr "SAMP એપ્લિકેશન યામ ના  સ્થાન મોકલે છે"
+
+#: u_translation.rsascomdrivere
+msgid "The ASCOM driver report an error"
+msgstr "ASCOM ડ્રાઇવર ભૂલની જાણ કરે છે"
+
+#: u_translation.rsascomremote
+#, object-pascal-format
+msgid "ASCOM Alpaca is available on %s"
+msgstr "ASCOM અલ્પાકા %s પર ઉપલબ્ધ છે"
+
+#: u_translation.rsascomtelesc
+msgid "ASCOM telescope interface"
+msgstr "ASCOM ટેલિસ્કોપ ઇન્ટરફેસ"
+
+#: u_translation.rsaskconfirmat
+msgid "Ask confirmation before any Internet connection"
+msgstr "કોઈપણ ઈન્ટરનેટ કનેક્શન પહેલા સમર્થન પૂછો"
+
+#: u_translation.rsaskforconfir
+msgid "Ask for confirmation before to jump to coordinates"
+msgstr "યામો પર જવા પહેલાં પુષ્ટિ માટે પૂછો"
+
+#: u_translation.rsaskforconfir2
+msgid "Ask for confirmation before to load the image"
+msgstr "છબી લોડ કરતા પહેલા સમર્થન માટે પૂછો"
+
+#: u_translation.rsaskforconfir3
+msgid "Ask for confirmation before to load the table"
+msgstr "કોષ્ટક લોડ કરતા પહેલા પુષ્ટિ માટે પૂછો"
+
+#: u_translation.rsasonscreenbl
+msgid "As on screen (black background!)"
+msgstr "પડદા  પરની જેમ (કાળી પૃષ્ઠભૂમિ!)"
+
+#: u_translation.rsasterism
+msgid "Asterism"
+msgstr "તારાપૂંજ"
+
+#: u_translation.rsasteroid
+msgid "Asteroid"
+msgstr "લઘુગ્રહ"
+
+#: u_translation.rsasteroidelem
+msgid "Sources for asteroid elements in MPC format (one URL per line)"
+msgstr "MPC ફોર્મેટમાં એસ્ટરોઇડ તત્વો માટે સ્ત્રોતો (રેખા દીઠ એક URL)"
+
+#: u_translation.rsasteroidelem2
+msgid "Asteroid elements"
+msgstr "લઘુગ્રહ તત્વો"
+
+#: u_translation.rsasteroidsfro
+msgid "asteroids from the file"
+msgstr "ફાઇલ માંથી લઘુગ્રહો"
+
+#: u_translation.rsasteroidupda
+msgid "Asteroid update successful"
+msgstr "લઘુગ્રહ અપડેટ સફળ"
+
+#: u_translation.rsastrometricj
+msgid "Astrometric J2000"
+msgstr "ખગોલિય J2000"
+
+#: u_translation.rsastronomical
+msgid "Astronomical"
+msgstr "ખગોળીય"
+
+#: u_translation.rsastronomical2
+msgid "Astronomical twilight"
+msgstr "ખગોળીય સંધિકાળ"
+
+#: u_translation.rsat
+msgid "at"
+msgstr "ખાતે"
+
+#: u_translation.rsatmosphericr
+msgid "Atmospheric refraction"
+msgstr "વાતાવરણીય પ્રત્યાવર્તન"
+
+#: u_translation.rsaugust
+msgid "August"
+msgstr "ઑગસ્ટ"
+
+#: u_translation.rsauthors
+msgid "Authors"
+msgstr "લેખકો"
+
+#: u_translation.rsautomatic
+msgid "Automatic"
+msgstr "સ્વચલિત"
+
+#: u_translation.rsautomaticall2
+msgid "Automatically optimize the labels placement"
+msgstr "નામપટ્ટી ની જગ્યા ને આપમેળે ઑપ્ટિમાઇઝ કરો"
+
+#: u_translation.rsautorefresh
+msgid "Auto-refresh"
+msgstr "આપમેડે તાજું કરો"
+
+#: u_translation.rsautorefreshe
+msgid "Auto-refresh every "
+msgstr "સ્વતઃ તાજું કરો દરેક "
+
+#: u_translation.rsauxiliaryfil
+msgid "Auxiliary files"
+msgstr "સહાયક ફાઇલ્સ"
+
+#: u_translation.rsavailableact
+msgid "Available actions"
+msgstr "ઉપલબ્ધ ક્રિયાઓ"
+
+#: u_translation.rsaz
+msgid "Az"
+msgstr "દીગંશ"
+
+#: u_translation.rsazimuth
+msgid "Azimuth"
+msgstr "દિગંશ"
+
+#: u_translation.rsazimuthalcoo
+msgid "Azimuthal coordinates"
+msgstr "શિરોબિંદુને લગતા યામો"
+
+#: u_translation.rsazimuthorigi
+msgid "Azimuth origin"
+msgstr "દિગંશ મૂળ"
+
+#: u_translation.rsazturns
+#, object-pascal-format
+msgid "%sAz turns:"
+msgstr "%sAz વળાંક:"
+
+#: u_translation.rsb
+msgid "B"
+msgstr "B"
+
+#: u_translation.rsback
+msgid "Back"
+msgstr "પાછા"
+
+#: u_translation.rsbackground
+msgid "Background"
+msgstr "પાશ્વભાગ"
+
+#: u_translation.rsbackgroundpi
+msgid "Background picture"
+msgstr "પૃષ્ઠભૂમિ ચિત્ર"
+
+#: u_translation.rsbayerletter
+msgid "Bayer letter"
+msgstr "બેયર પત્ર"
+
+#: u_translation.rsbc
+msgid "BC"
+msgstr "BC"
+
+#: u_translation.rsbeginprocess
+#, object-pascal-format
+msgid "Begin processing for jd=%s / %s"
+msgstr "jd=%s / %s માટે પ્રક્રિયા શરૂ કરો"
+
+#: u_translation.rsbesuretheyus
+msgid "Be sure they use a DOS line end format."
+msgstr "ખાતરી કરો કે તેઓ DOS લાઇન એન્ડ ફોર્મેટનો ઉપયોગ કરે છે."
+
+#: u_translation.rsbigstars
+msgid "Big stars"
+msgstr "મોટા તારાઓ"
+
+#: u_translation.rsbii
+msgid "BII"
+msgstr "BII"
+
+#: u_translation.rsbinaryindexe
+msgid "Binary indexed catalog"
+msgstr "દ્વિસંગી અનુક્રમિત સૂચિ"
+
+#: u_translation.rsbitmap
+msgid "Bitmap"
+msgstr "બિટમેપ"
+
+#: u_translation.rsbitmapfile
+msgid "Bitmap file"
+msgstr "બિટમેપ ફાઇલ"
+
+#: u_translation.rsblackonwhite
+msgid "Black on white"
+msgstr "સફેદ પર કાળો"
+
+#: u_translation.rsblackwhite
+msgid "Black/white"
+msgstr "કાળું/સફેદ"
+
+#: u_translation.rsblackwhiteli
+msgid "Black/white, line mode"
+msgstr "કાળું /સફેદ, રેખા મોડ"
+
+#: u_translation.rsblinkingpict
+msgid "Blinking picture"
+msgstr "ઝબકતું ચિત્ર"
+
+#: u_translation.rsbluemagnitud
+msgid "Blue magnitude"
+msgstr "ભૂરી તીવ્રતા"
+
+#: u_translation.rsblurred
+msgid "Blurred"
+msgstr "ઝાંખું"
+
+#: u_translation.rsbottom
+msgid "Bottom"
+msgstr "નીચે"
+
+#: u_translation.rsboundary
+msgid "Boundary"
+msgstr "સીમાઓ"
+
+#: u_translation.rsbrighter
+msgid "Brighter"
+msgstr "તેજસ્વી"
+
+#: u_translation.rsbrightest
+msgid "Brightest"
+msgstr "સૌથી તેજસ્વી"
+
+#: u_translation.rsbrighteststa
+msgid "Brightest star magnitude"
+msgstr "સૌથી તેજસ્વી તારાની તીવ્રતા"
+
+#: u_translation.rsbrightnebula
+msgid "Bright nebula"
+msgstr "તેજસ્વી નિહારિકા"
+
+#: u_translation.rsbrightness
+msgid "Brightness"
+msgstr "તેજસ્વિતા"
+
+#: u_translation.rsbrightstars
+msgid "Bright stars"
+msgstr "તેજસ્વી તારાઓ"
+
+#: u_translation.rsbrightstarss
+msgid "Bright star size"
+msgstr "તેજસ્વી તારા નું કદ"
+
+#: u_translation.rsbuildcatalog
+msgid "Build catalog"
+msgstr "સૂચિપત્ર બનાવો"
+
+#: u_translation.rsbutneverfain
+msgid "But never fainter than magnitude"
+msgstr "પરંતુ કદ કરતાં વધુ મંદ નહીં"
+
+#: u_translation.rsbutton
+msgid "Button"
+msgstr "બટન"
+
+#: u_translation.rsbuttonsize
+msgid "Button size"
+msgstr "બટનનું કદ"
+
+#: u_translation.rsby
+msgid "by"
+msgstr "દ્વારા"
+
+#: u_translation.rsbyname
+msgid "By name"
+msgstr "નામ દ્વારા"
+
+#: u_translation.rscalendar
+msgid "Calendar"
+msgstr "તારીખયુ"
+
+#: u_translation.rscalendargrap
+msgid "Calendar graph setting"
+msgstr "કૅલેન્ડર ગ્રાફ સેટિંગ"
+
+#: u_translation.rscancel
+msgid "Cancel"
+msgstr "રદ કરો"
+
+#: u_translation.rscancel2
+#, object-pascal-format
+msgid "Cancel %s"
+msgstr "રદ કરો %s"
+
+#: u_translation.rscancelwrongz
+#, object-pascal-format
+msgid "Cancel, wrong zip file ?? %s"
+msgstr "રદ કરો, ખોટી zip ફાઇલ ?? %s"
+
+#: u_translation.rscannotcomput
+msgid "Cannot compute satellites."
+msgstr "ઉપગ્રહોની ગણતરી કરી શકાતી નથી."
+
+#: u_translation.rscannotconnec
+#, object-pascal-format
+msgid "Cannot connect to server. %s"
+msgstr "સર્વર સાથે જોડાણ કરી શકાતું નથી. %s"
+
+#: u_translation.rscannotdownlo
+msgid "Cannot download PDF help now"
+msgstr "PDF સહાય હમણાં ડાઉનલોડ કરી શકાતી નથી"
+
+#: u_translation.rscannotdraw
+msgid "Cannot draw"
+msgstr "દોરી શકતા નથી"
+
+#: u_translation.rscannotgetyou
+msgid "Cannot get your IP address, or no location found for this address."
+msgstr "તમારું IP સરનામું મેળવી શકાતું નથી, અથવા આ સરનામા માટે કોઈ સ્થાન મળ્યું નથી."
+
+#: u_translation.rscannotopenda
+#, object-pascal-format
+msgid "%sCannot open database %s! %s"
+msgstr "%s ડેટાબેઝ %s ખોલી શકાતો નથી! %s"
+
+#: u_translation.rscannotwritet
+msgid "Cannot write to"
+msgstr "ને લખી શકતા નથી"
+
+#: u_translation.rscaption
+msgid "Caption"
+msgstr "શીર્ષક"
+
+#: u_translation.rscartesian
+msgid "Cartesian"
+msgstr "કાર્ટેશિયન"
+
+#: u_translation.rscascade
+msgid "Cascade"
+msgstr "ધોધવાળું"
+
+#: u_translation.rscat
+msgid "Cat."
+msgstr "કેટ."
+
+#: u_translation.rscatalog
+msgid "Catalog"
+msgstr "સૂચિ"
+
+#: u_translation.rscataloglongn
+msgid "Catalog long name"
+msgstr "સૂચિ નું લાંબુ નામ"
+
+#: u_translation.rscatalogsavai
+#, object-pascal-format, fuzzy, badformat
+msgid "%s Catalogs available"
+msgstr "%સ સૂચિપત્ર ઉપલબ્ધ"
+
+#: u_translation.rscatalogshort
+msgid "Catalog short name"
+msgstr "સૂચિ નું ટૂંકું નામ"
+
+#: u_translation.rscatalogstrin
+msgid "Catalog string"
+msgstr "સૂચિપત્ર શબ્દો"
+
+#: u_translation.rscatalogtype
+msgid "Catalog type"
+msgstr "સૂચિ નો પ્રકાર"
+
+#: u_translation.rsccw
+#, object-pascal-format
+msgid "%sCCW"
+msgstr "%sCCW"
+
+#: u_translation.rscdcnebulae
+msgid "CdC deep sky"
+msgstr "CdC ઊંડું આકાશ"
+
+#: u_translation.rscdcnebulaeca
+msgid "CdC deep sky catalogs and settings"
+msgstr "CdC ઊંડા આકાશ ના સૂચિપત્ર અને ગોઠવણ"
+
+#: u_translation.rscdcobsoletec
+msgid "Obsolete CdC catalogs and settings (you can still use them)"
+msgstr "અપ્રચલિત CdC કેટલોગ અને સેટિંગ્સ (તમે હજુ પણ તેનો ઉપયોગ કરી શકો છો)"
+
+#: u_translation.rscdcstars
+msgid "CdC stars"
+msgstr "CdC તારાઓ"
+
+#: u_translation.rscdcstarscata
+msgid "CdC star catalogs and settings"
+msgstr "CdC તારા સૂચિપત્રો અને સેટિંગ્સ"
+
+#: u_translation.rscdctranslator
+msgid "Patrick Chevalley, Marc Fokker"
+msgstr "પેટ્રિક ચેવલી, માર્ક ફોકર"
+
+#: u_translation.rscenter
+msgid "Center"
+msgstr "કેન્દ્ર"
+
+#: u_translation.rscenterobject
+msgid "Centre on this object"
+msgstr "આ પદાર્થ ને મધ્ય માં"
+
+#: u_translation.rscentralmerid
+msgid "Central meridian"
+msgstr "ખગોલિય મધ્યાહન વૃત"
+
+#: u_translation.rscentralstarb
+msgid "Central star B magnitude"
+msgstr "મધ્ય તારા B તેજસ્વીતા"
+
+#: u_translation.rscentralstarv
+msgid "Central star V magnitude"
+msgstr "મધ્ય તારા V તેજસ્વીતા"
+
+#: u_translation.rscentre
+msgid "Centre on"
+msgstr "મધ્ય માં"
+
+#: u_translation.rschangedrawin
+msgid "Change drawing mode"
+msgstr "ચિત્રકામ ની ઠબ બદલો"
+
+#: u_translation.rschangemousem
+msgid "Change mouse mode"
+msgstr "માઉસ મોડ બદલો"
+
+#: u_translation.rschangetothis
+msgid "Change to this setting will restart the program now!"
+msgstr "આ સેટિંગમાં ફેરફાર હવે પ્રોગ્રામને ફરીથી શરૂ કરશે!"
+
+#: u_translation.rschart
+msgid "Chart"
+msgstr "નકશો"
+
+#: u_translation.rschart2
+msgid "chart:"
+msgstr "નકશા:"
+
+#: u_translation.rschartcenterc
+msgid "Add a crosshair to the chart center"
+msgstr "નકશા ના મધ્ય માં ક્રોસહેર ઉમેરો"
+
+#: u_translation.rschartcoordin
+msgid "Chart, coordinates"
+msgstr "નકશા, યામો"
+
+#: u_translation.rschartcoordin2
+msgid "Chart coordinate systems"
+msgstr "નકશા ના યામો ની પદ્ધતિ"
+
+#: u_translation.rschartinforma
+msgid "Chart information"
+msgstr "નકશા ની માહિતી"
+
+#: u_translation.rschartlegend
+msgid "Chart legend"
+msgstr "નકશા ના લિજેન્ડસ"
+
+#: u_translation.rschartsetting
+msgid "Chart settings"
+msgstr "નકશા નું ગોઠવણ"
+
+#: u_translation.rschartsync
+msgid "Time sync"
+msgstr "સમય મેળવણી"
+
+#: u_translation.rschart_
+msgid "Chart_"
+msgstr "નકશો_"
+
+#: u_translation.rscheck
+msgid "Check"
+msgstr "ચકાસો"
+
+#: u_translation.rschecklist
+msgid "CheckList"
+msgstr "ચેકલીસ્ટ"
+
+#: u_translation.rschoosecolour
+msgid "Choose colours for the object types"
+msgstr "પદાર્થ ના પ્રકાર માટે રંગ નક્કી કરો"
+
+#: u_translation.rscircle
+msgid "Circle"
+msgstr "વર્તુળ"
+
+#: u_translation.rscircumpolar
+msgid "Circumpolar"
+msgstr "પરિધ્રુવીય"
+
+#: u_translation.rscivil
+msgid "Civil"
+msgstr "સિવિલ"
+
+#: u_translation.rsclass
+msgid "Class"
+msgstr "વર્ગ"
+
+#: u_translation.rscleanupmap
+msgid "Cleanup map"
+msgstr "સફાઈ નકશો"
+
+#: u_translation.rsclear
+msgid "Clear"
+msgstr "સાફ કરો"
+
+#: u_translation.rsclearall
+msgid "Clear all"
+msgstr "બધા દૂર કરો"
+
+#: u_translation.rscleartarget
+msgid "Clear Target"
+msgstr "લક્ષ્ય સ્પષ્ટ કરો"
+
+#: u_translation.rsclicktochang
+msgid "Click to change the colour "
+msgstr "રંગ બદલવા માટે દબાવો "
+
+#: u_translation.rsclientconnec
+msgid "Client connection keep alive"
+msgstr "ક્લાયન્ટ કનેક્શન જીવંત રાખો"
+
+#: u_translation.rsclientlist
+msgid "Client list"
+msgstr "ક્લાઇન્ટ્સ સૂચિ"
+
+#: u_translation.rsclock
+msgid "Clock"
+msgstr "ઘડિયાળ"
+
+#: u_translation.rsclose
+msgid "Close"
+msgstr "બંધ કરો"
+
+#: u_translation.rsclosechart
+msgid "Close chart"
+msgstr "નકશો બંધ કરો"
+
+#: u_translation.rscloseconnect
+msgid "Close connection"
+msgstr "જોડાણ બંધ કરો"
+
+#: u_translation.rsclosedcontou
+msgid "Closed contour"
+msgstr "બંધ સમોચ્ચ"
+
+#: u_translation.rsclosefiles
+msgid "Close files"
+msgstr "ફાઇલ્સ બંધ કરો"
+
+#: u_translation.rsclusterandne
+msgid "Cluster and nebula"
+msgstr "ગુચ્છ અને નિહારિકા"
+
+#: u_translation.rscollapse
+msgid "Collapse"
+msgstr "સંકુચિત કરો"
+
+#: u_translation.rscolor
+msgid "Colour"
+msgstr "રંગ"
+
+#: u_translation.rscolorindex
+msgid "Colour index"
+msgstr "રંગ સૂચિ"
+
+#: u_translation.rscolorlinemod
+msgid "Colour, line mode"
+msgstr "રંગ, રેખા મોડ"
+
+#: u_translation.rscolorsaturat
+msgid "Colour saturation"
+msgstr "રંગ સંતૃપ્તિ"
+
+#: u_translation.rscolumns
+msgid "Columns"
+msgstr "સ્તંભો"
+
+#: u_translation.rscombobox
+msgid "Combo box"
+msgstr "કૉમ્બો બૉક્સ"
+
+#: u_translation.rscomet
+msgid "Comet"
+msgstr "ધૂમકેતુ"
+
+#: u_translation.rscometelement
+msgid "Sources for comet elements in MPC format (one URL per line)"
+msgstr "MPC ફોર્મેટમાં ધૂમકેતુ તત્વો માટે સ્ત્રોતો (પ્રતિ લીટી એક URL)"
+
+#: u_translation.rscometelement2
+msgid "Comet elements"
+msgstr "ધૂમકેતુ તત્વો"
+
+#: u_translation.rscometupdates
+msgid "Comet update successful"
+msgstr "ધૂમકેતુ અપડેટ સફળ"
+
+#: u_translation.rscommandfound
+msgid "Command found OK."
+msgstr "નિર્દેશ બરાબર મડયો"
+
+#: u_translation.rscommandnotfo
+msgid "Command not found!"
+msgstr "નિર્દેશ મડયો નથી"
+
+#: u_translation.rscommandtouse
+msgid "Command to use to process the file."
+msgstr "ફાઇલ પર પ્રક્રિયા કરવા માટે વાપરવા માટેનો આદેશ."
+
+#: u_translation.rscommonname
+msgid "Common name"
+msgstr "સામાન્ય નામ"
+
+#: u_translation.rscompassroses
+msgid "Compass rose size"
+msgstr "હોકાયંત્ર નું કદ વધ્યું"
+
+#: u_translation.rscompilationa
+msgid "Compilation and save successful"
+msgstr "સંકલન અને સાચવો સફળ"
+
+#: u_translation.rscompiledwith
+msgid "Compiled with:"
+msgstr "આની સાથે સંકલિત:"
+
+#: u_translation.rscomponent
+msgid "Component"
+msgstr "ભાગ"
+
+#: u_translation.rscomponent1ma
+msgid "Component 1 magnitude"
+msgstr "ઘટક 1 તીવ્રતા"
+
+#: u_translation.rscomponent2ma
+msgid "Component 2 magnitude"
+msgstr "ઘટક 2 તીવ્રતા"
+
+#: u_translation.rscompute
+msgid "Compute"
+msgstr "ગણતરી કરો"
+
+#: u_translation.rscomputeaster
+msgid "Compute asteroid data for this month"
+msgstr "આ મહિના ના લઘુગ્રહો ના આંકડા ની ગણતરી કરો"
+
+#: u_translation.rscomputefield
+msgid "Compute field"
+msgstr "ફિલ્ડ ની ગણતરી કરો"
+
+#: u_translation.rscomputerises
+msgid "Compute rise/set time relative to this line"
+msgstr "આ લાઇનની સાપેક્ષમાં વધારો/સેટ સમયની ગણતરી કરો"
+
+#: u_translation.rsconfiguratio
+msgid "Configuration"
+msgstr "રુપરેખાંકન"
+
+#: u_translation.rsconfigure
+msgid "Configure"
+msgstr "રૂપરેખાંકિત કરો"
+
+#: u_translation.rsconfigurethe
+msgid "Configure the program"
+msgstr "પ્રોગ્રામને ગોઠવો"
+
+#: u_translation.rsconfirmation
+msgid "Confirmation prompt before saving a file."
+msgstr "ફાઇલ સાચવતા પહેલા પુષ્ટિકરણ પ્રોમ્પ્ટ."
+
+#: u_translation.rsconfirmfiled
+msgid "Confirm file delete: "
+msgstr "ફાઇલ કાઢી નાખવાની પુષ્ટિ કરો: "
+
+#: u_translation.rsconnect
+msgid "Connect"
+msgstr "જોડાવો"
+
+#: u_translation.rsconnected
+msgid "Connected"
+msgstr "જોડાયેલ"
+
+#: u_translation.rsconnectedfro
+#, object-pascal-format
+msgid "%s connected with %s, using chart %s, connected time:%s"
+msgstr "%s  જોડાયેલ છે %s, નકશો વાપરી %s , જોડાયેલ સમય: %s"
+
+#: u_translation.rsconnectedtos
+#, object-pascal-format
+msgid "Connected to the SQL database %s"
+msgstr "SQL ડેટાબેસ થી જોડાયેલ છે %s"
+
+#: u_translation.rsconnectionli
+msgid "Connection lines between each position"
+msgstr "દરેક સ્થિતિ વચ્ચે જોડાણ રેખાઓ"
+
+#: u_translation.rsconnectionto
+msgid "Connection to INDI server failed!"
+msgstr "INDI સર્વર સાથે કનેક્શન નિષ્ફળ થયું!"
+
+#: u_translation.rsconnectteles
+msgid "Connect telescope"
+msgstr "ટેલિસ્કોપ સાથે જોડો"
+
+#: u_translation.rsconnecttosam
+msgid "Connect to SAMP hub"
+msgstr "SAMP હબથી જોડાણ કરો"
+
+#: u_translation.rsconnecttosuc
+#, object-pascal-format
+msgid "Connection to %s, %s successful.%s"
+msgstr "%s સાથે કનેક્શન, %s સફળ.%s"
+
+#: u_translation.rsconstellatio
+msgid "Constellation"
+msgstr "નક્ષત્ર"
+
+#: u_translation.rsconstellatio2
+msgid "Constellation figures"
+msgstr "નક્ષત્રો ની આકૃતિ"
+
+#: u_translation.rsconstellatio3
+msgid "Constellation figures file name: "
+msgstr "નક્ષત્રો ની આકૃતિ ના ફાઇલ નામ: "
+
+#: u_translation.rsconstellatio4
+msgid "Constellation boundaries"
+msgstr "નક્ષત્ર સીમાઓ"
+
+#: u_translation.rsconstellatio5
+msgid "Constellation boundaries file name: "
+msgstr "નક્ષત્ર સીમાઓ ફાઇલ નામ: "
+
+#: u_translation.rsconstellatio6
+msgid "Constellation label"
+msgstr "નક્ષત્ર નામાંકન"
+
+#: u_translation.rsconstellatio7
+msgid "Constellation name"
+msgstr "નક્ષત્ર ના નામ"
+
+#: u_translation.rscontrast
+msgid "Contrast"
+msgstr "વિષમતા"
+
+#: u_translation.rscontrolpanel
+msgid "Control panel"
+msgstr "નિયંત્રણ ફલક"
+
+#: u_translation.rscontrolpanel2
+msgid "Control panel command "
+msgstr "નિયંત્રણ પેનલ આદેશ "
+
+#: u_translation.rsconvertcatal
+#, object-pascal-format
+msgid "Convert catalog file %s"
+msgstr "સૂચિપત્ર ફાઇલ %s  માં ફેરવો"
+
+#: u_translation.rsconvertcatal2
+msgid "Convert catalog files"
+msgstr "સૂચિપત્ર ફાઇલ ફેરવો"
+
+#: u_translation.rscooordinates
+msgid "Coordinate system to use with the clients"
+msgstr "ક્લાયન્ટ સાથે નો યામ પદ્ધતિ નો ઉપયોગ"
+
+#: u_translation.rscoord
+msgid "Coord."
+msgstr "યામો"
+
+#: u_translation.rscoordgrid
+msgid "Coord. grid"
+msgstr "યામ જાળી"
+
+#: u_translation.rscoordinates
+msgid "Coordinates:"
+msgstr "યામો :"
+
+#: u_translation.rscoordinatese
+msgid "Coordinates equinox"
+msgstr "સમપ્રકાશીય સમન્વય"
+
+#: u_translation.rscoordinatesg
+msgid "Coordinates grid"
+msgstr "યામ જાળી"
+
+#: u_translation.rscopy
+msgid "Copy"
+msgstr "નકલ કરો"
+
+#: u_translation.rscopycoordina
+msgid "Copy coordinates"
+msgstr "યામો ની નકલ કરો"
+
+#: u_translation.rscopyfrom
+msgid "Copy from:"
+msgstr "આમાંથી નકલ કરો:"
+
+#: u_translation.rscoreradius
+msgid "Core radius"
+msgstr "હાર્દ ત્રિજ્યા"
+
+#: u_translation.rscorrelated
+msgid "Correlated"
+msgstr "સહસંબંધિત"
+
+#: u_translation.rscouldnotload
+msgid "Could not load library "
+msgstr "લાઇબ્રેરી લોડ કરી શકાઈ નથી "
+
+#: u_translation.rscount
+msgid "Count"
+msgstr "ગણતરી"
+
+#: u_translation.rscountrytimez
+msgid "Country timezone"
+msgstr "દેશ નો સમય પ્રદેશ"
+
+#: u_translation.rscreateanewch
+msgid "Create a new chart"
+msgstr "નવો નકશો તૈયાર કરો"
+
+#: u_translation.rscreateasearc
+msgid "Create a search index file"
+msgstr "અનુક્રમણિકા શોધક ફાઇલ બનાવો"
+
+#: u_translation.rscreatefiles
+msgid "Create files"
+msgstr "ફાઇલ્સ બનાવો"
+
+#: u_translation.rscreateheader
+msgid "Create header"
+msgstr "મથાળું બનાવો"
+
+#: u_translation.rscreatepostsc
+msgid "Create postscript chart. Please wait..."
+msgstr "પોસ્ટસ્ક્રીપ્ટ નકશો બનાવો. મહેરબાની કરી રાહ જુવો"
+
+#: u_translation.rscreaterasterwh
+#, object-pascal-format
+msgid "Create raster chart %d x %d. Please wait..."
+msgstr "રાસ્ટર નકશો બનાવો %d x  %d . મહેરબાની કરી થોભો ..."
+
+#: u_translation.rscrossmeridia
+msgid "Cross meridian"
+msgstr "ક્રોસ યામયોતર"
+
+#: u_translation.rsculmination
+msgid "Culmination"
+msgstr "પરાકાષ્ઠા"
+
+#: u_translation.rscurrentchart
+msgid "Current chart coordinate system"
+msgstr "વર્તમાન નકશા ની યામ પદ્ધતિ"
+
+#: u_translation.rscurrentdate
+msgid "Date of validity"
+msgstr "માન્યતાની તારીખ"
+
+#: u_translation.rscursor
+msgid "Cursor"
+msgstr "કર્સર"
+
+#: u_translation.rscw
+#, object-pascal-format
+msgid "%sCW"
+msgstr "%sCW"
+
+#: u_translation.rsdarknebula
+msgid "Dark nebula"
+msgstr "શ્યામ નિહારિકા"
+
+#: u_translation.rsdarknight
+msgid "Dark night"
+msgstr "અંધારી રાત"
+
+#: u_translation.rsdash1
+msgid "Dash"
+msgstr "ત્રુટક"
+
+#: u_translation.rsdashdot1
+msgid "Dash dot"
+msgstr "ત્રુટક ટપકું"
+
+#: u_translation.rsdashdotdot1
+msgid "Dash dot dot"
+msgstr "ત્રુટક ટપકું ટપકું"
+
+#: u_translation.rsdatabasefile
+msgid "Database file: "
+msgstr "ડેટાબેસ ફાઇલ "
+
+#: u_translation.rsdatabaseopen
+#, object-pascal-format
+msgid "%sDatabase %s opened.%s"
+msgstr "%s ડેટાબેઝ %s ખોલ્યું. %s"
+
+#: u_translation.rsdatabasesett
+msgid "Database setting..."
+msgstr "ડેટાબેસ નું આયોજન"
+
+#: u_translation.rsdatafiles
+msgid "Data files:"
+msgstr "ડેટા ફાઇલ"
+
+#: u_translation.rsdatafilescdr
+msgid "Data files, CD-ROM"
+msgstr "ડેટા ફાઇલો, સીડી-રોમ"
+
+#: u_translation.rsdatamaintena
+msgid "Data maintenance"
+msgstr "ડેટા ની જાળવણી"
+
+#: u_translation.rsdatapreview
+msgid "Data preview"
+msgstr "ડેટા પૂર્વાવલોકન"
+
+#: u_translation.rsdatastartonl
+#, object-pascal-format
+msgid "Data starts on line %s"
+msgstr "ડેટા રેખા %s પર શરૂ થાય છે"
+
+#: u_translation.rsdatatype
+msgid "Data Type"
+msgstr "માહિતિ પ્રકાર"
+
+#: u_translation.rsdate
+msgid "Date"
+msgstr "તારીખ"
+
+#: u_translation.rsdateformat
+msgid "Date format"
+msgstr "તારીખ બંધારણ"
+
+#: u_translation.rsdatefrom
+msgid "Date from"
+msgstr "તારીખ થી"
+
+#: u_translation.rsdatesmaytake
+msgid "dates may take a long time. Do you want to continue?"
+msgstr "તારીખ કદાચ લાંબો સમય લે. શું તમે ચાલુ રાખવા માંગો છો?"
+
+#: u_translation.rsdatetime
+msgid "Date / time"
+msgstr "તારીખ/ સમય"
+
+#: u_translation.rsdatetime2
+msgid "Date/time"
+msgstr "તારીખ /સમય"
+
+#: u_translation.rsday
+msgid "Day"
+msgstr "દિવસ"
+
+#: u_translation.rsdays
+msgid "days"
+msgstr "દિવસો"
+
+#: u_translation.rsdaytime
+msgid "Day Time"
+msgstr "દિવસ સમય"
+
+#: u_translation.rsdbinsertfail
+#, object-pascal-format
+msgid "DB insert failed for %s: %s"
+msgstr "%s માટે DB દાખલ નિષ્ફળ થયું: %s"
+
+#: u_translation.rsdbname
+msgid "DB Name:"
+msgstr "DB નામ:"
+
+#: u_translation.rsde
+msgid "DE"
+msgstr "DE"
+
+#: u_translation.rsdec
+msgid "DEC"
+msgstr "DEC"
+
+#: u_translation.rsdecember
+msgid "December"
+msgstr "ડિસેમ્બર"
+
+#: u_translation.rsdecimaldegre
+msgid "Decimal degrees"
+msgstr "દશાંશ અંશ"
+
+#: u_translation.rsdecimalhours
+msgid "Decimal hours"
+msgstr "દશાંશ કલાક"
+
+#: u_translation.rsdecimalsouth
+msgid "Decimal south polar distance"
+msgstr "દશાંશ દક્ષિણ ધ્રુવ અંતર"
+
+#: u_translation.rsdeclination
+msgid "Declination"
+msgstr "ક્રાંતિ"
+
+#: u_translation.rsdecoptions
+msgid "DEC options"
+msgstr "DEC વિકલ્પો"
+
+#: u_translation.rsdecrementtim
+msgid "Decrement time"
+msgstr "સમય ઘટાડો"
+
+#: u_translation.rsdecturns
+msgid "DEC turns: "
+msgstr "DEC વળાંક: "
+
+#: u_translation.rsdecturns2
+#, object-pascal-format
+msgid "%sDEC turns:"
+msgstr "%s DEC વળાંક:"
+
+#: u_translation.rsdeepskycolou
+msgid "Deep sky colour"
+msgstr "ઊંડા આકાશ રંગ"
+
+#: u_translation.rsdeepskyobjec
+msgid "Deep sky object colour"
+msgstr "ઊંડા આકાશ ના પદાર્થ નો રંગ"
+
+#: u_translation.rsdefault
+msgid "Default"
+msgstr "પ્રાથમિક"
+
+#: u_translation.rsdefaultcolor
+msgid "Default colour"
+msgstr "પ્રાથમિક રંગ"
+
+#: u_translation.rsdefaultlabel
+msgid "Default label"
+msgstr "મૂળભૂત નામપટ્ટી"
+
+#: u_translation.rsdefaultmagni
+msgid "Default magnitude"
+msgstr "પૂર્વવ્રત તીવ્રતા"
+
+#: u_translation.rsdefaultmargi
+msgid "Default margin"
+msgstr "સામાન્ય હાંસિયો"
+
+#: u_translation.rsdefaultnebul
+msgid "Default nebulae parameters"
+msgstr "સામાન્ય નિહારિકા ના પરિમાણો"
+
+#: u_translation.rsdefaultoutli
+msgid "Default outline parameters"
+msgstr "સામાન્ય રૂપરેખા પરિમાણો"
+
+#: u_translation.rsdefaultsizea
+msgid "Default size (arcsec)"
+msgstr "પૂર્વવ્રત કદ (આર્ક સેક)"
+
+#: u_translation.rsdegree
+msgid "Degree"
+msgstr "પ્રમાણ"
+
+#: u_translation.rsdegreegridsp
+msgid "Grid spacing in degree"
+msgstr "જાળી ની જગ્યા અંશ માં"
+
+#: u_translation.rsdegreesminut
+msgid "Degrees, minutes, seconds"
+msgstr "અંશ, મિનિટ, સેકન્ડ"
+
+#: u_translation.rsdelaybetween
+msgid "Delay between frame"
+msgstr "ફ્રેમ વચ્ચે વિલંબ"
+
+#: u_translation.rsdelete
+msgid "Delete"
+msgstr "કાઢી નાંખો"
+
+#: u_translation.rsdeleteallexp
+msgid "Delete all expired ephemeris"
+msgstr "તમામ સમયસીમા સમાપ્ત થયેલ પંચાંગ  કાઢી નાખો"
+
+#: u_translation.rsdeleteallthe
+#, object-pascal-format
+msgid "Delete %s, all the child nodes and the scripts?"
+msgstr "%s, બધા ચાઈલ્ડ નોડ્સ અને સ્ક્રિપ્ટો કાઢી નાખીએ?"
+
+#: u_translation.rsdeletecomple
+msgid "Delete completed"
+msgstr "કાઢી નાખવાનું સમાપ્ત"
+
+#: u_translation.rsdeletedailyd
+msgid "Deleting the daily data"
+msgstr "દૈનિક ડેટા કાઢી રહ્યા છે"
+
+#: u_translation.rsdeletedsucce
+msgid "Deleted successfully!"
+msgstr "સફળતાપૂર્વક કાઢી નાખ્યું!"
+
+#: u_translation.rsdeletefromel
+msgid "Deleting from the element table..."
+msgstr "ઘટક કોષ્ટકમાંથી કાઢી નાખી રહ્યાં છીએ..."
+
+#: u_translation.rsdeletefromel2
+msgid "Deleting from the element list..."
+msgstr "ઘટક સૂચિમાંથી કાઢી નાખી રહ્યાં છીએ..."
+
+#: u_translation.rsdeletefrommo
+msgid "Deleting from the monthly table ..."
+msgstr "માસિક કોષ્ટકમાંથી કાઢી નાખી રહ્યાં છીએ..."
+
+#: u_translation.rsdeletefrommo2
+#, object-pascal-format
+msgid "Delete from monthly table for jd<%s"
+msgstr "jd<%s માટે માસિક કોષ્ટકમાંથી કાઢી નાખો"
+
+#: u_translation.rsdeletefromna
+msgid "Deleting from the name list..."
+msgstr "નામ સૂચિમાંથી કાઢી નાખી રહ્યાં છીએ..."
+
+#: u_translation.rsdeletemonthl
+msgid "Delete monthly data "
+msgstr "મહિનાના ડેટા કાઢી નાખો "
+
+#: u_translation.rsdeletemonthl2
+msgid "Delete monthly data older than "
+msgstr "ના કરતાં મહિના ના ડેટા કાઢી નાખો "
+
+#: u_translation.rsdeletempcdat
+msgid "Delete MPC data selectively"
+msgstr "MPC ડેટા પસંદગી થી કાઢી નાખો"
+
+#: u_translation.rsdeleteprevio
+msgid "Delete previous data for this date."
+msgstr "આ તારીખ માટે અગાઉનો ડેટા કાઢી નાખો."
+
+#: u_translation.rsdeletethecur
+msgid "Delete the current location from the database?"
+msgstr "ડેટાબેઝમાંથી વર્તમાન સ્થાન કાઢી નાખીએ?"
+
+#: u_translation.rsdeltaterror
+msgid "DeltaT uncertainty"
+msgstr "ડેલ્ટા અનિશ્ચિતતા"
+
+#: u_translation.rsdeltatrecent
+msgid "DeltaT recent value"
+msgstr "DeltaT તાજેતરનું મૂલ્ય"
+
+#: u_translation.rsdepressionof
+msgid "Depression of the visible horizon"
+msgstr "દૃશ્યમાન ક્ષિતિજની મંદતા"
+
+#: u_translation.rsdesc
+msgid "desc:"
+msgstr "માહિતી:"
+
+#: u_translation.rsdescription
+msgid "Description"
+msgstr "વર્ણન"
+
+#: u_translation.rsdesignation
+msgid "Designation"
+msgstr "પદનામ"
+
+#: u_translation.rsdesktopenvir
+msgid "Desktop environment"
+msgstr "ડેસ્કટોપ વાતાવરણ"
+
+#: u_translation.rsdetails
+msgid "Details"
+msgstr "વિગતો"
+
+#: u_translation.rsdiam
+msgid "Diam."
+msgstr "Diam."
+
+#: u_translation.rsdiameter
+msgid "Diameter"
+msgstr "વ્યાસ"
+
+#: u_translation.rsdiconnected
+msgid "Diconnected"
+msgstr "છૂટું કરો"
+
+#: u_translation.rsdifferencebe
+msgid "Difference between Terrestrial Time and Universal Time"
+msgstr "પાર્થિવ સમય અને સાર્વત્રિક સમય વચ્ચેનો તફાવત"
+
+#: u_translation.rsdifferenttha
+#, object-pascal-format
+msgid "%s (different than the configured port, maybe busy or other error.)"
+msgstr "%s (રૂપરેખાંકિત પોર્ટ કરતાં અલગ, કદાચ વ્યસ્ત અથવા અન્ય ભૂલ)"
+
+#: u_translation.rsdimension
+msgid "Dimension"
+msgstr "પરિમાણ"
+
+#: u_translation.rsdimensionand
+msgid "Dimension and units"
+msgstr "પરિમાણ અને એકમો"
+
+#: u_translation.rsdir
+msgid "Dir"
+msgstr "દિશા"
+
+#: u_translation.rsdirection2
+msgid "Direction"
+msgstr "દિશા"
+
+#: u_translation.rsdirectory
+msgid "Directory"
+msgstr "નિર્દેશિકા"
+
+#: u_translation.rsdirectorynot2
+msgid "Directory not found! Please install the Skychart Pictures package."
+msgstr "નિર્દેશિકા મળી નથી! કૃપા કરીને આકાશી નકશા ના ચિત્ર નું પેકેજ ઇન્સ્ટોલ કરો."
+
+#: u_translation.rsdisconnect
+msgid "Disconnect"
+msgstr "સંપર્ક તોડવો"
+
+#: u_translation.rsdisconnectfr
+msgid "Disconnect from SAMP"
+msgstr "SAMP થી જોડાણ તોડી નાખવું"
+
+#: u_translation.rsdisplay
+msgid "Display"
+msgstr "દેખાડો"
+
+#: u_translation.rsdisplayasasy
+msgid "Display as a symbol"
+msgstr "સંજ્ઞા તરીકે દર્શાવો"
+
+#: u_translation.rsdisplaycolou
+msgid "Display colour"
+msgstr "રંગ બતાવો"
+
+#: u_translation.rsdisplayimage
+msgid "Display images of catalogued objects"
+msgstr "સૂચિબદ્ધ વસ્તુઓની છબીઓ દર્શાવો"
+
+#: u_translation.rsdisplaylabel
+msgid "Display labels for all star catalogs"
+msgstr "બધા તારા સૂચિપત્ર માટે નામપટ્ટી દર્શાવો"
+
+#: u_translation.rsdisplaythech
+msgid "Display the chart information in the menu bar"
+msgstr "નકશા ની માહિતી મેનુ પટ્ટી માં બતાવો"
+
+#: u_translation.rsdisplaytheho
+msgid "Display the horizon picture"
+msgstr "ક્ષિતિજ ચિત્ર પ્રદર્શિત કરો"
+
+#: u_translation.rsdisplaythela
+msgid "Display the labels"
+msgstr "નામાંકન બતાવો"
+
+#: u_translation.rsdisplaythelo
+msgid "Display the local horizon line"
+msgstr "સ્થાનિક ક્ષિતિજ રેખા બતાવો"
+
+#: u_translation.rsdistance
+msgid "Distance"
+msgstr "અંતર"
+
+#: u_translation.rsdistancemeas
+msgid "Distance measurement"
+msgstr "અંતર માપન"
+
+#: u_translation.rsdivider
+msgid "Divider"
+msgstr "વિભાજક"
+
+#: u_translation.rsdonotchangea
+msgid "Do not change anything here if you are not sure what you do!"
+msgstr "જો તમને ખાતરી ન હોય કે તમે શું કરો છો તો અહીં કંઈપણ બદલશો નહીં!"
+
+#: u_translation.rsdonotfilterb
+msgid "Do not filter bright nebula by magnitude"
+msgstr "તેજસ્વી નિહારિકાને તીવ્રતા દ્વારા ફિલ્ટર કરશો નહીં"
+
+#: u_translation.rsdonotfilterm
+msgid "Do not filter Messier objects"
+msgstr "મેસિયર પદાર્થને ફિલ્ટર કરશો નહીં"
+
+#: u_translation.rsdonotrunasad
+#, object-pascal-format
+msgid "Do not run %s as %s!"
+msgstr "%s ને %s તરીકે ચલાવશો નહીં!"
+
+#: u_translation.rsdonotuserow1
+#, object-pascal-format
+msgid "Do not use row %s, reserved for external software interface."
+msgstr "પંક્તિ %s નો ઉપયોગ કરશો નહીં, જે બાહ્ય સોફ્ટવેર ઈન્ટરફેસ માટે આરક્ષિત છે."
+
+#: u_translation.rsdot1
+msgid "Dot"
+msgstr "ટપકું"
+
+#: u_translation.rsdoubles
+msgid "Doubles"
+msgstr "દ્વિ"
+
+#: u_translation.rsdoublestar
+msgid "Double star"
+msgstr "દ્વિ તારા"
+
+#: u_translation.rsdown
+msgid "Down"
+msgstr "નીચે"
+
+#: u_translation.rsdownload
+msgid "Download"
+msgstr "ડાઉનલોડ"
+
+#: u_translation.rsdownload2
+#, object-pascal-format
+msgid "Download %s"
+msgstr "ડાઉનલોડ %s"
+
+#: u_translation.rsdownloadarch
+msgid "Download archive"
+msgstr "આર્કાઇવ ડાઉનલોડ કરો"
+
+#: u_translation.rsdownloadcata
+msgid "Download catalog"
+msgstr "ડાઉનલોડ સૂચિપત્ર"
+
+#: u_translation.rsdownloadcoun
+msgid "Download country details"
+msgstr "દેશ ની માહિતી કાઢો"
+
+#: u_translation.rsdownloadfile
+msgid "Download File"
+msgstr "ફાઈલ ડાઉનલોડ"
+
+#: u_translation.rsdownloadfull
+msgid "Download full catalog"
+msgstr "ડાઉનલોડ સંપૂર્ણ સૂચિપત્ર"
+
+#: u_translation.rsdownloadlate
+msgid "Download the latest orbital elements"
+msgstr "નવીનતમ ભ્રમણકક્ષાના તત્વો ડાઉનલોડ કરો"
+
+#: u_translation.rsdownloadsola
+msgid "Download Solar System object SPICE kernel from JPL Horizon"
+msgstr "JPL Horizon પરથી સૌર મંડળ ના પદાર્થો ના  SPICE કર્નલ ડાઉનલોડ કરો"
+
+#: u_translation.rsdownloadtle
+msgid "Download TLE"
+msgstr "TLE ડાઉનલોડ કરો"
+
+#: u_translation.rsdoyoureallyw
+msgid "Do you really want to park the mount now?"
+msgstr "શું તમે ખરેખર હવે માઉન્ટ વિરામ કરવા માંગો છો?"
+
+#: u_translation.rsdoyouwanttol
+msgid "Do you want to load it?"
+msgstr "શું તમે તેને લોડ કરવા માંગો છો?"
+
+#: u_translation.rsdoyouwanttom
+msgid "Do you want to move the chart there?"
+msgstr "શું તમે નકશા ને ત્યાં ખસેડવા માંગો છો?"
+
+#: u_translation.rsdoyouwanttos
+msgid "Do you want to save the program settings now?"
+msgstr "શું તમે હવે પ્રોગ્રામ સેટિંગ્સ સાચવવા માંગો છો?"
+
+#: u_translation.rsdoyouwanttos2
+msgid "Do you want to save it?"
+msgstr "શું તમે તેને સાચવવા માંગો છો?"
+
+#: u_translation.rsdrawalinetha
+msgid "Draw a line that displays the proper motion for the next"
+msgstr "એક રેખા દોરો જે આગામી માટે યોગ્ય ગતિ દર્શાવે છે"
+
+#: u_translation.rsdrawasdso
+msgid "Draw as DSO"
+msgstr "DSO તરીકે દોરો"
+
+#: u_translation.rsdrawasstar
+msgid "Draw as star"
+msgstr "તારા તરીકે દોરો"
+
+#: u_translation.rsdrawing
+msgid "Drawing"
+msgstr "રેખાંકન"
+
+#: u_translation.rsdrawingtype
+msgid "Drawing type"
+msgstr "ચિત્રકામ  નો પ્રકાર"
+
+#: u_translation.rsdrawline
+msgid "Draw line"
+msgstr "રેખા દોરો"
+
+#: u_translation.rsdrawplanetas
+msgid "Draw planet as"
+msgstr "ગ્રહો ના તરીકે દોરો"
+
+#: u_translation.rsdrawtheappar
+msgid "Draw the apparent depressed horizon line"
+msgstr "દેખીતી ઉદાસીન ક્ષિતિજ રેખા દોરો"
+
+#: u_translation.rsdrift
+msgid "Yearly drift"
+msgstr "વાર્ષિક પ્રવાહ"
+
+#: u_translation.rsdriverselect
+msgid "Driver Selection"
+msgstr "ડ્રાઇવરની પસંદગી"
+
+#: u_translation.rsdsocatalogpi
+msgid "DSO Catalog pictures"
+msgstr "DSO સૂચિપત્ર છબીઓ"
+
+#: u_translation.rsdssrealsky
+msgid "DSS RealSky"
+msgstr "DSS RealSky"
+
+#: u_translation.rsduplicate
+msgid "Duplicate"
+msgstr "નકલ"
+
+#: u_translation.rsduration
+msgid "Duration"
+msgstr "સમયગાળો"
+
+#: u_translation.rsearth
+msgid "Earth"
+msgstr "પૃથ્વી"
+
+#: u_translation.rsearthshadow
+msgid "Earth shadow"
+msgstr "પૃથ્વીની છાયા"
+
+#: u_translation.rseast
+msgid "East"
+msgstr "પૂર્વ"
+
+#: u_translation.rseasthourangl
+msgid "East hour angle"
+msgstr "પૂર્વ કલાકનો કોણ"
+
+#: u_translation.rseastside
+msgid "East side"
+msgstr "પૂર્વ બાજુ"
+
+#: u_translation.rseccentricity
+msgid "Eccentricity"
+msgstr "તરંગીતા"
+
+#: u_translation.rseclipse
+msgid "Eclipse"
+msgstr "ગ્રહણ"
+
+#: u_translation.rsecliptic
+msgid "Ecliptic"
+msgstr "ક્રાન્તિવૃત્ત"
+
+#: u_translation.rseclipticcoor
+msgid "Ecliptic coordinates"
+msgstr "ક્રાન્તિવૃત્ત યામો"
+
+#: u_translation.rseclipticcoor3
+msgid "Ecliptic coord."
+msgstr "ક્રાન્તિવૃત્ત યામો"
+
+#: u_translation.rsedit
+msgid "Edit"
+msgstr "સંપાદન"
+
+#: u_translation.rseditcolor
+msgid "Edit colour"
+msgstr "રંગ સંપાદિત કરો"
+
+#: u_translation.rseditdsolines
+msgid "Edit nebulae lines color"
+msgstr "નિહારિકા રેખાઓનો રંગ સંપાદિત કરો"
+
+#: u_translation.rseditlabel
+msgid "Edit label"
+msgstr "નામપટ્ટી સુધારો"
+
+#: u_translation.rseditlineoper
+msgid "Edit line operation"
+msgstr "રેખા કામગીરી સંપાદિત કરો"
+
+#: u_translation.rseditobjectty
+msgid "Edit object types"
+msgstr "પદાર્થ ના પ્રકાર માં ફેરફાર કરો"
+
+#: u_translation.rseditscript
+msgid "Edit Script"
+msgstr "સ્ક્રિપ્ટ ફેરફાર કરો"
+
+#: u_translation.rsedittimeincr
+msgid "Edit time increment"
+msgstr "સમય વધારો સંપાદિત કરો"
+
+#: u_translation.rseditunits
+msgid "Edit units"
+msgstr "એકમ માં ફેરફાર કરો"
+
+#: u_translation.rselong
+msgid "Elong."
+msgstr "Elong."
+
+#: u_translation.rsemail
+msgid "email"
+msgstr "ઈ-મેલ"
+
+#: u_translation.rsemissionnebu
+msgid "Emission nebula"
+msgstr "ઉત્સર્જન નિહારિકા"
+
+#: u_translation.rsempty
+msgid "Empty"
+msgstr "ખાલી"
+
+#: u_translation.rsend
+msgid "End"
+msgstr "અંત કરો"
+
+#: u_translation.rsendofobject
+msgid "End of object"
+msgstr "પદાર્થ પૂર્ણ કરો"
+
+#: u_translation.rsendprocessin
+#, object-pascal-format
+msgid "End of processing: %s asteroids"
+msgstr "પ્રક્રિયાનો અંત: %s લઘુગ્રહો"
+
+#: u_translation.rsephemeris
+msgid "Ephemeris"
+msgstr "પંચાંગ"
+
+#: u_translation.rsephemeriscal
+msgid "Ephemeris calendar"
+msgstr "પંચાંગ  તારીખિયું"
+
+#: u_translation.rsephemerispro
+msgid "Ephemeris probably out of range, disabling any solar system object"
+msgstr "પંચાંગ કદાચ શ્રેણીની બહાર છે, સૌરમંડળના કોઈપણ પદાર્થને અક્ષમ કરે છે"
+
+#: u_translation.rsepoch
+msgid "Epoch"
+msgstr "યુગ"
+
+#: u_translation.rsepochjd
+msgid "Epoch (JD)"
+msgstr "યુગ (JD)"
+
+#: u_translation.rsepochofmaxim
+msgid "Epoch of maxima"
+msgstr "યુગ ની મહતમ"
+
+#: u_translation.rseqgrid
+msgid "Eq. grid"
+msgstr "ઇક્યુ. જાળી"
+
+#: u_translation.rsequator
+msgid "Equator"
+msgstr "વિષુવવૃત્ત"
+
+#: u_translation.rsequatorialco
+msgid "Equatorial coordinates"
+msgstr "વિષુવવૃત્તીય યામો"
+
+#: u_translation.rsequatorialco2
+#, object-pascal-format
+msgid "Equatorial coordinates, equinox: %s"
+msgstr "વિષુવવૃત્તીય યામો, સમપ્રકાશીય: %s"
+
+#: u_translation.rsequatorialco3
+msgid "Equatorial coord."
+msgstr "વિષુવવૃતિય યામો"
+
+#: u_translation.rsequatorialmo
+msgid "Equatorial mount"
+msgstr "વિષુવવૃત્તીય માઉન્ટ"
+
+#: u_translation.rsequinox
+msgid "Equinox:"
+msgstr "સંપાત:"
+
+#: u_translation.rsequinox2
+msgid "Equinox"
+msgstr "સંપાત"
+
+#: u_translation.rserror
+msgid "Error"
+msgstr "ભૂલ"
+
+#: u_translation.rserrorcreatin
+#, object-pascal-format
+msgid "%sError creating table %s"
+msgstr "%s કોષ્ટક બનાવવામાં ભૂલ %s"
+
+#: u_translation.rserrorfilenot
+msgid "Error, file not downloaded:"
+msgstr "ભૂલ, ફાઇલ ડાઉનલોડ થઈ નથી:"
+
+#: u_translation.rserrorpleasec
+msgid "Error! Please check the database parameters."
+msgstr "ભૂલ! મહેરબાની કરી ને ડેટાબેસ ના પરિમાણો ચકાશો."
+
+#: u_translation.rserrorpleasec2
+msgid "Error! Please check the database parameters and load the comete data file."
+msgstr "ભૂલ! મહેરબાની કરી ડેટાબેસ  પરિમાણો ચકાશો અને પ્રતિબદ્ધ આંકડા ફાઇલ પ્રકસેપિત કરો"
+
+#: u_translation.rserrorpleasec3
+msgid "Error! Please check the database parameters and load the picture package."
+msgstr "ભૂલ! કૃપા કરીને ડેટાબેઝ પરિમાણો તપાસો અને ચિત્ર પેકેજ લોડ કરો."
+
+#: u_translation.rsestimatedfil
+#, object-pascal-format
+msgid "Estimated file size: %sMB %sDo you want to continue?"
+msgstr "અંદાજિત ફાઇલ કદ: %sMB %s શું તમે ચાલુ રાખવા માંગો છો?"
+
+#: u_translation.rsestimatedtai
+msgid "Estimated tail length"
+msgstr "અંદાજીત પૂછ લંબાઈ"
+
+#: u_translation.rsevening
+msgid "Evening"
+msgstr "સાંજ"
+
+#: u_translation.rseveningtwili
+msgid "Evening twilight"
+msgstr "સાંજ નો સંધિકાળ"
+
+#: u_translation.rsevent
+msgid "Event"
+msgstr "ઘટના"
+
+#: u_translation.rsevery
+msgid "every "
+msgstr "દરેક "
+
+#: u_translation.rseverypositio
+msgid "Every position"
+msgstr "દરેક સ્થાન"
+
+#: u_translation.rsexampleofuse
+msgid "Example of user defined object: North galactic pole"
+msgstr "વપરાશકર્તા વ્યાખ્યાયિત પદાર્થનું ઉદાહરણ: ઉત્તર આકાશગંગાનો ધ્રુવ"
+
+#: u_translation.rsexit
+msgid "Exit"
+msgstr "બહાર નીકળો"
+
+#: u_translation.rsexiting
+msgid "Exiting ..."
+msgstr "બહાર નીકળે છે ..."
+
+#: u_translation.rsexpand
+msgid "Expand"
+msgstr "વિસ્તૃત કરો"
+
+#: u_translation.rsexpertmode
+msgid "Expert mode"
+msgstr "નિષ્ણાત સ્થિતિ"
+
+#: u_translation.rsexternalcata
+msgid "External catalog object"
+msgstr "બાહ્ય સૂચિ પદાર્થ"
+
+#: u_translation.rseyepiece
+msgid "Eyepiece"
+msgstr "નેત્ર કાચ"
+
+#: u_translation.rseyepieceappa
+msgid "Eyepiece apparent field of vision"
+msgstr "નેત્રકાચ ની દેખીતું ક્ષેત્ર દ્રષ્ટિ"
+
+#: u_translation.rseyepiecefoca
+msgid "Eyepiece focal length"
+msgstr "નેત્રકાચ ની કેન્દ્ર લંબાઈ"
+
+#: u_translation.rseyepiecevisi
+msgid "Eyepiece vision"
+msgstr "નેત્રકાચ ની દ્રષ્ટિ"
+
+#: u_translation.rsfailed
+#, object-pascal-format
+msgid "Failed: %s"
+msgstr "નિષ્ફળ: %s"
+
+#: u_translation.rsfainter
+msgid "Fainter"
+msgstr "ઝાંખું"
+
+#: u_translation.rsfaintstarssi
+msgid "Faint Stars Size "
+msgstr "જીણા તારાઓ નું કદ "
+
+#: u_translation.rsfamily
+msgid "Family"
+msgstr "પરિવાર"
+
+#: u_translation.rsfaq
+msgid "FAQ"
+msgstr "વારંવાર ના પ્રશ્નો"
+
+#: u_translation.rsfaster
+msgid "Faster"
+msgstr "ઝડપી"
+
+#: u_translation.rsfavorite
+msgid "Favorite"
+msgstr "મનગમતુ"
+
+#: u_translation.rsfebruary
+msgid "February"
+msgstr "ફેબ્રુઆરી"
+
+#: u_translation.rsffmpegprogra
+msgid "ffmpeg program path"
+msgstr "ffmpeg પ્રોગ્રામ પાથ"
+
+#: u_translation.rsfieldname
+msgid "Field Name"
+msgstr "ક્ષેત્ર નામ"
+
+#: u_translation.rsfieldnumber
+msgid "Field Number"
+msgstr "ક્ષેત્ર આંક"
+
+#: u_translation.rsfieldofvisio
+msgid "Field of vision"
+msgstr "દ્રષ્ટિક્ષેત્ર"
+
+#: u_translation.rsfieldofvisio3
+msgid "Field of vision settings"
+msgstr "દ્રષ્ટિ ક્ષેત્ર ની ગોઠવણ"
+
+#: u_translation.rsfieldofvisio5
+msgid "Field of vision number :"
+msgstr "દ્રષ્ટિ ક્ષેત્ર ના આંકડા:"
+
+#: u_translation.rsfieldtoowidt
+#, object-pascal-format
+msgid "Field too wide! Maximum is %s"
+msgstr "ક્ષેત્ર ઘણું પહોંળૂ ! મહતમ %s  છે."
+
+#: u_translation.rsfile
+msgid "File"
+msgstr "ફાઇલ"
+
+#: u_translation.rsfilenamewith
+msgid "Filename without path or extension"
+msgstr "Filename without path or extension"
+
+#: u_translation.rsfilenotfound
+msgid "File not found!"
+msgstr "ફાઈલ નથી મળી!"
+
+#: u_translation.rsfilespath
+msgid "Files path"
+msgstr "ફાઇલ નો રસ્તો"
+
+#: u_translation.rsfill
+msgid "Fill?"
+msgstr "પૂરો ?"
+
+#: u_translation.rsfillmilkyway
+msgid "Fill Milky Way"
+msgstr "દૂધ ગંગા પૂરો"
+
+#: u_translation.rsfillnebulae
+msgid "Fill nebulae"
+msgstr "નિહારિકા ભરો"
+
+#: u_translation.rsfillwithhori
+msgid "Fill with horizon colour"
+msgstr "ક્ષિતિજ રંગ સાથે ભરો"
+
+#: u_translation.rsfilter
+msgid "Filter ->"
+msgstr "નિસ્પંદક"
+
+#: u_translation.rsfilter2
+msgid "Filter"
+msgstr "ફિલ્ટર"
+
+#: u_translation.rsfilternebula
+msgid "Filter deep sky objects"
+msgstr "ઊંડા આકાશ ના પદાર્થ ના ફિલ્ટર"
+
+#: u_translation.rsfilterstars
+msgid "Filter stars "
+msgstr "તારા ફિલ્ટર "
+
+#: u_translation.rsfind
+msgid "Find"
+msgstr "મેળવો"
+
+#: u_translation.rsfindercircle
+msgid "Finder circle (eyepiece)"
+msgstr "શોધક વર્તુળ (આઈ પીસ)"
+
+#: u_translation.rsfindercircle2
+msgid "Finder Circle"
+msgstr "શોધ વર્તુળ"
+
+#: u_translation.rsfinderrectan
+msgid "Finder rectangle (CCD)"
+msgstr "શોધક લંબચોરસ (CCD)"
+
+#: u_translation.rsfindinfo
+msgid "Find info"
+msgstr "માહિતી શોધો"
+
+#: u_translation.rsfirst
+msgid "First"
+msgstr "પ્રથમ"
+
+#: u_translation.rsfirst5000
+msgid "First 5000"
+msgstr "પહેલા ૫૦૦૦"
+
+#: u_translation.rsfirstchar
+msgid "First char"
+msgstr "પહેલો શબ્દ"
+
+#: u_translation.rsfitsfile
+msgid "FITS file"
+msgstr "FITS ફાઇલ"
+
+#: u_translation.rsfixedblack
+msgid "Fixed black"
+msgstr "સ્થિર કાળો"
+
+#: u_translation.rsfixedskycolo
+msgid "Fixed sky colour"
+msgstr "સ્થિર આકાશી રંગ"
+
+#: u_translation.rsflamsteednum
+msgid "Flamsteed number"
+msgstr "ફ્લેમસ્ટીડ નંબર"
+
+#: u_translation.rsflipnsmoveme
+msgid "Flip N/S movement"
+msgstr "ઉ / દ ગતિ ઊંધી કરો"
+
+#: u_translation.rsfonts
+msgid "Fonts"
+msgstr "ફોન્ટસ"
+
+#: u_translation.rsforalargecat
+msgid "For a large catalog, always select Binary. For a small dataset that changes frequently, select Text. This enables you to edit the file and see the result immediately on the chart without the need to rerun this utility."
+msgstr "મોટી સૂચિ માટે, હંમેશા બાઈનરી પસંદ કરો. નાના ડેટાસેટ માટે કે જે વારંવાર બદલાય છે, ટેક્સ્ટ પસંદ કરો. આ તમને આ ઉપયોગિતાને ફરીથી ચલાવવાની જરૂર વગર ફાઇલને સંપાદિત કરવા અને નકશા પર તરત જ પરિણામ જોવા માટે સક્ષમ બનાવે છે."
+
+#: u_translation.rsforcecolor
+msgid "Force color"
+msgstr "બળ રંગ"
+
+#: u_translation.rsforceeqsys
+msgid "Force EqSys"
+msgstr "EqSys ને બળ કરો"
+
+#: u_translation.rsforcej2000
+msgid "Force J2000"
+msgstr "બળ પૂર્વક J2000"
+
+#: u_translation.rsformoreinfor
+msgid "For more information, see :"
+msgstr "વધુ માહિતી માટે, જુઓ:"
+
+#: u_translation.rsfov
+msgid "FOV"
+msgstr "FOV"
+
+#: u_translation.rsfov2
+msgid "FOV:"
+msgstr "FOV:"
+
+#: u_translation.rsfovbar
+msgid "FOV bar"
+msgstr "FOV પટ્ટી"
+
+#: u_translation.rsfovnumber
+msgid "FOV number:"
+msgstr "FOV આંકડો:"
+
+#: u_translation.rsframespersec
+msgid "Frames per second"
+msgstr "સેકન્ડ દીઠ ફ્રેમ"
+
+#: u_translation.rsframessize
+msgid "Frames size"
+msgstr "ફ્રેમ નું કદ"
+
+#: u_translation.rsfreesize
+msgid "Free size"
+msgstr "મુક્ત કદ"
+
+#: u_translation.rsfriday
+msgid "Fri."
+msgstr "શુક્ર"
+
+#: u_translation.rsfrom
+msgid "From"
+msgstr "તરફથી"
+
+#: u_translation.rsftp
+msgid "FTP "
+msgstr "FTP "
+
+#: u_translation.rsftppassivemo
+msgid "FTP passive mode"
+msgstr "FTP પેસિવ મોડ"
+
+#: u_translation.rsfullscreen
+msgid "Full screen"
+msgstr "પૂર્ણ પરદો"
+
+#: u_translation.rsgalactic
+msgid "Galactic"
+msgstr "આકાશગંગાને લગતું"
+
+#: u_translation.rsgalacticcoor
+msgid "Galactic coordinates"
+msgstr "આકાશગંગા ના યામો"
+
+#: u_translation.rsgalacticcoor2
+msgid "Galactic coord."
+msgstr "આકાશગંગા  યામો"
+
+#: u_translation.rsgalaxies
+msgid "Galaxies"
+msgstr "આકાશગંગા"
+
+#: u_translation.rsgalaxy
+msgid "Galaxy"
+msgstr "આકાશગંગા"
+
+#: u_translation.rsgalaxycluste
+msgid "Galaxy cluster"
+msgstr "આકાશગંગા ગુચ્છ"
+
+#: u_translation.rsgamma
+msgid "Gamma"
+msgstr "ગૅમા"
+
+#: u_translation.rsgeneral
+msgid "General"
+msgstr "સામાન્ય"
+
+#: u_translation.rsgeneralcatal
+msgid "General catalog options"
+msgstr "સામાન્ય સૂચિ ના વિકલ્પો"
+
+#: u_translation.rsgeneralsetti
+msgid "General settings"
+msgstr "સામાન્ય આયોજન"
+
+#: u_translation.rsgeocentric
+msgid "Geocentric"
+msgstr "ભૂકેન્દ્રીય"
+
+#: u_translation.rsgeometricalt
+msgid "Geometric altitude"
+msgstr "ભૌમિતિક ઊંચાઈ"
+
+#: u_translation.rsget
+msgid "Get"
+msgstr "મેળવો"
+
+#: u_translation.rsgetasteroidl
+msgid "Get the asteroids list."
+msgstr "લઘુગ્રહોની સૂચિ મેળવો."
+
+#: u_translation.rsgetdssimage
+msgid "Get the DSS image"
+msgstr "DSS ચિત્ર મેડવો"
+
+#: u_translation.rsgetfromteles
+msgid "Get from telescope"
+msgstr "ટેલિસ્કોપમાંથી મેળવો"
+
+#: u_translation.rsgetrecentmea
+msgid "Get the recent GRS measurement from JUPOS project."
+msgstr "JUPOS પ્રોજેક્ટમાંથી તાજેતરનું GRS માપ મેળવો."
+
+#: u_translation.rsglobularclus
+msgid "Globular cluster"
+msgstr "ગોળાકાર ગુચ્છ"
+
+#: u_translation.rsgnomonic
+msgid "Gnomonic"
+msgstr "જીનોમોનિક"
+
+#: u_translation.rsgraphheight
+msgid "Graph height"
+msgstr "ગ્રાફની ઊંચાઈ"
+
+#: u_translation.rsgraphic
+msgid "Graphic"
+msgstr "ગ્રાફિક"
+
+#: u_translation.rsgraphs
+msgid "Graphs"
+msgstr "આલેખો"
+
+#: u_translation.rsgravitationa
+msgid "Gravitational lens"
+msgstr "ગુરુત્વાકર્ષણ લેન્સ"
+
+#: u_translation.rsgreatest
+msgid "Greatest"
+msgstr "ગુરુતમ"
+
+#: u_translation.rsgreeksymbol
+msgid "Greek symbols"
+msgstr "ગ્રીક પ્રતીકો"
+
+#: u_translation.rsgreen
+msgid "Green"
+msgstr "લીલો"
+
+#: u_translation.rsgregoriancal
+msgid "Gregorian calendar start date"
+msgstr "ગ્રેગોરિયન કેલેન્ડરની શરૂઆતની તારીખ"
+
+#: u_translation.rsgrids
+msgid "Grids"
+msgstr "જાળી"
+
+#: u_translation.rsgridspacing
+msgid "Grid spacing"
+msgstr "જાળી જગ્યા"
+
+#: u_translation.rsgroup
+msgid "Group"
+msgstr "જૂથ"
+
+#: u_translation.rsgrstransit
+msgid "GRS transit"
+msgstr "GRS પારગમન"
+
+#: u_translation.rsgslopeparame
+msgid "G slope parameter"
+msgstr "G ઢાળ પરિમાણ"
+
+#: u_translation.rshabsolutemag
+msgid "H absolute magnitude"
+msgstr "H સંપૂર્ણ તીવ્રતા"
+
+#: u_translation.rshalfmassradi
+msgid "Half-mass radius"
+msgstr "અર્ધ-દળ ત્રિજ્યા"
+
+#: u_translation.rshaltafter100
+msgid "Halt after 1000 errors"
+msgstr "૧૦૦૦ ભૂલ પછી થોભો"
+
+#: u_translation.rshammeraitoff
+msgid "Hammer-Aitoff"
+msgstr "હેમર-એટઓફ"
+
+#: u_translation.rshandpad
+msgid "HandPad"
+msgstr "હેન્ડપેડ"
+
+#: u_translation.rshbetamagnitu
+msgid "H-Beta magnitude"
+msgstr "H-Beta તીવ્રતા"
+
+#: u_translation.rsheight
+msgid "Height"
+msgstr "ઊંચાઈ"
+
+#: u_translation.rshelp
+msgid "Help"
+msgstr "મદદ"
+
+#: u_translation.rshelpbasedir
+msgid "en/documentation/"
+msgstr "en/documentation/"
+
+#: u_translation.rshelpcontents
+msgid "Help contents"
+msgstr "મદદના સમાવિષ્ટો"
+
+#: u_translation.rshide
+msgid "Hide"
+msgstr "છુપાવો"
+
+#: u_translation.rshidelabel
+msgid "Hide label"
+msgstr "નામપટ્ટી સંતાળો"
+
+#: u_translation.rshideobjectwi
+msgid "Hide objects wider than"
+msgstr "કરતાં પહોળી વસ્તુઓ છુપાવો"
+
+#: u_translation.rshighcolor
+msgid "High colour"
+msgstr "ઉચ્ચ રંગ"
+
+#: u_translation.rshighquality
+msgid "High quality"
+msgstr "ઉચ્ચ ગુણવત્તા"
+
+#: u_translation.rshighsurfaceb
+msgid "High surface brightness"
+msgstr "ઊંચી સપાટીની તેજસ્વીતા"
+
+#: u_translation.rshorizon
+msgid "Horizon"
+msgstr "ક્ષિતિજ"
+
+#: u_translation.rshorizontalov
+msgid "Horizontal overlap %"
+msgstr "સમાંતર એક બીજા ના ઉપરચડવા ના %"
+
+#: u_translation.rshostname
+msgid "Hostname:"
+msgstr "યજમાનનામ:"
+
+#: u_translation.rshour
+msgid "Hour"
+msgstr "કલાક"
+
+#: u_translation.rshourangle
+msgid "Hour angle"
+msgstr "કલાક કોણ"
+
+#: u_translation.rshourgridspac
+msgid "Grid spacing in hour for equatorial grid"
+msgstr "વિષુવવૃતિય જાળી માટે જાળી નું અંતર કલાક માં"
+
+#: u_translation.rshourlymotion
+msgid "Hourly motion"
+msgstr "કલાક ની ગતિ"
+
+#: u_translation.rshours
+msgid "hours"
+msgstr "કલાકો"
+
+#: u_translation.rshoursminutes
+msgid "Hours, minutes, seconds"
+msgstr "કલાક, મિનિટ, સેકન્ડ"
+
+#: u_translation.rshttpproxy
+msgid "HTTP proxy"
+msgstr "HTTP પ્રોક્સી"
+
+#: u_translation.rshumidity
+msgid "Humidity %"
+msgstr "ભેજ %"
+
+#: u_translation.rsiconclickact
+msgid "Icon click action"
+msgstr "ચિન્હ ની ક્લિક ક્રિયા"
+
+#: u_translation.rsicons
+msgid "Icons"
+msgstr "ચિહ્નો"
+
+#: u_translation.rsiconsize
+msgid "Icon size"
+msgstr "ચિહ્નનું માપ"
+
+#: u_translation.rsicontime
+msgid "Icon time display"
+msgstr "ચિહ્ન ના સમય દેખાવ"
+
+#: u_translation.rsifitisnotins
+msgid "If it is not installed try the following depending on your system:"
+msgstr "જો તે ઇન્સ્ટોલ કરેલ ન હોય તો તમારી સિસ્ટમ પર આધાર રાખીને નીચેનાનો પ્રયાસ કરો:"
+
+#: u_translation.rsillum
+msgid "Illum."
+msgstr "Illum."
+
+#: u_translation.rsilluminatedf
+msgid "Illuminated fraction"
+msgstr "પ્રકાશિત અપૂર્ણાંક"
+
+#: u_translation.rsimagearchive
+msgid "Image archive"
+msgstr "છબી આર્કાઇવ"
+
+#: u_translation.rsimagedirecto
+msgid "Image directory"
+msgstr "છબી નિર્દેશિકા"
+
+#: u_translation.rsimagelist
+msgid "Image list"
+msgstr "છબી યાદી"
+
+#: u_translation.rsimportmosaic
+msgid "Import mosaic file"
+msgstr "મોઝેક ફાઇલ આયાત કરો"
+
+#: u_translation.rsinclination
+msgid "Inclination"
+msgstr "ઝોક"
+
+#: u_translation.rsinclination2
+msgid "Inclination="
+msgstr "નમનકોણ="
+
+#: u_translation.rsincludedayti
+msgid "Include day time pass"
+msgstr "દિવસનો સમય પાસ શામેલ કરો"
+
+#: u_translation.rsincrementfor
+msgid "Increment for bright stars"
+msgstr "તેજસ્વી તારાઓ માટે વધારો"
+
+#: u_translation.rsincrementtim
+msgid "Increment time"
+msgstr "સમય વધારો"
+
+#: u_translation.rsindicatehere
+msgid "Indicate here how to compute the required values from the data stored in the catalog text file."
+msgstr "કેટલોગ ટેક્સ્ટ ફાઇલમાં સંગ્રહિત ડેટામાંથી જરૂરી મૂલ્યોની ગણતરી કેવી રીતે કરવી તે અહીં સૂચવો."
+
+#: u_translation.rsindicatehowt
+msgid "Indicate how to recognize the object size unit:"
+msgstr "પદાર્થ ના કદના એકમને કેવી રીતે ઓળખવું તે સૂચવો:"
+
+#: u_translation.rsindicatethes
+msgid "Indicate the string identifier for each type of object:"
+msgstr "દરેક પ્રકારના પદાર્થ માટે સ્ટ્રિંગ ઓળખકર્તા સૂચવો:"
+
+#: u_translation.rsindicatethes2
+msgid "Indicate the string for each draw operation"
+msgstr "દરેક ડ્રો ઓપરેશન માટે સ્ટ્રિંગ સૂચવો"
+
+#: u_translation.rsindicatethes3
+msgid "Indicate the string for each colour"
+msgstr "દરેક રંગ માટે શબ્દમાળા સૂચવો"
+
+#: u_translation.rsindidriver
+msgid "INDI driver"
+msgstr "INDI ડ્રાઇવર"
+
+#: u_translation.rsindidriverse
+msgid "INDI driver settings"
+msgstr "INDI ડ્રાઇવર સેટિંગ્સ"
+
+#: u_translation.rsindiready
+msgid "INDI server is ready"
+msgstr "INDI સર્વર તૈયાર છે"
+
+#: u_translation.rsindiserverho
+msgid "INDI server host "
+msgstr "INDI સર્વર હોસ્ટ "
+
+#: u_translation.rsindiserverpo
+msgid "INDI server port"
+msgstr "INDI સર્વર પોર્ટ"
+
+#: u_translation.rsindrive
+msgid "in drive"
+msgstr "ડ્રાઈવ માં છે"
+
+#: u_translation.rsinfo
+msgid "Information"
+msgstr "જાણકારી"
+
+#: u_translation.rsinformationd
+msgid "Information detail"
+msgstr "માહિતી વિગત"
+
+#: u_translation.rsinformationf
+msgid "Information from catalog"
+msgstr "સૂચિપત્ર માંથી માહિતી"
+
+#: u_translation.rsinformationf2
+msgid "Information from"
+msgstr "પાસેથી માહિતી"
+
+#: u_translation.rsinitializeda
+msgid "Initialize database"
+msgstr "ડેટાબેસ ની શરૂવાત કરો"
+
+#: u_translation.rsinnersolarsy
+msgid "Inner Solar System"
+msgstr "આંતરિક સૌર મંડળ"
+
+#: u_translation.rsinputcatalog
+msgid "Input catalog files"
+msgstr "સૂચિ  ફાઇલો અંકિત કરો"
+
+#: u_translation.rsinsertfailed
+#, object-pascal-format
+msgid "insert failed line %s: %s"
+msgstr "નિષ્ફળ રેખા દાખલ કરો %s : %s"
+
+#: u_translation.rsinsertfailed2
+#, object-pascal-format
+msgid "Insert failed! %s"
+msgstr "દાખલ કરવું નિષ્ફળ થયું! %s"
+
+#: u_translation.rsinternet
+msgid "Internet"
+msgstr "ઇન્ટરનેટ"
+
+#: u_translation.rsinternetloca
+msgid "Internet localization"
+msgstr "ઇન્ટરનેટ સ્થાનિકીકરણ"
+
+#: u_translation.rsinttelesco
+msgid "Integrated telescope driver."
+msgstr "સંકલિત ટેલિસ્કોપ ડ્રાઈવર."
+
+#: u_translation.rsinvalidepoch
+#, object-pascal-format
+msgid "invalid epoch on line%s: %s"
+msgstr "રેખા %s પર અમાન્ય યુગ: %s"
+
+#: u_translation.rsinvalidfitsf
+#, object-pascal-format
+msgid "Invalid FITS file: %s"
+msgstr "અમાન્ય FITS ફાઇલ: %s"
+
+#: u_translation.rsinvalidpath
+msgid "Invalid path: "
+msgstr "અમાન્ય પાથ "
+
+#: u_translation.rsinvisibleatt
+msgid "Invisible at this latitude"
+msgstr "આ અક્ષાંશ પર અદ્રશ્ય"
+
+#: u_translation.rsiscoordinate
+#, object-pascal-format
+msgid "Is the coordinates epoch really %s?"
+msgstr "શું યુગ યામો ખરેખર %s ?"
+
+#: u_translation.rsisempty
+#, object-pascal-format
+msgid "%s is empty!"
+msgstr "%s ખાલી છે!"
+
+#: u_translation.rsittaketoolon
+#, object-pascal-format
+msgid "It take too long to draw the %s from catalog %s, please consider to not use this catalog for this FOV."
+msgstr "સૂચિપત્ર %s માંથી %s દોરવામાં ઘણો સમય લાગે છે, કૃપા કરીને આ FOV માટે આ સૂચિપત્ર નો ઉપયોગ ન કરવાનો વિચાર કરો."
+
+#: u_translation.rsjanuary
+msgid "January"
+msgstr "જાન્યુઆરી"
+
+#: u_translation.rsjd
+msgid "JD:"
+msgstr "JD:"
+
+#: u_translation.rsjd2
+msgid "JD"
+msgstr "JD"
+
+#: u_translation.rsjdcalendar
+msgid "JD calendar"
+msgstr "JD તારીખિયું"
+
+#: u_translation.rsjplephemeris
+msgid "JPL ephemeris search order"
+msgstr "JPL પંચાંગ શોધ નો ક્રમ"
+
+#: u_translation.rsjulianday
+msgid "Julian Day ="
+msgstr "જુલિયન દિવસ ="
+
+#: u_translation.rsjulianyear
+msgid "Julian Year"
+msgstr "જુલિયન વર્ષ"
+
+#: u_translation.rsjuly
+msgid "July"
+msgstr "જુલાઇ"
+
+#: u_translation.rsjune
+msgid "June"
+msgstr "જુન"
+
+#: u_translation.rsjupiter
+msgid "Jupiter"
+msgstr "ગુરૂ"
+
+#: u_translation.rsjupitergrslo
+msgid "Jupiter GRS longitude:"
+msgstr "ગુરુ ની લાલ આંખ નું રેખાંસ"
+
+#: u_translation.rskeepimageson
+msgid "Keep images on exit for later use"
+msgstr "પછીના ઉપયોગ માટે બહાર નીકળતી વખતે છબીઓ રાખો"
+
+#: u_translation.rskeeptableson
+msgid "Keep tables on exit for later use"
+msgstr "પછીના ઉપયોગ માટે બહાર નીકળતી વખતે કોષ્ટકો રાખો"
+
+#: u_translation.rskey
+msgid "Key"
+msgstr "ચાવી"
+
+#: u_translation.rskm
+msgid "Km."
+msgstr "કિમી"
+
+#: u_translation.rsknot
+msgid "Knot"
+msgstr "ગાંઠ"
+
+#: u_translation.rsl
+msgid "L"
+msgstr "L"
+
+#: u_translation.rslabel
+msgid "Label:"
+msgstr "શીર્ષક:"
+
+#: u_translation.rslabel2
+msgid "Label"
+msgstr "શીર્ષક"
+
+#: u_translation.rslabelobject
+msgid "Label object"
+msgstr "પદાર્થ નામાંકન"
+
+#: u_translation.rslabels
+msgid "Labels"
+msgstr "નામાંકન"
+
+#: u_translation.rslabeltext
+msgid "Label text"
+msgstr "નામપટ્ટી ના શબ્દો"
+
+#: u_translation.rslandscape
+msgid "Landscape"
+msgstr "આડું ચિત્ર"
+
+#: u_translation.rslanguage2
+msgid "Language"
+msgstr "ભાષા"
+
+#: u_translation.rslanguagesele
+msgid "Language selection"
+msgstr "ભાષા ચયન"
+
+#: u_translation.rslast
+msgid "Last"
+msgstr "છેલ્લુ"
+
+#: u_translation.rslatitude
+msgid "Latitude"
+msgstr "અક્ષાંશ"
+
+#: u_translation.rsleft
+msgid "Left"
+msgstr "ડાબે"
+
+#: u_translation.rsleftbar
+msgid "Left bar"
+msgstr "ડાબી પટ્ટી"
+
+#: u_translation.rslegal
+msgid "Legal"
+msgstr "કાનૂની"
+
+#: u_translation.rslegend
+msgid "Legend"
+msgstr "ચિહ્નો"
+
+#: u_translation.rslength
+msgid "Length"
+msgstr "લંબાઈ"
+
+#: u_translation.rslessnebulae
+msgid "Less deep sky"
+msgstr "ઓછું ઊંડું આકાશ"
+
+#: u_translation.rslessstars
+msgid "Less stars"
+msgstr "ઓછા તારાઓ"
+
+#: u_translation.rslha
+msgid "LHA"
+msgstr "LHA"
+
+#: u_translation.rslibrationinl
+msgid "Libration in latitude"
+msgstr "અક્ષાંશ માં લિબ્રેશન"
+
+#: u_translation.rslibrationinl2
+msgid "Libration in longitude"
+msgstr "રેખાંશ માં લિબ્રેશન"
+
+#: u_translation.rslicenseagree
+msgid "License agreement"
+msgstr "લાયસન્સ કરાર"
+
+#: u_translation.rslightyears
+msgid "light years"
+msgstr "પ્રકાશવર્ષ"
+
+#: u_translation.rslii
+msgid "LII"
+msgstr "LII"
+
+#: u_translation.rslimit
+msgid "Limit"
+msgstr "મર્યાદા"
+
+#: u_translation.rslimitingmagn
+msgid "Limiting magnitude, list:"
+msgstr "તેજસ્વીતાંક મર્યાદા, સૂચિ:"
+
+#: u_translation.rslimitingmagn2
+msgid "Limiting magnitude:"
+msgstr "તીવ્રતા ની મર્યાદા"
+
+#: u_translation.rslimitingsize
+msgid "Limiting size (arcminutes):"
+msgstr "કદ મર્યાદા (આર્કમિનિટ્સ)"
+
+#: u_translation.rslimitthenumb
+msgid "Limit the number of level 3 faint stars"
+msgstr "સ્તર 3 ઝાંખા તારાઓની સંખ્યા મર્યાદિત કરો"
+
+#: u_translation.rsline1
+msgid "Line"
+msgstr "રેખા"
+
+#: u_translation.rslinear
+msgid "Linear"
+msgstr "રેખીય"
+
+#: u_translation.rslineforteles
+msgid "Line for telescope pointing limit"
+msgstr "ટેલિસ્કોપ પોઇન્ટિંગ મર્યાદા માટે રેખા"
+
+#: u_translation.rslinemode
+msgid "Line mode"
+msgstr "રેખા મોડ"
+
+#: u_translation.rslinemodedraw
+msgid "Line mode drawing"
+msgstr "રેખા મોડ ચિત્રકામ"
+
+#: u_translation.rslineoperatio
+msgid "Line operation"
+msgstr "રેખા સંચાલન"
+
+#: u_translation.rslines
+msgid "Lines"
+msgstr "રેખાઓ"
+
+#: u_translation.rslinesgrid
+msgid "Lines / grid"
+msgstr "રેખાઓ/જાળી"
+
+#: u_translation.rslinewidth
+msgid "Line width "
+msgstr "રેખા ની જાડાઈ "
+
+#: u_translation.rslinkallchart
+msgid "Link all charts"
+msgstr "બધા નકશા જોડો"
+
+#: u_translation.rslist
+msgid "List"
+msgstr "સૂચિ"
+
+#: u_translation.rslistenonport
+#, object-pascal-format
+msgid "Listen on port: %s"
+msgstr "પોર્ટ ને સાંભળી રહ્યા છે: %s"
+
+#: u_translation.rslistofavaila
+msgid "List of available plates"
+msgstr "ઉપલબ્ધ પ્લેટ ની સૂચિ"
+
+#: u_translation.rsload
+msgid "Load"
+msgstr "લાવો"
+
+#: u_translation.rsloadfile
+msgid "Load file"
+msgstr "ફાઇલને લોડ કરો"
+
+#: u_translation.rsloadfromfile
+msgid "Load from file"
+msgstr "ફાઇલમાંથી લોડ કરો"
+
+#: u_translation.rsloadindiconf
+msgid "Load INDI configuration"
+msgstr "INDI રૂપરેખાંકન લોડ કરો"
+
+#: u_translation.rsloadingcatal
+msgid "Loading catalog list. Please wait ..."
+msgstr "સૂચિપત્ર ની સૂચિ લોડ કરી રહ્યું છે. મહેરબાની કરી રાહ જુવો"
+
+#: u_translation.rsloadmpcfile
+msgid "Load MPC file"
+msgstr "MPC ફાઇલ દાખલ કરો"
+
+#: u_translation.rsloadmpcforma
+msgid "Load MPC format file"
+msgstr "MPC  પ્રકાર ની ફાઇલ દાખલ કરો"
+
+#: u_translation.rsloadonlythef
+msgid "Load only the first "
+msgstr "માત્ર પહેલું લોડ કરો "
+
+#: u_translation.rsloadproject
+msgid "Load project"
+msgstr "યોજના ચાલુ કરો"
+
+#: u_translation.rslocalhorizon
+msgid "Local horizon"
+msgstr "સ્થાનિક ક્ષિતિજ"
+
+#: u_translation.rslocalizednam
+msgid "Localized name"
+msgstr "સ્થાનિક નામ"
+
+#: u_translation.rslocalsideral
+msgid "Local sidereal time"
+msgstr "સ્થાનિક નક્ષત્રિક સમય"
+
+#: u_translation.rslocationcode
+msgid "Location code"
+msgstr "સ્થાન કોડ"
+
+#: u_translation.rslocationtime
+msgid "Location / Time"
+msgstr "સ્થળ / સમય"
+
+#: u_translation.rslock
+msgid "Lock"
+msgstr "તાળુ"
+
+#: u_translation.rslockchartpos
+msgid "Lock chart position"
+msgstr "નકશા ની સ્થિતિ ને તાળું મારો"
+
+#: u_translation.rslockmagnitud
+msgid "Lock the magnitude filter"
+msgstr "તીવ્રતા ફિલ્ટરને તાળું મારો"
+
+#: u_translation.rslockon
+#, object-pascal-format
+msgid "Lock on %s"
+msgstr "%s  માં તાળું મારો"
+
+#: u_translation.rslockthechart
+msgid "Lock the chart at this position"
+msgstr "નકશા ને આ સ્થિતિ માં તાળું મારો"
+
+#: u_translation.rslog
+msgid "Log"
+msgstr "લૉગ"
+
+#: u_translation.rslogarithmics
+msgid "Logarithmic scale"
+msgstr "લઘુગણક પ્રમાણ"
+
+#: u_translation.rslongitude
+msgid "Longitude"
+msgstr "રેખાંશ"
+
+#: u_translation.rslongitudeasc
+msgid "Longitude ascending node"
+msgstr "રેખાંશ ચડતા નોડ"
+
+#: u_translation.rslookat
+msgid "Look at:"
+msgstr "તરફ જુવો:"
+
+#: u_translation.rslosange
+msgid "Lozenge"
+msgstr "ચતુષ્કોણ"
+
+#: u_translation.rslowsurfacebr
+msgid "Low surface brightness"
+msgstr "નીચી સપાટીની તેજસ્વીતા"
+
+#: u_translation.rsluminosity
+msgid "Luminosity"
+msgstr "તેજસ્વીતા"
+
+#: u_translation.rslunareclipse
+msgid "Lunar eclipses"
+msgstr "ચંદ્ર ગ્રહણો"
+
+#: u_translation.rsly
+msgid "ly"
+msgstr "ly"
+
+#: u_translation.rsmag
+msgid "Mag:"
+msgstr "તેજ."
+
+#: u_translation.rsmagn
+msgid "Magn."
+msgstr "તેજસ્વી ."
+
+#: u_translation.rsmagnitude
+msgid "Magnitude"
+msgstr "તેજસ્વીતાંક"
+
+#: u_translation.rsmagnitudeatm
+msgid "Magnitude at maxima"
+msgstr "મહતમ માં તીવ્રતા"
+
+#: u_translation.rsmagnitudeatm2
+msgid "Magnitude at minima"
+msgstr "ઓછામાં તીવ્રતા"
+
+#: u_translation.rsmagnitudeban
+msgid "Magnitude band"
+msgstr "તેજસ્વીતાંક પટ્ટી"
+
+#: u_translation.rsmagnitudedif
+msgid "Magnitude difference"
+msgstr "તીવ્રતા નું તફાવત"
+
+#: u_translation.rsmagnitudeecl
+msgid "Eclipse magnitude"
+msgstr "ગ્રહણની તીવ્રતા"
+
+#: u_translation.rsmagnitudeerr
+msgid "Magnitude error"
+msgstr "તેજસ્વીતાંક ખામી"
+
+#: u_translation.rsmagnitudefai
+msgid "magnitudes fainter than the stars."
+msgstr "તારાઓ કરતાં મંદ તીવ્રતા."
+
+#: u_translation.rsmagnitudetyc
+msgid "Magnitude Tycho BT"
+msgstr "Tycho BT તેજસ્વીતાંક"
+
+#: u_translation.rsmagnitudetyc2
+msgid "Magnitude Tycho VT"
+msgstr "Tycho VT તેજસ્વીતાંક"
+
+#: u_translation.rsmaillist
+msgid "Mail list, discussion group"
+msgstr "મુખ્ય સૂચિ, ચર્ચા જૂથ"
+
+#: u_translation.rsmainbar
+msgid "Main bar"
+msgstr "મુખ્ય પટ્ટી"
+
+#: u_translation.rsmainmenu
+msgid "Main menu"
+msgstr "મુખ્ય મેનુ"
+
+#: u_translation.rsmakeselectio
+msgid "Make selection of the table and column you want to your catalog"
+msgstr "તમે તમારા સૂચિપત્ર માં  જોઈતા કોષ્ટક અને કૉલમની પસંદગી કરો"
+
+#: u_translation.rsmanagetoolbo
+msgid "Manage tool box script"
+msgstr "ટૂલ બોક્સ સ્ક્રિપ્ટ મેનેજ કરો"
+
+#: u_translation.rsmanual
+msgid "Manual"
+msgstr "પુસ્તિકા"
+
+#: u_translation.rsmanualmount
+msgid "Manual mount"
+msgstr "મેન્યુઅલ માઉન્ટ"
+
+#: u_translation.rsmanualtelesc
+msgid "Manual telescope"
+msgstr "બિનયંત્રિક ટેલિસ્કોપ"
+
+#: u_translation.rsmap
+msgid "Map"
+msgstr "નકશો"
+
+#: u_translation.rsmarch
+msgid "March"
+msgstr "માર્ચ"
+
+#: u_translation.rsmark
+msgid "Mark"
+msgstr "નિશાની કરો"
+
+#: u_translation.rsmarkthechart
+msgid "Mark the centre of the chart"
+msgstr "નકશા નું મધ્ય અંકિત કરો"
+
+#: u_translation.rsmars
+msgid "Mars"
+msgstr "મંગળ"
+
+#: u_translation.rsmax
+msgid "Max."
+msgstr "મહત્તમ."
+
+#: u_translation.rsmax2
+msgid "max"
+msgstr "મહતમ"
+
+#: u_translation.rsmaximize
+msgid "Maximize"
+msgstr "મહત્તમ કરો"
+
+#: u_translation.rsmaximumdecli
+msgid "Maximum declination"
+msgstr "મહત્તમ ઘટાડો"
+
+#: u_translation.rsmaximummagni
+msgid "Maximum magnitude"
+msgstr "મહત્તમ તીવ્રતા"
+
+#: u_translation.rsmaximumnumbe
+msgid "Maximum number of image to show simultaneously"
+msgstr "એકસાથે બતાવવા માટે છબીની મહત્તમ સંખ્યા"
+
+#: u_translation.rsmaximumrows
+msgid "Maximum rows"
+msgstr "મહત્તમ પંક્તિઓ"
+
+#: u_translation.rsmay
+msgid "May"
+msgstr "મે"
+
+#: u_translation.rsmbytes
+msgid "MBytes"
+msgstr "મેઘા બાઇટ્સ"
+
+#: u_translation.rsmean
+msgid "Mean"
+msgstr "મધ્યક"
+
+#: u_translation.rsmeananomaly
+msgid "Mean anomaly"
+msgstr "મધ્યક વિસંગતતા"
+
+#: u_translation.rsmeanequatore
+msgid "mean equator, equinox and epoch of the date"
+msgstr "મધ્યક વિષુવવૃત્ત, સમપ્રકાશીય અને તારીખનો યુગ"
+
+#: u_translation.rsmeanequinoxa
+msgid "mean equinox and epoch J2000"
+msgstr "સરેરાશ સમપ્રકાશીય અને યુગ J2000"
+
+#: u_translation.rsmeanequinoxj
+msgid "mean equinox J2000, epoch of the date"
+msgstr "સરેરાશ સંપાત J2000, તારીખનો યુગ"
+
+#: u_translation.rsmeanj2000
+msgid "Mean J2000"
+msgstr "J2000 મધ્યક"
+
+#: u_translation.rsmeanlocal
+msgid "Mean local"
+msgstr "સરેરાસ સ્થાનિક"
+
+#: u_translation.rsmeanofthedat
+msgid "Mean of the date"
+msgstr "તારીખ નું મધ્યક"
+
+#: u_translation.rsmeanposition
+msgid "Mean position"
+msgstr "મધ્ય સ્થિતિ"
+
+#: u_translation.rsmeasurement
+msgid "Measurement"
+msgstr "માપ"
+
+#: u_translation.rsmemo
+msgid "Memo"
+msgstr "મેમો"
+
+#: u_translation.rsmercator
+msgid "Mercator"
+msgstr "મર્કેટર"
+
+#: u_translation.rsmercury
+msgid "Mercury"
+msgstr "બુધ"
+
+#: u_translation.rsmessages
+msgid "Messages:"
+msgstr "સંદેશાઓ:"
+
+#: u_translation.rsmeters
+msgid "Meters"
+msgstr "મીટરો"
+
+#: u_translation.rsmilkyway
+msgid "Milky Way"
+msgstr "દૂધ ગંગા"
+
+#: u_translation.rsmillionkm
+msgid "million Km."
+msgstr "દસ લાખ કિમી"
+
+#: u_translation.rsmin2
+msgid "min"
+msgstr "મિનિટ"
+
+#: u_translation.rsminimal
+msgid "Minimal"
+msgstr "ન્યૂનતમ"
+
+#: u_translation.rsminimalaltit
+msgid "Minimal altitude"
+msgstr "ન્યૂનતમ ઊંચાઈ"
+
+#: u_translation.rsminimumdecli
+msgid "Minimum declination"
+msgstr "ન્યૂનતમ ઘટાડો"
+
+#: u_translation.rsminute
+msgid "Minute"
+msgstr "મિનિટ"
+
+#: u_translation.rsminutes
+msgid "minutes"
+msgstr "મિનિટ"
+
+#: u_translation.rsmirrorhorizo
+msgid "Mirror horizontally"
+msgstr "સમાંતર ઉલટાવો"
+
+#: u_translation.rsmirrorvertic
+msgid "Mirror vertically"
+msgstr "ઊભું ઉલટાવો"
+
+#: u_translation.rsmisclines
+msgid "Misc. lines"
+msgstr "વિવિધ રેખાઓ"
+
+#: u_translation.rsmissingscrip
+msgid "Missing script title!"
+msgstr "સ્ક્રિપ્ટ શીર્ષક ખૂટે છે!"
+
+#: u_translation.rsmodify
+msgid "Modify"
+msgstr "સુધારો"
+
+#: u_translation.rsmonday
+msgid "Mon."
+msgstr "સોમ"
+
+#: u_translation.rsmonth
+msgid "Month"
+msgstr "મહિનો"
+
+#: u_translation.rsmoon
+msgid "Moon"
+msgstr "ચંદ્ર"
+
+#: u_translation.rsmoreinformat
+msgid "More informations"
+msgstr "વધુ માહિતી"
+
+#: u_translation.rsmorenebulae
+msgid "More deep sky"
+msgstr "વધુ ઊંડું આકાશ"
+
+#: u_translation.rsmoreoptions
+msgid "More options"
+msgstr "વધુ વિકલ્પો"
+
+#: u_translation.rsmorestars
+msgid "More stars"
+msgstr "વધુ તારાઓ"
+
+#: u_translation.rsmorethan1000
+msgid "More than 1000 errors! The processing is aborted."
+msgstr "1000 થી વધુ ભૂલો! પ્રક્રિયા બંધ છે."
+
+#: u_translation.rsmorethanobje
+#, object-pascal-format
+msgid "More than %s objects, the result is truncated."
+msgstr "%s કરતાં વધુ પદાર્થ, પરિણામ કાપવામાં આવ્યું છે."
+
+#: u_translation.rsmorning
+msgid "Morning"
+msgstr "સવાર"
+
+#: u_translation.rsmorningtwili
+msgid "Morning twilight"
+msgstr "સવાર નો સંધિકાળ"
+
+#: u_translation.rsmosaic
+msgid "Mosaic"
+msgstr "મોઝેઈક"
+
+#: u_translation.rsmosaiccenter
+msgid "Mosaic center"
+msgstr "મોઝેક કેન્દ્ર"
+
+#: u_translation.rsmosaicsize
+msgid "Mosaic size"
+msgstr "મોઝેક કદ"
+
+#: u_translation.rsmovelabel
+msgid "Move label"
+msgstr "નામપટ્ટી ખસેડો"
+
+#: u_translation.rsmpchttp
+msgid "MPC HTTP"
+msgstr "MPC HTTP"
+
+#: u_translation.rsmultipleflag
+msgid "Multiple flag"
+msgstr "બહુવિધ ઝંડી"
+
+#: u_translation.rsmultiplestar
+msgid "Multiple star"
+msgstr "બહુવિધ સ્ટાર"
+
+#: u_translation.rsnakedeye
+msgid "Naked eye"
+msgstr "નરી આંખે"
+
+#: u_translation.rsnakedeyerefe
+msgid "Naked eye reference"
+msgstr "નરી આંખ ના સંદર્ભ"
+
+#: u_translation.rsname
+msgid "Name"
+msgstr "નામ"
+
+#: u_translation.rsnautical
+msgid "Nautical"
+msgstr "દરિયાઈ"
+
+#: u_translation.rsnebula
+msgid "Deep sky object"
+msgstr "ઊંડો આકાશ પદાર્થ"
+
+#: u_translation.rsnebulacommon
+msgid "Deep sky common name"
+msgstr "ઊંડા આકાશનું સામાન્ય નામ"
+
+#: u_translation.rsnebuladispla
+msgid "Deep sky objects display"
+msgstr "ઊંડા આકાશ ના પદાર્થ દર્શક"
+
+#: u_translation.rsnebulae
+msgid "Deep sky objects"
+msgstr "ઊંડા આકાશ ના પદાર્થો"
+
+#: u_translation.rsnebulaefilte
+msgid "Deep sky filter"
+msgstr "ઊંડા આકાશ ના ફિલ્ટર"
+
+#: u_translation.rsnebulaeoroth
+msgid "Deep sky or other objects"
+msgstr "ગહન આકાશ અથવા અન્ય વસ્તુઓ"
+
+#: u_translation.rsnebulaeoutli
+msgid "Nebulae outlines"
+msgstr "નિહારિકા રૂપરેખા"
+
+#: u_translation.rsneighbor
+msgid "Neighbour"
+msgstr "પડોશી"
+
+#: u_translation.rsneptune
+msgid "Neptune"
+msgstr "નેપ્ચ્યુન"
+
+#: u_translation.rsnever
+msgid "never"
+msgstr "કદી નહિં"
+
+#: u_translation.rsnewbetaversi
+msgid "New beta version available"
+msgstr "નવું બીટા વર્ઝન ઉપલબ્ધ છે"
+
+#: u_translation.rsnewchart
+msgid "New chart"
+msgstr "નવો નકશો"
+
+#: u_translation.rsnewfindercir
+msgid "New finder circle"
+msgstr "નવું શોધક વર્તુળ"
+
+#: u_translation.rsnewlabel
+msgid "New label"
+msgstr "નવું નામાંકન"
+
+#: u_translation.rsnewversionav
+msgid "New version available"
+msgstr "નવું સંસ્કરણ ઉપલબ્ધ છે"
+
+#: u_translation.rsnext
+msgid "Next   >>"
+msgstr "પછીનું >>"
+
+#: u_translation.rsnext2
+msgid "Next"
+msgstr "પછીનું"
+
+#: u_translation.rsnextchart
+msgid "Next Chart"
+msgstr "આગામી નકશો"
+
+#: u_translation.rsnightvision
+msgid "Night vision"
+msgstr "રાત્રિ દ્રષ્ટિ"
+
+#: u_translation.rsnightvisionc
+msgid "Night vision color"
+msgstr "રાત્રિ દ્રષ્ટિ રંગ"
+
+#: u_translation.rsnoasteroidda
+#, object-pascal-format
+msgid "No asteroids data found!%sPlease load a MPC file first."
+msgstr "કોઈ લઘુગ્રહો નો ડેટા મળ્યો નથી! %s  મહેરબાની કરી પહેલા MPC ફાઇલ લોડ કરો."
+
+#: u_translation.rsnoastronomic
+msgid "No astronomical twilight today!"
+msgstr "આજે કોઈ ખગોળીય સંધ્યા નથી!"
+
+#: u_translation.rsnocatalogsel
+msgid "No catalog selected, or no table from the selected catalog contain coordinates information."
+msgstr "કોઈ સૂચિપત્ર  પસંદ કરેલ નથી, અથવા પસંદ કરેલ સૂચિપત્ર માં  કોઈ કોષ્ટકમાં સંકલન માહિતી નથી."
+
+#: u_translation.rsnochange
+msgid "No change"
+msgstr "કઈ બદલાવ નહિ"
+
+#: u_translation.rsnodata
+msgid "No Data"
+msgstr "ડેટા ઉપલબ્ધ નથી"
+
+#: u_translation.rsnodecimalsep
+msgid "No decimal separator"
+msgstr "કોઈ દશાંશ વિભાજક નથી"
+
+#: u_translation.rsnomargin
+msgid "No margin"
+msgstr "હાંસિયો નહીં"
+
+#: u_translation.rsnone1
+msgid "None"
+msgstr "કોઇપણ નહિ"
+
+#: u_translation.rsnonexistant
+msgid "Non-existent"
+msgstr "અસ્તિત્વમાં નથી"
+
+#: u_translation.rsnonexistentu
+msgid "Non-existent/unknown"
+msgstr "અવિદ્યમાન/અજ્ઞાત"
+
+#: u_translation.rsnoobjecttolo
+msgid "No object to lock on"
+msgstr "તાળું મારવા કોઈ પદાર્થ નથી"
+
+#: u_translation.rsnopicture
+msgid "No picture"
+msgstr "ચિત્ર ઉપલબ્ધ નથી"
+
+#: u_translation.rsnoprinterfou
+msgid "No printer found!"
+msgstr "કોઈ મુદ્રક મળ્યું નથી!"
+
+#: u_translation.rsnopropermo
+msgid "(uncorrected for proper motion, no pm data available from this catalog)"
+msgstr "(યોગ્ય ગતિ માટે અયોગ્ય, આ સૂચિપત્ર માં કોઈ pm ડેટા ઉપલબ્ધ નથી)"
+
+#: u_translation.rsnorth
+msgid "North"
+msgstr "ઉત્તર"
+
+#: u_translation.rsnosamphubpro
+msgid "No SAMP hub profile found, no hub is running."
+msgstr "કોઈ SAMP હબ પ્રોફાઇલ મળી નથી, કોઈ હબ ચાલી રહ્યું નથી."
+
+#: u_translation.rsnotafitsfile
+msgid "Not a FITS file, SIMPLE = T keyword missing"
+msgstr "FITS ફાઇલ નથી, SIMPLE = T કીવર્ડ ખૂટે છે"
+
+#: u_translation.rsnotargetobje
+msgid "No target object"
+msgstr "કોઈ લક્ષ્ય પદાર્થ નથી"
+
+#: u_translation.rsnotavailable
+msgid "Not available"
+msgstr "ઉપલબ્ધ નથી"
+
+#: u_translation.rsnotconnected
+#, object-pascal-format
+msgid "%s not connected."
+msgstr "%s  જોડાયેલ નથી"
+
+#: u_translation.rsnote
+msgid "Note"
+msgstr "નોંધ"
+
+#: u_translation.rsnotfound
+#, object-pascal-format
+msgid "%s not found"
+msgstr "%s મળતું નથી"
+
+#: u_translation.rsnotfoundinan
+#, object-pascal-format, fuzzy, badformat
+msgid "%s  Not found in any of the installed catalog indices."
+msgstr "&s  કોઈ પણ સ્થાપિત સૂચિ ના સૂચકાંકો માં મળતું નથી"
+
+#: u_translation.rsnotfoundmayb
+#, object-pascal-format
+msgid "%s Not found!%sMaybe the catalog is not installed, or there is a wrong path in catalog setting."
+msgstr "%s મળતું નથી %s કદાચ સૂચિ સ્થાપિત નથી, અથવા ખોટો માર્ગ સૂચિ ના સેટીગ માં બતાવ્યો છે."
+
+#: u_translation.rsnovember
+msgid "November"
+msgstr "નવેમ્બર"
+
+#: u_translation.rsnow
+msgid "Now"
+msgstr "હમણાં"
+
+#: u_translation.rsnumberofcopi
+msgid "Number of copies"
+msgstr "નકલોની સંખ્યા"
+
+#: u_translation.rsnumberofdays
+msgid "Number of days"
+msgstr "દિવસોની સંખ્યા"
+
+#: u_translation.rsnumberoffile
+msgid "Number of files"
+msgstr "ફાઇલોની સંખ્યા"
+
+#: u_translation.rsnumberofigno
+#, object-pascal-format
+msgid "Number of ignored invalid rows: %s"
+msgstr "અવગણવામાં આવેલી અમાન્ય પંક્તિઓની સંખ્યા: %s"
+
+#: u_translation.rsnumberofmont
+msgid "Number of months"
+msgstr "કુલ મહિના"
+
+#: u_translation.rsnumberofstar
+msgid "Number of stars"
+msgstr "કુલ તારાઓ"
+
+#: u_translation.rsnumberofstep
+msgid "Number of steps"
+msgstr "પગલાંઓની સંખ્યા"
+
+#: u_translation.rsnutationaber
+msgid "Nutation, aberration"
+msgstr "ન્યુટેશન, વિચલન"
+
+#: u_translation.rsobject
+msgid "Object"
+msgstr "પદાર્થ"
+
+#: u_translation.rsobjectbar
+msgid "Object bar"
+msgstr "પદાર્થ પટ્ટી"
+
+#: u_translation.rsobjectfilter
+msgid "Object filter"
+msgstr "પદાર્થ નિસ્પંદક"
+
+#: u_translation.rsobjectfilter2
+msgid "Object filter settings"
+msgstr "ઑબ્જેક્ટ ફિલ્ટર સેટિંગ્સ"
+
+#: u_translation.rsobjectlist
+msgid "Object list"
+msgstr "પદાર્થ સૂચિ"
+
+#: u_translation.rsobjectlistse
+msgid "Object list settings"
+msgstr "પદાર્થ સૂચિ ની ગોઠવણ"
+
+#: u_translation.rsobjectname
+msgid "Object name"
+msgstr "પદાર્થ નું નામ"
+
+#: u_translation.rsobjectsizeun
+msgid "Object size unit"
+msgstr "પદાર્થ કદ એકમ"
+
+#: u_translation.rsobjecttype
+msgid "Object type"
+msgstr "પદાર્થ પ્રકાર"
+
+#: u_translation.rsobsaltitude
+#, object-pascal-format, fuzzy, badformat
+msgid "%sAltitude"
+msgstr "% ઊંચાઈ"
+
+#: u_translation.rsobservationt
+msgid "Observation time"
+msgstr "નિરીક્ષણ સમય"
+
+#: u_translation.rsobservatory
+msgid "Observatory"
+msgstr "વેધશાળા"
+
+#: u_translation.rsobservatoryd
+msgid "Observatory database"
+msgstr "વેધશાળા નું ડેટાબેસ"
+
+#: u_translation.rsobservertool
+msgid "Observer tools"
+msgstr "નિરીક્ષક સાધનો"
+
+#: u_translation.rsobservinglis
+msgid "Observing list"
+msgstr "અવલોકન યાદી"
+
+#: u_translation.rsobservinglis2
+msgid "Observing list elements"
+msgstr "અવલોકન યાદી તત્વો"
+
+#: u_translation.rsobsolete
+msgid "Obsolete"
+msgstr "જુનવાણી"
+
+#: u_translation.rsoctober
+msgid "October"
+msgstr "ઑક્ટોબર"
+
+#: u_translation.rsofficialname
+msgid "Official name"
+msgstr "સત્તાવાર નામ"
+
+#: u_translation.rsoffset
+msgid "Offset"
+msgstr "ઓફસેટ"
+
+#: u_translation.rsoffsetlabel
+msgid "Offset label"
+msgstr "ઓફસેટ નામપટ્ટી"
+
+#: u_translation.rsok
+msgid "OK"
+msgstr "બરાબર"
+
+#: u_translation.rsoneevery
+msgid "One every"
+msgstr "એક દરેક"
+
+#: u_translation.rsonlinedss
+msgid "Online DSS"
+msgstr "ઓનલાઈન DSS"
+
+#: u_translation.rsonlinedsspic
+msgid "Online DSS pictures"
+msgstr "ઓનલાઇન DSS ચિત્રો"
+
+#: u_translation.rsonlinepictur
+msgid "Online pictures servers"
+msgstr "ઓનલાઈન ચિત્રો ના સર્વર"
+
+#: u_translation.rsonlinesearch
+msgid "Online search failed!"
+msgstr "ઑનલાઇન શોધ નિષ્ફળ!"
+
+#: u_translation.rsonlinesearch2
+msgid "Online search result"
+msgstr "ઑનલાઇન શોધ પરિણામ"
+
+#: u_translation.rsonlynumbered
+msgid "Only numbered asteroids"
+msgstr "માત્ર અંકિત લઘુગ્રહો"
+
+#: u_translation.rsonlyobjectsw
+msgid "Only objects within airmass limits tonight"
+msgstr "આજની રાત્રે માત્ર એરમાસની મર્યાદાની અંદરની વસ્તુઓ"
+
+#: u_translation.rsonlyobjectsw2
+msgid "Only objects within airmass limits now"
+msgstr "હવે માત્ર એરમાસ સીમાની અંદરની વસ્તુઓ"
+
+#: u_translation.rsonlyobjectsw3
+msgid "Only objects within hour angle limits tonight"
+msgstr "આજે રાત્રે માત્ર કલાકના ખૂણાની મર્યાદામાંની વસ્તુઓ"
+
+#: u_translation.rsonlyobjectsw4
+msgid "Only objects within hour angle limits now"
+msgstr "હવે માત્ર કલાકના ખૂણોની મર્યાદામાંની વસ્તુઓ"
+
+#: u_translation.rsonlythefirst
+msgid "Only the first"
+msgstr "માત્ર પહેલું"
+
+#: u_translation.rsonlythelast
+msgid "Only the last"
+msgstr "માત્ર છેલ્લું"
+
+#: u_translation.rsopen
+msgid "Open"
+msgstr "ખોલો"
+
+#: u_translation.rsopenachart
+msgid "Open a chart"
+msgstr "નકશો ખોલો"
+
+#: u_translation.rsopencluster
+msgid "Open cluster"
+msgstr "ખુલ્લુ  ગુચ્છ"
+
+#: u_translation.rsopenscript
+msgid "Open script"
+msgstr "સ્ક્રિપ્ટ ખોલો"
+
+#: u_translation.rsopenthebitma
+msgid "Open the bitmap."
+msgstr "બિટમેપ ખોલો"
+
+#: u_translation.rsoptions
+msgid "Options"
+msgstr "વિકલ્પો"
+
+#: u_translation.rsorbit
+msgid "Orbit"
+msgstr "ભ્રમણકક્ષા"
+
+#: u_translation.rsorbitaleleme
+msgid "Orbital elements"
+msgstr "ભ્રમણકક્ષા ના તત્વો"
+
+#: u_translation.rsorientation
+msgid "Orientation"
+msgstr "અભિગમ"
+
+#: u_translation.rsorienttothep
+msgid "Orient to the pole or zenith"
+msgstr "ધ્રુવ અથવા માથા ઉપર ઉદયમાન"
+
+#: u_translation.rsorusealocalf
+msgid "Or use a local file:"
+msgstr "અથવા લોકલ ફાઇલ વાપરો:"
+
+#: u_translation.rsother
+msgid "Other"
+msgstr "બીજુ"
+
+#: u_translation.rsotherlabel
+msgid "Other label"
+msgstr "બીજા નમાંકનો"
+
+#: u_translation.rsothersoftwar
+msgid "Other software data"
+msgstr "અન્ય સોફ્ટવેર ડેટા"
+
+#: u_translation.rsoutersolarsy
+msgid "Outer Solar System"
+msgstr "બાહ્ય સૌર મંડળ"
+
+#: u_translation.rsoutputcatalo
+msgid "Output catalog type"
+msgstr "સૂચિ પ્રકાર નું આઉટપુટ"
+
+#: u_translation.rsoutputcatalo2
+msgid "Output catalog options"
+msgstr "આઉટપુટ સૂચિપત્ર વિકલ્પો"
+
+#: u_translation.rsoutputdirect
+msgid "Output directory"
+msgstr "આઉટપુટ નિર્દેશિકા"
+
+#: u_translation.rspagemarginin
+msgid "Page margin in millimeters"
+msgstr "મીલીમીટરમાં પૃષ્ઠ હાંસિયો"
+
+#: u_translation.rsparallax
+msgid "Parallax"
+msgstr "લંબન"
+
+#: u_translation.rsparametric
+msgid "Parametric"
+msgstr "પેરામેટ્રિક"
+
+#: u_translation.rspark
+msgid "Park"
+msgstr "વિરામ કરો"
+
+#: u_translation.rspartial
+msgid "Partial"
+msgstr "અંશતઃ"
+
+#: u_translation.rspassword
+msgid "Password"
+msgstr "પાસવર્ડ"
+
+#: u_translation.rspastel
+msgid "Pastel"
+msgstr "રંગીન ચાક"
+
+#: u_translation.rspath
+msgid "Path"
+msgstr "સ્થાન"
+
+#: u_translation.rspathtosaveth
+msgid "Path to save the file:"
+msgstr "ફાઇલ સાચવવા માટેનો માર્ગ:"
+
+#: u_translation.rspathwidth
+msgid "Path width"
+msgstr "માર્ગ લંબાઈ"
+
+#: u_translation.rspause
+msgid "Pause"
+msgstr "અટકાવો"
+
+#: u_translation.rspenumbra
+msgid "Penumbra"
+msgstr "ઉપછાયા"
+
+#: u_translation.rsperihelionda
+msgid "Perihelion date"
+msgstr "સુર્ય નજીક ની તારીખ"
+
+#: u_translation.rsperiheliondi
+msgid "Perihelion distance"
+msgstr "સુર્ય નજીક નું અંતર"
+
+#: u_translation.rsperiod
+msgid "Period"
+msgstr "સમયગાળો"
+
+#: u_translation.rspersonaldata
+msgid "Personal data"
+msgstr "વ્યક્તિગત ડેટા"
+
+#: u_translation.rsphaseangle
+msgid "Phase angle"
+msgstr "કળા કોણ"
+
+#: u_translation.rsphotographic
+msgid "Photographic plate"
+msgstr "ફોટોગ્રાફિક પ્લેટ"
+
+#: u_translation.rsphotographic2
+msgid "Photographic"
+msgstr "છબીકલા ને લગતું"
+
+#: u_translation.rspictureangle
+msgid "Picture angle offset"
+msgstr "ચિત્ર કોણ ઓફસેટ"
+
+#: u_translation.rspictures
+msgid "Pictures"
+msgstr "ચિત્રો"
+
+#: u_translation.rspixelcount
+msgid "Pixel count"
+msgstr "બિંદુ ગણતરી"
+
+#: u_translation.rspixels
+msgid "pixels"
+msgstr "બિંદુઓ"
+
+#: u_translation.rspixelsize
+msgid "Pixel size"
+msgstr "બિંદુ કદ"
+
+#: u_translation.rsplanet
+msgid "Planet"
+msgstr "ગ્રહ"
+
+#: u_translation.rsplanetaryneb
+msgid "Planetary nebula"
+msgstr "ગ્રહોની નિહારિકા"
+
+#: u_translation.rsplanetarysat
+msgid "Planetary satellite"
+msgstr "ગ્રહોનો ઉપગ્રહ"
+
+#: u_translation.rsplanetssetti
+msgid "Planet settings"
+msgstr "ગ્રહો નું આયોજન"
+
+#: u_translation.rsplanetvisibi
+msgid "Planet visibility"
+msgstr "ગ્રહ દૃશ્યતા"
+
+#: u_translation.rsplatedefect
+msgid "Plate defect"
+msgstr "પ્લેટની ખામી"
+
+#: u_translation.rsplateiddatee
+msgid "Plate id.    Date  exp.   Margin  CD  Observatory"
+msgstr "પ્લેટ id. તારીખexp.  અંતર  CD વેધશાળા"
+
+#: u_translation.rspleasechecky
+msgid "Please check your Internet connection and the URL definition"
+msgstr "મહેરબાની કરી આપનું ઇન્ટરનેટ જોડાણ અને URL વ્યાખ્યા ચકાશો"
+
+#: u_translation.rspleaseconfig
+msgid "Please configure your DSS file path first."
+msgstr "મહેરબાની કરી તમારી DSS ફાઇલ નો માર્ગ  રૂપરેખાંકિત કરો"
+
+#: u_translation.rspleaseconfig2
+msgid "Please configure the orbital elements URL!"
+msgstr "કૃપયા ભ્રમણકક્ષા ના તત્વો ની URL ને ગોઠવો!"
+
+#: u_translation.rspleaseconfir
+#, object-pascal-format
+msgid "Please confirm that the telescope is pointed at %s"
+msgstr "કૃપા કરીને પુષ્ટિ કરો કે ટેલિસ્કોપ %s પર નિર્દેશિત છે"
+
+#: u_translation.rspleasedownlo
+msgid "Please download and select TLE file"
+msgstr "Please download and select TLE file"
+
+#: u_translation.rspleaseensure
+msgid "Please ensure that ASCOM telescope drivers are installed properly."
+msgstr "કૃપા કરીને ખાતરી કરો કે ASCOM ટેલિસ્કોપ ડ્રાઇવરો યોગ્ય રીતે ઇન્સ્ટોલ કરેલા છે."
+
+#: u_translation.rspleaseentera
+msgid "Please enter an object identifier."
+msgstr "મહેરબાની કરી પદાર્થ ઓળખકર્તા નાખો"
+
+#: u_translation.rspleaseindica
+msgid "Please indicate a catalog short name"
+msgstr "મહેરબાની કરી સૂચિપત્ર નું ટુંકુનામ દર્શાવો"
+
+#: u_translation.rspleaseindica2
+msgid "Please indicate a catalog long name"
+msgstr "મહેરબાની કરી સૂચિપત્ર નું લાંબુ નામ દર્શાવો"
+
+#: u_translation.rspleaseindica3
+msgid "Please indicate the directory where the catalog must be built"
+msgstr "કૃપા કરીને નિર્દેશિકા સૂચવો કે જ્યાં સૂચિપત્ર બાંધવો આવશ્યક છે"
+
+#: u_translation.rspleaseinstwine
+msgid "Please install wine http://www.winehq.org/ to compute artificial satellites on your computer."
+msgstr "તમારા કમ્પ્યુટર પર કૃત્રિમ ઉપગ્રહોની ગણતરી કરવા માટે કૃપા કરીને વાઇન http://www.winehq.org/ ઇન્સ્ટોલ કરો."
+
+#: u_translation.rspleasemountr
+msgid "Please mount RealSky CD number"
+msgstr "કૃપા કરીને RealSky CD નંબર માઉન્ટ કરો"
+
+#: u_translation.rspleasereport
+msgid "Please report any problem to:"
+msgstr "કૃપા કરીને કોઈપણ સમસ્યાની જાણ કરો:"
+
+#: u_translation.rspleasetrytoc
+msgid "Please try to create this directory yourself and restart the program."
+msgstr "કૃપા કરીને આ નિર્દેશિકા જાતે બનાવવાનો પ્રયાસ કરો અને પ્રોગ્રામને ફરીથી પ્રારંભ કરો."
+
+#: u_translation.rspleasetrytor
+msgid "Please try to reinstall the program."
+msgstr "કૃપા કરીને પ્રોગ્રામને ફરીથી ઇન્સ્ટોલ કરવાનો પ્રયાસ કરો."
+
+#: u_translation.rspleasewait
+msgid "Please wait..."
+msgstr "મહેરબાની કરીને રાહ જુઓ..."
+
+#: u_translation.rsplottheposit
+msgid "Plot orbital motion of solar system objects."
+msgstr "સૌરમંડળના પદાર્થોની ભ્રમણકક્ષાની ગતિ."
+
+#: u_translation.rspluto
+msgid "Pluto"
+msgstr "પ્લુટો"
+
+#: u_translation.rsplutoisaplan
+msgid "Pluto is a planet."
+msgstr "પ્લુટો એક ગ્રહ છે."
+
+#: u_translation.rspoleinclinat
+msgid "Pole inclination"
+msgstr "ધ્રુવ નમનકોણ"
+
+#: u_translation.rsport
+msgid "Port:"
+msgstr "પોર્ટ:"
+
+#: u_translation.rsportrait
+msgid "Portrait"
+msgstr "ઊભું ચિત્ર"
+
+#: u_translation.rsposition
+msgid "Position"
+msgstr "સ્થાન"
+
+#: u_translation.rspositionangl
+msgid "Position angle"
+msgstr "સ્થિતિ કોણ"
+
+#: u_translation.rspositionepoc
+msgid "Position epoch"
+msgstr "સ્થિતિ યુગ"
+
+#: u_translation.rspostscript
+msgid "PostScript"
+msgstr "પોસ્ટસ્ક્રિપ્ટ"
+
+#: u_translation.rspower
+msgid "Power"
+msgstr "શક્તિ"
+
+#: u_translation.rsprefixnamewi
+msgid "Prefix name with catalog short name"
+msgstr "સૂચિ ટૂંકા નામ સાથે ઉપસર્ગ નામ"
+
+#: u_translation.rsprepareacata
+msgid "Prepare a catalog with CatGen"
+msgstr "CatGen સાથે સૂચિપત્ર તૈયાર કરો"
+
+#: u_translation.rspreparedata
+msgid "Prepare data "
+msgstr "ડેટા તૈયાર કરો "
+
+#: u_translation.rspreparemonth
+msgid "Prepare monthly data"
+msgstr "મહિના ના ડેટા તૈયાર કરો."
+
+#: u_translation.rsprepointing
+msgid "Pre-Pointing"
+msgstr "નિર્દેશ પહેલા નું"
+
+#: u_translation.rsprepointline
+msgid "Pre-point line duration in minutes"
+msgstr "નિર્દેશ પહેલા ની રેખા નો સમય મિનિટ માં"
+
+#: u_translation.rspressuremill
+msgid "Pressure (millibar)"
+msgstr "દબાણ (મિલિબાર)"
+
+#: u_translation.rsprev
+msgid "<<   Prev"
+msgstr "<< પહેલાનું"
+
+#: u_translation.rspreview
+msgid "Preview"
+msgstr "પૂર્વદર્શન"
+
+#: u_translation.rsprevious
+msgid "Previous"
+msgstr "પહેલાનું"
+
+#: u_translation.rsprint
+msgid "Print"
+msgstr "છાપો"
+
+#: u_translation.rsprintchart
+msgid "Print chart"
+msgstr "નકશો છાપો"
+
+#: u_translation.rsprintedchart
+msgid "Printed chart"
+msgstr "છાપેલો નકશો"
+
+#: u_translation.rsprinter
+msgid "Printer:"
+msgstr "મુદ્રક:"
+
+#: u_translation.rsprinterlegen
+msgid "Printer legend"
+msgstr "મુદ્રક ચિન્હો"
+
+#: u_translation.rsprintersetup
+msgid "Printer setup"
+msgstr "મુદ્રક સ્થાપના"
+
+#: u_translation.rsprintfooter
+msgid "Print footer"
+msgstr "ફૂટર છાપો"
+
+#: u_translation.rsprintheader
+msgid "Print header"
+msgstr "હેડર છાપો"
+
+#: u_translation.rsprintmethod
+msgid "Print method"
+msgstr "છાપવાની પદ્ધતિ"
+
+#: u_translation.rsprintpreview
+msgid "Print Preview"
+msgstr "છાપવાનું પૂર્વદર્શન"
+
+#: u_translation.rsprintthechar
+msgid "Print the chart"
+msgstr "નકશો છાપો"
+
+#: u_translation.rsprocessing
+#, object-pascal-format
+msgid "Processing... %s"
+msgstr "પ્રક્રિયા કરી રહ્યું છે... %s"
+
+#: u_translation.rsprocessingen
+#, object-pascal-format
+msgid "Processing ended. Total number of comets: %s"
+msgstr "પ્રક્રિયા સમાપ્ત થઈ. ધૂમકેતુઓની કુલ સંખ્યા: %s"
+
+#: u_translation.rsprocessingen2
+#, object-pascal-format
+msgid "Processing ended. Total number of asteroids: %s"
+msgstr "પ્રક્રિયા સમાપ્ત થઈ. લઘુગ્રહોની કુલ સંખ્યા: %s"
+
+#: u_translation.rsprocessingen3
+#, object-pascal-format
+msgid "Processing ended. Total number of location :%s"
+msgstr "પ્રક્રિયા સમાપ્ત થઈ. સ્થળની કુલ સંખ્યા :%s"
+
+#: u_translation.rsprocessingli
+#, object-pascal-format
+msgid "Processing line %s"
+msgstr "પ્રક્રિયા રેખા %s"
+
+#: u_translation.rsprograminfor
+msgid "Program information"
+msgstr "કાર્યક્રમ ની માહિતી"
+
+#: u_translation.rsprogrammer
+msgid "Programmer:"
+msgstr "પ્રોગ્રામર:"
+
+#: u_translation.rsprogress
+msgid "Progress"
+msgstr "પ્રગતિ"
+
+#: u_translation.rsprogressmess
+msgid "Progress messages"
+msgstr "પ્રગતિ સંદેશ"
+
+#: u_translation.rsprojection
+msgid "Projection"
+msgstr "પ્રક્ષેપણ"
+
+#: u_translation.rsprojectionse
+msgid "Projection settings"
+msgstr "પ્રક્ષેપણ ગોઠવણ"
+
+#: u_translation.rspropermotion
+msgid "Proper motion in right ascension"
+msgstr "જમણા  ઉર્ધ્વગમન માં યોગ્ય ગતિ"
+
+#: u_translation.rspropermotion2
+msgid "Proper motion in declination"
+msgstr "વિષુવવૃત્તથી કોણીય અંતર માં યોગ્ય ગતિ"
+
+#: u_translation.rspropermotion3
+msgid "Proper motion"
+msgstr "યોગ્ય ગતિ"
+
+#: u_translation.rsproportional
+msgid "Proportional to the tail length"
+msgstr "પૂંછડીની લંબાઈના પ્રમાણસર"
+
+#: u_translation.rsproportional2
+msgid "Proportional to the magnitude"
+msgstr "તીવ્રતાના પ્રમાણસર"
+
+#: u_translation.rsprotocoltrac
+msgid "Protocol trace"
+msgstr "પ્રોટોકોલ ટ્રેસ"
+
+#: u_translation.rsproxy
+msgid "Proxy"
+msgstr "પ્રોક્સી"
+
+#: u_translation.rsproxyhost
+msgid "Proxy host"
+msgstr "પ્રોક્સી સંચાલન"
+
+#: u_translation.rsproxyport
+msgid "Proxy port"
+msgstr "પ્રોક્સી પોર્ટ"
+
+#: u_translation.rsputthefilesw
+#, object-pascal-format
+msgid "Put the files with a .tle extention to the %s folder"
+msgstr ".tle એક્સ્ટેંશનવાળી ફાઇલોને %s ફોલ્ડરમાં મૂકો"
+
+#: u_translation.rsqualityflag
+msgid "Quality flag"
+msgstr "ગુણવત્તા ધ્વજ"
+
+#: u_translation.rsquasar
+msgid "Quasar"
+msgstr "કવેસાર"
+
+#: u_translation.rsquickdelete
+msgid "Quick delete"
+msgstr "જલ્દી કાઢી નાખો"
+
+#: u_translation.rsquicklydelet
+msgid "Quickly delete all data related to comets"
+msgstr "ધૂમકેતુ ને લગતા તમામ ડેટા જલ્દી કાઢી નાખો"
+
+#: u_translation.rsquicklydelet2
+msgid "Quickly delete all data related to asteroids"
+msgstr "લઘુગ્રહ સંબંધિત તમામ ડેટા ઝડપથી કાઢી નાખો"
+
+#: u_translation.rsquickstartgu
+msgid "Quick start guide"
+msgstr "ઝડપી શરૂઆત માર્ગદર્શન"
+
+#: u_translation.rsra
+msgid "RA"
+msgstr "RA"
+
+#: u_translation.rsradialveloci
+msgid "Radial velocity"
+msgstr "અન્તર્નિહિત વેગ"
+
+#: u_translation.rsrange
+msgid "Range"
+msgstr "વિસ્તાર"
+
+#: u_translation.rsraoptions
+msgid "RA options"
+msgstr "RA વિકલ્પો"
+
+#: u_translation.rsrasterresolu
+msgid "Raster resolution"
+msgstr "રાસ્ટર રિઝોલ્યુશન"
+
+#: u_translation.rsraturns
+msgid "RA turns: "
+msgstr "RA વળાંક: "
+
+#: u_translation.rsraturns2
+#, object-pascal-format, fuzzy, badformat
+msgid "%sRA turns:"
+msgstr "%સ RA વળાંક:"
+
+#: u_translation.rsrealisticsim
+msgid "Realistic images"
+msgstr "ખરી છબી"
+
+#: u_translation.rsrealskynorth
+msgid "RealSky North"
+msgstr "RealSky ઉતર"
+
+#: u_translation.rsrealskysouth
+msgid "RealSky South"
+msgstr "RealSky દક્ષિણ"
+
+#: u_translation.rsrealtimeopti
+msgid "Real time options"
+msgstr "વાસ્તવિક સમય વિકલ્પો"
+
+#: u_translation.rsreceivecoord
+msgid "Receive coordinates from other applications"
+msgstr "અન્ય એપ્લિકેશનોમાંથી યામો મેળવો"
+
+#: u_translation.rsreceivefitsi
+msgid "Receive FITS images from other applications"
+msgstr "અન્ય એપ્લિકેશનોમાંથી FITS છબીઓ પ્રાપ્ત કરો"
+
+#: u_translation.rsreceivevotab
+msgid "Receive VO table data from other applications"
+msgstr "અન્ય એપ્લિકેશનોમાંથી VO કોષ્ટક ડેટા મેળવો"
+
+#: u_translation.rsrecognizeuni
+msgid "Recognize units or object type from the file:"
+msgstr "ફાઇલમાંથી એકમો અથવા પદાર્થ નો પ્રકાર ઓળખો:"
+
+#: u_translation.rsrecordanimat
+msgid "Record animation to file"
+msgstr "ફાઇલમાં એનિમેશન રેકોર્ડ કરો"
+
+#: u_translation.rsrecordingdir
+msgid "Recording directory"
+msgstr "રેકોર્ડીંગ નિર્દેશિકા"
+
+#: u_translation.rsrecordingext
+msgid "Recording extension"
+msgstr "રેકોર્ડિંગ એક્સ્ટેંશન"
+
+#: u_translation.rsrecordingopt
+msgid "Recording options"
+msgstr "રેકોર્ડિંગ વિકલ્પો"
+
+#: u_translation.rsrecordingpre
+msgid "Recording prefix"
+msgstr "રેકોર્ડીંગ ઉપસર્ગ"
+
+#: u_translation.rsrecoverhidde
+msgid "Recover hidden label"
+msgstr "છુપાયેલ નામપટ્ટી પુનઃપ્રાપ્ત કરો"
+
+#: u_translation.rsrectangular
+msgid "Rectangular"
+msgstr "લંબચોરસ"
+
+#: u_translation.rsred
+msgid "Red"
+msgstr "લાલ"
+
+#: u_translation.rsredmagnitude
+msgid "Red magnitude"
+msgstr "લાલ તીવ્રતા"
+
+#: u_translation.rsredo
+msgid "Redo"
+msgstr "ફરીથી કરો"
+
+#: u_translation.rsredolastchan
+msgid "Redo last change"
+msgstr "છેલ્લો ફેરફાર ફરી કરો"
+
+#: u_translation.rsreducedetail
+msgid "Reduce details when moving the chart"
+msgstr "નકશો ખસેડતી વખતે વિગતો ઓછી કરો"
+
+#: u_translation.rsreference
+msgid "Reference"
+msgstr "સંદર્ભ"
+
+#: u_translation.rsreflectionne
+msgid "Reflection nebula"
+msgstr "પરાવર્તી નિહારિકા"
+
+#: u_translation.rsrefresh
+msgid "Refresh"
+msgstr "તાજું કરો"
+
+#: u_translation.rsrefreshallep
+msgid "Refresh all ephemeris"
+msgstr "બધા પંચાંગ તાજા કરો"
+
+#: u_translation.rsrefreshimage
+msgid "Refresh image every"
+msgstr "છબી તાજી કરો દર"
+
+#: u_translation.rsrefreshrate
+msgid "Refresh rate"
+msgstr "તાજું કરવાનો દર"
+
+#: u_translation.rsreleasenotes
+msgid "Release notes"
+msgstr "પ્રકાશન નોંધો"
+
+#: u_translation.rsreload
+msgid "Reload"
+msgstr "ફરી લાવો"
+
+#: u_translation.rsreloadforcur
+#, object-pascal-format
+msgid "Reload %s for current chart"
+msgstr "વર્તમાન નકશા માટે %s ફરીથી લોડ કરો"
+
+#: u_translation.rsremoveallbre
+msgid "Remove all breakpoints"
+msgstr "બધા બ્રેકપોઇન્ટ્સ દૂર કરો"
+
+#: u_translation.rsremoveallcir
+msgid "Remove all circles"
+msgstr "બધા વર્તુળ દૂર કરો"
+
+#: u_translation.rsremovealllab
+msgid "Remove all labels"
+msgstr "બધા નામાંકન દૂર કરો"
+
+#: u_translation.rsremovelastci
+msgid "Remove last circle"
+msgstr "છેલ્લું વર્તુળ દૂર કરો"
+
+#: u_translation.rsremovelastla
+msgid "Remove last label"
+msgstr "છેલ્લું નામાંકન દૂર કરો"
+
+#: u_translation.rsreplacebytic
+msgid "Replace by tick mark"
+msgstr "ટિક માર્ક દ્વારા બદલો"
+
+#: u_translation.rsreplacedby
+msgid "Replaced by"
+msgstr "દ્વારા બદલો"
+
+#: u_translation.rsreportaprobl
+msgid "Report a problem"
+msgstr "સમસ્યાનો અહેવાલ આપો"
+
+#: u_translation.rsrequesttimeo
+msgid "Request timeout. You probably asked a too wide area which demanded too much processing time on the remote server."
+msgstr "સમયસમાપ્તિની વિનંતી કરો. તમે સંભવતઃ ખૂબ વિશાળ વિસ્તારને પૂછ્યું છે જે રિમોટ સર્વર પર ખૂબ જ વધુ પ્રોસેસિંગ સમય માંગે છે."
+
+#: u_translation.rsrequiredfiel
+msgid "Required field missing!"
+msgstr "જરૂરી માહિતી ગાયબ છે!"
+
+#: u_translation.rsrequirexplan
+msgid "(requires Xplanet 1.2.0)"
+msgstr "(Xplanet 1.2.0 ની જરૂર છે)"
+
+#: u_translation.rsreset
+msgid "Reset"
+msgstr "પુનઃસુયોજીત કરો"
+
+#: u_translation.rsresetalllabe
+msgid "Reset all labels"
+msgstr "બધા નામો ફરી ગોઠવો"
+
+#: u_translation.rsresetchart
+msgid "Reset chart"
+msgstr "નકશો ફરી કરો"
+
+#: u_translation.rsresetchartan
+msgid "Reset chart and options"
+msgstr "નકશા અને વિકલ્પો રીસેટ કરો"
+
+#: u_translation.rsresetinitial
+msgid "Reset initial default and restart"
+msgstr "પ્રારંભિક ડિફોલ્ટ રીસેટ કરો અને પુનઃપ્રારંભ કરો"
+
+#: u_translation.rsresetrotatio
+msgid "Reset rotation"
+msgstr "ફેરવેલું પાછું લાવો"
+
+#: u_translation.rsresettime
+msgid "Reset time"
+msgstr "સમય રીસેટ કરો"
+
+#: u_translation.rsresettolastt
+msgid "Reset to last time the chart was saved"
+msgstr "નકશા ને છેલ્લા સાચવેલી સ્થિતિ માં સાચવો"
+
+#: u_translation.rsresolution
+msgid "Resolution:"
+msgstr "રિઝોલ્યુશન:"
+
+#: u_translation.rsreturn
+msgid "Return"
+msgstr "પાછુ લાવો"
+
+#: u_translation.rsrevertaltkno
+msgid "Reverse Alt knob"
+msgstr "Alt નોબ ઊંધો કરો"
+
+#: u_translation.rsrevertazknob
+msgid "Reverse Az knob"
+msgstr "Az નોબ ઊંધો કરો"
+
+#: u_translation.rsrevertdeckno
+msgid "Reverse DEC knob"
+msgstr "DEC નોબ ઊંધો કરો"
+
+#: u_translation.rsrevertraknob
+msgid "Reverse RA knob"
+msgstr "RA નોબ ઊંધો કરો"
+
+#: u_translation.rsright
+msgid "Right"
+msgstr "જમણું"
+
+#: u_translation.rsrightascensi
+msgid "Right Ascension"
+msgstr "વિષુવાંશ"
+
+#: u_translation.rsrightbar
+msgid "Right Bar"
+msgstr "જમણી પટ્ટી"
+
+#: u_translation.rsrise
+msgid "Rise"
+msgstr "ઉદય"
+
+#: u_translation.rsrisetime
+msgid "Rise time"
+msgstr "ઉદય સમય"
+
+#: u_translation.rsrotateby180d
+msgid "Rotate by 180 degrees"
+msgstr "૧૮૦ અંશ થી ફેરવો"
+
+#: u_translation.rsrotatecylind
+msgid "Use oblique cylindrical projections"
+msgstr "ત્રાંસી નળાકાર અંદાજોનો ઉપયોગ કરો"
+
+#: u_translation.rsrotateleft
+msgid "Rotate left"
+msgstr "ડાબે ફેરવો"
+
+#: u_translation.rsrotateright
+msgid "Rotate right"
+msgstr "જમણે ફેરવો"
+
+#: u_translation.rsrotation
+msgid "Rotation"
+msgstr "પરિભ્રમણ"
+
+#: u_translation.rsrows
+msgid "Rows"
+msgstr "હરોળો"
+
+#: u_translation.rsrun
+msgid "Run"
+msgstr "ચલાવો"
+
+#: u_translation.rssampconfirma
+msgid "SAMP Confirmation"
+msgstr "SAMP પુષ્ટિકરણ"
+
+#: u_translation.rssamphubprofi
+#, object-pascal-format
+msgid "SAMP hub profile %s found, but it is missing a required value."
+msgstr "SAMP હબ પ્રોફાઇલ %s મળી, પરંતુ તેમાં જરૂરી મૂલ્ય ખૂટે છે."
+
+#: u_translation.rssampisamessa
+#, object-pascal-format
+msgid "SAMP is a messaging protocol that enables astronomy software tools to interoperate and communicate.%sSkychart can send and receive coordinates position, FITS images and VO tables."
+msgstr "SAMP એ એક મેસેજિંગ પ્રોટોકોલ છે જે ખગોળશાસ્ત્રના સોફ્ટવેર ટૂલ્સને ઇન્ટરઓપરેટ કરવા અને વાતચીત કરવા સક્ષમ બનાવે છે.%s આકાશી નકશા ના યામો ની સ્થિતિ, FITS ઈમેજો અને VO કોષ્ટકો મોકલી અને પ્રાપ્ત કરી શકે છે."
+
+#: u_translation.rssampsendcoor
+msgid "SAMP send coordinates"
+msgstr "SAMP યામો મોકલો"
+
+#: u_translation.rssampsetup
+msgid "SAMP setup"
+msgstr "SAMP સેટઅપ"
+
+#: u_translation.rssampstatus
+msgid "SAMP status"
+msgstr "SAMP સ્થિતિ"
+
+#: u_translation.rssaros
+msgid "Saros"
+msgstr "સારોસ"
+
+#: u_translation.rssatellite
+msgid "Satellite"
+msgstr "ઉપગ્રહ"
+
+#: u_translation.rssatellitesca
+msgid "Satellites calculation:"
+msgstr "ઉપગ્રહોની ગણતરી:"
+
+#: u_translation.rssatring
+msgid "Sat. ring"
+msgstr "શનિ. વલય"
+
+#: u_translation.rssaturday
+msgid "Sat."
+msgstr "શનિ"
+
+#: u_translation.rssaturn
+msgid "Saturn"
+msgstr "શનિ"
+
+#: u_translation.rssave
+msgid "Save"
+msgstr "સાચવો"
+
+#: u_translation.rssaveas
+msgid "Save as..."
+msgstr "આ રીતે સંગ્રહો..."
+
+#: u_translation.rssaveconfigur
+msgid "Save configuration now"
+msgstr "રુપરેખાંકન હમણાં સંગ્રહ કરો"
+
+#: u_translation.rssaveconfigur2
+msgid "Save configuration on exit"
+msgstr "સંગ્રહ કરી રુપરેખાંકન માંથી નીકળો"
+
+#: u_translation.rssaveimage
+msgid "Save image..."
+msgstr "છબી સંગ્રહ કરો"
+
+#: u_translation.rssaveproject
+msgid "Save project"
+msgstr "યોજના સાચવો"
+
+#: u_translation.rssavethecurre
+msgid "Save the active chart"
+msgstr "સક્રિય નકશો સાચવો"
+
+#: u_translation.rssavetofile
+msgid "Save to file"
+msgstr "ફાઇલ સાચવો"
+
+#: u_translation.rsscaled
+msgid "Scaled"
+msgstr "માપ થયેલ"
+
+#: u_translation.rsscanarchives
+msgid "Scan archives"
+msgstr "આર્કાઇવ્સ સ્કેન કરો"
+
+#: u_translation.rsscandirector
+msgid "Scan directory"
+msgstr "નિર્દેશિકા નું અવલોકન"
+
+#: u_translation.rsscreenresolu
+msgid "Screen resolution"
+msgstr "સ્ક્રીન રીઝોલ્યુશન"
+
+#: u_translation.rsscript
+msgid "Script"
+msgstr "સ્ક્રિપ્ટ"
+
+#: u_translation.rsscripteditor
+msgid "Script editor"
+msgstr "સ્ક્રિપ્ટ એડિટર"
+
+#: u_translation.rsscriptisalre
+#, object-pascal-format
+msgid "Script is already assigned to %s are you sure you want to duplicate it to %s ?"
+msgstr "સ્ક્રિપ્ટ પહેલેથી જ %s ને સોંપેલ છે શું તમે ખરેખર તેને %s પર ડુપ્લિકેટ કરવા માંગો છો?"
+
+#: u_translation.rsscrollbar
+msgid "Scroll bar"
+msgstr "સરક પટ્ટી"
+
+#: u_translation.rssday
+msgid "D"
+msgstr "D"
+
+#: u_translation.rssearch
+msgid "Search"
+msgstr "શોધો"
+
+#: u_translation.rssearchbox
+msgid "Search box"
+msgstr "શોધ ખાનું"
+
+#: u_translation.rssearchbyname
+msgid "Search by name"
+msgstr "નામ થી શોધો"
+
+#: u_translation.rssearchbyposi
+msgid "Search by position"
+msgstr "સ્તિથિ પ્રમાણે શોધો"
+
+#: u_translation.rssearchcatalo
+msgid "Search Catalogs"
+msgstr "સૂચિપત્ર શોધો"
+
+#: u_translation.rssearchfor
+msgid "Search for"
+msgstr "માટે શોધો"
+
+#: u_translation.rssearchindex
+msgid "Search index"
+msgstr "અનુક્રમણિકા શોધો"
+
+#: u_translation.rssearchradius
+msgid "Search radius"
+msgstr "ત્રિજ્યા શોધો"
+
+#: u_translation.rssearchsoftwa
+msgid "Search software update"
+msgstr "સૉફ્ટવેર અપડેટ શોધો"
+
+#: u_translation.rssec2
+msgid "Sec."
+msgstr "સે."
+
+#: u_translation.rssecond
+msgid "Second"
+msgstr "સેકન્ડ"
+
+#: u_translation.rsseconds
+msgid "Seconds"
+msgstr "સેકંડો"
+
+#: u_translation.rsseehttpascom
+#, object-pascal-format
+msgid "See %s for more information."
+msgstr "વધુ માહિતી માટે %s જુઓ."
+
+#: u_translation.rsselect
+msgid "Select"
+msgstr "પસંદ કરો"
+
+#: u_translation.rsselectall
+msgid "Select all"
+msgstr "બધુ પસંદ કરો"
+
+#: u_translation.rsselectcatalo
+msgid "Select Catalog"
+msgstr "સૂચિપત્ર નક્કી કરો"
+
+#: u_translation.rsselectcircle
+msgid "Select Circle"
+msgstr "વર્તુળ પસંદ કરો"
+
+#: u_translation.rsselectcolorb
+msgid "Select color (black for catalog default)"
+msgstr "રંગ પસંદ કરો (સૂચિપત્ર માટે સામાન્ય કાળો)"
+
+#: u_translation.rsselectlabels
+msgid "Select labels to recover"
+msgstr "પુનઃપ્રાપ્ત કરવા માટે નામપટ્ટી પસંદ કરો"
+
+#: u_translation.rsselectmirror
+msgid "Select mirror site"
+msgstr "મિરર સાઇટ પસંદ કરો"
+
+#: u_translation.rsselectnone
+msgid "Select none"
+msgstr "કોઈપણ પસંદ ન કરો"
+
+#: u_translation.rsselectplatef
+msgid "Select a plate from the list"
+msgstr "સૂચિમાંથી પ્લેટ પસંદ કરો"
+
+#: u_translation.rsselectrectan
+msgid "Select Rectangle"
+msgstr "લંબચોરસ પસંદ કરો"
+
+#: u_translation.rsselectscript
+msgid "Select script"
+msgstr "સ્ક્રિપ્ટ પસંદ કરો"
+
+#: u_translation.rsselectthefie
+msgid "Select the fields to use and their position in the text file"
+msgstr "ટેક્સ્ટ ફાઇલમાં ઉપયોગ કરવા માટેના ક્ષેત્રો અને તેમની સ્થિતિ પસંદ કરો"
+
+#: u_translation.rsselectthesys
+msgid "Select the system printer and options you want to use"
+msgstr "તમે ઉપયોગ કરવા માંગો છો તે સિસ્ટમ મુદ્રક  અને વિકલ્પો પસંદ કરો"
+
+#: u_translation.rsselectthetel
+msgid "Select the telescope interface"
+msgstr "ટેલિસ્કોપ ઇન્ટરફેસ પસંદ કરો"
+
+#: u_translation.rsselectthetyp
+msgid "Select the type of objects in your catalog"
+msgstr "તમારી  સૂચિ માં વસ્તુઓનો પ્રકાર પસંદ કરો"
+
+#: u_translation.rsselecttimeun
+msgid "Select time units"
+msgstr "સમય એકમો પસંદ કરો"
+
+#: u_translation.rssemi
+msgid "Semi"
+msgstr "આંશિક"
+
+#: u_translation.rssemimajoraxi
+msgid "Semimajor axis"
+msgstr "અર્ધ મુખ્ય ધરી"
+
+#: u_translation.rssendcharttop
+msgid "Send the chart to the printer."
+msgstr "નકશો મુદ્રક માં મોકલો"
+
+#: u_translation.rssendimageto
+msgid "Send image to"
+msgstr "ને છબીઓ મોકલો"
+
+#: u_translation.rssendtableto
+msgid "Send table to"
+msgstr "કોષ્ટકો ને મોકલો"
+
+#: u_translation.rssendviaserve
+msgid "Send via server"
+msgstr "સર્વર દ્વારા મોકલો"
+
+#: u_translation.rsseparation
+msgid "Separation"
+msgstr "વિચ્છેદ"
+
+#: u_translation.rsseparator
+msgid "Separator"
+msgstr "વિભાજક"
+
+#: u_translation.rsseptember
+msgid "September"
+msgstr "સપ્ટેમ્બર"
+
+#: u_translation.rsserver
+msgid "Server"
+msgstr "સર્વર"
+
+#: u_translation.rsserverinform
+msgid "Server information"
+msgstr "સર્વર માહિતી"
+
+#: u_translation.rsserveripinte
+msgid "Server IP interface:"
+msgstr "સર્વર IP ઇનરફેસ:"
+
+#: u_translation.rsserveripport
+msgid "Server IP port:"
+msgstr "સર્વર IP પોર્ટ:"
+
+#: u_translation.rsserverrespon
+msgid "Server response: "
+msgstr "સર્વર પ્રતિભાવ: "
+
+#: u_translation.rsset
+msgid "Set"
+msgstr "અસ્ત"
+
+#: u_translation.rssetdateandti
+msgid "Set date and time"
+msgstr "તારીખ અને સમય સેટ કરો"
+
+#: u_translation.rssetfov
+msgid "Set FOV"
+msgstr "FOV નક્કી કરો"
+
+#: u_translation.rssetfovto
+msgid "Set FOV to"
+msgstr "FOV ને આના પર સેટ કરો"
+
+#: u_translation.rssethowthemou
+msgid "Set how the mount moves for each axis when you turn the driving knob. From then on, a click on the 'Connect telescope' button will show you how many turns you must make to go from one object to another."
+msgstr "જ્યારે તમે ડ્રાઇવિંગ નોબ ફેરવો છો ત્યારે દરેક અક્ષ માટે માઉન્ટ કેવી રીતે આગળ વધે છે તે સેટ કરો. ત્યારથી, 'ટેલિસ્કોપ જોડો ' બટન પર એક ક્લિક તમને બતાવશે કે તમારે એક ઑબ્જેક્ટથી બીજા ઑબ્જેક્ટ પર જવા માટે કેટલા વળાંક લેવા પડશે."
+
+#: u_translation.rssetobservato
+msgid "Set observatory location"
+msgstr "વેધશાળાનું સ્થાન નક્કી કરો"
+
+#: u_translation.rssetoptionsfo
+msgid "Set options for best performance"
+msgstr "શ્રેષ્ઠ પ્રદર્શન માટે વિકલ્પો સેટ કરો"
+
+#: u_translation.rssettargetto
+#, object-pascal-format
+msgid "Set target to %s"
+msgstr "લક્ષ્યને %s પર સેટ કરો"
+
+#: u_translation.rssettime
+msgid "Set Time"
+msgstr "સમય ગોઠવો"
+
+#: u_translation.rssettotelesco
+msgid "Set to telescope"
+msgstr "ટેલિસ્કોપ પર સેટ કરો"
+
+#: u_translation.rssetup
+msgid "Setup"
+msgstr "સુયોજન"
+
+#: u_translation.rssetupoption
+msgid "Setup Options"
+msgstr "સેટઅપ વિકલ્પો"
+
+#: u_translation.rsshour
+msgid "H"
+msgstr "H"
+
+#: u_translation.rsshow0horizon
+msgid "Show 0d horizon line"
+msgstr "0d ક્ષિતિજ રેખા બતાવો"
+
+#: u_translation.rsshowallsky
+msgid "Show all sky"
+msgstr "આખું આકાશ બતાવો"
+
+#: u_translation.rsshowasinglep
+msgid "Show a single picture on the map."
+msgstr "નકશા પર એક જ ચિત્ર બતાવો."
+
+#: u_translation.rsshowasteroid
+msgid "Show asteroids"
+msgstr "લઘુગ્રહો બતાવો"
+
+#: u_translation.rsshowasteroid3
+msgid "Show asteroids on the chart"
+msgstr "નકશા માં લઘુગ્રહો બતાવો"
+
+#: u_translation.rsshowbuttonte
+msgid "Show button text"
+msgstr "બટન નું લખાણ બતાવો"
+
+#: u_translation.rsshowcelestia
+msgid "Show celestial equator"
+msgstr "અવકાશી વિષુવવૃત્ત બતાવો"
+
+#: u_translation.rsshowcomets
+msgid "Show comets"
+msgstr "ધૂમકેતુ બતાવો"
+
+#: u_translation.rsshowcometson
+msgid "Show comets on the chart"
+msgstr "નકશા માં ધૂમકેતુઓ બતાવો"
+
+#: u_translation.rsshowcompass
+msgid "Show the compass rose"
+msgstr "હોકાયંત્ર ઉદય બતાવો"
+
+#: u_translation.rsshowconstell
+msgid "Show constellation lines"
+msgstr "નક્ષત્ર રેખાઓ બતાવો"
+
+#: u_translation.rsshowconstell2
+msgid "Show constellation limits"
+msgstr "નક્ષત્ર મર્યાદા રેખા બતાવો"
+
+#: u_translation.rsshowconstell3
+msgid "Show constellation figures"
+msgstr "નક્ષત્ર ની આકૃતિ બતાવો"
+
+#: u_translation.rsshowconstell4
+msgid "Show constellation boundaries"
+msgstr "નક્ષત્ર સીમાઓ બતાવો"
+
+#: u_translation.rsshowcoordina
+msgid "Show coordinates grid"
+msgstr "યામ જાળી બતાવો"
+
+#: u_translation.rsshowdsolines
+msgid "Show nebulae outlines"
+msgstr "નિહારિકા રૂપરેખા બતાવો"
+
+#: u_translation.rsshowearthsha
+msgid "Show Earth shadow (Lunar eclipses)"
+msgstr "પૃથ્વી નો પડછાયો બતાવો (ચંદ્ર ગ્રહણ)"
+
+#: u_translation.rsshowecliptic
+msgid "Show ecliptic"
+msgstr "ક્રાન્તિવૃત્ત બતાવો"
+
+#: u_translation.rsshowgalactic
+msgid "Show galactic equator"
+msgstr "મંદાકિની વિષુવવૃત બતાવો"
+
+#: u_translation.rsshowgridlabe
+msgid "Show grid label"
+msgstr "જાળી નું નામાંકન બતાવો"
+
+#: u_translation.rsshowhidedssi
+msgid "Show/hide DSS image"
+msgstr "DSS ચિત્ર બતાવો/સંતાળો"
+
+#: u_translation.rsshowimagenam
+msgid "Show image name label"
+msgstr "છબી નામનું નામપટ્ટી બતાવો"
+
+#: u_translation.rsshowirvariab
+msgid "Show IR variables"
+msgstr "IR વિકારી બતાવો"
+
+#: u_translation.rsshowlabels
+msgid "Show labels"
+msgstr "નામો બતાવો"
+
+#: u_translation.rsshowlinefrom
+msgid "Show line from moved label to object"
+msgstr "ખસેડેલ નમપટ્ટીથી પદાર્થ પર રેખા બતાવો"
+
+#: u_translation.rsshowmark
+msgid "Show mark"
+msgstr "ચિન્હો બતાવો"
+
+#: u_translation.rsshowmarkinde
+msgid "Show mark index"
+msgstr "નિશાની કરેલ અનુકમણિક બતાવો"
+
+#: u_translation.rsshowmilkyway
+msgid "Show Milky Way"
+msgstr "આકાશગંગા બતાવો"
+
+#: u_translation.rsshowneareart
+msgid "Show near Earth asteroids independently of the magnitude"
+msgstr "તીવ્રતાથી સ્વતંત્ર રીતે પૃથ્વી નજીક ના લઘુગ્રહો બતાવો"
+
+#: u_translation.rsshownebulae
+msgid "Show deep sky objects"
+msgstr "ઊંડા આકાશ ના પદાર્થો બતાવો"
+
+#: u_translation.rsshowobjectbe
+msgid "Show objects below the horizon"
+msgstr "ક્ષિતિજ નીચે ના પદાર્થો બતાવો"
+
+#: u_translation.rsshowobjectpi
+msgid "Show object pictures on the chart"
+msgstr "નકશા માં પદાર્થ નું ચિત્ર બતાવો"
+
+#: u_translation.rsshowobjects
+msgid "Show objects"
+msgstr "પદાર્થ બતાવો"
+
+#: u_translation.rsshowonlymeri
+msgid "Show only meridian"
+msgstr "માત્ર યામયોતર બતાવો"
+
+#: u_translation.rsshowonlytext
+msgid "Show only text in detail window"
+msgstr "વિગતવાર વિંડોમાં ફક્ત ટેક્સ્ટ બતાવો"
+
+#: u_translation.rsshowpictures
+msgid "Show pictures"
+msgstr "ચિત્ર બતાવો"
+
+#: u_translation.rsshowplaneton
+msgid "Show planets on the chart"
+msgstr "નકશા માં ગ્રહો બતાવો"
+
+#: u_translation.rsshowplanets
+msgid "Show planets"
+msgstr "ગ્રહો બતાવો"
+
+#: u_translation.rsshowposition
+msgid "Show position in title bar"
+msgstr "શીર્ષક પટ્ટીમાં સ્થિતિ બતાવો"
+
+#: u_translation.rsshowstars
+msgid "Show stars"
+msgstr "તારા બતાવો"
+
+#: u_translation.rsshowtheimage
+msgid "Show the images on the map"
+msgstr "નકશા પર છબીઓ બતાવો"
+
+#: u_translation.rsshowthesmall
+msgid "Show the faint satellites of the outer planets"
+msgstr "બાહ્ય ગ્રહોના અસ્પષ્ટ ઉપગ્રહો બતાવો"
+
+#: u_translation.rsshowthispict
+msgid "Show this picture"
+msgstr "આ ચિત્ર બતાવો"
+
+#: u_translation.rsshowuserdefi
+msgid "Show User defined objects"
+msgstr "વપરાશકર્તા વ્યાખ્યાયિત પદાર્થો બતાવો"
+
+#: u_translation.rsshowvirtualo
+msgid "Show Virtual Observatory data"
+msgstr "કલ્પિત વેધશાળા ના ડેટા બતાવો"
+
+#: u_translation.rssideral
+msgid "Sidereal"
+msgstr "નક્ષત્રિક"
+
+#: u_translation.rssiderealday
+msgid "Sidereal day"
+msgstr "સાંપતિક દિન"
+
+#: u_translation.rssimulation
+msgid "Simulation"
+msgstr "આભાસી"
+
+#: u_translation.rssize
+msgid "Size"
+msgstr "કદ"
+
+#: u_translation.rsskybackgroun
+msgid "Sky background colour"
+msgstr "આકાશ પૃષ્ઠભૂમિ રંગ"
+
+#: u_translation.rsskycharthome
+msgid "Skychart homepage"
+msgstr "આકાશીય નકશા નું ઘર"
+
+#: u_translation.rsskycharticon
+msgid "Skychart icon setup"
+msgstr "આકાશી નકશા ની ચિહ્ન સ્થાપો"
+
+#: u_translation.rsskycharts
+msgid "Sky Charts"
+msgstr "આકાશ ના નકશા"
+
+#: u_translation.rsskycolour
+msgid "Sky colour"
+msgstr "આકાશ રંગ"
+
+#: u_translation.rsslantorthogr
+msgid "Slant orthographic"
+msgstr "ત્રાંસું ઓર્થોગ્રાફિક"
+
+#: u_translation.rsslew
+msgid "Slew"
+msgstr "ફેરવો"
+
+#: u_translation.rsslewcomplete
+msgid "Slew complete"
+msgstr "ફરવાનું સમાપ્ત"
+
+#: u_translation.rsslewingto
+#, object-pascal-format
+msgid "Slewing to %s / %s"
+msgstr "%s / %s તરફ ફેરવો"
+
+#: u_translation.rsslewtochartc
+msgid "Slew to chart center"
+msgstr "નકશા ના મધ્ય તરફ ફેરવો"
+
+#: u_translation.rsslewtocursor
+msgid "Slew to cursor position"
+msgstr "કર્સર ના સ્થાને ખસેડો"
+
+#: u_translation.rsslower
+msgid "Slower"
+msgstr "ધીમું"
+
+#: u_translation.rssmallstars
+msgid "Small stars"
+msgstr "નાના તારાઓ"
+
+#: u_translation.rssminute
+msgid "M"
+msgstr "M"
+
+#: u_translation.rssmonth
+msgid "M."
+msgstr "M."
+
+#: u_translation.rssocketerror
+#, object-pascal-format
+msgid "Socket error %s.  %s"
+msgstr "ખાંચ ની ભૂલ %s . %s"
+
+#: u_translation.rssolardistanc
+msgid "Solar distance"
+msgstr "સૌર અંતર"
+
+#: u_translation.rssolareclipse
+msgid "Solar eclipses"
+msgstr "સુર્ય ગ્રહણો"
+
+#: u_translation.rssolarelongat
+msgid "Solar elongation"
+msgstr "સૌર વિસ્તરણ"
+
+#: u_translation.rssolarsystem
+msgid "Solar System"
+msgstr "સૂર્ય મંડળ"
+
+#: u_translation.rssolarsystemb
+msgid "Solar system body"
+msgstr "સૌરમંડળનું શરીર"
+
+#: u_translation.rssolarsystemi
+msgid "Solar System Information"
+msgstr "સુર્ય મંડળ ની માહિતી"
+
+#: u_translation.rssolarsystemo
+msgid "Solar system object"
+msgstr "સુર્ય માળા ના પદાર્થો"
+
+#: u_translation.rssolarsystems
+msgid "Solar system settings"
+msgstr "સુર્ય મંડળ નું આયોજન"
+
+#: u_translation.rssomerecordsw
+#, object-pascal-format
+msgid "Some records where rejected, see the file %sreject.txt for details."
+msgstr "કેટલાક રેકોર્ડ જ્યાં નકારવામાં આવ્યા છે, વિગતો માટે %sreject.txt ફાઇલ જુઓ."
+
+#: u_translation.rssomethinggow
+msgid "Something went wrong during the initialization of the program. The program needs to be closed."
+msgstr "પ્રોગ્રામની શરૂઆત દરમિયાન કંઈક ખોટું થયું. પ્રોગ્રામ બંધ કરવાની જરૂર છે."
+
+#: u_translation.rssorrycopyisn
+msgid "Sorry, copy is not yet implemented for this page"
+msgstr "માફ કરશો, આ પેજ માટે કૉપિ હજુ સુધી લાગુ કરવામાં આવી નથી"
+
+#: u_translation.rssortby
+msgid "Sort by"
+msgstr "ના દ્વારા વર્ગીકૃત"
+
+#: u_translation.rssortingfiles
+msgid "Sorting files by magnitude"
+msgstr "તીવ્રતા દ્વારા ફાઇલોને સૉર્ટ કરી રહ્યાં છીએ"
+
+#: u_translation.rssortingthein
+msgid "Sorting the index file "
+msgstr "અનુક્રમણિકા ફાઇલને અલગ તારવી રહ્યાં છીએ "
+
+#: u_translation.rssouth
+msgid "South"
+msgstr "દક્ષિણ"
+
+#: u_translation.rsspacer
+msgid "Spacer"
+msgstr "જગ્યા છોડનાર"
+
+#: u_translation.rsspectralclas
+msgid "Spectral class"
+msgstr "વર્ણપટિય વર્ગો"
+
+#: u_translation.rsspeed
+msgid "Speed"
+msgstr "ઝડપ"
+
+#: u_translation.rsspiceephemer
+msgid "SPICE ephemeris"
+msgstr "SPICE પંચાંગ"
+
+#: u_translation.rsspline
+msgid "Spline"
+msgstr "સ્પ્લીન"
+
+#: u_translation.rssqldatabasen
+msgid "SQL database not available."
+msgstr "SQL ડેટાબેસ ઉપલબ્ધ  નથી"
+
+#: u_translation.rssqldatabases
+msgid "SQL database software is probably not installed!"
+msgstr "SQL ડેટાબેઝ સોફ્ટવેર કદાચ ઇન્સ્ટોલ કરેલ નથી!"
+
+#: u_translation.rssqlitedataba
+msgid "SQLite database"
+msgstr "SQLite ડેટાબેસ"
+
+#: u_translation.rssqrt
+msgid "Sqrt"
+msgstr "Sqrt"
+
+#: u_translation.rssquare
+msgid "Square"
+msgstr "ચોરસ"
+
+#: u_translation.rsssecond
+msgid "S"
+msgstr "S"
+
+#: u_translation.rsstandard
+msgid "Standard"
+msgstr "માનક"
+
+#: u_translation.rsstandardcolo
+msgid "Standard  colour"
+msgstr "પ્રમાણભૂત રંગ"
+
+#: u_translation.rsstar
+msgid "Star"
+msgstr "તારો"
+
+#: u_translation.rsstarandnebul
+msgid "Star and nebula limit"
+msgstr "તારા અને નિહારિકા મર્યાદા"
+
+#: u_translation.rsstarcolourbv
+msgid "Star colour (B-V):"
+msgstr "તારા રંગ (B-V):"
+
+#: u_translation.rsstarcommonna
+msgid "Star common name"
+msgstr "તારા નું સામાન્ય નામ"
+
+#: u_translation.rsstardisplay
+msgid "Star display"
+msgstr "તારા દર્શક"
+
+#: u_translation.rsstarlabel
+msgid "Star label"
+msgstr "તારા નામાંકન"
+
+#: u_translation.rsstars
+msgid "Stars"
+msgstr "તારાઓ"
+
+#: u_translation.rsstarsandnebu
+msgid "Stars and deep sky catalogs prepared with "
+msgstr "તારાઓ અને ઊંડા આકાશના સૂચિપત્ર સાથે તૈયાર "
+
+#: u_translation.rsstarsbitmapf
+msgid "Stars bitmap file"
+msgstr "તારાની બિટમેપ ફાઇલ"
+
+#: u_translation.rsstarsfilter
+msgid "Star filter"
+msgstr "તારા ના ફિલ્ટર"
+
+#: u_translation.rsstarsproperm
+msgid "Stars proper motion options (if available in the catalog)"
+msgstr "તારા ની યોગ્ય ગતિ વિકલ્પો (જો સૂચિપત્રમાં ઉપલબ્ધ હોય તો)"
+
+#: u_translation.rsstart
+msgid "Start"
+msgstr "શરૂ કરો"
+
+#: u_translation.rsstartbackwar
+msgid "Animation backward"
+msgstr "એનિમેશન પાછું લો"
+
+#: u_translation.rsstartdate
+msgid "Start date"
+msgstr "શરુઆતની તારીખ"
+
+#: u_translation.rsstartforward
+msgid "Animation forward"
+msgstr "એનિમેશન આગળ ધપાવો"
+
+#: u_translation.rsstartgraphat
+msgid "Start graph at local noon"
+msgstr "સ્થાનિક બપોરના સમયે ગ્રાફ શરૂ કરો"
+
+#: u_translation.rsstartmonth
+msgid "Start month"
+msgstr "મહિનો શરૂ કરો"
+
+#: u_translation.rsstartofobjec
+msgid "Start of object"
+msgstr "પદાર્થ શરૂ કરો"
+
+#: u_translation.rsstatusbar
+msgid "Status bar"
+msgstr "સ્થિતિદર્શક પટ્ટી"
+
+#: u_translation.rsstepinto
+msgid "Step Into"
+msgstr "અંદર જાઓ"
+
+#: u_translation.rsstepover
+msgid "Step Over"
+msgstr "પગલું પૂર્ણ"
+
+#: u_translation.rsstepunit
+msgid "Step unit"
+msgstr "પગલાં નો એકમ"
+
+#: u_translation.rsstop
+msgid "Stop"
+msgstr "બંધ કરો"
+
+#: u_translation.rsstoptcpipser
+msgid "Stop TCP/IP server"
+msgstr "TCP/IP  સર્વર બંધ કરો"
+
+#: u_translation.rssun
+msgid "Sun"
+msgstr "સૂર્ય"
+
+#: u_translation.rssunalt
+msgid "Sun alt."
+msgstr "સુર્ય ઊંચાઈ"
+
+#: u_translation.rssunday
+msgid "Sun."
+msgstr "રવિ"
+
+#: u_translation.rssunimagesour
+msgid "Sun image source"
+msgstr "સૂર્ય છબી સ્ત્રોત"
+
+#: u_translation.rssuninclinati
+msgid "Sun inclination"
+msgstr "સુર્ય નમનકોણ"
+
+#: u_translation.rssupernovarem
+msgid "Supernova remnant"
+msgstr "સુપરનોવા અવશેષ"
+
+#: u_translation.rssurface
+msgid "Surface"
+msgstr "સપાટી"
+
+#: u_translation.rssurfacebrigh
+msgid "Surface brightness"
+msgstr "સપાટી નું તેજ"
+
+#: u_translation.rsswapbutton
+msgid "Swap button"
+msgstr "બટન અદલાબદલી કરો"
+
+#: u_translation.rssyear
+msgid "Y"
+msgstr "Y"
+
+#: u_translation.rssymbol
+msgid "Symbol"
+msgstr "સંજ્ઞા"
+
+#: u_translation.rssync
+msgid "Sync"
+msgstr "સમન્વયન"
+
+#: u_translation.rssyncedto
+#, object-pascal-format
+msgid "Synced to %s / %s"
+msgstr "%s / %s તરફ લયબધ"
+
+#: u_translation.rssynodicmonth
+msgid "Synodic month"
+msgstr "ચંદ્ર-સૌર માસ"
+
+#: u_translation.rssystemprinte
+msgid "System printer"
+msgstr "સિસ્ટમ મુદ્રક"
+
+#: u_translation.rstable
+msgid "Table"
+msgstr "કોષ્ટક"
+
+#: u_translation.rstabledonotex
+#, object-pascal-format
+msgid "%sTable %s does not exist! %sPlease correct the error and retry."
+msgstr "%s કોષ્ટક %s અસ્તિત્વમાં નથી! %sકૃપા કરીને ભૂલ સુધારો અને ફરી પ્રયાસ કરો."
+
+#: u_translation.rstableexist
+#, object-pascal-format
+msgid "%sThis table exists: %s"
+msgstr "%s આ કોષ્ટક અસ્તિત્વમાં છે: %s"
+
+#: u_translation.rstarget
+msgid "Target"
+msgstr "લક્ષ્ય"
+
+#: u_translation.rstcpipconnect
+msgid "TCP/IP connection"
+msgstr "TCP/IP જોડાણ"
+
+#: u_translation.rstcpipserver
+msgid "TCP/IP server"
+msgstr "TCP/IP સર્વર"
+
+#: u_translation.rstcpipservice
+msgid "TCP/IP service not available."
+msgstr "TCP/IP સેવાઓ ઉપલબ્ધ નથી"
+
+#: u_translation.rstelescope
+msgid "Telescope"
+msgstr "ટેલિસ્કોપ"
+
+#: u_translation.rstelescopefoc
+msgid "Telescope focal length"
+msgstr "ટેલિસ્કોપ ની કેન્દ્ર લંબાઈ"
+
+#: u_translation.rstelescopenam
+msgid "Telescope name"
+msgstr "ટેલિસ્કોપ નું નામ"
+
+#: u_translation.rstelescopenot
+msgid "Telescope not connected"
+msgstr "ટેલિસ્કોપ જોડાયેલ નથી"
+
+#: u_translation.rstelescopeset
+msgid "Telescope settings"
+msgstr "ટેલિસ્કોપ સેટિંગ્સ"
+
+#: u_translation.rstemperaturec
+msgid "Temperature (Celsius)"
+msgstr "તાપમાન (સેલ્સિયસ)"
+
+#: u_translation.rstemporaryfil
+msgid "temporary file"
+msgstr "કામચલાઉ ફાઇલ"
+
+#: u_translation.rstext
+msgid "Text"
+msgstr "લખાણ"
+
+#: u_translation.rstextfilecata
+msgid "Text file catalog"
+msgstr "ટેક્સ્ટ ફાઇલ સૂચિ"
+
+#: u_translation.rstextsize
+msgid "Text size"
+msgstr "લખાણ નું કદ"
+
+#: u_translation.rstheimagedire
+msgid "The image directory contains sub-directories with the same names as the DSO catalogs. Each sub-directory contains FITS files with the names of the catalog objects. These images are used to replace the DSO symbols on the map."
+msgstr "છબી નિર્દેશિકા માં DSO સૂચિપત્ર જેવા જ નામોની પેટા-નિર્દેશિકા હોય છે. દરેક પેટા-નિર્દેશિકા માં  નિર્દેશિકા  પદાર્થ ના  નામ સાથે FITS ફાઇલો હોય છે. આ છબીઓનો ઉપયોગ નકશા પરના DSO પ્રતીકોને બદલવા માટે થાય છે."
+
+#: u_translation.rstheme
+msgid "Theme"
+msgstr "શુશોભન વિષય"
+
+#: u_translation.rsthenumberofr
+#, object-pascal-format
+msgid "The number of records for this catalog is unknow. The download will be limited to %s records"
+msgstr "આ સૂચિપત્ર  માટે રેકોર્ડની સંખ્યા અજાણ છે. ડાઉનલોડ %s રેકોર્ડ્સ સુધી મર્યાદિત રહેશે"
+
+#: u_translation.rstheobserving
+#, object-pascal-format
+msgid "The observing list %s was modified."
+msgstr "નિરીક્ષણ સૂચિ %s માં ફેરફાર કરવામાં આવ્યો હતો."
+
+#: u_translation.rstherearecata
+#, object-pascal-format
+msgid "There are %s catalogued images"
+msgstr "ત્યાં %s સૂચિબદ્ધ છબીઓ છે"
+
+#: u_translation.rsthereareobjec
+#, object-pascal-format
+msgid "There are %s objects in this field."
+msgstr "આ ક્ષેત્રમાં %s પદાર્થ છે."
+
+#: u_translation.rsthisactionre
+#, object-pascal-format
+msgid "This action overwrites all the database content for the country %s, using fresh data from NGA and GNIS.%sAll your editing for this country will be lost, only locations that you added with a new name will be kept.%sDo you want to continue?"
+msgstr "આ ક્રિયા દેશ %s માટે તમામ ડેટાબેઝ સામગ્રીને  NGA અને GNIS ના નવા ડેટાનો ઉપયોગ કરીને ઓવરરાઈટ કરે છે. %s આ દેશ માટે તમારું તમામ સંપાદન ખોવાઈ જશે, ફક્ત તમે નવા નામ સાથે ઉમેરેલા સ્થાનો જ રાખવામાં આવશે. %s શું તમે કરવા માંગો છો?"
+
+#: u_translation.rsthiscatalogc
+#, object-pascal-format
+msgid "This catalog contain %s records. It is not possible to download in full for performance reason."
+msgstr "આ સૂચિપત્રમાં %s રેકોર્ડ્સ છે. પ્રદર્શનના કારણોસર સંપૂર્ણ ડાઉનલોડ કરવું શક્ય નથી."
+
+#: u_translation.rsthisdirectdr
+msgid "This direct driver is kept for compatibility, it may work or not for you. But the preference is to use the INDI or ASCOM driver for your telescope."
+msgstr "આ સીધો  ડ્રાઈવર સુસંગતતા માટે રાખવામાં આવ્યો છે, તે તમારા માટે  કદાચ કામ કરી શકે છે કે નહીં. પરંતુ પ્રાધાન્ય તમારા ટેલિસ્કોપ માટે INDI અથવા ASCOM ડ્રાઇવરનો ઉપયોગ કરવાની છે."
+
+#: u_translation.rsthisfilecont
+#, object-pascal-format
+msgid "This file contain %s elements.%sThis is probably a base file you want to load without the \"Append\" option.%sIt can affect the performance to append all this data to the current file%sDo you want to continue anyway?"
+msgstr "આ ફાઇલમાં %s તત્વો છે. %s આ કદાચ એક આધાર ફાઇલ છે જેને તમે \"ઉમેરો\" વિકલ્પ વિના લોડ કરવા માંગો છો. %s તે વર્તમાન ફાઇલમાં આ તમામ ડેટાને જોડવાની કામગીરીને અસર કરી શકે છે %s શું તમે કોઈપણ રીતે ચાલુ રાખવા માંગો છો?"
+
+#: u_translation.rsthisfilewasn
+msgid "This file was not recognized as a MPCORB file."
+msgstr "આ ફાઇલને MPCORB ફાઇલ તરીકે ઓળખવામાં આવી ન હતી."
+
+#: u_translation.rsthisprogrami
+msgid "This program is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License"
+msgstr "આ પ્રોગ્રામ મફત સોફ્ટવેર છે; તમે GNU જનરલ પબ્લિક લાયસન્સની શરતો હેઠળ તેનું પુનઃવિતરિત કરી શકો છો અને/અથવા તેમાં ફેરફાર કરી શકો છો"
+
+#: u_translation.rsthursday
+msgid "Thu."
+msgstr "ગુરુ"
+
+#: u_translation.rstilehorizont
+msgid "Tile horizontally"
+msgstr "આડું ગોઠવો"
+
+#: u_translation.rstilevertical
+msgid "Tile vertically"
+msgstr "ઊભું ગોઠવો"
+
+#: u_translation.rstime
+msgid "Time"
+msgstr "સમય"
+
+#: u_translation.rstimesimulati
+msgid "Time simulation"
+msgstr "સમય નો ભાવાવેશ"
+
+#: u_translation.rstimeunits
+msgid "Time units"
+msgstr "સમય એકમ"
+
+#: u_translation.rstimezone
+msgid "Time zone"
+msgstr "પ્રાદેશિક સમય"
+
+#: u_translation.rstitle
+msgid "Title"
+msgstr "શીષૅક"
+
+#: u_translation.rstledownloado
+msgid "TLE download OK"
+msgstr "TLE ડાઉનલોડ બરાબર"
+
+#: u_translation.rsto
+msgid "to"
+msgstr "થી"
+
+#: u_translation.rstoday
+msgid "Today"
+msgstr "આજે"
+
+#: u_translation.rstofile
+msgid "to file:"
+msgstr "ફાઈલ કરવા માટે:"
+
+#: u_translation.rstonight
+msgid "Tonight"
+msgstr "આજે રાત્રે"
+
+#: u_translation.rstoolbar
+msgid "Toolbar"
+msgstr "સાધનપટ્ટી"
+
+#: u_translation.rstoolbaredito
+msgid "Toolbar editor"
+msgstr "ટૂલબાર સંપાદક"
+
+#: u_translation.rstoolbox
+msgid "Tool box"
+msgstr "ટૂલ બોક્સ"
+
+#: u_translation.rstools
+msgid "Tools"
+msgstr "સાધનો"
+
+#: u_translation.rstoomanyopenw
+msgid "Too many open windows, please close some charts."
+msgstr "ઘણી બધી વિન્ડો ખૂલી છે, મહેરબાની કરી કેટલાક નકશા બંધ કરો."
+
+#: u_translation.rstop
+msgid "Top"
+msgstr "ઉપર"
+
+#: u_translation.rstopocentric
+msgid "Topocentric"
+msgstr "ટોપોસેન્ટ્રિક"
+
+#: u_translation.rstotal
+msgid "Totality"
+msgstr "પૂર્ણતા"
+
+#: u_translation.rstotalasteroi
+msgid "Total asteroid count"
+msgstr "કુલ લઘુગ્રહ ની સંખ્યા"
+
+#: u_translation.rstotalradius
+msgid "Total radius"
+msgstr "કુલ ત્રિજ્યા"
+
+#: u_translation.rstour
+msgid "Tour"
+msgstr "પ્રવાસ"
+
+#: u_translation.rstousethisnew
+msgid "Before you can use the new orbital elements, you must compute the monthly data."
+msgstr "તમે નવા ભ્રમણકક્ષા તત્વોનો ઉપયોગ કરી શકો તે પહેલાં, તમારે માસિક ડેટાની ગણતરી કરવી આવશ્યક છે."
+
+#: u_translation.rstracking
+msgid "Tracking"
+msgstr "પગેરું મેડવો"
+
+#: u_translation.rstracktelesco
+msgid "Track telescope"
+msgstr "ટેલિસ્કોપ ટ્રેક કરો"
+
+#: u_translation.rstrajectories
+msgid "Trajectories simulation"
+msgstr "ટ્રેજેક્ટરીઝ સિમ્યુલેશન"
+
+#: u_translation.rstransformati
+msgid "Transformation"
+msgstr "રુપાંતરણ"
+
+#: u_translation.rstransit
+msgid "Transit"
+msgstr "પારગમન"
+
+#: u_translation.rstranslator
+msgid "Translator:"
+msgstr "અનુવાદક:"
+
+#: u_translation.rstransparency
+msgid "Transparency"
+msgstr "પારદર્શકતા"
+
+#: u_translation.rstransparentl
+msgid "Transparent line mode (occultations)"
+msgstr "પારદર્શક રેખા ઢબ (પીધાન)"
+
+#: u_translation.rstriplestar
+msgid "Triple star"
+msgstr "ત્રિ તારા"
+
+#: u_translation.rstropicalyear
+msgid "Tropical year"
+msgstr "ઉષ્ણકટિબંધીય વર્ષ"
+
+#: u_translation.rstropospheret
+msgid "Troposphere temperature lapse rate (K/km)"
+msgstr "પૃથ્વીની સપાટીથી સમતાપ મંડળ નું તાપમાન વિરામ દર (K/km)"
+
+#: u_translation.rstrueequatore
+msgid "true equator, equinox and epoch of the date"
+msgstr "સાચું વિષુવવૃત્ત, વિષુવવૃત્ત અને તારીખનો યુગ"
+
+#: u_translation.rstrueposition
+msgid "True position"
+msgstr "સાચી સ્થિતિ"
+
+#: u_translation.rstruesolar
+msgid "True solar"
+msgstr "સાચું સૌર"
+
+#: u_translation.rstrumplerclas
+msgid "Trumpler class"
+msgstr "ટ્રમ્પલર વર્ગ"
+
+#: u_translation.rstruncatedtos
+#, object-pascal-format
+msgid "Truncated to %s catalogs"
+msgstr "%s સૂચિપત્ર માં કાપવામાં આવ્યું"
+
+#: u_translation.rstrytoautocon
+msgid "Try to auto-connect to a SAMP hub when the program start"
+msgstr "જ્યારે પ્રોગ્રામ શરૂ થાય ત્યારે SAMP હબ સાથે જાતે જોડાણ કરવાનો પ્રયાસ કરો"
+
+#: u_translation.rsttut
+msgid "DeltaT: "
+msgstr "DeltaT: "
+
+#: u_translation.rstuesday
+msgid "Tue."
+msgstr "મંગળ"
+
+#: u_translation.rsturnsdegree
+msgid "turns / degree"
+msgstr "વળાંક /અંશ"
+
+#: u_translation.rsturnshour
+msgid "turns / hour"
+msgstr "વળાંક /કલાક"
+
+#: u_translation.rstwilight
+msgid "Twilight"
+msgstr "સંધિકાળ"
+
+#: u_translation.rstype
+msgid "Type"
+msgstr "પ્રકાર"
+
+#: u_translation.rstype2
+msgid "Type:"
+msgstr "પ્રકાર:"
+
+#: u_translation.rstypeofcoordi
+msgid "Type of coordinates"
+msgstr "યામો ના પ્રકાર"
+
+#: u_translation.rstypeofobject
+msgid "Object types to add to the list"
+msgstr "પદાર્થ ના પ્રકાર ને સૂચિ માં દાખલ કરવા"
+
+#: u_translation.rstypeofvariab
+msgid "Type of variability"
+msgstr "પરિવર્તનશીલતા ના પ્રકાર"
+
+#: u_translation.rsumbra
+msgid "Umbra"
+msgstr "છાયા"
+
+#: u_translation.rsunabletocrea
+msgid "Unable to create directory "
+msgstr "નિર્દેશિકા બનાવવામાં અસમર્થ "
+
+#: u_translation.rsunchecktoavo
+msgid "Uncheck to avoid duplicate with minor planet 134340"
+msgstr "નાના ગ્રહ 134340 સાથે નકલ ટાળવા માટે અનચેક કરો"
+
+#: u_translation.rsundo
+msgid "Undo"
+msgstr "પૂર્વવ્રત કરો"
+
+#: u_translation.rsundolastchan
+msgid "Undo last change"
+msgstr "છેલ્લો ફેરફાર રદ કરો"
+
+#: u_translation.rsunits
+msgid "Units"
+msgstr "એકમો"
+
+#: u_translation.rsuniversaltim
+msgid "Universal Time"
+msgstr "સાર્વત્રિક સમય"
+
+#: u_translation.rsunknow
+msgid "unknown"
+msgstr "અજ્ઞાત"
+
+#: u_translation.rsunknowobject
+msgid "Unknown object"
+msgstr "અપરિચિત પદાર્થ"
+
+#: u_translation.rsunlockchart
+msgid "Unlock chart"
+msgstr "નકશા નું તાળું ખોલો"
+
+#: u_translation.rsunpark
+msgid "Unpark"
+msgstr "અવિરામ કરો"
+
+#: u_translation.rsunsupportedf
+#, object-pascal-format
+msgid "Unsupported file extension: %sPlease fix it."
+msgstr "અસમર્થિત ફાઇલ એક્સ્ટેંશન: %sકૃપા કરીને તેને ઠીક કરો."
+
+#: u_translation.rsunsupporteds
+msgid "Unsupported SAMP hub profile. Must be a File URL"
+msgstr "અસમર્થિત SAMP હબ પ્રોફાઇલ. ફાઇલ URL હોવું આવશ્યક છે"
+
+#: u_translation.rsup
+msgid "Up"
+msgstr "ઉપર"
+
+#: u_translation.rsupdate1
+msgid "Update"
+msgstr "સુધારો"
+
+#: u_translation.rsupdatecoordi
+msgid "Update coordinates"
+msgstr "યામો બદલો"
+
+#: u_translation.rsupdatedsucce
+msgid "Updated successfully!"
+msgstr "સફળતાપૂર્વક ફેરફાર થયું!"
+
+#: u_translation.rsupdateoraddt
+msgid "Update/add the current location to the database?"
+msgstr "ડેટાબેઝમાં વર્તમાન સ્થાન ફેરફાર કરો/ઉમેરો?"
+
+#: u_translation.rsuranus
+msgid "Uranus"
+msgstr "યુરેનસ"
+
+#: u_translation.rsurl
+msgid "URL"
+msgstr "યૂ આર એલ (URL)"
+
+#: u_translation.rsurllaunchcom
+msgid "URL launch command"
+msgstr "URL  લોન્ચ આદેશ"
+
+#: u_translation.rsuseanothertt
+msgid "Use another DeltaT value"
+msgstr "અન્ય DeltaT મૂલ્યનો ઉપયોગ કરો"
+
+#: u_translation.rsuseapresetco
+msgid "Use a preset colour scheme:"
+msgstr "પહેલાથી નક્કી કરેલ  રંગ યોજનાનો ઉપયોગ કરો:"
+
+#: u_translation.rsuseasimplepo
+msgid "Use a simple pointer"
+msgstr "એક સરળ નિર્દેશકનો ઉપયોગ કરો"
+
+#: u_translation.rsusefultorepr
+msgid "(useful to represent a flux)"
+msgstr "(પ્રવાહનું પ્રતિનિધિત્વ કરવા માટે ઉપયોગી)"
+
+#: u_translation.rsusehttpproxy
+msgid "Use HTTP proxy"
+msgstr "HTTP પ્રોક્સી વાપરો"
+
+#: u_translation.rsuseonlinedss
+msgid "Use online DSS instead of RealSky"
+msgstr "RealSky ના સ્થાને ઓનલાઈન DSS નો ઉપયોગ કરો"
+
+#: u_translation.rsuseonlinesun
+msgid "Use online Sun image from SDO or SOHO"
+msgstr "SDO અથવા SOHO તરફથી ઓનલાઈન સુર્ય છબી નો ઉપયોગ કરો"
+
+#: u_translation.rsuserdefinedo
+msgid "User defined objects"
+msgstr "વપરાશકર્તા દ્વારા નિર્ધારિત પદાર્થો"
+
+#: u_translation.rsuserid
+msgid "User id:"
+msgstr "વપરાશ કર્તા ઓળખ:"
+
+#: u_translation.rsusername
+msgid "User name"
+msgstr "વપરાશકર્તા નામ"
+
+#: u_translation.rsusesocksprox
+msgid "Use Socks proxy"
+msgstr "સૉક્સ પ્રોક્સીનો ઉપયોગ કરો"
+
+#: u_translation.rsusesubsampli
+msgid "Use subsampling to limit the image size to"
+msgstr "છબીના કદને મર્યાદિત કરવા માટે સબસેમ્પલિંગનો ઉપયોગ કરો"
+
+#: u_translation.rsusesystemtim
+msgid "Use system time"
+msgstr "સિસ્ટમ સમયનો ઉપયોગ કરો"
+
+#: u_translation.rsusetcpipserv
+msgid "Use TCP/IP server"
+msgstr "TCP/IP સર્વર વાપરો"
+
+#: u_translation.rsusetheintern
+msgid "Use the internal INDI gui panel"
+msgstr "આંતરિક INDI gui પેનલનો ઉપયોગ કરો"
+
+#: u_translation.rsusethemenuor
+#, object-pascal-format
+msgid "Use the menu or button \"%s\" to configure this driver."
+msgstr "આ ડ્રાઇવરને ગોઠવવા માટે મેનુ અથવા બટન \"%s\" નો ઉપયોગ કરો."
+
+#: u_translation.rsusetheproper
+msgid "Use the proper motion to correct the position for the given epoch"
+msgstr "આપેલ યુગ માટે સ્થિતિ સુધારવા માટે યોગ્ય ગતિનો ઉપયોગ કરો"
+
+#: u_translation.rsusethisfield
+msgid "Use this field as an alternative name"
+msgstr "વૈકલ્પિક નામ તરીકે આ ક્ષેત્રનો ઉપયોગ કરો"
+
+#: u_translation.rsusingexistin
+#, object-pascal-format
+msgid "Using the existing file %s"
+msgstr "હાલની ફાઇલ %s નો ઉપયોગ કરીને"
+
+#: u_translation.rsut
+msgid "UT"
+msgstr "UT"
+
+#: u_translation.rsvariables
+msgid "Variables"
+msgstr "રૂપવિકારી"
+
+#: u_translation.rsvariablestar
+msgid "Variable star"
+msgstr "રૂપવિકારી તારા"
+
+#: u_translation.rsvariablestar2
+msgid "Variable stars"
+msgstr "રૂપવિકારી તારાઓ"
+
+#: u_translation.rsvelocity
+msgid "Velocity"
+msgstr "વેગ"
+
+#: u_translation.rsvenus
+msgid "Venus"
+msgstr "શુક્ર"
+
+#: u_translation.rsversion
+msgid "Version"
+msgstr "આવૃત્તિ"
+
+#: u_translation.rsverticalover
+msgid "Vertical overlap %"
+msgstr "ઊભું એકપર એક ચડી જવું %"
+
+#: u_translation.rsvicinity
+msgid "Vicinity"
+msgstr "નજીકમાં"
+
+#: u_translation.rsview
+msgid "View"
+msgstr "દર્શાવો"
+
+#: u_translation.rsviewheader
+msgid "View header"
+msgstr "મથાળૂ જુઓ"
+
+#: u_translation.rsviewhorizon
+msgid "View horizon"
+msgstr "ક્ષિતિજ જુવો"
+
+#: u_translation.rsviewobservin
+msgid "View observing list"
+msgstr "અવલોકન યાદી જુઓ"
+
+#: u_translation.rsviewonchart
+msgid "View on chart"
+msgstr "નકશા માં જુઓ"
+
+#: u_translation.rsvirtualobser
+msgid "Virtual Observatory Catalog"
+msgstr "કલ્પિત વેધશાળા સૂચિપત્ર"
+
+#: u_translation.rsvisibilityfo
+msgid "Visibility for your observatory"
+msgstr "તમારી વેધશાળા માટે દૃશ્યતા"
+
+#: u_translation.rsvisualisatio
+msgid "Visualisation scale"
+msgstr "વિઝ્યુલાઇઝેશન સ્કેલ"
+
+#: u_translation.rsvisualmagnit
+msgid "Visual magnitude"
+msgstr "દ્રષ્ટિ તીવ્રતા"
+
+#: u_translation.rsvocatalog
+msgid "VO Catalog"
+msgstr "VO સૂચિપત્ર"
+
+#: u_translation.rsvocatalogbro
+msgid "VO Catalog Browser"
+msgstr "VO સૂચિપત્ર બ્રાઉસર"
+
+#: u_translation.rsvosampsettin
+msgid "VO SAMP settings"
+msgstr "VO SAMP સેટિંગ્સ"
+
+#: u_translation.rswanttotracka
+msgid "Do you want to track an object before it rises?"
+msgstr "શું તમે પદાર્થ ઉદય થાય તે પહેલા માર્ગ તપાસ માંગો છો"
+
+#: u_translation.rswarning
+msgid "Warning!"
+msgstr "ચેતવણી!"
+
+#: u_translation.rswarningcalcu
+msgid "Warning! Calculation of"
+msgstr "ચેતવણી! ગણતરી ની"
+
+#: u_translation.rswarninglowre
+msgid "Warning! Low resolution mode. Use PostScript instead and print the result file."
+msgstr "ચેતવણી! લો રિઝોલ્યુશન મોડ. તેના બદલે પોસ્ટસ્ક્રીપ્ટનો ઉપયોગ કરો અને પરિણામ ફાઇલને છાપો."
+
+#: u_translation.rswarningsomea
+msgid "Warning! Some asteroid elements are outdated. Load element valid for the current map date."
+msgstr "ચેતવણી! કેટલાક લઘુગ્રહો ના તત્વો જૂના છે. આપેલ ઘટક વર્તમાન નકશા તારીખ માટે માન્ય છે."
+
+#: u_translation.rswarningsomec
+msgid "Warning! Some comet elements are outdated. Load element valid for the current map date."
+msgstr "ચેતવણી! કેટલાક ધૂમકેતુ તત્વો જૂના છે. આપેલ ઘટક વર્તમાન નકશા તારીખ માટે માન્ય છે."
+
+#: u_translation.rswarningthecu
+#, object-pascal-format
+msgid "Warning! The used date or your observatory location have been changed from the previous settings. You can reply No now, and use the %s button to return to your original date/time and observation location, otherwise the changes will be applied. Do you want to continue?"
+msgstr "ચેતવણી! વપરાયેલ તારીખ અથવા તમારું નિરીક્ષક સ્થાન અગાઉના સેટિંગ્સથી બદલાઈ ગયું છે. તમે હમણાં ના જવાબ આપી શકો છો, અને તમારી મૂળ તારીખ/સમય અને અવલોકન સ્થાન પર પાછા ફરવા માટે %s બટનનો ઉપયોગ કરો, અન્યથા ફેરફારો લાગુ કરવામાં આવશે. શું તમે ચાલુ રાખવા માંગો છો?"
+
+#: u_translation.rswarningyouar
+#, object-pascal-format
+msgid "Warning!%sYou are about to destroy the database %s and all its content, even if this content is not related to this program.%sAre you sure you want to continue?"
+msgstr "ચેતવણી!%sતમે ડેટાબેઝ %s અને તેની તમામ સામગ્રીનો નાશ કરવા જઈ રહ્યાં છો, ભલે આ સામગ્રી આ પ્રોગ્રામથી સંબંધિત ન હોય.%sશું તમે ખરેખર ચાલુ રાખવા માંગો છો?"
+
+#: u_translation.rswarningyouar2
+msgid "Warning! you are using multiple catalogs as sources for identical objects. You risk the display of duplicates. Be sure that this is what you want."
+msgstr "ચેતવણી! તમે સમાન વસ્તુઓના સ્ત્રોત તરીકે બહુવિધ સૂચિપત્ર નો ઉપયોગ કરી રહ્યાં છો. તમે  નકલી પ્રદર્શનનું જોખમ લો છો. ખાતરી કરો કે આ તમને જે જોઈએ છે તે છે."
+
+#: u_translation.rswarningyouha
+#, object-pascal-format
+msgid "WARNING !%sYou have chosen to append the data to an existing catalog.%sThis existing catalog and index must be exactly of the same format, otherwise the catalog will be corrupted.%sIt is a good idea to backup the actual files before proceeding this operation.%sDo you want to continue?"
+msgstr "ચેતવણી !%sતમે વર્તમાન સૂચિપત્ર માં  ડેટા જોડવાનું પસંદ કર્યું છે.%sઆ અસ્તિત્વમાંનો સૂચિપત્ર અને અનુક્રમણિકા બરાબર એ જ ફોર્મેટની હોવી જોઈએ, અન્યથા સૂચિપત્ર બગડશે.%sઆ ઓપરેશન આગળ વધતા પહેલા વાસ્તવિક ફાઈલોનો બેકઅપ લેવાનો સારો વિચાર છે. %s શું તમે ચાલુ રાખવા માંગો છો?"
+
+#: u_translation.rswednesday
+msgid "Wed."
+msgstr "બુધ"
+
+#: u_translation.rswest
+msgid "West"
+msgstr "પશ્ચિમ"
+
+#: u_translation.rswesthourangl
+msgid "West hour angle"
+msgstr "પશ્ચિમ કલાકનો કોણ"
+
+#: u_translation.rswestside
+msgid "West side"
+msgstr "પશ્ચિમ બાજુ"
+
+#: u_translation.rswhiteonblack
+msgid "White on black"
+msgstr "કાળા પર સફેદ"
+
+#: u_translation.rswidth
+msgid "Width"
+msgstr "પહોળાઈ"
+
+#: u_translation.rswindow
+msgid "Window"
+msgstr "વિન્ડો"
+
+#: u_translation.rsyear
+msgid "Year"
+msgstr "વર્ષ"
+
+#: u_translation.rsyears
+msgid "years"
+msgstr "વર્ષો"
+
+#: u_translation.rsyoualreadyha
+msgid "You already have the latest available version!"
+msgstr "તમારી પાસે પહેલેથી જ નવીનતમ ઉપલબ્ધ સંસ્કરણ છે!"
+
+#: u_translation.rsyouarenowrea
+msgid "You are now ready to display the asteroid for this time period."
+msgstr "તમે હવે આ સમયગાળા માટે લઘુગ્રહો પ્રદર્શિત કરવા માટે તૈયાર છો."
+
+#: u_translation.rsyouliveonabi
+msgid "If you observe high on a mountain, the horizon line will be lower than it would be at sea level."
+msgstr "જો તમે પર્વત પર ઊંચા અવલોકન કરો છો, તો ક્ષિતિજ રેખા દરિયાની સપાટીથી નીચી હશે."
+
+#: u_translation.rszenitalequid
+msgid "Zenital equidistant"
+msgstr "ખમધ્ય સમાન અંતર"
+
+#: u_translation.rszenith
+msgid "Zenith"
+msgstr "શિરોબિંદુ"
+
+#: u_translation.rszoom
+msgid "Zoom +"
+msgstr "મોટું કરી +"
+
+#: u_translation.rszoom2
+msgid "Zoom -"
+msgstr "નાનું કરો -"
+
+#: u_translation.rszoom3
+msgid "Zoom"
+msgstr "નાનુ મોટુ કરો"
+
+#: u_translation.rszoomcentre
+msgid "Zoom + and centre on"
+msgstr "મોટું કરો + અને મધ્ય માં"
+
+#: u_translation.rszoomcentre2
+msgid "Zoom - and centre on"
+msgstr "નાનું કરો - અને મધ્ય માં"
+
+#: u_translation.rszoomin
+msgid "Zoom in"
+msgstr "મોટું કરો"
+
+#: u_translation.rszoommoretovi
+msgid "Object too faint to show on the chart"
+msgstr "પદાર્થ નકશા પર બતાવવા માટે ખૂબ જ અસ્પષ્ટ છે"
+
+#: u_translation.rszoomout
+msgid "Zoom out"
+msgstr "નાનું કરો"
+

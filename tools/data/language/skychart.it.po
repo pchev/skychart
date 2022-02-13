@@ -4,14 +4,14 @@ msgstr ""
 "Project-Id-Version: skychart\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-12-21 13:09+0000\n"
-"PO-Revision-Date: 2021-05-15 16:57+0000\n"
+"PO-Revision-Date: 2022-01-05 17:47+0000\n"
 "Last-Translator: Mattia Verga <Unknown>\n"
 "Language-Team: Italian <kde-i18n-it@kde.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2021-12-21 13:12+0000\n"
-"X-Generator: Launchpad (build adb364d6a74a28e7b95d51cd30446ec16160de6c)\n"
+"X-Launchpad-Export-Date: 2022-02-13 14:56+0000\n"
+"X-Generator: Launchpad (build 619f92fce32b9c4e9124c2dcf63f8ea9f3342386)\n"
 "Language: it\n"
 
 #: u_translation.rs102cddss
@@ -290,7 +290,7 @@ msgstr "Aggiungi sempre il meridiano"
 
 #: u_translation.rsalwaysontop
 msgid "Always on top"
-msgstr ""
+msgstr "Sempre in primo piano"
 
 #: u_translation.rsalwayssavewi
 msgid "Always save without asking."
@@ -489,7 +489,7 @@ msgstr "Automatico"
 
 #: u_translation.rsautomaticall2
 msgid "Automatically optimize the labels placement"
-msgstr "Ottimizza automaticamente la disposizione delle etichette"
+msgstr "Ottimizza automaticamente la disposizione"
 
 #: u_translation.rsautorefresh
 msgid "Auto-refresh"
@@ -2415,7 +2415,7 @@ msgstr "Verde"
 
 #: u_translation.rsgregoriancal
 msgid "Gregorian calendar start date"
-msgstr "Data d'inizio del calendario Gregoriano"
+msgstr "Data inizio calendario Gregoriano"
 
 #: u_translation.rsgrids
 msgid "Grids"
@@ -3035,7 +3035,7 @@ msgstr "Blocca posizione cartina"
 
 #: u_translation.rslockmagnitud
 msgid "Lock the magnitude filter"
-msgstr ""
+msgstr "Blocca filtro magnitudine"
 
 #: u_translation.rslockon
 #, object-pascal-format
@@ -3152,7 +3152,7 @@ msgstr "Seleziona tabella e colonna che vuoi inserire nel tuo catalogo"
 
 #: u_translation.rsmanagetoolbo
 msgid "Manage tool box script"
-msgstr "Gestisci script della tool box"
+msgstr "Gestisci script della cassetta attrezzi"
 
 #: u_translation.rsmanual
 msgid "Manual"
@@ -3526,7 +3526,7 @@ msgstr "Nessun dato"
 
 #: u_translation.rsnodecimalsep
 msgid "No decimal separator"
-msgstr ""
+msgstr "Nessun separatore decimale"
 
 #: u_translation.rsnomargin
 msgid "No margin"
@@ -4457,7 +4457,7 @@ msgstr "Rimuovi l'ultima etichetta"
 
 #: u_translation.rsreplacebytic
 msgid "Replace by tick mark"
-msgstr "Sostituisci con segno di spunta"
+msgstr "Usa segno di spunta"
 
 #: u_translation.rsreplacedby
 msgid "Replaced by"
@@ -5647,7 +5647,7 @@ msgstr "Modifica barre degli strumenti"
 
 #: u_translation.rstoolbox
 msgid "Tool box"
-msgstr "Tool box"
+msgstr "Cassetta attrezzi"
 
 #: u_translation.rstools
 msgid "Tools"

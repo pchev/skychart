@@ -5,14 +5,14 @@ msgstr ""
 "Project-Id-Version: skychart.es\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-12-21 13:09+0000\n"
-"PO-Revision-Date: 2021-02-15 11:58+0000\n"
-"Last-Translator: Luis Castedo <Unknown>\n"
+"PO-Revision-Date: 2021-12-29 01:01+0000\n"
+"Last-Translator: Adolfo Jayme <fitoschido@gmail.com>\n"
 "Language-Team: French <kde-i18n-doc@kde.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2021-12-21 13:12+0000\n"
-"X-Generator: Launchpad (build adb364d6a74a28e7b95d51cd30446ec16160de6c)\n"
+"X-Launchpad-Export-Date: 2022-02-13 14:56+0000\n"
+"X-Generator: Launchpad (build 619f92fce32b9c4e9124c2dcf63f8ea9f3342386)\n"
 "Language: es\n"
 
 #: u_translation.rs102cddss
@@ -291,7 +291,7 @@ msgstr "Añadir siempre meridiano"
 
 #: u_translation.rsalwaysontop
 msgid "Always on top"
-msgstr ""
+msgstr "Siempre encima"
 
 #: u_translation.rsalwayssavewi
 msgid "Always save without asking."
@@ -2763,7 +2763,7 @@ msgstr "Día Juliano ="
 
 #: u_translation.rsjulianyear
 msgid "Julian Year"
-msgstr "Año Juliano"
+msgstr "Año juliano"
 
 #: u_translation.rsjuly
 msgid "July"
@@ -3036,7 +3036,7 @@ msgstr "Bloquear posición de la carta"
 
 #: u_translation.rslockmagnitud
 msgid "Lock the magnitude filter"
-msgstr ""
+msgstr "Bloquear el filtro de magnitud"
 
 #: u_translation.rslockon
 #, object-pascal-format
@@ -3527,7 +3527,7 @@ msgstr "Sin Datos"
 
 #: u_translation.rsnodecimalsep
 msgid "No decimal separator"
-msgstr ""
+msgstr "Sin separador decimal"
 
 #: u_translation.rsnomargin
 msgid "No margin"
@@ -4566,11 +4566,11 @@ msgstr "Usar proyecciones cilíndricas oblicuas"
 
 #: u_translation.rsrotateleft
 msgid "Rotate left"
-msgstr "Rotar a izquierdas"
+msgstr "Girar a la izquerda"
 
 #: u_translation.rsrotateright
 msgid "Rotate right"
-msgstr "Rotar a derechas"
+msgstr "Girar a la derecha"
 
 #: u_translation.rsrotation
 msgid "Rotation"
@@ -5115,7 +5115,7 @@ msgstr "Sideral"
 
 #: u_translation.rssiderealday
 msgid "Sidereal day"
-msgstr "Día sideral"
+msgstr "Día sidéreo"
 
 #: u_translation.rssimulation
 msgid "Simulation"

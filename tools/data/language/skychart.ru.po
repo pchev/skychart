@@ -3,14 +3,14 @@ msgstr ""
 "Project-Id-Version: skychart.ru\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-12-21 13:09+0000\n"
-"PO-Revision-Date: 2021-02-23 08:59+0000\n"
+"PO-Revision-Date: 2022-01-02 11:36+0000\n"
 "Last-Translator: Sergey Tarantsov <tsn-ast@yandex.ru>\n"
 "Language-Team: Zaporozhye Astronomical Club Altair <astroclub@ua.fm, http://astroclub.zp.ua>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2021-12-21 13:12+0000\n"
-"X-Generator: Launchpad (build adb364d6a74a28e7b95d51cd30446ec16160de6c)\n"
+"X-Launchpad-Export-Date: 2022-02-13 14:56+0000\n"
+"X-Generator: Launchpad (build 619f92fce32b9c4e9124c2dcf63f8ea9f3342386)\n"
 "Language: ru_UA\n"
 
 #: u_translation.rs102cddss
@@ -289,7 +289,7 @@ msgstr "Всегда показывать меридиан"
 
 #: u_translation.rsalwaysontop
 msgid "Always on top"
-msgstr ""
+msgstr "Всегда сверху"
 
 #: u_translation.rsalwayssavewi
 msgid "Always save without asking."
@@ -3034,7 +3034,7 @@ msgstr "Блокировка положения карты"
 
 #: u_translation.rslockmagnitud
 msgid "Lock the magnitude filter"
-msgstr ""
+msgstr "Заблокировать фильтр объектов"
 
 #: u_translation.rslockon
 #, object-pascal-format
@@ -3525,7 +3525,7 @@ msgstr "Нет данных"
 
 #: u_translation.rsnodecimalsep
 msgid "No decimal separator"
-msgstr ""
+msgstr "Без десятичного разделителя"
 
 #: u_translation.rsnomargin
 msgid "No margin"

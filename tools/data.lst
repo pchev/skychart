@@ -94,6 +94,7 @@ data/language/skychart.en.po
 data/language/skychart.es.po
 data/language/skychart.fa.po
 data/language/skychart.fr.po
+data/language/skychart.gu.po
 data/language/skychart.hr.po
 data/language/skychart.hu.po
 data/language/skychart.is.po
@@ -115,11 +116,11 @@ data/language/skychart.sc.po
 data/language/skychart.si.po
 data/language/skychart.sk.po
 data/language/skychart.sl.po
+data/language/skychart.sr.po
 data/language/skychart.sv.po
 data/language/skychart.th.po
 data/language/skychart.tr.po
 data/language/skychart.uk.po
-data/language/skychart.zh.po
 data/language/skychart.zh_TW.po
 data/language/skychart.zh_CN.po
 data/milkyway
