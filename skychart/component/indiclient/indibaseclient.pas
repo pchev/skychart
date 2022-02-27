@@ -663,6 +663,11 @@ begin
     begin
       if terminated then
         break;
+      if copy(GetNodeName(Node), 1, 13)='getProperties' then begin
+        // skip snoop device query to not create empty tab
+        Node := Node.NextSibling;
+        continue;
+      end;
       dp := findDev(Node, True, errmsg);
       if dp=nil then begin
         Node := Node.NextSibling;
