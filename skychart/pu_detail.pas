@@ -262,7 +262,7 @@ begin
     sstream := TStringStream.Create(Value);
     NewHTML.LoadFromStream(sstream);
     sstream.Free;
-    IpHtmlPanel1.DefaultFontSize := DoScaleX(FHtmlFontSize);
+    IpHtmlPanel1.DefaultFontSize := FHtmlFontSize;  // HTML font is already sized for DPI
     IpHtmlPanel1.SetHtml(NewHTML);
     if FSameposition then
     begin
