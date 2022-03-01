@@ -3,6 +3,7 @@
 # Download leap seconds file
 
 source="https://www.ietf.org/timezones/data/leap-seconds.list"
+rm leap-seconds.list
 wget $source
 
 ## Create Delta T file for Cartes du Ciel 
@@ -10,6 +11,7 @@ wget $source
 source="ftps://gdc.cddis.eosdis.nasa.gov/products/iers"
 
 # Get IERS
+rm finals.data
 wget $source/finals.data
 
 rm deltat.tmp deltat.txt 
@@ -33,11 +35,8 @@ done
 
 # Get next years predictions
 wget $source/deltat.preds
-tail +2 deltat.preds | while read lin
+tail +2 deltat.preds | while read dat del err 
 do 
- dat=${lin:11:7}
- del=${lin:21:5}
- err=${lin:45:5}
  printf "%8.4f\t%8.4f\t%8.4f\n" "$dat" "$del" "$err" >> deltat.tmp
 done 
 
