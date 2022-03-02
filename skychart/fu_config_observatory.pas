@@ -637,6 +637,7 @@ var
   fn, buf, country: string;
   loc: TStringList;
   f: textfile;
+  i: integer;
 begin
   DownloadDialog1.ScaleDpi:=UScaleDPI.scale;
   if cmain.HttpProxy then
@@ -689,6 +690,16 @@ begin
       f_observatory_db.csc.ObsCountry := csc.ObsCountry;
       f_observatory_db.ShowObservatory;
       ShowObservatory;
+      if TZComboBox.Items.Count>1 then begin
+        // country use more than one timezone, because it is not possible to select the right one
+        // based on the iploc information we set the offset using the current OS setting
+        i:=12+round(GetLocalTimeOffset/60);
+        CountryTZ.Checked:=false;
+        if (i>=0) and (i<TZComboBox.Items.Count) then begin
+          TZComboBox.ItemIndex:=i;
+          TZComboBoxChange(nil);
+        end;
+      end;
     end
     else
       ShowMessage(rsCannotGetYou + crlf + rsServerRespon + buf);
