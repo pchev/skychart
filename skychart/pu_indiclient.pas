@@ -63,7 +63,11 @@ type
     Label130: TLabel;
     Label15: TLabel;
     Label16: TLabel;
+    Label2: TLabel;
     Label260: TLabel;
+    Label3: TLabel;
+    Label4: TLabel;
+    Label5: TLabel;
     Label75: TLabel;
     lat: TEdit;
     led: TShape;

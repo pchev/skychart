@@ -25,20 +25,18 @@ object pop_indi: Tpop_indi
     TabOrder = 1
     object LabelAlpha: TLabel
       Left = 8
-      Height = 17
+      Height = 19
       Top = 8
       Width = 20
       Caption = 'RA '
-      ParentColor = False
       ParentFont = False
     end
     object LabelDelta: TLabel
       Left = 8
-      Height = 17
+      Height = 19
       Top = 44
       Width = 25
       Caption = 'DEC'
-      ParentColor = False
       ParentFont = False
     end
     object pos_x: TEdit
@@ -64,18 +62,18 @@ object pop_indi: Tpop_indi
       TabOrder = 1
     end
     object Handpad: TPanel
-      Left = 243
+      Left = 227
       Height = 61
       Top = 28
-      Width = 61
+      Width = 88
       BevelOuter = bvNone
       ClientHeight = 61
-      ClientWidth = 61
+      ClientWidth = 88
       ParentFont = False
       TabOrder = 2
       object ArrowLeft: TArrow
         Tag = 1
-        Left = 0
+        Left = 8
         Height = 20
         Top = 20
         Width = 20
@@ -88,7 +86,7 @@ object pop_indi: Tpop_indi
       end
       object ArrowRight: TArrow
         Tag = 2
-        Left = 40
+        Left = 48
         Height = 20
         Top = 20
         Width = 20
@@ -102,7 +100,7 @@ object pop_indi: Tpop_indi
       end
       object ArrowUp: TArrow
         Tag = 3
-        Left = 20
+        Left = 28
         Height = 20
         Top = 0
         Width = 20
@@ -116,7 +114,7 @@ object pop_indi: Tpop_indi
       end
       object ArrowDown: TArrow
         Tag = 4
-        Left = 20
+        Left = 28
         Height = 20
         Top = 40
         Width = 20
@@ -129,7 +127,7 @@ object pop_indi: Tpop_indi
         ShadowType = stNone
       end
       object ArrowStop: TButton
-        Left = 22
+        Left = 30
         Height = 16
         Top = 22
         Width = 16
@@ -137,9 +135,51 @@ object pop_indi: Tpop_indi
         ParentFont = False
         TabOrder = 0
       end
+      object Label2: TLabel
+        AnchorSideLeft.Control = ArrowUp
+        AnchorSideLeft.Side = asrBottom
+        AnchorSideTop.Control = ArrowUp
+        Left = 50
+        Height = 19
+        Top = 0
+        Width = 10
+        BorderSpacing.Left = 2
+        Caption = 'N'
+      end
+      object Label3: TLabel
+        AnchorSideLeft.Control = ArrowDown
+        AnchorSideLeft.Side = asrBottom
+        AnchorSideTop.Control = ArrowDown
+        Left = 50
+        Height = 19
+        Top = 40
+        Width = 7
+        BorderSpacing.Left = 2
+        Caption = 'S'
+      end
+      object Label5: TLabel
+        AnchorSideLeft.Control = ArrowRight
+        AnchorSideLeft.Side = asrBottom
+        AnchorSideTop.Control = ArrowRight
+        Left = 68
+        Height = 19
+        Top = 20
+        Width = 12
+        Caption = 'W'
+      end
+      object Label4: TLabel
+        AnchorSideTop.Control = ArrowLeft
+        AnchorSideRight.Control = ArrowLeft
+        Left = 1
+        Height = 19
+        Top = 20
+        Width = 7
+        Anchors = [akTop, akRight]
+        Caption = 'E'
+      end
     end
     object FlipNS: TRadioGroup
-      Left = 186
+      Left = 168
       Height = 61
       Top = 28
       Width = 51
@@ -164,10 +204,10 @@ object pop_indi: Tpop_indi
       TabOrder = 3
     end
     object AxisRates: TComboBox
-      Left = 183
+      Left = 168
       Height = 28
       Top = 0
-      Width = 132
+      Width = 147
       Constraints.MaxHeight = 28
       ItemHeight = 0
       ParentFont = False
@@ -188,20 +228,18 @@ object pop_indi: Tpop_indi
     TabOrder = 3
     object Label15: TLabel
       Left = 8
-      Height = 17
+      Height = 19
       Top = 8
       Width = 61
       Caption = 'Latitude : '
-      ParentColor = False
       ParentFont = False
     end
     object Label16: TLabel
       Left = 113
-      Height = 17
+      Height = 19
       Top = 8
       Width = 70
       Caption = 'Longitude :'
-      ParentColor = False
       ParentFont = False
     end
     object ButtonSetLocation: TSpeedButton
@@ -250,11 +288,10 @@ object pop_indi: Tpop_indi
     end
     object Label1: TLabel
       Left = 211
-      Height = 17
+      Height = 19
       Top = 8
       Width = 49
       Caption = 'Altitude'
-      ParentColor = False
       ParentFont = False
     end
     object Elev: TEdit
@@ -325,29 +362,26 @@ object pop_indi: Tpop_indi
     end
     object Label75: TLabel
       Left = 8
-      Height = 17
+      Height = 19
       Top = 4
       Width = 110
       Caption = 'INDI Server Host '
-      ParentColor = False
       ParentFont = False
     end
     object Label130: TLabel
       Left = 192
-      Height = 17
+      Height = 19
       Top = 4
       Width = 104
       Caption = 'INDI server Port'
-      ParentColor = False
       ParentFont = False
     end
     object Label260: TLabel
       Left = 8
-      Height = 17
+      Height = 19
       Top = 49
       Width = 92
       Caption = 'Telescope type'
-      ParentColor = False
       ParentFont = False
     end
     object AutoloadConfig: TCheckBox
@@ -503,8 +537,8 @@ object pop_indi: Tpop_indi
     Enabled = False
     Interval = 5000
     OnTimer = IndiTimerTimer
-    Left = 224
-    Top = 360
+    Left = 192
+    Top = 392
   end
   object StopMoveTimer: TTimer
     Enabled = False

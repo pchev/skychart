@@ -70,6 +70,10 @@ type
     Label39: TLabel;
     Label4: TLabel;
     Label5: TLabel;
+    Label6: TLabel;
+    Label7: TLabel;
+    Label8: TLabel;
+    Label9: TLabel;
     PageControl1: TPageControl;
     Handpad: TPanel;
     PanelCredential: TPanel;
