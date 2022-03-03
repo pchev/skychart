@@ -3998,7 +3998,7 @@ begin
   end;
   sinho := sin(deg2rad * ho);
   dt := jd0;
-  hh := 1;
+  hh := 0;
   PlanetAltitude(pla, dt, hh - 1.0, cfgsc, x1, y1);
   if x1 > pi then
     x1 := x1 - pi2;
@@ -4053,8 +4053,10 @@ begin
       if (n = 1) then
       begin
         ht := hh + h1;
-        ymax0 := ymax;
-        ftransit := True;
+        if (ht>0)and(ht<24) then begin
+          ymax0 := ymax;
+          ftransit := True;
+        end;
       end;
     end;
     y1 := y3;
@@ -4197,7 +4199,7 @@ begin
       ths := na;
       tazs := na;
     end;
-    if frise and fset then begin
+    if frise and fset and (hs>hr) then begin
       // better transit precision
       ht:=(hs+hr)/2;
       jdt := jd0 + (ht - cfgsc.TimeZone) / 24;
