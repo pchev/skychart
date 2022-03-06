@@ -20,6 +20,7 @@
     <RequiredPkgs Count="16">
       <Item1>
         <PackageName Value="BGRABitmapPack"/>
+        <DefaultFilename Value="bgrabitmap/bgrabitmappack.lpk"/>
       </Item1>
       <Item2>
         <PackageName Value="indiclient"/>
