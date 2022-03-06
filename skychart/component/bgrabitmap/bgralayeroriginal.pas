@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: LGPL-3.0-linking-exception
 unit BGRALayerOriginal;
 
 {$mode objfpc}{$H+}
@@ -6,7 +7,7 @@ unit BGRALayerOriginal;
 interface
 
 uses
-  Classes, SysUtils, BGRABitmap, BGRABitmapTypes, BGRATransform, BGRAMemDirectory, fgl
+  BGRAClasses, SysUtils, BGRABitmap, BGRABitmapTypes, BGRATransform, BGRAMemDirectory, fgl
   {$IFDEF BGRABITMAP_USE_LCL},LCLType{$ENDIF};
 
 type
@@ -73,9 +74,12 @@ type
   private
     FFocused: boolean;
     FOnFocusChanged: TNotifyEvent;
+    function GetIsMovingPoint: boolean;
     function GetPointCoord(AIndex: integer): TPointF;
     function GetPointCount: integer;
+    function GetPointHighlighted(AIndex: integer): boolean;
     procedure SetFocused(AValue: boolean);
+    procedure SetPointHighlighted(AIndex: integer; AValue: boolean);
   protected
     FMatrix,FMatrixInverse: TAffineMatrix;          //view matrix from original coord
     FGridMatrix,FGridMatrixInverse: TAffineMatrix;  //grid matrix in original coord
@@ -83,7 +87,7 @@ type
     FPoints: array of record
       Origin, Coord: TPointF;
       OnMove, OnAlternateMove: TOriginalMovePointEvent;
-      RightButton: boolean;
+      RightButton, Highlighted: boolean;
       SnapToPoint: integer;
       HitBox: TAffineBox;
     end;
@@ -103,8 +107,8 @@ type
     FCurHoverPoint: integer;
     FHoverPointHandlers: THoverPointHandlers;
     FClickPointHandlers: TClickPointHandlers;
-    function RenderPoint(ADest: TBGRABitmap; ACoord: TPointF; AAlternateColor: boolean): TRect; virtual;
-    function GetRenderPointBounds(ACoord: TPointF): TRect; virtual;
+    function RenderPoint(ADest: TBGRABitmap; ACoord: TPointF; AAlternateColor: boolean; AHighlighted: boolean): TRect; virtual;
+    function GetRenderPointBounds(ACoord: TPointF; AHighlighted: boolean): TRect; virtual;
     function RenderArrow(ADest: TBGRABitmap; AOrigin, AEndCoord: TPointF): TRect; virtual;
     function GetRenderArrowBounds(AOrigin, AEndCoord: TPointF): TRect; virtual;
     function RenderPolygon(ADest: TBGRABitmap; ACoords: array of TPointF; AClosed: boolean; AStyle: TBGRAOriginalPolylineStyle; ABackColor: TBGRAPixel): TRect; virtual;
@@ -147,7 +151,9 @@ type
     property PointSize: single read FPointSize write FPointSize;
     property PointCount: integer read GetPointCount;
     property PointCoord[AIndex: integer]: TPointF read GetPointCoord;
+    property PointHighlighted[AIndex: integer]: boolean read GetPointHighlighted write SetPointHighlighted;
     property OnFocusChanged: TNotifyEvent read FOnFocusChanged write FOnFocusChanged;
+    property IsMovingPoint: boolean read GetIsMovingPoint;
   end;
 
   TBGRACustomOriginalStorage = class;
@@ -196,6 +202,9 @@ type
     procedure SaveToStream(AStream: TStream); virtual;
     function CreateEditor: TBGRAOriginalEditor; virtual;
     class function StorageClassName: RawByteString; virtual; abstract;
+    class function CanConvertToSVG: boolean; virtual;
+    function IsInfiniteSurface: boolean; virtual;
+    function ConvertToSVG(const {%H-}AMatrix: TAffineMatrix; out AOffset: TPoint): TObject; virtual;
     function Duplicate: TBGRALayerCustomOriginal; virtual;
     property Guid: TGuid read GetGuid write SetGuid;
     property OnChange: TOriginalChangeEvent read FOnChange write SetOnChange;
@@ -241,6 +250,7 @@ type
   public
     constructor Create; override;
     destructor Destroy; override;
+    function ConvertToSVG(const AMatrix: TAffineMatrix; out AOffset: TPoint): TObject; override;
     procedure Render(ADest: TBGRABitmap; AMatrix: TAffineMatrix; ADraft: boolean); override;
     function GetRenderBounds({%H-}ADestRect: TRect; AMatrix: TAffineMatrix): TRect; override;
     procedure LoadFromStorage(AStorage: TBGRACustomOriginalStorage); override;
@@ -252,6 +262,7 @@ type
     procedure AssignImage(AImage: TBGRACustomBitmap);
     function GetImageCopy: TBGRABitmap;
     class function StorageClassName: RawByteString; override;
+    class function CanConvertToSVG: boolean; override;
     property Width: integer read GetImageWidth;
     property Height: integer read GetImageHeight;
   end;
@@ -262,6 +273,7 @@ type
   protected
     FFormats: TFormatSettings;
     function GetBool(AName: utf8string): boolean;
+    function GetBoolDef(AName: utf8string; ADefault: boolean): boolean;
     function GetColorArray(AName: UTF8String): ArrayOfTBGRAPixel;
     function GetInteger(AName: utf8string): integer;
     function GetIntegerDef(AName: utf8string; ADefault: integer): integer;
@@ -280,12 +292,13 @@ type
     procedure SetPointF(AName: utf8string; AValue: TPointF);
     procedure SetRectF(AName: utf8string; AValue: TRectF);
     procedure SetRect(AName: utf8string; AValue: TRect);
-    procedure SetAffineMatrix(AName: utf8string; AValue: TAffineMatrix);
+    procedure SetAffineMatrix(AName: utf8string; const AValue: TAffineMatrix);
     procedure SetRawString(AName: utf8string; AValue: RawByteString); virtual; abstract;
     procedure SetSingle(AName: utf8string; AValue: single);
     procedure SetSingleArray(AName: utf8string; AValue: ArrayOfSingle);
     procedure SetColor(AName: UTF8String; AValue: TBGRAPixel);
     function GetDelimiter: char;
+    function GetEmpty: boolean; virtual; abstract;
   public
     constructor Create;
     function Duplicate: TBGRACustomOriginalStorage; virtual; abstract;
@@ -296,13 +309,21 @@ type
     function OpenObject(AName: utf8string): TBGRACustomOriginalStorage; virtual; abstract;
     function ObjectExists(AName: utf8string): boolean; virtual; abstract;
     procedure EnumerateObjects(AList: TStringList); virtual; abstract;
+    procedure EnumerateFiles(AList: TStringList); virtual; abstract;
     procedure RemoveFile(AName: utf8string); virtual; abstract;
+    function GetFileStream(AName: UTF8String): TStream; virtual; abstract;
     function ReadFile(AName: UTF8String; ADest: TStream): boolean; virtual; abstract;
+    function ReadBitmap(AName: UTF8String; ADest: TCustomUniversalBitmap): boolean; virtual; abstract;
     procedure WriteFile(AName: UTF8String; ASource: TStream; ACompress: boolean; AOwnStream: boolean = false); virtual; abstract;
+    function FileExists(AName: UTF8String): boolean; virtual; abstract;
+    function FloatEquals(AName: utf8string; AValue: single): boolean;
+    function PointFEquals(AName: utf8string; const AValue: TPointF): boolean;
+    function AffineMatrixEquals(AName: utf8string; const AValue: TAffineMatrix): boolean;
     property RawString[AName: utf8string]: RawByteString read GetRawString write SetRawString;
     property Int[AName: utf8string]: integer read GetInteger write SetInteger;
     property IntDef[AName: utf8string; ADefault: integer]: integer read GetIntegerDef;
     property Bool[AName: utf8string]: boolean read GetBool write SetBool;
+    property BoolDef[AName: utf8string; ADefault: boolean]: boolean read GetBoolDef;
     property Float[AName: utf8string]: single read GetSingle write SetSingle;
     property FloatArray[AName: utf8string]: ArrayOfSingle read GetSingleArray write SetSingleArray;
     property FloatDef[AName: utf8string; ADefault: single]: single read GetSingleDef;
@@ -312,6 +333,7 @@ type
     property AffineMatrix[AName: utf8string]: TAffineMatrix read GetAffineMatrix write SetAffineMatrix;
     property Color[AName: UTF8String]: TBGRAPixel read GetColor write SetColor;
     property ColorArray[AName: UTF8String]: ArrayOfTBGRAPixel read GetColorArray write SetColorArray;
+    property Empty: boolean read GetEmpty;
   end;
 
   { TBGRAMemOriginalStorage }
@@ -322,6 +344,7 @@ type
     FMemDirOwned: boolean;
     function GetRawString(AName: utf8string): RawByteString; override;
     procedure SetRawString(AName: utf8string; AValue: RawByteString); override;
+    function GetEmpty: boolean; override;
   public
     destructor Destroy; override;
     constructor Create;
@@ -335,9 +358,13 @@ type
     function OpenObject(AName: utf8string): TBGRACustomOriginalStorage; override;
     function ObjectExists(AName: utf8string): boolean; override;
     procedure EnumerateObjects(AList: TStringList); override;
+    procedure EnumerateFiles(AList: TStringList); override;
     procedure RemoveFile(AName: utf8string); override;
+    function GetFileStream(AName: UTF8String): TStream; override;
+    function ReadBitmap(AName: UTF8String; ADest: TCustomUniversalBitmap): boolean; override;
     function ReadFile(AName: UTF8String; ADest: TStream): boolean; override;
     procedure WriteFile(AName: UTF8String; ASource: TStream; ACompress: boolean; AOwnStream: boolean = false); override;
+    function FileExists(AName: UTF8String): boolean; override;
     procedure SaveToStream(AStream: TStream);
     procedure LoadFromStream(AStream: TStream);
     procedure LoadFromResource(AFilename: string);
@@ -349,7 +376,7 @@ function FindLayerOriginalClass(AStorageClassName: string): TBGRALayerOriginalAn
 
 implementation
 
-uses BGRAPolygon, math, BGRAMultiFileType, BGRAUTF8, Types, BGRAGraphics;
+uses BGRAPolygon, math, BGRAMultiFileType, BGRAUTF8, BGRAGraphics, BGRASVG, BGRASVGShapes;
 
 {$IFDEF BGRABITMAP_USE_LCL}
 function LCLKeyToSpecialKey(AKey: Word; AShift: TShiftState): TSpecialKey;
@@ -387,7 +414,7 @@ end;
 
 constructor TBGRAImageOriginalDiff.Create(AFromOriginal: TBGRALayerImageOriginal);
 begin
-  FImageBefore := AFromOriginal.FImage.NewReference as TBGRABitmap;
+  FImageBefore := AFromOriginal.FImage.NewReference;
   if Assigned(AFromOriginal.FJpegStream) then
   begin
     FJpegStreamBefore := TMemoryStream.Create;
@@ -401,7 +428,7 @@ procedure TBGRAImageOriginalDiff.ComputeDiff(
   AToOriginal: TBGRALayerImageOriginal);
 begin
   if Assigned(FImageAfter) then FImageAfter.FreeReference;
-  FImageAfter := AToOriginal.FImage.NewReference as TBGRABitmap;
+  FImageAfter := AToOriginal.FImage.NewReference;
   FreeAndNil(FJpegStreamAfter);
   if Assigned(AToOriginal.FJpegStream) then
   begin
@@ -418,7 +445,7 @@ var
 begin
   orig := AOriginal as TBGRALayerImageOriginal;
   orig.FImage.FreeReference;
-  orig.FImage := FImageAfter.NewReference as TBGRABitmap;
+  orig.FImage := FImageAfter.NewReference;
   FreeAndNil(orig.FJpegStream);
   if Assigned(FJpegStreamAfter) then
   begin
@@ -435,7 +462,7 @@ var
 begin
   orig := AOriginal as TBGRALayerImageOriginal;
   orig.FImage.FreeReference;
-  orig.FImage := FImageBefore.NewReference as TBGRABitmap;
+  orig.FImage := FImageBefore.NewReference;
   FreeAndNil(orig.FJpegStream);
   if Assigned(FJpegStreamBefore) then
   begin
@@ -460,7 +487,7 @@ begin
   if next.FContentVersionAfter < FContentVersionAfter then
     raise exception.Create('Cannot append diff made before this one.');
   FImageAfter.FreeReference;
-  FImageAfter := next.FImageAfter.NewReference as TBGRABitmap;
+  FImageAfter := next.FImageAfter.NewReference;
   FreeAndNil(FJpegStreamAfter);
   if Assigned(next.FJpegStreamAfter) then
   begin
@@ -545,9 +572,20 @@ begin
   result := FPoints[AIndex].Coord;
 end;
 
+function TBGRAOriginalEditor.GetIsMovingPoint: boolean;
+begin
+  result := FPointMoving <> -1;
+end;
+
 function TBGRAOriginalEditor.GetPointCount: integer;
 begin
   result := length(FPoints);
+end;
+
+function TBGRAOriginalEditor.GetPointHighlighted(AIndex: integer): boolean;
+begin
+  if (AIndex < 0) or (AIndex >= PointCount) then raise exception.Create('Index out of bounds');
+  result := FPoints[AIndex].Highlighted;
 end;
 
 procedure TBGRAOriginalEditor.SetFocused(AValue: boolean);
@@ -555,6 +593,13 @@ begin
   if FFocused=AValue then Exit;
   FFocused:=AValue;
   if Assigned(FOnFocusChanged) then FOnFocusChanged(self);
+end;
+
+procedure TBGRAOriginalEditor.SetPointHighlighted(AIndex: integer;
+  AValue: boolean);
+begin
+  if (AIndex < 0) or (AIndex >= PointCount) then raise exception.Create('Index out of bounds');
+  FPoints[AIndex].Highlighted := AValue;
 end;
 
 procedure TBGRAOriginalEditor.SetGridActive(AValue: boolean);
@@ -570,31 +615,53 @@ begin
   FGridMatrixInverse := AffineMatrixInverse(FGridMatrix);
 end;
 
-function TBGRAOriginalEditor.RenderPoint(ADest: TBGRABitmap; ACoord: TPointF; AAlternateColor: boolean): TRect;
+function TBGRAOriginalEditor.RenderPoint(ADest: TBGRABitmap; ACoord: TPointF; AAlternateColor: boolean; AHighlighted: boolean): TRect;
 const alpha = 192;
 var filler: TBGRAMultishapeFiller;
   c: TBGRAPixel;
+  penScale: Single;
+  oldClip: TRect;
 begin
-  result := GetRenderPointBounds(ACoord);
+  result := GetRenderPointBounds(ACoord, AHighlighted);
   if not isEmptyPointF(ACoord) then
   begin
-    filler := TBGRAMultishapeFiller.Create;
-    filler.AddEllipseBorder(ACoord.x,ACoord.y, FPointSize-2,FPointSize-2, 4, BGRA(0,0,0,alpha));
+    oldClip := ADest.ClipRect;
+    ADest.IntersectClip(result);
     if AAlternateColor then c := BGRA(255,128,128,alpha)
+      else if AHighlighted then c := BGRA(96,170,255,alpha)
       else c := BGRA(255,255,255,alpha);
-    filler.AddEllipseBorder(ACoord.x,ACoord.y, FPointSize-2,FPointSize-2, 1, c);
+    if AHighlighted then
+      ADest.GradientFill(result.Left, result.Top, result.Right, result.Bottom,
+                  c, BGRAPixelTransparent,
+                  gtRadial, PointF(ACoord.x,ACoord.y), PointF(result.right,ACoord.y),
+                  dmDrawWithTransparency);
+    penScale := FPointSize / 6;
+    if penScale < 1 then penScale := 1;
+    filler := TBGRAMultishapeFiller.Create;
+    filler.AddEllipseBorder(ACoord.x,ACoord.y, FPointSize-2,FPointSize-2, 3.5*penScale, BGRA(0,0,0,alpha));
+    filler.AddEllipseBorder(ACoord.x,ACoord.y, FPointSize-2,FPointSize-2, 1*penScale, c);
     filler.PolygonOrder:= poLastOnTop;
     filler.Draw(ADest);
     filler.Free;
+    ADest.ClipRect := oldClip;
   end;
 end;
 
-function TBGRAOriginalEditor.GetRenderPointBounds(ACoord: TPointF): TRect;
+function TBGRAOriginalEditor.GetRenderPointBounds(ACoord: TPointF; AHighlighted: boolean): TRect;
+var
+  r, penScale: Single;
 begin
   if isEmptyPointF(ACoord) then
     result := EmptyRect
   else
-    result := rect(floor(ACoord.x - FPointSize + 0.5), floor(ACoord.y - FPointSize + 0.5), ceil(ACoord.x + FPointSize + 0.5), ceil(ACoord.y + FPointSize + 0.5));
+  begin
+    penScale := FPointSize / 6;
+    if penScale < 1 then penScale := 1;
+    r := FPointSize + (penScale-1)*4;
+    if AHighlighted then r := max(r, FPointSize*2);
+    result := rect(floor(ACoord.x - r + 0.5), floor(ACoord.y - r + 0.5),
+                   ceil(ACoord.x + r + 0.5), ceil(ACoord.y + r + 0.5));
+  end;
 end;
 
 function TBGRAOriginalEditor.RenderArrow(ADest: TBGRABitmap; AOrigin,
@@ -604,16 +671,19 @@ var
   pts, ptsContour: ArrayOfTPointF;
   i: Integer;
   rF: TRectF;
+  penScale: Single;
 begin
   if isEmptyPointF(AOrigin) or isEmptyPointF(AEndCoord) then
     result := EmptyRect
   else
   begin
+    penScale := FPointSize / 6;
+    if penScale < 1 then penScale := 1;
     ADest.Pen.Arrow.EndAsClassic;
-    ADest.Pen.Arrow.EndSize := PointF(FPointSize,FPointSize);
-    pts := ADest.ComputeWidePolyline([AOrigin,AEndCoord],1);
+    ADest.Pen.Arrow.EndSize := PointF(FPointSize/penScale,FPointSize/penScale);
+    pts := ADest.ComputeWidePolyline([AOrigin,AEndCoord],1*penScale);
     ADest.Pen.Arrow.EndAsNone;
-    ptsContour := ADest.ComputeWidePolygon(pts, 2);
+    ptsContour := ADest.ComputeWidePolygon(pts, 2*penScale);
     ADest.FillPolyAntialias(ptsContour, BGRA(0,0,0,alpha));
     ADest.FillPolyAntialias(pts, BGRA(255,255,255,alpha));
     rF := RectF(AOrigin,AEndCoord);
@@ -630,14 +700,20 @@ begin
 end;
 
 function TBGRAOriginalEditor.GetRenderArrowBounds(AOrigin, AEndCoord: TPointF): TRect;
+var
+  penScale, margin: Single;
 begin
   if isEmptyPointF(AOrigin) or isEmptyPointF(AEndCoord) then
     result := EmptyRect
   else
   begin
-    result := Rect(floor(AOrigin.x+0.5-1.5),floor(AOrigin.y+0.5-1.5),ceil(AOrigin.x+0.5+1.5),ceil(AOrigin.y+0.5+1.5));
-    UnionRect(result, result, rect(floor(AEndCoord.x+0.5-FPointSize-1.5), floor(AEndCoord.y+0.5-FPointSize-1.5),
-                      ceil(AEndCoord.x+0.5+FPointSize+1.5), ceil(AEndCoord.y+0.5+FPointSize+1.5)) );
+    penScale := FPointSize / 6;
+    if penScale < 1 then penScale := 1;
+    margin := penScale * 1.5;
+    result := Rect(floor(AOrigin.x+0.5-margin),floor(AOrigin.y+0.5-margin),
+      ceil(AOrigin.x+0.5+margin),ceil(AOrigin.y+0.5+margin));
+    result.Union( rect(floor(AEndCoord.x+0.5-FPointSize-margin), floor(AEndCoord.y+0.5-FPointSize-margin),
+                      ceil(AEndCoord.x+0.5+FPointSize+margin), ceil(AEndCoord.y+0.5+FPointSize+margin)) );
   end;
 end;
 
@@ -822,6 +898,7 @@ begin
     OnMove := nil;
     OnAlternateMove:= nil;
     RightButton:= ARightButton;
+    Highlighted:= false;
     SnapToPoint:= -1;
     HitBox := TAffineBox.EmptyBox;
   end;
@@ -839,6 +916,7 @@ begin
     OnMove := AOnMoveEnd;
     OnAlternateMove:= nil;
     RightButton:= ARightButton;
+    Highlighted:= false;
     SnapToPoint:= -1;
     HitBox := TAffineBox.EmptyBox;
   end;
@@ -898,7 +976,10 @@ begin
         FPoints[FPointMoving].OnAlternateMove(self, FPoints[FPointMoving].Coord, newCoord, subShift)
       else
         FPoints[FPointMoving].OnMove(self, FPoints[FPointMoving].Coord, newCoord, subShift);
-      FPoints[FPointMoving].Coord := newCoord;
+      if (FPointMoving >= 0) and (FPointMoving < length(FPoints)) then
+        FPoints[FPointMoving].Coord := newCoord
+      else
+        FPointMoving := -1;
     end;
     ACursor := GetMoveCursor(FPointMoving);
     AHandled:= true;
@@ -1004,9 +1085,9 @@ var v: TPointF;
   transfCoord: TPointF;
 begin
   if ARightButton then
-    curDist := sqr(2.5*FPointSize)
+    curDist := sqr(2.25*FPointSize)
   else
-    curDist := sqr(1.5*FPointSize);
+    curDist := sqr(1.25*FPointSize);
   result := -1;
   transfCoord:= Matrix*ACoord;
 
@@ -1024,9 +1105,9 @@ begin
   if result <> -1 then exit;
 
   if not ARightButton then
-    curDist := sqr(2.5*FPointSize)
+    curDist := sqr(2.25*FPointSize)
   else
-    curDist := sqr(1.5*FPointSize);
+    curDist := sqr(1.25*FPointSize);
   for i := 0 to high(FPoints) do
   if FPoints[i].RightButton <> ARightButton then
   begin
@@ -1058,15 +1139,15 @@ begin
   for i := 0 to high(FPoints) do
   begin
     if isEmptyPointF(FPoints[i].Origin) then
-      elemRect := RenderPoint(ADest, OriginalCoordToView(FPoints[i].Coord), FPoints[i].RightButton)
+      elemRect := RenderPoint(ADest, OriginalCoordToView(FPoints[i].Coord), FPoints[i].RightButton, FPoints[i].Highlighted)
     else
       elemRect := RenderArrow(ADest, OriginalCoordToView(FPoints[i].Origin), OriginalCoordToView(FPoints[i].Coord));
-    if not IsRectEmpty(elemRect) then
+    if not elemRect.IsEmpty then
     begin
-      if IsRectEmpty(result) then
+      if result.IsEmpty then
         result := elemRect
       else
-        UnionRect(result, result, elemRect);
+        result.Union(elemRect);
     end;
   end;
   for i := 0 to high(FPolylines) do
@@ -1081,12 +1162,12 @@ begin
           ptsF[j] := OriginalCoordToView(Coords[j]);
       elemRect := RenderPolygon(ADest, ptsF, Closed, Style, BackColor);
     end;
-    if not IsRectEmpty(elemRect) then
+    if not elemRect.IsEmpty then
     begin
-      if IsRectEmpty(result) then
+      if result.IsEmpty then
         result := elemRect
       else
-        UnionRect(result, result, elemRect);
+        result.Union(elemRect);
     end;
   end;
 end;
@@ -1101,15 +1182,15 @@ begin
   for i := 0 to high(FPoints) do
   begin
     if isEmptyPointF(FPoints[i].Origin) then
-      elemRect := GetRenderPointBounds(OriginalCoordToView(FPoints[i].Coord))
+      elemRect := GetRenderPointBounds(OriginalCoordToView(FPoints[i].Coord), FPoints[i].Highlighted)
     else
       elemRect := GetRenderArrowBounds(OriginalCoordToView(FPoints[i].Origin), OriginalCoordToView(FPoints[i].Coord));
-    if not IsRectEmpty(elemRect) then
+    if not elemRect.IsEmpty then
     begin
-      if IsRectEmpty(result) then
+      if result.IsEmpty then
         result := elemRect
       else
-        UnionRect(result, result, elemRect);
+        result.Union(elemRect);
     end;
   end;
   for i := 0 to high(FPolylines) do
@@ -1124,12 +1205,12 @@ begin
           ptsF[j] := OriginalCoordToView(Coords[j]);
       elemRect := GetRenderPolygonBounds(ptsF);
     end;
-    if not IsRectEmpty(elemRect) then
+    if not elemRect.IsEmpty then
     begin
-      if IsRectEmpty(result) then
+      if result.IsEmpty then
         result := elemRect
       else
-        UnionRect(result, result, elemRect);
+        result.Union(elemRect);
     end;
   end;
 end;
@@ -1190,6 +1271,11 @@ begin
     raise exception.Create('This name refers to an existing object and so cannot be an attribute')
   else
     FMemDir.RawString[idx] := AValue;
+end;
+
+function TBGRAMemOriginalStorage.GetEmpty: boolean;
+begin
+  result := FMemDir.Count = 0;
 end;
 
 destructor TBGRAMemOriginalStorage.Destroy;
@@ -1304,6 +1390,15 @@ begin
       AList.Add(FMemDir.Entry[i].Name);
 end;
 
+procedure TBGRAMemOriginalStorage.EnumerateFiles(AList: TStringList);
+var
+  i: Integer;
+begin
+  for i := 0 to FMemDir.Count-1 do
+    if not FMemDir.IsDirectory[i] then
+      AList.Add(FMemDir.Entry[i].Name);
+end;
+
 procedure TBGRAMemOriginalStorage.RemoveFile(AName: utf8string);
 var
   idx: Integer;
@@ -1316,12 +1411,66 @@ begin
     FMemDir.Delete(idx);
 end;
 
+function TBGRAMemOriginalStorage.GetFileStream(AName: UTF8String): TStream;
+var
+  entryId: Integer;
+begin
+  entryId := FMemDir.IndexOf(EntryFilename(AName));
+  if (entryId <> -1) and not FMemDir.IsDirectory[entryId] then
+  begin
+    with FMemDir.Entry[entryId] do
+      result := GetStream;
+  end
+  else
+    result := nil;
+end;
+
+function TBGRAMemOriginalStorage.ReadBitmap(AName: UTF8String;
+  ADest: TCustomUniversalBitmap): boolean;
+var
+  entryId: Integer;
+  stream: TStream;
+begin
+  entryId := FMemDir.IndexOf(EntryFilename(AName));
+  if (entryId <> -1) and not FMemDir.IsDirectory[entryId] then
+  begin
+    if FMemDir.IsEntryCompressed[entryId] then
+    begin
+      stream := TMemoryStream.Create;
+      try
+        with FMemDir.Entry[entryId] do
+        begin
+          if CopyTo(stream) <> FileSize then
+            result := false
+          else
+          begin
+            stream.Position:= 0;
+            ADest.LoadFromStream(stream);
+            result := true;
+          end;
+        end;
+      finally
+        stream.Free;
+      end;
+    end else
+    with FMemDir.Entry[entryId] do
+    begin
+      stream := GetStream;
+      stream.Position:= 0;
+      ADest.LoadFromStream(stream);
+      result := true;
+    end;
+  end
+  else
+    result := false;
+end;
+
 function TBGRAMemOriginalStorage.ReadFile(AName: UTF8String; ADest: TStream): boolean;
 var
   entryId: Integer;
 begin
   entryId := FMemDir.IndexOf(EntryFilename(AName));
-  if entryId <> -1 then
+  if (entryId <> -1) and not FMemDir.IsDirectory[entryId] then
   begin
     with FMemDir.Entry[entryId] do
       result := CopyTo(ADest) = FileSize
@@ -1336,6 +1485,14 @@ var
 begin
   idxEntry := FMemDir.Add(EntryFilename(AName), ASource, true, AOwnStream);
   if ACompress then FMemDir.IsEntryCompressed[idxEntry] := true;
+end;
+
+function TBGRAMemOriginalStorage.FileExists(AName: UTF8String): boolean;
+var
+  entryId: Integer;
+begin
+  entryId := FMemDir.IndexOf(EntryFilename(AName));
+  result := (entryId <> -1) and not FMemDir.IsDirectory[entryId];
 end;
 
 procedure TBGRAMemOriginalStorage.SaveToStream(AStream: TStream);
@@ -1414,19 +1571,19 @@ begin
   begin
     stream.Position:= 0;
     {$PUSH}{$HINTS OFF}stream.ReadBuffer({%H-}result, sizeof({%H-}result));{$POP}
-    DWord(result[1,1]) := NtoLE(DWord(result[1,1]));
-    DWord(result[2,1]) := NtoLE(DWord(result[2,1]));
-    DWord(result[1,2]) := NtoLE(DWord(result[1,2]));
-    DWord(result[2,2]) := NtoLE(DWord(result[2,2]));
-    DWord(result[1,3]) := NtoLE(DWord(result[1,3]));
-    DWord(result[2,3]) := NtoLE(DWord(result[2,3]));
+    LongWord(result[1,1]) := NtoLE(LongWord(result[1,1]));
+    LongWord(result[2,1]) := NtoLE(LongWord(result[2,1]));
+    LongWord(result[1,2]) := NtoLE(LongWord(result[1,2]));
+    LongWord(result[2,2]) := NtoLE(LongWord(result[2,2]));
+    LongWord(result[1,3]) := NtoLE(LongWord(result[1,3]));
+    LongWord(result[2,3]) := NtoLE(LongWord(result[2,3]));
   end else
     result := AffineMatrixIdentity;
   stream.Free;
 end;
 
 procedure TBGRACustomOriginalStorage.SetAffineMatrix(AName: utf8string;
-  AValue: TAffineMatrix);
+  const AValue: TAffineMatrix);
 var
   stream: TMemoryStream;
 begin
@@ -1451,9 +1608,17 @@ begin
   RectangleF[AName] := rF;
 end;
 
+function TBGRACustomOriginalStorage.GetBoolDef(AName: utf8string;
+  ADefault: boolean): boolean;
+begin
+  if RawString[AName] = 'true' then result := true
+  else if RawString[AName] = 'false' then result := false
+  else result := ADefault;
+end;
+
 function TBGRACustomOriginalStorage.GetBool(AName: utf8string): boolean;
 begin
-  result := StrToBool(RawString[AName]);
+  result := GetBoolDef(AName, false);
 end;
 
 function TBGRACustomOriginalStorage.GetSingleArray(AName: utf8string): ArrayOfSingle;
@@ -1588,6 +1753,42 @@ constructor TBGRACustomOriginalStorage.Create;
 begin
   FFormats := DefaultFormatSettings;
   FFormats.DecimalSeparator := '.';
+end;
+
+function TBGRACustomOriginalStorage.FloatEquals(AName: utf8string;
+  AValue: single): boolean;
+var
+  curValue: Single;
+begin
+  curValue := Float[AName];
+  if curValue = EmptySingle then
+    result := (AValue = EmptySingle) else
+  if AValue = EmptySingle then
+    result := false else
+    result := (FloatToStrF(AValue, ffGeneral,7,3, FFormats) =
+              FloatToStrF(curValue, ffGeneral,7,3, FFormats));
+end;
+
+function TBGRACustomOriginalStorage.PointFEquals(AName: utf8string;
+  const AValue: TPointF): boolean;
+var
+  curValue: TPointF;
+begin
+  curValue := PointF[AName];
+  if isEmptyPointF(curValue) then
+    result := isEmptyPointF(AValue) else
+  if isEmptyPointF(AValue) then
+    result := False else
+    result := (FloatToStrF(AValue.x, ffGeneral,7,3, FFormats) =
+              FloatToStrF(curValue.x, ffGeneral,7,3, FFormats)) and
+              (FloatToStrF(AValue.y, ffGeneral,7,3, FFormats) =
+              FloatToStrF(curValue.y, ffGeneral,7,3, FFormats));
+end;
+
+function TBGRACustomOriginalStorage.AffineMatrixEquals(AName: utf8string;
+  const AValue: TAffineMatrix): boolean;
+begin
+  result := (AffineMatrix[AName] = AValue);
 end;
 
 { TBGRALayerCustomOriginal }
@@ -1745,6 +1946,22 @@ begin
   result := TBGRAOriginalEditor.Create;
 end;
 
+class function TBGRALayerCustomOriginal.CanConvertToSVG: boolean;
+begin
+  result := false;
+end;
+
+function TBGRALayerCustomOriginal.IsInfiniteSurface: boolean;
+begin
+  result := false;
+end;
+
+function TBGRALayerCustomOriginal.ConvertToSVG(const AMatrix: TAffineMatrix; out AOffset: TPoint): TObject;
+begin
+  AOffset := Point(0,0);
+  raise exception.Create('Not implemented');
+end;
+
 function TBGRALayerCustomOriginal.Duplicate: TBGRALayerCustomOriginal;
 var
   storage: TBGRAMemOriginalStorage;
@@ -1858,6 +2075,21 @@ begin
   FJpegStream.Free;
   FDiff.Free;
   inherited Destroy;
+end;
+
+function TBGRALayerImageOriginal.ConvertToSVG(const AMatrix: TAffineMatrix; out AOffset: TPoint): TObject;
+var
+  svg: TBGRASVG;
+  img: TSVGImage;
+begin
+  svg := TBGRASVG.Create(Width, Height, cuPixel);
+  Result:= svg;
+  AOffset := Point(0,0);
+  if Assigned(FJpegStream) then
+    img := svg.Content.AppendImage(0,0,Width,Height,FJpegStream,'image/jpeg') else
+  if Assigned(FImage) then
+    img := svg.Content.AppendImage(0,0,Width,Height,FImage,false);
+  img.matrix[cuCustom] := AMatrix;
 end;
 
 procedure TBGRALayerImageOriginal.Render(ADest: TBGRABitmap;
@@ -1999,12 +2231,17 @@ end;
 function TBGRALayerImageOriginal.GetImageCopy: TBGRABitmap;
 begin
   if FImage = nil then result := nil
-  else result := FImage.Duplicate as TBGRABitmap;
+  else result := FImage.Duplicate;
 end;
 
 class function TBGRALayerImageOriginal.StorageClassName: RawByteString;
 begin
   result := 'image';
+end;
+
+class function TBGRALayerImageOriginal.CanConvertToSVG: boolean;
+begin
+  Result:= true;
 end;
 
 initialization

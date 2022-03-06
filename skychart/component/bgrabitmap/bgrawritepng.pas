@@ -1,17 +1,9 @@
+// SPDX-License-Identifier: LGPL-3.0-linking-exception
 {
-    The original file before tweaking is:
-
-    This file is part of the Free Pascal run time library.
+    The original file is part of the Free Pascal run time library.
     Copyright (c) 2003 by the Free Pascal development team
 
-    PNG writer class.
-
-    See the file COPYING.FPC, included in this distribution,
-    for details about the copyright.
-
-    This program is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+    PNG writer class modified by circular.
 
  **********************************************************************
 
@@ -25,19 +17,22 @@ unit BGRAWritePNG;
 interface
 
 
-uses sysutils, classes, FPImage, FPImgCmn, PNGcomn, ZStream;
+uses sysutils, BGRAClasses, FPImage, FPImgCmn, PNGcomn, ZStream, BGRABitmapTypes;
 
 type
   THeaderChunk = packed record
-    Width, height : longword;
+    Width, height : LongWord;
     BitDepth, ColorType, Compression, Filter, Interlace : byte;
   end;
 
   TGetPixelFunc = function (x,y : LongWord) : TColorData of object;
+  TGetPixelBGRAFunc = function (p: PBGRAPixel) : TColorData of object;
 
   TColorFormatFunction = function (color:TFPColor) : TColorData of object;
 
-  TBGRAWriterPNG = class (TFPCustomImageWriter)
+  { TBGRAWriterPNG }
+
+  TBGRAWriterPNG = class (TBGRACustomWriterPNG)
     private
       FUsetRNS, FCompressedText, FWordSized, FIndexed,
       FUseAlpha, FGrayScale : boolean;
@@ -52,14 +47,18 @@ type
       OwnsPalette : boolean;
       FHeader : THeaderChunk;
       FGetPixel : TGetPixelFunc;
-      FDatalineLength : longword;
+      FGetPixelBGRA : TGetPixelBGRAFunc;
+      FDatalineLength : LongWord;
       ZData : TMemoryStream;  // holds uncompressed data until all blocks are written
       Compressor : TCompressionStream; // compresses the data
       FCompressionLevel : TCompressionLevel;
       procedure WriteChunk;
-      function GetColorPixel (x,y:longword) : TColorData;
-      function GetPalettePixel (x,y:longword) : TColorData;
-      function GetColPalPixel (x,y:longword) : TColorData;
+      function GetColorPixel (x,y:LongWord) : TColorData;
+      function GetPalettePixel (x,y:LongWord) : TColorData;
+      function GetColPalPixel (x,y:LongWord) : TColorData;
+      function GetColorPixelBGRA (p: PBGRAPixel) : TColorData;
+      function GetPalettePixelBGRA (p: PBGRAPixel) : TColorData;
+      function GetColPalPixelBGRA (p: PBGRAPixel) : TColorData;
       procedure InitWriteIDAT;
       procedure Gatherdata;
       procedure WriteCompressedData;
@@ -67,23 +66,26 @@ type
     protected
       property Header : THeaderChunk read FHeader;
       procedure InternalWrite ({%H-}Str:TStream; {%H-}Img:TFPCustomImage); override;
+      function GetUseAlpha: boolean; override;
+      procedure SetUseAlpha(AValue: boolean); override;
       procedure WriteIHDR; virtual;
       procedure WritePLTE; virtual;
       procedure WritetRNS; virtual;
       procedure WriteIDAT; virtual;
       procedure WriteTexts; virtual;
       procedure WriteIEND; virtual;
-      function CurrentLine (x:longword) : byte;
-      function PrevSample (x:longword): byte;
-      function PreviousLine (x:longword) : byte;
-      function PrevLinePrevSample (x:longword): byte;
-      function  DoFilter (LineFilter:byte;index:longword; b:byte) : byte; virtual;
-      procedure SetChunkLength (aValue : longword);
+      function CurrentLine (x:LongWord) : byte; inline;
+      function PrevSample (x:LongWord): byte; inline;
+      function PreviousLine (x:LongWord) : byte; inline;
+      function PrevLinePrevSample (x:LongWord): byte; inline;
+      function  DoFilter (LineFilter:byte;index:LongWord; b:byte) : byte; virtual;
+      procedure SetChunkLength (aValue : LongWord);
       procedure SetChunkType (ct : TChunkTypes); overload;
       procedure SetChunkType (ct : TChunkCode); overload;
       function DecideGetPixel : TGetPixelFunc; virtual;
+      function DecideGetPixelBGRA : TGetPixelBGRAFunc; virtual;
       procedure DetermineHeader (var AHeader : THeaderChunk); virtual;
-      function DetermineFilter ({%H-}Current, {%H-}Previous:PByteArray; {%H-}linelength:longword):byte; virtual;
+      function DetermineFilter ({%H-}Current, {%H-}Previous:PByteArray; {%H-}linelength:LongWord):byte; virtual;
       procedure FillScanLine (y : integer; ScanLine : pByteArray); virtual;
       function ColorDataGrayB(color:TFPColor) : TColorData;
       function ColorDataColorB(color:TFPColor) : TColorData;
@@ -101,7 +103,7 @@ type
       property ColorFormat : TColorformat read CFmt;
       property ColorFormatFunc : TColorFormatFunction read FFmtColor;
       property byteWidth : byte read FByteWidth;
-      property DatalineLength : longword read FDatalineLength;
+      property DatalineLength : LongWord read FDatalineLength;
     public
       constructor create; override;
       destructor destroy; override;
@@ -109,7 +111,6 @@ type
       property Indexed : boolean read FIndexed write FIndexed;
       property CompressedText : boolean read FCompressedText write FCompressedText;
       property WordSized : boolean read FWordSized write FWordSized;
-      property UseAlpha : boolean read FUseAlpha write FUseAlpha;
       property CompressionLevel : TCompressionLevel read FCompressionLevel write FCompressionLevel;
   end;
 
@@ -139,7 +140,7 @@ end;
 
 procedure TBGRAWriterPNG.WriteChunk;
 var chead : TChunkHeader;
-    c : longword;
+    c : LongWord;
 begin
   with FChunk do
     begin
@@ -171,7 +172,7 @@ begin
     end;
 end;
 
-procedure TBGRAWriterPNG.SetChunkLength(aValue : longword);
+procedure TBGRAWriterPNG.SetChunkLength(aValue : LongWord);
 begin
   with Fchunk do
     begin
@@ -206,12 +207,12 @@ begin
     end;
 end;
 
-function TBGRAWriterPNG.CurrentLine(x:longword):byte;
+function TBGRAWriterPNG.CurrentLine(x:LongWord):byte;
 begin
   result := FCurrentLine^[x];
 end;
 
-function TBGRAWriterPNG.PrevSample (x:longword): byte;
+function TBGRAWriterPNG.PrevSample (x:LongWord): byte;
 begin
   if x < byteWidth then
     result := 0
@@ -219,12 +220,12 @@ begin
     result := FCurrentLine^[x - bytewidth];
 end;
 
-function TBGRAWriterPNG.PreviousLine (x:longword) : byte;
+function TBGRAWriterPNG.PreviousLine (x:LongWord) : byte;
 begin
   result := FPreviousline^[x];
 end;
 
-function TBGRAWriterPNG.PrevLinePrevSample (x:longword): byte;
+function TBGRAWriterPNG.PrevLinePrevSample (x:LongWord): byte;
 begin
   if x < byteWidth then
     result := 0
@@ -232,7 +233,7 @@ begin
     result := FPreviousLine^[x - bytewidth];
 end;
 
-function TBGRAWriterPNG.DoFilter(LineFilter:byte;index:longword; b:byte) : byte;
+function TBGRAWriterPNG.DoFilter(LineFilter:byte;index:LongWord; b:byte) : byte;
 var diff : byte;
   procedure FilterSub;
   begin
@@ -257,7 +258,7 @@ var diff : byte;
     l := PrevSample(index);
     lp := PrevLinePrevSample(index);
     p := PreviousLine(index);
-    r := NativeInt(l) + NativeInt(p) - NativeInt(lp);
+    r := Int32or64(l) + Int32or64(p) - Int32or64(lp);
     dl := abs (r - l);
     dlp := abs (r - lp);
     dp := abs (r - p);
@@ -500,10 +501,10 @@ begin
   with AHeader do
     begin
     {$IFDEF ENDIAN_LITTLE}
-    // problem: TheImage has integer width, PNG header longword width.
+    // problem: TheImage has integer width, PNG header LongWord width.
     //          Integer Swap can give negative value
-    Width := swap (longword(TheImage.Width));
-    height := swap (longword(TheImage.Height));
+    Width := swap (LongWord(TheImage.Width));
+    height := swap (LongWord(TheImage.Height));
     {$ELSE}
     Width := TheImage.Width;
     height := TheImage.Height;
@@ -623,36 +624,53 @@ end;
 
 { Data making routines }
 
-function TBGRAWriterPNG.GetColorPixel (x,y:longword) : TColorData;
+function TBGRAWriterPNG.GetColorPixel (x,y:LongWord) : TColorData;
 begin
   result := FFmtColor (TheImage[x,y]);
-  //result := ConvertColorToData(TheImage.Colors[x,y],CFmt);
 end;
 
-function TBGRAWriterPNG.GetPalettePixel (x,y:longword) : TColorData;
+function TBGRAWriterPNG.GetPalettePixel (x,y:LongWord) : TColorData;
 begin
   result := TheImage.Pixels[x,y];
 end;
 
-function TBGRAWriterPNG.GetColPalPixel (x,y:longword) : TColorData;
+function TBGRAWriterPNG.GetColPalPixel (x,y:LongWord) : TColorData;
 begin
   result := ThePalette.IndexOf (TheImage.Colors[x,y]);
+end;
+
+function TBGRAWriterPNG.GetColorPixelBGRA(p: PBGRAPixel): TColorData;
+begin
+  result := FFmtColor(p^.ToFPColor);
+end;
+
+function TBGRAWriterPNG.GetPalettePixelBGRA(p: PBGRAPixel): TColorData;
+begin
+  result := TheImage.Palette.IndexOf(p^.ToFPColor);
+end;
+
+function TBGRAWriterPNG.GetColPalPixelBGRA(p: PBGRAPixel): TColorData;
+begin
+  result := ThePalette.IndexOf(p^.ToFPColor);
 end;
 
 function TBGRAWriterPNG.DecideGetPixel : TGetPixelFunc;
 begin
   case Fheader.colortype of
     3 : if TheImage.UsePalette then
-          begin
-          result := @GetPalettePixel;
-          end
-        else
-          begin
-          result := @GetColPalPixel;
-          end;
-    else  begin
-          result := @GetColorPixel;
-          end
+          result := @GetPalettePixel
+          else result := @GetColPalPixel;
+    else  result := @GetColorPixel;
+  end;
+end;
+
+function TBGRAWriterPNG.DecideGetPixelBGRA: TGetPixelBGRAFunc;
+begin
+  case Fheader.colortype of
+    3 : if TheImage.UsePalette then
+          result := @GetPalettePixelBGRA
+          else result := @GetColPalPixelBGRA;
+    else  result := @GetColorPixelBGRA;
   end;
 end;
 
@@ -688,6 +706,7 @@ begin
   ZData := TMemoryStream.Create;
   Compressor := TCompressionStream.Create (FCompressionLevel,ZData);
   FGetPixel := DecideGetPixel;
+  FGetPixelBGRA := DecideGetPixelBGRA;
 end;
 
 procedure TBGRAWriterPNG.FinalWriteIDAT;
@@ -697,7 +716,7 @@ begin
   FreeMem (FCurrentLine);
 end;
 
-function TBGRAWriterPNG.DetermineFilter (Current, Previous:PByteArray; linelength:longword) : byte;
+function TBGRAWriterPNG.DetermineFilter (Current, Previous:PByteArray; linelength:LongWord) : byte;
 begin
   result := 0;
 end;
@@ -705,10 +724,73 @@ end;
 procedure TBGRAWriterPNG.FillScanLine (y : integer; ScanLine : pByteArray);
 var x : integer;
     cd : TColorData;
-    r, index : longword;
+    r, index : LongWord;
     b : byte;
+    p : PBGRAPixel;
 begin
   index := 0;
+  if TheImage is TBGRACustomBitmap then
+  begin
+    p := TBGRACustomBitmap(TheImage).ScanLine[y];
+    if FHeader.BitDepth <> 16 then
+      case FByteWidth of
+        1: for x := pred(TheImage.Width) downto 0 do
+           begin
+             cd := FGetPixelBGRA(p);
+             ScanLine^[index] := cd;
+             inc (index);
+             inc(p);
+           end;
+        2: for x := pred(TheImage.Width) downto 0 do
+           begin
+             cd := FGetPixelBGRA(p);
+             ScanLine^[index] := cd and $ff;
+             ScanLine^[index+1] := cd shr 8;
+             inc (index,2);
+             inc(p);
+           end;
+        3: for x := pred(TheImage.Width) downto 0 do
+           begin
+             ScanLine^[index] := p^.red;
+             ScanLine^[index+1] := p^.green;
+             ScanLine^[index+2] := p^.blue;
+             inc (index,3);
+             inc(p);
+           end;
+        4: for x := pred(TheImage.Width) downto 0 do
+           begin
+             ScanLine^[index] := p^.red;
+             ScanLine^[index+1] := p^.green;
+             ScanLine^[index+2] := p^.blue;
+             ScanLine^[index+3] := p^.alpha;
+             inc (index,4);
+             inc(p);
+           end;
+        else raise exception.Create('Unexpected byte width');
+      end else
+      for x := pred(TheImage.Width) downto 0 do
+      begin
+        cd := FGetPixelBGRA(p);
+        {$IFDEF ENDIAN_BIG}
+        cd:=swap(cd);
+        {$ENDIF}
+        move (cd, ScanLine^[index], FBytewidth);
+        if WordSized then
+        begin
+          r := 0;
+          while (r+1 < FByteWidth) do
+            begin
+            b := Scanline^[index+r+1];
+            Scanline^[index+r+1] := Scanline^[index+r];
+            Scanline^[index+r] := b;
+            inc (r,2);
+            end;
+        end;
+        inc (index, FByteWidth);
+        inc(p);
+      end;
+  end
+  else
   for x := 0 to pred(TheImage.Width) do
     begin
     cd := FGetPixel (x,y);
@@ -731,7 +813,7 @@ begin
     end;
 end;
 
-procedure TBGRAWriterPNG.GatherData;
+procedure TBGRAWriterPNG.Gatherdata;
 var x,y : integer;
     lf : byte;
 begin
@@ -742,15 +824,16 @@ begin
     FPreviousLine := FSwitchLine;
     FillScanLine (y, FCurrentLine);
     lf := DetermineFilter (FCurrentLine, FpreviousLine, FDataLineLength);
-    for x := 0 to FDatalineLength-1 do
-      FCurrentLine^[x] := DoFilter (lf, x, FCurrentLine^[x]);
+    if lf <> 0 then
+      for x := 0 to FDatalineLength-1 do
+        FCurrentLine^[x] := DoFilter (lf, x, FCurrentLine^[x]);
     Compressor.Write (lf, sizeof(lf));
     Compressor.Write (FCurrentLine^, FDataLineLength);
     end;
 end;
 
 procedure TBGRAWriterPNG.WriteCompressedData;
-var l : longword;
+var l : LongWord;
 begin
   Compressor.Free;  // Close compression and finish the writing in ZData
   l := ZData.position;
@@ -864,5 +947,19 @@ begin
   WriteTexts;
   WriteIEND;
 end;
+
+function TBGRAWriterPNG.GetUseAlpha: boolean;
+begin
+  result := FUseAlpha;
+end;
+
+procedure TBGRAWriterPNG.SetUseAlpha(AValue: boolean);
+begin
+  FUseAlpha := AValue;
+end;
+
+initialization
+
+  DefaultBGRAImageWriter[ifPng] := TBGRAWriterPNG;
 
 end.

@@ -353,10 +353,10 @@
     </RunParams>
     <RequiredPackages Count="25">
       <Item1>
-        <PackageName Value="LazControls"/>
+        <PackageName Value="BGRABitmapPack"/>
       </Item1>
       <Item2>
-        <PackageName Value="BGRABitmapPack_nogl"/>
+        <PackageName Value="LazControls"/>
       </Item2>
       <Item3>
         <PackageName Value="indiclient"/>

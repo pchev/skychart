@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: LGPL-3.0-linking-exception
 unit UnzipperExt;
 
 {$mode objfpc}{$H+}
@@ -5,7 +6,7 @@ unit UnzipperExt;
 interface
 
 uses
-  Classes, SysUtils, zipper;
+  BGRAClasses, SysUtils, zipper;
 
 type
 

@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: LGPL-3.0-linking-exception
 unit BGRALzpCommon;
 
 {$mode objfpc}{$H+}
@@ -5,7 +6,7 @@ unit BGRALzpCommon;
 interface
 
 uses
-  Classes, SysUtils;
+  BGRAClasses, SysUtils;
 
 const
   LAZPAINT_COMPRESSION_MODE_ZSTREAM = 1;
@@ -31,9 +32,9 @@ type
 
   TLazPaintImageHeader = packed record
     magic: packed array[0..7] of char;
-    zero1, headerSize: DWord;
-    width, height, nbLayers, previewOffset: DWord;
-    zero2, compressionMode, reserved1, layersOffset: DWord;
+    zero1, headerSize: LongWord;
+    width, height, nbLayers, previewOffset: LongWord;
+    zero2, compressionMode, reserved1, layersOffset: LongWord;
   end;
 
 procedure LazPaintImageHeader_SwapEndianIfNeeded(AHeader: TLazPaintImageHeader);
@@ -45,8 +46,6 @@ procedure EncodeLazRLE(var sourceBuffer; size:PtrInt; ADest: TStream);
 function DecodeLazRLE(ASource: TStream; var destBuffer; availableOutputSize: PtrInt; availableInputSize: int64 = -1): PtrInt;
 
 implementation
-
-uses bufstream;
 
 const //flag to distinguish ranges of opcodes
       simpleRepetitionFlag = $00;    // $01..$3f: normal repetition
@@ -82,54 +81,89 @@ const //flag to distinguish ranges of opcodes
 
 
 procedure EncodeLazRLE(var sourceBuffer; size:PtrInt; ADest: TStream);
+const BufferSize = 4096;
 var
+  buffer: array[0..BufferSize-1] of byte;
+  bufferPos: integer;
   smallRepetitions: array[0..maxSmallRepCount-1] of record
-    value: NativeInt;
-    count: NativeInt; //minSmallRep..maxSmallRep
+    value: Int32or64;
+    count: Int32or64; //minSmallRep..maxSmallRep
   end;
-  smallRepetitionsCount, smallRepTotal: NativeInt;
-  buf: TStream;
-  previousWordSizeRepetition, previousByteSizeRepetition: NativeInt;
-  lastPackedDumpValue: NativeInt;
+  smallRepetitionsCount, smallRepTotal: Int32or64;
+  previousWordSizeRepetition, previousByteSizeRepetition: Int32or64;
+  lastPackedDumpValue: Int32or64;
 
-  procedure OutputNormalRepetition(AValue,ACount: NativeInt);
+  procedure FlushBuffer;
+  begin
+    ADest.WriteBuffer(buffer, BufferSize);
+    bufferPos := 0;
+  end;
+
+  procedure WriteByte(b: byte); inline;
+  begin
+    buffer[bufferPos] := b;
+    inc(bufferPos);
+    if bufferPos = BufferSize then FlushBuffer;
+  end;
+
+  procedure WriteBytes(p: PByte; ACount: integer);
+  var
+    writeCount: Integer;
+  begin
+    while bufferPos+ACount >= BufferSize do
+    begin
+      writeCount := BufferSize-bufferPos;
+      move(p^, buffer[bufferPos], writeCount);
+      inc(p, writeCount);
+      bufferPos := BufferSize;
+      dec(ACount, writeCount);
+      FlushBuffer;
+    end;
+    if ACount > 0 then
+    begin
+      move(p^, buffer[bufferPos], ACount);
+      inc(bufferPos, ACount);
+    end;
+  end;
+
+  procedure OutputNormalRepetition(AValue,ACount: Int32or64);
   begin
     If (ACount < 1) or (ACount > maxNormalRepetition) then
       raise exception.Create('Invalid count');
 
     if (AValue = 0) and (ACount <= 16) then
       begin
-        buf.WriteByte((ACount-1) or repetitionOf0Flag);
+        WriteByte((ACount-1) or repetitionOf0Flag);
       end else
     if (AValue = 255) and (ACount <= 16) then
       begin
-        buf.WriteByte((ACount-1) or repetitionOf255Flag);
+        WriteByte((ACount-1) or repetitionOf255Flag);
       end else
       begin
-        buf.WriteByte(ACount or simpleRepetitionFlag);
-        buf.WriteByte(AValue);
+        WriteByte(ACount or simpleRepetitionFlag);
+        WriteByte(AValue);
       end;
   end;
 
   procedure FlushSmallRepetitions;
-  var i,j: NativeInt;
-    packedCount: NativeInt;
-    smallOutput: NativeInt;
+  var i,j: Int32or64;
+    packedCount: Int32or64;
+    smallOutput: Int32or64;
   begin
     if smallRepetitionsCount = 0 then exit;
     if smallRepetitionsCount >= 4 then
     begin
       smallOutput:= smallRepetitionsCount and not 3;
-      buf.Writebyte(packedRepetitionFlag or (smallOutput shr 2));
+      WriteByte(packedRepetitionFlag or (smallOutput shr 2));
       packedCount := 0;
       for i := 0 to smallOutput-1 do
       begin
         packedCount := packedCount + ((smallRepetitions[i].count-minSmallRep) shl ((i and 3) shl 1));
         if (i and 3) = 3 then
         begin
-          buf.WriteByte(packedCount);
+          WriteByte(packedCount);
           for j := i-3 to i do
-            buf.WriteByte(smallRepetitions[j].value);
+            WriteByte(smallRepetitions[j].value);
           packedCount:= 0;
         end;
       end;
@@ -144,7 +178,7 @@ var
     smallRepTotal := 0;
   end;
 
-  procedure OutputRepetition(AValue,ACount: NativeInt; AAccumulate: boolean = true);
+  procedure OutputRepetition(AValue,ACount: Int32or64; AAccumulate: boolean = true);
   begin
     if AAccumulate and (ACount >= minSmallRep) and (ACount <= maxSmallRep) and (maxSmallRepCount>0) then
     begin
@@ -169,27 +203,27 @@ var
       begin
         if ACount = previousWordSizeRepetition then
         begin
-          buf.WriteByte(previousWordSizeRepetitionOpCode);
-          buf.WriteByte(AValue);
+          WriteByte(previousWordSizeRepetitionOpCode);
+          WriteByte(AValue);
         end else
         if ACount = previousByteSizeRepetition then
         begin
-          buf.WriteByte(previousByteSizeRepetitionOpCode);
-          buf.WriteByte(AValue);
+          WriteByte(previousByteSizeRepetitionOpCode);
+          WriteByte(AValue);
         end else
         if ACount <= 64+255 then
         begin
-          buf.WriteByte(byteRepetitionOpCode);
-          buf.WriteByte(ACount-64);
-          buf.WriteByte(AValue);
+          WriteByte(byteRepetitionOpCode);
+          WriteByte(ACount-64);
+          WriteByte(AValue);
           previousByteSizeRepetition := ACount;
         end else
         if ACount <= 65535 then
         begin
-          buf.WriteByte(wordRepetitionOpCode);
-          buf.WriteByte(ACount shr 8);
-          buf.WriteByte(ACount and 255);
-          buf.WriteByte(AValue);
+          WriteByte(wordRepetitionOpCode);
+          WriteByte(ACount shr 8);
+          WriteByte(ACount and 255);
+          WriteByte(AValue);
           previousWordSizeRepetition := ACount;
         end else
           raise exception.Create('Invalid count');
@@ -197,7 +231,7 @@ var
     end;
   end;
 
-  procedure DumpNoPack(P: PByte; ACount: NativeInt);
+  procedure DumpNoPack(P: PByte; ACount: Int32or64);
   begin
     if ACount = 0 then exit;
     if ACount = 1 then
@@ -212,18 +246,18 @@ var
     begin
       if ACount > 255+64 then
         raise exception.Create('Invalid count');
-      buf.WriteByte($01 or simpleDumpFlag);
-      buf.WriteByte(ACount-64);
+      WriteByte($01 or simpleDumpFlag);
+      WriteByte(ACount-64);
     end else
-      buf.WriteByte(ACount or simpleDumpFlag);
+      WriteByte(ACount or simpleDumpFlag);
 
-    buf.Write(p^, ACount);
+    WriteBytes(p, ACount);
   end;
 
-  procedure DumpPacked(p : PByte; ACount: NativeInt);
+  procedure DumpPacked(p : PByte; ACount: Int32or64);
   var diffLast: integer;
-      packedValues: array[0..31] of NativeInt;
-      nbPackedValues, idx: NativeInt;
+      packedValues: array[0..31] of Int32or64;
+      nbPackedValues, idx: Int32or64;
 
   begin
     if ACount = 0 then exit else
@@ -249,9 +283,9 @@ var
         DumpPacked(p+31, ACount-31);
         exit;
       end;
-      buf.WriteByte(ACount or packedDumpFlag);
+      WriteByte(ACount or packedDumpFlag);
       lastPackedDumpValue:= p^;
-      buf.WriteByte(lastPackedDumpValue);
+      WriteByte(lastPackedDumpValue);
       dec(ACount);
       inc(p);
     end else
@@ -266,7 +300,7 @@ var
       DumpPacked(p, ACount);
       exit;
     end else
-      buf.WriteByte(ACount or packedDumpFromLastFlag);
+      WriteByte(ACount or packedDumpFromLastFlag);
 
     nbPackedValues := 0;
     while ACount >0 do
@@ -283,20 +317,20 @@ var
     begin
       if idx+1 = nbPackedValues then
       begin
-        buf.WriteByte(packedValues[idx] shl 4);
+        WriteByte(packedValues[idx] shl 4);
         break;
       end;
-      buf.WriteByte((packedValues[idx] shl 4) + packedValues[idx+1]);
+      WriteByte((packedValues[idx] shl 4) + packedValues[idx+1]);
       inc(idx,2);
     end;
   end;
 
-  procedure Dump(p: PByte; ACount: NativeInt);
+  procedure Dump(p: PByte; ACount: Int32or64);
   const smallestPackedDump = 5;
         smallestPackedDumpTail = 3;
   var
-    diffVal,i: NativeInt;
-    fitPackStart: NativeInt;
+    diffVal,i: Int32or64;
+    fitPackStart: Int32or64;
     p2: PByte;
   begin
     if ACount >= smallestPackedDump then
@@ -338,14 +372,14 @@ var
 
 var
   psrc,psrcBefore: PByte;
-  curValue: NativeInt;
-  curCount: NativeInt;
+  curValue: Int32or64;
+  curCount: Int32or64;
 begin
   if size = 0 then exit;
   psrc := @sourceBuffer;
   if psrc = nil then
     raise exception.Create('Source buffer not provided');
-  buf := TWriteBufStream.Create(ADest,4096);
+  bufferPos := 0;
   curValue := psrc^;
   curCount := 1;
   inc(psrc);
@@ -415,20 +449,20 @@ begin
   end;
   if curCount > 0 then OutputRepetition(curValue,curCount);
   FlushSmallRepetitions;
-  buf.WriteByte(endOfStreamOpCode);
-  buf.Free;
+  WriteByte(endOfStreamOpCode);
+  FlushBuffer;
 end;
 
 function DecodeLazRLE(ASource: TStream; var destBuffer; availableOutputSize: PtrInt; availableInputSize: int64 = -1): PtrInt;
 const MaxBufferSize = 1024;
 var
-  opCode: NativeInt;
+  opCode: Int32or64;
   pdest: PByte;
-  lastRepeatWordSize, lastRepeatByteSize: NativeInt;
-  lastPackedDumpValue: NativeInt;
+  lastRepeatWordSize, lastRepeatByteSize: Int32or64;
+  lastPackedDumpValue: Int32or64;
 
   Buffer: packed array of byte;
-  BufferPos, BufferSize: NativeInt;
+  BufferPos, BufferSize: Int32or64;
   BufferStartLocation: Int64;
 
   procedure OutputOverflow(AWanted: PtrInt; AFunctionName: string);
@@ -453,13 +487,8 @@ var
       result := AWanted;
   end;
 
-  function GetNextBufferByte: byte;
+  function GetByteFromNextBuffer: byte;
   begin
-    if BufferPos < BufferSize then
-    begin
-      result := Buffer[BufferPos];
-      inc(BufferPos);
-    end else
     if BufferSize = 0 then
       result := $e0
     else
@@ -475,7 +504,17 @@ var
     end;
   end;
 
-  procedure RepeatValue(AValue: NativeInt; ACount: NativeInt);
+  function GetNextBufferByte: byte; inline;
+  begin
+    if BufferPos < BufferSize then
+    begin
+      result := Buffer[BufferPos];
+      inc(BufferPos);
+    end else
+      result := GetByteFromNextBuffer;
+  end;
+
+  procedure RepeatValue(AValue: Int32or64; ACount: Int32or64);
   begin
     if result+ACount > availableOutputSize then OutputOverflow(ACount,'RepeatValue');
     fillchar(pdest^, ACount, AValue);
@@ -483,8 +522,8 @@ var
     inc(result, ACount);
   end;
 
-  procedure PackedRepeatValues(ACount: NativeInt);
-  var packedCount: NativeInt;
+  procedure PackedRepeatValues(ACount: Int32or64);
+  var packedCount: Int32or64;
   begin
     while ACount > 0 do
     begin
@@ -500,7 +539,7 @@ var
     end;
   end;
 
-  procedure DumpValues(ACount: NativeInt);
+  procedure DumpValues(ACount: Int32or64);
   begin
     if result+ACount > availableOutputSize then OutputOverflow(ACount, 'DumpValues');
     inc(result, ACount);
@@ -512,8 +551,8 @@ var
     end;
   end;
 
-  procedure PackedDumpValues(ACount: NativeInt);
-  var packedData: NativeInt;
+  procedure PackedDumpValues(ACount: Int32or64);
+  var packedData: Int32or64;
   begin
     if result+ACount > availableOutputSize then OutputOverflow(ACount, 'PackedDumpValues');
     inc(result, ACount);

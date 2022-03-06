@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: LGPL-3.0-linking-exception
 unit BGRAStreamLayers;
 
 {$mode objfpc}{$H+}
@@ -6,12 +7,13 @@ unit BGRAStreamLayers;
 interface
 
 uses
-  Classes, SysUtils, BGRALayers, BGRABitmap, BGRALzpCommon, BGRAMemDirectory;
+  BGRAClasses, SysUtils, BGRALayers, BGRABitmap, BGRALzpCommon, BGRAMemDirectory;
 
 function CheckStreamForLayers(AStream: TStream): boolean;
 function LoadLayersFromStream(AStream: TStream; out ASelectedLayerIndex: integer; ALoadLayerUniqueIds: boolean = false;
-         ADestination: TBGRALayeredBitmap = nil): TBGRALayeredBitmap;
-procedure SaveLayersToStream(AStream: TStream; ALayers: TBGRACustomLayeredBitmap; ASelectedLayerIndex: integer; ACompression: TLzpCompression = lzpZStream);
+         ADestination: TBGRALayeredBitmap = nil; AProgress: boolean = false): TBGRALayeredBitmap;
+procedure SaveLayersToStream(AStream: TStream; ALayers: TBGRACustomLayeredBitmap; ASelectedLayerIndex: integer;
+         ACompression: TLzpCompression = lzpZStream; AProgress: boolean = false);
 procedure SaveLayerBitmapToStream(AStream: TStream; ABitmap: TBGRABitmap; ACaption: string; ACompression: TLzpCompression = lzpZStream);
 function LoadLayerBitmapFromStream(AStream: TStream; ACompression: TLzpCompression = lzpZStream) : TBGRABitmap;
 procedure RegisterStreamLayers;
@@ -50,12 +52,12 @@ begin
   OriginalGuid.D1 := NtoBE(OriginalGuid.D1);
   OriginalGuid.D2 := NtoBE(OriginalGuid.D2);
   OriginalGuid.D3 := NtoBE(OriginalGuid.D3);
-  DWord(OriginalMatrix[1,1]) := NtoLE(DWord(OriginalMatrix[1,1]));
-  DWord(OriginalMatrix[2,1]) := NtoLE(DWord(OriginalMatrix[2,1]));
-  DWord(OriginalMatrix[1,2]) := NtoLE(DWord(OriginalMatrix[1,2]));
-  DWord(OriginalMatrix[2,2]) := NtoLE(DWord(OriginalMatrix[2,2]));
-  DWord(OriginalMatrix[1,3]) := NtoLE(DWord(OriginalMatrix[1,3]));
-  DWord(OriginalMatrix[2,3]) := NtoLE(DWord(OriginalMatrix[2,3]));
+  LongWord(OriginalMatrix[1,1]) := NtoLE(LongWord(OriginalMatrix[1,1]));
+  LongWord(OriginalMatrix[2,1]) := NtoLE(LongWord(OriginalMatrix[2,1]));
+  LongWord(OriginalMatrix[1,2]) := NtoLE(LongWord(OriginalMatrix[1,2]));
+  LongWord(OriginalMatrix[2,2]) := NtoLE(LongWord(OriginalMatrix[2,2]));
+  LongWord(OriginalMatrix[1,3]) := NtoLE(LongWord(OriginalMatrix[1,3]));
+  LongWord(OriginalMatrix[2,3]) := NtoLE(LongWord(OriginalMatrix[2,3]));
 end;
 
 procedure SaveLayeredBitmapToStream(AStream: TStream; ALayers: TBGRACustomLayeredBitmap);
@@ -126,8 +128,8 @@ begin
   end;
 end;
 
-function LoadLayersFromStream(AStream: TStream; out ASelectedLayerIndex: integer; ALoadLayerUniqueIds: boolean = false;
-         ADestination: TBGRALayeredBitmap = nil): TBGRALayeredBitmap;
+function LoadLayersFromStream(AStream: TStream; out ASelectedLayerIndex: integer; ALoadLayerUniqueIds: boolean;
+         ADestination: TBGRALayeredBitmap; AProgress: boolean): TBGRALayeredBitmap;
 var
   OldPosition: Int64;
   HeaderFound: string;
@@ -199,6 +201,7 @@ begin
     AStream.Position:= LayerStackStartPosition;
     for i := 0 to NbLayers-1 do
     begin
+      if AProgress then OnLayeredBitmapLoadProgress(round(i*100/NbLayers));
       LayerHeaderSize:= LEReadLongint(AStream);
 
       LayerHeaderPosition := AStream.Position;
@@ -244,6 +247,7 @@ begin
 
       if LayerEndPosition <> -1 then AStream.Position := LayerEndPosition;
     end;
+    if AProgress then OnLayeredBitmapLoadProgress(100);
 
     RenameLayersToUniqueId(result);
     result.NotifyLoaded;
@@ -257,7 +261,8 @@ begin
   end;
 end;
 
-procedure SaveLayersToStream(AStream: TStream; ALayers: TBGRACustomLayeredBitmap; ASelectedLayerIndex: integer; ACompression: TLzpCompression);
+procedure SaveLayersToStream(AStream: TStream; ALayers: TBGRACustomLayeredBitmap;
+         ASelectedLayerIndex: integer; ACompression: TLzpCompression; AProgress: boolean);
 var
   StackOption: longint;
   i: integer;
@@ -289,6 +294,7 @@ begin
 
   for i := 0 to ALayers.NbLayers-1 do
   begin
+    if AProgress then OnLayeredBitmapSaveProgress(round(i*100/ALayers.NbLayers));
     LEWriteLongint(AStream, sizeof(h));
     LayerHeaderPosition := AStream.Position;
 
@@ -326,6 +332,7 @@ begin
 
     AStream.Position:= LayerBitmapPosition+BitmapSize;
   end;
+  if AProgress then OnLayeredBitmapSaveProgress(100);
 
   EndPos:= AStream.Position;
   if ALayers.HasMemFiles then

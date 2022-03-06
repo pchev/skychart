@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: LGPL-3.0-linking-exception
 unit BGRAReadXPM;
 
 {$mode objfpc}{$H+}
@@ -5,7 +6,7 @@ unit BGRAReadXPM;
 interface
 
 uses
-  Classes, SysUtils, FPReadXPM, FPimage;
+  BGRAClasses, SysUtils, FPReadXPM, FPimage;
 
 type
 

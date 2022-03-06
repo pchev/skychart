@@ -8,7 +8,7 @@
       <Version Value="11"/>
       <PathDelim Value="\"/>
       <SearchPaths>
-        <UnitOutputDirectory Value="lib\$(TargetCPU)-$(TargetOS)\$(FPCVer)"/>
+        <UnitOutputDirectory Value="lib\$(TargetCPU)-$(TargetOS)-$(LCLWidgetType)-$(FPCVer)"/>
       </SearchPaths>
       <Parsing>
         <SyntaxOptions>
@@ -29,8 +29,8 @@
     </CompilerOptions>
     <Description Value="Drawing routines with alpha blending and antialiasing"/>
     <License Value="modified LGPL"/>
-    <Version Major="10" Minor="6" Release="4"/>
-    <Files Count="134">
+    <Version Major="11" Minor="4"/>
+    <Files Count="142">
       <Item1>
         <Filename Value="bgraanimatedgif.pas"/>
         <UnitName Value="BGRAAnimatedGif"/>
@@ -569,6 +569,38 @@
         <Filename Value="spectraldata.inc"/>
         <Type Value="Binary"/>
       </Item134>
+      <Item135>
+        <Filename Value="libwebp.pas"/>
+        <UnitName Value="libwebp"/>
+      </Item135>
+      <Item136>
+        <Filename Value="linuxlib.pas"/>
+        <UnitName Value="linuxlib"/>
+      </Item136>
+      <Item137>
+        <Filename Value="bgrareadwebp.pas"/>
+        <UnitName Value="BGRAReadWebP"/>
+      </Item137>
+      <Item138>
+        <Filename Value="bgrawritewebp.pas"/>
+        <UnitName Value="BGRAWriteWebP"/>
+      </Item138>
+      <Item139>
+        <Filename Value="bgraclasses.pas"/>
+        <UnitName Value="BGRAClasses"/>
+      </Item139>
+      <Item140>
+        <Filename Value="bgrascanner.inc"/>
+        <Type Value="Include"/>
+      </Item140>
+      <Item141>
+        <Filename Value="generatedutf8.inc"/>
+        <Type Value="Include"/>
+      </Item141>
+      <Item142>
+        <Filename Value="generatedunicode.inc"/>
+        <Type Value="Include"/>
+      </Item142>
     </Files>
     <RequiredPkgs Count="2">
       <Item1>

@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: LGPL-3.0-linking-exception
 unit BGRAReadJpeg;
 
 {$mode objfpc}{$H+}
@@ -5,7 +6,7 @@ unit BGRAReadJpeg;
 interface
 
 uses
-  Classes, SysUtils, FPReadJPEG;
+  BGRAClasses, SysUtils, FPReadJPEG;
 
 type
   TJPEGScale = FPReadJPEG.TJPEGScale;

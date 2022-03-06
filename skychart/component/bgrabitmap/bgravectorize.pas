@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: LGPL-3.0-linking-exception
 unit BGRAVectorize;
 
 {$mode objfpc}{$H+}
@@ -22,7 +23,8 @@ interface
 }
 
 uses
-  Types, Classes, SysUtils, Graphics, BGRABitmapTypes, BGRATypewriter, BGRATransform, BGRACanvas2D, BGRAText;
+  BGRAClasses, SysUtils, BGRAGraphics, BGRABitmapTypes, BGRATypewriter,
+  BGRATransform, BGRACanvas2D, BGRAText;
 
 //vectorize a monochrome bitmap
 function VectorizeMonochrome(ASource: TBGRACustomBitmap; AZoom: single; APixelCenteredCoordinates: boolean;
@@ -62,6 +64,7 @@ type
     OutlineColor: TBGRAPixel;
     OutlineTexture: IBGRAScanner;
     OuterOutlineOnly: boolean;
+    OutlineJoin: TPenJoinStyle;
 
     ShadowVisible: boolean;
     ShadowColor: TBGRAPixel;
@@ -72,6 +75,7 @@ type
     constructor Create(ADirectoryUTF8: string); overload;
     function GetFontPixelMetric: TFontPixelMetric; override;
     function GetFontPixelMetricF: TFontPixelMetricF; override;
+    function FontExists(AName: string): boolean; override;
     procedure TextOutAngle(ADest: TBGRACustomBitmap; x, y: single; orientation: integer; s: string; c: TBGRAPixel; align: TAlignment); overload; override;
     procedure TextOutAngle(ADest: TBGRACustomBitmap; x, y: single; orientation: integer; s: string; c: TBGRAPixel; align: TAlignment; ARightToLeft: boolean); overload; override;
     procedure TextOutAngle(ADest: TBGRACustomBitmap; x, y: single; orientation: integer; s: string; texture: IBGRAScanner; align: TAlignment); overload; override;
@@ -174,6 +178,7 @@ type
     function ReadVectorizedFontHeader(AStream: TStream): TBGRAVectorizedFontHeader;
     function HeaderName: string; override;
     procedure SetDirectory(const AValue: string);
+    function ComputeKerning(AIdLeft, AIdRight: string): single; override;
   public
     UnderlineDecoration,StrikeOutDecoration: boolean;
     constructor Create; overload;
@@ -216,7 +221,7 @@ type
 
 implementation
 
-uses BGRAUTF8;
+uses BGRAUTF8{$IFDEF LCL}, Forms{$ENDIF};
 
 function VectorizeMonochrome(ASource: TBGRACustomBitmap; ARect: TRect; AZoom: single; APixelCenteredCoordinates: boolean;
   AWhiteBackground: boolean; ADiagonalFillPercent: single; AIntermediateDiagonals: boolean): ArrayOfTPointF;
@@ -242,7 +247,7 @@ var
 
   polygonF: array of TPointF;
 
-  function CheckPixel(const APixel: TBGRAPixel): boolean;
+  function CheckPixel(const APixel: TBGRAPixel): boolean; inline;
   begin
     result := (APixel.green <= 128) xor not AWhiteBackground;
   end;
@@ -652,9 +657,86 @@ var
     MakePolygon(cycle);
   end;
 
+  function GetBoundsWithin: TRect;
+  var p: PBGRAPixel;
+    yb, xb, xb2, maxx, maxy, minx, miny: LongInt;
+  begin
+    maxx := ARect.Left-1;
+    maxy := ARect.Top-1;
+    minx := ARect.Right;
+    miny := ARect.Bottom;
+    for yb := ARect.Top to ARect.Bottom-1 do
+    begin
+      p := ASource.ScanLine[yb] + ARect.Left;
+      for xb := ARect.Left to ARect.Right - 1 do
+      begin
+        if CheckPixel(p^) then
+        begin
+          if xb < minx then minx := xb;
+          if yb < miny then miny := yb;
+          if xb > maxx then maxx := xb;
+          if yb > maxy then maxy := yb;
+
+          inc(p, ARect.Right-1-xb);
+          for xb2 := ARect.Right-1 downto xb+1 do
+          begin
+            if CheckPixel(p^) then
+            begin
+              if xb2 > maxx then maxx := xb2;
+              break;
+            end;
+            dec(p);
+          end;
+          break;
+        end;
+        Inc(p);
+      end;
+    end;
+    if minx > maxx then Result := EmptyRect
+    else
+    begin
+      Result.left   := minx;
+      Result.top    := miny;
+      Result.right  := maxx + 1;
+      Result.bottom := maxy + 1;
+    end;
+  end;
+
+  function IsRectFull: boolean;
+  var
+    yb, xb: LongInt;
+    p: PBGRAPixel;
+  begin
+    for yb := ARect.Top to ARect.Bottom-1 do
+    begin
+      p := ASource.ScanLine[yb] + ARect.Left;
+      for xb := ARect.Left to ARect.Right - 1 do
+      begin
+        if not CheckPixel(p^) then exit(false);
+        inc(p);
+      end;
+    end;
+    result := true;
+  end;
+
 begin
-  IntersectRect(ARect, ARect, rect(0,0,ASource.Width,ASource.Height));
-  if IsRectEmpty(ARect) then exit(nil);
+  ARect.Intersect( rect(0,0,ASource.Width,ASource.Height) );
+  if ARect.IsEmpty then exit(nil);
+  ARect := GetBoundsWithin;
+  if ARect.IsEmpty then exit(nil);
+
+  factor := AZoom;
+  offset := AZoom*0.5;
+  if APixelCenteredCoordinates then DecF(Offset, 0.5);
+
+  if IsRectFull then
+  begin
+    result := PointsF([PointF((ARect.Left-0.5)*factor+offset, (ARect.Top-0.5)*factor+offset),
+                       PointF((ARect.Left-0.5)*factor+offset, (ARect.Bottom-0.5)*factor+offset),
+                       PointF((ARect.Right-0.5)*factor+offset, (ARect.Bottom-0.5)*factor+offset),
+                       PointF((ARect.Right-0.5)*factor+offset, (ARect.Top-0.5)*factor+offset)]);
+    exit;
+  end;
 
   iDiag := round((ADiagonalFillPercent-50)/100 * iHalf)*2; //even rounding to keep alignment with iOut
   iOut := (iHalf-iDiag) div 2;
@@ -1026,9 +1108,8 @@ begin
     end;
   end;
 
-  factor := AZoom/iUnit;
-  offset := AZoom*0.5;
-  if APixelCenteredCoordinates then Offset -= 0.5;
+  factor := factor / iUnit;
+
   for n := 0 to nbPoints-1 do
     with points[n] do
     if not drawn and not removed then
@@ -1072,8 +1153,11 @@ begin
     FVectorizedFont.Style := FontStyle - [fsUnderline];
     FVectorizedFont.UnderlineDecoration := fsUnderline in FontStyle;
     FVectorizedFont.Directory := FDirectoryUTF8;
-    if not FVectorizedFont.FontFound and LCLFontAvailable then
+    if not FVectorizedFont.FontFound and SystemFontAvailable then
+    begin
       FVectorizedFont.VectorizeLCL := True;
+      FVectorizedFont.Name := TBGRASystemFontRenderer.PatchSystemFontName(FontName);
+    end;
     Setlength(FVectorizedFontArray,length(FVectorizedFontArray)+1);
     FVectorizedFontArray[high(FVectorizedFontArray)].FontName := FontName;
     FVectorizedFontArray[high(FVectorizedFontArray)].FontStyle := FontStyle;
@@ -1111,6 +1195,7 @@ begin
   end;
   result := FCanvas2D;
   FCanvas2D.antialiasing:= FontQuality in[fqFineAntialiasing,fqFineClearTypeBGR,fqFineClearTypeRGB];
+  FCanvas2D.lineJoinLCL := OutlineJoin;
   if OutlineTexture <> nil then
     FCanvas2D.strokeStyle(OutlineTexture)
   else
@@ -1140,8 +1225,8 @@ begin
   previousClip := ADest.ClipRect;
   if style.Clipping then
   begin
-    intersectedClip := rect(0,0,0,0);
-    if not IntersectRect(intersectedClip, previousClip, ARect) then exit;
+    intersectedClip := TRect.Intersect(previousClip, ARect);
+    if intersectedClip.IsEmpty then exit;
     ADest.ClipRect := intersectedClip;
   end;
   UpdateFont;
@@ -1247,6 +1332,7 @@ begin
   OutlineVisible:= True;
   OutlineColor := BGRAPixelTransparent;
   OuterOutlineOnly := false;
+  OutlineJoin := pjsMiter;
 
   ShadowColor := BGRABlack;
   ShadowVisible := false;
@@ -1298,6 +1384,19 @@ begin
   result.Lineheight := fpm.Lineheight*factor;
   result.DescentLine := fpm.DescentLine*factor;
   result.xLine := fpm.xLine*factor;
+end;
+
+function TBGRAVectorizedFontRenderer.FontExists(AName: string): boolean;
+var
+  i: Integer;
+begin
+  {$IFDEF LCL}
+  for i := 0 to Screen.Fonts.Count-1 do
+    if CompareText(Screen.Fonts[i], AName) = 0 then exit(true);
+  result := false;
+  {$ELSE}
+  result := true;
+  {$ENDIF}
 end;
 
 procedure TBGRAVectorizedFontRenderer.TextOutAngle(ADest: TBGRACustomBitmap; x,
@@ -1427,7 +1526,7 @@ begin
     FVectorizedFont.SplitText(sUTF8, AMaxWidthF, remains);
     w := FVectorizedFont.GetTextSize(sUTF8).x;
     if w > result.x then result.x := w;
-    result.y += h;
+    IncF(result.y, h);
     sUTF8 := remains;
   until remains = '';
 end;
@@ -1584,6 +1683,7 @@ begin
   if FStyle=AValue then Exit;
   FStyle:=AValue;
   UpdateFont;
+  SubstituteBidiBracket:= fsItalic in AValue;
 end;
 
 function TBGRAVectorizedFont.GetFontEmHeightRatio: single;
@@ -1598,7 +1698,7 @@ begin
       OldHeight := FFont.Height;
       FFont.Height := FontEmHeightSign * 100;
       lEmHeight := BGRATextSize(FFont, fqSystem, 'Hg', 1).cy;
-      FFont.Height := FixLCLFontFullHeight(FFont.Name, FontFullHeightSign * 100);
+      FFont.Height := FixSystemFontFullHeight(FFont.Name, FontFullHeightSign * 100);
       lFullHeight := BGRATextSize(FFont, fqSystem, 'Hg', 1).cy;
       if lEmHeight = 0 then
         FFontEmHeightRatio := 1
@@ -1637,9 +1737,9 @@ begin
   if FFont <> nil then
   begin
     ClearGlyphs;
-    FFont.Name := FName;
+    FFont.Name := TBGRASystemFontRenderer.PatchSystemFontName(FName);
     FFont.Style := FStyle;
-    FFont.Height := FixLCLFontFullHeight(FFont.Name, FontFullHeightSign * FResolution);
+    FFont.Height := FixSystemFontFullHeight(FFont.Name, FontFullHeightSign * FResolution);
     FFont.Quality := fqNonAntialiased;
     FFontEmHeightRatio := 1;
     FFontEmHeightRatioComputed := false;
@@ -1785,7 +1885,7 @@ begin
       g := GetGlyph(nextchar);
       if g <> nil then
       begin
-        totalWidth += g.Width*FullHeight;
+        IncF(totalWidth, g.Width*FullHeight);
         if not firstChar and (totalWidth > AMaxWidth) then
         begin
           ARemainsUTF8:= copy(ATextUTF8,p,length(ATextUTF8)-p+1);
@@ -1951,8 +2051,8 @@ begin
 
     case lineAlignment of
     twaMiddle: ;
-    twaBottomLeft,twaBottomRight: lineShift -= 0.5;
-    twaTopRight,twaTopLeft : lineShift += 0.5;
+    twaBottomLeft,twaBottomRight: DecF(lineShift, 0.5);
+    twaTopRight,twaTopLeft : IncF(lineShift, 0.5);
     end;
 
     pos.Offset(step*(-lineShift));
@@ -2039,8 +2139,8 @@ begin
 
   case lineAlignment of
   twaMiddle: ;
-  twaBottomLeft, twaBottomRight: lineShift -= 0.5;
-  twaTopRight,twaTopLeft : lineShift += 0.5;
+  twaBottomLeft, twaBottomRight: DecF(lineShift, 0.5);
+  twaTopRight,twaTopLeft : IncF(lineShift, 0.5);
   end;
 
   pos.Offset(step*(-lineShift));
@@ -2101,7 +2201,7 @@ begin
   FDirectoryContent := nil;
   if FDirectory = '' then exit;
   if (length(FDirectory) > 0) and not (FDirectory[length(FDirectory)] in AllowDirectorySeparators) then
-    FDirectory += DirectorySeparator;
+    AppendStr(FDirectory, DirectorySeparator);
   if FindFirstUTF8(FDirectory +'*.glyphs', faAnyFile, SearchRec) = 0 then
   repeat
     {$PUSH}{$WARNINGS OFF}
@@ -2282,6 +2382,23 @@ begin
   FDirectory := Trim(AValue);
   UpdateDirectory;
   UpdateFont;
+end;
+
+function TBGRAVectorizedFont.ComputeKerning(AIdLeft, AIdRight: string): single;
+var
+  together: String;
+begin
+  if Resolution = 0 then exit(0);
+  if IsRightToLeftUTF8(AIdLeft) then
+  begin
+    if IsRightToLeftUTF8(AIdRight) then
+      together := AIdRight + AIdLeft
+    else
+      together := UTF8OverrideDirection(AIdRight + AIdLeft, true);
+  end else
+    together := AIdLeft + AIdRight;
+  result := BGRATextSize(FFont, fqSystem, together, 1).cx/Resolution
+            - Glyph[AIdLeft].Width - Glyph[AIdRight].Width;
 end;
 
 end.

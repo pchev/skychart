@@ -62,7 +62,7 @@
     </RunParams>
     <RequiredPackages Count="10">
       <Item1>
-        <PackageName Value="BGRABitmapPack_nogl"/>
+        <PackageName Value="BGRABitmapPack"/>
       </Item1>
       <Item2>
         <PackageName Value="downldialog"/>

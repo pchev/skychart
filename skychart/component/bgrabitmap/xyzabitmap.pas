@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: LGPL-3.0-linking-exception
 unit XYZABitmap;
 
 {$mode objfpc}{$H+}
@@ -5,7 +6,7 @@ unit XYZABitmap;
 interface
 
 uses
-  Classes, SysUtils, BGRABitmapTypes, UniversalDrawer;
+  BGRAClasses, SysUtils, BGRABitmapTypes, UniversalDrawer;
 
 type
 

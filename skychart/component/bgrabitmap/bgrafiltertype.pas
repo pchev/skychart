@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: LGPL-3.0-linking-exception
 unit BGRAFilterType;
 
 {$mode objfpc}{$H+}
@@ -5,7 +6,7 @@ unit BGRAFilterType;
 interface
 
 uses
-  Classes, BGRABitmapTypes;
+  BGRAClasses, BGRABitmapTypes;
 
 const
     FilterScannerChunkSize = 16;
@@ -116,7 +117,7 @@ type
 
 implementation
 
-uses Types, SysUtils, BGRABlend;
+uses SysUtils, BGRABlend;
 
 { TFilterTask }
 

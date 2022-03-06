@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: LGPL-3.0-linking-exception
 unit BGRAReadIco;
 
 {$mode objfpc}{$H+}
@@ -6,7 +7,7 @@ unit BGRAReadIco;
 interface
 
 uses
-  Classes, SysUtils, FPimage{$IFDEF BGRABITMAP_USE_LCL}, Graphics{$ENDIF};
+  BGRAClasses, SysUtils, FPimage{$IFDEF BGRABITMAP_USE_LCL}, Graphics{$ENDIF};
 
 type
   {$IFDEF BGRABITMAP_USE_LCL}TCustomIconClass = class of TCustomIcon;{$ENDIF}

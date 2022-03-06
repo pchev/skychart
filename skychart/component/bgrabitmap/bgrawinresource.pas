@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: LGPL-3.0-linking-exception
 unit BGRAWinResource;
 
 {$mode objfpc}{$H+}
@@ -5,7 +6,7 @@ unit BGRAWinResource;
 interface
 
 uses
-  Classes, SysUtils, BGRAMultiFileType, BGRABitmapTypes, BGRAReadBMP;
+  BGRAClasses, SysUtils, BGRAMultiFileType, BGRABitmapTypes, BGRAReadBMP;
 
 const
   RT_CURSOR = 1;
@@ -43,11 +44,11 @@ type
   { TResourceInfo }
 
   TResourceInfo = object
-    DataVersion: DWord;
+    DataVersion: LongWord;
     MemoryFlags: Word;
     LanguageId: Word;
-    Version: DWord;
-    Characteristics: DWord;
+    Version: LongWord;
+    Characteristics: LongWord;
     procedure SwapIfNecessary;
   end;
 
@@ -79,6 +80,7 @@ type
     procedure SetLanguageId(AValue: integer);
   public
     constructor Create(AContainer: TMultiFileContainer; ATypeNameOrId: TNameOrId; AEntryNameOrId: TNameOrId; const AResourceInfo: TResourceInfo);
+    function GetStream: TStream; override;
     property Id: integer read GetId write SetId;
     property TypeName: utf8string read GetTypeName;
     property TypeId: integer read GetTypeId;
@@ -98,6 +100,7 @@ type
     constructor Create(AContainer: TMultiFileContainer; ATypeNameOrId: TNameOrId; AEntryNameOrId: TNameOrId; const AResourceInfo: TResourceInfo; ADataStream: TStream);
     destructor Destroy; override;
     function CopyTo(ADestination: TStream): int64; override;
+    function GetStream: TStream; override;
   end;
 
   { TBitmapResourceEntry }
@@ -122,7 +125,7 @@ type
     Width, Height, Colors, Reserved: byte;
     //stored in little endian
     case byte of
-    0: (Variable: DWord; ImageSize: DWord; ImageId: Word);
+    0: (Variable: LongWord; ImageSize: LongWord; ImageId: Word);
     1: (Planes, BitsPerPixel: Word);
     2: (HotSpotX, HotSpotY: Word);
   end;
@@ -130,7 +133,7 @@ type
     Width, Height, Colors, Reserved: byte;
     //stored in little endian
     case byte of
-    0: (Variable: DWord; ImageSize: DWord; ImageOffset: DWord);
+    0: (Variable: LongWord; ImageSize: LongWord; ImageOffset: LongWord);
     1: (Planes, BitsPerPixel: Word);
     2: (HotSpotX, HotSpotY: Word);
   end;
@@ -378,7 +381,7 @@ var
   fileDir: packed array of TIconFileDirEntry;
   offset, written, i: integer;
   iconEntry: TCustomResourceEntry;
-  iconEntrySize: DWord;
+  iconEntrySize: LongWord;
   iconData: TMemoryStream;
   copyCount: Int64;
   subType: TNameOrId;
@@ -616,6 +619,11 @@ begin
     result := 0;
 end;
 
+function TUnformattedResourceEntry.GetStream: TStream;
+begin
+  Result:= FDataStream;
+end;
+
 { TResourceInfo }
 
 procedure TResourceInfo.SwapIfNecessary;
@@ -639,11 +647,11 @@ begin
   result := FTypeNameOrId.Id;
 end;
 
-function GetDWord(var ASource: PByte; var ARemainingBytes: Integer): DWord;
+function GetDWord(var ASource: PByte; var ARemainingBytes: Integer): LongWord;
 begin
   if ARemainingBytes >= 4 then
   begin
-    result := LEtoN(PDWord(ASource)^);
+    result := LEtoN(PLongWord(ASource)^);
     inc(ASource, 4);
     dec(ARemainingBytes, 4);
   end else
@@ -702,7 +710,7 @@ var
   entryNameOrId: TNameOrId;
   info: TResourceInfo;
   dataStream: TMemoryStream;
-  dummy: DWord;
+  dummy: LongWord;
 begin
   result := nil;
   if AStream.Position + 16 < AStream.Size then
@@ -771,7 +779,7 @@ begin
 end;
 
 procedure TCustomResourceEntry.Serialize(ADestination: TStream);
-var zero: DWord;
+var zero: LongWord;
   padding: integer;
 begin
   SerializeHeader(ADestination);
@@ -840,6 +848,12 @@ begin
   FTypeNameOrId := ATypeNameOrId;
   FEntryNameOrId := AEntryNameOrId;
   FResourceInfo := AResourceInfo;
+end;
+
+function TCustomResourceEntry.GetStream: TStream;
+begin
+  result := nil;
+  raise exception.Create('Stream not available');
 end;
 
 procedure TCustomResourceEntry.SetId(AValue: integer);

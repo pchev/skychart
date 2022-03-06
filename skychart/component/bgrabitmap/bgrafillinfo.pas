@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: LGPL-3.0-linking-exception
 unit BGRAFillInfo;
 
 {$mode objfpc}{$H+}
@@ -5,7 +6,7 @@ unit BGRAFillInfo;
 interface
 
 uses
-  Classes, SysUtils, BGRABitmapTypes;
+  BGRAClasses, SysUtils, BGRABitmapTypes;
 
 const
   AntialiasPrecision = 16;
@@ -20,6 +21,7 @@ type
 
   TFillShapeInfo = class(TBGRACustomFillInfo)
     protected
+      FPointInsideInter : ArrayOfTIntersectionInfo;
       //compute intersections. the array must be big enough
       procedure ComputeIntersection(cury: single; var inter: ArrayOfTIntersectionInfo; var nbInter: integer); virtual;
       //sort from left to right
@@ -31,6 +33,8 @@ type
       function NbMaxIntersection: integer; virtual;
 
     public
+      destructor Destroy; override;
+
       //returns true if the same segment number can be curved
       function SegmentsCurved: boolean; override;
 
@@ -370,7 +374,7 @@ begin
 end;
 
 procedure AddDensity(dest: PDensity; start,count: integer; value: word);
-var valueValue: longword;
+var valueValue: LongWord;
     lastAdd: integer;
 begin
   if count=0 then exit;
@@ -494,29 +498,34 @@ end;
 function TFillShapeInfo.IsPointInside(x, y: single; windingMode: boolean
   ): boolean;
 var
-    inter : ArrayOfTIntersectionInfo;
-    i,nbInter: integer;
+  i,nbInter: integer;
 begin
-  inter := CreateIntersectionArray;
-  ComputeAndSort(y,inter,nbInter,windingMode);
+  if FPointInsideInter = nil then
+    FPointInsideInter := CreateIntersectionArray;
+  ComputeAndSort(y,FPointInsideInter,nbInter,windingMode);
   i := 0;
   while i+1 < nbInter do
   begin
-    if (inter[i].interX < x) and (inter[i+1].interX > x) then
+    if (FPointInsideInter[i].interX < x) and (FPointInsideInter[i+1].interX > x) then
     begin
       result := true;
-      FreeIntersectionArray(inter);
+      FreeIntersectionArray(FPointInsideInter);
       exit;
     end;
     inc(i,2);
   end;
   result := false;
-  FreeIntersectionArray(inter);
 end;
 
 function TFillShapeInfo.NbMaxIntersection: integer;
 begin
   Result := 0;
+end;
+
+destructor TFillShapeInfo.Destroy;
+begin
+  FreeIntersectionArray(FPointInsideInter);
+  inherited Destroy;
 end;
 
 function TFillShapeInfo.SegmentsCurved: boolean;
@@ -1022,17 +1031,20 @@ var
 begin
   if FSegmentsDataCreated then exit;
   FSegmentsDataCreated := true;
-  p := @FPoints[0];
-  for i := 0 to high(FPoints) do
+  if FPoints<>nil then
   begin
-    if not p^.empty and (p^.slope <> EmptySingle) then
+    p := @FPoints[0];
+    for i := 0 to high(FPoints) do
     begin
-      if p^.winding < 0 then
-        p^.data := CreateSegmentData(p^.next,i, p)
-      else
-        p^.data := CreateSegmentData(i,p^.next, p);
+      if not p^.empty and (p^.slope <> EmptySingle) then
+      begin
+        if p^.winding < 0 then
+          p^.data := CreateSegmentData(p^.next,i, p)
+        else
+          p^.data := CreateSegmentData(i,p^.next, p);
+      end;
+      inc(p);
     end;
-    inc(p);
   end;
 end;
 
@@ -1331,7 +1343,6 @@ end;
 constructor TOnePassFillPolyInfo.Create(const points: array of TPointF; APixelCenteredCoordinates: boolean);
 var i,j: integer;
   p: POnePassRecord;
-  temp: single;
 begin
   inherited create(points, APixelCenteredCoordinates);
 
@@ -1385,7 +1396,7 @@ end;
 
 procedure TSimpleFillPolyInfo.ComputeIntersection(cury: single;
   var inter: ArrayOfTIntersectionInfo; var nbInter: integer);
-var i,j: integer;
+var i: integer;
   p: PCustomPointRecord;
   pInter: PIntersectionInfo;
 begin
@@ -1607,7 +1618,8 @@ begin
     if cury < FY1+FRY then
     begin
       d := abs((cury - (FY1+FRY)) / FRY);
-      d2 := sqrt(1 - sqr(d)) * FRX;
+      if d > 1 then d2 := 0
+      else d2 := sqrt(1 - sqr(d)) * FRX;
 
       if rrTopLeftSquare in FOptions then
         inter[nbinter].interX := FX1 else
@@ -1632,7 +1644,8 @@ begin
     if cury > FY2-FRY then
     begin
       d := abs((cury - (FY2-FRY)) / FRY);
-      d2 := sqrt(1 - sqr(d)) * FRX;
+      if d > 1 then d2 := 0
+      else d2 := sqrt(1 - sqr(d)) * FRX;
 
       if rrBottomLeftSquare in FOptions then
         inter[nbinter].interX := FX1 else

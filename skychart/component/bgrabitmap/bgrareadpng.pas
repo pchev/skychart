@@ -1,18 +1,9 @@
+// SPDX-License-Identifier: LGPL-3.0-linking-exception
 {
-    The original file before tweaking is:
-
-    $Id: fpreadpng.pp,v 1.10 2003/10/19 21:09:51 luk Exp $
-    This file is part of the Free Pascal run time library.
+    This file is originally part of the Free Pascal run time library.
     Copyright (c) 2003 by the Free Pascal development team
 
-    PNG reader implementation
-
-    See the file COPYING.FPC, included in this distribution,
-    for details about the copyright.
-
-    This program is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+    PNG reader implementation modified by circular.
 
  **********************************************************************
 
@@ -28,7 +19,7 @@ unit BGRAReadPng;
 interface
 
 uses
-  SysUtils,Classes, FPImage, FPImgCmn, PNGComn, ZStream, BGRABitmapTypes;
+  SysUtils,BGRAClasses, FPImage, FPImgCmn, PNGComn, ZStream, BGRABitmapTypes;
 
 Type
 
@@ -59,7 +50,7 @@ Type
       FConvertColor : TConvertColorProc;
       FBGRAConvertColor : TBGRAConvertColorProc;
       FHandleScanLine: THandleScanLineProc;
-      FVerticalShrinkMask: DWord;
+      FVerticalShrinkMask: LongWord;
       FVerticalShrinkShr: Integer;
       FGammaCorrection: single;
       FGammaCorrectionTable: packed array of word;
@@ -100,7 +91,7 @@ Type
       UseTransparent, EndOfFile : boolean;
       TransparentDataValue : TColorData;
       UsingBitGroup : byte;
-      DataIndex : longword;
+      DataIndex : LongWord;
       DataBytes : TColorData;
       procedure HandleChunk; virtual;
       procedure HandlePalette; virtual;
@@ -220,8 +211,8 @@ end;
 
 function TBGRAReaderPNG.ReadChunk: boolean;
 var {%H-}ChunkHeader : TChunkHeader;
-    readCRC : longword;
-    l : longword;
+    readCRC : LongWord;
+    l : LongWord;
 begin
   TheStream.Read ({%H-}ChunkHeader,sizeof(ChunkHeader));
   with chunk do
@@ -288,7 +279,7 @@ begin
 end;
 
 procedure TBGRAReaderPNG.HandleData;
-var OldSize : longword;
+var OldSize : LongWord;
 begin
   OldSize := ZData.size;
   ZData.Size := OldSize;
@@ -304,7 +295,7 @@ procedure TBGRAReaderPNG.HandleAlpha;
     begin
       with chunk do
         begin
-        if alength > longword(ThePalette.count) then
+        if alength > LongWord(ThePalette.count) then
           raise PNGImageException.create ('To much alpha values for palette');
         for r := 0 to alength-1 do
           begin
@@ -371,7 +362,7 @@ begin
 end;
 
 procedure TBGRAReaderPNG.HandlePalette;
-var r : longword;
+var r : LongWord;
     c : TFPColor;
     t : word;
 begin
@@ -489,7 +480,7 @@ begin
 end;
 
 function TBGRAReaderPNG.CalcColor(const ScanLine : PByteArray): TColorData;
-var cd : longword;
+var cd : LongWord;
     r : word;
     p : pbyte;
 begin
@@ -560,9 +551,9 @@ begin
            for rx := 0 to ScanlineLength[CurrentPass]-1 do
            begin
              {$IFDEF ENDIAN_BIG}
-             FSetPixel (x,y,swap(PDWord(@ScanLine^[DataIndex])^));
+             FSetPixel (x,y,swap(PLongWord(@ScanLine^[DataIndex])^));
              {$ELSE}
-             FSetPixel (x,y,PDWord(@ScanLine^[DataIndex])^);
+             FSetPixel (x,y,PLongWord(@ScanLine^[DataIndex])^);
              {$ENDIF}
              Inc(X, deltaX);
              inc(DataIndex,4);
@@ -593,8 +584,7 @@ begin
 end;
 
 procedure TBGRAReaderPNG.BGRAHandleScanLine (const y : integer; const ScanLine : PByteArray);
-var x, rx : integer;
-    c : TColorData;
+var rx : integer;
     pdest: PBGRAPixel;
 begin
   UsingBitGroup := 0;
@@ -630,15 +620,28 @@ begin
            end;
            exit;
          end;
+      3: begin
+           pdest := TBGRACustomBitmap(TheImage).ScanLine[y]+StartX;
+           for rx := 0 to ScanlineLength[CurrentPass]-1 do
+           begin
+             pdest^.red := ScanLine^[DataIndex];
+             pdest^.green := ScanLine^[DataIndex+1];
+             pdest^.blue := ScanLine^[DataIndex+2];
+             pdest^.alpha := 255;
+             Inc(pdest, deltaX);
+             inc(DataIndex, 3);
+           end;
+           exit;
+         end;
       4: begin
            pdest := TBGRACustomBitmap(TheImage).ScanLine[y]+StartX;
            for rx := 0 to ScanlineLength[CurrentPass]-1 do
            begin
              pdest^ := FBGRAConvertColor(
              {$IFDEF ENDIAN_BIG}
-             swap(PDWord(@ScanLine^[DataIndex])^)
+             swap(PLongWord(@ScanLine^[DataIndex])^)
              {$ELSE}
-             PDWord(@ScanLine^[DataIndex])^
+             PLongWord(@ScanLine^[DataIndex])^
              {$ENDIF}  );
              if pdest^.alpha = 0 then pdest^ := BGRAPixelTransparent;
              Inc(pdest, deltaX);
@@ -646,37 +649,20 @@ begin
            end;
            exit;
          end;
-      8: begin
-           pdest := TBGRACustomBitmap(TheImage).ScanLine[y]+StartX;
-           for rx := 0 to ScanlineLength[CurrentPass]-1 do
-           begin
-             pdest^ := FBGRAConvertColor(
-             {$IFDEF ENDIAN_BIG}
-             swap(PQWord(@ScanLine^[DataIndex])^)
-             {$ELSE}
-             PQWord(@ScanLine^[DataIndex])^
-             {$ENDIF}  );
-             if pdest^.alpha = 0 then pdest^ := BGRAPixelTransparent;
-             Inc(pdest, deltaX);
-             inc(DataIndex,8);
-           end;
-           exit;
-         end;
     end;
   {$POP}
 
-  X := StartX;
+  pdest := TBGRACustomBitmap(TheImage).ScanLine[y]+StartX;
   for rx := 0 to ScanlineLength[CurrentPass]-1 do
     begin
-    c := CalcColor(ScanLine);
-    FSetPixel (x,y,c);
-    Inc(X, deltaX);
+    pdest^ := FBGRAConvertColor(CalcColor(ScanLine));
+    Inc(pdest, deltaX);
     end
 end;
 
 procedure TBGRAReaderPNG.BGRAHandleScanLineTr(const y: integer;
   const ScanLine: PByteArray);
-var x, rx : integer;
+var rx : integer;
     c : TColorData;
     pdest: PBGRAPixel;
 begin
@@ -728,9 +714,9 @@ begin
            begin
              c :=
              {$IFDEF ENDIAN_BIG}
-             swap(PDWord(@ScanLine^[DataIndex])^)
+             swap(PLongWord(@ScanLine^[DataIndex])^)
              {$ELSE}
-             PDWord(@ScanLine^[DataIndex])^
+             PLongWord(@ScanLine^[DataIndex])^
              {$ENDIF}  ;
              if c = TransparentDataValue then
                pdest^ := BGRAPixelTransparent else
@@ -766,12 +752,14 @@ begin
          end;
     end;
 
-  X := StartX;
+  pdest := TBGRACustomBitmap(TheImage).ScanLine[y]+StartX;
   for rx := 0 to ScanlineLength[CurrentPass]-1 do
     begin
     c := CalcColor(ScanLine);
-    FSetPixel (x,y,c);
-    Inc(X, deltaX);
+    if c = TransparentDataValue then
+      pdest^ := BGRAPixelTransparent
+      else pdest^ := FBGRAConvertColor(c);
+    Inc(pdest, deltaX);
     end
 end;
 
@@ -784,7 +772,7 @@ begin
 end;
 
 function TBGRAReaderPNG.ColorGray2(const CD: TColorData): TFPColor;
-var c : NativeUint;
+var c : UInt32or64;
 begin
   c := CD and 3;
   c := c + (c shl 2);
@@ -800,7 +788,7 @@ begin
 end;
 
 function TBGRAReaderPNG.ColorGray4(const CD: TColorData): TFPColor;
-var c : NativeUint;
+var c : UInt32or64;
 begin
   c := CD and $F;
   c := c + (c shl 4);
@@ -815,7 +803,7 @@ begin
 end;
 
 function TBGRAReaderPNG.ColorGray8(const CD: TColorData): TFPColor;
-var c : NativeUint;
+var c : UInt32or64;
 begin
   c := CD and $FF;
   c := c + (c shl 8);
@@ -829,7 +817,7 @@ begin
 end;
 
 function TBGRAReaderPNG.ColorGray16(const CD: TColorData): TFPColor;
-var c : NativeUint;
+var c : UInt32or64;
 begin
   c := CD and $FFFF;
   with result do
@@ -842,7 +830,7 @@ begin
 end;
 
 function TBGRAReaderPNG.ColorGrayAlpha8 (const CD:TColorData) : TFPColor;
-var c : NativeUint;
+var c : UInt32or64;
 begin
   c := CD and $00FF;
   c := c + (c shl 8);
@@ -857,7 +845,7 @@ begin
 end;
 
 function TBGRAReaderPNG.ColorGrayAlpha16 (const CD:TColorData) : TFPColor;
-var c : NativeUint;
+var c : UInt32or64;
 begin
   c := CD and $FFFF;
   with result do
@@ -870,7 +858,7 @@ begin
 end;
 
 function TBGRAReaderPNG.ColorColor8 (const CD:TColorData) : TFPColor;
-var c : NativeUint;
+var c : UInt32or64;
 begin
   with result do
     begin
@@ -896,7 +884,7 @@ begin
 end;
 
 function TBGRAReaderPNG.ColorColorAlpha8 (const CD:TColorData) : TFPColor;
-var c : NativeUint;
+var c : UInt32or64;
 begin
   with result do
     begin
@@ -976,7 +964,7 @@ begin
 end;
 
 function TBGRAReaderPNG.BGRAColorGray2(const CD: TColorData): TBGRAPixel;
-var c : NativeUint;
+var c : UInt32or64;
 begin
   c := CD and 3;
   c := c + (c shl 2);
@@ -985,7 +973,7 @@ begin
 end;
 
 function TBGRAReaderPNG.BGRAColorGray4(const CD: TColorData): TBGRAPixel;
-var c : NativeUint;
+var c : UInt32or64;
 begin
   c := CD and $F;
   c := c + (c shl 4);
@@ -993,35 +981,35 @@ begin
 end;
 
 function TBGRAReaderPNG.BGRAColorGray8(const CD: TColorData): TBGRAPixel;
-var c : NativeUint;
+var c : UInt32or64;
 begin
   c := CD and $FF;
   result := BGRA(c,c,c);
 end;
 
 function TBGRAReaderPNG.BGRAColorGray16(const CD: TColorData): TBGRAPixel;
-var c : NativeUint;
+var c : UInt32or64;
 begin
   c := (CD shr 8) and $FF;
   result := BGRA(c,c,c);
 end;
 
 function TBGRAReaderPNG.BGRAColorGrayAlpha8(const CD: TColorData): TBGRAPixel;
-var c : NativeUint;
+var c : UInt32or64;
 begin
   c := CD and $00FF;
   result := BGRA(c,c,c,(CD shr 8) and $FF);
 end;
 
 function TBGRAReaderPNG.BGRAColorGrayAlpha16(const CD: TColorData): TBGRAPixel;
-var c : NativeUint;
+var c : UInt32or64;
 begin
   c := (CD shr 8) and $FF;
   result := BGRA(c,c,c,(CD shr 24) and $FF);
 end;
 
 function TBGRAReaderPNG.BGRAColorColor8(const CD: TColorData): TBGRAPixel;
-var temp: DWord;
+var temp: LongWord;
 begin
   temp := CD;
   result := BGRA(temp and $ff, (temp shr 8) and $ff, (temp shr 16) and $ff);
@@ -1033,7 +1021,7 @@ begin
 end;
 
 function TBGRAReaderPNG.BGRAColorColorAlpha8(const CD: TColorData): TBGRAPixel;
-var temp: DWord;
+var temp: LongWord;
 begin
   temp := CD;
   result := BGRA(temp and $ff, (temp shr 8) and $ff, (temp shr 16) and $ff, temp shr 24);
@@ -1170,7 +1158,7 @@ procedure TBGRAReaderPNG.DoDecompress;
       end;
   end;
 
-  procedure FilterSub(p: PByte; Count: NativeInt; bw: NativeInt);
+  procedure FilterSub(p: PByte; Count: Int32or64; bw: Int32or64);
   begin
     inc(p,bw);
     dec(Count,bw);
@@ -1184,16 +1172,16 @@ procedure TBGRAReaderPNG.DoDecompress;
     end;
   end;
 
-  procedure FilterUp(p,pPrev: PByte; Count: NativeUInt);
-  var Count4: NativeInt;
+  procedure FilterUp(p,pPrev: PByte; Count: UInt32or64);
+  var Count4: Int32or64;
   begin
     Count4 := Count shr 2;
     dec(Count, Count4 shl 2);
     while Count4 > 0 do
     begin
       {$push}{$r-}{$q-}
-      PDWord(p)^ := (((PDWord(pPrev)^ and $00FF00FF) + (PDWord(p)^ and $00FF00FF)) and $00FF00FF)
-        or (((PDWord(pPrev)^ and $FF00FF00) + (PDWord(p)^ and $FF00FF00)) and $FF00FF00);
+      PLongWord(p)^ := (((PLongWord(pPrev)^ and $00FF00FF) + (PLongWord(p)^ and $00FF00FF)) and $00FF00FF)
+        or (((PLongWord(pPrev)^ and $FF00FF00) + (PLongWord(p)^ and $FF00FF00)) and $FF00FF00);
       {$pop}
       inc(p,4);
       inc(pPrev,4);
@@ -1211,8 +1199,8 @@ procedure TBGRAReaderPNG.DoDecompress;
     end;
   end;
 
-  procedure FilterAverage(p,pPrev: PByte; Count: NativeUInt; bw: NativeInt);
-  var CountBW: NativeInt;
+  procedure FilterAverage(p,pPrev: PByte; Count: UInt32or64; bw: Int32or64);
+  var CountBW: Int32or64;
   begin
     CountBW := bw;
     dec(Count,CountBW);
@@ -1237,10 +1225,10 @@ procedure TBGRAReaderPNG.DoDecompress;
     end;
   end;
 
-  procedure FilterPaeth(p,pPrev: PByte; Count: NativeUInt; bw: NativeInt);
+  procedure FilterPaeth(p,pPrev: PByte; Count: UInt32or64; bw: Int32or64);
   var
-    rx, dl, dp, dlp : NativeInt;
-    diag,left: NativeUInt;
+    rx, dl, dp, dlp : Int32or64;
+    diag,left: UInt32or64;
   begin
     for rx := 0 to bw-1 do
     begin
@@ -1255,8 +1243,8 @@ procedure TBGRAReaderPNG.DoDecompress;
     begin
       diag := (pPrev-bw)^;
       left := (p - bw)^;
-      dl := pPrev^ - NativeInt(diag);
-      dp := NativeInt(left) - NativeInt(diag);
+      dl := pPrev^ - Int32or64(diag);
+      dp := Int32or64(left) - Int32or64(diag);
       dlp := abs(dl+dp);
       if dl < 0 then dl := -dl;
       if dp < 0 then dp := -dp;
@@ -1281,7 +1269,7 @@ procedure TBGRAReaderPNG.DoDecompress;
   end;
 
   procedure Decode;
-  var y, rp, ry, l : NativeInt;
+  var y, rp, ry, l : Int32or64;
       lf : byte;
       switchLine, currentLine, previousLine : pByteArray;
   begin

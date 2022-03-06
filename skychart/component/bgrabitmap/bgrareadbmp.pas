@@ -1,16 +1,10 @@
+// SPDX-License-Identifier: LGPL-3.0-linking-exception
 {*****************************************************************************}
 {
     This original file was part of the Free Pascal's "Free Components Library".
     Copyright (c) 2003 by Mazen NEIFER of the Free Pascal development team
 
-    BMP reader implementation.
-
-    See the file COPYING.FPC, included in this distribution,
-    for details about the copyright.
-
-    This program is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+    BMP reader implementation modified by circular.
 }
 {*****************************************************************************}
 { 08/2005 by Giulio Bernardi:
@@ -35,14 +29,14 @@ unit BGRAReadBMP;
 
 interface
 
-uses FPImage, classes, sysutils, BMPcomn, BGRABitmapTypes;
+uses FPImage, BGRAClasses, SysUtils, BMPcomn, BGRABitmapTypes;
 
 type
   TBMPTransparencyOption = (toAuto, toTransparent, toOpaque);
   TBitMapInfoHeader = BMPcomn.TBitMapInfoHeader;
   TBitMapFileHeader = BMPcomn.TBitMapFileHeader;
   TOS2BitmapHeader = packed record
-    bcSize: DWORD;
+    bcSize: LongWord;
     bcWidth: Word;
     bcHeight: Word;
     bcPlanes: Word;
@@ -76,7 +70,7 @@ type
       FPalette : PFPcolor;      // Buffer with Palette entries. (useless now)
       FBGRAPalette : PBGRAPixel;
       LineBuf : PByte;          // Buffer for 1 scanline. Can be Byte, Word, TColorRGB or TColorRGBA
-      RedMask, GreenMask, BlueMask : longword; //Used if Compression=bi_bitfields
+      RedMask, GreenMask, BlueMask : LongWord; //Used if Compression=bi_bitfields
       RedShift, GreenShift, BlueShift : shortint;
       FOutputHeight: integer;
       FOriginalHeight: Integer;
@@ -90,9 +84,9 @@ type
       // SetupRead will allocate the needed buffers, and read the colormap if needed.
       procedure SetupRead(nPalette, nRowBits: Integer; Stream : TStream); virtual;
       function CountBits(Value : byte) : shortint;
-      function ShiftCount(Mask : longword) : shortint;
-      function ExpandColor(value : longword) : TFPColor;
-      function ExpandColorBGRA(value : longword) : TBGRAPixel;
+      function ShiftCount(Mask : LongWord) : shortint;
+      function ExpandColor(value : LongWord) : TFPColor;
+      function ExpandColorBGRA(value : LongWord) : TBGRAPixel;
       procedure ExpandRLE8ScanLine(Row : Integer; Stream : TStream);
       procedure ExpandRLE4ScanLine(Row : Integer; Stream : TStream);
       procedure ReadScanLine(Row : Integer; Stream : TStream); virtual;
@@ -221,7 +215,7 @@ begin
 end;
 
 function TBGRAReaderBMP.GetQuickInfo(AStream: TStream): TQuickImageInfo;
-var headerSize: dword;
+var headerSize: LongWord;
   os2header: TOS2BitmapHeader;
   minHeader: TMinimumBitmapHeader;
   totalDepth: integer;
@@ -335,7 +329,7 @@ end;
   Example: 0000 0111 1110 0000, if we shr 5 we have 00XX XXXX for the color, but these bits must be the
   highest in the color, so we must shr (5-(8-6))=3, and we have XXXX XX00.
   A negative value means "shift left"  }
-function TBGRAReaderBMP.ShiftCount(Mask : longword) : shortint;
+function TBGRAReaderBMP.ShiftCount(Mask : LongWord) : shortint;
 var tmp : shortint;
 begin
   tmp:=0;
@@ -354,8 +348,8 @@ begin
   Result:=tmp;
 end;
 
-function TBGRAReaderBMP.ExpandColor(value : longword) : TFPColor;
-var tmpr, tmpg, tmpb : longword;
+function TBGRAReaderBMP.ExpandColor(value : LongWord) : TFPColor;
+var tmpr, tmpg, tmpb : LongWord;
     col : TColorRGB;
 begin
   {$IFDEF ENDIAN_BIG}
@@ -373,8 +367,8 @@ begin
   Result:=RGBToFPColor(col);
 end;
 
-function TBGRAReaderBMP.ExpandColorBGRA(value: longword): TBGRAPixel;
-var tmpr, tmpg, tmpb : longword;
+function TBGRAReaderBMP.ExpandColorBGRA(value: LongWord): TBGRAPixel;
+var tmpr, tmpg, tmpb : LongWord;
 begin
   {$IFDEF ENDIAN_BIG}
   value:=swap(value);
@@ -459,7 +453,7 @@ Var
   i, pallen : Integer;
   BadCompression : boolean;
   WriteScanlineProc: TWriteScanlineProc;
-  headerSize: longword;
+  headerSize: LongWord;
   os2header: TOS2BitmapHeader;
   shouldContinue: boolean;
 
@@ -473,7 +467,7 @@ begin
   if headerSize = sizeof(TOS2BitmapHeader) then
   begin
     fillchar({%H-}os2header,SizeOf(os2header),0);
-    Stream.Read(os2header.bcWidth,min(SizeOf(os2header),headerSize)-sizeof(DWord));
+    Stream.Read(os2header.bcWidth,min(SizeOf(os2header),headerSize)-sizeof(LongWord));
     BFI.Size := 16;
     BFI.Width := LEtoN(os2header.bcWidth);
     BFI.Height := LEtoN(os2header.bcHeight);
@@ -482,7 +476,7 @@ begin
     FPaletteEntrySize:= 3;
   end else
   begin
-    Stream.Read(BFI.Width,min(SizeOf(BFI),headerSize)-sizeof(DWord));
+    Stream.Read(BFI.Width,min(SizeOf(BFI),headerSize)-sizeof(LongWord));
     {$IFDEF ENDIAN_BIG}
     SwapBMPInfoHeader(BFI);
     {$ENDIF}
@@ -913,7 +907,7 @@ begin
       if pimg^.alpha = 255 then
       begin
         pimg^.alpha := 0;
-        if dword(pimg^) <> 0 then
+        if LongWord(pimg^) <> 0 then
         begin
          bmp.NeedXorMask;
          bmp.XorMask.SetPixel(x,Row,pimg^);
@@ -990,7 +984,7 @@ end;
 
 procedure TBGRAReaderBMP.MakeOpaque(Img: TFPCustomImage);
 var c: TFPColor;
-  x,y: NativeInt;
+  x,y: Int32or64;
 begin
   if Img is TBGRACustomBitmap then
     TBGRACustomBitmap(Img).AlphaFill(255)
@@ -1007,7 +1001,7 @@ end;
 procedure TBGRAReaderBMP.LoadMask(Stream: TStream; Img: TFPCustomImage; var ShouldContinue: boolean);
 begin
   if Img is TBGRACustomBitmap then TBGRACustomBitmap(Img).DiscardXorMask;
-  FMaskDataSize := ((Img.Width+31) div 32)*4; //padded to dword
+  FMaskDataSize := ((Img.Width+31) div 32)*4; //padded to LongWord
   getmem(FMaskData, FMaskDataSize);
   try
     ImageVerticalLoop(Stream,Img, @ReadMaskLine, @SkipMaskLine, @WriteMaskLine, nil, ShouldContinue);
@@ -1030,8 +1024,8 @@ procedure TBGRAReaderBMP.ImageVerticalLoop(Stream: TStream;
   var ShouldContinue: boolean);
 var
   prevPercent, percent, percentAdd : byte;
-  percentMod : longword;
-  percentAcc, percentAccAdd : longword;
+  percentMod : LongWord;
+  percentAcc, percentAccAdd : LongWord;
   PrevSourceRow,SourceRow, SourceRowDelta, SourceLastRow: integer;
   SourceRowAdd: integer;
   SourceRowAcc,SourceRowMod: integer;
@@ -1041,10 +1035,10 @@ begin
   if OutputHeight <= 0 then exit;
 
   percent:=0;
-  percentAdd := 100 div BFI.Height;
-  percentAcc:=BFI.Height div 2;
-  percentAccAdd := 100 mod BFI.Height;
-  percentMod:=BFI.Height;
+  percentMod:= OutputHeight;
+  percentAdd := 100 div percentMod;
+  percentAcc:= percentMod div 2;
+  percentAccAdd := 100 mod percentMod;
 
   DeltaX:=-1; DeltaY:=-1;
   if TopDown then
@@ -1060,10 +1054,10 @@ begin
   end;
   OutputRowDelta:= SourceRowDelta;
 
-  SourceRowAdd := (BFI.Height div OutputHeight)*SourceRowDelta;
-  SourceRowAcc := OutputHeight div 2;
-  SourceRowAccAdd := BFI.Height mod OutputHeight;
   SourceRowMod := OutputHeight;
+  SourceRowAdd := (BFI.Height div SourceRowMod)*SourceRowDelta;
+  SourceRowAcc := SourceRowMod div 2;
+  SourceRowAccAdd := BFI.Height mod SourceRowMod;
   If TopDown then
   begin
     OutputRow := 0;
@@ -1102,7 +1096,11 @@ begin
     prevPercent := percent;
     inc(percent,percentAdd);
     inc(percentAcc,percentAccAdd);
-    if percentAcc>=percentMod then inc(percent);
+    if percentAcc>=percentMod then
+    begin
+      dec(percentAcc, percentMod);
+      inc(percent);
+    end;
     if (percent<>prevPercent) and Assigned(ProgressProc) then ProgressProc(percent, ShouldContinue);
   end;
 end;

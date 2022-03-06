@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: LGPL-3.0-linking-exception
 {
  /**************************************************************************\
                                 bgrabitmaptypes.pas
@@ -7,20 +8,6 @@
 
        --> Include BGRABitmap and BGRABitmapTypes in the 'uses' clause.
 	       If you are using LCL types, add also BGRAGraphics unit.
-
- ****************************************************************************
- *                                                                          *
- *  This file is part of BGRABitmap library which is distributed under the  *
- *  modified LGPL.                                                          *
- *                                                                          *
- *  See the file COPYING.modifiedLGPL.txt, included in this distribution,   *
- *  for details about the copyright.                                        *
- *                                                                          *
- *  This program is distributed in the hope that it will be useful,         *
- *  but WITHOUT ANY WARRANTY; without even the implied warranty of          *
- *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.                    *
- *                                                                          *
- ****************************************************************************
 }
 
 unit BGRABitmapTypes;
@@ -31,20 +18,21 @@ unit BGRABitmapTypes;
 interface
 
 uses
-  Classes, Types, BGRAGraphics,
-  FPImage, FPImgCanv{$IFDEF BGRABITMAP_USE_LCL}, LCLType, GraphType, LResources{$ENDIF},
+  BGRAClasses, BGRAGraphics, BGRAUnicode,
+  FPImage{$IFDEF BGRABITMAP_USE_FPCANVAS}, FPImgCanv{$ENDIF}
+  {$IFDEF BGRABITMAP_USE_LCL}, LCLType, GraphType, LResources{$ENDIF},
   BGRAMultiFileType;
 
 
 const
-  BGRABitmapVersion = 10060400;
+  BGRABitmapVersion = 11040000;
 
   function BGRABitmapVersionStr: string;
 
 type
   TMultiFileContainer = BGRAMultiFileType.TMultiFileContainer;
-  Int32or64 = {$IFDEF CPU64}Int64{$ELSE}LongInt{$ENDIF};
-  UInt32or64 = {$IFDEF CPU64}UInt64{$ELSE}LongWord{$ENDIF};
+  Int32or64 = BGRAClasses.Int32or64;
+  UInt32or64 = BGRAClasses.UInt32or64;
   HDC = {$IFDEF BGRABITMAP_USE_LCL}LCLType.HDC{$ELSE}PtrUInt{$ENDIF};
 
 {=== Miscellaneous types ===}
@@ -56,6 +44,10 @@ type
     fmSet,
     {** Pixels that are filled are drawn upon with the fill color }
     fmDrawWithTransparency,
+    {** Pixels that are filled are drawn without gamma correction upon with the fill color }
+    fmLinearBlend,
+    {** Pixels that are XORed with the fill color}
+    fmXor,
     {** Pixels that are filled are drawn upon to the extent that the color underneath is similar to
         the start color. The more different the different is, the less it is drawn upon }
     fmProgressive);
@@ -126,7 +118,9 @@ type
     {** text or binary encoded image, no compression, extension PBM, PGM, PPM }
     ifPortableAnyMap,
     {** Scalable Vector Graphic, vectorial, read-only as raster }
-    ifSvg);
+    ifSvg,
+    {** Lossless or lossy compression using V8 algorithm (need libwebp library) }
+    ifWebP);
 
   {* Options when loading an image }
   TBGRALoadingOption = (
@@ -139,8 +133,13 @@ type
   TBGRALoadingOptions = set of TBGRALoadingOption;
 
   TTextLayout = BGRAGraphics.TTextLayout;
-  TFontBidiMode = (fbmAuto, fbmLeftToRight, fbmRightToLeft);
+  TFontBidiMode = BGRAUnicode.TFontBidiMode;
   TBidiTextAlignment = (btaNatural, btaOpposite, btaLeftJustify, btaRightJustify, btaCenter);
+
+const
+  fbmAuto = BGRAUnicode.fbmAuto;
+  fbmLeftToRight = BGRAUnicode.fbmLeftToRight;
+  fbmRightToLeft = BGRAUnicode.fbmRightToLeft;
 
   function AlignmentToBidiTextAlignment(AAlign: TAlignment; ARightToLeft: boolean): TBidiTextAlignment; overload;
   function AlignmentToBidiTextAlignment(AAlign: TAlignment): TBidiTextAlignment; overload;
@@ -234,8 +233,8 @@ const
 {$DEFINE INCLUDE_INTERFACE}
 {$i csscolorconst.inc}
 
-{$DEFINE INCLUDE_SCANNER_INTERFACE }
-{$I bgracustombitmap.inc}
+{$DEFINE INCLUDE_INTERFACE}
+{$I bgrascanner.inc}
 
 {$DEFINE INCLUDE_INTERFACE}
 {$I unibitmap.inc}
@@ -281,11 +280,16 @@ type
     fqSystemClearType,
     {** Garanties a high quality antialiasing. }
     fqFineAntialiasing,
-    {** Fine antialiasing with ClearType in assuming an LCD display in red/green/blue order }
+    {** Fine antialiasing with ClearType assuming an LCD display in red/green/blue order }
     fqFineClearTypeRGB,
-    {** Fine antialiasing with ClearType in assuming an LCD display in blue/green/red order }
+    {** Fine antialiasing with ClearType assuming an LCD display in blue/green/red order }
     fqFineClearTypeBGR);
 
+  TGetFineClearTypeAutoFunc = function(): TBGRAFontQuality;
+var
+  fqFineClearType : TGetFineClearTypeAutoFunc;
+
+type
   {* Measurements of a font }
   TFontPixelMetric = record
     {** The values have been computed }
@@ -379,6 +383,7 @@ type
     {** Returns measurement for the current font in pixels }
     function GetFontPixelMetric: TFontPixelMetric; virtual; abstract;
     function GetFontPixelMetricF: TFontPixelMetricF; virtual;
+    function FontExists(AName: string): boolean; virtual; abstract;
 
     {** Returns the total size of the string provided using the current font.
         Orientation is not taken into account, so that the width is along the text }
@@ -386,11 +391,12 @@ type
     function TextSizeF(sUTF8: string): TPointF; overload; virtual;
     function TextSize(sUTF8: string; AMaxWidth: integer; ARightToLeft: boolean): TSize; overload; virtual; abstract;
     function TextSizeF(sUTF8: string; AMaxWidthF: single; ARightToLeft: boolean): TPointF; overload; virtual;
-
-    function TextFitInfo(sUTF8: string; AMaxWidth: integer): integer; virtual; abstract;
-    function TextFitInfoF(sUTF8: string; AMaxWidthF: single): integer; virtual;
     function TextSizeAngle(sUTF8: string; {%H-}orientationTenthDegCCW: integer): TSize; virtual;
     function TextSizeAngleF(sUTF8: string; {%H-}orientationTenthDegCCW: integer): TPointF; virtual;
+
+    {** Returns the number of Unicode characters that fit into the specified size }
+    function TextFitInfo(sUTF8: string; AMaxWidth: integer): integer; virtual; abstract;
+    function TextFitInfoF(sUTF8: string; AMaxWidthF: single): integer; virtual;
 
     {** Draws the UTF8 encoded string, with color ''c''.
         If align is taLeftJustify, (''x'',''y'') is the top-left corner.
@@ -438,7 +444,7 @@ type
 {** Removes line ending and tab characters from a string (for a function
     like ''TextOut'' that does not handle this). this works with UTF8 strings
     as well }
-function CleanTextOutString(s: string): string;
+function CleanTextOutString(const s: string): string;
 {** Remove the line ending at the specified position or return False.
     This works with UTF8 strings however the index is the byte index }
 function RemoveLineEnding(var s: string; indexByte: integer): boolean;
@@ -518,6 +524,16 @@ type
     function GetBitmapDraft(AStream: TStream; AMaxWidth, AMaxHeight: integer; out AOriginalWidth,AOriginalHeight: integer): TBGRACustomBitmap; virtual; abstract;
   end;
 
+  { TBGRACustomWriterPNG }
+
+  TBGRACustomWriterPNG = class(TFPCustomImageWriter)
+  protected
+    function GetUseAlpha: boolean; virtual; abstract;
+    procedure SetUseAlpha(AValue: boolean); virtual; abstract;
+  public
+    property UseAlpha : boolean read GetUseAlpha write SetUseAlpha;
+  end;
+
 var
   {** List of stream readers for images }
   DefaultBGRAImageReader: array[TBGRAImageFormat] of TFPCustomImageReaderClass;
@@ -561,14 +577,14 @@ var
 
 implementation
 
-uses Math, SysUtils, BGRAUTF8, BGRAUnicode,
+uses Math, SysUtils, BGRAUTF8,
   FPReadXwd, FPReadXPM,
-  FPWriteJPEG, BGRAWritePNG, FPWriteBMP, FPWritePCX,
+  FPWriteJPEG, FPWriteBMP, FPWritePCX,
   FPWriteTGA, FPWriteXPM, FPReadPNM, FPWritePNM;
 
 function BGRABitmapVersionStr: string;
 var numbers: TStringList;
-  i,remaining: cardinal;
+  i,remaining: LongWord;
 begin
   numbers := TStringList.Create;
   remaining := BGRABitmapVersion;
@@ -598,6 +614,9 @@ end;
 
 {$DEFINE INCLUDE_IMPLEMENTATION}
 {$I bgracustombitmap.inc}
+
+{$DEFINE INCLUDE_IMPLEMENTATION}
+{$I bgrascanner.inc}
 
 {$DEFINE INCLUDE_IMPLEMENTATION}
 {$I bgrapixel.inc}
@@ -635,7 +654,7 @@ begin
   end;
 end;
 
-function CleanTextOutString(s: string): string;
+function CleanTextOutString(const s: string): string;
 var idxIn, idxOut: integer;
 begin
   setlength(result, length(s));
@@ -671,7 +690,18 @@ begin //we can ignore UTF8 character length because #13 and #10 are always 1 byt
       end
         else
           delete(s,indexByte,1);
-    end;
+    end else
+    if (s[indexByte] = #$C2) and (length(s) >= indexByte+1) and (s[indexByte+1] = #$85) then
+    begin
+      result := true;
+      delete(s,indexByte,2);
+    end else
+    if (s[indexByte] = #$E2) and (length(s) >= indexByte+2) and (s[indexByte+1] = #$80) and
+       (s[indexByte+2] in[#$A8,#$A9]) then
+    begin
+      result := true;
+      delete(s,indexByte,3);
+    end
   end;
 end;
 
@@ -693,7 +723,7 @@ procedure BGRADefaultWordBreakHandler(var ABefore, AAfter: string);
 const spacingChars = [' '];
   wordBreakChars = [' ',#9,'-','?','!'];
 var p, charLen: integer;
-  u: Cardinal;
+  u: LongWord;
 begin
   if (AAfter <> '') and (ABefore <> '') and not (AAfter[1] in spacingChars) and not (ABefore[length(ABefore)] in wordBreakChars) then
   begin
@@ -706,7 +736,7 @@ begin
       charLen := UTF8CharacterLength(@ABefore[p]);
       if p+charLen > length(ABefore)+1 then charLen := length(ABefore)+1-p;
       u := UTF8CodepointToUnicode(@ABefore[p],charLen);
-      if GetUnicodeBidiClass(u) = ubcNonSpacingMark then
+      if (GetUnicodeBidiClassEx(u) in[ubcNonSpacingMark, ubcCombiningLeftToRight]) then
         inc(p,charLen)
       else
         break;
@@ -778,6 +808,11 @@ begin
       result := f;
       exit;
     end;
+end;
+
+function GetFineClearTypeAuto: TBGRAFontQuality;
+begin
+  result := fqFineClearTypeRGB;
 end;
 
 { TBGRACustomFontRenderer }
@@ -1022,11 +1057,11 @@ var
   procedure DetectFromStream;
   var
     {%H-}magic: packed array[0..7] of byte;
-    {%H-}dwords: packed array[0..9] of DWORD;
-    magicAsText: string;
+    {%H-}dwords: packed array[0..9] of LongWord;
+    magicAsText, moreMagic: string;
 
     streamStartPos, maxFileSize: Int64;
-    expectedFileSize: DWord;
+    expectedFileSize: LongWord;
 
     procedure DetectTarga;
     var
@@ -1052,7 +1087,7 @@ var
 
     procedure DetectLazPaint;
     var
-      w,h: dword;
+      w,h: LongWord;
       i: integer;
     begin
       if (copy(magicAsText,1,8) = 'LazPaint') then //with header
@@ -1191,6 +1226,15 @@ var
     if (length(magicAsText)>3) and (magicAsText[1]='P') and
       (magicAsText[2] in['1'..'6']) and (magicAsText[3] = #10) then inc(scores[ifPortableAnyMap]);
 
+    if (copy(magicAsText,1,4) = 'RIFF') then
+    begin
+      AStream.Position:= streamStartPos+8;
+      setlength(moreMagic, 4);
+      if (AStream.Read(moreMagic[1],4) = 4)
+       and (moreMagic = 'WEBP') then
+        inc(scores[ifWebP], 2);
+    end;
+
     AStream.Position := streamStartPos;
   end;
 
@@ -1251,7 +1295,8 @@ begin
   if (ext = '.xpm') then result := ifXPixMap else
   if (ext = '.oxo') then result := ifPhoxo else
   if (ext = '.svg') then result := ifSvg else
-  if (ext = '.pbm') or (ext = '.pgm') or (ext = '.ppm') then result := ifPortableAnyMap;
+  if (ext = '.pbm') or (ext = '.pgm') or (ext = '.ppm') then result := ifPortableAnyMap else
+  if (ext = '.webp') then result := ifWebP;
 end;
 
 function SuggestImageExtension(AFormat: TBGRAImageFormat): string;
@@ -1276,6 +1321,7 @@ begin
     ifXPixMap: result := 'xpm';
     ifSvg: result := 'svg';
     ifPortableAnyMap: result := 'ppm';
+    ifWebP: result := 'webp';
     else result := '?';
   end;
 end;
@@ -1311,8 +1357,9 @@ begin
 
   if AFormat = ifPng then
   begin
-    result := TBGRAWriterPNG.Create;
-    TBGRAWriterPNG(result).UseAlpha := AHasTransparentPixels;
+    result := DefaultBGRAImageWriter[AFormat].Create;
+    if result is TBGRACustomWriterPNG then
+      TBGRACustomWriterPNG(result).UseAlpha := AHasTransparentPixels;
   end else
   if AFormat = ifBmp then
   begin
@@ -1340,7 +1387,7 @@ type
     code: pchar;
   end;
 
-{$IFDEF BGRABITMAP_USE_FPGUI}{$IFDEF MSWINDOWS}
+{$IFNDEF BGRABITMAP_USE_LCL}{$IFDEF MSWINDOWS}
 const
   RT_BITMAP = MAKEINTRESOURCE(2);
   RT_RCDATA = MAKEINTRESOURCE(10);
@@ -1453,9 +1500,10 @@ initialization
 
   {$DEFINE INCLUDE_INIT}
   {$I csscolorconst.inc}
+
+  fqFineClearType := @GetFineClearTypeAuto;
   
   DefaultBGRAImageWriter[ifJpeg] := TFPWriterJPEG;
-  DefaultBGRAImageWriter[ifPng] := TBGRAWriterPNG;
   DefaultBGRAImageWriter[ifBmp] := TFPWriterBMP;
   DefaultBGRAImageWriter[ifPcx] := TFPWriterPCX;
   DefaultBGRAImageWriter[ifTarga] := TFPWriterTarga;

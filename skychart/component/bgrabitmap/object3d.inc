@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: LGPL-3.0-linking-exception
 { TBGRAObject3D }
 
 procedure TBGRAObject3D.AddFace(AFace: IBGRAFace3D);

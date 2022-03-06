@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: LGPL-3.0-linking-exception
     {$IFDEF PARAM_USESSE} {$asmmode intel}
       minVal := 0;
       maxVal := 65535;
@@ -92,8 +93,8 @@
           else ec.alpha := a;
           DrawPixelInlineWithAlphaCheck(pdest, GammaCompression(ec));
         end;
-        colorPos += colorStep;
-        invZ += invZStep;
+        colorPos := colorPos + colorStep;
+        IncF(invZ, invZStep);
         inc(pdest);
         {$IFDEF PARAM_USEZBUFFER}
         inc(zbufferpos);

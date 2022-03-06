@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: LGPL-3.0-linking-exception
 unit UUnitTest;
 
 {$mode objfpc}{$H+}
@@ -5,7 +6,7 @@ unit UUnitTest;
 interface
 
 uses
-  Classes, SysUtils, BGRABitmapTypes;
+  BGRAClasses, SysUtils, BGRABitmapTypes;
 
 implementation
 

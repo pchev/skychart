@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: LGPL-3.0-linking-exception
 unit BGRAPhoxo;
 
 {$mode objfpc}{$H+}
@@ -5,7 +6,7 @@ unit BGRAPhoxo;
 interface
 
 uses
-  BGRABitmapTypes, FPImage, BGRALayers, BGRABitmap, Classes, SysUtils, BMPcomn;
+  BGRABitmapTypes, FPImage, BGRALayers, BGRABitmap, BGRAClasses, SysUtils, BMPcomn;
 
 const
   PhoxoHeaderMagic : packed array[1..4] of char = 'oXo ';
@@ -20,20 +21,20 @@ const
 type
   TPhoxoHeader = packed record
     magic: packed array[1..4] of char;
-    version: longword;
+    version: LongWord;
   end;
 
   TPhoxoBlockHeader = packed record
-    blockType : longword;
-    blockSize : longword;
+    blockType : LongWord;
+    blockSize : LongWord;
   end;
 
   TPhoxoLayerHeader = packed record
-    layerVisible: longword;
-    layerLimited: longword;
-    opacityPercent: longword;
+    layerVisible: LongWord;
+    layerLimited: LongWord;
+    opacityPercent: LongWord;
     bmpHeader: TBitMapInfoHeader;
-    redMask,greenMask,blueMask: longword;
+    redMask,greenMask,blueMask: LongWord;
   end;
 
   { TBGRAPhoxoDocument }
@@ -44,13 +45,15 @@ type
   protected
     function GetMimeType: string; override;
     procedure AddLayerFromPhoxoData(const ABlockHeader: TPhoxoBlockHeader; ABlockData: PByte);
+    procedure InternalLoadFromStream(AStream: TStream);
+    procedure InternalSaveToStream(AStream: TStream);
   public
     constructor Create; overload; override;
     constructor Create(AWidth, AHeight: integer); overload; override;
     procedure LoadFromStream(AStream: TStream); override;
     procedure LoadFromFile(const filenameUTF8: string); override;
-    procedure SaveToFile(const filenameUTF8: string); override;
     procedure SaveToStream(AStream: TStream); override;
+    procedure SaveToFile(const filenameUTF8: string); override;
     class function CheckFormat(Stream: TStream; ARestorePosition: boolean): boolean; static;
     class function ReadBlock(Stream: TStream; out AHeader: TPhoxoBlockHeader; out ABlockData: PByte): boolean; static;
     property DPIX: integer read FDPIX;
@@ -85,7 +88,7 @@ procedure RegisterPhoxoFormat;
 
 implementation
 
-uses BGRAUTF8, LazUTF8;
+uses BGRAUTF8;
 
 var AlreadyRegistered: boolean;
 
@@ -191,9 +194,9 @@ procedure TBGRAPhoxoDocument.AddLayerFromPhoxoData(
   const ABlockHeader: TPhoxoBlockHeader; ABlockData: PByte);
 var
   layerHeader: TPhoxoLayerHeader;
-  rawImageSize: longword;
-  rowStride: longword;
-  remaining: longword;
+  rawImageSize: LongWord;
+  rowStride: LongWord;
+  remaining: LongWord;
   bmp: TBGRABitmap;
   layerIndex,y,x: integer;
   pSrc: PByte;
@@ -280,6 +283,16 @@ begin
 end;
 
 procedure TBGRAPhoxoDocument.LoadFromStream(AStream: TStream);
+begin
+  OnLayeredBitmapLoadFromStreamStart;
+  try
+    InternalLoadFromStream(AStream);
+  finally
+    OnLayeredBitmapLoaded;
+  end;
+end;
+
+procedure TBGRAPhoxoDocument.InternalLoadFromStream(AStream: TStream);
 var blockHeader: TPhoxoBlockHeader;
     blockData: PByte;
     wCaption: widestring;
@@ -349,10 +362,22 @@ procedure TBGRAPhoxoDocument.LoadFromFile(const filenameUTF8: string);
 var AStream: TFileStreamUTF8;
 begin
   AStream := TFileStreamUTF8.Create(filenameUTF8,fmOpenRead or fmShareDenyWrite);
+  OnLayeredBitmapLoadStart(filenameUTF8);
   try
-    LoadFromStream(AStream);
+    InternalLoadFromStream(AStream);
   finally
+    OnLayeredBitmapLoaded;
     AStream.Free;
+  end;
+end;
+
+procedure TBGRAPhoxoDocument.SaveToStream(AStream: TStream);
+begin
+  OnLayeredBitmapSaveToStreamStart;
+  try
+    InternalSaveToStream(AStream);
+  finally
+    OnLayeredBitmapSaved;
   end;
 end;
 
@@ -360,14 +385,16 @@ procedure TBGRAPhoxoDocument.SaveToFile(const filenameUTF8: string);
 var AStream: TFileStreamUTF8;
 begin
   AStream := TFileStreamUTF8.Create(filenameUTF8,fmCreate or fmShareDenyWrite);
+  OnLayeredBitmapSaveStart(filenameUTF8);
   try
-    SaveToStream(AStream);
+    InternalSaveToStream(AStream);
   finally
+    OnLayeredBitmapSaved;
     AStream.Free;
   end;
 end;
 
-procedure TBGRAPhoxoDocument.SaveToStream(AStream: TStream);
+procedure TBGRAPhoxoDocument.InternalSaveToStream(AStream: TStream);
 
   procedure WriteFileHeader;
   var fileHeader: TPhoxoHeader;
@@ -378,7 +405,7 @@ procedure TBGRAPhoxoDocument.SaveToStream(AStream: TStream);
     AStream.WriteBuffer(fileHeader, sizeof(fileHeader));
   end;
 
-  procedure WriteBlockHeader(blockType: longword; blockSize: longword);
+  procedure WriteBlockHeader(blockType: LongWord; blockSize: LongWord);
   var blockHeader: TPhoxoBlockHeader;
   begin
     blockHeader.blockType := NtoLE(blockType);
@@ -397,7 +424,7 @@ procedure TBGRAPhoxoDocument.SaveToStream(AStream: TStream);
       pCaption: PWord;
 
       layerHeader: TPhoxoLayerHeader;
-      rowStride: longword;
+      rowStride: LongWord;
 
       temp,pdest: PByte;
       i,x,y: integer;
@@ -515,7 +542,11 @@ begin
   end;
 
   for i := 0 to NbLayers-1 do
+  begin
+    OnLayeredBitmapSaveProgress(round(i*100/NbLayers));
     WriteLayer(i);
+  end;
+  OnLayeredBitmapSaveProgress(100);
 
   WriteBlockHeader(PhoxoBlock_EndOfFile,0);
 end;

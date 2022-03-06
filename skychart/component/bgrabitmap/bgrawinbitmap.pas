@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: LGPL-3.0-linking-exception
 {
  /**************************************************************************\
                              bgrawinbitmap.pas
@@ -5,20 +6,6 @@
                  This unit should NOT be added to the 'uses' clause.
                  It contains accelerations for Windows. Notably, it
                  provides direct access to bitmap data.
-
- ****************************************************************************
- *                                                                          *
- *  This file is part of BGRABitmap library which is distributed under the  *
- *  modified LGPL.                                                          *
- *                                                                          *
- *  See the file COPYING.modifiedLGPL.txt, included in this distribution,   *
- *  for details about the copyright.                                        *
- *                                                                          *
- *  This program is distributed in the hope that it will be useful,         *
- *  but WITHOUT ANY WARRANTY; without even the implied warranty of          *
- *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.                    *
- *                                                                          *
- ****************************************************************************
 }
 
 unit BGRAWinBitmap;
@@ -28,7 +15,7 @@ unit BGRAWinBitmap;
 interface
 
 uses
-  Classes, SysUtils, BGRALCLBitmap, Windows, Graphics, GraphType;
+  BGRAClasses, SysUtils, BGRALCLBitmap, Windows, Graphics, GraphType;
 
 type
   { TBGRAWinBitmap }
@@ -154,7 +141,7 @@ end;
 procedure TBGRAWinBitmap.Draw(ACanvas: TCanvas; x, y: integer; Opaque: boolean);
 begin
   if self = nil then exit;
-  Draw(ACanvas, Classes.Rect(x,y,x+Width,y+Height), Opaque);
+  Draw(ACanvas, BGRAClasses.Rect(x,y,x+Width,y+Height), Opaque);
 end;
 
 procedure TBGRAWinBitmap.Draw(ACanvas: TCanvas; Rect: TRect; Opaque: boolean);
@@ -268,8 +255,8 @@ end;
 
 procedure TBGRAWinBitmap.GetImageFromCanvas(CanvasSource: TCanvas; x, y: integer);
 begin
-  self.Canvas.CopyRect(Classes.rect(0, 0, Width, Height), CanvasSource,
-    Classes.rect(X, Y, X + Width, Y + Height));
+  self.Canvas.CopyRect(BGRAClasses.rect(0, 0, Width, Height), CanvasSource,
+    BGRAClasses.rect(X, Y, X + Width, Y + Height));
 end;
 
 end.

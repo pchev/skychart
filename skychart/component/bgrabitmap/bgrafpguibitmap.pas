@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: LGPL-3.0-linking-exception
 unit BGRAfpGUIBitmap;
 
 {$mode objfpc}{$H+}
@@ -5,7 +6,7 @@ unit BGRAfpGUIBitmap;
 interface
 
 uses
-  SysUtils, Classes, BGRAGraphics, BGRABitmapTypes, BGRADefaultBitmap,
+  SysUtils, BGRAClasses, BGRAGraphics, BGRABitmapTypes, BGRADefaultBitmap,
   BGRAFreeType, EasyLazFreeType, LazFreeTypeFontCollection,
   BGRACanvas;
 
@@ -32,6 +33,7 @@ type
     procedure NotAvailable;
   public
     destructor Destroy; override;
+    procedure AssignToBitmap(ADestination: TBitmap);
     class procedure AddFreeTypeFontFolder(ADirectory: string; AUTF8: boolean = false); static;
     class procedure AddFreeTypeFontFile(AFilename: string; AUTF8: boolean = false); static;
     procedure Draw(ACanvas: TCanvas; x, y: integer; {%H-}Opaque: boolean=True); override;
@@ -83,7 +85,7 @@ procedure TBGRAfpGUIBitmap.RebuildBitmap;
 var pmask, pmaskline: PByte;
   pdata: PBGRAPixel;
   raw: TRawImage;
-  x,y,bit,masklinesize,curmaskbyte: NativeUInt;
+  x,y,bit,masklinesize,curmaskbyte: UInt32or64;
 begin
   if FBitmap.Transparent then
   begin
@@ -132,7 +134,7 @@ var
 begin
   if (ARawImage.Width <> Width) or
     (ARawImage.Height <> Height) then
-    raise Exception.Create('Bitmap size is inconsistant');
+    raise Exception.Create('Bitmap size is inconsistent');
 
   lineSize := Width*sizeof(TBGRAPixel);
   for y := 0 to Height-1 do
@@ -179,6 +181,11 @@ begin
   inherited Destroy;
 end;
 
+procedure TBGRAfpGUIBitmap.AssignToBitmap(ADestination: TBitmap);
+begin
+  ADestination.Assign(Bitmap);
+end;
+
 class procedure TBGRAfpGUIBitmap.AddFreeTypeFontFolder(ADirectory: string; AUTF8: boolean);
 begin
   if AUTF8 then ADirectory:= Utf8ToAnsi(ADirectory);
@@ -212,7 +219,7 @@ procedure TBGRAfpGUIBitmap.Draw(ACanvas: TGUICanvas; Rect: TRect;
   Opaque: boolean);
 begin
   BitmapTransparent := not Opaque;
-  ACanvas.StretchDraw(rect.left,rect.top,rect.right-rect.left,rect.bottom-rect.top, FBitmap.RawImage);
+  ACanvas.StretchDraw(rect.left,rect.top,rect.right-rect.left,rect.bottom-rect.top, Bitmap.RawImage);
 end;
 
 procedure TBGRAfpGUIBitmap.GetImageFromCanvas(CanvasSource: TCanvas; x,

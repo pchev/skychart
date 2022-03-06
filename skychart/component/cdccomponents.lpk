@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <CONFIG>
-  <Package Version="4">
+  <Package Version="5">
     <Name Value="CDCcomponents"/>
     <Type Value="RunAndDesignTime"/>
     <AddToProjectUsesSection Value="True"/>
@@ -16,10 +16,10 @@
       </Parsing>
     </CompilerOptions>
     <Description Value="Requires packages for Cartes du Ciel"/>
+    <CompatibilityMode Value="True"/>
     <RequiredPkgs Count="16">
       <Item1>
-        <PackageName Value="BGRABitmapPack_nogl"/>
-        <DefaultFilename Value="bgrabitmap/bgrabitmappack_nogl.lpk"/>
+        <PackageName Value="BGRABitmapPack"/>
       </Item1>
       <Item2>
         <PackageName Value="indiclient"/>

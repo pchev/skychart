@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: LGPL-3.0-linking-exception
 unit ExpandedBitmap;
 
 {$mode objfpc}{$H+}
@@ -5,7 +6,7 @@ unit ExpandedBitmap;
 interface
 
 uses
-  Classes, SysUtils, BGRABitmapTypes, UniversalDrawer;
+  BGRAClasses, SysUtils, BGRABitmapTypes, UniversalDrawer;
 
 type
 
@@ -53,8 +54,8 @@ procedure ExpandedChunkSetPixels(
     ASource: PExpandedPixel; ADest: PExpandedPixel;
     AAlpha: Word; ACount: integer; ASourceStride: integer); inline;
 var
-  alphaOver: NativeUInt;
-  finalAlpha, residualAlpha, finalAlphaDiv2: NativeUInt;
+  alphaOver: UInt32or64;
+  finalAlpha, residualAlpha, finalAlphaDiv2: UInt32or64;
 begin
   if AAlpha=0 then exit;
   if AAlpha=65535 then
@@ -71,7 +72,7 @@ begin
     if AAlpha > 32768 then alphaOver := AAlpha+1 else alphaOver := AAlpha;
     while ACount > 0 do
     begin
-      residualAlpha := (ADest^.alpha*NativeUInt(65536-alphaOver)+32768) shr 16;
+      residualAlpha := (ADest^.alpha*UInt32or64(65536-alphaOver)+32768) shr 16;
       finalAlpha := residualAlpha + ((ASource^.alpha*alphaOver+32768) shr 16);
       if finalAlpha <= 0 then ADest^ := ExpandedPixelTransparent else
       begin
@@ -79,11 +80,11 @@ begin
         finalAlphaDiv2 := finalAlpha shr 1;
         ADest^.alpha:= finalAlpha;
         ADest^.red := (ADest^.red*residualAlpha +
-                     ASource^.red*NativeUInt(finalAlpha-residualAlpha) + finalAlphaDiv2) div finalAlpha;
+                     ASource^.red*UInt32or64(finalAlpha-residualAlpha) + finalAlphaDiv2) div finalAlpha;
         ADest^.green := (ADest^.green*residualAlpha +
-                     ASource^.green*NativeUInt(finalAlpha-residualAlpha) + finalAlphaDiv2) div finalAlpha;
+                     ASource^.green*UInt32or64(finalAlpha-residualAlpha) + finalAlphaDiv2) div finalAlpha;
         ADest^.blue := (ADest^.blue*residualAlpha +
-                     ASource^.blue*NativeUInt(finalAlpha-residualAlpha) + finalAlphaDiv2) div finalAlpha;
+                     ASource^.blue*UInt32or64(finalAlpha-residualAlpha) + finalAlphaDiv2) div finalAlpha;
       end;
       inc(ADest);
       dec(ACount);
@@ -107,7 +108,7 @@ procedure ExpandedChunkDrawPixels(
     ASource: PExpandedPixel; ADest: PExpandedPixel;
     AAlpha: Word; ACount: integer; ASourceStride: integer); inline;
 var
-  alphaOver, srcAlphaOver, finalAlpha, finalAlphaDiv2, residualAlpha: NativeUInt;
+  alphaOver, srcAlphaOver, finalAlpha, finalAlphaDiv2, residualAlpha: UInt32or64;
 begin
   if AAlpha=0 then exit;
   if AAlpha >= 32768 then alphaOver := AAlpha+1 else alphaOver := AAlpha;
@@ -119,7 +120,7 @@ begin
     else
     begin
       if srcAlphaOver >= 32768 then inc(srcAlphaOver);
-      residualAlpha := (ADest^.alpha*NativeUInt(65536-srcAlphaOver)+32768) shr 16;
+      residualAlpha := (ADest^.alpha*UInt32or64(65536-srcAlphaOver)+32768) shr 16;
       finalAlpha := residualAlpha + srcAlphaOver;
       if finalAlpha <= 0 then ADest^ := ExpandedPixelTransparent else
       begin
@@ -155,8 +156,8 @@ procedure ExpandedChunkXorPixels(
     ASource: PExpandedPixel; ADest: PExpandedPixel;
     AAlpha: Word; ACount: integer; ASourceStride: integer); inline;
 var
-  alphaOver: NativeUInt;
-  finalAlpha, residualAlpha, finalAlphaDiv2: NativeUInt;
+  alphaOver: UInt32or64;
+  finalAlpha, residualAlpha, finalAlphaDiv2: UInt32or64;
   xored: TExpandedPixel;
 begin
   if AAlpha=0 then exit;
@@ -175,7 +176,7 @@ begin
     while ACount > 0 do
     begin
       PQWord(@xored)^ := PQWord(ADest)^ xor PQWord(ASource)^;
-      residualAlpha := (ADest^.alpha*NativeUInt(65536-alphaOver)+32768) shr 16;
+      residualAlpha := (ADest^.alpha*UInt32or64(65536-alphaOver)+32768) shr 16;
       finalAlpha := residualAlpha + ((xored.alpha*alphaOver+32768) shr 16);
       if finalAlpha <= 0 then ADest^ := ExpandedPixelTransparent else
       begin
@@ -183,11 +184,11 @@ begin
         finalAlphaDiv2 := finalAlpha shr 1;
         ADest^.alpha:= finalAlpha;
         ADest^.red := (ADest^.red*residualAlpha +
-                     xored.red*NativeUInt(finalAlpha-residualAlpha) + finalAlphaDiv2) div finalAlpha;
+                     xored.red*UInt32or64(finalAlpha-residualAlpha) + finalAlphaDiv2) div finalAlpha;
         ADest^.green := (ADest^.green*residualAlpha +
-                     xored.green*NativeUInt(finalAlpha-residualAlpha) + finalAlphaDiv2) div finalAlpha;
+                     xored.green*UInt32or64(finalAlpha-residualAlpha) + finalAlphaDiv2) div finalAlpha;
         ADest^.blue := (ADest^.blue*residualAlpha +
-                     xored.blue*NativeUInt(finalAlpha-residualAlpha) + finalAlphaDiv2) div finalAlpha;
+                     xored.blue*UInt32or64(finalAlpha-residualAlpha) + finalAlphaDiv2) div finalAlpha;
       end;
       inc(ADest);
       dec(ACount);
@@ -286,8 +287,8 @@ procedure ExpandedChunkSetPixelsExceptTransparent(
     ASource: PExpandedPixel; ADest: PExpandedPixel;
     AAlpha: Word; ACount: integer; ASourceStride: integer); inline;
 var
-  alphaOver: NativeUInt;
-  finalAlpha, residualAlpha, finalAlphaDiv2: NativeUInt;
+  alphaOver: UInt32or64;
+  finalAlpha, residualAlpha, finalAlphaDiv2: UInt32or64;
 begin
   if AAlpha=0 then exit;
   if AAlpha=65535 then
@@ -306,7 +307,7 @@ begin
     begin
       if ASource^.alpha = 65535 then
       begin
-        residualAlpha := (ADest^.alpha*NativeUInt(65536-alphaOver)+32768) shr 16;
+        residualAlpha := (ADest^.alpha*UInt32or64(65536-alphaOver)+32768) shr 16;
         finalAlpha := residualAlpha + AAlpha;
         if finalAlpha <= 0 then ADest^ := ExpandedPixelTransparent else
         begin
@@ -314,11 +315,11 @@ begin
           finalAlphaDiv2 := finalAlpha shr 1;
           ADest^.alpha:= finalAlpha;
           ADest^.red := (ADest^.red*residualAlpha +
-                       ASource^.red*NativeUInt(finalAlpha-residualAlpha) + finalAlphaDiv2) div finalAlpha;
+                       ASource^.red*UInt32or64(finalAlpha-residualAlpha) + finalAlphaDiv2) div finalAlpha;
           ADest^.green := (ADest^.green*residualAlpha +
-                       ASource^.green*NativeUInt(finalAlpha-residualAlpha) + finalAlphaDiv2) div finalAlpha;
+                       ASource^.green*UInt32or64(finalAlpha-residualAlpha) + finalAlphaDiv2) div finalAlpha;
           ADest^.blue := (ADest^.blue*residualAlpha +
-                       ASource^.blue*NativeUInt(finalAlpha-residualAlpha) + finalAlphaDiv2) div finalAlpha;
+                       ASource^.blue*UInt32or64(finalAlpha-residualAlpha) + finalAlphaDiv2) div finalAlpha;
         end;
       end;
       inc(ADest);
@@ -511,7 +512,7 @@ var
   pDest: PExpandedPixel;
   qty, maskStride: Integer;
   pMask: PByteMask;
-  factor: NativeUInt;
+  factor: UInt32or64;
 begin
   with PExpandedPixelScannerBrushFixedData(AFixedData)^ do
   begin
@@ -566,7 +567,7 @@ procedure ExpandedAlphaBrushSetPixels(AFixedData: Pointer;
     AContextData: PUniBrushContext; AAlpha: Word; ACount: integer);
 var
   pDest: PExpandedPixel;
-  alphaOver, residualAlpha, finalAlpha: NativeUInt;
+  alphaOver, residualAlpha, finalAlpha: UInt32or64;
 begin
   if AAlpha=0 then
   begin
@@ -589,7 +590,7 @@ begin
     else alphaOver := AAlpha;
     while ACount > 0 do
     begin
-      residualAlpha := (pDest^.alpha*NativeUInt(65536-alphaOver)+32768) shr 16;
+      residualAlpha := (pDest^.alpha*UInt32or64(65536-alphaOver)+32768) shr 16;
       finalAlpha := residualAlpha + (PWord(AFixedData)^*alphaOver+32768) shr 16;
       if finalAlpha > 65535 then finalAlpha := 65535;
       pDest^.alpha:= finalAlpha;
@@ -604,7 +605,7 @@ procedure ExpandedAlphaBrushErasePixels(AFixedData: Pointer;
     AContextData: PUniBrushContext; AAlpha: Word; ACount: integer);
 var
   pDest: PExpandedPixel;
-  alphaMul, finalAlpha: NativeUInt;
+  alphaMul, finalAlpha: UInt32or64;
 begin
   if AAlpha=0 then
   begin

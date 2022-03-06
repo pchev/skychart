@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: LGPL-3.0-linking-exception
 {$IFDEF INCLUDE_FILLDENSITY}
 {$UNDEF INCLUDE_FILLDENSITY}
 

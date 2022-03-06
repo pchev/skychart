@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: LGPL-3.0-linking-exception
 unit BGRATypewriter;
 
 {$mode objfpc}{$H+}
@@ -5,7 +6,7 @@ unit BGRATypewriter;
 interface
 
 uses
-  Classes, SysUtils, AvgLvlTree, BGRABitmapTypes, BGRACanvas2D, BGRATransform;
+  BGRAClasses, SysUtils, Avl_Tree, BGRABitmapTypes, BGRACanvas2D, BGRATransform;
 
 type
   TGlyphBoxes = array of record
@@ -32,6 +33,11 @@ type
     property Identifier: string read FIdentifier;
     procedure SaveToStream(AStream: TStream);
     class function LoadFromStream(AStream: TStream): TBGRAGlyph; static;
+  end;
+
+  TKerningInfo = class
+    IdLeft, IdRight: string;
+    KerningOffset: single;
   end;
 
   TGlyphPointCurveMode= TEasyBezierCurveMode;
@@ -86,11 +92,11 @@ type
   TBGRAGlyphDisplayInfo = record
     Glyph: TBGRAGlyph;
     Matrix: TAffineMatrix;
-    Mirrored: boolean;
+    Mirrored, RTL: WordBool;
   end;
 
   TBGRATextDisplayInfo = array of TBGRAGlyphDisplayInfo;
-  TBrowseGlyphCallbackFlag = (gcfMirrored, gcfMerged, gcfRightToLeft);
+  TBrowseGlyphCallbackFlag = (gcfMirrored, gcfMerged, gcfRightToLeft, gcfKerning);
   TBrowseGlyphCallbackFlags = set of TBrowseGlyphCallbackFlag;
   TBrowseGlyphCallback = procedure(ATextUTF8: string; AGlyph: TBGRAGlyph;
     AFlags: TBrowseGlyphCallbackFlags; AData: Pointer; out AContinue: boolean) of object;
@@ -99,6 +105,7 @@ type
     WidthAccumulator, MaxWidth: single;
     CharCount: integer;
     ByteCount: integer;
+    PrevGlyphId: string;
   end;
 
   TDisplayInfoCallbackData = record
@@ -106,6 +113,12 @@ type
     Matrix: TAffineMatrix;
     Info: TBGRATextDisplayInfo;
     InfoIndex: integer;
+    PrevGlyphId: string;
+  end;
+
+  TTextSizeCallbackData = record
+    Size: TPointF;
+    PrevGlyphId: string;
   end;
 
   { TBGRACustomTypeWriter }
@@ -113,7 +126,8 @@ type
   TBGRACustomTypeWriter = class
   private
     FBidiMode: TFontBidiMode;
-    FGlyphs: TAvgLvlTree;
+    FGlyphs: TAVLTree;
+    FKerningInfos: TAVLTree;
     procedure GlyphCallbackForDisplayInfo({%H-}ATextUTF8: string;
       AGlyph: TBGRAGlyph; AFlags: TBrowseGlyphCallbackFlags; AData: Pointer; out
       AContinue: boolean);
@@ -124,8 +138,7 @@ type
       AGlyph: TBGRAGlyph; {%H-}AFlags: TBrowseGlyphCallbackFlags; AData: pointer; out AContinue: boolean);
   protected
     TypeWriterMatrix: TAffineMatrix;
-    function CompareGlyph({%H-}Tree: TAvgLvlTree; Data1, Data2: Pointer): integer;
-    function FindGlyph(AIdentifier: string): TAvgLvlTreeNode;
+    function FindGlyph(AIdentifier: string): TAVLTreeNode;
     function GetGlyph(AIdentifier: string): TBGRAGlyph; virtual;
     procedure SetGlyph(AIdentifier: string; AValue: TBGRAGlyph);
     function GetDisplayInfo(ATextUTF8: string; X,Y: Single;
@@ -145,9 +158,13 @@ type
     function HeaderName: string; virtual;
     procedure BrowseGlyphs(ATextUTF8: string; ACallback: TBrowseGlyphCallback; AData: pointer; ADisplayOrder: boolean);
     procedure BrowseAllGlyphs(ACallback: TBrowseGlyphCallback; AData: pointer);
+    function FindKerning(AIdLeft, AIdRight: string): TAVLTreeNode;
+    function GetKerningOffset(AIdBefore, AIdAfter: string; ARightToLeft: boolean): single; virtual;
+    function ComputeKerning(AIdLeft, AIdRight: string): single; virtual;
   public
     OutlineMode: TBGRATypeWriterOutlineMode;
     DrawGlyphsSimultaneously : boolean;
+    SubstituteBidiBracket: boolean;
     LigatureWithF: boolean;
     constructor Create;
     function GetTextSizeBeforeTransform(ATextUTF8 :string): TPointF;
@@ -162,7 +179,7 @@ type
     function GetGlyphBox(AIdentifier: string; X,Y: Single; AAlign: TBGRATypeWriterAlignment = twaTopLeft): TAffineBox;
     function GetTextBox(ATextUTF8: string; X,Y: Single; AAlign: TBGRATypeWriterAlignment = twaTopLeft): TAffineBox;
     function GetTextGlyphBoxes(ATextUTF8: string; X,Y: Single; AAlign: TBGRATypeWriterAlignment = twaTopLeft): TGlyphBoxes;
-    procedure NeedGlyphRange(AUnicodeFrom, AUnicodeTo: Cardinal);
+    procedure NeedGlyphRange(AUnicodeFrom, AUnicodeTo: LongWord);
     procedure NeedGlyphAnsiRange;
     destructor Destroy; override;
     property BidiMode: TFontBidiMode read FBidiMode write SetBidiMode;
@@ -174,13 +191,6 @@ function ComputeEasyBezier(APoints: array of TPointF; ACurveMode: array of TGlyp
 implementation
 
 uses BGRAUTF8, BGRAUnicode, math;
-
-const
-  aleph = 'ا';
-  alephHamzaBelow = 'إ';
-  alephHamzaAbove = 'أ';
-  alephMaddaAbove = 'آ';
-  lam = 'ل';
 
 procedure LEWritePointF(Stream: TStream; AValue: TPointF);
 begin
@@ -513,10 +523,22 @@ begin
   AStream.Position:= EndPosition;
 end;
 
+function CompareGlyphNode(Data1, Data2: Pointer): integer;
+begin
+  result := CompareStr(TBGRAGlyph(Data1).Identifier,TBGRAGlyph(Data2).Identifier);
+end;
+
+function CompareKerningInfo(Data1, Data2: Pointer): integer;
+begin
+  result := CompareStr(TKerningInfo(Data1).IdLeft, TKerningInfo(Data2).IdLeft);
+  if result = 0 then
+    result := CompareStr(TKerningInfo(Data1).IdRight, TKerningInfo(Data2).IdRight);
+end;
+
 { TBGRACustomTypeWriter }
 
 function TBGRACustomTypeWriter.GetGlyph(AIdentifier: string): TBGRAGlyph;
-var Node: TAvgLvlTreeNode;
+var Node: TAVLTreeNode;
 begin
   Node := FindGlyph(AIdentifier);
   if Node = nil then
@@ -526,7 +548,7 @@ begin
 end;
 
 procedure TBGRACustomTypeWriter.SetGlyph(AIdentifier: string; AValue: TBGRAGlyph);
-var Node: TAvgLvlTreeNode;
+var Node: TAVLTreeNode;
 begin
   if AValue.Identifier <> AIdentifier then
     raise exception.Create('Identifier mismatch');
@@ -557,33 +579,33 @@ begin
   AContinue := true;
   with TTextFitInfoCallbackData(AData^) do
   begin
-    if Assigned(AGlyph) then
+    newWidth := WidthAccumulator+AGlyph.Width;
+    if gcfKerning in AFlags then
+      IncF(newWidth, GetKerningOffset(PrevGlyphId, AGlyph.Identifier, gcfRightToLeft in AFlags));
+    if newWidth < MaxWidth then
     begin
-      newWidth := WidthAccumulator+AGlyph.Width;
-      if newWidth < MaxWidth then
+      WidthAccumulator := newWidth;
+      inc(ByteCount, length(ATextUTF8));
+      inc(CharCount, UTF8Length(ATextUTF8));
+    end else
+    begin
+      AContinue := false;
+      if gcfMerged in AFlags then
       begin
-        WidthAccumulator := newWidth;
-        inc(ByteCount, length(ATextUTF8));
-        inc(CharCount, UTF8Length(ATextUTF8));
-      end else
-      begin
-        AContinue := false;
-        if gcfMerged in AFlags then
+        partialCharCount := Trunc(UTF8Length(ATextUTF8)*(MaxWidth-WidthAccumulator)/AGlyph.Width);
+        p := @ATextUTF8[1];
+        pEnd := p+length(ATextUTF8);
+        while (p<pEnd) and (partialCharCount > 0) do
         begin
-          partialCharCount := Trunc(UTF8Length(ATextUTF8)*(MaxWidth-WidthAccumulator)/AGlyph.Width);
-          p := @ATextUTF8[1];
-          pEnd := p+length(ATextUTF8);
-          while (p<pEnd) and (partialCharCount > 0) do
-          begin
-            charLen := UTF8CharacterLength(p);
-            inc(p, charLen);
-            inc(ByteCount, charLen);
-            inc(CharCount);
-            dec(partialCharCount);
-          end;
+          charLen := UTF8CharacterLength(p);
+          inc(p, charLen);
+          inc(ByteCount, charLen);
+          inc(CharCount);
+          dec(partialCharCount);
         end;
       end;
     end;
+    PrevGlyphId:= AGlyph.Identifier;
   end;
 end;
 
@@ -591,9 +613,18 @@ procedure TBGRACustomTypeWriter.GlyphCallbackForDisplayInfo(ATextUTF8: string;
   AGlyph: TBGRAGlyph; AFlags: TBrowseGlyphCallbackFlags; AData: Pointer; out AContinue: boolean);
 var
   m2: TAffineMatrix;
+  kerning: Single;
 begin
   with TDisplayInfoCallbackData(AData^) do
   begin
+    if gcfKerning in AFlags then
+    begin
+      if gcfRightToLeft in AFlags then
+        kerning := GetKerningOffset(AGlyph.Identifier, PrevGlyphId, gcfRightToLeft in AFlags)
+        else kerning := GetKerningOffset(PrevGlyphId, AGlyph.Identifier, gcfRightToLeft in AFlags);
+      Matrix := Matrix*AffineMatrixTranslation(kerning,0);
+    end;
+
     if Align in [twaLeft,twaMiddle,twaRight] then
       m2 := Matrix*AffineMatrixTranslation(0,-AGlyph.Height/2) else
     if Align in [twaBottomLeft,twaBottom,twaBottomRight] then
@@ -606,22 +637,19 @@ begin
 
     Info[InfoIndex].Glyph := AGlyph;
     Info[InfoIndex].Mirrored:= gcfMirrored in AFlags;
+    Info[InfoIndex].RTL := gcfRightToLeft in AFlags;
     Info[InfoIndex].Matrix := m2;
 
     Matrix := Matrix*AffineMatrixTranslation(AGlyph.Width,0);
     inc(InfoIndex);
+    PrevGlyphId := AGlyph.Identifier;
   end;
   AContinue:= true;
 end;
 
-function TBGRACustomTypeWriter.CompareGlyph(Tree: TAvgLvlTree; Data1, Data2: Pointer): integer;
-begin
-  result := CompareStr(TBGRAGlyph(Data1).Identifier,TBGRAGlyph(Data2).Identifier);
-end;
-
-function TBGRACustomTypeWriter.FindGlyph(AIdentifier: string): TAvgLvlTreeNode;
+function TBGRACustomTypeWriter.FindGlyph(AIdentifier: string): TAVLTreeNode;
 var Comp: integer;
-  Node: TAvgLvlTreeNode;
+  Node: TAVLTreeNode;
 begin
   Node:=FGlyphs.Root;
   while (Node<>nil) do begin
@@ -638,16 +666,20 @@ end;
 
 constructor TBGRACustomTypeWriter.Create;
 begin
-  FGlyphs := TAvgLvlTree.CreateObjectCompare(@CompareGlyph);
+  FGlyphs := TAVLTree.Create(@CompareGlyphNode);
   TypeWriterMatrix := AffineMatrixIdentity;
   OutlineMode:= twoFill;
   DrawGlyphsSimultaneously := false;
+  FKerningInfos := nil;
 end;
 
 function TBGRACustomTypeWriter.GetTextSizeBeforeTransform(ATextUTF8: string): TPointF;
+var data: TTextSizeCallbackData;
 begin
-  result := PointF(0,0);
-  BrowseGlyphs(ATextUTF8, @GlyphCallbackForTextSizeBeforeTransform, @result, false);
+  data.Size := PointF(0,0);
+  data.PrevGlyphId:= '';
+  BrowseGlyphs(ATextUTF8, @GlyphCallbackForTextSizeBeforeTransform, @data, false);
+  result := data.Size;
 end;
 
 procedure TBGRACustomTypeWriter.TextFitInfoBeforeTransform(ATextUTF8: string; AMaxWidth: single;
@@ -659,6 +691,7 @@ begin
   data.MaxWidth := AMaxWidth;
   data.CharCount:= 0;
   data.ByteCount:= 0;
+  data.PrevGlyphId:= '';
   BrowseGlyphs(ATextUTF8, @GlyphCallbackForTextFitInfoBeforeTransform, @data, false);
   ACharCount:= data.CharCount;
   AByteCount:= data.ByteCount;
@@ -755,8 +788,8 @@ begin
   end;
 end;
 
-procedure TBGRACustomTypeWriter.NeedGlyphRange(AUnicodeFrom, AUnicodeTo: Cardinal);
-var c: cardinal;
+procedure TBGRACustomTypeWriter.NeedGlyphRange(AUnicodeFrom, AUnicodeTo: LongWord);
+var c: LongWord;
 begin
   for c := AUnicodeFrom to AUnicodeTo do
     GetGlyph(UnicodeCharToUTF8(c));
@@ -778,6 +811,7 @@ begin
   data.Matrix := GetTextMatrix(ATextUTF8, X,Y,AAlign);
   setlength(data.Info, UTF8Length(ATextUTF8));
   data.InfoIndex := 0;
+  data.PrevGlyphId:= '';
   BrowseGlyphs(ATextUTF8, @GlyphCallbackForDisplayInfo, @data, true);
   setlength(data.Info, data.InfoIndex);
   result := data.Info;
@@ -812,13 +846,15 @@ end;
 procedure TBGRACustomTypeWriter.ClearGlyphs;
 begin
   FGlyphs.FreeAndClear;
+  if Assigned(FKerningInfos) then
+    FKerningInfos.FreeAndClear;
 end;
 
 procedure TBGRACustomTypeWriter.RemoveGlyph(AIdentifier: string);
-var Node: TAvgLvlTreeNode;
+var Node: TAVLTreeNode;
 begin
   Node := FindGlyph(AIdentifier);
-  if Node <> nil then FGlyphs.Delete(Node);
+  if Node <> nil then FGlyphs.FreeAndDelete(Node);
 end;
 
 procedure TBGRACustomTypeWriter.AddGlyph(AGlyph: TBGRAGlyph);
@@ -827,7 +863,8 @@ begin
 end;
 
 procedure TBGRACustomTypeWriter.SaveGlyphsToStream(AStream: TStream);
-var Enumerator: TAvgLvlTreeNodeEnumerator;
+var
+  Enumerator: TAVLTreeNodeEnumerator;
 begin
   LEWriteLongint(AStream,CustomHeaderSize);
   WriteCustomHeader(AStream);
@@ -893,10 +930,10 @@ begin
     exit;
   end;
   tGlyph := PointF(0,0);
-  if AAlign in [twaTop,twaMiddle,twaBottom] then tGlyph.X -= AGlyph.Width/2;
-  if AAlign in [twaTopRight,twaRight,twaBottomRight] then tGlyph.X -= AGlyph.Width;
-  if AAlign in [twaLeft,twaMiddle,twaRight] then tGlyph.Y -= AGlyph.Height/2;
-  if AAlign in [twaBottomLeft,twaBottom,twaBottomRight] then tGlyph.Y -= AGlyph.Height;
+  if AAlign in [twaTop,twaMiddle,twaBottom] then DecF(tGlyph.X, AGlyph.Width/2);
+  if AAlign in [twaTopRight,twaRight,twaBottomRight] then DecF(tGlyph.X, AGlyph.Width);
+  if AAlign in [twaLeft,twaMiddle,twaRight] then DecF(tGlyph.Y, AGlyph.Height/2);
+  if AAlign in [twaBottomLeft,twaBottom,twaBottomRight] then DecF(tGlyph.Y, AGlyph.Height);
   result := AffineMatrixTranslation(X,Y)*TypeWriterMatrix*AffineMatrixTranslation(tGlyph.X,tGlyph.Y);
 end;
 
@@ -909,8 +946,8 @@ begin
   if not (AAlign in [twaLeft,twaTopLeft,twaBottomLeft]) then
   begin
     size := GetTextSizeBeforeTransform(ATextUTF8);
-    if AAlign in[twaTop,twaMiddle,twaBottom] then tGlyph.X := size.x/2 else
-    if AAlign in[twaTopRight, twaRight, twaBottomRight] then tGlyph.X := size.x;
+    if AAlign in[twaTop,twaMiddle,twaBottom] then tGlyph.X := -size.x/2 else
+    if AAlign in[twaTopRight, twaRight, twaBottomRight] then tGlyph.X := -size.x;
   end;
   result := AffineMatrixTranslation(X,Y)*TypeWriterMatrix*AffineMatrixTranslation(tGlyph.X,tGlyph.Y);
 end;
@@ -1062,18 +1099,22 @@ var
 var
   nextchar,glyphId: string;
   g: TBGRAGlyph;
-  u: Cardinal;
+  u: LongWord;
   shouldContinue: boolean;
   flags: TBrowseGlyphCallbackFlags;
   i,charDestPos,charLen: integer;
+  prevGlyphId: string;
+  prevRTL: boolean;
+  bracketInfo: TUnicodeBracketInfo;
 begin
   if ATextUTF8 = '' then exit;
 
-  if BidiMode = fbmAuto then bidiArray := AnalyzeBidiUTF8(ATextUTF8)
-  else bidiArray := AnalyzeBidiUTF8(ATextUTF8, BidiMode = fbmRightToLeft);
+  bidiArray := AnalyzeBidiUTF8(ATextUTF8, BidiMode);
   if ADisplayOrder then OrderedCharInfo else UnorderedCharInfo;
 
   cur := 0;
+  prevGlyphId:= '';
+  prevRTL := false;
   while cur < length(charInfo) do
   begin
     curStart := cur;
@@ -1088,10 +1129,10 @@ begin
     TryMerge(['f','f']);
     TryMerge(['f','i']);
     TryMerge(['f','l']);
-    TryMerge([aleph,lam]);
-    TryMerge([alephHamzaAbove,lam]);
-    TryMerge([alephHamzaBelow,lam]);
-    TryMerge([alephMaddaAbove,lam]);
+    TryMerge([UTF8_ARABIC_ALEPH,UTF8_ARABIC_LAM]);
+    TryMerge([UTF8_ARABIC_ALEPH_HAMZA_ABOVE,UTF8_ARABIC_LAM]);
+    TryMerge([UTF8_ARABIC_ALEPH_HAMZA_BELOW,UTF8_ARABIC_LAM]);
+    TryMerge([UTF8_ARABIC_ALEPH_MADDA_ABOVE,UTF8_ARABIC_LAM]);
     //text extract correspond to the unordered actual sequence of characters
     setlength(nextchar, max(charInfo[curStart].charEnd, charInfo[cur-1].charEnd)
                        -min(charInfo[curStart].charStart, charInfo[cur-1].charStart));
@@ -1118,22 +1159,32 @@ begin
         inc(charDestPos, charLen);
       end;
     end;
-    if (curLigatureRight and curRTLScript) or
-       (curLigatureLeft and not curRTLScript) then glyphId := UnicodeCharToUTF8(UNICODE_ZERO_WIDTH_JOINER)+glyphId;
-    if (curLigatureLeft and curRTLScript) or
-       (curLigatureRight and not curRTLScript) then glyphId := glyphId+UnicodeCharToUTF8(UNICODE_ZERO_WIDTH_JOINER);
+    glyphId := UTF8Ligature(glyphId, curRTLScript, curLigatureLeft, curLigatureRight);
+    flags := [];
+    if merged then include(flags, gcfMerged);
+    if curRTL then include(flags, gcfRightToLeft);
+    if curRTL and charInfo[curStart].bidiInfo^.IsMirrored and (UTF8Length(glyphId)=1) then
+    begin
+      u := UTF8CodepointToUnicode(pchar(glyphId), length(glyphId));
+      if SubstituteBidiBracket then
+      begin
+        bracketInfo := GetUnicodeBracketInfo(u);
+        if bracketInfo.OpeningBracket = u then
+          glyphId := UnicodeCharToUTF8(bracketInfo.ClosingBracket)
+        else if bracketInfo.ClosingBracket = u then
+          glyphId := UnicodeCharToUTF8(bracketInfo.OpeningBracket)
+        else
+          include(flags, gcfMirrored);
+      end else
+        include(flags, gcfMirrored);
+    end;
     g := GetGlyph(glyphId);
     if g <> nil then
     begin
-      flags := [];
-      if merged then include(flags, gcfMerged);
-      if curRTL then include(flags, gcfRightToLeft);
-      if curRTL and (UTF8Length(glyphId)=1) then
-      begin
-        u := UTF8CodepointToUnicode(pchar(glyphId), length(glyphId));
-        if IsUnicodeMirrored(u) then include(flags, gcfMirrored);
-      end;
+      if (prevGlyphId <> '') and (curRTL = prevRTL) then include(flags, gcfKerning);
       ACallback(nextchar, g, flags, AData, shouldContinue);
+      prevGlyphId := glyphId;
+      prevRTL := curRTL;
       if not shouldContinue then break;
     end;
   end;
@@ -1142,7 +1193,7 @@ end;
 procedure TBGRACustomTypeWriter.BrowseAllGlyphs(
   ACallback: TBrowseGlyphCallback; AData: pointer);
 var
-  g: TAvgLvlTreeNode;
+  g: TAVLTreeNode;
   shouldContinue: boolean;
 begin
   g := FGlyphs.FindLowest;
@@ -1151,7 +1202,7 @@ begin
   begin
     ACallback(TBGRAGlyph(g.Data).Identifier, TBGRAGlyph(g.Data), [],
       AData, shouldContinue);
-    g := g.Successor;
+    g := g.Right;
   end;
 end;
 
@@ -1161,20 +1212,78 @@ procedure TBGRACustomTypeWriter.GlyphCallbackForTextSizeBeforeTransform(
 var
   gSizeY: Single;
 begin
-  if Assigned(AGlyph) then
+  with TTextSizeCallbackData(AData^) do
   begin
-    with TPointF(AData^) do
-    begin
-      x += AGlyph.Width;
-      gSizeY := AGlyph.Height;
-      if gSizeY > y then y := gSizeY;
-    end;
+    if gcfKerning in AFlags then
+      incF(size.x, GetKerningOffset(PrevGlyphId, AGlyph.Identifier, gcfRightToLeft in AFlags) );
+    IncF(Size.x, AGlyph.Width);
+    gSizeY := AGlyph.Height;
+    if gSizeY > Size.y then Size.y := gSizeY;
+    PrevGlyphId:= AGlyph.Identifier;
   end;
   AContinue:= true;
 end;
 
+function TBGRACustomTypeWriter.FindKerning(AIdLeft, AIdRight: string): TAVLTreeNode;
+var Comp: integer;
+  Node: TAVLTreeNode;
+begin
+  if not Assigned(FKerningInfos) then exit(nil);
+  Node:=FKerningInfos.Root;
+  while (Node<>nil) do begin
+    Comp:=CompareStr(AIdLeft,TKerningInfo(Node.Data).IdLeft);
+    if Comp=0 then
+      Comp:=CompareStr(AIdRight,TKerningInfo(Node.Data).IdRight);
+    if Comp=0 then break;
+    if Comp<0 then begin
+      Node:=Node.Left
+    end else begin
+      Node:=Node.Right
+    end;
+  end;
+  result := Node;
+end;
+
+function TBGRACustomTypeWriter.GetKerningOffset(AIdBefore, AIdAfter: string; ARightToLeft: boolean): single;
+var
+  temp: String;
+  node: TAVLTreeNode;
+  info: TKerningInfo;
+begin
+  if ARightToLeft then
+  begin
+    temp := AIdBefore;
+    AIdBefore := AIdAfter;
+    AIdAfter := temp;
+  end;
+  if FKerningInfos = nil then
+    FKerningInfos := TAVLTree.Create(@CompareKerningInfo);
+  node := FindKerning(AIdBefore, AIdAfter);
+  if Assigned(node) then
+    result := TKerningInfo(node.Data).KerningOffset
+  else
+  begin
+    result := ComputeKerning(AIdBefore, AIdAfter);
+    info := TKerningInfo.Create;
+    info.IdLeft:= AIdBefore;
+    info.IdRight:= AIdAfter;
+    info.KerningOffset:= result;
+    FKerningInfos.Add(Pointer(info));
+  end;
+end;
+
+function TBGRACustomTypeWriter.ComputeKerning(AIdLeft, AIdRight: string): single;
+begin
+  result := 0;
+end;
+
 destructor TBGRACustomTypeWriter.Destroy;
 begin
+  if Assigned(FKerningInfos) then
+  begin
+    FKerningInfos.FreeAndClear;
+    FKerningInfos.Free;
+  end;
   FGlyphs.FreeAndClear;
   FGlyphs.Free;
   inherited Destroy;

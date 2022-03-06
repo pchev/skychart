@@ -1,14 +1,14 @@
-{$IFDEF INCLUDE_USES}
-{$UNDEF INCLUDE_USES}
-,fpg_base, fpg_main
-{$ENDIF}
-
+// SPDX-License-Identifier: LGPL-3.0-linking-exception
 {$IFDEF INCLUDE_INTERFACE}
 {$UNDEF INCLUDE_INTERFACE}
 type
   TColor = TfpgColor;
+
+  { TRawImage }
+
   TRawImage = class(TfpgImage)
-    procedure BGRASetSizeAndTransparency(AWidth,AHeight: Integer; ATransparent: boolean);  
+    procedure BGRASetSizeAndTransparency(AWidth,AHeight: Integer; ATransparent: boolean);
+    procedure Assign(AOther: TObject); virtual;
   end;
   TGUICanvas = TfpgCanvas;
 
@@ -20,10 +20,9 @@ const
 function clRgbBtnHighlight: TColor;
 function clRgbBtnShadow: TColor;
 function ColorToRGB(c: TColor): TColor; inline;
-function RGBToColor(R, G, B: Byte): TColor;
-procedure RedGreenBlue(rgb: TColor; out Red, Green, Blue: Byte); // does not work on system color
 function GetScreenDPIX: integer;
 function GetScreenDPIY: integer;
+
 {$ENDIF}
 
 {$IFDEF INCLUDE_IMPLEMENTATION}
@@ -55,6 +54,21 @@ begin
   end;
 end;
 
+procedure TRawImage.Assign(AOther: TObject);
+var
+  src: TRawImage;
+begin
+  if AOther is TRawImage then
+  begin
+    src := TRawImage(AOther);
+    BGRASetSizeAndTransparency(src.Width, src.Height, src.Masked);
+    move(src.ImageData^, ImageData^, ImageDataSize);
+    if Masked then
+      move(src.MaskData^, MaskData^, MaskDataSize);
+  end else
+    raise exception.Create('Unable to assign');
+end;
+
 function clRgbBtnHighlight: TColor;
 begin
   result := fpgColorToRGB(fpg_base.clHilite2);
@@ -68,18 +82,6 @@ end;
 function ColorToRGB(c: TColor): TColor; inline;
 begin
   result := fpgColorToRGB(c);
-end;
-
-function RGBToColor(R, G, B: Byte): TColor;
-begin
-  Result := (R shl 16) or (G shl 8) or B;
-end;
-
-procedure RedGreenBlue(rgb: TColor; out Red, Green, Blue: Byte);
-begin
-  Blue := rgb and $000000ff;
-  Green := (rgb shr 8) and $000000ff;
-  Red := (rgb shr 16) and $000000ff;
 end;
 
 function GetScreenDPIX: integer;

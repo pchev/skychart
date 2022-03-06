@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: LGPL-3.0-linking-exception
 unit BGRAPhongTypes;
 
 {$mode objfpc}{$H+}
@@ -5,7 +6,7 @@ unit BGRAPhongTypes;
 interface
 
 uses
-  Classes, SysUtils, BGRABitmapTypes;
+  BGRAClasses, SysUtils, BGRABitmapTypes;
 
 type
 

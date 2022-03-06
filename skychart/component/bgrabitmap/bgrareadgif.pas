@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: LGPL-3.0-linking-exception
 { This unit provides some optimisations of TFPReaderGif: decompression algorithm and direct pixel access of TBGRABitmap.
   Note: to read an animation use TBGRAAnimatedGif instead. }
 
@@ -8,7 +9,7 @@ unit BGRAReadGif;
 interface
 
 uses
-  Classes, SysUtils, FPimage, FPReadGif;
+  BGRAClasses, SysUtils, FPimage, FPReadGif;
 
 type
   PGifRGB = ^TGifRGB;
@@ -144,15 +145,15 @@ var
   I: Integer;
   Data,
   Bits,
-  Code: Cardinal;
+  Code: LongWord;
   SourcePtr: PByte;
-  InCode: Cardinal;
+  InCode: LongWord;
 
-  CodeSize: Cardinal;
-  CodeMask: Cardinal;
-  FreeCode: Cardinal;
-  OldCode: Cardinal;
-  Prefix: array[0..4095] of Cardinal;
+  CodeSize: LongWord;
+  CodeMask: LongWord;
+  FreeCode: LongWord;
+  OldCode: LongWord;
+  Prefix: array[0..4095] of LongWord;
   Suffix,
   Stack: array [0..4095] of Byte;
   StackPointer, StackTop: PByte;

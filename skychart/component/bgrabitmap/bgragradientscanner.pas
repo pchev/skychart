@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: LGPL-3.0-linking-exception
 unit BGRAGradientScanner;
 
 {$mode objfpc}{$H+}
@@ -7,7 +8,7 @@ interface
 { This unit contains scanners that generate gradients }
 
 uses
-  Classes, SysUtils, BGRABitmapTypes, BGRATransform;
+  SysUtils, BGRABitmapTypes, BGRATransform;
 
 type
   TBGRAColorInterpolation = (ciStdRGB, ciLinearRGB, ciLinearHSLPositive, ciLinearHSLNegative, ciGSBPositive, ciGSBNegative);
@@ -69,7 +70,7 @@ type
   TBGRAHueGradient = class(TBGRASimpleGradient)
   private
     hsla1,hsla2: THSLAPixel;
-    hue1,hue2: longword;
+    hue1,hue2: LongWord;
     FOptions: THueGradientOptions;
     procedure Init(c1,c2: THSLAPixel; AOptions: THueGradientOptions);
     function InterpolateToHSLA(position: word): THSLAPixel;
@@ -109,6 +110,34 @@ type
     property InterpolationFunction: TGradientInterpolationFunction read FInterpolationFunction write FInterpolationFunction;
   end;
 
+  { TBGRABufferedGradient }
+
+  TBGRABufferedGradient = class(TBGRACustomGradient)
+  protected
+    FGradient: TBGRACustomGradient;
+    FGradientOwned: boolean;
+    FPadded: boolean;
+    FAverageColorComputed: boolean;
+    FAverageColorExpanded: TExpandedPixel;
+    FMonochromeComputed: boolean;
+    FMonochrome: boolean;
+    FBufferSize, FBufferShift: integer;
+    FColorTab: array of TBGRAPixel;
+    FColorComputed: bitpacked array[0..65535] of boolean;
+    FRepetition: TBGRAGradientRepetition;
+  public
+    constructor Create(AGradient: TBGRACustomGradient; AOwner: boolean; APadded: boolean;
+      ABufferSize: integer);
+    destructor Destroy; override;
+    {** Returns the color at a given ''position''. The reference range is
+        from 0 to 65535, however values beyond are possible as well }
+    function GetColorAt(position: integer): TBGRAPixel; override;
+    {** Returns the average color of the gradient }
+    function GetAverageColor: TBGRAPixel; override;
+    function GetAverageExpandedColor: TExpandedPixel; override;
+    function GetMonochrome: boolean; override;
+  end;
+
   TBGRAGradientScannerInternalScanNextFunc = function():single of object;
   TBGRAGradientScannerInternalScanAtFunc = function(const p: TPointF):single of object;
 
@@ -132,6 +161,8 @@ type
     FAverageExpandedColor: TExpandedPixel;
     FScanNextFunc: TBGRAGradientScannerInternalScanNextFunc;
     FScanAtFunc: TBGRAGradientScannerInternalScanAtFunc;
+    FGetGradientColor: TBGRAGradientGetColorAtFloatFunc;
+    FGetGradientExpandedColor: TBGRAGradientGetExpandedColorAtFloatFunc;
     FFocalDistance: single;
     FFocalDirection, FFocalNormal: TPointF;
     FRadialDenominator, FRadialDeltaSign, maxW1, maxW2: single;
@@ -170,8 +201,14 @@ type
     function ScanNextExpandedInline: TExpandedPixel; inline;
     procedure SetTransform(AValue: TAffineMatrix);
     procedure SetFlipGradient(AValue: boolean);
+    procedure SetSinus(AValue: boolean);
     function GetGradientColor(a: single): TBGRAPixel;
     function GetGradientExpandedColor(a: single): TExpandedPixel;
+    function GetGradientColorFlipped(a: single): TBGRAPixel;
+    function GetGradientExpandedColorFlipped(a: single): TExpandedPixel;
+    function GetGradientColorSinus(a: single): TBGRAPixel;
+    function GetGradientExpandedColorSinus(a: single): TExpandedPixel;
+    procedure UpdateGetGradientColorFunctions;
   public
     constructor Create(AGradientType: TGradientType; AOrigin, d1: TPointF); overload;
     constructor Create(AGradientType: TGradientType; AOrigin, d1, d2: TPointF); overload;
@@ -204,7 +241,7 @@ type
     property Transform: TAffineMatrix read FTransform write SetTransform;
     property Gradient: TBGRACustomGradient read FGradient;
     property FlipGradient: boolean read FFlipGradient write SetFlipGradient;
-    property Sinus: boolean Read FSinus write FSinus;
+    property Sinus: boolean Read FSinus write SetSinus;
   end;
 
   { TBGRAConstantScanner }
@@ -311,6 +348,86 @@ implementation
 
 uses BGRABlend, Math;
 
+{ TBGRABufferedGradient }
+
+constructor TBGRABufferedGradient.Create(AGradient: TBGRACustomGradient;
+  AOwner: boolean; APadded: boolean; ABufferSize: integer);
+var
+  bufferPowSize: integer;
+begin
+  FGradient := AGradient;
+  FGradientOwned:= AOwner;
+  FPadded := APadded;
+  bufferPowSize := 0;
+  while ABufferSize > 1 do
+  begin
+    ABufferSize := ABufferSize shr 1;
+    inc(bufferPowSize);
+  end;
+  if bufferPowSize > 16 then bufferPowSize := 16;
+  FBufferSize:= 1 shl bufferPowSize;
+  setlength(FColorTab, FBufferSize);
+  FBufferShift := 16-bufferPowSize;
+end;
+
+destructor TBGRABufferedGradient.Destroy;
+begin
+  if FGradientOwned then FGradient.Free;
+  inherited Destroy;
+end;
+
+function TBGRABufferedGradient.GetColorAt(position: integer): TBGRAPixel;
+var
+  posBuf: Integer;
+begin
+  if FPadded then
+  begin
+    if position < 0 then
+      position := 0 else
+    if position >= 65536 then
+      position := 65536;
+    posBuf := position shr FBufferShift;
+    if posBuf > FBufferSize shr 1 then dec(posBuf);
+  end else
+  begin
+    position := position and 131071;
+    posBuf := position shr (FBufferShift+1);
+  end;
+
+  if not FColorComputed[posBuf] then
+  begin
+    result := FGradient.GetColorAt(position);
+    FColorTab[posBuf] := result;
+    FColorComputed[posBuf] := true;
+  end else
+    result := FColorTab[posBuf];
+end;
+
+function TBGRABufferedGradient.GetAverageColor: TBGRAPixel;
+begin
+  result := GammaCompression(GetAverageExpandedColor);
+end;
+
+function TBGRABufferedGradient.GetAverageExpandedColor: TExpandedPixel;
+begin
+  if not FAverageColorComputed then
+  begin
+    FAverageColorExpanded := FGradient.GetAverageExpandedColor;
+    FAverageColorComputed := true;
+  end;
+  result := FAverageColorExpanded;
+end;
+
+function TBGRABufferedGradient.GetMonochrome: boolean;
+begin
+  if not FMonochromeComputed then
+  begin
+    FMonochrome:= FGradient.Monochrome;
+    FMonochromeComputed:= true;
+  end;
+  result := FMonochrome;
+end;
+
 { TBGRASimpleGradient }
 
 constructor TBGRASimpleGradient.Create(AColor1, AColor2: TBGRAPixel; ARepetition: TBGRAGradientRepetition);
@@ -407,6 +524,7 @@ end;
 
 function TBGRASimpleGradient.GetColorAtF(position: single): TBGRAPixel;
 begin
+  if position = EmptySingle then result := BGRAPixelTransparent else
   if FRepetition <> grPad then
     result := GetColorAt(round(frac(position*0.5)*131072)) else  //divided by 2 for reflected repetition
   begin
@@ -457,6 +575,7 @@ end;
 function TBGRASimpleGradient.GetExpandedColorAtF(position: single
   ): TExpandedPixel;
 begin
+  if position = EmptySingle then result := BGRAPixelTransparent else
   if FRepetition <> grPad then
     result := GetExpandedColorAt(round(frac(position*0.5)*131072)) else  //divided by 2 for reflected repetition
   begin
@@ -683,9 +802,9 @@ begin
 end;
 
 function TBGRAMultiGradient.GetColorAt(position: integer): TBGRAPixel;
-var i: NativeInt;
+var i: Int32or64;
     ec: TExpandedPixel;
-    curPos,posDiff: NativeInt;
+    curPos,posDiff: Int32or64;
 begin
   if FCycle then
     position := (position-FPositions[0]) mod (FPositions[high(FPositions)] - FPositions[0]) + FPositions[0];
@@ -712,17 +831,17 @@ begin
       if GammaCorrection then
       begin
         if FEColors[i+1].red < FEColors[i].red then
-          ec.red := FEColors[i].red - NativeUInt(curPos)*NativeUInt(FEColors[i].red-FEColors[i+1].red) div NativeUInt(posDiff) else
-          ec.red := FEColors[i].red + NativeUInt(curPos)*NativeUInt(FEColors[i+1].red-FEColors[i].red) div NativeUInt(posDiff);
+          ec.red := FEColors[i].red - UInt32or64(curPos)*UInt32or64(FEColors[i].red-FEColors[i+1].red) div UInt32or64(posDiff) else
+          ec.red := FEColors[i].red + UInt32or64(curPos)*UInt32or64(FEColors[i+1].red-FEColors[i].red) div UInt32or64(posDiff);
         if FEColors[i+1].green < FEColors[i].green then
-          ec.green := FEColors[i].green - NativeUInt(curPos)*NativeUInt(FEColors[i].green-FEColors[i+1].green) div NativeUInt(posDiff) else
-          ec.green := FEColors[i].green + NativeUInt(curPos)*NativeUInt(FEColors[i+1].green-FEColors[i].green) div NativeUInt(posDiff);
+          ec.green := FEColors[i].green - UInt32or64(curPos)*UInt32or64(FEColors[i].green-FEColors[i+1].green) div UInt32or64(posDiff) else
+          ec.green := FEColors[i].green + UInt32or64(curPos)*UInt32or64(FEColors[i+1].green-FEColors[i].green) div UInt32or64(posDiff);
         if FEColors[i+1].blue < FEColors[i].blue then
-          ec.blue := FEColors[i].blue - NativeUInt(curPos)*NativeUInt(FEColors[i].blue-FEColors[i+1].blue) div NativeUInt(posDiff) else
-          ec.blue := FEColors[i].blue + NativeUInt(curPos)*NativeUInt(FEColors[i+1].blue-FEColors[i].blue) div NativeUInt(posDiff);
+          ec.blue := FEColors[i].blue - UInt32or64(curPos)*UInt32or64(FEColors[i].blue-FEColors[i+1].blue) div UInt32or64(posDiff) else
+          ec.blue := FEColors[i].blue + UInt32or64(curPos)*UInt32or64(FEColors[i+1].blue-FEColors[i].blue) div UInt32or64(posDiff);
         if FEColors[i+1].alpha < FEColors[i].alpha then
-          ec.alpha := FEColors[i].alpha - NativeUInt(curPos)*NativeUInt(FEColors[i].alpha-FEColors[i+1].alpha) div NativeUInt(posDiff) else
-          ec.alpha := FEColors[i].alpha + NativeUInt(curPos)*NativeUInt(FEColors[i+1].alpha-FEColors[i].alpha) div NativeUInt(posDiff);
+          ec.alpha := FEColors[i].alpha - UInt32or64(curPos)*UInt32or64(FEColors[i].alpha-FEColors[i+1].alpha) div UInt32or64(posDiff) else
+          ec.alpha := FEColors[i].alpha + UInt32or64(curPos)*UInt32or64(FEColors[i+1].alpha-FEColors[i].alpha) div UInt32or64(posDiff);
         result := GammaCompression(ec);
       end else
       begin
@@ -737,9 +856,9 @@ end;
 
 function TBGRAMultiGradient.GetExpandedColorAt(position: integer
   ): TExpandedPixel;
-var i: NativeInt;
-    curPos,posDiff: NativeInt;
-    rw,gw,bw: NativeUInt;
+var i: Int32or64;
+    curPos,posDiff: Int32or64;
+    rw,gw,bw: UInt32or64;
 begin
   if FCycle then
     position := (position-FPositions[0]) mod (FPositions[high(FPositions)] - FPositions[0]) + FPositions[0];
@@ -766,30 +885,30 @@ begin
       if GammaCorrection then
       begin
         if FEColors[i+1].red < FEColors[i].red then
-          result.red := FEColors[i].red - NativeUInt(curPos)*NativeUInt(FEColors[i].red-FEColors[i+1].red) div NativeUInt(posDiff) else
-          result.red := FEColors[i].red + NativeUInt(curPos)*NativeUInt(FEColors[i+1].red-FEColors[i].red) div NativeUInt(posDiff);
+          result.red := FEColors[i].red - UInt32or64(curPos)*UInt32or64(FEColors[i].red-FEColors[i+1].red) div UInt32or64(posDiff) else
+          result.red := FEColors[i].red + UInt32or64(curPos)*UInt32or64(FEColors[i+1].red-FEColors[i].red) div UInt32or64(posDiff);
         if FEColors[i+1].green < FEColors[i].green then
-          result.green := FEColors[i].green - NativeUInt(curPos)*NativeUInt(FEColors[i].green-FEColors[i+1].green) div NativeUInt(posDiff) else
-          result.green := FEColors[i].green + NativeUInt(curPos)*NativeUInt(FEColors[i+1].green-FEColors[i].green) div NativeUInt(posDiff);
+          result.green := FEColors[i].green - UInt32or64(curPos)*UInt32or64(FEColors[i].green-FEColors[i+1].green) div UInt32or64(posDiff) else
+          result.green := FEColors[i].green + UInt32or64(curPos)*UInt32or64(FEColors[i+1].green-FEColors[i].green) div UInt32or64(posDiff);
         if FEColors[i+1].blue < FEColors[i].blue then
-          result.blue := FEColors[i].blue - NativeUInt(curPos)*NativeUInt(FEColors[i].blue-FEColors[i+1].blue) div NativeUInt(posDiff) else
-          result.blue := FEColors[i].blue + NativeUInt(curPos)*NativeUInt(FEColors[i+1].blue-FEColors[i].blue) div NativeUInt(posDiff);
+          result.blue := FEColors[i].blue - UInt32or64(curPos)*UInt32or64(FEColors[i].blue-FEColors[i+1].blue) div UInt32or64(posDiff) else
+          result.blue := FEColors[i].blue + UInt32or64(curPos)*UInt32or64(FEColors[i+1].blue-FEColors[i].blue) div UInt32or64(posDiff);
         if FEColors[i+1].alpha < FEColors[i].alpha then
-          result.alpha := FEColors[i].alpha - NativeUInt(curPos)*NativeUInt(FEColors[i].alpha-FEColors[i+1].alpha) div NativeUInt(posDiff) else
-          result.alpha := FEColors[i].alpha + NativeUInt(curPos)*NativeUInt(FEColors[i+1].alpha-FEColors[i].alpha) div NativeUInt(posDiff);
+          result.alpha := FEColors[i].alpha - UInt32or64(curPos)*UInt32or64(FEColors[i].alpha-FEColors[i+1].alpha) div UInt32or64(posDiff) else
+          result.alpha := FEColors[i].alpha + UInt32or64(curPos)*UInt32or64(FEColors[i+1].alpha-FEColors[i].alpha) div UInt32or64(posDiff);
       end else
       begin
-        rw := NativeInt(FColors[i].red shl 8) + (((curPos) shl 8)*(FColors[i+1].red-FColors[i].red)) div (posDiff);
-        gw := NativeInt(FColors[i].green shl 8) + (((curPos) shl 8)*(FColors[i+1].green-FColors[i].green)) div (posDiff);
-        bw := NativeInt(FColors[i].blue shl 8) + (((curPos) shl 8)*(FColors[i+1].blue-FColors[i].blue)) div (posDiff);
+        rw := Int32or64(FColors[i].red shl 8) + (((curPos) shl 8)*(FColors[i+1].red-FColors[i].red)) div (posDiff);
+        gw := Int32or64(FColors[i].green shl 8) + (((curPos) shl 8)*(FColors[i+1].green-FColors[i].green)) div (posDiff);
+        bw := Int32or64(FColors[i].blue shl 8) + (((curPos) shl 8)*(FColors[i+1].blue-FColors[i].blue)) div (posDiff);
 
         if rw >= $ff00 then result.red := $ffff
-        else result.red := (GammaExpansionTab[rw shr 8]*NativeUInt(255 - (rw and 255)) + GammaExpansionTab[(rw shr 8)+1]*NativeUInt(rw and 255)) shr 8;
+        else result.red := (GammaExpansionTab[rw shr 8]*UInt32or64(255 - (rw and 255)) + GammaExpansionTab[(rw shr 8)+1]*UInt32or64(rw and 255)) shr 8;
         if gw >= $ff00 then result.green := $ffff
-        else result.green := (GammaExpansionTab[gw shr 8]*NativeUInt(255 - (gw and 255)) + GammaExpansionTab[(gw shr 8)+1]*NativeUInt(gw and 255)) shr 8;
+        else result.green := (GammaExpansionTab[gw shr 8]*UInt32or64(255 - (gw and 255)) + GammaExpansionTab[(gw shr 8)+1]*UInt32or64(gw and 255)) shr 8;
         if bw >= $ff00 then result.blue := $ffff
-        else result.blue := (GammaExpansionTab[bw shr 8]*NativeUInt(255 - (bw and 255)) + GammaExpansionTab[(bw shr 8)+1]*NativeUInt(bw and 255)) shr 8;
-        result.alpha := NativeInt(FColors[i].alpha shl 8) + (((curPos) shl 8)*(FColors[i+1].alpha-FColors[i].alpha)) div (posDiff);
+        else result.blue := (GammaExpansionTab[bw shr 8]*UInt32or64(255 - (bw and 255)) + GammaExpansionTab[(bw shr 8)+1]*UInt32or64(bw and 255)) shr 8;
+        result.alpha := Int32or64(FColors[i].alpha shl 8) + (((curPos) shl 8)*(FColors[i+1].alpha-FColors[i].alpha)) div (posDiff);
         result.alpha := result.alpha + (result.alpha shr 8);
       end;
     end;
@@ -831,7 +950,7 @@ end;
 
 function TBGRASimpleGradientWithGammaCorrection.InterpolateToBGRA(position: word
   ): TBGRAPixel;
-var b,b2: cardinal;
+var b,b2: LongWord;
     ec: TExpandedPixel;
 begin
   b      := position;
@@ -845,7 +964,7 @@ end;
 
 function TBGRASimpleGradientWithGammaCorrection.InterpolateToExpanded(
   position: word): TExpandedPixel;
-var b,b2: cardinal;
+var b,b2: LongWord;
 begin
   b      := position;
   b2     := 65536-b;
@@ -871,7 +990,7 @@ end;
 
 function TBGRASimpleGradientWithoutGammaCorrection.InterpolateToBGRA(
   position: word): TBGRAPixel;
-var b,b2: cardinal;
+var b,b2: LongWord;
 begin
   b      := position shr 6;
   b2     := 1024-b;
@@ -883,7 +1002,7 @@ end;
 
 function TBGRASimpleGradientWithoutGammaCorrection.InterpolateToExpanded(
   position: word): TExpandedPixel;
-var b,b2: cardinal;
+var b,b2: LongWord;
     rw,gw,bw: word;
 begin
   b      := position shr 6;
@@ -895,17 +1014,17 @@ begin
   if rw >= $ff00 then
     result.red := 65535
   else
-    result.red := (GammaExpansionTab[rw shr 8]*NativeUInt(255 - (rw and 255)) + GammaExpansionTab[(rw shr 8)+1]*NativeUInt(rw and 255)) shr 8;
+    result.red := (GammaExpansionTab[rw shr 8]*UInt32or64(255 - (rw and 255)) + GammaExpansionTab[(rw shr 8)+1]*UInt32or64(rw and 255)) shr 8;
 
   if gw >= $ff00 then
     result.green := 65535
   else
-    result.green := (GammaExpansionTab[gw shr 8]*NativeUInt(255 - (gw and 255)) + GammaExpansionTab[(gw shr 8)+1]*NativeUInt(gw and 255)) shr 8;
+    result.green := (GammaExpansionTab[gw shr 8]*UInt32or64(255 - (gw and 255)) + GammaExpansionTab[(gw shr 8)+1]*UInt32or64(gw and 255)) shr 8;
 
   if bw >= $ff00 then
     result.blue := 65535
   else
-    result.blue := (GammaExpansionTab[bw shr 8]*NativeUInt(255 - (bw and 255)) + GammaExpansionTab[(bw shr 8)+1]*NativeUInt(bw and 255)) shr 8;
+    result.blue := (GammaExpansionTab[bw shr 8]*UInt32or64(255 - (bw and 255)) + GammaExpansionTab[(bw shr 8)+1]*UInt32or64(bw and 255)) shr 8;
 
   result.alpha := (FColor1.alpha * b2 + FColor2.alpha * b + 511) shr 2;
 end;
@@ -991,7 +1110,7 @@ begin
   result.green := GammaCompressionTab[g];
   result.blue := GammaCompressionTab[b];
   result.alpha := a shr 8;
-  FCurColor += FStep;
+  FCurColor := FCurColor + FStep;
 end;
 
 function TBGRAGradientTriangleScanner.ScanNextExpandedPixel: TExpandedPixel;
@@ -1013,12 +1132,12 @@ begin
   result.green := g;
   result.blue := b;
   result.alpha := a;
-  FCurColor += FStep;
+  FCurColor := FCurColor + FStep;
 end;
 
 procedure TBGRAGradientTriangleScanner.ScanSkipPixels(ACount: integer);
 begin
-  FCurColor += FStep*ACount;
+  FCurColor := FCurColor + FStep*ACount;
 end;
 
 { TBGRAGradientScanner }
@@ -1078,6 +1197,7 @@ procedure TBGRAGradientScanner.SetFlipGradient(AValue: boolean);
 begin
   if FFlipGradient=AValue then Exit;
   FFlipGradient:=AValue;
+  UpdateGetGradientColorFunctions;
 end;
 
 function TBGRAGradientScanner.GetGradientColor(a: single): TBGRAPixel;
@@ -1108,7 +1228,7 @@ begin
     if FFlipGradient then a := 1-a;
     if FSinus then
     begin
-      a *= 65536;
+      a := a * 65536;
       if (a <= low(int64)) or (a >= high(int64)) then
         result := FAverageExpandedColor
       else
@@ -1116,6 +1236,59 @@ begin
     end else
       result := FGradient.GetExpandedColorAtF(a);
   end;
+end;
+
+function TBGRAGradientScanner.GetGradientColorFlipped(a: single): TBGRAPixel;
+begin
+  result := FGradient.GetColorAtF(1 - a);
+end;
+
+function TBGRAGradientScanner.GetGradientExpandedColorFlipped(a: single): TExpandedPixel;
+begin
+  result := FGradient.GetExpandedColorAtF(1 - a);
+end;
+
+function TBGRAGradientScanner.GetGradientColorSinus(a: single): TBGRAPixel;
+begin
+  if FFlipGradient then a := 1-a;
+  a := a * 65536;
+  if (a <= low(int64)) or (a >= high(int64)) then
+    result := FAverageColor
+    else result := FGradient.GetColorAt(Sin65536(round(a) and 65535));
+end;
+
+function TBGRAGradientScanner.GetGradientExpandedColorSinus(a: single): TExpandedPixel;
+begin
+  if FFlipGradient then a := 1-a;
+  a := a * 65536;
+  if (a <= low(int64)) or (a >= high(int64)) then
+    result := FAverageExpandedColor
+    else result := FGradient.GetExpandedColorAt(Sin65536(round(a) and 65535));
+end;
+
+procedure TBGRAGradientScanner.UpdateGetGradientColorFunctions;
+begin
+  if FSinus then
+  begin
+    FGetGradientColor:= @GetGradientColorSinus;
+    FGetGradientExpandedColor:= @GetGradientExpandedColorSinus;
+  end else
+  if FFlipGradient then
+  begin
+    FGetGradientColor:= @GetGradientColorFlipped;
+    FGetGradientExpandedColor:= @GetGradientExpandedColorFlipped;
+  end else
+  begin
+    FGetGradientColor:= @FGradient.GetColorAtF;
+    FGetGradientExpandedColor:= @FGradient.GetExpandedColorAtF;
+  end;
+end;
+
+procedure TBGRAGradientScanner.SetSinus(AValue: boolean);
+begin
+  if FSinus=AValue then Exit;
+  FSinus:=AValue;
+  UpdateGetGradientColorFunctions;
 end;
 
 procedure TBGRAGradientScanner.Init(AGradientType: TGradientType; AOrigin, d1: TPointF;
@@ -1145,6 +1318,7 @@ begin
 
   InitGradientType;
   InitTransform;
+  UpdateGetGradientColorFunctions;
 end;
 
 procedure TBGRAGradientScanner.Init(AOrigin: TPointF; ARadius: single;
@@ -1169,6 +1343,7 @@ begin
 
   InitGradientType;
   InitTransform;
+  UpdateGetGradientColorFunctions;
 end;
 
 procedure TBGRAGradientScanner.InitGradientType;
@@ -1200,7 +1375,7 @@ begin
 
       FFocalDirection := FRelativeFocal;
       FFocalDistance := VectLen(FFocalDirection);
-      if FFocalDistance > 0 then FFocalDirection *= 1/FFocalDistance;
+      if FFocalDistance > 0 then FFocalDirection := FFocalDirection * (1/FFocalDistance);
       FFocalNormal := PointF(-FFocalDirection.y,FFocalDirection.x);
       FRadialDenominator := sqr(FRadius-FFocalRadius)-sqr(FFocalDistance);
 
@@ -1288,20 +1463,20 @@ begin
 
   case FGradientType of
     gtReflected: FRepeatHoriz := (FMatrix[1,1]=0);
-    gtDiamond,gtAngular: FRepeatHoriz:= FIsAverage;
+    gtDiamond,gtAngular: FRepeatHoriz:= false;
     gtRadial: begin
+      FRepeatHoriz:= false;
       if FFocalRadius = FRadius then FIsAverage:= true;
-      FRepeatHoriz:= FIsAverage;
     end
   else
     {gtLinear:} FRepeatHoriz := (FMatrix[1,1]=0);
   end;
 
   if FGradient.Monochrome then
-  begin
-    FRepeatHoriz:= true;
     FIsAverage:= true;
-  end;
+
+  if FIsAverage then
+    FRepeatHoriz:= true;
 
   FPosition := PointF(0,0);
 end;
@@ -1310,11 +1485,13 @@ procedure TBGRAGradientScanner.InitGradient;
 begin
   FAverageColor := FGradient.GetAverageColor;
   FAverageExpandedColor := FGradient.GetAverageExpandedColor;
+  UpdateGetGradientColorFunctions;
 end;
 
 function TBGRAGradientScanner.ComputeRadialFocal(const p: TPointF): single;
 var
-  w1,w2,h,d1,d2,delta,num: single;
+  w1,w2,num: single;
+  h,d1,d2,delta: double;
 begin
   w1 := p*FFocalDirection;
   w2 := FFocalDistance-w1;
@@ -1423,24 +1600,16 @@ end;
 
 function TBGRAGradientScanner.ScanNextInline: TBGRAPixel;
 begin
-  if FIsAverage then
-    result := FAverageColor
-  else
-  begin
-    result := GetGradientColor(FScanNextFunc());
-    FPosition.Offset(FMatrix[1,1],FMatrix[2,1]);
-  end;
+  result := FGetGradientColor(FScanNextFunc());
+  FPosition.x := FPosition.x + FMatrix[1,1];
+  FPosition.y := FPosition.y + FMatrix[2,1];
 end;
 
 function TBGRAGradientScanner.ScanNextExpandedInline: TExpandedPixel;
 begin
-  if FIsAverage then
-    result := FAverageExpandedColor
-  else
-  begin
-    result := GetGradientExpandedColor(FScanNextFunc());
-    FPosition.Offset(FMatrix[1,1],FMatrix[2,1]);
-  end;
+  result := FGetGradientExpandedColor(FScanNextFunc());
+  FPosition.x := FPosition.x + FMatrix[1,1];
+  FPosition.y := FPosition.y + FMatrix[2,1];
 end;
 
 constructor TBGRAGradientScanner.Create(c1, c2: TBGRAPixel;
@@ -1504,8 +1673,15 @@ begin
   FPosition := FMatrix*PointF(x,y);
   if FRepeatHoriz then
   begin
-    FHorizColor := ScanNextInline;
-    FHorizExpandedColor := ScanNextExpandedInline;
+    if FIsAverage then
+    begin
+      FHorizColor := FAverageColor;
+      FHorizExpandedColor := FAverageExpandedColor;
+    end else
+    begin
+      FHorizColor := ScanNextInline;
+      FHorizExpandedColor := ScanNextExpandedInline;
+    end;
   end;
 end;
 
@@ -1576,7 +1752,7 @@ begin
     dmXor:
       while count > 0 do
       begin
-        PDword(pdest)^ := PDword(pdest)^ xor DWord(ScanNextInline);
+        PLongWord(pdest)^ := PLongWord(pdest)^ xor LongWord(ScanNextInline);
         inc(pdest);
         dec(count);
       end;
@@ -1686,7 +1862,7 @@ begin
         dmXor:
           while qty > 0 do
           begin
-            PDword(pdest)^ := PDword(pdest)^ xor DWord(GetNextWithGlobal);
+            PLongWord(pdest)^ := PLongWord(pdest)^ xor LongWord(GetNextWithGlobal);
             inc(pdest);
             dec(qty);
           end;
@@ -1726,7 +1902,7 @@ begin
         dmXor:
           while qty > 0 do
           begin
-            PDword(pdest)^ := PDword(pdest)^ xor DWord(GetNext);
+            PLongWord(pdest)^ := PLongWord(pdest)^ xor LongWord(GetNext);
             inc(pdest);
             dec(qty);
           end;
@@ -1839,7 +2015,7 @@ begin
       dmXor:
         while qty > 0 do
         begin
-          PDword(pdest)^ := PDword(pdest)^ xor DWord(GetNext);
+          PLongWord(pdest)^ := PLongWord(pdest)^ xor LongWord(GetNext);
           inc(pdest);
           dec(qty);
         end;
@@ -1964,7 +2140,7 @@ begin
     dmXor:
       while count > 0 do
       begin
-        PDword(pdest)^ := PDword(pdest)^ xor DWord(GetNext);
+        PLongWord(pdest)^ := PLongWord(pdest)^ xor LongWord(GetNext);
         inc(pdest);
         dec(count);
       end;

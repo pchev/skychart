@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: LGPL-3.0-linking-exception
 unit BGRAReadBmpMioMap;
 
 {$mode objfpc}{$H+}
@@ -5,7 +6,7 @@ unit BGRAReadBmpMioMap;
 interface
 
 uses
-  Classes, SysUtils, FPimage, BGRABitmapTypes;
+  BGRAClasses, SysUtils, FPimage, BGRABitmapTypes;
 
 const
   MioMapMagicValue = 'RL';

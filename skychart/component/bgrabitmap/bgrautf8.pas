@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: LGPL-3.0-linking-exception
 unit BGRAUTF8;
 
 {$mode objfpc}{$H+}
@@ -6,7 +7,20 @@ unit BGRAUTF8;
 interface
 
 uses
-  Classes, SysUtils, BGRAUnicode{$IFDEF BGRABITMAP_USE_LCL}, lazutf8classes{$ENDIF};
+  BGRAClasses, SysUtils, math, BGRAUnicode{$IFDEF BGRABITMAP_USE_LCL}, lazutf8classes{$ENDIF};
+
+const
+  UTF8_ARABIC_ALEPH = 'ا';
+  UTF8_ARABIC_ALEPH_HAMZA_BELOW = 'إ';
+  UTF8_ARABIC_ALEPH_HAMZA_ABOVE = 'أ';
+  UTF8_ARABIC_ALEPH_MADDA_ABOVE = 'آ';
+  UTF8_ARABIC_LAM = 'ل';
+  UTF8_NO_BREAK_SPACE = ' ';
+  UTF8_ZERO_WIDTH_NON_JOINER = '‌';
+  UTF8_ZERO_WIDTH_JOINER = '‍';
+  UTF8_LINE_SEPARATOR = #$E2#$80#$A8;       //equivalent of <br>
+  UTF8_PARAGRAPH_SEPARATOR = #$E2#$80#$A9;  //equivalent of </p>
+  UTF8_NEXT_LINE = #$C2#$85;                //equivalent of CRLF
 
 {$IFDEF BGRABITMAP_USE_LCL}
 type
@@ -19,7 +33,7 @@ type
     FFileName: utf8string;
   public
     constructor Create(const AFileName: utf8string; Mode: Word); overload;
-    constructor Create(const AFileName: utf8string; Mode: Word; Rights: Cardinal); overload;
+    constructor Create(const AFileName: utf8string; Mode: Word; Rights: LongWord); overload;
     destructor Destroy; override;
     property FileName: utf8string Read FFilename;
   end;
@@ -49,21 +63,27 @@ function UTF8CharStart(UTF8Str: PChar; Len, CharIndex: PtrInt): PChar;
 
 function FileOpenUTF8(Const FileName : string; Mode : Integer) : THandle;
 function FileCreateUTF8(Const FileName : string) : THandle; overload;
-function FileCreateUTF8(Const FileName : string; Rights: Cardinal) : THandle; overload;
+function FileCreateUTF8(Const FileName : string; Rights: LongWord) : THandle; overload;
 function FileExistsUTF8(Const FileName : string): boolean;
+function DeleteFileUTF8(Const FileName : string): boolean;
 function FindFirstUTF8(const Path: string; Attr: Longint; out Rslt: TSearchRec): Longint;
 function FindNextUTF8(var Rslt: TSearchRec): Longint;
 procedure FindCloseUTF8(var F: TSearchrec);
 
 type
   string4 = string[4];
+  TUnicodeArray = packed array of LongWord;
+  TIntegerArray = array of integer;
 
 function UTF8CharacterLength(p: PChar): integer;
 function UTF8Length(const s: string): PtrInt; overload;
 function UTF8Length(p: PChar; ByteCount: PtrInt): PtrInt; overload;
-function UnicodeCharToUTF8(u: cardinal): string4;
+function UnicodeCharToUTF8(u: LongWord): string4;
 function UTF8ReverseString(const s: string): string;
-function UTF8CodepointToUnicode(p: PChar; ACodePointLen: integer): cardinal;
+function UTF8CodepointToUnicode(p: PChar; ACodePointLen: integer): LongWord;
+function UTF8ToUTF16(const S: AnsiString): UnicodeString;
+function UTF16ToUTF8(const S: UnicodeString): AnsiString;
+procedure UTF8ToUnicodeArray(const sUTF8: string; out u: TUnicodeArray; out ofs: TIntegerArray);
 
 type
   TBidiUTF8Info = packed record
@@ -72,6 +92,7 @@ type
   end;
   TBidiUTF8Array = packed array of TBidiUTF8Info;
   TUnicodeDisplayOrder = BGRAUnicode.TUnicodeDisplayOrder;
+  TUnicodeBidiInfo = BGRAUnicode.TUnicodeBidiInfo;
 
 function GetBidiClassUTF8(P: PChar): TUnicodeBidiClass;
 function GetFirstStrongBidiClassUTF8(const sUTF8: string): TUnicodeBidiClass;
@@ -79,13 +100,49 @@ function GetLastStrongBidiClassUTF8(const sUTF8: string): TUnicodeBidiClass;
 function IsRightToLeftUTF8(const sUTF8: string): boolean;
 function IsZeroWidthUTF8(const sUTF8: string): boolean;
 function AddParagraphBidiUTF8(s: string; ARightToLeft: boolean): string;
-function AnalyzeBidiUTF8(const sUTF8: string; ARightToLeft: boolean): TBidiUTF8Array; overload;
 function AnalyzeBidiUTF8(const sUTF8: string): TBidiUTF8Array; overload;
+function AnalyzeBidiUTF8(const sUTF8: string; ABidiMode: TFontBidiMode): TBidiUTF8Array; overload;
+function AnalyzeBidiUTF8(const sUTF8: string; ARightToLeft: boolean): TBidiUTF8Array; overload;
 function GetUTF8DisplayOrder(const ABidi: TBidiUTF8Array): TUnicodeDisplayOrder;
 function ContainsBidiIsolateOrFormattingUTF8(const sUTF8: string): boolean;
 
 function UTF8OverrideDirection(const sUTF8: string; ARightToLeft: boolean): string;
 function UTF8EmbedDirection(const sUTF8: string; ARightToLeft: boolean): string;
+function UTF8Ligature(const sUTF8: string; ARightToLeft: boolean; ALigatureLeft, ALigatureRight: boolean): string;
+
+type
+
+  { TGlyphUtf8 }
+
+  TGlyphUtf8 = record
+  private
+    function GetEmpty: boolean;
+  public
+    GlyphUtf8, MirroredGlyphUtf8: string;
+    RightToLeft, Mirrored, Merged: boolean;
+    ByteOffset, ByteSize: integer;
+    property Empty: boolean read GetEmpty;
+  end;
+
+  { TGlyphCursorUtf8 }
+
+  TGlyphCursorUtf8 = record
+  private
+    sUTF8: string;
+    currentChar: string;
+    currentOffset: integer;
+    currentBidiInfo: TUnicodeBidiInfo;
+    bidiArray: TBidiUTF8Array;
+    displayOrder: TUnicodeDisplayOrder;
+    displayIndex: Integer;
+    procedure NextMultichar;
+    procedure PeekMultichar;
+  public
+    class function New(const textUTF8: string; ABidiMode: TFontBidiMode): TGlyphCursorUtf8; static;
+    function GetNextGlyph: TGlyphUtf8;
+    procedure Rewind;
+    function EndOfString: boolean;
+  end;
 
 //little endian stream functions
 function LEReadInt64(Stream: TStream): int64;
@@ -152,7 +209,7 @@ begin
   result := LazFileUtils.FileCreateUTF8(FileName);
 end;
 
-function FileCreateUTF8(Const FileName : string; Rights: Cardinal) : THandle; overload;
+function FileCreateUTF8(Const FileName : string; Rights: LongWord) : THandle; overload;
 begin
   result := LazFileUtils.FileCreateUTF8(FileName, Rights);
 end;
@@ -160,6 +217,11 @@ end;
 function FileExistsUTF8(Const FileName : string): boolean;
 begin
   result := LazFileUtils.FileExistsUTF8(FileName);
+end;
+
+function DeleteFileUTF8(const FileName: string): boolean;
+begin
+  result := LazFileUtils.DeleteFileUTF8(FileName);
 end;
 
 function FindFirstUTF8(const Path: string; Attr: Longint; out Rslt: TSearchRec
@@ -193,9 +255,19 @@ begin
   result := LazUtf8.UTF8Length(p, ByteCount);
 end;
 
-function UnicodeCharToUTF8(u: cardinal): string4;
+function UnicodeCharToUTF8(u: LongWord): string4;
 begin
   result := LazUtf8.UnicodeToUTF8(u);
+end;
+
+function UTF8ToUTF16(const S: AnsiString): UnicodeString;
+begin
+  result := LazUTf8.UTF8ToUTF16(s);
+end;
+
+function UTF16ToUTF8(const S: UnicodeString): AnsiString;
+begin
+  result := LazUTf8.UTF16ToUTF8(s);
 end;
 
 {$ELSE}
@@ -266,7 +338,7 @@ begin
   result := FileCreate(UTF8ToSys(FileName));
 end;
 
-function FileCreateUTF8(const FileName: string; Rights: Cardinal): THandle;
+function FileCreateUTF8(const FileName: string; Rights: LongWord): THandle;
 begin
   result := FileCreate(UTF8ToSys(FileName),Rights);
 end;
@@ -274,6 +346,11 @@ end;
 function FileExistsUTF8(const FileName: string): boolean;
 begin
   result := FileExists(UTF8ToSys(FileName));
+end;
+
+function DeleteFileUTF8(const FileName: string): boolean;
+begin
+  result := DeleteFile(UTF8ToSys(FileName));
 end;
 
 function FindFirstUTF8(const Path: string; Attr: Longint; out Rslt: TSearchRec
@@ -363,7 +440,7 @@ begin
   end;
 end;
 
-function UnicodeToUTF8Inline(CodePoint: cardinal; Buf: PChar): integer;
+function UnicodeToUTF8Inline(CodePoint: LongWord; Buf: PChar): integer;
 begin
   case CodePoint of
     0..$7f:
@@ -397,7 +474,7 @@ begin
   end;
 end;
 
-function UnicodeCharToUTF8(u: cardinal): string4;
+function UnicodeCharToUTF8(u: LongWord): string4;
 begin
   result[0] := chr(UnicodeToUTF8Inline(u,@result[1]));
 end;
@@ -423,7 +500,7 @@ begin
     inherited Create(lHandle);
 end;
 
-constructor TFileStreamUTF8.Create(const AFileName: utf8string; Mode: Word; Rights: Cardinal);
+constructor TFileStreamUTF8.Create(const AFileName: utf8string; Mode: Word; Rights: LongWord);
 var
   lHandle: THandle;
 begin
@@ -481,6 +558,437 @@ begin
   end;
 end;
 
+{copied from LazUTF8
+ ------------------------------------------------------------------------------}
+type
+  TConvertResult = (trNoError, trNullSrc, trNullDest, trDestExhausted,
+    trInvalidChar, trUnfinishedChar);
+
+  TConvertOption = (toInvalidCharError, toInvalidCharToSymbol,
+    toUnfinishedCharError, toUnfinishedCharToSymbol);
+  TConvertOptions = set of TConvertOption;
+
+{ ------------------------------------------------------------------------------
+  Name:    ConvertUTF8ToUTF16
+  Params:  Dest                - Pointer to destination string
+           DestWideCharCount   - Wide char count allocated in destination string
+           Src                 - Pointer to source string
+           SrcCharCount        - Char count allocated in source string
+           Options             - Conversion options, if none is set, both
+             invalid and unfinished source chars are skipped
+
+             toInvalidCharError       - Stop on invalid source char and report
+                                      error
+             toInvalidCharToSymbol    - Replace invalid source chars with '?'
+             toUnfinishedCharError    - Stop on unfinished source char and
+                                      report error
+             toUnfinishedCharToSymbol - Replace unfinished source char with '?'
+
+           ActualWideCharCount - Actual wide char count converted from source
+                               string to destination string
+  Returns:
+    trNoError        - The string was successfully converted without
+                     any error
+    trNullSrc        - Pointer to source string is nil
+    trNullDest       - Pointer to destination string is nil
+    trDestExhausted  - Destination buffer size is not big enough to hold
+                     converted string
+    trInvalidChar    - Invalid source char has occurred
+    trUnfinishedChar - Unfinished source char has occurred
+
+  Converts the specified UTF-8 encoded string to UTF-16 encoded (system endian)
+ ------------------------------------------------------------------------------}
+function ConvertUTF8ToUTF16(Dest: PWideChar; DestWideCharCount: SizeUInt;
+  Src: PChar; SrcCharCount: SizeUInt; Options: TConvertOptions;
+  out ActualWideCharCount: SizeUInt): TConvertResult;
+var
+  DestI, SrcI: SizeUInt;
+  B1, B2, B3, B4: Byte;
+  W: Word;
+  C: LongWord;
+
+  function UnfinishedCharError: Boolean;
+  begin
+    if toUnfinishedCharToSymbol in Options then
+    begin
+      Dest[DestI] := System.WideChar('?');
+      Inc(DestI);
+      Result := False;
+    end
+    else
+      if toUnfinishedCharError in Options then
+      begin
+        ConvertUTF8ToUTF16 := trUnfinishedChar;
+        Result := True;
+      end
+      else Result := False;
+  end;
+
+  function InvalidCharError(Count: SizeUInt): Boolean; inline;
+  begin
+    if not (toInvalidCharError in Options) then
+    begin
+      if toInvalidCharToSymbol in Options then
+      begin
+        Dest[DestI] := System.WideChar('?');
+        Inc(DestI);
+      end;
+
+      Dec(SrcI, Count);
+
+      // skip trailing UTF-8 char bytes
+      while (Count > 0) do
+      begin
+        if (Byte(Src[SrcI]) and %11000000) <> %10000000 then Break;
+        Inc(SrcI);
+        Dec(Count);
+      end;
+
+      Result := False;
+    end
+    else
+      if toInvalidCharError in Options then
+      begin
+        ConvertUTF8ToUTF16 := trUnfinishedChar;
+        Result := True;
+      end;
+  end;
+
+begin
+  ActualWideCharCount := 0;
+
+  if not Assigned(Src) then
+  begin
+    Result := trNullSrc;
+    Exit;
+  end;
+
+  if not Assigned(Dest) then
+  begin
+    Result := trNullDest;
+    Exit;
+  end;
+  SrcI := 0;
+  DestI := 0;
+
+  while (DestI < DestWideCharCount) and (SrcI < SrcCharCount) do
+  begin
+    B1 := Byte(Src[SrcI]);
+    Inc(SrcI);
+
+    if B1 < 128 then // single byte UTF-8 char
+    begin
+      Dest[DestI] := System.WideChar(B1);
+      Inc(DestI);
+    end
+    else
+    begin
+      if SrcI >= SrcCharCount then
+        if UnfinishedCharError then Exit(trInvalidChar)
+        else Break;
+
+      B2 := Byte(Src[SrcI]);
+      Inc(SrcI);
+
+      if (B1 and %11100000) = %11000000 then // double byte UTF-8 char
+      begin
+        if (B2 and %11000000) = %10000000 then
+        begin
+          Dest[DestI] := System.WideChar(((B1 and %00011111) shl 6) or (B2 and %00111111));
+          Inc(DestI);
+        end
+        else // invalid character, assume single byte UTF-8 char
+          if InvalidCharError(1) then Exit(trInvalidChar);
+      end
+      else
+      begin
+        if SrcI >= SrcCharCount then
+          if UnfinishedCharError then Exit(trInvalidChar)
+          else Break;
+
+        B3 := Byte(Src[SrcI]);
+        Inc(SrcI);
+
+        if (B1 and %11110000) = %11100000 then // triple byte UTF-8 char
+        begin
+          if ((B2 and %11000000) = %10000000) and ((B3 and %11000000) = %10000000) then
+          begin
+            W := ((B1 and %00011111) shl 12) or ((B2 and %00111111) shl 6) or (B3 and %00111111);
+            if (W < $D800) or (W > $DFFF) then // to single wide char UTF-16 char
+            begin
+              Dest[DestI] := System.WideChar(W);
+              Inc(DestI);
+            end
+            else // invalid UTF-16 character, assume double byte UTF-8 char
+              if InvalidCharError(2) then Exit(trInvalidChar);
+          end
+          else // invalid character, assume double byte UTF-8 char
+            if InvalidCharError(2) then Exit(trInvalidChar);
+        end
+        else
+        begin
+          if SrcI >= SrcCharCount then
+            if UnfinishedCharError then Exit(trInvalidChar)
+            else Break;
+
+          B4 := Byte(Src[SrcI]);
+          Inc(SrcI);
+
+          if ((B1 and %11111000) = %11110000) and ((B2 and %11000000) = %10000000)
+            and ((B3 and %11000000) = %10000000) and ((B4 and %11000000) = %10000000) then
+          begin // 4 byte UTF-8 char
+            C := ((B1 and %00011111) shl 18) or ((B2 and %00111111) shl 12)
+              or ((B3 and %00111111) shl 6)  or (B4 and %00111111);
+            // to double wide char UTF-16 char
+            Dest[DestI] := System.WideChar($D800 or ((C - $10000) shr 10));
+            Inc(DestI);
+            if DestI >= DestWideCharCount then Break;
+            Dest[DestI] := System.WideChar($DC00 or ((C - $10000) and %0000001111111111));
+            Inc(DestI);
+          end
+          else // invalid character, assume triple byte UTF-8 char
+            if InvalidCharError(3) then Exit(trInvalidChar);
+        end;
+      end;
+    end;
+  end;
+
+  if DestI >= DestWideCharCount then
+  begin
+    DestI := DestWideCharCount - 1;
+    Result := trDestExhausted;
+  end
+  else
+    Result := trNoError;
+
+  Dest[DestI] := #0;
+  ActualWideCharCount := DestI + 1;
+end;
+
+function UTF8ToUTF16(const P: PChar; ByteCnt: SizeUInt): UnicodeString;
+var
+  L: SizeUInt;
+begin
+  if ByteCnt=0 then
+    exit('');
+  SetLength(Result, ByteCnt);
+  // wide chars of UTF-16 <= bytes of UTF-8 string
+  if ConvertUTF8ToUTF16(PWideChar(Result), Length(Result) + 1, P, ByteCnt,
+    [toInvalidCharToSymbol], L) = trNoError
+  then SetLength(Result, L - 1)
+  else Result := '';
+end;
+
+{------------------------------------------------------------------------------
+  Name:    UTF8ToUTF16
+  Params:  S - Source UTF-8 string
+  Returns: UTF-16 encoded string
+
+  Converts the specified UTF-8 encoded string to UTF-16 encoded (system endian)
+  Avoid copying the result string since on windows a widestring requires a full
+  copy
+ ------------------------------------------------------------------------------}
+function UTF8ToUTF16(const S: AnsiString): UnicodeString;
+begin
+  Result:=UTF8ToUTF16(PChar(S),length(S));
+end;
+
+{------------------------------------------------------------------------------
+  Name:    ConvertUTF16ToUTF8
+  Params:  Dest             - Pointer to destination string
+           DestCharCount    - Char count allocated in destination string
+           Src              - Pointer to source string
+           SrcWideCharCount - Wide char count allocated in source string
+           Options          - Conversion options, if none is set, both
+             invalid and unfinished source chars are skipped.
+             See ConvertUTF8ToUTF16 for details.
+
+           ActualCharCount  - Actual char count converted from source
+                            string to destination string
+  Returns: See ConvertUTF8ToUTF16
+
+  Converts the specified UTF-16 encoded string (system endian) to UTF-8 encoded
+ ------------------------------------------------------------------------------}
+function ConvertUTF16ToUTF8(Dest: PChar; DestCharCount: SizeUInt;
+  Src: PWideChar; SrcWideCharCount: SizeUInt; Options: TConvertOptions;
+  out ActualCharCount: SizeUInt): TConvertResult;
+var
+  DestI, SrcI: SizeUInt;
+  W1, W2: Word;
+  C: LongWord;
+
+  function UnfinishedCharError: Boolean;
+  begin
+    if toUnfinishedCharToSymbol in Options then
+    begin
+      Dest[DestI] := Char('?');
+      Inc(DestI);
+      Result := False;
+    end
+    else
+      if toUnfinishedCharError in Options then
+      begin
+        ConvertUTF16ToUTF8 := trUnfinishedChar;
+        Result := True;
+      end
+      else Result := False;
+  end;
+
+  function InvalidCharError(Count: SizeUInt): Boolean; inline;
+  begin
+    if not (toInvalidCharError in Options) then
+    begin
+      if toInvalidCharToSymbol in Options then
+      begin
+        Dest[DestI] := Char('?');
+        Inc(DestI);
+      end;
+
+      Dec(SrcI, Count);
+      // skip trailing UTF-16 wide char
+      if (Word(Src[SrcI]) and $FC00) = $DC00 then Inc(SrcI);
+
+      Result := False;
+    end
+    else
+      if toInvalidCharError in Options then
+      begin
+        ConvertUTF16ToUTF8 := trUnfinishedChar;
+        Result := True;
+      end;
+  end;
+
+begin
+  ActualCharCount := 0;
+
+  if not Assigned(Src) then
+  begin
+    Result := trNullSrc;
+    Exit;
+  end;
+
+  if not Assigned(Dest) then
+  begin
+    Result := trNullDest;
+    Exit;
+  end;
+  SrcI := 0;
+  DestI := 0;
+
+  while (DestI < DestCharCount) and (SrcI < SrcWideCharCount) do
+  begin
+    W1 := Word(Src[SrcI]);
+    Inc(SrcI);
+
+    if (W1 < $D800) or (W1 > $DFFF) then // single wide char UTF-16 char
+    begin
+      if W1 < $0080 then // to single byte UTF-8 char
+      begin
+        Dest[DestI] := Char(W1);
+        Inc(DestI);
+      end
+      else
+        if W1 < $0800 then // to double byte UTF-8 char
+        begin
+          Dest[DestI] := Char(%11000000 or ((W1 and %11111000000) shr 6));
+          Inc(DestI);
+          if DestI >= DestCharCount then Break;
+          Dest[DestI] := Char(%10000000 or (W1 and %111111));
+          Inc(DestI);
+        end
+        else
+        begin // to triple byte UTF-8 char
+          Dest[DestI] := Char(%11100000 or ((W1 and %1111000000000000) shr 12));
+          Inc(DestI);
+          if DestI >= DestCharCount then Break;
+          Dest[DestI] := Char(%10000000 or ((W1 and %111111000000) shr 6));
+          Inc(DestI);
+          if DestI >= DestCharCount then Break;
+          Dest[DestI] := Char(%10000000 or (W1 and %111111));
+          Inc(DestI);
+        end;
+    end
+    else
+    begin
+      if SrcI >= SrcWideCharCount then
+        if UnfinishedCharError then Exit(trInvalidChar)
+        else Break;
+
+      W2 := Word(Src[SrcI]);
+      Inc(SrcI);
+
+      if (W1 and $F800) = $D800 then // double wide char UTF-16 char
+      begin
+        if (W2 and $FC00) = $DC00 then
+        begin
+          C := (W1 - $D800) shl 10 + (W2 - $DC00) + $10000;
+
+          // to 4 byte UTF-8 char
+          Dest[DestI] := Char(%11110000 or (C shr 18));
+          Inc(DestI);
+          if DestI >= DestCharCount then Break;
+          Dest[DestI] := Char(%10000000 or ((C and $3F000) shr 12));
+          Inc(DestI);
+          if DestI >= DestCharCount then Break;
+          Dest[DestI] := Char(%10000000 or ((C and %111111000000) shr 6));
+          Inc(DestI);
+          if DestI >= DestCharCount then Break;
+          Dest[DestI] := Char(%10000000 or (C and %111111));
+          Inc(DestI);
+        end
+        else // invalid character, assume single wide char UTF-16 char
+          if InvalidCharError(1) then Exit(trInvalidChar);
+      end
+      else // invalid character, assume single wide char UTF-16 char
+        if InvalidCharError(1) then Exit(trInvalidChar);
+    end;
+  end;
+
+  if DestI >= DestCharCount then
+  begin
+    DestI := DestCharCount - 1;
+    Result := trDestExhausted;
+  end
+  else
+    Result := trNoError;
+
+  Dest[DestI] := #0;
+  ActualCharCount := DestI + 1;
+end;
+
+function UTF16ToUTF8(const P: PWideChar; WideCnt: SizeUInt): AnsiString;
+var
+  L: SizeUInt;
+begin
+  if WideCnt=0 then
+    exit('');
+
+  SetLength(Result, WideCnt * 3);
+  // bytes of UTF-8 <= 3 * wide chars of UTF-16 string
+  // e.g. %11100000 10100000 10000000 (UTF-8) is $0800 (UTF-16)
+  if ConvertUTF16ToUTF8(PChar(Result), Length(Result) + 1, P, WideCnt,
+    [toInvalidCharToSymbol], L) = trNoError then
+  begin
+    SetLength(Result, L - 1);
+  end else
+    Result := '';
+end;
+
+{------------------------------------------------------------------------------
+  Name:    UTF16ToUTF8
+  Params:  S - Source UTF-16 string (system endian)
+  Returns: UTF-8 encoded string
+
+  Converts the specified UTF-16 encoded string (system endian) to UTF-8 encoded
+ ------------------------------------------------------------------------------}
+function UTF16ToUTF8(const S: UnicodeString): AnsiString;
+begin
+  Result := UTF16ToUTF8(PWideChar(S),length(S));
+end;
+
+{end of copy from LazUTF8
+ ------------------------------------------------------------------------------}
+
 {$ENDIF}
 
 function UTF8ReverseString(const s: string): string;
@@ -507,7 +1015,7 @@ begin
   end;
 end;
 
-function UTF8CodepointToUnicode(p: PChar; ACodePointLen: integer): cardinal;
+function UTF8CodepointToUnicode(p: PChar; ACodePointLen: integer): LongWord;
 begin
   case ACodePointLen of
     0: result := 0;
@@ -548,7 +1056,7 @@ function GetFirstStrongBidiClassUTF8(const sUTF8: string): TUnicodeBidiClass;
 var
   p,pEnd: PChar;
   charLen: Integer;
-  u: Cardinal;
+  u: LongWord;
   curBidi: TUnicodeBidiClass;
   isolateNesting: integer;
 begin
@@ -585,7 +1093,7 @@ function GetLastStrongBidiClassUTF8(const sUTF8: string): TUnicodeBidiClass;
 var
   p,pEnd: PChar;
   charLen: Integer;
-  u: Cardinal;
+  u: LongWord;
   curBidi: TUnicodeBidiClass;
   isolateNesting: integer;
 begin
@@ -625,7 +1133,7 @@ function IsZeroWidthUTF8(const sUTF8: string): boolean;
 var
   p,pEnd: PChar;
   charLen: Integer;
-  u: Cardinal;
+  u: LongWord;
 begin
   if sUTF8 = '' then exit(true);
   p := @sUTF8[1];
@@ -670,7 +1178,7 @@ var
 
 var
   charLen: integer;
-  u: Cardinal;
+  u: LongWord;
 
 begin
   i := 1;
@@ -694,11 +1202,7 @@ begin
   result := s;
 end;
 
-type
-  TUnicodeArray = packed array of cardinal;
-  TIntegerArray = array of integer;
-
-procedure UTF8ToUnicode(const sUTF8: string; out u: TUnicodeArray; out ofs: TIntegerArray);
+procedure UTF8ToUnicodeArray(const sUTF8: string; out u: TUnicodeArray; out ofs: TIntegerArray);
 var
   index,len,charLen: integer;
   p,pStart,pEnd: PChar;
@@ -736,7 +1240,7 @@ begin
   end;
 end;
 
-function AnalyzeBidiUTF8(const sUTF8: string; ABaseDirection: cardinal): TBidiUTF8Array;
+function AnalyzeBidiUTF8(const sUTF8: string; ABidiMode: TFontBidiMode): TBidiUTF8Array;
 var
   u: TUnicodeArray;
   ofs: TIntegerArray;
@@ -747,8 +1251,8 @@ begin
     result := nil
   else
   begin
-    UTF8ToUnicode(sUTF8, u, ofs);
-    a := AnalyzeBidiUnicode(@u[0], length(u), ABaseDirection);
+    UTF8ToUnicodeArray(sUTF8, u, ofs);
+    a := AnalyzeBidiUnicode(@u[0], length(u), ABidiMode);
     setlength(result, length(u));
     for i := 0 to high(result) do
     begin
@@ -761,14 +1265,13 @@ end;
 function AnalyzeBidiUTF8(const sUTF8: string; ARightToLeft: boolean): TBidiUTF8Array;
 begin
   if ARightToLeft then
-    result := AnalyzeBidiUTF8(sUTF8, UNICODE_RIGHT_TO_LEFT_ISOLATE)
-  else
-    result := AnalyzeBidiUTF8(sUTF8, UNICODE_LEFT_TO_RIGHT_ISOLATE);
+    result := AnalyzeBidiUTF8(sUTF8, fbmRightToLeft)
+    else result := AnalyzeBidiUTF8(sUTF8, fbmLeftToRight);
 end;
 
 function AnalyzeBidiUTF8(const sUTF8: string): TBidiUTF8Array;
 begin
-  result := AnalyzeBidiUTF8(sUTF8, UNICODE_FIRST_STRONG_ISOLATE)
+  result := AnalyzeBidiUTF8(sUTF8, fbmAuto)
 end;
 
 function GetUTF8DisplayOrder(const ABidi: TBidiUTF8Array): TUnicodeDisplayOrder;
@@ -783,7 +1286,7 @@ function ContainsBidiIsolateOrFormattingUTF8(const sUTF8: string): boolean;
 var
   p,pEnd: PChar;
   charLen: Integer;
-  u: Cardinal;
+  u: LongWord;
 begin
   if sUTF8 = '' then exit(false);
   p := @sUTF8[1];
@@ -817,6 +1320,18 @@ begin
     result := UnicodeCharToUTF8(UNICODE_RIGHT_TO_LEFT_EMBEDDING) + sUTF8 + UnicodeCharToUTF8(UNICODE_POP_DIRECTIONAL_FORMATTING)
   else
     result := UnicodeCharToUTF8(UNICODE_LEFT_TO_RIGHT_EMBEDDING) + sUTF8 + UnicodeCharToUTF8(UNICODE_POP_DIRECTIONAL_FORMATTING);
+end;
+
+function UTF8Ligature(const sUTF8: string; ARightToLeft: boolean;
+  ALigatureLeft, ALigatureRight: boolean): string;
+begin
+  result := sUTF8;
+  if (ALigatureRight and ARightToLeft) or
+     (ALigatureLeft and not ARightToLeft) then
+     result := UTF8_ZERO_WIDTH_JOINER + result;
+  if (ALigatureLeft and ARightToLeft) or
+     (ALigatureRight and not ARightToLeft) then
+     result := result + UTF8_ZERO_WIDTH_JOINER;
 end;
 
 //little endian stream functions
@@ -859,7 +1374,7 @@ end;
 
 function LEReadSingle(Stream: TStream): single;
 var
-  ResultAsDWord : longword absolute result;
+  ResultAsDWord : LongWord absolute result;
 begin
   ResultAsDWord := 0;
   stream.Read(ResultAsDWord, sizeof(Result));
@@ -868,10 +1383,126 @@ end;
 
 procedure LEWriteSingle(Stream: TStream; AValue: single);
 var
-  ValueAsDWord : longword absolute AValue;
+  ValueAsDWord : LongWord absolute AValue;
 begin
   ValueAsDWord := NtoLE(ValueAsDWord);
   stream.Write(ValueAsDWord, sizeof(AValue));
+end;
+
+{ TGlyphUtf8 }
+
+function TGlyphUtf8.GetEmpty: boolean;
+begin
+  result := GlyphUtf8 = '';
+end;
+
+{ TGlyphCursorUtf8 }
+
+class function TGlyphCursorUtf8.New(const textUTF8: string; ABidiMode: TFontBidiMode): TGlyphCursorUtf8;
+begin
+  result.sUTF8 := textUTF8;
+  result.bidiArray := AnalyzeBidiUTF8(result.sUTF8, ABidiMode);
+  result.displayOrder := GetUTF8DisplayOrder(result.bidiArray);
+  result.Rewind;
+end;
+
+function TGlyphCursorUtf8.GetNextGlyph: TGlyphUtf8;
+var
+  rtlScript, ligatureLeft, ligatureRight: Boolean;
+  u: LongWord;
+  bracketInfo: TUnicodeBracketInfo;
+begin
+  if EndOfString then
+  begin
+    result.GlyphUtf8:= '';
+    result.RightToLeft:= false;
+    result.Mirrored:= false;
+    result.MirroredGlyphUtf8:= '';
+    exit;
+  end;
+  PeekMultichar;
+  NextMultichar;
+  result.GlyphUtf8 := currentChar;
+  result.RightToLeft := currentBidiInfo.IsRightToLeft;
+  result.Mirrored := currentBidiInfo.IsMirrored;
+  result.MirroredGlyphUtf8:= '';
+  result.ByteOffset := currentOffset;
+  result.ByteSize := length(currentChar);
+  result.Merged:= false;
+  if result.Mirrored then
+  begin
+    u := UTF8CodepointToUnicode(pchar(currentChar),
+      min(UTF8CharacterLength(pchar(currentChar)), length(currentChar)));
+    bracketInfo := GetUnicodeBracketInfo(u);
+    if bracketInfo.OpeningBracket = u then
+      result.MirroredGlyphUtf8 := UnicodeCharToUTF8(bracketInfo.ClosingBracket)
+    else if bracketInfo.ClosingBracket = u then
+      result.MirroredGlyphUtf8 := UnicodeCharToUTF8(bracketInfo.OpeningBracket);
+  end else
+  begin
+    rtlScript := currentBidiInfo.IsRightToLeftScript;
+    ligatureRight := currentBidiInfo.HasLigatureRight;
+    ligatureLeft := currentBidiInfo.HasLigatureLeft;
+    if (currentChar.StartsWith(UTF8_ARABIC_ALEPH) or
+       currentChar.StartsWith(UTF8_ARABIC_ALEPH_HAMZA_BELOW) or
+       currentChar.StartsWith(UTF8_ARABIC_ALEPH_HAMZA_ABOVE) or
+       currentChar.StartsWith(UTF8_ARABIC_ALEPH_MADDA_ABOVE)) and
+      not EndOfString then
+    begin
+      PeekMultichar;
+      if currentChar.StartsWith(UTF8_ARABIC_LAM) then
+      begin
+        result.GlyphUtf8 := currentChar + result.GlyphUtf8;
+        result.ByteOffset:= Min(result.ByteOffset, currentOffset);
+        inc(result.ByteSize, length(currentChar));
+        result.Merged := true;
+        ligatureRight := currentBidiInfo.HasLigatureRight;
+        NextMultichar;
+      end;
+    end;
+    result.GlyphUtf8 := UTF8Ligature(result.GlyphUtf8, rtlScript, ligatureLeft, ligatureRight);
+  end;
+end;
+
+procedure TGlyphCursorUtf8.Rewind;
+begin
+  displayIndex := 0;
+  while (displayIndex < length(displayOrder))
+    and not bidiArray[displayOrder[displayIndex]].BidiInfo.IsMulticharStart do
+      inc(displayIndex);
+end;
+
+procedure TGlyphCursorUtf8.NextMultichar;
+begin
+  inc(displayIndex);
+  while (displayIndex < length(displayOrder))
+    and not bidiArray[displayOrder[displayIndex]].BidiInfo.IsMulticharStart do
+      inc(displayIndex);
+end;
+
+procedure TGlyphCursorUtf8.PeekMultichar;
+var
+  startIndex, nextIndex, charLen, startOffset: Integer;
+begin
+  startIndex := displayOrder[displayIndex];
+  startOffset := bidiArray[startIndex].Offset;
+  currentBidiInfo := bidiArray[startIndex].BidiInfo;
+  nextIndex := startIndex+1;
+  while (nextIndex < length(bidiArray))
+    and not bidiArray[nextIndex].BidiInfo.IsMulticharStart do
+      inc(nextIndex);
+  if nextIndex >= length(bidiArray) then
+    charLen := length(sUTF8) - startOffset
+  else
+    charLen := bidiArray[nextIndex].Offset - startOffset;
+  setlength(currentChar, charLen);
+  if charLen > 0 then move(sUTF8[startOffset+1], currentChar[1], charLen);
+  currentOffset := startOffset;
+end;
+
+function TGlyphCursorUtf8.EndOfString: boolean;
+begin
+  result := displayIndex >= length(displayOrder);
 end;
 
 end.

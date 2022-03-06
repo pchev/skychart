@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: LGPL-3.0-linking-exception
 { This unit provides some optimisations of TFPReaderPCX: decompression using a read buffer.
   It also fixes the progress message and the InternalCheck. }
 
@@ -7,7 +8,7 @@ unit BGRAReadPCX;
 
 interface
 
-uses FPImage, Classes, SysUtils, FPReadPCX;
+uses FPImage, BGRAClasses, SysUtils, FPReadPCX;
 
 type
 
@@ -34,8 +35,8 @@ uses BGRABitmapTypes;
 procedure TBGRAReaderPCX.ReadScanLine(Row: integer; Stream: TStream);
 var
   P: PByte;
-  B: NativeUint;
-  bytes, Count: NativeUInt;
+  B: UInt32or64;
+  bytes, Count: UInt32or64;
 begin
   if FLineSize <= 0 then exit;
   P     := FScanLine;

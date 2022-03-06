@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: LGPL-3.0-linking-exception
 unit BGRAThumbnail;
 
 {$mode objfpc}{$H+}
@@ -6,7 +7,7 @@ unit BGRAThumbnail;
 interface
 
 uses
-  Classes, SysUtils, BGRABitmap, BGRABitmapTypes, FPimage;
+  BGRAClasses, SysUtils, BGRABitmap, BGRABitmapTypes, FPimage;
 
 function GetBitmapThumbnail(ABitmap: TBGRACustomBitmap; AWidth,AHeight: integer; ABackColor: TBGRAPixel; ACheckers: boolean; ADest: TBGRABitmap= nil; AVerticalShrink: single = 1; AHorizShrink: single = 1): TBGRABitmap; overload;
 function GetBitmapThumbnail(ABitmap: TBGRACustomBitmap; AFormat: TBGRAImageFormat; AWidth,AHeight: integer; ABackColor: TBGRAPixel; ACheckers: boolean; ADest: TBGRABitmap= nil; AVerticalShrink: single = 1; AHorizShrink: single = 1): TBGRABitmap; overload;
@@ -34,23 +35,31 @@ function GetXPixMapThumbnail(AStream: TStream; AWidth, AHeight: integer; ABackCo
 function GetBmpMioMapThumbnail(AStream: TStream; AWidth, AHeight: integer; ABackColor: TBGRAPixel; ACheckers: boolean; ADest: TBGRABitmap= nil): TBGRABitmap;
 
 procedure DrawThumbnailCheckers(bmp: TBGRABitmap; ARect: TRect; AIconCheckers: boolean = false);
+procedure DrawThumbnailCheckers(bmp: TBGRABitmap; ARect: TRect; AIconCheckers: boolean; AScale: single);
 
 var
   ImageCheckersColor1,ImageCheckersColor2  : TBGRAPixel;
   IconCheckersColor1,IconCheckersColor2  : TBGRAPixel;
+  CheckersScale: single = 1;
 
 implementation
 
-uses Types, base64, BGRAUTF8,
+uses base64, BGRAUTF8,
      DOM, XMLRead, BGRAReadJPEG, BGRAReadPng, BGRAReadGif, BGRAReadBMP,
      BGRAReadPSD, BGRAReadIco, UnzipperExt, BGRAReadLzp;
 
-procedure DrawThumbnailCheckers(bmp: TBGRABitmap; ARect: TRect; AIconCheckers: boolean);
+procedure DrawThumbnailCheckers(bmp: TBGRABitmap; ARect: TRect;
+  AIconCheckers: boolean);
+begin
+  DrawThumbnailCheckers(bmp, ARect,  AIconCheckers, CheckersScale);
+end;
+
+procedure DrawThumbnailCheckers(bmp: TBGRABitmap; ARect: TRect; AIconCheckers: boolean; AScale: single);
 begin
   if AIconCheckers then
-    bmp.DrawCheckers(ARect, IconCheckersColor1, IconCheckersColor2)
+    bmp.DrawCheckers(ARect, IconCheckersColor1, IconCheckersColor2, round(8*AScale), round(8*AScale))
   else
-    bmp.DrawCheckers(ARect, ImageCheckersColor1, ImageCheckersColor2);
+    bmp.DrawCheckers(ARect, ImageCheckersColor1, ImageCheckersColor2, round(8*AScale), round(8*AScale));
 end;
 
 function InternalGetBitmapThumbnail(ABitmap: TBGRACustomBitmap; AWidth, AHeight: integer; ABackColor: TBGRAPixel; ACheckers: boolean;
@@ -80,7 +89,7 @@ begin
       if hIcon = 0 then hIcon := 1;
       xIcon:= (result.Width-wIcon) div 2;
       yIcon:= (result.Height-hIcon) div 2;
-      if ACheckers then DrawThumbnailCheckers(result,Rect(xIcon,yIcon,xIcon+wIcon,yIcon+hIcon),ADarkCheckers);
+      if ACheckers then DrawThumbnailCheckers(result,Rect(xIcon,yIcon,xIcon+wIcon,yIcon+hIcon),ADarkCheckers,CheckersScale);
       if AShowHotSpot and (wIcon > 0) and (hIcon > 0) then
       begin
         hotspot := Point(xIcon+ABitmap.HotSpot.X*wIcon div ABitmap.Width,yIcon+ABitmap.HotSpot.Y*hIcon div ABitmap.Height);
@@ -225,6 +234,14 @@ begin
       begin
         png.Position:= 0;
         result := GetPngThumbnail(png,AWidth,AHeight,ABackColor,ACheckers,ADest);
+      end else
+      begin
+        png.Clear;
+        if unzip.UnzipFileToStream('mergedimage.png', png, False) then
+        begin
+          png.Position:= 0;
+          result := GetPngThumbnail(png,AWidth,AHeight,ABackColor,ACheckers,ADest);
+        end;
       end;
     finally
       png.Free;

@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: LGPL-3.0-linking-exception
 {$IFDEF INCLUDE_INTERFACE}
 {$UNDEF INCLUDE_INTERFACE}
 
@@ -48,7 +49,7 @@ type
     FixedData: array[0..31] of byte;
     InternalInitContext: TUniBrushInitContextProc;       //do not call directly
     InternalPutNextPixels: TUniBrushPutNextPixelsProc;   //do not call directly
-    Flags: Cardinal;
+    Flags: LongWord;
     procedure MoveTo(AContext: PUniBrushContext; ADest: pointer; AOfsX,AOfsY: integer); inline;
     procedure PutNextPixels(AContext: PUniBrushContext; AAlpha: Word; ACount: integer); inline;
     property Colorspace: TColorspaceAny read FColorspace write SetColorspace;
@@ -167,26 +168,28 @@ type
                        ALineOrder: TRawImageLineOrder); overload;
 
     procedure Assign(Source: TPersistent); override;
-    function NewBitmap: TCustomUniversalBitmap;
+    function NewBitmap: TCustomUniversalBitmap; overload; virtual;
+    function NewBitmap(AWidth, AHeight: integer): TCustomUniversalBitmap; overload; virtual;
+    function NewBitmap(AWidth, AHeight: integer; AColor: Pointer): TCustomUniversalBitmap; overload; virtual;
 
     {** Adds a reference (this reference count is not the same as
         the reference count of an interface, it changes only by
         explicit calls }
-    function NewReference: TCustomUniversalBitmap;
+    function NewReference: TCustomUniversalBitmap; virtual;
     {** Free a reference. When the resulting reference count gets
         to zero, the image is freed. The initial reference count
         is equal to 1 }
     procedure FreeReference;
     {** Returns an object with a reference count equal to 1. Duplicate
         this bitmap if necessary }
-    function GetUnique: TCustomUniversalBitmap;
-    function Duplicate(ACopyProperties: boolean=false): TCustomUniversalBitmap;
+    function GetUnique: TCustomUniversalBitmap; virtual;
+    function Duplicate(ACopyProperties: boolean=false): TCustomUniversalBitmap; virtual;
     procedure CopyPropertiesTo(ABitmap: TCustomUniversalBitmap); virtual;
     {** Get a part of the image with repetition in both directions. It means
       that if the bounds are within the image, the result is just that part
       of the image, but if the bounds are bigger than the image, the image
       is tiled. }
-    function GetPart(const ARect: TRect): TCustomUniversalBitmap;
+    function GetPart(const ARect: TRect): TCustomUniversalBitmap; virtual;
 
     procedure InvalidateBitmap; virtual;         //call if you modify with Scanline
     procedure LoadFromBitmapIfNeeded; virtual;   //call to ensure that data is up to date
@@ -290,6 +293,10 @@ type
     procedure ApplyMask(mask: TCustomUniversalBitmap; ARect: TRect; AAlpha: Word = 65535); overload;
     procedure ApplyMask(mask: TCustomUniversalBitmap; ARect: TRect; AMaskRectTopLeft: TPoint; AAlpha: Word = 65535); overload; virtual;
     procedure ApplyGlobalOpacity(alpha: byte); overload; virtual;
+    procedure FillMask(x,y: integer; AMask: TCustomUniversalBitmap; const ABrush: TUniversalBrush); overload; virtual;
+    procedure FillMask(x,y: integer; AMask: TCustomUniversalBitmap; ATexture: IBGRAScanner); overload; virtual;
+    procedure FillMask(x,y: integer; AMask: TCustomUniversalBitmap; ATexture: IBGRAScanner; AMode: TDrawMode); overload; virtual;
+    procedure FillMask(x,y: integer; AMask: TCustomUniversalBitmap; ATexture: IBGRAScanner; AMode: TDrawMode; AScanOffset: TPoint); overload; virtual;
 
     {** Fills completely a rectangle, without any border }
     procedure FillRect(ALeft, ATop, ARight, ABottom: integer; const ABrush: TUniversalBrush; AAlpha: Word = 65535); overload; virtual;
@@ -303,6 +310,7 @@ type
     procedure AlphaFillRect(ALeft, ATop, ARight, ABottom: integer; alpha: byte); virtual;
     procedure AlphaFillRect(const ARect: TRect; alpha: byte); virtual;
     procedure ApplyGlobalOpacity(ARect: TRect; alpha: byte); overload; virtual;
+    procedure DrawCheckers(ARect: TRect; const ABrushEven,ABrushOdd: TUniversalBrush; AGridWidth: integer = 8; AGridHeight: integer = 8); overload; virtual;
 
     {** Returns the address of a pixel. /!\ Does not check if the coordinates are valid. }
     function GetPixelAddress(x,y: integer): PByte; virtual;
@@ -311,14 +319,18 @@ type
     procedure GetPixelCycleIndirect(x,y: int32or64; AColor: pointer); virtual;
     procedure DrawPixel(x,y: Int32or64; const ABrush: TUniversalBrush; AAlpha: Word = 65535); overload; virtual;
     procedure DrawPixel(x,y: Int32or64; ATexture: IBGRAScanner; AMode: TDrawMode; AAlpha: Word = 65535); overload; virtual;
+    procedure DrawPixelF(x,y: single; const ABrush: TUniversalBrush; AAlpha: Word = 65535); overload; virtual;
+    procedure DrawPixelF(x,y: single; ATexture: IBGRAScanner; AMode: TDrawMode; AAlpha: Word = 65535); overload; virtual;
     {** Erase the content of the pixel by reducing the value of the
         alpha channel. ''alpha'' specifies how much to decrease.
         If the resulting alpha reaches zero, the content
         is replaced by the transparent pixel }
     procedure ErasePixel(x, y: int32or64; alpha: byte); virtual;
+    procedure ErasePixelF(x, y: single; alpha: byte); virtual;
     {** Sets the alpha value at (''x'',''y''). If ''alpha'' = 0, the
         pixel is replaced by the transparent pixel }
     procedure AlphaPixel(x, y: int32or64; alpha: byte); virtual;
+    procedure AlphaPixelF(x, y: single; alpha: byte); virtual;
     procedure HorizLine(x, y, x2: int32or64; const ABrush: TUniversalBrush; AAlpha: Word = 65535); virtual;
     {** Draws an horizontal line at line ''y'' and
         at columns ''x'' to ''x2'' included, using specified scanner
@@ -439,11 +451,11 @@ type
     procedure RotateUDInplace(ARect: TRect); overload; virtual;
 
     { Return a new bitmap rotated in a clock wise direction. }
-    function RotateCW: TCustomUniversalBitmap;
+    function RotateCW: TCustomUniversalBitmap; virtual;
     { Return a new bitmap rotated in a counter clock wise direction. }
-    function RotateCCW: TCustomUniversalBitmap;
+    function RotateCCW: TCustomUniversalBitmap; virtual;
     { Return a new bitmap rotated 180° (upside down). }
-    function RotateUD: TCustomUniversalBitmap;
+    function RotateUD: TCustomUniversalBitmap; virtual;
 
     {** Width of the image in pixels }
     property Width: integer Read GetWidth;
@@ -576,6 +588,9 @@ type
     procedure DrawPolygonAntialias(const APoints: array of TPointF; ATexture: IBGRAScanner; APenWidth: single); overload; virtual;
     procedure ErasePolygonOutlineAntialias(const APoints: array of TPointF; AAlpha: byte; APenWidth: single); overload; virtual;
 
+    procedure RectangleAntialias(x, y, x2, y2: single; const ABrush: TUniversalBrush; AWidth: single); overload; virtual;
+    procedure RectangleAntialias(x, y, x2, y2: single; ATexture: IBGRAScanner; AWidth: single); overload; virtual;
+
     {** Draws an ellipse without antialising. ''rx'' is the horizontal radius and
         ''ry'' the vertical radius }
     procedure Ellipse(x, y, rx, ry: single; const ABrush: TUniversalBrush; AWidth: single; AAlpha: Word = 65535); overload; virtual;
@@ -620,6 +635,9 @@ type
     procedure FillRectAntialias(const ARectF: TRectF; const ABrush: TUniversalBrush; APixelCenteredCoordinates: boolean = true); overload; virtual;
     procedure FillRectAntialias(const ARectF: TRectF; ATexture: IBGRAScanner; APixelCenteredCoordinates: boolean = true); overload; virtual;
     procedure EraseRectAntialias(const ARectF: TRectF; AAlpha: Byte; APixelCenteredCoordinates: boolean = true); overload; virtual;
+    procedure FillRoundRectAntialias(x, y, x2, y2, rx, ry: single; const ABrush: TUniversalBrush; AOptions: TRoundRectangleOptions = []; APixelCenteredCoordinates: boolean = true); overload; virtual;
+    procedure FillRoundRectAntialias(x, y, x2, y2, rx, ry: single; ATexture: IBGRAScanner; AOptions: TRoundRectangleOptions = []; APixelCenteredCoordinates: boolean = true); overload; virtual;
+    procedure EraseRoundRectAntialias(x, y, x2, y2, rx, ry: single; AAlpha: Byte; AOptions: TRoundRectangleOptions = []; APixelCenteredCoordinates: boolean = true); overload; virtual;
     procedure FillPath(APath: IBGRAPath; const ABrush: TUniversalBrush; APixelCenteredCoordinates: boolean = true); overload; virtual;
     procedure FillPath(APath: IBGRAPath; ATexture: IBGRAScanner; APixelCenteredCoordinates: boolean = true); overload; virtual;
     procedure ErasePath(APath: IBGRAPath; AAlpha: Byte; APixelCenteredCoordinates: boolean = true); overload; virtual;
@@ -667,14 +685,14 @@ type
 
   public
     //filters
-    function FilterBlurRadial(radius: single; blurType: TRadialBlurType): TCustomUniversalBitmap; overload;
-    function FilterBlurRadial(const ABounds: TRect; radius: single; blurType: TRadialBlurType): TCustomUniversalBitmap; overload;
-    function FilterBlurRadial(radiusX, radiusY: single; blurType: TRadialBlurType): TCustomUniversalBitmap; overload;
-    function FilterBlurRadial(const ABounds: TRect; radiusX, radiusY: single; blurType: TRadialBlurType): TCustomUniversalBitmap; overload;
-    function FilterBlurMotion(distance: single; angle: single; oriented: boolean): TCustomUniversalBitmap; overload;
-    function FilterBlurMotion(const ABounds: TRect; distance: single; angle: single; oriented: boolean): TCustomUniversalBitmap; overload;
-    function FilterCustomBlur(mask: TCustomUniversalBitmap): TCustomUniversalBitmap; overload;
-    function FilterCustomBlur(const ABounds: TRect; mask: TCustomUniversalBitmap): TCustomUniversalBitmap; overload;
+    function FilterBlurRadial(radius: single; blurType: TRadialBlurType): TCustomUniversalBitmap; overload; virtual;
+    function FilterBlurRadial(const ABounds: TRect; radius: single; blurType: TRadialBlurType): TCustomUniversalBitmap; overload; virtual;
+    function FilterBlurRadial(radiusX, radiusY: single; blurType: TRadialBlurType): TCustomUniversalBitmap; overload; virtual;
+    function FilterBlurRadial(const ABounds: TRect; radiusX, radiusY: single; blurType: TRadialBlurType): TCustomUniversalBitmap; overload; virtual;
+    function FilterBlurMotion(distance: single; angle: single; oriented: boolean): TCustomUniversalBitmap; overload; virtual;
+    function FilterBlurMotion(const ABounds: TRect; distance: single; angle: single; oriented: boolean): TCustomUniversalBitmap; overload; virtual;
+    function FilterCustomBlur(mask: TCustomUniversalBitmap): TCustomUniversalBitmap; overload; virtual;
+    function FilterCustomBlur(const ABounds: TRect; mask: TCustomUniversalBitmap): TCustomUniversalBitmap; overload; virtual;
 
   end;
 
@@ -761,6 +779,11 @@ type
     class function CreatePenStroker: TBGRACustomPenStroker; virtual; abstract;
     class function CreateArrow: TBGRACustomArrow; virtual; abstract;
 
+    class procedure RectangleAntialias(ADest: TCustomUniversalBitmap; APen: TBGRACustomPenStroker; x, y, x2, y2: single;
+                       const ABrush: TUniversalBrush; AWidth: single); virtual; abstract;
+    class procedure DrawPolygonAntialias(ADest: TCustomUniversalBitmap; APen: TBGRACustomPenStroker;
+                       const APoints: array of TPointF; const ABrush: TUniversalBrush; AWidth: single); overload; virtual; abstract;
+
     class procedure Ellipse(ADest: TCustomUniversalBitmap; APen: TBGRACustomPenStroker; x, y, rx, ry: single;
         const ABrush: TUniversalBrush; AWidth: single; AAlpha: Word=65535); overload; virtual; abstract;
     class procedure Ellipse(ADest: TCustomUniversalBitmap; APen: TBGRACustomPenStroker; const AOrigin, AXAxis, AYAxis: TPointF;
@@ -774,6 +797,9 @@ type
     class procedure FillRectAntialias(ADest: TCustomUniversalBitmap;
                     x, y, x2, y2: single; const ABrush: TUniversalBrush;
                     APixelCenteredCoordinates: boolean = true); virtual; abstract;
+    class procedure FillRoundRectAntialias(ADest: TCustomUniversalBitmap;
+                    x,y,x2,y2, rx,ry: single; const ABrush: TUniversalBrush;
+                    AOptions: TRoundRectangleOptions = []; APixelCenteredCoordinates: boolean = true); virtual; abstract;
     class procedure FillShapeAntialias(ADest: TCustomUniversalBitmap;
                     AShape: TBGRACustomFillInfo; AFillMode: TFillMode;
                     ABrush: TUniversalBrush); virtual; abstract;
@@ -975,7 +1001,7 @@ end;
 
 procedure TCustomUniversalBitmap.SetClipRect(const AValue: TRect);
 begin
-  IntersectRect(FClipRect,AValue,Rect(0,0,FWidth,FHeight));
+  FClipRect := TRect.Intersect(AValue, Rect(0,0,Width,Height));
 end;
 
 procedure TCustomUniversalBitmap.RaiseInvalidBrushColorspace;
@@ -1306,7 +1332,7 @@ procedure TCustomUniversalBitmap.EraseRectAntialias(x, y, x2, y2: single;
 var
   b: TUniversalBrush;
 begin
-  EraseBrush(b, AAlpha);
+  EraseBrush(b, AAlpha + (AAlpha shl 8));
   FillRectAntialias(x,y,x2,y2, b, APixelCenteredCoordinates);
 end;
 
@@ -1329,6 +1355,34 @@ procedure TCustomUniversalBitmap.EraseRectAntialias(const ARectF: TRectF;
 begin
   EraseRectAntialias(ARectF.Left, ARectF.Top, ARectF.Right, ARectF.Bottom,
      AAlpha, APixelCenteredCoordinates);
+end;
+
+procedure TCustomUniversalBitmap.FillRoundRectAntialias(x, y, x2, y2, rx,
+  ry: single; const ABrush: TUniversalBrush; AOptions: TRoundRectangleOptions;
+  APixelCenteredCoordinates: boolean);
+begin
+  if UniDrawerClass=nil then RaiseMissingUniDrawer;
+  UniDrawerClass.FillRoundRectAntialias(self, x,y,x2,y2, rx,ry, ABrush, AOptions, APixelCenteredCoordinates);
+end;
+
+procedure TCustomUniversalBitmap.FillRoundRectAntialias(x, y, x2, y2, rx,
+  ry: single; ATexture: IBGRAScanner; AOptions: TRoundRectangleOptions;
+  APixelCenteredCoordinates: boolean);
+var
+  b: TUniversalBrush;
+begin
+  ScannerBrush(b, ATexture, AntialiasingDrawMode, 0, 0);
+  FillRoundRectAntialias(x,y,x2,y2, rx,ry, b, AOptions, APixelCenteredCoordinates);
+end;
+
+procedure TCustomUniversalBitmap.EraseRoundRectAntialias(x, y, x2, y2, rx,
+  ry: single; AAlpha: Byte; AOptions: TRoundRectangleOptions;
+  APixelCenteredCoordinates: boolean);
+var
+  b: TUniversalBrush;
+begin
+  EraseBrush(b, AAlpha + (AAlpha shl 8));
+  FillRoundRectAntialias(x,y,x2,y2, rx,ry, b, AOptions, APixelCenteredCoordinates);
 end;
 
 procedure TCustomUniversalBitmap.FillPath(APath: IBGRAPath;
@@ -1600,8 +1654,8 @@ begin
     if c in Channels then
     begin
       resultForChannel := GetImageBoundsWithin(ARect, c, ANothingValue);
-      if IsRectEmpty(result) then result := resultForChannel
-      else UnionRect(result, result, resultForChannel);
+      if result.IsEmpty then result := resultForChannel
+      else result.Union(resultForChannel);
     end;
   end;
 end;
@@ -1775,9 +1829,13 @@ procedure TCustomUniversalBitmap.EraseLineAntialias(x1, y1, x2, y2: single;
   AAlpha: Byte; APenWidth: single; AClosedCap: boolean);
 var
   b: TUniversalBrush;
+  c: TBGRAPixel;
+  p: TBGRACustomPenStroker;
 begin
   EraseBrush(b, AAlpha + (AAlpha shl 8));
-  DrawLineAntialias(x1,y1,x2,y2, b, APenWidth, AClosedCap);
+  c := BGRA(0,0,0, AAlpha);
+  p := GetInternalPen;
+  FillPolyAntialias(p.ComputePolyline([PointF(x1,y1),PointF(x2,y2)],APenWidth,c,AClosedCap), b);
 end;
 
 procedure TCustomUniversalBitmap.DrawPolyLineAntialias(
@@ -1827,9 +1885,11 @@ procedure TCustomUniversalBitmap.ErasePolyLineAntialias(
   AClosedCap: boolean);
 var
   b: TUniversalBrush;
+  c: TBGRAPixel;
 begin
   EraseBrush(b, AAlpha + (AAlpha shl 8));
-  DrawPolyLineAntialias(APoints, b, APenWidth, AClosedCap);
+  c := BGRA(0,0,0, AAlpha);
+  FillPolyAntialias(GetInternalPen.ComputePolyline(APoints,APenWidth,c,AClosedCap), b);
 end;
 
 procedure TCustomUniversalBitmap.DrawPolyLineAntialiasAutocycle(
@@ -1861,7 +1921,8 @@ procedure TCustomUniversalBitmap.DrawPolygonAntialias(
   const APoints: array of TPointF; const ABrush: TUniversalBrush;
   APenWidth: single);
 begin
-   FillPolyAntialias(GetInternalPen.ComputePolygon(APoints,APenWidth),ABrush);
+  if UniDrawerClass = nil then RaiseMissingUniDrawer;
+  UniDrawerClass.DrawPolygonAntialias(self, GetInternalPen, APoints, ABrush, APenWidth);
 end;
 
 procedure TCustomUniversalBitmap.DrawPolygonAntialias(
@@ -1880,6 +1941,22 @@ var
 begin
   EraseBrush(b, AAlpha + (AAlpha shl 8));
   DrawPolygonAntialias(APoints, b, APenWidth);
+end;
+
+procedure TCustomUniversalBitmap.RectangleAntialias(x, y, x2, y2: single;
+  const ABrush: TUniversalBrush; AWidth: single);
+begin
+  if UniDrawerClass = nil then RaiseMissingUniDrawer;
+  UniDrawerClass.RectangleAntialias(self, GetInternalPen, x, y, x2, y2, ABrush, AWidth);
+end;
+
+procedure TCustomUniversalBitmap.RectangleAntialias(x, y, x2, y2: single;
+  ATexture: IBGRAScanner; AWidth: single);
+var
+  b: TUniversalBrush;
+begin
+  ScannerBrush(b, ATexture, AntialiasingDrawMode);
+  RectangleAntialias(x,y,x2,y2, b, AWidth);
 end;
 
 procedure TCustomUniversalBitmap.Ellipse(x, y, rx, ry: single;
@@ -2311,7 +2388,7 @@ end;
 
 procedure TCustomUniversalBitmap.Assign(Source: TPersistent);
 var pdest: PByte;
-  x,y: NativeInt;
+  x,y: Int32or64;
   col: TFPColor;
 begin
   if Source is TCustomUniversalBitmap then
@@ -2339,6 +2416,25 @@ end;
 function TCustomUniversalBitmap.NewBitmap: TCustomUniversalBitmap;
 begin
   result := InternalNew;
+end;
+
+function TCustomUniversalBitmap.NewBitmap(AWidth, AHeight: integer): TCustomUniversalBitmap;
+var
+  c: array[0..23] of byte;
+begin
+  AssignTransparentPixel(c);
+  result := NewBitmap(AWidth, AHeight, @c);
+end;
+
+function TCustomUniversalBitmap.NewBitmap(AWidth, AHeight: integer;
+  AColor: Pointer): TCustomUniversalBitmap;
+var
+  b: TUniversalBrush;
+begin
+  result := InternalNew;
+  result.SetSize(AWidth,AHeight);
+  SolidBrushIndirect(b, AColor, dmSet);
+  result.Fill(b);
 end;
 
 function TCustomUniversalBitmap.NewReference: TCustomUniversalBitmap;
@@ -2481,8 +2577,10 @@ end;
 procedure TCustomUniversalBitmap.Deserialize(AStream: TStream);
 var lWidth,lHeight,y: integer;
 begin
-  AStream.Read({%H-}lWidth,sizeof(lWidth));
-  AStream.Read({%H-}lHeight,sizeof(lHeight));
+  lWidth := 0;
+  lHeight := 0;
+  AStream.Read(lWidth,sizeof(lWidth));
+  AStream.Read(lHeight,sizeof(lHeight));
   lWidth := LEtoN(lWidth);
   lHeight := LEtoN(lHeight);
   SetSize(lWidth,lHeight);
@@ -2643,8 +2741,7 @@ var
   remain: TRect;
 begin
   result := ClipRect;
-  remain := EmptyRect;
-  IntersectRect(remain, ARect, result);
+  remain := TRect.Intersect(ARect, result);
   ClipRect := remain;
 end;
 
@@ -2732,9 +2829,146 @@ begin
   ApplyGlobalOpacity(ClipRect, alpha);
 end;
 
+procedure TCustomUniversalBitmap.FillMask(x, y: integer;
+  AMask: TCustomUniversalBitmap; const ABrush: TUniversalBrush);
+var
+  yb, remain: integer;
+  pScan: PByte;
+  delta: PtrInt;
+  ctx: TUniBrushContext;
+  r: TRect;
+  chunkCount, maskStride: integer;
+  maskSrc: PByteMask;
+  curVal: byte;
+  brushCount: integer;
+begin
+  if ABrush.Colorspace <> Colorspace then RaiseInvalidBrushColorspace;
+  r := RectWithSize(x,y,AMask.Width,AMask.Height);
+
+  if not CheckClippedRectBounds(r.Left,r.Top,r.Right,r.Bottom)
+    or ABrush.DoesNothing then exit;
+
+  LoadFromBitmapIfNeeded;
+  pScan := GetPixelAddress(r.Left, r.Top);
+  if LineOrder = riloBottomToTop then
+    delta := -RowSize
+    else delta := RowSize;
+
+  for yb := r.Top to r.Bottom-1 do
+  begin
+    ABrush.MoveTo(@ctx, pScan, r.Left, yb);
+    AMask.ScanMoveTo(r.Left - x, yb - y);
+    remain := r.Width;
+    while remain > 0 do
+    begin
+      chunkCount := remain;
+      AMask.ScanNextMaskChunk(chunkCount, maskSrc, maskStride);
+      dec(remain, chunkCount);
+      while chunkCount > 0 do
+      begin
+        curVal := maskSrc^.gray;
+        inc(maskSrc, maskStride);
+        dec(chunkCount);
+        brushCount := 1;
+        while (chunkCount > 0) and (maskSrc^.gray = curVal) do
+        begin
+          inc(maskSrc, maskStride);
+          dec(chunkCount);
+          inc(brushCount);
+        end;
+        ABrush.PutNextPixels(@ctx, curVal + (curVal shl 8), brushCount);
+      end;
+    end;
+    inc(pScan, delta);
+  end;
+  InvalidateBitmap;
+end;
+
+procedure TCustomUniversalBitmap.FillMask(x, y: integer;
+  AMask: TCustomUniversalBitmap; ATexture: IBGRAScanner);
+begin
+  FillMask(x,y, AMask, ATexture, dmDrawWithTransparency);
+end;
+
+procedure TCustomUniversalBitmap.FillMask(x, y: integer;
+  AMask: TCustomUniversalBitmap; ATexture: IBGRAScanner; AMode: TDrawMode);
+begin
+  FillMask(x,y, AMask, ATexture, AMode, Point(0,0));
+end;
+
+procedure TCustomUniversalBitmap.FillMask(x, y: integer;
+  AMask: TCustomUniversalBitmap; ATexture: IBGRAScanner; AMode: TDrawMode;
+  AScanOffset: TPoint);
+var
+  b: TUniversalBrush;
+begin
+  ScannerBrush(b, ATexture, AMode, AScanOffset.X, AScanOffset.Y);
+  FillMask(x,y, AMask, b);
+end;
+
 procedure TCustomUniversalBitmap.ApplyGlobalOpacity(ARect: TRect; alpha: byte);
 begin
   EraseRect(ARect, 255-alpha);
+end;
+
+procedure TCustomUniversalBitmap.DrawCheckers(ARect: TRect; const ABrushEven,
+  ABrushOdd: TUniversalBrush; AGridWidth: integer; AGridHeight: integer);
+var xcount,patY,yb,w,n,patX,patX1,patX1b: Int32or64;
+    pdest: PByte;
+    delta: PtrInt;
+    actualRect: TRect;
+    ctxEven,ctxOdd: TUniBrushContext;
+begin
+  actualRect := TRect.Intersect(ARect, ClipRect);
+  if actualRect.IsEmpty then exit;
+  w := actualRect.Right-actualRect.Left;
+  delta := self.RowSize;
+  if self.LineOrder = riloBottomToTop then delta := -delta;
+  pdest := self.GetPixelAddress(actualRect.left, actualRect.Top);
+  patY := (actualRect.Top - ARect.Top) mod (AGridHeight shl 1);
+  patX1 := (actualRect.Left - ARect.Left) mod (AGridWidth shl 1);
+  patX1b := (patX1+AGridWidth) mod (AGridWidth shl 1);
+  for yb := actualRect.Top to actualRect.Bottom-1 do
+  begin
+    if patY < AGridHeight then
+      patX := patX1
+      else patX := patX1b;
+    ABrushEven.MoveTo(@ctxEven, pdest, actualRect.Left,yb);
+    ABrushOdd.MoveTo(@ctxOdd, pdest, actualRect.Left,yb);
+    xcount := w;
+    if patX >= AGridWidth then
+    begin
+      n := (AGridWidth shl 1) - patX;
+      if n > xcount then n := xcount;
+      ABrushEven.PutNextPixels(@ctxEven, $ffff, n);
+      ABrushOdd.PutNextPixels(@ctxOdd, 0, n);
+      dec(xcount,n);
+      patX := 0;
+    end;
+    while xcount > 0 do
+    begin
+      n := AGridWidth - patX;
+      if n > xcount then n := xcount;
+      ABrushOdd.PutNextPixels(@ctxOdd, $ffff, n);
+      ABrushOdd.PutNextPixels(@ctxEven, 0, n);
+      dec(xcount, n);
+      patX := AGridWidth;
+
+      if xcount > 0 then
+      begin
+        n := (AGridWidth shl 1) - patX;
+        if n > xcount then n := xcount;
+        ABrushEven.PutNextPixels(@ctxEven, $ffff, n);
+        ABrushOdd.PutNextPixels(@ctxOdd, 0, n);
+        dec(xcount, n);
+        patX := 0;
+      end;
+    end;
+    inc(pbyte(pdest), delta);
+    inc(patY);
+    if patY = AGridHeight shl 1 then patY := 0;
+  end;
+  self.InvalidateBitmap;
 end;
 
 procedure TCustomUniversalBitmap.FillRect(ALeft, ATop, ARight, ABottom: integer;
@@ -2888,7 +3122,7 @@ var
   ctx: TUniBrushContext;
 begin
   if ABrush.Colorspace <> Colorspace then RaiseInvalidBrushColorspace;
-  if not PtInClipRect(x,y) then exit;
+  if not PtInClipRect(x,y) or (AAlpha = 0) then exit;
   LoadFromBitmapIfNeeded;
   pScan := GetPixelAddress(x,y);
   ABrush.MoveTo(@ctx, pScan,x,y);
@@ -2905,6 +3139,36 @@ begin
   DrawPixel(x,y, b, AAlpha);
 end;
 
+procedure TCustomUniversalBitmap.DrawPixelF(x, y: single;
+  const ABrush: TUniversalBrush; AAlpha: Word);
+var
+  ix, iy: integer;
+  fracX, fracY: longword;
+  aFracX, aFracY: word;
+begin
+  if ABrush.Colorspace <> Colorspace then RaiseInvalidBrushColorspace;
+  ix := floor(x); fracX := round((x-ix)*65536);
+  if fracX = 65536 then begin fracX := 0; inc(ix); end;
+  iy := floor(y); fracY := round((y-iy)*65536);
+  if fracY = 65536 then begin fracY := 0; inc(iy); end;
+  if (ix >= Width) or (iy >= Height) then exit;
+  if (ix < -integer(fracX <> 0)) or (iy < -integer(fracy <> 0)) then exit;
+  aFracX := (AAlpha*fracX+32768) shr 16;
+  DrawPixel(ix,iy, ABrush, ((not aFracX)*longword(65536-fracY)+32768) shr 16);
+  DrawPixel(ix+1,iy, ABrush, (aFracX*longword(65536-fracY)+32768) shr 16);
+  DrawPixel(ix,iy+1, ABrush, ((not aFracX)*fracY+32768) shr 16);
+  DrawPixel(ix+1,iy+1, ABrush, (aFracX*fracY+32768) shr 16);
+end;
+
+procedure TCustomUniversalBitmap.DrawPixelF(x, y: single;
+  ATexture: IBGRAScanner; AMode: TDrawMode; AAlpha: Word);
+var
+  b: TUniversalBrush;
+begin
+  ScannerBrush(b, ATexture, AMode);
+  DrawPixelF(x,y, b, AAlpha);
+end;
+
 procedure TCustomUniversalBitmap.ErasePixel(x, y: int32or64; alpha: byte);
 var
   b: TUniversalBrush;
@@ -2914,12 +3178,29 @@ begin
   DrawPixel(x,y, b);
 end;
 
+procedure TCustomUniversalBitmap.ErasePixelF(x, y: single; alpha: byte);
+var
+  b: TUniversalBrush;
+begin
+  if alpha = 0 then exit;
+  EraseBrush(b, alpha+(alpha shl 8));
+  DrawPixelF(x,y, b);
+end;
+
 procedure TCustomUniversalBitmap.AlphaPixel(x, y: int32or64; alpha: byte);
 var
   b: TUniversalBrush;
 begin
   AlphaBrush(b, alpha+(alpha shl 8));
   DrawPixel(x,y, b);
+end;
+
+procedure TCustomUniversalBitmap.AlphaPixelF(x, y: single; alpha: byte);
+var
+  b: TUniversalBrush;
+begin
+  AlphaBrush(b, alpha+(alpha shl 8));
+  DrawPixelF(x,y, b);
 end;
 
 procedure TCustomUniversalBitmap.HorizLine(x, y, x2: int32or64;
@@ -3567,7 +3848,8 @@ var
   PStart,PEnd: Pointer;
 begin
   if (ARect.Right <= ARect.Left) or (ARect.Bottom <= ARect.Top) then exit;
-  if not IntersectRect(ARect, ARect, rect(0,0,Width,Height)) then exit;
+  ARect.Intersect(rect(0,0,Width,Height));
+  if ARect.IsEmpty then exit;
   LoadFromBitmapIfNeeded;
   linesize := (ARect.Right-ARect.Left) * FPixelSize;
   line     := nil;
@@ -3600,7 +3882,8 @@ var
   PEnd:   PByte;
 begin
   if (ARect.Right <= ARect.Left) or (ARect.Bottom <= ARect.Top) then exit;
-  if not IntersectRect(ARect, ARect, rect(0,0,Width,Height)) then exit;
+  ARect.Intersect(rect(0,0,Width,Height));
+  if ARect.IsEmpty then exit;
   w := ARect.Right-ARect.Left;
   LoadFromBitmapIfNeeded;
   for yb := ARect.Top to ARect.Bottom-1 do
@@ -3627,7 +3910,8 @@ var
   w: integer;
 begin
   if (ARect.Right <= ARect.Left) or (ARect.Bottom <= ARect.Top) then exit;
-  if not IntersectRect(ARect, ARect, rect(0,0,Width,Height)) then exit;
+  ARect.Intersect(rect(0,0,Width,Height));
+  if ARect.IsEmpty then exit;
   LoadFromBitmapIfNeeded;
   w := ARect.Right-ARect.Left;
   linesize := w * FPixelSize;

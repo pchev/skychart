@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: LGPL-3.0-linking-exception
 {$IFDEF INCLUDE_INTERFACE}
 {$UNDEF INCLUDE_INTERFACE}
 
@@ -20,17 +21,18 @@ type
     //typed functions
 
     {** Creates an image of dimensions ''AWidth'' and ''AHeight'' and fills it with ''Color'' }
-    constructor Create(AWidth, AHeight: integer; const AColor: TPixel);
-    function NewBitmap(AWidth, AHeight: integer; const AColor: TPixel): TCustomUniversalBitmap; overload;
+    constructor Create(AWidth, AHeight: integer; const AColor: TPixel); virtual;
+    function NewBitmap(AWidth, AHeight: integer; const AColor: TPixel): TCustomUniversalBitmap; overload; virtual;
 
     function Equals(comp: TCustomUniversalBitmap): boolean; overload;
     function Equals(const comp: TPixel): boolean; overload;
     function GetDifferenceBounds(ABitmap: TCustomUniversalBitmap): TRect;
 
     procedure SolidBrushIndirect(out ABrush: TUniversalBrush; AColor: Pointer; ADrawMode: TDrawMode = dmDrawWithTransparency); override;
+    class procedure IdleBrush(out ABrush: TUniversalBrush); virtual;
     class procedure SolidBrush(out ABrush: TUniversalBrush; const AColor: TPixel; ADrawMode: TDrawMode = dmDrawWithTransparency); virtual;
     function CreateBrushTexture(ABrushStyle: TBrushStyle; APatternColor, ABackgroundColor: TPixel;
-            AWidth: integer = 8; AHeight: integer = 8; APenWidth: single = 1): TCustomUniversalBitmap;
+            AWidth: integer = 8; AHeight: integer = 8; APenWidth: single = 1): TCustomUniversalBitmap; virtual;
 
     procedure SetPixel(x,y: int32or64; const AColor: TPixel); overload; virtual;
     function GetPixel(x,y: int32or64): TPixel; inline;
@@ -46,11 +48,15 @@ type
     procedure ReplaceColor(ARect: TRect; const ABefore, AAfter: TPixel); overload; virtual;
     procedure ReplaceTransparent(const AAfter: TBGRAPixel); overload; virtual;
     procedure ReplaceTransparent(ARect: TRect; const AAfter: TPixel); overload; virtual;
+    procedure FillMask(x,y: integer; AMask: TCustomUniversalBitmap; const AColor: TPixel); overload; virtual;
+    procedure FillMask(x,y: integer; AMask: TCustomUniversalBitmap; const AColor: TPixel; ADrawMode: TDrawMode); overload; virtual;
     procedure FillRect(ALeft, ATop, ARight, ABottom: integer; const AColor: TPixel; ADrawMode: TDrawMode = dmSet; AAlpha: Word = 65535); overload; virtual;
     procedure FillRect(const ARect: TRect; const AColor: TPixel; ADrawMode: TDrawMode = dmSet; AAlpha: Word = 65535); overload; virtual;
+    procedure DrawCheckers(ARect: TRect; const AColorEven,AColorOdd: TPixel; AGridWidth: integer = 8; AGridHeight: integer = 8; ADrawMode: TDrawMode = dmSet); virtual;
     procedure DrawPixel(x,y: Int32or64; const AColor: TPixel); overload; virtual;
     procedure DrawPixel(x,y: Int32or64; const AColor: TPixel; ADrawMode: TDrawMode); overload; virtual;
     procedure DrawPixel(x,y: Int32or64; const AColor: TPixel; ADrawMode: TDrawMode; AAlpha: Word); overload; virtual;
+    procedure DrawPixelF(x,y: single; const AColor: TPixel; ADrawMode: TDrawMode; AAlpha: Word = 65535); overload; virtual;
     {** Replaces the content of the pixels at line ''y'' and
         at columns ''x'' to ''x2'' included, using specified color }
     procedure SetHorizLine(x, y, x2: int32or64; const AColor: TPixel); virtual;
@@ -119,14 +125,16 @@ type
         to be the same as the first point }
     procedure DrawPolygonAntialias(const APoints: array of TPointF; const AColor: TPixel; APenWidth: single); overload; virtual;
 
+    procedure RectangleAntialias(x, y, x2, y2: single; const AColor: TPixel; AWidth: single); overload; virtual;
+
     {** Draws an ellipse without antialising. ''rx'' is the horizontal radius and
         ''ry'' the vertical radius }
     procedure Ellipse(x, y, rx, ry: single; const AColor: TPixel; AWidth: single; AMode: TDrawMode; AAlpha: Word = 65535); overload; virtual;
-    procedure Ellipse(AOrigin, AXAxis, AYAxis: TPointF; const AColor: TPixel; AWidth: single; AMode: TDrawMode; AAlpha: Word = 65535); overload; virtual;
+    procedure Ellipse(const AOrigin, AXAxis, AYAxis: TPointF; const AColor: TPixel; AWidth: single; AMode: TDrawMode; AAlpha: Word = 65535); overload; virtual;
     {** Draws an ellipse with antialising. ''rx'' is the horizontal radius and
         ''ry'' the vertical radius }
     procedure EllipseAntialias(x, y, rx, ry: single; const AColor: TPixel; AWidth: single); overload; virtual;
-    procedure EllipseAntialias(AOrigin, AXAxis, AYAxis: TPointF; const AColor: TPixel; AWidth: single); overload; virtual;
+    procedure EllipseAntialias(const AOrigin, AXAxis, AYAxis: TPointF; const AColor: TPixel; AWidth: single); overload; virtual;
 
     procedure DrawPath(APath: IBGRAPath; const AColor: TPixel; AWidth: single; APixelCenteredCoordinates: boolean = true); overload; virtual;
     procedure DrawPath(APath: IBGRAPath; const AMatrix: TAffineMatrix; const AColor: TPixel; AWidth: single; APixelCenteredCoordinates: boolean = true); overload; virtual;
@@ -134,11 +142,16 @@ type
     //-------------------------------- antialias fill ---------------------------------------------
     procedure FillPolyAntialias(const APoints: array of TPointF; const AColor: TPixel; APixelCenteredCoordinates: boolean = true); overload; virtual;
     procedure FillEllipseAntialias(x, y, rx, ry: single; const AColor: TPixel); overload; virtual;
-    procedure FillEllipseAntialias(AOrigin, AXAxis, AYAxis: TPointF; const AColor: TPixel); overload; virtual;
+    procedure FillEllipseAntialias(const AOrigin, AXAxis, AYAxis: TPointF; const AColor: TPixel); overload; virtual;
     procedure FillPath(APath: IBGRAPath; const AColor: TPixel; APixelCenteredCoordinates: boolean = true); overload; virtual;
     procedure FillPath(APath: IBGRAPath; const AMatrix: TAffineMatrix; const AColor: TPixel; APixelCenteredCoordinates: boolean = true); overload; virtual;
     procedure FillRectAntialias(x, y, x2, y2: single; const AColor: TPixel; APixelCenteredCoordinates: boolean = true); overload; virtual;
     procedure FillRectAntialias(const ARectF: TRectF; const AColor: TPixel; APixelCenteredCoordinates: boolean = true); overload; virtual;
+
+    {** Fills a rounded rectangle with antialiasing. The corners have an
+        elliptical radius of ''rx'' and ''ry''. ''options'' specifies how to
+        draw the corners. See [[BGRABitmap Geometry types|geometry types]] }
+    procedure FillRoundRectAntialias(x, y, x2, y2, rx, ry: single; const AColor: TPixel; AOptions: TRoundRectangleOptions = []; APixelCenteredCoordinates: boolean = true); overload; virtual;
 
   end;
 
@@ -344,6 +357,15 @@ begin
   SolidBrush(ABrush, PPixel(AColor)^, ADrawMode);
 end;
 
+class procedure TGenericUniversalBitmap.IdleBrush(out ABrush: TUniversalBrush);
+begin
+  ABrush.Colorspace := TColorspace;
+  ABrush.InternalInitContext:= nil;
+  PDefaultSolidBrushIndirectFixedData(@ABrush.FixedData)^.PixelSize:= sizeof(TPixel);
+  ABrush.InternalPutNextPixels:= @DefaultSolidBrushIndirectSkipPixels;
+  ABrush.DoesNothing:= true;
+end;
+
 class procedure TGenericUniversalBitmap.SolidBrush(out ABrush: TUniversalBrush;
   const AColor: TPixel; ADrawMode: TDrawMode);
 var
@@ -520,6 +542,21 @@ begin
   ReplaceColor(ARect, before, AAfter);
 end;
 
+procedure TGenericUniversalBitmap.FillMask(x, y: integer;
+  AMask: TCustomUniversalBitmap; const AColor: TPixel);
+begin
+  FillMask(x,y, AMask, AColor, dmDrawWithTransparency);
+end;
+
+procedure TGenericUniversalBitmap.FillMask(x, y: integer;
+  AMask: TCustomUniversalBitmap; const AColor: TPixel; ADrawMode: TDrawMode);
+var
+  b: TUniversalBrush;
+begin
+  SolidBrush(b, AColor, ADrawMode);
+  FillMask(x,y, AMask, b);
+end;
+
 procedure TGenericUniversalBitmap.FillRect(ALeft, ATop, ARight,
   ABottom: integer; const AColor: TPixel; ADrawMode: TDrawMode; AAlpha: Word);
 var
@@ -536,6 +573,16 @@ var
 begin
   SolidBrush(b, AColor, ADrawMode);
   FillRect(ARect, b,AAlpha);
+end;
+
+procedure TGenericUniversalBitmap.DrawCheckers(ARect: TRect; const AColorEven,
+  AColorOdd: TPixel; AGridWidth: integer; AGridHeight: integer; ADrawMode: TDrawMode);
+var
+  bEven, bOdd: TUniversalBrush;
+begin
+  SolidBrush(bEven, AColorEven, ADrawMode);
+  SolidBrush(bOdd, AColorOdd, ADrawMode);
+  DrawCheckers(ARect, bEven, bOdd, AGridWidth, AGridHeight);
 end;
 
 procedure TGenericUniversalBitmap.DrawPixel(x, y: Int32or64;
@@ -563,6 +610,15 @@ var
 begin
   SolidBrush(b, AColor, ADrawMode);
   DrawPixel(x,y, b,AAlpha);
+end;
+
+procedure TGenericUniversalBitmap.DrawPixelF(x, y: single;
+  const AColor: TPixel; ADrawMode: TDrawMode; AAlpha: Word);
+var
+  b: TUniversalBrush;
+begin
+  SolidBrush(b, AColor, ADrawMode);
+  DrawPixelF(x,y, b,AAlpha);
 end;
 
 procedure TGenericUniversalBitmap.SetHorizLine(x, y, x2: int32or64;
@@ -885,13 +941,15 @@ begin
   FillEllipseAntialias(x,y,rx,ry, b);
 end;
 
-procedure TGenericUniversalBitmap.FillEllipseAntialias(AOrigin, AXAxis,
+procedure TGenericUniversalBitmap.FillEllipseAntialias(const AOrigin, AXAxis,
   AYAxis: TPointF; const AColor: TPixel);
 var
   b: TUniversalBrush;
 begin
   SolidBrush(b,AColor,AntialiasingDrawMode);
+  {$PUSH}{$R-}
   FillEllipseAntialias(AOrigin, AXAxis, AYAxis, b);
+  {$POP}
 end;
 
 procedure TGenericUniversalBitmap.FillPath(APath: IBGRAPath;
@@ -929,6 +987,16 @@ var
 begin
   SolidBrush(b,AColor,AntialiasingDrawMode);
   FillRectAntialias(ARectF,b,APixelCenteredCoordinates);
+end;
+
+procedure TGenericUniversalBitmap.FillRoundRectAntialias(x, y, x2, y2, rx,
+  ry: single; const AColor: TPixel; AOptions: TRoundRectangleOptions;
+  APixelCenteredCoordinates: boolean);
+var
+  b: TUniversalBrush;
+begin
+  SolidBrush(b,AColor,AntialiasingDrawMode);
+  FillRoundRectAntialias(x,y,x2,y2, rx,ry, b, AOptions, APixelCenteredCoordinates);
 end;
 
 procedure TGenericUniversalBitmap.DrawLineAntialias(x1, y1, x2, y2: single;
@@ -1002,6 +1070,15 @@ begin
   DrawPolygonAntialias(APoints, b, APenWidth);
 end;
 
+procedure TGenericUniversalBitmap.RectangleAntialias(x, y, x2, y2: single;
+  const AColor: TPixel; AWidth: single);
+var
+  b: TUniversalBrush;
+begin
+  SolidBrush(b,AColor,AntialiasingDrawMode);
+  RectangleAntialias(x,y,x2,y2, b, AWidth);
+end;
+
 procedure TGenericUniversalBitmap.Ellipse(x, y, rx, ry: single;
   const AColor: TPixel; AWidth: single; AMode: TDrawMode; AAlpha: Word);
 var
@@ -1011,13 +1088,15 @@ begin
   Ellipse(x,y,rx,ry, b, AWidth,AAlpha);
 end;
 
-procedure TGenericUniversalBitmap.Ellipse(AOrigin, AXAxis, AYAxis: TPointF;
+procedure TGenericUniversalBitmap.Ellipse(const AOrigin, AXAxis, AYAxis: TPointF;
   const AColor: TPixel; AWidth: single; AMode: TDrawMode; AAlpha: Word);
 var
   b: TUniversalBrush;
 begin
   SolidBrush(b,AColor,AMode);
+  {$PUSH}{$R-}
   Ellipse(AOrigin, AXAxis, AYAxis, b, AWidth,AAlpha);
+  {$POP}
 end;
 
 procedure TGenericUniversalBitmap.EllipseAntialias(x, y, rx, ry: single;
@@ -1029,13 +1108,15 @@ begin
   EllipseAntialias(x,y,rx,ry, b, AWidth);
 end;
 
-procedure TGenericUniversalBitmap.EllipseAntialias(AOrigin, AXAxis,
+procedure TGenericUniversalBitmap.EllipseAntialias(const AOrigin, AXAxis,
   AYAxis: TPointF; const AColor: TPixel; AWidth: single);
 var
   b: TUniversalBrush;
 begin
   SolidBrush(b,AColor,AntialiasingDrawMode);
+  {$PUSH}{$R-}
   EllipseAntialias(AOrigin, AXAxis, AYAxis, b, AWidth);
+  {$POP}
 end;
 
 procedure TGenericUniversalBitmap.DrawPath(APath: IBGRAPath;

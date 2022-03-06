@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: LGPL-3.0-linking-exception
 unit BGRABlurGL;
 
 {$mode objfpc}{$H+}
@@ -5,7 +6,7 @@ unit BGRABlurGL;
 interface
 
 uses
-  Classes, BGRAOpenGL3D, BGRABitmapTypes, BGRACanvasGL, BGRAOpenGLType;
+  BGRAClasses, BGRAOpenGL3D, BGRABitmapTypes, BGRACanvasGL, BGRAOpenGLType;
 
 type
 
@@ -57,7 +58,7 @@ end;
 function TBGLBlurShader.GetRadius: Single;
 begin
   result := FRadius.Value;
-  if FBlurType = rbPrecise then result *= 10;
+  if FBlurType = rbPrecise then result := result * 10;
 end;
 
 function TBGLBlurShader.GetTextureSize: TPoint;
@@ -77,7 +78,7 @@ end;
 
 procedure TBGLBlurShader.SetRadius(AValue: Single);
 begin
-  if FBlurType = rbPrecise then AValue /= 10;
+  if FBlurType = rbPrecise then AValue := AValue/10;
   FRadius.Value := AValue;
 end;
 

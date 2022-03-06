@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: LGPL-3.0-linking-exception
 unit BGRASliceScaling;
 
 {$mode objfpc}{$H+}
@@ -5,7 +6,7 @@ unit BGRASliceScaling;
 interface
 
 uses
-  Classes, SysUtils, BGRAGraphics, BGRABitmap, BGRABitmapTypes, IniFiles;
+  BGRAClasses, SysUtils, BGRAGraphics, BGRABitmap, BGRABitmapTypes, IniFiles;
 
 type
   TMargins = record
@@ -119,6 +120,7 @@ type
     FSliceScalingArray: TSliceScalingArray;
     FBitmapOwned: boolean;
     FBitmap: TBGRABitmap;
+    function GetCount: integer;
     procedure SetFSliceScalingArray(AValue: TSliceScalingArray);
   public
     constructor Create(ABitmap: TBGRABitmap;
@@ -144,13 +146,14 @@ type
     procedure Draw(ItemNumber: integer; ABitmap: TBGRABitmap;
       ALeft, ATop, AWidth, AHeight: integer; DrawGrid: boolean = False); overload;
   public
+    property Count: integer read GetCount;
     property SliceScalingArray: TSliceScalingArray
       read FSliceScalingArray write SetFSliceScalingArray;
   end;
 
 implementation
 
-uses BGRAUTF8, Types;
+uses BGRAUTF8;
 
 function Margins(ATop, ARight, ABottom, ALeft: integer): TMargins;
 begin
@@ -167,6 +170,11 @@ begin
   if FSliceScalingArray = AValue then
     Exit;
   FSliceScalingArray := AValue;
+end;
+
+function TBGRAMultiSliceScaling.GetCount: integer;
+begin
+  result := length(FSliceScalingArray);
 end;
 
 constructor TBGRAMultiSliceScaling.Create(ABitmap: TBGRABitmap;
@@ -294,12 +302,14 @@ end;
 procedure TBGRAMultiSliceScaling.Draw(ItemNumber: integer; ABitmap: TBGRABitmap;
   ARect: TRect; DrawGrid: boolean);
 begin
+  if (ItemNumber < 0) or (ItemNumber >= Count) then exit;
   FSliceScalingArray[ItemNumber].Draw(ABitmap, ARect, DrawGrid);
 end;
 
 procedure TBGRAMultiSliceScaling.Draw(ItemNumber: integer; ABitmap: TBGRABitmap;
   ALeft, ATop, AWidth, AHeight: integer; DrawGrid: boolean);
 begin
+  if (ItemNumber < 0) or (ItemNumber >= Count) then exit;
   FSliceScalingArray[ItemNumber].Draw(ABitmap, ALeft, ATop, AWidth, AHeight, DrawGrid);
 end;
 
@@ -366,8 +376,8 @@ begin
   for p := low(TSliceRepeatPosition) to high(TSliceRepeatPosition) do
     if SliceRepeat[p] then
     begin
-      if result <> '' then result += '+';
-      result += SliceRepeatPositionStr[p];
+      if result <> '' then AppendStr(result, '+');
+      AppendStr(result, SliceRepeatPositionStr[p]);
     end;
 end;
 
@@ -485,7 +495,7 @@ begin
     Result[spBottomRight] := rect(Width - Right, Height - Bottom, Width, Height);
   end;
   for pos := low(TSlicePosition) to high(TSlicePosition) do
-    OffsetRect(Result[pos], ARect.Left, ARect.Top);
+    Result[pos].Offset(ARect.Left, ARect.Top);
 end;
 
 procedure TBGRASliceScaling.SliceScalingDraw(ADest: TBGRABitmap;
@@ -537,8 +547,7 @@ begin
           not SliceRepeat[srpMiddleVertical]) then
         begin
           SliceBitmap[pos].ResampleFilter := ResampleFilter;
-          tempBGRA := SliceBitmap[pos].Resample(right - left, bottom -
-            top, FResampleMode) as TBGRABitmap;
+          tempBGRA := SliceBitmap[pos].Resample(right - left, bottom - top, FResampleMode);
           ADest.PutImage(left, top, tempBGRA, FDrawMode);
           tempBGRA.Free;
         end
@@ -547,10 +556,10 @@ begin
           SliceBitmap[pos].ResampleFilter := ResampleFilter;
           if not SliceRepeat[srpMiddleHorizontal] then
             tempBGRA := SliceBitmap[pos].Resample(
-              right - left, SliceBitmap[pos].Height, FResampleMode) as TBGRABitmap
+              right - left, SliceBitmap[pos].Height, FResampleMode)
           else
             tempBGRA := SliceBitmap[pos].Resample(
-              SliceBitmap[pos].Width, bottom - top, FResampleMode) as TBGRABitmap;
+              SliceBitmap[pos].Width, bottom - top, FResampleMode);
           tempBGRA.ScanOffset := point(-left, -top);
           ADest.FillRect(left, top, right, bottom, tempBGRA, FDrawMode);
           tempBGRA.Free;

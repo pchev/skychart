@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: LGPL-3.0-linking-exception
 {$IFDEF INCLUDE_INTERFACE}
 {$UNDEF INCLUDE_INTERFACE}
 type
@@ -354,6 +355,11 @@ begin
   result := BGRAToFPColor(Self);
 end;
 
+function TBGRAPixel.EqualsExactly(constref AColor: TBGRAPixel): boolean;
+begin
+  result := PLongWord(@AColor)^ = PLongWord(@self)^;
+end;
+
 class operator TBGRAPixel.:=(Source: TBGRAPixel): TColor;
 begin
   result := Source.ToColor;
@@ -398,7 +404,7 @@ end;
 procedure BGRASetGamma(AGamma: single);
 var
   GammaLinearFactor: single;
-  i,j,prevpos,nextpos,midpos: NativeInt;
+  i,j,prevpos,nextpos,midpos: Int32or64;
 begin
   if AGamma = 1 then
   begin
@@ -692,7 +698,7 @@ end;
 
 { Merge two colors of same importance }
 function MergeBGRA(ec1, ec2: TExpandedPixel): TExpandedPixel;
-var c12: cardinal;
+var c12: LongWord;
 begin
   if (ec1.alpha = 0) then
     Result := ec2
@@ -761,6 +767,9 @@ var
   ColorDiff: word;
   TempHueDiff: word;
 begin
+  if (ec1.alpha = 0) and (ec2.alpha = 0) then exit(0) else
+  if (ec1.alpha = ec2.alpha) and (ec1.red = ec2.red) and
+     (ec1.green = ec2.green) and (ec1.blue = ec2.blue) then exit(0);
   CompRedAlpha1 := ec1.red * ec1.alpha shr 16; //gives 0..65535
   CompGreenAlpha1 := ec1.green * ec1.alpha shr 16;
   CompBlueAlpha1 := ec1.blue * ec1.alpha shr 16;
@@ -826,7 +835,7 @@ end;
 function BGRAToColorF(const a: array of TBGRAPixel; AGammaExpansion: boolean
   ): ArrayOfTColorF;
 var
-  i: NativeInt;
+  i: Int32or64;
 begin
   setlength(result, length(a));
   for i := 0 to high(a) do
@@ -838,13 +847,13 @@ begin
   if not AGammaCompression then
   begin
     result.red := Min(255,Max(0,round(c[1]*255)));
-    result.green := Min(255,Max(0,round(c[1]*255)));
-    result.blue := Min(255,Max(0,round(c[1]*255)));
+    result.green := Min(255,Max(0,round(c[2]*255)));
+    result.blue := Min(255,Max(0,round(c[3]*255)));
   end else
   begin
     result.red := GammaCompressionTab[Min(65535,Max(0,round(c[1]*65535)))];
-    result.green := GammaCompressionTab[Min(65535,Max(0,round(c[1]*65535)))];
-    result.blue := GammaCompressionTab[Min(65535,Max(0,round(c[1]*65535)))];
+    result.green := GammaCompressionTab[Min(65535,Max(0,round(c[2]*65535)))];
+    result.blue := GammaCompressionTab[Min(65535,Max(0,round(c[3]*65535)))];
   end;
   result.alpha := Min(255,Max(0,round(c[4]*255)));
 end;
@@ -1123,9 +1132,9 @@ end;
 
 function GtoH(ghue: word): word;
 const
-  segment: array[0..5] of NativeUInt =
+  segment: array[0..5] of UInt32or64 =
      (13653, 10923, 8192, 13653, 10923, 8192);
-var g: NativeUint;
+var g: UInt32or64;
 begin
   g := ghue;
   if g < segment[0] then
@@ -1163,12 +1172,12 @@ end;
 
 function HtoG(hue: word): word;
 const
-  segmentDest: array[0..5] of NativeUInt =
+  segmentDest: array[0..5] of UInt32or64 =
      (13653, 10923, 8192, 13653, 10923, 8192);
-  segmentSrc: array[0..5] of NativeUInt =
+  segmentSrc: array[0..5] of UInt32or64 =
      (10923, 10922, 10923, 10923, 10922, 10923);
 var
-  h,g: NativeUInt;
+  h,g: UInt32or64;
 begin
   h := hue;
   if h < segmentSrc[0] then
@@ -1383,7 +1392,7 @@ operator := (const AValue: TExpandedPixel): TColor;
 begin Result := BGRAToColor(GammaCompression(AValue)); end;
 
 operator := (const AValue: TColor): TExpandedPixel;
-begin Result := GammaExpansion(ColorToBGRA(ColorToRGB(AValue))) end;
+begin Result := GammaExpansion(ColorToBGRA(AValue)) end;
 
 operator :=(const Source: TExpandedPixel): TBGRAPixel;
 begin
@@ -1530,7 +1539,7 @@ begin
 end;
 
 operator := (const AValue: TColor): THSLAPixel;
-begin Result := BGRAToHSLA(ColorToBGRA(ColorToRGB(AValue))) end;
+begin Result := BGRAToHSLA(ColorToBGRA(AValue)) end;
 
 operator := (const AValue: THSLAPixel): TColor;
 begin Result := BGRAToColor(HSLAToBGRA(AValue)) end;
@@ -1609,7 +1618,7 @@ begin
 end;
 
 operator := (const AValue: TColor): TGSBAPixel;
-begin Result := BGRAToGSBA(ColorToBGRA(ColorToRGB(AValue))) end;
+begin Result := BGRAToGSBA(ColorToBGRA(AValue)) end;
 
 operator := (const AValue: TGSBAPixel): TColor;
 begin Result := BGRAToColor(GSBAToBGRA(AValue)) end;

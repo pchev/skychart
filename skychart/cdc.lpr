@@ -43,7 +43,7 @@ uses
   pu_splash, pu_about, cu_tz, uniqueinstance_package, u_help, LCLProc, pu_clock,
   u_unzip, cu_tcpserver, pu_indiclient, u_satellite, pu_main, pu_observatory_db,
   pu_ascomclient, uDE, pu_voconfig, pr_vodetail,
-  bgrabitmappack_nogl, lazvo, multiframepackage, fu_config_time, fu_config_catalog,
+  lazvo, multiframepackage, fu_config_time, fu_config_catalog,
   fu_config_chart, fu_config_display, fu_config_internet, fu_config_observatory,
   fu_config_pictures, fu_config_solsys, fu_config_system, fu_config_calendar,
   pu_config_calendar, pu_planetinfo, pu_imglist, cu_plansat, cu_smallsat,

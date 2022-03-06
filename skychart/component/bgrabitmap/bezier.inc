@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: LGPL-3.0-linking-exception
 {$IFDEF INCLUDE_INTERFACE}
 {$UNDEF INCLUDE_INTERFACE}
 
@@ -152,6 +153,8 @@ type
     procedure Clear;
     procedure SetPoints(APoints: array of TPointF; ACurveMode: TEasyBezierCurveMode); overload;
     procedure SetPoints(APoints: array of TPointF; ACurveMode: array of TEasyBezierCurveMode); overload;
+    procedure SetPoints(APoints: array of TPointF; ACurveMode: TEasyBezierCurveMode; AStart, ACount: integer); overload;
+    procedure SetPoints(APoints: array of TPointF; ACurveMode: array of TEasyBezierCurveMode; AStart, ACount: integer); overload;
     procedure CopyToPath(ADest: IBGRAPath); overload;
     procedure CopyToPath(ADest: IBGRAPath; AOffset: TPointF; AReverse: boolean = false); overload;
     procedure CopyToPath(ADest: IBGRAPath; ATransformFunc: TEasyBezierPointTransformFunc; ATransformData: Pointer; AReverse: boolean = false); overload;
@@ -172,6 +175,12 @@ const
     AMinimumDotProduct: single = EasyBezierDefaultMinimumDotProduct): TEasyBezierCurve; overload;
 
   function EasyBezierCurve(APoints: array of TPointF; AClosed: boolean; ACurveMode: array of TEasyBezierCurveMode;
+    AMinimumDotProduct: single = EasyBezierDefaultMinimumDotProduct): TEasyBezierCurve; overload;
+
+  function EasyBezierCurve(APoints: array of TPointF; AStart, ACount: integer; AClosed: boolean; ACurveMode: TEasyBezierCurveMode;
+    AMinimumDotProduct: single = EasyBezierDefaultMinimumDotProduct): TEasyBezierCurve; overload;
+
+  function EasyBezierCurve(APoints: array of TPointF; AStart, ACount: integer; AClosed: boolean; ACurveMode: array of TEasyBezierCurveMode;
     AMinimumDotProduct: single = EasyBezierDefaultMinimumDotProduct): TEasyBezierCurve; overload;
 
 {$ENDIF}
@@ -250,7 +259,7 @@ begin
     t := 0;
     for i := 1 to nb-2 do
     begin
-      t += step;
+      IncF(t, step);
       result[i] := p1+t*(c+t*(b+t*a))
     end;
   end else
@@ -261,7 +270,7 @@ begin
     t := 0;
     for i := 0 to nb-3 do
     begin
-      t += step;
+      IncF(t, step);
       result[i] := p1+t*(c+t*(b+t*a))
     end;
   end;
@@ -273,11 +282,11 @@ var
 begin
   f1 := (1-t);
   f2 := f1*f1;
-  f1 *= f2;
-  f2 *= t*3;
+  f1 := f1 * f2;
+  f2 := f2 * t*3;
   f4 := t*t;
   f3 := f4*(1-t)*3;
-  f4 *= t;
+  f4 := f4 * t;
 
   result.x := f1*p1.x + f2*c1.x +
               f3*c2.x + f4*p2.x;
@@ -313,12 +322,12 @@ begin
   t := 0;
   for i := 1 to nb-2 do
   begin
-    t += step;
+    IncF(t, step);
     nextCoord := ComputePointAt(t);
-    result += VectLen(nextCoord-curCoord);
+    IncF(result, VectLen(nextCoord-curCoord));
     curCoord := nextCoord;
   end;
-  result += VectLen(p2-curCoord);
+  IncF(result, VectLen(p2-curCoord));
 end;
 
 function TCubicBezierCurve.ToPoints(AAcceptedDeviation: single;
@@ -490,7 +499,7 @@ begin
     t := 0;
     for i := 1 to nb-2 do
     begin
-      t += step;
+      IncF(t, step);
       result[i] := p1+t*(pB+t*pA);
     end;
   end else
@@ -501,7 +510,7 @@ begin
     t := 0;
     for i := 0 to nb-3 do
     begin
-      t += step;
+      IncF(t, step);
       result[i] := p1+t*(pB+t*pA);
     end;
   end;
@@ -528,7 +537,7 @@ var
 begin
   rev_t := (1-t);
   f2 := rev_t*t*2;
-  rev_t *= rev_t;
+  rev_t := rev_t * rev_t;
   t2 := t*t;
   result.x := rev_t*p1.x + f2*c.x + t2*p2.x;
   result.y := rev_t*p1.y + f2*c.y + t2*p2.y;
@@ -977,7 +986,7 @@ begin
   rev_t := (1-t);
   t2 := t*t;
   f2 := weight*rev_t*t*2;
-  rev_t *= rev_t;
+  rev_t := rev_t * rev_t;
   den := rev_t+f2+t2;
   if den <> 0 then
   begin
@@ -1045,7 +1054,7 @@ begin
   begin
     nextCoord := pts[i];
     if (nextCoord <> EmptyPointF) and (curCoord <> EmptyPointF) then
-       result += VectLen(nextCoord-curCoord);
+       IncF(result, VectLen(nextCoord-curCoord));
     curCoord := nextCoord;
   end;
   finalize(pts)
@@ -1114,18 +1123,30 @@ end;
 function EasyBezierCurve(APoints: array of TPointF; AClosed: boolean;
   ACurveMode: TEasyBezierCurveMode; AMinimumDotProduct: single): TEasyBezierCurve;
 begin
+  result := EasyBezierCurve(APoints, 0, length(APoints), AClosed, ACurveMode, AMinimumDotProduct);
+end;
+
+function EasyBezierCurve(APoints: array of TPointF; AClosed: boolean;
+  ACurveMode: array of TEasyBezierCurveMode; AMinimumDotProduct: single): TEasyBezierCurve;
+begin
+  result := EasyBezierCurve(APoints, 0, length(APoints), AClosed, ACurveMode, AMinimumDotProduct);
+end;
+
+function EasyBezierCurve(APoints: array of TPointF; AStart, ACount: integer; AClosed: boolean;
+  ACurveMode: TEasyBezierCurveMode; AMinimumDotProduct: single): TEasyBezierCurve;
+begin
   result.Init;
-  result.SetPoints(APoints, ACurveMode);
+  result.SetPoints(APoints, ACurveMode, AStart, ACount);
   result.Closed:= AClosed;
   result.MinimumDotProduct:= AMinimumDotProduct;
 end;
 
-function EasyBezierCurve(APoints: array of TPointF; AClosed: boolean;
+function EasyBezierCurve(APoints: array of TPointF; AStart, ACount: integer; AClosed: boolean;
   ACurveMode: array of TEasyBezierCurveMode;
   AMinimumDotProduct: single = EasyBezierDefaultMinimumDotProduct): TEasyBezierCurve;
 begin
   result.Init;
-  result.SetPoints(APoints, ACurveMode);
+  result.SetPoints(APoints, ACurveMode, AStart, ACount);
   result.Closed:= AClosed;
   result.MinimumDotProduct:= AMinimumDotProduct;
 end;
@@ -1310,28 +1331,45 @@ end;
 
 procedure TEasyBezierCurve.SetPoints(APoints: array of TPointF;
   ACurveMode: TEasyBezierCurveMode);
+begin
+  SetPoints(APoints, ACurveMode, 0, length(APoints));
+end;
+
+procedure TEasyBezierCurve.SetPoints(APoints: array of TPointF;
+  ACurveMode: array of TEasyBezierCurveMode);
+begin
+  SetPoints(APoints, ACurveMode, 0, length(APoints));
+end;
+
+procedure TEasyBezierCurve.SetPoints(APoints: array of TPointF;
+  ACurveMode: TEasyBezierCurveMode; AStart, ACount: integer);
 var
   i: Integer;
 begin
-  setlength(FPoints, length(APoints));
-  for i := 0 to high(APoints) do
+  if (AStart < 0) or (AStart+ACount > length(APoints)) then
+    raise exception.Create('Index out of bounds');
+  setlength(FPoints, ACount);
+  for i := 0 to ACount-1 do
   begin
-    FPoints[i].Coord := APoints[i];
+    FPoints[i].Coord := APoints[AStart + i];
     FPoints[i].CurveMode:= ACurveMode;
   end;
   FInvalidated:= true;
 end;
 
 procedure TEasyBezierCurve.SetPoints(APoints: array of TPointF;
-  ACurveMode: array of TEasyBezierCurveMode);
+  ACurveMode: array of TEasyBezierCurveMode; AStart, ACount: integer);
 var
   i,j: Integer;
 begin
-  setlength(FPoints, length(APoints));
-  j := 0;
-  for i := 0 to high(APoints) do
+  if (AStart < 0) or (AStart+ACount > length(APoints)) then
+    raise exception.Create('Index out of bounds');
+  setlength(FPoints, ACount);
+  if length(ACurveMode) > 0 then
+    j := AStart mod length(ACurveMode);
+  for i := 0 to ACount-1 do
   begin
-    FPoints[i].Coord := APoints[i];
+    FPoints[i].Coord := APoints[i + AStart];
     if length(ACurveMode) = 0 then
       FPoints[i].CurveMode:= cmAuto
     else

@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: LGPL-3.0-linking-exception
 unit BGRADithering;
 
 {$mode objfpc}{$H+}
@@ -5,10 +6,10 @@ unit BGRADithering;
 interface
 
 uses
-  Classes, SysUtils, BGRAFilterType, BGRAPalette, BGRABitmapTypes;
+  BGRAClasses, SysUtils, BGRAFilterType, BGRAPalette, BGRABitmapTypes;
 
 type
-  TOutputPixelProc = procedure(X,Y: NativeInt; AColorIndex: NativeInt; AColor: TBGRAPixel) of object;
+  TOutputPixelProc = procedure(X,Y: Int32or64; AColorIndex: Int32or64; AColor: TBGRAPixel) of object;
 
   { TDitheringTask }
 
@@ -18,17 +19,25 @@ type
     FIgnoreAlpha: boolean;
     FPalette: TBGRACustomApproxPalette;
     FCurrentOutputScanline: PBGRAPixel;
-    FCurrentOutputY: NativeInt;
+    FCurrentOutputY: Int32or64;
     FOutputPixel : TOutputPixelProc;
     FDrawMode: TDrawMode;
-    procedure OutputPixel(X,Y: NativeInt; {%H-}AColorIndex: NativeInt; AColor: TBGRAPixel); virtual;
+    procedure UpdateCurrentLine(Y: Int32or64); inline;
+    procedure OutputPixel(X,Y: Int32or64; {%H-}AColorIndex: Int32or64; AColor: TBGRAPixel); virtual;
+    procedure OutputPixelSet(X,Y: Int32or64; {%H-}AColorIndex: Int32or64; AColor: TBGRAPixel); virtual;
+    procedure OutputPixelSetExceptTransparent(X,Y: Int32or64; {%H-}AColorIndex: Int32or64; AColor: TBGRAPixel); virtual;
+    procedure OutputPixelLinearBlend(X,Y: Int32or64; {%H-}AColorIndex: Int32or64; AColor: TBGRAPixel); virtual;
+    procedure OutputPixelDraw(X,Y: Int32or64; {%H-}AColorIndex: Int32or64; AColor: TBGRAPixel); virtual;
+    procedure OutputPixelXor(X,Y: Int32or64; {%H-}AColorIndex: Int32or64; AColor: TBGRAPixel); virtual;
     procedure ApproximateColor(const AColor: TBGRAPixel; out AApproxColor: TBGRAPixel; out AIndex: integer);
+    procedure SetDrawMode(AValue: TDrawMode);
+    procedure UpdateOutputPixel;
   public
     constructor Create(ASource: IBGRAScanner; APalette: TBGRACustomApproxPalette; ADestination: TBGRACustomBitmap; AIgnoreAlpha: boolean; ABounds: TRect); overload;
     constructor Create(bmp: TBGRACustomBitmap; APalette: TBGRACustomApproxPalette; AInPlace: boolean; AIgnoreAlpha: boolean; ABounds: TRect); overload;
     constructor Create(bmp: TBGRACustomBitmap; APalette: TBGRACustomApproxPalette; AInPlace: boolean; AIgnoreAlpha: boolean); overload;
     property OnOutputPixel: TOutputPixelProc read FOutputPixel write FOutputPixel;
-    property DrawMode: TDrawMode read FDrawMode write FDrawMode;
+    property DrawMode: TDrawMode read FDrawMode write SetDrawMode;
   end;
 
   { TNearestColorTask }
@@ -55,15 +64,15 @@ type
     FLineOrder: TRawImageLineOrder;
     FPalette: TBGRACustomApproxPalette;
     FIgnoreAlpha: boolean;
-    FTransparentColorIndex: NativeInt;
+    FTransparentColorIndex: Int32or64;
 
     //following variables are used during dithering
     FCurrentScanlineSize: PtrInt;
     FCurrentData: PByte;
-    FCurrentOutputY: NativeInt;
+    FCurrentOutputY: Int32or64;
     FCurrentOutputScanline: PByte;
-    FCurrentBitOrderMask: NativeInt;
-    FCurrentMaxY: NativeInt;
+    FCurrentBitOrderMask: Int32or64;
+    FCurrentMaxY: Int32or64;
 
     procedure SetPalette(AValue: TBGRACustomApproxPalette);
     procedure SetIgnoreAlpha(AValue: boolean);
@@ -71,9 +80,9 @@ type
     procedure SetBitOrder(AValue: TRawImageBitOrder); virtual;
     procedure SetBitsPerPixel(AValue: integer); virtual;
     procedure SetByteOrder(AValue: TRawImageByteOrder); virtual;
-    procedure OutputPixelSubByte(X,Y: NativeInt; AColorIndex: NativeInt; {%H-}AColor: TBGRAPixel); virtual;
-    procedure OutputPixelFullByte(X,Y: NativeInt; AColorIndex: NativeInt; {%H-}AColor: TBGRAPixel); virtual;
-    function GetScanline(Y: NativeInt): Pointer; virtual;
+    procedure OutputPixelSubByte(X,Y: Int32or64; AColorIndex: Int32or64; {%H-}AColor: TBGRAPixel); virtual;
+    procedure OutputPixelFullByte(X,Y: Int32or64; AColorIndex: Int32or64; {%H-}AColor: TBGRAPixel); virtual;
+    function GetScanline(Y: Int32or64): Pointer; virtual;
     function GetTransparentColorIndex: integer;
     procedure SetTransparentColorIndex(AValue: integer);
   public
@@ -115,7 +124,7 @@ implementation
 
 uses BGRABlend;
 
-function AbsRGBADiff(const c1, c2: TExpandedPixel): NativeInt;
+function AbsRGBADiff(const c1, c2: TExpandedPixel): Int32or64;
 begin
   result := abs(c1.alpha-c2.alpha);
   inc(result, abs(c1.red-c2.red) );
@@ -189,8 +198,8 @@ begin
   FByteOrder:=AValue;
 end;
 
-procedure TDitheringToIndexedImage.OutputPixelSubByte(X, Y: NativeInt;
-  AColorIndex: NativeInt; AColor: TBGRAPixel);
+procedure TDitheringToIndexedImage.OutputPixelSubByte(X, Y: Int32or64;
+  AColorIndex: Int32or64; AColor: TBGRAPixel);
 var p: PByte;
 begin
   if y <> FCurrentOutputY then
@@ -215,8 +224,8 @@ begin
   end;
 end;
 
-procedure TDitheringToIndexedImage.OutputPixelFullByte(X, Y: NativeInt;
-  AColorIndex: NativeInt; AColor: TBGRAPixel);
+procedure TDitheringToIndexedImage.OutputPixelFullByte(X, Y: Int32or64;
+  AColorIndex: Int32or64; AColor: TBGRAPixel);
 begin
   if y <> FCurrentOutputY then
   begin
@@ -227,11 +236,11 @@ begin
   case FBitsPerPixel of
     8: (FCurrentOutputScanline+x)^ := AColorIndex;
     16: (PWord(FCurrentOutputScanline)+x)^ := AColorIndex;
-    32: (PDWord(FCurrentOutputScanline)+x)^ := AColorIndex;
+    32: (PLongWord(FCurrentOutputScanline)+x)^ := AColorIndex;
   end;
 end;
 
-function TDitheringToIndexedImage.GetScanline(Y: NativeInt): Pointer;
+function TDitheringToIndexedImage.GetScanline(Y: Int32or64): Pointer;
 begin
   if FLineOrder = riloTopToBottom then
     result := FCurrentData + Y*FCurrentScanlineSize
@@ -362,15 +371,74 @@ end;
 
 { TDitheringTask }
 
-procedure TDitheringTask.OutputPixel(X, Y: NativeInt; AColorIndex: NativeInt;
-  AColor: TBGRAPixel);
+procedure TDitheringTask.SetDrawMode(AValue: TDrawMode);
+begin
+  if FDrawMode=AValue then Exit;
+  FDrawMode:=AValue;
+  UpdateOutputPixel;
+end;
+
+procedure TDitheringTask.UpdateOutputPixel;
+begin
+  case FDrawMode of
+    dmSet: FOutputPixel := @OutputPixelSet;
+    dmSetExceptTransparent: FOutputPixel := @OutputPixelSetExceptTransparent;
+    dmLinearBlend: FOutputPixel := @OutputPixelLinearBlend;
+    dmXor: FOutputPixel := @OutputPixelXor;
+  else
+    {dmDrawWithTransparency} FOutputPixel := @OutputPixelDraw;
+  end;
+end;
+
+procedure TDitheringTask.UpdateCurrentLine(Y: Int32or64);
 begin
   if Y <> FCurrentOutputY then
   begin
     FCurrentOutputY := Y;
     FCurrentOutputScanline := Destination.ScanLine[y];
   end;
+end;
+
+procedure TDitheringTask.OutputPixel(X, Y: Int32or64; AColorIndex: Int32or64;
+  AColor: TBGRAPixel);
+begin
+  UpdateCurrentLine(y);
   PutPixels(FCurrentOutputScanline+x, @AColor, 1, FDrawMode, 255);
+end;
+
+procedure TDitheringTask.OutputPixelSet(X, Y: Int32or64;
+  AColorIndex: Int32or64; AColor: TBGRAPixel);
+begin
+  UpdateCurrentLine(y);
+  (FCurrentOutputScanline+x)^ := AColor;
+end;
+
+procedure TDitheringTask.OutputPixelSetExceptTransparent(X, Y: Int32or64;
+  AColorIndex: Int32or64; AColor: TBGRAPixel);
+begin
+  UpdateCurrentLine(y);
+  if AColor.alpha = 255 then (FCurrentOutputScanline+x)^ := AColor;
+end;
+
+procedure TDitheringTask.OutputPixelLinearBlend(X, Y: Int32or64;
+  AColorIndex: Int32or64; AColor: TBGRAPixel);
+begin
+  UpdateCurrentLine(y);
+  FastBlendPixelInline(FCurrentOutputScanline+x, AColor);
+end;
+
+procedure TDitheringTask.OutputPixelDraw(X, Y: Int32or64;
+  AColorIndex: Int32or64; AColor: TBGRAPixel);
+begin
+  UpdateCurrentLine(y);
+  DrawPixelInlineWithAlphaCheck(FCurrentOutputScanline+x, AColor);
+end;
+
+procedure TDitheringTask.OutputPixelXor(X, Y: Int32or64;
+  AColorIndex: Int32or64; AColor: TBGRAPixel);
+begin
+  UpdateCurrentLine(y);
+  PLongWord(FCurrentOutputScanline+x)^ := PLongWord(FCurrentOutputScanline+x)^ xor PLongWord(@AColor)^;
 end;
 
 procedure TDitheringTask.ApproximateColor(const AColor: TBGRAPixel;
@@ -407,9 +475,9 @@ begin
   FIgnoreAlpha:= AIgnoreAlpha;
   FCurrentOutputY := -1;
   FCurrentOutputScanline:= nil;
-  OnOutputPixel:= @OutputPixel;
   Destination := ADestination;
   FDrawMode:= dmSet;
+  UpdateOutputPixel;
 end;
 
 constructor TDitheringTask.Create(bmp: TBGRACustomBitmap;
@@ -422,9 +490,9 @@ begin
   FIgnoreAlpha:= AIgnoreAlpha;
   FCurrentOutputY := -1;
   FCurrentOutputScanline:= nil;
-  OnOutputPixel:= @OutputPixel;
   InPlace := AInPlace;
   FDrawMode:= dmSet;
+  UpdateOutputPixel;
 end;
 
 constructor TDitheringTask.Create(bmp: TBGRACustomBitmap;
@@ -436,9 +504,9 @@ begin
   FIgnoreAlpha:= AIgnoreAlpha;
   FCurrentOutputY := -1;
   FCurrentOutputScanline:= nil;
-  OnOutputPixel:= @OutputPixel;
   InPlace := AInPlace;
   FDrawMode:= dmSet;
+  UpdateOutputPixel;
 end;
 
 { TFloydSteinbergDitheringTask }
@@ -449,11 +517,11 @@ const
   MaxColorDiffForDiffusion = 4096;
 type
   TAccPixel = record
-    red,green,blue,alpha: NativeInt;
+    red,green,blue,alpha: Int32or64;
   end;
   TLine = array of TAccPixel;
 
-  procedure AddError(var dest: TAccPixel; const src: TAccPixel; factor: NativeInt);
+  procedure AddError(var dest: TAccPixel; const src: TAccPixel; factor: Int32or64); inline;
   const maxError = 65536 shl ErrorPrecisionShift;
     minError = -(65536 shl ErrorPrecisionShift);
   begin
@@ -472,22 +540,22 @@ type
   end;
 
 var
-  w,h: NativeInt;
+  w,h: Int32or64;
 
 var
   p,pNext: PExpandedPixel;
-  destX,destY: NativeInt;
+  destX,destY: Int32or64;
   orig,cur,approxExp: TExpandedPixel;
   approx: TBGRAPixel;
   approxIndex: integer;
   curPix,diff: TAccPixel;
-  i: NativeInt;
-  yWrite: NativeInt;
+  i: Int32or64;
+  yWrite: Int32or64;
   tempLine, currentLine, nextLine: TLine;
 
   nextScan,curScan: PExpandedPixel;
 
-  function ClampWordDiv(AValue: NativeInt): Word; inline;
+  function ClampWordDiv(AValue: Int32or64): Word; inline;
   begin
     if AValue < 0 then AValue := -((-AValue) shr ErrorPrecisionShift) else AValue := AValue shr ErrorPrecisionShift;
     if AValue < 0 then
@@ -498,7 +566,7 @@ var
       result := AValue;
   end;
 
-  function Div16(AValue: NativeInt): NativeInt; inline;
+  function Div16(AValue: Int32or64): Int32or64; inline;
   begin
     if AValue < 0 then
       result := -((-AValue) shr 4)
@@ -541,10 +609,10 @@ begin
           orig := p^;
           with currentLine[i] do
           begin
-            curPix.alpha := alpha+NativeInt(orig.alpha shl ErrorPrecisionShift);
-            curPix.red := red+NativeInt(orig.red shl ErrorPrecisionShift);
-            curPix.green := green+NativeInt(orig.green shl ErrorPrecisionShift);
-            curPix.blue := blue+NativeInt(orig.blue shl ErrorPrecisionShift);
+            curPix.alpha := alpha+Int32or64(orig.alpha shl ErrorPrecisionShift);
+            curPix.red := red+Int32or64(orig.red shl ErrorPrecisionShift);
+            curPix.green := green+Int32or64(orig.green shl ErrorPrecisionShift);
+            curPix.blue := blue+Int32or64(orig.blue shl ErrorPrecisionShift);
             cur.alpha := ClampWordDiv(curPix.alpha);
             cur.red := ClampWordDiv(curPix.red);
             cur.green := ClampWordDiv(curPix.green);
@@ -600,10 +668,10 @@ begin
         orig := p^;
         with currentLine[i] do
         begin
-          curPix.alpha := alpha+NativeInt(orig.alpha shl ErrorPrecisionShift);
-          curPix.red := red+NativeInt(orig.red shl ErrorPrecisionShift);
-          curPix.green := green+NativeInt(orig.green shl ErrorPrecisionShift);
-          curPix.blue := blue+NativeInt(orig.blue shl ErrorPrecisionShift);
+          curPix.alpha := alpha+Int32or64(orig.alpha shl ErrorPrecisionShift);
+          curPix.red := red+Int32or64(orig.red shl ErrorPrecisionShift);
+          curPix.green := green+Int32or64(orig.green shl ErrorPrecisionShift);
+          curPix.blue := blue+Int32or64(orig.blue shl ErrorPrecisionShift);
           cur.alpha := ClampWordDiv(curPix.alpha);
           cur.red := ClampWordDiv(curPix.red);
           cur.green := ClampWordDiv(curPix.green);
@@ -658,14 +726,7 @@ begin
     nextLine := tempLine;
     if yWrite = h-2 then
       nextLine := nil
-    else
-      for i := 0 to w-1 do
-      begin
-        nextLine[i].red := 0;
-        nextLine[i].green := 0;
-        nextLine[i].blue := 0;
-        nextLine[i].alpha := 0;
-      end;
+      else fillchar(nextLine[0], sizeof(nextLine[0])*w, 0);
   end;
   ReleaseSourceExpandedScanLine(curScan);
   ReleaseSourceExpandedScanLine(nextScan);
@@ -675,7 +736,7 @@ end;
 { TNearestColorTask }
 
 procedure TNearestColorTask.DoExecute;
-var yb,xb: NativeInt;
+var yb,xb: Int32or64;
   curScan,psrc: PBGRAPixel;
   colorIndex: LongInt;
   colorValue: TBGRAPixel;

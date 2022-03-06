@@ -1,23 +1,10 @@
+// SPDX-License-Identifier: LGPL-3.0-linking-exception
 {
  /**************************************************************************\
                              bgraqtbitmap.pas
                              -----------------
                  This unit should NOT be added to the 'uses' clause.
                  It contains patches for Qt.
-
- ****************************************************************************
- *                                                                          *
- *  This file is part of BGRABitmap library which is distributed under the  *
- *  modified LGPL.                                                          *
- *                                                                          *
- *  See the file COPYING.modifiedLGPL.txt, included in this distribution,   *
- *  for details about the copyright.                                        *
- *                                                                          *
- *  This program is distributed in the hope that it will be useful,         *
- *  but WITHOUT ANY WARRANTY; without even the implied warranty of          *
- *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.                    *
- *                                                                          *
- ****************************************************************************
 }
 
 unit BGRAQtBitmap;
@@ -27,7 +14,7 @@ unit BGRAQtBitmap;
 interface
 
 uses
-  Classes, SysUtils, BGRALCLBitmap, Graphics,
+  BGRAClasses, SysUtils, BGRALCLBitmap, Graphics,
   GraphType, BGRABitmapTypes;
 
 type
@@ -51,7 +38,7 @@ implementation
 
 uses LCLType,
   LCLIntf, IntfGraphics,
-  qtobjects, qt4,
+  qtobjects, {$ifdef LCLqt5}qt5{$else}qt4{$endif},
   FPImage;
 
 procedure TBGRAQtBitmap.SlowDrawTransparent(ABitmap: TBGRACustomBitmap;
@@ -73,14 +60,18 @@ end;
 
 procedure TBGRAQtBitmap.DataDrawOpaque(ACanvas: TCanvas; ARect: TRect;
   AData: Pointer; ALineOrder: TRawImageLineOrder; AWidth, AHeight: integer);
-var psrc,pdest: PBGRAPixel;
+{$IFDEF DARWIN}
+var
+  psrc,pdest: PBGRAPixel;
   bmp: TBGRAQtBitmap;
+  x, y: integer;
+{$ENDIF}
 begin
   {$IFDEF DARWIN}
   bmp := TBGRAQtBitmap.Create(AWidth,AHeight);
   try
     if ALineOrder = riloTopToBottom then psrc := AData
-    else psrc := PBGRAPixel(AData) + (AWidth*AHeight);
+    else psrc := PBGRAPixel(AData) + (AWidth*(AHeight-1));
     for y := 0 to AHeight-1 do
     begin
       pdest := bmp.ScanLine[y];
@@ -90,6 +81,8 @@ begin
         pdest^.green:= psrc^.green;
         pdest^.blue := psrc^.blue;
         pdest^.alpha := 255;
+        inc(psrc);
+        inc(pdest);
       end;
       if ALineOrder = riloBottomToTop then dec(psrc, 2*AWidth);
     end;

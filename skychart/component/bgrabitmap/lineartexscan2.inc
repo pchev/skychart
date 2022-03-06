@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: LGPL-3.0-linking-exception
       {$IFDEF PARAM_USESSE} {$asmmode intel}
       asm
          xorps xmm4,xmm4

@@ -1,1 +1,0 @@
-BGRAOpenGLType, BGRASpriteGL, BGRAOpenGL, BGRACanvasGL, BGRAFontGL, BGRAOpenGL3D, BGRABlurGL, 

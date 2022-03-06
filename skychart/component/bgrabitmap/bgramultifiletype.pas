@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: LGPL-3.0-linking-exception
 unit BGRAMultiFileType;
 
 {$mode objfpc}{$H+}
@@ -6,7 +7,7 @@ unit BGRAMultiFileType;
 interface
 
 uses
-  Classes, SysUtils, fgl;
+  BGRAClasses, SysUtils, fgl;
 
 type
 
@@ -47,6 +48,7 @@ type
   public
     constructor Create(AContainer: TMultiFileContainer);
     function CopyTo({%H-}ADestination: TStream): int64; virtual;
+    function GetStream: TStream; virtual;
     function CompareNameAndExtension(AName: utf8string; AExtension: utf8string; ACaseSensitive: boolean = true): integer;
     property Name: utf8string read GetName write SetName;
     property Extension: utf8string read GetExtension;
@@ -58,7 +60,7 @@ type
 
   { TMultiFileContainer }
 
-  TMultiFileContainer = class
+  TMultiFileContainer = class(TPersistent)
   private
     FEntries: TMultiFileEntryList;
   protected
@@ -76,6 +78,7 @@ type
     constructor Create(AFilename: utf8string); overload;
     constructor Create(AStream: TStream); overload;
     constructor Create(AStream: TStream; AStartPos: Int64); overload;
+    procedure Assign(Source: TPersistent); override;
     function Add(AName: utf8string; AExtension: utf8string; AContent: TStream; AOverwrite: boolean = false; AOwnStream: boolean = true): integer; overload;
     function Add(AName: utf8string; AExtension: utf8string; AContent: RawByteString; AOverwrite: boolean = false): integer; overload;
     function Add(AFilename: TEntryFilename; AContent: TStream; AOverwrite: boolean = false; AOwnStream: boolean = true): integer; overload;
@@ -196,6 +199,11 @@ begin
   result := 0;
 end;
 
+function TMultiFileEntry.GetStream: TStream;
+begin
+  result := nil;
+end;
+
 function TMultiFileEntry.CompareNameAndExtension(AName: utf8string;
   AExtension: utf8string; ACaseSensitive: boolean): integer;
 begin
@@ -307,6 +315,31 @@ begin
   LoadFromStream(AStream);
 end;
 
+procedure TMultiFileContainer.Assign(Source: TPersistent);
+var
+  other: TMultiFileContainer;
+  otherEntry, newEntry: TMultiFileEntry;
+  i: Integer;
+  content: TMemoryStream;
+begin
+  if Source is TMultiFileContainer then
+  begin
+    Clear;
+    other := TMultiFileContainer(Source);
+    for i := 0 to other.Count-1 do
+    begin
+      content := TMemoryStream.Create;
+      otherEntry := other.Entry[i];
+      otherEntry.CopyTo(content);
+      newEntry := CreateEntry(otherEntry.Name, otherEntry.Extension, content);
+      if not Assigned(newEntry) then
+        raise exception.Create('Unable to create entry');
+      AddEntry(newEntry);
+    end;
+  end else
+    inherited Assign(Source);
+end;
+
 function TMultiFileContainer.Add(AName: utf8string; AExtension: utf8string;
   AContent: TStream; AOverwrite: boolean; AOwnStream: boolean): integer;
 var
@@ -365,9 +398,9 @@ begin
 end;
 
 procedure TMultiFileContainer.LoadFromFile(AFilename: utf8string);
-var stream: TFileStream;
+var stream: TFileStreamUTF8;
 begin
-  stream := TFileStream.Create(Utf8ToAnsi(AFilename), fmOpenRead);
+  stream := TFileStreamUTF8.Create(AFilename, fmOpenRead);
   LoadFromStream(stream);
   stream.Free;
 end;
@@ -385,9 +418,9 @@ begin
 end;
 
 procedure TMultiFileContainer.SaveToFile(AFilename: utf8string);
-var stream: TFileStream;
+var stream: TFileStreamUTF8;
 begin
-  stream := TFileStream.Create(Utf8ToAnsi(AFilename), fmCreate);
+  stream := TFileStreamUTF8.Create(AFilename, fmCreate);
   SaveToStream(stream);
   stream.Free;
 end;

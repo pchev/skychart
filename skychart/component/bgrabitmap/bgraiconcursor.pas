@@ -1,11 +1,13 @@
+// SPDX-License-Identifier: LGPL-3.0-linking-exception
 unit BGRAIconCursor;
 
 {$mode objfpc}{$H+}
+{$i bgrabitmap.inc}
 
 interface
 
 uses
-  Classes, SysUtils, BGRAMultiFileType, BGRABitmapTypes;
+  BGRAClasses, SysUtils, BGRAMultiFileType, BGRABitmapTypes;
 
 type
   { TBGRAIconCursorEntry }
@@ -25,6 +27,7 @@ type
     class function TryCreate(AContainer: TMultiFileContainer; AContent: TStream): TBGRAIconCursorEntry; static;
     destructor Destroy; override;
     function CopyTo(ADestination: TStream): int64; override;
+    function GetStream: TStream; override;
     function GetBitmap: TBGRACustomBitmap;
     property Width: integer read FWidth;
     property Height: integer read FHeight;
@@ -49,8 +52,10 @@ type
       AContent: TStream): TMultiFileEntry; override;
     function ExpectedMagic: Word;
     procedure Init; override;
+    procedure AssignTo(Dest: TPersistent); override;
   public
     constructor Create(AFileType: TBGRAImageFormat); overload;
+    procedure Assign(Source: TPersistent); override;
     function Add(ABitmap: TBGRACustomBitmap; ABitDepth: integer; AOverwrite: boolean = false): integer; overload;
     function Add(AContent: TStream; AOverwrite: boolean = false; AOwnStream: boolean = true): integer; overload;
     procedure LoadFromStream(AStream: TStream); override;
@@ -66,11 +71,12 @@ type
   end;
 
 function BGRADitherIconCursor(ABitmap: TBGRACustomBitmap; ABitDepth: integer; ADithering: TDitheringAlgorithm): TBGRACustomBitmap;
+function BGRABitDepthIconCursor(ABitmap: TBGRACustomBitmap): integer;
 
 implementation
 
 uses BGRAWinResource, BGRAUTF8, BGRAReadPng, BGRAReadBMP, FPWriteBMP, BGRAPalette, BGRAWritePNG,
-  BGRAColorQuantization;
+  BGRAColorQuantization{$IFDEF BGRABITMAP_USE_LCL}, Graphics{$ENDIF};
 
 function BGRADitherIconCursor(ABitmap: TBGRACustomBitmap; ABitDepth: integer;
   ADithering: TDitheringAlgorithm): TBGRACustomBitmap;
@@ -137,6 +143,53 @@ begin
       end;
     end;
   end;
+end;
+
+function BGRABitDepthIconCursor(ABitmap: TBGRACustomBitmap): integer;
+var pal: TBGRAPalette;
+  p: PBGRAPixel;
+  n: integer;
+
+  function BlackAndWhite: boolean;
+  var
+    i: Integer;
+  begin
+    if pal.Count > 2 then result := false
+    else
+    begin
+      for i := 0 to pal.Count-1 do
+        if (pal.Color[i] <> BGRAWhite) and (pal.Color[i] <> BGRABlack) then
+          exit(false);
+      result := true;
+    end;
+  end;
+
+begin
+  pal := TBGRAPalette.Create;
+  p := ABitmap.Data;
+  n := ABitmap.NbPixels;
+  while (n > 0) and (pal.Count < 257) do
+  begin
+    if p^.alpha = 0 then
+    begin
+      if pal.Count < 257 then pal.AddColor(BGRABlack);
+    end else
+    if p^.alpha = 255 then
+    begin
+      if pal.Count < 257 then pal.AddColor(p^);
+    end else
+    begin
+      pal.Free;
+      exit(32);
+    end;
+    inc(p);
+    dec(n);
+  end;
+  if pal.Count > 256 then result := 24 else
+  if pal.Count > 16 then result := 8 else
+  if (pal.Count > 2) or not BlackAndWhite then result := 4 else
+    result := 1;
+  pal.Free;
 end;
 
 { TBGRAIconCursorEntry }
@@ -211,7 +264,7 @@ begin
         end else
         begin
           tempStream.Position := 8;
-          tempStream.WriteDWord(NtoLE(dword(bmp.Height*2))); //include mask size
+          tempStream.WriteDWord(NtoLE(LongWord(bmp.Height*2))); //include mask size
           if headerSize >= 20+4 then
           begin
             tempStream.Position:= 20;
@@ -297,6 +350,11 @@ begin
 
   FContent.Position := 0;
   result := ADestination.CopyFrom(FContent, FContent.Size);
+end;
+
+function TBGRAIconCursorEntry.GetStream: TStream;
+begin
+  Result:= FContent;
 end;
 
 function TBGRAIconCursorEntry.GetBitmap: TBGRACustomBitmap;
@@ -420,6 +478,28 @@ procedure TBGRAIconCursor.Init;
 begin
   inherited Init;
   FFileType:= ifUnknown;
+end;
+
+procedure TBGRAIconCursor.AssignTo(Dest: TPersistent);
+{$IFDEF BGRABITMAP_USE_LCL}
+var
+  temp: TMemoryStream;
+{$ENDIF}
+begin
+  {$IFDEF BGRABITMAP_USE_LCL}
+  if Dest is TCustomIcon then
+  begin
+    temp := TMemoryStream.Create;
+    try
+      SaveToStream(temp);
+      temp.Position:= 0;
+      TCustomIcon(Dest).LoadFromStream(temp);
+    finally
+      temp.Free;
+    end;
+  end else
+  {$ENDIF}
+    inherited AssignTo(Dest);
 end;
 
 constructor TBGRAIconCursor.Create(AFileType: TBGRAImageFormat);
@@ -555,7 +635,7 @@ begin
             bmpXOR.SaveToStream(temp, writer);
             //write double height to include mask
             temp.Position := 22;
-            temp.WriteDWord(NtoLE(DWord(bmpXOR.Height*2)));
+            temp.WriteDWord(NtoLE(LongWord(bmpXOR.Height*2)));
             //go after the file header
             temp.Position := 14;
             //copy bitmap without header
@@ -667,9 +747,9 @@ end;
 procedure TBGRAIconCursor.SaveToStream(ADestination: TStream);
 var header: TGroupIconHeader;
   i: integer;
-  accSize: DWord;
+  accSize: LongWord;
   dir: packed array of TIconFileDirEntry;
-  contentSize: DWord;
+  contentSize: LongWord;
 begin
   if Count = 0 then
     raise exception.Create('File cannot be empty');
@@ -757,6 +837,28 @@ begin
       exit;
     end;
   result := -1;
+end;
+
+procedure TBGRAIconCursor.Assign(Source: TPersistent);
+{$IFDEF BGRABITMAP_USE_LCL}
+var
+  temp: TMemoryStream;
+{$ENDIF}
+begin
+  {$IFDEF BGRABITMAP_USE_LCL}
+  if Source is TCustomIcon then
+  begin
+    temp := TMemoryStream.Create;
+    try
+      TCustomIcon(Source).SaveToStream(temp);
+      temp.Position:= 0;
+      LoadFromStream(temp);
+    finally
+      temp.Free;
+    end;
+  end else
+  {$ENDIF}
+    inherited Assign(Source);
 end;
 
 end.

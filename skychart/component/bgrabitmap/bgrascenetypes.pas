@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: LGPL-3.0-linking-exception
 unit BGRASceneTypes;
 
 {$mode objfpc}{$H+}
@@ -194,7 +195,7 @@ type
 
   IBGRAVertex3D = interface
     function GetColor: TBGRAPixel;
-    function GetCustomFlags: DWord;
+    function GetCustomFlags: LongWord;
     function GetCustomNormal: TPoint3D;
     function GetCustomNormal_128: TPoint3D_128;
     function GetLight: Single;
@@ -211,7 +212,7 @@ type
     procedure ComputeCoordinateAndClearNormal(const AMatrix: TMatrix3D; const AProjection: TProjection3D);
     function GetViewCoordZ: single;
     procedure SetColor(const AValue: TBGRAPixel);
-    procedure SetCustomFlags(AValue: DWord);
+    procedure SetCustomFlags(AValue: LongWord);
     procedure SetCustomNormal(AValue: TPoint3D);
     procedure SetCustomNormal_128(AValue: TPoint3D_128);
     procedure SetLight(const AValue: Single);
@@ -241,7 +242,7 @@ type
     property CustomNormal: TPoint3D read GetCustomNormal write SetCustomNormal;
     property CustomNormal_128: TPoint3D_128 read GetCustomNormal_128 write SetCustomNormal_128;
     property Usage: integer read GetUsage;
-    property CustomFlags: DWord read GetCustomFlags write SetCustomFlags;
+    property CustomFlags: LongWord read GetCustomFlags write SetCustomFlags;
     function GetAsObject: TObject;
   end;
 
@@ -324,7 +325,7 @@ type
     procedure FlipFace;
     function AddVertex(AVertex: IBGRAVertex3D): integer;
     function GetBiface: boolean;
-    function GetCustomFlags: DWord;
+    function GetCustomFlags: LongWord;
     function GetLightThroughFactorOverride: boolean;
     function GetMaterial: IBGRAMaterial3D;
     function GetMaterialName: string;
@@ -344,7 +345,7 @@ type
     function GetViewNormal: TPoint3D;
     function GetViewNormal_128: TPoint3D_128;
     function GetLightThroughFactor: single;
-    procedure SetCustomFlags(AValue: DWord);
+    procedure SetCustomFlags(AValue: LongWord);
     procedure SetLightThroughFactor(const AValue: single);
     procedure SetBiface(const AValue: boolean);
     procedure SetLightThroughFactorOverride(const AValue: boolean);
@@ -382,7 +383,7 @@ type
     property Material: IBGRAMaterial3D read GetMaterial write SetMaterial;
     property MaterialName: string read GetMaterialName write SetMaterialName;
     function GetAsObject: TObject;
-    property CustomFlags: DWord read GetCustomFlags write SetCustomFlags;
+    property CustomFlags: LongWord read GetCustomFlags write SetCustomFlags;
   end;
 
   TFace3DCallback = procedure(AFace: IBGRAFace3D) of object;
@@ -659,7 +660,7 @@ begin
   FPowerTableExp2 := 0;
   While Exponent*FPowerTableSize/16 < FSpecularIndex do
   begin
-    Exponent *= 2;
+    Exponent := Exponent * 2;
     Inc(FPowerTableExp2);
   end;
 
@@ -1028,7 +1029,7 @@ var
 
   NnH: single;
   PowerTableFPos: single;
-  PowerTableIPos,i: NativeInt;
+  PowerTableIPos,i: Int32or64;
 begin
   if SpecularCosine <= 0 then
     NnH := 0
@@ -1060,7 +1061,7 @@ begin
     PowerTablePos := NH;
     for i := FPowerTableExp2-1 downto 0 do
       PowerTablePos := PowerTablePos*PowerTablePos;
-    PowerTablePos *= FPowerTableSize;
+    PowerTablePos := PowerTablePos * FPowerTableSize;
     {$ENDIF}
     PowerTableIPos := round(PowerTablePos+0.5);
     PowerTableFPos := PowerTablePos-PowerTableIPos;
@@ -1068,23 +1069,23 @@ begin
   end; //faster than NnH := exp(FSpecularIndex*ln(NH)); !
 
   if FAutoDiffuseColor then
-    Context^.diffuseColor += ALightColor*round(DiffuseIntensity*65536)
+    Context^.diffuseColor := Context^.diffuseColor + ALightColor*round(DiffuseIntensity*65536)
   else
-    Context^.diffuseColor += ALightColor*FDiffuseColorInt*round(DiffuseIntensity*65536);
+    Context^.diffuseColor := Context^.diffuseColor + ALightColor*FDiffuseColorInt*round(DiffuseIntensity*65536);
 
   if FAutoSpecularColor then
-    Context^.specularColor += ALightColor*round(SpecularIntensity* NnH*65536)
+    Context^.specularColor := Context^.specularColor + ALightColor*round(SpecularIntensity* NnH*65536)
   else
-    Context^.specularColor += ALightColor*FSpecularColorInt*round(SpecularIntensity* NnH*65536);
+    Context^.specularColor := Context^.specularColor + ALightColor*FSpecularColorInt*round(SpecularIntensity* NnH*65536);
 end;
 
 procedure TBGRAMaterial3D.ComputeDiffuseColor(Context: PSceneLightingContext;
   const DiffuseIntensity: single; const ALightColor: TColorInt65536);
 begin
   if FAutoDiffuseColor then
-    Context^.diffuseColor += ALightColor*round(DiffuseIntensity*65536)
+    Context^.diffuseColor := Context^.diffuseColor + ALightColor*round(DiffuseIntensity*65536)
   else
-    Context^.diffuseColor += ALightColor*FDiffuseColorInt*round(DiffuseIntensity*65536);
+    Context^.diffuseColor := Context^.diffuseColor + ALightColor*FDiffuseColorInt*round(DiffuseIntensity*65536);
 end;
 
 procedure TBGRAMaterial3D.ComputeDiffuseLightness(

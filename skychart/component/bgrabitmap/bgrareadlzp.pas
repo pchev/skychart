@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: LGPL-3.0-linking-exception
 unit BGRAReadLzp;
 
 {$mode objfpc}{$H+}
@@ -5,7 +6,7 @@ unit BGRAReadLzp;
 interface
 
 uses
-  Classes, SysUtils, FPimage, BGRALzpCommon, BGRABitmapTypes, BGRABitmap;
+  BGRAClasses, SysUtils, FPimage, BGRALzpCommon, BGRABitmapTypes, BGRABitmap;
 
 type
 
@@ -153,15 +154,15 @@ end;
 
 class procedure TBGRAReaderLazPaint.LoadRLEImage(Str: TStream; Img: TFPCustomImage; out ACaption: string);
 var channelFlags: byte;
-    w,h,NbPixels,nameLen,channelStreamSize: DWord;
+    w,h,NbPixels,nameLen,channelStreamSize: LongWord;
     nextPosition: int64;
     PIndexed,PRed,PGreen,PBlue,PAlpha,
     PCurRed, PCurGreen, PCurBlue, PCurAlpha: PByte;
     PDest: PBGRAPixel;
-    x,y: DWord;
+    x,y: LongWord;
     c: TFPColor;
-    n,NbNonTransp: DWord;
-    a,index: NativeInt;
+    n,NbNonTransp: LongWord;
+    a,index: Int32or64;
     ColorTab: packed array[0..256*3-1] of byte;
 begin
   w := LEtoN(str.ReadDWord);

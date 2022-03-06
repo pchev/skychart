@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: LGPL-3.0-linking-exception
 unit BGRAGradients;
 
 {$mode objfpc}{$H+}
@@ -9,7 +10,7 @@ interface
 { Here are various functions that draw gradients, shadow and lighting }
 
 uses
-  Classes, BGRAGraphics, BGRABitmapTypes, BGRABitmap, BGRABlend, BGRAPhongTypes,
+  BGRAClasses, BGRAGraphics, BGRABitmapTypes, BGRABitmap, BGRABlend, BGRAPhongTypes,
   BGRASSE, BGRAGrayscaleMask;
 
 {$IFDEF BGRABITMAP_USE_LCL}{ Creates a bitmap with the specified text horizontally centered and with a shadow }
@@ -179,7 +180,7 @@ function CreateCyclicPerlinNoiseMap(AWidth, AHeight: integer; HorizontalPeriod: 
 
 implementation
 
-uses Types, Math, SysUtils{$IFDEF BGRABITMAP_USE_LCL}, BGRATextFX{$ENDIF}; {GraphType unit used by phongdraw.inc}
+uses Math, SysUtils{$IFDEF BGRABITMAP_USE_LCL}, BGRATextFX{$ENDIF}; {GraphType unit used by phongdraw.inc}
 
 {$IFDEF BGRABITMAP_USE_LCL}function TextShadow(AWidth, AHeight: Integer; AText: String;
   AFontHeight: Integer; ATextColor, AShadowColor: TBGRAPixel; AOffSetX,
@@ -1038,7 +1039,7 @@ function CreatePerlinNoiseMap(AWidth, AHeight: integer; HorizontalPeriod: Single
       inc(p);
     end;
     small.ResampleFilter := ResampleFilter;
-    resampled := small.Resample(dest.Width,dest.Height) as TBGRABitmap;
+    resampled := small.Resample(dest.Width,dest.Height);
     dest.BlendImage(0,0,resampled,boAdditive);
     resampled.Free;
     small.Free;
@@ -1053,11 +1054,11 @@ begin
   for i := 0 to 5 do
     AddNoise(round(AWidth / HorizontalPeriod / (32 shr i)),round(AHeight / VerticalPeriod / (32 shr i)), round(exp(ln((128 shr i)/128)*Exponent)*128),result);
 
-  temp := result.FilterNormalize(False) as TBGRABitmap;
+  temp := result.FilterNormalize(False);
   result.Free;
   result := temp;
 
-  temp := result.FilterBlurRadial(1,rbNormal) as TBGRABitmap;
+  temp := result.FilterBlurRadial(1,rbNormal);
   result.Free;
   result := temp;
 end;
@@ -1069,6 +1070,7 @@ function CreateCyclicPerlinNoiseMap(AWidth, AHeight: integer; HorizontalPeriod: 
   var small,cycled,resampled: TBGRABitmap;
       p: PBGRAPixel;
       i: Integer;
+      x, y: Int64;
   begin
     if (frequencyH = 0) or (frequencyV = 0) then exit;
     small := TBGRABitmap.Create(frequencyH,frequencyV);
@@ -1081,10 +1083,12 @@ function CreateCyclicPerlinNoiseMap(AWidth, AHeight: integer; HorizontalPeriod: 
       p^.alpha := 255;
       inc(p);
     end;
-    cycled := small.GetPart(rect(-2,-2,small.Width+2,small.Height+2)) as TBGRABitmap;
+    cycled := small.GetPart(rect(-2,-2,small.Width+2,small.Height+2));
     cycled.ResampleFilter := ResampleFilter;
-    resampled := cycled.Resample(round((cycled.Width-1)*(dest.Width/frequencyH)),round((cycled.Height-1)*(dest.Height/frequencyV))) as TBGRABitmap;
-    dest.BlendImage(round(-2*(dest.Width/frequencyH)),round(-2*(dest.Height/frequencyV)),resampled,boAdditive);
+    resampled := cycled.Resample(round((cycled.Width-1)*(dest.Width/frequencyH)),round((cycled.Height-1)*(dest.Height/frequencyV)));
+    x := round(-2*(dest.Width/frequencyH));
+    y := round(-2*(dest.Height/frequencyV));
+    dest.BlendImage(x,y,resampled,boAdditive);
     resampled.Free;
     cycled.Free;
     small.Free;
@@ -1099,11 +1103,11 @@ begin
   for i := 0 to 5 do
     AddNoise(round(AWidth / HorizontalPeriod / (32 shr i)),round(AHeight / VerticalPeriod / (32 shr i)), round(exp(ln((128 shr i)/128)*Exponent)*128),result);
 
-  temp := result.FilterNormalize(False) as TBGRABitmap;
+  temp := result.FilterNormalize(False);
   result.Free;
   result := temp;
 
-  temp := result.FilterBlurRadial(1,rbNormal) as TBGRABitmap;
+  temp := result.FilterBlurRadial(1,rbNormal);
   result.Free;
   result := temp;
 end;

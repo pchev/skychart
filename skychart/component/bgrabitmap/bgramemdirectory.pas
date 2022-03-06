@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: LGPL-3.0-linking-exception
 unit BGRAMemDirectory;
 
 {$mode objfpc}{$H+}
@@ -5,7 +6,7 @@ unit BGRAMemDirectory;
 interface
 
 uses
-  Classes, SysUtils, BGRAMultiFileType, fgl;
+  BGRAClasses, SysUtils, BGRAMultiFileType, fgl;
 
 const
   MemDirectoryFileHeader = 'TMemDirectory'#26#0#0;
@@ -44,6 +45,7 @@ type
     function InternalCopyTo({%H-}ADestination: TStream): int64;
   public
     function CopyTo({%H-}ADestination: TStream): int64; override;
+    function GetStream: TStream; override;
     constructor Create(AContainer: TMultiFileContainer; AFilename: TEntryFilename; AUncompressedStream: TStream; AOwnStream: boolean); overload;
     constructor CreateDirectory(AContainer: TMultiFileContainer; AFilename: TEntryFilename);
     constructor CreateFromData(AContainer: TMultiFileContainer; AFilename: TEntryFilename; AStream: TStream; AOwnStream: boolean; AUncompressedSize: int64; AFlags: Word);
@@ -139,7 +141,7 @@ begin
   if rootPos = 0 then
     raise exception.Create('Invalid root offset');
   rootSize := LEReadInt64(AStream);
-  if rootSize <= 4 then
+  if rootSize < 4 then
     raise exception.Create('Invalid root size');
   AStream.Position:= rootPos + startPos;
   rootStream:= TMemoryStream.Create;
@@ -600,6 +602,14 @@ function TMemDirectoryEntry.CopyTo(ADestination: TStream): int64;
 begin
   if IsDirectory then exit(0);
   result := InternalCopyTo(ADestination);
+end;
+
+function TMemDirectoryEntry.GetStream: TStream;
+begin
+  if IsCompressed then
+    raise exception.Create('Stream cannot be accessed directly because it is compressed')
+  else
+    result := FStream;
 end;
 
 constructor TMemDirectoryEntry.Create(AContainer: TMultiFileContainer; AFilename: TEntryFilename;

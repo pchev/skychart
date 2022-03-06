@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: LGPL-3.0-linking-exception
 unit BGRAWriteLzp;
 
 {$mode objfpc}{$H+}
@@ -5,7 +6,7 @@ unit BGRAWriteLzp;
 interface
 
 uses
-  Classes, SysUtils, FPimage, BGRALzpCommon, BGRABitmapTypes, BGRABitmap;
+  BGRAClasses, SysUtils, FPimage, BGRALzpCommon, BGRABitmapTypes, BGRABitmap;
 
 type
   { TBGRAWriterLazPaint }
@@ -17,17 +18,17 @@ type
     procedure SetCompression(AValue: TLzpCompression);
     procedure SetIncludeThumbnail(AValue: boolean);
     function WriteThumbnail(Str: TStream; Img: TFPCustomImage): boolean;
-    protected
-      CompressionMode: DWord;
-      procedure InternalWrite(Str: TStream; Img: TFPCustomImage); override;
-      function InternalWriteLayers({%H-}Str: TStream; {%H-}Img: TFPCustomImage): boolean; virtual;
-      function GetNbLayers: integer; virtual;
-    public
-      Caption: string;
-      constructor Create; override;
-      class procedure WriteRLEImage(Str: TStream; Img: TFPCustomImage; ACaption: string= ''); static;
-      property Compression: TLzpCompression read GetCompression write SetCompression;
-      property IncludeThumbnail: boolean read GetIncludeThumbnail write SetIncludeThumbnail;
+  protected
+    CompressionMode: LongWord;
+    procedure InternalWrite(Str: TStream; Img: TFPCustomImage); override;
+    function InternalWriteLayers({%H-}Str: TStream; {%H-}Img: TFPCustomImage): boolean; virtual;
+    function GetNbLayers: integer; virtual;
+  public
+    Caption: string;
+    constructor Create; override;
+    class procedure WriteRLEImage(Str: TStream; Img: TFPCustomImage; ACaption: string= ''); static;
+    property Compression: TLzpCompression read GetCompression write SetCompression;
+    property IncludeThumbnail: boolean read GetIncludeThumbnail write SetIncludeThumbnail;
   end;
 
 implementation
@@ -207,14 +208,14 @@ var
 
   procedure OutputPlane(AIndex: integer);
   begin
-    str.WriteDWord(NtoLE(DWord(CompressedPlane[AIndex].Size)));
+    str.WriteDWord(NtoLE(LongWord(CompressedPlane[AIndex].Size)));
     CompressedPlane[AIndex].Position:= 0;
     str.CopyFrom(CompressedPlane[AIndex],CompressedPlane[AIndex].Size);
   end;
 
   procedure OutputRGB(AIndex: integer);
   begin
-    str.WriteDWord(NtoLE(DWord(CompressedRGB[AIndex].Size)));
+    str.WriteDWord(NtoLE(LongWord(CompressedRGB[AIndex].Size)));
     CompressedRGB[AIndex].Position:= 0;
     str.CopyFrom(CompressedRGB[AIndex],CompressedRGB[AIndex].Size);
   end;
@@ -267,7 +268,8 @@ var
 var
   i,x,y: integer;
   PlaneFlags: Byte;
-  a: NativeInt;
+  a: Int32or64;
+  psrc: PBGRAPixel;
 
 begin
   NbPixels := Img.Width*img.Height;
@@ -281,26 +283,52 @@ begin
 
   NbNonTranspPixels := 0;
   NbOpaquePixels:= 0;
-  for y := 0 to img.Height-1 do
-    for x := 0 to img.Width-1 do
+  if img is TBGRACustomBitmap then
+  begin
+    for y := 0 to img.Height-1 do
     begin
-      with img.Colors[x,y] do
+      psrc := TBGRACustomBitmap(img).ScanLine[y];
+      for x := img.Width-1 downto 0 do
       begin
-        a := alpha shr 8;
-        PPlaneCur[3]^ := a;
-        inc(PPlaneCur[3]);
-        if a = 0 then continue;
-        if a = 255 then inc(NbOpaquePixels);
+        with psrc^ do
+        begin
+          PPlaneCur[3]^ := alpha;
+          inc(PPlaneCur[3]);
+          if alpha = 0 then begin inc(psrc); continue; end;
+          if alpha = 255 then inc(NbOpaquePixels);
 
-        inc(NbNonTranspPixels);
-        PPlaneCur[0]^ := red shr 8;
-        PPlaneCur[1]^ := green shr 8;
-        PPlaneCur[2]^ := blue shr 8;
-        inc(PPlaneCur[0]);
-        inc(PPlaneCur[1]);
-        inc(PPlaneCur[2]);
+          inc(NbNonTranspPixels);
+          PPlaneCur[0]^ := red;
+          PPlaneCur[1]^ := green;
+          PPlaneCur[2]^ := blue;
+          inc(PPlaneCur[0]);
+          inc(PPlaneCur[1]);
+          inc(PPlaneCur[2]);
+        end;
+        inc(psrc);
       end;
     end;
+  end else
+    for y := 0 to img.Height-1 do
+      for x := 0 to img.Width-1 do
+      begin
+        with img.Colors[x,y] do
+        begin
+          a := alpha shr 8;
+          PPlaneCur[3]^ := a;
+          inc(PPlaneCur[3]);
+          if a = 0 then continue;
+          if a = 255 then inc(NbOpaquePixels);
+
+          inc(NbNonTranspPixels);
+          PPlaneCur[0]^ := red shr 8;
+          PPlaneCur[1]^ := green shr 8;
+          PPlaneCur[2]^ := blue shr 8;
+          inc(PPlaneCur[0]);
+          inc(PPlaneCur[1]);
+          inc(PPlaneCur[2]);
+        end;
+      end;
 
   PlaneFlags := 0;
   if NbOpaquePixels = NbPixels then PlaneFlags := PlaneFlags or LazpaintChannelNoAlpha;
@@ -367,9 +395,9 @@ begin
   if (CompressedRGB[3] <> nil) and (NonRGBSize > RGBSize) then
     PlaneFlags:= PlaneFlags or LazpaintPalettedRGB;
 
-  str.WriteDWord(NtoLE(DWord(img.width)));
-  str.WriteDWord(NtoLE(DWord(img.Height)));
-  str.WriteDWord(NtoLE(DWord(length(ACaption))));
+  str.WriteDWord(NtoLE(LongWord(img.width)));
+  str.WriteDWord(NtoLE(LongWord(img.Height)));
+  str.WriteDWord(NtoLE(LongWord(length(ACaption))));
   if length(ACaption)>0 then str.WriteBuffer(ACaption[1],length(ACaption));
   str.WriteByte(PlaneFlags);
 

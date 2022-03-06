@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: LGPL-3.0-linking-exception
 asm
         //vL := vLS- vP*LightDestFactor;
         movups xmm4, vP

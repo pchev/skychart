@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: LGPL-3.0-linking-exception
 unit BGRACanvas2D;
 
 { To do :
@@ -17,10 +18,12 @@ unit BGRACanvas2D;
 interface
 
 uses
-  Classes, SysUtils, BGRAGraphics, BGRABitmapTypes, BGRATransform,
+  BGRAClasses, SysUtils, BGRAGraphics, BGRABitmapTypes, BGRATransform,
   BGRAGradientScanner, BGRAPath, BGRAPen, BGRAGrayscaleMask;
 
 type
+  ArrayOfString = array of string;
+
   IBGRACanvasTextureProvider2D = interface
     function getTexture: IBGRAScanner;
     property texture: IBGRAScanner read GetTexture;
@@ -33,7 +36,10 @@ type
     procedure setColors(ACustomGradient: TBGRACustomGradient);
     function GetGammaCorrection: boolean;
     procedure SetGammaCorrection(AValue: boolean);
+    function GetRepetition: TBGRAGradientRepetition;
+    procedure SetRepetition(AValue: TBGRAGradientRepetition);
     property gammaCorrection: boolean read GetGammaCorrection write SetGammaCorrection;
+    property repetition: TBGRAGradientRepetition read GetRepetition write SetRepetition;
   end;
 
   { TBGRACanvasTextureProvider2D }
@@ -75,6 +81,7 @@ type
     constructor Create(AMatrix: TAffineMatrix; AClipMask: TGrayscaleMask; AClipMaskOwned: boolean);
     function Duplicate: TBGRACanvasState2D;
     destructor Destroy; override;
+    procedure transform(AMatrix: TAffineMatrix);
     procedure SetClipMask(AClipMask: TGrayscaleMask; AOwned: boolean);
     property clipMaskReadOnly: TGrayscaleMask read FClipMask;
     property clipMaskReadWrite: TGrayscaleMask read GetClipMaskReadWrite;
@@ -291,12 +298,16 @@ type
     function isPointInPath(x,y: single): boolean; overload;
     function isPointInPath(pt: TPointF): boolean; overload;
 
-    procedure drawImage(image: TBGRACustomBitmap; dx,dy: single); overload;
-    procedure drawImage(image: TBGRACustomBitmap; dx,dy,dw,dh: single); overload;
+    procedure drawImage(image: TBGRACustomBitmap; dx,dy: single; AFilter: TResampleFilter = rfLinear); overload;
+    procedure drawImage(image: TBGRACustomBitmap; dx,dy,dw,dh: single; AFilter: TResampleFilter = rfLinear); overload;
 
     function getLineStyle: TBGRAPenStyle;
     procedure lineStyle(const AValue: array of single); overload;
     procedure lineStyle(AStyle: TPenStyle); overload;
+
+    class function StrToFontNameList(AText: string): ArrayOfString;
+    class function FontNameListToStr(AList: ArrayOfString): string;
+    class function CSSFontNameToLCL(AName: string): string;
 
     property surface: TBGRACustomBitmap read FSurface;
     property width: Integer read GetWidth;
@@ -342,7 +353,7 @@ type
 
 implementation
 
-uses Types, Math, BGRAFillInfo, BGRAPolygon, BGRABlend, FPWriteJPEG, FPWriteBMP, base64;
+uses Math, BGRAFillInfo, BGRAPolygon, BGRABlend, FPWriteJPEG, FPWriteBMP, base64;
 
 type
   TColorStop = record
@@ -361,6 +372,7 @@ type
     nbColorStops: integer;
     FCustomGradient: TBGRACustomGradient;
     FGammaCorrection: boolean;
+    FRepetition: TBGRAGradientRepetition;
   protected
     scanner: TBGRAGradientScanner;
     procedure CreateScanner; virtual; abstract;
@@ -369,6 +381,8 @@ type
     procedure GetBGRAGradient(out ABGRAGradient: TBGRACustomGradient; out AOwned: boolean);
     function GetGammaCorrection: boolean;
     procedure SetGammaCorrection(AValue: boolean);
+    function GetRepetition: TBGRAGradientRepetition;
+    procedure SetRepetition(AValue: TBGRAGradientRepetition);
   public
     constructor Create;
     function getTexture: IBGRAScanner; override;
@@ -380,6 +394,7 @@ type
     property texture: IBGRAScanner read GetTexture;
     property colorStopCount: integer read nbColorStops;
     property gammaCorrection: boolean read GetGammaCorrection write SetGammaCorrection;
+    property repetition: TBGRAGradientRepetition read GetRepetition write SetRepetition;
   end;
 
   { TBGRACanvasLinearGradient2D }
@@ -585,6 +600,18 @@ begin
   FGammaCorrection:= false;
 end;
 
+function TBGRACanvasGradient2D.GetRepetition: TBGRAGradientRepetition;
+begin
+  result := FRepetition;
+end;
+
+procedure TBGRACanvasGradient2D.SetRepetition(
+  AValue: TBGRAGradientRepetition);
+begin
+  FRepetition := AValue;
+  FreeAndNil(scanner);
+end;
+
 function TBGRACanvasGradient2D.getColorArray: TGradientArrayOfColors;
 var
   i: Integer;
@@ -611,12 +638,12 @@ begin
     if (colorStopCount = 2) and (colorStops[0].position = 0) and (colorStops[1].position = 1) then
     begin
       if FGammaCorrection then
-        ABGRAGradient := TBGRASimpleGradientWithGammaCorrection.Create(colorStops[0].color, colorStops[1].color)
+        ABGRAGradient := TBGRASimpleGradientWithGammaCorrection.Create(colorStops[0].color, colorStops[1].color, FRepetition)
       else
-        ABGRAGradient := TBGRASimpleGradientWithoutGammaCorrection.Create(colorStops[0].color, colorStops[1].color);
+        ABGRAGradient := TBGRASimpleGradientWithoutGammaCorrection.Create(colorStops[0].color, colorStops[1].color, FRepetition);
     end
     else
-      ABGRAGradient := TBGRAMultiGradient.Create(getColorArray,getPositionArray,FGammaCorrection,False);
+      ABGRAGradient := TBGRAMultiGradient.Create(getColorArray,getPositionArray,FGammaCorrection, FRepetition = grRepeat);
     AOwned := true;
   end else
   begin
@@ -649,7 +676,7 @@ end;
 procedure TBGRACanvasGradient2D.addColorStop(APosition: single; AColor: TColor
   );
 begin
-  addColorStop(APosition, ColorToBGRA(ColorToRGB(AColor)));
+  addColorStop(APosition, ColorToBGRA(AColor));
 end;
 
 procedure TBGRACanvasGradient2D.addColorStop(APosition: single; AColor: string
@@ -684,7 +711,7 @@ begin
   fillColor := BGRABlack;
   globalAlpha := 255;
 
-  fontName := 'Arial';
+  fontName := 'sans-serif';
   fontEmHeight := 10;
   fontStyle := [];
   textDirection := fbmAuto;
@@ -725,6 +752,7 @@ begin
   result.fontEmHeight := fontEmHeight;
   result.fontStyle := fontStyle;
   result.textDirection:= textDirection;
+  result.textBaseline:= textBaseline;
 
   result.lineWidth := lineWidth;
   result.penStroker.LineCap := penStroker.LineCap;
@@ -746,6 +774,11 @@ begin
     FClipMask.Free;
   penStroker.Free;
   inherited Destroy;
+end;
+
+procedure TBGRACanvasState2D.transform(AMatrix: TAffineMatrix);
+begin
+  matrix := matrix*AMatrix;
 end;
 
 procedure TBGRACanvasState2D.SetClipMask(AClipMask: TGrayscaleMask;
@@ -905,7 +938,7 @@ begin
     result := FFontRenderer;
   if Assigned(result) then
   begin
-    result.FontName := currentState.fontName;
+    result.FontName := CSSFontNameToLCL(currentState.fontName);
     result.FontStyle := currentState.fontStyle;
     if antialiasing then
       result.FontQuality:= fqFineAntialiasing
@@ -932,11 +965,11 @@ begin
 
   result := '';
   if fsItalic in currentState.fontStyle then
-    result := result+'italic ';
+    AppendStr(result, 'italic ');
   if fsBold in currentState.fontStyle then
-    result += 'bold ';
-  result += FloatToStrF(currentState.fontEmHeight,ffGeneral,6,0,formats)+'px ';
-  result += currentState.fontName;
+    AppendStr(result, 'bold ');
+  AppendStr(result, FloatToStrF(currentState.fontEmHeight,ffGeneral,6,0,formats)+'px ');
+  AppendStr(result, currentState.fontName);
   result := trim(result);
 end;
 
@@ -966,8 +999,26 @@ begin
 end;
 
 procedure TBGRACanvas2D.SetFontName(AValue: string);
+var
+  list: ArrayOfString;
+  i: Integer;
 begin
-  currentState.fontName := AValue;
+  list := StrToFontNameList(AValue);
+  for i := 0 to high(list) do
+  begin
+    if (list[i] = 'serif') or (list[i] = 'sans-serif') or (list[i] = 'monospace')
+    or (list[i] = 'cursive') or (list[i] = 'fantasy') then
+    begin
+      currentState.fontName:= list[i];
+      exit;
+    end else
+    if Assigned(fontRenderer) and fontRenderer.FontExists(list[i]) then
+    begin
+      currentState.fontName := list[i];
+      exit;
+    end;
+  end;
+  currentState.fontName := 'sans-serif';
 end;
 
 procedure TBGRACanvas2D.SetFontRenderer(AValue: TBGRACustomFontRenderer);
@@ -989,7 +1040,7 @@ var idxSpace,errPos: integer;
 begin
   currentState.fontStyle := [];
   currentState.fontEmHeight := 10;
-  currentState.fontName := 'Arial';
+  currentState.fontName := 'sans-serif';
   AValue := trim(AValue);
   while AValue <> '' do
   begin
@@ -1206,7 +1257,7 @@ var
   tempScan: TBGRACustomScanner;
   m: TAffineMatrix;
   s: TSize;
-  surfaceBounds, shadowBounds: TRect;
+  sourceBounds, usedSourceBounds, surfaceBounds, shadowBounds: TRect;
   rf: TResampleFilter;
   pad: TSize;
   p: PBGRAPixel;
@@ -1219,11 +1270,11 @@ begin
     h := max(hx,hy);
     if self.antialiasing then h := round(h);
     if h<=0 then continue;
-    m := FontMatrix*AffineMatrixScale(hx/sqr(h),hy/sqr(h));
+    m := FontMatrix*AffineMatrixScale(1/h, 1/h);
     if pixelCenteredCoordinates then m := AffineMatrixTranslation(0.5,0.5)*m;
     bmp := BGRABitmapFactory.Create;
     try
-      bmp.FontName := FontName;
+      bmp.FontName := CSSFontNameToLCL(FontName);
       bmp.FontStyle:= FontStyle;
       bmp.FontHeight:= round(h);
       bmp.FontBidiMode:= TextDirection;
@@ -1244,24 +1295,30 @@ begin
 
       pad := Size(round(h/3), round(h/3));
       m := m*AffineMatrixTranslation(-pad.cx,-pad.cy);
-      surfaceBounds := surface.GetImageAffineBounds(m, Types.Rect(0,0,s.cx+pad.cx*2,s.cy+pad.cy*2));
+      sourceBounds := BGRAClasses.Rect(0,0,s.cx+pad.cx*2,s.cy+pad.cy*2);
+      surfaceBounds := surface.GetImageAffineBounds(m, sourceBounds);
       if hasShadow then
       begin
         shadowBounds := surfaceBounds;
         shadowBounds.Inflate(ceil(shadowBlur),ceil(shadowBlur));
         shadowBounds.Offset(round(shadowOffsetX),round(shadowOffsetY));
         shadowBounds.Intersect(surface.ClipRect);
-        if not IsRectEmpty(shadowBounds) then
+        if not shadowBounds.IsEmpty then
         begin
           shadowBounds.Offset(-round(shadowOffsetX),-round(shadowOffsetY));
-          UnionRect(surfaceBounds, surfaceBounds, shadowBounds);
+          surfaceBounds.Union(shadowBounds);
         end;
       end;
-      if not IsRectEmpty(surfaceBounds) then
+      if not surfaceBounds.IsEmpty and IsAffineMatrixInversible(m) then
       begin
-        bmp.SetSize(s.cx+pad.cx*2,s.cy+pad.cy*2);
+        usedSourceBounds := (AffineMatrixInverse(m) *
+                             TAffineBox.AffineBox(RectF(surfaceBounds))).RectBounds;
+        usedSourceBounds.Inflate(1,1);
+        sourceBounds.Intersect(usedSourceBounds);
+        m := m * AffineMatrixTranslation(sourceBounds.Left, sourceBounds.Top);
+        bmp.SetSize(sourceBounds.Width, sourceBounds.Height);
         bmp.Fill(BGRABlack);
-        bmp.TextOut(pad.cx,pad.cy,Text,BGRAWhite);
+        bmp.TextOut(pad.cx - sourceBounds.Left,pad.cy - sourceBounds.Top, Text, BGRAWhite);
         if self.antialiasing then bmp.ConvertToLinearRGB else
         begin
           p := bmp.Data;
@@ -1325,14 +1382,125 @@ begin
 end;
 
 procedure TBGRACanvas2D.lineStyle(const AValue: array of single);
+var a: array of single;
+  i: Integer;
+  isClear: boolean;
 begin
-  currentState.penStroker.CustomPenStyle := DuplicatePenStyle(AValue);
+  isClear := (length(AValue) = 1) and (AValue[0] = 0);
+  if odd(length(AValue)) and not isClear then
+  begin
+    setlength(a, length(AValue)*2);
+    for i := 0 to high(AValue) do
+    begin
+      a[i] := AValue[i];
+      a[i + length(AValue)] := AValue[i];
+    end;
+  end else
+    a := DuplicatePenStyle(AValue);
+  currentState.penStroker.CustomPenStyle := a;
 end;
 
 procedure TBGRACanvas2D.lineStyle(AStyle: TPenStyle);
 begin
   if AStyle = psPattern then exit;
   lineStyle(PenStyleToBGRA(AStyle));
+end;
+
+class function TBGRACanvas2D.StrToFontNameList(AText: string): ArrayOfString;
+var
+  list: TStringList;
+  inQuote: Char;
+  nameStart, i: Integer;
+
+  procedure SkipSpace;
+  begin
+    while (i < length(AText)) and (AText[i] in [#0..#32]) do inc(i);
+  end;
+
+  procedure SkipComma;
+  begin
+    SkipSpace;
+    if (i < length(AText)) and (AText[i] = ',') then inc(i);
+    SkipSpace;
+  end;
+
+begin
+  list := TStringList.Create;
+  inQuote := ' ';
+  i := 1;
+  SkipSpace;
+  nameStart := -1;
+  while i <= length(AText) do
+  begin
+    if inQuote <> ' ' then
+    begin
+      if AText[i] = inQuote then
+      begin
+        list.Add(copy(AText, nameStart, i-nameStart));
+        inQuote := ' ';
+        inc(i);
+        SkipComma;
+        nameStart := -1;
+      end else
+        inc(i);
+    end else
+    if nameStart = -1 then
+    begin
+      if AText[i] in ['''', '"'] then
+      begin
+        nameStart := i+1;
+        inQuote := AText[i];
+        inc(i);
+      end else
+      begin
+        nameStart := i;
+        inc(i);
+      end;
+    end else
+    if AText[i] = ',' then
+    begin
+      list.Add(Trim(copy(AText, nameStart, i-nameStart)));
+      inc(i);
+      SkipComma;
+      nameStart := -1;
+    end else
+      inc(i);
+  end;
+  if nameStart <> -1 then list.Add(copy(AText, nameStart, length(AText)-nameStart+1));
+  setlength(result, list.Count);
+  for i := 0 to list.Count-1 do
+    result[i] := list[i];
+  list.Free;
+end;
+
+class function TBGRACanvas2D.FontNameListToStr(AList: ArrayOfString): string;
+var
+  i: Integer;
+begin
+  result := '';
+  for i := 0 to high(AList) do
+  begin
+    if i > 0 then AppendStr(result, ', ');
+    if pos(' ',AList[i]) <> -1 then
+      AppendStr(result, '''' + StringReplace(AList[i], '''', '&#39;', [rfReplaceAll]) + '''')
+      else AppendStr(result, AList[i]);
+  end;
+end;
+
+class function TBGRACanvas2D.CSSFontNameToLCL(AName: string): string;
+begin
+  if AName = 'sans-serif' then result := 'sans'
+  else if AName = 'cursive' then result := {$IFDEF WINDOWS}'Segoe Script'{$ELSE}
+                                           {$IFDEF LINUX}'Z003'{$ELSE}
+                                           {$IFDEF DARWIN}'Brush Script MT'{$ELSE}
+                                           'sans'
+                                           {$ENDIF}{$ENDIF}{$ENDIF}
+  else if AName = 'fantasy' then result := {$IFDEF WINDOWS}'Comic Sans MS'{$ELSE}
+                                           {$IFDEF DARWIN}'Papyrus'{$ELSE}
+                                           'sans'
+                                           {$ENDIF}{$ENDIF}
+  else result := StringReplace(StringReplace(AName, '&apos;', '''', [rfReplaceAll]),
+                                  '&#39;', '''', [rfReplaceAll]);
 end;
 
 function TBGRACanvas2D.QueryInterface({$IFDEF FPC_HAS_CONSTREF}constref{$ELSE}const{$ENDIF} IID: TGUID; out Obj): HResult; {$IF (not defined(WINDOWS)) AND (FPC_FULLVERSION>=20501)}cdecl{$ELSE}stdcall{$IFEND};
@@ -1487,7 +1655,7 @@ var ofsPts,ofsPts2: array of TPointF;
     var pixRect: TRect;
     begin
       if isEmptyPointF(coord) then exit;
-      pixRect := Types.Rect(round(floor(coord.x)),round(floor(coord.y)),round(ceil(coord.x+0.999))+1,round(ceil(coord.y+0.999))+1);
+      pixRect := BGRAClasses.Rect(round(floor(coord.x)),round(floor(coord.y)),round(ceil(coord.x+0.999))+1,round(ceil(coord.y+0.999))+1);
       if firstFound then
       begin
         foundRect := pixRect;
@@ -1512,7 +1680,7 @@ begin
   for i := 0 to high(ofsPts2) do
     ofsPts2[i] := points2[i]+offset;
 
-  maxRect := Types.Rect(0,0,width,height);
+  maxRect := BGRAClasses.Rect(0,0,width,height);
   if currentState.clipMaskReadOnly <> nil then
     foundRect := maxRect
   else
@@ -1524,8 +1692,9 @@ begin
     for i := 0 to high(ofsPts2) do
       AddPt(ofsPts2[i]);
     if firstFound then exit;
-    InflateRect(foundRect, ceil(shadowBlur),ceil(shadowBlur));
-    if not IntersectRect(foundRect, foundRect,maxRect) then exit;
+    foundRect.Inflate(ceil(shadowBlur), ceil(shadowBlur));
+    foundRect.Intersect(maxRect);
+    if foundRect.IsEmpty then exit;
     offset := PointF(-foundRect.Left,-foundRect.Top);
     for i := 0 to high(ofsPts) do
       ofsPts[i].Offset(offset);
@@ -1729,7 +1898,7 @@ var
   output: TStringStream;
   encode64: TBase64EncodingStream;
 begin
-  if surface = nil then exit;
+  if surface = nil then exit('');
   stream := TMemoryStream.Create;
   if mimeType='image/jpeg' then
   begin
@@ -1777,44 +1946,44 @@ end;
 
 procedure TBGRACanvas2D.scale(x, y: single);
 begin
-  currentState.matrix *= AffineMatrixScale(x,y);
+  currentState.transform(AffineMatrixScale(x,y));
 end;
 
 procedure TBGRACanvas2D.scale(factor: single);
 begin
-  currentState.matrix *= AffineMatrixScale(factor,factor);
+  currentState.transform( AffineMatrixScale(factor,factor) );
 end;
 
 procedure TBGRACanvas2D.rotate(angleRadCW: single);
 begin
-  currentState.matrix *= AffineMatrixRotationRad(-angleRadCW);
+  currentState.transform( AffineMatrixRotationRad(-angleRadCW) );
 end;
 
 procedure TBGRACanvas2D.translate(x, y: single);
 begin
   if (x = 0) and (y = 0) then exit;
-  currentState.matrix *= AffineMatrixTranslation(x,y);
+  currentState.transform( AffineMatrixTranslation(x,y) );
 end;
 
 procedure TBGRACanvas2D.skewx(angleRadCW: single);
 begin
-  currentState.matrix *= AffineMatrixSkewXRad(-angleRadCW);
+  currentState.transform( AffineMatrixSkewXRad(-angleRadCW) );
 end;
 
 procedure TBGRACanvas2D.skewy(angleRadCW: single);
 begin
-  currentState.matrix *= AffineMatrixSkewYRad(-angleRadCW);
+  currentState.transform( AffineMatrixSkewYRad(-angleRadCW) );
 end;
 
 procedure TBGRACanvas2D.transform(m11,m21, m12,m22, m13,m23: single);
 begin
-  currentState.matrix *= AffineMatrix(m11,m12,m13,
-                                      m21,m22,m23);
+  currentState.transform( AffineMatrix(m11,m12,m13,
+                                       m21,m22,m23) );
 end;
 
 procedure TBGRACanvas2D.transform(AMatrix: TAffineMatrix);
 begin
-  currentState.matrix *= AMatrix;
+  currentState.transform( AMatrix );
 end;
 
 procedure TBGRACanvas2D.setTransform(m11,m21, m12,m22, m13,m23: single);
@@ -1856,7 +2025,7 @@ end;
 
 procedure TBGRACanvas2D.strokeStyle(color: TColor);
 begin
-  currentState.strokeColor := ColorToBGRA(ColorToRGB(color));
+  currentState.strokeColor := ColorToBGRA(color);
   currentState.strokeTextureProvider := nil;
 end;
 
@@ -1895,7 +2064,7 @@ end;
 
 procedure TBGRACanvas2D.fillStyle(color: TColor);
 begin
-  currentState.fillColor := ColorToBGRA(ColorToRGB(color));
+  currentState.fillColor := ColorToBGRA(color);
   currentState.fillTextureProvider := nil;
 end;
 
@@ -1923,7 +2092,7 @@ end;
 
 procedure TBGRACanvas2D.shadowColor(color: TColor);
 begin
-  shadowColor(ColorToBGRA(ColorToRGB(color)));
+  shadowColor(ColorToBGRA(color));
 end;
 
 procedure TBGRACanvas2D.shadowColor(color: string);
@@ -2658,18 +2827,26 @@ begin
   end;
 end;
 
-procedure TBGRACanvas2D.drawImage(image: TBGRACustomBitmap; dx, dy: single);
+procedure TBGRACanvas2D.drawImage(image: TBGRACustomBitmap; dx, dy: single; AFilter: TResampleFilter);
+var
+  m: TAffineMatrix;
 begin
-  Surface.PutImageAffine(ApplyTransform(PointF(dx,dy))+PointF(0.5,0.5),
-    ApplyTransform(PointF(dx+image.width,dy))+PointF(0.5,0.5),
-    ApplyTransform(PointF(dx,dy+image.height))+PointF(0.5,0.5), image, currentState.globalAlpha);
+  if (image.Width = 0) or (image.Height = 0) then exit;
+  m := matrix*AffineMatrixTranslation(dx, dy);
+  if pixelCenteredCoordinates then
+    m := AffineMatrixTranslation(0.5, 0.5)*m;
+  Surface.PutImageAffine(m, image, AFilter, GetDrawMode, currentState.globalAlpha, false);
 end;
 
-procedure TBGRACanvas2D.drawImage(image: TBGRACustomBitmap; dx, dy, dw, dh: single);
+procedure TBGRACanvas2D.drawImage(image: TBGRACustomBitmap; dx, dy, dw, dh: single; AFilter: TResampleFilter);
+var
+  m: TAffineMatrix;
 begin
-  Surface.PutImageAffine(ApplyTransform(PointF(dx,dy))+PointF(0.5,0.5),
-    ApplyTransform(PointF(dx+dw,dy))+PointF(0.5,0.5),
-    ApplyTransform(PointF(dx,dy+dh))+PointF(0.5,0.5), image, currentState.globalAlpha);
+  if (image.Width = 0) or (image.Height = 0) then exit;
+  m := matrix*AffineMatrixTranslation(dx, dy)*AffineMatrixScale(dw/image.Width,dh/image.Height);
+  if pixelCenteredCoordinates then
+    m := AffineMatrixTranslation(0.5, 0.5)*m;
+  Surface.PutImageAffine(m, image, AFilter, GetDrawMode, currentState.globalAlpha, false);
 end;
 
 end.
