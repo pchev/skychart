@@ -12872,9 +12872,9 @@ procedure Tf_main.SAMPcoordpointAtsky(ra, Dec: double);
 begin
   if cfgm.SampConfirmCoord then
   begin
-    if MessageDlg(rsSAMPConfirma, rsASAMPApplica3 + ':' + crlf +
+    if MessageDlgCenter(rsSAMPConfirma, rsASAMPApplica3 + ':' + crlf +
       rsRA + ':' + ARToStr(ra / 15) + blank + rsDEC + ':' + DEToStr(Dec) +
-      crlf + rsDoYouWantToM, mtConfirmation, [mbYes, mbNo], 0) = mrNo then
+      crlf + rsDoYouWantToM, mtConfirmation, [mbYes, mbNo]) = mrNo then
       exit;
   end;
   if not (MultiFrame1.ActiveObject is Tf_chart) then exit;
@@ -12920,8 +12920,8 @@ var
 begin
   if cfgm.SampConfirmImage then
   begin
-    if MessageDlg(rsSAMPConfirma, rsASAMPApplica2 + ':' + crlf +
-      image_name + crlf + rsDoYouWantToL, mtConfirmation, [mbYes, mbNo], 0) = mrNo then
+    if MessageDlgCenter(rsSAMPConfirma, rsASAMPApplica2 + ':' + crlf +
+      image_name + crlf + rsDoYouWantToL, mtConfirmation, [mbYes, mbNo]) = mrNo then
       exit;
   end;
   SAMPurlToFile(url, image_name, 'fits', fn);
@@ -12949,8 +12949,8 @@ var
 begin
   if cfgm.SampConfirmTable then
   begin
-    if MessageDlg(rsSAMPConfirma, rsASAMPApplica + ':' + crlf +
-      table_name + crlf + rsDoYouWantToL, mtConfirmation, [mbYes, mbNo], 0) = mrNo then
+    if MessageDlgCenter(rsSAMPConfirma, rsASAMPApplica + ':' + crlf +
+      table_name + crlf + rsDoYouWantToL, mtConfirmation, [mbYes, mbNo]) = mrNo then
       exit;
   end;
   SAMPurlToFile(url, table_name, 'xml', fn);

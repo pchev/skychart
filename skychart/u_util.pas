@@ -159,6 +159,7 @@ function prepare_IAU_designation(rax,decx :double):string;
 function TruncDecimal(val: Extended; decimal: byte): Extended;
 procedure Wait(wt:single=5);
 function CleanName(fn:string):string;
+function MessageDlgCenter(const aCaption, aMsg: string; DlgType: TMsgDlgType; Buttons: TMsgDlgButtons): TModalResult;
 
 {$ifdef unix}
 function ExecFork(cmd: string; p1: string = ''; p2: string = ''; p3: string = '';
@@ -3908,6 +3909,15 @@ begin
   result:=StringReplace(result,'@','',[rfReplaceAll]);
   result:=StringReplace(result,'>','',[rfReplaceAll]);
   result:=StringReplace(result,'<','',[rfReplaceAll]);
+end;
+
+function MessageDlgCenter(const aCaption, aMsg: string; DlgType: TMsgDlgType; Buttons: TMsgDlgButtons): TModalResult;
+var f : TForm;
+begin
+   f := CreateMessageDialog(aCaption, aMsg, DlgType, Buttons);
+   f.Position := poOwnerFormCenter;
+   result := f.ShowModal;
+   f.Free;
 end;
 
 end.
