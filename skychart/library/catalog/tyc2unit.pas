@@ -423,6 +423,7 @@ if FileExists(nombin1) then readbin:=true else readbin:=false;
 FileMode:=0;
 if not fileisopen then begin
 if readbin then begin                        // open binary files
+  maxcat:=2;
   nomidx:=TY2path+slashchar+'tyc2idx.dat';
   AssignFile(fidx2,nomidx);
   reset(fidx2);
