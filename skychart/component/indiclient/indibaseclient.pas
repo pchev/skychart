@@ -108,7 +108,7 @@ type
     procedure ProcessDataThread(s: TStringStream);
     procedure ProcessDataAsync(Data: PtrInt);
     procedure setDriverConnection(status: boolean; deviceName: string);
-    procedure OpenProtocolTrace(fnraw, fnlog, fnerr: string);
+    procedure OpenProtocolTrace;
     procedure CloseProtocolTrace;
     procedure WriteProtocolTrace(buf: string);
     procedure WriteProtocolRaw(buf: string);
@@ -244,30 +244,30 @@ begin
 {$endif}
 end;
 
-procedure TIndiBaseClient.OpenProtocolTrace(fnraw, fnlog, fnerr: string);
+procedure TIndiBaseClient.OpenProtocolTrace;
 begin
   try
     if not FProtocolTrace then
       exit;
-    if fnraw <> '' then
-      fnraw := expandfilename(fnraw);
-    if fnlog <> '' then
-      fnlog := expandfilename(fnlog);
-    if fnerr <> '' then
-      fnerr := expandfilename(fnerr);
+    if FProtocolRawFile <> '' then
+      FProtocolRawFile := expandfilename(FProtocolRawFile);
+    if FProtocolTraceFile <> '' then
+      FProtocolTraceFile := expandfilename(FProtocolTraceFile);
+    if FProtocolErrorFile <> '' then
+      FProtocolErrorFile := expandfilename(FProtocolErrorFile);
     Filemode := 2;
-    assignfile(FPTraw, fnraw);
+    assignfile(FPTraw, FProtocolRawFile);
     rewrite(FPTraw);
-    writeln(FPTraw, FormatDateTime('yyyy"-"mm"-"dd"T"hh":"nn":"ss.zzz', Now) +
-      '  Start trace');
-    assignfile(FPTlog, fnlog);
+    writeln(FPTraw, FormatDateTime('yyyy"-"mm"-"dd"T"hh":"nn":"ss.zzz', Now) + '  Start trace');
+    flush(FPTraw);
+    assignfile(FPTlog, FProtocolTraceFile);
     rewrite(FPTlog);
-    writeln(FPTlog, FormatDateTime('yyyy"-"mm"-"dd"T"hh":"nn":"ss.zzz', Now) +
-      '  Start trace');
-    assignfile(FPTerr, fnerr);
+    writeln(FPTlog, FormatDateTime('yyyy"-"mm"-"dd"T"hh":"nn":"ss.zzz', Now) + '  Start trace');
+    flush(FPTlog);
+    assignfile(FPTerr, FProtocolErrorFile);
     rewrite(FPTerr);
-    writeln(FPTerr, FormatDateTime('yyyy"-"mm"-"dd"T"hh":"nn":"ss.zzz', Now) +
-      '  Start trace');
+    writeln(FPTerr, FormatDateTime('yyyy"-"mm"-"dd"T"hh":"nn":"ss.zzz', Now) + '  Start trace');
+    flush(FPTerr);
   except
 {$I-}
     FProtocolTrace := False;
@@ -300,6 +300,7 @@ begin
   try
     if FProtocolTrace then begin
        WriteLn(FPTlog, FormatDateTime('yyyy"-"mm"-"dd"T"hh":"nn":"ss.zzz', Now) + '  ' + buf);
+       flush(FPTlog);
     end;
   except
 {$I-}
@@ -317,6 +318,7 @@ begin
   try
     if FProtocolTrace then begin
        WriteLn(FPTraw, FormatDateTime('yyyy"-"mm"-"dd"T"hh":"nn":"ss.zzz', Now) + '  ' + buf);
+       flush(FPTraw);
     end;
   except
 {$I-}
@@ -334,6 +336,7 @@ begin
   try
     if FProtocolTrace then begin
       WriteLn(FPTerr, FormatDateTime('yyyy"-"mm"-"dd"T"hh":"nn":"ss.zzz', Now) + '  ' + buf);
+      flush(FPTerr);
     end;
   except
 {$I-}
@@ -359,7 +362,7 @@ begin
     tcpclient := TTCPClient.Create;
     s := TStringStream.Create('');
     try
-      OpenProtocolTrace(FProtocolRawFile, FProtocolTraceFile, FProtocolErrorFile);
+      OpenProtocolTrace;
       {$ifdef withCriticalsection}
       InitCriticalSection(SendCriticalSection);
       {$endif}
