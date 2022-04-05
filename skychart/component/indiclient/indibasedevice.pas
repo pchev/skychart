@@ -806,6 +806,7 @@ begin
           errmsg := 'only blob attribute set';
           if assigned(FIndiBlobEvent) then
             FIndiBlobEvent(blobEL);
+          node := node.NextSibling;
           continue;
         end;
         cnode := node.FirstChild;
