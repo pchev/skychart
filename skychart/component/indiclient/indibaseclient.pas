@@ -635,7 +635,6 @@ var
   dp: BaseDevice;
   isBlob: boolean;
   ebuf: string;
-  n: integer;
   buf, errmsg, dname, pname: string;
 begin
   s.Position := 0;
@@ -891,7 +890,6 @@ var
   buf: string;
   dns:TDNSSend;
   resp:TStringList;
-  i:integer;
 
   function FirstWord(var Line: string): string;
   var

@@ -633,11 +633,15 @@ begin
     while node <> nil do
     begin
       cnode := GetAttrib(node, 'name');
-      if cnode = nil then
+      if cnode = nil then begin
+        node := node.NextSibling;
         continue;
+      end;
       np := IUFindNumber(nvp, GetNodeValue(cnode));
-      if np = nil then
+      if np = nil then begin
+        node := node.NextSibling;
         continue;
+      end;
       cnode := node.FirstChild;
       if (cnode = nil) then
         np.Value := 0
@@ -671,11 +675,15 @@ begin
     while node <> nil do
     begin
       cnode := GetAttrib(node, 'name');
-      if cnode = nil then
+      if cnode = nil then begin
+        node := node.NextSibling;
         continue;
+      end;
       tp := IUFindText(tvp, GetNodeValue(cnode));
-      if tp = nil then
+      if tp = nil then begin
+        node := node.NextSibling;
         continue;
+      end;
       cnode := node.FirstChild;
       if (cnode = nil) then
         tp.Text := ''
@@ -703,11 +711,15 @@ begin
     while node <> nil do
     begin
       cnode := GetAttrib(node, 'name');
-      if cnode = nil then
+      if cnode = nil then begin
+        node := node.NextSibling;
         continue;
+      end;
       sp := IUFindSwitch(svp, GetNodeValue(cnode));
-      if sp = nil then
+      if sp = nil then begin
+        node := node.NextSibling;
         continue;
+      end;
       cnode := node.FirstChild;
       if (cnode <> nil) then
         if crackISState(GetNodeValue(cnode), swState) then
@@ -732,11 +744,15 @@ begin
     while node <> nil do
     begin
       cnode := GetAttrib(node, 'name');
-      if cnode = nil then
+      if cnode = nil then begin
+        node := node.NextSibling;
         continue;
+      end;
       lp := IUFindLight(lvp, GetNodeValue(cnode));
-      if lp = nil then
+      if lp = nil then begin
+        node := node.NextSibling;
         continue;
+      end;
       cnode := node.FirstChild;
       if (cnode <> nil) then
         if crackIPState(GetNodeValue(cnode), lState) then
