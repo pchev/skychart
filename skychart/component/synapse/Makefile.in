@@ -1,18 +1,21 @@
-#   Makefile.fpc for vosamp 0.0
+#   File generated automatically by Lazarus Package Manager
 #
+#   Makefile.fpc for synapse 0.0
+#
+#   This file was generated on 9-10-08
 
 [package]
-name=vosamp
+name=laz_synapse
 version=0.0
 
 [compiler]
 unittargetdir=lib/$(CPU_TARGET)-$(OS_TARGET)-$(LCL_PLATFORM)
-unitdir=../synapse/lib/$(CPU_TARGET)-$(OS_TARGET)-$(LCL_PLATFORM)/ ../xmlparser/lib/$(CPU_TARGET)-$(OS_TARGET)-$(LCL_PLATFORM)/ $(LAZDIR)/lcl/units/$(CPU_TARGET)-$(OS_TARGET)/ $(LAZDIR)/lcl/units/$(CPU_TARGET)-$(OS_TARGET)/$(LCL_PLATFORM)/ $(LAZDIR)/packager/units/$(CPU_TARGET)-$(OS_TARGET)/ $(LAZDIR)/components/lazutils/lib/$(CPU_TARGET)-$(OS_TARGET) $(LAZDIR)/ideintf/units/$(CPU_TARGET)-$(OS_TARGET)/$(LCL_PLATFORM) ./
+unitdir=$(LAZDIR)/packager/units/$(CPU_TARGET)-$(OS_TARGET)/ ./
 includedir=./
-options= $(fpcopts) -dLCL -dLCL$(LCL_PLATFORM) -O1 -MObjFPC -Sgi
+options= $(fpcopts) -MObjFPC -Sgi
 
 [target]
-units=vosamp.pas
+units=laz_synapse.pas
 
 [clean]
 files=$(wildcard $(COMPILER_UNITTARGETDIR)/*$(OEXT)) \
@@ -56,6 +59,6 @@ export LCL_PLATFORM
 .PHONY: cleartarget all
 
 cleartarget:
-        -$(DEL) $(COMPILER_UNITTARGETDIR)/vosamp$(PPUEXT)
+        -$(DEL) $(COMPILER_UNITTARGETDIR)/laz_synapse$(PPUEXT)
 
-all: cleartarget $(COMPILER_UNITTARGETDIR) vosamp$(PPUEXT)
+all: cleartarget $(COMPILER_UNITTARGETDIR) laz_synapse$(PPUEXT)

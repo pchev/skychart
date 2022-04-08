@@ -1,0 +1,81 @@
+diff -u3 ./ssl_openssl_lib.pas /home/cdc/skychart/skychart/component/synapse/ssl_openssl_lib.pas
+--- ./ssl_openssl_lib.pas	2022-03-08 10:49:06.722353875 +0100
++++ /home/cdc/skychart/skychart/component/synapse/ssl_openssl_lib.pas	2022-04-08 21:23:44.744315305 +0200
+@@ -116,8 +116,8 @@
+ var
+   {$IFNDEF MSWINDOWS}
+     {$IFDEF DARWIN}
+-    DLLSSLName: string = 'libssl.dylib';
+-    DLLUtilName: string = 'libcrypto.dylib';
++    DLLSSLName: string = 'libssl.1.1.dylib';       // versioned library required since Big Sur
++    DLLUtilName: string = 'libcrypto.1.1.dylib';
+     {$ELSE}
+      {$IFDEF OS2}
+       {$IFDEF OS2GCC}
+@@ -1925,8 +1925,8 @@
+ 
+ function InitSSLInterface: Boolean;
+ var
+-  s: string;
+-  i: integer;
++  s,lver,buf: string;
++  i,x,lver1,lver2,lver3: integer;
+ begin
+   {pf}
+   if SSLLoaded then
+@@ -1960,6 +1960,38 @@
+       {$ELSE}
+       SSLUtilHandle := LoadLib(DLLUtilName);
+       SSLLibHandle := LoadLib(DLLSSLName);
++      {$IFDEF DARWIN}
++      if SSLLibHandle=0 then begin
++        // try to load libraries from Frameworks
++        buf:=extractfilepath(paramstr(0));
++        DLLSSLName:=expandfilename(buf+'/../Frameworks')+'/'+DLLSSLName;
++        DLLUtilName:=expandfilename(buf+'/../Frameworks')+'/'+DLLUtilName;
++        SSLUtilHandle := LoadLib(DLLUtilName);
++        SSLLibHandle := LoadLib(DLLSSLName);
++      end;
++      {$ENDIF}
++      {$IFDEF Linux}
++         if SSLLibHandle=0 then begin    // try versioned library name
++           for lver1:=1 downto 0 do begin
++             lver:='.'+IntToStr(lver1);
++             SSLLibHandle := LoadLib(DLLSSLName+lver);
++             if SSLLibHandle<>0 then break;
++             for lver2:=9 downto 0 do begin
++               lver:='.'+IntToStr(lver1)+'.'+IntToStr(lver2);
++               SSLLibHandle := LoadLib(DLLSSLName+lver);
++               if SSLLibHandle<>0 then break;
++               for lver3:=9 downto 0 do begin
++                 lver:='.'+IntToStr(lver1)+'.'+IntToStr(lver2)+'.'+IntToStr(lver3);
++                 SSLLibHandle := LoadLib(DLLSSLName+lver);
++                 if SSLLibHandle<>0 then break;
++               end;
++               if SSLLibHandle<>0 then break;
++             end;
++             if SSLLibHandle<>0 then break;
++           end;
++           SSLUtilHandle := LoadLib(DLLUtilName+lver);
++         end;
++      {$ENDIF}
+       {$ENDIF}
+ {$ENDIF}
+       if (SSLLibHandle <> 0) and (SSLUtilHandle <> 0) then
+Seulement dans .: .svn
+diff -u3 ./synaser.pas /home/cdc/skychart/skychart/component/synapse/synaser.pas
+--- ./synaser.pas	2022-03-08 10:49:06.718353743 +0100
++++ /home/cdc/skychart/skychart/component/synapse/synaser.pas	2022-04-08 21:34:40.789060482 +0200
+@@ -236,7 +236,11 @@
+     {$IFDEF CPUARM}
+     MaxRates = 19; //CPUARM
+     {$ELSE}
+-    MaxRates = 30; //UNIX
++     {$IFDEF CPUARM}
++        MaxRates = 19;  //UNIX ARM
++     {$ELSE}
++        MaxRates = 30; //UNIX
++     {$ENDIF}
+     {$ENDIF}
+   {$ENDIF}
+ {$ELSE}

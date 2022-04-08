@@ -428,8 +428,8 @@
         <DefaultFilename Value="component/radec/radec.lpk"/>
       </Item22>
       <Item23>
-        <PackageName Value="synapse"/>
-        <DefaultFilename Value="component/synapse/source/lib/synapse.lpk"/>
+        <PackageName Value="laz_synapse"/>
+        <DefaultFilename Value="component/synapse/laz_synapse.lpk"/>
       </Item23>
       <Item24>
         <PackageName Value="XmlParser"/>
