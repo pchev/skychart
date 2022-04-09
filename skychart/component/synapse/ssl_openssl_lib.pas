@@ -1972,11 +1972,13 @@ begin
       {$ENDIF}
       {$IFDEF Linux}
          if SSLLibHandle=0 then begin    // try versioned library name
-           for lver1:=1 downto 0 do begin
+           for lver1:=3 downto 0 do begin
+             if lver1=2 then continue;   // no openssl 2.0
              lver:='.'+IntToStr(lver1);
              SSLLibHandle := LoadLib(DLLSSLName+lver);
              if SSLLibHandle<>0 then break;
              for lver2:=9 downto 0 do begin
+               if (lver1>0)and(lver2>1) then continue;  // only 1.1 and 3.0, but 0.9
                lver:='.'+IntToStr(lver1)+'.'+IntToStr(lver2);
                SSLLibHandle := LoadLib(DLLSSLName+lver);
                if SSLLibHandle<>0 then break;
