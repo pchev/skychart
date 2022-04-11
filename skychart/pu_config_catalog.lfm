@@ -4,7 +4,6 @@ object f_configcatalog: Tf_configcatalog
   Top = 124
   Width = 500
   ActiveControl = Button4
-  BorderStyle = bsSingle
   Caption = 'Catalog'
   ClientHeight = 630
   ClientWidth = 500
