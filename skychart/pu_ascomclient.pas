@@ -1274,7 +1274,7 @@ begin
       UpdTrackingButton;
     end;
   except
-    on E: EOleException do
+    on E: Exception do
       MessageDlg(DriverMsg + ': ' + E.Message, mtWarning, [mbOK], 0);
   end;
 {$endif}
@@ -1665,7 +1665,7 @@ begin
       end;
     end;
   except
-    on E: EOleException do
+    on E: Exception do
       MessageDlg(DriverMsg + ': ' + E.Message, mtWarning, [mbOK], 0);
   end;
 {$endif}
