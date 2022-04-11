@@ -256,7 +256,6 @@ begin
     except
       on E: Exception do begin
         MessageDlg(DriverMsg + ': ' + E.Message, mtWarning, [mbOK], 0);
-        ScopeDisconnect(ok);
         exit;
         end;
     end;
@@ -1145,7 +1144,7 @@ begin
   FConnected := ScopeConnectedReal;
   if not FConnected then begin
     ScopeDisconnect(ok);
-    ShowMessage('Telescope disconnected!');
+    ShowMessage('Telescope disconnected on it''s own!');
     exit;
   end;
   try
