@@ -1,8 +1,8 @@
-unit u_290; {version 2020-12-30}
+unit u_290; {version 2022-04-11}
 {Reads star databases type .290}
 {Minor adaptation, remove astap_main, add global variables, for use with Skychart}
 
-{Copyright (C) 2017,2020 by Han Kleijn, www.hnsky.org
+{Copyright (C) 2017,2022 by Han Kleijn, www.hnsky.org
  email: han.k.. at...hnsky.org
 
 This program is free software: you can redistribute it and/or modify
@@ -53,7 +53,7 @@ const
 //   maxmag [magnitude*10], double variable which specifies the maximum magnitude to be read. This is typical used in HNSKY if a star designation needs to be reported after a mouse click on it
 
 procedure reset290index;{call this procedure before start reading from the 290 files}
-function readdatabase290(searchmode:char; telescope_ra,telescope_dec, field_diameter:double; var ra2,dec2, mag2, Bp_Rp : double): boolean;{star 290 file database search}
+function readdatabase290(searchmode:char; telescope_ra,telescope_dec, field_diameter:double; out ra2,dec2, mag2, Bp_Rp : double): boolean;{star 290 file database search}
 
 
 // The format of the 290 star databases is described in the HNSKY help file
@@ -3044,7 +3044,7 @@ end;
 // preconditions:
 //   procedure reset290index should be called before any read.
 //   maxmag [magnitude*10], double variable which specifies the maximum magnitude to be read. This is typical used in HNSKY if a star designation needs to be reported after a mouse click on it
-function readdatabase290(searchmode:char; telescope_ra,telescope_dec, field_diameter:double; var ra2,dec2, mag2, Bp_Rp : double): boolean;{star 290 file database search}
+function readdatabase290(searchmode:char; telescope_ra,telescope_dec, field_diameter:double; out ra2,dec2, mag2, Bp_Rp : double): boolean;{star 290 file database search}
             {searchmode=S screen update }
             {searchmode=M mouse click  search}
             {searchmode=T text search}
@@ -3057,172 +3057,174 @@ begin
    {$I-}
   readdatabase290:=true;
   repeat
-    if  ( (file_open=0) or {file_open otherwise sometimes the file routine get stucked}
-          (nr_records<=0) or {here otherwise star at 0:0}
-          ((searchmode<>'T') and (mag2>maxmag))
-         ) then
-      begin {einde}
-         if file_open<>0 then closedatabase;
-         nearbyarea:=false;
-         naam2:=''; {clear for 5, 6 and 7 bytes records to prevent ghost names}
-         Bp_Rp:=-128;{assume no colour information is available or set to -128 for G17, G18 databases}
+    repeat
+      if  ( (file_open=0) or {file_open otherwise sometimes the file routine get stucked}
+            (nr_records<=0) or {here otherwise star at 0:0}
+            ((searchmode<>'T') and (mag2>maxmag))
+           ) then
+        begin {einde}
+           if file_open<>0 then closedatabase;
+           nearbyarea:=false;
+           naam2:=''; {clear for 5, 6 and 7 bytes records to prevent ghost names}
+           Bp_Rp:=-128;{assume no colour information is available or set to -128 for G17, G18 databases}
 
-         required_range:=max(field_diameter/2, 5.95 *pi/180);{Longest distance to a corner or center of a tile. Worst place is ra=0, dec 18.8 degrees}
+           required_range:=max(field_diameter/2, 5.95 *pi/180);{Longest distance to a corner or center of a tile. Worst place is ra=0, dec 18.8 degrees}
 
-         while ((area290>1) and (nearbyarea=false)) do
-         begin
-           dec(area290);
-           if searchmode='T' then nearbyarea:=true
-           else
-           begin {check if area is visible using center position tile}
-             ang_sep_fast(telescope_ra,telescope_dec,centers290[area290,1],centers290[area290,2], sep );
-             if sep<required_range then  nearbyarea:=true
+           while ((area290>1) and (nearbyarea=false)) do
+           begin
+             dec(area290);
+             if searchmode='T' then nearbyarea:=true
              else
-             if sep<required_range+15*pi/180 then {center close enough to check the corners}
-             begin {check if area is visible using corner position tile}
-               ang_sep_fast(telescope_ra,telescope_dec,centers290[area290,3],centers290[area290,5], sep );
+             begin {check if area is visible using center position tile}
+               ang_sep_fast(telescope_ra,telescope_dec,centers290[area290,1],centers290[area290,2], sep );
                if sep<required_range then  nearbyarea:=true
                else
+               if sep<required_range+15*pi/180 then {center close enough to check the corners}
                begin {check if area is visible using corner position tile}
-                 ang_sep_fast(telescope_ra,telescope_dec,centers290[area290,4],centers290[area290,5], sep );
+                 ang_sep_fast(telescope_ra,telescope_dec,centers290[area290,3],centers290[area290,5], sep );
                  if sep<required_range then  nearbyarea:=true
                  else
-                 begin  {check if area is visible using corner position tile}
-                   ang_sep_fast(telescope_ra,telescope_dec,centers290[area290,3],centers290[area290,6], sep );
+                 begin {check if area is visible using corner position tile}
+                   ang_sep_fast(telescope_ra,telescope_dec,centers290[area290,4],centers290[area290,5], sep );
                    if sep<required_range then  nearbyarea:=true
                    else
                    begin  {check if area is visible using corner position tile}
-                     ang_sep_fast(telescope_ra,telescope_dec,centers290[area290,4],centers290[area290,6], sep );
+                     ang_sep_fast(telescope_ra,telescope_dec,centers290[area290,3],centers290[area290,6], sep );
                      if sep<required_range then  nearbyarea:=true
+                     else
+                     begin  {check if area is visible using corner position tile}
+                       ang_sep_fast(telescope_ra,telescope_dec,centers290[area290,4],centers290[area290,6], sep );
+                       if sep<required_range then  nearbyarea:=true
+                     end;
                    end;
                  end;
                end;
              end;
+           end; {while}
+
+           if nearbyarea=false then begin
+             readdatabase290:=false; exit; end;
+
+           name_star:=copy(name_star,1,3)+'_'+filenames290[area290];{tyc0101.290}
+           try
+             thefile_stars:=tfilestream.Create( catalog_path+name_star, fmOpenRead );
+             Reader_stars := TReader.Create (thefile_stars, 5*6*9*11);{number of hnsky records, multiply off all posible record sizes}
+             {thefile_stars.size-reader.position>sizeof(hkyhdr) could also be used but slow down a factor of 2 !!!}
+             files_available:=true;
+           except
+              readdatabase290:=false;
+              files_available:=false;
+              exit;
            end;
-         end; {while}
-
-         if nearbyarea=false then begin
-           readdatabase290:=false; exit; end;
-
-         name_star:=copy(name_star,1,3)+'_'+filenames290[area290];{tyc0101.290}
-         try
-           thefile_stars:=tfilestream.Create( catalog_path+name_star, fmOpenRead );
-           Reader_stars := TReader.Create (thefile_stars, 5*6*9*11);{number of hnsky records, multiply off all posible record sizes}
-           {thefile_stars.size-reader.position>sizeof(hkyhdr) could also be used but slow down a factor of 2 !!!}
-           files_available:=true;
-         except
-            readdatabase290:=false;
-            files_available:=false;
-            exit;
-         end;
-         file_open:=2; {buffer size is .. x 1024}
-         reader_stars.read(database2,110); {read header info, 10x11 is 110 bytes}
-         if database2[109]=' ' then record_size:=11 {default}
-         else
-         record_size:=ord(database2[109]);{5,6,7,9,10 or 11 bytes record}
-
-         nr_records:= trunc((thefile_stars.size-110)/record_size);{110 header size, correct for above read}
-
-         mag2:=0;{temporary fix 2019-8-18. Remove in 2021 after release DR3 based database files}
-      end;{einde}
-
-    reader_stars.read(buf2,record_size);
-    header_record:=false;
-
-    case record_size of
-    5: begin {record size 5}
-         with p5^ do
-         begin
-           ra_raw:=(ra7 + ra8 shl 8 +ra9 shl 16);{always required, fasted method}
-           if ((ra_raw=$FFFFFF) and {special magnitude record is found}
-               ((mag2<150) or ((dec8-16)-mag2>=0)) ) {temporary fix 2019-8-18. Remove in 2021 after release DR3 based database files. Fix for area 205 with some faint star positions wrongly with ra=2*pi=$FFFFFF rather then $000000. Around location ra=0, dec=20 degrees}
-           then
-           begin
-             mag2:=dec8-16;{new magn shifted 16 to make sirius and other positive}
-             {magnitude is stored in mag2 till new magnitude record is found}
-             dec9_storage:=dec7-128;{recover dec9 shortint and put it in storage}
-            header_record:=true;
-           end
+           file_open:=2; {buffer size is .. x 1024}
+           reader_stars.read(database2,110); {read header info, 10x11 is 110 bytes}
+           if database2[109]=' ' then record_size:=11 {default}
            else
-           begin {normal record without magnitude}
-             ra2:= ra_raw*(pi*2  /((256*256*256)-1));
-             dec2:=((dec9_storage shl 16)+(dec8 shl 8)+dec7)*(pi*0.5/((128*256*256)-1));// dec2:=(dec7+(dec8 shl 8)+(dec9 shl 16))*(pi*0.5/((128*256*256)-1)); {FPC compiler makes mistake, but dec7 behind}
-             {The RA is stored as a 3 bytes word. The DEC position is stored as a two's complement (=standard), three bytes integer. The resolution of this three byte storage will be for RA: 360*60*60/((256*256*256)-1) = 0.077 arc seconds. For the DEC value it will be: 90*60*60/((128*256*256)-1) = 0.039 arc seconds.}
+           record_size:=ord(database2[109]);{5,6,7,9,10 or 11 bytes record}
+
+           nr_records:= trunc((thefile_stars.size-110)/record_size);{110 header size, correct for above read}
+
+           mag2:=0;{temporary fix 2019-8-18. Remove in 2021 after release DR3 based database files}
+        end;{einde}
+
+      reader_stars.read(buf2,record_size);
+      header_record:=false;
+
+      case record_size of
+      5: begin {record size 5}
+           with p5^ do
+           begin
+             ra_raw:=(ra7 + ra8 shl 8 +ra9 shl 16);{always required, fasted method}
+             if ((ra_raw=$FFFFFF) and {special magnitude record is found}
+                 ((mag2<150) or ((dec8-16)-mag2>=0)) ) {temporary fix 2019-8-18. Remove in 2021 after release DR3 based database files. Fix for area 205 with some faint star positions wrongly with ra=2*pi=$FFFFFF rather then $000000. Around location ra=0, dec=20 degrees}
+             then
+             begin
+               mag2:=dec8-16;{new magn shifted 16 to make sirius and other positive}
+               {magnitude is stored in mag2 till new magnitude record is found}
+               dec9_storage:=dec7-128;{recover dec9 shortint and put it in storage}
+              header_record:=true;
+             end
+             else
+             begin {normal record without magnitude}
+               ra2:= ra_raw*(pi*2  /((256*256*256)-1));
+               dec2:=((dec9_storage shl 16)+(dec8 shl 8)+dec7)*(pi*0.5/((128*256*256)-1));// dec2:=(dec7+(dec8 shl 8)+(dec9 shl 16))*(pi*0.5/((128*256*256)-1)); {FPC compiler makes mistake, but dec7 behind}
+               {The RA is stored as a 3 bytes word. The DEC position is stored as a two's complement (=standard), three bytes integer. The resolution of this three byte storage will be for RA: 360*60*60/((256*256*256)-1) = 0.077 arc seconds. For the DEC value it will be: 90*60*60/((128*256*256)-1) = 0.039 arc seconds.}
+             end;
            end;
-         end;
-       end;{record size 5}
-    6: begin {record size 6, new format 2018-5-31}
-          with p6^ do
-          begin
-            ra_raw:=(ra7 + ra8 shl 8 +ra9 shl 16);{always required, fasted method}
-            if ((ra_raw=$FFFFFF) and {special magnitude record is found}
-                ((mag2<150) or ((dec8-16)-mag2>=0)) ) {temporary fix 2019-8-18. Remove in 2021 after release DR3 based database files. Fix for area 205 with some faint star positions wrongly with ra=2*pi=$FFFFFF rather then $000000. Around location ra=0, dec=20 degrees}
-            then
+         end;{record size 5}
+      6: begin {record size 6, new format 2018-5-31}
+            with p6^ do
             begin
-              mag2:=dec8-16;{new magn shifted 16 to make sirius and other positive}
-              {magnitude is stored in mag2 till new magnitude record is found}
-              dec9_storage:=dec7-128;{recover dec9 shortint and put it in storage}
-             header_record:=true;
-            end
-            else
-            begin {normal record without magnitude}
-              ra2:= ra_raw*(pi*2  /((256*256*256)-1));
-              dec2:=((dec9_storage shl 16)+(dec8 shl 8)+dec7)*(pi*0.5/((128*256*256)-1));// dec2:=(dec7+(dec8 shl 8)+(dec9 shl 16))*(pi*0.5/((128*256*256)-1)); {FPC compiler makes mistake, but dec7 behind}
+              ra_raw:=(ra7 + ra8 shl 8 +ra9 shl 16);{always required, fasted method}
+              if ((ra_raw=$FFFFFF) and {special magnitude record is found}
+                  ((mag2<150) or ((dec8-16)-mag2>=0)) ) {temporary fix 2019-8-18. Remove in 2021 after release DR3 based database files. Fix for area 205 with some faint star positions wrongly with ra=2*pi=$FFFFFF rather then $000000. Around location ra=0, dec=20 degrees}
+              then
+              begin
+                mag2:=dec8-16;{new magn shifted 16 to make sirius and other positive}
+                {magnitude is stored in mag2 till new magnitude record is found}
+                dec9_storage:=dec7-128;{recover dec9 shortint and put it in storage}
+               header_record:=true;
+              end
+              else
+              begin {normal record without magnitude}
+                ra2:= ra_raw*(pi*2  /((256*256*256)-1));
+                dec2:=((dec9_storage shl 16)+(dec8 shl 8)+dec7)*(pi*0.5/((128*256*256)-1));// dec2:=(dec7+(dec8 shl 8)+(dec9 shl 16))*(pi*0.5/((128*256*256)-1)); {FPC compiler makes mistake, but dec7 behind}
+                Bp_Rp:=b_r;{gaia (Bp-Rp)*10, if no info in Gaia, the value is set-128}
+              end;
             end;
-            Bp_Rp:=b_r;{gaia (Bp-Rp)*10, if no info in Gaia, the value is set-128}
-          end;
-        end;{record size 6}
-    9: begin {record size 9}
-          with p9^ do
-          begin
-            ra_raw:=(ra7 + ra8 shl 8 +ra9 shl 16);{always required, fasted method}
-            if ra_raw=$FFFFFF  then  {special magnitude record is found}
+          end;{record size 6}
+      9: begin {record size 9}
+            with p9^ do
             begin
-              mag2:=dec8-16;{new magn shifted 16 to make sirius and other positive}
-              {magnitude is stored in mag2 till new magnitude record is found}
-              dec9_storage:=dec7-128;{recover dec9 shortint and put it in storage}
-              header_record:=true;{not a star but a header with values for magnitude and dec9 for the next record}
-            end
-            else
-            begin {normal record without magnitude}
-              nr32store:=nr32;{store for later}
-              ra2:= ra_raw*(pi*2  /((256*256*256)-1));
-              dec2:=((dec9_storage shl 16)+(dec8 shl 8)+dec7)*(pi*0.5/((128*256*256)-1));// dec2:=(dec7+(dec8 shl 8)+(dec9 shl 16))*(pi*0.5/((128*256*256)-1)); {FPC compiler makes mistake, put dec7 behind}
-              {The RA is stored as a 3 bytes word. The DEC position is stored as a two's complement (=standard), three bytes integer. The resolution of this three byte storage will be for RA: 360*60*60/((256*256*256)-1) = 0.077 arc seconds. For the DEC value it will be: 90*60*60/((128*256*256)-1) = 0.039 arc seconds.}
-            end;{normal record without magnitude}
-          end;{with P9^}
-        end; {record size 9}
+              ra_raw:=(ra7 + ra8 shl 8 +ra9 shl 16);{always required, fasted method}
+              if ra_raw=$FFFFFF  then  {special magnitude record is found}
+              begin
+                mag2:=dec8-16;{new magn shifted 16 to make sirius and other positive}
+                {magnitude is stored in mag2 till new magnitude record is found}
+                dec9_storage:=dec7-128;{recover dec9 shortint and put it in storage}
+                header_record:=true;{not a star but a header with values for magnitude and dec9 for the next record}
+              end
+              else
+              begin {normal record without magnitude}
+                nr32store:=nr32;{store for later}
+                ra2:= ra_raw*(pi*2  /((256*256*256)-1));
+                dec2:=((dec9_storage shl 16)+(dec8 shl 8)+dec7)*(pi*0.5/((128*256*256)-1));// dec2:=(dec7+(dec8 shl 8)+(dec9 shl 16))*(pi*0.5/((128*256*256)-1)); {FPC compiler makes mistake, put dec7 behind}
+                {The RA is stored as a 3 bytes word. The DEC position is stored as a two's complement (=standard), three bytes integer. The resolution of this three byte storage will be for RA: 360*60*60/((256*256*256)-1) = 0.077 arc seconds. For the DEC value it will be: 90*60*60/((128*256*256)-1) = 0.039 arc seconds.}
+              end;{normal record without magnitude}
+            end;{with P9^}
+          end; {record size 9}
 
-    10: begin {record size 10}
-          with p10^ do
-          begin
-            ra_raw:=(ra7 + ra8 shl 8 +ra9 shl 16);{always required, fasted method}
-            if ra_raw=$FFFFFF  then  {special magnitude record is found}
+      10: begin {record size 10}
+            with p10^ do
             begin
-              if dec9>-20 then mag2:=dec9 else  mag2:=256+dec9;{new magn 12.8 is -12.8, 12.9 = -12.7}
-             {magnitude is stored in mag2 till new magnitude record is found}
-             header_record:=true;
-            end
-            else
-            begin {normal record without magnitude}
-              nr32store:=nr32;{store for later}
-              ra2:= ra_raw*(pi*2  /((256*256*256)-1));
-              dec2:=((dec9 shl 16)+(dec8 shl 8)+dec7)*(pi*0.5/((128*256*256)-1));// dec2:=(dec7+(dec8 shl 8)+(dec9 shl 16))*(pi*0.5/((128*256*256)-1)); {FPC compiler makes mistake, put dec7 behind}
-            end;{normal record without magnitude}
-          end;{with P10^}
-        end; {record size 10}
-   11: begin {record size 11}
-         with p11^ do
-         begin
-           nr32store:=nr32;{store for later}
-           ra2:= (ra7 + ra8 shl 8 +ra9 shl 16)*(pi*2  /((256*256*256)-1));
-           dec2:=((dec9 shl 16)+(dec8 shl 8)+dec7)*(pi*0.5/((128*256*256)-1));// dec2:=(dec7+(dec8 shl 8)+(dec9 shl 16))*(pi*0.5/((128*256*256)-1)); {FPC compiler makes mistake, put dec7 behind}
-           if mag0>-20 then mag2:=mag0 else  mag2:=256+mag0;{new magn 12.8 is -12.8, 12.9 = -12.7}
-         end;{with P11^}
-       end; {record size 11}
-    end;{case}
+              ra_raw:=(ra7 + ra8 shl 8 +ra9 shl 16);{always required, fasted method}
+              if ra_raw=$FFFFFF  then  {special magnitude record is found}
+              begin
+                if dec9>-20 then mag2:=dec9 else  mag2:=256+dec9;{new magn 12.8 is -12.8, 12.9 = -12.7}
+               {magnitude is stored in mag2 till new magnitude record is found}
+               header_record:=true;
+              end
+              else
+              begin {normal record without magnitude}
+                nr32store:=nr32;{store for later}
+                ra2:= ra_raw*(pi*2  /((256*256*256)-1));
+                dec2:=((dec9 shl 16)+(dec8 shl 8)+dec7)*(pi*0.5/((128*256*256)-1));// dec2:=(dec7+(dec8 shl 8)+(dec9 shl 16))*(pi*0.5/((128*256*256)-1)); {FPC compiler makes mistake, put dec7 behind}
+              end;{normal record without magnitude}
+            end;{with P10^}
+          end; {record size 10}
+     11: begin {record size 11}
+           with p11^ do
+           begin
+             nr32store:=nr32;{store for later}
+             ra2:= (ra7 + ra8 shl 8 +ra9 shl 16)*(pi*2  /((256*256*256)-1));
+             dec2:=((dec9 shl 16)+(dec8 shl 8)+dec7)*(pi*0.5/((128*256*256)-1));// dec2:=(dec7+(dec8 shl 8)+(dec9 shl 16))*(pi*0.5/((128*256*256)-1)); {FPC compiler makes mistake, put dec7 behind}
+             if mag0>-20 then mag2:=mag0 else  mag2:=256+mag0;{new magn 12.8 is -12.8, 12.9 = -12.7}
+           end;{with P11^}
+         end; {record size 11}
+      end;{case}
 
-    dec(nr_records); {faster then  (thefile_stars.size-thefile_stars.position<sizeofhnskyhdr) !!!)}
+      dec(nr_records); {faster then  (thefile_stars.size-thefile_stars.position<sizeofhnskyhdr) !!!)}
+    until header_record=false;
 
     delta_ra:=abs(ra2-telescope_ra); if delta_ra>pi then delta_ra:=pi*2-delta_ra;
     if delta_ra>pi/3 then
@@ -3235,12 +3237,7 @@ begin
       sep:=(sqr( delta_ra*cos_value[round(dec2*180/pi)] ) + sqr(dec2-telescope_dec));{calculate seperation using approximate method for shorter distances}
       in_sight:=sep<sqr(field_diameter * 1.5/2); {{star in sight?  sqr(field_diameter) is faster then sqrt(seperation)}
     end;
-  until (
-   {$ifdef mswindows}
-   //(getinputstate=true) or
-   {$ELSE} {}
-   {$endif}
-   ( (header_record=false) and ((searchmode='T') or  (in_sight)) )); {text search or in_sight, skip when too far from centre screen and go to next line}
+  until ((searchmode='T') or (in_sight)); {text search or in_sight, skip when too far from centre screen and go to next line}
    {searchmode=T text search}
 
   {name stars}
