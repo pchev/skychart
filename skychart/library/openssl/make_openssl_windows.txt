@@ -1,0 +1,10 @@
+wget https://www.openssl.org/source/openssl-3.0.2.tar.gz
+tar xf openssl-3.0.2.tar.gz
+cd openssl-3.0.2
+./Configure mingw --cross-compile-prefix=i686-w64-mingw32-
+make
+zip openssl-win32.zip libssl-3.dll libcrypto-3.dll
+make clean
+./Configure mingw64 --cross-compile-prefix=x86_64-w64-mingw32-
+make
+zip openssl-win64.zip libssl-3-x64.dll libcrypto-3-x64.dll
