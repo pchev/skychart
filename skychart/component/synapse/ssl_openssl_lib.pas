@@ -116,8 +116,8 @@ const
 var
   {$IFNDEF MSWINDOWS}
     {$IFDEF DARWIN}
-    DLLSSLName: string = 'libssl.1.1.dylib';       // versioned library required since Big Sur
-    DLLUtilName: string = 'libcrypto.1.1.dylib';
+    DLLSSLName: string = 'libssl.3.dylib';       // versioned library required since Big Sur
+    DLLUtilName: string = 'libcrypto.3.dylib';
     {$ELSE}
      {$IFDEF OS2}
       {$IFDEF OS2GCC}

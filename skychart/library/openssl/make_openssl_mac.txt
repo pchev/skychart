@@ -1,0 +1,12 @@
+wget https://www.openssl.org/source/openssl-3.0.2.tar.gz
+tar xf openssl-3.0.2.tar.gz
+cd openssl-3.0.2
+export MACOSX_DEPLOYMENT_TARGET=10.10
+./Configure darwin64-x86_64-cc shared
+make
+install_name_tool -id @rpath/libcrypto.3.dylib libcrypto.3.dylib
+install_name_tool -id @rpath/libssl.3.dylib libssl.3.dylib
+install_name_tool -change /usr/local/lib/libcrypto.3.dylib @rpath/libcrypto.3.dylib libssl.3.dylib
+
+tar cvzf openssl-mac.tgz libcrypto.3.dylib libssl.3.dylib 
+
