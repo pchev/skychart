@@ -7,6 +7,7 @@ skychart/component/indiclient/backup/
 skychart/component/enhedits/backup/
 skychart/component/jdcalendar/backup/
 skychart/component/radec/backup/
+skychart/component/synapse/backup/
 tools/sac_images/backup/
 #ignore external data
 BaseData/catalog*.tgz
@@ -28,7 +29,7 @@ skychart/component/libsql/lib/
 skychart/component/mrecsort/lib/
 skychart/component/multiframe/lib/
 skychart/component/radec/lib/
-skychart/component/synapse/source/lib/lib/
+skychart/component/synapse/lib/
 skychart/component/uniqueinstance/lib/
 skychart/component/vo/lib/
 skychart/component/vosamp/lib/
