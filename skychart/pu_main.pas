@@ -6197,10 +6197,7 @@ begin
   cfgm.PrintBmpWidth := 1920;
   cfgm.PrintBmpHeight := 1080;
   cfgm.PrintLandscape := True;
-  if GetPrinterIndex >= 0 then
-    cfgm.PrintMethod := 0
-  else
-    cfgm.PrintMethod := 2;
+  cfgm.PrintMethod := 2;
   cfgm.PrintCmd1 := DefaultPrintCmd1;
   cfgm.PrintCmd2 := DefaultPrintCmd2;
   cfgm.PrintTmpPath := expandfilename(HomeDir);
