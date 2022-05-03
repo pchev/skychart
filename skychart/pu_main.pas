@@ -11948,6 +11948,8 @@ end;
 
 procedure Tf_main.InitToolBar;
 begin
+try
+  BeginFormUpdate;
   ResizeBtn;
   f_edittoolbar.DisabledContainer := ContainerPanel;
   f_edittoolbar.TBOnMouseUp := ToolButtonMouseUp;
@@ -11983,6 +11985,9 @@ begin
   f_edittoolbar.ActivateToolbar;
   // show all the configured bar
   ViewToolsBar(False);
+finally
+  EndFormUpdate;
+end;
 end;
 
 procedure Tf_main.EditToolBar(barnum: integer);
