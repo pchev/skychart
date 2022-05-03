@@ -76,10 +76,12 @@ type
     msg: TMemo;
     dev: TPageControl;
     Splitter1: TSplitter;
+    Timer1: TTimer;
     procedure FormClose(Sender: TObject; var CloseAction: TCloseAction);
     procedure FormCreate(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
     procedure FormShow(Sender: TObject);
+    procedure Timer1Timer(Sender: TObject);
   private
     { private declarations }
     indiclient: TIndiBaseClient;
@@ -233,6 +235,16 @@ begin
     indiclient.watchDevice(FIndiDevice);
   indiclient.ConnectServer;
   dmsg('Connecting to INDI server');
+  Timer1.Enabled:=true;
+  // disable form update to prevent autosizing overload
+  BeginFormUpdate;
+end;
+
+procedure Tf_indigui.Timer1Timer(Sender: TObject);
+begin
+  // security to resume form update if ServerConnected is not reach after 5 seconds
+  Timer1.Enabled:=false;
+  EndFormUpdate;
 end;
 
 procedure Tf_indigui.FormCreate(Sender: TObject);
@@ -263,6 +275,7 @@ procedure Tf_indigui.FormDestroy(Sender: TObject);
 var
   i: integer;
 begin
+ try
   if assigned(FonDestroy) then
     FonDestroy(self);
   indiclient.Terminate;
@@ -270,6 +283,8 @@ begin
     if devlist.Objects[i] <> nil then
       devlist.Objects[i].Free;
   devlist.Free;
+ except
+ end;
 end;
 
 procedure Tf_indigui.FormClose(Sender: TObject; var CloseAction: TCloseAction);
@@ -283,6 +298,7 @@ begin
   indiclient.setBLOBMode(B_NEVER, '');
   FConnectedServer:=true;
   dmsg('Server connected');
+  EndFormUpdate;
 end;
 
 procedure Tf_indigui.ServerDisconnected(Sender: TObject);

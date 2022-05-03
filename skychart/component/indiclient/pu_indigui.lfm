@@ -41,4 +41,11 @@ object f_indigui: Tf_indigui
     ScrollBars = ssAutoVertical
     TabOrder = 1
   end
+  object Timer1: TTimer
+    Enabled = False
+    Interval = 5000
+    OnTimer = Timer1Timer
+    Left = 54
+    Top = 30
+  end
 end
