@@ -182,6 +182,7 @@ type
     DriverMsg: string;
     procedure SetDef(Sender: TObject);
     function ScopeConnectedReal: boolean;
+    procedure ScopeGetAscomEquatorialSystem(var EqSys: double);
     procedure ScopeGetEqSysReal(var EqSys: double);
     function GetSlewing:boolean;
   public
@@ -365,7 +366,7 @@ begin
   try
     {$ifdef mswindows}
     if not Remote then begin
-      DriverMsg:=rsASCOMDriverE;
+      DriverMsg:=edit1.Text+':'+crlf+rsASCOMDriverE;
       if trim(edit1.Text) = '' then
          exit;
       T := Unassigned;
@@ -423,6 +424,7 @@ begin
         hasSync := TR.Get('cansync').AsBool;
       end;
       if handpad.Visible then begin
+        try
         rates:=TStringList.Create;
         GetScopeRates(nrates, rates);
         if (nrates>0) then begin
@@ -431,6 +433,9 @@ begin
         end;
         rates.Free;
         FlipNS.ItemIndex:=0;
+        except
+          Handpad.Visible:=false;
+        end;
       end;
       except
         FCanSetTracking := false;
@@ -628,6 +633,40 @@ begin
     GotoOK := False;
   end;
   refreshrate := timer1.interval
+end;
+
+procedure Tpop_scope.ScopeGetAscomEquatorialSystem(var EqSys: double);
+var
+  i: integer;
+begin
+  if ScopeConnected then
+  begin
+    try
+    if FScopeInterfaceVersion>1 then begin
+      {$ifdef mswindows}
+      if not Remote then begin
+         i := T.EquatorialSystem;
+      end
+      else
+      {$endif}
+      begin
+        i := TR.Get('equatorialsystem').AsInt;
+      end;
+    end
+    else i := 0;
+    except
+      i := 0;
+    end;
+  end
+  else
+    i := 0;
+  case i of
+    0: EqSys := 0;
+    1: EqSys := 0;
+    2: EqSys := 2000;
+    3: EqSys := 2050;
+    4: EqSys := 1950;
+  end;
 end;
 
 procedure Tpop_scope.ScopeGetEqSysReal(var EqSys: double);
@@ -874,7 +913,7 @@ begin
     GetScopeRates(n0, n1, @ax0r, @ax1r);
     if n0 >= 1 then
     begin
-      for i := 0 to n0 - 1 do
+      for i := 0 to (n0 div 2) - 1 do
       begin
         min := ax0r[2 * i];
         max := ax0r[2 * i + 1];
@@ -1639,29 +1678,49 @@ procedure Tpop_scope.ButtonAboutClick(Sender: TObject);
 {$ifdef mswindows}
 var
   buf: string;
+  cleanup: boolean;
+  eq:double;
 {$endif}
 begin
 {$ifdef mswindows}
   try
+    cleanup:=false;
     if (edit1.Text > '') then
     begin
       try
         if VarIsEmpty(T) then
         begin
           T := CreateOleObject(WideString(edit1.Text));
-          buf := T.Description;
-          buf := buf + crlf + T.DriverInfo;
-          T := Unassigned;
-          ShowMessage(buf);
-        end
-        else
-        begin
-          buf := T.Description;
-          buf := buf + crlf + T.DriverInfo;
-          ShowMessage(buf);
+          cleanup:=true;
         end;
+        buf := edit1.text;
+        buf := buf + crlf + T.Description;
+        buf := buf + crlf + T.DriverInfo;
+        if ScopeConnected then begin
+          ScopeGetAscomEquatorialSystem(eq);
+          if eq=0 then buf := buf + crlf + 'EquatorialSystem=Jnow'
+                  else buf := buf + crlf + 'EquatorialSystem=J'+FormatFloat(f0,eq);
+          if ForceEqSys then begin
+            ScopeGetEqSysReal(eq);
+            if eq=0 then buf := buf + ', Forced to Jnow'
+                    else buf := buf + ', Forced to J'+FormatFloat(f0,eq);
+          end;
+          buf:=buf+crlf+'Interface version: '+IntToStr(FScopeInterfaceVersion);
+          buf:=buf+crlf+'Capabilities:';
+          if FCanSetTracking then buf:=buf+' SetTracking';
+          if FCanParkUnpark then buf:=buf+' ParkUnpark';
+          if hasSync then buf:=buf+' CanSync';
+          if Handpad.Visible then buf:=buf+' MoveAxis';
+        end;
+        ShowMessage(buf);
         UpdTrackingButton;
+        if cleanup then T := Unassigned;
       except
+        on E: Exception do begin
+          buf:=buf+crlf+'Error: ' + E.Message;
+          ShowMessage(buf);
+          if cleanup then T := Unassigned;
+        end;
       end;
     end;
   except
