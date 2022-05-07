@@ -1127,6 +1127,7 @@ begin
   begin
     ForceEqSys := feqsys.Checked;
     EqSysVal := leqsys.ItemIndex;
+    if ScopeConnected then ScopeGetEqSysReal(FScopeEqSys);
   end;
   btok.Free;
   btcan.Free;
