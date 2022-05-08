@@ -463,8 +463,10 @@ begin
       scopedisconnect(dis_ok);
     UpdTrackingButton;
   except
-    on E: Exception do
+    on E: Exception do begin
       MessageDlg(format(DriverMsg,[E.Message]), mtWarning, [mbOK], 0);
+      scopedisconnect(dis_ok);
+    end;
   end;
 end;
 
