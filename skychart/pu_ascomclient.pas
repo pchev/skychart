@@ -460,8 +460,11 @@ begin
       ButtonSetLocation.Enabled := True;
       ButtonGetLocation.Enabled := True;
     end
-    else
+    else begin
+      // normally we must never go here because a failed connection must raise an exception, but some driver do not respect that.
+      MessageDlg(format(DriverMsg,['Connection fail for unknown reason.']), mtWarning, [mbOK], 0);
       scopedisconnect(dis_ok);
+    end;
     UpdTrackingButton;
   except
     on E: Exception do begin
