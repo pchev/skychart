@@ -256,7 +256,7 @@ begin
       end;
     except
       on E: Exception do begin
-        MessageDlg(DriverMsg + ': ' + E.Message, mtWarning, [mbOK], 0);
+        MessageDlg(format(DriverMsg,[E.Message]), mtWarning, [mbOK], 0);
         exit;
         end;
     end;
@@ -344,7 +344,7 @@ begin
     UpdParkButton;
   except
     on E: Exception do
-      MessageDlg(DriverMsg + ': ' + E.Message, mtWarning, [mbOK], 0);
+      MessageDlg(format(DriverMsg,[E.Message]), mtWarning, [mbOK], 0);
   end;
 
 end;
@@ -354,7 +354,6 @@ var
   dis_ok,c_ok: boolean;
   nrates: integer;
   rates: TStringList;
-  axis0rates, axis1rates: array of double;
 begin
   led.brush.color := clRed;
   led.refresh;
@@ -366,7 +365,7 @@ begin
   try
     {$ifdef mswindows}
     if not Remote then begin
-      DriverMsg:=rsFrom + ' ' + edit1.Text+':'+crlf+rsASCOMDriverE;
+      DriverMsg:=rsFrom + ' ' + edit1.Text+':'+crlf+rsASCOMDriverE+': '+'%s'+crlf+rsIfYouCannotF;
       if trim(edit1.Text) = '' then
          exit;
       T := Unassigned;
@@ -377,7 +376,7 @@ begin
     else
     {$endif}
     begin
-      DriverMsg:=StringReplace(rsASCOMDriverE,' ASCOM ',' Alpaca ',[]);
+      DriverMsg:=rsFrom + ' ' + edit1.Text+':'+crlf+StringReplace(rsASCOMDriverE, 'ASCOM', 'Alpaca', [])+': '+'%s'+crlf+rsIfYouCannotF;
       TR.Host:=ARestHost.Text;
       TR.Port:=ARestPort.Text;
       case ARestProtocol.ItemIndex of
@@ -465,7 +464,7 @@ begin
     UpdTrackingButton;
   except
     on E: Exception do
-      MessageDlg(DriverMsg + ': ' + E.Message, mtWarning, [mbOK], 0);
+      MessageDlg(format(DriverMsg,[E.Message]), mtWarning, [mbOK], 0);
   end;
 end;
 
@@ -559,7 +558,7 @@ begin
       end;
     except
       on E: Exception do
-        MessageDlg(DriverMsg + ': ' + E.Message, mtWarning, [mbOK], 0);
+        MessageDlg(format(DriverMsg,[E.Message]), mtWarning, [mbOK], 0);
     end;
   end;
 end;
@@ -622,7 +621,7 @@ begin
       end;
     except
       on E: Exception do
-        MessageDlg(DriverMsg + ': ' + E.Message, mtWarning, [mbOK], 0);
+        MessageDlg(format(DriverMsg,[E.Message]), mtWarning, [mbOK], 0);
     end;
   end
   else
@@ -770,7 +769,7 @@ begin
     end;
   except
     on E: Exception do
-      MessageDlg(DriverMsg + ': ' + E.Message, mtWarning, [mbOK], 0);
+      MessageDlg(format(DriverMsg,[E.Message]), mtWarning, [mbOK], 0);
   end;
 end;
 
@@ -795,7 +794,7 @@ begin
   end;
   except
     on E: Exception do
-      MessageDlg(DriverMsg + ': ' + E.Message, mtWarning, [mbOK], 0);
+      MessageDlg(format(DriverMsg,[E.Message]), mtWarning, [mbOK], 0);
   end;
 end;
 
@@ -820,7 +819,7 @@ begin
       end;
     except
       on E: Exception do
-        MessageDlg(DriverMsg + ': ' + E.Message, mtWarning, [mbOK], 0);
+        MessageDlg(format(DriverMsg,[E.Message]), mtWarning, [mbOK], 0);
     end;
   end;
 end;
@@ -1167,7 +1166,7 @@ begin
   TR:=TAscomRest.Create(self);
   TR.ClientId:=3292;
   FLastArrow:=0;
-  DriverMsg:=rsASCOMDriverE;
+  DriverMsg:=rsASCOMDriverE+': %s';
   {$ifndef mswindows}
   ASCOMLocal.TabVisible:=false;
   {$endif}
@@ -1315,7 +1314,7 @@ begin
     end;
   except
     on E: Exception do
-      MessageDlg(DriverMsg + ': ' + E.Message, mtWarning, [mbOK], 0);
+      MessageDlg(format(DriverMsg,[E.Message]), mtWarning, [mbOK], 0);
   end;
 {$endif}
 end;
@@ -1345,7 +1344,7 @@ begin
         FObservatoryCoord(self);
     except
       on E: Exception do
-        MessageDlg(DriverMsg + ': ' + E.Message, mtWarning, [mbOK], 0);
+        MessageDlg(format(DriverMsg,[E.Message]), mtWarning, [mbOK], 0);
     end;
   end;
 end;
@@ -1480,7 +1479,7 @@ begin
       end;
     except
       on E: Exception do
-        MessageDlg(DriverMsg + ': ' + E.Message, mtWarning, [mbOK], 0);
+        MessageDlg(format(DriverMsg,[E.Message]), mtWarning, [mbOK], 0);
     end;
   end;
 end;
@@ -1508,7 +1507,7 @@ begin
       end;
     except
       on E: Exception do
-        MessageDlg(DriverMsg + ': ' + E.Message, mtWarning, [mbOK], 0);
+        MessageDlg(format(DriverMsg,[E.Message]), mtWarning, [mbOK], 0);
     end;
   end;
 end;
@@ -1553,7 +1552,7 @@ begin
     end;
   except
     on E: Exception do
-      MessageDlg(DriverMsg + ': ' + E.Message, mtWarning, [mbOK], 0);
+      MessageDlg(format(DriverMsg,[E.Message]), mtWarning, [mbOK], 0);
   end;
 end;
 
@@ -1595,7 +1594,7 @@ begin
       Trackingled.brush.color := clRed;
   except
     on E: Exception do
-      MessageDlg(DriverMsg + ': ' + E.Message, mtWarning, [mbOK], 0);
+      MessageDlg(format(DriverMsg,[E.Message]), mtWarning, [mbOK], 0);
   end;
 end;
 
@@ -1632,7 +1631,7 @@ begin
       UpdParkButton;
     except
       on E: Exception do
-        MessageDlg(DriverMsg + ': ' + E.Message, mtWarning, [mbOK], 0);
+        MessageDlg(format(DriverMsg,[E.Message]), mtWarning, [mbOK], 0);
     end;
   end;
 end;
@@ -1665,7 +1664,7 @@ begin
       UpdTrackingButton;
     except
       on E: Exception do
-        MessageDlg(DriverMsg + ': ' + E.Message, mtWarning, [mbOK], 0);
+        MessageDlg(format(DriverMsg,[E.Message]), mtWarning, [mbOK], 0);
     end;
   end;
 end;
@@ -1726,7 +1725,7 @@ begin
     end;
   except
     on E: Exception do
-      MessageDlg(DriverMsg + ': ' + E.Message, mtWarning, [mbOK], 0);
+      MessageDlg(format(DriverMsg,[E.Message]), mtWarning, [mbOK], 0);
   end;
 {$endif}
 end;
