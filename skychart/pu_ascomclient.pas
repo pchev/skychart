@@ -257,6 +257,7 @@ begin
     except
       on E: Exception do begin
         MessageDlg(format(DriverMsg,[E.Message]), mtWarning, [mbOK], 0);
+        ScopeDisconnect(ok);
         exit;
         end;
     end;
@@ -1194,6 +1195,7 @@ begin
       CoordLock := True;
       timer1.Enabled := False;
       ShowCoordinates;
+      if not FConnected then exit;
       FSlewing:=GetSlewing;
       UpdTrackingButton;
       UpdParkButton;
