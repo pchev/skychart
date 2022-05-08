@@ -366,7 +366,7 @@ begin
   try
     {$ifdef mswindows}
     if not Remote then begin
-      DriverMsg:=edit1.Text+':'+crlf+rsASCOMDriverE;
+      DriverMsg:=rsFrom + ' ' + edit1.Text+':'+crlf+rsASCOMDriverE;
       if trim(edit1.Text) = '' then
          exit;
       T := Unassigned;
@@ -377,7 +377,7 @@ begin
     else
     {$endif}
     begin
-      DriverMsg:=StringReplace(rsASCOMDriverE,'ASCOM','Alpaca',[]);
+      DriverMsg:=StringReplace(rsASCOMDriverE,' ASCOM ',' Alpaca ',[]);
       TR.Host:=ARestHost.Text;
       TR.Port:=ARestPort.Text;
       case ARestProtocol.ItemIndex of
