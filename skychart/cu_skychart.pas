@@ -87,6 +87,7 @@ type
     function DrawDEline(ra, de, da,dde,ra1: double; drawlabel: boolean; col,linewidth,dir,lh,lt: integer; linestyle: TFPPenStyle; var labelok:boolean): boolean;
   public
     cfgsc: Tconf_skychart;
+    horizonpicture, horizonpicturedark: TBGRABitmap;
     labels: array[1..maxlabels] of Tobjlabel;
     numlabels: integer;
     dsopos: array[1..maxlabels] of TPoint;
@@ -214,6 +215,8 @@ end;
 constructor Tskychart.Create(AOwner: TComponent);
 begin
   inherited Create(AOwner);
+  horizonpicture := TBGRABitmap.Create;
+  horizonpicturedark := TBGRABitmap.Create;
   // set safe value
   cfgsc := Tconf_skychart.Create;
   cfgsc.quick := False;
@@ -267,6 +270,8 @@ begin
     Fplot.Free;
     cfgsc.Free;
     bgbmp.Free;
+    horizonpicture.Free;
+    horizonpicturedark.Free;
     inherited Destroy;
   except
     writetrace('error destroy ' + Name);
@@ -971,18 +976,20 @@ begin
   if cfgsc.horizonpicturevalid and (n <> cfgsc.horizondarken) then
   begin
     cfgsc.horizondarken := n;
-    cfgsc.horizonpicturedark.Assign(cfgsc.horizonpicture);
-    p := cfgsc.horizonpicturedark.Data;
-    for i := cfgsc.horizonpicturedark.NbPixels-1 downto 0 do
-    begin
-      if p^.alpha>0 then begin
-        p^.red := max(0,p^.red-n);
-        p^.green := max(0,p^.green-n);
-        p^.blue := max(0,p^.blue-n);
+    horizonpicturedark.Assign(horizonpicture);
+    if n>0 then begin
+      p := horizonpicturedark.Data;
+      for i := horizonpicturedark.NbPixels-1 downto 0 do
+      begin
+        if p^.alpha>0 then begin
+          p^.red := max(0,p^.red-n);
+          p^.green := max(0,p^.green-n);
+          p^.blue := max(0,p^.blue-n);
+        end;
+        inc(p);
       end;
-      inc(p);
+      horizonpicturedark.InvalidateBitmap;
     end;
-    cfgsc.horizonpicturedark.InvalidateBitmap;
   end;
   Fplot.init(Fplot.cfgchart.Width, Fplot.cfgchart.Height);
   if Fplot.cfgchart.onprinter and (Fplot.cfgplot.starplot = 0) and
@@ -5854,12 +5861,12 @@ begin
   for i := 0 to n - 1 do
   begin
     thread[i] := TDrawHorizonThread.Create(True);
-    thread[i].horizonpicture := cfgsc.horizonpicturedark;
+    thread[i].horizonpicture := horizonpicturedark;
     thread[i].hbmp := hbmp;
     thread[i].col2 := ColorToBGRA(FPlot.cfgplot.Color[19]);
     thread[i].cfgsc := cfgsc;
     thread[i].lowquality := cfgsc.HorizonPictureLowQuality or
-      ((pi2 / cfgsc.horizonpicturedark.Width) > (2 * cfgsc.fov / hbmp.Width));
+      ((pi2 / horizonpicturedark.Width) > (2 * cfgsc.fov / hbmp.Width));
     thread[i].num := n;
     thread[i].id := i;
     thread[i].Start;
@@ -8954,15 +8961,15 @@ begin
       fname := slash(Appdir) + fname;
     if FileExists(fname) then
     begin
-      cfgsc.horizonpicture.LoadFromFile(fname);
+      horizonpicture.LoadFromFile(fname);
       if uppercase(ExtractFileExt(fname)) = '.BMP' then
-        cfgsc.horizonpicture.ReplaceColor(ColorToBGRA(clFuchsia), BGRAPixelTransparent);
+        horizonpicture.ReplaceColor(ColorToBGRA(clFuchsia), BGRAPixelTransparent);
       cfgsc.horizonpicturevalid := True;
       cfgsc.horizonpicturename := fname;
     end
     else
     begin
-      cfgsc.horizonpicture.SetSize(1, 1);
+      horizonpicture.SetSize(1, 1);
       cfgsc.horizonpicturevalid := False;
       cfgsc.horizonpicturename := '';
     end;

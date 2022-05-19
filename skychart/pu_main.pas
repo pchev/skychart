@@ -908,6 +908,7 @@ begin
     cfgp.Assign((MultiFrame1.Activeobject as Tf_chart).sc.plot.cfgplot);
     cfg1.scopemark := False;
     cfg1.scope2mark := False;
+    cfg1.horizonpicturevalid := False;
     maxi := MultiFrame1.maximized;
     w := MultiFrame1.ActiveChild.Width;
     h := MultiFrame1.ActiveChild.Height;

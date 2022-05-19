@@ -1173,7 +1173,6 @@ type
     BodiesLst: TBodieslst;
     BodiesName: TBodiesName;
     horizonlist: Thorizonlist;
-    horizonpicture, horizonpicturedark: TBGRABitmap;
     HorizonFile, HorizonPictureFile: string;
     horizonlistname, horizonpicturename: string;
     horizonpicturevalid: boolean;
@@ -2205,8 +2204,6 @@ end;
 constructor Tconf_skychart.Create;
 begin
   inherited Create;
-  horizonpicture := TBGRABitmap.Create;
-  horizonpicturedark := TBGRABitmap.Create;
   horizonpicturevalid := False;
   horizondarken := -1;
   horizonlistname := '';
@@ -2248,8 +2245,6 @@ begin
   SetLength(BodiesLst,0);
   SetLength(BodiesName,0);
   tz.Free;
-  horizonpicture.Free;
-  horizonpicturedark.Free;
   inherited Destroy;
 end;
 
@@ -2809,8 +2804,6 @@ begin
   DarkenHorizonPicture := Source.DarkenHorizonPicture;
   for i := 0 to 360 do
     horizonlist[i] := Source.horizonlist[i];
-  horizonpicture.Assign(Source.horizonpicture);
-  horizonpicturedark.Assign(Source.horizonpicturedark);
   horizonpicturevalid := Source.horizonpicturevalid;
   horizondarken := Source.horizondarken;
   horizonpicturename := Source.horizonpicturename;

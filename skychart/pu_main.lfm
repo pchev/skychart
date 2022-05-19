@@ -288,6 +288,7 @@ object f_main: Tf_main
           Top = 0
           Width = 222
           Align = alClient
+          ParentColor = False
           ParentFont = False
         end
       end
@@ -324,6 +325,7 @@ object f_main: Tf_main
           Width = 661
           Align = alClient
           AutoSize = False
+          ParentColor = False
           ParentFont = False
           PopupMenu = StatusPopup
         end
