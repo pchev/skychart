@@ -42,8 +42,6 @@
 |          (Found at URL: http://www.ararat.cz/synapse/)                       |
 |==============================================================================}
 
-//2022-05-26 changed StrToIp and IpToStr from integer to longword for address 192.168.181.1
-
 {:@abstract(IP adress support procedures and functions)}
 
 {$IFDEF FPC}
@@ -88,10 +86,10 @@ function StrToIp6(value: string): TIp6Bytes;
 function Ip6ToStr(value: TIp6Bytes): string;
 
 {:Convert IPv4 address from their string form to binary.}
-function StrToIp(value: string): longword;
+function StrToIp(value: string): integer;
 
 {:Convert IPv4 address from binary to string form.}
-function IpToStr(value: longword): string;
+function IpToStr(value: integer): string;
 
 {:Convert IPv4 address to reverse form.}
 function ReverseIP(Value: AnsiString): AnsiString;
@@ -207,10 +205,10 @@ end;
 
 {==============================================================================}
 
-function StrToIp(value: string): longword; //2022-05-26 changed from integer to longword for address 192.168.181.1
+function StrToIp(value: string): integer;
 var
   s: string;
-  i, x: longword;
+  i, x: Integer;
 begin
   Result := 0;
   for x := 0 to 3 do
@@ -223,7 +221,7 @@ end;
 
 {==============================================================================}
 
-function IpToStr(value: longword): string;//2022-05-26 changed from integer to longword for address 192.168.181.1
+function IpToStr(value: integer): string;
 var
   x1, x2: word;
   y1, y2: byte;
