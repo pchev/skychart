@@ -191,6 +191,7 @@ begin
               TCPThrd[n].onTerminate := ThrdTerminate;
               TCPThrd[n].onExecuteCmd := FExecuteCmd;
               TCPThrd[n].keepalive := keepalive;
+              TCPThrd[n].id := n;
               TCPThrd[n].Start;
               i := 0;
               while (TCPThrd[n].Fsock = nil) and (i < 100) do
