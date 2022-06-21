@@ -4021,12 +4021,12 @@ begin
       if (y1 < 0.0) then
       begin
         hr := hh + h1;
-        frise := True;
+        if (hr>=0)and(hr<=24) then frise := True;
       end
       else
       begin
         hs := hh + h1;
-        fset := True;
+        if (hs>=0)and(hs<=24) then fset := True;
       end;
     end;
     // two rise/set
