@@ -135,6 +135,7 @@ type
     function LoadZoneTab(fn: string): boolean;
     property TimeZoneFile: string read GetTimeZoneFile write SetTimeZoneFile;
     property Longitude: double read GetLongitude write SetLongitude;
+    property Date: TDateTime read GetDate write SetDate;
     property JD: double read GetJD write SetJD;
     property SecondsOffset: longint read GetSecondOffset;
     property ZoneName: string read GetTZName;
