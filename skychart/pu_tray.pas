@@ -350,6 +350,8 @@ begin
     if (txt1<>lasttxt1)or(txt2<>lasttxt2) then begin
       UpdBmp(txt1, txt2, icontype, icontextsize, iconbg, icontext, bmp);
       SysTray.Icon.Assign(bmp);
+      SysTray.Hide;
+      SysTray.Show;
       lasttxt1:=txt1;
       lasttxt2:=txt2;
     end;
