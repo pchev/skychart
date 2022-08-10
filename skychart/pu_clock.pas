@@ -31,6 +31,7 @@ type
     procedure ColorBox1Change(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure FormDblClick(Sender: TObject);
+    procedure FormDestroy(Sender: TObject);
     procedure FormHide(Sender: TObject);
     procedure FormMouseDown(Sender: TObject; Button: TMouseButton;
       Shift: TShiftState; X, Y: integer);
@@ -120,6 +121,17 @@ procedure Tf_clock.FormDblClick(Sender: TObject);
 begin
   moving := False;
   Hide;
+end;
+
+procedure Tf_clock.FormDestroy(Sender: TObject);
+begin
+  try
+  if (cfgsc <> nil) then
+    cfgsc.Free;
+  if (planet <> nil) then
+    planet.Free;
+  except
+  end;
 end;
 
 procedure Tf_clock.FormMouseDown(Sender: TObject; Button: TMouseButton;

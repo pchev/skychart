@@ -40,6 +40,7 @@ object f_tray: Tf_tray
         Top = 97
         Width = 74
         Caption = 'Background'
+        ParentColor = False
         ParentFont = False
       end
       object Label2: TLabel
@@ -48,6 +49,7 @@ object f_tray: Tf_tray
         Top = 97
         Width = 25
         Caption = 'Text'
+        ParentColor = False
         ParentFont = False
       end
       object Label3: TLabel
@@ -56,6 +58,7 @@ object f_tray: Tf_tray
         Top = 156
         Width = 52
         Caption = 'Text Size'
+        ParentColor = False
         ParentFont = False
       end
       object Imagetest: TImage
@@ -88,7 +91,7 @@ object f_tray: Tf_tray
       end
       object SpinEdit1: TSpinEdit
         Left = 15
-        Height = 28
+        Height = 29
         Top = 171
         Width = 148
         MaxValue = 20

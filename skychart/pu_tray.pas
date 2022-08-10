@@ -348,10 +348,12 @@ begin
   if iconinfo <> 5 then
   begin
     if (txt1<>lasttxt1)or(txt2<>lasttxt2) then begin
-      UpdBmp(txt1, txt2, icontype, icontextsize, iconbg, icontext, bmp);
-      SysTray.Icon.Assign(bmp);
       SysTray.Hide;
+      LoadIcon;
+      UpdBmp(txt1, txt2, icontype, icontextsize, iconbg, icontext, bmp);
+      SysTray.Icon.Canvas.Draw(0,0,bmp);
       SysTray.Show;
+      systray.InternalUpdate;
       lasttxt1:=txt1;
       lasttxt2:=txt2;
     end;
@@ -438,17 +440,6 @@ procedure Tf_tray.FormDestroy(Sender: TObject);
 begin
   SysTray.Hide;
   bmp.Free;
-  if (f_clock <> nil) then
-  begin
-    if (f_clock.cfgsc <> nil) then
-      f_clock.cfgsc.Free;
-    if (f_clock.planet <> nil) then
-      f_clock.planet.Free;
-  end;
-  if f_calendar <> nil then
-    f_calendar.Free;
-  if cdcdb <> nil then
-    cdcdb.Free;
 end;
 
 procedure Tf_tray.MenuItem1Click(Sender: TObject);

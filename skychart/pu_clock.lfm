@@ -89,13 +89,12 @@ object f_clock: Tf_clock
   KeyPreview = True
   OnCreate = FormCreate
   OnDblClick = FormDblClick
+  OnDestroy = FormDestroy
   OnHide = FormHide
   OnMouseDown = FormMouseDown
   OnMouseMove = FormMouseMove
   OnMouseUp = FormMouseUp
   OnShow = FormShow
-  LCLVersion = '1.6.4.0'
-  Visible = False
   object Panel1: TPanel
     Left = 293
     Height = 24
@@ -129,9 +128,9 @@ object f_clock: Tf_clock
   end
   object Label1: TLabel
     Left = 16
-    Height = 24
+    Height = 28
     Top = 16
-    Width = 67
+    Width = 59
     Caption = 'Legal :'
     Color = clBlack
     ParentColor = False
@@ -141,9 +140,9 @@ object f_clock: Tf_clock
   end
   object Label2: TLabel
     Left = 16
-    Height = 24
+    Height = 28
     Top = 44
-    Width = 40
+    Width = 36
     Caption = 'UT :'
     Color = clBlack
     ParentColor = False
@@ -153,9 +152,9 @@ object f_clock: Tf_clock
   end
   object Label3: TLabel
     Left = 16
-    Height = 24
+    Height = 28
     Top = 72
-    Width = 120
+    Width = 110
     Caption = 'Mean local :'
     Color = clBlack
     ParentColor = False
@@ -165,9 +164,9 @@ object f_clock: Tf_clock
   end
   object Label4: TLabel
     Left = 16
-    Height = 24
+    Height = 28
     Top = 100
-    Width = 96
+    Width = 92
     Caption = 'True solar'
     Color = clBlack
     ParentColor = False
@@ -177,9 +176,9 @@ object f_clock: Tf_clock
   end
   object clock1: TLabel
     Left = 168
-    Height = 24
+    Height = 28
     Top = 16
-    Width = 92
+    Width = 76
     Caption = '00:00:00'
     Color = clBlack
     ParentColor = False
@@ -189,9 +188,9 @@ object f_clock: Tf_clock
   end
   object clock2: TLabel
     Left = 168
-    Height = 24
+    Height = 28
     Top = 44
-    Width = 92
+    Width = 76
     Caption = '00:00:00'
     Color = clBlack
     ParentColor = False
@@ -201,9 +200,9 @@ object f_clock: Tf_clock
   end
   object clock3: TLabel
     Left = 168
-    Height = 24
+    Height = 28
     Top = 72
-    Width = 92
+    Width = 76
     Caption = '00:00:00'
     Color = clBlack
     ParentColor = False
@@ -213,9 +212,9 @@ object f_clock: Tf_clock
   end
   object clock4: TLabel
     Left = 168
-    Height = 24
+    Height = 28
     Top = 100
-    Width = 92
+    Width = 76
     Caption = '00:00:00'
     Color = clBlack
     ParentColor = False
@@ -225,9 +224,9 @@ object f_clock: Tf_clock
   end
   object Label5: TLabel
     Left = 16
-    Height = 24
+    Height = 28
     Top = 128
-    Width = 70
+    Width = 63
     Caption = 'Sideral'
     Color = clBlack
     ParentColor = False
@@ -237,9 +236,9 @@ object f_clock: Tf_clock
   end
   object clock5: TLabel
     Left = 168
-    Height = 24
+    Height = 28
     Top = 128
-    Width = 92
+    Width = 76
     Caption = '00:00:00'
     Color = clBlack
     ParentColor = False
@@ -249,9 +248,9 @@ object f_clock: Tf_clock
   end
   object Label6: TLabel
     Left = 16
-    Height = 24
+    Height = 28
     Top = 156
-    Width = 28
+    Width = 25
     Caption = 'JD:'
     Color = clBlack
     ParentColor = False
@@ -261,9 +260,9 @@ object f_clock: Tf_clock
   end
   object clock6: TLabel
     Left = 168
-    Height = 24
+    Height = 28
     Top = 156
-    Width = 92
+    Width = 76
     Caption = '00:00:00'
     Color = clBlack
     ParentColor = False
@@ -274,7 +273,7 @@ object f_clock: Tf_clock
   object Timer1: TTimer
     Enabled = False
     OnTimer = Timer1Timer
-    left = 336
-    top = 160
+    Left = 336
+    Top = 160
   end
 end
