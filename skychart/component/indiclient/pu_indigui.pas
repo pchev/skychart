@@ -76,12 +76,12 @@ type
     msg: TMemo;
     dev: TPageControl;
     Splitter1: TSplitter;
-    Timer1: TTimer;
+    FormUpdateTimer: TTimer;
     procedure FormClose(Sender: TObject; var CloseAction: TCloseAction);
     procedure FormCreate(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
     procedure FormShow(Sender: TObject);
-    procedure Timer1Timer(Sender: TObject);
+    procedure FormUpdateTimerTimer(Sender: TObject);
   private
     { private declarations }
     indiclient: TIndiBaseClient;
@@ -117,6 +117,7 @@ type
     procedure SetSwitchButtonClick(Sender: TObject);
     procedure SetSwitchCheckClick(Sender: TObject; Index: integer);
     procedure SetSwitchComboChange(Sender: TObject);
+    procedure DelayedUpdate;
   public
     { public declarations }
     property IndiServer: string read FIndiServer write FIndiServer;
@@ -235,16 +236,22 @@ begin
     indiclient.watchDevice(FIndiDevice);
   indiclient.ConnectServer;
   dmsg('Connecting to INDI server');
-  Timer1.Enabled:=true;
-  // disable form update to prevent autosizing overload
-  BeginFormUpdate;
 end;
 
-procedure Tf_indigui.Timer1Timer(Sender: TObject);
+procedure Tf_indigui.DelayedUpdate;
 begin
-  // security to resume form update if ServerConnected is not reach after 5 seconds
-  Timer1.Enabled:=false;
-  EndFormUpdate;
+  // delay for update after all properties are received
+  BeginFormUpdate;
+  FormUpdateTimer.Enabled:=false;
+  FormUpdateTimer.Enabled:=true;
+end;
+
+procedure Tf_indigui.FormUpdateTimerTimer(Sender: TObject);
+begin
+  // no new properties for the timer duration, update the form now
+  FormUpdateTimer.Enabled:=false;
+  while FormIsUpdating do
+    EndFormUpdate;
 end;
 
 procedure Tf_indigui.FormCreate(Sender: TObject);
@@ -298,7 +305,6 @@ begin
   indiclient.setBLOBMode(B_NEVER, '');
   FConnectedServer:=true;
   dmsg('Server connected');
-  EndFormUpdate;
 end;
 
 procedure Tf_indigui.ServerDisconnected(Sender: TObject);
@@ -315,6 +321,7 @@ var
   tb: TTabSheet;
   devname: string;
 begin
+  DelayedUpdate;
   devname := dp.getDeviceName;
   tb := dev.AddTabSheet;
   tb.Caption := devname;
@@ -331,6 +338,7 @@ var
   devname: string;
   i, j: integer;
 begin
+  DelayedUpdate;
   devname := dp.getDeviceName;
   for i := 0 to dev.PageCount - 1 do
   begin
@@ -372,6 +380,7 @@ var
   lbl: Tlabel;
   i: integer;
 begin
+  DelayedUpdate;
   devname := indiProp.getDeviceName;
   groupname := indiProp.getGroupName;
   propname := indiProp.getName;
@@ -397,7 +406,6 @@ begin
     sb.Parent := tb;
     sb.BorderStyle:=bsNone;
     sb.Align := alClient;
-    sb.AutoSize := True;
     sb.ChildSizing.ControlsPerLine := 6;
     sb.ChildSizing.Layout := cclLeftToRightThenTopToBottom;
     sb.ChildSizing.HorizontalSpacing := 8;
@@ -438,6 +446,7 @@ var
   idev: TIndiDev;
   ip, ig, i, gcount: integer;
 begin
+  DelayedUpdate;
   devname := indiProp.getDeviceName;
   groupname := indiProp.getGroupName;
   propname := indiProp.getName;
@@ -1147,6 +1156,7 @@ begin
     sp.s := ISS_ON;
     dmsg(iprop.Name + ' ' + sp.Name + '=ON');
     indiclient.sendNewSwitch(svp);
+    if sname='DISCONNECT' then indiclient.sendNewSwitch(svp); // del* not received if not send two time ???
   end;
 end;
 
