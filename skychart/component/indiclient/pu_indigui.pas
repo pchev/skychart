@@ -77,6 +77,8 @@ type
     dev: TPageControl;
     Splitter1: TSplitter;
     FormUpdateTimer: TTimer;
+    procedure FormResize(Sender: TObject);
+    procedure PageChange(Sender: TObject);
     procedure FormClose(Sender: TObject; var CloseAction: TCloseAction);
     procedure FormCreate(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
@@ -300,6 +302,16 @@ begin
   CloseAction := caFree;
 end;
 
+procedure Tf_indigui.PageChange(Sender: TObject);
+begin
+  DelayedUpdate;
+end;
+
+procedure Tf_indigui.FormResize(Sender: TObject);
+begin
+  DelayedUpdate;
+end;
+
 procedure Tf_indigui.ServerConnected(Sender: TObject);
 begin
   indiclient.setBLOBMode(B_NEVER, '');
@@ -330,6 +342,7 @@ begin
   idev.page := TPageControl.Create(self);
   idev.page.Parent := tb;
   idev.page.Align := alClient;
+  idev.page.OnChange:=@PageChange;
   devlist.AddObject(devname, idev);
 end;
 
