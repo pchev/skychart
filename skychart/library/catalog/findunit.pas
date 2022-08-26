@@ -709,7 +709,7 @@ repeat
   ii:=i;
   seek(fx,i);
   blockread(fx,lin,reclen,n);
-  num:=trim(copy(lin.key,1,keylen));
+  num:=uppercase(trim(copy(lin.key,1,keylen)));
   if num>buf then imax:=i div reclen
             else imin:=i div reclen;
   if num=buf then ok:=true;
