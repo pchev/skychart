@@ -922,6 +922,7 @@ ctBin : begin  // binary catalog
         end;
     rtvar : begin  // variables stars 1
         if catheader.flen[3]>0 then lin.variable.id:=GetRecString(3);
+        if catheader.IdPrefix then lin.variable.id:=lin.options.flabel[lOffset+vsId]+' '+lin.variable.id;
         if catheader.flen[4]>0 then begin lin.variable.magmax:=GetRecSmallint(4)/1000; if lin.variable.magmax>32 then lin.variable.magmax:=99;end;
         if catheader.flen[5]>0 then begin lin.variable.magmin:=GetRecSmallint(5)/1000; if lin.variable.magmin>32 then lin.variable.magmin:=99;end;
         if catheader.flen[6]>0 then lin.variable.period:=GetRecSingle(6);
@@ -934,6 +935,7 @@ ctBin : begin  // binary catalog
         end;
     rtdbl : begin  // doubles stars 1
         if catheader.flen[3]>0 then lin.double.id:=GetRecString(3);
+        if catheader.IdPrefix then lin.double.id:=lin.options.flabel[lOffset+vsId]+' '+lin.double.id;
         if catheader.flen[4]>0 then begin lin.double.mag1:=GetRecSmallint(4)/1000; if lin.double.mag1>32 then lin.double.mag1:=99;end;
         if catheader.flen[5]>0 then begin lin.double.mag2:=GetRecSmallint(5)/1000; if lin.double.mag2>32 then lin.double.mag2:=99;end;
         if catheader.flen[6]>0 then lin.double.sep:=GetRecSmallint(6)/10;
