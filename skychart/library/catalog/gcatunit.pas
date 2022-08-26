@@ -946,6 +946,7 @@ ctBin : begin  // binary catalog
         end;
     rtneb : begin  // nebulae 1
         if catheader.flen[3]>0 then lin.neb.id:=GetRecString(3);
+        if catheader.IdPrefix then lin.neb.id:=lin.options.flabel[lOffset+vsId]+' '+lin.neb.id;
         if catheader.flen[4]>0 then lin.neb.nebtype:=GetRecByte(4);
         if catheader.flen[5]>0 then begin lin.neb.mag:=GetRecSmallint(5)/1000; if lin.neb.mag>32 then lin.neb.mag:=99;end;
         if catheader.flen[6]>0 then begin lin.neb.sbr:=GetRecSmallint(6)/1000; if lin.neb.sbr>32 then lin.neb.sbr:=99.9;end;
