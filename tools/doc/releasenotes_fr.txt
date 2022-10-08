@@ -29,7 +29,8 @@ Nouvelles fonctions:
 - Affiche l'angle horaire et la masse d'air sous le curseur de la souris
 - Ajout d'une raquette virtuelle pour les télescopes ASCOM et INDI
 - Ajout d'une option pour flouter et définir la transparence des catalogue de surfaces
-- Ajout d'une fonction de pré-pointage pour les occultations d'astéroïdes 
+- Ajout d'une fonction de pré-pointage pour les occultations d'astéroïdes
+- Ajout d'un bouton pour verrouiller la limite de magnitude à la valeur actuelle
 
 Correction d'un bug:
 - Mise à jour de Quicksat pour utiliser le nouveau fichier des magnitudes

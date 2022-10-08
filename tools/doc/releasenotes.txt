@@ -30,6 +30,7 @@ New functions:
 - Add telescope handpad for ASCOM and INDI
 - Add option to blure and set transparency of surface catalog
 - Add pre-pointing feature for asteroid occultation
+- Add button to lock the magnitude limit at the current value
 
 Bug fix:
 - Fix Bayer labels
