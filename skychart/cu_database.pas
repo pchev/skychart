@@ -320,6 +320,10 @@ begin
         LoadAstFam(slash(sampledir) + 'lc_familylookup.txt');
       end;
     end;
+    if updversion < '4.3o' then begin
+      // Force update asteroid extension because of format change
+      DeleteFile(slash(tempdir)+'lc_summary_pub.DATE');
+    end;
   end;
 end;
 
@@ -716,10 +720,10 @@ begin
          h:=trim(copy(buf,100,6));
          g:=trim(copy(buf,112,6));
          diam:=trim(copy(buf,89,8));
-         period:=trim(copy(buf,139,13));
-         amin:=trim(copy(buf,171,4));
-         amax:=trim(copy(buf,176,4));
-         u:=trim(copy(buf,181,2));
+         period:=trim(copy(buf,146,13));
+         amin:=trim(copy(buf,178,4));
+         amax:=trim(copy(buf,183,4));
+         u:=trim(copy(buf,188,2));
          cmd := 'REPLACE INTO cdc_ast_ext (number,name,fam,h,g,diam,period,amin,amax,u) VALUES (' + '"' +
           anum + '"' + ',"' + aname + '"'+ ',"' + fam + '"'+ ',"' + h + '"'+ ',"' + g + '"'+ ',"' +
           diam + '"'+ ',"' + period + '"' + ',"' + amin + '"'+ ',"' + amax + '"'+ ',"' + u + '"'+
