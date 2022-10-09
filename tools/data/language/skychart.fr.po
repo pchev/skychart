@@ -5,15 +5,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: skychart.fr\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-12-21 13:09+0000\n"
-"PO-Revision-Date: 2021-12-21 13:11+0000\n"
+"POT-Creation-Date: 2022-10-09 14:06+0000\n"
+"PO-Revision-Date: 2022-10-09 14:13+0000\n"
 "Last-Translator: Patrick Chevalley <Unknown>\n"
 "Language-Team: French <kde-i18n-doc@kde.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2022-02-13 14:56+0000\n"
-"X-Generator: Launchpad (build 619f92fce32b9c4e9124c2dcf63f8ea9f3342386)\n"
+"X-Launchpad-Export-Date: 2022-10-09 14:16+0000\n"
+"X-Generator: Launchpad (build 762fb15a975e8b23af6a1f86e44e46bfd0451459)\n"
 "Language: fr\n"
 
 #: u_translation.rs102cddss
@@ -218,6 +218,10 @@ msgstr "Âge"
 #: u_translation.rsairmass
 msgid "Airmass"
 msgstr "Masse d'air"
+
+#: u_translation.rsalbedo
+msgid "Albedo"
+msgstr "Albedo"
 
 #: u_translation.rsalignment
 msgid "Alignment"
@@ -2566,6 +2570,10 @@ msgstr "Affichage de l'heure dans l'icône"
 #: u_translation.rsifitisnotins
 msgid "If it is not installed try the following depending on your system:"
 msgstr "S'il n'est pas installé, essayez les commandes suivantes selon votre système :"
+
+#: u_translation.rsifyoucannotf
+msgid "If you cannot fix the error, please contact the telescope driver author for assistance."
+msgstr "Si vous ne pouvez pas corriger l'erreur, veuillez contacter l'auteur du pilote du télescope pour obtenir de l'aide."
 
 #: u_translation.rsillum
 msgid "Illum."

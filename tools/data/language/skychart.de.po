@@ -3,15 +3,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: skychart.en\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-12-21 13:09+0000\n"
-"PO-Revision-Date: 2021-04-10 05:48+0000\n"
+"POT-Creation-Date: 2022-10-09 14:06+0000\n"
+"PO-Revision-Date: 2022-03-26 05:44+0000\n"
 "Last-Translator: Stefan Beck <Unknown>\n"
 "Language-Team: <translation@ap-i.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2022-02-13 14:56+0000\n"
-"X-Generator: Launchpad (build 619f92fce32b9c4e9124c2dcf63f8ea9f3342386)\n"
+"X-Launchpad-Export-Date: 2022-10-09 14:16+0000\n"
+"X-Generator: Launchpad (build 762fb15a975e8b23af6a1f86e44e46bfd0451459)\n"
 
 #: u_translation.rs102cddss
 msgid "102 CD DSS"
@@ -216,6 +216,10 @@ msgstr "Alter"
 msgid "Airmass"
 msgstr "Luftmasse"
 
+#: u_translation.rsalbedo
+msgid "Albedo"
+msgstr ""
+
 #: u_translation.rsalignment
 msgid "Alignment"
 msgstr "Ausrichtung"
@@ -289,7 +293,7 @@ msgstr "Meridian immer hinzufügen"
 
 #: u_translation.rsalwaysontop
 msgid "Always on top"
-msgstr ""
+msgstr "Immer im Vordergrund"
 
 #: u_translation.rsalwayssavewi
 msgid "Always save without asking."
@@ -2564,6 +2568,10 @@ msgstr "Symbol Zeitanzeige"
 msgid "If it is not installed try the following depending on your system:"
 msgstr "Falls nicht installiert, versuchen Sie abhängig von Ihrem System Folgendes:"
 
+#: u_translation.rsifyoucannotf
+msgid "If you cannot fix the error, please contact the telescope driver author for assistance."
+msgstr ""
+
 #: u_translation.rsillum
 msgid "Illum."
 msgstr "Beleucht."
@@ -3034,7 +3042,7 @@ msgstr "Kartenposition sperren"
 
 #: u_translation.rslockmagnitud
 msgid "Lock the magnitude filter"
-msgstr ""
+msgstr "Helligkeitsfilter sperren"
 
 #: u_translation.rslockon
 #, object-pascal-format
@@ -3525,7 +3533,7 @@ msgstr "Keine Daten"
 
 #: u_translation.rsnodecimalsep
 msgid "No decimal separator"
-msgstr ""
+msgstr "Kein Dezimaltrennzeichen"
 
 #: u_translation.rsnomargin
 msgid "No margin"
@@ -5574,7 +5582,7 @@ msgstr "Dieser direkte Treiber wird aus Kompatibilitätsgründen beibehalten, m�
 #: u_translation.rsthisfilecont
 #, object-pascal-format
 msgid "This file contain %s elements.%sThis is probably a base file you want to load without the \"Append\" option.%sIt can affect the performance to append all this data to the current file%sDo you want to continue anyway?"
-msgstr ""
+msgstr "Diese Datei enthält %s elements.%s Es handelt sich wahrscheinlich um eine Basisdatei, die Sie ohne die Option \"Anhängen\" laden möchten.%slt kann die Leistung beeinträchtigen, wenn all diese Daten an die aktuelle Datei %s angehängt werden. Möchten Sie trotzdem fortfahren?"
 
 #: u_translation.rsthisfilewasn
 msgid "This file was not recognized as a MPCORB file."

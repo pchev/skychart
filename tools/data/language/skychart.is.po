@@ -3,15 +3,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: skychart.en\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-12-21 13:09+0000\n"
+"POT-Creation-Date: 2022-10-09 14:06+0000\n"
 "PO-Revision-Date: 2016-12-11 08:54+0000\n"
 "Last-Translator: Patrick Chevalley <Unknown>\n"
 "Language-Team: <translation@ap-i.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2022-02-13 14:56+0000\n"
-"X-Generator: Launchpad (build 619f92fce32b9c4e9124c2dcf63f8ea9f3342386)\n"
+"X-Launchpad-Export-Date: 2022-10-09 14:16+0000\n"
+"X-Generator: Launchpad (build 762fb15a975e8b23af6a1f86e44e46bfd0451459)\n"
 
 #: u_translation.rs102cddss
 msgid "102 CD DSS"
@@ -214,6 +214,10 @@ msgstr "Aldur"
 
 #: u_translation.rsairmass
 msgid "Airmass"
+msgstr ""
+
+#: u_translation.rsalbedo
+msgid "Albedo"
 msgstr ""
 
 #: u_translation.rsalignment
@@ -2563,6 +2567,10 @@ msgstr "Sýna tíma í táknmynd"
 #: u_translation.rsifitisnotins
 msgid "If it is not installed try the following depending on your system:"
 msgstr "Ef þetta er ekki uppsett þá reyndu eftirfarandi (háð stýrikerfi á tölvunni):"
+
+#: u_translation.rsifyoucannotf
+msgid "If you cannot fix the error, please contact the telescope driver author for assistance."
+msgstr ""
 
 #: u_translation.rsillum
 msgid "Illum."

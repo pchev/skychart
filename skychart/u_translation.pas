@@ -1571,7 +1571,8 @@ resourcestring
   rsAlwaysOnTop = 'Always on top';
   rsNoDecimalSep = 'No decimal separator';
   rsLockMagnitud = 'Lock the magnitude filter';
-  rsIfYouCannotF = 'If you cannot fix the error, please contact the telescope driver author.';
+  rsIfYouCannotF = 'If you cannot fix the error, please contact the telescope driver author for assistance.';
+  rsAlbedo = 'Albedo';
 
 // also update upsi_translation
 

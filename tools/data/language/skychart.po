@@ -6066,3 +6066,11 @@ msgstr ""
 msgid "Lock the magnitude filter"
 msgstr ""
 
+#: u_translation:rsifyoucannotf
+msgid "If you cannot fix the error, please contact the telescope driver author for assistance."
+msgstr ""
+
+#: u_translation:rsalbedo
+msgid "Albedo"
+msgstr ""
+

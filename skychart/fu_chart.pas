@@ -4339,7 +4339,7 @@ begin
            'Asteroid Lightcurve Database'+ '</a>' + ':' + htms_b + html_br;
       txt:=txt + html_b + rsFamily +': ' + htms_b + efam + html_br;
       txt:=txt + html_b + rsDiameter +': ' + htms_b + ediam + blank + rsKm + html_br;
-      txt:=txt + html_b + 'Albedo' +': ' + htms_b + albedo + html_br;
+      txt:=txt + html_b + rsAlbedo +': ' + htms_b + albedo + html_br;
       txt:=txt + html_b + rsPeriod +': ' + htms_b + eperiod + blank + rsHours + html_br;
       if (sh<>'') then begin
         emagn:=-1;
