@@ -86,7 +86,7 @@ type
       comh, comg, comnam, comeq: string): string;
     function LoadAstExt(fdfile: string): boolean;
     function LoadAstFam(famfile: string): boolean;
-    function GetAstExt(aname, anum: string; out fam,h,g,diam,period,amin,amax,u: string): boolean;
+    function GetAstExt(aname, anum: string; out fam,h,g,g1,g2,diam,albedo,period,amin,amax,u: string): boolean;
     function LoadAsteroidFile(astfile: string; append, astnumbered, stoperr, limit: boolean; astlimit: integer; memoast: Tmemo): boolean;
     procedure OpenAsteroid(append: boolean=false);
     procedure SaveAsteroid;
@@ -321,8 +321,20 @@ begin
       end;
     end;
     if updversion < '4.3o' then begin
-      // Force update asteroid extension because of format change
-      DeleteFile(slash(tempdir)+'lc_summary_pub.DATE');
+      DB.Query('select g1 from cdc_ast_ext limit 1');
+      if DB.LastError<>0 then begin
+        WriteTrace('Upgrade DB for new cdc_ast_ext column');
+        DB.Query('drop table cdc_ast_ext');
+        writetrace('Drop table cdc_ast_ext ... ' + DB.ErrorMessage);
+        DB.Commit;
+        DB.Query('CREATE TABLE ' + sqltable[7, 1] + sqltable[7, 2]);
+        WriteTrace('Create table ' + sqltable[7, 1] + ' ...  ' + DB.ErrorMessage);
+        DB.Query('CREATE INDEX ' + sqlindex[4, 1] + ' on ' + sqlindex[4, 2]);
+        if FileExists(slash(tempdir)+'lc_summary_pub.txt') then
+          LoadAstExt(slash(tempdir)+'lc_summary_pub.txt')
+        else
+          LoadAstExt(slash(sampledir)+'lc_summary_pub.txt');
+      end;
     end;
   end;
 end;
@@ -692,7 +704,7 @@ begin
 end;
 
 function TCDCdb.LoadAstExt(fdfile: string): boolean;
-var anum,aname,fam,h,g,diam,period,amin,amax,u: string;
+var anum,aname,fam,h,g,g1,g2,diam,albedo,period,amin,amax,u: string;
     buf,cmd: string;
     f: textfile;
 begin
@@ -717,16 +729,19 @@ begin
          anum:=trim(copy(buf,1,7));
          aname:=trim(copy(buf,11,30));
          fam:=trim(copy(buf,63,8));
+         diam:=trim(copy(buf,89,8));
          h:=trim(copy(buf,100,6));
          g:=trim(copy(buf,112,6));
-         diam:=trim(copy(buf,89,8));
+         g1:=trim(copy(buf,119,6));
+         g2:=trim(copy(buf,126,6));
+         albedo:=trim(copy(buf,137,6));
          period:=trim(copy(buf,146,13));
          amin:=trim(copy(buf,178,4));
          amax:=trim(copy(buf,183,4));
          u:=trim(copy(buf,188,2));
-         cmd := 'REPLACE INTO cdc_ast_ext (number,name,fam,h,g,diam,period,amin,amax,u) VALUES (' + '"' +
-          anum + '"' + ',"' + aname + '"'+ ',"' + fam + '"'+ ',"' + h + '"'+ ',"' + g + '"'+ ',"' +
-          diam + '"'+ ',"' + period + '"' + ',"' + amin + '"'+ ',"' + amax + '"'+ ',"' + u + '"'+
+         cmd := 'REPLACE INTO cdc_ast_ext (number,name,fam,h,g,g1,g2,diam,albedo,period,amin,amax,u) VALUES ("' +
+          anum + '","' + aname + '","' + fam + '","' + h + '","' + g + '","' + g1 + '","' + g2 + '","' +
+          diam + '","' + albedo + '","' + period + '","' + amin + '","' + amax + '","' + u + '"'+
           ' )';
         DB.query(cmd);
       end;
@@ -780,14 +795,14 @@ begin
   end;
 end;
 
-function TCDCdb.GetAstExt(aname, anum: string; out fam,h,g,diam,period,amin,amax,u: string): boolean;
+function TCDCdb.GetAstExt(aname, anum: string; out fam,h,g,g1,g2,diam,albedo,period,amin,amax,u: string): boolean;
 var cmd,aparent,afamname: string;
 begin
   result:=false;
   if anum='' then
-    cmd:='select fam,h,g,diam,period,amin,amax,u from cdc_ast_ext where name="'+trim(aname)+'"'
+    cmd:='select fam,h,g,g1,g2,diam,albedo,period,amin,amax,u from cdc_ast_ext where name="'+trim(aname)+'"'
   else
-    cmd:='select fam,h,g,diam,period,amin,amax,u from cdc_ast_ext where number="'+trim(anum)+'"';
+    cmd:='select fam,h,g,g1,g2,diam,albedo,period,amin,amax,u from cdc_ast_ext where number="'+trim(anum)+'"';
   DB.Query(cmd);
   if DB.Rowcount > 0 then
     begin
@@ -795,11 +810,14 @@ begin
       fam := DB.Results[0][0];
       h := DB.Results[0][1];
       g := DB.Results[0][2];
-      diam := DB.Results[0][3];
-      period := DB.Results[0][4];
-      amin := DB.Results[0][5];
-      amax := DB.Results[0][6];
-      u := DB.Results[0][7];
+      g1 := DB.Results[0][3];
+      g2 := DB.Results[0][4];
+      diam := DB.Results[0][5];
+      albedo := DB.Results[0][6];
+      period := DB.Results[0][7];
+      amin := DB.Results[0][8];
+      amax := DB.Results[0][9];
+      u := DB.Results[0][10];
       if trim(fam)<>'' then begin
         cmd:='select parent,name from cdc_ast_fam where number='+trim(fam);
         DB.Query(cmd);

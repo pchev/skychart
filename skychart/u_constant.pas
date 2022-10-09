@@ -1823,8 +1823,8 @@ const
     'PRIMARY KEY (locid))', '2,3'),
     ('cdc_ast_ext', ' ( name TEXT NOT NULL default "", '+
      'number NUMERIC default "0", fam TEXT NOT NULL default "",' +
-    'h NUMERIC NOT NULL default "0", g NUMERIC NOT NULL default "0", ' +
-    'diam NUMERIC NOT NULL default "0", period NUMERIC NOT NULL default "0", ' +
+    'h NUMERIC NOT NULL default "0", g NUMERIC NOT NULL default "0", g1 NUMERIC NOT NULL default "0", g2 NUMERIC NOT NULL default "0",' +
+    'diam NUMERIC NOT NULL default "0", albedo NUMERIC NOT NULL default "0", period NUMERIC NOT NULL default "0", ' +
     'amin NUMERIC NOT NULL default "0", amax NUMERIC NOT NULL default "0",  u TEXT NOT NULL default "", ' +
     'PRIMARY KEY (name))', '4'),
     ('cdc_ast_fam', ' ( number NUMERIC, parent NUMERIC, name TEXT, PRIMARY KEY (number))', '')

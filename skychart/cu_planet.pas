@@ -131,7 +131,8 @@ type
     procedure InitAsteroid(epoch, mh, mg, ma, ap, an, ic, ec, sa, eq: double; nam: string);
     procedure Asteroid(jd: double; highprec: boolean;
       var ar, de, dist, r, elong, phase, magn, xc, yc, zc: double);
-    function AsteroidMag(phase,dist,r,h,g: double): double; inline;
+    function AsteroidMag(phase,dist,r,h,g: double): double; inline; overload;
+    function AsteroidMag(phase,dist,r,h,g1,g2: double): double; overload;
     function ConnectDB(db: string): boolean;
     function NewAstDay(newjd, limitmag: double; cfgsc: Tconf_skychart): boolean;
     function FindAsteroid(x1, y1, x2, y2: double; nextobj: boolean;
@@ -2609,12 +2610,34 @@ begin
   astelem.Oc := sqrt(h * h + r * r);
 end;
 
-function TPlanet.AsteroidMag(phase,dist,r,h,g: double): double; inline;
+function TPlanet.AsteroidMag(phase,dist,r,h,g: double): double; inline; overload;
 var phi1, phi2: double;
 begin
   phi1 := exp(-3.33 * power(tan(phase / 2), 0.63));  { meeus91 32.14 }
   phi2 := exp(-1.87 * power(tan(phase / 2), 1.22));
   result := h + 5.0 * log10(dist * r) - 2.5 * log10((1 - g) * phi1 + g * phi2);
+end;
+
+function TPlanet.AsteroidMag(phase,dist,r,h,g1,g2: double): double; overload;
+var phi1, phi2, phi3, g12: double;
+begin
+  // A Three-Parameter Magnitude Phase Function for Asteroids
+  // Muinonen , 2010
+  phi1:=1-6*phase/pi;
+  phi2:=1-9*phase/(5*pi);
+  phi3:=Exp(-4*pi*Power(tan(phase/2),2/3));
+  if g2<0 then begin
+    g12:=g1;
+    if g12<0.2 then begin
+      g1 := 0.7527*g12 + 0.06164;
+      g2 := -0.9612*g12 + 0.6270;
+    end
+    else begin
+      g1 := 0.9529*g12 + 0.02162;
+      g2 := -0.6125*g12 + 0.5572;
+    end;
+  end;
+  result := h + 5.0 * log10(dist * r) - 2.5 * log10( g1*phi1 + g2*phi2 + (1-g1-g2)*phi3 );
 end;
 
 procedure TPlanet.Asteroid(jd: double; highprec: boolean;

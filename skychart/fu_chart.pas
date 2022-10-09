@@ -3864,7 +3864,7 @@ var
   diam, lc, ctar, ctde, rc, xc, yc, zc, ma, sa, dx, dy, illum, vel, lighttime: double;
   nam, elem_id, ref: string;
   emagn: double;
-  ename, enum,efam,sh,sg,ediam,eperiod,amin,amax,u: string;
+  ename, enum,efam,sh,sg,sg1,sg2,ediam,albedo,eperiod,amin,amax,u: string;
 
   function Bold(s: string): string;
   var
@@ -4333,16 +4333,22 @@ begin
       ename:=trim(nam);
       enum:='';
     end;
-    if sc.cdb.GetAstExt(ename, enum, efam,sh,sg,ediam,eperiod,amin,amax,u) then begin
+    if sc.cdb.GetAstExt(ename, enum, efam,sh,sg,sg1,sg2,ediam,albedo,eperiod,amin,amax,u) then begin
       txt:=txt + html_br + html_b + rsInformationF2+ blank +
            '<a href="' + URL_Asteroid_Lightcurve_Database_Info + '">' +
            'Asteroid Lightcurve Database'+ '</a>' + ':' + htms_b + html_br;
       txt:=txt + html_b + rsFamily +': ' + htms_b + efam + html_br;
       txt:=txt + html_b + rsDiameter +': ' + htms_b + ediam + blank + rsKm + html_br;
+      txt:=txt + html_b + 'Albedo' +': ' + htms_b + albedo + html_br;
       txt:=txt + html_b + rsPeriod +': ' + htms_b + eperiod + blank + rsHours + html_br;
-      if (sh<>'') and (sg<>'') then begin
-        emagn:=sc.planet.AsteroidMag(phase,dst,rr,StrToFloat(sh),StrToFloat(sg));
-        txt:=txt + html_b + rsMagnitude +': ' + htms_b + FormatFloat(f2,emagn) + html_br;
+      if (sh<>'') then begin
+        emagn:=-1;
+        if (sg1<>'') then
+          emagn:=sc.planet.AsteroidMag(phase,dst,rr,StrToFloat(sh),StrToFloat(sg1),StrToFloatDef(sg2,-1))
+        else if (sg<>'') then
+          emagn:=sc.planet.AsteroidMag(phase,dst,rr,StrToFloat(sh),StrToFloat(sg));
+        if emagn>0 then
+          txt:=txt + html_b + rsMagnitude +': ' + htms_b + FormatFloat(f2,emagn) + html_br;
       end;
       if amin<>'' then txt:=txt + html_b + rsAmplitudeMin +': ' + htms_b + amin + html_br;
       if amax<>'' then txt:=txt + html_b + rsAmplitudeMax +': ' + htms_b + amax + html_br;
