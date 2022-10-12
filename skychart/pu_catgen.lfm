@@ -2898,6 +2898,7 @@ object f_catgen: Tf_catgen
     Height = 443
     Top = 0
     Width = 393
+    TabStop = False
     ActivePage = TabSheet1
     Align = alClient
     ShowTabs = False
@@ -2914,6 +2915,7 @@ object f_catgen: Tf_catgen
         Top = 6
         Width = 242
         Caption = 'Select the type of object in your catalog'
+        ParentColor = False
         WordWrap = True
       end
       object Label8: TLabel
@@ -2922,6 +2924,7 @@ object f_catgen: Tf_catgen
         Top = 212
         Width = 111
         Caption = 'Input Catalog files'
+        ParentColor = False
       end
       object Label10: TLabel
         Left = 14
@@ -2929,6 +2932,7 @@ object f_catgen: Tf_catgen
         Top = 141
         Width = 120
         Caption = 'Catalog short name'
+        ParentColor = False
       end
       object Label13: TLabel
         Left = 14
@@ -2936,6 +2940,7 @@ object f_catgen: Tf_catgen
         Top = 176
         Width = 114
         Caption = 'Catalog long name'
+        ParentColor = False
       end
       object SpeedButton1: TSpeedButton
         Left = 103
@@ -3002,6 +3007,7 @@ object f_catgen: Tf_catgen
         Width = 349
         AutoSize = False
         Caption = 'For a large catalog always select "Binary". For a small dataset that change frequently select "Text", this let you edit the file and see the result immediatly on the chart without the need to rerun this utility.'
+        ParentColor = False
         WordWrap = True
       end
       object CatalogType: TRadioGroup
@@ -3035,7 +3041,7 @@ object f_catgen: Tf_catgen
       end
       object CatShortName: TEdit
         Left = 147
-        Height = 30
+        Height = 31
         Top = 137
         Width = 50
         MaxLength = 4
@@ -3043,7 +3049,7 @@ object f_catgen: Tf_catgen
       end
       object CatLongName: TEdit
         Left = 147
-        Height = 30
+        Height = 31
         Top = 170
         Width = 203
         MaxLength = 50
@@ -3088,7 +3094,7 @@ object f_catgen: Tf_catgen
       end
       object UpdateURL: TEdit
         Left = 147
-        Height = 30
+        Height = 31
         Top = 259
         Width = 203
         TabOrder = 5
@@ -3100,6 +3106,7 @@ object f_catgen: Tf_catgen
         Top = 263
         Width = 81
         Caption = 'Update URL :'
+        ParentColor = False
         Visible = False
       end
     end
@@ -3123,6 +3130,7 @@ object f_catgen: Tf_catgen
           Top = 82
           Width = 66
           Caption = 'Line width '
+          ParentColor = False
         end
         object Label19: TLabel
           Left = 159
@@ -3130,6 +3138,7 @@ object f_catgen: Tf_catgen
           Top = 150
           Width = 36
           Caption = 'Color '
+          ParentColor = False
         end
         object OutlineColor: TShape
           Left = 223
@@ -3150,7 +3159,7 @@ object f_catgen: Tf_catgen
         end
         object OutlineLineWidth: TLongEdit
           Left = 222
-          Height = 30
+          Height = 31
           Hint = '0..99'
           Top = 76
           Width = 41
@@ -3222,6 +3231,7 @@ object f_catgen: Tf_catgen
           Top = 17
           Width = 127
           Caption = 'Dimension and Units'
+          ParentColor = False
         end
         object Label12: TLabel
           Left = 8
@@ -3229,6 +3239,7 @@ object f_catgen: Tf_catgen
           Top = 89
           Width = 71
           Caption = 'Object type'
+          ParentColor = False
         end
         object Label15: TLabel
           Left = 9
@@ -3236,6 +3247,7 @@ object f_catgen: Tf_catgen
           Top = 118
           Width = 272
           Caption = 'Recognize Units or Object type from the file:'
+          ParentColor = False
         end
         object Label16: TLabel
           Left = 154
@@ -3243,11 +3255,12 @@ object f_catgen: Tf_catgen
           Top = 51
           Width = 162
           Caption = '(useful to represent a flux)'
+          ParentColor = False
           WordWrap = True
         end
         object NebDefaultUnit: TComboBox
           Left = 237
-          Height = 30
+          Height = 31
           Top = 12
           Width = 90
           ItemHeight = 0
@@ -3261,7 +3274,7 @@ object f_catgen: Tf_catgen
         end
         object NebDefaultSize: TLongEdit
           Left = 170
-          Height = 30
+          Height = 31
           Hint = '0..3600'
           Top = 12
           Width = 41
@@ -3281,7 +3294,7 @@ object f_catgen: Tf_catgen
         end
         object NebDefaultType: TComboBox
           Left = 121
-          Height = 30
+          Height = 31
           Top = 81
           Width = 114
           ItemHeight = 0
@@ -3387,6 +3400,7 @@ object f_catgen: Tf_catgen
         Top = 8
         Width = 145
         Caption = 'General catalog options'
+        ParentColor = False
       end
       object RaOptions: TRadioGroup
         Left = 8
@@ -3452,7 +3466,7 @@ object f_catgen: Tf_catgen
         TabOrder = 2
         object FloatEdit1: TFloatEdit
           Left = 8
-          Height = 30
+          Height = 31
           Top = 12
           Width = 58
           TabOrder = 0
@@ -3469,7 +3483,7 @@ object f_catgen: Tf_catgen
         TabOrder = 4
         object FloatEdit2: TFloatEdit
           Left = 12
-          Height = 30
+          Height = 31
           Top = 12
           Width = 58
           TabOrder = 0
@@ -3486,7 +3500,7 @@ object f_catgen: Tf_catgen
         TabOrder = 3
         object FloatEdit3: TFloatEdit
           Left = 8
-          Height = 30
+          Height = 31
           Top = 12
           Width = 58
           TabOrder = 0
@@ -3504,6 +3518,7 @@ object f_catgen: Tf_catgen
         Top = 255
         Width = 59
         Caption = 'First Char'
+        ParentColor = False
       end
       object Label5: TLabel
         Left = 273
@@ -3511,6 +3526,7 @@ object f_catgen: Tf_catgen
         Top = 255
         Width = 44
         Caption = 'Length'
+        ParentColor = False
       end
       object Label7: TLabel
         Left = 24
@@ -3518,6 +3534,7 @@ object f_catgen: Tf_catgen
         Top = 16
         Width = 336
         Caption = 'Select the fields to use and their position in the text file'
+        ParentColor = False
       end
       object Label3: TLabel
         Left = 18
@@ -3525,6 +3542,7 @@ object f_catgen: Tf_catgen
         Top = 255
         Width = 33
         Caption = 'Label'
+        ParentColor = False
       end
       object FieldList: TCheckListBox
         Left = 18
@@ -3636,6 +3654,7 @@ object f_catgen: Tf_catgen
         Top = 16
         Width = 140
         Caption = 'Output catalog options'
+        ParentColor = False
       end
       object OutputFileNumber: TRadioGroup
         Left = 24
@@ -3674,7 +3693,7 @@ object f_catgen: Tf_catgen
         TabOrder = 0
         object OutputDirectory: TDirectoryEdit
           Left = 16
-          Height = 30
+          Height = 31
           Top = 16
           Width = 243
           Directory = 'C:\testcat'
@@ -3743,6 +3762,7 @@ object f_catgen: Tf_catgen
         Top = 6
         Width = 322
         Caption = 'Indicate the string identifier for each type of object :'
+        ParentColor = False
       end
       object ObjectTypeStr: TStringGrid
         Left = 24
@@ -3780,6 +3800,7 @@ object f_catgen: Tf_catgen
         Top = 40
         Width = 283
         Caption = 'Indicate how to recognize the object size unit :'
+        ParentColor = False
       end
       object ObjectSizeStr: TStringGrid
         Left = 22
@@ -3817,6 +3838,7 @@ object f_catgen: Tf_catgen
         Top = 40
         Width = 263
         Caption = 'Indicate the string for each draw operation'
+        ParentColor = False
       end
       object OutlineDrawStr: TStringGrid
         Left = 30
@@ -3853,6 +3875,7 @@ object f_catgen: Tf_catgen
         Top = 16
         Width = 201
         Caption = 'Indicate the string for each color'
+        ParentColor = False
       end
       object Color1: TShape
         Left = 49
@@ -3939,6 +3962,7 @@ object f_catgen: Tf_catgen
         Top = 40
         Width = 152
         Caption = 'Click to change the color '
+        ParentColor = False
       end
       object ColorStr: TStringGrid
         Left = 160

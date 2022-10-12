@@ -3177,6 +3177,9 @@ begin
           Halt(1);
         end;
       end;
+      InitPage(pageDefault);
+      InitPage(pageDetails);
+      InitPage(pageBuild);
       Application.QueueAsyncCall(@BuildAsync,0);
     end
     else begin
