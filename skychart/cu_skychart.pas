@@ -2282,6 +2282,8 @@ var
   x1, y1: double;
   xx, yy: single;
   op, lw, col, fs: integer;
+  lid, lnum, lp, rs: integer;
+  lis: string;
   sbmp:TBGRABitmap;
   sbmpUsed: boolean;
 
@@ -2295,6 +2297,9 @@ begin
     sbmp.FillTransparent;
     sbmpUsed:=false;
     fillchar(rec, sizeof(rec), 0);
+    lnum := 7;
+    lp := 2;
+    rs:=0;
     try
       while Fcatalog.readlin(rec) do
       begin
@@ -2304,6 +2309,11 @@ begin
         projection(rec.ra, rec.Dec, x1, y1, True, cfgsc, False);
         WindowXY(x1, y1, xx, yy, cfgsc);
         op := rec.outlines.lineoperation;
+        if (op=0)and(rec.outlines.id<>'') then begin
+          lis := rec.outlines.id + FormatFloat(f6, rec.ra) + FormatFloat(f6, rec.Dec);
+          lid := rshash(lis, $7FFFFFFF);
+          SetLabel(lid, xx, yy, rs, 2, lnum, rec.outlines.id, laTopLeft, labrotation(rec.ra, rec.Dec, lnum, cfgsc), lp);
+        end;
         if rec.outlines.valid[vlLinewidth] then
           lw := rec.outlines.linewidth
         else
