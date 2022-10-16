@@ -185,7 +185,7 @@ TCatHdrInfo = record
          nebunit: array[1..3] of shortstring;
          nebunits: array[1..3] of Longint;
          Linelst: array[1..4] of shortstring;
-         LineType: array[1..4] of Longint;
+         LineOp: array[1..4] of Longint;
          Colorlst: array[1..10] of shortstring;
          Color: array[1..10] of Cardinal;
          calc : array[0..40,1..2] of double;
@@ -661,7 +661,7 @@ end;
 end;
 end;
 
-Function GetLineType2(p : integer) : Smallint;
+Function GetLineOp2(p : integer) : Smallint;
 var i : integer;
     buf:string;
 begin
@@ -671,7 +671,7 @@ result:=-1;
 buf:=buf+',';
 for i:=1 to 4 do begin
   if pos(buf,catinfo.Linelst[i])>0 then begin
-     result:=catinfo.Linetype[i];
+     result:=catinfo.LineOp[i];
      break;
   end;
 end;
@@ -685,7 +685,7 @@ buf:=trim(copy(dataline,catheader.fpos[p],catheader.flen[p]));
 if buf='' then buf:=' ';
 result:=$FFFFFF;
 buf:=buf+',';
-for i:=1 to 4 do begin
+for i:=1 to 10 do begin
   if pos(buf,catinfo.Colorlst[i])>0 then begin
      result:=catinfo.Color[i];
      break;
@@ -1089,10 +1089,10 @@ ctText: begin // text file, positional
         end;
     rtlin : begin  // outlines 2
         if catheader.flen[3]>0 then lin.outlines.id:=GetString2(3);
-        if catheader.flen[4]>0 then lin.outlines.lineoperation:=GetInt2(4);
+        if catheader.flen[4]>0 then lin.outlines.lineoperation:=GetLineOp2(4);
         if catheader.flen[5]>0 then lin.outlines.linewidth:=GetInt2(5);
         if catheader.flen[6]>0 then lin.outlines.linecolor:=GetColor2(6);
-        if catheader.flen[7]>0 then lin.outlines.linetype:=GetLineType2(7);
+        if catheader.flen[7]>0 then lin.outlines.linetype:=GetInt2(7);
         if catheader.flen[8]>0 then lin.outlines.comment:=GetString2(8);
         end;
     end;

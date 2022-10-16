@@ -244,7 +244,7 @@ type
     function GetString(p: integer): string;
     function GetNebType(p: integer): byte;
     function GetNebUnit(p: integer): smallint;
-    function GetLineType(p: integer): smallint;
+    function GetLineOp(p: integer): smallint;
     function Getcolor(p: integer): Tcolor;
     procedure PutRecDouble(x: double; p: integer);
     procedure PutRecSingle(x: single; p: integer);
@@ -370,7 +370,7 @@ const
   lab_num: array[1..l_sup] of string =
     ('Num1', 'Num2', 'Num3', 'Num4', 'Num5', 'Num6', 'Num7', 'Num8', 'Num9', 'Num10');
   nebtype: array[1..19] of integer = (1, 12, 2, 3, 4, 5, 13, 6, 11, 7, 8, 9, 10, 255, 0, 14, 15, 16, 17);
-  linetype: array[1..5] of byte = (0, 1, 2, 3, 4);
+  LineOp: array[1..5] of byte = (0, 1, 2, 3, 4);
   nebunits: array[1..3] of integer = (1, 60, 3600);
   pageFiles = 0;
   pageDefault = 1;
@@ -1989,7 +1989,7 @@ begin
   end;
 end;
 
-function Tf_catgen.GetLineType(p: integer): smallint;
+function Tf_catgen.GetLineOp(p: integer): smallint;
 var
   i: integer;
   buf: string;
@@ -2003,7 +2003,7 @@ begin
   begin
     if pos(buf, Linelst[i]) > 0 then
     begin
-      Result := Linetype[i];
+      Result := LineOp[i];
       break;
     end;
   end;
@@ -2277,7 +2277,7 @@ begin
   for i := 1 to 4 do
     catinfo.Linelst[i] := Linelst[i];
   for i := 1 to 4 do
-    catinfo.Linetype[i] := Linetype[i];
+    catinfo.LineOp[i] := LineOp[i];
   for i := 1 to 10 do
     catinfo.Colorlst[i] := Colorlst[i];
   for i := 1 to 10 do
@@ -2602,7 +2602,7 @@ begin
             PutRecString(GetString(nextpos), 3);  // id
           Inc(nextpos);
           if catheader.flen[4] > 0 then
-            PutRecByte(GetLineType(nextpos), 4);       // linetyp
+            PutRecByte(GetLineOp(nextpos), 4);       // line operation
           Inc(nextpos);
           if catheader.flen[5] > 0 then
             PutRecByte(round(Getfloat(nextpos, 1)), 5);   // line width
