@@ -1096,6 +1096,7 @@ begin
   catalogempty := False;
   stringgrid3.rowcount := stringgrid3.rowcount + 1;
   r := stringgrid3.rowcount - 1;
+  stringgrid3.cells[0, r] := '1';
   stringgrid3.cells[2, r] := '0';
   stringgrid3.cells[3, r] := '10';
   EditGCatPath(r);
