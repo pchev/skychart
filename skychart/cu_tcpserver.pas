@@ -47,7 +47,7 @@ type
     FExecuteCmd: TExCmd;
   public
     id: integer;
-    keepalive, abort, lockexecutecmd, stoping: boolean;
+    abort, lockexecutecmd, stoping: boolean;
     active_chart, remoteip, remoteport: string;
     constructor Create(hsock: tSocket);
     procedure Execute; override;
@@ -72,7 +72,7 @@ type
     procedure ShowError;
     procedure ThrdTerminate(var i: integer);
   public
-    keepalive, stoping: boolean;
+    stoping: boolean;
     TCPThrd: array [1..Maxwindow] of TTCPThrd;
     ThrdActive: array [1..Maxwindow] of boolean;
     constructor Create;
@@ -102,7 +102,6 @@ constructor TTCPDaemon.Create;
 begin
   FreeOnTerminate := True;
   inherited Create(True);
-  keepalive := False;
 end;
 
 procedure TTCPDaemon.ShowError;
@@ -190,7 +189,6 @@ begin
               TCPThrd[n] := TTCPThrd.Create(ClientSock);
               TCPThrd[n].onTerminate := ThrdTerminate;
               TCPThrd[n].onExecuteCmd := FExecuteCmd;
-              TCPThrd[n].keepalive := keepalive;
               TCPThrd[n].id := n;
               TCPThrd[n].Start;
               i := 0;
@@ -250,7 +248,6 @@ begin
   inherited Create(True);
   Csock := Hsock;
   cmd := TStringList.Create;
-  keepalive := False;
   abort := False;
   lockexecutecmd := False;
 end;
@@ -258,13 +255,12 @@ end;
 procedure TTCPThrd.Execute;
 var
   s, msg: string;
-  i, keepalivecount: integer;
+  i: integer;
 begin
   try
     Fsock := TTCPBlockSocket.Create;
     FConnectTime := now;
     stoping := False;
-    keepalivecount := 0;
     try
       Fsock.socket := CSock;
       Fsock.GetSins;
@@ -299,14 +295,9 @@ begin
           end
           else
           begin
-            Inc(keepalivecount);
-            if keepalive and ((keepalivecount mod 10) = 0) then
-            begin
-              keepalivecount := 0;
-              msg := 'SendString keepalive';
-              SendString('.' + crlf);      // keepalive check
-              if lastError <> 0 then
-                break;  // if send failed we close the connection
+            if LastError<>WSAETIMEDOUT then begin
+              terminate;
+              break;
             end;
           end;
         until False;
@@ -323,8 +314,6 @@ begin
       Fsock.CloseSocket;
       Fsock.Free;
       cmd.Free;
-      //    Suspended:=true;
-      //    terminate;
     end;
   except
   end;

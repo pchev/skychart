@@ -109,7 +109,6 @@ type
     UseIPserver: TCheckBox;
     ipaddr: TEdit;
     ipport: TEdit;
-    keepalive: TCheckBox;
     Label13: TLabel;
     TelescopeSelect: TRadioGroup;
     GroupBox1: TGroupBox;
@@ -166,7 +165,6 @@ type
     procedure LinuxDesktopBoxChange(Sender: TObject);
     procedure chkdbClick(Sender: TObject);
     procedure UseIPserverClick(Sender: TObject);
-    procedure keepaliveClick(Sender: TObject);
     procedure ipaddrChange(Sender: TObject);
     procedure ipportChange(Sender: TObject);
     procedure TelescopeSelectClick(Sender: TObject);
@@ -237,7 +235,6 @@ begin
   Label54.Caption := rsServerIPInte;
   Label55.Caption := rsServerIPPort;
   UseIPserver.Caption := rsUseTCPIPServ;
-  keepalive.Caption := rsClientConnec;
   ServerCoordSys.Caption:=rsCooordinateS;
   ServerCoordSys.Items[0]:=rsForceJ2000;
   ServerCoordSys.Items[1]:=rsCurrentChart;
@@ -398,7 +395,6 @@ begin
   ipport.Text := cmain.ServerIPport;
   useipserver.Checked := cmain.autostartserver;
   ServerCoordSys.ItemIndex:=cmain.ServerCoordSys;
-  keepalive.Checked := cmain.keepalive;
   CheckBox1.Checked := cmain.SampConfirmCoord;
   CheckBox2.Checked := cmain.SampConfirmImage;
   CheckBox3.Checked := cmain.SampConfirmTable;
@@ -598,11 +594,6 @@ end;
 procedure Tf_config_system.UseIPserverClick(Sender: TObject);
 begin
   cmain.AutostartServer := UseIPserver.Checked;
-end;
-
-procedure Tf_config_system.keepaliveClick(Sender: TObject);
-begin
-  cmain.keepalive := keepalive.Checked;
 end;
 
 procedure Tf_config_system.ipaddrChange(Sender: TObject);

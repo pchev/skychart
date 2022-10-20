@@ -6222,7 +6222,6 @@ begin
   cfgm.ServerIPport := '3292'; // x'CDC' :o)
   cfgm.IndiPanelCmd := dcd_cmd;
   cfgm.InternalIndiPanel := True;
-  cfgm.keepalive := True;
   cfgm.TextOnlyDetail := False;
   cfgm.AutostartServer := True;
   cfgm.ServerCoordSys:=1;
@@ -7829,7 +7828,6 @@ begin
         cfgm.IndiPanelCmd := ReadString(section, 'IndiPanelCmd', cfgm.IndiPanelCmd);
         cfgm.InternalIndiPanel :=
           ReadBool(section, 'InternalIndiPanel', cfgm.InternalIndiPanel);
-        cfgm.keepalive := ReadBool(section, 'keepalive', cfgm.keepalive);
         cfgm.TextOnlyDetail := ReadBool(section, 'TextOnlyDetail', cfgm.TextOnlyDetail);
         cfgm.AutostartServer :=
           ReadBool(section, 'AutostartServer', cfgm.AutostartServer);
@@ -9104,7 +9102,6 @@ begin
         WriteString(section, 'ServerIPport', cfgm.ServerIPport);
         WriteString(section, 'IndiPanelCmd', cfgm.IndiPanelCmd);
         WriteBool(section, 'InternalIndiPanel', cfgm.InternalIndiPanel);
-        WriteBool(section, 'keepalive', cfgm.keepalive);
         WriteBool(section, 'TextOnlyDetail', cfgm.TextOnlyDetail);
         WriteBool(section, 'AutostartServer', cfgm.AutostartServer);
         WriteInteger(section, 'ServerCoordSys', cfgm.ServerCoordSys);
@@ -10726,7 +10723,6 @@ procedure Tf_main.StartServer;
 begin
   try
     TCPDaemon := TTCPDaemon.Create;
-    TCPDaemon.keepalive := cfgm.keepalive;
     TCPDaemon.onGetACtiveChart := GetACtiveChart;
     TCPDaemon.onErrorMsg := TCPShowError;
     TCPDaemon.onShowSocket := TCPShowSocket;
@@ -11402,6 +11398,8 @@ end;
 
 procedure Tf_main.GetTCPInfo(i: integer; var buf: string);
 begin
+buf := '';
+try
   if (TCPDaemon <> nil) then
     with TCPDaemon do
     begin
@@ -11419,6 +11417,8 @@ begin
     end
   else
     buf := '';
+except
+end;
 end;
 
 function Tf_main.TCPClientConnected: boolean;
@@ -11426,6 +11426,7 @@ var
   i: integer;
 begin
   Result := False;
+  try
   if (TCPDaemon <> nil) then
     with TCPDaemon do
     begin
@@ -11438,6 +11439,8 @@ begin
         end;
       end;
     end;
+  except
+  end;
 end;
 
 procedure Tf_main.KillTCPClient(i: integer);

@@ -1285,7 +1285,7 @@ type
     VOurl, VOmaxrecord: integer;
     VOforceactive, UOforceactive: boolean;
     PrintLandscape, ShowChartInfo, ShowTitlePos, SyncChart, AnimRec: boolean;
-    maximized, updall, AutostartServer, keepalive, NewBackgroundImage: boolean;
+    maximized, updall, AutostartServer, NewBackgroundImage: boolean;
     ServerCoordSys: integer;
     TextOnlyDetail, SimpleMove, SimpleDetail, KioskMode, KioskDebug,
     CenterAtNoon: boolean;
@@ -3035,7 +3035,6 @@ begin
   updall := Source.updall;
   AutostartServer := Source.AutostartServer;
   ServerCoordSys := source.ServerCoordSys;
-  keepalive := Source.keepalive;
   NewBackgroundImage := Source.NewBackgroundImage;
   TextOnlyDetail := Source.TextOnlyDetail;
   ServerIPaddr := Source.ServerIPaddr;
