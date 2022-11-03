@@ -333,6 +333,10 @@ begin
       TR.Put('Connected',false);
     end;
     ok := True;
+    except
+      on E: Exception do
+        MessageDlg(format(DriverMsg,[E.Message]), mtWarning, [mbOK], 0);
+    end;
     led.brush.color := clRed;
     ButtonConnect.Enabled := True;
     ButtonDisconnect.Enabled := False;
@@ -343,11 +347,6 @@ begin
     ButtonGetLocation.Enabled := False;
     UpdTrackingButton;
     UpdParkButton;
-  except
-    on E: Exception do
-      MessageDlg(format(DriverMsg,[E.Message]), mtWarning, [mbOK], 0);
-  end;
-
 end;
 
 procedure Tpop_scope.ScopeConnect(var ok: boolean);
@@ -377,7 +376,7 @@ begin
     else
     {$endif}
     begin
-      DriverMsg:=rsFrom + ' ' + edit1.Text+':'+crlf+StringReplace(rsASCOMDriverE, 'ASCOM', 'Alpaca', [])+': '+'%s'+crlf+rsIfYouCannotF;
+      DriverMsg:=rsFrom + ' ' + 'telescope/'+ARestDevice.Text+':'+crlf+StringReplace(rsASCOMDriverE, 'ASCOM', 'Alpaca', [])+': '+'%s'+crlf+rsIfYouCannotF;
       TR.Host:=ARestHost.Text;
       TR.Port:=ARestPort.Text;
       case ARestProtocol.ItemIndex of
@@ -914,11 +913,13 @@ var
 begin
   n0 := 0;
   n1 := 0;
+  rates.Clear;
   if ScopeInterfaceVersion>1 then begin
+    try
     GetScopeRates(n0, n1, @ax0r, @ax1r);
     if n0 >= 1 then
     begin
-      for i := 0 to (n0 div 2) - 1 do
+      for i := 0 to (n0 div 2) do
       begin
         min := ax0r[2 * i];
         max := ax0r[2 * i + 1];
@@ -947,6 +948,8 @@ begin
     end
     else begin
       rates.add('Error getting supported rates!');
+    end;
+    except
     end;
   end
   else begin
