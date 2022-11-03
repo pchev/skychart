@@ -862,6 +862,7 @@ begin
         axis0rates^[nrates0 - 2] := irate.Minimum;
         axis0rates^[nrates0 - 1] := irate.Maximum;
       end;
+      nrates0:=nrates0 div 2;
     end;
     //  Second axis
     k := 1;
@@ -877,6 +878,7 @@ begin
         axis1rates^[nrates1 - 2] := irate.Minimum;
         axis1rates^[nrates1 - 1] := irate.Maximum;
       end;
+      nrates1:=nrates1 div 2;
     end;
     end else
     {$endif}
@@ -910,6 +912,11 @@ var
   i, j, n0, n1: integer;
   ax0r, ax1r: array of double;
   min, max, step, rate, x: double;
+function Format4(val:double):string;
+begin
+  val:=trunc(10000*val)/10000;
+  result:=formatfloat(f4s, val);
+end;
 begin
   n0 := 0;
   n1 := 0;
@@ -924,7 +931,7 @@ begin
         min := ax0r[2 * i];
         max := ax0r[2 * i + 1];
         if min = max then
-          rates.Add(formatfloat(f4s, min))
+          rates.Add(format4(min))
         else
         begin
           step := (max - min) / 3;
@@ -938,10 +945,10 @@ begin
               rates.add('0.1333');  //32x
               x := step / 2;
               if step > 0.3 then
-                rates.add(formatfloat('0.0000', x));
+                rates.add(format4(x));
             end
             else if rate > 0 then
-              rates.add(formatfloat('0.0000', rate));
+              rates.add(format4(rate));
           end;
         end;
       end;
