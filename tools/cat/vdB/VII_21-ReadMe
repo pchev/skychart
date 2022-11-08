@@ -1,0 +1,90 @@
+VII/21              Catalogue of Reflection Nebulae  (Van den Bergh, 1966)
+================================================================================
+Catalogue of Reflection Nebulae
+     Van den Bergh S.
+    <Astron. J. 71, 990 (1966)>
+    =1966AJ.....71..990V
+================================================================================
+ADC_Keywords: Nebulae
+
+Description:
+    A catalogue is given of all BD and CD stars north of -33deg which are
+    surrounded by reflection nebulosity visible on both the blue and red
+    prints of the Palomar Sky Survey. The nearer reflection nebulae lie
+    predominantly along Gould's Belt, whereas the more distant ones are
+    concentrated to the galactic plane. The data outline 13 associations
+    of reflection nebulae, some of which coincide with known OB or T
+    associations. Attention is drawn to the fact that most reflection
+    nebulae are illuminated by the integrated light of the Milky Way. The
+    integrated radiation will be more intense above and below the galactic
+    plane then in the galactic plane where the nuclear bulge of the Galaxy
+    and most of the disk are obscured by interstellar absorption.
+
+
+File Summary:
+--------------------------------------------------------------------------------
+ FileName    Lrecl    Records    Explanations
+--------------------------------------------------------------------------------
+ReadMe          80          .    This file
+catalog.dat     82        158    The catalogue (Table I of publication)
+--------------------------------------------------------------------------------
+
+
+Byte-by-byte Description of file: catalog.dat
+--------------------------------------------------------------------------------
+   Bytes Format  Units  Label     Explanations
+--------------------------------------------------------------------------------
+   2-  4  I3     ---    VdB       [1-158]+ van den Bergh catalog number (1)
+       5  A1     ---    RemFlag   '*' if remark is given in the publication
+   6- 15  A10    ---    DM        Durchmusterung (BD, CD or CP) designation
+  17- 22  I6     ---    HD        [1/359083]? Henry Draper Catalog (HD) number
+  23- 24  A2     ---    HD2       HD number suffix if second designation given
+  25- 29  F5.1   deg    oGLON     Original Galactic longitude
+  30- 34  F5.1   deg    oGLAT     Original Galactic latitude
+  36- 44  A9     ---    SpType    Spectral type
+  45- 49  F5.2   mag    Vmag      ? V magnitude
+      50  A1     ---    n_Vmag    [V] 'V' if variable magnitude
+  51- 55  A5     ---    Type      Type of nebula, see Note (2)
+  58- 61  A4     ---    SurfBr    Surface brightness on the blue PSS prints (3)
+  62- 65  A4     ---    Color     Coded reference to colors, see Note (4)
+  66- 70  A5     ---    Absorb    Absorption in field of nebula (5)
+  71- 75  F5.1   arcmin BRadMax   ? Maximum radii observed on blue PSS prints
+      76  A1     ---    u_BRadMax Uncertainty flag (:) on BRadMax
+  77- 81  F5.1   arcmin RRadMax   ? Maximum radii observed on red PSS prints
+      82  A1     ---    u_RRadMax Uncertainty flag (:) on BRadMax
+--------------------------------------------------------------------------------
+Note (1): a 159th reflection nebula corresponding to HD 224403
+   (GLON=116.6, GLAT=-00.22) is introduced by R. Racine in his study
+   of stars in Reflection Nebulae in (1968AJ.....73..233R)
+Note (2): Types given are I, II, I-II, II P, II, or P.
+   P is peculiar, and Type I and II are defined as follows:
+   Type I: nebula in which the illuminating star is embedded in the nebulosity;
+   Type II: star located outside the illuminated nebulosity.
+Note (3): Brightness is coded as:
+     'VBR'=very bright;   'BR'=bright;     'M'=moderate;
+       'F'=faint;         'VF'=very faint; ':'=uncertain.
+Note (4): Color classes are coded as:
+     'VB'=very blue;      'B'=blue;    'MB'=moderately blue;  'I'=intermediate
+     'MR'=moderately red; 'R'=red;     'VR'=very red;         ':'=uncertain.
+Note (5): Absorption is noted as:
+     'STR'=strong;  'MOD'=moderate;  'WK'=weak;  'ABS'=absent
+--------------------------------------------------------------------------------
+
+Historical Notes:
+  * NASA/ADC: The machine-readable version of the van den Bergh Reflection
+    Nebulae Catalogue was received from the University of Maryland. The
+    original card deck was in the 026 punch and this was converted to a
+    029 deck. Two keypunch errors were corrected in the 029 version:
+     #34 - the spectral type was changed from 09.5V to O9.5V (zero to oh)
+    #112 - the brightness was changed from ";"to "F"
+  * July 1979: documentation of the electronic version prepared by
+    Theresa A. Nagy (Document R-SAW-7/79-04 at NASA-GSFC, Greenbelt)
+  * Prepared in directory       /nonstell/nebulae/reflect    of CD-ROM
+    "Selected Astronomical Catalogs Volume 1" edited by the
+    Astronomical Data Center, NASA, 1992.
+  * 23-Aug-1995: Inserted missing decimal points in radius columns,
+    and added this standardized documentation file (at CDS)
+  * 28-Apr-1998: NASA/ADC corrected spectral type and visual magnitude
+    entries for 104 (Error submitted by John Greaves, United Kingdom)
+================================================================================
+(End)                                     Francois Ochsenbein [CDS]  28-Apr-1998
