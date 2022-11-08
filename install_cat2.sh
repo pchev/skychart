@@ -33,3 +33,4 @@ InstCat catalog_ocl $destdir/share/skychart
 InstCat catalog_leda $destdir/share/skychart
 InstCat catalog_barnard $destdir/share/skychart
 InstCat catalog_sh2 $destdir/share/skychart
+InstCat catalog_vdb $destdir/share/skychart

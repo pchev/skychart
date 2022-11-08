@@ -29,3 +29,4 @@ InstCat catalog_ocl $destdir
 InstCat catalog_leda $destdir
 InstCat catalog_barnard $destdir
 InstCat catalog_sh2 $destdir
+InstCat catalog_vdb $destdir
