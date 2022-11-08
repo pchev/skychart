@@ -20,11 +20,17 @@ begin
 
   // process parameters here so this is not done when running from CdC
   if ParamCount()>0 then begin
-    f_catgen.autorun:=true;
-    if Application.HasOption('p', 'project') then
+    if Application.HasOption('p', 'project') then begin
        f_catgen.autoproject:=Application.GetOptionValue('p', 'project');
-    if Application.HasOption('i', 'input') then
+       f_catgen.autorun:=true;
+    end;
+    if Application.HasOption('i', 'input') then begin
        f_catgen.autoinput:=Application.GetOptionValue('i', 'input');
+       f_catgen.autorun:=true;
+    end;
+    if (ParamCount()>0) and (not f_catgen.autorun) then begin
+       f_catgen.autoproject:=ParamStr(1);
+    end;
   end;
 
   Application.Run;

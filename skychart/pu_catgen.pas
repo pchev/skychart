@@ -3186,6 +3186,11 @@ begin
       debugln('File not found: '+autoproject);
       Halt(1);
     end;
+  end
+  else begin
+    if (autoproject<>'') and FileExists(autoproject) then begin
+      LoadProject(autoproject);
+    end;
   end;
 end;
 
