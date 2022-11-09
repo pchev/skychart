@@ -39,8 +39,8 @@ function IsGaiapath(path : string) : Boolean;
 procedure SetGaiapath(path,catshortname : string);
 procedure GetGaiaInfo(var h : TCatHeader; var info:TCatHdrInfo; var version : integer; var filter,ok : boolean);
 function  GetGaiaVersion: String;
-Procedure OpenGaiap(ar1,ar2,de1,de2: double ; var ok : boolean);
-Procedure OpenGaiawin(var ok : boolean);
+Procedure OpenGaiap(ar1,ar2,de1,de2: double ; var ok : boolean; out maxlevel: integer);
+Procedure OpenGaiawin(var ok : boolean; out maxlevel: integer);
 Procedure ReadGaia(var lin : GCatrec; var ok : boolean);
 Procedure NextGaia( var ok : boolean);
 procedure CloseGaia ;
@@ -313,15 +313,15 @@ begin
 end;
 
 
-Procedure OpenGaiap(ar1,ar2,de1,de2: double ; var ok : boolean);
+Procedure OpenGaiap(ar1,ar2,de1,de2: double ; var ok : boolean; out maxlevel: integer);
 begin
  curSM:=1;
  ar1:=ar1*15; ar2:=ar2*15;
  ok:=ReadGaiaHeader;
  if ok then begin
     case catheader.filenum of
-      732    : FindRegionAll7(ar1,ar2,de1,de2,nSM,zonelst,SMlst,hemislst);
-      9537   : FindRegionAll(ar1,ar2,de1,de2,nSM,zonelst,SMlst,hemislst);
+      732    : begin FindRegionAll7(ar1,ar2,de1,de2,nSM,zonelst,SMlst,hemislst); maxlevel:=4; end;
+      9537   : begin FindRegionAll(ar1,ar2,de1,de2,nSM,zonelst,SMlst,hemislst); maxlevel:=3; end;
     end;
     hemis:= hemislst[curSM];
     zone := zonelst[curSM];
@@ -349,14 +349,14 @@ curSM:=nSM;
 CloseGaiaRegion;
 end;
 
-Procedure OpenGaiawin(var ok : boolean);
+Procedure OpenGaiawin(var ok : boolean; out maxlevel: integer);
 begin
 curSM:=1;
 ok:=ReadGaiaHeader;
 if ok then begin
  case catheader.filenum of
-   732    : FindRegionAllWin7(nSM,zonelst,SMlst,hemislst);
-   9537   : FindRegionAllWin(nSM,zonelst,SMlst,hemislst);
+   732    : begin FindRegionAllWin7(nSM,zonelst,SMlst,hemislst); maxlevel:=4; end;
+   9537   : begin FindRegionAllWin(nSM,zonelst,SMlst,hemislst); maxlevel:=3; end;
  end;
  hemis:= hemislst[curSM];
  zone := zonelst[curSM];

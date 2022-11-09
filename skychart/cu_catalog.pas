@@ -6354,7 +6354,7 @@ begin
   SetGaiaPath(slash(cfgcat.starcatpath[gaia - BaseStar])+slash('gaia'+inttostr(cfgcat.GaiaLevel)), 'gaia');
   GetGaiaInfo(h,info,version,filter,ok);
   Gaiawin:=true;
-  OpenGaiawin(Result);
+  OpenGaiawin(Result,cfgcat.MaxGaiaLevel);
 end;
 
 procedure Tcatalog.OpenGaiaPos(ar1, ar2, de1, de2: double; var ok: boolean);
@@ -6366,16 +6366,30 @@ begin
   Gaiara2:=ar2;
   Gaiade1:=de1;
   Gaiade2:=de2;
-  OpenGaiap(ar1, ar2, de1, de2, ok);
+  OpenGaiap(ar1, ar2, de1, de2, ok,cfgcat.MaxGaiaLevel);
 end;
 
 function  Tcatalog.GetGaiaMagMax: double;
 begin
-  result:=15;
-  if DirectoryExists(slash(cfgcat.starcatpath[gaia - BaseStar])+slash('gaia2')) then begin
-    result:=18;
-    if DirectoryExists(slash(cfgcat.starcatpath[gaia - BaseStar])+slash('gaia3')) then
-       result:=21;
+  if cfgcat.MaxGaiaLevel=4 then begin
+    result:=12;
+    if DirectoryExists(slash(cfgcat.starcatpath[gaia - BaseStar])+slash('gaia2')) then begin
+      result:=15;
+      if DirectoryExists(slash(cfgcat.starcatpath[gaia - BaseStar])+slash('gaia3')) then begin
+         result:=18;
+         if DirectoryExists(slash(cfgcat.starcatpath[gaia - BaseStar])+slash('gaia4')) then begin
+            result:=21;
+         end;
+      end;
+    end;
+  end
+  else begin
+    result:=15;
+    if DirectoryExists(slash(cfgcat.starcatpath[gaia - BaseStar])+slash('gaia2')) then begin
+      result:=18;
+      if DirectoryExists(slash(cfgcat.starcatpath[gaia - BaseStar])+slash('gaia3')) then
+         result:=21;
+    end;
   end;
 end;
 
@@ -6549,16 +6563,17 @@ begin
 end;
 
 function Tcatalog.NextGaiaLevel: boolean;
+var i: integer;
 begin
   inc(cfgcat.GaiaLevel);
-  if (cfgcat.GaiaLevel=2)or((not cfgcat.Quick)and(cfgcat.GaiaLevel=3)) then  begin
+  if (cfgcat.GaiaLevel<cfgcat.MaxGaiaLevel)or((not cfgcat.Quick)and(cfgcat.GaiaLevel=cfgcat.MaxGaiaLevel)) then  begin
      SetGaiaPath(slash(cfgcat.starcatpath[gaia - BaseStar])+slash('gaia'+inttostr(cfgcat.GaiaLevel)), 'gaia');
      if Gaiawin then
-       OpenGaiawin(Result)
+       OpenGaiawin(Result,i)
      else
-       OpenGaiap(Gaiara1,Gaiara2,Gaiade1,Gaiade2,Result);
-     if (cfgcat.LimitGaiaCount)and(cfgcat.GaiaLevel=3) then
-       MaxGaiaRec:=1000000  // truncate only level 3
+       OpenGaiap(Gaiara1,Gaiara2,Gaiade1,Gaiade2,Result,i);
+     if (cfgcat.LimitGaiaCount)and(cfgcat.GaiaLevel=cfgcat.MaxGaiaLevel) then
+       MaxGaiaRec:=1000000  // truncate only on max level
      else
        MaxGaiaRec:=MaxInt;
   end
@@ -6567,13 +6582,14 @@ begin
 end;
 
 function Tcatalog.NextGaiaLevelPos(ar1, ar2, de1, de2: double): boolean;
+var i: integer;
 begin
   inc(cfgcat.GaiaLevel);
-  if (cfgcat.GaiaLevel=2)or((not cfgcat.Quick)and(cfgcat.GaiaLevel=3)) then  begin
+  if (cfgcat.GaiaLevel<cfgcat.MaxGaiaLevel)or((not cfgcat.Quick)and(cfgcat.GaiaLevel=cfgcat.MaxGaiaLevel)) then  begin
      SetGaiaPath(slash(cfgcat.starcatpath[gaia - BaseStar])+slash('gaia'+inttostr(cfgcat.GaiaLevel)), 'gaia');
-     OpenGaiap(ar1, ar2, de1, de2,Result);
-     if (cfgcat.LimitGaiaCount)and(cfgcat.GaiaLevel=3) then
-       MaxGaiaRec:=1000000  // truncate only level 3
+     OpenGaiap(ar1, ar2, de1, de2,Result,i);
+     if (cfgcat.LimitGaiaCount)and(cfgcat.GaiaLevel=cfgcat.MaxGaiaLevel) then
+       MaxGaiaRec:=1000000  // truncate only on max level
      else
        MaxGaiaRec:=MaxInt;
   end

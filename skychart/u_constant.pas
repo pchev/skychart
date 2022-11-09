@@ -1005,8 +1005,9 @@ type
     UseUSNOBrightStars, UseGSVSIr, Quick: boolean;
     // filter specific catalog entry
     Name290: string; // the hnsky catalog to use
-    GaiaLevel: integer; // the current Gaia level 1..3
-    LimitGaiaCount: boolean; // apply the maximum number of star in level 3
+    GaiaLevel: integer; // the current Gaia level 1..4
+    MaxGaiaLevel: integer; // 3 or 4
+    LimitGaiaCount: boolean; // apply the maximum number of star in max level
     constructor Create;
     destructor Destroy; override;
     procedure Assign(Source: Tconf_catalog);
