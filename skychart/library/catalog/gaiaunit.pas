@@ -90,8 +90,10 @@ function IsGaiapath(path : string) : Boolean;
 var p : string;
 begin
 p:=slash(path)+slash('gaia1'); // Check at least level 1 is available
-result:=    FileExists(p+'n0000'+slashchar+'gaia0001.dat')
-        and FileExists(p+'s8230'+slashchar+'gaia9490.dat')
+result:= (FileExists(p+'n0000'+slashchar+'gaia0001.dat')    // old gaia1 to mag 15
+        and FileExists(p+'s8230'+slashchar+'gaia9490.dat'))
+        or (FileExists(p+'n0000'+slashchar+'gaia001.dat')   // new gaia1 to mag 12
+        and FileExists(p+'s8230'+slashchar+'gaia732.dat'))
         and FileExists(p+'gaia.hdr');
 end;
 
@@ -301,7 +303,10 @@ var nomreg,nomzone :string;
 begin
  str(S:4,nomreg);
  str(abs(zone):4,nomzone);
- nomfich:=GaiaPath+slashchar+hemis+padzeros(nomzone,4)+slashchar+catname+padzeros(nomreg,4)+'.dat';
+ case catheader.filenum of
+   732    : nomfich:=GaiaPath+slashchar+hemis+padzeros(nomzone,4)+slashchar+catname+padzeros(nomreg,3)+'.dat';
+   9537   : nomfich:=GaiaPath+slashchar+hemis+padzeros(nomzone,4)+slashchar+catname+padzeros(nomreg,4)+'.dat';
+ end;
  SMname:=nomreg;
  if FileBIsOpen then CloseGaiaRegion;
  OpenGaiaFile(nomfich,ok);
@@ -314,7 +319,10 @@ begin
  ar1:=ar1*15; ar2:=ar2*15;
  ok:=ReadGaiaHeader;
  if ok then begin
-    FindRegionAll(ar1,ar2,de1,de2,nSM,zonelst,SMlst,hemislst);
+    case catheader.filenum of
+      732    : FindRegionAll7(ar1,ar2,de1,de2,nSM,zonelst,SMlst,hemislst);
+      9537   : FindRegionAll(ar1,ar2,de1,de2,nSM,zonelst,SMlst,hemislst);
+    end;
     hemis:= hemislst[curSM];
     zone := zonelst[curSM];
     Sm := Smlst[curSM];
@@ -346,7 +354,10 @@ begin
 curSM:=1;
 ok:=ReadGaiaHeader;
 if ok then begin
- FindRegionAllWin(nSM,zonelst,SMlst,hemislst);
+ case catheader.filenum of
+   732    : FindRegionAllWin7(nSM,zonelst,SMlst,hemislst);
+   9537   : FindRegionAllWin(nSM,zonelst,SMlst,hemislst);
+ end;
  hemis:= hemislst[curSM];
  zone := zonelst[curSM];
  Sm := Smlst[curSM];
