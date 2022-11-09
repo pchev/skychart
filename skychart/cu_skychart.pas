@@ -3802,11 +3802,13 @@ procedure Tskychart.FormatCatRec(rec: Gcatrec; var desc: string);
 var
   txt, buf, c: string;
   i: integer;
+  f: byte;
 const
   b = ' ';
   b5 = '     ';
   b6 = '      ';
   dp = ':';
+  cm = ',';
 begin
   cfgsc.FindRA := rec.ra;
   cfgsc.FindDec := rec.Dec;
@@ -4193,6 +4195,23 @@ begin
       txt := formatfloat('0.0####', rec.num[i]);
       if ((cfgsc.FindCat = 'Star')or(cfgsc.FindCat = 'Gaia')) and (uppercase(buf) = 'RV') then
         txt := txt + b + '[km/s]';
+      if (cfgsc.FindCat = 'Star') and (uppercase(buf) = 'GFLAG') then begin
+        buf:='Gaia cross-match';
+        f:=trunc(rec.num[i]);
+        txt:=inttostr(f);
+        if f>0 then begin
+          txt:=txt+dp;
+          if (f and 64)<>0 then txt:=txt+'no match, all astrometry from Hipparcos'+cm;
+          if (f and 32)<>0 then txt:=txt+'HIP 1991.25 position'+cm;
+          if (f and 16)<>0 then txt:=txt+'rejected V error > 2'+cm;
+          if (f and 8)<>0 then txt:=txt+'rejected position error > 5"'+cm;
+          if (f and 4)<>0 then txt:=txt+'proper motion from Hipparcos'+cm;
+          if (f and 2)<>0 then txt:=txt+'parallax from Hipparcos'+cm;
+          if (f and 1)<>0 then txt:=txt+'RV from Hipparcos'+cm;
+          if copy(txt,Length(txt),1)=cm then txt:=copy(txt,1,Length(txt)-1);
+        end
+        else txt:=txt+dp+'OK, all astrometry from Gaia';
+      end;
       Desc := Desc + buf + dp + txt + tab;
     end;
   cfgsc.FindName := wordspace(cfgsc.FindName);

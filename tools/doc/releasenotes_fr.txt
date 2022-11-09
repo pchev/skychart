@@ -31,6 +31,7 @@ Nouvelles fonctions:
 - Ajout d'une option pour flouter et définir la transparence des catalogue de surfaces
 - Ajout d'une fonction de pré-pointage pour les occultations d'astéroïdes
 - Ajout d'un bouton pour verrouiller la limite de magnitude à la valeur actuelle
+- Fusion de Gaia DR3 avec XHIP pour le catalogue d'étoiles par défaut, si disponible, toute l'astrométrie des étoiles brillantes provient désormais de Gaia.
 
 Correction d'un bug:
 - Mise à jour de Quicksat pour utiliser le nouveau fichier des magnitudes

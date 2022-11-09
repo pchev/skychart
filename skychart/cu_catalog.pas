@@ -2052,7 +2052,8 @@ end;
 
 procedure Tcatalog.FormatGCatS(var rec: GcatRec);
 var
-  bsccat, flam, bayer: boolean;
+  bsccat, gaiahip, flam, bayer: boolean;
+  cst,fl,ba: string;
 begin
   rec.ra := deg2rad * rec.ra;
   rec.Dec := deg2rad * rec.Dec;
@@ -2063,7 +2064,8 @@ begin
     (rec.vstr[4] and (trim(rec.options.flabel[lOffsetStr + 4]) = 'Fl')) and
     (rec.vstr[5] and (trim(rec.options.flabel[lOffsetStr + 5]) = 'Bayer')) and
     (rec.vstr[6] and (trim(rec.options.flabel[lOffsetStr + 6]) = 'Const'));
-  if bsccat then
+  gaiahip := (rec.vstr[8] and (copy(trim(rec.options.flabel[lOffsetStr + 8]),1,4) = 'GAIA'));
+  if bsccat and (not gaiahip) then  // XHIP, to be removed
   begin
     // remove fields used only for index
     rec.vstr[8] := False;
@@ -2072,6 +2074,46 @@ begin
     rec.vstr[4] := flam;
     bayer := (trim(rec.str[5]) <> '');
     rec.vstr[5] := bayer;
+    if bayer then
+    begin
+      rec.star.greeksymbol := GreekLetter(rec.str[5]);
+      if rec.star.greeksymbol <> '' then
+        rec.star.valid[vsGreekSymbol] := True
+      else
+        rec.star.greeksymbol:=trim(rec.str[5]);
+    end;
+    if (not bayer) and flam then
+    begin
+      rec.star.greeksymbol := trim(rec.str[4]);
+      if rec.star.greeksymbol <> '' then
+        rec.star.valid[vsGreekSymbol] := True
+      else
+        flam := False;
+    end;
+    rec.options.flabel[lOffsetStr + 3] := rsCommonName;
+    rec.vstr[3] := (trim(rec.str[3]) <> '');
+    if flam and (not bayer) then
+      rec.star.id := copy(trim(rec.str[4]) + blank15, 1, 3)
+    else
+      rec.star.id := '';
+    if bayer or flam then
+    begin
+      rec.star.id := trim(rec.star.id + blank + trim(rec.str[5]) + blank + trim(rec.str[6]));
+      rec.star.valid[vsId] := True;
+    end;
+  end;
+  if bsccat and gaiahip then  // GAIA Hipparcos merge
+  begin
+    rec.options.flabel[lOffsetStr + 8]:=StringReplace(rec.options.flabel[lOffsetStr + 8],'GAIA','GAIA ',[]);
+    cst:=trim(rec.str[6]);
+    fl:=StringReplace(trim(rec.str[4]),cst,'',[]);
+    ba:=StringReplace(trim(rec.str[5]),cst,'',[]);
+    flam := (fl <> '');
+    bayer := (ba <> '');
+    rec.vstr[4] := flam;
+    rec.vstr[5] := bayer;
+    rec.str[4] := fl;
+    rec.str[5] := ba;
     if bayer then
     begin
       rec.star.greeksymbol := GreekLetter(rec.str[5]);
@@ -5673,7 +5715,7 @@ begin
           h1 := trim(copy(buf, 6, 5));
           h2 := trim(copy(buf, 13, 5));
           FindNumGcatRec(cfgcat.StarCatPath[DefStar - BaseStar],
-            'star', 'HR' + h1, 11, rec, ok);
+            'star', 'HR' + h1, H.ixkeylen, rec, ok);
           if not ok then
             continue;
           if cfgshr.ConstLepoch = 0 then
@@ -5693,7 +5735,7 @@ begin
           cfgshr.ConstL[i].px1 := rec.star.px;
           cfgshr.ConstL[i].rv1 := rec.num[1];
           FindNumGcatRec(cfgcat.StarCatPath[DefStar - BaseStar],
-            'star', 'HR' + h2, 11, rec, ok);
+            'star', 'HR' + h2, H.ixkeylen, rec, ok);
           if not ok then
             continue;
           cfgshr.ConstL[i].ra2 := deg2rad * rec.ra;

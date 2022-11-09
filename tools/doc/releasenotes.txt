@@ -31,6 +31,7 @@ New functions:
 - Add option to blure and set transparency of surface catalog
 - Add pre-pointing feature for asteroid occultation
 - Add button to lock the magnitude limit at the current value
+- Merge Gaia DR3 with XHIP for the default star catalog, when available all the bright stars astrometry is now from Gaia.
 
 Bug fix:
 - Fix Bayer labels
