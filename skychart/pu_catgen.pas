@@ -198,8 +198,8 @@ type
     catheader: TFileHeader;
     catinfo: TCatHdrInfo;
     datarec: array [0..4096] of byte;
-    ff: array [1..9537] of file;
-    ffn: array [1..9537] of string;
+    ff: array [1..63002] of file;
+    ffn: array [1..63002] of string;
     destdir: string;
     freject: textfile;
     rejectopen: boolean;
@@ -258,6 +258,7 @@ type
     procedure FindRegion15(ar, de: double; var lg: integer);
     procedure FindRegion7(ar, de: double; var hemis: char; var zone, S: integer);
     procedure FindRegion(ar, de: double; var hemis: char; var zone, S: integer);
+    procedure FindRegion1(ar,de : double; var S : integer);
     procedure Createfiles;
     procedure CreateTxtfiles;
     procedure Closefiles;
@@ -538,6 +539,7 @@ begin
   OutputFileNumber.Items[1] := rs184Recommend;
   OutputFileNumber.Items[2] := rs732Recommend;
   OutputFileNumber.Items[3] := rs9537LargerDa;
+  OutputFileNumber.Items[4] := rs63000Billion;
   OutputOptions.Caption := rsOutputDirect;
   OutputAppend.Caption := rsAppendToAnEx;
   OutputSearchIndex.Caption := rsSearchIndex;
@@ -1110,6 +1112,7 @@ begin
       1: catheader.filenum := 184;
       2: catheader.filenum := 732;
       3: catheader.filenum := 9537;
+      4: catheader.filenum := 63002;
     end
   else
     catheader.filenum := 1;
@@ -2176,6 +2179,20 @@ begin
   zone := Trunc(abs(del)) * 100 + Trunc(Frac(abs(del)) * 60);
 end;
 
+Procedure Tf_catgen.FindRegion1(ar,de : double; var S : integer);
+var zone:integer;
+begin
+if de>88 then begin
+  S:=63002;
+end else if de<-87 then begin
+  S:=1;
+end
+else begin
+  zone := Trunc((de+90));
+  S := 360*(zone-3)+Trunc(ar)+2;
+end;
+end;
+
 procedure Tf_catgen.Createfiles;
 var
   i, n, m: integer;
@@ -2186,6 +2203,12 @@ begin
         Forcedirectories(destdir + zone_nam[n]);
     9537: for n := 0 to 23 do
         Forcedirectories(destdir + zone_nam[n]);
+    63002: begin
+           Forcedirectories(destdir + padzeros(IntToStr(0),3));
+           Forcedirectories(destdir + padzeros(IntToStr(180),3));
+           for n := 3 to 177 do
+              Forcedirectories(destdir + padzeros(IntToStr(n),3));
+           end;
   end;
   filemode := 2;
   assignfile(f, destdir + lowercase(trim(catheader.ShortName)) + '.hdr');
@@ -2241,6 +2264,18 @@ begin
           end;
         ffn[i] := slash(zone_nam[m]) + lowercase(trim(catheader.ShortName)) +
           padzeros(IntToStr(i), 4) + '.dat';
+      end;
+      63002:
+      begin
+        if i=1 then
+          ffn[i] := slash(padzeros(IntToStr(0),3)) + lowercase(trim(catheader.ShortName)) + padzeros(IntToStr(1), 3) + '.dat'
+        else if i=63002 then
+          ffn[i] := slash(padzeros(IntToStr(180),3)) + lowercase(trim(catheader.ShortName)) + padzeros(IntToStr(1), 3) + '.dat'
+        else begin
+          n:=(i-2) mod 360;
+          m:=3+((i-2) div 360);
+          ffn[i] := slash(padzeros(IntToStr(m),3)) + lowercase(trim(catheader.ShortName)) + padzeros(IntToStr(n), 3) + '.dat';
+        end;
       end;
       else
         raise ERangeError.CreateFmt('Invalid number of files : %d', [catheader.filenum]);
@@ -2655,6 +2690,7 @@ begin
         184: FindRegion15(ra, de, reg);
         732: FindRegion7(ra, de, hemis, zone, reg);
         9537: FindRegion(ra, de, hemis, zone, reg);
+        63002: FindRegion1(ra, de, reg);
       end;
       WriteRec(reg);
     until CatalogEOF;

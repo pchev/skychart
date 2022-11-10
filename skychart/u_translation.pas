@@ -1573,6 +1573,7 @@ resourcestring
   rsLockMagnitud = 'Lock the magnitude filter';
   rsIfYouCannotF = 'If you cannot fix the error, please contact the telescope driver author for assistance.';
   rsAlbedo = 'Albedo';
+  rs63000Billion = '63000 (for billion of objects)';
 
 // also update upsi_translation
 

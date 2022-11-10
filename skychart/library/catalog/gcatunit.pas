@@ -793,6 +793,7 @@ if cattype=ctBin then begin
       184    : nomfich:=GCatpath+slashchar+catname+padzeros(nomreg,3)+'.dat';
       732    : nomfich:=GCatpath+slashchar+hemis+padzeros(nomzone,4)+slashchar+catname+padzeros(nomreg,3)+'.dat';
       9537   : nomfich:=GCatpath+slashchar+hemis+padzeros(nomzone,4)+slashchar+catname+padzeros(nomreg,4)+'.dat';
+      63002  : nomfich:=GCatpath+slashchar+padzeros(nomzone,3)+slashchar+catname+padzeros(nomreg,3)+'.dat';
     end;
     SMname:=nomreg;
     if FileBIsOpen then CloseRegion;
@@ -826,6 +827,7 @@ case catheader.filenum of
     184    : FindRegionAll15(ar1,ar2,de1,de2,nSM,SMlst);
     732    : FindRegionAll7(ar1,ar2,de1,de2,nSM,zonelst,SMlst,hemislst);
     9537   : FindRegionAll(ar1,ar2,de1,de2,nSM,zonelst,SMlst,hemislst);
+    63002  : FindRegionAll1(ar1,ar2,de1,de2,nSM,zonelst,SMlst,hemislst);
 end;
 end;
 hemis:= hemislst[curSM];
@@ -1160,6 +1162,7 @@ case catheader.filenum of
     184    : FindRegionAllWin15(nSM,SMlst);
     732    : FindRegionAllWin7(nSM,zonelst,SMlst,hemislst);
     9537   : FindRegionAllWin(nSM,zonelst,SMlst,hemislst);
+    63002  : FindRegionAllWin1(nSM,zonelst,SMlst,hemislst);
 end;
 end;
 hemis:= hemislst[curSM];
@@ -1204,6 +1207,7 @@ case catheader.FileNum of
              for n:=0 to 23 do if fnum <= zone_lst[n] then begin; m:=n; break; end;
              fn:=slash(zone_nam[m])+lowercase(trim(catheader.ShortName))+padzeros(inttostr(fnum),4)+'.dat';
            end;
+  63002  : raise Exception.Create('Not implemented 63002') // no index for this large files
   else fn:='';
 end;
 OpenFile(GCatpath+slashchar+fn,ok);

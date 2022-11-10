@@ -3121,7 +3121,7 @@ object f_catgen: Tf_catgen
         Top = 226
         Width = 349
         Caption = 'Default Outline parameters'
-        ClientHeight = 192
+        ClientHeight = 174
         ClientWidth = 347
         TabOrder = 6
         object Label18: TLabel
@@ -3222,7 +3222,7 @@ object f_catgen: Tf_catgen
         Top = 226
         Width = 349
         Caption = 'Default Nebulae parameters'
-        ClientHeight = 192
+        ClientHeight = 174
         ClientWidth = 347
         TabOrder = 5
         object Label11: TLabel
@@ -3553,11 +3553,10 @@ object f_catgen: Tf_catgen
           'RA'
           'DEC'
         )
-        ItemHeight = 0
+        ItemHeight = 23
         OnKeyUp = FieldListKeyUp
         OnMouseUp = FieldListMouseUp
         TabOrder = 0
-        TopIndex = -1
         Data = {
           020000000000
         }
@@ -3658,7 +3657,7 @@ object f_catgen: Tf_catgen
       end
       object OutputFileNumber: TRadioGroup
         Left = 24
-        Height = 122
+        Height = 152
         Top = 40
         Width = 324
         AutoFill = True
@@ -3671,7 +3670,7 @@ object f_catgen: Tf_catgen
         ChildSizing.ShrinkVertical = crsScaleChilds
         ChildSizing.Layout = cclLeftToRightThenTopToBottom
         ChildSizing.ControlsPerLine = 1
-        ClientHeight = 102
+        ClientHeight = 132
         ClientWidth = 322
         ItemIndex = 0
         Items.Strings = (
@@ -3679,6 +3678,7 @@ object f_catgen: Tf_catgen
           '184 (recommended up to 1''000''000 objects)'
           '732 (recommended up to 5''000''000 objects)'
           '9537 (larger dataset)'
+          '63002 (billion of objects)'
         )
         TabOrder = 2
       end
@@ -3716,11 +3716,11 @@ object f_catgen: Tf_catgen
       end
       object OutputSearchIndex: TGroupBox
         Left = 24
-        Height = 134
-        Top = 178
+        Height = 118
+        Top = 200
         Width = 324
         Caption = 'Search Index'
-        ClientHeight = 114
+        ClientHeight = 98
         ClientWidth = 322
         TabOrder = 1
         object CBCreateIndex: TCheckBox

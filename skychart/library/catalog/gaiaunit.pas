@@ -306,6 +306,7 @@ begin
  case catheader.filenum of
    732    : nomfich:=GaiaPath+slashchar+hemis+padzeros(nomzone,4)+slashchar+catname+padzeros(nomreg,3)+'.dat';
    9537   : nomfich:=GaiaPath+slashchar+hemis+padzeros(nomzone,4)+slashchar+catname+padzeros(nomreg,4)+'.dat';
+   63002  : nomfich:=GaiaPath+slashchar+padzeros(nomzone,3)+slashchar+catname+padzeros(nomreg,3)+'.dat';
  end;
  SMname:=nomreg;
  if FileBIsOpen then CloseGaiaRegion;
@@ -322,6 +323,7 @@ begin
     case catheader.filenum of
       732    : begin FindRegionAll7(ar1,ar2,de1,de2,nSM,zonelst,SMlst,hemislst); maxlevel:=4; end;
       9537   : begin FindRegionAll(ar1,ar2,de1,de2,nSM,zonelst,SMlst,hemislst); maxlevel:=3; end;
+      63002  : begin FindRegionAll1(ar1,ar2,de1,de2,nSM,zonelst,SMlst,hemislst); maxlevel:=4; end;
     end;
     hemis:= hemislst[curSM];
     zone := zonelst[curSM];
@@ -357,6 +359,7 @@ if ok then begin
  case catheader.filenum of
    732    : begin FindRegionAllWin7(nSM,zonelst,SMlst,hemislst); maxlevel:=4; end;
    9537   : begin FindRegionAllWin(nSM,zonelst,SMlst,hemislst); maxlevel:=3; end;
+   63002  : begin FindRegionAllWin1(nSM,zonelst,SMlst,hemislst); maxlevel:=4; end;
  end;
  hemis:= hemislst[curSM];
  zone := zonelst[curSM];

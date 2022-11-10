@@ -99,6 +99,14 @@ procedure FindRegionListWinDS(var Nsm : integer ;
 procedure FindRegionListDS(x1,x2,y1,y2:Double ;
                           var Nsm : integer ;
                           var zonelst : array of string);
+procedure FindRegionAllWin1(var Nsm : integer ;
+                            var zonelst,SMlst : array of integer ;
+                            var hemislst : array of char );
+procedure FindRegionAll1(x1,x2,y1,y2:Double ;
+                          var Nsm : integer ;
+                          var zonelst,SMlst : array of integer ;
+                          var hemislst : array of char );
+
 function InvertI32(X : LongWord) : LongInt;
 Function NoSlash(nom : string) : string;
 Function Slash(nom : string) : string;
@@ -1265,6 +1273,114 @@ repeat
   yy:=yy+dy ;
 until yy>(ymax+dy);
 end;
+
+
+Procedure FindRegion1(ar,de : double; var hemis : char ; var zone,S : integer);
+begin
+hemis:=' ';
+if de>88 then begin
+  zone:=180;
+  S:=1;
+end else if de<-87 then begin
+  zone:=0;
+  S:=1;
+end
+else begin
+  zone := Trunc((de+90));
+  S := Trunc(ar);
+end;
+end;
+
+procedure FindRegionAllWin1(var Nsm : integer ;
+                            var zonelst,SMlst : array of integer ;
+                            var hemislst : array of char );
+var
+   hemis : char;
+   xx,yy,dx,dy,Sm,zone,k : integer;
+   ar,de,arp,dep : double;
+   def : boolean;
+const step = 1;
+begin
+if xmax<xmin then begin xx:=xmax; xmax:=xmin; xmin:=xx; end;
+if ymax<ymin then begin xx:=ymax; ymax:=ymin; ymin:=xx; end;
+GetADxy((xmax-xmin)div 2,(ymax-ymin)div 2,ar,de);
+nSM:=0;
+k:=(xmax-xmin) div 5;
+dx:=MaxIntValue([5,minintvalue([k,abs(Trunc(cos(deg2rad*de)*step*BxGlb))])]);
+k:=(ymax-ymin) div 5;
+if abs(de)>80 then
+  dy:=MaxIntValue([5,minintvalue([k,abs(Trunc(cos(deg2rad*de)*step*ByGlb))])])
+else
+  dy:=MaxIntValue([5,minintvalue([k,abs(Trunc(step*ByGlb))])]);
+yy:=ymin;
+repeat
+  xx:=xmin;
+  repeat
+    GetADxy(xx,yy,ar,de);
+    ar:=ar*15;
+    if ar>=360 then ar:=ar-360;
+    if ar<0 then ar:=ar+360;
+    arp:=ar; dep:=de;
+    precession(JDChart,JDCatalog,arp,dep);
+    Findregion1(arp,dep,hemis,zone,Sm);
+    def:=true ;
+    for k:=0 to nSM-1 do begin
+      if (zone=zonelst[k])and(Sm=Smlst[k]) then def:=false
+    end;
+    if def then begin
+      Smlst[nSm]:=Sm;
+      zonelst[nSM]:=zone;
+      hemislst[nSM]:=hemis;
+      inc(nSM);
+    end;
+    xx:=xx+dx ;
+  until xx>xmax;
+  yy:=yy+dy ;
+until yy>ymax;
+end;
+
+procedure FindRegionAll1(x1,x2,y1,y2:Double ;
+                          var Nsm : integer ;
+                          var zonelst,SMlst : array of integer ;
+                          var hemislst : array of char );
+var
+   hemis : char;
+   zone,Sm,k : integer;
+   step,ar,de,ra,arp,dep : double;
+   def : boolean;
+begin
+if x2<x1 then begin ra:=x2; x2:=x1; x1:=ra; end;
+if y2<y1 then begin ra:=y2; y2:=y1; y1:=ra; end;
+step:= 1;
+nSM:=0;
+de:=y1;
+repeat
+  if abs(de) >= 90 then continue;
+  ra:=x1;
+  repeat
+    ar:=ra;
+    if ar>=360 then ar:=ar-360;
+    if ar<0 then ar:=ar+360;
+    arp:=ar; dep:=de;
+    precession(JDChart,JDCatalog,arp,dep);
+    Findregion1(arp,dep,hemis,zone,Sm);
+    def:=true ;
+    for k:=0 to nSM-1 do begin
+      if Sm=Smlst[k] then def:=false
+    end;
+    if def then begin
+      Smlst[nSm]:=Sm;
+      zonelst[nSM]:=zone;
+      hemislst[nSM]:=hemis;
+      inc(nSM);
+    end;
+    ra:=ra+step;
+  until ra>x2;
+  de:=de+step;
+until de>y2;
+end;
+
+
 
 Procedure FindRegionDS(ar,de : double; var zone : string);
 begin
