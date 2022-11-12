@@ -3068,7 +3068,7 @@ begin
            naam2:=''; {clear for 5, 6 and 7 bytes records to prevent ghost names}
            Bp_Rp:=-128;{assume no colour information is available or set to -128 for G17, G18 databases}
 
-           required_range:=max(field_diameter/2, 5.95 *pi/180);{Longest distance to a corner or center of a tile. Worst place is ra=0, dec 18.8 degrees}
+           required_range:=max(field_diameter/2, 6.5 *pi/180);{Longest distance to a corner or center of a tile. Worst place is ra=0, dec 18.8 degrees}
 
            while ((area290>1) and (nearbyarea=false)) do
            begin
