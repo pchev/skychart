@@ -1,5 +1,5 @@
 This tools are used to make the default star catalog for CDC.
-It is based on V/137 Extended Hipparcos Compilation (XHIP).
+It is based on GAIA DR3 and V/137 Extended Hipparcos Compilation (XHIP).
 
 The HD and BD identifier are take from the original I/239 Hipparcos hip_main file.
 The HR identifier is taken from V/50 Bright Star Catalogue, 5th Revised Ed. using HD as key.
