@@ -3397,24 +3397,33 @@ begin
 
   id := '';
 
-  qry := 'SELECT id FROM cdc_com_name' + ' where UPPER(REPLACE(name,'' '','''')) = "' + s1 + '"';
-
+  qry := 'SELECT id FROM cdc_com_name' + ' where UPPER(name) = "' + s1 + '"';
   db1.Query(qry);
-
   if db1.Rowcount > 0 then
     id := db1.Results[0][0];
 
   if id = '' then
   begin
-
-    qry := 'SELECT id FROM cdc_com_name' + ' where UPPER(REPLACE(name,'' '','''')) like "%' +
-      s1 + '%"' + ' limit 1';
-
+    qry := 'SELECT id FROM cdc_com_name' + ' where UPPER(name) like "%' + s1 + '%"' + ' limit 1';
     db1.Query(qry);
-
     if db1.RowCount > 0 then
       id := db1.Results[0][0];
+  end;
 
+  if id = '' then
+  begin
+    qry := 'SELECT id FROM cdc_com_name' + ' where UPPER(REPLACE(name,'' '','''')) = "' + s1 + '"';
+    db1.Query(qry);
+    if db1.Rowcount > 0 then
+      id := db1.Results[0][0];
+  end;
+
+  if id = '' then
+  begin
+    qry := 'SELECT id FROM cdc_com_name' + ' where UPPER(REPLACE(name,'' '','''')) like "%' + s1 + '%"' + ' limit 1';
+    db1.Query(qry);
+    if db1.RowCount > 0 then
+      id := db1.Results[0][0];
   end;
 
   if id = '' then
