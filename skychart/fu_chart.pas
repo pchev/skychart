@@ -1096,6 +1096,7 @@ end;
 procedure Tf_chart.SetScrollBar(ShowPosition: boolean=true);
 var
   i: integer;
+  x: double;
 begin
   lockscrollbar := True;
   try
@@ -1104,7 +1105,11 @@ begin
       begin
         if cfgsc.Projpole = AltAz then
         begin
-          HorScrollBar.Position := round(rmod(cfgsc.acentre + pi2, pi2) * rad2deg * 3600);
+          if cfgsc.ObsLatitude>=0 then
+            x:=pi   // mid range is south
+          else
+            x:=0;   // mid range is north
+          HorScrollBar.Position := round(rmod(cfgsc.acentre + pi2 + x, pi2) * rad2deg * 3600);
           VertScrollBar.Position := -round(cfgsc.hcentre * rad2deg * 3600);
         end
         else if cfgsc.Projpole = Gal then
@@ -1140,8 +1145,8 @@ begin
   end;
 end;
 
-procedure Tf_chart.HorScrollBarScroll(Sender: TObject; ScrollCode: TScrollCode;
-  var ScrollPos: integer);
+procedure Tf_chart.HorScrollBarScroll(Sender: TObject; ScrollCode: TScrollCode; var ScrollPos: integer);
+var x: double;
 begin
   if lockscrollbar then
     exit;
@@ -1157,7 +1162,11 @@ begin
       cfgsc.Quick := True;
       if cfgsc.Projpole = AltAz then
       begin
-        cfgsc.acentre := rmod(deg2rad * HorScrollBar.Position / 3600 + pi2, pi2);
+        if cfgsc.ObsLatitude>=0 then
+          x:=pi   // mid range is south
+        else
+          x:=0;   // mid range is north
+        cfgsc.acentre := rmod(deg2rad * HorScrollBar.Position / 3600 + pi4 - x, pi2);
         Hz2Eq(cfgsc.acentre, cfgsc.hcentre, cfgsc.racentre, cfgsc.decentre, cfgsc);
         cfgsc.racentre := cfgsc.CurST - cfgsc.racentre;
       end
