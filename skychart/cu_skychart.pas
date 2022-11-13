@@ -4202,12 +4202,12 @@ begin
         if f>0 then begin
           txt:=txt+dp;
           if (f and 64)<>0 then txt:=txt+'no match, all astrometry from Hipparcos'+cm;
-          if (f and 32)<>0 then txt:=txt+'HIP 1991.25 position'+cm;
-          if (f and 16)<>0 then txt:=txt+'rejected V error > 2'+cm;
-          if (f and 8)<>0 then txt:=txt+'rejected position error > 5"'+cm;
+          if (f and 32)<>0 then txt:=txt+'no proper motion HIP 1991.25 position'+cm;
+          if (f and 16)<>0 then txt:=txt+'rejected match for V error > 2'+cm;
+          if (f and 8)<>0 then txt:=txt+'rejected match for position error > 5"'+cm;
           if (f and 4)<>0 then txt:=txt+'proper motion from Hipparcos'+cm;
           if (f and 2)<>0 then txt:=txt+'parallax from Hipparcos'+cm;
-          if (f and 1)<>0 then txt:=txt+'RV from Hipparcos'+cm;
+          if (f and 1)<>0 then txt:=txt+'radial velocity from XHIP'+cm;
           if copy(txt,Length(txt),1)=cm then txt:=copy(txt,1,Length(txt)-1);
         end
         else txt:=txt+dp+'OK, all astrometry from Gaia';

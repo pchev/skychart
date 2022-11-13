@@ -1,7 +1,7 @@
-  1  RV from Hipparcos
+  1  Radial velocity from XHIP
   2  Parallax from Hipparcos
   4  Proper motion from Hipparcos
   8  Rejected match for position error > 5"
  16  Rejected match for V magnitude error > 2
- 32  Hipparcos 1991.25 position
+ 32  No proper motion Hipparcos 1991.25 position
  64  Not in Gaia Hipparcos2Neighbourhood
