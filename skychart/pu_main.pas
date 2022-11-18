@@ -673,7 +673,7 @@ type
     basecaption, kioskpwd: string;
     rotspeed: double;
     NeedRestart, NeedToInitializeDB, ConfirmSaveConfig, InitOK, RestoreState,
-    ForceClose, SaveBlinkBG: boolean;
+    ForceClose, SaveBlinkBG, InitMaximized: boolean;
     InitialChartNum, Animcount: integer;
     AutoRefreshLock: boolean;
     AnimationEnabled: boolean;
@@ -1304,6 +1304,9 @@ begin
       WriteTrace('FormShow InitToolBar error: ' + E.Message);
       MessageDlg('FormShow InitToolBar error: ' + E.Message, mtError, [mbOK], 0);
     end;
+  end;
+  if InitMaximized then begin
+    WindowState := wsMaximized;
   end;
   InitTimer.Enabled := True;
   InitOK := True;
@@ -7802,10 +7805,8 @@ begin
         cfgm.SimpleMove := cfgm.SimpleDetail or ReadBool(section,
           'SimpleMove', cfgm.SimpleMove);
         cfgm.CenterAtNoon := ReadBool(section, 'CenterAtNoon', cfgm.CenterAtNoon);
-        if (ReadBool(section, 'WinMaximize', False)) then
-          f_main.WindowState := wsMaximized;
-        cfgm.autorefreshdelay :=
-          ReadInteger(section, 'autorefreshdelay', cfgm.autorefreshdelay);
+        InitMaximized:=ReadBool(section, 'WinMaximize', False);
+        cfgm.autorefreshdelay := ReadInteger(section, 'autorefreshdelay', cfgm.autorefreshdelay);
         buf := ReadString(section, 'ConstLfile', cfgm.ConstLfile);
         buf := ExtractSubPath(ConfigAppdir, buf);
         buf := StringReplace(buf,'Tirion-Constellations.cln','TirionConstL.cln',[]);
