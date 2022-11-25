@@ -13,7 +13,7 @@ object f_indigui: Tf_indigui
   OnShow = FormShow
   object dev: TPageControl
     Left = 0
-    Height = 429
+    Height = 420
     Top = 0
     Width = 677
     Align = alClient
@@ -25,7 +25,7 @@ object f_indigui: Tf_indigui
     Cursor = crVSplit
     Left = 0
     Height = 5
-    Top = 429
+    Top = 420
     Width = 677
     Align = alBottom
     Beveled = True
@@ -34,8 +34,8 @@ object f_indigui: Tf_indigui
   end
   object msg: TMemo
     Left = 0
-    Height = 91
-    Top = 434
+    Height = 100
+    Top = 425
     Width = 677
     Align = alBottom
     ParentFont = False

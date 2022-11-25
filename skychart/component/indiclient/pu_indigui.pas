@@ -373,7 +373,10 @@ end;
 
 procedure Tf_indigui.dmsg(txt: string);
 begin
+  if msg.Lines.Count>100 then msg.Lines.Delete(0);
   msg.Lines.Add(FormatDateTime('hh:nn:ss.zzz',now)+': '+txt);
+  msg.SelStart:=msg.GetTextLen-1;
+  msg.SelLength:=0;
 end;
 
 procedure Tf_indigui.NewMessage(mp: IMessage);
