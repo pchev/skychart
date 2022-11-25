@@ -1,11 +1,11 @@
 object f_indigui: Tf_indigui
   Left = 572
-  Height = 525
+  Height = 600
   Top = 53
-  Width = 677
+  Width = 820
   Caption = 'INDI'
-  ClientHeight = 525
-  ClientWidth = 677
+  ClientHeight = 600
+  ClientWidth = 820
   OnClose = FormClose
   OnCreate = FormCreate
   OnDestroy = FormDestroy
@@ -13,9 +13,9 @@ object f_indigui: Tf_indigui
   OnShow = FormShow
   object dev: TPageControl
     Left = 0
-    Height = 420
+    Height = 495
     Top = 0
-    Width = 677
+    Width = 820
     Align = alClient
     ParentFont = False
     TabOrder = 0
@@ -25,8 +25,8 @@ object f_indigui: Tf_indigui
     Cursor = crVSplit
     Left = 0
     Height = 5
-    Top = 420
-    Width = 677
+    Top = 495
+    Width = 820
     Align = alBottom
     Beveled = True
     ParentColor = False
@@ -35,8 +35,8 @@ object f_indigui: Tf_indigui
   object msg: TMemo
     Left = 0
     Height = 100
-    Top = 425
-    Width = 677
+    Top = 500
+    Width = 820
     Align = alBottom
     ParentFont = False
     ReadOnly = True

@@ -26,7 +26,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 interface
 
 uses
-  indibaseclient, indibasedevice, indiapi, indicom,
+  indibaseclient, indibasedevice, indiapi, indicom, math,
   Classes, SysUtils, FileUtil, Forms, Controls, Graphics, Dialogs, ComCtrls,
   StdCtrls, ExtCtrls, Buttons;
 
@@ -63,6 +63,7 @@ type
     lbl: TLabel;
     Name: string;
     page: TScrollBox;
+    container: TPanel;
     dp: BaseDevice;
     iprop: IndiProperty;
     idev: TIndiDev;
@@ -92,6 +93,7 @@ type
     FonDestroy: TNotifyEvent;
     FButtonGroup: integer;
     indiclosing,FDisconnectedServer,FConnectedServer: boolean;
+    LblWidth,BtnWidth: integer;
     procedure dmsg(txt: string);
     procedure NewDevice(dp: Basedevice);
     procedure DeleteDevice(dp: Basedevice);
@@ -105,6 +107,7 @@ type
     procedure ServerConnected(Sender: TObject);
     procedure ServerDisconnected(Sender: TObject);
     procedure AddSpacer(iprop: TIndiProp);
+    procedure SetLabel(lbl:TLabel; txt:string);
     procedure CreateTextWidget(iprop: TIndiProp);
     procedure CreateSwitchWidget(iprop: TIndiProp);
     procedure CreateNumberWidget(iprop: TIndiProp);
@@ -278,6 +281,8 @@ begin
   indiclient.onNewLight := @NewLight;
   indiclient.onServerConnected := @ServerConnected;
   indiclient.onServerDisconnected := @ServerDisconnected;
+  LblWidth:=140;
+  BtnWidth:=80;
 end;
 
 procedure Tf_indigui.FormDestroy(Sender: TObject);
@@ -422,21 +427,33 @@ begin
     sb.Parent := tb;
     sb.BorderStyle:=bsNone;
     sb.Align := alClient;
-    sb.ChildSizing.ControlsPerLine := 6;
+    sb.ChildSizing.ControlsPerLine := 1;
     sb.ChildSizing.Layout := cclLeftToRightThenTopToBottom;
-    sb.ChildSizing.HorizontalSpacing := 8;
-    sb.ChildSizing.LeftRightSpacing := 8;
-    sb.ChildSizing.TopBottomSpacing := 8;
-    sb.ChildSizing.VerticalSpacing := 4;
+    sb.ChildSizing.HorizontalSpacing := 0;
+    sb.ChildSizing.LeftRightSpacing := 0;
+    sb.ChildSizing.TopBottomSpacing := 4;
+    sb.ChildSizing.VerticalSpacing := 0;
     iprop.idev.group.AddObject(groupname, sb);
   end;
   iprop.page := sb;
+
+  iprop.container:=TPanel.Create(self);
+  iprop.container.BevelOuter:=bvNone;
+  iprop.container.Top:=iprop.page.ControlCount*30;
+  iprop.container.Align:=alTop;
+  iprop.container.ChildSizing.ControlsPerLine := 6;
+  iprop.container.ChildSizing.Layout := cclLeftToRightThenTopToBottom;
+  iprop.container.ChildSizing.HorizontalSpacing := 8;
+  iprop.container.ChildSizing.LeftRightSpacing := 8;
+  iprop.container.ChildSizing.TopBottomSpacing := 3;
+  iprop.container.ChildSizing.VerticalSpacing := 4;
+
   led := TIpsLed.Create(self);
   led.State := indiProp.getState;
-  led.Parent := iprop.page;
+  led.Parent := iprop.container;
   lbl := TLabel.Create(self);
-  lbl.Caption := proplbl;
-  lbl.Parent := iprop.page;
+  SetLabel(lbl,proplbl);
+  lbl.Parent := iprop.container;
   iprop.state := led;
   iprop.lbl := lbl;
   iprop.Name := propname;
@@ -450,6 +467,10 @@ begin
     else
       CreateUnknowWidget(iprop);
   end;
+
+  iprop.container.AutoSize := True;
+  iprop.container.Parent:=iprop.page;
+
   iprop.idev.props.AddObject(propname, iprop);
 end;
 
@@ -489,6 +510,7 @@ begin
   begin
     iprop.widget.Objects[i].Free;
   end;
+  iprop.container.Free;
   iprop.state.Free;
   iprop.lbl.Free;
   iprop.Free;
@@ -516,9 +538,20 @@ var
   spacer: TLabel;
 begin
   spacer := TLabel.Create(self);
-  spacer.Caption := ' ';
-  spacer.Parent := iprop.page;
+  spacer.Parent := iprop.container;
+  spacer.AutoSize:=True;
   iprop.widget.AddObject('', spacer);
+end;
+
+procedure Tf_indigui.SetLabel(lbl:TLabel; txt:string);
+var w: integer;
+begin
+  w:=min(2*LblWidth,max(Canvas.TextWidth(txt),LblWidth));
+  lbl.AutoSize:=False;
+  lbl.Constraints.MaxWidth := w;
+  lbl.Constraints.MinWidth := w;
+  lbl.Width:=w;
+  lbl.Caption := txt;
 end;
 
 procedure Tf_indigui.CreateTextWidget(iprop: TIndiProp);
@@ -528,7 +561,7 @@ var
   entry: TEdit;
   btn: TButton;
   tvp: ITextVectorProperty;
-  i: integer;
+  i,w: integer;
   n: string;
   btnok: boolean;
 begin
@@ -541,34 +574,38 @@ begin
       AddSpacer(iprop);
       AddSpacer(iprop);
     end;
-    lbl := TLabel.Create(self);
-    lbl.AutoSize := True;
     n := tvp.tp[i].lbl;
     if trim(n) = '' then
       n := tvp.tp[i].Name;
-    lbl.Caption := n + ':';
-    lbl.Parent := iprop.page;
+    lbl := TLabel.Create(self);
+    SetLabel(lbl,n + ':');
+    lbl.Parent := iprop.container;
     iprop.widget.AddObject(lbl.Caption, lbl);
     txt := TLabel.Create(self);
-    txt.AutoSize := True;
-    txt.Caption := tvp.tp[i].Text;
-    txt.Parent := iprop.page;
+    SetLabel(txt, tvp.tp[i].Text);
+    txt.Parent := iprop.container;
     iprop.ctrl.AddObject(tvp.tp[i].Name, txt);
     if tvp.p <> IP_RO then
     begin
       entry := TEdit.Create(self);
-      entry.AutoSize := True;
-      entry.Parent := iprop.page;
+      entry.AutoSize:=False;
+      entry.Constraints.MaxWidth := LblWidth;
+      entry.Constraints.MinWidth := LblWidth;
+      entry.Width:=LblWidth;
+      entry.Parent := iprop.container;
       iprop.entry.AddObject(tvp.tp[i].Name, entry);
       if not btnok then
       begin
         btnok := True;
         btn := TButton.Create(self);
-        btn.AutoSize := True;
+        btn.AutoSize:=False;
+        btn.Constraints.MaxWidth := BtnWidth;
+        btn.Constraints.MinWidth := BtnWidth;
+        btn.Width:=BtnWidth;
         btn.Caption := 'Set';
         btn.OnClick := @SetButtonClick;
         btn.tag := PtrInt(iprop);
-        btn.Parent := iprop.page;
+        btn.Parent := iprop.container;
         iprop.widget.AddObject(btn.Caption, btn);
       end
       else
@@ -701,7 +738,7 @@ var
   entry: TEdit;
   btn: TButton;
   nvp: INumberVectorProperty;
-  i: integer;
+  i,w: integer;
   n: string;
   btnok: boolean;
 begin
@@ -714,34 +751,38 @@ begin
       AddSpacer(iprop);
       AddSpacer(iprop);
     end;
-    lbl := TLabel.Create(self);
-    lbl.AutoSize := True;
     n := nvp.np[i].lbl;
     if trim(n) = '' then
       n := nvp.np[i].Name;
-    lbl.Caption := n + ':';
-    lbl.Parent := iprop.page;
+    lbl := TLabel.Create(self);
+    SetLabel(lbl,n + ':');
+    lbl.Parent := iprop.container;
     iprop.widget.AddObject(lbl.Caption, lbl);
     txt := TLabel.Create(self);
-    txt.AutoSize := True;
-    txt.Caption := IndiFormatFloat(nvp.np[i].Value, nvp.np[i].format);
-    txt.Parent := iprop.page;
+    SetLabel(txt, IndiFormatFloat(nvp.np[i].Value, nvp.np[i].format));
+    txt.Parent := iprop.container;
     iprop.ctrl.AddObject(nvp.np[i].Name, txt);
     if nvp.p <> IP_RO then
     begin
       entry := TEdit.Create(self);
-      entry.AutoSize := True;
-      entry.Parent := iprop.page;
+      entry.AutoSize:=False;
+      entry.Constraints.MaxWidth := LblWidth;
+      entry.Constraints.MinWidth := LblWidth;
+      entry.Width:=LblWidth;
+      entry.Parent := iprop.container;
       iprop.entry.AddObject(nvp.np[i].Name, entry);
       if not btnok then
       begin
         btnok := True;
         btn := TButton.Create(self);
-        btn.AutoSize := True;
+        btn.AutoSize:=False;
+        btn.Constraints.MaxWidth := BtnWidth;
+        btn.Constraints.MinWidth := BtnWidth;
+        btn.Width:=BtnWidth;
         btn.Caption := 'Set';
         btn.OnClick := @SetButtonClick;
         btn.tag := PtrInt(iprop);
-        btn.Parent := iprop.page;
+        btn.Parent := iprop.container;
         iprop.widget.AddObject(btn.Caption, btn);
       end
       else
@@ -798,7 +839,7 @@ begin
   chk.Caption := '';
   chk.OnItemClick := @SetSwitchCheckClick;
   chk.tag := PtrInt(iprop);
-  chk.Parent := iprop.page;
+  chk.Parent := iprop.container;
   iprop.ctrl.AddObject(svp.Name, chk);
   for i := 1 to 3 do
     AddSpacer(iprop);
@@ -807,24 +848,28 @@ end;
 procedure Tf_indigui.CreateSwitchButton(svp: ISwitchVectorProperty; iprop: TIndiProp);
 var
   btn: TSpeedButton;
-  i: integer;
+  i, w: integer;
   n: string;
 begin
   Inc(FButtonGroup);
   for i := 0 to svp.nsp - 1 do
   begin
     btn := TSpeedButton.Create(self);
-    btn.AutoSize := True;
-    btn.Margin := 6;
     btn.GroupIndex := FButtonGroup;
     btn.Down := (svp.sp[i].s = ISS_ON);
     n := svp.sp[i].lbl;
     if trim(n) = '' then
       n := svp.sp[i].Name;
+    btn.AutoSize:=False;
+    w:=min(2*LblWidth,max(Canvas.TextWidth(n)+8,LblWidth));
+    btn.Constraints.MaxWidth := w;
+    btn.Constraints.MinWidth := w;
+    btn.Constraints.MinHeight := 30;
+    btn.Width:=w;
     btn.Caption := n;
     btn.OnClick := @SetSwitchButtonClick;
     btn.tag := PtrInt(iprop);
-    btn.Parent := iprop.page;
+    btn.Parent := iprop.container;
     iprop.ctrl.AddObject(svp.sp[i].Name, btn);
   end;
   for i := svp.nsp + 1 to 4 do
@@ -834,25 +879,31 @@ end;
 procedure Tf_indigui.CreateSwitchCombobox(svp: ISwitchVectorProperty; iprop: TIndiProp);
 var
   cmb: TComboBox;
-  i, p: integer;
+  i, p, w: integer;
   n: string;
 begin
   cmb := TComboBox.Create(self);
-  cmb.AutoSize := True;
+  cmb.AutoSize := false;
   p := 0;
+  w := 0;
   for i := 0 to svp.nsp - 1 do
   begin
     n := svp.sp[i].lbl;
     if trim(n) = '' then
       n := svp.sp[i].Name;
+    w := max(w, Canvas.TextWidth(n));
     cmb.Items.Add(n);
     if (svp.sp[i].s = ISS_ON) then
       p := i;
   end;
+  w:=min(2*LblWidth,max(w,LblWidth));
+  cmb.Constraints.MaxWidth:=w;
+  cmb.Constraints.MinWidth:=w;
+  cmb.Width:=w;
   cmb.ItemIndex := p;
   cmb.OnChange := @SetSwitchComboChange;
   cmb.tag := PtrInt(iprop);
-  cmb.Parent := iprop.page;
+  cmb.Parent := iprop.container;
   iprop.ctrl.AddObject(svp.Name, cmb);
   for i := 1 to 3 do
     AddSpacer(iprop);
@@ -875,7 +926,7 @@ begin
     lbl := TLabel.Create(self);
     lbl.AutoSize := True;
     lbl.Caption := lvp.lp[i].lbl;
-    lbl.Parent := iprop.page;
+    lbl.Parent := iprop.container;
     lbl := TLabel.Create(self);
     lbl.AutoSize := True;
     case lvp.lp[i].s of
@@ -884,7 +935,7 @@ begin
       IPS_BUSY: lbl.Caption := 'warning';
       IPS_ALERT: lbl.Caption := 'alert';
     end;
-    lbl.Parent := iprop.page;
+    lbl.Parent := iprop.container;
     iprop.ctrl.AddObject(lvp.lp[i].Name, lbl);
     AddSpacer(iprop);
     AddSpacer(iprop);
@@ -908,11 +959,11 @@ begin
     lbl := TLabel.Create(self);
     lbl.AutoSize := True;
     lbl.Caption := bvp.bp[i].Name;
-    lbl.Parent := iprop.page;
+    lbl.Parent := iprop.container;
     lbl := TLabel.Create(self);
     lbl.AutoSize := True;
     lbl.Caption := bvp.bp[i].lbl;
-    lbl.Parent := iprop.page;
+    lbl.Parent := iprop.container;
     iprop.widget.AddObject(lbl.Caption, lbl);
     AddSpacer(iprop);
     AddSpacer(iprop);
