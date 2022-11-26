@@ -895,6 +895,7 @@ begin
   if not IndiGUIready then
   begin
     f_indigui := Tf_indigui.Create(self);
+    ScaleDPI(f_indigui);
     f_indigui.onDestroy := @IndiGUIdestroy;
     f_indigui.IndiServer := csc.IndiServerHost;
     f_indigui.IndiPort := csc.IndiServerPort;

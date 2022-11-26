@@ -29,6 +29,7 @@ object pop_indi: Tpop_indi
       Top = 8
       Width = 20
       Caption = 'RA '
+      ParentColor = False
       ParentFont = False
     end
     object LabelDelta: TLabel
@@ -37,6 +38,7 @@ object pop_indi: Tpop_indi
       Top = 44
       Width = 25
       Caption = 'DEC'
+      ParentColor = False
       ParentFont = False
     end
     object pos_x: TEdit
@@ -145,6 +147,7 @@ object pop_indi: Tpop_indi
         Width = 10
         BorderSpacing.Left = 2
         Caption = 'N'
+        ParentColor = False
       end
       object Label3: TLabel
         AnchorSideLeft.Control = ArrowDown
@@ -156,6 +159,7 @@ object pop_indi: Tpop_indi
         Width = 7
         BorderSpacing.Left = 2
         Caption = 'S'
+        ParentColor = False
       end
       object Label5: TLabel
         AnchorSideLeft.Control = ArrowRight
@@ -166,6 +170,7 @@ object pop_indi: Tpop_indi
         Top = 20
         Width = 12
         Caption = 'W'
+        ParentColor = False
       end
       object Label4: TLabel
         AnchorSideTop.Control = ArrowLeft
@@ -176,6 +181,7 @@ object pop_indi: Tpop_indi
         Width = 7
         Anchors = [akTop, akRight]
         Caption = 'E'
+        ParentColor = False
       end
     end
     object FlipNS: TRadioGroup
@@ -232,6 +238,7 @@ object pop_indi: Tpop_indi
       Top = 8
       Width = 61
       Caption = 'Latitude : '
+      ParentColor = False
       ParentFont = False
     end
     object Label16: TLabel
@@ -240,6 +247,7 @@ object pop_indi: Tpop_indi
       Top = 8
       Width = 70
       Caption = 'Longitude :'
+      ParentColor = False
       ParentFont = False
     end
     object ButtonSetLocation: TSpeedButton
@@ -292,6 +300,7 @@ object pop_indi: Tpop_indi
       Top = 8
       Width = 49
       Caption = 'Altitude'
+      ParentColor = False
       ParentFont = False
     end
     object Elev: TEdit
@@ -366,6 +375,7 @@ object pop_indi: Tpop_indi
       Top = 4
       Width = 110
       Caption = 'INDI Server Host '
+      ParentColor = False
       ParentFont = False
     end
     object Label130: TLabel
@@ -374,6 +384,7 @@ object pop_indi: Tpop_indi
       Top = 4
       Width = 104
       Caption = 'INDI server Port'
+      ParentColor = False
       ParentFont = False
     end
     object Label260: TLabel
@@ -382,6 +393,7 @@ object pop_indi: Tpop_indi
       Top = 49
       Width = 92
       Caption = 'Telescope type'
+      ParentColor = False
       ParentFont = False
     end
     object AutoloadConfig: TCheckBox
