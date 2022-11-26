@@ -430,12 +430,6 @@ begin
     sb.Parent := tb;
     sb.BorderStyle:=bsNone;
     sb.Align := alClient;
-    sb.ChildSizing.ControlsPerLine := 1;
-    sb.ChildSizing.Layout := cclLeftToRightThenTopToBottom;
-    sb.ChildSizing.HorizontalSpacing := 0;
-    sb.ChildSizing.LeftRightSpacing := 0;
-    sb.ChildSizing.TopBottomSpacing := 4;
-    sb.ChildSizing.VerticalSpacing := 0;
     iprop.idev.group.AddObject(groupname, sb);
   end;
   iprop.page := sb;
