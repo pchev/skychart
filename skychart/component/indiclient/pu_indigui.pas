@@ -292,7 +292,10 @@ begin
  try
   if assigned(FonDestroy) then
     FonDestroy(self);
+  try
   indiclient.Terminate;
+  except
+  end;
   for i := 0 to devlist.Count - 1 do
     if devlist.Objects[i] <> nil then
       devlist.Objects[i].Free;
