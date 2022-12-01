@@ -4,15 +4,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: skychart.nb\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-10-09 14:06+0000\n"
-"PO-Revision-Date: 2019-10-06 13:44+0000\n"
-"Last-Translator: Patrick Chevalley <Unknown>\n"
+"POT-Creation-Date: 2022-11-14 14:48+0000\n"
+"PO-Revision-Date: 2022-11-22 11:23+0000\n"
+"Last-Translator: ovl-1 <Unknown>\n"
 "Language-Team: <translation@ap-i.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2022-10-09 14:16+0000\n"
-"X-Generator: Launchpad (build 762fb15a975e8b23af6a1f86e44e46bfd0451459)\n"
+"X-Launchpad-Export-Date: 2022-11-30 13:57+0000\n"
+"X-Generator: Launchpad (build 51cef3d08dff1e227b5ada709bd67280c567d4be)\n"
 
 #: u_translation.rs102cddss
 msgid "102 CD DSS"
@@ -25,6 +25,10 @@ msgstr "184 (anbefalt opp til 1 000 000 objekter)"
 #: u_translation.rs50recommende
 msgid "50   (recommended up to 100,000 objects)"
 msgstr "50   (anbefalt opp til 100 000 objekter)"
+
+#: u_translation.rs63000billion
+msgid "63000 (for billion of objects)"
+msgstr ""
 
 #: u_translation.rs732recommend
 msgid "732 (recommended up to 5,000,000 objects)"
@@ -1049,7 +1053,7 @@ msgstr "Beregn felt"
 
 #: u_translation.rscomputerises
 msgid "Compute rise/set time relative to this line"
-msgstr ""
+msgstr "Beregn tid for oppgang/nedgang relativt til denne linjen"
 
 #: u_translation.rsconfiguratio
 msgid "Configuration"
@@ -1541,7 +1545,7 @@ msgstr "DeltaT-usikkerhet"
 
 #: u_translation.rsdeltatrecent
 msgid "DeltaT recent value"
-msgstr ""
+msgstr "DeltaT siste verdi"
 
 #: u_translation.rsdepressionof
 msgid "Depression of the visible horizon"
@@ -1674,7 +1678,7 @@ msgstr "Ikke endre noe her hvis du ikke er sikker på hva du gjør!"
 
 #: u_translation.rsdonotfilterb
 msgid "Do not filter bright nebula by magnitude"
-msgstr ""
+msgstr "Ikke filtrer lys stjernetåke etter magnitude"
 
 #: u_translation.rsdonotfilterm
 msgid "Do not filter Messier objects"
@@ -1905,7 +1909,7 @@ msgstr "Elong."
 
 #: u_translation.rsemail
 msgid "email"
-msgstr ""
+msgstr "e-post"
 
 #: u_translation.rsemissionnebu
 msgid "Emission nebula"
@@ -2511,7 +2515,7 @@ msgstr "Horisont"
 
 #: u_translation.rshorizontalov
 msgid "Horizontal overlap %"
-msgstr ""
+msgstr "Horisontal overlapping %"
 
 #: u_translation.rshostname
 msgid "Hostname:"
@@ -2595,7 +2599,7 @@ msgstr "Bildeliste"
 
 #: u_translation.rsimportmosaic
 msgid "Import mosaic file"
-msgstr ""
+msgstr "Importer mosaikkfil"
 
 #: u_translation.rsinclination
 msgid "Inclination"
@@ -3144,7 +3148,7 @@ msgstr "Magnitude Tycho VT"
 
 #: u_translation.rsmaillist
 msgid "Mail list, discussion group"
-msgstr ""
+msgstr "Postliste, diskusjonsgruppe"
 
 #: u_translation.rsmainbar
 msgid "Main bar"
@@ -3152,7 +3156,7 @@ msgstr "Hovedlinje"
 
 #: u_translation.rsmainmenu
 msgid "Main menu"
-msgstr ""
+msgstr "Hovedmeny"
 
 #: u_translation.rsmakeselectio
 msgid "Make selection of the table and column you want to your catalog"
@@ -3389,15 +3393,15 @@ msgstr "Morgenlysning"
 
 #: u_translation.rsmosaic
 msgid "Mosaic"
-msgstr ""
+msgstr "Mosaikk"
 
 #: u_translation.rsmosaiccenter
 msgid "Mosaic center"
-msgstr ""
+msgstr "Mosaikksentrum"
 
 #: u_translation.rsmosaicsize
 msgid "Mosaic size"
-msgstr ""
+msgstr "Mosaikkstørrelse"
 
 #: u_translation.rsmovelabel
 msgid "Move label"
@@ -3708,7 +3712,7 @@ msgstr "Stedsdatabase"
 
 #: u_translation.rsobservertool
 msgid "Observer tools"
-msgstr ""
+msgstr "Observatørverktøy"
 
 #: u_translation.rsobservinglis
 msgid "Observing list"
@@ -3832,7 +3836,7 @@ msgstr "Orientering"
 
 #: u_translation.rsorienttothep
 msgid "Orient to the pole or zenith"
-msgstr "Orienter mot polen"
+msgstr "Orienter til pol eller senit"
 
 #: u_translation.rsorusealocalf
 msgid "Or use a local file:"
@@ -4962,7 +4966,7 @@ msgstr "Vis knappetekst"
 
 #: u_translation.rsshowcelestia
 msgid "Show celestial equator"
-msgstr ""
+msgstr "Vis himmelekvator"
 
 #: u_translation.rsshowcomets
 msgid "Show comets"
@@ -5995,7 +5999,7 @@ msgstr "Versjon"
 
 #: u_translation.rsverticalover
 msgid "Vertical overlap %"
-msgstr ""
+msgstr "Vertikal overlapping %"
 
 #: u_translation.rsvicinity
 msgid "Vicinity"

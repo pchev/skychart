@@ -6074,3 +6074,7 @@ msgstr ""
 msgid "Albedo"
 msgstr ""
 
+#: u_translation:rs63000billion
+msgid "63000 (for billion of objects)"
+msgstr ""
+
