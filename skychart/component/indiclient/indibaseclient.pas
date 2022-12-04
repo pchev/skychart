@@ -910,7 +910,7 @@ var
 begin
   {$ifdef UNIX}
   try
-  if (pos('.', host) = 0) and (not ResolveHostByName(host, H)) then
+  if (host<>'localhost') and (pos('.', host) = 0) and (not ResolveHostByName(host, H)) then
   begin
     // try to add the default domain
     buf := FirstWord(DefaultDomainList);
