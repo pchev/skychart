@@ -4591,22 +4591,22 @@ begin
     case i of
       0:
       begin
-        txt := txt + html_b + rsRise + ':' + htms_b + thr + blank;
+        txt := txt + html_b + rsRise + ':' +blank+ htms_b + thr + blank;
         if (not cmain.SimpleDetail) and (trim(tazr) > '') then
-          txt := txt + rsAzimuth + ':' + tAzr + html_br
+          txt := txt + rsAzimuth + ':' +blank+ tAzr + html_br
         else
           txt := txt + html_br;
-        txt := txt + html_b + rsTransit + ':' + htms_b + tht + blank + tculmalt + html_br;
-        txt := txt + html_b + rsSet + ':' + htms_b + ths + blank;
+        txt := txt + html_b + rsTransit + ':' +blank+ htms_b + tht + blank + tculmalt + html_br;
+        txt := txt + html_b + rsSet + ':' +blank+ htms_b + ths + blank;
         if (not cmain.SimpleDetail) and (trim(tazs) > '') then
-          txt := txt + rsAzimuth + ':' + tAzs + html_br
+          txt := txt + rsAzimuth + ':' +blank+ tAzs + html_br
         else
           txt := txt + html_br;
       end;
       1:
       begin
         txt := txt + rsCircumpolar + html_br;
-        txt := txt + html_b + rsCulmination + ':' + htms_b + tht + blank + tculmalt + html_br;
+        txt := txt + html_b + rsCulmination + ':' +blank+ htms_b + tht + blank + tculmalt + html_br;
       end;
       else
       begin

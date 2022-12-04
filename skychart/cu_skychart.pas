@@ -4290,21 +4290,21 @@ begin
     case i of
       0:
       begin
-        txt := txt + rsRise + ':' + thr + blank + rsAz + ':' + tazr + blank + blank;
-        txt := txt + rsCulmination + ':' + tht + blank + blank;
-        txt := txt + rsSet + ':' + ths + blank + rsAz + ':' + tazs + blank;
+        txt := txt + rsRise + ':' +  thr + blank + rsAz + ':' + tazr + blank + blank;
+        txt := txt + rsCulmination + ':' + blank + tht + blank + blank;
+        txt := txt + rsSet + ':' + blank + ths + blank + rsAz + ':' + tazs + blank;
       end;
       1:
       begin
         txt := txt + rsCircumpolar + blank + blank + blank;
-        txt := txt + rsCulmination + ':' + tht + blank;
+        txt := txt + rsCulmination +':' + blank + tht + blank;
       end;
       else
       begin
         txt := txt + rsInvisibleAtT + blank;
       end;
     end;
-    if lha>-99 then txt:=txt + blank + rsLHA + ':'+ armtostr(rad2deg * lha / 15);
+    if lha>-99 then txt:=txt + blank + rsLHA + ':'+ blank + armtostr(rad2deg * lha / 15);
     cfgsc.FindDesc2 := txt;
   end
   else
