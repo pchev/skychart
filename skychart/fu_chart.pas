@@ -6683,7 +6683,12 @@ begin
     85: Result := cmd_IdentCenter;
     86: Result := cmd_IdentTelescope;
     87: Result := cmd_SetShowPicture(arg[1]);
-    88: Result := cmd_SetBGimage(arg[1],arg[2]);
+    88: begin
+        if arg.Count>2 then
+          Result := cmd_SetBGimage(arg[1],arg[2])
+        else
+          Result := cmd_SetBGimage(arg[1],'ON');
+        end;
     89: Result := cmd_LoadBGimage(arg[1]);
     90: Result := cmd_GetObjectList;
     91: Result := cmd_LoadCircle(arg[1]);
