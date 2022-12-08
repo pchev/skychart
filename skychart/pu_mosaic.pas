@@ -206,6 +206,7 @@ begin
      De.Value := De.Value + dde/5
   else
      De.Value := De.Value + dde;
+  Apply;
 end;
 
 procedure Tf_mosaic.DEdownClick(Sender: TObject);
@@ -216,6 +217,7 @@ begin
      De.Value := De.Value - dde/5
   else
      De.Value := De.Value - dde;
+  Apply;
 end;
 
 procedure Tf_mosaic.RArightClick(Sender: TObject);
@@ -226,6 +228,7 @@ begin
      Ra.Value := Ra.Value - dra/5
   else
      Ra.Value := Ra.Value - dra;
+  Apply;
 end;
 
 procedure Tf_mosaic.RAleftClick(Sender: TObject);
@@ -236,6 +239,7 @@ begin
      Ra.Value := Ra.Value + dra/5
   else
      Ra.Value := Ra.Value + dra;
+  Apply;
 end;
 
 procedure Tf_mosaic.RotdownClick(Sender: TObject);
@@ -246,6 +250,7 @@ begin
      Rotation.Value := rmod(Rotation.Value + 1 + 360, 360)
   else
      Rotation.Value := rmod(Rotation.Value + 10 + 360, 360);
+  Apply;
 end;
 
 procedure Tf_mosaic.RotupClick(Sender: TObject);
@@ -256,6 +261,7 @@ begin
      Rotation.Value := rmod(Rotation.Value - 1 + 360, 360)
   else
      Rotation.Value := rmod(Rotation.Value - 10 + 360, 360);
+  Apply;
 end;
 
 procedure Tf_mosaic.FrameListChange(Sender: TObject);

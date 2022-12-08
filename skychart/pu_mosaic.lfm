@@ -29,7 +29,6 @@ object f_mosaic: Tf_mosaic
       Top = 8
       Width = 202
       kind = RA
-      Value = 0
       Enabled = True
       OnChange = RaChange
       Constraints.MaxHeight = 28
@@ -42,7 +41,6 @@ object f_mosaic: Tf_mosaic
       Top = 44
       Width = 202
       kind = DE
-      Value = 0
       Enabled = True
       OnChange = DeChange
       Constraints.MaxHeight = 28
@@ -51,7 +49,7 @@ object f_mosaic: Tf_mosaic
     end
     object Label1: TLabel
       Left = 8
-      Height = 17
+      Height = 19
       Top = 10
       Width = 17
       Caption = 'RA'
@@ -60,7 +58,7 @@ object f_mosaic: Tf_mosaic
     end
     object Label2: TLabel
       Left = 8
-      Height = 17
+      Height = 19
       Top = 46
       Width = 25
       Caption = 'DEC'
@@ -121,7 +119,7 @@ object f_mosaic: Tf_mosaic
     TabOrder = 1
     object Label3: TLabel
       Left = 8
-      Height = 17
+      Height = 19
       Top = 107
       Width = 68
       Caption = 'Mosaic size'
@@ -130,7 +128,7 @@ object f_mosaic: Tf_mosaic
     end
     object Label4: TLabel
       Left = 246
-      Height = 17
+      Height = 19
       Top = 107
       Width = 8
       Caption = 'X'
@@ -150,7 +148,7 @@ object f_mosaic: Tf_mosaic
     end
     object Label5: TLabel
       Left = 8
-      Height = 17
+      Height = 19
       Top = 40
       Width = 138
       Caption = 'Finder rectangle (CCD)'
@@ -159,7 +157,7 @@ object f_mosaic: Tf_mosaic
     end
     object Label6: TLabel
       Left = 8
-      Height = 17
+      Height = 19
       Top = 148
       Width = 128
       Caption = 'Horizontal overlap %'
@@ -168,7 +166,7 @@ object f_mosaic: Tf_mosaic
     end
     object Label7: TLabel
       Left = 8
-      Height = 17
+      Height = 19
       Top = 186
       Width = 110
       Caption = 'Vertical overlap %'
@@ -177,7 +175,7 @@ object f_mosaic: Tf_mosaic
     end
     object Label8: TLabel
       Left = 8
-      Height = 17
+      Height = 19
       Top = 6
       Width = 37
       Caption = 'Name'
@@ -186,7 +184,7 @@ object f_mosaic: Tf_mosaic
     end
     object MosaicName: TEdit
       Left = 60
-      Height = 30
+      Height = 31
       Top = 0
       Width = 254
       ParentFont = False
@@ -195,7 +193,7 @@ object f_mosaic: Tf_mosaic
     end
     object SizeX: TSpinEdit
       Left = 186
-      Height = 28
+      Height = 29
       Top = 102
       Width = 51
       MaxValue = 10
@@ -207,7 +205,7 @@ object f_mosaic: Tf_mosaic
     end
     object SizeY: TSpinEdit
       Left = 263
-      Height = 28
+      Height = 29
       Top = 102
       Width = 51
       MaxValue = 10
@@ -219,7 +217,7 @@ object f_mosaic: Tf_mosaic
     end
     object Hoverlap: TSpinEdit
       Left = 186
-      Height = 28
+      Height = 29
       Top = 142
       Width = 51
       MaxValue = 50
@@ -230,7 +228,7 @@ object f_mosaic: Tf_mosaic
     end
     object Voverlap: TSpinEdit
       Left = 186
-      Height = 28
+      Height = 29
       Top = 181
       Width = 51
       MaxValue = 50
@@ -307,7 +305,7 @@ object f_mosaic: Tf_mosaic
     TabOrder = 3
     object Label9: TLabel
       Left = 8
-      Height = 17
+      Height = 19
       Top = 7
       Width = 102
       Caption = 'Camera rotation '
@@ -336,22 +334,20 @@ object f_mosaic: Tf_mosaic
     end
     object Rotation: TFloatSpinEdit
       Left = 172
-      Height = 28
+      Height = 29
       Top = 2
       Width = 65
       MaxValue = 360
-      MinValue = 0
       OnChange = RotationChange
       ParentFont = False
       TabOrder = 2
-      Value = 0
     end
   end
   object ApplyTimer: TTimer
     Enabled = False
     Interval = 250
     OnTimer = ApplyTimerTimer
-    left = 275
-    top = 340
+    Left = 275
+    Top = 340
   end
 end
