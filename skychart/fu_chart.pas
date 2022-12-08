@@ -83,6 +83,8 @@ type
     CopyCoord: TMenuItem;
     CopyCoord1: TMenuItem;
     CopyCoord2: TMenuItem;
+    MenuSAMP2: TMenuItem;
+    MenuSAMP3: TMenuItem;
     PrePointMeasure: TMenuItem;
     PrePointCreate: TMenuItem;
     PrePointRemove: TMenuItem;
@@ -102,7 +104,7 @@ type
     MenuAddToObsList: TMenuItem;
     MenuViewObsList: TMenuItem;
     MenuSAMP: TMenuItem;
-    SAMPbroadcastcoord: TMenuItem;
+    MenuSAMP1: TMenuItem;
     MenuRectangle2: TMenuItem;
     MenuRectangle10: TMenuItem;
     MenuRectangle1: TMenuItem;
@@ -223,7 +225,9 @@ type
     procedure RefreshTimerTimer(Sender: TObject);
     procedure RemoveAllLabel1Click(Sender: TObject);
     procedure RemoveLastLabel1Click(Sender: TObject);
-    procedure SAMPsendcoordClick(Sender: TObject);
+    procedure SAMPsendCursorCoordClick(Sender: TObject);
+    procedure SAMPsendObjectCoordClick(Sender: TObject);
+    procedure SAMPsendCenterCoordClick(Sender: TObject);
     procedure search1Click(Sender: TObject);
     procedure SlewCenterClick(Sender: TObject);
     procedure SlewCursorClick(Sender: TObject);
@@ -337,6 +341,7 @@ type
     procedure ApplyMosaic(Sender: TObject);
     procedure PrePointCenter(Sender: TObject);
     procedure PrePointCenterNow(Sender: TObject);
+    procedure SetSAMPmenu(menu:Tmenuitem; num: integer);
   public
     { Public declarations }
     Image1: TChartDrawingControl;
@@ -548,6 +553,9 @@ begin
   RecoverLabel.Caption := rsRecoverHidde;
   Resetalllabel.Caption := rsResetAllLabe;
   MenuSAMP.Caption := rsSAMPSendCoor;
+  MenuSAMP1.Caption := rsCursorPositi;
+  MenuSAMP2.Caption := rsSelectedObje;
+  MenuSAMP3.Caption := rsChartCenter;
   MenuObslist.Caption := rsObservingLis;
   MenuViewObsList.Caption := rsViewObservin;
   MenuObslistFirst.Caption := rsFirst;
@@ -1338,7 +1346,7 @@ begin
   Refresh(True, False);
 end;
 
-procedure Tf_chart.SAMPsendcoordClick(Sender: TObject);
+procedure Tf_chart.SAMPsendCursorCoordClick(Sender: TObject);
 var
   cn, client: string;
   i: integer;
@@ -1358,6 +1366,55 @@ begin
   if sc.cfgsc.ApparentPos then
     mean_equatorial(ra, de, sc.cfgsc, True, True);
   precession(sc.cfgsc.JDChart, jd2000, ra, de);
+  if assigned(FSendCoordpointAtsky) then
+    FSendCoordpointAtsky(client, ra, de);
+end;
+
+procedure Tf_chart.SAMPsendObjectCoordClick(Sender: TObject);
+var
+  cn, client: string;
+  i: integer;
+  ra, de: double;
+begin
+  if sc.cfgsc.FindOK then begin
+    client := '';
+    cn := TMenuItem(Sender).Caption;
+    for i := 0 to SampClientName.Count - 1 do
+    begin
+      if SampClientName[i] = cn then
+      begin
+        client := SampClientId[i];
+        break;
+      end;
+    end;
+    ra:=sc.cfgsc.FindRA2000;
+    de:=sc.cfgsc.FindDec2000;
+    if assigned(FSendCoordpointAtsky) then
+      FSendCoordpointAtsky(client, ra, de);
+  end
+  else begin
+    Fshowinfo(rsNoTargetObje);
+  end;
+end;
+
+procedure Tf_chart.SAMPsendCenterCoordClick(Sender: TObject);
+var
+  cn, client: string;
+  i: integer;
+  ra, de: double;
+begin
+  client := '';
+  cn := TMenuItem(Sender).Caption;
+  for i := 0 to SampClientName.Count - 1 do
+  begin
+    if SampClientName[i] = cn then
+    begin
+      client := SampClientId[i];
+      break;
+    end;
+  end;
+  ra:=sc.cfgsc.racentre2000;
+  de:=sc.cfgsc.decentre2000;
   if assigned(FSendCoordpointAtsky) then
     FSendCoordpointAtsky(client, ra, de);
 end;
@@ -2406,10 +2463,39 @@ begin
   end;
 end;
 
+procedure Tf_chart.SetSAMPmenu(menu:Tmenuitem; num: integer);
+var action: TNotifyEvent;
+    MenuItem: TMenuItem;
+    i: integer;
+begin
+  case num of
+    1: action:=SAMPsendCursorCoordClick;
+    2: action:=SAMPsendObjectCoordClick;
+    3: action:=SAMPsendCenterCoordClick;
+  end;
+  while menu.Count > 0 do
+    menu.Delete(0);
+  MenuItem := TMenuItem.Create(self);
+  MenuItem.Caption := rsAllSAMPClien;
+  MenuItem.Tag := 0;
+  MenuItem.OnClick := action;
+  menu.Add(MenuItem);
+  for i := 0 to SampClientName.Count - 1 do
+  begin
+    if SampClientCoordpointAtsky[i] = '1' then
+    begin
+      MenuItem := TMenuItem.Create(self);
+      MenuItem.Caption := SampClientName[i];
+      MenuItem.Tag := i;
+      MenuItem.OnClick := action;
+      menu.Add(MenuItem);
+    end;
+  end;
+end;
+
 procedure Tf_chart.PopupMenu1Popup(Sender: TObject);
 var
-  i, xc, yc: integer;
-  MenuItem: TMenuItem;
+  xc, yc: integer;
 begin
   if assigned(FImageSetFocus) then
     FImageSetFocus(self);
@@ -2503,24 +2589,9 @@ begin
   MenuSAMP.Visible := SampConnected;
   if SampConnected then
   begin
-    while MenuSAMP.Count > 0 do
-      MenuSAMP.Delete(0);
-    MenuItem := TMenuItem.Create(self);
-    MenuItem.Caption := rsAllSAMPClien;
-    MenuItem.Tag := 0;
-    MenuItem.OnClick := SAMPsendcoordClick;
-    MenuSAMP.Add(MenuItem);
-    for i := 0 to SampClientName.Count - 1 do
-    begin
-      if SampClientCoordpointAtsky[i] = '1' then
-      begin
-        MenuItem := TMenuItem.Create(self);
-        MenuItem.Caption := SampClientName[i];
-        MenuItem.Tag := i;
-        MenuItem.OnClick := SAMPsendcoordClick;
-        MenuSAMP.Add(MenuItem);
-      end;
-    end;
+    SetSAMPmenu(MenuSAMP1,1);
+    SetSAMPmenu(MenuSAMP2,2);
+    SetSAMPmenu(MenuSAMP3,3);
   end;
   if assigned(FSetScriptMenu) then
     FSetScriptMenu(self);

@@ -254,9 +254,14 @@ object f_chart: Tf_chart
     end
     object MenuSAMP: TMenuItem
       Caption = 'SAMP send coordinates'
-      object SAMPbroadcastcoord: TMenuItem
-        Caption = 'Broadcast position'
-        OnClick = SAMPsendcoordClick
+      object MenuSAMP1: TMenuItem
+        Caption = 'Cursor position'
+      end
+      object MenuSAMP2: TMenuItem
+        Caption = 'Selected object'
+      end
+      object MenuSAMP3: TMenuItem
+        Caption = 'Chart center'
       end
     end
     object About2: TMenuItem
