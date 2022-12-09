@@ -1577,6 +1577,7 @@ resourcestring
   rsCursorPositi = 'Cursor position';
   rsSelectedObje = 'Selected object';
   rsChartCenter = 'Chart center';
+  rsPasteCoordin = 'Paste coordinates';
 
 // also update upsi_translation
 

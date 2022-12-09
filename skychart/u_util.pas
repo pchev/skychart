@@ -95,6 +95,7 @@ function DEToStr2(de: double; var d, m, s: string): string;
 function DEToStr3(de: double): string;
 function Str3ToDE(dms: string): double;
 function DEToStr4(de: double): string;
+procedure Str2RaDec(txt: string; out ra,de: double);
 function isodate(a, m, d: integer): string;
 function LeapYear(Year: longint): boolean;
 function DayofYear(y, m, d: integer): integer;
@@ -1869,6 +1870,61 @@ try
 except
  result:=-9999;
 end;
+end;
+
+procedure Str2RaDec(txt: string; out ra,de: double);
+var buf,buf1,buf2: string;
+    i,p,s: integer;
+    lst: TStringList;
+begin
+//  Format example:
+//  RA: 02h53m29.7s DE:+16°11'49.5"
+//  11h22m33.3s +30°10'20"
+//  +30°10'20" 11h22m33.3s
+//  11:22:33.3 +30:10:20
+//  11 22 33.3 +30 10 20
+//  11:22 +30:10
+//  11 22 +30 10
+//  11.5 -30.1
+//  11 30 -30.1
+
+  lst:=TStringList.Create;
+  try
+  txt:=StringReplace(txt,'RA:',' ',[]);   // remove text constant
+  txt:=StringReplace(txt,'DE:',' ',[]);
+  txt:=StringReplace(txt,'DEC:',' ',[]);
+  txt:=trim(txt);
+  buf1:='';
+  buf2:='';
+  Splitarg(txt,' ',lst);
+  if lst.Count=2 then begin // ra dec in two words
+    buf1:=trim(lst[0]);
+    buf2:=trim(lst[1]);
+    if (copy(buf1,1,1)='+')or(copy(buf1,1,1)='-') then begin // dec first
+      buf:=buf1;
+      buf1:=buf2;
+      buf2:=buf;
+    end;
+  end
+  else begin
+    s:=-1;
+    for i:=1 to lst.Count-1 do begin  // skip first word, this cannot work with dec first
+       if (copy(lst[i],1,1)='+') or (copy(lst[i],1,1)='-') then s:=i; // word with sign is first of dec
+    end;
+    if s<0 then
+      s:=lst.Count div 2; // no sign, assume same number of word for ra and dec
+    for i:=0 to s-1 do
+      buf1:=buf1+' '+lst[i];
+    for i:=s to lst.Count-1 do
+      buf2:=buf2+' '+lst[i];
+  end;
+
+  ra:=Str3ToAR(trim(buf1));
+  de:=Str3ToDE(trim(buf2));
+
+  finally
+   lst.free
+  end;
 end;
 
 function isodate(a, m, d: integer): string;

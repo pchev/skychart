@@ -29,7 +29,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 interface
 
 uses
-  u_help, u_translation, u_constant, u_projection, u_util,
+  u_help, u_translation, u_constant, u_projection, u_util, Clipbrd,
   LCLIntf, SysUtils, Classes, Graphics, Controls, Forms, UScaleDPI,
   Dialogs, StdCtrls, cu_radec, enhedits, ExtCtrls, LResources, Buttons;
 
@@ -42,6 +42,7 @@ type
     Button2: TButton;
     Button3: TButton;
     Button4: TButton;
+    ButtonPast: TButton;
     InputEquinox: TComboBox;
     LockPosition: TCheckBox;
     PanelCoord: TPanel;
@@ -65,6 +66,7 @@ type
     rot: TFloatEdit;
     procedure Button3Click(Sender: TObject);
     procedure Button4Click(Sender: TObject);
+    procedure ButtonPastClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure EqChange(Sender: TObject);
@@ -105,6 +107,7 @@ begin
   coord2.Caption := rsAlt;
   eq1.Caption := rsRA;
   eq2.Caption := rsDE;
+  ButtonPast.Caption := rsPasteCoordin;
   Label3.Caption := rsFOV;
   Label4.Caption := rsRotation;
   LockPosition.Caption := rsLockTheChart;
@@ -193,6 +196,22 @@ procedure Tf_position.Button4Click(Sender: TObject);
 begin
   if Assigned(FApply) then
     FApply(self);
+end;
+
+procedure Tf_position.ButtonPastClick(Sender: TObject);
+var buf: string;
+    cra,cde: double;
+begin
+  buf := Clipboard.AsText;
+  Str2RaDec(buf,cra,cde);
+  if (cra>-9999) and (cde>-9999) then begin
+    ra.Value:=cra;
+    de.Value:=cde;
+    EqChange(nil);
+  end
+  else begin
+    ShowMessage('Cannot interpret the text "'+buf+'" as RA DEC values');
+  end;
 end;
 
 procedure Tf_position.EqChange(Sender: TObject);
