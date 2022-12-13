@@ -2051,11 +2051,15 @@ function TPlanet.FindPlanet(x1, y1, x2, y2: double; nextobj: boolean;
   cfgsc: Tconf_skychart; var nom, ma, date, desc: string; trunc: boolean = True; searchcenter: boolean = False): boolean;
 var
   i, j: integer;
-  tar, tde, ar, de: double;
+  tar, tde, ar, de, rac: double;
   distmin: double;
   directfind: boolean;
   distancetocenter: array[0..MaxPlSim, 1..MaxPla] of double;
 begin
+  if x2 > pi2 then
+    rac := pi2
+  else
+    rac := 0;
   ar := (x2 + x1) / 2;
   de := (y2 + y1) / 2;
   distancetocenter[0, 1] := maxdouble;
@@ -2109,7 +2113,7 @@ begin
       cfgsc.FindDec2000 := cfgsc.PlanetLst[CurrentStep, CurrentPlanet, 9];
       cfgsc.FindDist := cfgsc.PlanetLst[CurrentStep, CurrentPlanet, 10];
       // search if this planet center is at the position
-      if (trunc) and ((tar < x1) or (tar > x2) or (tde < y1) or
+      if (trunc) and (((tar+rac) < x1) or ((tar+rac) > x2) or (tde < y1) or
         (tde > y2) or ((CurrentPlanet > 11) and (currentplanet <= MaxPla) and
         (cfgsc.PlanetLst[CurrentStep, CurrentPlanet, 6] > 90)))
       //     ((CurrentPlanet>11)and (currentplanet<=MaxPla)and cfgsc.StarFilter and (cfgsc.PlanetLst[CurrentStep,CurrentPlanet,5]>cfgsc.StarMagMax)) )
