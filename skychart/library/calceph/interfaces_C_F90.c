@@ -7,7 +7,7 @@
            Astronomie et Systemes Dynamiques, IMCCE, CNRS, Observatoire de
   Paris.
 
-   Copyright, 2008-2020,CNRS
+   Copyright, 2008-2021,CNRS
    email of the author : Mickael.Gastineau@obspm.fr, Herve.Manche@obspm.fr
 
 */
@@ -82,6 +82,11 @@ terms.
 #define inline
 #endif
 
+/* if the fortran is disabled */
+#ifndef FC_FUNC_
+#define FC_FUNC_(x,y) x
+#endif
+
 int FC_FUNC_(f90calceph_sopen, F90CALCEPH_SOPEN) (char *filename, int len);
 
 void FC_FUNC_(f90calceph_sclose, F90CALCEPH_SCLOSE) (void);
@@ -138,10 +143,16 @@ int FC_FUNC_(f90calceph_getpositionrecordcount, F90CALCEPH_GETPOSITIONRECORDCOUN
 int FC_FUNC_(f90calceph_getpositionrecordindex,
              F90CALCEPH_GETPOSITIONRECORDINDEX) (long long *eph, int *index, int *target, int *center,
                                                  double *firsttime, double *lasttime, int *frame);
+int FC_FUNC_(f90calceph_getpositionrecordindex2,
+             F90CALCEPH_GETPOSITIONRECORDINDEX2) (long long *eph, int *index, int *target, int *center,
+                                                 double *firsttime, double *lasttime, int *frame, int *segid);
 int FC_FUNC_(f90calceph_getorientrecordcount, F90CALCEPH_GETORIENTRECORDCOUNT) (long long *eph);
 int FC_FUNC_(f90calceph_getorientrecordindex,
              F90CALCEPH_GETORIENTRECORDINDEX) (long long *eph, int *index, int *target, double *firsttime,
                                                double *lasttime, int *frame);
+int FC_FUNC_(f90calceph_getorientrecordindex2,
+             F90CALCEPH_GETORIENTRECORDINDEX2) (long long *eph, int *index, int *target, double *firsttime,
+                                               double *lasttime, int *frame, int *segtype);
 int FC_FUNC_(f90calceph_compute, F90CALCEPH_COMPUTE) (long long *eph, double *JD0, double *time,
                                                       int *target, int *center, double PV[6]);
 int FC_FUNC_(f90calceph_compute_order, F90CALCEPH_COMPUTE_ORDER) (long long *eph, double *JD0,
@@ -158,6 +169,7 @@ int FC_FUNC_(f90calceph_orient_unit, F90CALCEPH_ORIENT_UNIT) (long long *eph, do
                                                               int *target, int *unit, double PV[6]);
 int FC_FUNC_(f90calceph_rotangmom_unit, F90CALCEPH_ROTANGMOM_UNIT) (long long *eph, double *JD0,
                                                                     double *time, int *target, int *unit, double PV[6]);
+int FC_FUNC_(f90calceph_getmaxsupportedorder, F90CALCEPH_GETMAXSUPPORTEDORDER) (int *order);
 
 void *f2003calceph_open_array(int n, char *filename, int len);
 
@@ -1071,6 +1083,35 @@ int FC_FUNC_(f90calceph_getpositionrecordindex,
 }
 
 /********************************************************/
+/*! This function returns the target and origin bodies, the first and last time,
+ , the reference frame and the segment type available at the specified index
+ for the position's records of the ephemeris file  associated to eph.
+
+   return 0 on error, otherwise non-zero value.
+
+  @param eph (inout) ephemeris descriptor
+  @param index (in) index of the position’s record, between 1 and
+ calceph_getpositionrecordcount()
+  @param target – The target body
+  @param center – The origin body
+  @param firsttime (out) the Julian date of the first time available in this
+ record, expressed in the same time scale as calceph_gettimescale.
+  @param lasttime (out) the Julian date of the first time available in this
+ record, expressed in the same time scale as calceph_gettimescale.
+  @param frame (out) reference frame
+  1  = ICRF
+  @param segtype (out) type of segment
+*/
+/********************************************************/
+int FC_FUNC_(f90calceph_getpositionrecordindex2,
+             F90CALCEPH_GETPOSITIONRECORDINDEX2) (long long *eph, int *index, int *target, int *center,
+                                                 double *firsttime, double *lasttime, int *frame, int *segtype)
+{
+    return calceph_getpositionrecordindex2(f90calceph_getaddresseph(eph), *index, target, center, firsttime,
+                                          lasttime, frame, segtype);
+}
+
+/********************************************************/
 /*! return the number of position’s records available in the ephemeris file
 
   @param eph (inout) ephemeris descriptor
@@ -1105,6 +1146,33 @@ int FC_FUNC_(f90calceph_getorientrecordindex,
                                                  double *firsttime, double *lasttime, int *frame)
 {
     return calceph_getorientrecordindex(f90calceph_getaddresseph(eph), *index, target, firsttime, lasttime, frame);
+}
+
+/********************************************************/
+/*! This function returns the target and origin bodies, the first and last time,
+ the reference frame, and the segment type available at the specified index
+ for the orientation's records of the ephemeris file  associated to eph.
+
+   return 0 on error, otherwise non-zero value.
+
+  @param eph (inout) ephemeris descriptor
+  @param index (in) index of the position’s record, between 1 and
+ calceph_getporientrecordcount()
+  @param target – The target body
+  @param firsttime (out) the Julian date of the first time available in this
+ record, expressed in the same time scale as calceph_gettimescale.
+  @param lasttime (out) the Julian date of the first time available in this
+ record, expressed in the same time scale as calceph_gettimescale.
+  @param frame (out) reference frame
+  1  = ICRF
+  @param segid (out) type of segment
+*/
+/********************************************************/
+int FC_FUNC_(f90calceph_getorientrecordindex2,
+             F90CALCEPH_GETPOSITIONRECORDINDEX2) (long long *eph, int *index, int *target,
+                                                 double *firsttime, double *lasttime, int *frame, int *segid)
+{
+    return calceph_getorientrecordindex2(f90calceph_getaddresseph(eph), *index, target, firsttime, lasttime, frame, segid);
 }
 
 /********************************************************/
@@ -1207,6 +1275,18 @@ void FC_FUNC_(f90calceph_getversion_str, F90CALCEPH_GETVERSION_STR) (char versio
 }
 
 /********************************************************/
+/*! return, for a given type of segment, the maximal order of the derivatives
+  It returns -1 if the segment type is unknown or not supported by the library
+
+  @param idseg (in) number of the segment
+*/
+/********************************************************/
+int FC_FUNC_(f90calceph_getmaxsupportedorder, F90CALCEPH_GETMAXSUPPORTEDORDER) (int *idseg)
+{
+    return calceph_getmaxsupportedorder(*idseg);
+}
+
+/********************************************************/
 /*! Open the specified ephemeris file
   return 0 on error.
   return 1 on success.
@@ -1239,3 +1319,4 @@ int calceph_(double *JD0, double *time, int *target, int *center, double PV[6])
 {
     return calceph_scompute(*JD0, *time, *target, *center, PV);
 }
+

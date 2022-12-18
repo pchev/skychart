@@ -11,7 +11,7 @@
   \author  M. Gastineau
            Astronomie et Systemes Dynamiques, IMCCE, CNRS, Observatoire de Paris.
 
-   Copyright, 2019, CNRS
+   Copyright, 2019-2021, CNRS
    email of the author : Mickael.Gastineau@obspm.fr
 
   History:
@@ -115,9 +115,6 @@ knowledge of the CeCILL-C,CeCILL-B or CeCILL license and that you accept its ter
 int calceph_spk_interpol_PV_segment_18(struct SPKfile *pspk, struct SPKSegmentHeader *seg,
                                        struct SPICEcache *cache, treal TimeJD0, treal Timediff, stateType * Planet)
 {
-#if DEBUG
-    int j;
-#endif
     int p;
 
     const double Timesec = ((TimeJD0 - 2.451545E+06) + Timediff) * 86400E0;

@@ -6,7 +6,7 @@
   \author  M. Gastineau 
            Astronomie et Systemes Dynamiques, IMCCE, CNRS, Observatoire de Paris. 
 
-   Copyright,  2017, CNRS
+   Copyright,  2017-2021, CNRS
    email of the author : Mickael.Gastineau@obspm.fr
 
   History:
@@ -133,7 +133,34 @@ int calceph_getorientrecordcount(t_calcephbin * eph)
 */
 /*--------------------------------------------------------------------------*/
 int calceph_getorientrecordindex(t_calcephbin * eph, int index, int *target, double *firsttime,
-                                   double *lasttime, int *frame)
+                                 double *lasttime, int *frame)
+{
+    int segid = -1;
+
+    return calceph_getorientrecordindex2(eph, index, target, firsttime, lasttime, frame, &segid);
+}
+
+/*--------------------------------------------------------------------------*/
+/*! This function returns the target body, the first and last time, 
+ the reference frame, and the type of segment available at the specified index 
+ for the orientation's records of the ephemeris file  associated to eph.
+ 
+   return 0 on error, otherwise non-zero value.
+  
+  @param eph (inout) ephemeris descriptor
+  @param index (in) index of the orient’s record, between 1 and calceph_getorientrecordcount()
+  @param target – The target body
+  @param firsttime (out) the Julian date of the first time available in this record, 
+    expressed in the same time scale as calceph_gettimescale.
+  @param lasttime (out) the Julian date of the first time available in this record,
+    expressed in the same time scale as calceph_gettimescale.
+  @param frame (out) reference frame
+  1  = ICRF
+  @param segid (out) type of segment
+*/
+/*--------------------------------------------------------------------------*/
+int calceph_getorientrecordindex2(t_calcephbin * eph, int index, int *target, double *firsttime,
+                                  double *lasttime, int *frame, int *segid)
 {
     int res = 0;
 
@@ -141,16 +168,16 @@ int calceph_getorientrecordindex(t_calcephbin * eph, int index, int *target, dou
     {
         case CALCEPH_espice:
             res = calceph_spice_getorientrecordindex(&eph->data.spkernel, index, target, firsttime,
-                                                       lasttime, frame);
+                                                     lasttime, frame, segid);
             break;
 
         case CALCEPH_ebinary:
             res = calceph_inpop_getorientrecordindex(&eph->data.binary, index, target, firsttime,
-                                                       lasttime, frame);
+                                                     lasttime, frame, segid);
             break;
 
         default:
-            fatalerror("Unknown ephemeris type in calceph_getorientrecordindex\n");
+            fatalerror("Unknown ephemeris type in calceph_getorientrecordindex or calceph_getorientrecordindex2\n");
             break;
     }
     return res;

@@ -7,7 +7,7 @@
   \author  M. Gastineau
            Astronomie et Systemes Dynamiques, IMCCE, CNRS, Observatoire de Paris.
 
-   Copyright, 2011-2020, CNRS
+   Copyright, 2011-2021, CNRS
    email of the author : Mickael.Gastineau@obspm.fr
 
   History:
@@ -140,12 +140,13 @@ static void calceph_txtfk_debug(const struct TXTFKfile *header)
 
    @return  1 on sucess and 0 on failure
 
-   @param file (inout) file descriptor.
+   @param file (inout) file descriptor. Closed on exit if success.
    @param filename (in) A character string giving the name of an ephemeris data file.
+ @param locale (in) C locale to handle the decimal point inside the conversion string to double
    @param res (out) descriptor of the ephemeris.
 */
 /*--------------------------------------------------------------------------*/
-int calceph_txtfk_open(FILE * file, const char *filename, struct SPICEkernel *res)
+int calceph_txtfk_open(FILE * file, const char *filename, struct calceph_locale clocale, struct SPICEkernel *res)
 {
     off_t lenfile;
 
@@ -173,9 +174,9 @@ int calceph_txtfk_open(FILE * file, const char *filename, struct SPICEkernel *re
     res->filetype = TXT_FK;
     res->filedata.txtfk.txtpckfile.listconstant = NULL;
     res->filedata.txtfk.txtpckfile.buffer = NULL;
-    res->filedata.txtfk.txtpckfile.file = NULL;
+    res->filedata.txtfk.txtpckfile.clocale = clocale;
     res->filedata.txtfk.listframe = NULL;
-    
+
   /*---------------------------------------------------------*/
     /* get the file size and read all the file to the memory */
   /*---------------------------------------------------------*/
@@ -341,10 +342,6 @@ int calceph_txtfk_open(FILE * file, const char *filename, struct SPICEkernel *re
                                         buffer[k] = 'E';
                                 }
                             }
-                            /* printf("value= %d %d '%.*s'\n", (int) begvalue, (int) endvalue, (int) (endvalue -
-                             * begvalue), buffer + begvalue); */
-                            /*dvalue = strtod(buffer + begvalue, NULL);
-                               if (buffer[curpos]=='D' || buffer[curpos]=='d') buffer[curpos]='E';  */
 
                             /* create the new value */
                             pnewval = (struct TXTPCKvalue *) malloc(sizeof(struct TXTPCKvalue));
@@ -408,6 +405,7 @@ int calceph_txtfk_open(FILE * file, const char *filename, struct SPICEkernel *re
                     }
                     pnewcst->next = NULL;
                     pnewcst->value = listvalue;
+                    pnewcst->assignment = 0;
                     pnewcst->name = (char *) malloc(((size_t) (endkeyword - begkeyword + 1)) * sizeof(char));
                     if (pnewcst->name == NULL)
                     {
@@ -438,6 +436,7 @@ int calceph_txtfk_open(FILE * file, const char *filename, struct SPICEkernel *re
 
     res->filedata.txtfk.txtpckfile.listconstant = listconstant;
     res->filedata.txtfk.txtpckfile.buffer = buffer;
+    res->filedata.txtfk.txtpckfile.clocale = clocale;
     rootlistframe = NULL;
 
   /*---------------------------------------------------------*/
@@ -615,7 +614,7 @@ int calceph_txtfk_open(FILE * file, const char *filename, struct SPICEkernel *re
         }
     }
 
-    res->filedata.txtfk.txtpckfile.file = file;
+    fclose(file);
 #if DEBUG
     calceph_txtfk_debug(&res->filedata.txtfk);
 #endif
@@ -934,13 +933,13 @@ int calceph_txtfk_createeulerangles_matrix(double tkframe_angles[3], double tkfr
     }
     else
     {
-        psi = atan2(tkframe_matrix[0][2], -tkframe_matrix[1][2]);
+        psi = atan2(tkframe_matrix[0][2], tkframe_matrix[1][2]);
         theta = acos(tkframe_matrix[2][2]);
-        phi = atan2(tkframe_matrix[2][0], tkframe_matrix[2][1]);
+        phi = atan2(tkframe_matrix[2][0], -tkframe_matrix[2][1]);
     }
-    tkframe_angles[0] = -psi;
-    tkframe_angles[1] = -theta;
-    tkframe_angles[2] = -phi;
-
+    tkframe_angles[0] = psi;
+    tkframe_angles[1] = theta;
+    tkframe_angles[2] = phi;
+    
     return 1;
 }

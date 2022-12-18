@@ -11,7 +11,7 @@
   \author  M. Gastineau 
            Astronomie et Systemes Dynamiques, IMCCE, CNRS, Observatoire de Paris. 
 
-   Copyright, 2011-2018, CNRS
+   Copyright, 2011-2021, CNRS
    email of the author : Mickael.Gastineau@obspm.fr
 
   History:
@@ -362,7 +362,15 @@ static void calceph_spk_interpol_PV_segment_20_an(const double *Coeff_Array, tre
                                                   treal Timediff, struct SPKSegmentHeader_20 *seg,
                                                   treal Timerecordbeg, stateType * Planet, int N)
 {
-    treal Cp[15000], P_Sum[3], V_Sum[3], Tc, Ip[15000], Up[15000], Vp[15000];
+
+#if __STDC_VERSION__>199901L
+#define NSTACK_INTERPOL (N+1)
+#else
+#define NSTACK_INTERPOL 15000
+#endif
+
+    treal Cp[NSTACK_INTERPOL], P_Sum[3], V_Sum[3], Tc, Ip[NSTACK_INTERPOL], Up[NSTACK_INTERPOL], Vp[NSTACK_INTERPOL];
+#undef NSTACK_INTERPOL
 
     long long int TimeJD0pent = longr(TimeJD0);
 

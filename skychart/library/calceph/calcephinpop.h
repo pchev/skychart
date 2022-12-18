@@ -7,7 +7,7 @@
   \author  M. Gastineau
            Astronomie et Systemes Dynamiques, IMCCE, CNRS, Observatoire de Paris.
 
-   Copyright, 2008-2019, CNRS
+   Copyright, 2008-2021, CNRS
    email of the author : Mickael.Gastineau@obspm.fr
 
  History :
@@ -317,6 +317,7 @@ int calceph_inpop_interpol_PV(struct calcephbin_inpop *p_pbinfile, treal TimeJD0
 int calceph_inpop_readcoeff(t_memarcoeff * pcoeftime_array, double Time);
 int calceph_inpop_seekreadcoeff(t_memarcoeff * pephbin, double Time);
 int calceph_inpop_open(FILE * file, const char *fileName, struct calcephbin_inpop *res);
+struct calcephbin_inpop calceph_inpop_fdopen(struct calcephbin_inpop *eph);
 void calceph_inpop_close(struct calcephbin_inpop *eph);
 int calceph_inpop_prefetch(struct calcephbin_inpop *eph);
 void calceph_interpol_PV_an(const t_memarcoeff * p_pbinfile, treal TimeJD0, treal Timediff, stateType * Planet,
@@ -368,7 +369,7 @@ int calceph_inpop_gettimescale(struct calcephbin_inpop *eph);
 int calceph_inpop_gettimespan(struct calcephbin_inpop *eph, double *firsttime, double *lasttime, int *continuous);
 int calceph_inpop_getpositionrecordcount(struct calcephbin_inpop *eph);
 int calceph_inpop_getpositionrecordindex(struct calcephbin_inpop *eph, int index, int *target,
-                                         int *center, double *firsttime, double *lasttime, int *frame);
+                                         int *center, double *firsttime, double *lasttime, int *frame, int *segid);
 int calceph_inpop_getorientrecordcount(struct calcephbin_inpop *eph);
 int calceph_inpop_getorientrecordindex(struct calcephbin_inpop *eph, int index, int *target,
-                                       double *firsttime, double *lasttime, int *frame);
+                                       double *firsttime, double *lasttime, int *frame, int *segid);

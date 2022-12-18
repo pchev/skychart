@@ -14,7 +14,7 @@ interface
     \author  M. Gastineau
              Astronomie et Systemes Dynamiques, IMCCE, CNRS, Observatoire de Paris.
 
-     Copyright, 2008-2020, CNRS
+     Copyright, 2008-2022, CNRS
      email of the author : Mickael.Gastineau@obspm.fr
    }
   {----------------------------------------------------------------- }
@@ -75,10 +75,10 @@ interface
   const
     CALCEPH_VERSION_MAJOR = 3;    
   {! version : minor number of CALCEPH library  }
-    CALCEPH_VERSION_MINOR = 4;    
+    CALCEPH_VERSION_MINOR = 5;
   {! version : patch number of CALCEPH library  }
-    CALCEPH_VERSION_PATCH = 6;    
-    CALCEPH_VERSION_STRING = '3.4.6';
+    CALCEPH_VERSION_PATCH = 1;
+    CALCEPH_VERSION_STRING = '3.5.1';
 
   {! define the maximum number of characters (includeing the trailing '\0')
    that the name of a constant could contain.  }
@@ -107,6 +107,27 @@ interface
     CALCEPH_OUTPUT_EULERANGLES = 64;    
   {! outputs are the nutation angles  }
     CALCEPH_OUTPUT_NUTATIONANGLES = 128;
+
+  { list of the known segment type for spice kernels and inpop/jpl original file format  }
+  { segment of the original DE/INPOP file format }
+    CALCEPH_SEGTYPE_ORIG_0 = 0;    {!< segment type for the original DE/INPOP file format }
+  { segment of the spice kernels }
+    CALCEPH_SEGTYPE_SPK_1  = 1;   {!< Modified Difference Arrays. The time argument for these ephemerides is TDB }
+    CALCEPH_SEGTYPE_SPK_2  = 2;   {!< Chebyshev polynomials for position. fixed length time intervals.The time argument for these ephemerides is TDB }
+    CALCEPH_SEGTYPE_SPK_3  = 3;   {!< Chebyshev polynomials for position and velocity. fixed length time intervals. The time argument for these ephemerides is TDB }
+    CALCEPH_SEGTYPE_SPK_5  = 5;   {!< Discrete states (two body propagation).  The time argument for these ephemerides is TDB }
+    CALCEPH_SEGTYPE_SPK_8  = 8;   {!< Lagrange Interpolation - Equal Time Steps. The time argument for these ephemerides is TDB }
+    CALCEPH_SEGTYPE_SPK_9  = 9;   {!< Lagrange Interpolation - Unequal Time Steps. The time argument for these ephemerides is TDB }
+    CALCEPH_SEGTYPE_SPK_12 = 12;  {!< Hermite Interpolation - Equal Time Steps. The time argument for these ephemerides is TDB }
+    CALCEPH_SEGTYPE_SPK_13 = 13;  {!< Hermite Interpolation - Unequal Time Steps. The time argument for these ephemerides is TDB }
+    CALCEPH_SEGTYPE_SPK_17 = 17;  {!< Equinoctial Elements. The time argument for these ephemerides is TDB }
+    CALCEPH_SEGTYPE_SPK_18 = 18;  {!< ESOC/DDID Hermite/Lagrange Interpolation.  The time argument for these ephemerides is TDB }
+    CALCEPH_SEGTYPE_SPK_19 = 19;  {!< ESOC/DDID Piecewise Interpolation. The time argument for these ephemerides is TDB }
+    CALCEPH_SEGTYPE_SPK_20 = 20;  {!< Chebyshev polynomials for velocity. fixed length time intervals. The time argument for these ephemerides is TDB }
+    CALCEPH_SEGTYPE_SPK_21 = 21;  {!< Extended Modified Difference Arrays. The time argument for these ephemerides is TDB }
+    CALCEPH_SEGTYPE_SPK_102 = 102; {!< Chebyshev polynomials for position. fixed length time intervals.  The time argument for these ephemerides is TCB }
+    CALCEPH_SEGTYPE_SPK_103 = 103; {!< Chebyshev polynomials for position and velocity. fixed length time intervals. The time argument for these ephemerides is TCB }
+    CALCEPH_SEGTYPE_SPK_120 = 120; {!< Chebyshev polynomials for velocity. fixed length time intervals.  The time argument for these ephemerides is TCB }
 
   {! NAIF identification numbers for the Sun and planetary barycenters (table 2
    * of reference 1)  }
@@ -156,7 +177,7 @@ interface
     NAIFID_METIS = 516;    
     NAIFID_CALLIRRHOE = 517;    
     NAIFID_THEMISTO = 518;    
-    NAIFID_MAGACLITE = 519;    
+    NAIFID_MEGACLITE = 519;
     NAIFID_TAYGETE = 520;    
     NAIFID_CHALDENE = 521;    
     NAIFID_HARPALYKE = 522;    
@@ -447,7 +468,7 @@ type
   Tcalceph_sopen = function (filename:Pchar):longint;cdecl;
 
   {! return the version of the ephemeris data file as a null-terminated string  }
-  Tcalceph_sgetfileversion = function (var szversion: Pchar):longint;cdecl;
+  Tcalceph_sgetfileversion = function (var szversion: Tcalcstr):longint;cdecl;
 
   {! compute the position <x,y,z> and velocity <xdot,ydot,zdot>
      for a given target and center  }
@@ -584,6 +605,12 @@ type
   Tcalceph_getpositionrecordindex = function (eph: Pt_calcephbin; index:longint; var target:longint; var center:longint; var firsttime:double;
              var lasttime:double; var frame:longint):longint;cdecl;
 
+  {! return the target and origin bodies, the first and last time, the reference frame
+   and the segment type available at the specified position’s records' index of the
+   ephemeris file }
+  Tcalceph_getpositionrecordindex2 = function (eph: Pt_calcephbin; index:longint; var target:longint; var center:longint; var firsttime:double;
+              var lasttime:double; var frame:longint; var segtype:longint):longint;cdecl;
+
   {! return the number of orientation’s records available in the ephemeris file
       }
   Tcalceph_getorientrecordcount = function (eph: Pt_calcephbin):longint;cdecl;
@@ -594,8 +621,17 @@ type
   Tcalceph_getorientrecordindex = function (eph: Pt_calcephbin; index:longint; var target:longint; var firsttime:double; var lasttime:double;
              var frame:longint):longint;cdecl;
 
+  {! return the target body, the first and last time, the reference frame and the segment type
+   available at the specified orientation’s records' index of the ephemeris file
+   }
+   Tcalceph_getorientrecordindex2 = function (eph: Pt_calcephbin; index:longint; var target:longint; var firsttime:double; var lasttime:double;
+              var frame:longint; var segtype:longint):longint;cdecl;
+
   {! close an ephemeris data file and destroy the ephemeris descriptor  }
   Tcalceph_close = procedure (eph: Pt_calcephbin);cdecl;
+
+  {! return the maximal order of the derivatives for a segment type }
+  Tcalceph_getmaxsupportedorder = function (idseg: longint): longint;
 
   {! return the version of the library as a null-terminated string  }
   Tcalceph_getversion_str = procedure (var szversion:Tcalcstr);cdecl;

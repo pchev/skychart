@@ -11,7 +11,7 @@
   \author  M. Gastineau 
            Astronomie et Systemes Dynamiques, IMCCE, CNRS, Observatoire de Paris. 
 
-   Copyright, 2016, 2017, CNRS
+   Copyright, 2016-2021, CNRS
    email of the author : Mickael.Gastineau@obspm.fr
 
   History:
@@ -117,9 +117,6 @@ knowledge of the CeCILL-C,CeCILL-B or CeCILL license and that you accept its ter
 int calceph_spk_interpol_PV_segment_12(struct SPKfile *pspk, struct SPKSegmentHeader *seg, struct SPICEcache *cache,
                                        treal TimeJD0, treal Timediff, stateType * Planet)
 {
-#if  DEBUG
-    int j;
-#endif
     int p;
 
     const double Delta = ((TimeJD0 - 2.451545E+06) + Timediff) * 86400E0 - seg->seginfo.data12.T_begin;

@@ -8,7 +8,7 @@
   \author  M. Gastineau 
            Astronomie et Systemes Dynamiques, IMCCE, CNRS, Observatoire de Paris. 
 
-   Copyright, 2008-2019, CNRS
+   Copyright, 2008-2021, CNRS
    email of the author : Mickael.Gastineau@obspm.fr
 
   History:
@@ -1130,6 +1130,11 @@ int calceph_inpop_compute_unit_check(int target, int center, int unit,
             fatalerror("Center object %d is not available in the ephemeris file.\n", center);
             return 0;
         }
+        if (*center_oldid !=0 && (target == NUTATIONS+1 || target == LIBRATIONS+1 || target == TTMTDB+1 || target == TCGMTCB+1))
+        {
+            fatalerror("Center object should be 0 (instead of %d) for the given target %d.\n", center, target);
+            return 0;
+        }
         *newunit = unit;
     }
     return 1;
@@ -1508,7 +1513,13 @@ static int calceph_interpol_PV_planet(struct calcephbin_inpop *p_pbinfile, treal
 /*--------------------------------------------------------------------------*/
 void calceph_interpol_PV_lowlevel(stateType * X, const treal * A, treal Tc, treal scale, int N, int ncomp)
 {
-    treal Cp[15000], Up[15000], Vp[15000], Wp[15000];
+#if __STDC_VERSION__>199901L
+#define NSTACK_INTERPOL (N+1)
+#else
+#define NSTACK_INTERPOL 15000
+#endif
+    treal Cp[NSTACK_INTERPOL], Up[NSTACK_INTERPOL], Vp[NSTACK_INTERPOL], Wp[NSTACK_INTERPOL];
+#undef NSTACK_INTERPOL
 
     /* Compute interpolated position */
     calceph_chebyshev_order_0(Cp, N, Tc);

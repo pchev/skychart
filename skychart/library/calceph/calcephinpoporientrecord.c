@@ -6,7 +6,7 @@
   \author  M. Gastineau 
            Astronomie et Systemes Dynamiques, IMCCE, CNRS, Observatoire de Paris. 
 
-   Copyright, 2017, CNRS
+   Copyright, 2017-2021, CNRS
    email of the author : Mickael.Gastineau@obspm.fr
 
   History:
@@ -102,7 +102,7 @@ int calceph_inpop_getorientrecordcount(struct calcephbin_inpop *eph)
 
     if (eph->H1.libratPtr[1] > 0 && eph->H1.libratPtr[2] > 0)
     {
-         res++;
+        res++;
     }
 
     return res;
@@ -110,7 +110,7 @@ int calceph_inpop_getorientrecordcount(struct calcephbin_inpop *eph)
 
 /*--------------------------------------------------------------------------*/
 /*! This function returns the target and origin bodies, the first and last time, 
- and the reference frame available at the specified index for the orientation's records 
+ the reference frame, and the type of segment available at the specified index for the orientation's records 
   of the ephemeris file associated to eph.
  
  
@@ -125,25 +125,27 @@ int calceph_inpop_getorientrecordcount(struct calcephbin_inpop *eph)
     expressed in the same time scale as calceph_gettimescale.
   @param frame (out) reference frame
   1  = ICRF
+  @param segid (out) type of segment
 */
 /*--------------------------------------------------------------------------*/
-int calceph_inpop_getorientrecordindex(struct calcephbin_inpop *eph, int index, int *target, 
-                                         double *firsttime, double *lasttime, int *frame)
+int calceph_inpop_getorientrecordindex(struct calcephbin_inpop *eph, int index, int *target,
+                                       double *firsttime, double *lasttime, int *frame, int *segid)
 {
     int res = 0;
 
     *firsttime = eph->H1.timeData[0];
     *lasttime = eph->H1.timeData[1];
     *frame = 1;
+    *segid = CALCEPH_SEGTYPE_ORIG_0;
 
     if (eph->H1.libratPtr[1] > 0 && eph->H1.libratPtr[2] > 0)
     {
-         index--;
-         if (index==0)
-         {
-             *target = NAIFID_MOON;
-             res = 1;
-         }    
+        index--;
+        if (index == 0)
+        {
+            *target = NAIFID_MOON;
+            res = 1;
+        }
     }
     return res;
 }

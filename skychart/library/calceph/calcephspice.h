@@ -8,7 +8,7 @@
            Astronomie et Systemes Dynamiques, IMCCE, CNRS, Observatoire de
   Paris.
 
-   Copyright, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019, CNRS
+   Copyright, 2011-2021, CNRS
    email of the author : Mickael.Gastineau@obspm.fr
 
   History:
@@ -69,6 +69,12 @@ terms.
 #endif
 #if HAVE_PTHREAD
 #include <pthread.h>
+#endif
+#if HAVE_LOCALE_H
+#include <locale.h>
+#endif
+#if HAVE_XLOCALE_H
+#include <xlocale.h>
 #endif
 
 #include "calcephstatetype.h"
@@ -171,6 +177,27 @@ enum SPKBinaryFileFormat
     BFF_NATIVE_IEEE = 0         /*!< big or little-endian order for numbers but same as current
                                    hardware. not in standard, but allow faster processing.  */
 };
+
+/*! handle the decimal point for any locale : strtod is dependent to locale for the decimal point */
+#if HAVE_STRTOD_L && ((HAVE_NEWLOCALE && defined(LC_NUMERIC_MASK)) || HAVE__CREATE_LOCALE) && HAVE_FREELOCALE && (HAVE_LOCALE_H || HAVE_XLOCALE_H)
+/*! use strtod version without locale sensitivity */
+#define USE_STRTOD_L 1
+/*! structure of C locale */
+struct calceph_locale 
+{
+    locale_t dataclocale;       /*!< define the locale C to handle properly the decimal point  */
+    int useclocale;             /*!< =1 if locale should be used for the conversion */
+};    
+#else    
+/*! discard the usage of strtod_l */
+#undef USE_STRTOD_L
+/*! structure of C locale */
+struct calceph_locale
+{
+    int useclocale;             /*!< always 0 */
+};    
+#endif
+
 
 /*-----------------------------------------------------------------*/
 /* structures */
@@ -392,6 +419,7 @@ struct SPKfile
     double *mmap_buffer;        /*!< preallocated buffer with mmap */
     size_t mmap_size;           /*!< size of mmap_buffer in bytes */
     int mmap_used;              /*!< =1 mmap was used instead of malloc */
+    enum SPKBinaryFileFormat bff; /*!< if bff!=BFF_NATIVE_IEEE, disable prefetch */ 
 };
 
 /*-----------------------------------------------------------------*/
@@ -413,6 +441,7 @@ struct TXTPCKconstant
     struct TXTPCKconstant *next;    /*!< next constant */
     char *name;                 /*!< name */
     struct TXTPCKvalue *value;  /*!< value */
+    int  assignment;            /*!< incremental assignment = 1, direct assignment = 0 */
 };
 
 /*-----------------------------------------------------------------*/
@@ -420,8 +449,8 @@ struct TXTPCKconstant
 /*-----------------------------------------------------------------*/
 struct TXTPCKfile
 {
-    FILE *file;                 /*!< I/O descriptor */
-    char *buffer;               /*!< content of the constant */
+    struct calceph_locale clocale;         /*!< C locale for the conversion : not duplicated, should not be free */
+    char *buffer;                           /*!< content of the constant */
     struct TXTPCKconstant *listconstant;    /*!< list of constants */
 };
 
@@ -537,6 +566,7 @@ struct calcephbin_spice
     /* predefined constant */
     double AU;                  /*!< Astronomical Unit */
     double EMRAT;               /*!< Earth-Moon mass ratio */
+    struct calceph_locale clocale;  /*!< C locale for the conversion : should be freed on close statement  */
 };
 
 /*-----------------------------------------------------------------*/
@@ -630,13 +660,13 @@ int calceph_binpck_open(FILE * file, const char *filename, struct SPICEkernel *r
 void calceph_binpck_close(struct SPKfile *eph);
 
 /*! open for reading a text PCK file */
-int calceph_txtpck_open(FILE * file, const char *filename, struct SPICEkernel *res);
+int calceph_txtpck_open(FILE * file, const char *filename, struct calceph_locale clocale, struct SPICEkernel *res);
 
 /*! close for reading a text PCK file */
 void calceph_txtpck_close(struct TXTPCKfile *eph);
 
 /*! open for reading a text FK file */
-int calceph_txtfk_open(FILE * file, const char *filename, struct SPICEkernel *res);
+int calceph_txtfk_open(FILE * file, const char *filename, struct calceph_locale clocale, struct SPICEkernel *res);
 
 /*! close for reading a text FK file */
 void calceph_txtfk_close(struct TXTFKfile *eph);
@@ -684,11 +714,15 @@ int calceph_spk_readword(FILE * file, const char *filename, int rec_begin, int r
 int calceph_spk_fastreadword(struct SPKfile *pspk, const struct SPKSegmentHeader *seg,
                              struct SPICEcache *cache, const char *filename, int rec_begin, int rec_end,
                              const double **record);
+enum SPKBinaryFileFormat calceph_bff_detect(struct SPKHeader *header);
+void calceph_bff_convert_array_double(double *x, int n, enum SPKBinaryFileFormat reqconvert);
+void calceph_bff_reorder_array_int(int *x, int n, enum SPKBinaryFileFormat reqconvert);
+
 
 /*-----------------------------------------------------------------*/
 /*! internal functions to read text kernel files */
 /*-----------------------------------------------------------------*/
-int calceph_txtpck_load(FILE * file, const char *filename, const char *header, struct TXTPCKfile *res);
+int calceph_txtpck_load(FILE * file, const char *filename, const char *header, struct calceph_locale clocale, struct TXTPCKfile *res);
 
 int calceph_txtpck_getconstant_int(struct TXTPCKfile *eph, const char *name, int *p_pival);
 int calceph_txtpck_getconstant_intmatrix1x3(struct TXTPCKfile *eph, const char *name, int *p_pival);
@@ -701,6 +735,8 @@ int calceph_txtpck_getconstant_matrix1x3(struct TXTPCKfile *eph, const char *nam
 int calceph_txtpck_getconstant_txtpckvalue(struct TXTPCKfile *eph, const char *name,
                                            struct TXTPCKvalue **p_ptxtpckvalue);
 struct TXTPCKconstant *calceph_txtpck_getptrconstant(struct TXTPCKfile *eph, const char *name);
+
+int calceph_txtpck_merge_incrementalassignment(struct SPICEkernel *list,  struct SPICEkernel *newkernel);
 
 int calceph_txtpck_getvalue_char(struct TXTPCKvalue *listvalue, char *p_pszval);
 
@@ -758,10 +794,10 @@ int calceph_spice_gettimescale(const struct calcephbin_spice *eph);
 int calceph_spice_gettimespan(const struct calcephbin_spice *eph, double *firsttime, double *lasttime, int *continuous);
 int calceph_spice_getpositionrecordcount(const struct calcephbin_spice *eph);
 int calceph_spice_getpositionrecordindex(const struct calcephbin_spice *eph, int index, int *target,
-                                         int *center, double *firsttime, double *lasttime, int *frame);
+                                         int *center, double *firsttime, double *lasttime, int *frame, int *segid);
 int calceph_spice_getorientrecordcount(const struct calcephbin_spice *eph);
 int calceph_spice_getorientrecordindex(const struct calcephbin_spice *eph, int index, int *target,
-                                       double *firsttime, double *lasttime, int *frame);
+                                       double *firsttime, double *lasttime, int *frame, int *segid);
 
 /*-----------------------------------------------------------------*/
 /*! internal functions to link objects */
@@ -779,10 +815,11 @@ int calceph_spice_tablelinkbody_compute(struct calcephbin_spice *eph, double JD0
 
 int calceph_spice_cache_init(struct SPICEcache **cache, int count_body);
 
+int calceph_spice_tablelinkbody_locatelinktime_complex(struct SPICEtablelinkbody *table, int target,
+                                                       int center, struct SPICElinktime ***link, int **countlisttime);
+
 int calceph_spice_findframe_matrix(const struct calcephbin_spice *eph, int id, double JD0, double time,
                                    double matrix[3][3]);
 
-int calceph_spice_tablelinkbody_locatelinktime_complex(struct SPICEtablelinkbody *table, int target,
-                                                       int center, struct SPICElinktime ***link, int **countlisttime);
 
 #endif /*__CALCEPH_SPICE__*/

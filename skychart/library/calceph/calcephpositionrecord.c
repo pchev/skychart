@@ -6,7 +6,7 @@
   \author  M. Gastineau 
            Astronomie et Systemes Dynamiques, IMCCE, CNRS, Observatoire de Paris. 
 
-   Copyright,  2017, CNRS
+   Copyright,  2017-2021, CNRS
    email of the author : Mickael.Gastineau@obspm.fr
 
   History:
@@ -136,22 +136,50 @@ int calceph_getpositionrecordcount(t_calcephbin * eph)
 int calceph_getpositionrecordindex(t_calcephbin * eph, int index, int *target, int *center, double *firsttime,
                                    double *lasttime, int *frame)
 {
+    int segid = -1;
+
+    return calceph_getpositionrecordindex2(eph, index, target, center, firsttime, lasttime, frame, &segid);
+}
+
+/*--------------------------------------------------------------------------*/
+/*! This function returns the target and origin bodies, the first and last time, 
+ , the reference frame, and the type of segment available at the specified index 
+ for the position's records of the ephemeris file  associated to eph.
+ 
+   return 0 on error, otherwise non-zero value.
+  
+  @param eph (inout) ephemeris descriptor
+  @param index (in) index of the position’s record, between 1 and calceph_getpositionrecordcount()
+  @param target – The target body
+  @param center – The origin body
+  @param firsttime (out) the Julian date of the first time available in this record, 
+    expressed in the same time scale as calceph_gettimescale.
+  @param lasttime (out) the Julian date of the first time available in this record,
+    expressed in the same time scale as calceph_gettimescale.
+  @param frame (out) reference frame
+  1  = ICRF
+  @param segid (out) type of segment
+*/
+/*--------------------------------------------------------------------------*/
+int calceph_getpositionrecordindex2(t_calcephbin * eph, int index, int *target, int *center, double *firsttime,
+                                    double *lasttime, int *frame, int *segid)
+{
     int res = 0;
 
     switch (eph->etype)
     {
         case CALCEPH_espice:
             res = calceph_spice_getpositionrecordindex(&eph->data.spkernel, index, target, center, firsttime,
-                                                       lasttime, frame);
+                                                       lasttime, frame, segid);
             break;
 
         case CALCEPH_ebinary:
             res = calceph_inpop_getpositionrecordindex(&eph->data.binary, index, target, center, firsttime,
-                                                       lasttime, frame);
+                                                       lasttime, frame, segid);
             break;
 
         default:
-            fatalerror("Unknown ephemeris type in calceph_getpositionrecordindex\n");
+            fatalerror("Unknown ephemeris type in calceph_getpositionrecordindex or calceph_getpositionrecordindex2\n");
             break;
     }
     return res;

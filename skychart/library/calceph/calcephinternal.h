@@ -133,6 +133,7 @@ struct calcephbin
 /*----------------------------------------------------------------------------*/
 /* functions */
 /*----------------------------------------------------------------------------*/
+t_calcephbin* calceph_open_array2(int n, char** filename);
 int calceph_unit_convert_quantities_time(stateType *Planet, int InputUnit,  int OutputUnit);
 int calceph_unit_convert_quantities_time_array(int n, stateType * Planet, int InputUnit, int OutputUnit);
 

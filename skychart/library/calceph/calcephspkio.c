@@ -9,7 +9,7 @@
            Astronomie et Systemes Dynamiques, IMCCE, CNRS, Observatoire de
   Paris.
 
-   Copyright, 2011-2020, CNRS
+   Copyright, 2011-2021, CNRS
    email of the author : Mickael.Gastineau@obspm.fr
 
   History:
@@ -112,10 +112,6 @@ static void calceph_spk_convertheader(struct SPKHeader *header, enum SPKBinaryFi
 
 static int calceph_bff_convert_int(int x, enum SPKBinaryFileFormat reqconvert);
 
-static void calceph_bff_convert_array_double(double *x, int n, enum SPKBinaryFileFormat reqconvert);
-
-static void calceph_bff_reorder_array_int(int *x, int n, enum SPKBinaryFileFormat reqconvert);
-
 /*--------------------------------------------------------------------------*/
 /*!
      Read the header data block for the SPK ephemeris file
@@ -134,15 +130,7 @@ int calceph_spk_open(FILE * file, const char *filename, struct SPICEkernel *res)
 {
     struct SPKHeader header;
 
-    enum SPKBinaryFileFormat reqconvert;
-
     struct SPKSegmentList *listseg;
-
-    union
-    {
-        unsigned char c[4];
-        unsigned int i;
-    } endian;
 
     listseg = NULL;
 
@@ -178,35 +166,7 @@ int calceph_spk_open(FILE * file, const char *filename, struct SPICEkernel *res)
     /* check if Binary File Format Identification requires a conversion for this
      * hardware */
   /*---------------------------------------------------------*/
-    reqconvert = BFF_NATIVE_IEEE;
-    endian.i = 0x01020304;
-    if (0x04 == endian.c[0])
-    {
-        /* hardware is little endian */
-        if (strncmp("BIG-IEEE", header.bff, BFF_LEN) == 0)
-        {
-#if DEBUG
-            printf("convert 'Binary File Format Identification' to little endian\n");
-#endif
-            reqconvert = BFF_BIG_IEEE;
-        }
-    }
-    else if (0x01 == endian.c[0])
-    {
-        /* hardware is big endian */
-        if (strncmp("LTL-IEEE", header.bff, BFF_LEN) == 0)
-        {
-#if DEBUG
-            printf("convert 'Binary File Format Identification' to big endian\n");
-#endif
-            reqconvert = BFF_LTL_IEEE;
-        }
-    }
-
-    if (reqconvert != BFF_NATIVE_IEEE)
-    {
-        calceph_spk_convertheader(&header, reqconvert);
-    }
+    res->filedata.spk.bff = calceph_bff_detect(&header);
 
 #if DEBUG
     calceph_spk_debugheader(&header);
@@ -222,7 +182,7 @@ int calceph_spk_open(FILE * file, const char *filename, struct SPICEkernel *res)
   /*---------------------------------------------------------*/
     /* read the list of segments */
   /*---------------------------------------------------------*/
-    if (calceph_spk_readlistsegment(file, filename, &listseg, header.fwd, header.bwd, reqconvert) == 0)
+    if (calceph_spk_readlistsegment(file, filename, &listseg, header.fwd, header.bwd, res->filedata.spk.bff) == 0)
     {
         return 0;
     }
@@ -279,7 +239,7 @@ int calceph_spk_prefetch(struct SPKfile *pspk)
 
     off_t newlen;
 
-    if (pspk->prefetch == 0)
+    if (pspk->prefetch == 0 && pspk->bff==BFF_NATIVE_IEEE)
     {
         if (fseeko(pspk->file, 0, SEEK_END) != 0)
         {
@@ -623,6 +583,7 @@ int calceph_spk_fastreadword(struct SPKfile *pspk, const struct SPKSegmentHeader
             {
                 return 0;
             }
+            calceph_bff_convert_array_double(cache->buffer, (rec_end - rec_begin + 1), seg->bff);
             cache->rec_begin = rec_begin;
             cache->rec_end = rec_end;
             cache->segment = seg;
@@ -798,6 +759,7 @@ static int calceph_spk_readsegment_header(FILE * file, const char *filename, str
                 seg->seginfo.data5.count_directory = ndirectory;
                 res = calceph_spk_readword(file, filename, seg->rec_end - 2 - ndirectory + 1, seg->rec_end - 2,
                                            seg->seginfo.data5.directory);
+                calceph_bff_convert_array_double( seg->seginfo.data5.directory, ndirectory, seg->bff);
             }
             break;
 
@@ -839,6 +801,7 @@ static int calceph_spk_readsegment_header(FILE * file, const char *filename, str
                 seg->seginfo.data13.count_directory = ndirectory;
                 res = calceph_spk_readword(file, filename, seg->rec_end - 2 - ndirectory + 1, seg->rec_end - 2,
                                            seg->seginfo.data13.directory);
+                calceph_bff_convert_array_double( seg->seginfo.data13.directory, ndirectory, seg->bff);
             }
             break;
 
@@ -892,6 +855,7 @@ static int calceph_spk_readsegment_header(FILE * file, const char *filename, str
                 seg->seginfo.data18.count_directory = ndirectory;
                 res = calceph_spk_readword(file, filename, seg->rec_end - 3 - ndirectory + 1, seg->rec_end - 3,
                                            seg->seginfo.data18.directory);
+                calceph_bff_convert_array_double( seg->seginfo.data18.directory, ndirectory, seg->bff);
             }
             break;
 
@@ -925,6 +889,7 @@ static int calceph_spk_readsegment_header(FILE * file, const char *filename, str
                 seg->seginfo.data21.count_directory = ndirectory;
                 res = calceph_spk_readword(file, filename, seg->rec_end - 2 - ndirectory + 1, seg->rec_end - 2,
                                            seg->seginfo.data21.directory);
+                calceph_bff_convert_array_double( seg->seginfo.data21.directory, ndirectory, seg->bff);
             }
             break;
 
@@ -1025,6 +990,55 @@ int calceph_spk_interpol_PV_segment(struct SPKfile *pspk, struct SPKSegmentHeade
 }
 
 /*--------------------------------------------------------------------------*/
+/*! detect if the header has the same endian of the hardware.
+if not, the header is converted to the endian of the hardware
+
+  @param header (inout) header to process
+*/
+/*--------------------------------------------------------------------------*/
+enum SPKBinaryFileFormat calceph_bff_detect(struct SPKHeader *header)
+{
+    union
+    {
+        unsigned char c[4];
+        unsigned int i;
+    } endian;
+
+    enum SPKBinaryFileFormat reqconvert;
+
+    reqconvert = BFF_NATIVE_IEEE;
+    endian.i = 0x01020304;
+    if (0x04 == endian.c[0])
+    {
+        /* hardware is little endian */
+        if (strncmp("BIG-IEEE", header->bff, BFF_LEN) == 0)
+        {
+#if DEBUG
+            printf("convert 'Binary File Format Identification' to little endian\n");
+#endif
+            reqconvert = BFF_BIG_IEEE;
+        }
+    }
+    else if (0x01 == endian.c[0])
+    {
+        /* hardware is big endian */
+        if (strncmp("LTL-IEEE", header->bff, BFF_LEN) == 0)
+        {
+#if DEBUG
+            printf("convert 'Binary File Format Identification' to big endian\n");
+#endif
+            reqconvert = BFF_LTL_IEEE;
+        }
+    }
+
+    if (reqconvert != BFF_NATIVE_IEEE)
+    {
+        calceph_spk_convertheader(header, reqconvert);
+    }
+    return reqconvert;
+}
+
+/*--------------------------------------------------------------------------*/
 /*!
      convert a integer to the native number
 
@@ -1066,7 +1080,7 @@ static int calceph_bff_convert_int(int x, enum SPKBinaryFileFormat reqconvert)
   @param reqconvert (in) type of data in the file
 */
 /*--------------------------------------------------------------------------*/
-static void calceph_bff_convert_array_double(double *x, int n, enum SPKBinaryFileFormat reqconvert)
+void calceph_bff_convert_array_double(double *x, int n, enum SPKBinaryFileFormat reqconvert)
 {
     union uswap
     {
@@ -1113,7 +1127,7 @@ static void calceph_bff_convert_array_double(double *x, int n, enum SPKBinaryFil
   @param reqconvert (in) type of data in the file
 */
 /*--------------------------------------------------------------------------*/
-static void calceph_bff_reorder_array_int(int *x, int n, enum SPKBinaryFileFormat reqconvert)
+void calceph_bff_reorder_array_int(int *x, int n, enum SPKBinaryFileFormat reqconvert)
 {
     int k;
 

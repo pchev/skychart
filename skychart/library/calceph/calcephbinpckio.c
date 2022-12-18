@@ -100,7 +100,7 @@ knowledge of the CeCILL-C,CeCILL-B or CeCILL license and that you accept its ter
 void calceph_binpck_debugsegment(struct SPKSegmentHeader *seg);
 #endif
 static int calceph_binpck_readlistsegment(FILE * file, const char *filename, struct SPKSegmentList **list, int fwd,
-                                          int bwd);
+                                          int bwd, enum SPKBinaryFileFormat reqconvert);
 static int calceph_binpck_readsegment_header(FILE * file, const char *filename, struct SPKSegmentHeader *seg);
 
 /*--------------------------------------------------------------------------*/
@@ -151,6 +151,12 @@ int calceph_binpck_open(FILE * file, const char *filename, struct SPICEkernel *r
         return 0;
     }
 
+  /*---------------------------------------------------------*/
+    /* check if Binary File Format Identification requires a conversion for this
+     * hardware */
+  /*---------------------------------------------------------*/
+    res->filedata.spk.bff = calceph_bff_detect(&header);
+
 #if DEBUG
     calceph_spk_debugheader(&header);
 #endif
@@ -165,7 +171,7 @@ int calceph_binpck_open(FILE * file, const char *filename, struct SPICEkernel *r
  /*---------------------------------------------------------*/
     /* read the list of segments */
  /*---------------------------------------------------------*/
-    if (calceph_binpck_readlistsegment(file, filename, &listseg, header.fwd, header.bwd) == 0)
+    if (calceph_binpck_readlistsegment(file, filename, &listseg, header.fwd, header.bwd, res->filedata.spk.bff) == 0)
     {
         return 0;
     }
@@ -197,9 +203,11 @@ void calceph_binpck_close(struct SPKfile *eph)
    @param list (inout) pointer to the list 
    @param fwd (in) record number to read
    @param bwd (in) previous record number
+   @param reqconvert (in) binary file format
 */
 /*--------------------------------------------------------------------------*/
-static int calceph_binpck_readlistsegment(FILE * file, const char *filename, struct SPKSegmentList **list, int fwd, int PARAMETER_UNUSED(bwd))
+static int calceph_binpck_readlistsegment(FILE * file, const char *filename, struct SPKSegmentList **list, int fwd, int PARAMETER_UNUSED(bwd), 
+                                          enum SPKBinaryFileFormat reqconvert)
 {
 #if HAVE_PRAGMA_UNUSED
 #pragma unused(bwd)
@@ -248,6 +256,9 @@ static int calceph_binpck_readlistsegment(FILE * file, const char *filename, str
                    fwd + 1, filename, strerror(errno));
         return 0;
     }
+
+    calceph_bff_convert_array_double(ddescriptor, DAF_RECORD_LEN / 8, reqconvert);
+
     next = (int) ddescriptor[0];
 #if DEBUG
     prev = (int) ddescriptor[1];
@@ -285,9 +296,11 @@ static int calceph_binpck_readlistsegment(FILE * file, const char *filename, str
     offset = 2;
     for (j = 0; j < count && res == 1; j++)
     {
-        const int *parint = (int *) (ddescriptor + offset + 3);
+        int *parint = (int *) (ddescriptor + offset + 3);
 
         struct SPKSegmentHeader *seg = pnew->array_seg.array + j;
+        
+        calceph_bff_reorder_array_int(parint, 5, reqconvert);
 
         seg->T_begin = ddescriptor[offset + 1];
         seg->T_end = ddescriptor[offset + 2];
@@ -297,6 +310,7 @@ static int calceph_binpck_readlistsegment(FILE * file, const char *filename, str
         seg->datatype = (enum SPKdatatype) parint[2];
         seg->rec_begin = parint[3];
         seg->rec_end = parint[4];
+        seg->bff = reqconvert;
 
         memcpy(seg->id, segmentid + SEGMENTID_LEN * j, SEGMENTID_LEN);
         memcpy(seg->descriptor, ddescriptor + offset, NS_SPK * 8);
@@ -316,7 +330,7 @@ static int calceph_binpck_readlistsegment(FILE * file, const char *filename, str
     /* go the next records */
     if (next != 0 && res != 0)
     {
-        res = calceph_binpck_readlistsegment(file, filename, list, next, fwd);
+        res = calceph_binpck_readlistsegment(file, filename, list, next, fwd, reqconvert);
     }
     return res;
 }
@@ -343,6 +357,7 @@ static int calceph_binpck_readsegment_header(FILE * file, const char *filename, 
             res = calceph_spk_readword(file, filename, seg->rec_end - 3, seg->rec_end, drecord);
             if (res == 1)
             {
+                calceph_bff_convert_array_double(drecord, 4, seg->bff);
                 seg->seginfo.data2.T_begin = drecord[0];
                 seg->seginfo.data2.T_len = drecord[1];
                 seg->seginfo.data2.count_dataperrecord = (int) drecord[2];
@@ -356,6 +371,7 @@ static int calceph_binpck_readsegment_header(FILE * file, const char *filename, 
             res = calceph_spk_readword(file, filename, seg->rec_end - 6, seg->rec_end, drecord);
             if (res == 1)
             {
+                calceph_bff_convert_array_double(drecord, 7, seg->bff);
                 seg->seginfo.data20.dscale = drecord[0];
                 seg->seginfo.data20.tscale = drecord[1];
                 seg->seginfo.data20.T_init_JD = drecord[2];

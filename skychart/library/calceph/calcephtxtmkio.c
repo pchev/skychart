@@ -7,7 +7,7 @@
   \author  M. Gastineau 
            Astronomie et Systemes Dynamiques, IMCCE, CNRS, Observatoire de Paris. 
 
-   Copyright, 2011-2020, CNRS
+   Copyright, 2011-2021, CNRS
    email of the author : Mickael.Gastineau@obspm.fr
 
   History:                                                                
@@ -99,11 +99,11 @@ knowledge of the CeCILL-C,CeCILL-B or CeCILL license and that you accept its ter
 /*--------------------------------------------------------------------------*/
 static int calceph_txtmk_symbols_getlen(const char *buffer, const struct TXTPCKvalue *kernel,
                                         const struct TXTPCKconstant *pathsymbols,
-                                        const struct TXTPCKconstant *pathvalues, off_t *slen);
+                                        const struct TXTPCKconstant *pathvalues, off_t * slen);
 static int calceph_txtmk_symbol_cmpeq(const char *buffer, const struct TXTPCKvalue *symb, off_t loc);
 static void calceph_txtmk_symbols_copy(char *dst, const char *buffer, const struct TXTPCKvalue *kernel,
                                        const struct TXTPCKconstant *pathsymbols,
-                                       const struct TXTPCKconstant *pathvalues, size_t * curdst);
+                                       const struct TXTPCKconstant *pathvalues, size_t *curdst);
 
 /*--------------------------------------------------------------------------*/
 /*!  Read the files of the text Meta kernel (MK) file
@@ -120,7 +120,7 @@ int calceph_txtmk_open(FILE * file, const char *filename, struct calcephbin_spic
     int ret;
     struct TXTPCKfile txtfile;
 
-    ret = calceph_txtpck_load(file, filename, "KPL/MK", &txtfile);
+    ret = calceph_txtpck_load(file, filename, "KPL/MK", res->clocale, &txtfile);
 
     if (ret)
     {
@@ -177,7 +177,7 @@ int calceph_txtmk_open(FILE * file, const char *filename, struct calcephbin_spic
                     off_t slen;
 
                     /* compute the length of the file name */
-                    lenfilename = (size_t)(kerntmpcont->loclast - kerntmpcont->locfirst);
+                    lenfilename = (size_t) (kerntmpcont->loclast - kerntmpcont->locfirst);
                     /* look for the $ statement */
                     ret = calceph_txtmk_symbols_getlen(txtfile.buffer, kerntmpcont, pathsymbols, pathvalues, &slen);
                     if (ret)
@@ -234,7 +234,7 @@ int calceph_txtmk_open(FILE * file, const char *filename, struct calcephbin_spic
                 if (ret)
                 {
                     /* load the file */
-                    t_calcephbin *ephbin = calceph_open_array(nfile, (const char *const *) arfilename);
+                    t_calcephbin *ephbin = calceph_open_array2(nfile, arfilename);
 
 #if DEBUG
                     printf("calceph_open_array returns '%p'\n", ephbin);
@@ -287,9 +287,6 @@ int calceph_txtmk_open(FILE * file, const char *filename, struct calcephbin_spic
         {
             ret = 0;
         }
-        /* on error, avoid to close 2 time the file */
-        if (ret == 0)
-            txtfile.file = NULL;
 
         /* unload constants */
 #if DEBUG
@@ -316,13 +313,13 @@ int calceph_txtmk_open(FILE * file, const char *filename, struct calcephbin_spic
 /*--------------------------------------------------------------------------*/
 static int calceph_txtmk_symbols_getlen(const char *buffer, const struct TXTPCKvalue *kernel,
                                         const struct TXTPCKconstant *pathsymbols,
-                                        const struct TXTPCKconstant *pathvalues, off_t *slen)
+                                        const struct TXTPCKconstant *pathvalues, off_t * slen)
 {
     int ret = 1;
     off_t pos;
 
 #if DEBUG
-    printf("calceph_txtmk_symbols_getlen(,%ld) -enter\n", (long int)*slen);
+    printf("calceph_txtmk_symbols_getlen(,%ld) -enter\n", (long int) *slen);
 #endif
 
     *slen = 0;
@@ -352,7 +349,7 @@ static int calceph_txtmk_symbols_getlen(const char *buffer, const struct TXTPCKv
     }
 
 #if DEBUG
-    printf("calceph_txtmk_symbols_getlen(,%ld) - return %d\n", (long int)*slen, ret);
+    printf("calceph_txtmk_symbols_getlen(,%ld) - return %d\n", (long int) *slen, ret);
 #endif
     return ret;
 }
@@ -390,7 +387,7 @@ static int calceph_txtmk_symbol_cmpeq(const char *buffer, const struct TXTPCKval
 /*--------------------------------------------------------------------------*/
 static void calceph_txtmk_symbols_copy(char *dst, const char *buffer, const struct TXTPCKvalue *kernel,
                                        const struct TXTPCKconstant *pathsymbols,
-                                       const struct TXTPCKconstant *pathvalues, size_t * curdst)
+                                       const struct TXTPCKconstant *pathvalues, size_t *curdst)
 {
     off_t pos;
 

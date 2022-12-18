@@ -7,7 +7,7 @@
 !  \author  M. Gastineau 
 !           Astronomie et Systemes Dynamiques, IMCCE, CNRS, Observatoire de Paris. 
 !
-!   Copyright, 2008-2019,  CNRS
+!   Copyright, 2008-2021,  CNRS
 !   email of the author : Mickael.Gastineau@obspm.fr
 ! 
 !
@@ -67,11 +67,11 @@
 ! version : major number of CALCEPH library
        integer, parameter ::  CALCEPH_VERSION_MAJOR=3
 ! version : minor number of CALCEPH library
-       integer, parameter ::  CALCEPH_VERSION_MINOR=4
+       integer, parameter ::  CALCEPH_VERSION_MINOR=5
 !  version : patch number of CALCEPH library 
-       integer, parameter ::  CALCEPH_VERSION_PATCH=6
+       integer, parameter ::  CALCEPH_VERSION_PATCH=1
 !  version : string of characters
-       character(*), parameter :: CALCEPH_VERSION_STRING='3.4.6'
+       character(*), parameter :: CALCEPH_VERSION_STRING='3.5.1'
 
        
 !/*----------------------------------------------------------------------------------------------*/
@@ -108,6 +108,28 @@
         INTEGER, parameter :: CALCEPH_OUTPUT_EULERANGLES=64
 !/*! outputs are the nutation angles */
         INTEGER, parameter :: CALCEPH_OUTPUT_NUTATIONANGLES=128
+
+!/* list of the known segment type for spice kernels and inpop/jpl original file format  */
+!/* segment of the original DE/INPOP file format */
+!/*! segment type for the original DE/INPOP file format */
+        INTEGER, parameter :: CALCEPH_SEGTYPE_ORIG_0=0    
+!/* segment of the spice kernels */
+        INTEGER, parameter :: CALCEPH_SEGTYPE_SPK_1=1  
+        INTEGER, parameter :: CALCEPH_SEGTYPE_SPK_2=2   
+        INTEGER, parameter :: CALCEPH_SEGTYPE_SPK_3=3   
+        INTEGER, parameter :: CALCEPH_SEGTYPE_SPK_5=5   
+        INTEGER, parameter :: CALCEPH_SEGTYPE_SPK_8=8   
+        INTEGER, parameter :: CALCEPH_SEGTYPE_SPK_9=9   
+        INTEGER, parameter :: CALCEPH_SEGTYPE_SPK_12=12  
+        INTEGER, parameter :: CALCEPH_SEGTYPE_SPK_13=13  
+        INTEGER, parameter :: CALCEPH_SEGTYPE_SPK_17=17  
+        INTEGER, parameter :: CALCEPH_SEGTYPE_SPK_18=18  
+        INTEGER, parameter :: CALCEPH_SEGTYPE_SPK_19=19  
+        INTEGER, parameter :: CALCEPH_SEGTYPE_SPK_20=20  
+        INTEGER, parameter :: CALCEPH_SEGTYPE_SPK_21=21  
+        INTEGER, parameter :: CALCEPH_SEGTYPE_SPK_102=102 
+        INTEGER, parameter :: CALCEPH_SEGTYPE_SPK_103=103 
+        INTEGER, parameter :: CALCEPH_SEGTYPE_SPK_120=120 
 
 
 !/*! NAIF identification numbers for the Sun and planetary barycenters (table 2 of reference 1) */
@@ -160,7 +182,7 @@
         INTEGER, parameter :: NAIFID_METIS         = 516     
         INTEGER, parameter :: NAIFID_CALLIRRHOE    = 517     
         INTEGER, parameter :: NAIFID_THEMISTO      = 518     
-        INTEGER, parameter :: NAIFID_MAGACLITE     = 519     
+        INTEGER, parameter :: NAIFID_MEGACLITE     = 519     
         INTEGER, parameter :: NAIFID_TAYGETE       = 520     
         INTEGER, parameter :: NAIFID_CHALDENE      = 521     
         INTEGER, parameter :: NAIFID_HARPALYKE     = 522     
@@ -808,6 +830,22 @@
           INTEGER(C_INT) :: calceph_getpositionrecordindex
         END FUNCTION calceph_getpositionrecordindex
 
+        ! return the target and origin bodies, the first and last time, the reference frame and the segment type in the ephemeris file
+        FUNCTION calceph_getpositionrecordindex2(eph, index, target,        &
+     &     center, firsttime, lasttime, frame, segid) BIND(C)
+          USE, INTRINSIC :: ISO_C_BINDING
+          IMPLICIT NONE
+          TYPE(C_PTR), VALUE, intent(in) :: eph
+          INTEGER(C_INT),VALUE, intent(in) :: index
+          REAL(C_DOUBLE), intent(out) :: firsttime
+          REAL(C_DOUBLE), intent(out) :: lasttime
+          INTEGER(C_INT), intent(out) :: target
+          INTEGER(C_INT), intent(out) :: center
+          INTEGER(C_INT), intent(out) :: frame
+          INTEGER(C_INT), intent(out) :: segid
+          INTEGER(C_INT) :: calceph_getpositionrecordindex2
+        END FUNCTION calceph_getpositionrecordindex2
+
         ! return the number of orientation’s records available in the ephemeris file 
         FUNCTION calceph_getorientrecordcount(eph) BIND(C)
           USE, INTRINSIC :: ISO_C_BINDING
@@ -830,13 +868,28 @@
           INTEGER(C_INT) :: calceph_getorientrecordindex
         END FUNCTION calceph_getorientrecordindex
 
+        ! return the target bodies, the first and last time, the reference frame and segment type in the ephemeris file
+        FUNCTION calceph_getorientrecordindex2(eph, index, target,        &
+     &     firsttime, lasttime, frame, segid) BIND(C)
+          USE, INTRINSIC :: ISO_C_BINDING
+          IMPLICIT NONE
+          TYPE(C_PTR), VALUE, intent(in) :: eph
+          INTEGER(C_INT),VALUE, intent(in) :: index
+          REAL(C_DOUBLE), intent(out) :: firsttime
+          REAL(C_DOUBLE), intent(out) :: lasttime
+          INTEGER(C_INT), intent(out) :: target
+          INTEGER(C_INT), intent(out) :: frame
+          INTEGER(C_INT), intent(out) :: segid
+          INTEGER(C_INT) :: calceph_getorientrecordindex2
+        END FUNCTION calceph_getorientrecordindex2
+
         ! get the file version of the ephemeris file
         FUNCTION calceph_getfileversion(eph, vers)                       &
      &   BIND(C, NAME='f2003calceph_getfileversion')
           USE, INTRINSIC :: ISO_C_BINDING
           IMPLICIT NONE
           TYPE(C_PTR), VALUE, intent(in) :: eph
-        character(len=1,kind=C_CHAR),dimension(1024),intent(out)::vers
+        character(len=1,kind=C_CHAR),dimension(33),intent(out)::vers
           integer(C_INT) :: calceph_getfileversion
         END FUNCTION calceph_getfileversion
 
@@ -847,6 +900,13 @@
           TYPE(C_PTR), VALUE, intent(in) :: eph
        END SUBROUTINE calceph_close
 
+        ! return the maximal order of the derivatives for a segment type
+        FUNCTION calceph_getmaxsupportedorder(idseg) BIND(C)
+          USE, INTRINSIC :: ISO_C_BINDING
+          IMPLICIT NONE
+          INTEGER(C_INT),VALUE, intent(in) :: idseg
+          INTEGER(C_INT) :: calceph_getmaxsupportedorder
+        END FUNCTION calceph_getmaxsupportedorder
 
         END INTERFACE
         

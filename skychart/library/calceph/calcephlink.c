@@ -6,7 +6,7 @@
   \author  M. Gastineau
            Astronomie et Systemes Dynamiques, IMCCE, CNRS, Observatoire de Paris.
 
-   Copyright, 2013, 2014, 2015, 2016, 2017, 2018, 2019, CNRS
+   Copyright, 2013-2021, CNRS
    email of the author : Mickael.Gastineau@obspm.fr
 
   History:
@@ -1176,22 +1176,11 @@ int calceph_spice_tablelinkbody_compute(struct calcephbin_spice *eph, double JD0
                                                       JD0, time, &state);
                 if (center != -1)
                 {
-                    calceph_stateType_rotate(&state, rotationmatrix);
+                    calceph_stateType_rotate_PV(&state, rotationmatrix);
                 }
                 else
                 {
-                    /* compute the euler angles from the rotation matrix */
-                    double tkframe_matrix[3][3];
-                    double matrixframe1[3][3];
-                    int tkframe_axes[3] = { 3, 1, 3 };
-                    calceph_txtfk_creatematrix_eulerangles(&(tkframe_matrix[0][0]), state.Position, tkframe_axes);
-                    calceph_matrix3x3_prod(matrixframe1, rotationmatrix, tkframe_matrix);
-                    res = calceph_txtfk_createeulerangles_matrix(state.Position, matrixframe1);
-                    if (res != 0 && state.order > 0)
-                    {
-                        fatalerror("Derivatives (or higher) are not computed with a non ICRF frame\n");
-                        res = 0;
-                    }
+                    res = calceph_stateType_rotate_eulerangles(&state, rotationmatrix);                    
                 }
             }
             else

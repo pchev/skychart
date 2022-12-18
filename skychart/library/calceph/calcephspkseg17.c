@@ -8,7 +8,7 @@
            Astronomie et Systemes Dynamiques, IMCCE, CNRS, Observatoire de
   Paris.
 
-   Copyright, 2018, CNRS
+   Copyright, 2018-2021, CNRS
    email of the author : Mickael.Gastineau@obspm.fr
 
   History:
@@ -295,7 +295,7 @@ int calceph_spk_interpol_PV_segment_17(struct SPKfile *PARAMETER_UNUSED(pspk),
     transeqtoinertial[2][0] = 0.;
     transeqtoinertial[2][1] = cos(de);
     transeqtoinertial[2][2] = sin(de);
-    calceph_stateType_rotate(Planet, transeqtoinertial);
+    calceph_stateType_rotate_PV(Planet, transeqtoinertial);
 
     return 1;
 }

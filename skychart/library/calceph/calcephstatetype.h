@@ -7,7 +7,7 @@
   \author  M. Gastineau 
            Astronomie et Systemes Dynamiques, IMCCE, CNRS, Observatoire de Paris. 
 
-   Copyright, 2011, 2012, 2013, 2014, 2015, 2016, 2017, CNRS
+   Copyright, 2011-2021, CNRS
    email of the author : Mickael.Gastineau@obspm.fr
  
  History :
@@ -109,8 +109,10 @@ void calceph_stateType_mul_scale(stateType* state, treal a);
 void calceph_stateType_mul_time(stateType* state, treal a);
 /* ! divide the 'time' quantities  by a**(derivative of time) */
 void calceph_stateType_div_time(stateType* state, treal a);
-/*! perform the rotation of the state */
-void calceph_stateType_rotate(stateType * Planet, double rotationmatrix[3][3]);
+/*! perform the rotation of the state containing cartesian position and derivatives */
+void calceph_stateType_rotate_PV(stateType * Planet, double rotationmatrix[3][3]);
+/*! perform the rotation of the state containing euler angles */
+int calceph_stateType_rotate_eulerangles(stateType * state, double rotationmatrix[3][3]);
 /* ! print debug information */
 void calceph_stateType_debug(const stateType* state);
 #endif

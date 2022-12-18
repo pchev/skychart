@@ -6,7 +6,7 @@
   \author  M. Gastineau 
            Astronomie et Systemes Dynamiques, IMCCE, CNRS, Observatoire de Paris. 
 
-   Copyright, 2017, CNRS
+   Copyright, 2017-2021, CNRS
    email of the author : Mickael.Gastineau@obspm.fr
 
   History:
@@ -116,7 +116,7 @@ int calceph_inpop_getpositionrecordcount(struct calcephbin_inpop *eph)
 
 /*--------------------------------------------------------------------------*/
 /*! This function returns the target and origin bodies, the first and last time, 
- and the reference frame available at the specified index 
+ the reference frame, and the type of segment available at the specified index 
  for the position's records of the ephemeris file  associated to eph.
  
  
@@ -132,10 +132,11 @@ int calceph_inpop_getpositionrecordcount(struct calcephbin_inpop *eph)
     expressed in the same time scale as calceph_gettimescale.
   @param frame (out) reference frame
   1  = ICRF
+  @param segid (out) type of segment
 */
 /*--------------------------------------------------------------------------*/
 int calceph_inpop_getpositionrecordindex(struct calcephbin_inpop *eph, int index, int *target, int *center,
-                                         double *firsttime, double *lasttime, int *frame)
+                                         double *firsttime, double *lasttime, int *frame, int *segid)
 {
     int res = 0;
 
@@ -145,6 +146,7 @@ int calceph_inpop_getpositionrecordindex(struct calcephbin_inpop *eph, int index
     *lasttime = eph->H1.timeData[1];
     *frame = 1;
     *center = NAIFID_SOLAR_SYSTEM_BARYCENTER;
+    *segid = CALCEPH_SEGTYPE_ORIG_0;
 
     for (j = 0; j < 12; j++)
     {

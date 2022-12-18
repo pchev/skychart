@@ -7,7 +7,7 @@
   \author  M. Gastineau
            Astronomie et Systemes Dynamiques, IMCCE, CNRS, Observatoire de Paris.
 
-   Copyright, 2011-2020, CNRS
+   Copyright, 2011-2021, CNRS
    email of the author : Mickael.Gastineau@obspm.fr
 
   History:
@@ -100,6 +100,12 @@ static int calceph_txtpck_getconstant_intmatrixnxn(struct TXTPCKfile *eph, const
                                                    int n2, int *p_pival);
 static int calceph_txtpck_getconstant_matrixnxn(struct TXTPCKfile *eph, const char *name, int n1, int n2,
                                                 double *p_pdval);
+static double calceph_strtod(const char *nptr, char **endptr, struct calceph_locale clocale);
+
+static struct TXTPCKvalue *calceph_txtpck_load_decodevalue(char *buffer, off_t lenfile, off_t begkeyword,
+                                                           off_t endkeyword, const char *filename,
+                                                           off_t * pcurpos);
+static void calceph_txtpck_load_appendvaluetoend(struct TXTPCKconstant *pnewcst, struct TXTPCKvalue *listvalue);
 
 #if DEBUG
 /*--------------------------------------------------------------------------*/
@@ -137,13 +143,14 @@ void calceph_txtpck_debug(const struct TXTPCKfile *header)
 
  @param file (inout) file descriptor.
  @param filename (in) A character string giving the name of an ephemeris data file.
+ @param locale (in) C locale to handle the decimal point inside the conversion string to double
  @param res (out) descriptor of the ephemeris.
 */
 /*--------------------------------------------------------------------------*/
-int calceph_txtpck_open(FILE * file, const char *filename, struct SPICEkernel *res)
+int calceph_txtpck_open(FILE * file, const char *filename, struct calceph_locale clocale, struct SPICEkernel *res)
 {
     res->filetype = TXT_PCK;
-    return calceph_txtpck_load(file, filename, "KPL/PCK", &res->filedata.txtpck);
+    return calceph_txtpck_load(file, filename, "KPL/PCK", clocale, &res->filedata.txtpck);
 }
 
 /*--------------------------------------------------------------------------*/
@@ -151,13 +158,15 @@ int calceph_txtpck_open(FILE * file, const char *filename, struct SPICEkernel *r
 
   @return  1 on sucess and 0 on failure
 
- @param file (inout) file descriptor.
+ @param file (inout) file descriptor. the file is closed on success
  @param filename (in) A character string giving the name of an ephemeris data file.
  @param header (in) header in the file (e.g., "PKL/MK" or "KPL/PCK")
+ @param locale (in) C locale to handle the decimal point inside the conversion string to double
  @param res (out) descriptor of the text file.
 */
 /*--------------------------------------------------------------------------*/
-int calceph_txtpck_load(FILE * file, const char *filename, const char *header, struct TXTPCKfile *res)
+int calceph_txtpck_load(FILE * file, const char *filename, const char *header, struct calceph_locale clocale,
+                        struct TXTPCKfile *res)
 {
     off_t lenfile;
 
@@ -183,8 +192,8 @@ int calceph_txtpck_load(FILE * file, const char *filename, const char *header, s
     /* initialize with empty values if a failure occurs during the initialization */
   /*---------------------------------------------------------*/
     res->listconstant = NULL;
-    res->file = NULL;
     res->buffer = NULL;
+    res->clocale = clocale;
 
   /*---------------------------------------------------------*/
     /* get the file size and read all the file to the memory */
@@ -263,212 +272,104 @@ int calceph_txtpck_load(FILE * file, const char *filename, const char *header, s
                     curpos++;
                 if (curpos < lenfile && buffer[curpos] != '\\')
                 {
-                    struct TXTPCKconstant *pnewcst;
+                    struct TXTPCKconstant *pnewcst = NULL;
 
-                    struct TXTPCKvalue *listvalue = NULL, *prec = NULL;
+                    struct TXTPCKvalue *listvalue = NULL;
+                    int assignment = 0;
 
                     /* read the keyword */
                     off_t begkeyword = curpos;
 
                     off_t endkeyword;
 
-                    off_t begvalue, endvalue;
+                    size_t sizekeyword; /* in characters */
 
                     while (curpos < lenfile && !isspace(buffer[curpos]) && buffer[curpos] != '=')
                         curpos++;
                     endkeyword = curpos;
+                    sizekeyword = endkeyword - begkeyword;
                     /* printf("keyword= %d %d '%.*s'\n", (int) begkeyword, (int) endkeyword, (int) (endkeyword -
                      * begkeyword), buffer + begkeyword); */
-                    while (curpos < lenfile && (isspace(buffer[curpos]) || buffer[curpos] == '='))
-                        curpos++;
 
-                    /* find the ( or ' or digit or sign +- */
                     while (curpos < lenfile && isspace(buffer[curpos]))
                         curpos++;
-                    /* check the parenthesis or ' or digit or sign +- */
-                    if (buffer[curpos] != '(' && buffer[curpos] != '\'' && !isdigit(buffer[curpos])
-                        && buffer[curpos] != '+' && buffer[curpos] != '-')
+                    if (curpos + 1 < lenfile)
                     {
-                        fatalerror("Can't find  the character '(' , ' or a digit after the keyword '%.*s'\n",
-                                   endkeyword - begkeyword, buffer + begkeyword);
-                        free(buffer);
-                        return 0;
-                    }
-                    /* single string */
-                    if (buffer[curpos] == '\'')
-                    {
-                        begvalue = curpos;
-                        curpos++;
-                        while (curpos < lenfile && buffer[curpos] != '\'')
-                            curpos++;
-                        curpos++;
-                        endvalue = curpos;
-                        /* create the new value */
-                        listvalue = (struct TXTPCKvalue *) malloc(sizeof(struct TXTPCKvalue));
-                        if (listvalue == NULL)
+                        if (buffer[curpos] == '+' && buffer[curpos + 1] == '=')
                         {
-                            fatalerror("Can't allocate memory for %lu bytes\nSystem error : '%s'\n",
-                                       (unsigned long) (sizeof(struct TXTPCKvalue)), strerror(errno));
-                            free(buffer);
-                            return 0;
+                            curpos += 2;
+                            assignment = 1;
                         }
-                        listvalue->next = NULL;
-                        listvalue->buffer = buffer;
-                        listvalue->locfirst = begvalue;
-                        listvalue->loclast = endvalue;
-                    }
-                    else if (buffer[curpos] == '(')
-                    {
-                        curpos++;   /* skip parenthesis */
-                        while (curpos < lenfile && buffer[curpos] != ')')
-                        {
-                            struct TXTPCKvalue *pnewval;
-
-                            /* read the value */
-                            while (curpos < lenfile && isspace(buffer[curpos]))
-                                curpos++;
-                            begvalue = curpos;
-
-                            if (curpos < lenfile && buffer[curpos] == '\'')
-                            {   /* begin a string */
-                                curpos++;
-                                while (curpos < lenfile
-                                       && (buffer[curpos] != '\''
-                                           || (buffer[curpos] == '\'' && curpos + 1 < lenfile
-                                               && buffer[curpos + 1] == '\'')))
-                                {
-                                    if (buffer[curpos] == '\'')
-                                        curpos++;
-                                    curpos++;
-                                }
-                                curpos++;
-                                endvalue = curpos;
-                            }
-                            else
-                            {   /* begin a value */
-                                off_t k;
-
-                                while (curpos < lenfile && !isspace(buffer[curpos]) && buffer[curpos] != ','
-                                       && buffer[curpos] != ')')
-                                {
-                                    curpos++;
-                                }
-                                endvalue = curpos;
-                                /*replace fortran number by C number */
-                                for (k = begvalue; k <= endvalue; k++)
-                                {
-                                    if (buffer[k] == 'D' || buffer[k] == 'd')
-                                        buffer[k] = 'E';
-                                }
-                            }
-                            /* printf("value= %d %d '%.*s'\n", (int) begvalue, (int) endvalue, (int) (endvalue -
-                             * begvalue), buffer + begvalue); */
-                            /*dvalue = strtod(buffer + begvalue, NULL);
-                               if (buffer[curpos]=='D' || buffer[curpos]=='d') buffer[curpos]='E';  */
-
-                            /* create the new value */
-                            pnewval = (struct TXTPCKvalue *) malloc(sizeof(struct TXTPCKvalue));
-                            if (pnewval == NULL)
-                            {
-                                fatalerror("Can't allocate memory for %lu bytes\nSystem error : '%s'\n",
-                                           (unsigned long) (sizeof(struct TXTPCKvalue)), strerror(errno));
-                                free(buffer);
-                                return 0;
-                            }
-                            pnewval->next = NULL;
-                            pnewval->buffer = buffer;
-                            pnewval->locfirst = begvalue;
-                            pnewval->loclast = endvalue;
-                            if (prec == NULL)
-                                listvalue = prec = pnewval;
-                            else
-                            {
-                                prec->next = pnewval;
-                                prec = pnewval;
-                            }
-
-                            /* find the ) or , */
-                            while (curpos < lenfile && isspace(buffer[curpos]))
-                                curpos++;
-
-                            if (curpos < lenfile && buffer[curpos] == ',')
-                                curpos++;
-                        }
-                        curpos++;   /* skip parenthesis */
-                    }
-                    /* digit case */
-                    else if (isdigit(buffer[curpos]) || buffer[curpos] == '+' || buffer[curpos] == '-')
-                    {
-                        struct TXTPCKvalue *pnewval;
-
-                        off_t k;
-
-                        /* begin a value */
-                        begvalue = curpos;
-                        while (curpos < lenfile
-                               && (isdigit(buffer[curpos]) || buffer[curpos] == '.' || buffer[curpos] == 'D'
-                                   || buffer[curpos] == 'd' || buffer[curpos] == 'E' || buffer[curpos] == '+'
-                                   || buffer[curpos] == '-'))
+                        else if (buffer[curpos] == '=')
                         {
                             curpos++;
+                            assignment = 0;
                         }
-                        endvalue = curpos;
-                        /*replace fortran number by C number */
-                        for (k = begvalue; k <= endvalue; k++)
-                        {
-                            if (buffer[k] == 'D' || buffer[k] == 'd')
-                                buffer[k] = 'E';
-                        }
-
-                        /* create the new value */
-                        pnewval = (struct TXTPCKvalue *) malloc(sizeof(struct TXTPCKvalue));
-                        if (pnewval == NULL)
-                        {
-                            fatalerror("Can't allocate memory for %lu bytes\nSystem error : '%s'\n",
-                                       (unsigned long) (sizeof(struct TXTPCKvalue)), strerror(errno));
-                            free(buffer);
-                            return 0;
-                        }
-                        pnewval->next = NULL;
-                        pnewval->buffer = buffer;
-                        pnewval->locfirst = begvalue;
-                        pnewval->loclast = endvalue;
-                        if (prec == NULL)
-                            listvalue = prec = pnewval;
                         else
                         {
-                            prec->next = pnewval;
-                            prec = pnewval;
+                            fatalerror("The file '%s' is malformed\n", filename);
+                            free(buffer);
+                            return 0;
+                        }
+
+                    }
+
+                    /* decode the value */
+                    listvalue =
+                        calceph_txtpck_load_decodevalue(buffer, lenfile, begkeyword, endkeyword, filename,
+                                                        &curpos);
+                    if (listvalue == NULL)
+                    {
+                        free(buffer);
+                        return 0;
+                    }
+
+                    /* incremental assignment : try to find if the same constant exists */
+                    if (assignment == 1)
+                    {
+                        for (pnewcst = listconstant; pnewcst != NULL; pnewcst = pnewcst->next)
+                        {
+                            if (memcmp(pnewcst->name, buffer + begkeyword, sizekeyword) == 0)
+                            {
+                                /* constant already exist : push the value at the end */
+                                calceph_txtpck_load_appendvaluetoend(pnewcst, listvalue);
+                                break;
+                            }
                         }
                     }
 
-                    /* create the new constant */
-                    pnewcst = (struct TXTPCKconstant *) malloc(sizeof(struct TXTPCKconstant));
                     if (pnewcst == NULL)
                     {
-                        fatalerror("Can't allocate memory for %lu bytes\nSystem error : '%s'\n",
-                                   (unsigned long) (sizeof(struct TXTPCKconstant)), strerror(errno));
-                        free(buffer);
-                        return 0;
-                    }
-                    pnewcst->next = NULL;
-                    pnewcst->value = listvalue;
-                    pnewcst->name = (char *) malloc(((size_t) (endkeyword - begkeyword + 1)) * sizeof(char));
-                    if (pnewcst->name == NULL)
-                    {
-                        fatalerror("Can't allocate memory for %lu bytes\nSystem error : '%s'\n",
-                                   (unsigned long) (sizeof(endkeyword - begkeyword + 1)), strerror(errno));
-                        free(buffer);
-                        return 0;
-                    }
-                    memcpy(pnewcst->name, buffer + begkeyword, (endkeyword - begkeyword) * sizeof(char));
-                    pnewcst->name[endkeyword - begkeyword] = '\0';
-                    if (precconstant == NULL)
-                        precconstant = listconstant = pnewcst;
-                    else
-                    {
-                        precconstant->next = pnewcst;
-                        precconstant = precconstant->next;
+
+                        /*create the new constant */
+                        pnewcst = (struct TXTPCKconstant *) malloc(sizeof(struct TXTPCKconstant));
+                        if (pnewcst == NULL)
+                        {
+                            fatalerror("Can't allocate memory for %lu bytes\nSystem error : '%s'\n",
+                                       (unsigned long) (sizeof(struct TXTPCKconstant)), strerror(errno));
+                            free(buffer);
+                            return 0;
+                        }
+                        pnewcst->next = NULL;
+                        pnewcst->value = listvalue;
+                        pnewcst->assignment = assignment;
+                        pnewcst->name = (char *) malloc((sizekeyword + 1) * sizeof(char));
+                        if (pnewcst->name == NULL)
+                        {
+                            fatalerror("Can't allocate memory for %lu bytes\nSystem error : '%s'\n",
+                                       (unsigned long) (sizeof(sizekeyword + 1)), strerror(errno));
+                            free(buffer);
+                            return 0;
+                        }
+                        memcpy(pnewcst->name, buffer + begkeyword, sizekeyword * sizeof(char));
+                        pnewcst->name[endkeyword - begkeyword] = '\0';
+                        if (precconstant == NULL)
+                            precconstant = listconstant = pnewcst;
+                        else
+                        {
+                            precconstant->next = pnewcst;
+                            precconstant = precconstant->next;
+                        }
                     }
                 }
                 if (curpos + lenbegintext < ulenfile && strncmp(buffer + curpos, begintext, lenbegintext) == 0)
@@ -483,10 +384,215 @@ int calceph_txtpck_load(FILE * file, const char *filename, const char *header, s
     }
 
     res->listconstant = listconstant;
-    res->file = file;
     res->buffer = buffer;
+    res->clocale = clocale;
 
+    fclose(file);
     return 1;
+}
+
+/*--------------------------------------------------------------------------*/
+/*! append listvalue to the end of values of pnewcst 
+ @param pnewcst (in) contant to update
+ @param listvalue (in) list value to move
+*/
+/*--------------------------------------------------------------------------*/
+void calceph_txtpck_load_appendvaluetoend(struct TXTPCKconstant *pnewcst, struct TXTPCKvalue *listvalue)
+{
+    if (pnewcst->value == NULL)
+    {
+        pnewcst->value = listvalue;
+    }
+    else
+    {
+        struct TXTPCKvalue *taillistvalue = pnewcst->value;
+
+        while (taillistvalue->next != NULL)
+            taillistvalue = taillistvalue->next;
+        taillistvalue->next = listvalue;
+    }
+}
+
+/*--------------------------------------------------------------------------*/
+/*!  Read the value associated to a constant of the text PCK kernel file
+
+  It decodes the value after the symbol '=' or '+='
+
+  @return NULL on failure, otherwise the list of values
+
+ @param buffer (in) buffer of the text kernel.
+ @param lenfile (in) size of buffer.
+ @param begkeyword (in) position of the first character of the keyword in the buffer 
+ @param endkeyword (in) next position of the last character of the keyword in the buffer 
+ @param filename (in) A character string giving the name of an ephemeris data file.
+ @param pcurpos (inout) current position of the parser.
+*/
+/*--------------------------------------------------------------------------*/
+struct TXTPCKvalue *calceph_txtpck_load_decodevalue(char *buffer, off_t lenfile, off_t begkeyword, off_t endkeyword,
+                                                    const char *filename, 
+                                                    off_t * pcurpos)
+{
+    off_t curpos = *pcurpos;
+    struct TXTPCKvalue *listvalue = NULL, *prec = NULL;
+    off_t begvalue, endvalue;
+
+    /* find the ( or ' or digit or sign +- */
+    while (curpos < lenfile && isspace(buffer[curpos]))
+        curpos++;
+    /* check the parenthesis or ' or digit or sign +- */
+    if (buffer[curpos] != '(' && buffer[curpos] != '\'' && !isdigit(buffer[curpos])
+        && buffer[curpos] != '+' && buffer[curpos] != '-')
+    {
+        fatalerror("Can't find  the character '(' , ' or a digit after the keyword '%.*s'\n",
+                   endkeyword - begkeyword, buffer + begkeyword);
+        return NULL;
+    }
+    /* single string */
+    if (buffer[curpos] == '\'')
+    {
+        begvalue = curpos;
+        curpos++;
+        while (curpos < lenfile && buffer[curpos] != '\'')
+            curpos++;
+        curpos++;
+        endvalue = curpos;
+        /* create the new value */
+        listvalue = (struct TXTPCKvalue *) malloc(sizeof(struct TXTPCKvalue));
+        if (listvalue == NULL)
+        {
+            fatalerror("Can't allocate memory for %lu bytes\nSystem error : '%s'\n",
+                       (unsigned long) (sizeof(struct TXTPCKvalue)), strerror(errno));
+            return NULL;
+        }
+        listvalue->next = NULL;
+        listvalue->buffer = buffer;
+        listvalue->locfirst = begvalue;
+        listvalue->loclast = endvalue;
+    }
+    else if (buffer[curpos] == '(')
+    {
+        curpos++;               /* skip parenthesis */
+        while (curpos < lenfile && buffer[curpos] != ')')
+        {
+            struct TXTPCKvalue *pnewval;
+
+            /* read the value */
+            while (curpos < lenfile && isspace(buffer[curpos]))
+                curpos++;
+            begvalue = curpos;
+
+            if (curpos < lenfile && buffer[curpos] == '\'')
+            {                   /* begin a string */
+                curpos++;
+                while (curpos < lenfile
+                       && (buffer[curpos] != '\''
+                           || (buffer[curpos] == '\'' && curpos + 1 < lenfile && buffer[curpos + 1] == '\'')))
+                {
+                    if (buffer[curpos] == '\'')
+                        curpos++;
+                    curpos++;
+                }
+                curpos++;
+                endvalue = curpos;
+            }
+            else
+            {                   /* begin a value */
+                off_t k;
+
+                while (curpos < lenfile && !isspace(buffer[curpos]) && buffer[curpos] != ',' && buffer[curpos] != ')')
+                {
+                    curpos++;
+                }
+                endvalue = curpos;
+                /*replace fortran number by C number */
+                for (k = begvalue; k <= endvalue; k++)
+                {
+                    if (buffer[k] == 'D' || buffer[k] == 'd')
+                        buffer[k] = 'E';
+                }
+            }
+
+            /* create the new value */
+            pnewval = (struct TXTPCKvalue *) malloc(sizeof(struct TXTPCKvalue));
+            if (pnewval == NULL)
+            {
+                fatalerror("Can't allocate memory for %lu bytes\nSystem error : '%s'\n",
+                           (unsigned long) (sizeof(struct TXTPCKvalue)), strerror(errno));
+                return NULL;
+            }
+            pnewval->next = NULL;
+            pnewval->buffer = buffer;
+            pnewval->locfirst = begvalue;
+            pnewval->loclast = endvalue;
+            if (prec == NULL)
+                listvalue = prec = pnewval;
+            else
+            {
+                prec->next = pnewval;
+                prec = pnewval;
+            }
+
+            /* find the ) or , */
+            while (curpos < lenfile && isspace(buffer[curpos]))
+                curpos++;
+
+            if (curpos < lenfile && buffer[curpos] == ',')
+                curpos++;
+        }
+        curpos++;               /* skip parenthesis */
+    }
+    /* digit case */
+    else if (isdigit(buffer[curpos]) || buffer[curpos] == '+' || buffer[curpos] == '-')
+    {
+        struct TXTPCKvalue *pnewval;
+
+        off_t k;
+
+        /* begin a value */
+        begvalue = curpos;
+        while (curpos < lenfile
+               && (isdigit(buffer[curpos]) || buffer[curpos] == '.' || buffer[curpos] == 'D'
+                   || buffer[curpos] == 'd' || buffer[curpos] == 'E' || buffer[curpos] == '+' || buffer[curpos] == '-'))
+        {
+            curpos++;
+        }
+        endvalue = curpos;
+        /*replace fortran number by C number */
+        for (k = begvalue; k <= endvalue; k++)
+        {
+            if (buffer[k] == 'D' || buffer[k] == 'd')
+                buffer[k] = 'E';
+        }
+
+        /* create the new value */
+        pnewval = (struct TXTPCKvalue *) malloc(sizeof(struct TXTPCKvalue));
+        if (pnewval == NULL)
+        {
+            fatalerror("Can't allocate memory for %lu bytes\nSystem error : '%s'\n",
+                       (unsigned long) (sizeof(struct TXTPCKvalue)), strerror(errno));
+            return NULL;
+        }
+        pnewval->next = NULL;
+        pnewval->buffer = buffer;
+        pnewval->locfirst = begvalue;
+        pnewval->loclast = endvalue;
+        if (prec == NULL)
+            listvalue = prec = pnewval;
+        else
+        {
+            prec->next = pnewval;
+            prec = pnewval;
+        }
+    }
+    else
+    {
+        fatalerror("unknown value type  after the keyword '%.*s' in the file '%s'\n", 
+                   endkeyword - begkeyword, buffer + begkeyword, filename);
+        return NULL;
+    }
+
+    *pcurpos = curpos;
+    return listvalue;
 }
 
 /*--------------------------------------------------------------------------*/
@@ -520,12 +626,11 @@ void calceph_txtpck_close(struct TXTPCKfile *eph)
         free(pcst);
     }
 
-    if (eph->buffer) free(eph->buffer);
-    if (eph->file)
-    {
-        fclose(eph->file);
-        eph->file = NULL;
-    }
+    if (eph->buffer)
+        free(eph->buffer);
+        
+    eph->listconstant = NULL;    
+    eph->buffer = NULL;
 }
 
 /*--------------------------------------------------------------------------*/
@@ -561,7 +666,8 @@ int calceph_txtpck_getconstant_vd(const struct TXTPCKfile *eph, const char *name
                     {
                         char *perr;
 
-                        arrayvalue[found] = strtod(listvalue->buffer + listvalue->locfirst, &perr);
+                        arrayvalue[found] =
+                            calceph_strtod(listvalue->buffer + listvalue->locfirst, &perr, eph->clocale);
                         found += (((off_t) (perr - listvalue->buffer)) <= listvalue->loclast) ? 1 : 0;
                     }
                     else
@@ -730,7 +836,7 @@ static int calceph_txtpck_getconstant_matrixnxn(struct TXTPCKfile *eph, const ch
             {
                 char *perr;
 
-                p_pdval[j] = strtod(listvalue->buffer + listvalue->locfirst, &perr);
+                p_pdval[j] = calceph_strtod(listvalue->buffer + listvalue->locfirst, &perr, eph->clocale);
                 found = (isspace(*perr) || *perr == ',')
                     && (((off_t) (perr - listvalue->buffer)) <= listvalue->loclast);
             }
@@ -898,7 +1004,7 @@ int calceph_txtpck_getconstantindex(struct TXTPCKfile *eph, int *index,
                 {
                     char *perr;
 
-                    *value = strtod(listvalue->buffer + listvalue->locfirst, &perr);
+                    *value = calceph_strtod(listvalue->buffer + listvalue->locfirst, &perr, eph->clocale);
                     res = (((off_t) (perr - listvalue->buffer)) <= listvalue->loclast) ? 1 : 0;
                     /*printf("dvalue=%g found=%d %d %d\n", *value, res, (int)(perr-eph->buffer),
                      * (int)listvalue->loclast); */
@@ -985,4 +1091,91 @@ int calceph_txtpck_getvalue_char(struct TXTPCKvalue *listvalue, char *p_pszval)
         found = 1;
     }
     return found;
+}
+
+/*--------------------------------------------------------------------------*/
+/*! return the string converted as double using the given locale
+  @param nptr (in) string to convert
+  @param nptr (inout) last character used by the conversion
+  @param clocale (in) C locale to handle the decimal point
+  on enter, the array must have enough room.
+*/
+/*--------------------------------------------------------------------------*/
+static double calceph_strtod(const char *nptr, char **endptr, struct calceph_locale clocale)
+{
+#if USE_STRTOD_L
+    if (clocale.useclocale == 1)
+    {
+        return strtod_l(nptr, endptr, clocale.dataclocale);
+    }
+    else
+#endif
+    {
+        (void) clocale;
+        return strtod(nptr, endptr);
+    }
+}
+
+/*--------------------------------------------------------------------------*/
+/*! merge the incremental assignment from newkernel to the existing constants from the list
+
+   @return  1 on sucess and 0 on failure
+
+ @param list (inout) exiting list to update, except the element equals to newkernel
+ @param newkernel (in) take increment assigment from this list
+*/
+/*--------------------------------------------------------------------------*/
+int calceph_txtpck_merge_incrementalassignment(struct SPICEkernel *list, struct SPICEkernel *newkernel)
+{
+    struct TXTPCKconstant *prec = NULL, *cur = NULL, *nextcur = NULL, *nextprec = NULL;
+
+    if (newkernel->filetype != TXT_PCK)
+    {
+        fatalerror
+            ("Internal error in calceph_txtpck_merge_incrementalassignment : type of the kernel should be TXT_PCK");
+        return 0;
+    }
+
+    for (cur = newkernel->filedata.txtpck.listconstant; cur != NULL;)
+    {
+        nextcur = cur->next;
+        nextprec = cur;
+        if (cur->assignment == 1)
+        {
+            /* find if the constant exit in the previous list */
+            struct SPICEkernel *ker;
+
+            for (ker = list; ker != NULL && cur != NULL; ker = ker->next)
+            {
+                if (ker != newkernel && ker->filetype == TXT_PCK)
+                {
+                    struct TXTPCKconstant *existingconstant =
+                        calceph_txtpck_getptrconstant(&(ker->filedata.txtpck), cur->name);
+                    if (existingconstant != NULL)
+                    {
+                        /* move the value from newkernel to existingconstant */
+                        calceph_txtpck_load_appendvaluetoend(existingconstant, cur->value);
+                        cur->value = NULL;
+                        /* remove this constant from newkernel */
+                        nextprec = prec;
+                        if (prec == NULL)
+                        {
+                            newkernel->filedata.txtpck.listconstant = nextcur;
+                        }
+                        else
+                        {
+                            prec->next = nextcur;
+                        }
+                        free(cur->name);
+                        free(cur);
+                        cur = NULL;
+                    }
+                }
+            }
+        }
+        cur = nextcur;
+        prec = nextprec;
+    }
+
+    return 1;
 }

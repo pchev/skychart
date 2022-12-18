@@ -21,6 +21,9 @@
 /* Define to 1 if you have the <errno.h> header file. */
 #define HAVE_ERRNO_H 1
 
+/* Define to 1 if you have the `freelocale' function. */
+#define HAVE_FREELOCALE 1
+
 /* Define to 1 if fseeko (and presumably ftello) exists and is declared. */
 #define HAVE_FSEEKO 1
 
@@ -33,6 +36,9 @@
 /* Define to 1 if you have the <limits.h> header file. */
 #define HAVE_LIMITS_H 1
 
+/* Define to 1 if you have the <locale.h> header file. */
+#define HAVE_LOCALE_H 1
+
 /* Define to 1 if you have the <math.h> header file. */
 #define HAVE_MATH_H 1
 
@@ -44,6 +50,9 @@
 
 /* Define to 1 if you have the `rint' function. */
 /*#undef HAVE_RINT */
+
+/* Define to 1 if you have the `setlocale' function. */
+#define HAVE_SETLOCALE 1
 
 /* Define to 1 if you have the <stdbool.h> header file. */
 /*#undef HAVE_STDBOOL_H */
@@ -63,6 +72,12 @@
 /* Define to 1 if you have the <string.h> header file. */
 #define HAVE_STRING_H 1
 
+/* Define to 1 if you have the `strncmp' function. */
+#define HAVE_STRNCMP 1
+
+/* Define to 1 if you have the `strtod_l' function. */
+#define HAVE_STRTOD_L 1
+
 /* Define to 1 if you have the <sys/stat.h> header file. */
 #define HAVE_SYS_STAT_H 1
 
@@ -79,7 +94,7 @@
 #define PACKAGE "calceph"
 
 /* Define to the address where bug reports for this package should be sent. */
-#define PACKAGE_BUGREPORT "inpop@imcce.fr"
+#define PACKAGE_BUGREPORT "inpop.imcce@obspm.fr"
 
 /* Define to the full name of this package. */
 #define PACKAGE_NAME "CALCEPH"
@@ -89,6 +104,9 @@
 
 /* Define to the one symbol short name of this package. */
 #define PACKAGE_TARNAME "calceph"
+
+/* Define to the home page for this package. */
+#define PACKAGE_URL "https://www.imcce.fr/inpop/calceph/"
 
 /* Define to the version of this package. */
 #define PACKAGE_VERSION "1.0.4"
@@ -143,8 +161,10 @@
 
 #if defined(__GNUC__)
 
-/* definition for fdopen and mkstemp */
+/* definition for fdopen and mkstemp and strtod_l */
 #define _GNU_SOURCE 1
+
+#define HAVE_NEWLOCALE 1
 
 #endif
 
@@ -153,7 +173,6 @@
 #define bool BOOL
 #define false FALSE
 #define true TRUE
-
 
 #if __MSVCRT_VERSION__<0x0800 &&  (defined(__MINGW32__) || defined (__MINGW64__))
 /* mingw defined _fseeki64 only for __MSVCRT_VERSION__>=0x0800 */
@@ -176,6 +195,10 @@
 #define fseeko _fseeki64
 #define ftello _ftelli64
 #define HAVE_RINT 1
+#define locale_t _locale_t
+#define HAVE__CREATE_LOCALE 1
+#define freelocale _free_locale
+#define strtod_l _strtod_l
 #endif
 
 

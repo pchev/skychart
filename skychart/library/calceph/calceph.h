@@ -7,7 +7,7 @@
   \author  M. Gastineau
            Astronomie et Systemes Dynamiques, IMCCE, CNRS, Observatoire de Paris.
 
-   Copyright, 2008-2020, CNRS 
+   Copyright, 2008-2022, CNRS 
    email of the author : Mickael.Gastineau@obspm.fr
 */
 /*-----------------------------------------------------------------*/
@@ -67,9 +67,9 @@ terms.
 /*! version : major number of CALCEPH library */
 #define CALCEPH_VERSION_MAJOR 3
 /*! version : minor number of CALCEPH library */
-#define CALCEPH_VERSION_MINOR 4 
+#define CALCEPH_VERSION_MINOR 5 
 /*! version : patch number of CALCEPH library */
-#define CALCEPH_VERSION_PATCH 6
+#define CALCEPH_VERSION_PATCH 1
 
 /*----------------------------------------------------------------------------------------------*/
 /* windows specific support */
@@ -168,6 +168,29 @@ extern "C"
 /*! outputs are the nutation angles */
 #define CALCEPH_OUTPUT_NUTATIONANGLES 128
 
+
+/* list of the known segment type for spice kernels and inpop/jpl original file format  */
+/* segment of the original DE/INPOP file format */
+#define CALCEPH_SEGTYPE_ORIG_0 0    /*!< segment type for the original DE/INPOP file format */
+/* segment of the spice kernels */
+#define CALCEPH_SEGTYPE_SPK_1  1   /*!< Modified Difference Arrays. The time argument for these ephemerides is TDB */
+#define CALCEPH_SEGTYPE_SPK_2  2   /*!< Chebyshev polynomials for position. fixed length time intervals.The time argument for these ephemerides is TDB */
+#define CALCEPH_SEGTYPE_SPK_3  3   /*!< Chebyshev polynomials for position and velocity. fixed length time intervals. The time argument for these ephemerides is TDB */
+#define CALCEPH_SEGTYPE_SPK_5  5   /*!< Discrete states (two body propagation).  The time argument for these ephemerides is TDB */
+#define CALCEPH_SEGTYPE_SPK_8  8   /*!< Lagrange Interpolation - Equal Time Steps. The time argument for these ephemerides is TDB */
+#define CALCEPH_SEGTYPE_SPK_9  9   /*!< Lagrange Interpolation - Unequal Time Steps. The time argument for these ephemerides is TDB */
+#define CALCEPH_SEGTYPE_SPK_12 12  /*!< Hermite Interpolation - Equal Time Steps. The time argument for these ephemerides is TDB */
+#define CALCEPH_SEGTYPE_SPK_13 13  /*!< Hermite Interpolation - Unequal Time Steps. The time argument for these ephemerides is TDB */
+#define CALCEPH_SEGTYPE_SPK_17 17  /*!< Equinoctial Elements. The time argument for these ephemerides is TDB */
+#define CALCEPH_SEGTYPE_SPK_18 18  /*!< ESOC/DDID Hermite/Lagrange Interpolation.  The time argument for these ephemerides is TDB */
+#define CALCEPH_SEGTYPE_SPK_19 19  /*!< ESOC/DDID Piecewise Interpolation. The time argument for these ephemerides is TDB */
+#define CALCEPH_SEGTYPE_SPK_20 20  /*!< Chebyshev polynomials for velocity. fixed length time intervals. The time argument for these ephemerides is TDB */
+#define CALCEPH_SEGTYPE_SPK_21 21  /*!< Extended Modified Difference Arrays. The time argument for these ephemerides is TDB */
+#define CALCEPH_SEGTYPE_SPK_102 102 /*!< Chebyshev polynomials for position. fixed length time intervals.  The time argument for these ephemerides is TCB */
+#define CALCEPH_SEGTYPE_SPK_103 103 /*!< Chebyshev polynomials for position and velocity. fixed length time intervals. The time argument for these ephemerides is TCB */
+#define CALCEPH_SEGTYPE_SPK_120 120 /*!< Chebyshev polynomials for velocity. fixed length time intervals.  The time argument for these ephemerides is TCB */
+
+
 /*! NAIF identification numbers for the Sun and planetary barycenters (table 2
  * of reference 1) */
 #define NAIFID_SOLAR_SYSTEM_BARYCENTER 0
@@ -220,7 +243,7 @@ extern "C"
 #define NAIFID_METIS 516
 #define NAIFID_CALLIRRHOE 517
 #define NAIFID_THEMISTO 518
-#define NAIFID_MAGACLITE 519
+#define NAIFID_MEGACLITE 519
 #define NAIFID_TAYGETE 520
 #define NAIFID_CHALDENE 521
 #define NAIFID_HARPALYKE 522
@@ -548,11 +571,16 @@ extern "C"
   __CALCEPH_DECLSPEC t_calcephbin* calceph_open(const char* filename);
 
   /*! open a list of ephemeris data file */
-  __CALCEPH_DECLSPEC t_calcephbin* calceph_open_array(int n, const char* const filename[/*n */]);
+  __CALCEPH_DECLSPEC t_calcephbin* calceph_open_array(int n, const char* const filename[ ]);
+
+#if 0
+  /*! duplicate the handle of the ephemeris data file */
+  __CALCEPH_DECLSPEC t_calcephbin* calceph_fdopen(t_calcephbin* eph);
+#endif
 
   /*! return the version of the ephemeris data file as a null-terminated string */
   __CALCEPH_DECLSPEC int calceph_getfileversion(t_calcephbin* eph,
-                                                char szversion[CALCEPH_MAX_CONSTANTNAME]);
+                                                char szversion[CALCEPH_MAX_CONSTANTVALUE]);
 
   /*! prefetch all data to memory */
   __CALCEPH_DECLSPEC int calceph_prefetch(t_calcephbin* eph);
@@ -649,6 +677,13 @@ extern "C"
                                                         int* center, double* firsttime, double* lasttime,
                                                         int* frame);
 
+  /*! return the target and origin bodies, the first and last time, the reference frame 
+   and the segment type available at the specified position’s records' index of the
+   ephemeris file */
+  __CALCEPH_DECLSPEC int calceph_getpositionrecordindex2(t_calcephbin* eph, int index, int* target,
+                                                        int* center, double* firsttime, double* lasttime,
+                                                        int* frame, int *segtype);
+
   /*! return the number of orientation’s records available in the ephemeris file
    */
   __CALCEPH_DECLSPEC int calceph_getorientrecordcount(t_calcephbin* eph);
@@ -659,8 +694,17 @@ extern "C"
   __CALCEPH_DECLSPEC int calceph_getorientrecordindex(t_calcephbin* eph, int index, int* target,
                                                       double* firsttime, double* lasttime, int* frame);
 
+  /*! return the target body, the first and last time, the reference frame and the segment type
+   available at the specified orientation’s records' index of the ephemeris file
+   */
+  __CALCEPH_DECLSPEC int calceph_getorientrecordindex2(t_calcephbin* eph, int index, int* target,
+                                                      double* firsttime, double* lasttime, int* frame, int *segtype);
+
   /*! close an ephemeris data file and destroy the ephemeris descriptor */
   __CALCEPH_DECLSPEC void calceph_close(t_calcephbin* eph);
+
+  /*! return the maximal order of the derivatives for a segment type */
+  __CALCEPH_DECLSPEC int calceph_getmaxsupportedorder(int idseg);
 
   /*! return the version of the library as a null-terminated string */
   __CALCEPH_DECLSPEC void calceph_getversion_str(char szversion[CALCEPH_MAX_CONSTANTNAME]);

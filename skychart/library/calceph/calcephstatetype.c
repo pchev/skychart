@@ -6,7 +6,7 @@
   \author  M. Gastineau 
            Astronomie et Systemes Dynamiques, IMCCE, CNRS, Observatoire de Paris. 
 
-   Copyright, 2016, 2017, CNRS
+   Copyright, 2016-2021, CNRS
    email of the author : Mickael.Gastineau@obspm.fr
 
 */
@@ -505,12 +505,12 @@ void calceph_stateType_div_time(stateType * state, treal a)
 }
 
 /*--------------------------------------------------------------------------*/
-/*! perform the rotation of alll the quantities according to the rotation matrix
+/*! perform the rotation of all the quantities according to the rotation matrix
  @param rotationmatrix (in) rotation matrix 3x3
  @param Planet (inout) position and velocity of the planet
  */
 /*--------------------------------------------------------------------------*/
-void calceph_stateType_rotate(stateType * Planet, double rotationmatrix[3][3])
+void calceph_stateType_rotate_PV(stateType * Planet, double rotationmatrix[3][3])
 {
     stateType newstate;
 
@@ -556,8 +556,64 @@ void calceph_stateType_rotate(stateType * Planet, double rotationmatrix[3][3])
     *Planet = newstate;
 }
 
+
 /*--------------------------------------------------------------------------*/
-/* ! print the debug information  for statetype
+/*! perform the rotation of all the quantities according to the rotation matrix.
+ it updates the euler angles
+ @details 
+  return 0 on error.
+  return 1 on success.
+
+ @param rotationmatrix (in) rotation matrix 3x3
+ @param state (inout) euler angles of the orientation of the planet
+*/
+/*--------------------------------------------------------------------------*/
+
+
+
+int calceph_stateType_rotate_eulerangles(stateType * state, double rotationmatrix[3][3])
+{
+    int res;
+    union
+    {
+        double mat[3][3];
+        double vec[9];
+    } tkframe_matrix;
+
+    double matrixframe1[3][3];
+
+    int tkframe_axes[3] = { 3, 1, 3 };
+
+    double angles[] = { -state->Position[0], -state->Position[1], -state->Position[2] };
+    int j;
+    int k;
+    double rotationmatrixtr[3][3];
+
+    calceph_txtfk_creatematrix_eulerangles(tkframe_matrix.vec, angles, tkframe_axes);
+    calceph_matrix3x3_prod(matrixframe1, tkframe_matrix.mat, rotationmatrix);
+
+    for (j = 0; j < 3; j++)
+    {
+        for (k = 0; k < 3; k++)
+        {
+            rotationmatrixtr[j][k] = matrixframe1[k][j];
+        }
+    }
+    res = calceph_txtfk_createeulerangles_matrix(angles, rotationmatrixtr);
+    state->Position[0] = angles[2];
+    state->Position[1] = angles[1];
+    state->Position[2] = angles[0];
+
+    if (res != 0 && state->order > 0)
+    {
+        fatalerror("Derivatives (or higher) are not computed with a non ICRF frame\n");
+        res = 0;
+    }
+    return res;
+}
+
+/*--------------------------------------------------------------------------*/
+/* ! print the debug information for statetype
  @param state (in) display values
  */
 /*--------------------------------------------------------------------------*/

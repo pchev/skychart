@@ -8,11 +8,12 @@ endif
 
 CP = cp
 
+LIBS = -lc -lm
 
 ifneq ($(findstring Darwin,$(OSTYPE)),)
 SO_Name       = libcalceph.dylib
 CFLAGS        = -DHAVE_CONFIG_H -I. -O2 -fPIC $(arch_flags) -Wno-implicit-function-declaration
-LIBFLAGS      = -Wl,-single_module -dynamiclib  -lc -lm -mmacosx-version-min=10.6
+LIBFLAGS      = -Wl,-single_module -dynamiclib  -mmacosx-version-min=10.6
 else
 SOName        = libcalceph.so.1
 SO_Name       = libcalceph.so.1.1

@@ -8,7 +8,7 @@
   \author  M. Gastineau
            Astronomie et Systemes Dynamiques, IMCCE, CNRS, Observatoire de Paris.
 
-   Copyright, 2008-2019, CNRS
+   Copyright, 2008-2021, CNRS
    email of the author : Mickael.Gastineau@obspm.fr
 
   History:
@@ -134,6 +134,21 @@ t_calcephbin *calceph_open(const char *fileName)
 */
 /*--------------------------------------------------------------------------*/
 t_calcephbin *calceph_open_array(int n, const char *const fileName_array[ /*n */ ])
+{
+    return calceph_open_array2(n, (char **) &fileName_array[0]);
+}
+
+/*--------------------------------------------------------------------------*/
+/*!
+     Open n "filename" ephemeris files .
+
+  @return descriptor of the ephemeris
+
+  @param n (in) number of elemnts of the array fileName.
+  @param fileName_array (in) array of character strings giving the name of the n ephemeris data files.
+*/
+/*--------------------------------------------------------------------------*/
+t_calcephbin *calceph_open_array2(int n, char **fileName_array)
 {
     t_calcephbin *res;
 
@@ -280,13 +295,14 @@ t_calcephbin *calceph_open_array(int n, const char *const fileName_array[ /*n */
                 calceph_close(res);
                 return NULL;
             }
-            if (calceph_txtpck_open(file, fileName, spicekernel) == 0)
+            if (calceph_txtpck_open(file, fileName, res->data.spkernel.clocale, spicekernel) == 0)
             {
                 fclose(file);
                 calceph_close(res);
                 return NULL;
             }
-            if (calceph_spice_tablelinkbody_addfile(&res->data.spkernel, spicekernel) == 0)
+            if (calceph_txtpck_merge_incrementalassignment(res->data.spkernel.list, spicekernel)==0 
+                || calceph_spice_tablelinkbody_addfile(&res->data.spkernel, spicekernel) == 0)
             {
                 fclose(file);
                 calceph_close(res);
@@ -309,7 +325,7 @@ t_calcephbin *calceph_open_array(int n, const char *const fileName_array[ /*n */
                 calceph_close(res);
                 return NULL;
             }
-            if (calceph_txtfk_open(file, fileName, spicekernel) == 0)
+            if (calceph_txtfk_open(file, fileName, res->data.spkernel.clocale, spicekernel) == 0)
             {
                 fclose(file);
                 calceph_close(res);
@@ -372,6 +388,49 @@ t_calcephbin *calceph_open_array(int n, const char *const fileName_array[ /*n */
 
     return res;
 }
+
+/*--------------------------------------------------------------------------*/
+/*! duplicate the the handle of the ephemeris data file
+  return null if an error occurs.
+  return a new new handle
+ @param eph (inout) ephemeris descriptor
+*/
+/*--------------------------------------------------------------------------*/
+#if 0
+t_calcephbin *calceph_fdopen(t_calcephbin * eph)
+{
+    t_calcephbin *res = NULL;
+
+    res = (t_calcephbin *) malloc(sizeof(t_calcephbin));
+    if (res == NULL)
+    {
+        fatalerror("Can't allocate memory for t_calcephbin\nSystem error : '%s'\n", strerror(errno));
+
+        return NULL;
+    }
+    res->etype = eph->etype;
+
+    switch (eph->etype)
+    {
+            /*case CALCEPH_espice:
+               res->data.spkernel = calceph_spice_fdopen(&eph->data.spkernel);
+               break;
+
+               case CALCEPH_ebinary:
+               res->data.binary = calceph_inpop_fdopen(&eph->data.binary);
+               break;
+
+               case CALCEPH_unknown:
+               break; */
+
+        default:
+            fatalerror("Unknown ephemeris type in calceph_fdopen\n");
+            res = NULL;
+            break;
+    }
+    return res;
+}
+#endif
 
 /*--------------------------------------------------------------------------*/
 /*! Close the  ephemeris file and destroy the ephemeris descriptor
@@ -1028,5 +1087,47 @@ int calceph_unit_convert_quantities_time(stateType * Planet, int InputUnit, int 
         calceph_stateType_div_time(Planet, 86400E0);
     }
 
+    return res;
+}
+
+/*--------------------------------------------------------------------------*/
+/*! return, for a given type of segment, the maximal order of the derivatives
+  It returns -1 if the segment type is unknown or not supported by the library
+
+  @param idseg (in) number of the segment
+*/
+/*--------------------------------------------------------------------------*/
+int calceph_getmaxsupportedorder(int idseg)
+{
+    int res = -1;
+
+    switch (idseg)
+    {
+        case CALCEPH_SEGTYPE_ORIG_0:
+        case CALCEPH_SEGTYPE_SPK_2:
+        case CALCEPH_SEGTYPE_SPK_3:
+        case CALCEPH_SEGTYPE_SPK_8:
+        case CALCEPH_SEGTYPE_SPK_9:
+        case CALCEPH_SEGTYPE_SPK_12:
+        case CALCEPH_SEGTYPE_SPK_13:
+        case CALCEPH_SEGTYPE_SPK_18:
+        case CALCEPH_SEGTYPE_SPK_19:
+        case CALCEPH_SEGTYPE_SPK_20:
+        case CALCEPH_SEGTYPE_SPK_102:
+        case CALCEPH_SEGTYPE_SPK_103:
+        case CALCEPH_SEGTYPE_SPK_120:
+            res = 3;
+            break;
+
+        case CALCEPH_SEGTYPE_SPK_1:
+        case CALCEPH_SEGTYPE_SPK_5:
+        case CALCEPH_SEGTYPE_SPK_17:
+        case CALCEPH_SEGTYPE_SPK_21:
+            res = 1;
+            break;
+
+        default:
+            break;
+    }
     return res;
 }

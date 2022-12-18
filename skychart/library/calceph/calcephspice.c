@@ -8,7 +8,7 @@
   \author  M. Gastineau
            Astronomie et Systemes Dynamiques, IMCCE, CNRS, Observatoire de Paris.
 
-   Copyright, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019,  CNRS
+   Copyright, 2011-2021,  CNRS
    email of the author : Mickael.Gastineau@obspm.fr
 
   History:
@@ -100,7 +100,7 @@ static int calceph_spicekernel_getconstantcount(struct SPICEkernel *eph);
 
 static int calceph_spicekernel_getconstantindex(struct SPICEkernel *eph, int *index,
                                                 char name[CALCEPH_MAX_CONSTANTNAME], double *value);
-static int calceph_spice_findlibration(const struct calcephbin_spice *eph);
+static const struct TXTFKframe *calceph_spice_findorientation_moon(const struct calcephbin_spice *eph);
 
 static const struct TXTFKframe *calceph_spicekernel_findframe(const struct SPICEkernel *eph,
                                                               const struct TXTPCKconstant *cst);
@@ -118,6 +118,10 @@ static const struct TXTFKframe *calceph_spice_findframe2(const struct calcephbin
 static const struct TXTFKframe *calceph_spice_findframe_id(const struct calcephbin_spice *eph, int id);
 
 static int calceph_spicekernel_isthreadsafe(const struct SPICEkernel *eph);
+
+static int calceph_spice_computeframe_matrix(const struct calcephbin_spice *eph, int *predefinedframe,
+                                             const struct TXTFKframe *frame, int *center, double JD0, double time,
+                                             double matrix[3][3], int *unitmatrix, int *idfixed);
 
 /*--------------------------------------------------------------------------*/
 /*! add a file to the list of kernel.
@@ -137,6 +141,28 @@ struct SPICEkernel *calceph_spice_addfile(struct calcephbin_spice *eph)
         eph->AU = 0.E0;
         eph->EMRAT = 0.E0;
         calceph_spice_tablelinkbody_init(&eph->tablelink);
+        eph->clocale.useclocale = 0;
+#if USE_STRTOD_L
+#if HAVE__CREATE_LOCALE
+        eph->clocale.dataclocale = _create_locale(LC_NUMERIC, "C");
+#else
+        eph->clocale.dataclocale = newlocale(LC_NUMERIC_MASK, "C", (locale_t) 0);
+#endif
+        eph->clocale.useclocale = (eph->clocale.dataclocale == (locale_t) 0) ? 0 : 1;
+#endif
+        /* if the locale does not produce a correct decimal point, generates an error */
+        if (eph->clocale.useclocale == 0)
+        {
+            char buffer[10];
+
+            sprintf(buffer, "%0.1f", 0.5);
+            if (buffer[1] != '.')
+            {
+                fatalerror
+                    ("Current locale does not create the decimal point '.' and calceph can't create a C locale\n");
+                return NULL;
+            }
+        }
     }
     /* go to the tail of the list of file */
     prec = eph->list;
@@ -211,6 +237,10 @@ void calceph_spice_close(struct calcephbin_spice *eph)
 {
     struct SPICEkernel *list = eph->list;
 
+#if USE_STRTOD_L
+    if (eph->clocale.useclocale == 1)
+        freelocale(eph->clocale.dataclocale);
+#endif
     while (list != NULL)
     {
         struct SPICEkernel *clist = list;
@@ -353,6 +383,7 @@ int calceph_spice_isthreadsafe(const struct calcephbin_spice *eph)
 static int calceph_spice_convertid_old2spiceid_id(const struct calcephbin_spice *eph, int target)
 {
     int res = -1;
+    const struct TXTFKframe *frameOrientationMoon;
 
     switch (target)
     {
@@ -406,7 +437,9 @@ static int calceph_spice_convertid_old2spiceid_id(const struct calcephbin_spice 
             break;
 
         case LIBRATIONS + 1:
-            res = calceph_spice_findlibration(eph);
+            frameOrientationMoon = calceph_spice_findorientation_moon(eph);
+            if (frameOrientationMoon != NULL)
+                res = frameOrientationMoon->class_id;
             break;
 
         default:
@@ -629,7 +662,7 @@ int calceph_spice_getconstant_vs(struct calcephbin_spice *eph, const char *name,
                     {
                         int curpos = 0;
 
-                        for (k = listvalue->locfirst + 1; k < j && k < CALCEPH_MAX_CONSTANTVALUE; k++)
+                        for (k = listvalue->locfirst + 1; k < j && curpos < CALCEPH_MAX_CONSTANTVALUE; k++)
                         {
                             if (listvalue->buffer[k] == '\'')
                                 k++;
@@ -949,19 +982,20 @@ int calceph_spice_unit_convert_orient(stateType * Planet, int InputUnit, int Out
 }
 
 /*--------------------------------------------------------------------------*/
-/*! return the object id of the euler angles of the moon (libration)
-    try to to find the frame with the specified radical
+/*! return the frame of the euler angles of the moon (libration)
+    try to find the frame with the specified radical
     return -1 if not supported.
   @param eph (in) ephemeris descriptor
   @param name (in) name to find
   @param target (in) spice id of the object
 */
 /*--------------------------------------------------------------------------*/
-static int calceph_spice_findlibration2(const struct calcephbin_spice *eph, const char *name, int target)
+static const struct TXTFKframe *calceph_spice_findlibration_body(const struct calcephbin_spice *eph, const char *name,
+                                                                 int target)
 {
     const struct TXTPCKconstant *pcstOBJECT_MOON_FRAME;
 
-    const struct TXTFKframe *frame;
+    const struct TXTFKframe *frame = NULL;
 
     pcstOBJECT_MOON_FRAME = calceph_spice_getptrconstant(eph, name);
     if (pcstOBJECT_MOON_FRAME == NULL)
@@ -969,7 +1003,7 @@ static int calceph_spice_findlibration2(const struct calcephbin_spice *eph, cons
 #if DEBUG
         printf("'%s' not found in the kernels\n", name);
 #endif
-        return -1;
+        return NULL;
     }
     frame = calceph_spice_findframe(eph, pcstOBJECT_MOON_FRAME);
     if (frame == NULL)
@@ -977,81 +1011,36 @@ static int calceph_spice_findlibration2(const struct calcephbin_spice *eph, cons
 #if DEBUG
         printf("frame not found in the kernels\n");
 #endif
-        return -1;
+        return NULL;
     }
+
     if (frame->center != target)
     {
 #if DEBUG
         printf("center is not the %d\n", target);
 #endif
-        return -1;
+        return NULL;
     }
-    if (frame->tkframe_relative != NULL)
-    {
-        if (frame->tkframe_spec != NULL && calceph_txtpck_cmpszvalue(frame->tkframe_spec, "'MATRIX'") == 0)
-        {
-            int j, k;
 
 #if DEBUG
-            printf("if the frame uses a matrix, check that the matrix is identity\n");
+    printf("class_id for the libration of the body %d : %d\n", target, frame->class_id);
 #endif
-            for (j = 0; j < 3; j++)
-            {
-                for (k = 0; k < 3; k++)
-                {
-                    if (j == k && frame->tkframe_matrix[j * 3 + k] != 1.0E0)
-                    {
-#if DEBUG
-                        printf("matrix is not identity (diagonal is not 1)\n");
-#endif
-                        return -1;
-                    }
-                    if (j != k && frame->tkframe_matrix[j * 3 + k] != 0.0E0)
-                    {
-#if DEBUG
-                        printf("matrix is not identity (other elements are not 0)\n");
-#endif
-                        return -1;
-                    }
-                }
-            }
-        }
-
-        frame = calceph_spice_findframe2(eph, frame->tkframe_relative);
-        if (frame == NULL)
-        {
-#if DEBUG
-            printf("frame not found in the kernels\n");
-#endif
-            return -1;
-        }
-        if (frame->center != target)
-        {
-#if DEBUG
-            printf("center is not the %d\n", target);
-#endif
-            return -1;
-        }
-    }
-#if DEBUG
-    printf("class_id for the libration of the moon : %d\n", frame->class_id);
-#endif
-    return frame->class_id;
+    return frame;
 }
 
 /*--------------------------------------------------------------------------*/
 /*! return the object id of the euler angles of the moon (libration)
-    return -1 if not supported.
+    return NULL if not supported.
   @param eph (in) ephemeris descriptor
 */
 /*--------------------------------------------------------------------------*/
-static int calceph_spice_findlibration(const struct calcephbin_spice *eph)
+static const struct TXTFKframe *calceph_spice_findorientation_moon(const struct calcephbin_spice *eph)
 {
-    int res;
+    const struct TXTFKframe *res = NULL;
 
-    res = calceph_spice_findlibration2(eph, "OBJECT_MOON_FRAME", 301);
-    if (res == -1)
-        res = calceph_spice_findlibration2(eph, "FRAME_MOON_PA", 301);
+    res = calceph_spice_findlibration_body(eph, "OBJECT_MOON_FRAME", 301);
+    if (res == NULL)
+        res = calceph_spice_findlibration_body(eph, "FRAME_MOON_PA", 301);
     return res;
 }
 
@@ -1190,6 +1179,141 @@ static const struct TXTFKframe *calceph_spice_findframe_id(const struct calcephb
 }
 
 /*--------------------------------------------------------------------------*/
+/*! return the rotation matrix from a fixed frame to the frame
+   and the id of the first fixed frame.
+   
+   The matrix returns the complete rotation from the frame idfixed to the frame.
+
+  return 0 on error.
+  return 1 on success.
+
+  @param eph (in) ephemeris descriptor
+  @param predefinedframe (in) frame (non NULL for a pre-defined frame)
+  @param fkframe (in) frame (may be NULL for a pre-defined frame)
+  @param center (in) required center if non NULL
+  @param JD0 (in) reference time (could be 0)
+  @param time (in) time elapsed from JD0
+  @param matrix (out) rotation matrix 3x3 from the frame idfixed to the frame
+  @param idfixed (out) first non-relative frame which depends frame (=1 for J2000)
+  @param unitmatrix (out) =1, if the the rotation matrix is identity.
+     if =0, the content is unknown (may be identity or not)
+*/
+/*--------------------------------------------------------------------------*/
+static int calceph_spice_computeframe_matrix(const struct calcephbin_spice *eph, int *predefinedframe,
+                                             const struct TXTFKframe *fkframe, int *center, double JD0, double time,
+                                             double matrix[3][3], int *unitmatrix, int *idfixed)
+{
+
+    int j, k, res = 1;
+
+    *unitmatrix = 0;
+    *idfixed = 1;               /* = J2000 */
+    res = 1;
+#if DEBUG
+    printf("calceph_spice_computeframe_matrix - predefinedframe %d class_id=%d center %d\n",
+           (predefinedframe == NULL ? -1 : *predefinedframe), (fkframe == NULL ? -1 : fkframe->class_id),
+           (center == NULL ? -1 : *center));
+#endif
+    /* pre-defined frame */
+    if (fkframe == NULL)
+    {
+        int builtin = 0;
+        double epsJ2000;
+
+        switch (*predefinedframe)
+        {
+            case 17:           /*ECLIPJ2000  Ecliptic coordinates based upon the J2000 frame. equation 3.222-1 from extra
+                                   supp. astro. almanach at J2000.0 */
+                epsJ2000 = 84381.448 / 3600;
+                calceph_txtfk_creatematrix_axes1(matrix, epsJ2000 * M_PI / 180.E0);
+                builtin = 1;
+                break;
+            default:
+                break;
+        }
+
+        if (builtin == 0)
+        {
+            fatalerror("Can't find the definition of the frame '%d'\n", *predefinedframe);
+            return 0;
+        }
+    }
+    /* non NULL frame  : relative frame  */
+    else
+    {
+        /* check the center if required */
+        if (center != NULL && fkframe->center != *center)
+        {
+#if DEBUG
+            printf("center is not the %d\n", *center);
+#endif
+            return 0;
+        }
+        if (fkframe->tkframe_relative == NULL && fkframe->tkframe_relative_id == 0)
+        {
+            *idfixed = fkframe->class_id;
+            *unitmatrix = 1;
+            for (j = 0; j < 3; j++)
+            {
+                for (k = 0; k < 3; k++)
+                {
+                    matrix[j][k] = 0.;
+                }
+                matrix[j][j] = 1.;
+            }
+#if DEBUG
+            printf("calceph_spice_computeframe_matrix -   NULL fixed frame  : idfixed %d\n", *idfixed);
+#endif
+        }
+        else
+        {
+            double matrixframe[3][3];
+            const struct TXTFKframe *relativeframe = NULL;
+
+            /*transpose the matrix */
+            for (j = 0; j < 3; j++)
+            {
+                for (k = 0; k < 3; k++)
+                {
+                    matrix[j][k] = matrixframe[j][k] = fkframe->tkframe_matrix[3 * j + k];
+                }
+            }
+            *unitmatrix = 0;
+            *idfixed = fkframe->class_id;
+
+            /* frame is relative to another frame */
+            if (fkframe->tkframe_relative != NULL)
+            {
+                double matrixrelative[3][3];
+
+                relativeframe = calceph_spice_findframe2(eph, fkframe->tkframe_relative);
+
+                if (relativeframe != NULL)
+                {
+                    res = calceph_spice_computeframe_matrix(eph, NULL, relativeframe, center, JD0,
+                                                            time, matrixrelative, unitmatrix, idfixed);
+
+                    calceph_matrix3x3_prod(matrix,  matrixframe, matrixrelative);
+                    *unitmatrix = 0;
+                }
+            }
+           
+#if DEBUG
+            printf("calceph_spice_computeframe_matrix - tkframe_relative: %p relativeframe : %p \n", fkframe->tkframe_relative, relativeframe);
+#endif
+        }
+    }
+#if DEBUG
+    printf("calceph_spice_computeframe_matrix returns %d (idfixed=%d)\n", res, *idfixed);
+    for (j = 0; j < 3; j++)
+    {
+        printf("%g %g %g\n", matrix[j][0], matrix[j][1], matrix[j][2]);
+    }
+#endif
+    return res;
+}
+
+/*--------------------------------------------------------------------------*/
 /*! return the rotation matrix of the frame  associated to the specified value from a list of kernel
 
   return 0 on error.
@@ -1202,53 +1326,18 @@ static const struct TXTFKframe *calceph_spice_findframe_id(const struct calcephb
   @param matrix (out) rotation matrix 3x3
 */
 /*--------------------------------------------------------------------------*/
-int calceph_spice_findframe_matrix(const struct calcephbin_spice *eph, int id, double PARAMETER_UNUSED(JD0), double PARAMETER_UNUSED(time),
-                                   double matrix[3][3])
+int calceph_spice_findframe_matrix(const struct calcephbin_spice *eph, int id, double JD0,
+                                   double time, double matrix[3][3])
 {
-#if HAVE_PRAGMA_UNUSED
-#pragma unused(JD0, time)
-#endif
-    int j, k;
+    int unitmatrix, idfixed;
 
     const struct TXTFKframe *frame = calceph_spice_findframe_id(eph, id);
 
-    if (frame == NULL)
-    {
-        int builtin = 0;
-        double epsJ2000;
+#if DEBUG
+    printf("calceph_spice_findframe_matrix find frame %d\n", (frame == NULL ? -1 : frame->class_id));
+#endif
 
-        switch (id)
-        {
-            case 17:           /*ECLIPJ2000  Ecliptic coordinates based upon the J2000 frame. equation 3.222-1 from extra
-                                   supp. astro. almanach at J2000.0 */
-                epsJ2000 = 84381.448/3600;
-                calceph_txtfk_creatematrix_axes1(matrix, epsJ2000 * M_PI / 180.E0);
-                return 1;
-                /*break; */
-            default:
-                break;
-        }
-
-        if (builtin == 0)
-        {
-            fatalerror("Can't find the definition of the frame '%d'\n", id);
-            return 0;
-        }
-    }
-    for (j = 0; j < 3; j++)
-    {
-        for (k = 0; k < 3; k++)
-        {
-            matrix[j][k] = frame->tkframe_matrix[3 * j + k];
-        }
-    }
-
-    if (frame->tkframe_relative_id != 1)
-    {
-        fatalerror("The  frame '%d' is not relative to ICRF or J2000 reference frame \n", id);
-        return 0;
-    }
-    return (frame->tkframe_relative_id == 1);
+    return calceph_spice_computeframe_matrix(eph, &id, frame, NULL, JD0, time, matrix, &unitmatrix, &idfixed);
 }
 
 /*--------------------------------------------------------------------------*/
@@ -1270,19 +1359,32 @@ int calceph_spice_findframe_matrix(const struct calcephbin_spice *eph, int id, d
    =1 : Position+Velocity  are computed
    =2 : Position+Velocity+Acceleration  are computed
    =3 : Position+Velocity+Acceleration+Jerk  are computed
+  @param matrix (in) rotation matrix 3x3 from the fixed frame to the frame
+  @param unitmatrix (in) =1, if the the rotation matrix is identity.
+     if =0, the content is unknown (may be identity or not)
    @param PV (out) quantities of the "target" object
    PV[0:3*(order+1)-1] are valid
 */
 /*--------------------------------------------------------------------------*/
 static int calceph_spice_orient_unit_spiceid(struct calcephbin_spice *eph, double JD0, double time,
-                                             int spicetarget, int unit, int order, double PV[ /*<=12 */ ])
+                                             int spicetarget, int unit, int order, double matrix[3][3], int unitmatrix,
+                                             double PV[ /*<=12 */ ])
 {
     stateType statetarget;
 
     int res;
 
+#if DEBUG
+    printf("calceph_spice_orient_unit_spiceid spicetarget=%d\n", spicetarget);
+#endif
+
     statetarget.order = order;
     res = calceph_spice_tablelinkbody_compute(eph, JD0, time, spicetarget, -1, &statetarget);
+    if (unitmatrix == 0 && res != 0)
+    {
+        res = calceph_stateType_rotate_eulerangles(&statetarget, matrix);
+    }
+
     if (res)
     {
         int ephunit = CALCEPH_UNIT_SEC + CALCEPH_UNIT_RAD;
@@ -1325,49 +1427,66 @@ int calceph_spice_orient_unit(struct calcephbin_spice *eph, double JD0, double t
 {
     int target_spiceid = -1;
 
-    int newunit;
+    int newunit = unit;
+    int unitmatrix = 1;
+    double matrix[3][3];
+    int target_binarykernel = target;
 
-    if ((unit & CALCEPH_USE_NAIFID) != 0)
+    const struct TXTFKframe *firstframe = NULL;
+
+    
+    if ((unit & CALCEPH_USE_NAIFID) == 0)
     {
-        newunit = unit - CALCEPH_USE_NAIFID;
+        newunit = unit + CALCEPH_USE_NAIFID;
+        if (target != LIBRATIONS + 1)
+        {
+            fatalerror("Orientation for the target object %d is not supported.\n", target);
+            return 0;
+        }
+         target = NAIFID_MOON;
+    }
+    
+    
+    if ((newunit & CALCEPH_USE_NAIFID) != 0)
+    {
+        int *countlisttime;
+
+        struct SPICElinktime **loclink;
+
+        newunit = newunit - CALCEPH_USE_NAIFID;
+        target_spiceid = target;
+        /* try to locate the frame of the orientation  */
         if (target != NAIFID_MOON)
         {
-            /* try to locate in a binary pck */
-            int *countlisttime;
-
-            struct SPICElinktime **loclink;
 
             char frameid[256];
-            int targetframe;
 
             sprintf(frameid, "OBJECT_%d_FRAME", target);
-            targetframe = calceph_spice_findlibration2(eph, frameid, target);
-            if (targetframe != -1)
-            {
-#if DEBUG
-                printf("found orientation for %d : %d\n", target, targetframe);
-#endif
-                if (calceph_spice_tablelinkbody_locatelinktime_complex(&eph->tablelink, targetframe, -1,
-                                                                       &loclink, &countlisttime) == 1)
-                {
-                    if (*countlisttime > 0)
-                        target_spiceid = targetframe;
-                }
-            }
-            else
-            {
-                if (calceph_spice_tablelinkbody_locatelinktime_complex(&eph->tablelink, target, -1, &loclink,
-                                                                       &countlisttime) == 1)
-                {
-                    if (*countlisttime > 0)
-                        target_spiceid = target;
-                }
-            }
+            firstframe = calceph_spice_findlibration_body(eph, frameid, target);
         }
         else
         {
-            target_spiceid = calceph_spice_findlibration(eph);
+            firstframe = calceph_spice_findorientation_moon(eph);
         }
+
+        /* if a compatible frame  was found, we try to find the data in the binary pck */
+        if (firstframe != NULL)
+        {
+            if (calceph_spice_computeframe_matrix(eph, NULL, firstframe, &target, JD0,
+                                                  time, matrix, &unitmatrix, &target_binarykernel) == 1)
+                target_spiceid = target_binarykernel;
+            else
+                target_spiceid = -1;
+        }
+        /* otherwise, try to locate to directly target in a binary pck */
+        else if (calceph_spice_tablelinkbody_locatelinktime_complex(&eph->tablelink, target_spiceid, -1,
+                                                                    &loclink, &countlisttime) == 1)
+        {
+            if (*countlisttime <= 0)
+                target_spiceid = -1;
+        }
+        else
+            target_spiceid = -1;
 
         /* try to locate using POLE_RA/DE/PM */
         if (target_spiceid == -1)
@@ -1375,22 +1494,13 @@ int calceph_spice_orient_unit(struct calcephbin_spice *eph, double JD0, double t
             return calceph_txtpck_orient_unit(eph, JD0, time, target, newunit, order, PV);
         }
     }
-    else
-    {
-        if (target != LIBRATIONS + 1)
-        {
-            fatalerror("Orientation for the target object %d is not supported.\n", target);
-            return 0;
-        }
-        target_spiceid = calceph_spice_convertid_old2spiceid_id(eph, target);
-        newunit = unit;
-    }
+    
     if (target_spiceid == -1)
     {
         fatalerror("Orientation for the target object %d is not available in the ephemeris file.\n", target);
         return 0;
     }
-    return calceph_spice_orient_unit_spiceid(eph, JD0, time, target_spiceid, newunit, order, PV);
+    return calceph_spice_orient_unit_spiceid(eph, JD0, time, target_spiceid, newunit, order, matrix, unitmatrix, PV);
 }
 
 /*--------------------------------------------------------------------------*/
@@ -1442,7 +1552,7 @@ int calceph_spice_compute_unit(struct calcephbin_spice *eph, double JD0, double 
         }
         if (target == LIBRATIONS + 1)
         {
-            return calceph_spice_orient_unit_spiceid(eph, JD0, time, target_spiceid, newunit, order, PV);
+            return calceph_spice_orient_unit(eph, JD0, time, target, unit, order, PV);
         }
         else
         {

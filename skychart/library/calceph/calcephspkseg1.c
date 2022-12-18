@@ -11,7 +11,7 @@
   \author  M. Gastineau 
            Astronomie et Systemes Dynamiques, IMCCE, CNRS, Observatoire de Paris. 
 
-   Copyright, 2016, 2017, CNRS
+   Copyright, 2016-2021, CNRS
    email of the author : Mickael.Gastineau@obspm.fr
 
   History:
@@ -233,9 +233,6 @@ static void calceph_spk_interpol_MDA(const struct SegType1_Record *Precord,
 int calceph_spk_interpol_PV_segment_1(struct SPKfile *pspk, struct SPKSegmentHeader *seg, struct SPICEcache *cache,
                                       treal TimeJD0, treal Timediff, stateType * Planet)
 {
-#if DEBUG
-    int j;
-#endif
     int p, k;
 
     const double Timesec = ((TimeJD0 - 2.451545E+06) + Timediff) * 86400E0;

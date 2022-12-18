@@ -7,7 +7,7 @@
 !  \author  M. Gastineau 
 !           Astronomie et Systemes Dynamiques, IMCCE, CNRS, Observatoire de Paris. 
 !
-!   Copyright, 2008-2019, CNRS
+!   Copyright, 2008-2021, CNRS
 !   email of the author : Mickael.Gastineau@obspm.fr
 ! 
 !
@@ -124,10 +124,16 @@
        external f90calceph_getpositionrecordcount   
        integer f90calceph_getpositionrecordindex
        external f90calceph_getpositionrecordindex   
+       integer f90calceph_getpositionrecordindex2
+       external f90calceph_getpositionrecordindex2   
        integer f90calceph_getorientrecordcount
        external f90calceph_getorientrecordcount   
        integer f90calceph_getorientrecordindex
-       external f90calceph_getorientrecordindex   
+       external f90calceph_getorientrecordindex 
+       integer f90calceph_getorientrecordindex2
+       external f90calceph_getorientrecordindex2 
+       integer f90calceph_getmaxsupportedorder  
+       external f90calceph_getmaxsupportedorder 
        integer f90calceph_getfileversion
        external f90calceph_getfileversion    
        external f90calceph_getversion_str 
@@ -173,6 +179,44 @@
        integer CALCEPH_OUTPUT_NUTATIONANGLES
        PARAMETER (CALCEPH_OUTPUT_NUTATIONANGLES=128)
 
+!/* list of the known segment type for spice kernels and inpop/jpl original file format  */
+!/* segment of the original DE/INPOP file format */
+!/*! segment type for the original DE/INPOP file format */
+       integer CALCEPH_SEGTYPE_ORIG_0   
+       PARAMETER (CALCEPH_SEGTYPE_ORIG_0=0)
+!/* segment of the spice kernels */
+        integer CALCEPH_SEGTYPE_SPK_1  
+        integer CALCEPH_SEGTYPE_SPK_2 
+        integer CALCEPH_SEGTYPE_SPK_3   
+        integer CALCEPH_SEGTYPE_SPK_5   
+        integer CALCEPH_SEGTYPE_SPK_8   
+        integer CALCEPH_SEGTYPE_SPK_9   
+        integer CALCEPH_SEGTYPE_SPK_12  
+        integer CALCEPH_SEGTYPE_SPK_13  
+        integer CALCEPH_SEGTYPE_SPK_17  
+        integer CALCEPH_SEGTYPE_SPK_18  
+        integer CALCEPH_SEGTYPE_SPK_19  
+        integer CALCEPH_SEGTYPE_SPK_20  
+        integer CALCEPH_SEGTYPE_SPK_21  
+        integer CALCEPH_SEGTYPE_SPK_102 
+        integer CALCEPH_SEGTYPE_SPK_103 
+        integer CALCEPH_SEGTYPE_SPK_120 
+        PARAMETER (CALCEPH_SEGTYPE_SPK_1=1)  
+        PARAMETER (CALCEPH_SEGTYPE_SPK_2=2)   
+        PARAMETER (CALCEPH_SEGTYPE_SPK_3=3)   
+        PARAMETER (CALCEPH_SEGTYPE_SPK_5=5)   
+        PARAMETER (CALCEPH_SEGTYPE_SPK_8=8)   
+        PARAMETER (CALCEPH_SEGTYPE_SPK_9=9)   
+        PARAMETER (CALCEPH_SEGTYPE_SPK_12=12)  
+        PARAMETER (CALCEPH_SEGTYPE_SPK_13=13)  
+        PARAMETER (CALCEPH_SEGTYPE_SPK_17=17)  
+        PARAMETER (CALCEPH_SEGTYPE_SPK_18=18)  
+        PARAMETER (CALCEPH_SEGTYPE_SPK_19=19)  
+        PARAMETER (CALCEPH_SEGTYPE_SPK_20=20)  
+        PARAMETER (CALCEPH_SEGTYPE_SPK_21=21)  
+        PARAMETER (CALCEPH_SEGTYPE_SPK_102=102) 
+        PARAMETER (CALCEPH_SEGTYPE_SPK_103=103) 
+        PARAMETER (CALCEPH_SEGTYPE_SPK_120=120) 
        
 
 !/*! NAIF identification numbers for the Sun and planetary barycenters (table 2 of reference 1) */
@@ -225,7 +269,7 @@
        integer NAIFID_METIS              
        integer NAIFID_CALLIRRHOE         
        integer NAIFID_THEMISTO           
-       integer NAIFID_MAGACLITE          
+       integer NAIFID_MEGACLITE          
        integer NAIFID_TAYGETE            
        integer NAIFID_CHALDENE           
        integer NAIFID_HARPALYKE          
@@ -551,7 +595,7 @@
        PARAMETER ( NAIFID_METIS         = 516  )
        PARAMETER ( NAIFID_CALLIRRHOE    = 517  )
        PARAMETER ( NAIFID_THEMISTO      = 518  )
-       PARAMETER ( NAIFID_MAGACLITE     = 519  )
+       PARAMETER ( NAIFID_MEGACLITE     = 519  )
        PARAMETER ( NAIFID_TAYGETE       = 520  )
        PARAMETER ( NAIFID_CHALDENE      = 521  )
        PARAMETER ( NAIFID_HARPALYKE     = 522  )

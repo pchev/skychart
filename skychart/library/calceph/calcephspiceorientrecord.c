@@ -6,7 +6,7 @@
   \author  M. Gastineau
            Astronomie et Systemes Dynamiques, IMCCE, CNRS, Observatoire de Paris.
 
-   Copyright, 2017, 2018, 2019, CNRS
+   Copyright, 2017, 2018, 2019, 2020, 2021, CNRS
    email of the author : Mickael.Gastineau@obspm.fr
 
   History:
@@ -149,10 +149,11 @@ int calceph_spice_getorientrecordcount(const struct calcephbin_spice *eph)
     expressed in the same time scale as calceph_gettimescale.
   @param frame (out) reference frame
   1  = ICRF
+  @param segid (out) type of segment
 */
 /*--------------------------------------------------------------------------*/
 int calceph_spice_getorientrecordindex(const struct calcephbin_spice *eph, int index, int *target,
-                                       double *firsttime, double *lasttime, int *frame)
+                                       double *firsttime, double *lasttime, int *frame, int *segid)
 {
     int j;
 
@@ -182,6 +183,7 @@ int calceph_spice_getorientrecordindex(const struct calcephbin_spice *eph, int i
                             *lasttime = seg->T_end / 86400E0 + 2.451545E+06;
                             *target = seg->body;
                             *frame = seg->refframe;
+                            *segid = seg->datatype;
                             return 1;
                         }
                     }
