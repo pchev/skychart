@@ -65,7 +65,7 @@ ifeq ($(OS_TARGET),darwin)
 	$(MAKE) -C plan404 clean
 	$(MAKE) -C wcs clean
 	$(MAKE) -C chealpix -f Makefile.darwin clean
-	$(MAKE) -C calceph -f Makefile.darwin clean
+	$(MAKE) -C calceph clean
 endif
 endif
 endif
