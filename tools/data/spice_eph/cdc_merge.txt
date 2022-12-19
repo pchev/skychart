@@ -36,4 +36,9 @@ SPK_KERNEL = cdcext.bsp
   SOURCE_SPK_KERNEL = nep095.bsp
     BODIES          = 808, 807, 806, 805, 804, 803
 
+SPK_KERNEL = cdcsun.bsp
+  BEGIN_TIME = 1 JAN 1901 00:00:00.000 TDB
+  END_TIME = 1 JAN 2100 00:00:00.000 TDB
+  SOURCE_SPK_KERNEL = mar097.bsp
+    BODIES          = 10
  

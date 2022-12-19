@@ -251,14 +251,15 @@ try
   // close previous files
   CloseCalcephBody;
   // put all the files in array
-  n:=min(MaxSpkFiles,csc.SPKlist.Count);
+  n:=min(MaxSpkFiles-1,csc.SPKlist.Count);
   SetLength(eph_files,n);
   for i:=0 to n-1 do begin
     eph_files[i]:=slash(SPKdir)+csc.SPKlist[i];
     fileeph[i]:=Pchar(eph_files[i]);
   end;
+  fileeph[n]:=Pchar(slash(CalcephFolder)+'cdcsun.bsp'); // Add Sun-Barycenter file because Horizon spk can be one or the other
   // open the ephemeris
-  ephbody:=calceph_open_array(n,fileeph);
+  ephbody:=calceph_open_array(n+1,fileeph);
   result := ephbody<>nil;
   if result then begin
     // get maximum number of targets
@@ -316,7 +317,7 @@ var jd0,t: double;
     res,i: integer;
 begin
 // compute target body rectangular coordinates
-// beware that only center=0 (barycentric) is available if no other planetary spk is loaded
+// beware that only center=0 (barycentric) or 10 (Sun) is available if no other planetary spk is loaded
   result:=false;
   if libcalceph=0 then exit;
   try

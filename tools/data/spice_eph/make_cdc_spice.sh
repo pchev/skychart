@@ -14,9 +14,9 @@ wget ftp://naif.jpl.nasa.gov/pub/naif/generic_kernels/lsk/latest_leapseconds.tls
 wget ftp://naif.jpl.nasa.gov/pub/naif/generic_kernels/spk/satellites/*
 
 # merge the cdc files
-rm cdcbase.bsp cdcext.bsp
+rm cdcbase.bsp cdcext.bsp cdcsun.bsp
 cspice/exe/spkmerge cdc_merge.txt
 
 # check the result
-cspice/exe/brief cdcbase.bsp cdcext.bsp
+cspice/exe/brief cdcbase.bsp cdcext.bsp cdcsun.bsp
 

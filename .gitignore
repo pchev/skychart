@@ -11,6 +11,7 @@ skychart/component/synapse/backup/
 tools/sac_images/backup/
 #ignore external data
 BaseData/catalog*.tgz
+BaseData/data_spice*.tgz
 BaseData/*.xz
 # ignore fpc makefiles
 Makefile

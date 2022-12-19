@@ -38,5 +38,5 @@ do
 done
 
 InstData data_jpleph $destdir/share/skychart
-
+InstData data_spicesun $destdir/share/skychart
 

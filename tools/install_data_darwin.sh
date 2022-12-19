@@ -36,4 +36,4 @@ do
 done
 
 InstData data_jpleph $destdir
-
+InstData data_spicesun $destdir
