@@ -1795,6 +1795,7 @@ try
     else begin
       t:=copy(dms,1,p-1); delete(dms,1,p);
       result:=result+ s * StrToFloatDef(trim(t),0) / 60;
+      dms:=StringReplace(dms,' ','',[rfReplaceAll]);
       p:=pos(sep[3],dms);
       if p=0 then
         t:=dms
@@ -1872,6 +1873,23 @@ except
 end;
 end;
 
+function NumericStr(txt:string):string;
+var i,n: integer;
+    c: char;
+begin
+  // keep only numeric character, keep space between number
+  // 'RA center: 20h32m53s.10' -> '20 32 53 .10'
+  result:='';
+  for i:=1 to length(txt) do begin
+    c:=txt[i];
+    if ((c>='0')and(c<='9'))or(c='.')or(c='+')or(c='-') then
+      result:=result+c
+    else
+      result:=result+' ';
+  end;
+  result:=wordspace(result);
+end;
+
 procedure Str2RaDec(txt: string; out ra,de: double);
 var buf,buf1,buf2: string;
     i,p,s: integer;
@@ -1890,10 +1908,7 @@ begin
 
   lst:=TStringList.Create;
   try
-  txt:=StringReplace(txt,'RA:',' ',[]);   // remove text constant
-  txt:=StringReplace(txt,'DE:',' ',[]);
-  txt:=StringReplace(txt,'DEC:',' ',[]);
-  txt:=trim(txt);
+  txt:=trim(NumericStr(txt));
   buf1:='';
   buf2:='';
   Splitarg(txt,' ',lst);
