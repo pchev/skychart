@@ -494,6 +494,10 @@ begin
               equinox := 1950
             else
               equinox := strtofloat(buf);
+            if (equinox<minyeardt)or(equinox>maxyeardt) then begin
+              equinox:=2000;
+              valid:=false;
+            end;
           end;
           if (keyword = 'RADECSYS') then
             radecsys := buf;
@@ -549,7 +553,7 @@ var
   fn: string;
 begin
   try
-    if FFileName <> '' then
+    if (FFileName <> '')and(Header.valid) then
     begin
       fn := FFileName;
   {$ifdef mswindows}

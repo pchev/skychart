@@ -536,6 +536,7 @@ begin
     exit;
   csc.BackgroundImage := UTF8ToSys(backimg.Text);
   Ffits.filename := csc.BackgroundImage;
+  if not FFits.Header.valid then exit;
   FFits.InfoWCScoord;
   if Ffits.WCSvalid then
   begin
