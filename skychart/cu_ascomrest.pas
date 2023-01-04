@@ -155,7 +155,7 @@ begin
   Fok:=False;
   Fhttp:=THTTPSend.Create;
   Fhttp.Sock.ConnectionTimeout:=5000;  // not too long if service is not available
-  Fhttp.Timeout:=120000;               // 2 minutes for long sync request
+  Fhttp.Timeout:=5000;
   Fhttp.UserAgent:='';
 end;
 
@@ -252,7 +252,7 @@ begin
   Fhost:='localhost';
   Fport:='11111';
   FRemoteIP:='';
-  FTimeout:=120000;
+  FTimeout:=5000;
   FDevice:='';
   Fuser:='';
   Fpassword:='';
@@ -338,6 +338,7 @@ function TAscomRest.Get(method:string; param: string=''; hdr: string=''):TAscomR
    RESTRequest.http.Document.Clear;
    RESTRequest.http.Headers.Clear;
    RESTRequest.http.Timeout:=FTimeout;
+   RESTRequest.http.sock.SocksTimeout:=FTimeout;
    url:=FbaseUrl+LowerCase(Fdevice)+'/'+LowerCase(method);
    if param>'' then begin
       url:=url+'?'+param+'&ClientID='+IntToStr(FClientId);

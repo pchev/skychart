@@ -194,7 +194,7 @@ type
     procedure ScopeShow;
     procedure ScopeShowModal(var ok: boolean);
     procedure ScopeConnect(var ok: boolean);
-    procedure ScopeDisconnect(var ok: boolean);
+    procedure ScopeDisconnect(var ok: boolean; doDisconnect:boolean=true);
     procedure ScopeGetInfo(var scName: shortstring;
       var QueryOK, SyncOK, GotoOK: boolean; var refreshrate: integer);
     procedure ScopeGetEqSys(var EqSys: double);
@@ -305,7 +305,7 @@ begin
   end;
 end;
 
-procedure Tpop_scope.ScopeDisconnect(var ok: boolean);
+procedure Tpop_scope.ScopeDisconnect(var ok: boolean; doDisconnect:boolean=true);
 begin
 
   timer1.Enabled := False;
@@ -322,7 +322,7 @@ begin
     if not Remote then begin
     if not VarIsEmpty(T) then
     begin
-      T.connected := False;
+      if doDisconnect then T.connected := False;
       T := Unassigned;
     end;
     end
@@ -330,7 +330,7 @@ begin
     {$endif}
     begin
       // Send a disconnect, the server manage if it really disconnect the device or not
-      TR.Put('Connected',false);
+      if doDisconnect then TR.Put('Connected',false);
     end;
     ok := True;
     except
@@ -391,7 +391,7 @@ begin
       TR.Timeout:=2000;
       TR.Put('Connected',true);
       c_ok := TR.Get('connected').AsBool;
-      TR.Timeout:=60000;
+      TR.Timeout:=2000;
     end;
     if c_ok then
     begin
@@ -1198,7 +1198,7 @@ var ok: boolean;
 begin
   FConnected := ScopeConnectedReal;
   if not FConnected then begin
-    ScopeDisconnect(ok);
+    ScopeDisconnect(ok,false);
     ShowMessage('Telescope disconnected on it''s own!');
     exit;
   end;
@@ -1208,7 +1208,7 @@ begin
       CoordLock := True;
       timer1.Enabled := False;
       ShowCoordinates;
-      if not FConnected then exit;
+      if not FConnected then raise Exception.Create('Telescope disconnected on it''s own!');
       FSlewing:=GetSlewing;
       UpdTrackingButton;
       UpdParkButton;
@@ -1216,8 +1216,10 @@ begin
       timer1.Enabled := True;
     end;
   except
-    timer1.Enabled := False;
-    Initialized := False;
+    on E:Exception do begin
+      ShowMessage('Telescope connection error: '+E.Message);
+      ScopeDisconnect(ok,false);
+    end;
   end;
 end;
 
