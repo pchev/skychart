@@ -3047,8 +3047,10 @@ begin
               cfgsc.BodiesLst[j, i + 1, 4] := jdt;
               cfgsc.BodiesLst[j, i + 1, 5] := dist;
            end
-           else
+           else begin
+             cfgsc.BodiesName[j, i + 1, 2] := '';
              cfgsc.msg := cu_calceph.LastError;
+           end;
           end;
         end;
       end;
