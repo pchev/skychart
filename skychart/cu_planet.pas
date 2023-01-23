@@ -157,6 +157,7 @@ type
     procedure nutation(j: double; var nutl, nuto: double);
     procedure aberration(j: double; var abv, ehn: coordvector;
       var ab1, abe, abp, gr2e: double; var abm, asl: boolean);
+    procedure ObjectMotion(otype,oname: string; ElemEpoch,cjd,cst: double; c:Tconf_skychart; out dist,pa,dx,dy: double);
     property eph_method: string read Feph_method;
   end;
 
@@ -3320,7 +3321,7 @@ var
   dist, r, elong, phase, rad, ded: double;
   epoch, h, g, ma, ap, an, ic, ec, sa, eq, xc, yc, zc: double;
   qry, id, ref, nam: string;
-  i, idx, ira, idec, imag: integer;
+  idx, ira, idec, imag: integer;
 begin
   Result := False;
   searchid := '';
@@ -3472,7 +3473,7 @@ var
   tar, tde: double;
   dist, r: double;
   target: string;
-  jdt, hh, jd0, st0, ar, de, q: double;
+  jdt, hh, jd0, st0, ar, de, q, dm,pa,dx,dy: double;
   sar, sde, shh, sdp, sdist, sdpkm, sdistkm: string;
 const
   d1 = '0.0';
@@ -3534,14 +3535,14 @@ begin
     jdt := cfgsc.BodiesLst[CurrentBodyStep, CurrentBody, 4];
     cfgsc.FindSimjd := jdt;
     djd(jdt + (cfgsc.TimeZone - cfgsc.DT_UT) / 24, yy, mm, dd, hh);
+    jd0 := jd(yy, mm, dd, 0);
+    st0 := SidTim(jd0, hh - cfgsc.TimeZone, cfgsc.ObsLongitude);
     shh := ARtoStr3(rmod(hh, 24));
     date := Date2Str(yy, mm, dd) + blank + shh;
     cfgsc.FindRA2000 := cfgsc.BodiesLst[CurrentBodyStep, CurrentBody, 6];
     cfgsc.FindDec2000 := cfgsc.BodiesLst[CurrentBodyStep, CurrentBody, 7];
     cfgsc.FindDist := cfgsc.BodiesLst[CurrentBodyStep, CurrentBody, 5];
     if ServerCoordSystem=csJ2000 then begin
-       jd0 := jd(yy, mm, dd, 0);
-       st0 := SidTim(jd0, hh - cfgsc.TimeZone, cfgsc.ObsLongitude);
        ar := cfgsc.FindRA2000;
        de := cfgsc.FindDec2000;
        if cfgsc.PlanetParalaxe then
@@ -3558,9 +3559,12 @@ begin
     str(dist: 7: 4, sdist);
     str(r*km_au: 7: 0, sdpkm);
     str(dist*km_au: 7: 0, sdistkm);
+    ObjectMotion('Spk',nom,0,jdt,st0,cfgsc,dm,pa,dx,dy);
     Desc := sar + tab + sde + tab + ' Spk' + tab + nom + tab + 'SPK id:'+ target + tab +
             'dist:' + sdist + ' au' + tab + 'dist:' + sdistkm + ' km' + tab + 'rsol:' +
-             sdp + ' au' + tab + 'rsol:' + sdpkm + ' km' + tab + 'date:' + date;
+             sdp + ' au' + tab + 'rsol:' + sdpkm + ' km' + tab + 'date:' + date + tab;
+    if dm>0 then
+      Desc:=Desc+'MotionArcm:'+formatfloat(f3, dm*60)+tab+'MotionPA:'+formatfloat(f1, pa)+tab;
     cfgsc.TrackType := TTbody;
     cfgsc.TrackId := target;
     cfgsc.TrackName := nom;
@@ -3640,7 +3644,7 @@ var
   tar, tde: double;
   h, g, ma, ap, an, ic, ec, sa, eq, ra, Dec, dist, r, elong, phase, magn, xc, yc, zc: double;
   ref, nam: string;
-  jdt, hh, jd0, st0, ar, de, q: double;
+  jdt, hh, jd0, st0, ar, de, q,dm,pa,dx,dy: double;
   sar, sde, shh, sdp, sdist, sphase: string;
 const
   d1 = '0.0';
@@ -3703,6 +3707,8 @@ begin
     cfgsc.FindSimjd := jdt;
     //  str(jdt:12:4,sjd);
     djd(jdt + (cfgsc.TimeZone - cfgsc.DT_UT) / 24, yy, mm, dd, hh);
+    jd0 := jd(yy, mm, dd, 0);
+    st0 := SidTim(jd0, hh - cfgsc.TimeZone, cfgsc.ObsLongitude);
     shh := ARtoStr3(rmod(hh, 24));
     date := Date2Str(yy, mm, dd) + blank + shh;
     cdb.GetAstElem(strtoint(cfgsc.AsteroidName[CurrentAstStep, CurrentAsteroid, 1]), cfgsc.AsteroidLst[CurrentAstStep, CurrentAsteroid, 5], h, g, ma, ap, an, ic,
@@ -3714,8 +3720,6 @@ begin
     cfgsc.FindDec2000 := cfgsc.AsteroidLst[CurrentAstStep, CurrentAsteroid, 7];
     cfgsc.FindDist := dist;
     if ServerCoordSystem=csJ2000 then begin
-       jd0 := jd(yy, mm, dd, 0);
-       st0 := SidTim(jd0, hh - cfgsc.TimeZone, cfgsc.ObsLongitude);
        ar := cfgsc.FindRA2000;
        de := cfgsc.FindDec2000;
        if cfgsc.PlanetParalaxe then
@@ -3729,6 +3733,7 @@ begin
     str(r: 7: 4, sdp);
     str(dist: 7: 4, sdist);
     str((rad2deg * phase): 4: 0, sphase);
+    ObjectMotion('As',nom,cfgsc.AsteroidLst[CurrentAstStep, CurrentAsteroid, 5],jdt,st0,cfgsc,dm,pa,dx,dy);
     Desc := sar + tab + sde + tab + ' As' + tab + nom + tab + 'm:' +
       mag + tab + 'phase:' + sphase + blank + ldeg + tab + 'dist:' +
       sdist + 'au' + tab + 'rsol:' + sdp + 'au' + tab + 'vel:' +
@@ -3736,6 +3741,8 @@ begin
       'date:' + date + tab + 'ref:' + ref;
     djd(cfgsc.AsteroidLst[CurrentAstStep, CurrentAsteroid, 5], yy, mm, dd, hh);
     Desc := Desc + '/' + Date2Str(yy, mm, dd) + tab; // ephemeris date
+    if dm>0 then
+      Desc:=Desc+'MotionArcm:'+formatfloat(f3, dm*60)+tab+'MotionPA:'+formatfloat(f1, pa)+tab;
     if abs(cfgsc.AsteroidLst[CurrentAstStep, CurrentAsteroid, 5] - cfgsc.CurJDUT) > 365 then
       desc := desc + rsWarningSomeA + tab;
     cfgsc.TrackType := TTasteroid;
@@ -3761,7 +3768,7 @@ var
   h, g, ap, an, ic, ec, eq, ra, Dec, dist, r, elong, phase, magn, q, tp, diam, lc,
   car, cde, rc, xc, yc, zc: double;
   nam, elem_id: string;
-  jdt, hh, jd0, st0, ar, de, q1: double;
+  jdt, hh, jd0, st0, ar, de, q1,dm,pa,dx,dy: double;
   sar, sde, shh, sdp, sdist, sphase, svel: string;
 const
   d1 = '0.0';
@@ -3823,6 +3830,8 @@ begin
     jdt := cfgsc.CometLst[CurrentComStep, CurrentComet, 7];
     cfgsc.FindSimjd := jdt;
     djd(jdt + (cfgsc.TimeZone - cfgsc.DT_UT) / 24, yy, mm, dd, hh);
+    jd0 := jd(yy, mm, dd, 0);
+    st0 := SidTim(jd0, hh - cfgsc.TimeZone, cfgsc.ObsLongitude);
     shh := ARtoStr3(rmod(hh, 24));
     date := Date2Str(yy, mm, dd) + blank + shh;
     cdb.GetComElem(cfgsc.CometName[CurrentComStep, CurrentComet, 1],
@@ -3833,8 +3842,6 @@ begin
     cfgsc.FindDec2000 := Dec;
     cfgsc.FindDist := dist;
     if ServerCoordSystem=csJ2000 then begin
-       jd0 := jd(yy, mm, dd, 0);
-       st0 := SidTim(jd0, hh - cfgsc.TimeZone, cfgsc.ObsLongitude);
        ar := cfgsc.FindRA2000;
        de := cfgsc.FindDec2000;
        if cfgsc.PlanetParalaxe then
@@ -3852,6 +3859,7 @@ begin
       svel := formatfloat(f1, 42.1219 * sqrt(1 / r - 1 / (2 * q / (1 - ec)))) + 'km/s'
     else
       svel := 'n/a';  { TODO : velocity for parabolic and hyperbolic orbits }
+    ObjectMotion('Cm',nom,cfgsc.CometLst[CurrentComStep, CurrentComet,8],jdt,st0,cfgsc,dm,pa,dx,dy);
     Desc := sar + tab + sde + tab + ' Cm' + tab + nom + tab + 'm:' +
       mag + tab + 'phase:' + sphase + blank + ldeg + tab + 'dist:' +
       sdist + 'au' + tab + 'rsol:' + sdp + 'au' + tab + 'vel:' + svel +
@@ -3859,6 +3867,8 @@ begin
       date + tab + 'ref:' + elem_id;
     djd(cfgsc.CometLst[CurrentComStep, CurrentComet, 8], yy, mm, dd, hh);
     Desc := Desc + '/' + Date2Str(yy, mm, dd) + tab;
+    if dm>0 then
+      Desc:=Desc+'MotionArcm:'+formatfloat(f3, dm*60)+tab+'MotionPA:'+formatfloat(f1, pa)+tab;
     if abs(cfgsc.CometLst[CurrentComStep, CurrentComet, 8] - cfgsc.CurJDUT) > 180 then
       desc := desc + rsWarningSomeC + tab;
     cfgsc.TrackType := TTcomet;
@@ -4451,5 +4461,91 @@ begin
   end;
 end;
 
+procedure TPlanet.ObjectMotion(otype,oname: string; ElemEpoch,cjd,cst: double; c:Tconf_skychart; out dist,pa,dx,dy: double);
+var id: string;
+    idx: integer;
+    q, h: double;
+    nst, njd: double;
+    tp, ec, ap, an, ic, g, eq, cra1, cde1, dst1, cra, cdec, dst, rr, elong, phase, magn,
+    diam, lc, ctar, ctde, rc, xc, yc, zc, ma, sa: double;
+    nam, elem_id, ref: string;
+begin
+    dist := 0;
+    nst := Rmod(cst + 1.00273790935 * 15 * deg2rad, pi2); // sidereal + 1 hour
+    njd := cjd + 1 / 24; // JD + 1 hour
+    if otype = 'Cm' then
+    begin
+      FindCometId(oname,id);
+      if id<>'' then begin
+        if cdb.GetComElem(id, ElemEpoch, tp, q, ec, ap, an, ic, h, g, eq, nam, elem_id) then begin
+          InitComet(tp, q, ec, ap, an, ic, h, g, eq, nam);
+          Comet(cjd, True, cra1, cde1, dst1, rr, elong, phase, magn, diam, lc, ctar, ctde, rc, xc, yc, zc);
+          Comet(njd, True, cra, cdec, dst, rr, elong, phase, magn, diam, lc, ctar, ctde, rc, xc, yc, zc);
+          Precession(jd2000,c.JDChart,cra1,cde1);
+          Precession(jd2000,c.JDChart,cra,cdec);
+          if c.ApparentPos then begin
+            apparent_equatorial(cra1,cde1,c,true,true);
+            apparent_equatorial(cra,cdec,c,true,true);
+          end;
+          if c.PlanetParalaxe then begin
+            Paralaxe(cst, dst1, cra1, cde1, cra1, cde1, q, c);
+            Paralaxe(nst, dst, cra, cdec, cra, cdec, q, c);
+          end;
+          dist := rad2deg * angulardistance(cra1, cde1, cra, cdec);
+        end;
+      end;
+    end;
+    if otype = 'As' then
+    begin
+      FindAsteroidIndex(oname,idx);
+      if idx>=0 then begin
+        if cdb.GetAstElem(idx, ElemEpoch, h, g, ma, ap, an, ic, ec, sa, eq, ref, nam) then begin
+          InitAsteroid(ElemEpoch, h, g, ma, ap, an, ic, ec, sa, eq, nam);
+          Asteroid(cjd, True, cra1, cde1, dst1, rr, elong, phase, magn, xc, yc, zc);
+          Asteroid(njd, True, cra, cdec, dst, rr, elong, phase, magn, xc, yc, zc);
+          Precession(jd2000,c.JDChart,cra1,cde1);
+          Precession(jd2000,c.JDChart,cra,cdec);
+          if c.ApparentPos then begin
+            apparent_equatorial(cra1,cde1,c,true,true);
+            apparent_equatorial(cra,cdec,c,true,true);
+          end;
+          if c.PlanetParalaxe then begin
+            Paralaxe(cst, dst1, cra1, cde1, cra1, cde1, q, c);
+            Paralaxe(nst, dst, cra, cdec, cra, cdec, q, c);
+          end;
+          dist := rad2deg * angulardistance(cra1, cde1, cra, cdec);
+        end;
+      end;
+    end;
+    if otype = 'Spk' then
+    begin
+      FindBodyIndex(oname,c,idx);
+      if idx>=0 then begin
+        id:=c.BodiesName[0, idx, 1];
+        if Body(cjd,strtoint(id),cra1,cde1,dst1,rr) and Body(njd,strtoint(id),cra,cdec,dst,rr) then begin
+          Precession(jd2000,c.JDChart,cra1,cde1);
+          Precession(jd2000,c.JDChart,cra,cdec);
+          if c.ApparentPos then begin
+            apparent_equatorial(cra1,cde1,c,true,true);
+            apparent_equatorial(cra,cdec,c,true,true);
+          end;
+          if c.PlanetParalaxe then begin
+            Paralaxe(cst, dst1, cra1, cde1, cra1, cde1, q, c);
+            Paralaxe(nst, dst, cra, cdec, cra, cdec, q, c);
+          end;
+          dist := rad2deg * angulardistance(cra1, cde1, cra, cdec);
+        end;
+      end;
+    end;
+    if dist > (0.05 / 3600) then
+    begin
+      pa := rmod(rad2deg * PositionAngle(cra1, cde1, cra, cdec) + 360, 360);
+      dx := rmod((rad2deg * (cra - cra1) / 15) + 24, 24);
+      if dx > 12 then
+        dx := dx - 24;
+      dy := rad2deg * (cdec - cde1);
+    end
+    else dist:=0;
+end;
 
 end.

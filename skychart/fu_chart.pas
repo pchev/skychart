@@ -3933,14 +3933,14 @@ var
   searchdir, fn, ImgCat,id: string;
   bmp: TBGRAbitmap;
   ipla, isat: integer;
-  i,ii, p, l, y, m, d, precision, pa, idx: integer;
+  i,ii, p, l, y, m, d, precision, idx: integer;
   isStar, isSolarSystem, isd2k, isvo, isOsr, isArtSat: boolean;
   ApparentValid, supconj: boolean;
   ra, Dec, q, a, h, ag, airm, hg, hr, ht, hs, hrl,hsl, azr, azs, al, j1, j2, j3, rar, der, rat,
   det, ras, des, culmalt, lha: double;
   ra2000, de2000, radate, dedate, raapp, deapp, cjd, cjd0, cst, nst, njd, err, gw: double;
   r: TStringList;
-  tp, ec, ap, an, ic, g, eq, cra1, cde1, dst1, cra, cdec, dist, dst, dkm, rr, elong, phase, magn,
+  tp, ec, ap, an, ic, g, eq, cra1, cde1, dst1, cra, cdec, dist, pa, dst, dkm, rr, elong, phase, magn,
   diam, lc, ctar, ctde, rc, xc, yc, zc, ma, sa, dx, dy, illum, vel, lighttime: double;
   nam, elem_id, ref: string;
   emagn: double;
@@ -4251,156 +4251,107 @@ begin
     txt := txt + html_br;
   until buf = '';
 
-
   // object motion
-  dist := 0;
-  nst := Rmod(cst + 1.00273790935 * 15 * deg2rad, pi2); // sidereal + 1 hour
-  njd := cjd + 1 / 24; // JD + 1 hour
-  if otype = 'Cm' then
-  begin
-    sc.planet.FindCometId(oname,id);
-    if id<>'' then begin
-      if sc.cdb.GetComElem(id, sc.cfgsc.TrackElemEpoch, tp, q, ec, ap, an, ic, h, g, eq, nam, elem_id) then begin
-        sc.planet.InitComet(tp, q, ec, ap, an, ic, h, g, eq, nam);
-        sc.planet.Comet(cjd, True, cra1, cde1, dst1, rr, elong, phase, magn, diam, lc, ctar, ctde, rc, xc, yc, zc);
-        sc.planet.Comet(njd, True, cra, cdec, dst, rr, elong, phase, magn, diam, lc, ctar, ctde, rc, xc, yc, zc);
-        Precession(jd2000,sc.cfgsc.JDChart,cra1,cde1);
-        Precession(jd2000,sc.cfgsc.JDChart,cra,cdec);
-        if sc.cfgsc.ApparentPos then begin
-          apparent_equatorial(cra1,cde1,sc.cfgsc,true,true);
-          apparent_equatorial(cra,cdec,sc.cfgsc,true,true);
-        end;
-        if sc.cfgsc.PlanetParalaxe then begin
-          Paralaxe(cst, dst1, cra1, cde1, cra1, cde1, q, sc.cfgsc);
-          Paralaxe(nst, dst, cra, cdec, cra, cdec, q, sc.cfgsc);
-        end;
-        dist := rad2deg * angulardistance(cra1, cde1, cra, cdec);
+  if (otype='Cm')or(otype='As')or(otype='Spk') then begin
+    sc.planet.ObjectMotion(otype,oname,sc.cfgsc.TrackElemEpoch,cjd,cst,sc.cfgsc,dist,pa,dx,dy);
+  end
+  else begin
+    dist := 0;
+    nst := Rmod(cst + 1.00273790935 * 15 * deg2rad, pi2); // sidereal + 1 hour
+    njd := cjd + 1 / 24; // JD + 1 hour
+    if (otype = 'P') then
+    begin
+      sc.planet.Planet(ipla, cjd, cra1, cde1, dst1, illum, phase, diam, magn, rc, xc, yc, zc, vel, lighttime);
+      sc.planet.Planet(ipla, njd, cra, cdec, dst, illum, phase, diam, magn, rc, xc, yc, zc, vel, lighttime);
+      Precession(jd2000,sc.cfgsc.JDChart,cra1,cde1);
+      Precession(jd2000,sc.cfgsc.JDChart,cra,cdec);
+      if sc.cfgsc.ApparentPos then begin
+        apparent_equatorial(cra1,cde1,sc.cfgsc,true,true);
+        apparent_equatorial(cra,cdec,sc.cfgsc,true,true);
       end;
-    end;
-  end;
-  if otype = 'As' then
-  begin
-    sc.planet.FindAsteroidIndex(oname,idx);
-    if idx>=0 then begin
-      if sc.cdb.GetAstElem(idx, sc.cfgsc.TrackElemEpoch, h, g, ma, ap, an, ic, ec, sa, eq, ref, nam) then begin
-        sc.planet.InitAsteroid(sc.cfgsc.TrackElemEpoch, h, g, ma, ap, an, ic, ec, sa, eq, nam);
-        sc.planet.Asteroid(cjd, True, cra1, cde1, dst1, rr, elong, phase, magn, xc, yc, zc);
-        sc.planet.Asteroid(njd, True, cra, cdec, dst, rr, elong, phase, magn, xc, yc, zc);
-        Precession(jd2000,sc.cfgsc.JDChart,cra1,cde1);
-        Precession(jd2000,sc.cfgsc.JDChart,cra,cdec);
-        if sc.cfgsc.ApparentPos then begin
-          apparent_equatorial(cra1,cde1,sc.cfgsc,true,true);
-          apparent_equatorial(cra,cdec,sc.cfgsc,true,true);
-        end;
-        if sc.cfgsc.PlanetParalaxe then begin
-          Paralaxe(cst, dst1, cra1, cde1, cra1, cde1, q, sc.cfgsc);
-          Paralaxe(nst, dst, cra, cdec, cra, cdec, q, sc.cfgsc);
-        end;
-        dist := rad2deg * angulardistance(cra1, cde1, cra, cdec);
+      if sc.cfgsc.PlanetParalaxe then begin
+        Paralaxe(cst, dst1, cra1, cde1, cra1, cde1, q, sc.cfgsc);
+        Paralaxe(nst, dst, cra, cdec, cra, cdec, q, sc.cfgsc);
       end;
+      dist := rad2deg * angulardistance(cra1, cde1, cra, cdec);
     end;
-  end;
-  if otype = 'Spk' then
-  begin
-    sc.planet.FindBodyIndex(oname,sc.cfgsc,idx);
-    if idx>=0 then begin
-      id:=sc.cfgsc.BodiesName[0, idx, 1];
-      if sc.planet.Body(cjd,strtoint(id),cra1,cde1,dst1,rr) and sc.planet.Body(njd,strtoint(id),cra,cdec,dst,rr) then begin
-        Precession(jd2000,sc.cfgsc.JDChart,cra1,cde1);
-        Precession(jd2000,sc.cfgsc.JDChart,cra,cdec);
-        if sc.cfgsc.ApparentPos then begin
-          apparent_equatorial(cra1,cde1,sc.cfgsc,true,true);
-          apparent_equatorial(cra,cdec,sc.cfgsc,true,true);
-        end;
-        if sc.cfgsc.PlanetParalaxe then begin
-          Paralaxe(cst, dst1, cra1, cde1, cra1, cde1, q, sc.cfgsc);
-          Paralaxe(nst, dst, cra, cdec, cra, cdec, q, sc.cfgsc);
-        end;
-        dist := rad2deg * angulardistance(cra1, cde1, cra, cdec);
+    if (otype = 'S*') and (ipla = 10) then
+    begin
+      sc.planet.Sun(cjd, cra1, cde1, dst1, diam);
+      sc.planet.Sun(njd, cra, cdec, dst, diam);
+      Precession(jd2000,sc.cfgsc.JDChart,cra1,cde1);
+      Precession(jd2000,sc.cfgsc.JDChart,cra,cdec);
+      if sc.cfgsc.ApparentPos then begin
+        apparent_equatorial(cra1,cde1,sc.cfgsc,true,true);
+        apparent_equatorial(cra,cdec,sc.cfgsc,true,true);
       end;
+      if sc.cfgsc.PlanetParalaxe then begin
+        Paralaxe(cst, dst1, cra1, cde1, cra1, cde1, q, sc.cfgsc);
+        Paralaxe(nst, dst, cra, cdec, cra, cdec, q, sc.cfgsc);
+      end;
+      dist := rad2deg * angulardistance(cra1, cde1, cra, cdec);
     end;
-  end;
-  if (otype = 'P') then
-  begin
-    sc.planet.Planet(ipla, cjd, cra1, cde1, dst1, illum, phase, diam, magn, rc, xc, yc, zc, vel, lighttime);
-    sc.planet.Planet(ipla, njd, cra, cdec, dst, illum, phase, diam, magn, rc, xc, yc, zc, vel, lighttime);
-    Precession(jd2000,sc.cfgsc.JDChart,cra1,cde1);
-    Precession(jd2000,sc.cfgsc.JDChart,cra,cdec);
-    if sc.cfgsc.ApparentPos then begin
-      apparent_equatorial(cra1,cde1,sc.cfgsc,true,true);
-      apparent_equatorial(cra,cdec,sc.cfgsc,true,true);
+    if (otype = 'Ps') and (ipla = 11) then
+    begin
+      sc.planet.Moon(cjd, cra1, cde1, dst1, dkm, diam, phase, illum,sc.cfgsc);
+      sc.planet.Moon(njd, cra, cdec, dst, dkm, diam, phase, illum,sc.cfgsc);
+      Precession(jd2000,sc.cfgsc.JDChart,cra1,cde1);
+      Precession(jd2000,sc.cfgsc.JDChart,cra,cdec);
+      if sc.cfgsc.ApparentPos then begin
+        apparent_equatorial(cra1,cde1,sc.cfgsc,true,true);
+        apparent_equatorial(cra,cdec,sc.cfgsc,true,true);
+      end;
+      if sc.cfgsc.PlanetParalaxe then begin
+        Paralaxe(cst, dst1, cra1, cde1, cra1, cde1, q, sc.cfgsc);
+        Paralaxe(nst, dst, cra, cdec, cra, cdec, q, sc.cfgsc);
+      end;
+      dist := rad2deg * angulardistance(cra1, cde1, cra, cdec);
     end;
-    if sc.cfgsc.PlanetParalaxe then begin
-      Paralaxe(cst, dst1, cra1, cde1, cra1, cde1, q, sc.cfgsc);
-      Paralaxe(nst, dst, cra, cdec, cra, cdec, q, sc.cfgsc);
+    if (otype = 'Ps') and (isat > 0) then
+    begin
+      sc.planet.PlanSat(isat, cjd, sc.cfgsc, cra1, cde1, dst1, supconj, buf);
+      sc.planet.PlanSat(isat, njd, sc.cfgsc, cra, cdec, dst, supconj, buf);
+      Precession(jd2000,sc.cfgsc.JDChart,cra1,cde1);
+      Precession(jd2000,sc.cfgsc.JDChart,cra,cdec);
+      if sc.cfgsc.ApparentPos then begin
+        apparent_equatorial(cra1,cde1,sc.cfgsc,true,true);
+        apparent_equatorial(cra,cdec,sc.cfgsc,true,true);
+      end;
+      if sc.cfgsc.PlanetParalaxe then begin
+        Paralaxe(cst, dst1, cra1, cde1, cra1, cde1, q, sc.cfgsc);
+        Paralaxe(nst, dst, cra, cdec, cra, cdec, q, sc.cfgsc);
+      end;
+      dist := rad2deg * angulardistance(cra1, cde1, cra, cdec);
+      if buf<>'' then
+         txt := txt + html_b + rsEphemeris + ': ' + htms_b + buf + html_br;
     end;
-    dist := rad2deg * angulardistance(cra1, cde1, cra, cdec);
-  end;
-  if (otype = 'S*') and (ipla = 10) then
-  begin
-    sc.planet.Sun(cjd, cra1, cde1, dst1, diam);
-    sc.planet.Sun(njd, cra, cdec, dst, diam);
-    Precession(jd2000,sc.cfgsc.JDChart,cra1,cde1);
-    Precession(jd2000,sc.cfgsc.JDChart,cra,cdec);
-    if sc.cfgsc.ApparentPos then begin
-      apparent_equatorial(cra1,cde1,sc.cfgsc,true,true);
-      apparent_equatorial(cra,cdec,sc.cfgsc,true,true);
-    end;
-    if sc.cfgsc.PlanetParalaxe then begin
-      Paralaxe(cst, dst1, cra1, cde1, cra1, cde1, q, sc.cfgsc);
-      Paralaxe(nst, dst, cra, cdec, cra, cdec, q, sc.cfgsc);
-    end;
-    dist := rad2deg * angulardistance(cra1, cde1, cra, cdec);
-  end;
-  if (otype = 'Ps') and (ipla = 11) then
-  begin
-    sc.planet.Moon(cjd, cra1, cde1, dst1, dkm, diam, phase, illum,sc.cfgsc);
-    sc.planet.Moon(njd, cra, cdec, dst, dkm, diam, phase, illum,sc.cfgsc);
-    Precession(jd2000,sc.cfgsc.JDChart,cra1,cde1);
-    Precession(jd2000,sc.cfgsc.JDChart,cra,cdec);
-    if sc.cfgsc.ApparentPos then begin
-      apparent_equatorial(cra1,cde1,sc.cfgsc,true,true);
-      apparent_equatorial(cra,cdec,sc.cfgsc,true,true);
-    end;
-    if sc.cfgsc.PlanetParalaxe then begin
-      Paralaxe(cst, dst1, cra1, cde1, cra1, cde1, q, sc.cfgsc);
-      Paralaxe(nst, dst, cra, cdec, cra, cdec, q, sc.cfgsc);
-    end;
-    dist := rad2deg * angulardistance(cra1, cde1, cra, cdec);
-  end;
-  if (otype = 'Ps') and (isat > 0) then
-  begin
-    sc.planet.PlanSat(isat, cjd, sc.cfgsc, cra1, cde1, dst1, supconj, buf);
-    sc.planet.PlanSat(isat, njd, sc.cfgsc, cra, cdec, dst, supconj, buf);
-    Precession(jd2000,sc.cfgsc.JDChart,cra1,cde1);
-    Precession(jd2000,sc.cfgsc.JDChart,cra,cdec);
-    if sc.cfgsc.ApparentPos then begin
-      apparent_equatorial(cra1,cde1,sc.cfgsc,true,true);
-      apparent_equatorial(cra,cdec,sc.cfgsc,true,true);
-    end;
-    if sc.cfgsc.PlanetParalaxe then begin
-      Paralaxe(cst, dst1, cra1, cde1, cra1, cde1, q, sc.cfgsc);
-      Paralaxe(nst, dst, cra, cdec, cra, cdec, q, sc.cfgsc);
-    end;
-    dist := rad2deg * angulardistance(cra1, cde1, cra, cdec);
-    if buf<>'' then
-       txt := txt + html_b + rsEphemeris + ': ' + htms_b + buf + html_br;
+    if dist > (0.05 / 3600) then
+    begin
+      pa := round(rmod(rad2deg * PositionAngle(cra1, cde1, cra, cdec) + 360, 360));
+      dx := rmod((rad2deg * (cra - cra1) / 15) + 24, 24);
+      if dx > 12 then
+        dx := dx - 24;
+      dy := rad2deg * (cdec - cde1);
+    end
+    else dist:=0;
   end;
 
-  if dist > (0.05 / 3600) then
+  if dist > 0 then
   begin
-    pa := round(rmod(rad2deg * PositionAngle(cra1, cde1, cra, cdec) + 360, 360));
-    dx := rmod((rad2deg * (cra - cra1) / 15) + 24, 24);
-    if dx > 12 then
-      dx := dx - 24;
-    dy := rad2deg * (cdec - cde1);
-    txt := txt + html_b + rsHourlyMotion + ': ' + htms_b + DEToStrShort(dist) + ' PA:' + IntToStr(pa) + ldeg;
+    txt := txt + html_b + rsHourlyMotion + ': ' + htms_b + DEToStrShort(dist) + ' PA:' + FormatFloat(f1,pa) + ldeg;
     txt := txt + ' dRA:' + ARToStrShort(dx, 2) + ' dDec:' + DEToStrShort(dy) + html_br;
   end;
 
   // Asteroid extension
   if otype = 'As' then
   begin
+    nam:='';
+    sc.planet.FindAsteroidIndex(oname,idx);
+    if idx>=0 then begin
+      sc.cdb.GetAstElem(idx, sc.cfgsc.TrackElemEpoch, h, g, ma, ap, an, ic, ec, sa, eq, ref, nam);
+      sc.planet.InitAsteroid(sc.cfgsc.TrackElemEpoch, h, g, ma, ap, an, ic, ec, sa, eq, nam);
+      sc.planet.Asteroid(cjd, True, cra1, cde1, dst, rr, elong, phase, magn, xc, yc, zc);
+    end;
     i:=pos(')',nam);
     if i>0 then begin
       enum:=copy(nam,1,i-1);
