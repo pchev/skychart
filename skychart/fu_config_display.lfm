@@ -49,7 +49,7 @@ object f_config_display: Tf_config_display
           Visible = False
           object Label9: TLabel
             Left = 38
-            Height = 17
+            Height = 19
             Top = 49
             Width = 99
             Caption = 'Stars bitmap file'
@@ -58,7 +58,7 @@ object f_config_display: Tf_config_display
           end
           object FileNameEdit1: TFileNameEdit
             Left = 37
-            Height = 30
+            Height = 31
             Top = 85
             Width = 335
             OnAcceptFileName = FileNameEdit1AcceptFileName
@@ -157,7 +157,7 @@ object f_config_display: Tf_config_display
           end
           object Label259: TLabel
             Left = 24
-            Height = 17
+            Height = 19
             Top = 86
             Width = 52
             Caption = 'Contrast'
@@ -166,7 +166,7 @@ object f_config_display: Tf_config_display
           end
           object Label258: TLabel
             Left = 24
-            Height = 17
+            Height = 19
             Top = 30
             Width = 103
             Caption = 'Bright Stars Size '
@@ -231,7 +231,7 @@ object f_config_display: Tf_config_display
           end
           object Label257: TLabel
             Left = 24
-            Height = 17
+            Height = 19
             Top = 61
             Width = 163
             Caption = 'Increment for Bright Stars'
@@ -240,7 +240,7 @@ object f_config_display: Tf_config_display
           end
           object Label263: TLabel
             Left = 24
-            Height = 17
+            Height = 19
             Top = 143
             Width = 98
             Caption = 'Color saturation'
@@ -249,7 +249,7 @@ object f_config_display: Tf_config_display
           end
           object Label262: TLabel
             Left = 24
-            Height = 17
+            Height = 19
             Top = 102
             Width = 52
             Caption = 'Contrast'
@@ -258,7 +258,7 @@ object f_config_display: Tf_config_display
           end
           object Label256: TLabel
             Left = 24
-            Height = 17
+            Height = 19
             Top = 16
             Width = 94
             Caption = 'Faint Stars Size '
@@ -424,7 +424,7 @@ object f_config_display: Tf_config_display
         ParentFont = False
         object Label181: TLabel
           Left = 87
-          Height = 17
+          Height = 19
           Top = 34
           Width = 24
           Caption = '-0.3'
@@ -433,7 +433,7 @@ object f_config_display: Tf_config_display
         end
         object Label182: TLabel
           Left = 143
-          Height = 17
+          Height = 19
           Top = 34
           Width = 24
           Caption = '-0.1'
@@ -442,7 +442,7 @@ object f_config_display: Tf_config_display
         end
         object Label183: TLabel
           Left = 200
-          Height = 17
+          Height = 19
           Top = 34
           Width = 20
           Caption = '0.2'
@@ -451,7 +451,7 @@ object f_config_display: Tf_config_display
         end
         object Label184: TLabel
           Left = 257
-          Height = 17
+          Height = 19
           Top = 34
           Width = 20
           Caption = '0.5'
@@ -460,7 +460,7 @@ object f_config_display: Tf_config_display
         end
         object Label185: TLabel
           Left = 307
-          Height = 17
+          Height = 19
           Top = 34
           Width = 20
           Caption = '0.8'
@@ -469,7 +469,7 @@ object f_config_display: Tf_config_display
         end
         object Label186: TLabel
           Left = 362
-          Height = 17
+          Height = 19
           Top = 34
           Width = 20
           Caption = '1.3'
@@ -478,7 +478,7 @@ object f_config_display: Tf_config_display
         end
         object Label187: TLabel
           Left = 420
-          Height = 17
+          Height = 19
           Top = 34
           Width = 8
           Caption = '>'
@@ -487,7 +487,7 @@ object f_config_display: Tf_config_display
         end
         object Label188: TLabel
           Left = 40
-          Height = 17
+          Height = 19
           Top = 34
           Width = 8
           Caption = '<'
@@ -496,7 +496,7 @@ object f_config_display: Tf_config_display
         end
         object Label189: TLabel
           Left = 32
-          Height = 17
+          Height = 19
           Top = 10
           Width = 106
           Caption = 'Star colour (B-V) :'
@@ -505,7 +505,7 @@ object f_config_display: Tf_config_display
         end
         object Label193: TLabel
           Left = 210
-          Height = 17
+          Height = 19
           Top = 178
           Width = 71
           Alignment = taCenter
@@ -515,7 +515,7 @@ object f_config_display: Tf_config_display
         end
         object Label194: TLabel
           Left = 294
-          Height = 17
+          Height = 19
           Top = 178
           Width = 49
           Alignment = taCenter
@@ -525,7 +525,7 @@ object f_config_display: Tf_config_display
         end
         object Label195: TLabel
           Left = 186
-          Height = 17
+          Height = 19
           Top = 105
           Width = 32
           Alignment = taCenter
@@ -535,7 +535,7 @@ object f_config_display: Tf_config_display
         end
         object Label197: TLabel
           Left = 49
-          Height = 17
+          Height = 19
           Top = 178
           Width = 80
           Alignment = taCenter
@@ -545,7 +545,7 @@ object f_config_display: Tf_config_display
         end
         object Label198: TLabel
           Left = 137
-          Height = 17
+          Height = 19
           Top = 178
           Width = 61
           Alignment = taCenter
@@ -555,7 +555,7 @@ object f_config_display: Tf_config_display
         end
         object Label199: TLabel
           Left = 372
-          Height = 17
+          Height = 19
           Top = 105
           Width = 55
           Alignment = taCenter
@@ -565,7 +565,7 @@ object f_config_display: Tf_config_display
         end
         object Label196: TLabel
           Left = 366
-          Height = 17
+          Height = 19
           Top = 178
           Width = 66
           Alignment = taCenter
@@ -575,7 +575,7 @@ object f_config_display: Tf_config_display
         end
         object Label11: TLabel
           Left = 311
-          Height = 17
+          Height = 19
           Top = 105
           Width = 49
           Alignment = taCenter
@@ -585,7 +585,7 @@ object f_config_display: Tf_config_display
         end
         object Label6: TLabel
           Left = 57
-          Height = 17
+          Height = 19
           Top = 105
           Width = 52
           Alignment = taCenter
@@ -595,7 +595,7 @@ object f_config_display: Tf_config_display
         end
         object Label234: TLabel
           Left = 121
-          Height = 17
+          Height = 19
           Top = 105
           Width = 41
           Alignment = taCenter
@@ -605,7 +605,7 @@ object f_config_display: Tf_config_display
         end
         object Label269: TLabel
           Left = 243
-          Height = 17
+          Height = 19
           Top = 105
           Width = 61
           Caption = 'Milky Way'
@@ -966,8 +966,8 @@ object f_config_display: Tf_config_display
             Top = 10
             Width = 51
             BevelOuter = bvNone
-            ClientHeight = 230
-            ClientWidth = 47
+            ClientHeight = 234
+            ClientWidth = 51
             ParentFont = False
             TabOrder = 1
             object chkFillNE: TCheckBox
@@ -1053,8 +1053,8 @@ object f_config_display: Tf_config_display
             Top = 10
             Width = 53
             BevelOuter = bvNone
-            ClientHeight = 230
-            ClientWidth = 49
+            ClientHeight = 234
+            ClientWidth = 53
             ParentFont = False
             TabOrder = 0
             object chkFillRN: TCheckBox
@@ -1143,7 +1143,7 @@ object f_config_display: Tf_config_display
           object lblAst: TLabel
             AnchorSideLeft.Control = Label7
             Left = 4
-            Height = 17
+            Height = 19
             Top = 44
             Width = 55
             Caption = 'Asterism'
@@ -1161,7 +1161,7 @@ object f_config_display: Tf_config_display
           object lblSN: TLabel
             AnchorSideLeft.Control = lblDSOType
             Left = 251
-            Height = 17
+            Height = 19
             Top = 44
             Width = 123
             Caption = 'Supernova remnant'
@@ -1179,7 +1179,7 @@ object f_config_display: Tf_config_display
           object lblOCl: TLabel
             AnchorSideLeft.Control = Label7
             Left = 4
-            Height = 17
+            Height = 19
             Top = 73
             Width = 79
             Caption = 'Open cluster'
@@ -1189,7 +1189,7 @@ object f_config_display: Tf_config_display
           object lblGCl: TLabel
             AnchorSideLeft.Control = Label7
             Left = 4
-            Height = 17
+            Height = 19
             Top = 102
             Width = 98
             Caption = 'Globular cluster'
@@ -1199,7 +1199,7 @@ object f_config_display: Tf_config_display
           object lblPNe: TLabel
             AnchorSideLeft.Control = Label7
             Left = 4
-            Height = 17
+            Height = 19
             Top = 131
             Width = 104
             Caption = 'Planetary nebula'
@@ -1209,7 +1209,7 @@ object f_config_display: Tf_config_display
           object lblDN: TLabel
             AnchorSideLeft.Control = Label7
             Left = 4
-            Height = 17
+            Height = 19
             Top = 160
             Width = 75
             Caption = 'Dark nebula'
@@ -1219,7 +1219,7 @@ object f_config_display: Tf_config_display
           object lblEN: TLabel
             AnchorSideLeft.Control = Label7
             Left = 4
-            Height = 17
+            Height = 19
             Top = 189
             Width = 98
             Caption = 'Emission nebula'
@@ -1229,7 +1229,7 @@ object f_config_display: Tf_config_display
           object lblRN: TLabel
             AnchorSideLeft.Control = Label7
             Left = 4
-            Height = 17
+            Height = 19
             Top = 218
             Width = 107
             Caption = 'Reflection nebula'
@@ -1293,7 +1293,7 @@ object f_config_display: Tf_config_display
           object lblGxy: TLabel
             AnchorSideLeft.Control = lblDSOType
             Left = 251
-            Height = 17
+            Height = 19
             Top = 73
             Width = 41
             Caption = 'Galaxy'
@@ -1303,7 +1303,7 @@ object f_config_display: Tf_config_display
           object lblGxyCl: TLabel
             AnchorSideLeft.Control = lblDSOType
             Left = 251
-            Height = 17
+            Height = 19
             Top = 102
             Width = 86
             Caption = 'Galaxy cluster'
@@ -1313,7 +1313,7 @@ object f_config_display: Tf_config_display
           object lblQ: TLabel
             AnchorSideLeft.Control = lblDSOType
             Left = 251
-            Height = 17
+            Height = 19
             Top = 131
             Width = 44
             Caption = 'Quasar'
@@ -1323,7 +1323,7 @@ object f_config_display: Tf_config_display
           object lblGL: TLabel
             AnchorSideLeft.Control = lblDSOType
             Left = 251
-            Height = 17
+            Height = 19
             Top = 160
             Width = 106
             Caption = 'Gravitational lens'
@@ -1333,7 +1333,7 @@ object f_config_display: Tf_config_display
           object lblNE: TLabel
             AnchorSideLeft.Control = lblDSOType
             Left = 251
-            Height = 17
+            Height = 19
             Top = 189
             Width = 79
             Caption = 'Non-existent'
@@ -1476,7 +1476,7 @@ object f_config_display: Tf_config_display
           end
           object Label1: TLabel
             Left = 24
-            Height = 17
+            Height = 19
             Top = 13
             Width = 143
             Caption = 'Low surface brightness'
@@ -1485,7 +1485,7 @@ object f_config_display: Tf_config_display
           end
           object Label2: TLabel
             Left = 251
-            Height = 17
+            Height = 19
             Top = 13
             Width = 147
             Caption = 'High surface brightness'
@@ -1494,7 +1494,7 @@ object f_config_display: Tf_config_display
           end
           object Label3: TLabel
             Left = 8
-            Height = 17
+            Height = 19
             Top = 62
             Width = 44
             Caption = 'Fainter'
@@ -1503,7 +1503,7 @@ object f_config_display: Tf_config_display
           end
           object Label4: TLabel
             Left = 401
-            Height = 17
+            Height = 19
             Top = 62
             Width = 50
             Anchors = [akTop, akLeft, akRight]
@@ -1527,8 +1527,8 @@ object f_config_display: Tf_config_display
             Height = 41
             Top = 94
             Width = 235
-            ClientHeight = 37
-            ClientWidth = 231
+            ClientHeight = 41
+            ClientWidth = 235
             ParentFont = False
             TabOrder = 2
             object Shape29: TShape
@@ -1558,7 +1558,7 @@ object f_config_display: Tf_config_display
           TabOrder = 2
           object lblDSOCScheme: TLabel
             Left = 2
-            Height = 17
+            Height = 19
             Top = 16
             Width = 177
             Caption = 'Use a preset colour scheme :'
@@ -1570,7 +1570,7 @@ object f_config_display: Tf_config_display
             AnchorSideTop.Side = asrCenter
             Left = 256
             Height = 28
-            Top = 10
+            Top = 11
             Width = 170
             Constraints.MaxHeight = 28
             ItemHeight = 0
@@ -1605,7 +1605,7 @@ object f_config_display: Tf_config_display
           Visible = False
           object Label205: TLabel
             Left = 119
-            Height = 17
+            Height = 19
             Top = 111
             Width = 47
             Alignment = taCenter
@@ -1616,7 +1616,7 @@ object f_config_display: Tf_config_display
           end
           object Label202: TLabel
             Left = 11
-            Height = 17
+            Height = 19
             Top = 111
             Width = 57
             Alignment = taCenter
@@ -1627,7 +1627,7 @@ object f_config_display: Tf_config_display
           end
           object Label208: TLabel
             Left = 237
-            Height = 17
+            Height = 19
             Top = 111
             Width = 130
             Alignment = taCenter
@@ -1730,7 +1730,7 @@ object f_config_display: Tf_config_display
           end
           object Label5: TLabel
             Left = 8
-            Height = 17
+            Height = 19
             Top = 97
             Width = 93
             Caption = 'Fixed sky color '
@@ -2110,8 +2110,8 @@ object f_config_display: Tf_config_display
             AnchorSideTop.Control = DrawPMy
             AnchorSideTop.Side = asrCenter
             Left = 110
-            Height = 17
-            Top = 37
+            Height = 19
+            Top = 36
             Width = 34
             Caption = 'years'
             ParentColor = False
@@ -2119,7 +2119,7 @@ object f_config_display: Tf_config_display
           end
           object Label8: TLabel
             Left = 36
-            Height = 17
+            Height = 19
             Top = 8
             Width = 355
             Caption = 'Draw a line that represent the proper motion for the next '
@@ -2202,8 +2202,8 @@ object f_config_display: Tf_config_display
             AnchorSideTop.Control = DSLsurface
             AnchorSideTop.Side = asrCenter
             Left = 256
-            Height = 17
-            Top = 40
+            Height = 19
+            Top = 39
             Width = 49
             Caption = 'Label10'
             ParentColor = False
@@ -2232,8 +2232,8 @@ object f_config_display: Tf_config_display
             AnchorSideTop.Control = SurfaceBlure
             AnchorSideTop.Side = asrCenter
             Left = 232
-            Height = 17
-            Top = 68
+            Height = 19
+            Top = 67
             Width = 82
             Caption = 'Transparency'
             ParentColor = False
@@ -2253,7 +2253,7 @@ object f_config_display: Tf_config_display
           TabOrder = 3
           object Label72: TLabel
             Left = 29
-            Height = 17
+            Height = 19
             Top = 48
             Width = 218
             Caption = 'Constellation Boundary File Name : '
@@ -2343,7 +2343,7 @@ object f_config_display: Tf_config_display
           TabOrder = 4
           object Label132: TLabel
             Left = 29
-            Height = 17
+            Height = 19
             Top = 40
             Width = 196
             Caption = 'Constellation Figure File Name : '
@@ -2441,7 +2441,7 @@ object f_config_display: Tf_config_display
             Left = 16
             Height = 21
             Top = 2
-            Width = 307
+            Width = 305
             Caption = 'Display the chart information in the menu bar.'
             OnClick = ShowChartInfoClick
             ParentFont = False
@@ -2555,7 +2555,6 @@ object f_config_display: Tf_config_display
           Width = 498
           Align = alBottom
           BevelOuter = bvNone
-          Caption = 'Panel11'
           ClientHeight = 90
           ClientWidth = 498
           TabOrder = 2
@@ -2641,7 +2640,7 @@ object f_config_display: Tf_config_display
           TabOrder = 3
           object Label237: TLabel
             Left = 135
-            Height = 17
+            Height = 19
             Top = 2
             Width = 133
             Caption = 'Magnitude difference'
@@ -2651,7 +2650,7 @@ object f_config_display: Tf_config_display
           end
           object Label252: TLabel
             Left = 298
-            Height = 17
+            Height = 19
             Top = 2
             Width = 33
             Caption = 'Color'
@@ -2724,7 +2723,7 @@ object f_config_display: Tf_config_display
           end
           object Label255: TLabel
             Left = 351
-            Height = 17
+            Height = 19
             Top = 2
             Width = 24
             Caption = 'Size'
@@ -3133,7 +3132,7 @@ object f_config_display: Tf_config_display
           end
           object Label14: TLabel
             Left = 19
-            Height = 17
+            Height = 19
             Top = 2
             Width = 76
             Caption = 'Label Object'
@@ -3143,7 +3142,7 @@ object f_config_display: Tf_config_display
           end
           object Label15: TLabel
             Left = 42
-            Height = 17
+            Height = 19
             Top = 275
             Width = 145
             Caption = 'Observing list elements'
@@ -3196,7 +3195,7 @@ object f_config_display: Tf_config_display
             TabOrder = 36
             object Label260: TLabel
               Left = 11
-              Height = 17
+              Height = 19
               Top = 2
               Width = 52
               Caption = 'Rotation'
@@ -3633,7 +3632,7 @@ object f_config_display: Tf_config_display
         end
         object Label121: TLabel
           Left = 16
-          Height = 17
+          Height = 19
           Top = 75
           Width = 104
           Caption = 'Coordinates Grid'
@@ -3642,7 +3641,7 @@ object f_config_display: Tf_config_display
         end
         object Label122: TLabel
           Left = 16
-          Height = 17
+          Height = 19
           Top = 40
           Width = 40
           Caption = 'Object'
@@ -3651,7 +3650,7 @@ object f_config_display: Tf_config_display
         end
         object Label123: TLabel
           Left = 16
-          Height = 17
+          Height = 19
           Top = 116
           Width = 39
           Caption = 'Labels'
@@ -3660,7 +3659,7 @@ object f_config_display: Tf_config_display
         end
         object Label124: TLabel
           Left = 16
-          Height = 17
+          Height = 19
           Top = 159
           Width = 47
           Caption = 'Legend'
@@ -3669,7 +3668,7 @@ object f_config_display: Tf_config_display
         end
         object Label125: TLabel
           Left = 16
-          Height = 17
+          Height = 19
           Top = 200
           Width = 112
           Caption = 'Information detail'
@@ -3678,7 +3677,7 @@ object f_config_display: Tf_config_display
         end
         object Label126: TLabel
           Left = 16
-          Height = 17
+          Height = 19
           Top = 243
           Width = 60
           Caption = 'Object list'
@@ -3687,7 +3686,7 @@ object f_config_display: Tf_config_display
         end
         object Label127: TLabel
           Left = 16
-          Height = 17
+          Height = 19
           Top = 285
           Width = 90
           Caption = 'Printer legend'
@@ -3696,7 +3695,7 @@ object f_config_display: Tf_config_display
         end
         object Label128: TLabel
           Left = 194
-          Height = 17
+          Height = 19
           Top = 40
           Width = 28
           Caption = 'Font'
@@ -3705,7 +3704,7 @@ object f_config_display: Tf_config_display
         end
         object Label129: TLabel
           Left = 348
-          Height = 17
+          Height = 19
           Top = 40
           Width = 43
           Caption = 'Modify'
@@ -4071,7 +4070,7 @@ object f_config_display: Tf_config_display
         end
         object Label235: TLabel
           Left = 16
-          Height = 17
+          Height = 19
           Top = 331
           Width = 85
           Caption = 'Greek symbol'
@@ -4174,7 +4173,7 @@ object f_config_display: Tf_config_display
         ParentFont = False
         object Label307: TLabel
           Left = 26
-          Height = 17
+          Height = 19
           Top = 13
           Width = 182
           Caption = 'Finder circle (Eyepiece/Telrad)'
@@ -4261,7 +4260,7 @@ object f_config_display: Tf_config_display
         ParentFont = False
         object Label308: TLabel
           Left = 26
-          Height = 17
+          Height = 19
           Top = 13
           Width = 196
           Caption = 'Finder rectangle (CCD / Camera)'
@@ -4332,7 +4331,7 @@ object f_config_display: Tf_config_display
         end
         object Label16: TLabel
           Left = 26
-          Height = 17
+          Height = 19
           Top = 386
           Width = 394
           Caption = 'Do not use row 10, it is reserved for external software interface.'
@@ -4381,135 +4380,65 @@ object f_config_display: Tf_config_display
     Left = 152
     Top = 496
     Bitmap = {
-      4C69040000001000000010000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      00000000000000000000000000000000000000000000000000007F7F7FFF7F7F
-      7FFF7F7F7FFF7F7F7FFF00000000000000000000000000000000000000000000
-      000000000000000000000000000000000000000000007F7F7FFF00FFFFFFFFFF
-      FFFF00FFFFFFFFFFFFFF7F7F7FFF000000000000000000000000000000000000
-      000000000000000000000000000000000000000000007F7F7FFF7F7F7FFF7F7F
-      7FFF7F7F7FFF7F7F7FFF7F7F7FFF7F7F7FFF7F7F7FFF7F7F7FFF7F7F7FFF0000
-      000000000000000000000000000000000000000000007F7F7FFFFFFFFFFFFFFF
-      FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF7F7F
-      7FFF00000000000000000000000000000000000000007F7F7FFFFFFFFFFF00FF
-      FFFF0000000000FFFFFF0000000000FFFFFF0000000000FFFFFF000000007F7F
-      7FFF00000000000000000000000000000000000000007F7F7FFFFFFFFFFF0000
-      000000FFFFFF0000000000FFFFFF0000000000FFFFFF0000000000FFFFFF7F7F
-      7FFF00000000000000000000000000000000000000007F7F7FFFFFFFFFFF00FF
-      FFFF0000000000FFFFFF0000000000FFFFFF0000000000FFFFFF000000007F7F
-      7FFF00000000000000000000000000000000000000007F7F7FFFFFFFFFFF0000
-      000000FFFFFF0000000000FFFFFF0000000000FFFFFF0000000000FFFFFF7F7F
-      7FFF00000000000000000000000000000000000000007F7F7FFF7F7F7FFF7F7F
-      7FFF7F7F7FFF7F7F7FFF7F7F7FFF7F7F7FFF7F7F7FFF7F7F7FFF7F7F7FFF7F7F
-      7FFF000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000FFFFFEFFFBFCFAFFFDFFFEFFF9FCFAFFFAFD
-      FBFFFDFFFEFFFCFFFDFFFDFFFEFFF5F8F6FFFDFFFEFFFFFFFEFFF4F5F3FFFFFF
-      FEFFFEFEFEFFFDFFFF00FBFDFEFFFFFFFFFFF1F1F1FFFDFFFF00FDFFFF00F9FE
-      FDFFFAFFFEFFF9FEFDFFFBFFFFFFF9FBFBFFFDFFFF00FEFEFEFFFFFFFFFFF7F7
-      F7FFFFFFFFFFFDFFFF00FBFDFEFFFEFEFEFFFDFFFF00FBFDFDFFF2F7F6FFF6FB
-      FAFFFBFFFFFFFBFFFFFFF7FCFBFFFDFFFF00FDFFFF00FEFEFEFF9F9F9FFFFFFF
-      FFFFF8F8F8FFFDFFFF00FCFEFFFFFDFFFF00FAFCFDFFFDFFFF00EEF2F3FF8B8F
-      90FF595E5FFF4E5354FF6B7071FF919596FFE4E8E9FFA3A5A6FF525455FFF8FA
-      FBFFFDFFFF00FDFFFF00FCFEFFFFF7F9FAFFFBFFFFFFBEC2C3FF5A5F60FF5C61
-      62FF8A8F90FF999E9FFF919697FF6F7374FF737778FF7D7F80FF6E7071FFFDFF
-      FF00FDFFFF00FDFFFF00FCFEFFFFF8FBFFFFE7EAEEFF6B6E72FF6E7376FFECF1
-      F4FFEFF6F9FFF3FAFDFFF8FFFFFF9A9FA2FF919699FF818488FF797C80FFF8F9
-      FDFFFDFEFFFFFDFFFF00FCFEFFFFF8FBFFFF8D9094FF5F6467FFDADFE2FFF8FF
-      FFFFF4FBFEFFF8FFFFFF9DA4A7FF8D9295FF999EA1FF919498FF828589FFF6F7
-      FBFFFDFEFFFFFDFFFF00FCFEFFFFFBFEFFFF5D6064FF8B9093FFFAFFFFFFEDF4
-      F7FFF8FFFFFF979EA1FF61686BFF7B8083FF72777AFF7A7D81FF676A6EFFFCFD
-      FFFFFDFEFFFFFDFFFF00FDFFFF00FAFDFFFF53565AFF979A9EFFFAFFFFFFFAFF
-      FFFFF3FAFDFFF2F9FCFFF8FFFFFFEAEFF2FFFAFFFFFFF9FCFFFFFBFEFFFFFDFE
-      FFFFF3F4F8FFFDFFFF00FDFFFF00FDFFFF006B6F70FF8B8F90FFF9FEFFFFFAFF
-      FFFFFAFFFFFFFAFFFFFFFAFFFFFFF8FCFDFFFBFFFFFFFDFFFF00F9FBFCFFFDFF
-      FF00FDFFFF00FDFFFF00FDFFFF00FDFFFF00959798FF5D5F60FFD2D6D7FFF9FD
-      FEFFF7FCFDFFFAFFFFFFFAFFFFFFF8FCFDFFF4F8F9FFFDFFFF00FDFFFF00F2F4
-      F5FFFDFFFF00FDFFFF00FDFFFF00FFFFFFFFE8EAEAFF757777FF737877FFD4D9
-      D8FFFBFFFFFFF5FAF9FFF7FCFBFFCED0D0FF9B9D9DFFEEEEEEFFFFFFFFFFF8F8
-      F8FFFFFFFFFFFDFFFF00FDFFFF00FFFFFFFFFFFFFFFFC0C2C2FF5B5D5DFF5D62
-      61FF777C7BFF979C9BFF717675FF555757FF525454FFD9D9D9FFFFFFFFFFFFFF
-      FFFFF7F7F7FFFDFFFF00FDFFFF00FFFFFEFFF5F6F4FFFDFFFEFFEEF1EFFF9EA1
-      9FFF707371FF636664FF7C7F7DFFA3A6A4FFF1F4F2FFF8F9F7FFFFFFFEFFFDFB
-      FAFFFFFFFFFFFDFFFF00FDFFFF00FCFCFCFFFFFFFEFFF9FBFBFFFDFFFEFFF9FB
-      FBFFFDFFFEFFFBFDFDFFFDFFFEFFFAFCFCFFFDFFFEFFFFFFFFFFFAFBF9FFFCFC
-      FCFFFFFFFFFFFDFFFF00FDFFFF00FDFFFF00FDFFFF00FDFFFF00FDFFFF00FDFF
-      FF00FDFFFF00FDFFFF00FDFFFF00FDFFFF00FDFFFF00FDFFFF00FDFFFF00FDFF
-      FF00FDFFFF00FAFCFDFFFDFFFF00000000000000000000000000000000000000
-      CB0000000000000000000000000000000000000000004848EC00000000000000
-      0000000000000000000000000000000000000000000000000000000000001C1C
-      ED1B6161F39AADADFFE1CFCFFFFF9797FEE84242EEA00000E621000000000000
-      D0000000000000000000000000000000000000000000000000000000D2790B0B
-      D2FF7B7BDEFF9292DDFF8888D7FF8989D9FF6969D8FE0000D0FF0000D0880000
-      00000000BB00000000000000000000000000000000000000BF7B0D0DBEFF8D8D
-      D9FF8787D7FF8181D6FF7D7DD5FF7878D3FF7676D0FF7C7CD0FF1414BFFF0000
-      BD90000000000000000000000000000091000000A71D0000A5FF8181D4FF7A7A
-      D3FF7474D4FF7171D4FF6D6DD3FF6A6AD1FF6464CEFF6161CAFF6565C8FF0101
-      A6FF0000A72F0000920000000000000000000000919A3939AEFE7070CFFF6969
-      D1FF6666D2FF6262D2FF5E5ED2FF5A5AD1FF5555CEFF5050C9FF4B4BC3FF3535
-      ADFE000090AB000000000000000000000000000078E15252BCFF5E5ECCFF5959
-      CFFF5656D2FF5252D4FF4F4FD5FF4B4BD3FF4646CFFF4141C9FF3C3CC0FF4545
-      BAFF000078F1000000000000000000000000000060F94C4CBFFF4D4DC9FF4A4A
-      CFFF4747D4FF4444D8FF4040D9FF3C3CD7FF3737D2FF3131C9FF2929BDFF4C4C
-      C6FF000061FF00000000000000000000000000004DE21F1FA2FF2D2DC0FF3434
-      CDFF3737D7FF3B3BDDFF3636E0FF3131DDFF2D2DD6FF2828CBFF1D1DBCFF0707
-      9EFF00004DF800000000000000000000000000003BA000006DFE0101B3FF0505
-      C6FF0707D8FF0909E4FF0B0BE8FF0A0AE4FF0808D8FF0707C6FF0404B4FF0000
-      76FE00003AB300000000000000000000390000002B26000029FF0202A8FF0707
-      C2FF0B0BD9FF0F0FECFF1010F5FF0F0FECFF0B0BD9FF0707C2FF0202ADFF0000
-      2DFF00002B370000380000000000000000000000000000002B8C00003AFF0305
-      AEFF0807CBFF0E0DE6FF1111FAFF0E0DE5FF0806C9FF0406B3FF000241FF0000
-      2AA20000000000000000000000000000000000002C00000000000003308F0512
-      3FFF0E1B84FE131AB1FF191CC2FF151DB4FF121E89FE091645FF010634A10000
-      000000002C000000000000000000000000000000000000002C00000000000513
-      432B132452AB26385EF23C4E6EFF2F4265F3192B58B1091A4C36000000000005
-      3500000000000000000000000000000000000000000000000000000000000B15
-      430000000000000000000000000000000000000000001A102900000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000002CE0
-      900000000000000000000000000000000000000000003AE29700000000000000
-      0000000000000000000000000000000000000000000000CA7000000000001BE2
-      893266EDB1B1AEFDD9F7D1FFEDFF93F9CBF740E79CAE00DD792D0000000000CA
-      70000000000000000000000000000000000000B966000000000000CB6F9A0DCD
-      77FF7ADCB3FE92DEC1FF88D9BBFF89DBBBFF5FD7A4FE00C96CFF00CC6F960000
-      000000B966000000000000000000000000000000000000BC679E0BBD6EFF8BD8
-      BCFF89D8BCFF81D7B9FF7ED5B6FF7AD3B4FF77D0B1FF77D0AFFF0ABD6EFF00BC
-      6796000000000000000000000000009A540000AD5E3500A85AFF80D4B6FF7BD3
-      B4FF76D4B3FF72D4B2FF6ED3B0FF6AD1ADFF65CEA9FF61CAA5FF61C6A1FF00A7
-      5BFF00AC5F2F009A54000000000000000000009953B337B27EFE70CFAEFF69D0
-      ADFF65D2AEFF62D2ADFF5ED2ACFF5AD1A9FF55CEA5FF50C89EFF4BC296FF2CAC
-      76FE009953AB000000000000000000000000008746F951BD94FF5ECCA5FF5AD0
-      A8FF56D2AAFF52D4ABFF4ED5ABFF4AD3A7FF46CFA1FF41C89AFF3BBF8FFF3CB3
-      85FF008746EE00000000000000000000000000753BFF4CBE93FF4DC99EFF4ACF
-      A3FF47D4A8FF44D8ABFF40D9AAFF3CD7A7FF37D1A0FF2FC894FF2ABC87FF47BC
-      8FFF00753BFF000000000000000000000000006535F51CA46CFF2CC08BFF34CD
-      9BFF36D7A7FF39DDADFF35E0ADFF30DCA9FF2DD7A1FF27CA93FF1BBB7FFF0495
-      57FF006637F000000000000000000000000000562DB1007943FE01B36EFF05C6
-      84FF08D898FF09E4A4FF0BE8A9FF0AE3A3FF08D796FF07C583FF03B26EFF0076
-      41FE00562EAC000000000000000000532C0000492634004222FF02A863FF07C2
-      7FFF0BDA99FF0FEDAEFF10F5B6FF0FEBACFF0BD797FF07C07DFF02A460FF0043
-      21FF0049262C00532D0000000000000000000000000000371B9C014021FF05AC
-      69FF06CA86FF0CE5A5FF0FF9B9FF0BE2A2FF06C884FF09AC6AFF024022FF0036
-      1B940000000000000000000000000000000000341A000000000004301A99133D
-      29FF1F7F57FE23AD78FF26BE84FF25AC77FF227F59FE143E2BFF07331E930000
-      000000341A0000000000000000000000000000000000002C1600000000001343
-      2D3020503BAC2C5945F2386451FF315E4AEE24543FA91848322D000000000D37
-      2200000000000000000000000000000000000000000000000000000000001542
-      2C00000000000000000000000000000000000000000026594100000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000
+      4C7A0400000010000000100000002B0700000000000078DAED960B5054D719C7
+      2FC8D32DC104CD34A0B1DA94860055531E1A68C3C357118CE16521055C025831
+      2288B2C82348422AD43A2220082A040581B04B8B38CE585129993280CA2ECBEA
+      B269480D3509B582E5B9EFFBEFB9775DE02AD2389D76DA999E996FBFBDDFFDFF
+      BE73F69CEF3BB314F5FF611C393939986DCFCA52300CA37F961C8FCFFD349B8F
+      FF36E369398C3CB37636F014FF4FF97958EABF7CFE7FF50CFE17074043ABD340
+      4FBC9A788D5ECB7ED7914FC64FAAA658CFE82626C7594FD3348981D2EA6976CF
+      474747D967C6D4B41E1A2617F15AF24EADD5B2EF1886194AA592F5467E26971E
+      63CA294C69352CC79852A79DCECBE8AAAAAA5856A552B1711D6DC8A3D1E9593F
+      32368E23C70A11111D83AD21A1D89D9C82E3274A716FE8AF38577B1EC1A16150
+      69667232BC526D98EF5AFBA7888CD9815FF063F16B92A3BCB20AC74BCBB03775
+      3F5205E9C8CE39842492CFC81A791581BFB93F82DD49FB90949A8607A3137838
+      A5C6B8460F15C95B517596E429476E5E3E0E661D824A4DD6FA68DD46FE686109
+      62E276E2B33F0FB2CC849666FD999A3A1C2D3A41D6528DE32527F1C147059852
+      6A393C91226A471C8E1416937D078627942C5B4618FE2F7723F3D087D827C840
+      46762E762626816CD534CFEE1DF908098F44594525CB33C6AC7D4CAD63F3DC7F
+      38C6C6C8233B17C38E4FA838FBB07B6F32BBEF6A1AD3398CA6D219EA80AD0DAD
+      8EC319ED44D9494491BD97DE91434D2650EAF41C7E42A59EE6C626263939987A
+      18BA7F1F070402A4A60B2053F4B3F34D6AD46CFDF448243875E60C464646A66B
+      C7587FFA99AB1A6DEDED78272A0A51B17C08B2325176FA1452D20E206CFB7652
+      37A1502814D3772853C3333CE991A909B64746461FA2B2BA0AC9A9297837210E
+      5939D93877BE06A31363E4DC956CEFE8B51ACEFC3A9D8E8D1BFA64C633FDC078
+      8D4EF7A8FFC87E68D530E831E73E3E8B197BE6C97163CE7B62F3E607DFEA3E59
+      BA74D881CF1FAF1089F0A5584CEAB08C1EF2F31BF998A2BE5E615048E6A1A507
+      793C293233BF4051D100F2F3E528285060D7AE7E9A7064B1927C83EECA1CECF5
+      4C1B9B6B387A5481C387E5C8CDBD83ECECDB484FEF435A9A045959122C5E7C9D
+      E4B85AC8E58E13AB5B4651B584912123A30FFBF7CB909222C39E3D7D484CEC45
+      5C5C0FF8FC6EC4C777C2C4E43CC951B78AA28A66E7A858B7AE894E4E1693B5F6
+      2221418AD85829A2A3A5888CEC4558580FB66DEBC2962D9FC2DD5D447E4B6123
+      770DE95F0607B712FD4D444488111E2E4570B00C6FBD759B307DD8B8510C5FDF
+      2E787BB761C386DF93F9D347B9FC0E7560E0750405752120408C4D9B6458BFBE
+      1F3E3E0AC2C8E1E929C59A355D7072BA8AC0C00EC2F31F3BF8A0C1E5CBCFC2D5
+      B50D6E6EB7885E0E2FAF017878DC25DC0089DFC1ABAFDEC0B265ADB0B4AC246C
+      908ACB7B91F3DD439B98B4C0DCBC8368FA616D7D0F3CDE10162EBC072BAB7E12
+      EB8099D945C2A691DFFF46CB0CBB8E98B3234539C1D4B49EE8DA09A780ADED03
+      2C5A34C97AE699899B9A8A08EF4ACCD993A2D63E76FECEBF2179B1C0BC095696
+      37F09CCDD778FE790DF15FC1CAA20B66162DA04C7D09FBDAD9276BC7C5E016AC
+      3E66FEC29B78CE218FB6B36FC64B4BDBB164D945BCF072016DFDE2069858B855
+      73F473E430B7F377B67B25B8D1716DF498F7D624ACF28B1F7FC9F9E7CDD6F681
+      1E0681FBBCFDC35BE23F67DC7E91D37FE4FF80CBDDC239E36F0C96CD0F7627B3
+      CE61B0E0F584E1E6E626BD42D98B6114AB6F287DBE39DD440D1C749DADE38CCB
+      098FAE9EBD1536B704C8F8BC852EFAE20FC8575C41C19FAE20465E43535DEF81
+      BAB9B794A39F3D5A7756F2AE26E1487F2B0A88E5CA2FE3FDDB9790D177110249
+      33B1DF6221794F74A51CAE2294A244D1EE547D240EC92E2193E8D3642DD827BB
+      80A4BEDF21B15784F89E06F0BB6BC1EFA80655F70E2861CC2A96338EF29016CF
+      0BEFD3C9E226EC9210BDB409B15211A2A54244F63620ACA716DB3A2BB1A5BD14
+      2E4252FFE521DCFE3FBC51FDF6D51244DFAC45A4A41EE1D24F102C6BC4D6DB8D
+      08E8ABC34671357C3B2BE075FD18BC5B3E02D18F70F8035E08BC568CA0AE4A04
+      88CF6193AC1EEBFB1BE1A3F804DEF23A78F67E8C559D2578ADF53036B51E03A3
+      E7F0F1EE934B6BDE834BDB11B8DD3A050FC2AC1B10C1FDAE08AB3F6F80ABBC1A
+      3FEC2E86C3951C989DD80E2AC1F3EF1C3EDCB5993AE84F9BB424C1BC230F56FD
+      27617DAF06BCA1062CFCCB3958C94B61F9C70FB1E002D9FF345F9A0AFF91709A
+      0D217DF3334737CA6F254CEBDF85657B0E789F95C376B8098B262FC1F66F42F0
+      E465B06CCB8669CD0E50FE2B40F42E54882BF7FC3D1D4E9BF8AC80B970172CBA
+      7F85EF7C550B5BF565F006CFC2A2330FD6C24498FAAC04E5E150F244EDB8D9B3
+      CE6CB57DB9DD4F9CB03C673BFD7D513A1CAFE5E107420156E644D08B7FEA0CCB
+      1FBF5C3C5BCF6D9C175967E7EFBAFA7BDBBC842E111BC6D6C6BD8D35D10123AF
+      84BED9F0DDCDAFB30BB6F15C396F1B2DF1739933EE18E1FB6FE9F77F001AC6AC
+      0B
     }
   end
 end
