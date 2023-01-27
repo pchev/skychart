@@ -4217,6 +4217,10 @@ begin
       continue;
     if isd2k and (copy(buf2, 1, 4) = 'Dim:') then
       continue;
+    if copy(buf2,1,11) = 'MotionArcm:' then
+      continue;
+    if copy(buf2,1,9) = 'MotionPA:' then
+      continue;
     if isd2k and (copy(buf2, 1, 5) = 'desc:') then
       buf2 := copy(buf2, 6, 999);
     if isd2k and (copy(buf2, 1, 2) = 'n:') then
@@ -4339,7 +4343,8 @@ begin
   if dist > 0 then
   begin
     txt := txt + html_b + rsHourlyMotion + ': ' + htms_b + DEToStrShort(dist) + ' PA:' + FormatFloat(f1,pa) + ldeg;
-    txt := txt + ' dRA:' + ARToStrShort(dx, 2) + ' dDec:' + DEToStrShort(dy) + html_br;
+    txt := txt + ' dRA:' + ARToStrShort(dx, 2) + ' dDec:' + DEToStrShort(dy);
+    txt := txt + ' dx:' + FormatFloat(f1,dx*15*3600) + lsec + ' dy:' + FormatFloat(f1,dy*3600) + lsec + html_br;
   end;
 
   // Asteroid extension
