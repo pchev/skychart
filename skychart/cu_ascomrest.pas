@@ -112,6 +112,7 @@ type
     function GetTimeout: integer;
     procedure SetTimeout(value:integer);
     function GetImagearrayBase64:TMemoryStream;
+    procedure WaitRequest(req: THTTPthread);
   public
     constructor Create(AOwner: TComponent); override;
     destructor Destroy; override;
@@ -169,7 +170,6 @@ procedure THTTPthread.Execute;
 begin
   Fok:=Fhttp.HTTPMethod(method, fURL);
 end;
-
 
 { TAscomResult }
 
@@ -277,6 +277,21 @@ begin
   FTimeout:=value;
 end;
 
+procedure TAscomRest.WaitRequest(req: THTTPthread);
+var endt: double;
+    aborted: boolean;
+begin
+  // ensure request time do not excess timeout
+  endt:=now+FTimeout/MSecsPerDay;
+  aborted:=false;
+  while (not req.Finished)and(not aborted) do begin
+    aborted:=(now>endt);
+    sleep(10);
+  end;
+  if aborted then
+     req.http.Abort;
+end;
+
 procedure TAscomRest.SetBaseUrl;
 begin
   if (Fuser='')or(Fpassword='') then
@@ -352,10 +367,7 @@ function TAscomRest.Get(method:string; param: string=''; hdr: string=''):TAscomR
    if hdr<>'' then RESTRequest.http.Headers.Add(hdr);
    RESTRequest.method:='GET';
    RESTRequest.Start;
-   while not RESTRequest.Finished do begin
-     sleep(5);
-     if GetCurrentThreadId=MainThreadID then Application.ProcessMessages;
-   end;
+   WaitRequest(RESTRequest);
    ok := RESTRequest.ok;
    if ok then begin
      if (RESTRequest.http.ResultCode=200) then begin
@@ -467,10 +479,7 @@ function TAscomRest.GetImagearrayBase64:TMemoryStream;
    RESTRequest.url:=url;
    RESTRequest.method:='GET';
    RESTRequest.Start;
-   while not RESTRequest.Finished do begin
-     sleep(5);
-     if GetCurrentThreadId=MainThreadID then Application.ProcessMessages;
-   end;
+   WaitRequest(RESTRequest);
    ok := RESTRequest.ok;
    if ok then begin
      if (RESTRequest.http.ResultCode=200) then begin
@@ -634,10 +643,7 @@ begin
   RESTRequest.url:=url;
   RESTRequest.method:='PUT';
   RESTRequest.Start;
-  while not RESTRequest.Finished do begin
-    sleep(5);
-    if GetCurrentThreadId=MainThreadID then Application.ProcessMessages;
-  end;
+  WaitRequest(RESTRequest);
   ok := RESTRequest.ok;
    if ok then begin
     if (RESTRequest.http.ResultCode=200) then begin
@@ -715,10 +721,7 @@ begin
   RESTRequest.url:=url;
   RESTRequest.method:='PUT';
   RESTRequest.Start;
-  while not RESTRequest.Finished do begin
-    sleep(5);
-    if GetCurrentThreadId=MainThreadID then Application.ProcessMessages;
-  end;
+  WaitRequest(RESTRequest);
   if method='Connected' then
     FRemoteIP:=RESTRequest.http.Sock.GetRemoteSinIP;
   ok := RESTRequest.ok;
