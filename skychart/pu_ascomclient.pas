@@ -315,11 +315,11 @@ begin
   pos_y.Text := '';
   az_x.Text := '';
   alt_y.Text := '';
-  if trim(edit1.Text) = '' then
-    exit;
   try
     {$ifdef mswindows}
     if not Remote then begin
+    if trim(edit1.Text) = '' then
+       exit;
     if not VarIsEmpty(T) then
     begin
       if doDisconnect then T.connected := False;
