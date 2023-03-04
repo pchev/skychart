@@ -41,7 +41,7 @@ uses
   pu_config_solsys, pu_config_chart, pu_config_system, pu_config_internet,
   cu_radec, pu_config_calendar, pu_planetinfo, cu_sampclient, cu_vodata,
   pu_obslist, fu_script, pu_scriptengine, u_constant, u_util, UScaleDPI,
-  u_ccdconfig, blcksock, synsock, dynlibs, FileUtil, LCLVersion, LCLType,
+  u_ccdconfig, blcksock, synsock, dynlibs, FileUtil, ExtendedNotebook, LCLVersion, LCLType,
   InterfaceBase, LCLIntf, SysUtils, Classes, Graphics, Forms, Controls, Menus,
   Math, StdCtrls, Dialogs, Buttons, ExtCtrls, ComCtrls, StdActns, types,
   Printers, ActnList, IniFiles, Spin, Clipbrd, MultiFrame, ChildFrame,
@@ -69,6 +69,7 @@ type
     MenuUpdDeltaT: TMenuItem;
     StatusPopup: TPopupMenu;
     SavePictureDialog1: TSavePictureDialog;
+    TabControl1: TExtendedNotebook;
     UniqueInstance1: TUniqueInstance;
     ViewAllTollbar: TAction;
     MenuItem1: TMenuItem;
@@ -189,7 +190,6 @@ type
     MenuShowLabels: TMenuItem;
     MenuResetLanguage: TMenuItem;
     InitTimer: TTimer;
-    TabControl1: TTabControl;
     MenuTrackTelescope: TMenuItem;
     MenuPrintPreview: TMenuItem;
     MenuTelescopeSetup: TMenuItem;
@@ -1998,8 +1998,10 @@ begin
 end;
 
 procedure Tf_main.MultiFrame1CreateChild(Sender: TObject);
+var ntab: TTabSheet;
 begin
-  TabControl1.Tabs.Add(TChildFrame(Sender).Caption);
+  ntab:=TabControl1.AddTabSheet;
+  ntab.Caption:=TChildFrame(Sender).Caption;
   if TabControl1.Visible <> (MultiFrame1.Maximized) and (MultiFrame1.ChildCount > 1) then
   begin
     TabControl1.Visible := (MultiFrame1.Maximized) and (MultiFrame1.ChildCount > 1);
@@ -2017,11 +2019,11 @@ begin
     f_planetinfo.LinkedChartData := nil;
     f_planetinfo.Close;
   end;
-  for i := 0 to TabControl1.Tabs.Count - 1 do
+  for i := 0 to TabControl1.PageCount - 1 do
   begin
-    if TabControl1.Tabs[i] = TChildFrame(Sender).Caption then
+    if TabControl1.Pages[i].Caption = TChildFrame(Sender).Caption then
     begin
-      TabControl1.Tabs.Delete(i);
+      TabControl1.Pages[i].Destroy;
       break;
     end;
   end;
@@ -2126,9 +2128,9 @@ procedure Tf_main.TabControl1Change(Sender: TObject);
 var
   cname: string;
 begin
-  if (TabControl1.TabIndex >= 0) and (TabControl1.TabIndex < TabControl1.Tabs.Count) then
+  if (TabControl1.TabIndex >= 0) and (TabControl1.TabIndex < TabControl1.PageCount) then
   begin
-    cname := TabControl1.Tabs[TabControl1.TabIndex];
+    cname := TabControl1.Pages[TabControl1.TabIndex].Caption;
     SelectChart(cname);
   end;
 end;
@@ -10335,9 +10337,9 @@ begin
     ViewClock.Checked := (f_clock <> nil) and (f_clock.Visible);
     MenuPrintPreview.Visible := (cfgm.PrintMethod = 0);
     cname := MultiFrame1.ActiveChild.Caption;
-    for i := 0 to TabControl1.Tabs.Count - 1 do
+    for i := 0 to TabControl1.PageCount - 1 do
     begin
-      if TabControl1.Tabs[i] = cname then
+      if TabControl1.Pages[i].Caption = cname then
       begin
         TabControl1.TabIndex := i;
         break;
@@ -10572,11 +10574,11 @@ begin
         sc.cfgsc.chartname:=newname;
         MultiFrame1.ActiveObject.Caption:=newname;
         MultiFrame1.ActiveChild.Caption:=newname;
-        for i := 0 to TabControl1.Tabs.Count - 1 do
+        for i := 0 to TabControl1.PageCount - 1 do
         begin
-          if TabControl1.Tabs[i] = oldname then
+          if TabControl1.Pages[i].Caption = oldname then
           begin
-            TabControl1.Tabs[i]:=newname;
+            TabControl1.Pages[i].Caption:=newname;
             break;
           end;
         end;

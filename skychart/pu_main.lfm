@@ -23,29 +23,17 @@ object f_main: Tf_main
     Width = 885
     Align = alTop
     BevelOuter = bvNone
-    ClientHeight = 77
-    ClientWidth = 881
+    ClientHeight = 81
+    ClientWidth = 885
     FullRepaint = False
     ParentFont = False
     TabOrder = 0
     TabStop = True
-    object TabControl1: TTabControl
-      Left = 0
-      Height = 30
-      Top = 0
-      Width = 881
-      TabStop = False
-      OnChange = TabControl1Change
-      Align = alTop
-      ParentFont = False
-      TabOrder = 1
-      Visible = False
-    end
     object ToolBarObj: TToolBar
       Left = 0
       Height = 27
-      Top = 50
-      Width = 881
+      Top = 54
+      Width = 885
       Align = alBottom
       ButtonHeight = 24
       ButtonWidth = 24
@@ -62,19 +50,19 @@ object f_main: Tf_main
     object PanelToolBarMain: TPanel
       Left = 0
       Height = 25
-      Top = 25
-      Width = 881
+      Top = 29
+      Width = 885
       Align = alBottom
       BevelOuter = bvNone
-      ClientHeight = 21
-      ClientWidth = 877
+      ClientHeight = 25
+      ClientWidth = 885
       ParentFont = False
-      TabOrder = 2
+      TabOrder = 1
       object ToolBarMain: TToolBar
         Left = 0
-        Height = 21
+        Height = 25
         Top = 0
-        Width = 843
+        Width = 855
         Align = alClient
         ButtonHeight = 24
         ButtonWidth = 24
@@ -96,14 +84,14 @@ object f_main: Tf_main
         end
       end
       object ChildControl: TPanel
-        Left = 843
-        Height = 21
+        Left = 855
+        Height = 25
         Top = 0
-        Width = 34
+        Width = 30
         Align = alRight
         AutoSize = True
         BevelOuter = bvNone
-        ClientHeight = 17
+        ClientHeight = 25
         ClientWidth = 30
         ParentFont = False
         TabOrder = 1
@@ -164,6 +152,21 @@ object f_main: Tf_main
         end
       end
     end
+    object TabControl1: TExtendedNotebook
+      Left = 0
+      Height = 30
+      Top = 0
+      Width = 885
+      TabStop = False
+      Align = alTop
+      DragMode = dmAutomatic
+      ParentFont = False
+      TabOrder = 2
+      Visible = False
+      OnChange = TabControl1Change
+      TabDragMode = dmAutomatic
+      TabDragAcceptMode = dmAutomatic
+    end
   end
   object PanelLeft: TPanel
     Left = 0
@@ -172,17 +175,17 @@ object f_main: Tf_main
     Width = 28
     Align = alLeft
     BevelOuter = bvNone
-    ClientHeight = 457
-    ClientWidth = 24
+    ClientHeight = 461
+    ClientWidth = 28
     Font.Height = 10
     FullRepaint = False
     ParentFont = False
     TabOrder = 1
     object ToolBarLeft: TToolBar
       Left = 0
-      Height = 457
+      Height = 461
       Top = 0
-      Width = 24
+      Width = 28
       Align = alClient
       ButtonHeight = 24
       ButtonWidth = 26
@@ -206,16 +209,16 @@ object f_main: Tf_main
     Width = 26
     Align = alRight
     BevelOuter = bvNone
-    ClientHeight = 457
-    ClientWidth = 22
+    ClientHeight = 461
+    ClientWidth = 26
     FullRepaint = False
     ParentFont = False
     TabOrder = 3
     object ToolBarRight: TToolBar
       Left = 0
-      Height = 457
+      Height = 461
       Top = 0
-      Width = 22
+      Width = 26
       Align = alClient
       ButtonHeight = 24
       ButtonWidth = 26
@@ -243,14 +246,14 @@ object f_main: Tf_main
     Width = 885
     Align = alBottom
     BevelOuter = bvNone
-    ClientHeight = 30
-    ClientWidth = 881
+    ClientHeight = 34
+    ClientWidth = 885
     FullRepaint = False
     ParentFont = False
     TabOrder = 4
     object Shape1: TShape
       Left = 222
-      Height = 30
+      Height = 34
       Top = 0
       Width = 2
       Align = alLeft
@@ -259,34 +262,34 @@ object f_main: Tf_main
     end
     object PPanels0: TPanel
       Left = 0
-      Height = 30
+      Height = 34
       Top = 0
       Width = 222
       Align = alLeft
       Alignment = taLeftJustify
       BevelOuter = bvNone
-      ClientHeight = 26
-      ClientWidth = 218
+      ClientHeight = 34
+      ClientWidth = 222
       FullRepaint = False
       ParentFont = False
       TabOrder = 0
       object LPanels0: TPanel
         Left = 0
-        Height = 26
+        Height = 34
         Top = 0
-        Width = 218
+        Width = 222
         Align = alClient
         Alignment = taLeftJustify
         BevelOuter = bvNone
-        ClientHeight = 22
-        ClientWidth = 214
+        ClientHeight = 34
+        ClientWidth = 222
         ParentFont = False
         TabOrder = 0
         object P0L1: TLabel
           Left = 0
-          Height = 22
+          Height = 34
           Top = 0
-          Width = 214
+          Width = 222
           Align = alClient
           ParentColor = False
           ParentFont = False
@@ -295,34 +298,34 @@ object f_main: Tf_main
     end
     object PPanels1: TPanel
       Left = 224
-      Height = 30
+      Height = 34
       Top = 0
-      Width = 657
+      Width = 661
       Align = alClient
       Alignment = taLeftJustify
       BevelOuter = bvNone
-      ClientHeight = 26
-      ClientWidth = 653
+      ClientHeight = 34
+      ClientWidth = 661
       FullRepaint = False
       ParentFont = False
       TabOrder = 1
       object LPanels1: TPanel
         Left = 0
-        Height = 26
+        Height = 34
         Top = 0
-        Width = 653
+        Width = 661
         Align = alClient
         Alignment = taLeftJustify
         BevelOuter = bvNone
-        ClientHeight = 22
-        ClientWidth = 649
+        ClientHeight = 34
+        ClientWidth = 661
         ParentFont = False
         TabOrder = 0
         object P1L1: TLabel
           Left = 0
-          Height = 22
+          Height = 34
           Top = 0
-          Width = 649
+          Width = 661
           Align = alClient
           AutoSize = False
           ParentColor = False
@@ -347,8 +350,8 @@ object f_main: Tf_main
     OnCreateChild = MultiFrame1CreateChild
     OnDeleteChild = MultiFrame1DeleteChild
     BevelOuter = bvNone
-    ClientHeight = 235
-    ClientWidth = 330
+    ClientHeight = 239
+    ClientWidth = 334
     Color = clBlack
     FullRepaint = False
     ParentColor = False
@@ -2984,8 +2987,8 @@ object f_main: Tf_main
     Height = 121
     Top = 420
     Width = 331
-    ClientHeight = 117
-    ClientWidth = 327
+    ClientHeight = 121
+    ClientWidth = 331
     ParentFont = False
     TabOrder = 5
     Visible = False
@@ -3001,18 +3004,18 @@ object f_main: Tf_main
       ChildSizing.ShrinkVertical = crsScaleChilds
       ChildSizing.Layout = cclLeftToRightThenTopToBottom
       ChildSizing.ControlsPerLine = 2
-      ClientHeight = 18
-      ClientWidth = 20
+      ClientHeight = 22
+      ClientWidth = 24
       FullRepaint = False
       ParentFont = False
       TabOrder = 0
       OnMouseUp = MagPanelMouseUp
       object ButtonMoreStar: TImage
         Left = 0
-        Height = 9
+        Height = 11
         Hint = 'More Stars'
         Top = 0
-        Width = 10
+        Width = 12
         Center = True
         OnClick = MoreStarExecute
         OnMouseUp = MagPanelMouseUp
@@ -3035,11 +3038,11 @@ object f_main: Tf_main
         }
       end
       object ButtonLessStar: TImage
-        Left = 10
-        Height = 9
+        Left = 12
+        Height = 11
         Hint = 'Less Stars'
         Top = 0
-        Width = 10
+        Width = 12
         Center = True
         OnClick = LessStarExecute
         OnMouseUp = MagPanelMouseUp
@@ -3060,10 +3063,10 @@ object f_main: Tf_main
       end
       object ButtonMoreNeb: TImage
         Left = 0
-        Height = 9
+        Height = 11
         Hint = 'More Nebulae'
-        Top = 9
-        Width = 10
+        Top = 11
+        Width = 12
         Center = True
         OnClick = MoreNebExecute
         OnMouseUp = MagPanelMouseUp
@@ -3083,11 +3086,11 @@ object f_main: Tf_main
         }
       end
       object ButtonLessNeb: TImage
-        Left = 10
-        Height = 9
+        Left = 12
+        Height = 11
         Hint = 'Less Nebulae'
-        Top = 9
-        Width = 10
+        Top = 11
+        Width = 12
         Center = True
         OnClick = LessNebExecute
         OnMouseUp = MagPanelMouseUp
@@ -3150,13 +3153,13 @@ object f_main: Tf_main
       Top = 19
       Width = 59
       BevelOuter = bvNone
-      ClientHeight = 17
-      ClientWidth = 55
+      ClientHeight = 21
+      ClientWidth = 59
       ParentFont = False
       TabOrder = 3
       object TimeVal: TMouseUpDown
         Left = 36
-        Height = 17
+        Height = 21
         Top = 0
         Width = 17
         Associate = EditTimeVal
@@ -3169,7 +3172,7 @@ object f_main: Tf_main
       end
       object EditTimeVal: TEdit
         Left = 0
-        Height = 17
+        Height = 21
         Top = 0
         Width = 36
         Align = alLeft
@@ -3185,8 +3188,8 @@ object f_main: Tf_main
       Top = 89
       Width = 162
       BevelOuter = bvNone
-      ClientHeight = 15
-      ClientWidth = 158
+      ClientHeight = 19
+      ClientWidth = 162
       Color = clNone
       Font.Color = clNavy
       Font.Height = -11
