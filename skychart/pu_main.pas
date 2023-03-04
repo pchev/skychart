@@ -53,9 +53,11 @@ type
   { Tf_main }
 
   Tf_main = class(TForm)
+    FileRenameChart: TAction;
     LockMagnitude: TAction;
     MenuEditToolbar2: TMenuItem;
     MenuItem2: TMenuItem;
+    FileRenameChart1: TMenuItem;
     MenuLockMagnitude: TMenuItem;
     StatusCopy: TMenuItem;
     MenuShowVO: TMenuItem;
@@ -467,6 +469,7 @@ type
     procedure AnimationExecute(Sender: TObject);
     procedure AnimationTimerTimer(Sender: TObject);
     procedure BlinkImageExecute(Sender: TObject);
+    procedure FileRenameChartExecute(Sender: TObject);
     procedure LockMagnitudeExecute(Sender: TObject);
     procedure MenuLockChartClick(Sender: TObject);
     procedure MDEditToolBar(Sender: TObject; Button: TMouseButton;
@@ -801,6 +804,7 @@ type
     function CloseChart(cname: string): string;
     function ListChart: string;
     function SelectChart(cname: string): string;
+    function RenameChart(newname: string): string;
     function HelpCmd(cname: string): string;
     function GetSelectedObject: string;
     function ExecuteCmd(cname: string; arg: TStringList): string;
@@ -2027,6 +2031,22 @@ begin
     TabControl1.Visible := (MultiFrame1.Maximized) and (MultiFrame1.ChildCount > 2);
     ViewTopPanel;
   end;
+end;
+
+procedure Tf_main.FileRenameChartExecute(Sender: TObject);
+var
+  cname,oldname: string;
+  i: integer;
+begin
+  if MultiFrame1.ActiveObject is Tf_chart then
+    with MultiFrame1.ActiveObject as Tf_chart do
+    begin
+      oldname:=sc.cfgsc.chartname;
+      cname:=InputBox(rsRenameChart, rsChartName+':', oldname);
+      if (cname<>'')and(cname<>oldname) then begin
+        RenameChart(cname);
+      end;
+    end;
 end;
 
 procedure Tf_main.PlanetInfoExecute(Sender: TObject);
@@ -9527,6 +9547,9 @@ begin
   FileSaveAs1.Caption := '&' + rsSaveAs;
   FileSaveAs1.hint := rsSaveTheCurre;
   FileSaveAs1.Category := CatFile;
+  FileRenameChart.Caption:='&' + rsRenameChart;
+  FileRenameChart.Hint:=rsRenameTheCur;
+  FileRenameChart.Category := CatFile;
   Calendar.Caption := '&' + rsCalendar + Ellipsis;
   Calendar.hint := rsEphemerisCal;
   Calendar.Category := CatTools;
@@ -10528,9 +10551,38 @@ begin
       with MultiFrame1.Childs[i] do
         if InitOK and (Caption = cname) then
         begin
+          MultiFrame1.SetActiveChild(i);
           SetFocus;
           Result := msgOK;
         end;
+end;
+
+function Tf_main.RenameChart(newname: string): string;
+var
+  oldname: string;
+  i: integer;
+begin
+  if MultiFrame1.ActiveObject is Tf_chart then
+    with MultiFrame1.ActiveObject as Tf_chart do
+    begin
+      oldname:=sc.cfgsc.chartname;
+      if (newname<>'')and(newname<>oldname) then begin
+        newname := GetUniqueName(newname, false);
+        Caption:=newname;
+        sc.cfgsc.chartname:=newname;
+        MultiFrame1.ActiveObject.Caption:=newname;
+        MultiFrame1.ActiveChild.Caption:=newname;
+        for i := 0 to TabControl1.Tabs.Count - 1 do
+        begin
+          if TabControl1.Tabs[i] = oldname then
+          begin
+            TabControl1.Tabs[i]:=newname;
+            break;
+          end;
+        end;
+      end;
+      result:=sc.cfgsc.chartname;
+    end;
 end;
 
 function Tf_main.HelpCmd(cname: string): string;
@@ -10643,6 +10695,7 @@ begin
     17: Result := ShowPlanetInfo(arg[1]);
     18: Result := GetSelectedObject;
     19: Result := LoadMPCORB(arg[1]);
+    20: Result := RenameChart(arg[1]);
     else
     begin
       Result := 'Bad chart name ' + cname;

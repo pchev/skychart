@@ -1578,6 +1578,9 @@ resourcestring
   rsSelectedObje = 'Selected object';
   rsChartCenter = 'Chart center';
   rsPasteCoordin = 'Paste coordinates';
+  rsRenameChart = 'Rename chart';
+  rsChartName = 'Chart name';
+  rsRenameTheCur = 'Rename the curent chart';
 
 // also update upsi_translation
 

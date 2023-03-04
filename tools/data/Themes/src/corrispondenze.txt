@@ -133,3 +133,4 @@ i131	set-catalog
 i132	set-general
 i133	set-internet
 i134	lock-magnitude
+i135	edit-rename
