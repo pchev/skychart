@@ -1121,13 +1121,15 @@ procedure Tf_main.FileNew1Execute(Sender: TObject);
 var
   cname: string;
 begin
-  cname:=InputBox('New chart','Chart name:','');
-  if cname='' then
-    cname := GetUniqueName(rsChart_, True)
-  else
-    cname := GetUniqueName(cname, false);
-  CreateChild(cname, True, def_cfgsc, def_cfgplot);
-  SelectChart(cname);
+  cname:='';
+  if InputQuery(rsNewChart,rsChartName+':',cname) then begin
+    if cname='' then
+      cname := GetUniqueName(rsChart_, True)
+    else
+      cname := GetUniqueName(cname, false);
+    CreateChild(cname, True, def_cfgsc, def_cfgplot);
+    SelectChart(cname);
+  end;
 end;
 
 function Tf_main.SaveChart(fn: string): string;
@@ -2050,9 +2052,11 @@ begin
     with MultiFrame1.ActiveObject as Tf_chart do
     begin
       oldname:=sc.cfgsc.chartname;
-      cname:=InputBox(rsRenameChart, rsChartName+':', oldname);
-      if (cname<>'')and(cname<>oldname) then begin
-        RenameChart(cname);
+      cname:=oldname;
+      if InputQuery(rsRenameChart,rsChartName+':',cname) then begin
+         if (cname<>'')and(cname<>oldname) then begin
+           RenameChart(cname);
+         end;
       end;
     end;
 end;
