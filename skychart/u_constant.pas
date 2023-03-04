@@ -2382,7 +2382,7 @@ begin
   ObsHorizonDepression := Source.ObsHorizonDepression;
   ObsName := Source.ObsName;
   ObsCountry := Source.ObsCountry;
-  // chartname:=Source.chartname ; do not replace the initial chart name
+  chartname := Source.chartname;
   ast_day := Source.ast_day;
   ast_daypos := Source.ast_daypos;
   com_day := Source.com_day;

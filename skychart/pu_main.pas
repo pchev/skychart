@@ -1112,7 +1112,11 @@ procedure Tf_main.FileNew1Execute(Sender: TObject);
 var
   cname: string;
 begin
-  cname := GetUniqueName(rsChart_, True);
+  cname:=InputBox('New chart','Chart name:','');
+  if cname='' then
+    cname := GetUniqueName(rsChart_, True)
+  else
+    cname := GetUniqueName(cname, false);
   CreateChild(cname, True, def_cfgsc, def_cfgplot);
   SelectChart(cname);
 end;
@@ -1385,7 +1389,7 @@ end;
 procedure Tf_main.Init;
 var
   i,p: integer;
-  firstuse: boolean;
+  firstuse,cnum: boolean;
   cname: string;
 begin
   firstuse := False;
@@ -1555,13 +1559,20 @@ begin
       WriteTrace('Create default chart');
     if FirstChart<>'' then begin
       ReadChartConfig(SafeUTF8ToSys(ExpandFileNameUTF8(FirstChart)), True, false, def_cfgplot, def_cfgsc);
-      cname := stringreplace(extractfilename(FirstChart), blank, '_', [rfReplaceAll]);
+      cname := def_cfgsc.chartname;
+      if cname='' then
+        cname := stringreplace(extractfilename(FirstChart), blank, '_', [rfReplaceAll]);
       p := pos('.', cname);
       if p > 0 then
         cname := copy(cname, 1, p - 1);
+      cname:=GetUniqueName(cname, false);
     end
     else begin
-      cname:=GetUniqueName(rsChart_, True);
+      cname := def_cfgsc.chartname;
+      if cname='' then
+         cname:=GetUniqueName(rsChart_, True)
+      else
+         cname:=GetUniqueName(cname, false);
     end;
     CreateChild(cname, True, def_cfgsc, def_cfgplot, True);
     if InitialChartNum > 1 then
@@ -1574,7 +1585,15 @@ begin
           cfgp.Assign(def_cfgplot);
           cfgs.Assign(def_cfgsc);
           ReadChartConfig(configfile + IntToStr(i), True, False, cfgp, cfgs);
-          CreateChild(GetUniqueName(rsChart_, True), False, cfgs, cfgp);
+          if cfgs.chartname='' then begin
+            cname:=rsChart_;
+            cnum:=true;
+          end
+          else begin
+            cname:=cfgs.chartname;
+            cnum:=false;
+          end;
+          CreateChild(GetUniqueName(cname, cnum), False, cfgs, cfgp);
         except
         end;
       end;
@@ -6955,6 +6974,7 @@ begin
     begin
       section := 'main';
       try
+        csc.chartname:=ReadString(section,'ChartName','');
         if resizemain then
         begin
           t := ReadInteger(section, 'WinTop', 40);
@@ -8578,6 +8598,7 @@ begin
         if overwrite then
           Clear;
         section := 'main';
+        WriteString(section,'ChartName',csc.chartname);
         WriteInteger(section, 'WinTop', f_main.Top);
         WriteInteger(section, 'WinLeft', f_main.Left);
         WriteInteger(section, 'WinWidth', f_main.Width);
@@ -13194,12 +13215,12 @@ begin
   with Sender as Tf_chart do
   begin
     // delete old entries
-    for i := PopupMenu1.Items.Count - 1 downto 0 do
-      if PopupMenu1.Items[i].Tag = 100 then
+    for i := PopupMenuChart.Items.Count - 1 downto 0 do
+      if PopupMenuChart.Items[i].Tag = 100 then
       begin
-        for j := PopupMenu1.Items[i].Count - 1 downto 0 do
-          PopupMenu1.Items[i].Delete(j);
-        PopupMenu1.Items.Delete(i);
+        for j := PopupMenuChart.Items[i].Count - 1 downto 0 do
+          PopupMenuChart.Items[i].Delete(j);
+        PopupMenuChart.Items.Delete(i);
       end;
     // add entries
     for i := 0 to numscript - 1 do

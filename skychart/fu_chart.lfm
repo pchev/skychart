@@ -198,8 +198,8 @@ object f_chart: Tf_chart
       OnExecute = chart_imglistExecute
     end
   end
-  object PopupMenu1: TPopupMenu
-    OnPopup = PopupMenu1Popup
+  object PopupMenuChart: TPopupMenu
+    OnPopup = PopupMenuChartPopup
     Left = 275
     Top = 129
     object About1: TMenuItem

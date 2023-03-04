@@ -160,7 +160,7 @@ type
     chart_MoveSouthWest: TAction;
     chart_MoveSouthEast: TAction;
     chart_Centre: TAction;
-    PopupMenu1: TPopupMenu;
+    PopupMenuChart: TPopupMenu;
     Zoom1: TMenuItem;
     Zoom2: TMenuItem;
     Centre1: TMenuItem;
@@ -246,7 +246,7 @@ type
     procedure chart_MoveSouthWestExecute(Sender: TObject);
     procedure chart_MoveSouthEastExecute(Sender: TObject);
     procedure chart_CentreExecute(Sender: TObject);
-    procedure PopupMenu1Popup(Sender: TObject);
+    procedure PopupMenuChartPopup(Sender: TObject);
     procedure chart_zoomminusmoveExecute(Sender: TObject);
     procedure chart_zoomplusmoveExecute(Sender: TObject);
     procedure chart_FlipXExecute(Sender: TObject);
@@ -603,7 +603,7 @@ begin
   // Menu accelerator
   for i := 0 to MaxMenulevel do
     AccelList[i] := '';
-  SetMenuAccelerator(PopupMenu1.items, 0, AccelList);
+  SetMenuAccelerator(PopupMenuChart.items, 0, AccelList);
 end;
 
 constructor Tf_chart.Create(TheOwner: TComponent);
@@ -641,7 +641,7 @@ begin
   Image1.OnMouseUp := Image1MouseUp;
   Image1.OnMouseWheel := Image1MouseWheel;
   Image1.OnPaint := Image1Paint;
-  Image1.PopupMenu := PopupMenu1;
+  Image1.PopupMenu := PopupMenuChart;
   Image1.TabStop := True;
   sc := Tskychart.Create(Image1);
   sc.Image := Image1.Canvas;
@@ -2493,7 +2493,7 @@ begin
   end;
 end;
 
-procedure Tf_chart.PopupMenu1Popup(Sender: TObject);
+procedure Tf_chart.PopupMenuChartPopup(Sender: TObject);
 var
   xc, yc: integer;
 begin

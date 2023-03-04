@@ -3390,7 +3390,7 @@ object f_main: Tf_main
   object MainMenu1: TMainMenu
     Images = Img16Day
     Left = 57
-    Top = 105
+    Top = 104
     object SubFile: TMenuItem
       Caption = '&File'
       Hint = 'File related commands'
