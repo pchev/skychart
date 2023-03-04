@@ -1602,6 +1602,7 @@ begin
         end;
       end;
     end;
+    MultiFrame1.SetActiveChild(0);
     for i := 0 to MultiFrame1.ChildCount - 1 do
        if MultiFrame1.Childs[i].DockedObject is Tf_chart then
          Tf_chart(MultiFrame1.Childs[i].DockedObject).locked:=true;
