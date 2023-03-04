@@ -58,7 +58,11 @@ type
     MenuEditToolbar2: TMenuItem;
     MenuItem2: TMenuItem;
     FileRenameChart1: TMenuItem;
+    MenuItemFileNew: TMenuItem;
+    MenuItemCloseChart: TMenuItem;
+    MenuItemRenameTab: TMenuItem;
     MenuLockMagnitude: TMenuItem;
+    PopupTab: TPopupMenu;
     StatusCopy: TMenuItem;
     MenuShowVO: TMenuItem;
     MenuShowUserObject: TMenuItem;
@@ -513,6 +517,7 @@ type
     procedure MultiFrame1CreateChild(Sender: TObject);
     procedure MultiFrame1DeleteChild(Sender: TObject);
     procedure PlanetInfoExecute(Sender: TObject);
+    procedure PopupTabPopup(Sender: TObject);
     procedure PopupToolbar2Click(Sender: TObject);
     procedure ResetRotationExecute(Sender: TObject);
     procedure rotate180Execute(Sender: TObject);
@@ -2055,6 +2060,19 @@ end;
 procedure Tf_main.PlanetInfoExecute(Sender: TObject);
 begin
   PlanetInfoPage(-1, True);
+end;
+
+procedure Tf_main.PopupTabPopup(Sender: TObject);
+var p:TPoint;
+    i: integer;
+begin
+  // Select the chart for that tab we right click
+  p.X:=Mouse.CursorPos.X;
+  p.Y:=Mouse.CursorPos.Y;
+  p:=TabControl1.ScreenToClient(p);
+  i:=TabControl1.IndexOfTabAt(p);
+  if (i>=0)and(i<TabControl1.PageCount) then
+    SelectChart(TabControl1.Pages[i].Caption);
 end;
 
 procedure Tf_main.PlanetInfoPage(pg: integer; cursorpos: boolean = False);
@@ -9888,6 +9906,8 @@ begin
   AnimBackward.Category := CatAnimation;
 
   // Menu without action
+  // tab popup
+  MenuItemCloseChart.Caption := '&' + rsCloseChart;
   // Menu File
   SubFile.Caption := '&' + rsFile;
   MenuFileClose.Caption := '&' + rsCloseChart;
@@ -10583,6 +10603,7 @@ begin
             break;
           end;
         end;
+        MultiFrame1ActiveChildChange(nil);
       end;
       result:=sc.cfgsc.chartname;
     end;

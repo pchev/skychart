@@ -161,9 +161,11 @@ object f_main: Tf_main
       Align = alTop
       DragMode = dmAutomatic
       ParentFont = False
+      PopupMenu = PopupTab
       TabOrder = 2
       Visible = False
       OnChange = TabControl1Change
+      Options = [nboHidePageListPopup]
       TabDragMode = dmAutomatic
       TabDragAcceptMode = dmAutomatic
     end
@@ -10080,6 +10082,22 @@ object f_main: Tf_main
     object StatusCopy: TMenuItem
       Caption = 'StatusCopy'
       OnClick = StatusCopyClick
+    end
+  end
+  object PopupTab: TPopupMenu
+    OnPopup = PopupTabPopup
+    Left = 192
+    Top = 299
+    object MenuItemFileNew: TMenuItem
+      Action = FileNew1
+    end
+    object MenuItemRenameTab: TMenuItem
+      Action = FileRenameChart
+    end
+    object MenuItemCloseChart: TMenuItem
+      Caption = 'MenuItemCloseChart'
+      ImageIndex = 11
+      OnClick = BtnCloseChildClick
     end
   end
 end
