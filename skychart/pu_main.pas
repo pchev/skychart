@@ -8570,22 +8570,22 @@ end;
 procedure Tf_main.SaveDefault;
 var
   i, j: integer;
+  cname: string;
 begin
   try
     SavePrivateConfig(configfile);
     SaveQuickSearch(configfile);
-    if (MultiFrame1.ActiveObject is Tf_chart) then
-    begin
-      SaveChartConfig(configfile, MultiFrame1.ActiveChild, False);
-    end;
-    j := 0;
-    for i := 0 to MultiFrame1.ChildCount - 1 do
-      if (MultiFrame1.Childs[i].DockedObject is Tf_chart) and
-        (MultiFrame1.Childs[i].DockedObject <> MultiFrame1.ActiveObject) then
-      begin
-        Inc(j);
-        SaveChartConfig(configfile + IntToStr(j), MultiFrame1.Childs[i], False);
+    for i:=0 to TabControl1.PageCount-1 do begin
+      cname:=TabControl1.Pages[i].Caption;
+      for j:=0 to MultiFrame1.ChildCount - 1 do begin
+        if (MultiFrame1.Childs[j].DockedObject is Tf_chart) and (MultiFrame1.Childs[j].DockedObject.Caption=cname) then begin
+          if i=0 then
+            SaveChartConfig(configfile, MultiFrame1.Childs[j], False)
+          else
+            SaveChartConfig(configfile + IntToStr(i), MultiFrame1.Childs[j], False);
+        end;
       end;
+    end;
   except
   end;
 end;
