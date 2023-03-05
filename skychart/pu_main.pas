@@ -11495,8 +11495,6 @@ begin
     EditTimeVal.Enabled := True;
     TimeVal.Enabled := True;
     TimeU.Enabled := True;
-    if Sender is Tf_chart then
-      ActiveControl := Tf_chart(Sender).Image1;
   end;
 end;
 
