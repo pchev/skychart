@@ -4,15 +4,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: skychart.nb\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-12-01 11:02+0000\n"
-"PO-Revision-Date: 2022-11-22 11:23+0000\n"
+"POT-Creation-Date: 2023-03-07 11:15+0000\n"
+"PO-Revision-Date: 2023-01-25 10:39+0000\n"
 "Last-Translator: ovl-1 <Unknown>\n"
 "Language-Team: <translation@ap-i.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2022-12-03 08:41+0000\n"
-"X-Generator: Launchpad (build 51cef3d08dff1e227b5ada709bd67280c567d4be)\n"
+"X-Launchpad-Export-Date: 2023-03-07 12:00+0000\n"
+"X-Generator: Launchpad (build 1938a4fd80bdf1a1b1373119ac1ac9e0e65174d6)\n"
 
 #: u_translation.rs102cddss
 msgid "102 CD DSS"
@@ -298,7 +298,7 @@ msgstr "Alltid legge til meridian"
 
 #: u_translation.rsalwaysontop
 msgid "Always on top"
-msgstr ""
+msgstr "Alltid øverst"
 
 #: u_translation.rsalwayssavewi
 msgid "Always save without asking."
@@ -839,6 +839,10 @@ msgstr "Kart"
 msgid "chart:"
 msgstr "kart:"
 
+#: u_translation.rschartcenter
+msgid "Chart center"
+msgstr ""
+
 #: u_translation.rschartcenterc
 msgid "Add a crosshair to the chart center"
 msgstr "Legg til et trådkors i kartsenteret"
@@ -858,6 +862,10 @@ msgstr "Kartinformasjon"
 #: u_translation.rschartlegend
 msgid "Chart legend"
 msgstr "Kartforklaring"
+
+#: u_translation.rschartname
+msgid "Chart name"
+msgstr ""
 
 #: u_translation.rschartsetting
 msgid "Chart settings"
@@ -1262,6 +1270,10 @@ msgstr "Gjeldende dato"
 
 #: u_translation.rscursor
 msgid "Cursor"
+msgstr ""
+
+#: u_translation.rscursorpositi
+msgid "Cursor position"
 msgstr ""
 
 #: u_translation.rscw
@@ -1841,7 +1853,7 @@ msgstr "Øst"
 
 #: u_translation.rseasthourangl
 msgid "East hour angle"
-msgstr ""
+msgstr "Timevinkel øst"
 
 #: u_translation.rseastside
 msgid "East side"
@@ -1962,7 +1974,7 @@ msgstr "Ekv. nett"
 
 #: u_translation.rsequator
 msgid "Equator"
-msgstr ""
+msgstr "Ekvator"
 
 #: u_translation.rsequatorialco
 msgid "Equatorial coordinates"
@@ -2000,7 +2012,7 @@ msgstr "%sFeil ved opprettelse av tabell %s"
 
 #: u_translation.rserrorfilenot
 msgid "Error, file not downloaded:"
-msgstr ""
+msgstr "Feil, fil ikke lastet ned:"
 
 #: u_translation.rserrorpleasec
 msgid "Error! Please check the database parameters."
@@ -2267,7 +2279,7 @@ msgstr ""
 
 #: u_translation.rsformoreinfor
 msgid "For more information, see :"
-msgstr ""
+msgstr "For mer informasjon, se:"
 
 #: u_translation.rsfov
 msgid "FOV"
@@ -2427,7 +2439,7 @@ msgstr "Startdato for gregoriansk kalender"
 
 #: u_translation.rsgrids
 msgid "Grids"
-msgstr ""
+msgstr "Rutenett"
 
 #: u_translation.rsgridspacing
 msgid "Grid spacing"
@@ -3060,7 +3072,7 @@ msgstr ""
 
 #: u_translation.rslog
 msgid "Log"
-msgstr ""
+msgstr "Logg"
 
 #: u_translation.rslogarithmics
 msgid "Logarithmic scale"
@@ -3212,7 +3224,7 @@ msgstr "Maksimer"
 
 #: u_translation.rsmaximumdecli
 msgid "Maximum declination"
-msgstr ""
+msgstr "Maksimum deklinasjon"
 
 #: u_translation.rsmaximummagni
 msgid "Maximum magnitude"
@@ -3316,7 +3328,7 @@ msgstr "Minimal høyde"
 
 #: u_translation.rsminimumdecli
 msgid "Minimum declination"
-msgstr ""
+msgstr "Minimum deklinasjon"
 
 #: u_translation.rsminute
 msgid "Minute"
@@ -3538,7 +3550,7 @@ msgstr "Ingen data"
 
 #: u_translation.rsnodecimalsep
 msgid "No decimal separator"
-msgstr ""
+msgstr "Ingen desimaltegn"
 
 #: u_translation.rsnomargin
 msgid "No margin"
@@ -3630,7 +3642,7 @@ msgstr "Antall kopier"
 
 #: u_translation.rsnumberofdays
 msgid "Number of days"
-msgstr ""
+msgstr "Antall dager"
 
 #: u_translation.rsnumberoffile
 msgid "Number of files"
@@ -3834,6 +3846,10 @@ msgstr "Baneelementer"
 msgid "Orientation"
 msgstr "Orientering"
 
+#: u_translation.rsorientationf
+msgid "Orientation from zenith in Alt/Az chart"
+msgstr ""
+
 #: u_translation.rsorienttothep
 msgid "Orient to the pole or zenith"
 msgstr "Orienter til pol eller senit"
@@ -3894,6 +3910,10 @@ msgstr "Delvis"
 msgid "Password"
 msgstr "Passord"
 
+#: u_translation.rspastecoordin
+msgid "Paste coordinates"
+msgstr ""
+
 #: u_translation.rspastel
 msgid "Pastel"
 msgstr "Pastell"
@@ -3936,7 +3956,7 @@ msgstr "Personlige data"
 
 #: u_translation.rsphaseangle
 msgid "Phase angle"
-msgstr ""
+msgstr "Fasevinkel"
 
 #: u_translation.rsphotographic
 msgid "Photographic plate"
@@ -4061,7 +4081,7 @@ msgstr ""
 
 #: u_translation.rsplottheposit
 msgid "Plot orbital motion of solar system objects."
-msgstr ""
+msgstr "Plott banebevegelse av solsystemobjekter."
 
 #: u_translation.rspluto
 msgid "Pluto"
@@ -4467,6 +4487,14 @@ msgstr "Fjern siste sirkel"
 msgid "Remove last label"
 msgstr "Fjern siste påskrift"
 
+#: u_translation.rsrenamechart
+msgid "Rename chart"
+msgstr ""
+
+#: u_translation.rsrenamethecur
+msgid "Rename the curent chart"
+msgstr ""
+
 #: u_translation.rsreplacebytic
 msgid "Replace by tick mark"
 msgstr ""
@@ -4787,6 +4815,10 @@ msgstr "Velg sirkel"
 msgid "Select color (black for catalog default)"
 msgstr "Velg farge (svart for standardverdien)"
 
+#: u_translation.rsselectedobje
+msgid "Selected object"
+msgstr ""
+
 #: u_translation.rsselectlabels
 msgid "Select labels to recover"
 msgstr "Velg påskrifter å gjenopprette"
@@ -4845,11 +4877,11 @@ msgstr "Send kartet til skriveren."
 
 #: u_translation.rssendimageto
 msgid "Send image to"
-msgstr ""
+msgstr "Send bilde til"
 
 #: u_translation.rssendtableto
 msgid "Send table to"
-msgstr ""
+msgstr "Send tabell til"
 
 #: u_translation.rssendviaserve
 msgid "Send via server"
@@ -5369,7 +5401,7 @@ msgstr "Animasjon bakover"
 
 #: u_translation.rsstartdate
 msgid "Start date"
-msgstr ""
+msgstr "Startdato"
 
 #: u_translation.rsstartforward
 msgid "Animation forward"
@@ -6106,7 +6138,7 @@ msgstr "Vest"
 
 #: u_translation.rswesthourangl
 msgid "West hour angle"
-msgstr ""
+msgstr "Timevinkel vest"
 
 #: u_translation.rswestside
 msgid "West side"
@@ -6178,7 +6210,7 @@ msgstr "Zoom inn"
 
 #: u_translation.rszoommoretovi
 msgid "Object too faint to show on the chart"
-msgstr ""
+msgstr "Objekt er for svakt til å vises på kartet"
 
 #: u_translation.rszoomout
 msgid "Zoom out"

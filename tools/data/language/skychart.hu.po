@@ -3,15 +3,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: skychart.en\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-12-01 11:02+0000\n"
+"POT-Creation-Date: 2023-03-07 11:15+0000\n"
 "PO-Revision-Date: 2017-01-14 17:43+0000\n"
 "Last-Translator: Patrick Chevalley <Unknown>\n"
 "Language-Team: <translation@ap-i.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2022-12-03 08:40+0000\n"
-"X-Generator: Launchpad (build 51cef3d08dff1e227b5ada709bd67280c567d4be)\n"
+"X-Launchpad-Export-Date: 2023-03-07 12:00+0000\n"
+"X-Generator: Launchpad (build 1938a4fd80bdf1a1b1373119ac1ac9e0e65174d6)\n"
 
 #: u_translation.rs102cddss
 msgid "102 CD DSS"
@@ -838,6 +838,10 @@ msgstr "Térkép"
 msgid "chart:"
 msgstr "térkép:"
 
+#: u_translation.rschartcenter
+msgid "Chart center"
+msgstr ""
+
 #: u_translation.rschartcenterc
 msgid "Add a crosshair to the chart center"
 msgstr ""
@@ -857,6 +861,10 @@ msgstr "Térkép információk"
 #: u_translation.rschartlegend
 msgid "Chart legend"
 msgstr "A térkép jelölései"
+
+#: u_translation.rschartname
+msgid "Chart name"
+msgstr ""
 
 #: u_translation.rschartsetting
 msgid "Chart settings"
@@ -1261,6 +1269,10 @@ msgstr "Érvényesség dátuma"
 
 #: u_translation.rscursor
 msgid "Cursor"
+msgstr ""
+
+#: u_translation.rscursorpositi
+msgid "Cursor position"
 msgstr ""
 
 #: u_translation.rscw
@@ -3833,6 +3845,10 @@ msgstr "Pályaadatok"
 msgid "Orientation"
 msgstr "Tájolás"
 
+#: u_translation.rsorientationf
+msgid "Orientation from zenith in Alt/Az chart"
+msgstr ""
+
 #: u_translation.rsorienttothep
 msgid "Orient to the pole or zenith"
 msgstr ""
@@ -3892,6 +3908,10 @@ msgstr "Részleges"
 #: u_translation.rspassword
 msgid "Password"
 msgstr "Jelszó"
+
+#: u_translation.rspastecoordin
+msgid "Paste coordinates"
+msgstr ""
 
 #: u_translation.rspastel
 msgid "Pastel"
@@ -4466,6 +4486,14 @@ msgstr "Az utolsó kereső kör eltüntetése"
 msgid "Remove last label"
 msgstr "Utolsó címke törlése"
 
+#: u_translation.rsrenamechart
+msgid "Rename chart"
+msgstr ""
+
+#: u_translation.rsrenamethecur
+msgid "Rename the curent chart"
+msgstr ""
+
 #: u_translation.rsreplacebytic
 msgid "Replace by tick mark"
 msgstr ""
@@ -4785,6 +4813,10 @@ msgstr ""
 #: u_translation.rsselectcolorb
 msgid "Select color (black for catalog default)"
 msgstr "Szín választása (alapból fekete)"
+
+#: u_translation.rsselectedobje
+msgid "Selected object"
+msgstr ""
 
 #: u_translation.rsselectlabels
 msgid "Select labels to recover"

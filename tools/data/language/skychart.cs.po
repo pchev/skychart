@@ -3,15 +3,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: skychart.cs\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-12-01 11:02+0000\n"
+"POT-Creation-Date: 2023-03-07 11:15+0000\n"
 "PO-Revision-Date: 2022-11-17 12:16+0000\n"
 "Last-Translator: Stanislav Holub <Unknown>\n"
 "Language-Team: <translation@ap-i.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2022-12-03 08:40+0000\n"
-"X-Generator: Launchpad (build 51cef3d08dff1e227b5ada709bd67280c567d4be)\n"
+"X-Launchpad-Export-Date: 2023-03-07 12:00+0000\n"
+"X-Generator: Launchpad (build 1938a4fd80bdf1a1b1373119ac1ac9e0e65174d6)\n"
 "X-Poedit-Bookmarks: 99,-1,-1,-1,-1,-1,-1,-1,-1,-1\n"
 
 #: u_translation.rs102cddss
@@ -839,6 +839,10 @@ msgstr "Mapa"
 msgid "chart:"
 msgstr "mapa:"
 
+#: u_translation.rschartcenter
+msgid "Chart center"
+msgstr ""
+
 #: u_translation.rschartcenterc
 msgid "Add a crosshair to the chart center"
 msgstr "Přidání nitkového kříže do středu mapy"
@@ -858,6 +862,10 @@ msgstr "Informace o mapě"
 #: u_translation.rschartlegend
 msgid "Chart legend"
 msgstr "Legenda mapy"
+
+#: u_translation.rschartname
+msgid "Chart name"
+msgstr ""
 
 #: u_translation.rschartsetting
 msgid "Chart settings"
@@ -1263,6 +1271,10 @@ msgstr "Datum"
 #: u_translation.rscursor
 msgid "Cursor"
 msgstr "Kurzor"
+
+#: u_translation.rscursorpositi
+msgid "Cursor position"
+msgstr ""
 
 #: u_translation.rscw
 #, object-pascal-format
@@ -3834,6 +3846,10 @@ msgstr "Elementy oběžných drah"
 msgid "Orientation"
 msgstr "Orientace"
 
+#: u_translation.rsorientationf
+msgid "Orientation from zenith in Alt/Az chart"
+msgstr ""
+
 #: u_translation.rsorienttothep
 msgid "Orient to the pole or zenith"
 msgstr "Orientace k pólu nebo zenitu"
@@ -3893,6 +3909,10 @@ msgstr "Částečné"
 #: u_translation.rspassword
 msgid "Password"
 msgstr "Heslo"
+
+#: u_translation.rspastecoordin
+msgid "Paste coordinates"
+msgstr ""
 
 #: u_translation.rspastel
 msgid "Pastel"
@@ -4467,6 +4487,14 @@ msgstr "Odstranit poslední kružnici"
 msgid "Remove last label"
 msgstr "Odstranit poslední popisek"
 
+#: u_translation.rsrenamechart
+msgid "Rename chart"
+msgstr ""
+
+#: u_translation.rsrenamethecur
+msgid "Rename the curent chart"
+msgstr ""
+
 #: u_translation.rsreplacebytic
 msgid "Replace by tick mark"
 msgstr "Nahradit zaškrtnutím"
@@ -4786,6 +4814,10 @@ msgstr "Vybrat Kruh"
 #: u_translation.rsselectcolorb
 msgid "Select color (black for catalog default)"
 msgstr "Vyberte barvu (černou pro výchozí katalogu)"
+
+#: u_translation.rsselectedobje
+msgid "Selected object"
+msgstr ""
 
 #: u_translation.rsselectlabels
 msgid "Select labels to recover"

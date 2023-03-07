@@ -6,15 +6,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: skychart\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2022-12-01 11:02+0000\n"
-"PO-Revision-Date: 2019-06-04 15:15+0000\n"
-"Last-Translator: Zachary Wu <Unknown>\n"
+"POT-Creation-Date: 2023-03-07 11:15+0000\n"
+"PO-Revision-Date: 2023-02-12 15:08+0000\n"
+"Last-Translator: Allen Zhong <Unknown>\n"
 "Language-Team: Chinese (Simplified) <zh_CN@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2022-12-03 08:40+0000\n"
-"X-Generator: Launchpad (build 51cef3d08dff1e227b5ada709bd67280c567d4be)\n"
+"X-Launchpad-Export-Date: 2023-03-07 12:00+0000\n"
+"X-Generator: Launchpad (build 1938a4fd80bdf1a1b1373119ac1ac9e0e65174d6)\n"
 
 #: u_translation.rs102cddss
 msgid "102 CD DSS"
@@ -841,6 +841,10 @@ msgstr "星图"
 msgid "chart:"
 msgstr "星图："
 
+#: u_translation.rschartcenter
+msgid "Chart center"
+msgstr ""
+
 #: u_translation.rschartcenterc
 msgid "Add a crosshair to the chart center"
 msgstr ""
@@ -860,6 +864,10 @@ msgstr "星图信息"
 #: u_translation.rschartlegend
 msgid "Chart legend"
 msgstr "星图图例"
+
+#: u_translation.rschartname
+msgid "Chart name"
+msgstr ""
 
 #: u_translation.rschartsetting
 msgid "Chart settings"
@@ -1264,6 +1272,10 @@ msgstr "有效日期"
 
 #: u_translation.rscursor
 msgid "Cursor"
+msgstr ""
+
+#: u_translation.rscursorpositi
+msgid "Cursor position"
 msgstr ""
 
 #: u_translation.rscw
@@ -2812,7 +2824,7 @@ msgstr "千米"
 
 #: u_translation.rsknot
 msgid "Knot"
-msgstr ""
+msgstr "节"
 
 #: u_translation.rsl
 msgid "L"
@@ -3836,6 +3848,10 @@ msgstr "轨道根数"
 msgid "Orientation"
 msgstr "方向"
 
+#: u_translation.rsorientationf
+msgid "Orientation from zenith in Alt/Az chart"
+msgstr ""
+
 #: u_translation.rsorienttothep
 msgid "Orient to the pole or zenith"
 msgstr ""
@@ -3896,6 +3912,10 @@ msgstr "偏食"
 msgid "Password"
 msgstr "密码"
 
+#: u_translation.rspastecoordin
+msgid "Paste coordinates"
+msgstr ""
+
 #: u_translation.rspastel
 msgid "Pastel"
 msgstr "柔和"
@@ -3938,7 +3958,7 @@ msgstr "个人资料"
 
 #: u_translation.rsphaseangle
 msgid "Phase angle"
-msgstr ""
+msgstr "相位角"
 
 #: u_translation.rsphotographic
 msgid "Photographic plate"
@@ -4469,6 +4489,14 @@ msgstr "删除上一寻星镜圈"
 msgid "Remove last label"
 msgstr "删除上个标签"
 
+#: u_translation.rsrenamechart
+msgid "Rename chart"
+msgstr ""
+
+#: u_translation.rsrenamethecur
+msgid "Rename the curent chart"
+msgstr ""
+
 #: u_translation.rsreplacebytic
 msgid "Replace by tick mark"
 msgstr ""
@@ -4788,6 +4816,10 @@ msgstr ""
 #: u_translation.rsselectcolorb
 msgid "Select color (black for catalog default)"
 msgstr "选择颜色（默认星表为黑色）"
+
+#: u_translation.rsselectedobje
+msgid "Selected object"
+msgstr ""
 
 #: u_translation.rsselectlabels
 msgid "Select labels to recover"

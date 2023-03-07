@@ -6,15 +6,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: skychart\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2022-12-01 11:02+0000\n"
+"POT-Creation-Date: 2023-03-07 11:15+0000\n"
 "PO-Revision-Date: 2022-01-28 18:17+0000\n"
 "Last-Translator: Bhargav Joshi <Unknown>\n"
 "Language-Team: Gujarati <gu@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2022-12-03 08:41+0000\n"
-"X-Generator: Launchpad (build 51cef3d08dff1e227b5ada709bd67280c567d4be)\n"
+"X-Launchpad-Export-Date: 2023-03-07 12:00+0000\n"
+"X-Generator: Launchpad (build 1938a4fd80bdf1a1b1373119ac1ac9e0e65174d6)\n"
 
 #: u_translation.rs102cddss
 msgid "102 CD DSS"
@@ -841,6 +841,10 @@ msgstr "નકશો"
 msgid "chart:"
 msgstr "નકશા:"
 
+#: u_translation.rschartcenter
+msgid "Chart center"
+msgstr ""
+
 #: u_translation.rschartcenterc
 msgid "Add a crosshair to the chart center"
 msgstr "નકશા ના મધ્ય માં ક્રોસહેર ઉમેરો"
@@ -860,6 +864,10 @@ msgstr "નકશા ની માહિતી"
 #: u_translation.rschartlegend
 msgid "Chart legend"
 msgstr "નકશા ના લિજેન્ડસ"
+
+#: u_translation.rschartname
+msgid "Chart name"
+msgstr ""
 
 #: u_translation.rschartsetting
 msgid "Chart settings"
@@ -1265,6 +1273,10 @@ msgstr "માન્યતાની તારીખ"
 #: u_translation.rscursor
 msgid "Cursor"
 msgstr "કર્સર"
+
+#: u_translation.rscursorpositi
+msgid "Cursor position"
+msgstr ""
 
 #: u_translation.rscw
 #, object-pascal-format
@@ -3836,6 +3848,10 @@ msgstr "ભ્રમણકક્ષા ના તત્વો"
 msgid "Orientation"
 msgstr "અભિગમ"
 
+#: u_translation.rsorientationf
+msgid "Orientation from zenith in Alt/Az chart"
+msgstr ""
+
 #: u_translation.rsorienttothep
 msgid "Orient to the pole or zenith"
 msgstr "ધ્રુવ અથવા માથા ઉપર ઉદયમાન"
@@ -3895,6 +3911,10 @@ msgstr "અંશતઃ"
 #: u_translation.rspassword
 msgid "Password"
 msgstr "પાસવર્ડ"
+
+#: u_translation.rspastecoordin
+msgid "Paste coordinates"
+msgstr ""
 
 #: u_translation.rspastel
 msgid "Pastel"
@@ -4469,6 +4489,14 @@ msgstr "છેલ્લું વર્તુળ દૂર કરો"
 msgid "Remove last label"
 msgstr "છેલ્લું નામાંકન દૂર કરો"
 
+#: u_translation.rsrenamechart
+msgid "Rename chart"
+msgstr ""
+
+#: u_translation.rsrenamethecur
+msgid "Rename the curent chart"
+msgstr ""
+
 #: u_translation.rsreplacebytic
 msgid "Replace by tick mark"
 msgstr "ટિક માર્ક દ્વારા બદલો"
@@ -4788,6 +4816,10 @@ msgstr "વર્તુળ પસંદ કરો"
 #: u_translation.rsselectcolorb
 msgid "Select color (black for catalog default)"
 msgstr "રંગ પસંદ કરો (સૂચિપત્ર માટે સામાન્ય કાળો)"
+
+#: u_translation.rsselectedobje
+msgid "Selected object"
+msgstr ""
 
 #: u_translation.rsselectlabels
 msgid "Select labels to recover"

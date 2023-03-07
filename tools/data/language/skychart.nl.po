@@ -3,15 +3,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: skychart.en\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-12-01 11:02+0000\n"
-"PO-Revision-Date: 2020-11-08 13:34+0000\n"
+"POT-Creation-Date: 2023-03-07 11:15+0000\n"
+"PO-Revision-Date: 2023-02-01 13:43+0000\n"
 "Last-Translator: Marc Fokker <marc@marcfokker.nl>\n"
 "Language-Team: <translation@ap-i.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2022-12-03 08:40+0000\n"
-"X-Generator: Launchpad (build 51cef3d08dff1e227b5ada709bd67280c567d4be)\n"
+"X-Launchpad-Export-Date: 2023-03-07 12:00+0000\n"
+"X-Generator: Launchpad (build 1938a4fd80bdf1a1b1373119ac1ac9e0e65174d6)\n"
 
 #: u_translation.rs102cddss
 msgid "102 CD DSS"
@@ -27,7 +27,7 @@ msgstr "50  (aanbevolen tot 100.000 objecten)"
 
 #: u_translation.rs63000billion
 msgid "63000 (for billion of objects)"
-msgstr ""
+msgstr "63000 (voor een miljard aan objecten)"
 
 #: u_translation.rs732recommend
 msgid "732 (recommended up to 5,000,000 objects)"
@@ -222,7 +222,7 @@ msgstr "Luchtmassa"
 
 #: u_translation.rsalbedo
 msgid "Albedo"
-msgstr ""
+msgstr "Abedo"
 
 #: u_translation.rsalignment
 msgid "Alignment"
@@ -297,7 +297,7 @@ msgstr "Toon altijd meridiaan"
 
 #: u_translation.rsalwaysontop
 msgid "Always on top"
-msgstr ""
+msgstr "Altijd bovenaan"
 
 #: u_translation.rsalwayssavewi
 msgid "Always save without asking."
@@ -306,15 +306,15 @@ msgstr "Automatisch opslaan zonder bevestiging."
 #: u_translation.rsamaximumoffi
 #, object-pascal-format
 msgid "A maximum of %s files can be selected"
-msgstr ""
+msgstr "Maximaal %s bestanden is te selecteren"
 
 #: u_translation.rsamplitudemax
 msgid "Amplitude max."
-msgstr ""
+msgstr "Amplitude max."
 
 #: u_translation.rsamplitudemin
 msgid "Amplitude min."
-msgstr ""
+msgstr "Amplitude min."
 
 #: u_translation.rsanewversiono
 #, object-pascal-format
@@ -351,7 +351,7 @@ msgstr "Voeg toe aan bestaande catalogus "
 
 #: u_translation.rsappendtocurr
 msgid "Append to current file"
-msgstr ""
+msgstr "Voeg toe aan huidig bestand"
 
 #: u_translation.rsapply
 msgid "Apply"
@@ -610,7 +610,7 @@ msgstr "Blauw magnitude"
 
 #: u_translation.rsblurred
 msgid "Blurred"
-msgstr ""
+msgstr "Vervaagd"
 
 #: u_translation.rsbottom
 msgid "Bottom"
@@ -838,6 +838,10 @@ msgstr "Kaart"
 msgid "chart:"
 msgstr "kaart:"
 
+#: u_translation.rschartcenter
+msgid "Chart center"
+msgstr ""
+
 #: u_translation.rschartcenterc
 msgid "Add a crosshair to the chart center"
 msgstr "Voeg een roos toe aan het kaart centrum"
@@ -857,6 +861,10 @@ msgstr "Kaart informatie"
 #: u_translation.rschartlegend
 msgid "Chart legend"
 msgstr "Kaart legenda"
+
+#: u_translation.rschartname
+msgid "Chart name"
+msgstr ""
 
 #: u_translation.rschartsetting
 msgid "Chart settings"
@@ -892,7 +900,7 @@ msgstr "Circumpolair"
 
 #: u_translation.rscivil
 msgid "Civil"
-msgstr ""
+msgstr "Civiel"
 
 #: u_translation.rsclass
 msgid "Class"
@@ -1263,6 +1271,10 @@ msgstr "Huidige datum"
 msgid "Cursor"
 msgstr "Aanwijzer"
 
+#: u_translation.rscursorpositi
+msgid "Cursor position"
+msgstr ""
+
 #: u_translation.rscw
 #, object-pascal-format
 msgid "%sCW"
@@ -1478,7 +1490,7 @@ msgstr "Verwijder"
 
 #: u_translation.rsdeleteallexp
 msgid "Delete all expired ephemeris"
-msgstr ""
+msgstr "Verwijder alle verouderde efemeriden"
 
 #: u_translation.rsdeleteallthe
 #, object-pascal-format
@@ -1744,7 +1756,7 @@ msgstr "Download de laatste baanelementen"
 
 #: u_translation.rsdownloadsola
 msgid "Download Solar System object SPICE kernel from JPL Horizon"
-msgstr ""
+msgstr "Download Zonnelstelsel-objecten SPICE kernel van JPL Horizon"
 
 #: u_translation.rsdownloadtle
 msgid "Download TLE"
@@ -1840,7 +1852,7 @@ msgstr "Oost"
 
 #: u_translation.rseasthourangl
 msgid "East hour angle"
-msgstr ""
+msgstr "Oostelijke uurhoek"
 
 #: u_translation.rseastside
 msgid "East side"
@@ -1908,7 +1920,7 @@ msgstr "Elong."
 
 #: u_translation.rsemail
 msgid "email"
-msgstr ""
+msgstr "e-mail"
 
 #: u_translation.rsemissionnebu
 msgid "Emission nebula"
@@ -1961,7 +1973,7 @@ msgstr "Eq. rooster"
 
 #: u_translation.rsequator
 msgid "Equator"
-msgstr ""
+msgstr "Equator"
 
 #: u_translation.rsequatorialco
 msgid "Equatorial coordinates"
@@ -2097,7 +2109,7 @@ msgstr "Zwakke sterren grootte "
 
 #: u_translation.rsfamily
 msgid "Family"
-msgstr ""
+msgstr "Familie"
 
 #: u_translation.rsfaq
 msgid "FAQ"
@@ -2210,7 +2222,7 @@ msgstr "Beeldveld camera"
 
 #: u_translation.rsfindinfo
 msgid "Find info"
-msgstr ""
+msgstr "Zoek info"
 
 #: u_translation.rsfirst
 msgid "First"
@@ -2426,7 +2438,7 @@ msgstr "Gregoriaanse kalender start datum"
 
 #: u_translation.rsgrids
 msgid "Grids"
-msgstr ""
+msgstr "Roosters"
 
 #: u_translation.rsgridspacing
 msgid "Grid spacing"
@@ -2574,7 +2586,7 @@ msgstr "Als het niet geïnstalleerd is, probeer het volgende afhankelijk van uw 
 
 #: u_translation.rsifyoucannotf
 msgid "If you cannot fix the error, please contact the telescope driver author for assistance."
-msgstr ""
+msgstr "Als je de fout niet kunt verhelpen neem dan contact op met de ontwerper van de telescoop driver voor assistentie."
 
 #: u_translation.rsillum
 msgid "Illum."
@@ -2598,7 +2610,7 @@ msgstr "Afbeeldingenlijst"
 
 #: u_translation.rsimportmosaic
 msgid "Import mosaic file"
-msgstr ""
+msgstr "Importeer mozaiek bestand"
 
 #: u_translation.rsinclination
 msgid "Inclination"
@@ -2678,7 +2690,7 @@ msgstr "Informatie uit catalogus"
 
 #: u_translation.rsinformationf2
 msgid "Information from"
-msgstr ""
+msgstr "Inforamtie afkomstig van"
 
 #: u_translation.rsinitializeda
 msgid "Initialize database"
@@ -2937,7 +2949,7 @@ msgstr "Lineair"
 
 #: u_translation.rslineforteles
 msgid "Line for telescope pointing limit"
-msgstr ""
+msgstr "Lijn van telescoop positie limiet"
 
 #: u_translation.rslinemode
 msgid "Line mode"
@@ -3046,7 +3058,7 @@ msgstr "Blokkeer kaart positie"
 
 #: u_translation.rslockmagnitud
 msgid "Lock the magnitude filter"
-msgstr ""
+msgstr "Zet magnitude filter vast"
 
 #: u_translation.rslockon
 #, object-pascal-format
@@ -3211,7 +3223,7 @@ msgstr "Maximaliseer"
 
 #: u_translation.rsmaximumdecli
 msgid "Maximum declination"
-msgstr ""
+msgstr "Maximale declinatie"
 
 #: u_translation.rsmaximummagni
 msgid "Maximum magnitude"
@@ -3315,7 +3327,7 @@ msgstr "Minimale hoogte"
 
 #: u_translation.rsminimumdecli
 msgid "Minimum declination"
-msgstr ""
+msgstr "Minimale declinatie"
 
 #: u_translation.rsminute
 msgid "Minute"
@@ -3537,7 +3549,7 @@ msgstr "Geen gegevens"
 
 #: u_translation.rsnodecimalsep
 msgid "No decimal separator"
-msgstr ""
+msgstr "Geen decimaal scheidingsteken"
 
 #: u_translation.rsnomargin
 msgid "No margin"
@@ -3629,7 +3641,7 @@ msgstr "Aantal kopiën"
 
 #: u_translation.rsnumberofdays
 msgid "Number of days"
-msgstr ""
+msgstr "Aantal dagen"
 
 #: u_translation.rsnumberoffile
 msgid "Number of files"
@@ -3833,6 +3845,10 @@ msgstr "Baan elementen"
 msgid "Orientation"
 msgstr "Oriëntatie"
 
+#: u_translation.rsorientationf
+msgid "Orientation from zenith in Alt/Az chart"
+msgstr ""
+
 #: u_translation.rsorienttothep
 msgid "Orient to the pole or zenith"
 msgstr "Oriënteer op de pool"
@@ -3893,6 +3909,10 @@ msgstr "Gedeeltelijk"
 msgid "Password"
 msgstr "Wachtwoord"
 
+#: u_translation.rspastecoordin
+msgid "Paste coordinates"
+msgstr ""
+
 #: u_translation.rspastel
 msgid "Pastel"
 msgstr "Pastel"
@@ -3935,7 +3955,7 @@ msgstr "Wijzig gegevens"
 
 #: u_translation.rsphaseangle
 msgid "Phase angle"
-msgstr ""
+msgstr "Fasehoek"
 
 #: u_translation.rsphotographic
 msgid "Photographic plate"
@@ -4278,7 +4298,7 @@ msgstr "Plaats de bestanden met een .tle extensie in de %s map"
 
 #: u_translation.rsqualityflag
 msgid "Quality flag"
-msgstr ""
+msgstr "Kwaliteit vlag"
 
 #: u_translation.rsquasar
 msgid "Quasar"
@@ -4423,7 +4443,7 @@ msgstr "Vernieuw"
 
 #: u_translation.rsrefreshallep
 msgid "Refresh all ephemeris"
-msgstr ""
+msgstr "Ververs alle efemeriden"
 
 #: u_translation.rsrefreshimage
 msgid "Refresh image every"
@@ -4465,6 +4485,14 @@ msgstr "Verwijder laatste cirkel"
 #: u_translation.rsremovelastla
 msgid "Remove last label"
 msgstr "Verwijder laatste label"
+
+#: u_translation.rsrenamechart
+msgid "Rename chart"
+msgstr ""
+
+#: u_translation.rsrenamethecur
+msgid "Rename the curent chart"
+msgstr ""
 
 #: u_translation.rsreplacebytic
 msgid "Replace by tick mark"
@@ -4785,6 +4813,10 @@ msgstr "Selecteer cirkel"
 #: u_translation.rsselectcolorb
 msgid "Select color (black for catalog default)"
 msgstr "Selecteer kleur (zwart voor catalogus standaard)"
+
+#: u_translation.rsselectedobje
+msgid "Selected object"
+msgstr ""
 
 #: u_translation.rsselectlabels
 msgid "Select labels to recover"
@@ -5219,7 +5251,7 @@ msgstr "Zonnestelsel"
 
 #: u_translation.rssolarsystemb
 msgid "Solar system body"
-msgstr ""
+msgstr "Zonnestelsel object"
 
 #: u_translation.rssolarsystemi
 msgid "Solar System Information"
@@ -5276,7 +5308,7 @@ msgstr "Snelheid"
 
 #: u_translation.rsspiceephemer
 msgid "SPICE ephemeris"
-msgstr ""
+msgstr "SPICE efemeriden"
 
 #: u_translation.rsspline
 msgid "Spline"
@@ -5368,7 +5400,7 @@ msgstr "Animatie achteruit"
 
 #: u_translation.rsstartdate
 msgid "Start date"
-msgstr ""
+msgstr "Startdatum"
 
 #: u_translation.rsstartforward
 msgid "Animation forward"
@@ -5584,9 +5616,9 @@ msgid "This direct driver is kept for compatibility, it may work or not for you.
 msgstr "Deze directe driver is behouden voor compatibiliteit. Het kan in jouw geval functioneren, maar misschien ook niet. Gebruik bij voorkeur de INDI of ASCOM driver voor je telescoop."
 
 #: u_translation.rsthisfilecont
-#, object-pascal-format
+#, object-pascal-format, fuzzy, badformat
 msgid "This file contain %s elements.%sThis is probably a base file you want to load without the \"Append\" option.%sIt can affect the performance to append all this data to the current file%sDo you want to continue anyway?"
-msgstr ""
+msgstr "Dit bestand bevat %s elementen. %s Dit is een basisbestand dat je waarschijnlijk wilt laden zonder de \"Toevoegen\" optie. %s Het kan de prestaties beïnvloeden wanneer je al deze gegevens wilt toevoegen aan het huidige bestand. Wil je toch doorgaan?"
 
 #: u_translation.rsthisfilewasn
 msgid "This file was not recognized as a MPCORB file."
@@ -5682,7 +5714,7 @@ msgstr "Totaliteit"
 
 #: u_translation.rstotalasteroi
 msgid "Total asteroid count"
-msgstr ""
+msgstr "Totaal aantal plantoiden"
 
 #: u_translation.rstotalradius
 msgid "Total radius"
@@ -5759,7 +5791,7 @@ msgstr "Trumpler klasse"
 #: u_translation.rstruncatedtos
 #, object-pascal-format
 msgid "Truncated to %s catalogs"
-msgstr ""
+msgstr "Afgekort tot %s catalogi"
 
 #: u_translation.rstrytoautocon
 msgid "Try to auto-connect to a SAMP hub when the program start"
@@ -6105,7 +6137,7 @@ msgstr "West"
 
 #: u_translation.rswesthourangl
 msgid "West hour angle"
-msgstr ""
+msgstr "Westelijke uurhoek"
 
 #: u_translation.rswestside
 msgid "West side"
@@ -6177,7 +6209,7 @@ msgstr "Zoom in"
 
 #: u_translation.rszoommoretovi
 msgid "Object too faint to show on the chart"
-msgstr ""
+msgstr "Onject is te zwak om af te beelden"
 
 #: u_translation.rszoomout
 msgid "Zoom out"

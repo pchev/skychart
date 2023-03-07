@@ -6078,3 +6078,35 @@ msgstr ""
 msgid "63000 (for billion of objects)"
 msgstr ""
 
+#: u_translation:rscursorpositi
+msgid "Cursor position"
+msgstr ""
+
+#: u_translation:rsselectedobje
+msgid "Selected object"
+msgstr ""
+
+#: u_translation:rschartcenter
+msgid "Chart center"
+msgstr ""
+
+#: u_translation:rspastecoordin
+msgid "Paste coordinates"
+msgstr ""
+
+#: u_translation:rsrenamechart
+msgid "Rename chart"
+msgstr ""
+
+#: u_translation:rschartname
+msgid "Chart name"
+msgstr ""
+
+#: u_translation:rsrenamethecur
+msgid "Rename the curent chart"
+msgstr ""
+
+#: u_translation:rsorientationf
+msgid "Orientation from zenith in Alt/Az chart"
+msgstr ""
+
