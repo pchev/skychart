@@ -4292,7 +4292,7 @@ object f_config_display: Tf_config_display
         object CenterMark2: TCheckBox
           Left = 26
           Height = 21
-          Top = 447
+          Top = 416
           Width = 162
           Caption = 'Mark the chart center '
           OnClick = CenterMark1Click
@@ -4300,7 +4300,7 @@ object f_config_display: Tf_config_display
           TabOrder = 2
         end
         object CheckBox2: TCheckBox
-          Left = 296
+          Left = 300
           Height = 21
           Top = 416
           Width = 89
@@ -4310,7 +4310,7 @@ object f_config_display: Tf_config_display
           TabOrder = 1
         end
         object CheckBox4: TCheckBox
-          Left = 296
+          Left = 300
           Height = 21
           Top = 447
           Width = 128
@@ -4336,6 +4336,15 @@ object f_config_display: Tf_config_display
           Width = 394
           Caption = 'Do not use row 10, it is reserved for external software interface.'
           ParentColor = False
+        end
+        object cbAltAzMark: TCheckBox
+          Left = 26
+          Height = 21
+          Top = 447
+          Width = 258
+          Caption = 'Orientation from zenith in Alt/Az chart'
+          OnClick = cbAltAzMarkClick
+          TabOrder = 5
         end
       end
     end

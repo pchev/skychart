@@ -8548,7 +8548,10 @@ begin
   begin
     projection(ra, de, x1, y1, False, cfgsc);
     projection(ra, de + 0.001, x2, y2, False, cfgsc);
-    rot := RotationAngle(x1, y1, x2, y2, cfgsc);
+    if cfgsc.AltAzMark and (cfgsc.Projpole=Altaz) then
+       rot:=0
+    else
+       rot := RotationAngle(x1, y1, x2, y2, cfgsc);
     // crosshair
     if cfgsc.ShowCrosshair and (num < 0) and (not moving) then
     begin

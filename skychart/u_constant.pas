@@ -1121,7 +1121,7 @@ type
     ManualTelescope, ShowImages,
     EyepieceMask, ShowImageList, ShowImageLabel, ShowBackgroundImage,
     showstars, shownebulae, showline, showlabelall, Editlabels,
-    OptimizeLabels, RotLabel: boolean;
+    OptimizeLabels, RotLabel, AltAzMark: boolean;
     BackgroundImage: string;
     MaxArchiveImg: integer;
     ArchiveDir: array[1..MaxArchiveDir] of string;
@@ -2477,6 +2477,7 @@ begin
   Editlabels := Source.Editlabels;
   OptimizeLabels := Source.OptimizeLabels;
   RotLabel := Source.RotLabel;
+  AltAzMark := Source.AltAzMark;
   BackgroundImage := Source.BackgroundImage;
   HorizonMax := Source.HorizonMax;
   HorizonMin := Source.HorizonMin;

@@ -47,6 +47,7 @@ type
     Button8: TButton;
     Button9: TButton;
     CheckBox1: TCheckBox;
+    cbAltAzMark: TCheckBox;
     MagNoDecimal: TCheckBox;
     DSLsurface: TCheckBox;
     Edit1: TEdit;
@@ -411,6 +412,7 @@ type
     procedure Button9Click(Sender: TObject);
     procedure ButtonComputeCircleClick(Sender: TObject);
     procedure ButtonComputeRectangleClick(Sender: TObject);
+    procedure cbAltAzMarkClick(Sender: TObject);
     procedure CBStyleChange(Sender: TObject);
     procedure CFStyleChange(Sender: TObject);
     procedure CheckBox1Click(Sender: TObject);
@@ -809,6 +811,7 @@ begin
   CenterMark2.Caption := rsMarkTheChart;
   CheckBox2.Caption := rsShowLabels;
   CheckBox4.Caption := rsShowMarkInde;
+  cbAltAzMark.Caption := rsOrientationF;
   label16.Caption := format(rsDoNotUseRow1,['10']);
   label8.Caption := rsDrawALineTha;
   Label68.Caption := rsYears;
@@ -1160,6 +1163,11 @@ begin
   csc.marknumlabel := TCheckBox(Sender).Checked;
   CheckBox3.Checked := csc.marknumlabel;
   CheckBox4.Checked := csc.marknumlabel;
+end;
+
+procedure Tf_config_display.cbAltAzMarkClick(Sender: TObject);
+begin
+  csc.AltAzMark:=cbAltAzMark.Checked;
 end;
 
 procedure Tf_config_display.ConstbFileAcceptFileName(Sender: TObject;
@@ -1738,6 +1746,7 @@ begin
   RRow := 1;
   CenterMark2.Checked := csc.ShowCircle;
   CheckBox2.Checked := csc.RectangleLabel;
+  cbAltAzMark.Checked:=csc.AltAzMark;
   f_fov.Edit11.Text := cshr.ffovc_tfl;
   f_fov.Edit12.Text := cshr.ffovc_px;
   f_fov.Edit13.Text := cshr.ffovc_py;
