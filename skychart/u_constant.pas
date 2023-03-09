@@ -591,7 +591,7 @@ const
   URL_TLEINFO1 = 'http://www.tle.info/data/visual.txt';
   URL_TLEINFO2 = 'http://www.tle.info/data/TLE.ZIP';
 
-  URL_CELESTRAK1 = 'https://celestrak.com/NORAD/elements/visual.txt';
+  URL_CELESTRAK1 = 'https://celestrak.org/NORAD/elements/visual.txt';
 
 
   URL_GRS = 'https://www.ap-i.net/pub/virtualplanet/grs.txt';
