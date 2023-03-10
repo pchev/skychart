@@ -286,6 +286,10 @@ object f_chart: Tf_chart
         Caption = 'CopyCoord1'
         OnClick = CopyCoord1Click
       end
+      object CopyCoord2000: TMenuItem
+        Caption = 'CopyCoord2000'
+        OnClick = CopyCoord2000Click
+      end
       object CopyCoord2: TMenuItem
         Caption = 'CopyCoord2'
         OnClick = CopyCoord2Click

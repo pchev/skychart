@@ -83,6 +83,7 @@ type
     CopyCoord: TMenuItem;
     CopyCoord1: TMenuItem;
     CopyCoord2: TMenuItem;
+    CopyCoord2000: TMenuItem;
     MenuSAMP2: TMenuItem;
     MenuSAMP3: TMenuItem;
     PrePointMeasure: TMenuItem;
@@ -196,6 +197,7 @@ type
     procedure Cleanupmap1Click(Sender: TObject);
     procedure CopyCoord1Click(Sender: TObject);
     procedure ChartResize(Sender: TObject);
+    procedure CopyCoord2000Click(Sender: TObject);
     procedure CopyCoord2Click(Sender: TObject);
     procedure EyepieceMaskClick(Sender: TObject);
     procedure HorScrollBarScroll(Sender: TObject; ScrollCode: TScrollCode;
@@ -582,6 +584,7 @@ begin
   PrePointing.Caption:=rsPrePointing;
   CopyCoord.Caption := rsCopyCoordina;
   CopyCoord1.Caption := rsEquatorialCo+', [hms]';
+  CopyCoord2000.Caption := rsEquatorialCo+', J2000 [hms]';
   CopyCoord2.Caption := '';
   Cleanupmap1.Caption := rsCleanupMap;
   Connect1.Caption := rsConnectTeles;
@@ -2575,6 +2578,8 @@ begin
     Sync1.Visible := False;
     PrePointMeasure.Caption:=rsMeasurement;
   end;
+  CopyCoord1.Caption := rsEquatorialCo+', '+sc.cfgsc.EquinoxName+', [hms]';
+  CopyCoord2000.Visible:=(sc.cfgsc.EquinoxName<>'J2000');
   case sc.cfgsc.ProjPole of
     Equat : CopyCoord2.Caption := rsEquatorialCo+', '+rsDecimalHours;
     Altaz : CopyCoord2.Caption := rsAltAzCoordin+', '+rsDecimalDegre;
@@ -2702,6 +2707,28 @@ begin
   begin
     sc.GetCoord(xcursor, ycursor, ra, Dec, a, h, l, b, le, be);
   end;
+  txt := ARtoStr(ra * rad2deg / 15) + blank + DEToStr(Dec * rad2deg);
+  Clipboard.AsText := txt;
+end;
+
+procedure Tf_chart.CopyCoord2000Click(Sender: TObject);
+// same as CopyCoord1 but J2000
+var
+  txt: string;
+  ra, Dec, a, h, l, b, le, be: double;
+begin
+  if sc.cfgsc.FindName > '' then
+  begin
+    ra := sc.cfgsc.FindRA;
+    Dec := sc.cfgsc.FindDec;
+  end
+  else
+  begin
+    sc.GetCoord(xcursor, ycursor, ra, Dec, a, h, l, b, le, be);
+  end;
+  if sc.cfgsc.ApparentPos then
+    mean_equatorial(ra,dec, sc.cfgsc, true, true);
+  Precession(sc.cfgsc.JDChart,jd2000,ra,Dec);
   txt := ARtoStr(ra * rad2deg / 15) + blank + DEToStr(Dec * rad2deg);
   Clipboard.AsText := txt;
 end;
