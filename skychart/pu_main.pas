@@ -6552,6 +6552,7 @@ begin
   def_cfgsc.Editlabels := False;
   def_cfgsc.OptimizeLabels := True;
   def_cfgsc.RotLabel := False;
+  def_cfgsc.AltAzMark:=false;
   def_cfgsc.HorizonRise := True;
   def_cfgsc.StyleGrid := psSolid;
   def_cfgsc.StyleEqGrid := psSolid;
@@ -7523,6 +7524,7 @@ begin
         csc.EditLabels := ReadBool(section, 'EditLabels', csc.EditLabels);
         csc.OptimizeLabels := ReadBool(section, 'OptimizeLabels', csc.OptimizeLabels);
         csc.RotLabel := ReadBool(section, 'RotLabel', csc.RotLabel);
+        csc.AltAzMark := ReadBool(section, 'AltAzMark', csc.AltAzMark);
         csc.HorizonRise:=ReadBool(section, 'HorizonRise', csc.HorizonRise);
         csc.ShowGrid := ReadBool(section, 'ShowGrid', csc.ShowGrid);
         csc.ShowGridNum := ReadBool(section, 'ShowGridNum', csc.ShowGridNum);
@@ -8905,6 +8907,7 @@ begin
         WriteBool(section, 'EditLabels', csc.EditLabels);
         WriteBool(section, 'OptimizeLabels', csc.OptimizeLabels);
         WriteBool(section, 'RotLabel', csc.RotLabel);
+        WriteBool(section, 'AltAzMark', csc.AltAzMark);
         WriteBool(section, 'HorizonRise', csc.HorizonRise);
         WriteBool(section, 'ShowGrid', csc.ShowGrid);
         WriteBool(section, 'ShowGridNum', csc.ShowGridNum);

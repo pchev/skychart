@@ -53,6 +53,7 @@ procedure GetAHxyF(x, y: integer; var a, h: double; c: Tconf_skychart);
 procedure GetLBxy(x, y: integer; var l, b: double; c: Tconf_skychart);
 procedure GetLBExy(x, y: integer; var le, be: double; c: Tconf_skychart);
 function labrotation(ra, de: double; lnum: integer; c: Tconf_skychart): double;
+function rectanglerotation(ra, de: double; c: Tconf_skychart): double;
 function ObjectInMap(ra, de: double; c: Tconf_skychart): boolean;
 function NorthPoleInMap(c: Tconf_skychart): boolean;
 function SouthPoleInMap(c: Tconf_skychart): boolean;
@@ -842,6 +843,34 @@ begin
   begin
     Result := c.LabelOrient[lnum];
   end;
+end;
+
+function rectanglerotation(ra, de: double; c: Tconf_skychart): double;
+var
+  a, d, ac, dc, x1, x2, y1, y2: double;
+begin
+  if c.AltAzMark then
+  begin
+    case c.Projpole of
+      Altaz: begin
+        projection(ra, de, x1, y1, False, c);
+        Eq2Hz(c.CurST - ra, de, a, d, c);
+        d:=d+0.001;
+        Hz2Eq(a,d,ra,de,c);
+        ra:=c.CurST-ra;
+        projection(ra, de, x2, y2, False, c);
+      end;
+      else begin
+        projection(ra, de, x1, y1, False, c);
+        projection(ra, de + 0.001, x2, y2, False, c);
+      end;
+    end;
+  end
+  else begin
+    projection(ra, de, x1, y1, False, c);
+    projection(ra, de + 0.001, x2, y2, False, c);
+  end;
+  Result := RotationAngle(x1, y1, x2, y2, c);
 end;
 
 function ObjectInMap(ra, de: double; c: Tconf_skychart): boolean;
