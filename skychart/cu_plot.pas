@@ -1525,8 +1525,6 @@ begin
           if outlinecol = cfgplot.bgColor then
             outlinecol := outlinecol xor clWhite;
           outlinemax := outlinenum + 1;
-          if (cfgplot.nebplot = 0) and ((outlinetype = 2)or(outlinetype = 3)) then
-            outlinetype := 0;
           if (cfgchart.onprinter) and (outlinetype = 1) then
             outlinetype := 0;
 

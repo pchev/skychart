@@ -885,7 +885,6 @@ begin
     Fplot.cfgplot.autoskycolorValid := False;
     Fplot.cfgplot.StarPlot := 0;
     Fplot.cfgplot.NebPlot := 0;
-    cfgsc.FillMilkyWay := False;
     cfgsc.WhiteBg := True;
   end
   else
@@ -2322,15 +2321,10 @@ begin
           fs := rec.outlines.linetype
         else
           fs := rec.options.LogSize;
-        if cfgsc.WhiteBg then
-          col := FPlot.cfgplot.Color[11]
+        if rec.outlines.valid[vlLinecolor] then
+          col := rec.outlines.linecolor
         else
-        begin
-          if rec.outlines.valid[vlLinecolor] then
-            col := rec.outlines.linecolor
-          else
-            col := rec.options.Units;
-        end;
+          col := rec.options.Units;
         sbmpUsed := FPlot.PlotOutline(xx, yy, op, lw, fs, rec.options.ObjType, cfgsc.x2, col, sbmp, cfgsc.SurfaceAlpha) or sbmpUsed;
       end;
       if sbmpUsed then begin
@@ -2382,15 +2376,10 @@ begin
           fs := rec.outlines.linetype
         else
           fs := rec.options.LogSize;
-        if cfgsc.WhiteBg then
-          col := FPlot.cfgplot.Color[11]
+        if rec.outlines.valid[vlLinecolor] then
+          col := rec.outlines.linecolor
         else
-        begin
-          if rec.outlines.valid[vlLinecolor] then
-            col := rec.outlines.linecolor
-          else
-            col := rec.options.Units;
-        end;
+          col := rec.options.Units;
         sbmpUsed := FPlot.PlotOutline(xx, yy, op, lw, fs, rec.options.ObjType, cfgsc.x2, col, sbmp, cfgsc.SurfaceAlpha) or sbmpUsed;
       end;
       if sbmpUsed then begin
@@ -2433,7 +2422,7 @@ begin
     lw := 1;
     fs := 1;
     if cfgsc.WhiteBg then
-      col := FPlot.cfgplot.Color[11]
+      col := FPlot.cfgplot.Color[22]
     else
     begin
       col := addcolor(FPlot.cfgplot.Color[22], FPlot.cfgplot.Color[0]);
