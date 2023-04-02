@@ -6,15 +6,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: skychart\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2023-03-07 11:15+0000\n"
-"PO-Revision-Date: 2023-02-05 12:22+0000\n"
+"POT-Creation-Date: 2023-04-02 14:33+0000\n"
+"PO-Revision-Date: 2023-03-28 20:14+0000\n"
 "Last-Translator: Andi Chandler <Unknown>\n"
 "Language-Team: English (United Kingdom) <en_GB@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2023-03-07 12:00+0000\n"
-"X-Generator: Launchpad (build 1938a4fd80bdf1a1b1373119ac1ac9e0e65174d6)\n"
+"X-Launchpad-Export-Date: 2023-04-02 14:48+0000\n"
+"X-Generator: Launchpad (build 610eeb74559fa4aabb929a482afece263183fac0)\n"
 
 #: u_translation.rs102cddss
 msgid "102 CD DSS"
@@ -50,7 +50,7 @@ msgstr ""
 
 #: u_translation.rsabort
 msgid "Abort"
-msgstr ""
+msgstr "Abort"
 
 #: u_translation.rsabortedbyuse
 msgid "Aborted by user"
@@ -140,7 +140,7 @@ msgstr ""
 
 #: u_translation.rsactualsystem
 msgid "Actual system time"
-msgstr ""
+msgstr "Actual system time"
 
 #: u_translation.rsad
 msgid "AD"
@@ -168,7 +168,7 @@ msgstr ""
 
 #: u_translation.rsaddlabel
 msgid "Add label"
-msgstr ""
+msgstr "Add label"
 
 #: u_translation.rsaddlabelfore
 msgid "Add label for every object in the list"
@@ -233,7 +233,7 @@ msgstr ""
 
 #: u_translation.rsall
 msgid "All"
-msgstr ""
+msgstr "All"
 
 #: u_translation.rsallconfigura
 msgid "All configuration options"
@@ -250,7 +250,7 @@ msgstr ""
 #: u_translation.rsalltablesstr
 #, object-pascal-format
 msgid "%sAll table structures exist."
-msgstr ""
+msgstr "%sAll table structures exist."
 
 #: u_translation.rsalltoolsbar
 msgid "All toolbars"
@@ -271,7 +271,7 @@ msgstr "Alt/Az coord. "
 
 #: u_translation.rsaltazcoord2
 msgid "Alt/Az coord."
-msgstr ""
+msgstr "Alt/Az coord."
 
 #: u_translation.rsaltazcoordin
 msgid "Alt-Az coordinates"
@@ -552,7 +552,7 @@ msgstr "Background"
 
 #: u_translation.rsbackgroundpi
 msgid "Background picture"
-msgstr ""
+msgstr "Background picture"
 
 #: u_translation.rsbayerletter
 msgid "Bayer letter"
@@ -721,7 +721,7 @@ msgstr ""
 #: u_translation.rscannotopenda
 #, object-pascal-format
 msgid "%sCannot open database %s! %s"
-msgstr ""
+msgstr "%sCannot open database %s! %s"
 
 #: u_translation.rscannotwritet
 msgid "Cannot write to"
@@ -879,7 +879,7 @@ msgstr ""
 
 #: u_translation.rschart_
 msgid "Chart_"
-msgstr ""
+msgstr "Chart_"
 
 #: u_translation.rscheck
 msgid "Check"
@@ -1059,7 +1059,7 @@ msgstr "Compute asteroid data for this month"
 
 #: u_translation.rscomputefield
 msgid "Compute field"
-msgstr ""
+msgstr "Compute field"
 
 #: u_translation.rscomputerises
 msgid "Compute rise/set time relative to this line"
@@ -1105,7 +1105,7 @@ msgstr "Connected to the SQL database %s"
 
 #: u_translation.rsconnectionli
 msgid "Connection lines between each position"
-msgstr ""
+msgstr "Connection lines between each position"
 
 #: u_translation.rsconnectionto
 msgid "Connection to INDI server failed!"
@@ -1122,7 +1122,7 @@ msgstr ""
 #: u_translation.rsconnecttosuc
 #, object-pascal-format
 msgid "Connection to %s, %s successful.%s"
-msgstr ""
+msgstr "Connection to %s, %s successful.%s"
 
 #: u_translation.rsconstellatio
 msgid "Constellation"
@@ -1310,7 +1310,7 @@ msgstr "Database file: "
 #: u_translation.rsdatabaseopen
 #, object-pascal-format
 msgid "%sDatabase %s opened.%s"
-msgstr ""
+msgstr "%sDatabase %s opened.%s"
 
 #: u_translation.rsdatabasesett
 msgid "Database setting..."
@@ -1583,7 +1583,7 @@ msgstr "Desktop environment"
 
 #: u_translation.rsdetails
 msgid "Details"
-msgstr ""
+msgstr "Details"
 
 #: u_translation.rsdiam
 msgid "Diam."
@@ -1879,7 +1879,7 @@ msgstr "Ecliptic coordinates"
 
 #: u_translation.rseclipticcoor3
 msgid "Ecliptic coord."
-msgstr ""
+msgstr "Ecliptic coord."
 
 #: u_translation.rsedit
 msgid "Edit"
@@ -1895,7 +1895,7 @@ msgstr ""
 
 #: u_translation.rseditlabel
 msgid "Edit label"
-msgstr ""
+msgstr "Edit label"
 
 #: u_translation.rseditlineoper
 msgid "Edit line operation"
@@ -1989,7 +1989,7 @@ msgstr "Equatorial coordinates, equinox: %s"
 
 #: u_translation.rsequatorialco3
 msgid "Equatorial coord."
-msgstr ""
+msgstr "Equatorial coord."
 
 #: u_translation.rsequatorialmo
 msgid "Equatorial mount"
@@ -2010,7 +2010,7 @@ msgstr "Error"
 #: u_translation.rserrorcreatin
 #, object-pascal-format
 msgid "%sError creating table %s"
-msgstr ""
+msgstr "%sError creating table %s"
 
 #: u_translation.rserrorfilenot
 msgid "Error, file not downloaded:"
@@ -2026,7 +2026,7 @@ msgstr "Error! Please check the database parameters and load the comete data fil
 
 #: u_translation.rserrorpleasec3
 msgid "Error! Please check the database parameters and load the picture package."
-msgstr ""
+msgstr "Error! Please check the database parameters and load the picture package."
 
 #: u_translation.rsestimatedfil
 #, object-pascal-format
@@ -2051,7 +2051,7 @@ msgstr ""
 
 #: u_translation.rsevery
 msgid "every "
-msgstr ""
+msgstr "every "
 
 #: u_translation.rseverypositio
 msgid "Every position"
@@ -2169,7 +2169,7 @@ msgstr ""
 
 #: u_translation.rsfilenotfound
 msgid "File not found!"
-msgstr ""
+msgstr "File not found!"
 
 #: u_translation.rsfilespath
 msgid "Files path"
@@ -2621,7 +2621,7 @@ msgstr "Inclination"
 
 #: u_translation.rsinclination2
 msgid "Inclination="
-msgstr ""
+msgstr "Inclination="
 
 #: u_translation.rsincludedayti
 msgid "Include day time pass"
@@ -2681,7 +2681,7 @@ msgstr "in drive"
 
 #: u_translation.rsinfo
 msgid "Information"
-msgstr ""
+msgstr "Information"
 
 #: u_translation.rsinformationd
 msgid "Information detail"
@@ -2768,7 +2768,7 @@ msgstr ""
 
 #: u_translation.rsjd
 msgid "JD:"
-msgstr ""
+msgstr "JD:"
 
 #: u_translation.rsjd2
 msgid "JD"
@@ -3017,7 +3017,7 @@ msgstr ""
 
 #: u_translation.rsloadmpcfile
 msgid "Load MPC file"
-msgstr ""
+msgstr "Load MPC file"
 
 #: u_translation.rsloadmpcforma
 msgid "Load MPC format file"
@@ -3114,7 +3114,7 @@ msgstr ""
 
 #: u_translation.rsmag
 msgid "Mag:"
-msgstr ""
+msgstr "Mag:"
 
 #: u_translation.rsmagn
 msgid "Magn."
@@ -3395,7 +3395,7 @@ msgstr ""
 #: u_translation.rsmorethanobje
 #, object-pascal-format
 msgid "More than %s objects, the result is truncated."
-msgstr ""
+msgstr "More than %s objects, the result is truncated."
 
 #: u_translation.rsmorning
 msgid "Morning"
@@ -3560,7 +3560,7 @@ msgstr "No margin"
 
 #: u_translation.rsnone1
 msgid "None"
-msgstr ""
+msgstr "None"
 
 #: u_translation.rsnonexistant
 msgid "Non-existent"
@@ -3665,7 +3665,7 @@ msgstr "Number of stars"
 
 #: u_translation.rsnumberofstep
 msgid "Number of steps"
-msgstr ""
+msgstr "Number of steps"
 
 #: u_translation.rsnutationaber
 msgid "Nutation, aberration"
@@ -4083,7 +4083,7 @@ msgstr ""
 
 #: u_translation.rsplottheposit
 msgid "Plot orbital motion of solar system objects."
-msgstr ""
+msgstr "Plot orbital motion of solar system objects."
 
 #: u_translation.rspluto
 msgid "Pluto"
@@ -4131,7 +4131,7 @@ msgstr ""
 
 #: u_translation.rsprepareacata
 msgid "Prepare a catalog with CatGen"
-msgstr ""
+msgstr "Prepare a catalogue with CatGen"
 
 #: u_translation.rspreparedata
 msgid "Prepare data "
@@ -4171,7 +4171,7 @@ msgstr "Print"
 
 #: u_translation.rsprintchart
 msgid "Print chart"
-msgstr ""
+msgstr "Print chart"
 
 #: u_translation.rsprintedchart
 msgid "Printed chart"
@@ -4244,7 +4244,7 @@ msgstr ""
 
 #: u_translation.rsprogress
 msgid "Progress"
-msgstr ""
+msgstr "Progress"
 
 #: u_translation.rsprogressmess
 msgid "Progress messages"
@@ -4571,7 +4571,7 @@ msgstr "Reverse Az knob"
 
 #: u_translation.rsrevertdeckno
 msgid "Reverse DEC knob"
-msgstr ""
+msgstr "Reverse DEC knob"
 
 #: u_translation.rsrevertraknob
 msgid "Reverse RA knob"
@@ -4742,7 +4742,7 @@ msgstr "Scroll bar"
 
 #: u_translation.rssday
 msgid "D"
-msgstr ""
+msgstr "D"
 
 #: u_translation.rssearch
 msgid "Search"
@@ -4819,6 +4819,10 @@ msgstr ""
 
 #: u_translation.rsselectedobje
 msgid "Selected object"
+msgstr ""
+
+#: u_translation.rsselection
+msgid "Selection"
 msgstr ""
 
 #: u_translation.rsselectlabels
@@ -4972,7 +4976,7 @@ msgstr ""
 
 #: u_translation.rsshour
 msgid "H"
-msgstr ""
+msgstr "H"
 
 #: u_translation.rsshow0horizon
 msgid "Show 0d horizon line"
@@ -5164,7 +5168,7 @@ msgstr "Sidereal day"
 
 #: u_translation.rssimulation
 msgid "Simulation"
-msgstr ""
+msgstr "Simulation"
 
 #: u_translation.rssize
 msgid "Size"
@@ -5225,11 +5229,11 @@ msgstr ""
 
 #: u_translation.rssminute
 msgid "M"
-msgstr ""
+msgstr "M"
 
 #: u_translation.rssmonth
 msgid "M."
-msgstr ""
+msgstr "M."
 
 #: u_translation.rssocketerror
 #, object-pascal-format
@@ -5323,7 +5327,7 @@ msgstr "SQL database not available."
 
 #: u_translation.rssqldatabases
 msgid "SQL database software is probably not installed!"
-msgstr ""
+msgstr "SQL database software is probably not installed!"
 
 #: u_translation.rssqlitedataba
 msgid "SQLite database"
@@ -5339,7 +5343,7 @@ msgstr "Square"
 
 #: u_translation.rsssecond
 msgid "S"
-msgstr ""
+msgstr "S"
 
 #: u_translation.rsstandard
 msgid "Standard"
@@ -5435,7 +5439,7 @@ msgstr ""
 
 #: u_translation.rsstepunit
 msgid "Step unit"
-msgstr ""
+msgstr "Step unit"
 
 #: u_translation.rsstop
 msgid "Stop"
@@ -5483,7 +5487,7 @@ msgstr ""
 
 #: u_translation.rssyear
 msgid "Y"
-msgstr ""
+msgstr "Y"
 
 #: u_translation.rssymbol
 msgid "Symbol"
@@ -5513,7 +5517,7 @@ msgstr ""
 #: u_translation.rstabledonotex
 #, object-pascal-format
 msgid "%sTable %s does not exist! %sPlease correct the error and retry."
-msgstr ""
+msgstr "%sTable %s does not exist! %sPlease correct the error and retry."
 
 #: u_translation.rstableexist
 #, object-pascal-format
@@ -5602,7 +5606,7 @@ msgstr "There are %s catalogued images"
 #: u_translation.rsthereareobjec
 #, object-pascal-format
 msgid "There are %s objects in this field."
-msgstr ""
+msgstr "There are %s objects in this field."
 
 #: u_translation.rsthisactionre
 #, object-pascal-format
@@ -5927,7 +5931,7 @@ msgstr "URL launch command"
 
 #: u_translation.rsuseanothertt
 msgid "Use another DeltaT value"
-msgstr ""
+msgstr "Use another DeltaT value"
 
 #: u_translation.rsuseapresetco
 msgid "Use a preset colour scheme:"
@@ -5959,7 +5963,7 @@ msgstr ""
 
 #: u_translation.rsuserid
 msgid "User id:"
-msgstr ""
+msgstr "User id:"
 
 #: u_translation.rsusername
 msgid "User name"
@@ -5975,7 +5979,7 @@ msgstr "Use subsampling to limit the image size to"
 
 #: u_translation.rsusesystemtim
 msgid "Use system time"
-msgstr ""
+msgstr "Use system time"
 
 #: u_translation.rsusetcpipserv
 msgid "Use TCP/IP server"
@@ -6188,11 +6192,11 @@ msgstr "Zenith"
 
 #: u_translation.rszoom
 msgid "Zoom +"
-msgstr ""
+msgstr "Zoom +"
 
 #: u_translation.rszoom2
 msgid "Zoom -"
-msgstr ""
+msgstr "Zoom -"
 
 #: u_translation.rszoom3
 msgid "Zoom"

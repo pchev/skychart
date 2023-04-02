@@ -4,15 +4,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: skychart.es\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-03-07 11:15+0000\n"
-"PO-Revision-Date: 2022-12-01 09:52+0000\n"
+"POT-Creation-Date: 2023-04-02 14:33+0000\n"
+"PO-Revision-Date: 2023-03-14 11:45+0000\n"
 "Last-Translator: Luis Castedo <Unknown>\n"
 "Language-Team: French <kde-i18n-doc@kde.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2023-03-07 12:00+0000\n"
-"X-Generator: Launchpad (build 1938a4fd80bdf1a1b1373119ac1ac9e0e65174d6)\n"
+"X-Launchpad-Export-Date: 2023-04-02 14:48+0000\n"
+"X-Generator: Launchpad (build 610eeb74559fa4aabb929a482afece263183fac0)\n"
 "Language: es\n"
 
 #: u_translation.rs102cddss
@@ -842,7 +842,7 @@ msgstr "carta:"
 
 #: u_translation.rschartcenter
 msgid "Chart center"
-msgstr ""
+msgstr "Centro de la carta"
 
 #: u_translation.rschartcenterc
 msgid "Add a crosshair to the chart center"
@@ -866,7 +866,7 @@ msgstr "Leyenda de la carta"
 
 #: u_translation.rschartname
 msgid "Chart name"
-msgstr ""
+msgstr "Nombre de la carta"
 
 #: u_translation.rschartsetting
 msgid "Chart settings"
@@ -1275,7 +1275,7 @@ msgstr "Cursor"
 
 #: u_translation.rscursorpositi
 msgid "Cursor position"
-msgstr ""
+msgstr "Posición del cursor"
 
 #: u_translation.rscw
 #, object-pascal-format
@@ -3849,7 +3849,7 @@ msgstr "Orientación"
 
 #: u_translation.rsorientationf
 msgid "Orientation from zenith in Alt/Az chart"
-msgstr ""
+msgstr "Orientación desde el cénit en carta Alt/Ac"
 
 #: u_translation.rsorienttothep
 msgid "Orient to the pole or zenith"
@@ -3913,7 +3913,7 @@ msgstr "Clave"
 
 #: u_translation.rspastecoordin
 msgid "Paste coordinates"
-msgstr ""
+msgstr "Pegar coordenadas"
 
 #: u_translation.rspastel
 msgid "Pastel"
@@ -4490,11 +4490,11 @@ msgstr "Quitar la última etiqueta"
 
 #: u_translation.rsrenamechart
 msgid "Rename chart"
-msgstr ""
+msgstr "Renombrar carta"
 
 #: u_translation.rsrenamethecur
 msgid "Rename the curent chart"
-msgstr ""
+msgstr "Renombrar la carta actual"
 
 #: u_translation.rsreplacebytic
 msgid "Replace by tick mark"
@@ -4818,6 +4818,10 @@ msgstr "Seleccionar el color (negro, predeterminado del catálogo)"
 
 #: u_translation.rsselectedobje
 msgid "Selected object"
+msgstr "Objeto seleccionado"
+
+#: u_translation.rsselection
+msgid "Selection"
 msgstr ""
 
 #: u_translation.rsselectlabels

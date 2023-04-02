@@ -6110,3 +6110,7 @@ msgstr ""
 msgid "Orientation from zenith in Alt/Az chart"
 msgstr ""
 
+#: u_translation:rsselection
+msgid "Selection"
+msgstr ""
+
