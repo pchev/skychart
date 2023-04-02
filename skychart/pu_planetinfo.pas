@@ -2192,11 +2192,11 @@ begin
   bmp.FontHeight:=round(16*TextZoom);
   bmp.FontStyle:=[fsBold];
   repeat
-    ts:=bmp.TextSize(lbl);
+    ts:=bmp.TextSizeMultiline(lbl);
     if (ts.cx>xmin-5) then bmp.FontHeight:=bmp.FontHeight-1;
   until (ts.cx<=xmin-5)or(bmp.FontHeight<8);
-  bmp.TextOut(xmin-5,y-6,lbl,ColorToBGRA(clWhite),taRightJustify);
-  bmp.TextOut(xmax+5,y-5,lbl,ColorToBGRA(clWhite),taLeftJustify);
+  bmp.TextMultiline(xmin-5-ts.Width,y-6,ts.Width,lbl,ColorToBGRA(clWhite),btaRightJustify);
+  bmp.TextMultiline(xmax+5,y-5,ts.Width,lbl,ColorToBGRA(clWhite),btaLeftJustify);
 end;
 
 Procedure Tf_planetinfo.PlotPlanet(bmp:TBGRABitmap);
@@ -2266,9 +2266,9 @@ begin
     yc:=ymax-ys;
     RiseSet(config.jd0,config.FindRA,config.FindDec,hp1,ht,hp2,azr,azs,i,config);
     case i of
-      0: PlotLine(bmp,config.FindName,yc,config.FindDec,hp1,hp2,ht);
-      1: PlotLine(bmp,config.FindName,yc,config.FindDec,0,24,ht);
-      2: PlotLine(bmp,config.FindName,yc,config.FindDec,-100,-100,-100);
+      0: PlotLine(bmp,rsSelection+':'+crlf+config.FindName, yc, config.FindDec, hp1, hp2, ht);
+      1: PlotLine(bmp,rsSelection+':'+crlf+config.FindName,yc,config.FindDec,0,24,ht);
+      2: PlotLine(bmp,rsSelection+':'+crlf+config.FindName,yc,config.FindDec,-100,-100,-100);
     end;
   end;
 

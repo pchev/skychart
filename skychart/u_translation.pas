@@ -1582,6 +1582,7 @@ resourcestring
   rsChartName = 'Chart name';
   rsRenameTheCur = 'Rename the curent chart';
   rsOrientationF = 'Orientation from zenith in Alt/Az chart';
+  rsSelection = 'Selection';
 
 // also update upsi_translation
 
