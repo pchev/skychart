@@ -1,5 +1,5 @@
 ASTEROID LIGHTCURVE DATABASE (LCDB) FAMILY LOOKUP TABLE (Complete)
-GENERATED: Dec 14, 2021
+GENERATED: Apr 24, 2023
 
 Number  Parent  Family Name          Count   Albedo Err    G      Err    Class     
 -----------------------------------------------------------------------------------

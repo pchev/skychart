@@ -608,8 +608,8 @@ const
   URL_CDCAsteroidElements = 'https://www.ap-i.net/pub/skychart/mpc/mpc5000.dat';
 
   URL_Asteroid_Lightcurve_Database_Info = 'https://minplanobs.org/MPInfo/php/lcdb.php';
-  URL_Asteroid_Lightcurve_Date = 'https://www.ap-i.net/pub/skychart/asteroid/lc_summary_pub.DATE';
-  URL_Asteroid_Lightcurve_Database = 'https://www.ap-i.net/pub/skychart/asteroid/lc_summary_pub.txt';
+  URL_Asteroid_Lightcurve_Date = 'https://www.ap-i.net/pub/skychart/asteroid/lc_summary.DATE';
+  URL_Asteroid_Lightcurve_Database = 'https://www.ap-i.net/pub/skychart/asteroid/lc_summary.txt';
   URL_Asteroid_Lightcurve_Family = 'https://www.ap-i.net/pub/skychart/asteroid/lc_familylookup.txt';
   URL_IVOASAMP = 'http://www.ivoa.net/documents/SAMP/';
 

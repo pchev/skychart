@@ -316,7 +316,7 @@ begin
       // load asteroid extension
       i := strtointdef(DB.QueryOne('select count(*) from cdc_ast_fam where number=1'), 0);
       if i=0 then begin
-        LoadAstExt(slash(sampledir) + 'lc_summary_pub.txt');
+        LoadAstExt(slash(sampledir) + 'lc_summary.txt');
         LoadAstFam(slash(sampledir) + 'lc_familylookup.txt');
       end;
     end;
@@ -330,10 +330,10 @@ begin
         DB.Query('CREATE TABLE ' + sqltable[7, 1] + sqltable[7, 2]);
         WriteTrace('Create table ' + sqltable[7, 1] + ' ...  ' + DB.ErrorMessage);
         DB.Query('CREATE INDEX ' + sqlindex[4, 1] + ' on ' + sqlindex[4, 2]);
-        if FileExists(slash(tempdir)+'lc_summary_pub.txt') then
-          LoadAstExt(slash(tempdir)+'lc_summary_pub.txt')
+        if FileExists(slash(tempdir)+'lc_summary.txt') then
+          LoadAstExt(slash(tempdir)+'lc_summary.txt')
         else
-          LoadAstExt(slash(sampledir)+'lc_summary_pub.txt');
+          LoadAstExt(slash(sampledir)+'lc_summary.txt');
       end;
     end;
   end;
@@ -1277,7 +1277,7 @@ begin
       dropdb(cmain);
       raise Exception.Create('Error loading ' + slash(sampledir) + 'MPCsample.dat');
     end;
-    LoadAstExt(slash(sampledir) + 'lc_summary_pub.txt');
+    LoadAstExt(slash(sampledir) + 'lc_summary.txt');
     LoadAstFam(slash(sampledir) + 'lc_familylookup.txt');
     // load sample comet data
     if not LoadCometFile(slash(sampledir) + 'Cometsample.dat', memo) then
