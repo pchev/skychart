@@ -53,7 +53,7 @@ procedure GetAHxyF(x, y: integer; var a, h: double; c: Tconf_skychart);
 procedure GetLBxy(x, y: integer; var l, b: double; c: Tconf_skychart);
 procedure GetLBExy(x, y: integer; var le, be: double; c: Tconf_skychart);
 function labrotation(ra, de: double; lnum: integer; c: Tconf_skychart): double;
-function rectanglerotation(ra, de: double; c: Tconf_skychart): double;
+function rectanglerotation(ra, de: double; c: Tconf_skychart; UseAltAz:boolean): double;
 function ObjectInMap(ra, de: double; c: Tconf_skychart): boolean;
 function NorthPoleInMap(c: Tconf_skychart): boolean;
 function SouthPoleInMap(c: Tconf_skychart): boolean;
@@ -845,11 +845,11 @@ begin
   end;
 end;
 
-function rectanglerotation(ra, de: double; c: Tconf_skychart): double;
+function rectanglerotation(ra, de: double; c: Tconf_skychart; UseAltAz:boolean): double;
 var
   a, d, ac, dc, x1, x2, y1, y2: double;
 begin
-  if c.AltAzMark then
+  if UseAltAz and c.AltAzMark then
   begin
     case c.Projpole of
       Altaz: begin
