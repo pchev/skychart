@@ -475,7 +475,7 @@ type
     function cmd_SetTZ(tz: string): string;
     function cmd_GetTZ: string;
     function cmd_SetBGimage(onoff,setfov: string; loadnew: boolean=true): string;
-    function cmd_LoadBGimage(fn: string): string;
+    function cmd_LoadBGimage(fn,track: string): string;
     function cmd_SetShowPicture(onoff: string): string;
     function cmd_PDSS(DssDir, ImagePath, ImageName, useexisting: string): string;
     function cmd_GetObjectList: string;
@@ -4813,7 +4813,7 @@ begin
   Refresh(True, False);
 end;
 
-function Tf_Chart.cmd_LoadBGimage(fn: string): string;
+function Tf_Chart.cmd_LoadBGimage(fn,track: string): string;
 begin
   sc.cfgsc.BackgroundImage := fn;
   sc.Fits.Filename := sc.cfgsc.BackgroundImage;
@@ -4827,9 +4827,11 @@ begin
       sc.Fits.InsertDB(sc.cfgsc.BackgroundImage, 'OTHER', 'BKG',
         sc.Fits.Center_RA + 0.00001, sc.Fits.Center_DE + 0.00001, sc.Fits.Img_Width,
         sc.Fits.Img_Height, sc.Fits.Rotation);
-    sc.cfgsc.fov := 1.25 * sc.Fits.Img_Width;
-    sc.cfgsc.TrackOn := True;
-    sc.cfgsc.TrackType := TTimage;
+    if (uppercase(track) = 'ON') then begin
+      sc.cfgsc.fov := 1.25 * sc.Fits.Img_Width;
+      sc.cfgsc.TrackOn := True;
+      sc.cfgsc.TrackType := TTimage;
+    end;
     Result := msgOK;
   end
   else
@@ -6743,7 +6745,12 @@ begin
         else
           Result := cmd_SetBGimage(arg[1],'ON');
         end;
-    89: Result := cmd_LoadBGimage(arg[1]);
+    89:  begin
+        if arg.Count>2 then
+          Result := cmd_LoadBGimage(arg[1],arg[2])
+        else
+          Result := cmd_LoadBGimage(arg[1],'ON');
+        end;
     90: Result := cmd_GetObjectList;
     91: Result := cmd_LoadCircle(arg[1]);
     92: Result := cmd_DefCircle(arg[1], arg[2], arg[3], arg[4]);
