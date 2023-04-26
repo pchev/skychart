@@ -17,9 +17,15 @@
       </XPManifest>
       <Icon Value="0"/>
     </General>
+    <MacroValues Count="1">
+      <Macro6 Name="LCLWidgetType" Value="gtk2"/>
+    </MacroValues>
     <BuildModes Count="8">
       <Item1 Name="release" Default="True"/>
       <Item2 Name="debug">
+        <MacroValues Count="1">
+          <Macro5 Name="LCLWidgetType" Value="gtk2"/>
+        </MacroValues>
         <CompilerOptions>
           <Version Value="11"/>
           <Target>
@@ -64,6 +70,9 @@
         </CompilerOptions>
       </Item2>
       <Item3 Name="debug heap">
+        <MacroValues Count="1">
+          <Macro4 Name="LCLWidgetType" Value="gtk2"/>
+        </MacroValues>
         <CompilerOptions>
           <Version Value="11"/>
           <Target>
@@ -339,10 +348,13 @@
           </Other>
         </CompilerOptions>
       </Item8>
-      <SharedMatrixOptions Count="3">
+      <SharedMatrixOptions Count="6">
         <Item1 ID="368139646039" Modes="windows,win64" Type="IDEMacro" MacroName="LCLWidgetType" Value="win32"/>
         <Item2 ID="941875233765" Modes="Qt" Type="IDEMacro" MacroName="LCLWidgetType" Value="qt"/>
         <Item3 ID="313858106277" Modes="Qt5" Type="IDEMacro" MacroName="LCLWidgetType" Value="qt5"/>
+        <Item4 ID="764061439095" Modes="debug heap" Type="IDEMacro" MacroName="LCLWidgetType" Value="gtk2"/>
+        <Item5 ID="174458976913" Modes="debug" Type="IDEMacro" MacroName="LCLWidgetType" Value="gtk2"/>
+        <Item6 ID="480998929205" Modes="release" Type="IDEMacro" MacroName="LCLWidgetType" Value="gtk2"/>
       </SharedMatrixOptions>
     </BuildModes>
     <PublishOptions>
