@@ -1874,7 +1874,7 @@ procedure Tf_config_catalog.Button8Click(Sender: TObject);
 var
   f: textfile;
   i, n: integer;
-  ac: string;
+  ac,sep: string;
 begin
   if stringgrid1.RowCount <= 1 then
     exit;
@@ -1888,19 +1888,20 @@ begin
     AssignFile(f, UTF8ToSys(SaveDialog1.FileName));
     Rewrite(f);
     n := length(ccat.UserObjects);
+    sep:=',';
     for i := 0 to n - 1 do
     begin
       if ccat.UserObjects[i].active then
         ac := '1'
       else
         ac := '0';
-      WriteLn(f, ccat.UserObjects[i].oname + blank +
-        ARToStr3(rad2deg * ccat.UserObjects[i].ra / 15) + blank +
-        DEToStr3(rad2deg * ccat.UserObjects[i].Dec) + blank + ac + blank +
-        IntToStr(ccat.UserObjects[i].otype) + blank +
-        FormatFloat(f2, ccat.UserObjects[i].mag) + blank +
-        FormatFloat(f2, ccat.UserObjects[i].size) + blank +
-        IntToStr(ccat.UserObjects[i].color) + blank + ccat.UserObjects[i].comment
+      WriteLn(f, StringReplace(ccat.UserObjects[i].oname,sep,blank,[rfReplaceAll]) + sep +
+        ARToStr3(rad2deg * ccat.UserObjects[i].ra / 15) + sep +
+        DEToStr3(rad2deg * ccat.UserObjects[i].Dec) + sep + ac + sep +
+        IntToStr(ccat.UserObjects[i].otype) + sep +
+        FormatFloat(f2, ccat.UserObjects[i].mag) + sep +
+        FormatFloat(f2, ccat.UserObjects[i].size) + sep +
+        IntToStr(ccat.UserObjects[i].color) + sep + StringReplace(ccat.UserObjects[i].comment,sep,blank,[rfReplaceAll])
         );
     end;
     CloseFile(f);
@@ -1912,6 +1913,9 @@ var
   f: textfile;
   i, n, p: integer;
   buf1, buf2: string;
+  sep: char;
+  newformat: boolean;
+  str:TStringList;
 begin
   if OpenDialog1.InitialDir = '' then
     OpenDialog1.InitialDir := HomeDir;
@@ -1921,6 +1925,16 @@ begin
       WriteTrace(Caption + ' Load user objects from ' + UTF8ToSys(OpenDialog1.FileName));
     AssignFile(f, UTF8ToSys(OpenDialog1.FileName));
     reset(f);
+
+    // test format on first line
+    sep:=',';
+    str:=TStringList.Create;
+    ReadLn(f, buf1);
+    SplitRec2(buf1,sep,str);
+    newformat:=(str.Count>=3);
+
+    // count number of record
+    reset(f);
     n := 0;
     while not EOF(f) do
     begin
@@ -1929,46 +1943,87 @@ begin
     end;
     n := min(n, MaxUserObjects);
     setlength(ccat.UserObjects, n);
+
+    // read file
     reset(f);
-    for i := 0 to n - 1 do
-    begin
-      ;
-      ReadLn(f, buf1);
-      p := pos(blank, buf1);
-      buf2 := copy(buf1, 1, p - 1);
-      Delete(buf1, 1, p);
-      ccat.UserObjects[i].oname := buf2;
-      p := pos(blank, buf1);
-      buf2 := copy(buf1, 1, p - 1);
-      Delete(buf1, 1, p);
-      ccat.UserObjects[i].ra := deg2rad * 15 * Str3ToAR(trim(buf2));
-      p := pos(blank, buf1);
-      buf2 := copy(buf1, 1, p - 1);
-      Delete(buf1, 1, p);
-      ccat.UserObjects[i].Dec := deg2rad * Str3ToDE(trim(buf2));
-      p := pos(blank, buf1);
-      buf2 := copy(buf1, 1, p - 1);
-      Delete(buf1, 1, p);
-      ccat.UserObjects[i].active := (trim(buf2) = '1');
-      p := pos(blank, buf1);
-      buf2 := copy(buf1, 1, p - 1);
-      Delete(buf1, 1, p);
-      ccat.UserObjects[i].otype := strtointdef(buf2, 0);
-      p := pos(blank, buf1);
-      buf2 := copy(buf1, 1, p - 1);
-      Delete(buf1, 1, p);
-      ccat.UserObjects[i].mag := StrToFloatDef(buf2, 6);
-      p := pos(blank, buf1);
-      buf2 := copy(buf1, 1, p - 1);
-      Delete(buf1, 1, p);
-      ccat.UserObjects[i].size := StrToFloatDef(buf2, 60);
-      p := pos(blank, buf1);
-      buf2 := copy(buf1, 1, p - 1);
-      Delete(buf1, 1, p);
-      ccat.UserObjects[i].color := StrToIntDef(buf2, 0);
-      ccat.UserObjects[i].comment := buf1;
+    if newformat then begin
+      // newformat, coma separated with optional fields
+      for i := 0 to n - 1 do
+      begin
+        ReadLn(f, buf1);
+        SplitRec2(buf1,sep,str);
+        ccat.UserObjects[i].oname := str[0];
+        ccat.UserObjects[i].ra := deg2rad * 15 * Str3ToAR(trim(str[1]));
+        ccat.UserObjects[i].Dec := deg2rad * Str3ToDE(trim(str[2]));
+        if str.Count>3 then
+          ccat.UserObjects[i].active := (trim(str[3]) = '1')
+        else
+          ccat.UserObjects[i].active := true;
+        if str.Count>4 then
+          ccat.UserObjects[i].otype := strtointdef(str[4], 0)
+        else
+          ccat.UserObjects[i].otype := 0;
+        if str.Count>5 then
+          ccat.UserObjects[i].mag := StrToFloatDef(str[5], 6)
+        else
+          ccat.UserObjects[i].mag := 6;
+        if str.Count>6 then
+          ccat.UserObjects[i].size := StrToFloatDef(str[6], 60)
+        else
+          ccat.UserObjects[i].size := 60;
+        if str.Count>7 then
+          ccat.UserObjects[i].color := StrToIntDef(str[7], 0)
+        else
+          ccat.UserObjects[i].color := 0;
+        if str.Count>8 then
+          ccat.UserObjects[i].comment := str[8]
+        else
+          ccat.UserObjects[i].comment := '';
+      end;
+    end
+    else begin
+      // old format, space separated, all fields must be present
+      for i := 0 to n - 1 do
+      begin
+        ReadLn(f, buf1);
+        p := pos(blank, buf1);
+        buf2 := copy(buf1, 1, p - 1);
+        Delete(buf1, 1, p);
+        ccat.UserObjects[i].oname := buf2;
+        p := pos(blank, buf1);
+        buf2 := copy(buf1, 1, p - 1);
+        Delete(buf1, 1, p);
+        ccat.UserObjects[i].ra := deg2rad * 15 * Str3ToAR(trim(buf2));
+        p := pos(blank, buf1);
+        buf2 := copy(buf1, 1, p - 1);
+        Delete(buf1, 1, p);
+        ccat.UserObjects[i].Dec := deg2rad * Str3ToDE(trim(buf2));
+        p := pos(blank, buf1);
+        buf2 := copy(buf1, 1, p - 1);
+        Delete(buf1, 1, p);
+        ccat.UserObjects[i].active := (trim(buf2) = '1');
+        p := pos(blank, buf1);
+        buf2 := copy(buf1, 1, p - 1);
+        Delete(buf1, 1, p);
+        ccat.UserObjects[i].otype := strtointdef(buf2, 0);
+        p := pos(blank, buf1);
+        buf2 := copy(buf1, 1, p - 1);
+        Delete(buf1, 1, p);
+        ccat.UserObjects[i].mag := StrToFloatDef(buf2, 6);
+        p := pos(blank, buf1);
+        buf2 := copy(buf1, 1, p - 1);
+        Delete(buf1, 1, p);
+        ccat.UserObjects[i].size := StrToFloatDef(buf2, 60);
+        p := pos(blank, buf1);
+        buf2 := copy(buf1, 1, p - 1);
+        Delete(buf1, 1, p);
+        ccat.UserObjects[i].color := StrToIntDef(buf2, 0);
+        ccat.UserObjects[i].comment := buf1;
+      end;
     end;
+
     CloseFile(f);
+    str.Free;
     ShowUserObjects;
   end;
 end;
