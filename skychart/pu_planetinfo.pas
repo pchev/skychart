@@ -181,7 +181,6 @@ type
     NAV_Disabled: TBGRABitmap;
 
     procedure SetDefaultFOV;
-    procedure SetView(AViewIndex, AMoonIndex: integer);
 
     procedure Rescale_Internal;
     procedure NAV_Coloring(col: TColor; bmp:TBGRABitmap);
@@ -214,6 +213,7 @@ type
     LinkedChartData: Tconf_skychart;
 
     ChartSync: Boolean;
+    KioskMode: boolean;
 
     Procedure SetLang;
     Procedure RefreshInfo;
@@ -226,6 +226,7 @@ type
     procedure PlotPlanetImage(bmp:TBGRABitmap; ATarget, AOrigin : integer);
     Procedure PlotHeader(bmp:TBGRABitmap; title:string; showobs,showtime: boolean);
     property planet: Tplanet read Fplanet write Fplanet;
+    procedure SetView(AViewIndex, AMoonIndex: integer);
 
     // Inc/Dec and get string for navigation speed
     procedure SetTimeSpeed(ATimeIndex: integer);
@@ -646,6 +647,7 @@ begin
   {$endif}
 
   firstuse := true;
+  KioskMode := false;
 
   //NAV Status bits
   NAV_Bits := TBits.Create(8);
@@ -1702,6 +1704,7 @@ begin
       1: SetFromSun;
       2: SetFromPlanet;
     end;
+    if KioskMode then fov:=1.2*fov;
 
   end;
 

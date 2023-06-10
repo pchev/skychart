@@ -2102,31 +2102,38 @@ begin
     pt.X := 0;
     pt.Y := 0;
     pt := self.ClientToScreen(pt);
-    f_planetinfo.BorderStyle := bsNone;
+    f_planetinfo.BorderStyle := bsSingle;
+    f_planetinfo.FormStyle := fsStayOnTop;
+    f_planetinfo.tbPlanets.Visible := False;
+    f_planetinfo.PanelTop.Visible := False;
     f_planetinfo.PanelLeft.Visible := False;
     f_planetinfo.ShowCurrentObject := False;
+    f_planetinfo.cbLabels.Checked:=false;
+    f_planetinfo.KioskMode:=true;
     f_planetinfo.Show;
     f_planetinfo.Width := Width;
     f_planetinfo.Height := Height;
     f_planetinfo.top := pt.Y;
     f_planetinfo.left := pt.X;
     Application.ProcessMessages;
+    f_planetinfo.View_Index := pg;
+    f_planetinfo.SetView(pg,0);
   end
   else
   begin
     if cursorpos and (not f_planetinfo.Visible) then
       formpos(f_planetinfo, mouse.cursorpos.x, mouse.cursorpos.y);
     f_planetinfo.ActivePage := -1;
+    if pg >= 0 then
+      f_planetinfo.View_Index := pg;
+
+    f_planetinfo.LinkedChartData := Tf_chart(MultiFrame1.ActiveObject).sc.cfgsc;
+    f_planetinfo.Show;
+
+    f_planetinfo.SetRadioButtons;
+    f_planetinfo.RefreshInfo;
   end;
 
-  if pg >= 0 then
-    f_planetinfo.View_Index := pg;
-
-  f_planetinfo.LinkedChartData := Tf_chart(MultiFrame1.ActiveObject).sc.cfgsc;
-  f_planetinfo.Show;
-
-  f_planetinfo.SetRadioButtons;
-  f_planetinfo.RefreshInfo;
 end;
 
 function Tf_main.ShowPlanetInfo(pg: string): string;
