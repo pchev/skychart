@@ -5,7 +5,7 @@ object f_main: Tf_main
   Width = 885
   ActiveControl = PanelTop
   Caption = 'Cartes du Ciel'
-  ClientHeight = 576
+  ClientHeight = 546
   ClientWidth = 885
   KeyPreview = True
   Menu = MainMenu1
@@ -172,12 +172,12 @@ object f_main: Tf_main
   end
   object PanelLeft: TPanel
     Left = 0
-    Height = 461
+    Height = 431
     Top = 81
     Width = 28
     Align = alLeft
     BevelOuter = bvNone
-    ClientHeight = 461
+    ClientHeight = 431
     ClientWidth = 28
     Font.Height = 10
     FullRepaint = False
@@ -185,7 +185,7 @@ object f_main: Tf_main
     TabOrder = 1
     object ToolBarLeft: TToolBar
       Left = 0
-      Height = 461
+      Height = 431
       Top = 0
       Width = 28
       Align = alClient
@@ -206,19 +206,19 @@ object f_main: Tf_main
   end
   object PanelRight: TPanel
     Left = 859
-    Height = 461
+    Height = 431
     Top = 81
     Width = 26
     Align = alRight
     BevelOuter = bvNone
-    ClientHeight = 461
+    ClientHeight = 431
     ClientWidth = 26
     FullRepaint = False
     ParentFont = False
     TabOrder = 3
     object ToolBarRight: TToolBar
       Left = 0
-      Height = 461
+      Height = 431
       Top = 0
       Width = 26
       Align = alClient
@@ -244,7 +244,7 @@ object f_main: Tf_main
   object PanelBottom: TPanel
     Left = 0
     Height = 34
-    Top = 542
+    Top = 512
     Width = 885
     Align = alBottom
     BevelOuter = bvNone
@@ -3124,7 +3124,7 @@ object f_main: Tf_main
       AutoSize = False
       Constraints.MaxHeight = 26
       DropDownCount = 15
-      ItemHeight = 0
+      ItemHeight = 24
       OnCloseUp = quicksearchClick
       OnDblClick = quicksearchClick
       OnKeyDown = quicksearchKeyDown
@@ -3143,7 +3143,7 @@ object f_main: Tf_main
       Constraints.MaxHeight = 26
       DropDownCount = 11
       Font.CharSet = ANSI_CHARSET
-      ItemHeight = 0
+      ItemHeight = 18
       OnChange = TimeUChange
       ParentFont = False
       Style = csDropDownList
@@ -3375,7 +3375,7 @@ object f_main: Tf_main
   end
   object ScriptPanel: TPanel
     Left = 28
-    Height = 461
+    Height = 431
     Top = 81
     Width = 279
     Align = alLeft
@@ -3386,7 +3386,7 @@ object f_main: Tf_main
   end
   object Splitter1: TSplitter
     Left = 307
-    Height = 461
+    Height = 431
     Top = 81
     Width = 5
     ResizeStyle = rsLine

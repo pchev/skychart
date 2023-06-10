@@ -1550,6 +1550,7 @@ begin
       SubChart.Visible := False;
       SubTelescope.Visible := False;
       SubWindow.Visible := False;
+      SubUpdate.Visible := False;
       SubHelp.Visible := False;
       topmessage.Visible := False;
       PanelToolBarMain.Visible := False;
