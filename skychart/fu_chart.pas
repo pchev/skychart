@@ -4030,7 +4030,7 @@ begin
   else if DarkTheme then
       txt := html_h_drk
   else if cmain.SimpleDetail then
-    txt := html_h_b + html_h2
+    txt := html_h_b + html_h1
   else
     txt := html_h;
   // object type
@@ -4283,7 +4283,9 @@ begin
   until buf = '';
 
   // object motion
-  if (otype='Cm')or(otype='As')or(otype='Spk') then begin
+  if cmain.KioskMode then
+    dist:=0
+  else if (otype='Cm')or(otype='As')or(otype='Spk') then begin
     sc.planet.ObjectMotion(otype,oname,sc.cfgsc.TrackElemEpoch,cjd,cst,sc.cfgsc,dist,pa,dx,dy);
   end
   else begin
