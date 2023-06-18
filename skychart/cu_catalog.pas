@@ -2324,9 +2324,11 @@ var
   H: TCatHeader;
   info: TCatHdrInfo;
   rec: GCatrec;
-  i, version: integer;
-  iid: string;
+  i, n, version,cattype: integer;
+  iid,cid,buf: string;
   catok: boolean;
+const
+  maxtext=1000;
 begin
   ok := False;
   iid := id;
@@ -2336,9 +2338,12 @@ begin
     begin
       SetGcatPath(cfgcat.GCatLst[i].path, cfgcat.GCatLst[i].shortname);
       GetGCatInfo(H, info, version, GCatFilter, catok);
+      buf:=copy(H.version,8,1);
+      cattype:=strtointdef(buf,0);
       if catok and fileexists(slash(cfgcat.GCatLst[i].path) +
         cfgcat.GCatLst[i].shortname + '.ixr') then
       begin
+        // new index format
         FindNumGcatRec(cfgcat.GCatLst[i].path, cfgcat.GCatLst[i].shortname, iid,
           H.ixkeylen, rec, ok);
         if ok then
@@ -2363,10 +2368,49 @@ begin
       else if catok and fileexists(slash(cfgcat.GCatLst[i].path) +
         cfgcat.GCatLst[i].shortname + '.idx') then
       begin
+        // old index format
         FindNumGcat(cfgcat.GCatLst[i].path, cfgcat.GCatLst[i].shortname, iid, H.ixkeylen,
           ar, de, ok);
         if ok then
           break;
+      end
+      else if cattype=ctText then begin
+        // text catalog
+        iid:=UpperCase(trim(id));
+        n:=0;
+        OpenGCat(0,24,-90,90,ok);
+        if ok then begin
+          repeat
+            inc(n);
+            ReadGCat(rec, ok);
+            case version of
+              rtStar: cid:=rec.star.id;
+              rtVar:  cid:=rec.variable.id;
+              rtDbl:  cid:=rec.double.id;
+              rtNeb:  cid:=rec.neb.id;
+              rtlin:  cid:=rec.outlines.id;
+            end;
+            if iid=UpperCase(trim(cid)) then break;
+            if (n>maxtext) then ok:=false;
+          until (not ok);
+          if ok then begin
+            ar := rec.ra / 15;
+            de := rec.Dec;
+            if ctype = rtStar then
+              FormatGCatS(rec)
+            else if ctype = rtNeb then
+              FormatGCatN(rec)
+            else
+            begin
+              rec.ra := deg2rad * rec.ra;
+              rec.Dec := deg2rad * rec.Dec;
+            end;
+            FFindId := id;
+            FFindRecOK := True;
+            FFindRec := rec;
+            break;
+          end;
+        end;
       end;
     end;
   end;
