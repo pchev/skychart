@@ -26,7 +26,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 interface
 
 uses
-  indibaseclient, indibasedevice, indiapi, indicom, math,
+  indibaseclient, indibasedevice, indiapi, indicom, math, blcksock,
   Classes, SysUtils, FileUtil, Forms, Controls, Graphics, Dialogs, ComCtrls,
   StdCtrls, ExtCtrls, Buttons;
 
@@ -328,9 +328,16 @@ begin
 end;
 
 procedure Tf_indigui.ServerDisconnected(Sender: TObject);
+var buf: string;
 begin
   if not indiclosing then begin
     FDisconnectedServer:=true;
+    buf:='INDI server '+FIndiServer+':'+FIndiPort+' disconnected';
+    try
+    if (indiclient<>nil) then buf:=buf+crlf+indiclient.ErrorDesc;
+    except
+    end;
+    ShowMessage(buf);
     Close;
   end;
 end;

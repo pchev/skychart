@@ -465,6 +465,7 @@ begin
         until False;
       end;
     finally
+      FErrorDesc:=tcpclient.GetErrorDesc;
       if FProtocolTrace then
         WriteProtocolTrace('Disconnect, socket status=' + tcpclient.Sock.LastErrorDesc);
       FConnected := False;
