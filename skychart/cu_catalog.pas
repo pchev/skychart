@@ -5704,9 +5704,10 @@ end;
 procedure Tcatalog.LoadConstL(fname: string);
 var
   f: textfile;
-  i, n: integer;
+  i, n, j, k: integer;
   ra1, ra2, de1, de2: single;
   buf, h1, h2: string;
+  row: TStringList;
   filter, ok: boolean;
   ver, ctype: integer;
   rec: GCatrec;
@@ -5721,6 +5722,7 @@ begin
   end;
   Filemode := 0;
   assignfile(f, fname);
+  row:=TStringList.Create;
   try
     // get file type
     reset(f);
@@ -5756,10 +5758,18 @@ begin
             continue;
           if copy(buf, 1, 1) = ';' then
             continue;
-          h1 := trim(copy(buf, 6, 5));
-          h2 := trim(copy(buf, 13, 5));
+          Splitarg(buf,blank,row);
+          if row.Count<3 then continue;
+          buf:=trim(row[1]);
+          val(buf,j,k);
+          if k=0 then h1:='HR'+buf
+                 else h1:=buf;
+          buf:=trim(row[2]);
+          val(buf,j,k);
+          if k=0 then h2:='HR'+buf
+                 else h2:=buf;
           FindNumGcatRec(cfgcat.StarCatPath[DefStar - BaseStar],
-            'star', 'HR' + h1, H.ixkeylen, rec, ok);
+            'star', h1, H.ixkeylen, rec, ok);
           if not ok then
             continue;
           if cfgshr.ConstLepoch = 0 then
@@ -5779,7 +5789,7 @@ begin
           cfgshr.ConstL[i].px1 := rec.star.px;
           cfgshr.ConstL[i].rv1 := rec.num[1];
           FindNumGcatRec(cfgcat.StarCatPath[DefStar - BaseStar],
-            'star', 'HR' + h2, H.ixkeylen, rec, ok);
+            'star', h2, H.ixkeylen, rec, ok);
           if not ok then
             continue;
           cfgshr.ConstL[i].ra2 := deg2rad * rec.ra;
@@ -5819,6 +5829,7 @@ begin
     cfgshr.ConstLNum := n;
   finally
     closefile(f);
+    row.free;
   end;
 end;
 
