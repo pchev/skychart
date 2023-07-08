@@ -179,8 +179,10 @@ type
 
     {** Creates an image by copying the content of a ''TFPCustomImage'' }
     constructor Create(AFPImage: TFPCustomImage); overload; override;
-    {** Creates an image by copying the content of a ''TBitmap'' }
-    constructor Create(ABitmap: TBitmap; AUseTransparent: boolean = true); overload; override;
+    {** Creates an image by copying the content of a ''TBitmap'', apply transparent color if specified and bitmap is masked }
+    constructor Create(ABitmap: TBitmap); overload; override;
+    {** Creates an image by copying the content of a ''TBitmap'', enforce/disable use of transparent color }
+    constructor Create(ABitmap: TBitmap; AUseTransparentColor: boolean); overload; override;
 
     {** Creates an image by loading its content from the file ''AFilename''.
         The encoding of the string is the default one for the operating system.
@@ -248,7 +250,8 @@ type
     {** Assign the content of the specified ''Source''. It can be a ''TBGRACustomBitmap'' or
         a ''TFPCustomImage'' }
     procedure Assign(Source: TPersistent); overload; override;
-    procedure Assign(Source: TBitmap; AUseTransparent: boolean); overload;
+    procedure AssignWithFixedTransparent(Source: TBitmap); overload;
+    procedure Assign(Source: TBitmap; AUseTransparentColor: boolean); overload;
 
     {** Stores the image in the stream without compression nor header }
     procedure Serialize(AStream: TStream); override;
@@ -691,7 +694,7 @@ implementation
 
 uses Math, BGRAUTF8, BGRABlend, BGRAFilters, BGRAGradientScanner,
   BGRAResample, BGRAPolygon, BGRAPolygonAliased,
-  BGRAPath, FPReadPcx, FPWritePcx, FPReadXPM, FPWriteXPM,
+  BGRAPath, BGRAReadPcx, BGRAWritePcx, FPReadXPM, FPWriteXPM,
   BGRAReadBMP, BGRAReadJpeg,
   BGRADithering, BGRAFilterScanner;
 
@@ -1032,11 +1035,17 @@ begin
   Assign(AFPImage);
 end;
 
-{ Creates an image of dimensions AWidth and AHeight and filled with transparent pixels. }
-constructor TBGRADefaultBitmap.Create(ABitmap: TBitmap; AUseTransparent: boolean);
+constructor TBGRADefaultBitmap.Create(ABitmap: TBitmap);
 begin
   inherited Create;
-  Assign(ABitmap, AUseTransparent);
+  AssignWithFixedTransparent(ABitmap);
+end;
+
+{ Creates an image of dimensions AWidth and AHeight and filled with transparent pixels. }
+constructor TBGRADefaultBitmap.Create(ABitmap: TBitmap; AUseTransparentColor: boolean);
+begin
+  inherited Create;
+  Assign(ABitmap, AUseTransparentColor);
 end;
 
 { Creates an image by loading its content from the file AFilename.
@@ -1184,12 +1193,17 @@ begin
     inherited Assign(Source);
 end;
 
-procedure TBGRADefaultBitmap.Assign(Source: TBitmap; AUseTransparent: boolean);
+procedure TBGRADefaultBitmap.AssignWithFixedTransparent(Source: TBitmap);
+begin
+  Assign(Source, Source.Masked and (Source.TransparentMode = tmFixed));
+end;
+
+procedure TBGRADefaultBitmap.Assign(Source: TBitmap; AUseTransparentColor: boolean);
 var
   transpColor: TBGRAPixel;
 begin
   Assign(Source);
-  if AUseTransparent and TBitmap(Source).Transparent then
+  if AUseTransparentColor then
   begin
     if TBitmap(Source).TransparentMode = tmFixed then
       transpColor := ColorToBGRA(TBitmap(Source).TransparentColor)
@@ -1901,7 +1915,7 @@ var
   currentGlyph: TGlyphUtf8;
   currentGlyphUtf8: string;
   currentGlyphWidth: single;
-  angle, textLen: single;
+  angleRad, textLen, skipped: single;
 
   procedure NextGlyph;
   begin
@@ -1912,8 +1926,18 @@ var
     currentGlyphWidth := TextSize(currentGlyphUtf8).cx;
   end;
 
+  function SkipStartGlyphs(AInitialPosition:single):single;
+  begin
+    result := 0;
+    while (result + 1e-6 < AInitialPosition) and not glyphCursor.EndOfString do
+    begin
+      NextGlyph;
+      IncF(result, currentGlyphWidth + ALetterSpacing);
+    end;
+  end;
+
 begin
-  if (ATexture = nil) and (AColor.alpha = 0) then exit;
+  if (ATexture = nil) and not FontRenderer.TextVisible(AColor) then exit;
   sUTF8 := CleanTextOutString(sUTF8);
   if sUTF8 = '' then exit;
   glyphCursor := TGlyphCursorUtf8.New(sUTF8, FontBidiMode);
@@ -1926,26 +1950,35 @@ begin
       NextGlyph;
       IncF(textLen, ALetterSpacing + currentGlyphWidth);
     end;
-    case AAlign of
-      taCenter: ACursor.MoveBackward(textLen*0.5);
-      taRightJustify: ACursor.MoveBackward(textLen);
-    end;
     glyphCursor.Rewind;
+    skipped:=0;
+    case AAlign of
+      taCenter:
+        begin
+          skipped:=SkipStartGlyphs(0.5 * (textLen-ACursor.PathLength));
+          ACursor.MoveBackward((textLen-skipped)*0.5);
+        end;
+      taRightJustify:
+        begin
+          skipped:=SkipStartGlyphs(textLen-ACursor.PathLength);
+          ACursor.MoveBackward(textLen-skipped);
+        end;
+    end;
   end;
 
   while not glyphCursor.EndOfString do
   begin
     NextGlyph;
-    ACursor.MoveForward(currentGlyphWidth);
+    if ACursor.MoveForward(currentGlyphWidth) <> currentGlyphWidth then break;
     ACursor.MoveBackward(currentGlyphWidth, false);
     ACursor.MoveForward(currentGlyphWidth*0.5);
-    with ACursor.CurrentTangent do angle := arctan2(y,x);
+    with ACursor.CurrentTangent do angleRad := arctan2(y,x);
     with ACursor.CurrentCoordinate do
     begin
       if ATexture = nil then
-        TextOutAngle(x,y, system.round(-angle*1800/Pi), currentGlyphUtf8, AColor, taCenter)
+        TextOutAngle(x,y, system.round(-angleRad*(1800/Pi)), currentGlyphUtf8, AColor, taCenter)
       else
-        TextOutAngle(x,y, system.round(-angle*1800/Pi), currentGlyphUtf8, ATexture, taCenter);
+        TextOutAngle(x,y, system.round(-angleRad*(1800/Pi)), currentGlyphUtf8, ATexture, taCenter);
     end;
     ACursor.MoveForward(currentGlyphWidth*0.5 + ALetterSpacing);
   end;
@@ -1973,7 +2006,7 @@ var
   end;
 
 begin
-  if (ATexture = nil) and (AColor.alpha = 0) then exit;
+  if (ATexture = nil) and not FontRenderer.TextVisible(AColor) then exit;
   sUTF8 := CleanTextOutString(sUTF8);
   if sUTF8 = '' then exit;
   glyphCursor := TGlyphCursorUtf8.New(sUTF8, FontBidiMode);
@@ -4448,7 +4481,7 @@ end;
 
 { Make a copy of the transparent bitmap to a TBitmap with a background color
   instead of transparency }
-function TBGRADefaultBitmap.MakeBitmapCopy(BackgroundColor: TColor; AMasked: boolean): TBitmap;
+function TBGRADefaultBitmap.MakeBitmapCopy(BackgroundColor: TColor; {%H-}AMasked: boolean): TBitmap;
 var
   opaqueCopy: TBGRACustomBitmap;
 begin

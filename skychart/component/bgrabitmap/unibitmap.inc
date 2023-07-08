@@ -77,6 +77,8 @@ type
   end;
 
   { TCustomUniversalBitmap }
+  TResolutionUnit = (ruNone, ruPixelsPerInch, ruPixelsPerCentimeter);
+
 
   TCustomUniversalBitmap = class(TFPCustomImage, IBGRAScanner)
   private
@@ -111,6 +113,15 @@ type
     {** Specifies if linear antialiasing must be used when drawing
         antialiased shapes }
     FAntialiasingDrawMode: TDrawMode;
+
+    //Resolution
+    FResolutionUnit: TResolutionUnit;
+    FResolutionX,
+    FResolutionY: Single;
+
+    procedure SetResolutionUnit(AResolutionUnit: TResolutionUnit);
+    function GetResolutionWidth: Single; virtual;
+    function GetResolutionHeight: Single; virtual;
 
     procedure Init; virtual;
     procedure ReallocData; virtual;
@@ -511,6 +522,12 @@ type
     {** Current reference white used for color conversion }
     property ReferenceWhite: PXYZReferenceWhite read FReferenceWhite write FReferenceWhite;
 
+    //Resolution
+    property ResolutionUnit: TResolutionUnit read FResolutionUnit write SetResolutionUnit;
+    property ResolutionX: Single read FResolutionX write FResolutionX;
+    property ResolutionY: Single read FResolutionY write FResolutionY;
+    property ResolutionWidth: Single read GetResolutionWidth;
+    property ResolutionHeight: Single read GetResolutionHeight;
 
     {==== Pen style ====}
   protected
@@ -2104,6 +2121,48 @@ begin
   FLineOrder:= AValue;
 end;
 
+procedure TCustomUniversalBitmap.SetResolutionUnit(AResolutionUnit: TResolutionUnit);
+begin
+  if (AResolutionUnit<>FResolutionUnit) then
+  begin
+    Case AResolutionUnit of
+    ruPixelsPerInch : if (FResolutionUnit=ruPixelsPerCentimeter) then //Old Resolution is in Cm
+             begin
+               FResolutionX :=FResolutionX*2.54;
+               FResolutionY :=FResolutionY*2.54;
+             end;
+    ruPixelsPerCentimeter: if (FResolutionUnit=ruPixelsPerInch) then //Old Resolution is in Inch
+                  begin
+                    FResolutionX :=FResolutionX/2.54;
+                    FResolutionY :=FResolutionY/2.54;
+                  end;
+    end;
+    FResolutionUnit :=AResolutionUnit;
+  end;
+end;
+
+function TCustomUniversalBitmap.GetResolutionWidth: Single;
+begin
+  if (FResolutionUnit=ruNone)
+  then Result :=FWidth
+  else begin
+         Result :=0;
+         if (FResolutionX<>0)
+         then Result :=FWidth/FResolutionX;
+       end;
+end;
+
+function TCustomUniversalBitmap.GetResolutionHeight: Single;
+begin
+  if (FResolutionUnit=ruNone)
+  then Result :=FHeight
+  else begin
+         Result :=0;
+         if (FResolutionY<>0)
+         then Result :=FHeight/FResolutionY;
+       end;
+end;
+
 procedure TCustomUniversalBitmap.Init;
 begin
   FRefCount := 1;
@@ -2237,7 +2296,7 @@ begin
   ct := Colorspace.GetColorTransparency(AColor);
   if (ADrawMode in[dmLinearBlend,dmDrawWithTransparency]) and
    (ct = ctSemiTransparent) then
-     raise exception.Create('Semi-tranparent drawing not handled by default brush')
+     raise exception.Create('Semi-transparent drawing not handled by default brush')
   else if ADrawMode = dmXor then
      raise exception.Create('Xor mode not handled by default brush');
 
@@ -2273,7 +2332,7 @@ procedure TCustomUniversalBitmap.ReallocData;
 begin
   ReAllocMem(FDataByte, FHeight * FRowSize);
   if (FNbPixels > 0) and (FDataByte = nil) then
-    raise EOutOfMemory.Create('TUniversalBitmap: Not enough memory');
+    SysUtils.OutOfMemoryError;
   InvalidateBitmap;
   FScanPtr:= nil;
 end;
@@ -2393,6 +2452,9 @@ var pdest: PByte;
 begin
   if Source is TCustomUniversalBitmap then
   begin
+    ResolutionUnit :=TCustomUniversalBitmap(Source).ResolutionUnit;
+    ResolutionX :=TCustomUniversalBitmap(Source).ResolutionX;
+    ResolutionY :=TCustomUniversalBitmap(Source).ResolutionY;
     SetSize(TCustomUniversalBitmap(Source).Width, TCustomUniversalBitmap(Source).Height);
     PutImage(0, 0, TCustomUniversalBitmap(Source), dmSet);
   end else
@@ -2480,6 +2542,9 @@ begin
   ABitmap.FillMode := FillMode;
   ABitmap.ClipRect := ClipRect;
   ABitmap.ScanOffset := ScanOffset;
+  ABitmap.ResolutionUnit:= ResolutionUnit;
+  ABitmap.ResolutionX:= ResolutionX;
+  ABitmap.ResolutionY:= ResolutionY;
 end;
 
 function TCustomUniversalBitmap.GetPart(const ARect: TRect): TCustomUniversalBitmap;

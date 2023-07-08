@@ -174,17 +174,20 @@ type
   operator - (const pt1, pt2: TPointF): TPointF; inline;
   {** Returns a point with opposite values for ''x'' and ''y'' components }
   operator - (const pt2: TPointF): TPointF; inline;
+  {$if FPC_FULLVERSION < 030301}
   {** Scalar product: multiplies ''x'' and ''y'' components and returns the sum }
   operator * (const pt1, pt2: TPointF): single; inline;
+  operator ** (const pt1, pt2: TPointF): single; inline;
+  {$endif}
   {** Multiplies both ''x'' and ''y'' by ''factor''. It scales the vector represented by (''x'',''y'') }
   operator * (const pt1: TPointF; factor: single): TPointF; inline;
   {** Multiplies both ''x'' and ''y'' by ''factor''. It scales the vector represented by (''x'',''y'') }
   operator * (factor: single; const pt1: TPointF): TPointF; inline;
   {** Returns the length of the vector (''dx'',''dy'') }
-  function VectLen(dx,dy: single): single; overload;
+  function VectLen(const dx,dy: single): single; overload; inline;
   {** Returns the length of the vector represented by (''x'',''y'') }
-  function VectLen(v: TPointF): single; overload;
-  function VectDet(v1,v2: TPointF): double; inline;
+  function VectLen(const v: TPointF): single; overload;
+  function VectDet(const v1,v2: TPointF): double; inline;
 
 type
   TFaceCulling = (fcNone, fcKeepCW, fcKeepCCW);
@@ -399,6 +402,7 @@ type
       specifies that if the points are aligned, it should still be considered as convex }
   function IsConvex(const pts: array of TPointF; IgnoreAlign: boolean = true): boolean;
   function IsClockwise(const pts: array of TPointF): boolean;
+  function IsMostlyClockwise(const pts: array of TPointF): boolean;
   {** Checks if the quad formed by the 4 given points intersects itself }
   function DoesQuadIntersect(pt1,pt2,pt3,pt4: TPointF): boolean;
   {** Checks if two segment intersect }
@@ -1026,7 +1030,7 @@ begin
   if lenU = 0 then exit(0);
   u.Scale(1/lenU);
   v := BottomLeft-TopLeft;
-  lenH := PointF(-u.y,u.x)*v;
+  lenH := PointF(-u.y,u.x)**v;
   result := abs(lenU*lenH);
 end;
 
@@ -1047,6 +1051,8 @@ end;
 
 class function TAffineBox.AffineBox(ATopLeft, ATopRight, ABottomLeft: TPointF): TAffineBox;
 begin
+  if isEmptyPointF(ATopLeft) or isEmptyPointF(ATopRight) or isEmptyPointF(ABottomLeft) then
+     raise exception.Create('Unexpected empty point');
   result.TopLeft := ATopLeft;
   result.TopRight := ATopRight;
   result.BottomLeft := ABottomLeft;
@@ -1054,6 +1060,8 @@ end;
 
 class function TAffineBox.AffineBox(ARectF: TRectF): TAffineBox;
 begin
+  if isEmptyPointF(ARectF.TopLeft) or isEmptyPointF(ARectF.BottomRight) then
+     raise exception.Create('Unexpected empty point');
   result.TopLeft := ARectF.TopLeft;
   result.TopRight := PointF(ARectF.Right, ARectF.Top);
   result.BottomLeft := PointF(ARectF.Left, ARectF.Bottom);
@@ -1102,17 +1110,17 @@ begin
   perpV := PointF(v.y,-v.x);
 
   //reverse normal if not in the same direction as other side
-  if perpU*v < 0 then
+  if perpU**v < 0 then
   begin
     perpU := -perpU;
     perpV := -perpV;
   end;
 
   //determine position along normals
-  posU1 := (APoint-TopLeft)*perpU;
-  posU2 := (APoint-BottomLeft)*perpU;
-  posV1 := (APoint-TopLeft)*perpV;
-  posV2 := (APoint-TopRight)*perpV;
+  posU1 := (APoint-TopLeft)**perpU;
+  posU2 := (APoint-BottomLeft)**perpU;
+  posV1 := (APoint-TopLeft)**perpV;
+  posV2 := (APoint-TopRight)**perpV;
 
   result := (posU1 >= 0) and (posU2 < 0) and (posV1 >= 0) and (posV2 < 0);
 end;
@@ -1395,10 +1403,19 @@ begin
   result.y := pt1.y+pt2.y;
 end;
 
+{$if FPC_FULLVERSION < 030301}
+// keep alias for backward compatibility
 operator *(const pt1, pt2: TPointF): single;
 begin
   result := pt1.x*pt2.x + pt1.y*pt2.y;
 end;
+
+// new operator for scalar product
+operator **(const pt1, pt2: TPointF): single;
+begin
+  result := pt1.x*pt2.x + pt1.y*pt2.y;
+end;
+{$endif}
 
 operator *(const pt1: TPointF; factor: single): TPointF;
 begin
@@ -1499,20 +1516,20 @@ begin
   end;
 end;
 
-function VectLen(v: TPointF): single;
+function VectLen(const v: TPointF): single;
 begin
   if isEmptyPointF(v) then
     result := EmptySingle
   else
-    result := sqrt(v*v);
+    result := sqrt(sqr(v.x) + sqr(v.y));
 end;
 
-function VectDet(v1, v2: TPointF): double;
+function VectDet(const v1, v2: TPointF): double;
 begin
   result := v1.x*v2.y - v1.y*v2.x;
 end;
 
-function VectLen(dx, dy: single): single;
+function VectLen(const dx, dy: single): single;
 begin
   result := sqrt(dx*dx+dy*dy);
 end;
@@ -1556,9 +1573,9 @@ var pos, step: single;
 begin
   parallel := false;
   n := PointF(-line2.dir.y, line2.dir.x);
-  step := line1.dir*n;
+  step := line1.dir**n;
   if step = 0 then begin SetParallel; exit; end;
-  pos := (line2.origin - line1.origin)*n;
+  pos := (line2.origin - line1.origin)**n;
   result := line1.origin + line1.dir * (pos/step);
 end;
 
@@ -1647,8 +1664,8 @@ begin
     else
     begin
       //check if intersections are inside the segments
-      pos1 := (inter-seg1.origin)*seg1.dir;
-      pos2 := (inter-seg2.origin)*seg2.dir;
+      pos1 := (inter-seg1.origin)**seg1.dir;
+      pos2 := (inter-seg2.origin)**seg2.dir;
       if (pos1 >= 0) and (pos1 <= seg1len) and
          (pos2 >= 0) and (pos2 <= seg2len) then
         result := true
@@ -1672,6 +1689,17 @@ begin
     end;
   end;
   result := true;
+end;
+
+function IsMostlyClockwise(const pts: array of TPointF): boolean;
+var
+  i: Integer;
+  sum: double;
+begin
+  sum := 0;
+  for i := 0 to high(pts) do
+    sum += (pts[(i+1) mod length(pts)].x-pts[i].x)*(pts[(i+1) mod length(pts)].y+pts[i].y);
+  result := sum <= 0;
 end;
 
 { Check if a quaduadrilateral intersects itself }

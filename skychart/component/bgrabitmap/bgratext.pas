@@ -735,6 +735,10 @@ begin
     tempBmp := nil;
     try
       tempBmp := TBitmap.Create;
+      {$IFDEF BGRABITMAP_USE_MSEGUI}
+      tempBmp.Width := 1;
+      tempBmp.Height := 1;
+      {$ENDIF}
       tempBmp.Canvas.Font := Font;
       if Quality in[fqFineClearTypeBGR,fqFineClearTypeRGB,fqFineAntialiasing] then
       begin
@@ -1069,7 +1073,7 @@ var
   end;
 
 begin
-  if not SystemFontAvailable then exit;
+  if not SystemFontAvailable or ((c.alpha = 0) and (tex = nil)) then exit;
 
   if CustomAntialiasingLevel = 0 then
     CustomAntialiasingLevel:= FontAntialiasingLevel;
@@ -1174,7 +1178,7 @@ var
   tempLCL: TBitmap;
   {$ENDIF}
 begin
-  if not SystemFontAvailable then exit;
+  if not SystemFontAvailable or ((c.alpha = 0) and (tex = nil)) then exit;
 
   if CustomAntialiasingLevel = 0 then
     CustomAntialiasingLevel:= FontAntialiasingLevel;
@@ -1314,8 +1318,10 @@ begin
 end;
 
 function TBGRASystemFontRenderer.FontExists(AName: string): boolean;
+{$IFDEF LCL}
 var
   i: Integer;
+{$ENDIF}
 begin
   {$IFDEF LCL}
   for i := 0 to Screen.Fonts.Count-1 do

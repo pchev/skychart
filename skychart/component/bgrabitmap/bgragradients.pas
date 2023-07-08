@@ -223,7 +223,9 @@ begin
   else if ADir = gdHorizontal then begin
     ARect1.Right:=Round(ARect1.Right * AValue);
     ARect2.Left:=ARect1.Right;
-  end;
+  end
+  else
+    raise exception.Create('Unknown gradient direction');
   if ADirection1 = gdVertical then begin
     APoint1:=PointF(ARect1.Left,ARect1.Top);
     APoint2:=PointF(ARect1.Left,ARect1.Bottom);
@@ -231,7 +233,9 @@ begin
   else if ADirection1 = gdHorizontal then begin
     APoint1:=PointF(ARect1.Left,ARect1.Top);
     APoint2:=PointF(ARect1.Right,ARect1.Top);
-  end;
+  end
+  else
+    raise exception.Create('Unknown gradient direction');
   if ADirection2 = gdVertical then begin
     APoint3:=PointF(ARect2.Left,ARect2.Top);
     APoint4:=PointF(ARect2.Left,ARect2.Bottom);
@@ -239,7 +243,9 @@ begin
   else if ADirection2 = gdHorizontal then begin
     APoint3:=PointF(ARect2.Left,ARect2.Top);
     APoint4:=PointF(ARect2.Right,ARect2.Top);
-  end;
+  end
+  else
+    raise exception.Create('Unknown gradient direction');
 
   if AValue <> 0 then
     ABitmap.GradientFill(ARect1.Left,ARect1.Top,ARect1.Right,ARect1.Bottom,
@@ -1070,7 +1076,6 @@ function CreateCyclicPerlinNoiseMap(AWidth, AHeight: integer; HorizontalPeriod: 
   var small,cycled,resampled: TBGRABitmap;
       p: PBGRAPixel;
       i: Integer;
-      x, y: Int64;
   begin
     if (frequencyH = 0) or (frequencyV = 0) then exit;
     small := TBGRABitmap.Create(frequencyH,frequencyV);
@@ -1086,9 +1091,7 @@ function CreateCyclicPerlinNoiseMap(AWidth, AHeight: integer; HorizontalPeriod: 
     cycled := small.GetPart(rect(-2,-2,small.Width+2,small.Height+2));
     cycled.ResampleFilter := ResampleFilter;
     resampled := cycled.Resample(round((cycled.Width-1)*(dest.Width/frequencyH)),round((cycled.Height-1)*(dest.Height/frequencyV)));
-    x := round(-2*(dest.Width/frequencyH));
-    y := round(-2*(dest.Height/frequencyV));
-    dest.BlendImage(x,y,resampled,boAdditive);
+    dest.BlendImage(round(-2*(dest.Width/frequencyH)),round(-2*(dest.Height/frequencyV)),resampled,boAdditive);
     resampled.Free;
     cycled.Free;
     small.Free;
