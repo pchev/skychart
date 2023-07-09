@@ -13,9 +13,12 @@
 }
 
 {
-Temporary file to fix a bug when the default browser is Edge
+Temporary file with fix for Lazarus version < 3
+Remove when compiling with version 2 is no more necessary.
+Fix a bug when the default browser is Edge
 see: https://bugs.freepascal.org/view.php?id=35659
 }
+
 unit LazHelpHTML_fix;
 
 {$mode objfpc}{$H+}
@@ -23,11 +26,12 @@ unit LazHelpHTML_fix;
 interface
 
 uses
-  {$IFDEF Windows}Windows,ShellApi, {$IFEND}Classes, SysUtils,
+  {$IFDEF MSWindows}Windows, ShellApi,{$ENDIF} // needed for ShellExecute, not good for WinCE, issue #36558
+  Classes, SysUtils,
   // LazUtils
-  LazFileUtils, UTF8Process, LazUTF8, LazConfigStorage,
+  LazFileUtils, UTF8Process, LazStringUtils, LazConfigStorage, LazLoggerBase,
   // LCL
-  LCLProc, LCLIntf, LCLStrConsts, HelpIntfs, LazHelpIntf;
+  LCLIntf, LCLStrConsts, HelpIntfs, LazHelpIntf;
 
 type
   { THTMLHelpDatabase
@@ -212,7 +216,7 @@ begin
   end;
   FullURL:=CombineURL(URLType,URLPath,URLParams);
   {$IFNDEF DisableChecks}
-    debugln('THTMLHelpDatabase.ShowURL B URL=',URL,' URLType=',URLType,' URLPath=',URLPath,' URLParams=',URLParams);
+  debugln('THTMLHelpDatabase.ShowURL B URL=',URL,' URLType=',URLType,' URLPath=',URLPath,' URLParams=',URLParams);
   {$ENDIF}
 
   // call viewer
@@ -325,7 +329,7 @@ var
   URLMacroPos: LongInt;
   BrowserProcess: TProcessUTF8;
   Executable, ParamsStr: String;
-  IsShellStr:Boolean = false; // added
+  IsShellStr: Boolean = false;
 begin
   Result:=shrViewerError;
   ErrMsg:='';
@@ -357,19 +361,19 @@ begin
   //otherwise FileExistsUf8 and FileIsExecutable fail. Issue #0030502
   if (Length(Executable) > 1) and (Executable[1] = '"') and (Executable[Length(Executable)] = '"') then
     Executable := Copy(Executable, 2, Length(Executable)-2);
+  // Preparation of special handling for Microsoft Edge in Win10, issue #35659
+  IsShellStr := UpperCase(LeftStr(Executable,Pos(':',Executable)))='SHELL:';
   {$endif windows}
-  IsShellStr := UpperCase(LeftStr(Executable,Pos(':',Executable)))='SHELL:'; //Added
-  if Not IsShellStr Then  //Added
-  Begin
-  if (not FileExistsUTF8(Executable)) then begin
-    ErrMsg:=Format(hhsHelpBrowserNotFound, [Executable]);
-    exit;
+  if not IsShellStr then begin
+    if (not FileExistsUTF8(Executable)) then begin
+      ErrMsg:=Format(hhsHelpBrowserNotFound, [Executable]);
+      exit;
+    end;
+    if (not FileIsExecutable(Executable)) then begin
+      ErrMsg:=Format(hhsHelpBrowserNotExecutable, [Executable]);
+      exit;
+    end;
   end;
-  if (not FileIsExecutable(Executable)) then begin
-    ErrMsg:=Format(hhsHelpBrowserNotExecutable, [Executable]);
-    exit;
-  end;
-  End; //added
   //debugln('THTMLBrowserHelpViewer.ShowNode Node.URL=',Node.URL);
 
   // create params and replace %ParamsStr for URL
@@ -387,14 +391,15 @@ begin
   {$ENDIF}
 
   // run
-{$IFDEF Windows}  //Added
- If IsShellStr Then
-  Begin
-    If ShellExecute(0,'open',Pchar(Executable),Pchar(ParamsStr),'',SW_SHOWNORMAL)<=32 Then
-     ErrMsg := Format(hhsHelpErrorWhileExecuting,[Executable+' ',ParamsStr, LineEnding, 'ShellExecute']) else
-    Result := shrSuccess;
+  {$IFDEF MSWindows}     // not good for WinCE! Issue #36558.
+  // Special handling for Microsoft Edge in Win10, issue #35659
+  if IsShellStr then begin
+    if ShellExecute(0,'open',PChar(Executable),PChar(ParamsStr),'',SW_SHOWNORMAL)<=32 then
+      ErrMsg := Format(hhsHelpErrorWhileExecuting,[Executable+' ',ParamsStr, LineEnding, 'ShellExecute']) 
+    else
+      Result := shrSuccess;
   end else
-  {$IFEND} //Added
+  {$ENDIF}
   try
     BrowserProcess:=TProcessUTF8.Create(nil);
     try
