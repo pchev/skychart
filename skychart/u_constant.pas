@@ -585,11 +585,11 @@ const
 
 
   URL_TLE = 'https://www.space-track.org';
-  URL_QUICKSAT = 'https://www.prismnet.com/~mmccants/';
-  URL_QSMAG = 'https://www.prismnet.com/~mmccants/programs/qsmag.zip';
+  URL_QUICKSAT = 'https://www.mmccants.org';
+  URL_QSMAG = 'https://www.mmccants.org/programs/qsmag.zip';
 
-  URL_TLEINFO1 = 'http://www.tle.info/data/visual.txt';
-  URL_TLEINFO2 = 'http://www.tle.info/data/TLE.ZIP';
+  URL_TLEINFO1 = 'https://www.idb.com.au/files/TLE_DATA/visual.txt';
+  URL_TLEINFO2 = 'https://www.idb.com.au/files/TLE_DATA/TLE.ZIP';
 
   URL_CELESTRAK1 = 'https://celestrak.org/NORAD/elements/visual.txt';
 

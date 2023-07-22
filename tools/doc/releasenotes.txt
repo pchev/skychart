@@ -34,6 +34,7 @@ New functions:
 - Merge Gaia DR3 with XHIP for the default star catalog, when available all the bright stars astrometry is now from Gaia.
 
 Bug fix:
+- There was change in URL for TLE download, open Setup/Update/Artificial satellites, and click one of the two button to get the new URL
 - Fix Bayer labels
 - Update Quicksat to support the new magnitude file
 - Fix PHD2 comet tracking interface

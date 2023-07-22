@@ -34,6 +34,7 @@ Nouvelles fonctions:
 - Fusion de Gaia DR3 avec XHIP pour le catalogue d'étoiles par défaut, si disponible, toute l'astrométrie des étoiles brillantes provient désormais de Gaia.
 
 Correction d'un bug:
+- Il y a eu des modifications des URL pour le téléchargement des TLE. Ouvrez Paramètres/Mise à jours/Satellites artificiels, puis clic un des deux boutons pour obtenir les nouvelles URL
 - Mise à jour de Quicksat pour utiliser le nouveau fichier des magnitudes
 - Corrige l'interface de suivi des comètes PHD2
 - Corrige du réglage de l'heure du télescope
