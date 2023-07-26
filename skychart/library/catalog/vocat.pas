@@ -585,36 +585,109 @@ NextVOCat(ok);
 if not ok then CloseVOCat;
 end;
 
-Function StrToDeg(dms : string) : double;
-var s,p : integer;
-    t,sep : string;
+function Str3ToDE(dms : string): double;
+type tseplist=array[1..3] of string;
+var s,p,d1 : integer;
+    t : string;
+    sep: tseplist;
+const
+    sep1: tseplist = ('d','m','s');
+    sep2: tseplist = ('°','''','"');
+    sep3: tseplist = (#176,'''','"');
+    sep4: tseplist = (':',':',':');
+    sep5: tseplist = (' ',' ',' ');
 begin
 try
-dms:=trim(dms);
-if copy(dms,1,1)='-' then s:=-1 else s:=1;
-sep:=' ';
-p:=pos(sep,dms);
-if p=0 then begin
-  sep:=':';
-  p:=pos(sep,dms);
-end;
-if p=0 then
-  result:=StrToFloatDef(dms,0)
-else begin
-  t:=copy(dms,1,p-1); delete(dms,1,p);
-  result:=StrToIntDef(trim(t),0);
-  dms:=trim(dms);
-  if dms>'' then begin
-    p:=pos(sep,dms);
-    t:=copy(dms,1,p-1); delete(dms,1,p);
-    result:=result+ s * StrToIntDef(trim(t),0) / 60;
-    dms:=trim(dms);
-    if dms>'' then begin
-      t:=dms;
+  if copy(dms,1,1)='-' then s:=-1 else s:=1;
+  sep:=sep1;
+  d1:=length(sep[1])-1;
+  p:=pos(sep[1],dms);
+  if p=0 then begin
+    sep:=sep2;
+    d1:=length(sep[1])-1;
+    p:=pos(sep[1],dms);
+  end;
+  if p=0 then begin
+    sep:=sep3;
+    d1:=length(sep[1])-1;
+    p:=pos(sep[1],dms);
+  end;
+  if p=0 then begin
+    sep:=sep4;
+    d1:=length(sep[1])-1;
+    p:=pos(sep[1],dms);
+  end;
+  if p=0 then begin
+    sep:=sep5;
+    d1:=length(sep[1])-1;
+    p:=pos(sep[1],dms);
+  end;
+  if p=0 then
+    result:=StrToFloatDef(trim(dms),-9999)
+  else begin
+    t:=copy(dms,1,p-1); delete(dms,1,p+d1);
+    result:=StrToFloatDef(trim(t),0);
+    p:=pos(sep[2],dms);
+    if p=0 then
+      result:=result+ s * StrToFloatDef(trim(dms),0) / 60
+    else begin
+      t:=copy(dms,1,p-1); delete(dms,1,p);
+      result:=result+ s * StrToFloatDef(trim(t),0) / 60;
+      p:=pos(sep[3],dms);
+      if p=0 then
+        t:=dms
+      else
+        t:=copy(dms,1,p-1);
       result:=result+ s * StrToFloatDef(trim(t),0) / 3600;
     end;
   end;
+except
+ result:=0;
 end;
+end;
+
+function Str3ToAR(dms : string): double;
+type tseplist=array[1..3] of string;
+var s,p : integer;
+    t : string;
+    sep: tseplist;
+const
+    sep1: tseplist = ('h','m','s');
+    sep2: tseplist = (':',':',':');
+    sep3: tseplist = (' ',' ',' ');
+begin
+try
+  if copy(dms,1,1)='-' then s:=-1 else s:=1;
+  sep:=sep1;
+  p:=pos(sep[1],dms);
+  if p=0 then begin
+    sep:=sep2;
+    p:=pos(sep[1],dms);
+  end;
+  if p=0 then begin
+    sep:=sep3;
+    p:=pos(sep[1],dms);
+  end;
+  if p=0 then
+    result:=StrToFloatDef(trim(dms),-9999)
+  else begin
+    t:=copy(dms,1,p-1); delete(dms,1,p);
+    result:=StrToFloatDef(trim(t),0);
+    p:=pos(sep[2],dms);
+    if p=0 then
+      result:=result+ s * StrToFloatDef(trim(dms),0) / 60
+    else begin
+      t:=copy(dms,1,p-1); delete(dms,1,p);
+      result:=result+ s * StrToFloatDef(trim(t),0) / 60;
+      dms:=StringReplace(dms,' ','',[rfReplaceAll]);
+      p:=pos(sep[3],dms);
+      if p=0 then
+        t:=dms
+      else
+        t:=copy(dms,1,p-1);
+      result:=result+ s * StrToFloatDef(trim(t),0) / 3600;
+    end;
+  end;
 except
 result:=0;
 end;
@@ -622,7 +695,7 @@ end;
 
 Procedure ReadVOCat(out lin : GCatrec; var ok : boolean);
 var cell: TDOMNode;
-    buf,recno: string;
+    buf,recno,aa: string;
     i: integer;
     raok,decok: boolean;
 begin
@@ -680,16 +753,12 @@ if Assigned(VoNode) then begin
     if (not raok)and(pos('error',TFieldData(VOFields.Objects[i]).ucd)=0)and(((lin.ra=-999) and (pos('pos.eq.ra',TFieldData(VOFields.Objects[i]).ucd)=1))or
        (pos('pos.eq.ra;meta.main',TFieldData(VOFields.Objects[i]).ucd)=1))
         then begin
-           if pos('h:m:s',TFieldData(VOFields.Objects[i]).units)>0 then
-              lin.ra:=deg2rad*15*StrToDeg(buf)
-            else lin.ra:=deg2rad*StrToFloatDef(buf,0);
+          lin.ra:=deg2rad*15*Str3ToAR(buf);
     end;
     if (not decok)and(pos('error',TFieldData(VOFields.Objects[i]).ucd)=0)and(((lin.dec=-999) and (pos('pos.eq.dec',TFieldData(VOFields.Objects[i]).ucd)=1))or
        (pos('pos.eq.dec;meta.main',TFieldData(VOFields.Objects[i]).ucd)=1))
         then begin
-           if pos('d:m:s',TFieldData(VOFields.Objects[i]).units)>0 then
-              lin.dec:=deg2rad*StrToDeg(buf)
-            else lin.dec:=deg2rad*StrToFloatDef(buf,0);
+          lin.dec:=deg2rad*Str3ToDE(buf);
     end;
     if (buf<>'')and(pos('meta.record',TFieldData(VOFields.Objects[i]).ucd)=1) then recno:=buf;
     case catversion of
