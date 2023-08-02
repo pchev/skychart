@@ -49,7 +49,7 @@ else
 LCL_PLATFORM=cocoa
 endif
 else
-LCL_PLATFORM=gtk2
+LCL_PLATFORM=qt5
 endif
 endif
 endif

@@ -9,7 +9,7 @@ Packager: Patrick Chevalley
 BuildRoot: %_topdir/%{name}
 BuildArch: i386
 Provides: skychart
-Requires: libpasastro chealpix gtk2 glib2 pango mesa-libGLU libjpeg libpng sqlite xplanet espeak
+Requires: libpasastro chealpix qt5pas glib2 libjpeg libpng sqlite xplanet espeak
 AutoReqProv: no
 
 %description
