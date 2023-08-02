@@ -18,13 +18,13 @@
       <Icon Value="0"/>
     </General>
     <MacroValues Count="1">
-      <Macro6 Name="LCLWidgetType" Value="gtk2"/>
+      <Macro2 Name="LCLWidgetType" Value="qt5"/>
     </MacroValues>
-    <BuildModes Count="8">
+    <BuildModes Count="7">
       <Item1 Name="release" Default="True"/>
       <Item2 Name="debug">
         <MacroValues Count="1">
-          <Macro5 Name="LCLWidgetType" Value="gtk2"/>
+          <Macro2 Name="LCLWidgetType" Value="qt5"/>
         </MacroValues>
         <CompilerOptions>
           <Version Value="11"/>
@@ -71,7 +71,7 @@
       </Item2>
       <Item3 Name="debug heap">
         <MacroValues Count="1">
-          <Macro4 Name="LCLWidgetType" Value="gtk2"/>
+          <Macro2 Name="LCLWidgetType" Value="qt5"/>
         </MacroValues>
         <CompilerOptions>
           <Version Value="11"/>
@@ -162,47 +162,7 @@
           </Other>
         </CompilerOptions>
       </Item4>
-      <Item5 Name="linux 32">
-        <CompilerOptions>
-          <Version Value="11"/>
-          <Target>
-            <Filename Value="units/$(TargetCPU)-$(TargetOS)-$(LCLWidgetType)/skychart"/>
-          </Target>
-          <SearchPaths>
-            <UnitOutputDirectory Value="units/$(TargetCPU)-$(TargetOS)-$(LCLWidgetType)"/>
-            <SrcPath Value="$(LazarusDir)/lcl;$(LazarusDir)/lcl/interfaces/$(LCLWidgetType)"/>
-          </SearchPaths>
-          <Parsing>
-            <SyntaxOptions>
-              <CStyleOperator Value="False"/>
-            </SyntaxOptions>
-          </Parsing>
-          <CodeGeneration>
-            <TargetCPU Value="i386"/>
-            <TargetOS Value="linux"/>
-          </CodeGeneration>
-          <Linking>
-            <Debugging>
-              <GenerateDebugInfo Value="False"/>
-              <UseLineInfoUnit Value="False"/>
-              <StripSymbols Value="True"/>
-            </Debugging>
-            <LinkSmart Value="True"/>
-            <Options>
-              <Win32>
-                <GraphicApplication Value="True"/>
-              </Win32>
-            </Options>
-          </Linking>
-          <Other>
-            <Verbosity>
-              <ShowHints Value="False"/>
-            </Verbosity>
-            <CustomOptions Value="-CF64"/>
-          </Other>
-        </CompilerOptions>
-      </Item5>
-      <Item6 Name="win64">
+      <Item5 Name="win64">
         <MacroValues Count="1">
           <Macro1 Name="LCLWidgetType" Value="win32"/>
         </MacroValues>
@@ -253,10 +213,10 @@
             <CustomOptions Value="-CF64"/>
           </Other>
         </CompilerOptions>
-      </Item6>
-      <Item7 Name="Qt">
+      </Item5>
+      <Item6 Name="cocoa">
         <MacroValues Count="1">
-          <Macro2 Name="LCLWidgetType" Value="qt"/>
+          <Macro3 Name="LCLWidgetType" Value="cocoa"/>
         </MacroValues>
         <CompilerOptions>
           <Version Value="11"/>
@@ -265,7 +225,6 @@
           </Target>
           <SearchPaths>
             <UnitOutputDirectory Value="units/$(TargetCPU)-$(TargetOS)-$(LCLWidgetType)"/>
-            <SrcPath Value="$(LazarusDir)/lcl;$(LazarusDir)/lcl/interfaces/$(LCLWidgetType)"/>
           </SearchPaths>
           <Parsing>
             <SyntaxOptions>
@@ -286,6 +245,7 @@
           <Linking>
             <Debugging>
               <DebugInfoType Value="dsDwarf2"/>
+              <UseHeaptrc Value="True"/>
             </Debugging>
             <Options>
               <Win32>
@@ -297,64 +257,68 @@
             <Verbosity>
               <ShowHints Value="False"/>
             </Verbosity>
-            <CustomOptions Value="-CF64"/>
+            <CompilerMessages>
+              <IgnoredMessages idx6058="True"/>
+            </CompilerMessages>
+            <CustomOptions Value="-CF64 -dUSEHEAPTRC"/>
+          </Other>
+        </CompilerOptions>
+      </Item6>
+      <Item7 Name="gtk2">
+        <MacroValues Count="1">
+          <Macro4 Name="LCLWidgetType" Value="gtk2"/>
+        </MacroValues>
+        <CompilerOptions>
+          <Version Value="11"/>
+          <Target>
+            <Filename Value="units/$(TargetCPU)-$(TargetOS)-$(LCLWidgetType)/skychart"/>
+          </Target>
+          <SearchPaths>
+            <UnitOutputDirectory Value="units/$(TargetCPU)-$(TargetOS)-$(LCLWidgetType)"/>
+          </SearchPaths>
+          <Parsing>
+            <SyntaxOptions>
+              <CStyleOperator Value="False"/>
+            </SyntaxOptions>
+          </Parsing>
+          <CodeGeneration>
+            <Checks>
+              <IOChecks Value="True"/>
+              <RangeChecks Value="True"/>
+              <OverflowChecks Value="True"/>
+              <StackChecks Value="True"/>
+            </Checks>
+            <Optimizations>
+              <OptimizationLevel Value="0"/>
+            </Optimizations>
+          </CodeGeneration>
+          <Linking>
+            <Debugging>
+              <DebugInfoType Value="dsDwarf2"/>
+              <UseHeaptrc Value="True"/>
+            </Debugging>
+            <Options>
+              <Win32>
+                <GraphicApplication Value="True"/>
+              </Win32>
+            </Options>
+          </Linking>
+          <Other>
+            <Verbosity>
+              <ShowHints Value="False"/>
+            </Verbosity>
+            <CompilerMessages>
+              <IgnoredMessages idx6058="True"/>
+            </CompilerMessages>
+            <CustomOptions Value="-CF64 -dUSEHEAPTRC"/>
           </Other>
         </CompilerOptions>
       </Item7>
-      <Item8 Name="Qt5">
-        <MacroValues Count="1">
-          <Macro3 Name="LCLWidgetType" Value="qt5"/>
-        </MacroValues>
-        <CompilerOptions>
-          <Version Value="11"/>
-          <Target>
-            <Filename Value="units/$(TargetCPU)-$(TargetOS)-$(LCLWidgetType)/skychart"/>
-          </Target>
-          <SearchPaths>
-            <UnitOutputDirectory Value="units/$(TargetCPU)-$(TargetOS)-$(LCLWidgetType)"/>
-            <SrcPath Value="$(LazarusDir)/lcl;$(LazarusDir)/lcl/interfaces/$(LCLWidgetType)"/>
-          </SearchPaths>
-          <Parsing>
-            <SyntaxOptions>
-              <CStyleOperator Value="False"/>
-            </SyntaxOptions>
-          </Parsing>
-          <CodeGeneration>
-            <Checks>
-              <IOChecks Value="True"/>
-              <RangeChecks Value="True"/>
-              <OverflowChecks Value="True"/>
-              <StackChecks Value="True"/>
-            </Checks>
-            <Optimizations>
-              <OptimizationLevel Value="0"/>
-            </Optimizations>
-          </CodeGeneration>
-          <Linking>
-            <Debugging>
-              <DebugInfoType Value="dsDwarf2"/>
-            </Debugging>
-            <Options>
-              <Win32>
-                <GraphicApplication Value="True"/>
-              </Win32>
-            </Options>
-          </Linking>
-          <Other>
-            <Verbosity>
-              <ShowHints Value="False"/>
-            </Verbosity>
-            <CustomOptions Value="-CF64"/>
-          </Other>
-        </CompilerOptions>
-      </Item8>
-      <SharedMatrixOptions Count="6">
+      <SharedMatrixOptions Count="4">
         <Item1 ID="368139646039" Modes="windows,win64" Type="IDEMacro" MacroName="LCLWidgetType" Value="win32"/>
-        <Item2 ID="941875233765" Modes="Qt" Type="IDEMacro" MacroName="LCLWidgetType" Value="qt"/>
-        <Item3 ID="313858106277" Modes="Qt5" Type="IDEMacro" MacroName="LCLWidgetType" Value="qt5"/>
-        <Item4 ID="764061439095" Modes="debug heap" Type="IDEMacro" MacroName="LCLWidgetType" Value="gtk2"/>
-        <Item5 ID="174458976913" Modes="debug" Type="IDEMacro" MacroName="LCLWidgetType" Value="gtk2"/>
-        <Item6 ID="480998929205" Modes="release" Type="IDEMacro" MacroName="LCLWidgetType" Value="gtk2"/>
+        <Item2 ID="313858106277" Modes="debug heap,release,debug" Type="IDEMacro" MacroName="LCLWidgetType" Value="qt5"/>
+        <Item3 ID="515644909926" Modes="cocoa" Type="IDEMacro" MacroName="LCLWidgetType" Value="cocoa"/>
+        <Item4 ID="737246237302" Modes="gtk2" Type="IDEMacro" MacroName="LCLWidgetType" Value="gtk2"/>
       </SharedMatrixOptions>
     </BuildModes>
     <PublishOptions>
