@@ -3000,16 +3000,13 @@ begin
     CloseCalcephBody;
     if NeedRestart then
       ExecNoWait(ParamStr(0));
-{$ifndef lclqt}{$ifndef lclqt5}{$ifndef lclcocoa}
     if VerboseMsg then
       WriteTrace('Destroy Cursor');
     if CursorImage1 <> nil then
     begin
-      if lclver < '0.9.29' then
-        CursorImage1.FreeImage;
+      CursorImage1.ReleaseHandle;
       CursorImage1.Free;
     end;
-{$endif}{$endif}{$endif}
     ///////////////////////////////////////////////
     // removed as this crash on Windows and memleak is very small
     // if TCPDaemon<>nil then TCPDaemon.Free;
