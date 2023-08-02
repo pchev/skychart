@@ -193,6 +193,7 @@ begin
   Width := 14;
   pen.Color := clBlack;
   brush.Color := clGray;
+  Canvas.AntialiasingMode:=amOn;
 end;
 
 destructor TIpsLed.Destroy;
@@ -207,25 +208,21 @@ begin
     IPS_IDLE:
     begin
       Hint := 'Idle';
-      pen.Color := clBlack;
       brush.Color := clGray;
     end;
     IPS_OK:
     begin
       Hint := 'OK';
-      pen.Color := clWhite;
       brush.Color := clGreen;
     end;
     IPS_BUSY:
     begin
       Hint := 'Busy';
-      pen.Color := clWhite;
       brush.Color := clYellow;
     end;
     IPS_ALERT:
     begin
       Hint := 'Alert';
-      pen.Color := clWhite;
       brush.Color := clRed;
     end;
   end;
