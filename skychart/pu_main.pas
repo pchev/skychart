@@ -882,6 +882,9 @@ uses
     {$ifdef LCLgtk2}
   gtk2proc,
     {$endif}
+    {$ifdef lclqt5}
+  qtint,
+    {$endif}
     {$if (lcl_fullversion >= 1070000)}
   lclplatformdef,
     {$endif}
@@ -1400,8 +1403,8 @@ end;
 procedure Tf_main.Init;
 var
   i,p: integer;
-  firstuse,cnum: boolean;
-  cname: string;
+  firstuse,cnum,usecursor: boolean;
+  cname,buf: string;
 begin
   firstuse := False;
   try
@@ -1485,8 +1488,16 @@ begin
     ConnectDB(Config_Version);
     if VerboseMsg then
       WriteTrace('Cursor');
-    if fileexists(slash(appdir) + slash('data') + slash('Themes') +
-      slash('default') + 'retic.cur') then
+
+    {$ifdef lclqt5}
+    buf:=GetQtVersion;
+    WriteTrace('Running on Qt version: '+buf);
+    usecursor:=buf>'5.10.0';
+    {$else}
+    usecursor:=true;
+    {$endif}
+
+    if usecursor and fileexists(slash(appdir) + slash('data') + slash('Themes') + slash('default') + 'retic.cur') then
     begin
       try
         CursorImage1.LoadFromFile(SysToUTF8(slash(appdir) + slash('data') +
