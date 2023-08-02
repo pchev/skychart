@@ -1,12 +1,12 @@
 object pop_indi: Tpop_indi
   Left = 456
-  Height = 541
+  Height = 558
   Top = 130
   Width = 321
   HorzScrollBar.Visible = False
   VertScrollBar.Visible = False
   Caption = 'INDI Telescope Interface'
-  ClientHeight = 541
+  ClientHeight = 558
   ClientWidth = 321
   OnChangeBounds = FormChangeBounds
   OnCloseQuery = kill
@@ -16,7 +16,7 @@ object pop_indi: Tpop_indi
   object Panel1: TPanel
     Left = 0
     Height = 89
-    Top = 292
+    Top = 318
     Width = 321
     Align = alTop
     ClientHeight = 89
@@ -25,7 +25,7 @@ object pop_indi: Tpop_indi
     TabOrder = 1
     object LabelAlpha: TLabel
       Left = 8
-      Height = 19
+      Height = 18
       Top = 8
       Width = 20
       Caption = 'RA '
@@ -34,7 +34,7 @@ object pop_indi: Tpop_indi
     end
     object LabelDelta: TLabel
       Left = 8
-      Height = 19
+      Height = 18
       Top = 44
       Width = 25
       Caption = 'DEC'
@@ -142,7 +142,7 @@ object pop_indi: Tpop_indi
         AnchorSideLeft.Side = asrBottom
         AnchorSideTop.Control = ArrowUp
         Left = 50
-        Height = 19
+        Height = 18
         Top = 0
         Width = 10
         BorderSpacing.Left = 2
@@ -154,9 +154,9 @@ object pop_indi: Tpop_indi
         AnchorSideLeft.Side = asrBottom
         AnchorSideTop.Control = ArrowDown
         Left = 50
-        Height = 19
+        Height = 18
         Top = 40
-        Width = 7
+        Width = 8
         BorderSpacing.Left = 2
         Caption = 'S'
         ParentColor = False
@@ -166,19 +166,19 @@ object pop_indi: Tpop_indi
         AnchorSideLeft.Side = asrBottom
         AnchorSideTop.Control = ArrowRight
         Left = 68
-        Height = 19
+        Height = 18
         Top = 20
-        Width = 12
+        Width = 13
         Caption = 'W'
         ParentColor = False
       end
       object Label4: TLabel
         AnchorSideTop.Control = ArrowLeft
         AnchorSideRight.Control = ArrowLeft
-        Left = 1
-        Height = 19
+        Left = 0
+        Height = 18
         Top = 20
-        Width = 7
+        Width = 8
         Anchors = [akTop, akRight]
         Caption = 'E'
         ParentColor = False
@@ -197,8 +197,8 @@ object pop_indi: Tpop_indi
       ChildSizing.ShrinkVertical = crsScaleChilds
       ChildSizing.Layout = cclLeftToRightThenTopToBottom
       ChildSizing.ControlsPerLine = 1
-      ClientHeight = 59
-      ClientWidth = 49
+      ClientHeight = 57
+      ClientWidth = 47
       ItemIndex = 0
       Items.Strings = (
         '^'
@@ -215,7 +215,7 @@ object pop_indi: Tpop_indi
       Top = 0
       Width = 147
       Constraints.MaxHeight = 28
-      ItemHeight = 0
+      ItemHeight = 18
       ParentFont = False
       Style = csDropDownList
       TabOrder = 4
@@ -223,18 +223,18 @@ object pop_indi: Tpop_indi
   end
   object GroupBox5: TGroupBox
     Left = 0
-    Height = 111
-    Top = 143
+    Height = 129
+    Top = 151
     Width = 321
     Align = alTop
     Caption = 'Observatory '
-    ClientHeight = 91
-    ClientWidth = 319
+    ClientHeight = 99
+    ClientWidth = 317
     ParentFont = False
     TabOrder = 3
     object Label15: TLabel
       Left = 8
-      Height = 19
+      Height = 18
       Top = 8
       Width = 61
       Caption = 'Latitude : '
@@ -243,9 +243,9 @@ object pop_indi: Tpop_indi
     end
     object Label16: TLabel
       Left = 113
-      Height = 19
+      Height = 18
       Top = 8
-      Width = 70
+      Width = 69
       Caption = 'Longitude :'
       ParentColor = False
       ParentFont = False
@@ -296,9 +296,9 @@ object pop_indi: Tpop_indi
     end
     object Label1: TLabel
       Left = 211
-      Height = 19
+      Height = 18
       Top = 8
-      Width = 49
+      Width = 48
       Caption = 'Altitude'
       ParentColor = False
       ParentFont = False
@@ -317,13 +317,13 @@ object pop_indi: Tpop_indi
   end
   object GroupBox1: TGroupBox
     Left = 0
-    Height = 143
+    Height = 151
     Top = 0
     Width = 321
     Align = alTop
     Caption = 'INDI driver settings'
-    ClientHeight = 123
-    ClientWidth = 319
+    ClientHeight = 121
+    ClientWidth = 317
     ParentFont = False
     TabOrder = 0
     object IndiServerPort: TEdit
@@ -363,7 +363,7 @@ object pop_indi: Tpop_indi
       Width = 170
       AutoCompleteText = [cbactSearchAscending]
       Constraints.MaxHeight = 28
-      ItemHeight = 0
+      ItemHeight = 18
       OnSelect = MountIndiDeviceSelect
       ParentFont = False
       Style = csDropDownList
@@ -371,36 +371,36 @@ object pop_indi: Tpop_indi
     end
     object Label75: TLabel
       Left = 8
-      Height = 19
+      Height = 18
       Top = 4
-      Width = 110
+      Width = 106
       Caption = 'INDI Server Host '
       ParentColor = False
       ParentFont = False
     end
     object Label130: TLabel
       Left = 192
-      Height = 19
+      Height = 18
       Top = 4
-      Width = 104
+      Width = 99
       Caption = 'INDI server Port'
       ParentColor = False
       ParentFont = False
     end
     object Label260: TLabel
       Left = 8
-      Height = 19
+      Height = 18
       Top = 49
-      Width = 92
+      Width = 90
       Caption = 'Telescope type'
       ParentColor = False
       ParentFont = False
     end
     object AutoloadConfig: TCheckBox
       Left = 8
-      Height = 21
+      Height = 22
       Top = 97
-      Width = 139
+      Width = 144
       Caption = 'Load configuration'
       OnClick = AutoloadConfigClick
       ParentFont = False
@@ -408,9 +408,9 @@ object pop_indi: Tpop_indi
     end
     object ProtocolTrace: TCheckBox
       Left = 202
-      Height = 21
+      Height = 22
       Top = 97
-      Width = 112
+      Width = 117
       Caption = 'Protocol trace '
       OnChange = ProtocolTraceChange
       ParentFont = False
@@ -419,8 +419,8 @@ object pop_indi: Tpop_indi
   end
   object Memomsg: TMemo
     Left = 0
-    Height = 87
-    Top = 381
+    Height = 78
+    Top = 407
     Width = 321
     Align = alClient
     ParentFont = False
@@ -431,7 +431,7 @@ object pop_indi: Tpop_indi
   object Panel2: TPanel
     Left = 0
     Height = 73
-    Top = 468
+    Top = 485
     Width = 321
     Align = alBottom
     ClientHeight = 73
@@ -491,9 +491,9 @@ object pop_indi: Tpop_indi
       AnchorSideTop.Control = SpeedButton4
       AnchorSideTop.Side = asrCenter
       Left = 8
-      Height = 21
-      Top = 42
-      Width = 109
+      Height = 22
+      Top = 41
+      Width = 114
       Caption = 'Always on top'
       OnChange = CheckBoxOnTopChange
       TabOrder = 4
@@ -502,7 +502,7 @@ object pop_indi: Tpop_indi
   object Panel3: TPanel
     Left = 0
     Height = 38
-    Top = 254
+    Top = 280
     Width = 321
     Align = alTop
     ClientHeight = 38
