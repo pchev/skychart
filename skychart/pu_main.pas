@@ -1402,7 +1402,7 @@ end;
 
 procedure Tf_main.Init;
 var
-  i,p: integer;
+  i,p,i1,i2: integer;
   firstuse,cnum,usecursor: boolean;
   cname,buf: string;
 begin
@@ -1492,7 +1492,12 @@ begin
     {$ifdef lclqt5}
     buf:=GetQtVersion;
     WriteTrace('Running on Qt version: '+buf);
-    usecursor:=buf>'5.10.0';
+    i:=pos('.',buf);               // do not use QtVersionMinor because of bug in qtint
+    if not TryStrToInt(copy(buf,1,i-1),i1) then i1:=5;
+    Delete(buf,1,i);
+    i:=pos('.',buf);
+    if not TryStrToInt(copy(buf,1,i-1),i2) then i2:=0;
+    usecursor:=(i1>=5)and(i2>=12); // cursor crash with old version, work with version in focal
     {$else}
     usecursor:=true;
     {$endif}
