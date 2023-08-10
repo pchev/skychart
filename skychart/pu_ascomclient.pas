@@ -1199,7 +1199,7 @@ begin
   FConnected := ScopeConnectedReal;
   if not FConnected then begin
     ScopeDisconnect(ok,false);
-    ShowMessage('Telescope disconnected on it''s own!');
+    ShowMessage('Telescope disconnected on its own!');
     exit;
   end;
   try
@@ -1208,7 +1208,7 @@ begin
       CoordLock := True;
       timer1.Enabled := False;
       ShowCoordinates;
-      if not FConnected then raise Exception.Create('Telescope disconnected on it''s own!');
+      if not FConnected then raise Exception.Create('Telescope disconnected on its own!');
       FSlewing:=GetSlewing;
       UpdTrackingButton;
       UpdParkButton;
