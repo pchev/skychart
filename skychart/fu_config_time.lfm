@@ -35,66 +35,70 @@ object f_config_time: Tf_config_time
       object Page1: TTabSheet
         Caption = 'Time'
         ClientHeight = 532
-        ClientWidth = 495
+        ClientWidth = 501
         ParentFont = False
         object Panel8: TPanel
           Left = 0
           Height = 204
           Top = 328
-          Width = 495
+          Width = 501
           Align = alClient
           ClientHeight = 204
-          ClientWidth = 495
+          ClientWidth = 501
           ParentFont = False
           TabOrder = 1
           Visible = False
           object Label135: TLabel
             Left = 20
-            Height = 19
+            Height = 18
             Top = 67
-            Width = 55
+            Width = 56
             Caption = 'TT - UT  : '
+            ParentColor = False
             ParentFont = False
           end
           object Tdt_Ut: TLabel
             AnchorSideLeft.Control = Label135
             AnchorSideLeft.Side = asrBottom
             AnchorSideTop.Control = Label135
-            Left = 82
-            Height = 19
+            Left = 83
+            Height = 18
             Top = 67
-            Width = 32
+            Width = 30
             BorderSpacing.Left = 7
             Caption = '0000'
+            ParentColor = False
             ParentFont = False
           end
           object Label136: TLabel
             AnchorSideLeft.Control = Tdt_Ut
             AnchorSideLeft.Side = asrBottom
             AnchorSideTop.Control = Label135
-            Left = 122
-            Height = 19
+            Left = 121
+            Height = 18
             Top = 67
             Width = 51
             BorderSpacing.Left = 8
             Caption = 'Seconds'
+            ParentColor = False
             ParentFont = False
           end
           object Label150: TLabel
             Left = 20
-            Height = 19
+            Height = 18
             Top = 49
-            Width = 342
+            Width = 339
             Caption = 'Difference between Terrestrial Time and Universal Time'
+            ParentColor = False
             ParentFont = False
           end
           object CheckBox4: TCheckBox
             AnchorSideTop.Control = dt_ut
             AnchorSideTop.Side = asrCenter
             Left = 18
-            Height = 21
-            Top = 108
-            Width = 176
+            Height = 22
+            Top = 107
+            Width = 178
             Caption = 'Use another TT-UT value'
             OnClick = CheckBox4Click
             ParentFont = False
@@ -104,10 +108,11 @@ object f_config_time: Tf_config_time
             AnchorSideTop.Control = TZComboBox
             AnchorSideTop.Side = asrCenter
             Left = 20
-            Height = 19
+            Height = 18
             Top = 13
             Width = 63
             Caption = 'Time zone'
+            ParentColor = False
             ParentFont = False
           end
           object TZComboBox: TComboBox
@@ -116,7 +121,7 @@ object f_config_time: Tf_config_time
             Top = 8
             Width = 286
             Constraints.MaxHeight = 28
-            ItemHeight = 0
+            ItemHeight = 18
             OnChange = TZComboBoxChange
             ParentFont = False
             Style = csDropDownList
@@ -142,10 +147,11 @@ object f_config_time: Tf_config_time
             AnchorSideTop.Control = GregY
             AnchorSideTop.Side = asrCenter
             Left = 20
-            Height = 19
+            Height = 18
             Top = 141
-            Width = 182
+            Width = 181
             Caption = 'Gregorian calendar start date'
+            ParentColor = False
             ParentFont = False
           end
           object GregY: TLongEdit
@@ -212,98 +218,108 @@ object f_config_time: Tf_config_time
           Left = 0
           Height = 238
           Top = 90
-          Width = 495
+          Width = 501
           Align = alTop
           ClientHeight = 238
-          ClientWidth = 495
+          ClientWidth = 501
           ParentFont = False
           TabOrder = 0
           object Label137: TLabel
             AnchorSideTop.Control = t_hourEdit
             AnchorSideTop.Side = asrCenter
             Left = 18
-            Height = 19
+            Height = 18
             Top = 76
-            Width = 30
+            Width = 31
             Caption = 'Time'
+            ParentColor = False
             ParentFont = False
           end
           object Label139: TLabel
             Left = 138
-            Height = 19
+            Height = 18
             Top = 51
             Width = 12
             Caption = 'M'
+            ParentColor = False
             ParentFont = False
           end
           object Label141: TLabel
             Left = 207
-            Height = 19
+            Height = 18
             Top = 51
-            Width = 7
+            Width = 8
             Caption = 'S'
+            ParentColor = False
             ParentFont = False
           end
           object Label138: TLabel
             Left = 67
-            Height = 19
+            Height = 18
             Top = 51
             Width = 10
             Caption = 'H'
+            ParentColor = False
             ParentFont = False
           end
           object Label143: TLabel
             Left = 67
-            Height = 19
+            Height = 18
             Top = 0
-            Width = 8
+            Width = 9
             Caption = 'Y'
+            ParentColor = False
             ParentFont = False
           end
           object Label144: TLabel
             Left = 138
-            Height = 19
+            Height = 18
             Top = 0
             Width = 12
             Caption = 'M'
+            ParentColor = False
             ParentFont = False
           end
           object Label145: TLabel
             Left = 208
-            Height = 19
+            Height = 18
             Top = 0
             Width = 10
             Caption = 'D'
+            ParentColor = False
             ParentFont = False
           end
           object Label140: TLabel
             AnchorSideTop.Control = d_yearEdit
             AnchorSideTop.Side = asrCenter
             Left = 18
-            Height = 19
+            Height = 18
             Top = 25
-            Width = 30
+            Width = 29
             Caption = 'Date'
+            ParentColor = False
             ParentFont = False
           end
           object Label1: TLabel
             AnchorSideTop.Control = JDEdit
             AnchorSideTop.Side = asrCenter
             Left = 18
-            Height = 19
+            Height = 18
             Top = 111
-            Width = 18
+            Width = 17
             Caption = 'JD:'
+            ParentColor = False
             ParentFont = False
           end
           object tzLabel: TLabel
             AnchorSideTop.Control = t_hourEdit
             AnchorSideTop.Side = asrCenter
             Left = 280
-            Height = 19
+            Height = 18
             Top = 76
             Width = 44
             Caption = 'tzLabel'
+            ParentColor = False
             ParentFont = False
           end
           object ADBC: TRadioGroup
@@ -322,8 +338,8 @@ object f_config_time: Tf_config_time
             ChildSizing.ShrinkVertical = crsScaleChilds
             ChildSizing.Layout = cclLeftToRightThenTopToBottom
             ChildSizing.ControlsPerLine = 2
-            ClientHeight = 37
-            ClientWidth = 136
+            ClientHeight = 35
+            ClientWidth = 134
             Columns = 2
             Items.Strings = (
               'AD'
@@ -603,18 +619,20 @@ object f_config_time: Tf_config_time
             AnchorSideTop.Control = JDEdit
             AnchorSideTop.Side = asrCenter
             Left = 248
-            Height = 19
+            Height = 18
             Top = 111
             Width = 50
             Caption = 'UTLabel'
+            ParentColor = False
             ParentFont = False
           end
           object dterr: TLabel
             Left = 18
-            Height = 19
+            Height = 18
             Top = 135
-            Width = 33
+            Width = 32
             Caption = 'dterr'
+            ParentColor = False
             ParentFont = False
           end
           object JDEdit: TFloatSpinEdit
@@ -646,16 +664,16 @@ object f_config_time: Tf_config_time
           Left = 0
           Height = 90
           Top = 0
-          Width = 495
+          Width = 501
           Align = alTop
           ClientHeight = 90
-          ClientWidth = 495
+          ClientWidth = 501
           TabOrder = 2
           object CheckBox1: TCheckBox
             Left = 18
-            Height = 21
+            Height = 22
             Top = 24
-            Width = 126
+            Width = 129
             Caption = 'Use system time'
             OnClick = CheckBox1Click
             ParentFont = False
@@ -663,9 +681,9 @@ object f_config_time: Tf_config_time
           end
           object CheckBox2: TCheckBox
             Left = 18
-            Height = 21
+            Height = 22
             Top = 57
-            Width = 144
+            Width = 145
             Caption = 'Auto-refresh every '
             OnClick = CheckBox2Click
             ParentFont = False
@@ -677,7 +695,7 @@ object f_config_time: Tf_config_time
             Left = 210
             Height = 28
             Hint = '10..60'
-            Top = 53
+            Top = 54
             Width = 41
             Constraints.MaxHeight = 28
             ParentFont = False
@@ -693,10 +711,11 @@ object f_config_time: Tf_config_time
             AnchorSideTop.Control = CheckBox2
             AnchorSideTop.Side = asrCenter
             Left = 269
-            Height = 19
-            Top = 58
+            Height = 18
+            Top = 59
             Width = 51
             Caption = 'Seconds'
+            ParentColor = False
             ParentFont = False
           end
         end
@@ -704,13 +723,13 @@ object f_config_time: Tf_config_time
       object Page2: TTabSheet
         Caption = 'Simulation'
         ClientHeight = 532
-        ClientWidth = 495
+        ClientWidth = 501
         ParentFont = False
         object RadioGroup1: TRadioGroup
           Left = 0
           Height = 85
           Top = 322
-          Width = 495
+          Width = 501
           Align = alTop
           AutoFill = True
           Caption = 'Show Labels'
@@ -722,8 +741,8 @@ object f_config_time: Tf_config_time
           ChildSizing.ShrinkVertical = crsScaleChilds
           ChildSizing.Layout = cclLeftToRightThenTopToBottom
           ChildSizing.ControlsPerLine = 3
-          ClientHeight = 65
-          ClientWidth = 493
+          ClientHeight = 55
+          ClientWidth = 497
           Columns = 3
           Items.Strings = (
             'None'
@@ -736,11 +755,11 @@ object f_config_time: Tf_config_time
           ParentFont = False
           TabOrder = 0
           object LongEdit1: TLongEdit
-            Left = 333
-            Height = 28
+            Left = 334
+            Height = 24
             Hint = '2..500'
-            Top = 29
-            Width = 154
+            Top = 25
+            Width = 157
             Constraints.MaxHeight = 28
             ParentFont = False
             ParentShowHint = False
@@ -756,7 +775,7 @@ object f_config_time: Tf_config_time
           Left = 0
           Height = 57
           Top = 407
-          Width = 495
+          Width = 501
           Align = alTop
           AutoFill = True
           Caption = 'Label Text'
@@ -768,8 +787,8 @@ object f_config_time: Tf_config_time
           ChildSizing.ShrinkVertical = crsScaleChilds
           ChildSizing.Layout = cclLeftToRightThenTopToBottom
           ChildSizing.ControlsPerLine = 3
-          ClientHeight = 37
-          ClientWidth = 493
+          ClientHeight = 57
+          ClientWidth = 501
           Columns = 3
           Items.Strings = (
             'Object Name'
@@ -787,7 +806,7 @@ object f_config_time: Tf_config_time
           Left = 0
           Height = 56
           Top = 464
-          Width = 495
+          Width = 501
           Align = alTop
           AutoFill = True
           Caption = 'Date Format'
@@ -799,8 +818,8 @@ object f_config_time: Tf_config_time
           ChildSizing.ShrinkVertical = crsScaleChilds
           ChildSizing.Layout = cclLeftToRightThenTopToBottom
           ChildSizing.ControlsPerLine = 6
-          ClientHeight = 36
-          ClientWidth = 493
+          ClientHeight = 56
+          ClientWidth = 501
           Columns = 6
           Items.Strings = (
             'Year'
@@ -821,10 +840,10 @@ object f_config_time: Tf_config_time
           Left = 0
           Height = 288
           Top = 0
-          Width = 495
+          Width = 501
           Align = alTop
           ClientHeight = 288
-          ClientWidth = 495
+          ClientWidth = 501
           TabOrder = 3
           object stepreset: TSpeedButton
             Left = 377
@@ -839,27 +858,30 @@ object f_config_time: Tf_config_time
           end
           object Label178: TLabel
             Left = 316
-            Height = 19
+            Height = 18
             Top = 23
-            Width = 41
+            Width = 40
             Caption = 'every  '
+            ParentColor = False
             ParentFont = False
           end
           object Label179: TLabel
             Left = 176
-            Height = 19
+            Height = 18
             Top = 23
-            Width = 104
+            Width = 103
             Caption = 'Number of steps'
+            ParentColor = False
             ParentFont = False
           end
           object Label56: TLabel
             Left = 1
-            Height = 19
+            Height = 18
             Top = 1
-            Width = 493
+            Width = 499
             Align = alTop
             Caption = 'Plot orbital motion of solar system objects'
+            ParentColor = False
             ParentFont = False
           end
           object stepunit: TRadioGroup
@@ -877,8 +899,8 @@ object f_config_time: Tf_config_time
             ChildSizing.ShrinkVertical = crsScaleChilds
             ChildSizing.Layout = cclLeftToRightThenTopToBottom
             ChildSizing.ControlsPerLine = 4
-            ClientHeight = 36
-            ClientWidth = 302
+            ClientHeight = 26
+            ClientWidth = 300
             Columns = 4
             Items.Strings = (
               'Days'
@@ -910,11 +932,10 @@ object f_config_time: Tf_config_time
               'Comets'
               'SPK'
             )
-            ItemHeight = 0
+            ItemHeight = 26
             OnItemClick = SimObjItemClick
             ParentFont = False
             TabOrder = 1
-            TopIndex = -1
             Data = {
               0D00000000000000000000000000000000
             }
@@ -1031,7 +1052,7 @@ object f_config_time: Tf_config_time
               Top = 4
               Width = 144
               Constraints.MaxHeight = 28
-              ItemHeight = 0
+              ItemHeight = 18
               OnChange = AsteroidListChange
               ParentFont = False
               Style = csDropDownList
@@ -1076,7 +1097,7 @@ object f_config_time: Tf_config_time
               Top = 4
               Width = 144
               Constraints.MaxHeight = 28
-              ItemHeight = 0
+              ItemHeight = 18
               OnChange = CometListChange
               ParentFont = False
               Style = csDropDownList
@@ -1101,7 +1122,7 @@ object f_config_time: Tf_config_time
               Top = 4
               Width = 224
               Constraints.MaxHeight = 28
-              ItemHeight = 0
+              ItemHeight = 18
               OnChange = SPKboxChange
               ParentFont = False
               Style = csDropDownList
@@ -1109,10 +1130,11 @@ object f_config_time: Tf_config_time
             end
             object Label13: TLabel
               Left = 6
-              Height = 19
+              Height = 18
               Top = 8
-              Width = 23
+              Width = 25
               Caption = 'SPK'
+              ParentColor = False
             end
           end
         end
@@ -1120,16 +1142,16 @@ object f_config_time: Tf_config_time
           Left = 0
           Height = 34
           Top = 288
-          Width = 495
+          Width = 501
           Align = alTop
           ClientHeight = 34
-          ClientWidth = 495
+          ClientWidth = 501
           TabOrder = 4
           object stepline: TCheckBox
             Left = 8
-            Height = 21
+            Height = 22
             Top = 6
-            Width = 270
+            Width = 274
             Caption = 'Connection lines between each position '
             OnClick = steplineClick
             ParentFont = False
@@ -1137,9 +1159,9 @@ object f_config_time: Tf_config_time
           end
           object stepmark: TCheckBox
             Left = 321
-            Height = 21
+            Height = 22
             Top = 6
-            Width = 83
+            Width = 86
             Caption = 'stepmark'
             OnClick = stepmarkClick
             ParentFont = False
@@ -1150,25 +1172,26 @@ object f_config_time: Tf_config_time
       object Page3: TTabSheet
         Caption = 'Animation'
         ClientHeight = 532
-        ClientWidth = 495
+        ClientWidth = 501
         ParentFont = False
         object GroupBox1: TGroupBox
           Left = 0
           Height = 81
           Top = 0
-          Width = 495
+          Width = 501
           Align = alTop
           Caption = 'Real time options'
-          ClientHeight = 79
-          ClientWidth = 493
+          ClientHeight = 81
+          ClientWidth = 501
           ParentFont = False
           TabOrder = 0
           object Label2: TLabel
             Left = 3
-            Height = 19
+            Height = 18
             Top = 24
-            Width = 133
+            Width = 131
             Caption = 'Delay between frame'
+            ParentColor = False
             ParentFont = False
           end
           object TrackBar1: TTrackBar
@@ -1190,11 +1213,11 @@ object f_config_time: Tf_config_time
           Left = 0
           Height = 451
           Top = 81
-          Width = 495
+          Width = 501
           Align = alClient
           Caption = 'Recording options'
-          ClientHeight = 449
-          ClientWidth = 493
+          ClientHeight = 451
+          ClientWidth = 501
           ParentFont = False
           TabOrder = 1
           object DirectoryEdit1: TDirectoryEdit
@@ -1213,18 +1236,20 @@ object f_config_time: Tf_config_time
           end
           object Label3: TLabel
             Left = 3
-            Height = 19
+            Height = 18
             Top = 66
-            Width = 121
+            Width = 120
             Caption = 'Recording directory'
+            ParentColor = False
             ParentFont = False
           end
           object Label4: TLabel
             Left = 3
-            Height = 19
+            Height = 18
             Top = 112
             Width = 101
             Caption = 'Recording prefix'
+            ParentColor = False
             ParentFont = False
           end
           object Edit1: TEdit
@@ -1239,20 +1264,22 @@ object f_config_time: Tf_config_time
           end
           object Label5: TLabel
             Left = 3
-            Height = 19
+            Height = 18
             Top = 187
-            Width = 117
+            Width = 116
             Caption = 'Frames per second'
             Constraints.MaxHeight = 28
+            ParentColor = False
             ParentFont = False
           end
           object Label6: TLabel
             Left = 3
-            Height = 19
+            Height = 18
             Top = 260
-            Width = 159
+            Width = 160
             Caption = 'Additional ffmpeg options'
             Constraints.MaxHeight = 28
+            ParentColor = False
             ParentFont = False
           end
           object Edit2: TEdit
@@ -1267,11 +1294,12 @@ object f_config_time: Tf_config_time
           end
           object Label7: TLabel
             Left = 3
-            Height = 19
+            Height = 18
             Top = 223
-            Width = 71
+            Width = 72
             Caption = 'Frames size'
             Constraints.MaxHeight = 28
+            ParentColor = False
             ParentFont = False
           end
           object Edit3: TEdit
@@ -1286,11 +1314,12 @@ object f_config_time: Tf_config_time
           end
           object Label8: TLabel
             Left = 368
-            Height = 19
+            Height = 18
             Top = 223
             Width = 7
             Caption = 'x'
             Constraints.MaxHeight = 28
+            ParentColor = False
             ParentFont = False
           end
           object Edit4: TEdit
@@ -1309,7 +1338,7 @@ object f_config_time: Tf_config_time
             Top = 218
             Width = 114
             Constraints.MaxHeight = 28
-            ItemHeight = 0
+            ItemHeight = 24
             Items.Strings = (
               'No change'
               'VGA'
@@ -1337,11 +1366,12 @@ object f_config_time: Tf_config_time
           end
           object Label9: TLabel
             Left = 3
-            Height = 19
+            Height = 18
             Top = 145
             Width = 124
             Caption = 'Recording extention'
             Constraints.MaxHeight = 28
+            ParentColor = False
             ParentFont = False
           end
           object Edit5: TEdit
@@ -1367,11 +1397,12 @@ object f_config_time: Tf_config_time
           end
           object Label10: TLabel
             Left = 3
-            Height = 19
+            Height = 18
             Top = 299
-            Width = 132
+            Width = 133
             Caption = 'ffmpeg program path'
             Constraints.MaxHeight = 28
+            ParentColor = False
             ParentFont = False
           end
           object FileNameEdit1: TFileNameEdit

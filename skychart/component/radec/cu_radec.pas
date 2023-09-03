@@ -387,7 +387,8 @@ begin
   LabelSec := TLabel.Create(self);
   ArrowDeg := TMouseUpDown.Create(self);
   ArrowDeg.Constraints.MaxHeight := Constraints.MaxHeight-2;
-  ArrowDeg.Max := 360;
+  ArrowDeg.Max := 23;
+  ArrowDeg.Min := 0;
   ArrowMin := TMouseUpDown.Create(self);
   ArrowMin.Constraints.MaxHeight := Constraints.MaxHeight-2;
   ArrowSec := TMouseUpDown.Create(self);
@@ -461,10 +462,26 @@ procedure TRaDec.SetKind(Val: Tradeckind);
 begin
   Fkind := Val;
   case Fkind of
-    RA: LabelDeg.Caption := 'h';
-    DE: LabelDeg.Caption := 'd';
-    Az: LabelDeg.Caption := 'd';
-    Alt: LabelDeg.Caption := 'd';
+    RA: begin
+        LabelDeg.Caption := 'h';
+        ArrowDeg.Max := 23;
+        ArrowDeg.Min := 0;
+        end;
+    DE: begin
+        LabelDeg.Caption := 'd';
+        ArrowDeg.Max := 89;
+        ArrowDeg.Min := -89;
+        end;
+    Az: begin
+        LabelDeg.Caption := 'd';
+        ArrowDeg.Max := 359;
+        ArrowDeg.Min := 0;
+        end;
+    Alt: begin
+        LabelDeg.Caption := 'd';
+        ArrowDeg.Max := 89;
+        ArrowDeg.Min := -89;
+        end;
   end;
   Invalidate;
 end;

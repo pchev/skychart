@@ -1,10 +1,10 @@
 object f_mosaic: Tf_mosaic
   Left = 1564
-  Height = 461
+  Height = 482
   Top = 30
   Width = 364
   Caption = 'f_mosaic'
-  ClientHeight = 461
+  ClientHeight = 482
   ClientWidth = 364
   Constraints.MinHeight = 344
   Constraints.MinWidth = 364
@@ -19,8 +19,8 @@ object f_mosaic: Tf_mosaic
     Width = 364
     Align = alTop
     Caption = 'Mosaic center'
-    ClientHeight = 86
-    ClientWidth = 362
+    ClientHeight = 76
+    ClientWidth = 360
     ParentFont = False
     TabOrder = 0
     object Ra: TRaDec
@@ -49,16 +49,16 @@ object f_mosaic: Tf_mosaic
     end
     object Label1: TLabel
       Left = 8
-      Height = 19
+      Height = 18
       Top = 10
-      Width = 17
+      Width = 18
       Caption = 'RA'
       ParentColor = False
       ParentFont = False
     end
     object Label2: TLabel
       Left = 8
-      Height = 19
+      Height = 18
       Top = 46
       Width = 25
       Caption = 'DEC'
@@ -108,27 +108,27 @@ object f_mosaic: Tf_mosaic
   end
   object GroupBox2: TGroupBox
     Left = 0
-    Height = 241
-    Top = 163
+    Height = 249
+    Top = 176
     Width = 364
     Align = alClient
     Caption = 'Mosaic'
-    ClientHeight = 221
-    ClientWidth = 362
+    ClientHeight = 219
+    ClientWidth = 360
     ParentFont = False
     TabOrder = 1
     object Label3: TLabel
       Left = 8
-      Height = 19
+      Height = 18
       Top = 107
-      Width = 68
+      Width = 70
       Caption = 'Mosaic size'
       ParentColor = False
       ParentFont = False
     end
     object Label4: TLabel
       Left = 246
-      Height = 19
+      Height = 18
       Top = 107
       Width = 8
       Caption = 'X'
@@ -137,10 +137,10 @@ object f_mosaic: Tf_mosaic
     end
     object FrameList: TComboBox
       Left = 8
-      Height = 35
+      Height = 32
       Top = 62
       Width = 341
-      ItemHeight = 0
+      ItemHeight = 18
       OnChange = FrameListChange
       ParentFont = False
       Style = csDropDownList
@@ -148,34 +148,34 @@ object f_mosaic: Tf_mosaic
     end
     object Label5: TLabel
       Left = 8
-      Height = 19
+      Height = 18
       Top = 40
-      Width = 138
+      Width = 137
       Caption = 'Finder rectangle (CCD)'
       ParentColor = False
       ParentFont = False
     end
     object Label6: TLabel
       Left = 8
-      Height = 19
+      Height = 18
       Top = 148
-      Width = 128
+      Width = 127
       Caption = 'Horizontal overlap %'
       ParentColor = False
       ParentFont = False
     end
     object Label7: TLabel
       Left = 8
-      Height = 19
+      Height = 18
       Top = 186
-      Width = 110
+      Width = 109
       Caption = 'Vertical overlap %'
       ParentColor = False
       ParentFont = False
     end
     object Label8: TLabel
       Left = 8
-      Height = 19
+      Height = 18
       Top = 6
       Width = 37
       Caption = 'Name'
@@ -184,7 +184,7 @@ object f_mosaic: Tf_mosaic
     end
     object MosaicName: TEdit
       Left = 60
-      Height = 31
+      Height = 32
       Top = 0
       Width = 254
       ParentFont = False
@@ -193,7 +193,7 @@ object f_mosaic: Tf_mosaic
     end
     object SizeX: TSpinEdit
       Left = 186
-      Height = 29
+      Height = 32
       Top = 102
       Width = 51
       MaxValue = 10
@@ -205,7 +205,7 @@ object f_mosaic: Tf_mosaic
     end
     object SizeY: TSpinEdit
       Left = 263
-      Height = 29
+      Height = 32
       Top = 102
       Width = 51
       MaxValue = 10
@@ -217,7 +217,7 @@ object f_mosaic: Tf_mosaic
     end
     object Hoverlap: TSpinEdit
       Left = 186
-      Height = 29
+      Height = 32
       Top = 142
       Width = 51
       MaxValue = 50
@@ -228,7 +228,7 @@ object f_mosaic: Tf_mosaic
     end
     object Voverlap: TSpinEdit
       Left = 186
-      Height = 29
+      Height = 32
       Top = 181
       Width = 51
       MaxValue = 50
@@ -241,7 +241,7 @@ object f_mosaic: Tf_mosaic
   object Panel1: TPanel
     Left = 0
     Height = 57
-    Top = 404
+    Top = 425
     Width = 364
     Align = alBottom
     AutoSize = True
@@ -294,20 +294,20 @@ object f_mosaic: Tf_mosaic
   end
   object GroupBox3: TGroupBox
     Left = 0
-    Height = 57
+    Height = 70
     Top = 106
     Width = 364
     Align = alTop
     Caption = 'Rotation'
-    ClientHeight = 37
-    ClientWidth = 362
+    ClientHeight = 40
+    ClientWidth = 360
     ParentFont = False
     TabOrder = 3
     object Label9: TLabel
       Left = 8
-      Height = 19
+      Height = 18
       Top = 7
-      Width = 102
+      Width = 103
       Caption = 'Camera rotation '
       ParentColor = False
       ParentFont = False
@@ -334,7 +334,7 @@ object f_mosaic: Tf_mosaic
     end
     object Rotation: TFloatSpinEdit
       Left = 172
-      Height = 29
+      Height = 32
       Top = 2
       Width = 65
       MaxValue = 360
