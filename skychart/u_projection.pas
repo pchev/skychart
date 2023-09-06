@@ -2118,9 +2118,9 @@ begin
     hh := double(arccos(hh));
     st0 := rad2deg * sidtim(jd, 0.0, ObsLongitude) / 15;
     st := rad2deg * (ar - hh) / 15;
-    hp1 := rmod((st - st0) / 1.002737908 + 24, 24);
+    hp1 := rmod((st - st0) + 24, 24) / 1.002737908;
     st := rad2deg * (ar + hh) / 15;
-    hp2 := rmod((st - st0) / 1.002737908 + 24, 24);
+    hp2 := rmod((st - st0) + 24, 24) / 1.002737908;
   end
   else
   begin
