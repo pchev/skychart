@@ -5632,6 +5632,7 @@ begin
       exit;
     Fpop_indi.ScopeDisconnect(ok);
     Connect1.Checked := False;
+    ISleep(500);
     if ok then
       Result := msgOK;
   end;

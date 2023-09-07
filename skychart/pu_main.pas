@@ -3153,6 +3153,7 @@ begin
             with (MultiFrame1.Childs[i].DockedObject as Tf_chart) do
             begin
               locked := True;
+              cmd_DisconnectTelescope;
               TelescopeTimer.Enabled := False;
               RefreshTimer.Enabled := False;
               BlinkTimer.Enabled := False;
