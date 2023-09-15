@@ -1,0 +1,88 @@
+[Panel]
+Title=Make Horizon Profile
+HidenTimer=0
+AlwaysActive=0
+NumToolbar1=0
+NumToolbar2=0
+NumComponent=13
+component_0="Group_1;Telescope;2"
+component_1="	Label_1;Az"
+component_2="	Edit_1"
+component_3="	Label_2;Alt"
+component_4="	Edit_2"
+component_5="	Event_3;3;Telescope move;"
+component_6="	Spacer_1"
+component_7="	Button_3;Add point;0;"
+component_8="Group_2;Horizon file;1"
+component_9="	Memo_1;300"
+component_10="	Button_1;Save;0;"
+component_11="	Button_5;Load;0;"
+component_12="	Button_4;Clear;0;"
+
+[button_3]
+s="Procedure SortNumeric(Lines:TStrings);"
+"var sl: TstringList;"
+"begin"
+"  GetSl('STRL1',sl);"
+"  sl.assign(Lines);"
+"  SortNumericList(sl);"
+"  Lines.Assign(sl);"
+"  sl.Clear;"
+"end;"
+""
+"begin"
+"  Memo_1.Lines.Add(Edit_1.Text+' '+Edit_2.Text);"
+"  SortNumeric(Memo_1.Lines);"
+"end."
+
+
+[button_1]
+s="var fn: string;"
+"begin"
+"  SaveDialog(fn);"
+"  Memo_1.Lines.SaveToFile(fn);"
+"end."
+
+
+[button_5]
+s="var fn: string;"
+""
+"Procedure SortNumeric(Lines:TStrings);"
+"var sl: TstringList;"
+"begin"
+"  GetSl('STRL1',sl);"
+"  sl.assign(Lines);"
+"  SortNumericList(sl);"
+"  Lines.Assign(sl);"
+"  sl.Clear;"
+"end;"
+""
+"begin"
+"  OpenDialog(fn);"
+"  Memo_1.Lines.LoadFromFile(fn);"
+"  SortNumeric(Memo_1.Lines);"
+"end."
+
+
+[button_4]
+s="begin"
+"  Memo_1.Clear;"
+"end."
+
+
+[event_3]
+s="// Telescope move event"
+"var"
+"    ra,de,a,h: double;"
+"begin"
+" getD('TelescopeRA',ra);"
+" getD('TelescopeDE',de);"
+" Eq2Hz(ra,de,a,h);"
+" a:=a*rad2deg;"
+" h:=h*rad2deg;"
+" Edit_1.text:=FormatFloat('0.000',a);"
+" Edit_2.text:=FormatFloat('0.000',h);"
+"end."
+""
+""
+
