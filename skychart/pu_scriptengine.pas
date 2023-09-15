@@ -76,6 +76,8 @@ type
     CheckListHeightEdit: TEdit;
     Panel3: TPanel;
     Panel4: TPanel;
+    Panel5: TPanel;
+    Panel6: TPanel;
     PanelLeft: TPanel;
     PSCustomPlugin1: TPSCustomPlugin;
     PSDllPlugin1: TPSDllPlugin;
@@ -255,6 +257,7 @@ type
     procedure doStrtoFloatD(str: string; var defval: double; var val: double);
     function doStringReplace(str, s1, s2: string): string;
     function doIsNumber(str: string): boolean;
+    procedure doSortNumericList(var list: TStringList);
     function doMsgBox(const aMsg: string): boolean;
     procedure doShowMessage(const aMsg: string);
     function doGetCometList(const filter: string; maxnum: integer;
@@ -467,6 +470,29 @@ end;
 function Tf_scriptengine.doIsNumber(str: string): boolean;
 begin
   Result := IsNumber(str);
+end;
+
+function CompareListNumeric(List: TStringList; Index1, Index2: Integer): Integer;
+var n1,n2: double;
+    p: integer;
+    buf1,buf2: string;
+begin
+  buf1:=trim(List[Index1]);
+  buf2:=trim(List[Index2]);
+  p:=pos(' ',buf1);
+  if p>0 then buf1:=copy(buf1,1,p-1);
+  p:=pos(' ',buf2);
+  if p>0 then buf2:=copy(buf2,1,p-1);
+  n1:=StrToFloatDef(buf1,0);
+  n2:=StrToFloatDef(buf2,0);
+  if n1=n2 then result:=0
+  else if n1>n2 then result:=1
+  else result:=-1;
+end;
+
+procedure Tf_scriptengine.doSortNumericList(var list: TStringList);
+begin
+  list.CustomSort(@CompareListNumeric);
 end;
 
 function Tf_scriptengine.doMsgBox(const aMsg: string): boolean;
@@ -2810,6 +2836,8 @@ begin
       'Function Format(Const Fmt : String; const Args : Array of const) : String;');
     AddMethod(self, @Tf_scriptengine.doIsNumber,
       'function IsNumber(str: String): boolean;');
+    AddMethod(self, @Tf_scriptengine.doSortNumericList,
+      'procedure SortNumericList(var list: TStringList);');
     AddMethod(self, @Tf_scriptengine.doMsgBox,
       'function MsgBox(const aMsg: string):boolean;');
     AddMethod(self, @Tf_scriptengine.doShowMessage,
