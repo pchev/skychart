@@ -3307,11 +3307,20 @@ begin
   if s1 = '' then
     exit;
 
-  // search
+  // exact search
   for i:=0 to cdb.NumAsteroidElement-1 do begin
-    if pos(s1,cdb.AsteroidSearchNames[i].searchname)>0 then begin
+    if s1=cdb.AsteroidSearchNames[i].searchname then begin
       idx:=cdb.AsteroidSearchNames[i].elementidx;
       break;
+    end;
+  end;
+  if idx<0 then begin
+    // search
+    for i:=0 to cdb.NumAsteroidElement-1 do begin
+      if pos(s1,cdb.AsteroidSearchNames[i].searchname)>0 then begin
+        idx:=cdb.AsteroidSearchNames[i].elementidx;
+        break;
+      end;
     end;
   end;
 end;
