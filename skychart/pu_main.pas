@@ -4039,7 +4039,7 @@ begin
       end;
       Refresh(True, True);
       if showcom <> sc.cfgsc.ShowComet then
-        ShowError(rsErrorPleaseC2);
+        ShowError(rsWarningSomeC+crlf+rsDate+': '+jddate(sc.cfgsc.CurJDUT)+crlf+rsErrorPleaseC2);
     end;
 end;
 
