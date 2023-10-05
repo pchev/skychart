@@ -2,7 +2,7 @@
 
 # Download leap seconds file
 
-source="https://www.ietf.org/timezones/data/leap-seconds.list"
+source="ftp://hpiers.obspm.fr/iers/bul/bulc/ntp/leap-seconds.list"
 rm leap-seconds.list
 wget $source
 
@@ -35,7 +35,7 @@ done
 
 # Get next years predictions
 wget $source/deltat.preds
-tail +2 deltat.preds | while read dat del err 
+tail +2 deltat.preds | awk '{ ER = ($5 == "") ? $4 : $5 ; printf $2 " " $3 " " ER "\n"}' | while read dat del err 
 do 
  printf "%8.4f\t%8.4f\t%8.4f\n" "$dat" "$del" "$err" >> deltat.tmp
 done 
