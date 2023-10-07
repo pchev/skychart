@@ -4754,6 +4754,7 @@ begin
           if i >= 0 then
             quicksearch.Items.Delete(i);
           quicksearch.Items.Insert(0, num);
+          quicksearch.ItemIndex:=quicksearch.Items.Count-1;
           quicksearch.ItemIndex := 0;
         end;
         Result := msgOK;
@@ -10128,6 +10129,7 @@ begin
     if i >= 0 then
       quicksearch.Items.Delete(i);
     quicksearch.Items.Insert(0, Num);
+    quicksearch.ItemIndex:=quicksearch.Items.Count-1;
     quicksearch.ItemIndex := 0;
   end
   else
