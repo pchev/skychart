@@ -1,5 +1,10 @@
 #!/bin/bash
 
+# work directory
+workdir=$(mktemp -d -t)
+if [[ -z $workdir ]]; then workdir=/tmp; fi
+cd $workdir
+
 #Patrick Chevalley key used to sign the Skychart packages
 key=8B8B57C1AA716FC2
 
