@@ -754,11 +754,13 @@ const
     ('https://vizier.cds.unistra.fr/viz-bin/VizieR-S?$ID', 'Vizier'),
     ('https://ned.ipac.caltech.edu/cgi-bin/nph-objsearch?extend=no&out_csys=Equatorial&out_equinox=J2000.0&obj_sort=RA+or+Longitude&of=pre_text&zv_breaker=30000.0&list_limit=5&img_stamp=YES&objname=$ID', 'NED'),
     ('http://leda.univ-lyon1.fr/ledacat.cgi?o=$ID', 'HyperLeda'));
-  infocoord_maxurl = 3;
+  infocoord_maxurl = 4;
   infocoord_url: array [1..infocoord_maxurl, 1..2] of string = (
     ('https://simbad.cds.unistra.fr/simbad/sim-coo?Radius=5&Radius.unit=arcmin&Coord=$RA%20$DE', 'Simbad'),
     ('https://ned.ipac.caltech.edu/cgi-bin/nph-objsearch?search_type=Near+Position+Search&in_csys=Equatorial&out_csys=Equatorial&out_equinox=J2000.0&of=pre_text&zv_breaker=30000.0&list_limit=5&img_stamp=YES&in_equinox=J2000.0&radius=2.0&lon=$RA&lat=$DE', 'NED'),
-    ('http://leda.univ-lyon1.fr/fG.cgi?n=a000&c=o&ob=ra&f=5&p=J$RA%20$DE', 'HyperLeda'));
+    ('http://leda.univ-lyon1.fr/fG.cgi?n=a000&c=o&ob=ra&f=5&p=J$RA%20$DE', 'HyperLeda'),
+    ('https://sga.legacysurvey.org/?conera=$DRA&conedec=$DDE&coneradius=5#results','SGA')
+    );
 
   DefaultffmpegOptions = '-b:v 18000k -bt 10000k';
 {$ifdef linux}

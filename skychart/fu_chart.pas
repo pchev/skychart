@@ -1426,7 +1426,7 @@ procedure Tf_chart.search1Click(Sender: TObject);
 var
   ra, de, a, h, l, b, le, be: double;
   i: integer;
-  sra, sde, url: string;
+  sra, sde, dra,dde, url: string;
 begin
   i := TMenuItem(Sender).tag;
   if (i > 0) and (i <= infocoord_maxurl) then
@@ -1437,11 +1437,15 @@ begin
     precession(sc.cfgsc.JDChart, jd2000, ra, de);
     sra := trim(ARtoStr(rad2deg * ra / 15));
     sde := trim(DEToStr3(rad2deg * de));
+    dra := trim(FormatFloat(f6,rad2deg * ra));
+    dde := trim(FormatFloat(f6,rad2deg * de));
     if (Copy(sde, 1, 1) <> '-') then
       sde := '%2b' + sde;
     url := infocoord_url[i, 1];
     url := StringReplace(url, '$RA', sra, []);
     url := StringReplace(url, '$DE', sde, []);
+    url := StringReplace(url, '$DRA', dra, []);
+    url := StringReplace(url, '$DDE', dde, []);
     ExecuteFile(url);
   end;
 end;

@@ -140,7 +140,7 @@ var
   NodeA: TIpHtmlNodeA;
   src: string;
   i: integer;
-  url, sra, sde, n: string;
+  url, sra, sde, dra, dde, n: string;
 begin
   if IpHtmlPanel1.HotNode is TIpHtmlNodeA then
   begin
@@ -152,6 +152,8 @@ begin
       if i > infoname_maxurl then
       begin
         i := i - infoname_maxurl;
+        dra := trim(FormatFloat(f6,rad2deg * ra));
+        dde := trim(FormatFloat(f6,rad2deg * de));
         sra := trim(ARtoStr(rad2deg * ra / 15));
         sde := trim(DEToStr3(rad2deg * de));
         if (Copy(sde, 1, 1) <> '-') then
@@ -159,6 +161,8 @@ begin
         url := infocoord_url[i, 1];
         url := StringReplace(url, '$RA', sra, []);
         url := StringReplace(url, '$DE', sde, []);
+        url := StringReplace(url, '$DRA', dra, []);
+        url := StringReplace(url, '$DDE', dde, []);
       end
       else
       begin
