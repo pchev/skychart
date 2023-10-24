@@ -1200,6 +1200,10 @@ type
     CalGraphHeight: integer;
     // Planisphere
     PlanisphereDate, PlanisphereTime: boolean;
+    // Pole precession
+    PPdraw, PPdrawlabel: boolean;
+    PPyearstart,PPyearend,PPyearlabelstep: integer;
+
     constructor Create;
     destructor Destroy; override;
     procedure Assign(Source: Tconf_skychart);
@@ -2225,6 +2229,7 @@ begin
   CometMark := TStringList.Create;
   AsteroidMark := TStringList.Create;
   SPKlist:=TStringList.Create;
+  PPdraw:=false;
 end;
 
 destructor Tconf_skychart.Destroy;
@@ -2815,6 +2820,11 @@ begin
   lockStarMag := Source.lockStarMag;
   lockNebMag := Source.lockNebMag;
   lockNebSize := Source.lockNebSize;
+  PPdraw := Source.PPdraw;
+  PPdrawlabel := Source.PPdrawlabel;
+  PPyearstart := Source.PPyearstart;
+  PPyearend := Source.PPyearend;
+  PPyearlabelstep := Source.PPyearlabelstep;
 end;
 
 { Tconf_plot }

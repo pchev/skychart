@@ -3721,6 +3721,9 @@ object f_main: Tf_main
       object MenuMosaic: TMenuItem
         Action = Mosaic
       end
+      object MenuPrecession: TMenuItem
+        Action = PolePrecession
+      end
       object MenuTrajectory: TMenuItem
         Action = Trajectories
       end
@@ -4359,6 +4362,12 @@ object f_main: Tf_main
       Hint = 'Exit|Exit application'
       ImageIndex = 11
       OnExecute = FileExit1Execute
+    end
+    object PolePrecession: TAction
+      Category = 'Tools'
+      Caption = 'Pole precession'
+      ImageIndex = 69
+      OnExecute = PolePrecessionExecute
     end
   end
   object ActionListEdit: TActionList

@@ -416,7 +416,7 @@
         <DefaultFilename Value="component/zoomimage/zoomimage.lpk"/>
       </Item25>
     </RequiredPackages>
-    <Units Count="88">
+    <Units Count="89">
       <Unit0>
         <Filename Value="cdc.lpr"/>
         <IsPartOfProject Value="True"/>
@@ -944,6 +944,13 @@
         <Filename Value="cu_calceph.pas"/>
         <IsPartOfProject Value="True"/>
       </Unit87>
+      <Unit88>
+        <Filename Value="pu_precession.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="f_precession"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Form"/>
+      </Unit88>
     </Units>
   </ProjectOptions>
   <CompilerOptions>

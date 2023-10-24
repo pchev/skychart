@@ -1583,6 +1583,9 @@ resourcestring
   rsRenameTheCur = 'Rename the curent chart';
   rsOrientationF = 'Orientation from zenith in Alt/Az chart';
   rsSelection = 'Selection';
+  rsPolePrecessi = 'Pole precession';
+  rsDrawThePosit = 'Draw the position of the pole between the following years';
+  rsLabelEvery = 'Label every';
 
 // also update upsi_translation
 

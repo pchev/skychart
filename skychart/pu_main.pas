@@ -36,7 +36,7 @@ uses
   BaseUnix,
   {$endif}
   lclstrconsts, XMLConf, u_help, u_translation, cu_catalog, cu_planet, cu_fits, cu_calceph,
-  cu_database, fu_chart, cu_tcpserver, pu_config_time, pu_config_observatory,
+  cu_database, fu_chart, cu_tcpserver, pu_config_time, pu_config_observatory, pu_precession,
   pu_config_display, pu_config_pictures, pu_indigui, pu_config_catalog, pu_prepoint,
   pu_config_solsys, pu_config_chart, pu_config_system, pu_config_internet,
   cu_radec, pu_config_calendar, pu_planetinfo, cu_sampclient, cu_vodata,
@@ -53,11 +53,13 @@ type
   { Tf_main }
 
   Tf_main = class(TForm)
+    PolePrecession: TAction;
     FileRenameChart: TAction;
     LockMagnitude: TAction;
     MenuEditToolbar2: TMenuItem;
     MenuItem2: TMenuItem;
     FileRenameChart1: TMenuItem;
+    MenuPrecession: TMenuItem;
     MenuItemFileNew: TMenuItem;
     MenuItemCloseChart: TMenuItem;
     MenuItemRenameTab: TMenuItem;
@@ -519,6 +521,7 @@ type
     procedure PlanetInfoExecute(Sender: TObject);
     procedure PopupTabPopup(Sender: TObject);
     procedure PopupToolbar2Click(Sender: TObject);
+    procedure PolePrecessionExecute(Sender: TObject);
     procedure ResetRotationExecute(Sender: TObject);
     procedure rotate180Execute(Sender: TObject);
     procedure SavePictureDialog1CanClose(Sender: TObject; var CanClose: boolean
@@ -765,6 +768,7 @@ type
     procedure EnableAsteroid(Sender: TObject);
     procedure DisableAsteroid(Sender: TObject);
     procedure UpdateAstExt;
+    procedure PolePrecessionChange(Sender: TObject);
 
   public
     { Public declarations }
@@ -9610,6 +9614,9 @@ begin
   Mosaic.Caption := '&' + rsMosaic;
   Mosaic.Hint := rsMosaic;
   Mosaic.Category := CatTools;
+  PolePrecession.Caption := '&' + rsPolePrecessi;
+  PolePrecession.Hint := rsPolePrecessi;
+  PolePrecession.Category := CatTools;
   SaveImage.Caption := '&' + rsSaveImage;
   SaveImage.Hint := rsSaveImage;
   SaveImage.Category := CatFile;
@@ -12750,6 +12757,31 @@ begin
     44: PrintSetup(Sender);
     45: SetupChartPage(1);
   end;
+end;
+
+procedure Tf_main.PolePrecessionExecute(Sender: TObject);
+begin
+ if f_precession=nil then begin
+   f_precession:=Tf_precession.Create(self);
+   f_precession.onChange:=PolePrecessionChange;
+ end;
+ f_precession.SetLang;
+ f_precession.Show;
+end;
+
+procedure Tf_main.PolePrecessionChange(Sender: TObject);
+begin
+ if f_precession=nil then exit;
+ if MultiFrame1.ActiveObject is Tf_chart then begin
+   with MultiFrame1.ActiveObject as Tf_chart do begin
+     sc.cfgsc.PPyearstart:=f_precession.yearstart.Value;
+     sc.cfgsc.PPyearend:=f_precession.yearend.Value;
+     sc.cfgsc.PPyearlabelstep:=f_precession.labelstep.Value;
+     sc.cfgsc.PPdrawlabel:=f_precession.DrawLabel.Checked;
+     sc.cfgsc.PPdraw:=f_precession.Draw;
+     Refresh(True,True);
+   end;
+ end;
 end;
 
 procedure Tf_main.ToolButtonMouseDown(Sender: TObject; Button: TMouseButton;

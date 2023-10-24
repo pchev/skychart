@@ -1,0 +1,118 @@
+object f_precession: Tf_precession
+  Left = 369
+  Height = 120
+  Top = 30
+  Width = 369
+  AutoSize = True
+  Caption = 'Precession'
+  ClientHeight = 120
+  ClientWidth = 369
+  FormStyle = fsStayOnTop
+  OnClose = FormClose
+  OnCreate = FormCreate
+  OnShow = FormShow
+  object yearstart: TSpinEdit
+    AnchorSideLeft.Control = Label2
+    AnchorSideLeft.Side = asrBottom
+    AnchorSideTop.Control = Label2
+    AnchorSideTop.Side = asrCenter
+    Left = 48
+    Height = 32
+    Top = 28
+    Width = 90
+    BorderSpacing.Left = 8
+    Increment = 1000
+    MaxValue = 200000
+    MinValue = -200000
+    TabOrder = 0
+    Value = -13000
+  end
+  object yearend: TSpinEdit
+    AnchorSideLeft.Control = Label3
+    AnchorSideLeft.Side = asrBottom
+    AnchorSideTop.Control = Label2
+    AnchorSideTop.Side = asrCenter
+    Left = 175
+    Height = 32
+    Top = 28
+    Width = 90
+    BorderSpacing.Left = 8
+    BorderSpacing.Right = 8
+    Increment = 1000
+    MaxValue = 200000
+    MinValue = -200000
+    TabOrder = 1
+    Value = 13000
+  end
+  object labelstep: TSpinEdit
+    AnchorSideLeft.Control = DrawLabel
+    AnchorSideLeft.Side = asrBottom
+    AnchorSideTop.Control = DrawLabel
+    AnchorSideTop.Side = asrCenter
+    Left = 114
+    Height = 32
+    Top = 77
+    Width = 90
+    BorderSpacing.Left = 8
+    BorderSpacing.Right = 8
+    TabOrder = 2
+    Value = 1000
+  end
+  object Label1: TLabel
+    Left = 8
+    Height = 18
+    Top = 0
+    Width = 353
+    BorderSpacing.Left = 8
+    BorderSpacing.Right = 8
+    Caption = 'Draw the position of the pole between the following years'
+    ParentColor = False
+  end
+  object Label2: TLabel
+    AnchorSideLeft.Control = Label1
+    Left = 8
+    Height = 18
+    Top = 35
+    Width = 32
+    Caption = 'From'
+    ParentColor = False
+  end
+  object Label3: TLabel
+    AnchorSideLeft.Control = yearstart
+    AnchorSideLeft.Side = asrBottom
+    AnchorSideTop.Control = Label2
+    AnchorSideTop.Side = asrCenter
+    Left = 154
+    Height = 18
+    Top = 35
+    Width = 13
+    BorderSpacing.Left = 16
+    Caption = 'to'
+    ParentColor = False
+  end
+  object Button1: TButton
+    AnchorSideLeft.Control = labelstep
+    AnchorSideLeft.Side = asrBottom
+    AnchorSideTop.Control = DrawLabel
+    AnchorSideTop.Side = asrCenter
+    Left = 220
+    Height = 25
+    Top = 81
+    Width = 83
+    BorderSpacing.Left = 16
+    BorderSpacing.Right = 8
+    BorderSpacing.Bottom = 14
+    Caption = 'Apply'
+    OnClick = Button1Click
+    TabOrder = 3
+  end
+  object DrawLabel: TCheckBox
+    AnchorSideLeft.Control = Label1
+    Left = 8
+    Height = 22
+    Top = 82
+    Width = 98
+    Caption = 'Label every'
+    TabOrder = 4
+  end
+end

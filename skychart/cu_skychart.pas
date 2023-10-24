@@ -143,6 +143,7 @@ type
     procedure DrawGrid(drawlabel: boolean);
     procedure DrawAltAzEqGrid;
     procedure DrawPole(pole: integer);
+    procedure DrawPrecessionCircle;
     procedure DrawEqGrid(drawlabel: boolean; altstyle: boolean = False);
     procedure DrawAzGrid(drawlabel: boolean);
     procedure DrawGalGrid(drawlabel: boolean);
@@ -446,6 +447,7 @@ begin
         DrawTelescopeLimit;
       end;
     end;
+    DrawPrecessionCircle;
     // Finder mark
     DrawCircle;
     // Artificials satellites
@@ -4969,6 +4971,64 @@ begin
       yy, Fplot.cfgplot.Color[13], cfgsc.LineWidthGrid, cfgsc.StyleGrid);
     Fplot.Plotline(xx, yy - 5 * Fplot.cfgchart.drawsize, xx, yy + 5 * Fplot.cfgchart.drawsize,
       Fplot.cfgplot.Color[13], cfgsc.LineWidthGrid, cfgsc.StyleGrid);
+  end;
+end;
+
+procedure Tskychart.DrawPrecessionCircle;
+var
+  year, yearstart,yearend,yearstep,yearlabelstep: integer;
+  a, d, x1, y1, t: double;
+  p: coordvector;
+  xx, yy, xpn, ypn, xps, yps: single;
+  i,n,l: integer;
+begin
+  if not cfgsc.PPdraw then exit;
+  // draw position of the pole for the range of date
+  yearstart:=cfgsc.PPyearstart;
+  yearend:=cfgsc.PPyearend;
+  yearlabelstep:=cfgsc.PPyearlabelstep;
+  if abs(yearend-yearstart)>1000 then
+    yearstep:=100
+  else
+    yearstep:=1;
+  n:=abs(yearend-yearstart) div yearstep;
+  l:=yearlabelstep div yearstep;
+  xpn:=0; ypn:=0; xps:=0; yps:=0;
+  for i:=0 to n do begin
+    year := yearstart+i*yearstep;
+    t:=jd(year,1,1,0);
+    // at the north pole
+    a:=0;
+    d:=pid2;
+    sofa_S2C(a, d, p);
+    // precession
+    PrecessionV(t, cfgsc.JDChart, p);
+    sofa_c2s(p, a, d);
+    a := rmod(a + pi2, pi2);
+    // projection to chart
+    projection(a, d, x1, y1, false, cfgsc);
+    WindowXY(x1, y1, xx, yy, cfgsc);
+    if i>0 then Fplot.Plotline(xpn, ypn, xx, yy, Fplot.cfgplot.Color[15], cfgsc.LineWidthGrid, cfgsc.StyleGrid);
+    if ((i mod l) = 0) then FPlot.PlotSimMark(xx, yy , Fplot.cfgplot.Color[15]);
+    if cfgsc.PPdrawlabel and ((i mod l) = 0) then FPlot.PlotText(round(xx), round(yy) , 1, Fplot.cfgplot.LabelColor[7], laCenter, laBottom, inttostr(year), cfgsc.WhiteBg, false);
+    xpn := xx;
+    ypn := yy;
+    // at the south pole
+    a:=0;
+    d:=-pid2;
+    sofa_S2C(a, d, p);
+    // precession
+    PrecessionV(t, cfgsc.JDChart, p);
+    sofa_c2s(p, a, d);
+    a := rmod(a + pi2, pi2);
+    // projection to chart
+    projection(a, d, x1, y1, cfgsc.horizonopaque, cfgsc);
+    WindowXY(x1, y1, xx, yy, cfgsc);
+    if i>0 then Fplot.Plotline(xps, yps, xx, yy, Fplot.cfgplot.Color[15], cfgsc.LineWidthGrid, cfgsc.StyleGrid);
+    if ((i mod l) = 0) then FPlot.PlotSimMark(xx, yy , Fplot.cfgplot.Color[15]);
+    if cfgsc.PPdrawlabel and ((i mod l) = 0) then FPlot.PlotText(round(xx), round(yy) , 1, Fplot.cfgplot.LabelColor[7], laCenter, laBottom, inttostr(year), cfgsc.WhiteBg, false);
+    xps := xx;
+    yps := yy;
   end;
 end;
 
