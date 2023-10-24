@@ -3,15 +3,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: skychart.en\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-04-02 14:33+0000\n"
+"POT-Creation-Date: 2023-10-24 12:12+0000\n"
 "PO-Revision-Date: 2021-02-01 14:54+0000\n"
 "Last-Translator: grofaty <Unknown>\n"
 "Language-Team: American English <kde-i18n-doc@kde.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2023-04-02 14:48+0000\n"
-"X-Generator: Launchpad (build 610eeb74559fa4aabb929a482afece263183fac0)\n"
+"X-Launchpad-Export-Date: 2023-10-24 12:20+0000\n"
+"X-Generator: Launchpad (build e54af6300b9c312839f7b6ef075746018660f6a5)\n"
 "Language: en_US\n"
 
 #: u_translation.rs102cddss
@@ -1815,6 +1815,10 @@ msgstr "Prikaži planet kot"
 msgid "Draw the apparent depressed horizon line"
 msgstr "Nariši navidezno spuščeno črto obzorja"
 
+#: u_translation.rsdrawtheposit
+msgid "Draw the position of the pole between the following years"
+msgstr ""
+
 #: u_translation.rsdrift
 msgid "Yearly drift"
 msgstr "Letni premik"
@@ -2835,6 +2839,10 @@ msgstr "Oznaka:"
 #: u_translation.rslabel2
 msgid "Label"
 msgstr "Oznaka"
+
+#: u_translation.rslabelevery
+msgid "Label every"
+msgstr ""
 
 #: u_translation.rslabelobject
 msgid "Label object"
@@ -4094,6 +4102,10 @@ msgstr "Pluton je planet."
 #: u_translation.rspoleinclinat
 msgid "Pole inclination"
 msgstr "Nagib pola"
+
+#: u_translation.rspoleprecessi
+msgid "Pole precession"
+msgstr ""
 
 #: u_translation.rsport
 msgid "Port:"

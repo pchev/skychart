@@ -2,19 +2,19 @@ msgid ""
 msgstr ""
 "Project-Id-Version: skychart\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-04-02 14:33+0000\n"
+"POT-Creation-Date: 2023-10-24 12:12+0000\n"
 "PO-Revision-Date: 2021-06-30 23:15+0000\n"
 "Last-Translator: Jerzy Rokicki <Unknown>\n"
 "Language-Team: French <kde-i18n-doc@kde.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2023-04-02 14:48+0000\n"
-"X-Generator: Launchpad (build 610eeb74559fa4aabb929a482afece263183fac0)\n"
-"X-Poedit-SourceCharset: utf-8\n"
+"X-Launchpad-Export-Date: 2023-10-24 12:20+0000\n"
+"X-Generator: Launchpad (build e54af6300b9c312839f7b6ef075746018660f6a5)\n"
+"X-Poedit-Country: Poland\n"
 "Language: fr\n"
 "X-Poedit-Language: Polish\n"
-"X-Poedit-Country: Poland\n"
+"X-Poedit-SourceCharset: utf-8\n"
 
 #: u_translation.rs102cddss
 msgid "102 CD DSS"
@@ -1817,6 +1817,10 @@ msgstr "Przedstaw planety na mapie jako:"
 msgid "Draw the apparent depressed horizon line"
 msgstr "Rysuj pozorną linię horyzontu"
 
+#: u_translation.rsdrawtheposit
+msgid "Draw the position of the pole between the following years"
+msgstr ""
+
 #: u_translation.rsdrift
 msgid "Yearly drift"
 msgstr "Dryf Roczny"
@@ -2837,6 +2841,10 @@ msgstr "Etykieta:"
 #: u_translation.rslabel2
 msgid "Label"
 msgstr "Etykieta"
+
+#: u_translation.rslabelevery
+msgid "Label every"
+msgstr ""
 
 #: u_translation.rslabelobject
 msgid "Label object"
@@ -4096,6 +4104,10 @@ msgstr "Pluton jest planetą."
 #: u_translation.rspoleinclinat
 msgid "Pole inclination"
 msgstr "Nachylenie bieguna"
+
+#: u_translation.rspoleprecessi
+msgid "Pole precession"
+msgstr ""
 
 #: u_translation.rsport
 msgid "Port:"

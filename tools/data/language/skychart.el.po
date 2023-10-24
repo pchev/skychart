@@ -3,15 +3,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: skychart.en\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-04-02 14:33+0000\n"
+"POT-Creation-Date: 2023-10-24 12:12+0000\n"
 "PO-Revision-Date: 2017-01-14 17:41+0000\n"
 "Last-Translator: Patrick Chevalley <Unknown>\n"
 "Language-Team: <translation@ap-i.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2023-04-02 14:48+0000\n"
-"X-Generator: Launchpad (build 610eeb74559fa4aabb929a482afece263183fac0)\n"
+"X-Launchpad-Export-Date: 2023-10-24 12:20+0000\n"
+"X-Generator: Launchpad (build e54af6300b9c312839f7b6ef075746018660f6a5)\n"
 
 #: u_translation.rs102cddss
 msgid "102 CD DSS"
@@ -1814,6 +1814,10 @@ msgstr "Σχεδιασμός πλανητών ως"
 msgid "Draw the apparent depressed horizon line"
 msgstr "Σχεδίαση της φαινόμενης γραμμής του συμπιεσμένου ορίζοντα"
 
+#: u_translation.rsdrawtheposit
+msgid "Draw the position of the pole between the following years"
+msgstr ""
+
 #: u_translation.rsdrift
 msgid "Yearly drift"
 msgstr "Ετήσια ολίσθηση"
@@ -2834,6 +2838,10 @@ msgstr "Ετικέτα:"
 #: u_translation.rslabel2
 msgid "Label"
 msgstr "Ετικέτα"
+
+#: u_translation.rslabelevery
+msgid "Label every"
+msgstr ""
 
 #: u_translation.rslabelobject
 msgid "Label object"
@@ -4093,6 +4101,10 @@ msgstr "Θεώρησε τον Πλούτωνα πλανήτη"
 #: u_translation.rspoleinclinat
 msgid "Pole inclination"
 msgstr "Κλίση πόλου"
+
+#: u_translation.rspoleprecessi
+msgid "Pole precession"
+msgstr ""
 
 #: u_translation.rsport
 msgid "Port:"

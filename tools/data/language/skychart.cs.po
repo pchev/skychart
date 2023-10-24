@@ -3,15 +3,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: skychart.cs\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-04-02 14:33+0000\n"
-"PO-Revision-Date: 2023-03-08 17:43+0000\n"
+"POT-Creation-Date: 2023-10-24 12:12+0000\n"
+"PO-Revision-Date: 2023-04-03 19:40+0000\n"
 "Last-Translator: Stanislav Holub <Unknown>\n"
 "Language-Team: <translation@ap-i.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2023-04-02 14:48+0000\n"
-"X-Generator: Launchpad (build 610eeb74559fa4aabb929a482afece263183fac0)\n"
+"X-Launchpad-Export-Date: 2023-10-24 12:20+0000\n"
+"X-Generator: Launchpad (build e54af6300b9c312839f7b6ef075746018660f6a5)\n"
 "X-Poedit-Bookmarks: 99,-1,-1,-1,-1,-1,-1,-1,-1,-1\n"
 
 #: u_translation.rs102cddss
@@ -1815,6 +1815,10 @@ msgstr "Zobrazit planety jako"
 msgid "Draw the apparent depressed horizon line"
 msgstr "Vykreslit hranici zdánlivého horizontu"
 
+#: u_translation.rsdrawtheposit
+msgid "Draw the position of the pole between the following years"
+msgstr ""
+
 #: u_translation.rsdrift
 msgid "Yearly drift"
 msgstr "Roční drift"
@@ -2835,6 +2839,10 @@ msgstr "Popisek:"
 #: u_translation.rslabel2
 msgid "Label"
 msgstr "Popisek"
+
+#: u_translation.rslabelevery
+msgid "Label every"
+msgstr ""
 
 #: u_translation.rslabelobject
 msgid "Label object"
@@ -4095,6 +4103,10 @@ msgstr "Pluto je planeta"
 msgid "Pole inclination"
 msgstr "Sklon pólu"
 
+#: u_translation.rspoleprecessi
+msgid "Pole precession"
+msgstr ""
+
 #: u_translation.rsport
 msgid "Port:"
 msgstr "Port:"
@@ -4821,7 +4833,7 @@ msgstr "Vybraný objekt"
 
 #: u_translation.rsselection
 msgid "Selection"
-msgstr ""
+msgstr "Výběr"
 
 #: u_translation.rsselectlabels
 msgid "Select labels to recover"

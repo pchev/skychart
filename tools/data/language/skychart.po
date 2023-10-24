@@ -6114,3 +6114,15 @@ msgstr ""
 msgid "Selection"
 msgstr ""
 
+#: u_translation:rspoleprecessi
+msgid "Pole precession"
+msgstr ""
+
+#: u_translation:rsdrawtheposit
+msgid "Draw the position of the pole between the following years"
+msgstr ""
+
+#: u_translation:rslabelevery
+msgid "Label every"
+msgstr ""
+

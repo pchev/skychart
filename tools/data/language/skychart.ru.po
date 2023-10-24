@@ -2,15 +2,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: skychart.ru\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-04-02 14:33+0000\n"
-"PO-Revision-Date: 2022-12-31 07:10+0000\n"
+"POT-Creation-Date: 2023-10-24 12:12+0000\n"
+"PO-Revision-Date: 2023-09-25 10:10+0000\n"
 "Last-Translator: Aleksey Kabanov <Unknown>\n"
 "Language-Team: Zaporozhye Astronomical Club Altair <astroclub@ua.fm, http://astroclub.zp.ua>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2023-04-02 14:48+0000\n"
-"X-Generator: Launchpad (build 610eeb74559fa4aabb929a482afece263183fac0)\n"
+"X-Launchpad-Export-Date: 2023-10-24 12:20+0000\n"
+"X-Generator: Launchpad (build e54af6300b9c312839f7b6ef075746018660f6a5)\n"
 "Language: ru_UA\n"
 
 #: u_translation.rs102cddss
@@ -27,7 +27,7 @@ msgstr "50 (рекомендовано для более 100000 объектов
 
 #: u_translation.rs63000billion
 msgid "63000 (for billion of objects)"
-msgstr ""
+msgstr "63000 (на млрд. объектов)"
 
 #: u_translation.rs732recommend
 msgid "732 (recommended up to 5,000,000 objects)"
@@ -222,7 +222,7 @@ msgstr "Airmass"
 
 #: u_translation.rsalbedo
 msgid "Albedo"
-msgstr ""
+msgstr "Альбедо"
 
 #: u_translation.rsalignment
 msgid "Alignment"
@@ -840,7 +840,7 @@ msgstr "карте:"
 
 #: u_translation.rschartcenter
 msgid "Chart center"
-msgstr ""
+msgstr "Центр карты"
 
 #: u_translation.rschartcenterc
 msgid "Add a crosshair to the chart center"
@@ -864,7 +864,7 @@ msgstr "Пояснения к карте"
 
 #: u_translation.rschartname
 msgid "Chart name"
-msgstr ""
+msgstr "Название карты"
 
 #: u_translation.rschartsetting
 msgid "Chart settings"
@@ -1273,7 +1273,7 @@ msgstr "Курсор"
 
 #: u_translation.rscursorpositi
 msgid "Cursor position"
-msgstr ""
+msgstr "Позиция курсора"
 
 #: u_translation.rscw
 #, object-pascal-format
@@ -1813,6 +1813,10 @@ msgstr "Метод отображения планет"
 #: u_translation.rsdrawtheappar
 msgid "Draw the apparent depressed horizon line"
 msgstr "Показать кажущуюся линию депрессии горизонта"
+
+#: u_translation.rsdrawtheposit
+msgid "Draw the position of the pole between the following years"
+msgstr ""
 
 #: u_translation.rsdrift
 msgid "Yearly drift"
@@ -2835,6 +2839,10 @@ msgstr "Метка:"
 msgid "Label"
 msgstr "Метка"
 
+#: u_translation.rslabelevery
+msgid "Label every"
+msgstr ""
+
 #: u_translation.rslabelobject
 msgid "Label object"
 msgstr "Метки объектов"
@@ -3847,7 +3855,7 @@ msgstr "Ориентация"
 
 #: u_translation.rsorientationf
 msgid "Orientation from zenith in Alt/Az chart"
-msgstr ""
+msgstr "Зенитная ориентация в Alt/Az режиме"
 
 #: u_translation.rsorienttothep
 msgid "Orient to the pole or zenith"
@@ -3911,7 +3919,7 @@ msgstr "Пароль"
 
 #: u_translation.rspastecoordin
 msgid "Paste coordinates"
-msgstr ""
+msgstr "Вставить координаты"
 
 #: u_translation.rspastel
 msgid "Pastel"
@@ -4093,6 +4101,10 @@ msgstr "Считать Плутон планетой"
 #: u_translation.rspoleinclinat
 msgid "Pole inclination"
 msgstr "Наклон полюса"
+
+#: u_translation.rspoleprecessi
+msgid "Pole precession"
+msgstr ""
 
 #: u_translation.rsport
 msgid "Port:"
@@ -4298,7 +4310,7 @@ msgstr "Поместите файлы с расширением .tle в папк
 
 #: u_translation.rsqualityflag
 msgid "Quality flag"
-msgstr ""
+msgstr "Флаг качества"
 
 #: u_translation.rsquasar
 msgid "Quasar"
@@ -4488,11 +4500,11 @@ msgstr "Удалить последнюю метку"
 
 #: u_translation.rsrenamechart
 msgid "Rename chart"
-msgstr ""
+msgstr "Переименовать карту"
 
 #: u_translation.rsrenamethecur
 msgid "Rename the curent chart"
-msgstr ""
+msgstr "Переименовать текущую карту"
 
 #: u_translation.rsreplacebytic
 msgid "Replace by tick mark"
@@ -4816,11 +4828,11 @@ msgstr "Выберите цвет (черный по умолчанию)"
 
 #: u_translation.rsselectedobje
 msgid "Selected object"
-msgstr ""
+msgstr "Выделенный объект"
 
 #: u_translation.rsselection
 msgid "Selection"
-msgstr ""
+msgstr "Выделение"
 
 #: u_translation.rsselectlabels
 msgid "Select labels to recover"
