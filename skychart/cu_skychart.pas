@@ -4986,11 +4986,11 @@ begin
   // draw position of the pole for the range of date
   yearstart:=cfgsc.PPyearstart;
   yearend:=cfgsc.PPyearend;
-  yearlabelstep:=cfgsc.PPyearlabelstep;
   if abs(yearend-yearstart)>1000 then
     yearstep:=100
   else
     yearstep:=1;
+  yearlabelstep:=max(cfgsc.PPyearlabelstep,yearstep);
   n:=abs(yearend-yearstart) div yearstep;
   l:=yearlabelstep div yearstep;
   xpn:=0; ypn:=0; xps:=0; yps:=0;
