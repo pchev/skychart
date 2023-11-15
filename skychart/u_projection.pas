@@ -2053,6 +2053,7 @@ begin
     i:=0;
   end;
   if i=0 then begin
+    a:=rmod(azr + pi, pi2);
     aa:=round(rmod(azr + pi, pi2)*rad2deg);
     if (aa<0)or(aa>360) then exit;
     ch:=c.horizonlist[aa];
@@ -2088,6 +2089,7 @@ begin
     i:=0;
   end;
   if i=0 then begin
+    a:=rmod(azs + pi, pi2);
     aa:=round(rmod(azs + pi, pi2)*rad2deg);
     if (aa<0)or(aa>360) then exit;
     ch:=c.horizonlist[aa];
