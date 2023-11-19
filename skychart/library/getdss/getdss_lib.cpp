@@ -22,6 +22,7 @@
 ** code.
 */
 
+#include <locale.h>
 #include <stdio.h>
 #include <ctype.h>
 #define   getch()   getchar()
@@ -112,6 +113,7 @@ extern "C" int ImageExtract( SImageConfig *pConfig )
 /* 0   on success, otherwise one of the error codes in "Errcode.h".         */
 
 {
+   setlocale (LC_NUMERIC, "C");
    char buff[512];                     /* temp text buffer                  */
    char szRealSkyDir[_MAX_PATH];         /* path name of RealSky directory  */
    int i;                           /* loop counter                         */
@@ -272,6 +274,7 @@ extern "C" int GetPlateList( SImageConfig *pConfig , SPlateData *pd)
 /* 0   on success, otherwise one of the error codes in "Errcode.h".  */
 
 {
+   setlocale (LC_NUMERIC, "C");
    char buff[512];                     /* temp text buffer                 */
    char szRealSkyDir[_MAX_PATH];         /* path name of RealSky directory */
    int rval = DSS_IMG_ERR_USER_CANCEL;      /* return value                */
@@ -434,6 +437,7 @@ extern "C" int ImageExtractFromPlate( SImageConfig *pConfig ,char *ReqPlateName 
 /* 0   on success, otherwise one of the error codes in "Errcode.h". */
 
 {
+   setlocale (LC_NUMERIC, "C");
    char buff[512];                     /* temp text buffer                 */
    char szRealSkyDir[_MAX_PATH];         /* path name of RealSky directory */
    int i;                           /* loop counter                        */
