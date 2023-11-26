@@ -11880,6 +11880,7 @@ end;
 
 procedure Tf_main.FormKeyDown(Sender: TObject; var Key: word; Shift: TShiftState);
 begin
+  if key=VK_MENU then exit;
   if cfgm.KioskMode then
   begin
     if (key = VK_RETURN) or (Length(kioskpwd) > 50) then
