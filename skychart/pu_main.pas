@@ -3212,6 +3212,8 @@ var
 begin
   if MultiFrame1.ActiveObject is Tf_chart then
   begin
+    if (cfgm.PrintMethod = 0) and (GetPrinterIndex < 0) then
+      cfgm.PrintMethod := 2;
     buf := rsSkyCharts + ', ' + rsObservatory + blank + Tf_chart(
       MultiFrame1.ActiveObject).sc.cfgsc.ObsName + ', ' + rsCenter +
       blank + rsRA + ':' + ARmtoStr(rad2deg * Tf_chart(
@@ -3244,6 +3246,8 @@ var
 begin
   if MultiFrame1.ActiveObject is Tf_chart then
   begin
+    if (cfgm.PrintMethod = 0) and (GetPrinterIndex < 0) then
+      cfgm.PrintMethod := 2;
     buf := rsSkyCharts + ', ' + rsObservatory + blank + Tf_chart(
       MultiFrame1.ActiveObject).sc.cfgsc.ObsName + ', ' + rsCenter +
       blank + rsRA + ':' + ARmtoStr(rad2deg * Tf_chart(
@@ -7876,8 +7880,6 @@ begin
           ReadInteger(section, 'PrintBmpHeight', cfgm.PrintBmpHeight);
         cfgm.PrintLandscape := ReadBool(section, 'PrintLandscape', cfgm.PrintLandscape);
         cfgm.PrintMethod := ReadInteger(section, 'PrintMethod', cfgm.PrintMethod);
-        if (cfgm.PrintMethod = 0) and (GetPrinterIndex < 0) then
-          cfgm.PrintMethod := 2;
         cfgm.PrintCmd1 := ReadString(section, 'PrintCmd1', cfgm.PrintCmd1);
         cfgm.PrintCmd2 := ReadString(section, 'PrintCmd2', cfgm.PrintCmd2);
         cfgm.PrintTmpPath := ReadString(section, 'PrintTmpPath', cfgm.PrintTmpPath);
