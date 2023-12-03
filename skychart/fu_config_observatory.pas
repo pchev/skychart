@@ -38,7 +38,9 @@ type
 
   Tf_config_observatory = class(TFrame)
     altmeter: TFloatEdit;
+    AirmassMagnitude: TCheckBox;
     DarkenHorizon: TCheckBox;
+    GroupBox4: TGroupBox;
     Panel1: TPanel;
     Panel2: TPanel;
     Panel3: TPanel;
@@ -113,6 +115,7 @@ type
     procedure Button6Click(Sender: TObject);
     procedure Button7Click(Sender: TObject);
     procedure Button8Click(Sender: TObject);
+    procedure AirmassMagnitudeClick(Sender: TObject);
     procedure DarkenHorizonChange(Sender: TObject);
     procedure HorizonRiseClick(Sender: TObject);
     procedure latKeyDown(Sender: TObject; var Key: word; Shift: TShiftState);
@@ -709,6 +712,11 @@ begin
     ShowMessage(rsCannotGetYou + crlf + DownloadDialog1.ResponseText);
 end;
 
+procedure Tf_config_observatory.AirmassMagnitudeClick(Sender: TObject);
+begin
+  csc.AirmassMagnitude:=AirmassMagnitude.Checked;
+end;
+
 procedure Tf_config_observatory.ComboBox1Select(Sender: TObject);
 var
   i: integer;
@@ -1039,6 +1047,7 @@ begin
   ShowHorizon0.Checked := csc.ShowHorizon0;
   HorizonRise.Checked := csc.HorizonRise;
   horizondepression.Checked := csc.ShowHorizonDepression;
+  AirmassMagnitude.Checked := csc.AirmassMagnitude;
 end;
 
 procedure Tf_config_observatory.displayhorizonClick(Sender: TObject);

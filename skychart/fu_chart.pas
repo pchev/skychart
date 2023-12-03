@@ -3974,7 +3974,7 @@ var
   tp, ec, ap, an, ic, g, eq, cra1, cde1, dst1, cra, cdec, dist, pa, dst, dkm, rr, elong, phase, magn,
   diam, lc, ctar, ctde, rc, xc, yc, zc, ma, sa, dx, dy, illum, vel, lighttime: double;
   nam, elem_id, ref: string;
-  emagn: double;
+  emagn,amagn: double;
   ename, enum,efam,sh,sg,sg1,sg2,ediam,albedo,eperiod,amin,amax,u: string;
 
   function Bold(s: string): string;
@@ -4233,6 +4233,7 @@ begin
   end;
 
   // other attribute
+  amagn:=-999;
   repeat
     i := pos(tab, buf);
     if i = 0 then
@@ -4275,6 +4276,10 @@ begin
             buf2 := 'Dist: ' + FormatFloat(f1, a * km_au / 1E6) + blank + rsMillionKm;
           end;
         end;
+      end;
+      if (uppercase(copy(buf2, 1, 3)) = 'MV:') then
+      begin
+         amagn:=StrToFloatDef(trim(copy(buf2,4,99)),-999);
       end;
       if isvo or isOsr then
         txt := txt + bold(buf2)
@@ -4583,6 +4588,7 @@ begin
     begin
       airm := AirMass(h);
       txt := txt + html_b + rsAirmass + ': ' + htms_b + FormatFloat(f1, airm) + html_br;
+      if amagn>-900 then txt := txt + html_b + 'Absorbed magnitude' + ': '+ htms_b + FormatFloat(f1, amagn + sc.cfgsc.absorption * airm) + html_br;
     end;
   end;
   if (not isArtSat) then

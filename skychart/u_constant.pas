@@ -1128,7 +1128,7 @@ type
     MaxArchiveImg: integer;
     ArchiveDir: array[1..MaxArchiveDir] of string;
     ArchiveDirActive: array[1..MaxArchiveDir] of boolean;
-    HorizonRise: boolean;
+    HorizonRise, AirmassMagnitude: boolean;
     // working variable
     lockMagn: boolean;
     lockStarMag,lockNebMag,lockNebSize: double;
@@ -1177,6 +1177,7 @@ type
     horizonlistname, horizonpicturename: string;
     horizonpicturevalid: boolean;
     horizondarken: integer;
+    absorption: double;
     nummodlabels, posmodlabels, numcustomlabels, poscustomlabels: integer;
     modlabels: array[1..maxmodlabels] of Tmodlabel;
     customlabels: array[1..maxmodlabels] of Tcustomlabel;
@@ -2826,6 +2827,8 @@ begin
   PPyearstart := Source.PPyearstart;
   PPyearend := Source.PPyearend;
   PPyearlabelstep := Source.PPyearlabelstep;
+  AirmassMagnitude := Source.AirmassMagnitude;
+  absorption := Source.absorption;
 end;
 
 { Tconf_plot }

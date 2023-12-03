@@ -81,6 +81,9 @@ procedure Hz2Eq(A, h: double; var hh, de: double; c: Tconf_skychart;
   method: smallint = refmethod);
 procedure Refraction(var h: double; flag: boolean; c: Tconf_skychart; method: smallint);
 function  AirMass(h: double): double;
+function  AtmAbsorption(sitealt: double): double;
+function AbsorbedMag(ra,dec,mag: double; c: Tconf_skychart): double;
+function GeomElevation(HH, DE: double; c: Tconf_skychart): double;
 function ecliptic(j: double; nuto: double = 0): double;
 procedure nutationme(j: double; var nutl, nuto: double);
 procedure aberrationme(j: double; var abe, abp: double);
@@ -1367,6 +1370,40 @@ function  AirMass(h: double): double;
 begin
   // Pickering, "The Southern Limits of the Ancient Star Catalog" DIO 2002
   result := 1 / sin(h + deg2rad * (244 / (165 + 47 * (rad2deg * h) ** 1.1)));
+end;
+
+function  AtmAbsorption(sitealt: double): double;
+var ARay,Aaer,Aoz: double;
+begin
+  // From the July 1992 issue of International Comet Quarterly, Vol. 14, pages 55-59.
+  // http://www.icq.eps.harvard.edu/ICQExtinct.html
+  // sitealt in km
+  // result in magnitude per airmass
+  ARay := 0.1451 * exp (-sitealt/7.996);
+  Aaer := 0.120 * exp(-sitealt/1.5);
+  Aoz := 0.016;
+  Result := ARay + Aaer + Aoz;
+end;
+
+function AbsorbedMag(ra,dec,mag: double; c: Tconf_skychart): double;
+var h: double;
+begin
+  h := max(0,GeomElevation(c.CurST - ra, dec,c));
+  result := mag + c.absorption * AirMass(h);
+end;
+
+function GeomElevation(HH, DE: double; c: Tconf_skychart): double;
+var
+  l1, d1, h1, sh: double;
+begin
+  l1 := deg2rad * c.ObsLatitude;
+  d1 := DE;
+  h1 := HH;
+  sh := sin(l1) * sin(d1) + cos(l1) * cos(d1) * cos(h1);
+  if abs(sh) < 1 then
+    result := double(arcsin(sh))
+  else
+    result := sgn(sh) * pi / 2;
 end;
 
 function ecliptic(j: double; nuto: double = 0): double;

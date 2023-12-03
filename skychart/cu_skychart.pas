@@ -831,6 +831,8 @@ begin
     cfgsc.ShowHorizonDepression := False;
     cfgsc.ObsHorizonDepression := 0;
   end;
+  // atmospheric absorption
+  cfgsc.absorption := AtmAbsorption(cfgsc.ObsAltitude/1000);
   // diurnal abberation
   sla_GEOC(p, cfgsc.ObsAltitude, cfgsc.ObsRAU, cfgsc.ObsZAU);
   cfgsc.Diurab := PI2 * cfgsc.ObsRAU * SOLSID / C;
@@ -1574,6 +1576,9 @@ begin
                       ((abs(dyear)>50)and rec.star.valid[vsPx] and(rec.star.px>0)and(rec.star.px<0.8) and (trim(rec.options.flabel[26]) = 'RV')),
                        rec.star.px, rec.num[1], distfact);
           catalog.AdjustStarForDistance(rec,distfact);
+        end;
+        if (cfgsc.Projpole = AltAz) and (cfgsc.AirmassMagnitude) then begin
+          rec.star.magv := AbsorbedMag(rec.ra,rec.dec,rec.star.magv,cfgsc);
         end;
         lra:=rec.ra;
         ldec:=rec.Dec;
