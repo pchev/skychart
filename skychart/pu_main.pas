@@ -9700,7 +9700,7 @@ begin
   ViewNightVision.hint := rsNightVisionC;
   ViewNightVision.Category := CatView;
   ViewAllTollbar.Caption := '&' + rsAllToolsBar;
-  ViewMainMenu.Caption := '&' + rsMainMenu;
+  ViewMainMenu.Caption := '&' + rsMainMenu +' (Ctrl+Shift+M)';
   ViewServerInfo.Caption := '&' + rsServerInform + Ellipsis;
   ViewServerInfo.Hint := rsServerInform;
   ViewServerInfo.Category := CatInformation;
@@ -11895,6 +11895,15 @@ begin
       ForceClose := True;
       Close;
       Exit;
+    end;
+  end;
+  if not cfgm.KioskMode then begin
+    if (ssCtrl in Shift) and (ssShift in Shift) then
+    begin
+      // Ctrl + Shift + key handling
+      case key of
+        VK_M: ViewMainMenu.Execute;
+      end;
     end;
   end;
   if cfgm.KioskMode or ((Activecontrol <> nil) and

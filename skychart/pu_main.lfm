@@ -4505,7 +4505,7 @@ object f_main: Tf_main
   object ActionListView: TActionList
     Images = Img16Day
     Left = 437
-    Top = 105
+    Top = 104
     object zoomplus: TAction
       Category = 'Zoom'
       Hint = 'Zoom In'
@@ -4616,7 +4616,6 @@ object f_main: Tf_main
       Category = 'View'
       Caption = 'Main menu'
       OnExecute = ViewMainMenuExecute
-      ShortCut = 24653
     end
     object ViewAllTollbar: TAction
       Category = 'View'
