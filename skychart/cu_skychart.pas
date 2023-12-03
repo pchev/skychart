@@ -5505,7 +5505,7 @@ var
     xx, yy, xxp, yyp: single;
     plotok: boolean;
   begin
-    if (abs(a) < musec) or (abs(a - pi2) < musec) or (abs(a - pi) < musec) then
+    if cfgsc.MeridianWideLine and ((abs(a) < musec) or (abs(a - pi2) < musec) or (abs(a - pi) < musec)) then
     begin
       w := cfgsc.LineWidthGrid+WideLine;
       col := Fplot.cfgplot.Color[15];

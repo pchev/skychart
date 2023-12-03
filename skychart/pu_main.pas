@@ -6556,6 +6556,7 @@ begin
   def_cfgsc.DarkenHorizonPicture := True;
   def_cfgsc.ShowHorizonDepression := False;
   def_cfgsc.ShowHorizon0 := True;
+  def_cfgsc.MeridianWideLine := True;
   def_cfgsc.HorizonMax := 0;
   def_cfgsc.CoordExpertMode := False;
   def_cfgsc.CoordType := 0;
@@ -7536,6 +7537,7 @@ begin
         csc.CoordType := ReadInteger(section, 'CoordType', csc.CoordType);
         csc.DrawPMyear := ReadInteger(section, 'DrawPMyear', csc.DrawPMyear);
         csc.horizonopaque := ReadBool(section, 'horizonopaque', csc.horizonopaque);
+        csc.MeridianWideLine := ReadBool(section, 'MeridianWideLine', csc.MeridianWideLine);
         csc.ShowHorizon := ReadBool(section, 'ShowHorizon', csc.ShowHorizon);
         csc.ShowHorizonPicture :=
           ReadBool(section, 'ShowHorizonPicture', csc.ShowHorizonPicture);
@@ -8929,6 +8931,7 @@ begin
         WriteBool(section, 'FillHorizon', csc.FillHorizon);
         WriteBool(section, 'ShowHorizonDepression', csc.ShowHorizonDepression);
         WriteBool(section, 'ShowHorizon0', csc.ShowHorizon0);
+        WriteBool(section, 'MeridianWideLine', csc.MeridianWideLine);
         WriteString(section, 'horizonfile', csc.horizonfile);
         WriteString(section, 'HorizonPictureFile', csc.HorizonPictureFile);
         WriteBool(section, 'ShowEqGrid', csc.ShowEqGrid);

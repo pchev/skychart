@@ -48,6 +48,7 @@ type
     Button9: TButton;
     CheckBox1: TCheckBox;
     cbAltAzMark: TCheckBox;
+    MeridianWideLine: TCheckBox;
     MagNoDecimal: TCheckBox;
     DSLsurface: TCheckBox;
     Edit1: TEdit;
@@ -457,6 +458,7 @@ type
     procedure GridStyleChange(Sender: TObject);
     procedure LabelLineClick(Sender: TObject);
     procedure lstDSOCSchemeChange(Sender: TObject);
+    procedure MeridianWideLineClick(Sender: TObject);
     procedure OnlyMeridianClick(Sender: TObject);
     procedure OptLabelsClick(Sender: TObject);
     procedure PageDSOColourShow(Sender: TObject);
@@ -1553,6 +1555,7 @@ begin
   CGrid.Checked := csc.ShowGrid;
   OnlyMeridian.Checked := csc.ShowOnlyMeridian;
   CheckBox8.Checked := csc.ShowAlwaysMeridian;
+  MeridianWideLine.Checked := csc.MeridianWideLine;
   GridNum.Checked := csc.ShowGridNum;
   ShowLines.Checked := csc.showline;
   if csc.DSLforcecolor then
@@ -2330,6 +2333,11 @@ end;
 procedure Tf_config_display.CheckBox8Click(Sender: TObject);
 begin
   csc.ShowAlwaysMeridian := CheckBox8.Checked;
+end;
+
+procedure Tf_config_display.MeridianWideLineClick(Sender: TObject);
+begin
+  csc.MeridianWideLine:=MeridianWideLine.Checked;
 end;
 
 procedure Tf_config_display.CheckBox9Click(Sender: TObject);

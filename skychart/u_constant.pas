@@ -1107,7 +1107,7 @@ type
     LineWidthGrid, LineWidthEqGrid, LineWidthConstL, LineWidthConstB, LineWidthEcliptic, LineWidthGalEq: integer;
     ShowEcliptic, ShowGalactic, ShowEquator, ShowMilkyWay, FillMilkyWay, LinemodeMilkyway,
     ShowHorizon, ShowHorizonPicture, HorizonPictureLowQuality, FillHorizon,
-    ShowHorizon0, ShowHorizonDepression: boolean;
+    ShowHorizon0, ShowHorizonDepression, MeridianWideLine: boolean;
     PrePointRA, PrePointDEC, PrePointTime, PrePointMarkRA, PrePointMarkDEC: double;
     PrePointLength: integer;
     DrawPrePoint, DarkenHorizonPicture: Boolean;
@@ -2435,6 +2435,7 @@ begin
   FillHorizon := Source.FillHorizon;
   ShowHorizonDepression := Source.ShowHorizonDepression;
   ShowHorizon0 := Source.ShowHorizon0;
+  MeridianWideLine := Source.MeridianWideLine;
   PrePointRA := Source.PrePointRA;
   PrePointDEC := Source.PrePointDEC;
   PrePointTime := Source.PrePointTime;
