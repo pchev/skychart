@@ -832,7 +832,7 @@ begin
     cfgsc.ObsHorizonDepression := 0;
   end;
   // atmospheric absorption
-  cfgsc.absorption := AtmAbsorption(cfgsc.ObsAltitude/1000);
+  cfgsc.absorption := AtmAbsorption(cfgsc.ObsAltitude/1000,cfgsc.ObsRH);
   // diurnal abberation
   sla_GEOC(p, cfgsc.ObsAltitude, cfgsc.ObsRAU, cfgsc.ObsZAU);
   cfgsc.Diurab := PI2 * cfgsc.ObsRAU * SOLSID / C;

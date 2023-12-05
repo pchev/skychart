@@ -81,7 +81,7 @@ procedure Hz2Eq(A, h: double; var hh, de: double; c: Tconf_skychart;
   method: smallint = refmethod);
 procedure Refraction(var h: double; flag: boolean; c: Tconf_skychart; method: smallint);
 function  AirMass(h: double): double;
-function  AtmAbsorption(sitealt: double): double;
+function  AtmAbsorption(sitealt,rh: double): double;
 function AbsorbedMag(ra,dec,mag: double; c: Tconf_skychart): double;
 function GeomElevation(HH, DE: double; c: Tconf_skychart): double;
 function ecliptic(j: double; nuto: double = 0): double;
@@ -1372,15 +1372,16 @@ begin
   result := 1 / sin(h + deg2rad * (244 / (165 + 47 * (rad2deg * h) ** 1.1)));
 end;
 
-function  AtmAbsorption(sitealt: double): double;
-var ARay,Aaer,Aoz: double;
+function  AtmAbsorption(sitealt,rh: double): double;
+var ARay,Aaer,Aoz,A0: double;
 begin
   // From the July 1992 issue of International Comet Quarterly, Vol. 14, pages 55-59.
   // http://www.icq.eps.harvard.edu/ICQExtinct.html
-  // sitealt in km
+  // sitealt in km, humidity rh in range 0...1
   // result in magnitude per airmass
   ARay := 0.1451 * exp (-sitealt/7.996);
-  Aaer := 0.120 * exp(-sitealt/1.5);
+  A0 := 0.05*rh+0.025;  // using assumption that "average"=50%, "winter"=20%, "summer"=80%
+  Aaer := 0.120 * exp(-sitealt/1.5) * A0/0.05 ; // constant 0.120 is for "average" A0=0.05
   Aoz := 0.016;
   Result := ARay + Aaer + Aoz;
 end;
