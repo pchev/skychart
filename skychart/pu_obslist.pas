@@ -197,6 +197,7 @@ const
 { Tf_obslist }
 
 procedure Tf_obslist.SetLang;
+var am: double;
 begin
   Caption := rsObservingLis;
   StringGrid1.Columns[0].Title.Caption := rsObject;
@@ -231,6 +232,20 @@ begin
   SetHelp(self, hlpObslist);
   AllLabels.Caption := rsAddLabelForE;
   BtnImportMosaic.Caption:=rsImportMosaic;
+  // airmass label
+  am := StrToFloatDef(trim(AirmassCombo.Text), -99);
+  if am < 0 then
+  begin
+    Faltitude := -0.5;
+    label2.Caption := rsAltitude + ': ' + rsHorizon;
+  end
+  else
+  begin
+    if am < 1 then
+      am := 1;
+    Faltitude := 90 - rad2deg * arccos(1 / am);
+    label2.Caption := rsAltitude + ': ' + formatfloat('0', Faltitude) + ldeg;
+  end;
 end;
 
 procedure Tf_obslist.Newlist;

@@ -87,9 +87,9 @@ object f_obslist: Tf_obslist
     end
     object AllLabels: TCheckBox
       Left = 480
-      Height = 21
+      Height = 22
       Top = 3
-      Width = 240
+      Width = 243
       Caption = 'Add label for every object in the list'
       OnChange = AllLabelsChange
       ParentFont = False
@@ -153,9 +153,8 @@ object f_obslist: Tf_obslist
       item
         MinSize = 100
         MaxSize = 500
-        SizePriority = 1
         Title.Caption = 'Title'
-        Width = 206
+        Width = 204
       end    
       item
         MinSize = 3
@@ -183,7 +182,7 @@ object f_obslist: Tf_obslist
       96
       80
       80
-      206
+      204
       3
     )
   end
@@ -264,13 +263,13 @@ object f_obslist: Tf_obslist
       object TabSheet1: TTabSheet
         Caption = 'Airmass'
         ClientHeight = 88
-        ClientWidth = 511
+        ClientWidth = 517
         ParentFont = False
         object LimitAirmassNow: TCheckBox
           Left = 16
-          Height = 23
+          Height = 22
           Top = 46
-          Width = 253
+          Width = 263
           Caption = 'Only objects within airmass limits now'
           OnChange = LimitAirmassNowChange
           ParentFont = False
@@ -278,9 +277,9 @@ object f_obslist: Tf_obslist
         end
         object LimitAirmassTonight: TCheckBox
           Left = 16
-          Height = 23
+          Height = 22
           Top = 22
-          Width = 272
+          Width = 280
           Caption = 'Only objects within airmass limits tonight'
           OnChange = LimitAirmassTonightChange
           ParentFont = False
@@ -288,9 +287,9 @@ object f_obslist: Tf_obslist
         end
         object Label2: TLabel
           Left = 216
-          Height = 19
+          Height = 18
           Top = 3
-          Width = 40
+          Width = 41
           Caption = 'Label2'
           ParentColor = False
           ParentFont = False
@@ -301,7 +300,7 @@ object f_obslist: Tf_obslist
           Top = 1
           Width = 96
           Constraints.MaxHeight = 26
-          ItemHeight = 0
+          ItemHeight = 24
           ItemIndex = 2
           Items.Strings = (
             '1.1'
@@ -319,9 +318,9 @@ object f_obslist: Tf_obslist
         end
         object Label1: TLabel
           Left = 16
-          Height = 19
+          Height = 18
           Top = 3
-          Width = 30
+          Width = 31
           Caption = 'Limit'
           ParentColor = False
           ParentFont = False
@@ -330,13 +329,13 @@ object f_obslist: Tf_obslist
       object TabSheet2: TTabSheet
         Caption = 'Transit'
         ClientHeight = 88
-        ClientWidth = 511
+        ClientWidth = 517
         ParentFont = False
         object LimitHourangleTonight: TCheckBox
           Left = 143
-          Height = 21
+          Height = 22
           Top = 22
-          Width = 292
+          Width = 299
           Caption = 'Only objects within hour angle limits tonight'
           OnChange = LimitHourangleTonightChange
           ParentFont = False
@@ -344,9 +343,9 @@ object f_obslist: Tf_obslist
         end
         object Label3: TLabel
           Left = 143
-          Height = 17
+          Height = 18
           Top = 3
-          Width = 30
+          Width = 31
           Caption = 'Limit'
           ParentColor = False
           ParentFont = False
@@ -357,7 +356,7 @@ object f_obslist: Tf_obslist
           Top = 1
           Width = 72
           Constraints.MaxHeight = 26
-          ItemHeight = 0
+          ItemHeight = 24
           ItemIndex = 1
           Items.Strings = (
             '1.0'
@@ -372,7 +371,7 @@ object f_obslist: Tf_obslist
         end
         object Label4: TLabel
           Left = 320
-          Height = 17
+          Height = 18
           Top = 3
           Width = 38
           Caption = 'Hours'
@@ -381,9 +380,9 @@ object f_obslist: Tf_obslist
         end
         object LimitHourangleNow: TCheckBox
           Left = 143
-          Height = 21
+          Height = 22
           Top = 46
-          Width = 273
+          Width = 281
           Caption = 'Only objects within hour angle limits now'
           OnChange = LimitHourangleNowChange
           ParentFont = False
@@ -402,9 +401,9 @@ object f_obslist: Tf_obslist
           TabOrder = 0
           object RadioButton1: TRadioButton
             Left = 2
-            Height = 21
+            Height = 22
             Top = 2
-            Width = 109
+            Width = 112
             Caption = 'RadioButton1'
             Checked = True
             OnClick = RadioGroup1Click
@@ -414,9 +413,9 @@ object f_obslist: Tf_obslist
           end
           object RadioButton2: TRadioButton
             Left = 2
-            Height = 21
+            Height = 22
             Top = 26
-            Width = 109
+            Width = 112
             Caption = 'RadioButton2'
             OnClick = RadioGroup1Click
             ParentFont = False
@@ -424,9 +423,9 @@ object f_obslist: Tf_obslist
           end
           object RadioButton3: TRadioButton
             Left = 2
-            Height = 21
+            Height = 22
             Top = 50
-            Width = 109
+            Width = 112
             Caption = 'RadioButton3'
             OnClick = RadioGroup1Click
             ParentFont = False
