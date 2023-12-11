@@ -4200,6 +4200,7 @@ begin
     with MultiFrame1.ActiveObject as Tf_chart do
     begin
       sc.cfgsc.ShowConstl := not sc.cfgsc.ShowConstl;
+      sc.cfgsc.CurrentConstel := '';
       if VerboseMsg then
         WriteTrace('ShowConstellationLineExecute');
       if (not sc.cfgsc.TrackOn) and (sc.cfgsc.Projpole = Altaz) then
@@ -4651,6 +4652,7 @@ begin
     with chart as Tf_chart do
     begin
       catalog.ClearSearch;
+      sc.cfgsc.CurrentConstel:='';
       case kind of
         0:
         begin
@@ -4726,7 +4728,8 @@ begin
         end;
         9:
         begin
-          ok := catalog.SearchConstellation(num, ar1, de1);
+          ok := catalog.SearchConstellation(num, ar1, de1,buf);
+          sc.cfgsc.CurrentConstel := uppercase(copy(trim(buf),1,3));
           itype := ftlin;
           stype := '';
         end;
@@ -6570,6 +6573,7 @@ begin
   def_cfgsc.ShowOnlyMeridian := False;
   def_cfgsc.ShowAlwaysMeridian := True;
   def_cfgsc.ShowConstL := True;
+  def_cfgsc.CurrentConstel := '';
   def_cfgsc.ShowConstB := False;
   def_cfgsc.ShowEcliptic := False;
   def_cfgsc.ShowGalactic := False;
@@ -10251,6 +10255,7 @@ begin
       ok := False;
       itype := ftAll;
       catalog.ClearSearch;
+      sc.cfgsc.CurrentConstel:='';
       // nebula
       stype := 'N';
       itype := ftNeb;

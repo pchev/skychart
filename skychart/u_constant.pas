@@ -883,6 +883,7 @@ type
     ra1, de1, ra2, de2: double;
     pmra1, pmde1, pmra2, pmde2, px1, rv1, px2, rv2: double;
     pm, pxrv1, pxrv2: boolean;
+    constname: string[3];
   end;
 
   TMilkywaydot = record
@@ -1103,6 +1104,7 @@ type
     sunrefreshtime: integer;
     ShowPluto, ShowConstl, ShowConstB, ShowEqGrid, ShowGrid, ShowGridNum,
     ShowOnlyMeridian, ShowAlwaysMeridian, UseSystemTime, countrytz: boolean;
+    CurrentConstel: string;
     StyleGrid, StyleEqGrid, StyleConstL, StyleConstB, StyleEcliptic, StyleGalEq: TFPPenStyle;
     LineWidthGrid, LineWidthEqGrid, LineWidthConstL, LineWidthConstB, LineWidthEcliptic, LineWidthGalEq: integer;
     ShowEcliptic, ShowGalactic, ShowEquator, ShowMilkyWay, FillMilkyWay, LinemodeMilkyway,
@@ -2403,6 +2405,7 @@ begin
   DrawPMyear := Source.DrawPMyear;
   ShowPluto := Source.ShowPluto;
   ShowConstl := Source.ShowConstl;
+  CurrentConstel := Source.CurrentConstel;
   ShowConstB := Source.ShowConstB;
   ShowEqGrid := Source.ShowEqGrid;
   ShowGrid := Source.ShowGrid;

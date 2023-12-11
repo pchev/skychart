@@ -6958,37 +6958,40 @@ begin
   end;
   for i := 0 to Fcatalog.cfgshr.ConstLnum - 1 do
   begin
-    ra1 := Fcatalog.cfgshr.ConstL[i].ra1;
-    de1 := Fcatalog.cfgshr.ConstL[i].de1;
-    ra2 := Fcatalog.cfgshr.ConstL[i].ra2;
-    de2 := Fcatalog.cfgshr.ConstL[i].de2;
-    pmok := Fcatalog.cfgshr.ConstL[i].pm;
-    if pmok and cfgsc.PMon then
+    if (cfgsc.CurrentConstel='') or (Fcatalog.cfgshr.ConstL[i].constname='') or (Fcatalog.cfgshr.ConstL[i].constname=cfgsc.CurrentConstel) then
     begin
-      propermotion(ra1, de1, dyear, Fcatalog.cfgshr.ConstL[i].pmra1,
-        Fcatalog.cfgshr.ConstL[i].pmde1, Fcatalog.cfgshr.ConstL[i].pxrv1,
-        Fcatalog.cfgshr.ConstL[i].px1, Fcatalog.cfgshr.ConstL[i].rv1,distfact);
-      propermotion(ra2, de2, dyear, Fcatalog.cfgshr.ConstL[i].pmra2,
-        Fcatalog.cfgshr.ConstL[i].pmde2, Fcatalog.cfgshr.ConstL[i].pxrv2,
-        Fcatalog.cfgshr.ConstL[i].px2, Fcatalog.cfgshr.ConstL[i].rv2,distfact);
-    end;
-    precession(jd2000, cfgsc.JDChart, ra1, de1);
-    if cfgsc.ApparentPos then
-      apparent_equatorial(ra1, de1, cfgsc, True, False);
-    projection(ra1, de1, xx1, yy1, True, cfgsc);
-    precession(jd2000, cfgsc.JDChart, ra2, de2);
-    if cfgsc.ApparentPos then
-      apparent_equatorial(ra2, de2, cfgsc, True, False);
-    projection(ra2, de2, xx2, yy2, True, cfgsc);
-    r1 := rad2deg * abs(xx1 - xx2);
-    r2 := rad2deg * abs(yy1 - yy2);
-    d := sqrt(r1 * r1 + r2 * r2);
-    if (xx1 < 199) and (xx2 < 199) and (d < 50) then
-    begin
-      WindowXY(xx1, yy1, x1, y1, cfgsc);
-      WindowXY(xx2, yy2, x2, y2, cfgsc);
-      if (intpower(x2 - x1, 2) + intpower(y2 - y1, 2)) < cfgsc.x2 then
-        FPlot.PlotLine(x1, y1, x2, y2, color, cfgsc.LineWidthConstL, cfgsc.StyleConstL);
+      ra1 := Fcatalog.cfgshr.ConstL[i].ra1;
+      de1 := Fcatalog.cfgshr.ConstL[i].de1;
+      ra2 := Fcatalog.cfgshr.ConstL[i].ra2;
+      de2 := Fcatalog.cfgshr.ConstL[i].de2;
+      pmok := Fcatalog.cfgshr.ConstL[i].pm;
+      if pmok and cfgsc.PMon then
+      begin
+        propermotion(ra1, de1, dyear, Fcatalog.cfgshr.ConstL[i].pmra1,
+          Fcatalog.cfgshr.ConstL[i].pmde1, Fcatalog.cfgshr.ConstL[i].pxrv1,
+          Fcatalog.cfgshr.ConstL[i].px1, Fcatalog.cfgshr.ConstL[i].rv1,distfact);
+        propermotion(ra2, de2, dyear, Fcatalog.cfgshr.ConstL[i].pmra2,
+          Fcatalog.cfgshr.ConstL[i].pmde2, Fcatalog.cfgshr.ConstL[i].pxrv2,
+          Fcatalog.cfgshr.ConstL[i].px2, Fcatalog.cfgshr.ConstL[i].rv2,distfact);
+      end;
+      precession(jd2000, cfgsc.JDChart, ra1, de1);
+      if cfgsc.ApparentPos then
+        apparent_equatorial(ra1, de1, cfgsc, True, False);
+      projection(ra1, de1, xx1, yy1, True, cfgsc);
+      precession(jd2000, cfgsc.JDChart, ra2, de2);
+      if cfgsc.ApparentPos then
+        apparent_equatorial(ra2, de2, cfgsc, True, False);
+      projection(ra2, de2, xx2, yy2, True, cfgsc);
+      r1 := rad2deg * abs(xx1 - xx2);
+      r2 := rad2deg * abs(yy1 - yy2);
+      d := sqrt(r1 * r1 + r2 * r2);
+      if (xx1 < 199) and (xx2 < 199) and (d < 50) then
+      begin
+        WindowXY(xx1, yy1, x1, y1, cfgsc);
+        WindowXY(xx2, yy2, x2, y2, cfgsc);
+        if (intpower(x2 - x1, 2) + intpower(y2 - y1, 2)) < cfgsc.x2 then
+          FPlot.PlotLine(x1, y1, x2, y2, color, cfgsc.LineWidthConstL, cfgsc.StyleConstL);
+      end;
     end;
   end;
   Result := True;

@@ -207,7 +207,7 @@ type
     function SearchVarStar(Num: string; var ar1, de1: double): boolean;
     function SearchVarAlias(Num: string; out buf:string): boolean;
     function SearchLines(Num: string; var ar1, de1: double): boolean;
-    function SearchConstellation(Num: string; var ar1, de1: double): boolean;
+    function SearchConstellation(Num: string; var ar1, de1: double; var shortname:string): boolean;
     function SearchConstAbrev(Num: string; var ar1, de1: double): boolean;
     function FindAtPos(cat: integer; x1, y1, x2, y2: double;
       nextobj, truncate, searchcenter: boolean; cfgsc: Tconf_skychart; var rec: Gcatrec): boolean;
@@ -4602,7 +4602,7 @@ begin
   end;
 end;
 
-function Tcatalog.SearchConstellation(Num: string; var ar1, de1: double): boolean;
+function Tcatalog.SearchConstellation(Num: string; var ar1, de1: double; var shortname:string): boolean;
 var
   i: integer;
 begin
@@ -4611,6 +4611,7 @@ begin
     if trim(cfgshr.ConstelName[i, 2]) = trim(Num) then
     begin
       Result := True;
+      shortname := cfgshr.ConstelName[i, 1];
       ar1 := cfgshr.ConstelPos[i].ra;
       de1 := cfgshr.ConstelPos[i].de;
       break;
@@ -5779,6 +5780,7 @@ begin
             else
               cfgshr.ConstLepoch := rec.options.Epoch;
           end;
+          cfgshr.ConstL[i].constname := uppercase(copy(trim(row[0]),1,3));
           cfgshr.ConstL[i].pm := True;
           cfgshr.ConstL[i].ra1 := deg2rad * rec.ra;
           cfgshr.ConstL[i].de1 := deg2rad * rec.Dec;
@@ -5818,6 +5820,7 @@ begin
               WriteTrace('Error in file ' + fname + ' , row ' + IntToStr(i + 1));
             continue;
           end;
+          cfgshr.ConstL[i].constname := '';
           cfgshr.ConstL[i].ra1 := deg2rad * ra1 * 15;
           cfgshr.ConstL[i].de1 := deg2rad * de1;
           cfgshr.ConstL[i].ra2 := deg2rad * ra2 * 15;
