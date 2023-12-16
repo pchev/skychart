@@ -5769,7 +5769,7 @@ end;
 
 procedure Tskychart.DrawMeridian;
 var
-  ra, de: double;
+  ra, de, h, az: double;
   col, n, i, w: integer;
   x1, y1: double;
   xx, yy, xxp, yyp: single;
@@ -5799,11 +5799,33 @@ begin
       end;
     end;
   end;
-  // horizon
+  // horizon 0°
   xxp := 999999;
   for n := 0 to 360 do
   begin
     Hz2Eq(deg2rad * n, 0, ra, de, cfgsc);
+    ra := cfgsc.CurST - ra;
+    projection(ra, de, x1, y1, False, cfgsc);
+    if (x1 < 200) and (y1 < 200) then
+    begin
+      WindowXY(x1, y1, xx, yy, cfgsc);
+      if (xxp < 999999) and ((intpower(xxp - xx, 2) + intpower(yyp - yy, 2)) < cfgsc.x2) and
+        ((xx > -cfgsc.Xmax) and (xx < 2 * cfgsc.Xmax) and (yy > -cfgsc.Ymax) and (yy < 2 * cfgsc.Ymax)) then
+      begin
+        Fplot.Plotline(xxp, yyp, xx, yy, col, w, cfgsc.StyleGrid);
+      end;
+      xxp := xx;
+      yyp := yy;
+    end;
+  end;
+  // local horizon
+  xxp := 999999;
+  if cfgsc.ShowHorizon then
+  for n := 1 to 361 do
+  begin
+    h := cfgsc.horizonlist[n];
+    az := deg2rad * rmod(360 + n - 1 - 180, 360);
+    Hz2Eq(az, h, ra, de, cfgsc);
     ra := cfgsc.CurST - ra;
     projection(ra, de, x1, y1, False, cfgsc);
     if (x1 < 200) and (y1 < 200) then
