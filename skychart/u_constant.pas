@@ -1620,7 +1620,7 @@ const
     ('CLOSECHART', '2', 'chart_name'),
     ('SELECTCHART', '3', 'chart_name'),
     ('LISTCHART', '4', ''),
-    ('SEARCH', '5', 'object_name'),
+    ('SEARCH', '5', 'object_name LOCK'),
     ('GETMSGBOX', '6', ''),
     ('GETCOORBOX', '7', ''),
     ('GETINFOBOX', '8', ''),
@@ -1640,7 +1640,7 @@ const
     );
 
   // Chart Commands
-  numcmd = 131;
+  numcmd = 132;
   cmdlist: array[1..numcmd, 1..3] of string = (
     ('ZOOM+', '1', ''),
     ('ZOOM-', '2', ''),
@@ -1774,7 +1774,8 @@ const
     ('GETSCOPESLEWING', '128', 'True/False'),
     ('GETFRAMES', '129', ''),
     ('SETCHARTEQUINOX', '130', 'DATE/J2000'),
-    ('SETFIELDNUMBER', '131', '1..10')
+    ('SETFIELDNUMBER', '131', '1..10'),
+    ('TRACKOBJECT', '132', 'ON/OFF')
     );
 
 // Database

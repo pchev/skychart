@@ -822,7 +822,7 @@ type
     function GetScopeRates(cname: string; arg: TStringList): string;
     procedure SendInfo(Sender: TObject; origin, str: string);
     function GenericSearch(cname, Num: string; var ar1, de1: double;
-      idresult: boolean = True): boolean;
+      idresult: boolean = True; track: boolean = False): boolean;
     procedure ObsListSearch(obj: string; ra, de: double);
     procedure ObsListSlew(obj: string; ra, de: double);
     procedure GetObjectCoord(obj: string; var lbl: string; var ra, de: double);
@@ -10217,7 +10217,7 @@ begin
 end;
 
 function Tf_main.GenericSearch(cname, Num: string; var ar1, de1: double;
-  idresult: boolean = True): boolean;
+  idresult: boolean = True; track: boolean = False): boolean;
 var
   ok: boolean;
   i: integer;
@@ -10356,6 +10356,10 @@ begin
       if ok and idresult then
       begin
         IdentSearchResult(num, stype, itype, ar1, de1);
+        if track then begin
+          sc.cfgsc.TrackOn := True;
+          UpdateBtn(sc.cfgsc.flipx, sc.cfgsc.flipy, Connect1.Checked, MultiFrame1.ActiveObject);
+        end;
       end;
     end;
   finally
@@ -10719,6 +10723,7 @@ var
   ar1, de1: double;
   chart: TFrame;
   child: TChildFrame;
+  ok: Boolean;
 begin
   Result := msgFailed;
   if VerboseMsg then
@@ -10743,10 +10748,13 @@ begin
     2: Result := CloseChart(arg[1]);
     3: Result := SelectChart(arg[1]);
     4: Result := ListChart;
-    5: if Genericsearch(cname, arg[1], ar1, de1) then
-        Result := msgOK
-      else
-        Result := msgNotFound;
+    5: begin
+       ok := uppercase(arg[2])='LOCK';
+       if Genericsearch(cname, arg[1], ar1, de1, True, ok) then
+         Result := msgOK
+       else
+         Result := msgNotFound;
+      end;
     6: Result := msgOK + blank + P1L1.Caption;
     7: Result := msgOK + blank + P0L1.Caption;
     8: Result := msgOK + blank + topmsg;

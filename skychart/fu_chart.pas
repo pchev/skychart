@@ -408,6 +408,7 @@ type
     function cmd_MoveScope(RA, DE: string): string;
     function cmd_MoveScopeH(H, D: string): string;
     function cmd_TrackTelescope(onoff: string): string;
+    function cmd_TrackObject(onoff: string): string;
     function cmd_ObslistLoad(fn: string): string;
     function cmd_ObslistFirst: string;
     function cmd_ObslistLast: string;
@@ -6806,6 +6807,7 @@ begin
     129: Result := cmd_GetFrames;
     130: Result := cmd_SetChartEquinox(arg[1]);
     131: Result := cmd_SetFieldnumber(arg[1]);
+    132: Result := cmd_TrackObject(arg[1]);
     else
       Result := msgFailed + ' Bad command name';
   end;
@@ -8256,6 +8258,33 @@ begin
      sc.cfgsc.ObsName:='Telescope';
   end;
   AutoRefresh;
+end;
+
+function Tf_chart.cmd_TrackObject(onoff: string): string;
+begin
+  if onoff = 'ON' then
+  begin
+    if (((sc.cfgsc.TrackType >= TTplanet) and (sc.cfgsc.TrackType <= TTasteroid)) or
+          (sc.cfgsc.TrackType = TTequat) or (sc.cfgsc.TrackType = TTbody)) and (sc.cfgsc.TrackName <> '') then
+        begin
+          sc.cfgsc.TrackOn := True;
+          Refresh(True, False);
+          result:=msgOK;
+        end
+        else
+        begin
+          sc.cfgsc.TrackOn := False;
+          result:=msgFailed;
+        end;
+  end
+  else if onoff = 'OFF' then
+  begin
+    sc.cfgsc.TrackOn := False;
+    result:=msgOK;
+  end
+  else begin
+    result:=msgFailed;
+  end;
 end;
 
 end.
