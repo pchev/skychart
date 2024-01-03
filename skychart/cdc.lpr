@@ -48,8 +48,8 @@ uses
   fu_config_pictures, fu_config_solsys, fu_config_system, fu_config_calendar,
   pu_config_calendar, pu_planetinfo, pu_imglist, cu_plansat, cu_smallsat,
   pu_fov, pu_edittoolbar, fu_script, pu_scriptengine, pu_pascaleditor,
-  uPSI_CheckLst, upsi_translation, u_scriptsocket, pu_scriptconfig, pu_tour,
-  UScaleDPI, u_ccdconfig, u_orbits, u_speech, cu_healpix, cu_ascomrest, pu_mosaic, pu_prepoint, calceph, cu_calceph;
+  uPSI_CheckLst, upsi_translation, u_scriptsocket, pu_scriptconfig, pu_tour, pu_updcatalog,
+  UScaleDPI, u_ccdconfig, u_orbits, u_speech, cu_healpix, cu_ascomrest, pu_mosaic, pu_prepoint, calceph, cu_calceph, cu_httpdownload;
   
 var i : integer;
     buf, p, step : string;

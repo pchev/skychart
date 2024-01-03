@@ -1495,7 +1495,7 @@ type
 
 // pseudo-constant only here
 var
-  ConfigAppdir, ConfigPrivateDir, Appdir, PrivateDir, SampleDir,
+  ConfigAppdir, ConfigPrivateDir, Appdir, PrivateDir, SampleDir, PrivateCatalogDir,
   SatDir, SatArchiveDir, ArchiveDir, TempDir, ZoneDir, HomeDir, VODir,
   ScriptDir, PrivateScriptDir: string;
   FirstChart: string;

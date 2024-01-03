@@ -38,7 +38,7 @@ uses
   lclstrconsts, XMLConf, u_help, u_translation, cu_catalog, cu_planet, cu_fits, cu_calceph,
   cu_database, fu_chart, cu_tcpserver, pu_config_time, pu_config_observatory, pu_precession,
   pu_config_display, pu_config_pictures, pu_indigui, pu_config_catalog, pu_prepoint,
-  pu_config_solsys, pu_config_chart, pu_config_system, pu_config_internet,
+  pu_config_solsys, pu_config_chart, pu_config_system, pu_config_internet, pu_updcatalog,
   cu_radec, pu_config_calendar, pu_planetinfo, cu_sampclient, cu_vodata,
   pu_obslist, fu_script, pu_scriptengine, u_constant, u_util, UScaleDPI,
   u_ccdconfig, blcksock, synsock, dynlibs, FileUtil, ExtendedNotebook, LCLVersion, LCLType,
@@ -53,6 +53,7 @@ type
   { Tf_main }
 
   Tf_main = class(TForm)
+    MenuUpdCatalog: TMenuItem;
     PolePrecession: TAction;
     FileRenameChart: TAction;
     LockMagnitude: TAction;
@@ -509,6 +510,7 @@ type
     procedure MenuToolboxConfigClick(Sender: TObject);
     procedure MenuToolboxClick(Sender: TObject);
     procedure MenuUpdAsteroidClick(Sender: TObject);
+    procedure MenuUpdCatalogClick(Sender: TObject);
     procedure MenuUpdCometClick(Sender: TObject);
     procedure MenuUpdDeltaTClick(Sender: TObject);
     procedure MenuUpdGrsClick(Sender: TObject);
@@ -769,6 +771,7 @@ type
     procedure DisableAsteroid(Sender: TObject);
     procedure UpdateAstExt;
     procedure PolePrecessionChange(Sender: TObject);
+    procedure SaveCatalogConfig(Sender: TObject);
 
   public
     { Public declarations }
@@ -2433,6 +2436,11 @@ begin
     CreateDir(PrivateScriptDir);
   if not directoryexists(PrivateScriptDir) then
     forcedirectories(PrivateScriptDir);
+  PrivateCatalogDir := slash(PrivateDir) + 'catalog';
+  if not directoryexists(PrivateCatalogDir) then
+    CreateDir(PrivateCatalogDir);
+  if not directoryexists(PrivateCatalogDir) then
+    forcedirectories(PrivateCatalogDir);
   if VerboseMsg then
     debugln('appdir=' + appdir);
   // Be sur the data directory exists
@@ -6866,7 +6874,7 @@ begin
   catalog.cfgcat.starcatfield[gaia - BaseStar, 1] := 0;
   catalog.cfgcat.starcatfield[gaia - BaseStar, 2] := 6;
   catalog.cfgcat.GaiaLevel:=1;
-  catalog.cfgcat.LimitGaiaCount:=true;
+  catalog.cfgcat.LimitGaiaCount:=false;
 
   for i := 1 to maxvarstarcatalog do
   begin
@@ -12232,6 +12240,22 @@ procedure Tf_main.MenuUpdAsteroidClick(Sender: TObject);
 begin
   UpdateAstExt;
   SetupSolsysPage(3, True);
+end;
+
+procedure Tf_main.MenuUpdCatalogClick(Sender: TObject);
+begin
+  if f_updcatalog=nil then begin
+     Application.CreateForm(Tf_updcatalog, f_updcatalog);
+     f_updcatalog.onSaveConfig := SaveCatalogConfig;
+  end;
+  f_updcatalog.catalog:=catalog;
+  f_updcatalog.cmain:=cfgm;
+  f_updcatalog.Show;
+end;
+
+procedure Tf_main.SaveCatalogConfig(Sender: TObject);
+begin
+  SaveDefault;
 end;
 
 procedure Tf_main.UpdateAstExt;

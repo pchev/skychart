@@ -1,0 +1,341 @@
+object f_updcatalog: Tf_updcatalog
+  Left = 369
+  Height = 527
+  Top = 30
+  Width = 753
+  ClientHeight = 527
+  ClientWidth = 753
+  FormStyle = fsStayOnTop
+  OnCloseQuery = FormCloseQuery
+  OnCreate = FormCreate
+  OnDestroy = FormDestroy
+  OnShow = FormShow
+  object Panel1: TPanel
+    Left = 0
+    Height = 34
+    Top = 0
+    Width = 753
+    Align = alTop
+    Caption = 'Select catalog to install or remove'
+    TabOrder = 0
+  end
+  object Panel2: TPanel
+    Left = 0
+    Height = 95
+    Top = 432
+    Width = 753
+    Align = alBottom
+    ClientHeight = 95
+    ClientWidth = 753
+    TabOrder = 1
+    object PanelDownload: TPanel
+      Left = 1
+      Height = 50
+      Top = 1
+      Width = 751
+      Align = alTop
+      ClientHeight = 50
+      ClientWidth = 751
+      TabOrder = 0
+      object LabelProgress: TLabel
+        Left = 8
+        Height = 18
+        Top = 16
+        Width = 87
+        Caption = 'LabelProgress'
+        ParentColor = False
+      end
+      object ButtonAbort: TButton
+        Left = 416
+        Height = 25
+        Top = 12
+        Width = 75
+        Caption = 'Abort'
+        OnClick = ButtonAbortClick
+        TabOrder = 0
+      end
+    end
+    object ButtonClose: TButton
+      Left = 664
+      Height = 25
+      Top = 56
+      Width = 75
+      Caption = 'Close'
+      OnClick = ButtonCloseClick
+      TabOrder = 1
+    end
+  end
+  object PageControl1: TPageControl
+    Left = 0
+    Height = 398
+    Top = 34
+    Width = 753
+    ActivePage = TabSheetStar
+    Align = alClient
+    TabIndex = 0
+    TabOrder = 2
+    object TabSheetStar: TTabSheet
+      Caption = 'Stars'
+      ClientHeight = 363
+      ClientWidth = 749
+      object GridStar: TStringGrid
+        Left = 0
+        Height = 363
+        Top = 0
+        Width = 749
+        Align = alClient
+        AutoFillColumns = True
+        Columns = <        
+          item
+            ButtonStyle = cbsButtonColumn
+            Color = clBtnFace
+            MinSize = 25
+            MaxSize = 25
+            SizePriority = 0
+            Title.Caption = ''
+            Width = 25
+          end        
+          item
+            MinSize = 150
+            ReadOnly = True
+            SizePriority = 0
+            Title.Caption = 'Status'
+            Width = 150
+          end        
+          item
+            MinSize = 200
+            ReadOnly = True
+            SizePriority = 0
+            Title.Caption = 'Catalog'
+            Width = 200
+          end        
+          item
+            MinSize = 200
+            MaxSize = 400
+            ReadOnly = True
+            Title.Caption = 'Description'
+            Width = 270
+          end        
+          item
+            MinSize = 100
+            MaxSize = 100
+            ReadOnly = True
+            SizePriority = 0
+            Title.Caption = 'Size'
+            Width = 100
+          end>
+        DefaultColWidth = 120
+        FixedCols = 0
+        Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goColSizing, goAlwaysShowEditor, goThumbTracking, goCellHints, goCellEllipsis]
+        TabOrder = 0
+        OnButtonClick = GridButtonClick
+        ColWidths = (
+          25
+          150
+          200
+          270
+          100
+        )
+      end
+    end
+    object TabSheetVar: TTabSheet
+      Caption = 'Variable stars'
+      ClientHeight = 363
+      ClientWidth = 749
+      object GridVar: TStringGrid
+        Left = 0
+        Height = 363
+        Top = 0
+        Width = 749
+        Align = alClient
+        AutoFillColumns = True
+        Columns = <        
+          item
+            ButtonStyle = cbsButtonColumn
+            Color = clBtnFace
+            MinSize = 25
+            MaxSize = 25
+            SizePriority = 0
+            Title.Caption = ''
+            Width = 25
+          end        
+          item
+            MinSize = 150
+            ReadOnly = True
+            SizePriority = 0
+            Title.Caption = 'Status'
+            Width = 150
+          end        
+          item
+            MinSize = 200
+            ReadOnly = True
+            SizePriority = 0
+            Title.Caption = 'Catalog'
+            Width = 200
+          end        
+          item
+            MinSize = 200
+            MaxSize = 400
+            ReadOnly = True
+            Title.Caption = 'Description'
+            Width = 270
+          end        
+          item
+            MinSize = 100
+            MaxSize = 100
+            ReadOnly = True
+            SizePriority = 0
+            Title.Caption = 'Size'
+            Width = 100
+          end>
+        DefaultColWidth = 120
+        FixedCols = 0
+        Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goColSizing, goTabs, goAlwaysShowEditor, goThumbTracking, goCellHints, goCellEllipsis]
+        TabOrder = 0
+        OnButtonClick = GridButtonClick
+        ColWidths = (
+          25
+          150
+          200
+          270
+          100
+        )
+      end
+    end
+    object TabSheetDouble: TTabSheet
+      Caption = 'Double stars'
+      ClientHeight = 363
+      ClientWidth = 749
+      object GridDouble: TStringGrid
+        Left = 0
+        Height = 363
+        Top = 0
+        Width = 749
+        Align = alClient
+        AutoFillColumns = True
+        Columns = <        
+          item
+            ButtonStyle = cbsButtonColumn
+            Color = clBtnFace
+            MinSize = 25
+            MaxSize = 25
+            SizePriority = 0
+            Title.Caption = ''
+            Width = 25
+          end        
+          item
+            MinSize = 150
+            ReadOnly = True
+            SizePriority = 0
+            Title.Caption = 'Status'
+            Width = 150
+          end        
+          item
+            MinSize = 200
+            ReadOnly = True
+            SizePriority = 0
+            Title.Caption = 'Catalog'
+            Width = 200
+          end        
+          item
+            MinSize = 200
+            MaxSize = 400
+            ReadOnly = True
+            Title.Caption = 'Description'
+            Width = 270
+          end        
+          item
+            MinSize = 100
+            MaxSize = 100
+            ReadOnly = True
+            SizePriority = 0
+            Title.Caption = 'Size'
+            Width = 100
+          end>
+        DefaultColWidth = 120
+        FixedCols = 0
+        Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goColSizing, goTabs, goAlwaysShowEditor, goThumbTracking, goCellHints, goCellEllipsis]
+        TabOrder = 0
+        OnButtonClick = GridButtonClick
+        ColWidths = (
+          25
+          150
+          200
+          270
+          100
+        )
+      end
+    end
+    object TabSheetDSO: TTabSheet
+      Caption = 'DSO'
+      ClientHeight = 363
+      ClientWidth = 749
+      object GridDSO: TStringGrid
+        Left = 0
+        Height = 363
+        Top = 0
+        Width = 749
+        Align = alClient
+        AutoFillColumns = True
+        Columns = <        
+          item
+            ButtonStyle = cbsButtonColumn
+            Color = clBtnFace
+            MinSize = 25
+            MaxSize = 25
+            SizePriority = 0
+            Title.Caption = ''
+            Width = 25
+          end        
+          item
+            MinSize = 150
+            ReadOnly = True
+            SizePriority = 0
+            Title.Caption = 'Status'
+            Width = 150
+          end        
+          item
+            MinSize = 200
+            ReadOnly = True
+            SizePriority = 0
+            Title.Caption = 'Catalog'
+            Width = 200
+          end        
+          item
+            MinSize = 200
+            MaxSize = 400
+            ReadOnly = True
+            Title.Caption = 'Description'
+            Width = 270
+          end        
+          item
+            MinSize = 100
+            MaxSize = 100
+            ReadOnly = True
+            SizePriority = 0
+            Title.Caption = 'Size'
+            Width = 100
+          end>
+        DefaultColWidth = 120
+        FixedCols = 0
+        Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goColSizing, goTabs, goAlwaysShowEditor, goThumbTracking, goCellHints, goCellEllipsis]
+        TabOrder = 0
+        OnButtonClick = GridButtonClick
+        ColWidths = (
+          25
+          150
+          200
+          270
+          100
+        )
+      end
+    end
+  end
+  object EndInstallTimer: TTimer
+    Enabled = False
+    Interval = 2000
+    OnTimer = EndInstallTimerTimer
+    Left = 222
+    Top = 440
+  end
+end

@@ -4080,6 +4080,10 @@ object f_main: Tf_main
     end
     object SubUpdate: TMenuItem
       Caption = 'Update'
+      object MenuUpdCatalog: TMenuItem
+        Caption = 'Install catalog data'
+        OnClick = MenuUpdCatalogClick
+      end
       object MenuUpdSoft: TMenuItem
         Caption = 'Search software update'
         OnClick = MenuUpdSoftClick

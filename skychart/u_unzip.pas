@@ -20,6 +20,9 @@ uses
 
 function FileUnzip(fnzip, TempDir, fn: PChar): boolean;
 function FileUnzipAll(fnzip, TempDir: PChar): boolean;
+function FileUnzipWithPath(fnzip, TempDir: PChar; progress:TNotifyEvent=nil): boolean;
+
+var ProgressMessage: string;
 
 const
   CASESENSITIVITY = 0;
@@ -350,6 +353,7 @@ begin
   begin
 
     repeat
+      chdir(TempDir);
       ok := do_extract_currentfile(uf, opt_extract_without_path, opt_overwrite) = UNZ_OK;
       if ok then
         Inc(n);
@@ -364,5 +368,53 @@ begin
   unzClose(uf);
 end;
 
+function FileUnzipWithPath(fnzip, TempDir: PChar; progress:TNotifyEvent=nil): boolean;
+var
+  uf: unzFile;
+  olddir: string;
+  opt_extract_without_path, opt_overwrite: cint;
+  ok: boolean;
+  n,eok: integer;
+begin
+  Result := False;
+  ProgressMessage := '';
+  uf := unzOpen(fnzip);
+
+  if uf = nil then
+    exit;
+
+  olddir := GetCurrentDir;
+  chdir(TempDir);
+  opt_extract_without_path := 0;
+  opt_overwrite := 1;
+  n := 0;
+
+  if unzGoToFirstFile(uf) = UNZ_OK then
+  begin
+
+    repeat
+      chdir(TempDir);
+      ok := do_extract_currentfile(uf, opt_extract_without_path, opt_overwrite) = UNZ_OK;
+      if ok then
+        Inc(n);
+      ok := unzGoToNextFile(uf) = UNZ_OK;
+      if (progress<>nil)and((n mod 100) = 0) then begin
+        ProgressMessage:=inttostr(n)+' files extracted...';
+        progress(nil);
+      end;
+    until not ok;
+
+  end;
+  Result := n > 0;
+  chdir(olddir);
+  unzCloseCurrentFile(uf);
+  unzClose(uf);
+
+  if (progress<>nil) then begin
+    ProgressMessage:='Completed extraction of '+inttostr(n)+' files';
+    progress(nil);
+  end;
+
+end;
 
 end.
