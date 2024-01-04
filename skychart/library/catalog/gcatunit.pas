@@ -100,6 +100,7 @@ TCatOption = packed record
           altname  : Tvalid;
           altprefix: Tvalid;
           flabel   : Tlabellst;
+          Amplitudeflag: Integer;
           end;
 GCatrec = packed record
           ra,dec   : double ;
@@ -268,6 +269,7 @@ begin
   emptyrec.options.ObjType:=catheader.ObjType;
   emptyrec.options.LogSize:=catheader.LogSize;
   emptyrec.options.UsePrefix:=catheader.UsePrefix;
+  emptyrec.options.Amplitudeflag:=-1;
   for n:=1 to 10 do emptyrec.options.altname[n]:=(catheader.altname[n]=1);
   for n:=1 to 10 do emptyrec.options.altprefix[n]:=(catheader.AltPrefix[n]=1);
   emptyrec.options.flabel:=catheader.flabel;
@@ -298,6 +300,7 @@ begin
       if catheader.flen[10]>0 then emptyrec.variable.valid[vvSp]:=true;
       if catheader.flen[11]>0 then emptyrec.variable.valid[vvMagcode]:=true;
       if catheader.flen[12]>0 then emptyrec.variable.valid[vvComment]:=true;
+      for n:=1 to 10 do if trim(catheader.flabel[lOffsetStr+n])='f_min' then emptyrec.options.Amplitudeflag:=n;
       end;
   rtdbl : begin  // doubles stars 1
       if catheader.flen[3]>0 then emptyrec.double.valid[vdId]:=true;
