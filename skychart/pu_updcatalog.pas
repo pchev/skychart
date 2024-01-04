@@ -517,18 +517,26 @@ try
           end
           else if InstallInfo.cattype='double star' then
           begin
-
+            Fcatalog.cfgcat.dblstarcatpath[InstallInfo.catnum - BaseDbl] := slash(PrivateCatalogDir)+slash(InstallInfo.path);
+            Fcatalog.cfgcat.dblstarcatdef[InstallInfo.catnum - BaseDbl] := true;
+            Fcatalog.cfgcat.dblstarcatfield[InstallInfo.catnum - BaseDbl, 1] := InstallInfo.minlevel;
+            Fcatalog.cfgcat.dblstarcatfield[InstallInfo.catnum - BaseDbl, 2] := InstallInfo.maxlevel;
           end
           else if InstallInfo.cattype='variable star' then
           begin
-
+            Fcatalog.cfgcat.varstarcatpath[InstallInfo.catnum - BaseVar] := slash(PrivateCatalogDir)+slash(InstallInfo.path);
+            Fcatalog.cfgcat.varstarcatdef[InstallInfo.catnum - BaseVar] := true;
+            Fcatalog.cfgcat.varstarcatfield[InstallInfo.catnum - BaseVar, 1] := InstallInfo.minlevel;
+            Fcatalog.cfgcat.varstarcatfield[InstallInfo.catnum - BaseVar, 2] := InstallInfo.maxlevel;
           end
           else if InstallInfo.cattype='dso' then
           begin
-
+            Fcatalog.cfgcat.nebcatpath[InstallInfo.catnum - BaseNeb] := slash(PrivateCatalogDir)+slash(InstallInfo.path);;
+            Fcatalog.cfgcat.nebcatdef[InstallInfo.catnum - BaseNeb] := true;
+            Fcatalog.cfgcat.nebcatfield[InstallInfo.catnum - BaseNeb, 1] := InstallInfo.minlevel;
+            Fcatalog.cfgcat.nebcatfield[InstallInfo.catnum - BaseNeb, 2] := InstallInfo.maxlevel;
           end;
           if Assigned(FSaveConfig) then FSaveConfig(self);
-
         end;
 
      end
