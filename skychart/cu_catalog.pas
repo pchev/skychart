@@ -2179,7 +2179,7 @@ begin
         continue;
     end;
     if rec.options.Amplitudeflag>0 then begin
-      if rec.str[rec.options.Amplitudeflag]='(' then
+      if rec.str[rec.options.Amplitudeflag]<>' ' then
         rec.variable.magmin:=rec.variable.magmax+rec.variable.magmin;
     end;
     rec.ra := deg2rad * rec.ra;
