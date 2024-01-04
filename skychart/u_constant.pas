@@ -583,6 +583,7 @@ const
   URL_LEAPSECOND = 'https://www.ap-i.net/pub/skychart/deltat/leap-seconds.list';
   URL_IERS = 'https://www.ap-i.net/pub/skychart/deltat/finals.data';
 
+  URL_CATALOG_LIST = 'https://vega.ap-i.net/pub/catalog/catalog_list.txt';
 
   URL_TLE = 'https://www.space-track.org';
   URL_QUICKSAT = 'https://www.mmccants.org';

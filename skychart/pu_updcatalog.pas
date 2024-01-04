@@ -24,7 +24,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 
 interface
 
-uses u_constant, u_util, cu_httpdownload, u_unzip, cu_catalog, FileUtil,
+uses u_constant, u_util, UScaleDPI, downloaddialog, cu_httpdownload, u_unzip, cu_catalog, FileUtil,
   Classes, SysUtils, Forms, Controls, Graphics, Dialogs, ExtCtrls, Grids, ComCtrls, StdCtrls;
 
 type
@@ -50,6 +50,7 @@ type
     GridVar: TStringGrid;
     GridDouble: TStringGrid;
     GridDSO: TStringGrid;
+    LabelAction: TLabel;
     LabelProgress: TLabel;
     PageControl1: TPageControl;
     Panel1: TPanel;
@@ -78,6 +79,7 @@ type
     FRunning: boolean;
     procedure ClearGrid(g:TStringGrid);
     procedure LoadCatalogList;
+    procedure UpdateList;
     procedure ShowStatus(grid: TStringGrid);
     procedure InstallDlg(info: TCatInfo);
     procedure UninstallDlg(info: TCatInfo);
@@ -195,7 +197,8 @@ end;
 
 procedure Tf_updcatalog.FormCreate(Sender: TObject);
 begin
- // http:= TFPHTTPClient.Create(nil);
+  ScaleDPI(Self);
+ // SetLang;
 end;
 
 procedure Tf_updcatalog.FormShow(Sender: TObject);
@@ -211,7 +214,6 @@ begin
   ClearGrid(GridVar);
   ClearGrid(GridDouble);
   ClearGrid(GridDSO);
-//  http.Free;
 end;
 
 procedure Tf_updcatalog.ButtonCloseClick(Sender: TObject);
@@ -241,7 +243,7 @@ var f: textfile;
     row: Tstringlist;
     grid: TStringGrid;
 begin
-  { #todo : download, refresh }
+  UpdateList;
   ClearGrid(GridStar);
   ClearGrid(GridVar);
   ClearGrid(GridDouble);
@@ -254,6 +256,7 @@ begin
     ReadLn(f,buf);
     if copy(buf,1,1)='#' then continue;
     Splitrec2(buf,';',row);
+    if row.Count<>12 then continue;
     if row[1] > cdcver then continue; // skip catalog not supported by this version of the program
     // type of object
     if row[0]='star' then grid:=GridStar
@@ -276,6 +279,62 @@ begin
   ShowStatus(GridVar);
   ShowStatus(GridDouble);
   ShowStatus(GridDSO);
+end;
+
+procedure Tf_updcatalog.UpdateList;
+var
+  dl: TDownloadDialog;
+  fn: string;
+  ft: TDateTime;
+  doDownload: boolean;
+begin
+  fn := slash(PrivateCatalogDir)+'catalog_list.txt';
+  doDownload:=true;
+  if FileExists(fn) then begin
+    if FileAge(fn,ft) then begin
+      doDownload:=(ft<(now-1));
+    end;
+  end;
+  if doDownload then begin
+    dl := TDownloadDialog.Create(self);
+    dl.ScaleDpi:=UScaleDPI.scale;
+    try
+      if Fcmain.HttpProxy then
+      begin
+        dl.SocksProxy := '';
+        dl.SocksType := '';
+        dl.HttpProxy := Fcmain.ProxyHost;
+        dl.HttpProxyPort := Fcmain.ProxyPort;
+        dl.HttpProxyUser := Fcmain.ProxyUser;
+        dl.HttpProxyPass := Fcmain.ProxyPass;
+      end
+      else if Fcmain.SocksProxy then
+      begin
+        dl.HttpProxy := '';
+        dl.SocksType := Fcmain.SocksType;
+        dl.SocksProxy := Fcmain.ProxyHost;
+        dl.HttpProxyPort := Fcmain.ProxyPort;
+        dl.HttpProxyUser := Fcmain.ProxyUser;
+        dl.HttpProxyPass := Fcmain.ProxyPass;
+      end
+      else
+      begin
+        dl.SocksProxy := '';
+        dl.SocksType := '';
+        dl.HttpProxy := '';
+        dl.HttpProxyPort := '';
+        dl.HttpProxyUser := '';
+        dl.HttpProxyPass := '';
+      end;
+      dl.ConfirmDownload := False;
+      dl.QuickCancel := true;
+      dl.URL := URL_CATALOG_LIST;
+      dl.SaveToFile := fn;
+      dl.Execute;
+    finally
+      dl.Free;
+    end;
+  end;
 end;
 
 procedure Tf_updcatalog.ShowStatus(grid: TStringGrid);
@@ -391,6 +450,7 @@ begin
   httpdownload.onDownloadError:=@DownloadError;
   PanelDownload.Visible:=true;
   ButtonAbort.Visible:=true;
+  LabelAction.Caption:='Installing '+info.catname+Ellipsis;
   LabelProgress.Caption:='';
   InstallInfo:=info;
   httpdownload.Start;

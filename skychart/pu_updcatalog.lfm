@@ -40,26 +40,36 @@ object f_updcatalog: Tf_updcatalog
       object LabelProgress: TLabel
         Left = 8
         Height = 18
-        Top = 16
+        Top = 23
         Width = 87
         Caption = 'LabelProgress'
         ParentColor = False
       end
       object ButtonAbort: TButton
-        Left = 416
+        Left = 656
         Height = 25
-        Top = 12
+        Top = 16
         Width = 75
+        Anchors = [akTop, akRight]
         Caption = 'Abort'
         OnClick = ButtonAbortClick
         TabOrder = 0
       end
+      object LabelAction: TLabel
+        Left = 8
+        Height = 18
+        Top = 3
+        Width = 72
+        Caption = 'LabelAction'
+        ParentColor = False
+      end
     end
     object ButtonClose: TButton
-      Left = 664
+      Left = 656
       Height = 25
       Top = 56
       Width = 75
+      Anchors = [akTop, akRight]
       Caption = 'Close'
       OnClick = ButtonCloseClick
       TabOrder = 1
