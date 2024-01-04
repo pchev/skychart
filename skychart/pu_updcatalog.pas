@@ -85,6 +85,7 @@ type
     procedure Uninstall(info: TCatInfo);
     procedure ShowProgress;
     procedure DownloadComplete;
+    procedure DownloadError;
     procedure UnzipProgress(Sender : TObject);
   public
     property cmain: Tconf_main read Fcmain write Fcmain;
@@ -370,24 +371,24 @@ begin
   httpdownload:=THTTPBigDownload.Create(true);
   if Fcmain.HttpProxy then
   begin
-    httpdownload.http.Proxy.Host:=Fcmain.ProxyHost;
-    httpdownload.http.Proxy.Port:=StrToIntDef(Fcmain.ProxyPort,0);
-    httpdownload.http.Proxy.UserName:=Fcmain.ProxyUser;
-    httpdownload.http.Proxy.Password:=Fcmain.ProxyPass;
+    httpdownload.Proxy.Host:=Fcmain.ProxyHost;
+    httpdownload.Proxy.Port:=StrToIntDef(Fcmain.ProxyPort,0);
+    httpdownload.Proxy.UserName:=Fcmain.ProxyUser;
+    httpdownload.Proxy.Password:=Fcmain.ProxyPass;
   end
   else
   begin
-    httpdownload.http.Proxy.Host:='';
-    httpdownload.http.Proxy.Port:=0;
-    httpdownload.http.Proxy.UserName:='';
-    httpdownload.http.Proxy.Password:='';
+    httpdownload.Proxy.Host:='';
+    httpdownload.Proxy.Port:=0;
+    httpdownload.Proxy.UserName:='';
+    httpdownload.Proxy.Password:='';
   end;
-  httpdownload.http.AllowRedirect:=true;
   fn:=slash(TempDir)+'catalog.zip';
   httpdownload.url:=info.url;
-  httpdownload.fn:=fn;
+  httpdownload.filename:=fn;
   httpdownload.onProgress:=@ShowProgress;
   httpdownload.onDownloadComplete:=@DownloadComplete;
+  httpdownload.onDownloadError:=@DownloadError;
   PanelDownload.Visible:=true;
   ButtonAbort.Visible:=true;
   LabelProgress.Caption:='';
@@ -401,7 +402,7 @@ var f: textfile;
 begin
 try
   ButtonAbort.Visible:=false;
-  fn:=httpdownload.fn;
+  fn:=httpdownload.filename;
   if httpdownload.HttpResult and FileExists(fn) then
   begin
      if FileUnzipWithPath(PChar(fn), PChar(PrivateCatalogDir), @UnzipProgress) then
@@ -454,6 +455,15 @@ finally
 end;
 end;
 
+procedure Tf_updcatalog.DownloadError;
+begin
+try
+ ShowMessage('Download error: '+httpdownload.HttpErr);
+finally
+  EndInstallTimer.Enabled:=true;
+end;
+end;
+
 procedure Tf_updcatalog.EndInstallTimerTimer(Sender: TObject);
 begin
   EndInstallTimer.Enabled:=false;
@@ -465,9 +475,7 @@ end;
 
 procedure Tf_updcatalog.ButtonAbortClick(Sender: TObject);
 begin
-  httpdownload.HttpErr:='Aborted by user';
-  httpdownload.HttpResult:=false;
-  httpdownload.http.Terminate;
+  httpdownload.Abort;
 end;
 
 procedure Tf_updcatalog.ShowProgress;

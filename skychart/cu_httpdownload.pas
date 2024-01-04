@@ -19,6 +19,9 @@ You should have received a copy of the GNU General Public License
 along with this program; if not, write to the Free Software
 Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 }
+{
+  download a file, directly to disk file, in a non-blocking thread
+}
 
 {$mode ObjFPC}{$H+}
 
@@ -29,20 +32,30 @@ uses  fphttpclient, opensslsockets,
 
 type   THTTPBigDownload = class(TThread)
   private
+    http: TFPHTTPClient;
     FUpdateSize: int64;
     FMillis: QWord;
-    FDownloadComplete, FProgress: TThreadMethod;
+    Furl,Ffn: string;
+    FHttpResult: boolean;
+    FHttpErr: string;
+    FProgressText: string;
+    FDownloadComplete, FDownloadError, FProgress: TThreadMethod;
+    function GetProxy: TProxyData;
+    procedure SetProxy(value: TProxyData);
+    procedure HttpProgress(Sender: TObject; const ContentLength, CurrentPos: Int64);
   public
-    http: TFPHTTPClient;
-    url,fn: string;
-    HttpErr: string;
-    progresstext: string;
-    HttpResult: boolean;
     constructor Create(CreateSuspended: boolean);
     procedure Execute; override;
-    procedure HttpProgress(Sender: TObject; const ContentLength, CurrentPos: Int64);
+    procedure Abort;
+    property url: string read Furl write Furl;
+    property filename: string read Ffn write Ffn;
+    property ProgressText: string read FProgressText;
+    property HttpResult: boolean read FHttpResult;
+    property HttpErr: string read FHttpErr;
+    Property Proxy : TProxyData Read GetProxy Write SetProxy;
     property onProgress: TThreadMethod read FProgress write FProgress;
     property onDownloadComplete: TThreadMethod read FDownloadComplete write FDownloadComplete;
+    property onDownloadError: TThreadMethod read FDownloadError write FDownloadError;
   end;
 
 implementation
@@ -52,22 +65,34 @@ begin
  inherited Create(CreateSuspended);
  FreeOnTerminate := True;
  http:=TFPHTTPClient.Create(nil);
+ http.AllowRedirect:=true;
  http.OnDataReceived:=@HttpProgress;
+end;
+
+function THTTPBigDownload.GetProxy: TProxyData;
+begin
+  result:=http.Proxy;
+end;
+
+procedure THTTPBigDownload.SetProxy(value: TProxyData);
+begin
+  http.Proxy.Assign(value);
 end;
 
 procedure THTTPBigDownload.Execute;
 begin
 try
-  HttpErr:='';
-  HttpResult:=true;
+  FHttpErr:='';
+  FHttpResult:=true;
   FMillis := GetTickCount64;
-  http.Get(url, fn);
-  Synchronize(FDownloadComplete);
+  http.Get(Furl, Ffn);
+  if assigned(FDownloadComplete) then Synchronize(FDownloadComplete);
   FreeAndNil(http);
 except
   on E: Exception do begin
-    HttpErr:=E.Message;
-    HttpResult:=false;
+    FHttpErr:=E.Message;
+    FHttpResult:=false;
+    if assigned(FDownloadError) then Synchronize(FDownloadError);
   end;
 end;
 end;
@@ -84,33 +109,40 @@ begin
     FUpdateSize := CurrentPos;
 
     if CurrentPos<1024 then
-      progresstext := format('Read Bytes: %.0n', [1.0 * CurrentPos])
+      FProgressText := format('Read Bytes: %.0n', [1.0 * CurrentPos])
     else if CurrentPos<(1024*1024) then
-      progresstext := format('Read KB: %.1f', [CurrentPos / 1024])
+      FProgressText := format('Read KB: %.1f', [CurrentPos / 1024])
     else
-      progresstext := format('Read MB: %.1f', [CurrentPos / 1024 / 1024]);
+      FProgressText := format('Read MB: %.1f', [CurrentPos / 1024 / 1024]);
 
     if ContentLength > 0 then begin
       if ContentLength<1024 then
-        progresstext := progresstext + format(' of %.0n (%5.2f%%)', [1.0 * ContentLength, CurrentPos * 100 / ContentLength])
+        FProgressText := FProgressText + format(' of %.0n (%5.2f%%)', [1.0 * ContentLength, CurrentPos * 100 / ContentLength])
       else if CurrentPos<(1024*1024) then
-        progresstext := progresstext + format(' of %.1f (%5.2f%%)', [ContentLength/1024, CurrentPos * 100 / ContentLength])
+        FProgressText := FProgressText + format(' of %.1f (%5.2f%%)', [ContentLength/1024, CurrentPos * 100 / ContentLength])
       else
-        progresstext := progresstext + format(' of %.1f (%5.2f%%)', [ContentLength/1024/1024, CurrentPos * 100 / ContentLength])
+        FProgressText := FProgressText + format(' of %.1f (%5.2f%%)', [ContentLength/1024/1024, CurrentPos * 100 / ContentLength])
     end;
 
     if (dsize>0)and(dt>0) then begin
       speed := dsize * 1000 / dt;
       if speed<1024 then
-        progresstext := progresstext + format(', %.0n Bytes/Seconds', [speed])
+        FProgressText := FProgressText + format(', %.0n Bytes/Seconds', [speed])
       else if speed<(1024*1024) then
-        progresstext := progresstext + format(', %.1f KB/Seconds', [speed/1024])
+        FProgressText := FProgressText + format(', %.1f KB/Seconds', [speed/1024])
       else
-        progresstext := progresstext + format(', %.1f MB/Seconds', [speed/1024/1024]);
+        FProgressText := FProgressText + format(', %.1f MB/Seconds', [speed/1024/1024]);
     end;
-    Synchronize(FProgress);
+    if assigned(FProgress) then Synchronize(FProgress);
     FMillis := GetTickCount64;
   end;
+end;
+
+procedure THTTPBigDownload.Abort;
+begin
+  FHttpErr:='Aborted by user';
+  FHttpResult:=false;
+  http.Terminate;
 end;
 
 end.
