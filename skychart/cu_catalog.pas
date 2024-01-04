@@ -240,6 +240,7 @@ type
     procedure ClearSearch;
     procedure CleanCache;
     procedure AdjustStarForDistance(var rec:GCatrec; distfact:double);
+    procedure removeGcat(shortname: string);
     property FindId: string read FFindId;
     property FindRecOK: boolean read FFindRecOK;
     property FindRec: GCatrec read FFindRec write FFindRec;
@@ -6752,6 +6753,22 @@ begin
      if rec.star.valid[vsMagb] then rec.star.magb := rec.star.magb + 5*Log10(distfact);
      if rec.star.valid[vsMagr] then rec.star.magr := rec.star.magr + 5*Log10(distfact);
    end;
+end;
+
+procedure Tcatalog.removeGcat(shortname: string);
+var i,n: integer;
+begin
+  n := -1;
+  for i := 0 to cfgcat.GCatNum - 1 do
+    if cfgcat.GCatLst[i].shortname = shortname then
+      n := i;
+  if n>=0 then begin
+    for i := n+1 to cfgcat.GCatNum - 1 do
+       cfgcat.GCatLst[i-1] := cfgcat.GCatLst[i];
+    cfgcat.GCatNum:=cfgcat.GCatNum-1;
+    SetLength(cfgcat.GCatLst, cfgcat.GCatNum);
+    CleanCache;
+  end;
 end;
 
 end.

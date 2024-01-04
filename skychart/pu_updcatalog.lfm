@@ -125,18 +125,19 @@ object f_updcatalog: Tf_updcatalog
             Width = 150
           end        
           item
-            MinSize = 200
+            MinSize = 150
+            MaxSize = 150
             ReadOnly = True
             SizePriority = 0
             Title.Caption = 'Catalog'
-            Width = 200
+            Width = 150
           end        
           item
             MinSize = 200
             MaxSize = 400
             ReadOnly = True
             Title.Caption = 'Description'
-            Width = 270
+            Width = 320
           end        
           item
             MinSize = 100
@@ -154,8 +155,8 @@ object f_updcatalog: Tf_updcatalog
         ColWidths = (
           25
           150
-          200
-          270
+          150
+          320
           100
         )
       end
@@ -189,18 +190,19 @@ object f_updcatalog: Tf_updcatalog
             Width = 150
           end        
           item
-            MinSize = 200
+            MinSize = 150
+            MaxSize = 150
             ReadOnly = True
             SizePriority = 0
             Title.Caption = 'Catalog'
-            Width = 200
+            Width = 150
           end        
           item
             MinSize = 200
             MaxSize = 400
             ReadOnly = True
             Title.Caption = 'Description'
-            Width = 270
+            Width = 320
           end        
           item
             MinSize = 100
@@ -218,8 +220,8 @@ object f_updcatalog: Tf_updcatalog
         ColWidths = (
           25
           150
-          200
-          270
+          150
+          320
           100
         )
       end
@@ -253,18 +255,19 @@ object f_updcatalog: Tf_updcatalog
             Width = 150
           end        
           item
-            MinSize = 200
+            MinSize = 150
+            MaxSize = 150
             ReadOnly = True
             SizePriority = 0
             Title.Caption = 'Catalog'
-            Width = 200
+            Width = 150
           end        
           item
             MinSize = 200
             MaxSize = 400
             ReadOnly = True
             Title.Caption = 'Description'
-            Width = 270
+            Width = 320
           end        
           item
             MinSize = 100
@@ -282,8 +285,8 @@ object f_updcatalog: Tf_updcatalog
         ColWidths = (
           25
           150
-          200
-          270
+          150
+          320
           100
         )
       end
@@ -317,18 +320,19 @@ object f_updcatalog: Tf_updcatalog
             Width = 150
           end        
           item
-            MinSize = 200
+            MinSize = 150
+            MaxSize = 150
             ReadOnly = True
             SizePriority = 0
             Title.Caption = 'Catalog'
-            Width = 200
+            Width = 150
           end        
           item
             MinSize = 200
             MaxSize = 400
             ReadOnly = True
             Title.Caption = 'Description'
-            Width = 270
+            Width = 320
           end        
           item
             MinSize = 100
@@ -346,8 +350,8 @@ object f_updcatalog: Tf_updcatalog
         ColWidths = (
           25
           150
-          200
-          270
+          150
+          320
           100
         )
       end

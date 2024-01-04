@@ -32,7 +32,7 @@ type
   TCatInfo = class(TObject)
     installed, prereqok, newversion: boolean;
     catnum,minlevel,maxlevel: integer;
-    cattype,cdcminversion,version,catname,desc,size,url,prereq,path: string;
+    cattype,cdcminversion,version,catname,desc,size,url,prereq,path,shortname: string;
     installedversion: string;
     grid: TStringGrid;
     constructor Create(data:Tstringlist);
@@ -122,8 +122,9 @@ begin
   prereq:=data[7];
   path:=StringReplace(data[8],'/',DirectorySeparator,[rfReplaceAll]);
   catnum:=StrToIntDef(data[9],-1);
-  minlevel:=StrToIntDef(data[10],0);
-  maxlevel:=StrToIntDef(data[11],10)
+  shortname:=data[10];
+  minlevel:=StrToIntDef(data[11],0);
+  maxlevel:=StrToIntDef(data[12],10)
 end;
 
 procedure TCatInfo.SearchInstalled(basedir:string);
@@ -289,7 +290,7 @@ begin
     ReadLn(f,buf);
     if copy(buf,1,1)='#' then continue;
     Splitrec2(buf,';',row);
-    if row.Count<>12 then continue;
+    if row.Count<>13 then continue;
     if row[1] > cdcver then continue; // skip catalog not supported by this version of the program
     // type of object
     if row[0]='star' then grid:=GridStar
@@ -506,6 +507,7 @@ end;
 procedure Tf_updcatalog.DownloadComplete;
 var f: textfile;
     fn: string;
+    i,j: integer;
 begin
 try
   ButtonAbort.Visible:=false;
@@ -520,7 +522,7 @@ try
         CloseFile(f);
         DeleteFile(fn);
 
-        if InstallInfo.catnum>0 then begin
+        if InstallInfo.catnum>0 then begin      // standard catalog
           if InstallInfo.cattype='star' then
           begin
             Fcatalog.cfgcat.starcatpath[InstallInfo.catnum - BaseStar] := slash(PrivateCatalogDir)+slash(InstallInfo.path);
@@ -548,11 +550,40 @@ try
           end
           else if InstallInfo.cattype='dso' then
           begin
-            Fcatalog.cfgcat.nebcatpath[InstallInfo.catnum - BaseNeb] := slash(PrivateCatalogDir)+slash(InstallInfo.path);;
+            Fcatalog.cfgcat.nebcatpath[InstallInfo.catnum - BaseNeb] := slash(PrivateCatalogDir)+slash(InstallInfo.path);
             Fcatalog.cfgcat.nebcatdef[InstallInfo.catnum - BaseNeb] := true;
             Fcatalog.cfgcat.nebcatfield[InstallInfo.catnum - BaseNeb, 1] := InstallInfo.minlevel;
             Fcatalog.cfgcat.nebcatfield[InstallInfo.catnum - BaseNeb, 2] := InstallInfo.maxlevel;
           end;
+          if Assigned(FSaveConfig) then FSaveConfig(self);
+        end
+        else if InstallInfo.catnum=0 then  // Catgen catalog
+        begin
+          i := -1;
+          for j := 0 to Fcatalog.cfgcat.GCatNum - 1 do
+            if Fcatalog.cfgcat.GCatLst[j].shortname = trim(InstallInfo.shortname) then
+              i := j;
+          if i < 0 then
+          begin
+            Fcatalog.cfgcat.GCatNum := Fcatalog.cfgcat.GCatNum + 1;
+            SetLength(Fcatalog.cfgcat.GCatLst, Fcatalog.cfgcat.GCatNum);
+            i := Fcatalog.cfgcat.GCatNum - 1;
+          end;
+          Fcatalog.cfgcat.GCatLst[i].shortname := trim(InstallInfo.shortname);
+          Fcatalog.cfgcat.GCatLst[i].path := slash(PrivateCatalogDir)+slash(InstallInfo.path);
+          Fcatalog.cfgcat.GCatLst[i].min := InstallInfo.minlevel;
+          Fcatalog.cfgcat.GCatLst[i].max := InstallInfo.maxlevel;
+          Fcatalog.cfgcat.GCatLst[i].Actif := true;
+          Fcatalog.cfgcat.GCatLst[i].magmax := 0;
+          Fcatalog.cfgcat.GCatLst[i].Name := '';
+          Fcatalog.cfgcat.GCatLst[i].cattype := 0;
+          Fcatalog.cfgcat.GCatLst[i].ForceColor := False;
+          Fcatalog.cfgcat.GCatLst[i].col := 0;
+          if not Fcatalog.GetInfo(Fcatalog.cfgcat.GCatLst[i].path,
+            Fcatalog.cfgcat.GCatLst[i].shortname, Fcatalog.cfgcat.GCatLst[i].magmax,
+            Fcatalog.cfgcat.GCatLst[i].cattype, Fcatalog.cfgcat.GCatLst[i].version,
+            Fcatalog.cfgcat.GCatLst[i].Name) then
+            Fcatalog.cfgcat.GCatLst[i].Actif := False;
           if Assigned(FSaveConfig) then FSaveConfig(self);
         end;
 
@@ -608,6 +639,8 @@ procedure Tf_updcatalog.Uninstall(info: TCatInfo);
 var dir: string;
 begin
   if (trim(PrivateCatalogDir)='')or(trim(info.path)='') then exit;
+  if (info.catnum=0)and(info.shortname<>'') then
+    Fcatalog.removeGcat(info.shortname);
   dir:=slash(PrivateCatalogDir)+slash(info.path);
   if not DeleteDirectory(dir,false) then
     ShowMessage('Error deleting '+dir);

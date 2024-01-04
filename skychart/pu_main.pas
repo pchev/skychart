@@ -1271,8 +1271,7 @@ begin
   end;
   if (active = '1') and (not catalog.cfgcat.GCatLst[i].Actif) then
   begin
-    catalog.cfgcat.GCatNum := catalog.cfgcat.GCatNum - 1;
-    SetLength(catalog.cfgcat.GCatLst, catalog.cfgcat.GCatNum);
+    catalog.removeGcat(trim(shortname));
     exit;
   end;
   Result := msgOK;
