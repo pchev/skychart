@@ -1596,6 +1596,7 @@ resourcestring
   rsUninstall = 'Uninstall';
   rsInstalling = 'Installing';
   rsCloseTheSetu = 'Close the Setup window and launch the catalog installer tool?';
+  rsRefreshTheLi = 'Refresh the list';
 
 // also update upsi_translation
 

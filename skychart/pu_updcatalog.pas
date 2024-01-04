@@ -45,6 +45,7 @@ type
   { Tf_updcatalog }
 
   Tf_updcatalog = class(TForm)
+    ButtonRefresh: TButton;
     ButtonClose: TButton;
     ButtonAbort: TButton;
     GridVar: TStringGrid;
@@ -64,6 +65,7 @@ type
     EndInstallTimer: TTimer;
     procedure ButtonAbortClick(Sender: TObject);
     procedure ButtonCloseClick(Sender: TObject);
+    procedure ButtonRefreshClick(Sender: TObject);
     procedure EndInstallTimerTimer(Sender: TObject);
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
     procedure FormCreate(Sender: TObject);
@@ -79,7 +81,7 @@ type
     FRunning: boolean;
     procedure ClearGrid(g:TStringGrid);
     procedure LoadCatalogList;
-    procedure UpdateList;
+    function UpdateList(ForceDownload: boolean; out txt: string): boolean;
     procedure ShowStatus(grid: TStringGrid);
     procedure InstallDlg(info: TCatInfo);
     procedure UninstallDlg(info: TCatInfo);
@@ -200,6 +202,7 @@ procedure Tf_updcatalog.SetLang;
 begin
   Caption:=rsInstallObjec;
   panel1.Caption:=rsSelectTheCat;
+  ButtonRefresh.Caption:=rsRefreshTheLi;
   TabSheetStar.Caption:=rsStars;
   TabSheetVar.Caption:=rsVariableStar2;
   TabSheetDouble.Caption:=rsDoubleStar;
@@ -273,7 +276,7 @@ var f: textfile;
     row: Tstringlist;
     grid: TStringGrid;
 begin
-  UpdateList;
+  UpdateList(False,buf);
   ClearGrid(GridStar);
   ClearGrid(GridVar);
   ClearGrid(GridDouble);
@@ -311,16 +314,18 @@ begin
   ShowStatus(GridDSO);
 end;
 
-procedure Tf_updcatalog.UpdateList;
+function Tf_updcatalog.UpdateList(ForceDownload: boolean; out txt: string): boolean;
 var
   dl: TDownloadDialog;
   fn: string;
   ft: TDateTime;
   doDownload: boolean;
 begin
+  result:=false;
+  txt:='';
   fn := slash(PrivateCatalogDir)+'catalog_list.txt';
   doDownload:=true;
-  if FileExists(fn) then begin
+  if (not ForceDownload) and FileExists(fn) then begin
     if FileAge(fn,ft) then begin
       doDownload:=(ft<(now-1));
     end;
@@ -360,11 +365,23 @@ begin
       dl.QuickCancel := true;
       dl.URL := URL_CATALOG_LIST;
       dl.SaveToFile := fn;
-      dl.Execute;
+      result:=dl.Execute;
+      txt:=dl.ResponseText;
     finally
       dl.Free;
     end;
   end;
+end;
+
+procedure Tf_updcatalog.ButtonRefreshClick(Sender: TObject);
+var txt: string;
+begin
+  if UpdateList(True,txt) then begin
+    LoadCatalogList;
+    ShowMessage(rsUpdatedSucce);
+  end
+  else
+    ShowMessage(rsError+': '+txt);
 end;
 
 procedure Tf_updcatalog.ShowStatus(grid: TStringGrid);
