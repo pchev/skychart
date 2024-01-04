@@ -83,7 +83,6 @@ type
     f_config_time1: Tf_config_time;
     f_config_observatory1: Tf_config_observatory;
     f_config_chart1: Tf_config_chart;
-    f_config_catalog1: Tf_config_catalog;
     f_config_solsys1: Tf_config_solsys;
     f_config_display1: Tf_config_display;
     f_config_pictures1: Tf_config_pictures;
@@ -122,6 +121,7 @@ type
     procedure DisableAsteroid(Sender: TObject);
   public
     { Déclarations publiques }
+    f_config_catalog1: Tf_config_catalog;
     procedure SetLang;
     property ccat: Tconf_catalog read Fccat write SetCcat;
     property cshr: Tconf_shared read Fcshr write SetCshr;

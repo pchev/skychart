@@ -44,11 +44,14 @@ type
     bsc3: TDirectoryEdit;
     BSCbox: TCheckBox;
     Button1: TButton;
+    ButtonInstallCat: TButton;
     Button5: TButton;
     Button6: TButton;
     Button7: TButton;
     Button8: TButton;
     Button9: TButton;
+    ButtonInstallCat1: TButton;
+    ButtonInstallCat2: TButton;
     fsac1: TLongEdit;
     fsac2: TLongEdit;
     Label98: TLabel;
@@ -252,6 +255,7 @@ type
     PageControl1: TPageControl;
     procedure addobjClick(Sender: TObject);
     procedure Button1Click(Sender: TObject);
+    procedure ButtonInstallCatClick(Sender: TObject);
     procedure Button5Click(Sender: TObject);
     procedure Button6Click(Sender: TObject);
     procedure Button7Click(Sender: TObject);
@@ -315,7 +319,7 @@ type
     { Private declarations }
     HintX, HintY: integer;
     catalogempty, LockChange, LockCatPath, LockActivePath: boolean;
-    FApplyConfig: TNotifyEvent;
+    FApplyConfig,FInstallCatalog: TNotifyEvent;
     FSendVoTable: TSendVoTable;
     FCatGen: Tf_catgen;
     textcolor: TColor;
@@ -352,6 +356,7 @@ type
     procedure SetLang;
     property onApplyConfig: TNotifyEvent read FApplyConfig write FApplyConfig;
     property onSendVoTable: TSendVoTable read FSendVoTable write FSendVoTable;
+    property onInstallCatalog: TNotifyEvent read FInstallCatalog write FInstallCatalog;
   end;
 
 implementation
@@ -365,6 +370,9 @@ begin
   Label37.Caption := rsStarsAndNebu;
   addcat.Caption := rsAdd;
   delcat.Caption := rsDelete;
+  ButtonInstallCat.Caption:=rsInstallObjec;
+  ButtonInstallCat1.Caption:=rsInstallObjec;
+  ButtonInstallCat2.Caption:=rsInstallObjec;
   ColorDialog1.Title := rsSelectColorB;
   Page1a.Caption := rsVOCatalog;
   Label1.Caption := rsVirtualObser;
@@ -1665,6 +1673,13 @@ begin
   url := 'file://' + slash(VODir) + stringgrid4.cells[2, p];
   if assigned(FSendVoTable) then
     FSendVoTable(client, tname, tid, url);
+end;
+
+procedure Tf_config_catalog.ButtonInstallCatClick(Sender: TObject);
+begin
+  if MessageDlg(rsCloseTheSetu, mtConfirmation, mbYesNo, 0)=mryes then begin
+    if Assigned(FInstallCatalog) then FInstallCatalog(self);
+  end;
 end;
 
 procedure Tf_config_catalog.StringGrid1DrawCell(Sender: TObject;

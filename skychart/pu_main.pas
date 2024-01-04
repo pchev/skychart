@@ -772,6 +772,8 @@ type
     procedure UpdateAstExt;
     procedure PolePrecessionChange(Sender: TObject);
     procedure SaveCatalogConfig(Sender: TObject);
+    procedure OpenUpdCatalog(Sender: TObject);
+    procedure OpenUpdCatalogAsync(Data: PtrInt);
 
   public
     { Public declarations }
@@ -4929,6 +4931,7 @@ begin
     f_config.Fits := fits;
     f_config.catalog := catalog;
     f_config.db := cdcdb;
+    f_config.f_config_catalog1.onInstallCatalog := OpenUpdCatalog;
   end;
   try
     f_config.ccat := catalog.cfgcat;
@@ -5441,6 +5444,7 @@ begin
     ConfigCatalog.f_config_catalog1.PageControl1.PageIndex := 0;
     ConfigCatalog.f_config_catalog1.onApplyConfig := ApplyConfigCatalog;
     ConfigCatalog.f_config_catalog1.onSendVoTable := SendVoTable;
+    ConfigCatalog.f_config_catalog1.onInstallCatalog := OpenUpdCatalog;
     ConfigCatalog.f_config_catalog1.ccat.Assign(catalog.cfgcat);
     ConfigCatalog.f_config_catalog1.cshr.Assign(catalog.cfgshr);
     ConfigCatalog.f_config_catalog1.cplot.Assign(def_cfgplot);
@@ -12254,6 +12258,25 @@ begin
   f_updcatalog.catalog:=catalog;
   f_updcatalog.cmain:=cfgm;
   f_updcatalog.Show;
+end;
+
+procedure Tf_main.OpenUpdCatalog(Sender: TObject);
+begin
+  if (ConfigCatalog<>nil)and(sender=ConfigCatalog.f_config_catalog1) then begin
+    ConfigCatalog.ModalResult:=mrOK;
+    ConfigCatalog.Close;
+    Application.QueueAsyncCall(OpenUpdCatalogAsync,0);
+  end;
+  if (f_config<>nil)and(sender=f_config.f_config_catalog1) then begin
+    f_config.ModalResult:=mrOK;
+    f_config.Close;
+    Application.QueueAsyncCall(OpenUpdCatalogAsync,0);
+  end;
+end;
+
+procedure Tf_main.OpenUpdCatalogAsync(Data: PtrInt);
+begin
+  MenuUpdCatalogClick(nil);
 end;
 
 procedure Tf_main.SaveCatalogConfig(Sender: TObject);

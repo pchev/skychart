@@ -1595,6 +1595,7 @@ resourcestring
   rsInstallNewVe = 'Install new version %s over %s';
   rsUninstall = 'Uninstall';
   rsInstalling = 'Installing';
+  rsCloseTheSetu = 'Close the Setup window and launch the catalog installer tool?';
 
 // also update upsi_translation
 

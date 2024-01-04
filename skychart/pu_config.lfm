@@ -161,9 +161,9 @@ object f_config: Tf_config
     TabOrder = 0
     object Applyall: TCheckBox
       Left = 16
-      Height = 21
+      Height = 22
       Top = 12
-      Width = 181
+      Width = 186
       Caption = 'Apply Change To All Chart'
       Checked = True
       ParentFont = False
