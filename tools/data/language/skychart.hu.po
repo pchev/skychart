@@ -3,15 +3,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: skychart.en\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-10-24 12:12+0000\n"
+"POT-Creation-Date: 2024-01-04 11:03+0000\n"
 "PO-Revision-Date: 2017-01-14 17:43+0000\n"
 "Last-Translator: Patrick Chevalley <Unknown>\n"
 "Language-Team: <translation@ap-i.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2023-10-24 12:20+0000\n"
-"X-Generator: Launchpad (build e54af6300b9c312839f7b6ef075746018660f6a5)\n"
+"X-Launchpad-Export-Date: 2024-01-04 12:32+0000\n"
+"X-Generator: Launchpad (build e1eeab5b20e19239bd7d5f36676f7a52988db88b)\n"
 
 #: u_translation.rs102cddss
 msgid "102 CD DSS"
@@ -2718,6 +2718,27 @@ msgstr "Sikertelen beszúrás %s sorban: %s"
 msgid "Insert failed! %s"
 msgstr "Sikertelen beszúrás! %s"
 
+#: u_translation.rsinstall
+msgid "Install"
+msgstr ""
+
+#: u_translation.rsinstalled
+msgid "Installed"
+msgstr ""
+
+#: u_translation.rsinstalling
+msgid "Installing"
+msgstr ""
+
+#: u_translation.rsinstallnewve
+#, object-pascal-format
+msgid "Install new version %s over %s"
+msgstr ""
+
+#: u_translation.rsinstallobjec
+msgid "Install object catalog"
+msgstr ""
+
 #: u_translation.rsinternet
 msgid "Internet"
 msgstr "Internet"
@@ -3356,6 +3377,10 @@ msgstr "Függőleges tükrözés"
 #: u_translation.rsmisclines
 msgid "Misc. lines"
 msgstr "Vegyes vonalak"
+
+#: u_translation.rsmissingprere
+msgid "Missing prerequisites"
+msgstr ""
 
 #: u_translation.rsmissingscrip
 msgid "Missing script title!"
@@ -4858,6 +4883,10 @@ msgstr ""
 msgid "Select script"
 msgstr ""
 
+#: u_translation.rsselectthecat
+msgid "Select the catalog to install or remove"
+msgstr ""
+
 #: u_translation.rsselectthefie
 msgid "Select the fields to use and their position in the text file"
 msgstr "Válaszd ki a mezőket és kezdőpoziciójukat a szövegfájlban"
@@ -5434,6 +5463,10 @@ msgstr "Hónap kezdete"
 msgid "Start of object"
 msgstr "Objektum eleje"
 
+#: u_translation.rsstatus
+msgid "Status"
+msgstr ""
+
 #: u_translation.rsstatusbar
 msgid "Status bar"
 msgstr "Állapotsor"
@@ -5872,6 +5905,10 @@ msgstr "Visszavonás"
 #: u_translation.rsundolastchan
 msgid "Undo last change"
 msgstr "Utolsó változtatás visszavonása"
+
+#: u_translation.rsuninstall
+msgid "Uninstall"
+msgstr ""
 
 #: u_translation.rsunits
 msgid "Units"

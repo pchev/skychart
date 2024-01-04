@@ -1586,6 +1586,15 @@ resourcestring
   rsPolePrecessi = 'Pole precession';
   rsDrawThePosit = 'Draw the position of the pole between the following years';
   rsLabelEvery = 'Label every';
+  rsInstallObjec = 'Install object catalog';
+  rsSelectTheCat = 'Select the catalog to install or remove';
+  rsStatus = 'Status';
+  rsInstalled = 'Installed';
+  rsInstall = 'Install';
+  rsMissingPrere = 'Missing prerequisites';
+  rsInstallNewVe = 'Install new version %s over %s';
+  rsUninstall = 'Uninstall';
+  rsInstalling = 'Installing';
 
 // also update upsi_translation
 

@@ -2,15 +2,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: skychart.ru\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-10-24 12:12+0000\n"
-"PO-Revision-Date: 2023-09-25 10:10+0000\n"
+"POT-Creation-Date: 2024-01-04 11:03+0000\n"
+"PO-Revision-Date: 2023-12-31 07:10+0000\n"
 "Last-Translator: Aleksey Kabanov <Unknown>\n"
 "Language-Team: Zaporozhye Astronomical Club Altair <astroclub@ua.fm, http://astroclub.zp.ua>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2023-10-24 12:20+0000\n"
-"X-Generator: Launchpad (build e54af6300b9c312839f7b6ef075746018660f6a5)\n"
+"X-Launchpad-Export-Date: 2024-01-04 12:32+0000\n"
+"X-Generator: Launchpad (build e1eeab5b20e19239bd7d5f36676f7a52988db88b)\n"
 "Language: ru_UA\n"
 
 #: u_translation.rs102cddss
@@ -1816,7 +1816,7 @@ msgstr "Показать кажущуюся линию депрессии гор
 
 #: u_translation.rsdrawtheposit
 msgid "Draw the position of the pole between the following years"
-msgstr ""
+msgstr "Отобразить позицию полюса в указанном диапазоне лет"
 
 #: u_translation.rsdrift
 msgid "Yearly drift"
@@ -2718,6 +2718,27 @@ msgstr "включить неудачную строку %s : %s"
 msgid "Insert failed! %s"
 msgstr "Неудачное включение! %s"
 
+#: u_translation.rsinstall
+msgid "Install"
+msgstr ""
+
+#: u_translation.rsinstalled
+msgid "Installed"
+msgstr ""
+
+#: u_translation.rsinstalling
+msgid "Installing"
+msgstr ""
+
+#: u_translation.rsinstallnewve
+#, object-pascal-format
+msgid "Install new version %s over %s"
+msgstr ""
+
+#: u_translation.rsinstallobjec
+msgid "Install object catalog"
+msgstr ""
+
 #: u_translation.rsinternet
 msgid "Internet"
 msgstr "Интернет"
@@ -2841,7 +2862,7 @@ msgstr "Метка"
 
 #: u_translation.rslabelevery
 msgid "Label every"
-msgstr ""
+msgstr "Метка каждые"
 
 #: u_translation.rslabelobject
 msgid "Label object"
@@ -3356,6 +3377,10 @@ msgstr "Зеркально по вертикали"
 #: u_translation.rsmisclines
 msgid "Misc. lines"
 msgstr "Разн. линии"
+
+#: u_translation.rsmissingprere
+msgid "Missing prerequisites"
+msgstr ""
 
 #: u_translation.rsmissingscrip
 msgid "Missing script title!"
@@ -4104,7 +4129,7 @@ msgstr "Наклон полюса"
 
 #: u_translation.rspoleprecessi
 msgid "Pole precession"
-msgstr ""
+msgstr "Прецессия полюса"
 
 #: u_translation.rsport
 msgid "Port:"
@@ -4858,6 +4883,10 @@ msgstr "Выбрать камеру"
 msgid "Select script"
 msgstr "Выбрать скрипт"
 
+#: u_translation.rsselectthecat
+msgid "Select the catalog to install or remove"
+msgstr ""
+
 #: u_translation.rsselectthefie
 msgid "Select the fields to use and their position in the text file"
 msgstr "Выберите поля и их положение в текстовом файле"
@@ -5434,6 +5463,10 @@ msgstr "Начальный месяц"
 msgid "Start of object"
 msgstr "Начало объекта"
 
+#: u_translation.rsstatus
+msgid "Status"
+msgstr ""
+
 #: u_translation.rsstatusbar
 msgid "Status bar"
 msgstr "Панель состояния"
@@ -5872,6 +5905,10 @@ msgstr "Отменить"
 #: u_translation.rsundolastchan
 msgid "Undo last change"
 msgstr "Отменить последнее изменение"
+
+#: u_translation.rsuninstall
+msgid "Uninstall"
+msgstr ""
 
 #: u_translation.rsunits
 msgid "Units"

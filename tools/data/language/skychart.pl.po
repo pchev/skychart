@@ -2,15 +2,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: skychart\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-10-24 12:12+0000\n"
-"PO-Revision-Date: 2021-06-30 23:15+0000\n"
+"POT-Creation-Date: 2024-01-04 11:03+0000\n"
+"PO-Revision-Date: 2023-11-10 17:13+0000\n"
 "Last-Translator: Jerzy Rokicki <Unknown>\n"
 "Language-Team: French <kde-i18n-doc@kde.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2023-10-24 12:20+0000\n"
-"X-Generator: Launchpad (build e54af6300b9c312839f7b6ef075746018660f6a5)\n"
+"X-Launchpad-Export-Date: 2024-01-04 12:32+0000\n"
+"X-Generator: Launchpad (build e1eeab5b20e19239bd7d5f36676f7a52988db88b)\n"
 "X-Poedit-Country: Poland\n"
 "Language: fr\n"
 "X-Poedit-Language: Polish\n"
@@ -225,7 +225,7 @@ msgstr "Masa optyczna"
 
 #: u_translation.rsalbedo
 msgid "Albedo"
-msgstr ""
+msgstr "Albedo"
 
 #: u_translation.rsalignment
 msgid "Alignment"
@@ -300,7 +300,7 @@ msgstr "Zawsze pokazuj południk niebieski"
 
 #: u_translation.rsalwaysontop
 msgid "Always on top"
-msgstr ""
+msgstr "Zawsze na wierzchu"
 
 #: u_translation.rsalwayssavewi
 msgid "Always save without asking."
@@ -843,7 +843,7 @@ msgstr "mapa:"
 
 #: u_translation.rschartcenter
 msgid "Chart center"
-msgstr ""
+msgstr "Środek mapy"
 
 #: u_translation.rschartcenterc
 msgid "Add a crosshair to the chart center"
@@ -867,7 +867,7 @@ msgstr "Legenda"
 
 #: u_translation.rschartname
 msgid "Chart name"
-msgstr ""
+msgstr "Nazwa mapy"
 
 #: u_translation.rschartsetting
 msgid "Chart settings"
@@ -1276,7 +1276,7 @@ msgstr "Kursor"
 
 #: u_translation.rscursorpositi
 msgid "Cursor position"
-msgstr ""
+msgstr "Pozycja kursora"
 
 #: u_translation.rscw
 #, object-pascal-format
@@ -1819,7 +1819,7 @@ msgstr "Rysuj pozorną linię horyzontu"
 
 #: u_translation.rsdrawtheposit
 msgid "Draw the position of the pole between the following years"
-msgstr ""
+msgstr "Wyświetl pozycję bieguna we wskazanym okresie"
 
 #: u_translation.rsdrift
 msgid "Yearly drift"
@@ -1927,7 +1927,7 @@ msgstr "Elong."
 
 #: u_translation.rsemail
 msgid "email"
-msgstr ""
+msgstr "e-mail"
 
 #: u_translation.rsemissionnebu
 msgid "Emission nebula"
@@ -2189,7 +2189,7 @@ msgstr "Wypełnij Drogę Mleczną"
 
 #: u_translation.rsfillnebulae
 msgid "Fill nebulae"
-msgstr ""
+msgstr "Wypełnij mgławice"
 
 #: u_translation.rsfillwithhori
 msgid "Fill with horizon colour"
@@ -2721,6 +2721,27 @@ msgstr "wstawianie nie powiodło się na linii %s : %s"
 msgid "Insert failed! %s"
 msgstr "Wstawianie nie powiodło się! %s"
 
+#: u_translation.rsinstall
+msgid "Install"
+msgstr ""
+
+#: u_translation.rsinstalled
+msgid "Installed"
+msgstr ""
+
+#: u_translation.rsinstalling
+msgid "Installing"
+msgstr ""
+
+#: u_translation.rsinstallnewve
+#, object-pascal-format
+msgid "Install new version %s over %s"
+msgstr ""
+
+#: u_translation.rsinstallobjec
+msgid "Install object catalog"
+msgstr ""
+
 #: u_translation.rsinternet
 msgid "Internet"
 msgstr "Internet"
@@ -3069,7 +3090,7 @@ msgstr "Zablokuj pozycję mapy"
 
 #: u_translation.rslockmagnitud
 msgid "Lock the magnitude filter"
-msgstr ""
+msgstr "Zablokuj filtr jasności."
 
 #: u_translation.rslockon
 #, object-pascal-format
@@ -3360,6 +3381,10 @@ msgstr "Odbij pionowo"
 msgid "Misc. lines"
 msgstr "Różne linie"
 
+#: u_translation.rsmissingprere
+msgid "Missing prerequisites"
+msgstr ""
+
 #: u_translation.rsmissingscrip
 msgid "Missing script title!"
 msgstr "Brak tytułu skryptu!"
@@ -3560,7 +3585,7 @@ msgstr "Brak danych"
 
 #: u_translation.rsnodecimalsep
 msgid "No decimal separator"
-msgstr ""
+msgstr "Bez separatora dziesiętnego"
 
 #: u_translation.rsnomargin
 msgid "No margin"
@@ -3922,7 +3947,7 @@ msgstr "Hasło:"
 
 #: u_translation.rspastecoordin
 msgid "Paste coordinates"
-msgstr ""
+msgstr "Wklej współrzędne"
 
 #: u_translation.rspastel
 msgid "Pastel"
@@ -4107,7 +4132,7 @@ msgstr "Nachylenie bieguna"
 
 #: u_translation.rspoleprecessi
 msgid "Pole precession"
-msgstr ""
+msgstr "Precesja bieguna"
 
 #: u_translation.rsport
 msgid "Port:"
@@ -4503,11 +4528,11 @@ msgstr "Usuń ostatnią etykietę"
 
 #: u_translation.rsrenamechart
 msgid "Rename chart"
-msgstr ""
+msgstr "Zmień nazwę mapy"
 
 #: u_translation.rsrenamethecur
 msgid "Rename the curent chart"
-msgstr ""
+msgstr "Zmień nazwę bieżącej mapy"
 
 #: u_translation.rsreplacebytic
 msgid "Replace by tick mark"
@@ -4831,11 +4856,11 @@ msgstr "Wybierz kolor (czarny domyślnie dla katalogu)"
 
 #: u_translation.rsselectedobje
 msgid "Selected object"
-msgstr ""
+msgstr "Zaznaczony obiekt"
 
 #: u_translation.rsselection
 msgid "Selection"
-msgstr ""
+msgstr "Zaznaczenie"
 
 #: u_translation.rsselectlabels
 msgid "Select labels to recover"
@@ -4860,6 +4885,10 @@ msgstr "Wybierz ramkę"
 #: u_translation.rsselectscript
 msgid "Select script"
 msgstr "Wybierz skrypt"
+
+#: u_translation.rsselectthecat
+msgid "Select the catalog to install or remove"
+msgstr ""
 
 #: u_translation.rsselectthefie
 msgid "Select the fields to use and their position in the text file"
@@ -5437,6 +5466,10 @@ msgstr "Rozpocznij dla miesiąca"
 msgid "Start of object"
 msgstr "Początek obiektu"
 
+#: u_translation.rsstatus
+msgid "Status"
+msgstr ""
+
 #: u_translation.rsstatusbar
 msgid "Status bar"
 msgstr "Pasek stanu"
@@ -5875,6 +5908,10 @@ msgstr "Cofnij"
 #: u_translation.rsundolastchan
 msgid "Undo last change"
 msgstr "Cofnij ostatnią zmianę"
+
+#: u_translation.rsuninstall
+msgid "Uninstall"
+msgstr ""
 
 #: u_translation.rsunits
 msgid "Units"

@@ -24,7 +24,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 
 interface
 
-uses u_constant, u_util, UScaleDPI, downloaddialog, cu_httpdownload, u_unzip, cu_catalog, FileUtil,
+uses u_constant, u_util, u_translation, UScaleDPI, downloaddialog, cu_httpdownload, u_unzip, cu_catalog, FileUtil,
   Classes, SysUtils, Forms, Controls, Graphics, Dialogs, ExtCtrls, Grids, ComCtrls, StdCtrls;
 
 type
@@ -90,6 +90,7 @@ type
     procedure DownloadError;
     procedure UnzipProgress(Sender : TObject);
   public
+    procedure SetLang;
     property cmain: Tconf_main read Fcmain write Fcmain;
     property catalog: Tcatalog read Fcatalog write Fcatalog;
     property onSaveConfig: TNotifyEvent read FSaveConfig write FSaveConfig;
@@ -195,10 +196,39 @@ end;
 
 { Tf_updcatalog }
 
+procedure Tf_updcatalog.SetLang;
+begin
+  Caption:=rsInstallObjec;
+  panel1.Caption:=rsSelectTheCat;
+  TabSheetStar.Caption:=rsStars;
+  TabSheetVar.Caption:=rsVariableStar2;
+  TabSheetDouble.Caption:=rsDoubleStar;
+  TabSheetDSO.Caption:=rsNebulae;
+  GridStar.Columns[1].Title.Caption:=rsStatus;
+  GridStar.Columns[2].Title.Caption:=rsCatalog;
+  GridStar.Columns[3].Title.Caption:=rsDescription;
+  GridStar.Columns[4].Title.Caption:=rsSize;
+  GridVar.Columns[1].Title.Caption:=rsStatus;
+  GridVar.Columns[2].Title.Caption:=rsCatalog;
+  GridVar.Columns[3].Title.Caption:=rsDescription;
+  GridVar.Columns[4].Title.Caption:=rsSize;
+  GridDouble.Columns[1].Title.Caption:=rsStatus;
+  GridDouble.Columns[2].Title.Caption:=rsCatalog;
+  GridDouble.Columns[3].Title.Caption:=rsDescription;
+  GridDouble.Columns[4].Title.Caption:=rsSize;
+  GridDSO.Columns[1].Title.Caption:=rsStatus;
+  GridDSO.Columns[2].Title.Caption:=rsCatalog;
+  GridDSO.Columns[3].Title.Caption:=rsDescription;
+  GridDSO.Columns[4].Title.Caption:=rsSize;
+  ButtonAbort.Caption:=rsAbort;
+  ButtonClose.Caption:=rsClose;
+
+end;
+
 procedure Tf_updcatalog.FormCreate(Sender: TObject);
 begin
   ScaleDPI(Self);
- // SetLang;
+  SetLang;
 end;
 
 procedure Tf_updcatalog.FormShow(Sender: TObject);
@@ -347,15 +377,15 @@ begin
     info.SearchPrereqInGrid(grid);
     if info.installed then begin
       if info.newversion then
-        txt:='New version available'
+        txt:=rsNewVersionAv
       else
-        txt:='Installed';
+        txt:=rsInstalled;
     end
     else begin
       if info.prereqok then
-        txt:='Install'
+        txt:=rsInstall
       else
-        txt:='Missing prerequisites';
+        txt:=rsMissingPrere;
     end;
     grid.Cells[colinstall,i]:=txt;
   end;
@@ -382,7 +412,7 @@ begin
         if info.prereqok then
           InstallDlg(info)
         else
-          ShowMessage('Missing prerequisites '+info.prereq);
+          ShowMessage(rsMissingPrere+' '+info.prereq);
       end;
     end;
   end;
@@ -392,7 +422,7 @@ procedure Tf_updcatalog.InstallDlg(info: TCatInfo);
 begin
   if info.newversion then
   begin
-    if MessageDlg('Install new version '+info.version+' over '+info.installedversion,mtConfirmation,mbYesNo,0)=mryes then
+    if MessageDlg(Format(rsInstallNewVe, [info.version, info.installedversion]), mtConfirmation, mbYesNo, 0)=mryes then
     begin
       Uninstall(info);
       Install(info);
@@ -400,7 +430,7 @@ begin
     else EndInstallTimer.Enabled:=true;
   end
   else begin
-    if MessageDlg('Install '+info.catname,mtConfirmation,mbYesNo,0)=mryes then
+    if MessageDlg(rsInstall+' '+info.catname,mtConfirmation,mbYesNo,0)=mryes then
     begin
       Install(info);
     end
@@ -412,7 +442,7 @@ procedure Tf_updcatalog.UninstallDlg(info: TCatInfo);
 var catlist: string;
 begin
   catlist:=info.ListSamePathinGrid(info.grid);
-  if MessageDlg('Uninstall '+info.catname+catlist,mtConfirmation,mbYesNo,0)=mryes then
+  if MessageDlg(rsUninstall+' '+info.catname+catlist, mtConfirmation, mbYesNo, 0)=mryes then
   begin
     Uninstall(info);
   end;
@@ -450,7 +480,7 @@ begin
   httpdownload.onDownloadError:=@DownloadError;
   PanelDownload.Visible:=true;
   ButtonAbort.Visible:=true;
-  LabelAction.Caption:='Installing '+info.catname+Ellipsis;
+  LabelAction.Caption:=rsInstalling+' '+info.catname+Ellipsis;
   LabelProgress.Caption:='';
   InstallInfo:=info;
   httpdownload.Start;

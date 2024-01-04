@@ -6126,3 +6126,39 @@ msgstr ""
 msgid "Label every"
 msgstr ""
 
+#: u_translation:rsinstallobjec
+msgid "Install object catalog"
+msgstr ""
+
+#: u_translation:rsselectthecat
+msgid "Select the catalog to install or remove"
+msgstr ""
+
+#: u_translation:rsstatus
+msgid "Status"
+msgstr ""
+
+#: u_translation:rsinstalled
+msgid "Installed"
+msgstr ""
+
+#: u_translation:rsinstall
+msgid "Install"
+msgstr ""
+
+#: u_translation:rsmissingprere
+msgid "Missing prerequisites"
+msgstr ""
+
+#: u_translation:rsinstallnewve
+msgid "Install new version %s over %s"
+msgstr ""
+
+#: u_translation:rsuninstall
+msgid "Uninstall"
+msgstr ""
+
+#: u_translation:rsinstalling
+msgid "Installing"
+msgstr ""
+

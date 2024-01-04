@@ -3,15 +3,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: skychart.ca\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-10-24 12:12+0000\n"
-"PO-Revision-Date: 2023-09-05 08:29+0000\n"
+"POT-Creation-Date: 2024-01-04 11:03+0000\n"
+"PO-Revision-Date: 2023-11-27 09:26+0000\n"
 "Last-Translator: Antoni Clavell <Unknown>\n"
 "Language-Team: <translation@ap-i.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2023-10-24 12:20+0000\n"
-"X-Generator: Launchpad (build e54af6300b9c312839f7b6ef075746018660f6a5)\n"
+"X-Launchpad-Export-Date: 2024-01-04 12:32+0000\n"
+"X-Generator: Launchpad (build e1eeab5b20e19239bd7d5f36676f7a52988db88b)\n"
 "X-Poedit-Country: CATALONIA\n"
 
 #: u_translation.rs102cddss
@@ -1817,7 +1817,7 @@ msgstr "Dibuixa la línia de depressió aparent de l'horitzó"
 
 #: u_translation.rsdrawtheposit
 msgid "Draw the position of the pole between the following years"
-msgstr ""
+msgstr "Dibuixa la posició del pol entre els anys següents"
 
 #: u_translation.rsdrift
 msgid "Yearly drift"
@@ -2719,6 +2719,27 @@ msgstr "Error d'inserció, línia %s : %s"
 msgid "Insert failed! %s"
 msgstr "Error d'inserció! %s"
 
+#: u_translation.rsinstall
+msgid "Install"
+msgstr ""
+
+#: u_translation.rsinstalled
+msgid "Installed"
+msgstr ""
+
+#: u_translation.rsinstalling
+msgid "Installing"
+msgstr ""
+
+#: u_translation.rsinstallnewve
+#, object-pascal-format
+msgid "Install new version %s over %s"
+msgstr ""
+
+#: u_translation.rsinstallobjec
+msgid "Install object catalog"
+msgstr ""
+
 #: u_translation.rsinternet
 msgid "Internet"
 msgstr "Internet"
@@ -2842,7 +2863,7 @@ msgstr "Etiqueta"
 
 #: u_translation.rslabelevery
 msgid "Label every"
-msgstr ""
+msgstr "Etiqueta cada"
 
 #: u_translation.rslabelobject
 msgid "Label object"
@@ -3357,6 +3378,10 @@ msgstr "Mirall vertical"
 #: u_translation.rsmisclines
 msgid "Misc. lines"
 msgstr "Altres línies"
+
+#: u_translation.rsmissingprere
+msgid "Missing prerequisites"
+msgstr ""
 
 #: u_translation.rsmissingscrip
 msgid "Missing script title!"
@@ -4105,7 +4130,7 @@ msgstr "Inclinació del pol"
 
 #: u_translation.rspoleprecessi
 msgid "Pole precession"
-msgstr ""
+msgstr "Precessió del pol"
 
 #: u_translation.rsport
 msgid "Port:"
@@ -4859,6 +4884,10 @@ msgstr "Seleccioneu rectangle"
 msgid "Select script"
 msgstr "Triar script"
 
+#: u_translation.rsselectthecat
+msgid "Select the catalog to install or remove"
+msgstr ""
+
 #: u_translation.rsselectthefie
 msgid "Select the fields to use and their position in the text file"
 msgstr "Escolliu els camps a utilitzar i llur posició en el fitxer"
@@ -5435,6 +5464,10 @@ msgstr "Mes d'inici"
 msgid "Start of object"
 msgstr "Inici de l'objecte"
 
+#: u_translation.rsstatus
+msgid "Status"
+msgstr ""
+
 #: u_translation.rsstatusbar
 msgid "Status bar"
 msgstr "Barra d'estat"
@@ -5873,6 +5906,10 @@ msgstr "Desfés"
 #: u_translation.rsundolastchan
 msgid "Undo last change"
 msgstr "Desfés el darrer canvi"
+
+#: u_translation.rsuninstall
+msgid "Uninstall"
+msgstr ""
 
 #: u_translation.rsunits
 msgid "Units"

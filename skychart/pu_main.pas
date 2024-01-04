@@ -9567,6 +9567,8 @@ begin
     end;
     if f_clock <> nil then
       f_clock.SetLang;
+    if f_updcatalog <> nil then
+      f_updcatalog.SetLang;
     InitToolBar;
   except
   end;
@@ -10022,6 +10024,7 @@ begin
   MenuReleaseNotes.Caption := '&' + rsReleaseNotes + Ellipsis;
   //Menu Update
   SubUpdate.Caption := rsUpdate1;
+  MenuUpdCatalog.Caption := rsInstallObjec;
   MenuUpdSoft.Caption := rsSearchSoftwa;
   MenuUpdDeltaT.Caption:= rsDeltatRecent;
   MenuUpdGrs.Caption := rsJupiterGRSLo;
