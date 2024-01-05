@@ -1,0 +1,560 @@
+B/wds    The Washington Visual Double Star Catalog            (Mason+ 2001-2020)
+================================================================================
+The Washington Visual Double Star Catalog (WDS), Version 2023-11-27
+    Mason B.D., Wycoff G.L., Hartkopf W.I., Douglass G.G., Worley C.E.
+   <Astron. J. 122, 3466 (2001)>
+   =2001AJ....122.3466M
+================================================================================
+ADC_Keywords: Stars, double and multiple ; Positional data
+
+Description:
+    The Washington Visual Double Star Catalog (WDS) is the successor to
+    the Index Catalogue of Visual Double Stars, 1961.0 (IDS; Jeffers and
+    van den Bos, Publ. Lick Obs. 21). Three earlier double star catalogs
+    in XXth century, those by Burnham (BDS, 1906, "General Catalogue of
+    Double Stars within 121 degrees of the North Pole", Carnegie
+    Institution of Washington), Innes (SDS, 1927, "Southern Double Star
+    Catalogue -19 to -90 degrees", Union Observatory, Johannesburg, South
+    Africa), and Aitken (ADS, 1932 "New General Catalogue of Double Stars
+    within 121 degrees of the North Pole", Carnegie Institution of
+    Washington), each covered only a portion of the sky. Both the IDS and
+    the WDS cover the entire sky, and the WDS is intended to contain all
+    known visual double stars for which at least one differential measure
+    has been published. The WDS is continually updated as published data
+    become available. Prior to this, three major updates have been
+    published (Worley and Douglass 1984, "Washington Visual Double Star
+    Catalog, 1984.0", U.S. Naval Observatory, Washington; Worley and
+    Douglass 1997A&AS..125..523W, Cat. I/237; Mason, Wycoff, Hartkopf,
+    Douglass and Worley 2001AJ....122.3466M; and Mason et al. 2006.5).
+
+    The Washington Double Star Catalog (WDS) has seen numerous changes
+    since the last major release of the catalog. The application of many
+    techniques and considerable industry over the past few years has
+    yielded significant gains in both the number of systems and the number
+    of measures. Is is maintained by the US Naval Observatory, and
+    represents the world's principal database of astrometric double and
+    multiple star information. The WDS contains positions (J2000),
+    discoverer designations, epochs, position angles, separations,
+    magnitudes, spectral types, proper motions, and, when available,
+    Durchmusterung numbers and notes for the components of the systems.
+
+Acknowledgement of Usage:
+    If the WDS and associated databases were helpful for your research
+    work, the following acknowledgement would be appreciated:
+
+    "This research has made use of the Washington Double Star Catalog
+    maintained at the U.S. Naval Observatory."
+
+
+File Summary:
+--------------------------------------------------------------------------------
+ FileName   Lrecl   Records   Explanations
+--------------------------------------------------------------------------------
+ReadMe          80        .   This file
+wds.dat        130   155663   The Washington Double Star Catalog (main part)
+notes.dat      103    35679   The Washington Double Star Catalog (notes)
+refs.dat       126    23741   Discoverer names and references
+--------------------------------------------------------------------------------
+
+See also:
+    http://www.astro.gsu.edu/wds/ : the WDS Home page
+    V/111 : Fifth Catalog of Orbits of Visual Double Stars
+    I/274 : Catalog of Components of Double and Multiple stars (Dommanget+ 2002)
+    I/276 : Tycho Double Star Catalogue (TDSC) (Fabricius+ 2002)
+   II/291 : The Photometric Magnitude Difference Catalog (Mason+ 2008)
+
+Byte-by-byte Description of file: wds.dat
+--------------------------------------------------------------------------------
+   Bytes Format Units   Label  Explanations
+--------------------------------------------------------------------------------
+   1- 10  A10   ---     WDS    WDS name (based on J2000 position)
+  11- 17  A7    ---     Disc   Discoverer Code (1 to 4 letters) and Number (5)
+  18- 22  A5    ---     Comp   Components when more than 2 (1)
+  24- 27  I4    yr      Obs1   ? Date of first satisfactory observation
+  29- 32  I4    yr      Obs2   ? Date of last satisfactory observation
+  34- 37  I4    ---     Nobs   Number of Observations (up to 9999)
+  39- 41  I3    deg     pa1    ? Position Angle at date Obs1 (2)
+  43- 45  I3    deg     pa2    ? Position Angle at date Obs2 (2)
+  47- 51  F5.1  arcsec  sep1   ? Separation at date Obs1
+  53- 58  F6.2  arcsec  sep2   ? Separation at date Obs12
+  59- 64  F6.3  mag     mag1   ? Magnitude of First Component
+  65- 69  F5.2  mag     mag2   ? Magnitude of Second Component
+  71- 80  A10   ---     SpType Spectral Type (Primary/Secondary)
+  81- 84  I4    mas/yr  pmRA1  ? Primary Proper Motion (RA)
+  85- 88  I4    mas/yr  pmDE1  ? Primary Proper Motion (Dec)
+  90- 93  I4    mas/yr  pmRA2  ? Secondary Proper Motion (RA)
+  94- 97  I4    mas/yr  pmDE2  ? Secondary Proper Motion (Dec)
+  99-107  A9    ---     DM     Durchmusterung Number (3)
+ 108-111  A4    ---     Notes  [B-Z ] Notes about the binary (4)
+     112  A1    ---   n_RAh    [!P] indicates a position derived from WDS name
+ 113-114  I2    h       RAh    ? Right Ascension J2000 (Ep=J2000, hours)
+ 115-116  I2    min     RAm    ? Right Ascension J2000 (Ep=J2000, minutes)
+ 117-121  F5.2  s       RAs    [0/60]? Right Ascension J2000 (Ep=J2000, seconds)
+     122  A1    ---     DE-    Declination J2000 (Ep=J2000, sign)
+ 123-124  I2    deg     DEd    ? Declination J2000 (Ep=J2000, degrees)
+ 125-126  I2    arcmin  DEm    ? Declination J2000 (Ep=J2000, minutes)
+ 127-130  F4.1  arcsec  DEs    [0/60]? Declination J2000 (Ep=J2000, seconds)
+--------------------------------------------------------------------------------
+Note (1): Components, when the object has more than two. The Lick IDS
+     scheme (which used letters P, Q, R...) has been discontinued, and
+     components are now referred to by the traditionally employed
+     lower-case letters. The rather awkward upper-case designations, e.g.
+     ABXC, have been changed to the form AB-C, etc. We have noted some
+     confusion on the part of observers and students alike, as to how to
+     designate components in multiple systems. Traditionally, these have
+     been designated in order of separation, thus AB, AC,...., or in the
+     cases where close pairs are observed blended, AB-C, AB-D,.... In some
+     instances, differing resolution limits produce situations where
+     observations are intermixed, thus AC, AB-C, and so forth (in all too
+     many cases, carelessness on the part of the observer does not permit
+     us to determine with certainty how the observation is to be
+     interpreted). There are also many instances where later observations
+     have revealed a closer companion; these are designated Aa, Bb, etc.
+     In a few cases wider, later discoveries have also been so denoted.
+
+Note (2): Crude positions (e.g., NP for "North Preceding") of the past have
+     been changed to their degree equivalent with an accompanying note.
+     Position angles are unprecessed in this catalog (i.e., they are for
+     the mean date of observation).
+
+Note (3): use the convention of the Henry Draper Catalogue:
+     BD (Bonn) from +89 degrees to -22 degrees inclusive, Cordoba from -23
+     degrees to -51 degrees inclusive, Cape Photographic from -52 degrees
+     to -89 degrees inclusive. When a star is not contained in the
+     Durchmusterung proper to its declination zone, but is contained in
+     another Durchmusterung, this is so indicated in the Notes. Other
+     components having different Durchmusterung numbers are also indicated
+     in the Notes. From September 2009, the DM number may be followed by
+     a component letter, e.g. "-50 9826B" for WSI  81Ba,Bb
+
+Note (4): The following codes are contained in these columns:
+     N = Notes found in the "notes.dat" table.
+     B = Summary line gives blue (Johnson U or B, blue photographic, etc.)
+         magnitudes
+     C = Orbit and Linear solution. A published orbit exists and this
+         system has a Linear Solution as well. A "C" code, then,
+         indicates both an "O" and an "L" code.
+     D = Has measure in Delta-M catalog
+     I = Identification uncertain. Match of object at precise position
+         with WDS pair may or may not be correct. Currently under examination.
+     K = Summary line gives K-band or other infrared (>1 micron) magnitudes
+     L = Linear solution. Linear elements for this pair have been
+         determined. Linear Elements Catalog is currently under development.
+     M = Magnitude modified. Magnitudes have been corrected to the
+         Tycho-V scale based on other systems measured by the
+         discoverer and Tycho.
+     O = Orbit, briefly described in WDSNOT MEMO and has entry in Orbit Catalog
+     P = 100-year proper motion in right ascension and declination
+     R = Summary line gives red (Johnson R or I, red photographic,
+         etc.) magnitudes
+     S = Statistically different parallax and proper motion indicates
+         that this pair is non-physical.
+     T = Statistically the same parallax within the errors and similar
+         proper motion or other technique indicates that this pair
+         is physical.
+     U = Proper motion or other technique indicates that this pair
+         is non-physical.
+     V = Proper motion or other technique indicates that this pair
+         is physical.
+     X = A "Dubious Double" (or "Bogus Binary"). This pair may represent
+         a positional typo in the original publication (so we're looking
+         in the wrong location), an optical double disappearing due to
+         radically different proper motions, a plate flaw, or simply a
+         pair not at a magnitude, separation, etc., sufficiently similar
+         to those noted when the first measure was added (making it too
+         faint, too close, etc.).
+     Y = Statistically different parallax for the components indicates
+         they are non-physical.
+     Z = Statistically the same parallax within the errors would
+         indicate the components are physical.
+     At present, column 108 is reserved for N, column 109 for O, L, C,
+     or X and column 110 for D. The other codes can occur in any column.
+
+Note (5): Originally 3 letters represent the discoverer; an additional
+    'A' denotes an appendix, 'B' a second appendix, e.g. in the lists
+    of F. Struve: STF1004 is the 1004th system in the main list,
+    STFA 11 is the 11th system of the first appendix, STFB 12 is the
+    12th system of the second appendix, etc.
+--------------------------------------------------------------------------------
+
+Byte-by-byte Description of file: notes.dat
+--------------------------------------------------------------------------------
+   Bytes Format Units   Label     Explanations
+--------------------------------------------------------------------------------
+   1- 10  A10   ---     WDS       WDS name
+  12- 22  A11   ---     Disc      Discoverer Code and Number
+  24- 95  A72   ---     Text      Text of note
+  96-103  A8    ---     RefCode   Reference code
+--------------------------------------------------------------------------------
+
+Byte-by-byte Description of file: refs.dat
+--------------------------------------------------------------------------------
+   Bytes Format Units   Label     Explanations
+--------------------------------------------------------------------------------
+   1-  4  A4    ---     Disc      Discoverer Code
+   6- 13  A8    ---     RefCode   Reference code
+  15- 19  A5    ---     Meth      Method(s)
+  20- 20  A1    ---     E         E column
+  23-126  A104   ---    Text      Authors and publication reference with
+                                   reference code used by ADS/CDS/NED (1)
+--------------------------------------------------------------------------------
+Note (1): "additional DD list" refers to a list of discovery designations
+     for discoverers who had no papers where they were first author.
+--------------------------------------------------------------------------------
+
+History:
+  * 08-Jan-2009: Version 103861 binaries, from http://ad.usno.navy.mil/wds/
+  * 22-Feb-2009: Version 104221 binaries, from http://ad.usno.navy.mil/wds/
+  * 01-Mar-2009: Version 104225 binaries, from http://ad.usno.navy.mil/wds/
+  * 08-Mar-2009: Version 104235 binaries, from http://ad.usno.navy.mil/wds/
+  * 15-Mar-2009: Version 104223 binaries, from http://ad.usno.navy.mil/wds/
+  * 28-Mar-2009: Version 104227 binaries, from http://ad.usno.navy.mil/wds/
+  * 19-Apr-2009: Version 104260 binaries, from http://ad.usno.navy.mil/wds/
+  * 10-May-2009: Version 104271 binaries, from http://ad.usno.navy.mil/wds/
+  * 02-Aug-2009: Version 104298 binaries, from http://ad.usno.navy.mil/wds/
+  * 23-Aug-2009: Version 104682 binaries, from http://ad.usno.navy.mil/wds/
+  * 13-Sep-2009: Version 104854 binaries, from http://ad.usno.navy.mil/wds/
+  * 25-Oct-2009: Version 104989 binaries, from http://ad.usno.navy.mil/wds/
+  * 20-Dec-2009: Version 106003 binaries, from http://ad.usno.navy.mil/wds/
+  * 27-Dec-2009: Version 106058 binaries, from http://ad.usno.navy.mil/wds/
+  * 10-Jan-2010: Version 106057 binaries, from http://ad.usno.navy.mil/wds/
+  * 31-Jan-2010: Version 106089 binaries, from http://ad.usno.navy.mil/wds/
+  * 07-Feb-2010: Version 106091 binaries, from http://ad.usno.navy.mil/wds/
+  * 28-Feb-2010: Version 106252 binaries, from http://ad.usno.navy.mil/wds/
+  * 14-Mar-2010: Version 106277 binaries, from http://ad.usno.navy.mil/wds/
+  * 21-Mar-2010: Version 106320 binaries, from http://ad.usno.navy.mil/wds/
+  * 28-Mar-2010: Version 106581 binaries, from http://ad.usno.navy.mil/wds/
+  * 04-Apr-2010: Version 106676 binaries, from http://ad.usno.navy.mil/wds/
+  * 18-Apr-2010: Version 107349 binaries, from http://ad.usno.navy.mil/wds/
+  * 25-Apr-2010: Version 107449 binaries; bibcodes added in refs.dat
+  * 02-May-2010: Version 107556 binaries, from http://ad.usno.navy.mil/wds/
+  * 16-May-2010: Version 107599 binaries, from http://ad.usno.navy.mil/wds/
+  * 06-Jun-2010: Version 107683 binaries, from http://ad.usno.navy.mil/wds/
+  * 13-Jun-2010: Version 107705 binaries, from http://ad.usno.navy.mil/wds/
+  * 20-Jun-2010: Version 107705 binaries, from http://ad.usno.navy.mil/wds/
+  * 27-Jun-2010: Version 107812 binaries, from http://ad.usno.navy.mil/wds/
+  * 29-Aug-2010: Version 108100 binaries, from http://ad.usno.navy.mil/wds/
+  * 14-Sep-2010: Version 108184 binaries, from http://ad.usno.navy.mil/wds/
+  * 03-Oct-2010: Version 108313 binaries, from http://ad.usno.navy.mil/wds/
+  * 10-Oct-2010: Version 108314 binaries, from http://ad.usno.navy.mil/wds/
+  * 17-Oct-2010: Version 108336 binaries, from http://ad.usno.navy.mil/wds/
+  * 24-Oct-2010: Version 108377 binaries, from http://ad.usno.navy.mil/wds/
+  * 31-Oct-2010: Version 108509 binaries, from http://ad.usno.navy.mil/wds/
+  * 07-Nov-2010: Version 108529 binaries, from http://ad.usno.navy.mil/wds/
+  * 14-Nov-2010: Version 108534 binaries, from http://ad.usno.navy.mil/wds/
+  * 21-Nov-2010: Version 108543 binaries, from http://ad.usno.navy.mil/wds/
+  * 28-Nov-2010: Version 108581 binaries, from http://ad.usno.navy.mil/wds/
+  * 05-Dec-2010: Version 108628 binaries, from http://ad.usno.navy.mil/wds/
+  * 12-Dec-2010: Version 108628 binaries, from http://ad.usno.navy.mil/wds/
+  * 19-Dec-2010: Version 108626 binaries, from http://ad.usno.navy.mil/wds/
+  * 26-Dec-2010: Version 108626 binaries, from http://ad.usno.navy.mil/wds/
+  * 09-Jan-2011: Version 113184 binaries, from http://ad.usno.navy.mil/wds/
+  * 16-Jan-2011: Version 113184 binaries, from http://ad.usno.navy.mil/wds/
+  * 30-Jan-2011: Version 113457 binaries, from http://ad.usno.navy.mil/wds/
+  * 06-Feb-2011: Version 113581 binaries, from http://ad.usno.navy.mil/wds/
+  * 13-Feb-2011: Version 113581 binaries, from http://ad.usno.navy.mil/wds/
+  * 27-Feb-2011: Version 113700 binaries, from http://ad.usno.navy.mil/wds/
+  * 20-Mar-2011: Version 114037 binaries, from http://ad.usno.navy.mil/wds/
+  * 27-Mar-2011: Version 114127 binaries, from http://ad.usno.navy.mil/wds/
+  * 03-Apr-2011: Version 114405 binaries, from http://ad.usno.navy.mil/wds/
+  * 10-Apr-2011: Version 114415 binaries, from http://ad.usno.navy.mil/wds/
+  * 17-Apr-2011: Version 114473 binaries, from http://ad.usno.navy.mil/wds/
+  * 25-Apr-2011: Version 114515 binaries, from http://ad.usno.navy.mil/wds/
+  * 01-May-2011: Version 114755 binaries, from http://ad.usno.navy.mil/wds/
+  * 15-May-2011: Version 114766 binaries, from http://ad.usno.navy.mil/wds/
+  * 22-May-2011: Version 114796 binaries, from http://ad.usno.navy.mil/wds/
+  * 29-May-2011: Version 114865 binaries, from http://ad.usno.navy.mil/wds/
+  * 05-Jun-2011: Version 114921 binaries, from http://ad.usno.navy.mil/wds/
+  * 12-Jun-2011: Version 114927 binaries, from http://ad.usno.navy.mil/wds/
+  * 19-Jun-2011: Version 114942 binaries, from http://ad.usno.navy.mil/wds/
+  * 26-Jun-2011: Version 114954 binaries, from http://ad.usno.navy.mil/wds/
+  * 17-Jul-2011: Version 114971 binaries, from http://ad.usno.navy.mil/wds/
+  * 24-Jul-2011: Version 114978 binaries, from http://ad.usno.navy.mil/wds/
+  * 31-Jul-2011: Version 114979 binaries, from http://ad.usno.navy.mil/wds/
+  * 07-Aug-2011: Version 115002 binaries, from http://ad.usno.navy.mil/wds/
+  * 15-Aug-2011: Version 115050 binaries, from http://ad.usno.navy.mil/wds/
+  * 21-Aug-2011: Version 115115 binaries, from http://ad.usno.navy.mil/wds/
+  * 04-Sep-2011: Version 115416 binaries, from http://ad.usno.navy.mil/wds/
+  * 18-Sep-2011: Version 115478 binaries, from http://ad.usno.navy.mil/wds/
+  * 25-Sep-2011: Version 115515 binaries, from http://ad.usno.navy.mil/wds/
+  * 23-Oct-2011: Version 115609 binaries, from http://ad.usno.navy.mil/wds/
+  * 30-Oct-2011: Version 115609 binaries, from http://ad.usno.navy.mil/wds/
+  * 06-Nov-2011: Version 115635 binaries, from http://ad.usno.navy.mil/wds/
+  * 13-Nov-2011: Version 115634 binaries, from http://ad.usno.navy.mil/wds/
+  * 20-Nov-2011: Version 115659 binaries, from http://ad.usno.navy.mil/wds/
+  * 27-Nov-2011: Version 115702 binaries, from http://ad.usno.navy.mil/wds/
+  * 04-Dec-2011: Version 115702 binaries, from http://ad.usno.navy.mil/wds/
+  * 11-Dec-2011: Version 115715 binaries, from http://ad.usno.navy.mil/wds/
+  * 18-Dec-2011: Version 115714 binaries, from http://ad.usno.navy.mil/wds/
+  * 25-Dec-2011: Version 115759 binaries, from http://ad.usno.navy.mil/wds/
+  * 01-Jan-2012: Version 115769 binaries, from http://ad.usno.navy.mil/wds/
+  * 15-Jan-2012: Version 116222 binaries, from http://ad.usno.navy.mil/wds/
+  * 22-Jan-2012: Version 116222 binaries, from http://ad.usno.navy.mil/wds/
+  * 29-Jan-2012: Version 116253 binaries, from http://ad.usno.navy.mil/wds/
+  * 05-Feb-2012: Version 116300 binaries, from http://ad.usno.navy.mil/wds/
+  * 12-Feb-2012: Version 116365 binaries, from http://ad.usno.navy.mil/wds/
+  * 19-Feb-2012: Version 116365 binaries, from http://ad.usno.navy.mil/wds/
+  * 26-Feb-2012: Version 116948 binaries, from http://ad.usno.navy.mil/wds/
+  * 18-Mar-2012: Version 117417 binaries, from http://ad.usno.navy.mil/wds/
+  * 01-Apr-2012: Version 117417 binaries, from http://ad.usno.navy.mil/wds/
+  * 01-Jul-2012: Version 118447 binaries, from http://ad.usno.navy.mil/wds/
+  * 08-Jul-2012: Version 118491 binaries, from http://ad.usno.navy.mil/wds/
+  * 15-Jul-2012: Version 118491 binaries, from http://ad.usno.navy.mil/wds/
+  * 22-Jul-2012: Version 118556 binaries, from http://ad.usno.navy.mil/wds/
+  * 05-Aug-2012: Version 118558 binaries, from http://ad.usno.navy.mil/wds/
+  * 16-Sep-2012: Version 119128 binaries, from http://ad.usno.navy.mil/wds/
+  * 23-Sep-2012: Version 119148 binaries, from http://ad.usno.navy.mil/wds/
+  * 30-Sep-2012: Version 119149 binaries, from http://ad.usno.navy.mil/wds/
+  * 07-Oct-2012: Version 119397 binaries, from http://ad.usno.navy.mil/wds/
+  * 14-Oct-2012: Version 119472 binaries, from http://ad.usno.navy.mil/wds/
+  * 28-Oct-2012: Version 119722 binaries, from http://ad.usno.navy.mil/wds/
+  * 04-Nov-2012: Version 119761 binaries, from http://ad.usno.navy.mil/wds/
+  * 11-Nov-2012: Version 119826 binaries, from http://ad.usno.navy.mil/wds/
+  * 18-Nov-2012: Version 119923 binaries, from http://ad.usno.navy.mil/wds/
+  * 25-Nov-2012: Version 119978 binaries, from http://ad.usno.navy.mil/wds/
+  * 09-Dec-2012: Version 119991 binaries, from http://ad.usno.navy.mil/wds/
+  * 13-Jan-2013: Version 120095 binaries, from http://ad.usno.navy.mil/wds/
+  * 20-Jan-2013: Version 120190 binaries, from http://ad.usno.navy.mil/wds/
+  * 27-Jan-2013: Version 120203 binaries, from http://ad.usno.navy.mil/wds/
+  * 10-Feb-2013: Version 125137 binaries, from http://ad.usno.navy.mil/wds/
+  * 17-Feb-2013: Version 125245 binaries, from http://ad.usno.navy.mil/wds/
+  * 24-Feb-2013: Version 125273 binaries, from http://ad.usno.navy.mil/wds/
+  * 03-Mar-2013: Version 125271 binaries, from http://ad.usno.navy.mil/wds/
+  * 10-Mar-2013: Version 125271 binaries, from http://ad.usno.navy.mil/wds/
+  * 17-Mar-2013: Version 125269 binaries, from http://ad.usno.navy.mil/wds/
+  * 24-Mar-2013: Version 125271 binaries, from http://ad.usno.navy.mil/wds/
+  * 31-Mar-2013: Version 125269 binaries, from http://ad.usno.navy.mil/wds/
+  * 14-Apr-2013: Version 125269 binaries, from http://ad.usno.navy.mil/wds/
+  * 21-Apr-2013: Version 125365 binaries, from http://ad.usno.navy.mil/wds/
+  * 29-Apr-2013: Version 125370 binaries, from http://ad.usno.navy.mil/wds/
+  * 05-May-2013: Version 125540 binaries, from http://ad.usno.navy.mil/wds/
+  * 12-May-2013: Version 125672 binaries, from http://ad.usno.navy.mil/wds/
+  * 26-May-2013: Version 125743 binaries, from http://ad.usno.navy.mil/wds/
+  * 02-Jun-2013: Version 125757 binaries, from http://ad.usno.navy.mil/wds/
+  * 09-Jun-2013: Version 125765 binaries, from http://ad.usno.navy.mil/wds/
+  * 16-Jun-2013: Version 125766 binaries, from http://ad.usno.navy.mil/wds/
+  * 07-Jul-2013: Version 126211 binaries, from http://ad.usno.navy.mil/wds/
+  * 14-Jul-2013: Version 126211 binaries, from http://ad.usno.navy.mil/wds/
+  * 21-Jul-2013: Version 126261 binaries, from http://ad.usno.navy.mil/wds/
+  * 28-Jul-2013: Version 126298 binaries, from http://ad.usno.navy.mil/wds/
+  * 04-Aug-2013: Version 126388 binaries, from http://ad.usno.navy.mil/wds/
+  * 11-Aug-2013: Version 126512 binaries, from http://ad.usno.navy.mil/wds/
+  * 01-Sep-2013: Version 126526 binaries, from http://ad.usno.navy.mil/wds/
+  * 08-Sep-2013: Version 126552 binaries, from http://ad.usno.navy.mil/wds/
+  * 22-Sep-2013: Version 127232 binaries, from http://ad.usno.navy.mil/wds/
+  * 29-Sep-2013: Version 127512 binaries, from http://ad.usno.navy.mil/wds/
+  * 06-Oct-2013: Version 127576 binaries, from http://ad.usno.navy.mil/wds/
+  * 13-Oct-2013: Version 127578 binaries, from http://ad.usno.navy.mil/wds/
+  * 21-Oct-2013: Version 127620 binaries, from http://ad.usno.navy.mil/wds/
+  * 21-Oct-2013: Version 127620 binaries, from http://ad.usno.navy.mil/wds/
+  * 27-Oct-2013: Version 127754 binaries, from http://ad.usno.navy.mil/wds/
+  * 10-Nov-2013: Version 127758 binaries, from http://ad.usno.navy.mil/wds/
+  * 24-Nov-2013: Version 127766 binaries, from http://ad.usno.navy.mil/wds/
+  * 02-Dec-2013: Version 127766 binaries, from http://ad.usno.navy.mil/wds/
+  * 08-Dec-2013: Version 127778 binaries, from http://ad.usno.navy.mil/wds/
+  * 29-Dec-2013: Version 127779 binaries, from http://ad.usno.navy.mil/wds/
+  * 05-Jan-2014: Version 127781 binaries, from http://ad.usno.navy.mil/wds/
+  * 21-Jan-2014: Version 127790 binaries, from http://ad.usno.navy.mil/wds/
+  * 02-Feb-2014: Version 127799 binaries, from http://ad.usno.navy.mil/wds/
+  * 10-Feb-2014: Version 127867 binaries, from http://ad.usno.navy.mil/wds/
+  * 24-Feb-2014: Version 127869 binaries, from http://ad.usno.navy.mil/wds/
+  * 24-Mar-2014: Version 128288 binaries, from http://ad.usno.navy.mil/wds/
+  * 31-Mar-2014: Version 128426 binaries, from http://ad.usno.navy.mil/wds/
+  * 07-Apr-2014: Version 128502 binaries, from http://ad.usno.navy.mil/wds/
+  * 14-Apr-2014: Version 128511 binaries, from http://ad.usno.navy.mil/wds/
+  * 05-May-2014: Version 128525 binaries, from http://ad.usno.navy.mil/wds/
+  * 26-May-2014: Version 128849 binaries, from http://ad.usno.navy.mil/wds/
+  * 16-Jun-2014: Version 128849 binaries, from http://ad.usno.navy.mil/wds/
+  * 15-Jul-2014: Version 128877 binaries, from http://ad.usno.navy.mil/wds/
+  * 21-Jul-2014: Version 128878 binaries, from http://ad.usno.navy.mil/wds/
+  * 19-Aug-2014: Version 129001 binaries, from http://ad.usno.navy.mil/wds/
+  * 01-Sep-2014: Version 129047 binaries, from http://ad.usno.navy.mil/wds/
+  * 08-Sep-2014: Version 129047 binaries, from http://ad.usno.navy.mil/wds/
+  * 22-Sep-2014: Version 129181 binaries, from http://ad.usno.navy.mil/wds/
+  * 08-Oct-2014: Version 129238 binaries, from http://ad.usno.navy.mil/wds/
+  * 12-Oct-2014: Version 129239 binaries, from http://ad.usno.navy.mil/wds/
+  * 20-Oct-2014: Version 129242 binaries, from http://ad.usno.navy.mil/wds/
+  * 27-Oct-2014: Version 129455 binaries, from http://ad.usno.navy.mil/wds/
+  * 03-Nov-2014: Version 129455 binaries, from http://ad.usno.navy.mil/wds/
+  * 17-Nov-2014: Version 129494 binaries, from http://ad.usno.navy.mil/wds/
+  * 24-Nov-2014: Version 130074 binaries, from http://ad.usno.navy.mil/wds/
+  * 01-Dec-2014: Version 130074 binaries, from http://ad.usno.navy.mil/wds/
+  * 08-Dec-2014: Version 130075 binaries, from http://ad.usno.navy.mil/wds/
+  * 15-Dec-2014: Version 130083 binaries, from http://ad.usno.navy.mil/wds/
+  * 29-Dec-2014: Version 130084 binaries, from http://ad.usno.navy.mil/wds/
+  * 05-Jan-2015: Version 130084 binaries, from http://ad.usno.navy.mil/wds/
+  * 12-Jan-2015: Version 130084 binaries, from http://ad.usno.navy.mil/wds/
+  * 19-Jan-2015: Version 130388 binaries, from http://ad.usno.navy.mil/wds/
+  * 26-Jan-2015: Version 130933 binaries, from http://ad.usno.navy.mil/wds/
+  * 02-Feb-2015: Version 130934 binaries, from http://ad.usno.navy.mil/wds/
+  * 09-Feb-2015: Version 131662 binaries, from http://ad.usno.navy.mil/wds/
+  * 16-Feb-2015: Version 131671 binaries, from http://ad.usno.navy.mil/wds/
+  * 03-Mar-2015: Version 132120 binaries, from http://ad.usno.navy.mil/wds/
+  * 09-Mar-2015: Version 132120 binaries, from http://ad.usno.navy.mil/wds/
+  * 25-Mar-2015: Version 132194 binaries, from http://ad.usno.navy.mil/wds/
+  * 07-Apr-2015: Version 132228 binaries, from http://ad.usno.navy.mil/wds/
+  * 20-Apr-2015: Version 132231 binaries, from http://ad.usno.navy.mil/wds/
+  * 11-May-2015: Version 132308 binaries, from http://ad.usno.navy.mil/wds/
+  * 18-May-2015: Version 132391 binaries, from http://ad.usno.navy.mil/wds/
+  * 26-May-2015: Version 132457 binaries, from http://ad.usno.navy.mil/wds/
+  * 01-Jun-2015: Version 132456 binaries, from http://ad.usno.navy.mil/wds/
+  * 08-Jun-2015: Version 132486 binaries, from http://ad.usno.navy.mil/wds/
+  * 22-Jun-2015: Version 132600 binaries, from http://ad.usno.navy.mil/wds/
+  * 29-Jun-2015: Version 132869 binaries, from http://ad.usno.navy.mil/wds/
+  * 05-Jul-2015: Version 132871 binaries, from http://ad.usno.navy.mil/wds/
+  * 19-Jul-2015: Version 132885 binaries, from http://ad.usno.navy.mil/wds/
+  * 04-Aug-2015: Version 133050 binaries, from http://ad.usno.navy.mil/wds/
+  * 01-Sep-2015: Version 133049 binaries, from http://ad.usno.navy.mil/wds/
+  * 07-Sep-2015: Version 133068 binaries, from http://ad.usno.navy.mil/wds/
+  * 14-Sep-2015: Version 133134 binaries, from http://ad.usno.navy.mil/wds/
+  * 05-Oct-2015: Version 133188 binaries, from http://ad.usno.navy.mil/wds/
+  * 19-Oct-2015: Version 133254 binaries, from http://ad.usno.navy.mil/wds/
+  * 02-Nov-2015: Version 133473 binaries, from http://ad.usno.navy.mil/wds/
+  * 02-Nov-2015: Version 133473 binaries, from http://ad.usno.navy.mil/wds/
+  * 16-Nov-2015: Version 133473 binaries, from http://ad.usno.navy.mil/wds/
+  * 07-Dec-2015: Version 133706 binaries, from http://ad.usno.navy.mil/wds/
+  * 14-Dec-2015: Version 133756 binaries, from http://ad.usno.navy.mil/wds/
+  * 25-Jan-2016: Version 133964 binaries, from http://ad.usno.navy.mil/wds/
+  * 15-Feb-2016: Version 134872 binaries, from http://ad.usno.navy.mil/wds/
+  * 22-Feb-2016: Version 134872 binaries, from http://ad.usno.navy.mil/wds/
+  * 29-Feb-2016: Version 135076 binaries, from http://ad.usno.navy.mil/wds/
+  * 07-Mar-2016: Version 135090 binaries, from http://ad.usno.navy.mil/wds/
+  * 21-Mar-2016: Version 135098 binaries, from http://ad.usno.navy.mil/wds/
+  * 11-Apr-2016: Version 135198 binaries, from http://ad.usno.navy.mil/wds/
+  * 18-Apr-2016: Version 135239 binaries, from http://ad.usno.navy.mil/wds/
+  * 02-May-2016: Version 135297 binaries, from http://ad.usno.navy.mil/wds/
+  * 09-May-2016: Version 135496 binaries, from http://ad.usno.navy.mil/wds/
+  * 23-May-2016: Version 137086 binaries, from http://ad.usno.navy.mil/wds/
+  * 30-May-2016: Version 137199 binaries, from http://ad.usno.navy.mil/wds/
+  * 06-Jun-2016: Version 137205 binaries, from http://ad.usno.navy.mil/wds/
+  * 20-Jun-2016: Version 137222 binaries, from http://ad.usno.navy.mil/wds/
+  * 27-Jun-2016: Version 137225 binaries, from http://ad.usno.navy.mil/wds/
+  * 04-Jul-2016: Version 137259 binaries, from http://ad.usno.navy.mil/wds/
+  * 26-Jul-2016: Version 137802 binaries, from http://ad.usno.navy.mil/wds/
+  * 16-Aug-2016: Version 137855 binaries, from http://ad.usno.navy.mil/wds/
+  * 29-Aug-2016: Version 138234 binaries, from http://ad.usno.navy.mil/wds/
+  * 05-Sep-2016: Version 138234 binaries, from http://ad.usno.navy.mil/wds/
+  * 03-Oct-2016: Version 138637 binaries, from http://ad.usno.navy.mil/wds/
+  * 10-Oct-2016: Version 138637 binaries, from http://ad.usno.navy.mil/wds/
+  * 07-Nov-2016: Version 138741 binaries, from http://ad.usno.navy.mil/wds/
+  * 14-Nov-2016: Version 138744 binaries, from http://ad.usno.navy.mil/wds/
+  * 21-Nov-2016: Version 138744 binaries, from http://ad.usno.navy.mil/wds/
+  * 05-Dec-2016: Version 138744 binaries, from http://ad.usno.navy.mil/wds/
+  * 13-Dec-2016: Version 138965 binaries, from http://ad.usno.navy.mil/wds/
+  * 02-Jan-2017: Version 138965 binaries, from http://ad.usno.navy.mil/wds/
+  * 17-Jan-2017: Version 138984 binaries, from http://ad.usno.navy.mil/wds/
+  * 06-Feb-2017: Version 138989 binaries, from http://ad.usno.navy.mil/wds/
+  * 13-Feb-2017: Version 138999 binaries, from http://ad.usno.navy.mil/wds/
+  * 06-Mar-2017: Version 139677 binaries, from http://ad.usno.navy.mil/wds/
+  * 13-Mar-2017: Version 139688 binaries, from http://ad.usno.navy.mil/wds/
+  * 27-Mar-2017: Version 139694 binaries, from http://ad.usno.navy.mil/wds/
+  * 10-Apr-2017: Version 139781 binaries, from http://ad.usno.navy.mil/wds/
+  * 02-May-2017: Version 141504 binaries, from http://ad.usno.navy.mil/wds/
+  * 29-May-2017: Version 141738 binaries, from http://ad.usno.navy.mil/wds/
+  * 12-Jun-2017: Version 141765 binaries, from http://ad.usno.navy.mil/wds/
+  * 26-Jun-2017: Version 141827 binaries, from http://ad.usno.navy.mil/wds/
+  * 10-Jul-2017: Version 141828 binaries, from http://ad.usno.navy.mil/wds/
+  * 07-Aug-2017: Version 141891 binaries, from http://ad.usno.navy.mil/wds/
+  * 28-Aug-2017: Version 141905 binaries, from http://ad.usno.navy.mil/wds/
+  * 04-Sep-2017: Version 141911 binaries, from http://ad.usno.navy.mil/wds/
+  * 18-Sep-2017: Version 141911 binaries, from http://ad.usno.navy.mil/wds/
+  * 25-Sep-2017: Version 141911 binaries, from http://ad.usno.navy.mil/wds/
+  * 09-Oct-2017: Version 141912 binaries, from http://ad.usno.navy.mil/wds/
+  * 06-Nov-2017: Version 142013 binaries, from http://ad.usno.navy.mil/wds/
+  * 20-Nov-2017: Version 142116 binaries, from http://ad.usno.navy.mil/wds/
+  * 04-Dec-2017: Version 142202 binaries, from http://ad.usno.navy.mil/wds/
+  * 15-Jan-2018: Version 142211 binaries, from http://ad.usno.navy.mil/wds/
+  * 19-Feb-2018: Version 142547 binaries, from http://ad.usno.navy.mil/wds/
+  * 12-Mar-2018: Version 142552 binaries, from http://ad.usno.navy.mil/wds/
+  * 19-Mar-2018: Version 142563 binaries, from http://ad.usno.navy.mil/wds/
+  * 03-Apr-2018: Version 142595 binaries, from http://ad.usno.navy.mil/wds/
+  * 09-Apr-2018: Version 142596 binaries, from http://ad.usno.navy.mil/wds/
+  * 01-May-2018: Version 142618 binaries, from http://ad.usno.navy.mil/wds/
+  * 07-May-2018: Version 142645 binaries, from http://ad.usno.navy.mil/wds/
+  * 14-May-2018: Version 142681 binaries, from http://ad.usno.navy.mil/wds/
+  * 22-May-2018: Version 142684 binaries, from http://ad.usno.navy.mil/wds/
+  * 28-May-2018: Version 142780 binaries, from http://ad.usno.navy.mil/wds/
+  * 11-Jun-2018: Version 142783 binaries, from http://ad.usno.navy.mil/wds/
+  * 16-Jul-2018: Version 142785 binaries, from http://ad.usno.navy.mil/wds/
+  * 03-Sep-2018: Version 143759 binaries, from http://ad.usno.navy.mil/wds/
+  * 10-Sep-2018: Version 145176 binaries, from http://ad.usno.navy.mil/wds/
+  * 17-Sep-2018: Version 145517 binaries, from http://ad.usno.navy.mil/wds/
+  * 24-Sep-2018: Version 145551 binaries, from http://ad.usno.navy.mil/wds/
+  * 08-Oct-2018: Version 145556 binaries, from http://ad.usno.navy.mil/wds/
+  * 29-Oct-2018: Version 145660 binaries, from http://ad.usno.navy.mil/wds/
+  * 05-Nov-2018: Version 145660 binaries, from http://ad.usno.navy.mil/wds/
+  * 26-Nov-2018: Version 145770 binaries, from http://ad.usno.navy.mil/wds/
+  * 17-Dec-2018: Version 145980 binaries, from http://ad.usno.navy.mil/wds/
+  * 17-Dec-2018: Version 145980 binaries, from http://ad.usno.navy.mil/wds/
+  * 17-Dec-2018: Version 145980 binaries, from http://ad.usno.navy.mil/wds/
+  * 15-Jan-2019: Version 146114 binaries, from http://ad.usno.navy.mil/wds/
+  * 21-Jan-2019: Version 146115 binaries, from http://ad.usno.navy.mil/wds/
+  * 18-Feb-2019: Version 146115 binaries, from http://ad.usno.navy.mil/wds/
+  * 04-Mar-2019: Version 146271 binaries, from http://ad.usno.navy.mil/wds/
+  * 25-Mar-2019: Version 146271 binaries, from http://ad.usno.navy.mil/wds/
+  * 01-Apr-2019: Version 146271 binaries, from http://ad.usno.navy.mil/wds/
+  * 08-Apr-2019: Version 146274 binaries, from http://ad.usno.navy.mil/wds/
+  * 15-Apr-2019: Version 148142 binaries, from http://ad.usno.navy.mil/wds/
+  * 29-Apr-2019: Version 148289 binaries, from http://ad.usno.navy.mil/wds/
+  * 06-May-2019: Version 148475 binaries, from http://ad.usno.navy.mil/wds/
+  * 21-May-2019: Version 148640 binaries, from http://ad.usno.navy.mil/wds/
+  * 03-Jun-2019: Version 148690 binaries, from http://ad.usno.navy.mil/wds/
+  * 11-Jun-2019: Version 148870 binaries, from http://ad.usno.navy.mil/wds/
+  * 17-Jun-2019: Version 149076 binaries, from http://ad.usno.navy.mil/wds/
+  * 23-Jul-2019: Version 149157 binaries, from http://ad.usno.navy.mil/wds/
+  * 12-Aug-2019: Version 149682 binaries, from http://ad.usno.navy.mil/wds/
+  * 26-Aug-2019: Version 149635 binaries, from http://ad.usno.navy.mil/wds/
+  * 02-Sep-2019: Version 149734 binaries, from http://ad.usno.navy.mil/wds/
+  * 09-Sep-2019: Version 149731 binaries, from http://ad.usno.navy.mil/wds/
+  * 30-Sep-2019: Version 149730 binaries, from http://ad.usno.navy.mil/wds/
+  * 21-Oct-2019: Version 150551 binaries, from http://ad.usno.navy.mil/wds/
+  * 05-Aug-2020: Version 152352 binaries, from http://www.astro.gsu.edu/wds/
+  * 06-Aug-2020: Version 152352 binaries, from http://www.astro.gsu.edu/wds/
+  * 10-Aug-2020: Version 152352 binaries, from http://www.astro.gsu.edu/wds/
+  * 24-Aug-2020: Version 152354 binaries, from http://www.astro.gsu.edu/wds/
+  * 31-Aug-2020: Version 152448 binaries, from http://www.astro.gsu.edu/wds/
+  * 21-Sep-2020: Version 152451 binaries, from http://www.astro.gsu.edu/wds/
+  * 05-Oct-2020: Version 152451 binaries, from http://www.astro.gsu.edu/wds/
+  * 19-Oct-2020: Version 153002 binaries, from http://www.astro.gsu.edu/wds/
+  * 27-Oct-2020: Version 153002 binaries, from http://www.astro.gsu.edu/wds/
+  * 30-Nov-2020: Version 153007 binaries, from http://www.astro.gsu.edu/wds/
+  * 14-Dec-2020: Version 153033 binaries, from http://www.astro.gsu.edu/wds/
+  * 08-Mar-2021: Version 153989 binaries, from http://www.astro.gsu.edu/wds/
+  * 22-Mar-2021: Version 154003 binaries, from http://www.astro.gsu.edu/wds/
+  * 06-Apr-2021: Version 154005 binaries, from http://www.astro.gsu.edu/wds/
+  * 19-Apr-2021: Version 154039 binaries, from http://www.astro.gsu.edu/wds/
+  * 03-May-2021: Version 154041 binaries, from http://www.astro.gsu.edu/wds/
+  * 17-May-2021: Version 154040 binaries, from http://www.astro.gsu.edu/wds/
+  * 14-Jun-2021: Version 154046 binaries, from http://www.astro.gsu.edu/wds/
+  * 28-Jun-2021: Version 154046 binaries, from http://www.astro.gsu.edu/wds/
+  * 09-Aug-2021: Version 154218 binaries, from http://www.astro.gsu.edu/wds/
+  * 06-Sep-2021: Version 154250 binaries, from http://www.astro.gsu.edu/wds/
+  * 20-Sep-2021: Version 154252 binaries, from http://www.astro.gsu.edu/wds/
+  * 02-Nov-2021: Version 154333 binaries, from http://www.astro.gsu.edu/wds/
+  * 15-Nov-2021: Version 154448 binaries, from http://www.astro.gsu.edu/wds/
+  * 13-Dec-2021: Version 154541 binaries, from http://www.astro.gsu.edu/wds/
+  * 24-Jan-2022: Version 154613 binaries, from http://www.astro.gsu.edu/wds/
+  * 07-Feb-2022: Version 154623 binaries, from http://www.astro.gsu.edu/wds/
+  * 07-Mar-2022: Version 154686 binaries, from http://www.astro.gsu.edu/wds/
+  * 21-Mar-2022: Version 154686 binaries, from http://www.astro.gsu.edu/wds/
+  * 04-Apr-2022: Version 154684 binaries, from http://www.astro.gsu.edu/wds/
+  * 19-Apr-2022: Version 154684 binaries, from http://www.astro.gsu.edu/wds/
+  * 17-May-2022: Version 154792 binaries, from http://www.astro.gsu.edu/wds/
+  * 27-Jun-2022: Version 154798 binaries, from http://www.astro.gsu.edu/wds/
+  * 08-Aug-2022: Version 154915 binaries, from http://www.astro.gsu.edu/wds/
+  * 03-Oct-2022: Version 155005 binaries, from http://www.astro.gsu.edu/wds/
+  * 17-Oct-2022: Version 155020 binaries, from http://www.astro.gsu.edu/wds/
+  * 31-Oct-2022: Version 155159 binaries, from http://www.astro.gsu.edu/wds/
+  * 12-Dec-2022: Version 155169 binaries, from http://www.astro.gsu.edu/wds/
+  * 06-Mar-2023: Version 155502 binaries, from http://www.astro.gsu.edu/wds/
+  * 03-Apr-2023: Version 155506 binaries, from http://www.astro.gsu.edu/wds/
+  * 02-May-2023: Version 155511 binaries, from http://www.astro.gsu.edu/wds/
+  * 30-May-2023: Version 155511 binaries, from http://www.astro.gsu.edu/wds/
+  * 12-Jun-2023: Version 155541 binaries, from http://www.astro.gsu.edu/wds/
+  * 26-Jun-2023: Version 155548 binaries, from http://www.astro.gsu.edu/wds/
+  * 24-Jul-2023: Version 155583 binaries, from http://www.astro.gsu.edu/wds/
+  * 04-Sep-2023: Version 155621 binaries, from http://www.astro.gsu.edu/wds/
+  * 30-Oct-2023: Version 155623 binaries, from http://www.astro.gsu.edu/wds/
+  * 27-Nov-2023: Version 155663 binaries, from http://www.astro.gsu.edu/wds/
+================================================================================
+(End)                                   Francois Ochsenbein [CDS]    27-Nov-2023

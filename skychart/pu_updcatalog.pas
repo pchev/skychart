@@ -33,7 +33,7 @@ type
     installed, prereqok, newversion: boolean;
     catnum,minlevel,maxlevel: integer;
     cattype,cdcminversion,version,catname,desc,size,url,prereq,path,shortname: string;
-    installedversion: string;
+    installedversion,infourl: string;
     grid: TStringGrid;
     constructor Create(data:Tstringlist);
     procedure SearchInstalled(basedir:string);
@@ -103,7 +103,7 @@ var
 
 implementation
 
-const colaction=0; colinstall=1; colname=2; coldesc=3; colsize=4;
+const colaction=0; colinstall=1; colname=2; coldesc=3; colsize=4; colinfo=5;
 
 {$R *.lfm}
 
@@ -124,7 +124,8 @@ begin
   catnum:=StrToIntDef(data[9],-1);
   shortname:=data[10];
   minlevel:=StrToIntDef(data[11],0);
-  maxlevel:=StrToIntDef(data[12],10)
+  maxlevel:=StrToIntDef(data[12],10);
+  infourl:=data[13];
 end;
 
 procedure TCatInfo.SearchInstalled(basedir:string);
@@ -290,7 +291,7 @@ begin
     ReadLn(f,buf);
     if copy(buf,1,1)='#' then continue;
     Splitrec2(buf,';',row);
-    if row.Count<>13 then continue;
+    if row.Count<>14 then continue;
     if row[1] > cdcver then continue; // skip catalog not supported by this version of the program
     // type of object
     if row[0]='star' then grid:=GridStar
@@ -307,6 +308,7 @@ begin
     grid.Cells[colname,grid.RowCount-1]:=info.catname;
     grid.Cells[coldesc,grid.RowCount-1]:=info.desc;
     grid.Cells[colsize,grid.RowCount-1]:=info.size;
+    grid.Cells[colinfo,grid.RowCount-1]:='->';
   until eof(f);
   row.Free;
   ShowStatus(GridStar);
@@ -412,12 +414,12 @@ end;
 procedure Tf_updcatalog.GridButtonClick(Sender: TObject; aCol, aRow: Integer);
 var info: TCatInfo;
 begin
-  FRunning:=True;
-  ButtonClose.Enabled:=false;
   with Tstringgrid(Sender) do
   begin
-    if (aRow >= 1) and (aCol = 0) then
+    if (aRow >= 1) and (aCol = colaction) then
     begin
+      FRunning:=True;
+      ButtonClose.Enabled:=false;
       info:=TCatInfo(Objects[colinstall,aRow]);
       if info.installed then
       begin
@@ -429,9 +431,17 @@ begin
       else begin
         if info.prereqok then
           InstallDlg(info)
-        else
+        else begin
           ShowMessage(rsMissingPrere+' '+info.prereq);
+          FRunning:=False;
+          ButtonClose.Enabled:=true;
+        end;
       end;
+    end
+    else if (aRow >= 1) and (aCol = colinfo) then
+    begin
+      info:=TCatInfo(Objects[colinstall,aRow]);
+      if info.infourl<>'' then ExecuteFile(info.infourl);
     end;
   end;
 end;

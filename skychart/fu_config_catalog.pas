@@ -54,6 +54,8 @@ type
     ButtonInstallCat2: TButton;
     fsac1: TLongEdit;
     fsac2: TLongEdit;
+    LabelWDS: TLabel;
+    LabelGCVS: TLabel;
     Label98: TLabel;
     OngcBox: TCheckBox;
     frc31: TLongEdit;
@@ -77,6 +79,7 @@ type
     Label92: TLabel;
     Label95: TLabel;
     Panel1: TPanel;
+    Panel2: TPanel;
     rc33: TDirectoryEdit;
     RC3box: TCheckBox;
     sac3: TDirectoryEdit;
@@ -389,6 +392,8 @@ begin
   Label27.Caption := rsFilesPath;
   Label18.Caption := rsStars;
   Label19.Caption := rsVariables;
+  LabelGCVS.Caption:=Format(rsUseTheMenuTo, [rsUpdate1, rsInstallObjec]);
+  LabelWDS.Caption:=Format(rsUseTheMenuT2, [rsUpdate1, rsInstallObjec]);
   Label20.Caption := rsDoubles;
   USNBright.Caption := rsBrightStars;
   IRVar.Caption := rsShowIRVariab;

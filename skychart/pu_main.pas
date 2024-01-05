@@ -6887,10 +6887,7 @@ begin
     catalog.cfgcat.varstarcatfield[i, 1] := 0;
     catalog.cfgcat.varstarcatfield[i, 2] := 0;
   end;
-  catalog.cfgcat.varstarcatpath[gcvs - BaseVar] :=
-    catalog.cfgcat.varstarcatpath[gcvs - BaseVar] + PathDelim + 'gcvs';
-  catalog.cfgcat.varstarcatfield[gcvs - BaseVar, 1] := 0;
-  catalog.cfgcat.varstarcatfield[gcvs - BaseVar, 2] := 10;
+  // gcvs removed, replaced by new version from Catgen
   for i := 1 to maxdblstarcatalog do
   begin
     catalog.cfgcat.dblstarcatpath[i] := 'cat';
@@ -6899,10 +6896,7 @@ begin
     catalog.cfgcat.dblstarcatfield[i, 1] := 0;
     catalog.cfgcat.dblstarcatfield[i, 2] := 0;
   end;
-  catalog.cfgcat.dblstarcatpath[wds - BaseDbl] :=
-    catalog.cfgcat.dblstarcatpath[wds - BaseDbl] + PathDelim + 'wds';
-  catalog.cfgcat.dblstarcatfield[wds - BaseDbl, 1] := 0;
-  catalog.cfgcat.dblstarcatfield[wds - BaseDbl, 2] := 10;
+  // wds removed, replaced by new version from Catgen
   for i := 1 to maxnebcatalog do
   begin
     catalog.cfgcat.nebcatpath[i] := 'cat';
@@ -8616,6 +8610,19 @@ begin
          JPL_DE[i+1] := JPL_DE[i];
       JPL_DE[1] := 440;
     end;
+  end;
+  if Config_Version < '4.3q' then begin
+    // replaced by new version using Catgen
+    catalog.cfgcat.varstarcatpath[gcvs - BaseVar] := 'cat';
+    catalog.cfgcat.VarStarCatDef[gcvs - BaseVar] := false;
+    catalog.cfgcat.VarStarCatOn[gcvs - BaseVar] := false;
+    catalog.cfgcat.varstarcatfield[gcvs - BaseVar, 1] := 0;
+    catalog.cfgcat.varstarcatfield[gcvs - BaseVar, 2] := 0;
+    catalog.cfgcat.dblstarcatpath[wds - BaseDbl] := 'cat';
+    catalog.cfgcat.dblStarCatDef[gcvs - BaseVar] := false;
+    catalog.cfgcat.dblStarCatOn[gcvs - BaseVar] := false;
+    catalog.cfgcat.dblstarcatfield[wds - BaseDbl, 1] := 0;
+    catalog.cfgcat.dblstarcatfield[wds - BaseDbl, 2] := 10;
   end;
 end;
 

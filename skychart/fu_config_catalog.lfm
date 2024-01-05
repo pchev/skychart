@@ -123,6 +123,7 @@ object f_config_catalog: Tf_config_catalog
           ParentShowHint = False
           ShowHint = True
           TabOrder = 6
+          Visible = False
           OnChange = Fgcv2Change
           Value = 0
           MaxValue = 10
@@ -139,6 +140,7 @@ object f_config_catalog: Tf_config_catalog
           ParentShowHint = False
           ShowHint = True
           TabOrder = 11
+          Visible = False
           OnChange = Fwds2Change
           Value = 0
           MaxValue = 10
@@ -155,6 +157,7 @@ object f_config_catalog: Tf_config_catalog
           ParentShowHint = False
           ShowHint = True
           TabOrder = 10
+          Visible = False
           OnChange = Fwds1Change
           Value = 0
           MaxValue = 10
@@ -171,6 +174,7 @@ object f_config_catalog: Tf_config_catalog
           ParentShowHint = False
           ShowHint = True
           TabOrder = 5
+          Visible = False
           OnChange = Fgcv1Change
           Value = 0
           MaxValue = 10
@@ -190,6 +194,7 @@ object f_config_catalog: Tf_config_catalog
           ParentShowHint = False
           ShowHint = True
           TabOrder = 4
+          Visible = False
         end
         object IRVar: TCheckBox
           Tag = 1
@@ -202,6 +207,7 @@ object f_config_catalog: Tf_config_catalog
           OnClick = IRVarClick
           ParentFont = False
           TabOrder = 8
+          Visible = False
         end
         object WDSbox: TCheckBox
           Tag = 1
@@ -218,6 +224,7 @@ object f_config_catalog: Tf_config_catalog
           ParentShowHint = False
           ShowHint = True
           TabOrder = 9
+          Visible = False
         end
         object gcv3: TDirectoryEdit
           Tag = 1
@@ -232,6 +239,7 @@ object f_config_catalog: Tf_config_catalog
           MaxLength = 0
           ParentFont = False
           TabOrder = 7
+          Visible = False
           OnChange = gcv3Change
         end
         object wds3: TDirectoryEdit
@@ -247,6 +255,7 @@ object f_config_catalog: Tf_config_catalog
           MaxLength = 0
           ParentFont = False
           TabOrder = 12
+          Visible = False
           OnChange = wds3Change
         end
         object Label89: TLabel
@@ -414,6 +423,36 @@ object f_config_catalog: Tf_config_catalog
           Caption = 'Install object catalog'
           OnClick = ButtonInstallCatClick
           TabOrder = 18
+        end
+        object Panel2: TPanel
+          Left = 93
+          Height = 162
+          Top = 262
+          Width = 379
+          BevelOuter = bvNone
+          ClientHeight = 162
+          ClientWidth = 379
+          TabOrder = 19
+          object LabelGCVS: TLabel
+            Left = 0
+            Height = 58
+            Top = 0
+            Width = 379
+            AutoSize = False
+            Caption = 'LabelGCVS'
+            ParentColor = False
+            WordWrap = True
+          end
+          object LabelWDS: TLabel
+            Left = 0
+            Height = 64
+            Top = 88
+            Width = 368
+            AutoSize = False
+            Caption = 'LabelWDS'
+            ParentColor = False
+            WordWrap = True
+          end
         end
       end
       object Page3: TTabSheet
