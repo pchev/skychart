@@ -6162,3 +6162,23 @@ msgstr ""
 msgid "Installing"
 msgstr ""
 
+#: u_translation:rsclosethesetu
+msgid "Close the Setup window and launch the catalog installer tool?"
+msgstr ""
+
+#: u_translation:rsrefreshtheli
+msgid "Refresh the list"
+msgstr ""
+
+#: u_translation:rsusethemenuto
+msgid "Use the menu \"%s/%s\" to install a variable star catalog"
+msgstr ""
+
+#: u_translation:rsusethemenut2
+msgid "Use the menu \"%s/%s\" to install a double star catalog"
+msgstr ""
+
+#: u_translation:rsopencatalogs
+msgid "Open Catalog Setup"
+msgstr ""
+

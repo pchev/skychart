@@ -217,18 +217,23 @@ begin
   GridStar.Columns[2].Title.Caption:=rsCatalog;
   GridStar.Columns[3].Title.Caption:=rsDescription;
   GridStar.Columns[4].Title.Caption:=rsSize;
+  GridStar.Columns[5].Title.Caption:=rsInfo;
   GridVar.Columns[1].Title.Caption:=rsStatus;
   GridVar.Columns[2].Title.Caption:=rsCatalog;
   GridVar.Columns[3].Title.Caption:=rsDescription;
   GridVar.Columns[4].Title.Caption:=rsSize;
+  GridVar.Columns[5].Title.Caption:=rsInfo;
   GridDouble.Columns[1].Title.Caption:=rsStatus;
   GridDouble.Columns[2].Title.Caption:=rsCatalog;
   GridDouble.Columns[3].Title.Caption:=rsDescription;
   GridDouble.Columns[4].Title.Caption:=rsSize;
+  GridDouble.Columns[5].Title.Caption:=rsInfo;
   GridDSO.Columns[1].Title.Caption:=rsStatus;
   GridDSO.Columns[2].Title.Caption:=rsCatalog;
   GridDSO.Columns[3].Title.Caption:=rsDescription;
   GridDSO.Columns[4].Title.Caption:=rsSize;
+  GridDSO.Columns[5].Title.Caption:=rsInfo;
+  ButtonSetup.Caption:=rsOpenCatalogS;
   ButtonAbort.Caption:=rsAbort;
   ButtonClose.Caption:=rsClose;
 

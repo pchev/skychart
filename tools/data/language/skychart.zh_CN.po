@@ -6,14 +6,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: skychart\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2024-01-04 11:03+0000\n"
+"POT-Creation-Date: 2024-01-05 15:24+0000\n"
 "PO-Revision-Date: 2023-02-12 15:08+0000\n"
 "Last-Translator: Allen Zhong <Unknown>\n"
 "Language-Team: Chinese (Simplified) <zh_CN@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2024-01-04 12:32+0000\n"
+"X-Launchpad-Export-Date: 2024-01-05 15:32+0000\n"
 "X-Generator: Launchpad (build e1eeab5b20e19239bd7d5f36676f7a52988db88b)\n"
 
 #: u_translation.rs102cddss
@@ -960,6 +960,10 @@ msgstr "闭合轮廓线"
 #: u_translation.rsclosefiles
 msgid "Close files"
 msgstr "关闭文件"
+
+#: u_translation.rsclosethesetu
+msgid "Close the Setup window and launch the catalog installer tool?"
+msgstr ""
 
 #: u_translation.rsclusterandne
 msgid "Cluster and nebula"
@@ -3853,6 +3857,10 @@ msgstr "打开"
 msgid "Open a chart"
 msgstr "打开星图"
 
+#: u_translation.rsopencatalogs
+msgid "Open Catalog Setup"
+msgstr ""
+
 #: u_translation.rsopencluster
 msgid "Open cluster"
 msgstr "疏散星团"
@@ -4492,6 +4500,10 @@ msgstr "刷新图像每隔"
 #: u_translation.rsrefreshrate
 msgid "Refresh rate"
 msgstr "刷新频率"
+
+#: u_translation.rsrefreshtheli
+msgid "Refresh the list"
+msgstr ""
 
 #: u_translation.rsreleasenotes
 msgid "Release notes"
@@ -6042,6 +6054,16 @@ msgstr ""
 #, object-pascal-format
 msgid "Use the menu or button \"%s\" to configure this driver."
 msgstr "使用菜单或 \"%s\" 按钮来设置本驱动。"
+
+#: u_translation.rsusethemenut2
+#, object-pascal-format
+msgid "Use the menu \"%s/%s\" to install a double star catalog"
+msgstr ""
+
+#: u_translation.rsusethemenuto
+#, object-pascal-format
+msgid "Use the menu \"%s/%s\" to install a variable star catalog"
+msgstr ""
 
 #: u_translation.rsusetheproper
 msgid "Use the proper motion to correct the position for the given epoch"

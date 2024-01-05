@@ -5,14 +5,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: skychart.fr\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-01-04 11:03+0000\n"
-"PO-Revision-Date: 2024-01-04 12:27+0000\n"
+"POT-Creation-Date: 2024-01-05 15:24+0000\n"
+"PO-Revision-Date: 2024-01-05 15:28+0000\n"
 "Last-Translator: Patrick Chevalley <Unknown>\n"
 "Language-Team: French <kde-i18n-doc@kde.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2024-01-04 12:32+0000\n"
+"X-Launchpad-Export-Date: 2024-01-05 15:32+0000\n"
 "X-Generator: Launchpad (build e1eeab5b20e19239bd7d5f36676f7a52988db88b)\n"
 "Language: fr\n"
 
@@ -960,6 +960,10 @@ msgstr "Contour fermé"
 #: u_translation.rsclosefiles
 msgid "Close files"
 msgstr "Ferme les fichiers"
+
+#: u_translation.rsclosethesetu
+msgid "Close the Setup window and launch the catalog installer tool?"
+msgstr "Fermer la fenêtre de configuration et lancer l'outil d'installation des catalogues ?"
 
 #: u_translation.rsclusterandne
 msgid "Cluster and nebula"
@@ -3853,6 +3857,10 @@ msgstr "Ouvrir"
 msgid "Open a chart"
 msgstr "Ouvrir une carte"
 
+#: u_translation.rsopencatalogs
+msgid "Open Catalog Setup"
+msgstr "Ouvrir la configuration des catalogues"
+
 #: u_translation.rsopencluster
 msgid "Open cluster"
 msgstr "Amas ouvert"
@@ -4492,6 +4500,10 @@ msgstr "Rafraîchit l'image toutes les"
 #: u_translation.rsrefreshrate
 msgid "Refresh rate"
 msgstr "Taux de rafraîchissement"
+
+#: u_translation.rsrefreshtheli
+msgid "Refresh the list"
+msgstr "Rafraîchir la liste"
 
 #: u_translation.rsreleasenotes
 msgid "Release notes"
@@ -6042,6 +6054,16 @@ msgstr "Utilise le panneau INDI interne"
 #, object-pascal-format
 msgid "Use the menu or button \"%s\" to configure this driver."
 msgstr "Utilisez le menu ou bouton « %s » pour configurer ce pilote."
+
+#: u_translation.rsusethemenut2
+#, object-pascal-format
+msgid "Use the menu \"%s/%s\" to install a double star catalog"
+msgstr "Utilisez le menu \"%s/%s\" pour installer un catalogue d'étoiles doubles"
+
+#: u_translation.rsusethemenuto
+#, object-pascal-format
+msgid "Use the menu \"%s/%s\" to install a variable star catalog"
+msgstr "Utilisez le menu \"%s/%s\" pour installer un catalogue d'étoiles variables"
 
 #: u_translation.rsusetheproper
 msgid "Use the proper motion to correct the position for the given epoch"

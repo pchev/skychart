@@ -2,14 +2,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: skychart.ru\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-01-04 11:03+0000\n"
+"POT-Creation-Date: 2024-01-05 15:24+0000\n"
 "PO-Revision-Date: 2023-12-31 07:10+0000\n"
 "Last-Translator: Aleksey Kabanov <Unknown>\n"
 "Language-Team: Zaporozhye Astronomical Club Altair <astroclub@ua.fm, http://astroclub.zp.ua>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2024-01-04 12:32+0000\n"
+"X-Launchpad-Export-Date: 2024-01-05 15:32+0000\n"
 "X-Generator: Launchpad (build e1eeab5b20e19239bd7d5f36676f7a52988db88b)\n"
 "Language: ru_UA\n"
 
@@ -957,6 +957,10 @@ msgstr "Закрытый контур"
 #: u_translation.rsclosefiles
 msgid "Close files"
 msgstr "Закрыть файлы"
+
+#: u_translation.rsclosethesetu
+msgid "Close the Setup window and launch the catalog installer tool?"
+msgstr ""
 
 #: u_translation.rsclusterandne
 msgid "Cluster and nebula"
@@ -3850,6 +3854,10 @@ msgstr "Открыть"
 msgid "Open a chart"
 msgstr "Открыть карту"
 
+#: u_translation.rsopencatalogs
+msgid "Open Catalog Setup"
+msgstr ""
+
 #: u_translation.rsopencluster
 msgid "Open cluster"
 msgstr "Рассеянное звёздное скопление"
@@ -4489,6 +4497,10 @@ msgstr "Обновлять каждые"
 #: u_translation.rsrefreshrate
 msgid "Refresh rate"
 msgstr "Обновление, мс"
+
+#: u_translation.rsrefreshtheli
+msgid "Refresh the list"
+msgstr ""
 
 #: u_translation.rsreleasenotes
 msgid "Release notes"
@@ -6039,6 +6051,16 @@ msgstr "Использовать внутреннюю панель интерф�
 #, object-pascal-format
 msgid "Use the menu or button \"%s\" to configure this driver."
 msgstr "Используйте меню или кнопку «%s» для настройки этого драйвера."
+
+#: u_translation.rsusethemenut2
+#, object-pascal-format
+msgid "Use the menu \"%s/%s\" to install a double star catalog"
+msgstr ""
+
+#: u_translation.rsusethemenuto
+#, object-pascal-format
+msgid "Use the menu \"%s/%s\" to install a variable star catalog"
+msgstr ""
 
 #: u_translation.rsusetheproper
 msgid "Use the proper motion to correct the position for the given epoch"

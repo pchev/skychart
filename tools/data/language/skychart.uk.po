@@ -3,14 +3,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Cartes du Ciel v.3\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-01-04 11:03+0000\n"
+"POT-Creation-Date: 2024-01-05 15:24+0000\n"
 "PO-Revision-Date: 2016-12-11 09:04+0000\n"
 "Last-Translator: Patrick Chevalley <Unknown>\n"
 "Language-Team: Zaporozhye Astronomical Club Altair <astroclubzp@gmail.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2024-01-04 12:32+0000\n"
+"X-Launchpad-Export-Date: 2024-01-05 15:32+0000\n"
 "X-Generator: Launchpad (build e1eeab5b20e19239bd7d5f36676f7a52988db88b)\n"
 "X-Poedit-Country: UKRAINE\n"
 "X-Poedit-Language: Ukrainian\n"
@@ -960,6 +960,10 @@ msgstr "Закритий контур"
 #: u_translation.rsclosefiles
 msgid "Close files"
 msgstr "Закрити файли"
+
+#: u_translation.rsclosethesetu
+msgid "Close the Setup window and launch the catalog installer tool?"
+msgstr ""
 
 #: u_translation.rsclusterandne
 msgid "Cluster and nebula"
@@ -3853,6 +3857,10 @@ msgstr "Відкрити"
 msgid "Open a chart"
 msgstr "Відкрити мапу"
 
+#: u_translation.rsopencatalogs
+msgid "Open Catalog Setup"
+msgstr ""
+
 #: u_translation.rsopencluster
 msgid "Open cluster"
 msgstr "Розсіяне скупчення"
@@ -4491,6 +4499,10 @@ msgstr ""
 
 #: u_translation.rsrefreshrate
 msgid "Refresh rate"
+msgstr ""
+
+#: u_translation.rsrefreshtheli
+msgid "Refresh the list"
 msgstr ""
 
 #: u_translation.rsreleasenotes
@@ -6041,6 +6053,16 @@ msgstr ""
 #: u_translation.rsusethemenuor
 #, object-pascal-format
 msgid "Use the menu or button \"%s\" to configure this driver."
+msgstr ""
+
+#: u_translation.rsusethemenut2
+#, object-pascal-format
+msgid "Use the menu \"%s/%s\" to install a double star catalog"
+msgstr ""
+
+#: u_translation.rsusethemenuto
+#, object-pascal-format
+msgid "Use the menu \"%s/%s\" to install a variable star catalog"
 msgstr ""
 
 #: u_translation.rsusetheproper

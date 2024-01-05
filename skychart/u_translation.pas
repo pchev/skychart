@@ -1599,6 +1599,7 @@ resourcestring
   rsRefreshTheLi = 'Refresh the list';
   rsUseTheMenuTo = 'Use the menu "%s/%s" to install a variable star catalog';
   rsUseTheMenuT2 = 'Use the menu "%s/%s" to install a double star catalog';
+  rsOpenCatalogS = 'Open Catalog Setup';
 
 // also update upsi_translation
 

@@ -4,14 +4,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: skychart.no\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-01-04 11:03+0000\n"
+"POT-Creation-Date: 2024-01-05 15:24+0000\n"
 "PO-Revision-Date: 2017-01-29 16:49+0000\n"
 "Last-Translator: ovl-1 <Unknown>\n"
 "Language-Team: <translation@ap-i.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2024-01-04 12:32+0000\n"
+"X-Launchpad-Export-Date: 2024-01-05 15:32+0000\n"
 "X-Generator: Launchpad (build e1eeab5b20e19239bd7d5f36676f7a52988db88b)\n"
 
 #: u_translation.rs102cddss
@@ -958,6 +958,10 @@ msgstr "Lukket kontur"
 #: u_translation.rsclosefiles
 msgid "Close files"
 msgstr "Lukk filer"
+
+#: u_translation.rsclosethesetu
+msgid "Close the Setup window and launch the catalog installer tool?"
+msgstr ""
 
 #: u_translation.rsclusterandne
 msgid "Cluster and nebula"
@@ -3851,6 +3855,10 @@ msgstr "Åpne"
 msgid "Open a chart"
 msgstr "Åpne et kart"
 
+#: u_translation.rsopencatalogs
+msgid "Open Catalog Setup"
+msgstr ""
+
 #: u_translation.rsopencluster
 msgid "Open cluster"
 msgstr "Åpen stjernehop"
@@ -4490,6 +4498,10 @@ msgstr "Bildeoppdateringsintervall"
 #: u_translation.rsrefreshrate
 msgid "Refresh rate"
 msgstr "Oppdateringsrate"
+
+#: u_translation.rsrefreshtheli
+msgid "Refresh the list"
+msgstr ""
 
 #: u_translation.rsreleasenotes
 msgid "Release notes"
@@ -6040,6 +6052,16 @@ msgstr ""
 #, object-pascal-format
 msgid "Use the menu or button \"%s\" to configure this driver."
 msgstr "Bruk menyen eller knappen \"%s\" for å stille inn denne driveren."
+
+#: u_translation.rsusethemenut2
+#, object-pascal-format
+msgid "Use the menu \"%s/%s\" to install a double star catalog"
+msgstr ""
+
+#: u_translation.rsusethemenuto
+#, object-pascal-format
+msgid "Use the menu \"%s/%s\" to install a variable star catalog"
+msgstr ""
 
 #: u_translation.rsusetheproper
 msgid "Use the proper motion to correct the position for the given epoch"
