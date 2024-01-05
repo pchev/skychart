@@ -429,6 +429,7 @@ begin
     begin
       FRunning:=True;
       ButtonClose.Enabled:=false;
+      ButtonSetup.Enabled:=false;
       info:=TCatInfo(Objects[colinstall,aRow]);
       if info.installed then
       begin
@@ -444,6 +445,7 @@ begin
           ShowMessage(rsMissingPrere+' '+info.prereq);
           FRunning:=False;
           ButtonClose.Enabled:=true;
+          ButtonSetup.Enabled:=true;
         end;
       end;
     end
@@ -636,6 +638,7 @@ begin
   LoadCatalogList;
   FRunning:=False;
   ButtonClose.Enabled:=true;
+  ButtonSetup.Enabled:=true;
 end;
 
 procedure Tf_updcatalog.ButtonAbortClick(Sender: TObject);

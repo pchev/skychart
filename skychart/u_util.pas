@@ -85,6 +85,7 @@ function ARmtoStr(ar: double): string;
 function DEpToStr(de: double; precision: integer = 1): string;
 function ARptoStr(ar: double; precision: integer = 1): string;
 function TimToStr(tim: double; sep: string = ':'; showsec: boolean = True): string;
+function TimeToStrShort(t: double): string;
 function StrToTim(tim: string; sep: string = ':'): double;
 function YearADBC(year: integer): string;
 function Date2Str(y, m, d: integer; yadbc: boolean = True): string;
@@ -1151,6 +1152,62 @@ begin
   else
     Result := d + sep + m;
 
+end;
+
+function TimeToStrShort(t: double): string;
+var
+  dd, min1, min, sec: double;
+  sg, d, m, s: string;
+begin
+
+  if t >= 0 then
+    sg := ''
+  else
+    sg := '-';
+
+  t := abs(t);
+  dd := Int(t);
+  min1 := abs(t - dd) * 60;
+
+  if min1 >= 59.9917 then
+  begin
+    dd := dd + sgn(t);
+
+    if dd = 24 then
+      dd := 0;
+
+    min1 := 0.0;
+  end;
+
+  min := Int(min1);
+  sec := (min1 - min) * 60;
+
+  if sec >= 59.5 then
+  begin
+    min := min + 1;
+    sec := 0.0;
+  end;
+
+  str(dd: 2: 0, d);
+  str(min: 2: 0, m);
+
+  if abs(min) < 10 then
+    m := '0' + trim(m);
+
+  str(sec: 2: 0, s);
+
+  if abs(sec) < 9.5 then
+    s := '0' + trim(s);
+
+  Result := sg;
+
+  if dd <> 0 then
+    Result := Result + d + ':';
+
+  if min <> 0 then
+    Result := Result + m + ':';
+
+  Result := Result + trim(s);
 end;
 
 function StrToTim(tim: string; sep: string = ':'): double;

@@ -27,8 +27,10 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 
 interface
 
-uses  fphttpclient, opensslsockets,
+uses  u_util, fphttpclient, opensslsockets,
   Classes, SysUtils;
+
+const FSpeedPosMax=50;
 
 type   THTTPBigDownload = class(TThread)
   private
@@ -40,6 +42,8 @@ type   THTTPBigDownload = class(TThread)
     FHttpErr: string;
     FProgressText: string;
     FDownloadComplete, FDownloadError, FProgress: TThreadMethod;
+    FSpeed: array[0..FSpeedPosMax] of double;
+    FSpeedPos, FSpeedNum: integer;
     function GetProxy: TProxyData;
     procedure SetProxy(value: TProxyData);
     procedure HttpProgress(Sender: TObject; const ContentLength, CurrentPos: Int64);
@@ -84,6 +88,8 @@ begin
 try
   FHttpErr:='';
   FHttpResult:=true;
+  FSpeedPos:=0;
+  FSpeedNum:=0;
   FMillis := GetTickCount64;
   http.Get(Furl, Ffn);
   if assigned(FDownloadComplete) then Synchronize(FDownloadComplete);
@@ -99,6 +105,7 @@ end;
 
 procedure THTTPBigDownload.HttpProgress(Sender: TObject; const ContentLength, CurrentPos: Int64);
 var dsize,dt: int64;
+    i: integer;
     speed: double;
 begin
   dt := GetTickCount64 - FMillis;
@@ -127,11 +134,23 @@ begin
     if (dsize>0)and(dt>0) then begin
       speed := dsize * 1000 / dt;
       if speed<1024 then
-        FProgressText := FProgressText + format(', %.0n Bytes/Seconds', [speed])
+        FProgressText := FProgressText + format(', %.0n Bytes/s', [speed])
       else if speed<(1024*1024) then
-        FProgressText := FProgressText + format(', %.1f KB/Seconds', [speed/1024])
+        FProgressText := FProgressText + format(', %.1f KB/s', [speed/1024])
       else
-        FProgressText := FProgressText + format(', %.1f MB/Seconds', [speed/1024/1024]);
+        FProgressText := FProgressText + format(', %.1f MB/s', [speed/1024/1024]);
+
+      FSpeed[FSpeedPos]:=speed;
+      inc(FSpeedPos);
+      if FSpeedPos>FSpeedPosMax then FSpeedPos:=0;
+      inc(FSpeedNum);
+      if FSpeedNum>(FSpeedPosMax+1) then FSpeedNum:=(FSpeedPosMax+1);
+      speed:=0;
+      for i:=0 to FSpeedNum-1 do speed:=speed+FSpeed[i];
+      speed:=speed/FSpeedNum;
+
+      FProgressText := FProgressText + format(', remaining time %s',[ TimeToStrShort((ContentLength-CurrentPos)/speed/SecsPerHour)]);
+
     end;
     if assigned(FProgress) then Synchronize(FProgress);
     FMillis := GetTickCount64;
