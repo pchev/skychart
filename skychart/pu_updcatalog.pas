@@ -45,6 +45,7 @@ type
   { Tf_updcatalog }
 
   Tf_updcatalog = class(TForm)
+    ButtonSetup: TButton;
     ButtonRefresh: TButton;
     ButtonClose: TButton;
     ButtonAbort: TButton;
@@ -66,6 +67,7 @@ type
     procedure ButtonAbortClick(Sender: TObject);
     procedure ButtonCloseClick(Sender: TObject);
     procedure ButtonRefreshClick(Sender: TObject);
+    procedure ButtonSetupClick(Sender: TObject);
     procedure EndInstallTimerTimer(Sender: TObject);
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
     procedure FormCreate(Sender: TObject);
@@ -75,7 +77,7 @@ type
   private
     Fcatalog: Tcatalog;
     Fcmain: Tconf_main;
-    FSaveConfig: TNotifyEvent;
+    FSaveConfig, FOpenSetup: TNotifyEvent;
     InstallInfo: TCatInfo;
     httpdownload: THTTPBigDownload;
     FRunning: boolean;
@@ -93,9 +95,11 @@ type
     procedure UnzipProgress(Sender : TObject);
   public
     procedure SetLang;
+    property Running: boolean read FRunning;
     property cmain: Tconf_main read Fcmain write Fcmain;
     property catalog: Tcatalog read Fcatalog write Fcatalog;
     property onSaveConfig: TNotifyEvent read FSaveConfig write FSaveConfig;
+    property onOpenSetup: TNotifyEvent read FOpenSetup write FOpenSetup;
   end;
 
 var
@@ -655,6 +659,12 @@ begin
   if not DeleteDirectory(dir,false) then
     ShowMessage('Error deleting '+dir);
 end;
+
+procedure Tf_updcatalog.ButtonSetupClick(Sender: TObject);
+begin
+  if assigned(FOpenSetup) then FOpenSetup(self);
+end;
+
 
 end.
 

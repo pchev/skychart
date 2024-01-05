@@ -86,6 +86,15 @@ object f_updcatalog: Tf_updcatalog
       OnClick = ButtonCloseClick
       TabOrder = 1
     end
+    object ButtonSetup: TButton
+      Left = 8
+      Height = 25
+      Top = 56
+      Width = 248
+      Caption = 'Open Catalog Setup'
+      OnClick = ButtonSetupClick
+      TabOrder = 2
+    end
   end
   object PageControl1: TPageControl
     Left = 0

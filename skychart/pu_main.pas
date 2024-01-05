@@ -774,6 +774,8 @@ type
     procedure SaveCatalogConfig(Sender: TObject);
     procedure OpenUpdCatalog(Sender: TObject);
     procedure OpenUpdCatalogAsync(Data: PtrInt);
+    procedure OpenCatalogSetup(Sender: TObject);
+    procedure OpenCatalogSetupAsync(Data: PtrInt);
 
   public
     { Public declarations }
@@ -12260,6 +12262,7 @@ begin
   if f_updcatalog=nil then begin
      Application.CreateForm(Tf_updcatalog, f_updcatalog);
      f_updcatalog.onSaveConfig := SaveCatalogConfig;
+     f_updcatalog.onOpenSetup := OpenCatalogSetup;
   end;
   f_updcatalog.catalog:=catalog;
   f_updcatalog.cmain:=cfgm;
@@ -12283,6 +12286,19 @@ end;
 procedure Tf_main.OpenUpdCatalogAsync(Data: PtrInt);
 begin
   MenuUpdCatalogClick(nil);
+end;
+
+procedure Tf_main.OpenCatalogSetup(Sender: TObject);
+begin
+  if (f_updcatalog<>nil)and(sender=f_updcatalog)and(not f_updcatalog.Running) then begin
+    f_updcatalog.Close;
+    Application.QueueAsyncCall(OpenCatalogSetupAsync,0);
+  end;
+end;
+
+procedure Tf_main.OpenCatalogSetupAsync(Data: PtrInt);
+begin
+  SetupCatalogPage(0);
 end;
 
 procedure Tf_main.SaveCatalogConfig(Sender: TObject);
