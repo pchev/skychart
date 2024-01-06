@@ -431,6 +431,7 @@ begin
       if FRunning then Exit;
       FRunning:=True;
       ButtonClose.Enabled:=false;
+      ButtonRefresh.Enabled:=false;
       ButtonSetup.Enabled:=false;
       info:=TCatInfo(Objects[colinstall,aRow]);
       if info.installed then
@@ -447,6 +448,7 @@ begin
           ShowMessage(rsMissingPrere+' '+info.prereq);
           FRunning:=False;
           ButtonClose.Enabled:=true;
+          ButtonRefresh.Enabled:=true;
           ButtonSetup.Enabled:=true;
         end;
       end;
@@ -649,6 +651,7 @@ begin
   LoadCatalogList;
   FRunning:=False;
   ButtonClose.Enabled:=true;
+  ButtonRefresh.Enabled:=true;
   ButtonSetup.Enabled:=true;
 end;
 
