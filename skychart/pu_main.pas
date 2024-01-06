@@ -12266,6 +12266,7 @@ begin
   end;
   f_updcatalog.catalog:=catalog;
   f_updcatalog.cmain:=cfgm;
+  f_updcatalog.cdb := cdcdb;
   f_updcatalog.Show;
 end;
 

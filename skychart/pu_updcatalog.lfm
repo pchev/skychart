@@ -75,6 +75,25 @@ object f_updcatalog: Tf_updcatalog
         Caption = 'LabelAction'
         ParentColor = False
       end
+      object ProgressCat: TLabel
+        Left = 200
+        Height = 18
+        Top = 4
+        Width = 37
+        Caption = 'Other'
+        ParentColor = False
+        ParentFont = False
+        Visible = False
+      end
+      object ProgressBar1: TProgressBar
+        Left = 288
+        Height = 17
+        Top = 3
+        Width = 341
+        ParentFont = False
+        TabOrder = 1
+        Visible = False
+      end
     end
     object ButtonClose: TButton
       Left = 656
@@ -421,12 +440,91 @@ object f_updcatalog: Tf_updcatalog
         )
       end
     end
+    object TabSheetPicture: TTabSheet
+      Caption = 'DSO pictures'
+      ClientHeight = 363
+      ClientWidth = 749
+      object GridPicture: TStringGrid
+        Left = 0
+        Height = 363
+        Top = 0
+        Width = 749
+        Align = alClient
+        AutoFillColumns = True
+        ColCount = 6
+        Columns = <        
+          item
+            ButtonStyle = cbsButtonColumn
+            Color = clBtnFace
+            MinSize = 25
+            MaxSize = 25
+            SizePriority = 0
+            Title.Caption = ''
+            Width = 25
+          end        
+          item
+            MinSize = 150
+            ReadOnly = True
+            SizePriority = 0
+            Title.Caption = 'Status'
+            Width = 150
+          end        
+          item
+            MinSize = 100
+            MaxSize = 100
+            ReadOnly = True
+            SizePriority = 0
+            Title.Caption = 'Catalog'
+            Width = 100
+          end        
+          item
+            MinSize = 200
+            MaxSize = 400
+            ReadOnly = True
+            Title.Caption = 'Description'
+            Width = 330
+          end        
+          item
+            MinSize = 80
+            MaxSize = 80
+            ReadOnly = True
+            SizePriority = 0
+            Title.Caption = 'Size'
+            Width = 80
+          end        
+          item
+            ButtonStyle = cbsButtonColumn
+            MinSize = 60
+            MaxSize = 60
+            SizePriority = 0
+            Title.Caption = 'Info'
+            Width = 60
+          end>
+        DefaultColWidth = 120
+        FixedCols = 0
+        MouseWheelOption = mwGrid
+        Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goColSizing, goTabs, goAlwaysShowEditor, goThumbTracking, goCellHints, goCellEllipsis]
+        ParentShowHint = False
+        ShowHint = True
+        TabOrder = 0
+        OnButtonClick = GridButtonClick
+        OnGetCellHint = GridGetCellHint
+        ColWidths = (
+          25
+          150
+          100
+          330
+          80
+          60
+        )
+      end
+    end
   end
   object EndInstallTimer: TTimer
     Enabled = False
     Interval = 2000
     OnTimer = EndInstallTimerTimer
-    Left = 222
-    Top = 440
+    Left = 320
+    Top = 488
   end
 end

@@ -24,7 +24,8 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 
 interface
 
-uses u_constant, u_util, u_translation, UScaleDPI, downloaddialog, cu_httpdownload, u_unzip, cu_catalog, FileUtil,
+uses u_constant, u_util, u_translation, UScaleDPI, downloaddialog, cu_httpdownload, u_unzip,
+  cu_catalog, FileUtil, cu_database,
   Classes, SysUtils, Forms, Controls, Graphics, Dialogs, ExtCtrls, Grids, ComCtrls, StdCtrls;
 
 type
@@ -49,6 +50,7 @@ type
     ButtonRefresh: TButton;
     ButtonClose: TButton;
     ButtonAbort: TButton;
+    GridPicture: TStringGrid;
     GridVar: TStringGrid;
     GridDouble: TStringGrid;
     GridDSO: TStringGrid;
@@ -59,6 +61,9 @@ type
     Panel2: TPanel;
     GridStar: TStringGrid;
     PanelDownload: TPanel;
+    ProgressBar1: TProgressBar;
+    ProgressCat: TLabel;
+    TabSheetPicture: TTabSheet;
     TabSheetStar: TTabSheet;
     TabSheetVar: TTabSheet;
     TabSheetDouble: TTabSheet;
@@ -78,6 +83,7 @@ type
   private
     Fcatalog: Tcatalog;
     Fcmain: Tconf_main;
+    Fcdb: Tcdcdb;
     FSaveConfig, FOpenSetup: TNotifyEvent;
     InstallInfo: TCatInfo;
     httpdownload: THTTPBigDownload;
@@ -99,6 +105,7 @@ type
     property Running: boolean read FRunning;
     property cmain: Tconf_main read Fcmain write Fcmain;
     property catalog: Tcatalog read Fcatalog write Fcatalog;
+    property cdb: Tcdcdb read Fcdb write Fcdb;
     property onSaveConfig: TNotifyEvent read FSaveConfig write FSaveConfig;
     property onOpenSetup: TNotifyEvent read FOpenSetup write FOpenSetup;
   end;
@@ -214,6 +221,7 @@ begin
   TabSheetVar.Caption:=rsVariableStar2;
   TabSheetDouble.Caption:=rsDoubleStar;
   TabSheetDSO.Caption:=rsNebulae;
+  TabSheetPicture.Caption:=rsDSOCatalogPi;
   GridStar.Columns[1].Title.Caption:=rsStatus;
   GridStar.Columns[2].Title.Caption:=rsCatalog;
   GridStar.Columns[3].Title.Caption:=rsDescription;
@@ -234,6 +242,11 @@ begin
   GridDSO.Columns[3].Title.Caption:=rsDescription;
   GridDSO.Columns[4].Title.Caption:=rsSize;
   GridDSO.Columns[5].Title.Caption:=rsInfo;
+  GridPicture.Columns[1].Title.Caption:=rsStatus;
+  GridPicture.Columns[2].Title.Caption:=rsCatalog;
+  GridPicture.Columns[3].Title.Caption:=rsDescription;
+  GridPicture.Columns[4].Title.Caption:=rsSize;
+  GridPicture.Columns[5].Title.Caption:=rsInfo;
   ButtonSetup.Caption:=rsOpenCatalogS;
   ButtonAbort.Caption:=rsAbort;
   ButtonClose.Caption:=rsClose;
@@ -260,6 +273,7 @@ begin
   ClearGrid(GridVar);
   ClearGrid(GridDouble);
   ClearGrid(GridDSO);
+  ClearGrid(GridPicture);
 end;
 
 procedure Tf_updcatalog.ButtonCloseClick(Sender: TObject);
@@ -294,6 +308,7 @@ begin
   ClearGrid(GridVar);
   ClearGrid(GridDouble);
   ClearGrid(GridDSO);
+  ClearGrid(GridPicture);
   row := Tstringlist.Create;
   fn := slash(PrivateCatalogDir)+'catalog_list.txt';
   AssignFile(f,fn);
@@ -309,6 +324,7 @@ begin
     else if row[0]='double star' then grid:=GridDouble
     else if row[0]='variable star' then grid:=GridVar
     else if row[0]='dso' then grid:=GridDSO
+    else if row[0]='picture' then grid:=GridPicture
     else continue;
     info:=TCatInfo.Create(row);
     info.SearchInstalled(PrivateCatalogDir);
@@ -326,6 +342,7 @@ begin
   ShowStatus(GridVar);
   ShowStatus(GridDouble);
   ShowStatus(GridDSO);
+  ShowStatus(GridPicture);
 end;
 
 function Tf_updcatalog.UpdateList(ForceDownload: boolean; out txt: string): boolean;
@@ -557,7 +574,7 @@ try
         CloseFile(f);
         DeleteFile(fn);
 
-        if InstallInfo.catnum>0 then begin      // standard catalog
+        if InstallInfo.catnum>BaseStar then begin      // standard catalog
           if InstallInfo.cattype='star' then
           begin
             Fcatalog.cfgcat.starcatpath[InstallInfo.catnum - BaseStar] := slash(PrivateCatalogDir)+slash(InstallInfo.path);
@@ -620,6 +637,19 @@ try
             Fcatalog.cfgcat.GCatLst[i].Name) then
             Fcatalog.cfgcat.GCatLst[i].Actif := False;
           if Assigned(FSaveConfig) then FSaveConfig(self);
+        end
+        else if InstallInfo.catnum=1 then  // Pictures
+        begin
+          if InstallInfo.cattype='picture' then
+          begin
+            ProgressCat.Visible:=true;
+            ProgressBar1.Visible:=true;
+            cmain.ImagePath:=slash(PrivateCatalogDir)+'pictures';
+            Fcdb.ScanImagesDirectory(cmain.ImagePath, ProgressCat, ProgressBar1);
+            ProgressCat.Visible:=false;
+            ProgressBar1.Visible:=false;
+          end;
+          if Assigned(FSaveConfig) then FSaveConfig(self);
         end;
 
      end
@@ -679,8 +709,22 @@ begin
   if (info.catnum=0)and(info.shortname<>'') then
     Fcatalog.removeGcat(info.shortname);
   dir:=slash(PrivateCatalogDir)+slash(info.path);
-  if not DeleteDirectory(dir,false) then
+  if not DeleteDirectory(dir,false) then begin
     ShowMessage('Error deleting '+dir);
+    exit;
+  end;
+  if (info.catnum=1)and(info.cattype='picture') then
+  begin
+    PanelDownload.Visible:=true;
+    ProgressCat.Visible:=true;
+    ProgressBar1.Visible:=true;
+    Application.ProcessMessages;
+    cmain.ImagePath:=slash(PrivateCatalogDir)+'pictures';
+    Fcdb.ScanImagesDirectory(cmain.ImagePath, ProgressCat, ProgressBar1);
+    ProgressCat.Visible:=false;
+    ProgressBar1.Visible:=false;
+    PanelDownload.Visible:=false;
+  end;
 end;
 
 procedure Tf_updcatalog.ButtonSetupClick(Sender: TObject);
