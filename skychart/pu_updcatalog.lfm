@@ -135,19 +135,19 @@ object f_updcatalog: Tf_updcatalog
             Width = 150
           end        
           item
-            MinSize = 150
-            MaxSize = 150
+            MinSize = 100
+            MaxSize = 100
             ReadOnly = True
             SizePriority = 0
             Title.Caption = 'Catalog'
-            Width = 150
+            Width = 100
           end        
           item
             MinSize = 200
             MaxSize = 400
             ReadOnly = True
             Title.Caption = 'Description'
-            Width = 280
+            Width = 330
           end        
           item
             MinSize = 80
@@ -167,14 +167,18 @@ object f_updcatalog: Tf_updcatalog
           end>
         DefaultColWidth = 120
         FixedCols = 0
+        MouseWheelOption = mwGrid
         Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goColSizing, goAlwaysShowEditor, goThumbTracking, goCellHints, goCellEllipsis]
+        ParentShowHint = False
+        ShowHint = True
         TabOrder = 0
         OnButtonClick = GridButtonClick
+        OnGetCellHint = GridGetCellHint
         ColWidths = (
           25
           150
-          150
-          280
+          100
+          330
           80
           60
         )
@@ -210,19 +214,19 @@ object f_updcatalog: Tf_updcatalog
             Width = 150
           end        
           item
-            MinSize = 150
-            MaxSize = 150
+            MinSize = 100
+            MaxSize = 100
             ReadOnly = True
             SizePriority = 0
             Title.Caption = 'Catalog'
-            Width = 150
+            Width = 100
           end        
           item
             MinSize = 200
             MaxSize = 400
             ReadOnly = True
             Title.Caption = 'Description'
-            Width = 280
+            Width = 330
           end        
           item
             MinSize = 80
@@ -242,14 +246,18 @@ object f_updcatalog: Tf_updcatalog
           end>
         DefaultColWidth = 120
         FixedCols = 0
+        MouseWheelOption = mwGrid
         Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goColSizing, goTabs, goAlwaysShowEditor, goThumbTracking, goCellHints, goCellEllipsis]
+        ParentShowHint = False
+        ShowHint = True
         TabOrder = 0
         OnButtonClick = GridButtonClick
+        OnGetCellHint = GridGetCellHint
         ColWidths = (
           25
           150
-          150
-          280
+          100
+          330
           80
           60
         )
@@ -285,19 +293,19 @@ object f_updcatalog: Tf_updcatalog
             Width = 150
           end        
           item
-            MinSize = 150
-            MaxSize = 150
+            MinSize = 100
+            MaxSize = 100
             ReadOnly = True
             SizePriority = 0
             Title.Caption = 'Catalog'
-            Width = 150
+            Width = 100
           end        
           item
             MinSize = 200
             MaxSize = 400
             ReadOnly = True
             Title.Caption = 'Description'
-            Width = 280
+            Width = 330
           end        
           item
             MinSize = 80
@@ -317,14 +325,18 @@ object f_updcatalog: Tf_updcatalog
           end>
         DefaultColWidth = 120
         FixedCols = 0
+        MouseWheelOption = mwGrid
         Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goColSizing, goTabs, goAlwaysShowEditor, goThumbTracking, goCellHints, goCellEllipsis]
+        ParentShowHint = False
+        ShowHint = True
         TabOrder = 0
         OnButtonClick = GridButtonClick
+        OnGetCellHint = GridGetCellHint
         ColWidths = (
           25
           150
-          150
-          280
+          100
+          330
           80
           60
         )
@@ -360,19 +372,19 @@ object f_updcatalog: Tf_updcatalog
             Width = 150
           end        
           item
-            MinSize = 150
-            MaxSize = 150
+            MinSize = 100
+            MaxSize = 100
             ReadOnly = True
             SizePriority = 0
             Title.Caption = 'Catalog'
-            Width = 150
+            Width = 100
           end        
           item
             MinSize = 200
             MaxSize = 400
             ReadOnly = True
             Title.Caption = 'Description'
-            Width = 280
+            Width = 330
           end        
           item
             MinSize = 80
@@ -392,14 +404,18 @@ object f_updcatalog: Tf_updcatalog
           end>
         DefaultColWidth = 120
         FixedCols = 0
+        MouseWheelOption = mwGrid
         Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goColSizing, goTabs, goAlwaysShowEditor, goThumbTracking, goCellHints, goCellEllipsis]
+        ParentShowHint = False
+        ShowHint = True
         TabOrder = 0
         OnButtonClick = GridButtonClick
+        OnGetCellHint = GridGetCellHint
         ColWidths = (
           25
           150
-          150
-          280
+          100
+          330
           80
           60
         )

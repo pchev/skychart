@@ -74,6 +74,7 @@ type
     procedure FormDestroy(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure GridButtonClick(Sender: TObject; aCol, aRow: Integer);
+    procedure GridGetCellHint(Sender: TObject; ACol, ARow: Integer; var HintText: String);
   private
     Fcatalog: Tcatalog;
     Fcmain: Tconf_main;
@@ -427,6 +428,7 @@ begin
   begin
     if (aRow >= 1) and (aCol = colaction) then
     begin
+      if FRunning then Exit;
       FRunning:=True;
       ButtonClose.Enabled:=false;
       ButtonSetup.Enabled:=false;
@@ -455,6 +457,15 @@ begin
       if info.infourl<>'' then ExecuteFile(info.infourl);
     end;
   end;
+end;
+
+procedure Tf_updcatalog.GridGetCellHint(Sender: TObject; ACol, ARow: Integer; var HintText: String);
+begin
+with sender as TStringGrid do begin
+ if (trim(Cells[Acol,Arow])<>'')and(Canvas.TextWidth(Cells[Acol,Arow])>ColWidths[Acol]) then begin
+   HintText:=Cells[Acol,Arow];
+ end;
+end;
 end;
 
 procedure Tf_updcatalog.InstallDlg(info: TCatInfo);
