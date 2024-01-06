@@ -244,6 +244,7 @@ procedure Tf_updcatalog.FormCreate(Sender: TObject);
 begin
   ScaleDPI(Self);
   SetLang;
+  PageControl1.ActivePageIndex:=0;
 end;
 
 procedure Tf_updcatalog.FormShow(Sender: TObject);
@@ -474,7 +475,7 @@ procedure Tf_updcatalog.InstallDlg(info: TCatInfo);
 begin
   if info.newversion then
   begin
-    if MessageDlg(Format(rsInstallNewVe, [info.version, info.installedversion]), mtConfirmation, mbYesNo, 0)=mryes then
+    if MessageDlg(info.catname+crlf+Format(rsInstallNewVe, [info.version, info.installedversion]), mtConfirmation, mbYesNo, 0)=mryes then
     begin
       Uninstall(info);
       Install(info);
@@ -482,7 +483,7 @@ begin
     else EndInstallTimer.Enabled:=true;
   end
   else begin
-    if MessageDlg(rsInstall+' '+info.catname,mtConfirmation,mbYesNo,0)=mryes then
+    if MessageDlg(rsInstall+' '+info.catname+crlf+info.desc,mtConfirmation,mbYesNo,0)=mryes then
     begin
       Install(info);
     end
