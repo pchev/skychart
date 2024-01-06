@@ -1,5 +1,11 @@
 Version 4.3 beta, Notes de la version
 
+Nouvelle façon d'installer les catalogues supplémentaire en utilisant le menu Mise à jour / Installer des catalogues d'objets :
+Ceci remplace les précédents téléchargements "Catalogues supplémentaires".
+Les anciens catalogues GCVS et WDS sont désormais obsolètes et doivent être réinstallés avec le nouvel outil.
+Il existe un choix entre différentes versions de catalogue d'étoiles variables et doubles en fonction de vos besoins.
+Plus de catalogues de nébuleuses sont inclus.
+
 Nouveau calcul des satellites planétaire avec la librairie CALCEPH:
 Pour avoir la meilleur précision possible de la position il est maintenant possible de la calculer en utilisant un kernel SPICE.
 Il faut pour cela installer les fichiers de données correspondant depuis:
@@ -31,7 +37,13 @@ Nouvelles fonctions:
 - Ajout d'une option pour flouter et définir la transparence des catalogue de surfaces
 - Ajout d'une fonction de pré-pointage pour les occultations d'astéroïdes
 - Ajout d'un bouton pour verrouiller la limite de magnitude à la valeur actuelle
-- Fusion de Gaia DR3 avec XHIP pour le catalogue d'étoiles par défaut, si disponible, toute l'astrométrie des étoiles brillantes provient désormais de Gaia.
+- Ajout d'une option pour voir l'effet de l'absorbsion atmosphérique sur la magnitude des étoiles
+- Ajout du dessin du mouvement du pole en fonction de la précession
+- Ajout d'une commande du serveur pour suivre un objet
+- Après une recherche par nom de constellation uniquement cette figure de constellation est dessinée
+- Fusion de GAIA DR3 avec XHIP pour le catalogue d'étoiles par défaut, si disponible, toute l'astrométrie des étoiles brillantes provient désormais de Gaia.
+- Nouveau téléchargement pour GAIA DR3, maintenant en quatre parties pour les magnitudes 12,15,18,21
+- Amélioration des performances lors de l'utilisation de GAIA DR3 pour les magnitudes 18 et 21
 
 Correction d'un bug:
 - Il y a eu des modifications des URL pour le téléchargement des TLE. Ouvrez Paramètres/Mise à jours/Satellites artificiels, puis clic un des deux boutons pour obtenir les nouvelles URL
@@ -40,6 +52,7 @@ Correction d'un bug:
 - Corrige du réglage de l'heure du télescope
 - Les planètes en mode ligne doivent être vraiment transparentes
 - Corrige "Voir les marques" pour la simulation des comètes et astéroïdes
+- Corrige le démarage du programme avec un pilote d'impression défectueux
 
 Suppression:
 - Déplace le catalog SAC en obsolète, il est remplacé par OpenNGC

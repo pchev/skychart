@@ -1,5 +1,13 @@
 Version 4.3 beta, release Notes
 
+New way to install additional catalog using the menu Update / Install object catalog:
+This replace the previous "Additional catalog" download.
+The old GCVS and WDS catalog are now obsolete and must be reinstalled with the new tool.
+There is choice for different version of variable and double star catalog depending on your needs.
+More DSO catalog are included.
+
+Linux version is now build with Qt5. This imply some change in prerequisit packages and in the way to modify the program theme.
+
 New calculation of the planetary satellites with CALCEPH library:
 To have the best possible precision of the position it is now possible to calculate it using a SPICE kernel.
 To do this, you have to install the corresponding data files from:
@@ -31,7 +39,13 @@ New functions:
 - Add option to blure and set transparency of surface catalog
 - Add pre-pointing feature for asteroid occultation
 - Add button to lock the magnitude limit at the current value
-- Merge Gaia DR3 with XHIP for the default star catalog, when available all the bright stars astrometry is now from Gaia.
+- Add option to show the effect of atmospheric absorption on star magnitude
+- Add drawing of pole movement due to precession
+- Add a server command to lock on an object
+- After a search for a constellation name only this constellation figure is plotted.
+- Merge GAIA DR3 with XHIP for the default star catalog, when available all the bright stars astrometry is now from Gaia.
+- New GAIA DR3 download are available, this is now in four part with limiting magnitude of 12,15,18,21. 
+- Large performance improvement when using the new GAIA DR3 files for magnitude 18 and 21.
 
 Bug fix:
 - There was change in URL for TLE download, open Setup/Update/Artificial satellites, and click one of the two button to get the new URL
@@ -41,6 +55,7 @@ Bug fix:
 - Fix setting telescope time
 - Planet in line mode must be really transparent 
 - Fix "Show Mark" option for comet and asteroid simulation
+- Fix the program startup with faulty printer driver
 
 Removed:
 - Move SAC to obsolete catalog, replaced by OpenNGC
