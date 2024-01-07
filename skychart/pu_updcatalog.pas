@@ -420,10 +420,15 @@ procedure Tf_updcatalog.ShowStatus(grid: TStringGrid);
 var i: integer;
     info: TCatInfo;
     txt: string;
+    prereqgrid:TStringGrid;
 begin
   for i:=1 to grid.RowCount-1 do begin
     info:=TCatInfo(grid.Objects[colinstall,i]);
-    info.SearchPrereqInGrid(grid);
+    if info.cattype='picture' then
+      prereqgrid:=GridDSO
+    else
+      prereqgrid:=grid;
+    info.SearchPrereqInGrid(prereqgrid);
     if info.installed then begin
       if info.newversion then
         txt:=rsNewVersionAv
@@ -496,7 +501,10 @@ with sender as TStringGrid do begin
         if prereqok then
           txt:=rsInstall+': '+catname
         else
-          txt:=rsMissingPrere+': '+prereq;
+          if cattype='picture' then
+            txt:=rsMissingPrere+': '+rsNebula+', '+prereq
+          else
+            txt:=rsMissingPrere+': '+prereq;
       end;
    end;
    HintText:=txt;
