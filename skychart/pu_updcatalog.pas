@@ -26,7 +26,7 @@ interface
 
 uses u_constant, u_util, u_translation, UScaleDPI, downloaddialog, cu_httpdownload, u_unzip,
   cu_catalog, FileUtil, cu_database,
-  Classes, SysUtils, Forms, Controls, Graphics, Dialogs, ExtCtrls, Grids, ComCtrls, StdCtrls;
+  Classes, SysUtils, Forms, Controls, Graphics, Dialogs, ExtCtrls, Grids, ComCtrls, StdCtrls, Types;
 
 type
 
@@ -80,6 +80,7 @@ type
     procedure FormShow(Sender: TObject);
     procedure GridButtonClick(Sender: TObject; aCol, aRow: Integer);
     procedure GridGetCellHint(Sender: TObject; ACol, ARow: Integer; var HintText: String);
+    procedure GridDrawCell(Sender: TObject; aCol, aRow: Integer; aRect: TRect; aState: TGridDrawState);
   private
     Fcatalog: Tcatalog;
     Fcmain: Tconf_main;
@@ -486,6 +487,23 @@ with sender as TStringGrid do begin
    HintText:=Cells[Acol,Arow];
  end;
 end;
+end;
+
+procedure Tf_updcatalog.GridDrawCell(Sender: TObject; aCol, aRow: Integer; aRect: TRect; aState: TGridDrawState);
+begin
+  if (aCol=colinstall)and(aRow>0) then begin
+    with sender as TStringGrid do begin
+      if Cells[aCol,aRow]=rsInstalled then Canvas.Pen.Color:=clLime
+      else if Cells[aCol,aRow]=rsInstall then Canvas.Pen.Color:=clWindow
+      else if Cells[aCol,aRow]=rsNewVersionAv then Canvas.Pen.Color:=clYellow
+      else if Cells[aCol,aRow]=rsMissingPrere then Canvas.Pen.Color:=clred
+      else Canvas.Pen.Color:=clWindow;
+      Canvas.Pen.Style:=psSolid;
+      Canvas.Pen.Width:=DoScaleX(3);
+      Canvas.Brush.Style:=bsClear;
+      Canvas.Rectangle(aRect);
+    end;
+  end;
 end;
 
 procedure Tf_updcatalog.InstallDlg(info: TCatInfo);

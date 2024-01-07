@@ -191,6 +191,7 @@ object f_updcatalog: Tf_updcatalog
         ParentShowHint = False
         ShowHint = True
         TabOrder = 0
+        OnDrawCell = GridDrawCell
         OnButtonClick = GridButtonClick
         OnGetCellHint = GridGetCellHint
         ColWidths = (
@@ -270,6 +271,7 @@ object f_updcatalog: Tf_updcatalog
         ParentShowHint = False
         ShowHint = True
         TabOrder = 0
+        OnDrawCell = GridDrawCell
         OnButtonClick = GridButtonClick
         OnGetCellHint = GridGetCellHint
         ColWidths = (
@@ -349,6 +351,7 @@ object f_updcatalog: Tf_updcatalog
         ParentShowHint = False
         ShowHint = True
         TabOrder = 0
+        OnDrawCell = GridDrawCell
         OnButtonClick = GridButtonClick
         OnGetCellHint = GridGetCellHint
         ColWidths = (
@@ -428,6 +431,7 @@ object f_updcatalog: Tf_updcatalog
         ParentShowHint = False
         ShowHint = True
         TabOrder = 0
+        OnDrawCell = GridDrawCell
         OnButtonClick = GridButtonClick
         OnGetCellHint = GridGetCellHint
         ColWidths = (
@@ -507,6 +511,7 @@ object f_updcatalog: Tf_updcatalog
         ParentShowHint = False
         ShowHint = True
         TabOrder = 0
+        OnDrawCell = GridDrawCell
         OnButtonClick = GridButtonClick
         OnGetCellHint = GridGetCellHint
         ColWidths = (
@@ -524,7 +529,7 @@ object f_updcatalog: Tf_updcatalog
     Enabled = False
     Interval = 2000
     OnTimer = EndInstallTimerTimer
-    Left = 320
-    Top = 488
+    Left = 328
+    Top = 464
   end
 end
