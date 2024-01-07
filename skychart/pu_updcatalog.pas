@@ -481,9 +481,27 @@ begin
 end;
 
 procedure Tf_updcatalog.GridGetCellHint(Sender: TObject; ACol, ARow: Integer; var HintText: String);
+var txt: string;
 begin
 with sender as TStringGrid do begin
- if (trim(Cells[Acol,Arow])<>'')and(Canvas.TextWidth(Cells[Acol,Arow])>ColWidths[Acol]) then begin
+ if ((aCol=colinstall)or(aCol=colaction))and(arow>0) then begin
+   with Objects[colinstall,ARow] as TCatInfo do begin
+      if installed then begin
+        if newversion then
+          txt:=rsNewVersionAv+': '+version
+        else
+          txt:=rsInstalled+': '+slash(PrivateCatalogDir)+slash(path);
+      end
+      else begin
+        if prereqok then
+          txt:=rsInstall+': '+catname
+        else
+          txt:=rsMissingPrere+': '+prereq;
+      end;
+   end;
+   HintText:=txt;
+ end
+ else if (trim(Cells[Acol,Arow])<>'')and(Canvas.TextWidth(Cells[Acol,Arow])>ColWidths[Acol]) then begin
    HintText:=Cells[Acol,Arow];
  end;
 end;
@@ -493,11 +511,20 @@ procedure Tf_updcatalog.GridDrawCell(Sender: TObject; aCol, aRow: Integer; aRect
 begin
   if (aCol=colinstall)and(aRow>0) then begin
     with sender as TStringGrid do begin
-      if Cells[aCol,aRow]=rsInstalled then Canvas.Pen.Color:=clLime
-      else if Cells[aCol,aRow]=rsInstall then Canvas.Pen.Color:=clWindow
-      else if Cells[aCol,aRow]=rsNewVersionAv then Canvas.Pen.Color:=clYellow
-      else if Cells[aCol,aRow]=rsMissingPrere then Canvas.Pen.Color:=clred
-      else Canvas.Pen.Color:=clWindow;
+      with Objects[colinstall,ARow] as TCatInfo do begin
+         if installed then begin
+           if newversion then
+             Canvas.Pen.Color:=clYellow
+           else
+             Canvas.Pen.Color:=clLime;
+         end
+         else begin
+           if prereqok then
+             Canvas.Pen.Color:=clWindow
+           else
+             Canvas.Pen.Color:=clred;
+         end;
+      end;
       Canvas.Pen.Style:=psSolid;
       Canvas.Pen.Width:=DoScaleX(3);
       Canvas.Brush.Style:=bsClear;
