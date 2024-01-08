@@ -583,17 +583,30 @@ begin
   httpdownload:=THTTPBigDownload.Create(true);
   if Fcmain.HttpProxy then
   begin
-    httpdownload.Proxy.Host:=Fcmain.ProxyHost;
-    httpdownload.Proxy.Port:=StrToIntDef(Fcmain.ProxyPort,0);
-    httpdownload.Proxy.UserName:=Fcmain.ProxyUser;
-    httpdownload.Proxy.Password:=Fcmain.ProxyPass;
+    httpdownload.SocksProxy := '';
+    httpdownload.SocksType := '';
+    httpdownload.HttpProxy := Fcmain.ProxyHost;
+    httpdownload.HttpProxyPort := Fcmain.ProxyPort;
+    httpdownload.HttpProxyUser := Fcmain.ProxyUser;
+    httpdownload.HttpProxyPass := Fcmain.ProxyPass;
+  end
+  else if Fcmain.SocksProxy then
+  begin
+    httpdownload.HttpProxy := '';
+    httpdownload.SocksType := Fcmain.SocksType;
+    httpdownload.SocksProxy := Fcmain.ProxyHost;
+    httpdownload.HttpProxyPort := Fcmain.ProxyPort;
+    httpdownload.HttpProxyUser := Fcmain.ProxyUser;
+    httpdownload.HttpProxyPass := Fcmain.ProxyPass;
   end
   else
   begin
-    httpdownload.Proxy.Host:='';
-    httpdownload.Proxy.Port:=0;
-    httpdownload.Proxy.UserName:='';
-    httpdownload.Proxy.Password:='';
+    httpdownload.SocksProxy := '';
+    httpdownload.SocksType := '';
+    httpdownload.HttpProxy := '';
+    httpdownload.HttpProxyPort := '';
+    httpdownload.HttpProxyUser := '';
+    httpdownload.HttpProxyPass := '';
   end;
   fn:=slash(TempDir)+'catalog.zip';
   httpdownload.url:=info.url;

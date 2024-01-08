@@ -27,36 +27,47 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 
 interface
 
-uses  u_util, fphttpclient, opensslsockets,
+uses  u_util, blcksock, HTTPsend, FTPSend, ssl_openssl,
   Classes, SysUtils;
 
 const FSpeedPosMax=50;
 
 type   THTTPBigDownload = class(TThread)
   private
-    http: TFPHTTPClient;
-    FUpdateSize: int64;
+    http: THTTPSend;
     FMillis: QWord;
-    Furl,Ffn: string;
+    Furl,Ffirsturl,Ffn: string;
     FHttpResult: boolean;
     FHttpErr: string;
     FProgressText: string;
+    Fproxy, Fproxyport, Fproxyuser, Fproxypass: string;
+    FSocksproxy, FSockstype: string;
+    Fsockreadcount, Fsockwritecount, FUpdateSize: integer;
+    FFileSize: int64;
+    FfileStream: TFileStream;
     FDownloadComplete, FDownloadError, FProgress: TThreadMethod;
     FSpeed: array[0..FSpeedPosMax] of double;
     FSpeedPos, FSpeedNum: integer;
-    function GetProxy: TProxyData;
-    procedure SetProxy(value: TProxyData);
     procedure HttpProgress(Sender: TObject; const ContentLength, CurrentPos: Int64);
+    procedure SockStatus(Sender: TObject; Reason: THookSocketReason;const Value: string);
+    procedure SockMonitor(Sender: TObject; Writing: boolean;const Buffer: Pointer; Len: integer);
+
   public
+    ok: boolean;
     constructor Create(CreateSuspended: boolean);
     procedure Execute; override;
     procedure Abort;
+    property HttpProxy: string read Fproxy write Fproxy;
+    property HttpProxyPort: string read Fproxyport write Fproxyport;
+    property HttpProxyUser: string read Fproxyuser write Fproxyuser;
+    property HttpProxyPass: string read Fproxypass write Fproxypass;
+    property SocksProxy: string read FSocksproxy write FSocksproxy;
+    property SocksType: string read FSockstype write FSockstype;
     property url: string read Furl write Furl;
     property filename: string read Ffn write Ffn;
     property ProgressText: string read FProgressText;
     property HttpResult: boolean read FHttpResult;
     property HttpErr: string read FHttpErr;
-    Property Proxy : TProxyData Read GetProxy Write SetProxy;
     property onProgress: TThreadMethod read FProgress write FProgress;
     property onDownloadComplete: TThreadMethod read FDownloadComplete write FDownloadComplete;
     property onDownloadError: TThreadMethod read FDownloadError write FDownloadError;
@@ -64,43 +75,179 @@ type   THTTPBigDownload = class(TThread)
 
 implementation
 
+function HTTP_FileSize(AHTTP: THTTPSend; AURL: string): int64;
+{
+  //SZ To get size of the file on HTTP request
+  AHTTP - HTTP instance
+  AURL  - URL of the file
+}
+var
+  head: string;
+  i: integer;
+  Size: int64;
+begin
+  Size := 0;
+  try
+    AHTTP.Headers.Clear;
+    AHTTP.Document.Clear;
+    AHTTP.HTTPMethod('HEAD', AURL);
+    head := AHTTP.Headers.Text;
+    i := pos('content-length', LowerCase(head));
+    if i > 0 then
+    begin
+      Inc(i, 14);
+      // Skip colon and white space chars
+      while i <= length(head) do
+      begin
+        if not (head[i] in [' ', ':', #9, #10, #13]) then
+          break;
+        Inc(i);
+      end;
+      while i <= length(head) do
+      begin
+        if head[i] in ['0'..'9'] then
+          Size := Size * 10 + Ord(head[i]) - 48
+        else
+          break;
+        Inc(i);
+      end;
+    end;
+    AHTTP.Headers.Clear;
+    AHTTP.Document.Clear;
+  finally
+  end;
+  Result := Size;
+end;
+
 constructor THTTPBigDownload.Create(CreateSuspended: boolean);
 begin
  inherited Create(CreateSuspended);
  FreeOnTerminate := True;
- http:=TFPHTTPClient.Create(nil);
- http.AllowRedirect:=true;
- http.OnDataReceived:=@HttpProgress;
-end;
-
-function THTTPBigDownload.GetProxy: TProxyData;
-begin
-  result:=http.Proxy;
-end;
-
-procedure THTTPBigDownload.SetProxy(value: TProxyData);
-begin
-  http.Proxy.Assign(value);
+ ok := False;
+ FMillis := 0;
+ http:=THTTPSend.Create;
 end;
 
 procedure THTTPBigDownload.Execute;
+var newurl: string;
+    i: integer;
 begin
 try
-  FHttpErr:='';
-  FHttpResult:=true;
-  FSpeedPos:=0;
-  FSpeedNum:=0;
-  FMillis := GetTickCount64;
-  http.Get(Furl, Ffn);
-  if assigned(FDownloadComplete) then Synchronize(FDownloadComplete);
+ FfileStream := TFileStream.Create(Ffn,fmCreate or fmShareDenyWrite);
+ repeat // to handle redirection
+    http.clear;
+    Fsockreadcount := 0;
+    Fsockwritecount := 0;
+    FUpdateSize := 0;
+
+    Ffirsturl := Furl;
+    FHttpErr:='';
+    FHttpResult:=true;
+    FSpeedPos:=0;
+    FSpeedNum:=0;
+
+    http.UserAgent:='Wget/1.16.1 (linux-gnu)';
+    http.OutputStream := nil;
+    FFileSize := HTTP_FileSize(http, Furl);
+
+    http.OutputStream := FfileStream;
+
+    FSockreadcount := 0;
+    http.Sock.OnStatus := @SockStatus;
+    http.sock.OnMonitor := @SockMonitor;
+
+    FMillis := GetTickCount64;
+    ok := http.HTTPMethod('GET', Furl);
+
+    if ok and ((http.ResultCode = 200) or (http.ResultCode = 0)) then
+    begin  // success
+      if ok and assigned(FDownloadComplete) then Synchronize(FDownloadComplete);
+      break;
+    end
+    else if (http.ResultCode = 301) or (http.ResultCode = 302) or (http.ResultCode = 307) then
+    begin  // redirect
+      newurl:='';
+      for i := 0 to http.Headers.Count - 1 do
+      begin
+        if UpperCase(copy(http.Headers[i], 1, 9)) = 'LOCATION:' then
+        begin
+          newurl := trim(copy(http.Headers[i], 10, 9999));
+          if (newurl = Furl) or (newurl = Ffirsturl) then begin  // redirect recursive loop
+            ok := False;
+            newurl:='';
+            break;
+          end
+          else
+          begin
+            FProgressText := 'Redirect to: ' + newurl;
+            if assigned(FProgress) then synchronize(FProgress);
+            break;
+          end;
+        end;
+      end;
+      if newurl<>'' then begin
+        Furl := newurl;
+        Continue; // retry next redirection
+      end
+      else
+        break; // redirect recursive loop, exit
+    end
+    else
+    begin // error
+      FHttpResult := False;
+      if ok then begin
+        FHttpErr := FHttpErr + http.ResultString
+      end;
+      if assigned(FDownloadError) then Synchronize(FDownloadError);
+      break;
+    end;
+    break;
+  until false;
+
+  http.OutputStream:=nil;
+  FfileStream.Free;
   FreeAndNil(http);
-except
+
+ except
   on E: Exception do begin
     FHttpErr:=E.Message;
     FHttpResult:=false;
     if assigned(FDownloadError) then Synchronize(FDownloadError);
   end;
 end;
+end;
+
+procedure THTTPBigDownload.SockStatus(Sender: TObject; Reason: THookSocketReason;
+  const Value: string);
+begin
+  FProgressText := '';
+  case reason of
+    HR_ResolvingBegin: FProgressText := 'Resolving ' + Value;
+    HR_Connect: FProgressText := 'Connect ' + Value;
+    HR_Accept: FProgressText := 'Accept ' + Value;
+    HR_ReadCount: ; //SZ Dummy
+    HR_WriteCount:
+      begin
+        FSockwritecount := FSockwritecount + StrToInt(Value);
+        FProgressText := 'Request sent, waiting response';
+      end;
+    else
+      FProgressText := '';
+  end;
+
+  if (FProgressText <> '') and assigned(FProgress) then
+  begin
+    synchronize(FProgress);
+  end;
+end;
+
+procedure THTTPBigDownload.SockMonitor(Sender: TObject; Writing: boolean; const Buffer: Pointer; Len: integer);
+begin
+  if not Writing then
+  begin
+    FSockreadcount := FSockreadcount + len;
+    HttpProgress(sender,FFileSize,FSockreadcount);
+  end;
 end;
 
 procedure THTTPBigDownload.HttpProgress(Sender: TObject; const ContentLength, CurrentPos: Int64);
@@ -152,8 +299,10 @@ begin
       FProgressText := FProgressText + format(', remaining time %s',[ TimeToStrShort((ContentLength-CurrentPos)/speed/SecsPerHour)]);
 
     end;
+
     if assigned(FProgress) then Synchronize(FProgress);
     FMillis := GetTickCount64;
+
   end;
 end;
 
@@ -161,7 +310,7 @@ procedure THTTPBigDownload.Abort;
 begin
   FHttpErr:='Aborted by user';
   FHttpResult:=false;
-  http.Terminate;
+  http.Abort;
 end;
 
 end.
