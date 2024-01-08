@@ -40,6 +40,7 @@ type
   private
 
     FFileSize: int64;
+    FfileStream: TFileStream;
 
     FonDownloadComplete: TDownloadProc;
     FonProgress: TDownloadProc;
@@ -64,7 +65,7 @@ type
 
     Fsockreadcount, Fsockwritecount, FUpdateSize: integer;
 
-    Durl, Dftpdir, Dftpfile, progresstext: string;
+    Durl, Dftpdir, Dftpfile, Dhttpfile, progresstext: string;
     ok: boolean;
 
     constructor Create;
@@ -84,6 +85,7 @@ type
     FDownloadFeedback: TDownloadFeedback;
     Furl, Ffirsturl: string;
     Ffile: string;
+    FHttpDirectDownload: boolean;
     FResponse: string;
     Fproxy, Fproxyport, Fproxyuser, Fproxypass: string;
     FSocksproxy, FSockstype: string;
@@ -126,6 +128,7 @@ type
   published
     property URL: string read Furl write Furl;
     property SaveToFile: string read Ffile write Ffile;
+    property HttpDirectDownload: boolean read FHttpDirectDownload write FHttpDirectDownload;
     property ResponseText: string read FResponse;
     property Timeout: integer read FTimeout write FTimeout;
     property HttpProxy: string read Fproxy write Fproxy;
@@ -197,6 +200,7 @@ begin
   FFWMode := 0;
   FFWpassive := True;
   FConfirmDownload := True;
+  FHttpDirectDownload := False;
   FDownloadFile := 'Download File';
   FCopyfrom := 'Copy from:';
   Ftofile := 'to file:';
@@ -332,7 +336,7 @@ begin
       application.ProcessMessages;
     until i <> mrNone;
     Timer1.Enabled := False;
-    Result := DF.modalresult = mrOk;
+    Result := i = mrOk;
   end
   else
   begin
@@ -444,6 +448,10 @@ begin
 
     DownloadDaemon := TDownloadDaemon.Create;
     DownloadDaemon.Phttp := @http;
+    if FHttpDirectDownload then
+      DownloadDaemon.Dhttpfile := Ffile
+    else
+      DownloadDaemon.Dhttpfile := '';
     DownloadDaemon.Durl := Furl;
     DownloadDaemon.protocol := prHttp;
     DownloadDaemon.onProgress := @progressreport;
@@ -519,13 +527,17 @@ begin
 
   if ok and ((http.ResultCode = 200) or (http.ResultCode = 0)) then
   begin  // success
-    http.Document.Position := 0;
-    http.Document.SaveToFile(FFile);
-
-    //SZ Update exact size
-    DownloadDaemon.UpdateSizeText(http.Document.Size,0);
-    progressreport;
-
+    if FHttpDirectDownload then begin
+      DownloadDaemon.UpdateSizeText(FileSize(Ffile),0);
+      progressreport;
+    end
+    else begin
+      http.Document.Position := 0;
+      http.Document.SaveToFile(FFile);
+      //SZ Update exact size
+      DownloadDaemon.UpdateSizeText(http.Document.Size,0);
+      progressreport;
+    end;
     FResponse := 'Finished: ' + progress.Text;
   end
   else if (http.ResultCode = 301) or (http.ResultCode = 302) or (http.ResultCode = 307) then
@@ -644,6 +656,7 @@ constructor TDownloadDaemon.Create;
 begin
   ok := False;
   FMillis := 0;
+  Dhttpfile:='';
   FreeOnTerminate := True;
   inherited Create(True);
 end;
@@ -765,13 +778,24 @@ begin
   begin
     phttp^.Sock.OnStatus := @SockStatus;
     phttp^.sock.OnMonitor := @SockMonitor;
+    phttp^.OutputStream := nil;
 
     //SZ Added code to retrieve file size for download progress
     FFileSize := HTTP_FileSize(phttp^, Durl);
 
+    if Dhttpfile<>'' then begin
+      FfileStream := TFileStream.Create(Dhttpfile,fmCreate or fmShareDenyWrite);
+      phttp^.OutputStream := FfileStream;
+    end;
+
     FSockreadcount := 0;
 
     ok := phttp^.HTTPMethod('GET', Durl);
+
+    if Dhttpfile<>'' then begin
+      phttp^.OutputStream:=nil;
+      FfileStream.Free;
+    end;
 
   end
   else
