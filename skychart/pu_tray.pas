@@ -163,7 +163,7 @@ begin
 {$endif}
   f_clock.cfgsc := Tconf_skychart.Create;
   f_clock.planet := TPlanet.Create(self);
-  f_clock.planet.SetDE(slash(appdir) + slash('data') + 'jpleph');
+  f_clock.planet.SetDE(slash(PrivateCatalogDir) + 'jpleph', slash(Appdir) + slash('data') + 'jpleph');
   f_clock.Font.Color := clRed;
   inif := TMeminifile.Create(configfile);
   try
@@ -494,7 +494,7 @@ begin
   begin
     f_calendar := Tf_calendar.Create(self);
     f_calendar.planet := f_clock.planet;
-    f_calendar.planet.SetDE(slash(appdir) + slash('data') + 'jpleph');
+    f_calendar.planet.SetDE(slash(PrivateCatalogDir) + 'jpleph', slash(Appdir) + slash('data') + 'jpleph');
     f_calendar.cdb := cdcdb;
     f_calendar.eclipsepath := slash(appdir) + slash('data') + slash('eclipses');
     f_calendar.AzNorth := True;
@@ -706,6 +706,7 @@ begin
   Tempdir := slash(privatedir) + DefaultTmpDir;
   SatDir := slash(privatedir) + 'satellites';
   DBDir := slash(privatedir) + 'database';
+  PrivateCatalogDir := slash(PrivateDir) + 'catalog';
   if not directoryexists(SatDir) then
     CreateDir(SatDir);
   if not directoryexists(SatDir) then
