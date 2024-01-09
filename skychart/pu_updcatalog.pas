@@ -338,6 +338,7 @@ begin
     grid.Cells[colsize,grid.RowCount-1]:=info.size;
     grid.Cells[colinfo,grid.RowCount-1]:='->';
   until eof(f);
+  CloseFile(f);
   row.Free;
   ShowStatus(GridStar);
   ShowStatus(GridVar);
