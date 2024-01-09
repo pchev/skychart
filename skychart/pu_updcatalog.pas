@@ -25,7 +25,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 interface
 
 uses u_constant, u_util, u_translation, UScaleDPI, downloaddialog, cu_calceph,
-  cu_httpdownload, u_unzip, cu_catalog, FileUtil, cu_database,
+  cu_httpdownload, u_unzip, cu_catalog, FileUtil, cu_database, cu_planet,
   Classes, SysUtils, Forms, Controls, Graphics, Dialogs, ExtCtrls, Grids, ComCtrls, StdCtrls, Types;
 
 type
@@ -87,6 +87,7 @@ type
     Fcatalog: Tcatalog;
     Fcmain: Tconf_main;
     Fcdb: Tcdcdb;
+    Fplanet: TPlanet;
     FSaveConfig, FOpenSetup: TNotifyEvent;
     InstallInfo: TCatInfo;
     httpdownload: THTTPBigDownload;
@@ -225,7 +226,7 @@ begin
   TabSheetDouble.Caption:=rsDoubleStar;
   TabSheetDSO.Caption:=rsNebulae;
   TabSheetPicture.Caption:=rsDSOCatalogPi;
-  TabSheetKernel.Caption:=rsPlanetarySat;
+  TabSheetKernel.Caption:=rsSolarSystem;
   GridStar.Columns[1].Title.Caption:=rsStatus;
   GridStar.Columns[2].Title.Caption:=rsCatalog;
   GridStar.Columns[3].Title.Caption:=rsDescription;
@@ -588,10 +589,13 @@ end;
 procedure Tf_updcatalog.Install(info: TCatInfo);
 var fn,ext: string;
 begin
-  ext := LowerCase(ExtractFileExt(info.url));
-  if ext<>'.zip' then begin
-    ShowMessage('Catalog file download is '+ext+', only .zip is supported');
-    Exit;
+  if Info.catnum<>3 then begin
+    ext := LowerCase(ExtractFileExt(info.url));
+    if ext<>'.zip' then begin
+      ShowMessage('Catalog file download is '+ext+', only .zip is supported');
+      EndInstallTimer.Enabled:=true;
+      Exit;
+    end;
   end;
   httpdownload:=THTTPBigDownload.Create(true);
   if Fcmain.HttpProxy then
@@ -621,7 +625,14 @@ begin
     httpdownload.HttpProxyUser := '';
     httpdownload.HttpProxyPass := '';
   end;
-  fn:=slash(TempDir)+'catalog.zip';
+  if info.catnum=3 then begin
+    fn:=slash(PrivateCatalogDir)+slash(info.path);
+    if not directoryexists(fn) then
+      CreateDir(fn);
+    fn:=fn+ExtractFileName(info.url)
+  end
+  else
+    fn:=slash(TempDir)+'catalog.zip';
   httpdownload.url:=info.url;
   httpdownload.filename:=fn;
   httpdownload.onProgress:=@ShowProgress;
@@ -645,13 +656,13 @@ try
   fn:=httpdownload.filename;
   if httpdownload.HttpResult and FileExists(fn) then
   begin
-     if FileUnzipWithPath(PChar(fn), PChar(PrivateCatalogDir), @UnzipProgress) then
+     if (InstallInfo.catnum=3) or FileUnzipWithPath(PChar(fn), PChar(PrivateCatalogDir), @UnzipProgress) then
      begin
         AssignFile(f,slash(PrivateCatalogDir)+slash(InstallInfo.path)+InstallInfo.catname+'_version.txt');
         Rewrite(f);
         WriteLn(f,InstallInfo.version);
         CloseFile(f);
-        DeleteFile(fn);
+        if (InstallInfo.catnum<>3) then DeleteFile(fn);
 
         if InstallInfo.catnum>BaseStar then begin      // standard catalog
           if InstallInfo.cattype='star' then
@@ -735,6 +746,13 @@ try
           if InstallInfo.cattype='kernel' then
           begin
             Load_Calceph_Files;
+          end;
+        end
+        else if InstallInfo.catnum=3 then  // JPL ephemeris
+        begin
+          if InstallInfo.cattype='kernel' then
+          begin
+            Fplanet.load_de(MaxInt); // clear current file in cache
           end;
         end;
      end

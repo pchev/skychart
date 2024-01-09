@@ -1464,7 +1464,7 @@ begin
     cdcdb.onFinishAsteroidUpgrade := FinishAsteroidUpgrade;
     planet.cdb := cdcdb;
     f_search.cdb := cdcdb;
-    planet.SetDE(slash(Appdir) + slash('data') + 'jpleph');
+    planet.SetDE(slash(PrivateCatalogDir) + 'jpleph', slash(Appdir) + slash('data') + 'jpleph');
     if libcalceph<>0 then InitCalcephBody(def_cfgsc);
     if VerboseMsg then
       WriteTrace('Background Image');

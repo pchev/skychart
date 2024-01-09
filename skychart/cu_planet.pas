@@ -73,7 +73,7 @@ type
     cdb: TCdcDb;
     constructor Create(AOwner: TComponent); override;
     destructor Destroy; override;
-    procedure SetDE(folder: string);
+    procedure SetDE(folder1,folder2: string);
     function load_de(t: double): boolean;
     function ComputePlanet(cfgsc: Tconf_skychart): boolean;
     procedure FindNumPla(id: integer;
@@ -4364,9 +4364,10 @@ begin
   Time_Alt(jd0, ars, des, -6, civm, cive, obslat, obslon);
 end;
 
-procedure TPlanet.SetDE(folder: string);
+procedure TPlanet.SetDE(folder1,folder2: string);
 begin
-  de_folder := folder;
+  de_folder1 := folder1;
+  de_folder2 := folder2;
 end;
 
 function TPlanet.load_de(t: double): boolean;
@@ -4393,7 +4394,9 @@ begin
     de_jdend := -MaxInt;
     for i := 1 to nJPL_DE do
     begin
-      if load_de_file(t, de_folder, JPL_DE[i], de_filename, de_jdstart, de_jdend) then
+      if load_de_file(t, de_folder1, JPL_DE[i], de_filename, de_jdstart, de_jdend) or
+         load_de_file(t, de_folder2, JPL_DE[i], de_filename, de_jdstart, de_jdend)
+      then
       begin
         Result := True;
         de_type := JPL_DE[i];

@@ -42,7 +42,7 @@ type   THTTPBigDownload = class(TThread)
     FProgressText: string;
     Fproxy, Fproxyport, Fproxyuser, Fproxypass: string;
     FSocksproxy, FSockstype: string;
-    Fsockreadcount, Fsockwritecount, FUpdateSize: integer;
+    Fsockreadcount, Fsockwritecount, FUpdateSize: Int64;
     FFileSize: int64;
     FfileStream: TFileStream;
     FDownloadComplete, FDownloadError, FProgress: TThreadMethod;

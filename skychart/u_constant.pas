@@ -1516,7 +1516,7 @@ var
   LinuxDesktop: integer = 0;  // FreeDesktop=0, Other=1
   crRetic: TCursor = 5;
   Params: TStringList;
-  de_folder, de_filename: string;
+  de_folder1, de_folder2, de_filename: string;
   de_type, de_jdcheck: integer;
   de_jdstart, de_jdend: double;
   VerboseMsg: boolean = False;

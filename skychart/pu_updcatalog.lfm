@@ -525,7 +525,7 @@ object f_updcatalog: Tf_updcatalog
       end
     end
     object TabSheetKernel: TTabSheet
-      Caption = 'Planetary satellites'
+      Caption = 'Solar system'
       ClientHeight = 363
       ClientWidth = 814
       object GridKernel: TStringGrid
