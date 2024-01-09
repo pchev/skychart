@@ -323,41 +323,43 @@ begin
   ClearGrid(GridKernel);
   row := Tstringlist.Create;
   fn := slash(PrivateCatalogDir)+'catalog_list.txt';
-  AssignFile(f,fn);
-  Reset(f);
-  repeat
-    ReadLn(f,buf);
-    if copy(buf,1,1)='#' then continue;
-    Splitrec2(buf,';',row);
-    if row.Count<>14 then continue;
-    if row[1] > cdcver then continue; // skip catalog not supported by this version of the program
-    // type of object
-    if row[0]='star' then grid:=GridStar
-    else if row[0]='double star' then grid:=GridDouble
-    else if row[0]='variable star' then grid:=GridVar
-    else if row[0]='dso' then grid:=GridDSO
-    else if row[0]='picture' then grid:=GridPicture
-    else if row[0]='kernel' then grid:=GridKernel
-    else continue;
-    info:=TCatInfo.Create(row);
-    info.SearchInstalled(PrivateCatalogDir);
-    info.grid:=grid;
-    grid.RowCount:=grid.RowCount+1;
-    grid.Objects[colinstall,grid.RowCount-1]:=info;
-    grid.Cells[colaction,grid.RowCount-1]:=Ellipsis;
-    grid.Cells[colname,grid.RowCount-1]:=info.catname;
-    grid.Cells[coldesc,grid.RowCount-1]:=info.desc;
-    grid.Cells[colsize,grid.RowCount-1]:=info.size;
-    grid.Cells[colinfo,grid.RowCount-1]:='->';
-  until eof(f);
-  CloseFile(f);
-  row.Free;
-  ShowStatus(GridStar);
-  ShowStatus(GridVar);
-  ShowStatus(GridDouble);
-  ShowStatus(GridDSO);
-  ShowStatus(GridPicture);
-  ShowStatus(GridKernel);
+  if FileExists(fn) then begin
+    AssignFile(f,fn);
+    Reset(f);
+    repeat
+      ReadLn(f,buf);
+      if copy(buf,1,1)='#' then continue;
+      Splitrec2(buf,';',row);
+      if row.Count<>14 then continue;
+      if row[1] > cdcver then continue; // skip catalog not supported by this version of the program
+      // type of object
+      if row[0]='star' then grid:=GridStar
+      else if row[0]='double star' then grid:=GridDouble
+      else if row[0]='variable star' then grid:=GridVar
+      else if row[0]='dso' then grid:=GridDSO
+      else if row[0]='picture' then grid:=GridPicture
+      else if row[0]='kernel' then grid:=GridKernel
+      else continue;
+      info:=TCatInfo.Create(row);
+      info.SearchInstalled(PrivateCatalogDir);
+      info.grid:=grid;
+      grid.RowCount:=grid.RowCount+1;
+      grid.Objects[colinstall,grid.RowCount-1]:=info;
+      grid.Cells[colaction,grid.RowCount-1]:=Ellipsis;
+      grid.Cells[colname,grid.RowCount-1]:=info.catname;
+      grid.Cells[coldesc,grid.RowCount-1]:=info.desc;
+      grid.Cells[colsize,grid.RowCount-1]:=info.size;
+      grid.Cells[colinfo,grid.RowCount-1]:='->';
+    until eof(f);
+    CloseFile(f);
+    row.Free;
+    ShowStatus(GridStar);
+    ShowStatus(GridVar);
+    ShowStatus(GridDouble);
+    ShowStatus(GridDSO);
+    ShowStatus(GridPicture);
+    ShowStatus(GridKernel);
+  end;
 end;
 
 function Tf_updcatalog.UpdateList(ForceDownload: boolean; out txt: string): boolean;
@@ -408,7 +410,7 @@ begin
         dl.HttpProxyPass := '';
       end;
       dl.ConfirmDownload := False;
-      dl.QuickCancel := true;
+      dl.QuickCancel := FileExists(fn);
       dl.URL := URL_CATALOG_LIST;
       dl.SaveToFile := fn;
       result:=dl.Execute;
