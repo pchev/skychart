@@ -133,8 +133,8 @@ var newurl: string;
     i: integer;
 begin
 try
- FfileStream := TFileStream.Create(Ffn,fmCreate or fmShareDenyWrite);
  repeat // to handle redirection
+    FfileStream := TFileStream.Create(Ffn,fmCreate or fmShareDenyWrite);
     http.clear;
     Fsockreadcount := 0;
     Fsockwritecount := 0;
@@ -158,6 +158,9 @@ try
 
     FMillis := GetTickCount64;
     ok := http.HTTPMethod('GET', Furl);
+
+    http.OutputStream:=nil;
+    FfileStream.Free;
 
     if ok and ((http.ResultCode = 200) or (http.ResultCode = 0)) then
     begin  // success
@@ -204,8 +207,6 @@ try
     break;
   until false;
 
-  http.OutputStream:=nil;
-  FfileStream.Free;
   FreeAndNil(http);
 
  except
