@@ -2591,7 +2591,6 @@ var
   step, buf: string;
   i: integer;
   c: TBGRAPixel;
-  fn: array of string;
   {$ifdef mswindows}
   Registry: TRegistry;
   {$endif}
@@ -2846,25 +2845,7 @@ begin
     CalcephExtOk:=false;
     Load_LibCalceph;
     if libcalceph<>0 then begin
-      CalcephFolder:=slash(Appdir) + slash('data') + 'spice_eph';
-      SetLength(fn,2);
-      fn[0]:=slash(CalcephFolder)+'cdcbase.bsp';
-      fn[1]:=slash(CalcephFolder)+'cdcext.bsp';
-      if FileExistsUTF8(fn[0]) then begin
-        i:=1;
-        CalcephBaseOk:=true;
-        if FileExistsUTF8(fn[1]) then begin
-          i:=2;
-          CalcephExtOk:=true;
-        end;
-        SetLength(fn,i);
-        InitCalcephSat(i,fn);
-        if libcalceph=0 then begin
-          CalcephBaseOk:=false;
-          CalcephExtOk:=false;
-        end
-        else WriteTrace('libcalceph loaded');
-      end;
+      Load_Calceph_Files;
     end
     else begin
       step := 'Try libpasspice';
@@ -2887,7 +2868,7 @@ begin
         SpiceBaseOk:=(i=0);
         i:=i+SpiceLoadspk(pchar(slash(SpiceFolder)+'cdcext.bsp'));
         SpiceExtOk:=(i=0);
-        WriteTrace('libspice loaded');
+        WriteTrace('libspice loaded (deprecated)');
       end;
     end;
 

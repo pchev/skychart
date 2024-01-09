@@ -2,9 +2,9 @@ object f_updcatalog: Tf_updcatalog
   Left = 369
   Height = 527
   Top = 30
-  Width = 753
+  Width = 818
   ClientHeight = 527
-  ClientWidth = 753
+  ClientWidth = 818
   FormStyle = fsStayOnTop
   OnCloseQuery = FormCloseQuery
   OnCreate = FormCreate
@@ -14,14 +14,14 @@ object f_updcatalog: Tf_updcatalog
     Left = 0
     Height = 34
     Top = 0
-    Width = 753
+    Width = 818
     Align = alTop
     Caption = 'Select catalog to install or remove'
     ClientHeight = 34
-    ClientWidth = 753
+    ClientWidth = 818
     TabOrder = 0
     object ButtonRefresh: TButton
-      Left = 560
+      Left = 625
       Height = 25
       Top = 4
       Width = 171
@@ -35,19 +35,19 @@ object f_updcatalog: Tf_updcatalog
     Left = 0
     Height = 95
     Top = 432
-    Width = 753
+    Width = 818
     Align = alBottom
     ClientHeight = 95
-    ClientWidth = 753
+    ClientWidth = 818
     TabOrder = 1
     object PanelDownload: TPanel
       Left = 1
       Height = 50
       Top = 1
-      Width = 751
+      Width = 816
       Align = alTop
       ClientHeight = 50
-      ClientWidth = 751
+      ClientWidth = 816
       TabOrder = 0
       object LabelProgress: TLabel
         Left = 8
@@ -58,7 +58,7 @@ object f_updcatalog: Tf_updcatalog
         ParentColor = False
       end
       object ButtonAbort: TButton
-        Left = 656
+        Left = 721
         Height = 25
         Top = 16
         Width = 75
@@ -96,7 +96,7 @@ object f_updcatalog: Tf_updcatalog
       end
     end
     object ButtonClose: TButton
-      Left = 656
+      Left = 721
       Height = 25
       Top = 56
       Width = 75
@@ -119,7 +119,7 @@ object f_updcatalog: Tf_updcatalog
     Left = 0
     Height = 398
     Top = 34
-    Width = 753
+    Width = 818
     ActivePage = TabSheetStar
     Align = alClient
     TabIndex = 0
@@ -127,12 +127,12 @@ object f_updcatalog: Tf_updcatalog
     object TabSheetStar: TTabSheet
       Caption = 'Stars'
       ClientHeight = 363
-      ClientWidth = 749
+      ClientWidth = 814
       object GridStar: TStringGrid
         Left = 0
         Height = 363
         Top = 0
-        Width = 749
+        Width = 814
         Align = alClient
         AutoFillColumns = True
         ColCount = 6
@@ -166,7 +166,7 @@ object f_updcatalog: Tf_updcatalog
             MaxSize = 400
             ReadOnly = True
             Title.Caption = 'Description'
-            Width = 330
+            Width = 395
           end        
           item
             MinSize = 80
@@ -198,7 +198,7 @@ object f_updcatalog: Tf_updcatalog
           25
           150
           100
-          330
+          395
           80
           60
         )
@@ -207,12 +207,12 @@ object f_updcatalog: Tf_updcatalog
     object TabSheetVar: TTabSheet
       Caption = 'Variable stars'
       ClientHeight = 363
-      ClientWidth = 749
+      ClientWidth = 814
       object GridVar: TStringGrid
         Left = 0
         Height = 363
         Top = 0
-        Width = 749
+        Width = 814
         Align = alClient
         AutoFillColumns = True
         ColCount = 6
@@ -246,7 +246,7 @@ object f_updcatalog: Tf_updcatalog
             MaxSize = 400
             ReadOnly = True
             Title.Caption = 'Description'
-            Width = 330
+            Width = 395
           end        
           item
             MinSize = 80
@@ -278,7 +278,7 @@ object f_updcatalog: Tf_updcatalog
           25
           150
           100
-          330
+          395
           80
           60
         )
@@ -287,12 +287,12 @@ object f_updcatalog: Tf_updcatalog
     object TabSheetDouble: TTabSheet
       Caption = 'Double stars'
       ClientHeight = 363
-      ClientWidth = 749
+      ClientWidth = 814
       object GridDouble: TStringGrid
         Left = 0
         Height = 363
         Top = 0
-        Width = 749
+        Width = 814
         Align = alClient
         AutoFillColumns = True
         ColCount = 6
@@ -326,7 +326,7 @@ object f_updcatalog: Tf_updcatalog
             MaxSize = 400
             ReadOnly = True
             Title.Caption = 'Description'
-            Width = 330
+            Width = 395
           end        
           item
             MinSize = 80
@@ -358,7 +358,7 @@ object f_updcatalog: Tf_updcatalog
           25
           150
           100
-          330
+          395
           80
           60
         )
@@ -367,12 +367,12 @@ object f_updcatalog: Tf_updcatalog
     object TabSheetDSO: TTabSheet
       Caption = 'DSO'
       ClientHeight = 363
-      ClientWidth = 749
+      ClientWidth = 814
       object GridDSO: TStringGrid
         Left = 0
         Height = 363
         Top = 0
-        Width = 749
+        Width = 814
         Align = alClient
         AutoFillColumns = True
         ColCount = 6
@@ -406,7 +406,7 @@ object f_updcatalog: Tf_updcatalog
             MaxSize = 400
             ReadOnly = True
             Title.Caption = 'Description'
-            Width = 330
+            Width = 395
           end        
           item
             MinSize = 80
@@ -438,7 +438,7 @@ object f_updcatalog: Tf_updcatalog
           25
           150
           100
-          330
+          395
           80
           60
         )
@@ -447,12 +447,12 @@ object f_updcatalog: Tf_updcatalog
     object TabSheetPicture: TTabSheet
       Caption = 'DSO pictures'
       ClientHeight = 363
-      ClientWidth = 749
+      ClientWidth = 814
       object GridPicture: TStringGrid
         Left = 0
         Height = 363
         Top = 0
-        Width = 749
+        Width = 814
         Align = alClient
         AutoFillColumns = True
         ColCount = 6
@@ -486,7 +486,7 @@ object f_updcatalog: Tf_updcatalog
             MaxSize = 400
             ReadOnly = True
             Title.Caption = 'Description'
-            Width = 330
+            Width = 395
           end        
           item
             MinSize = 80
@@ -518,7 +518,87 @@ object f_updcatalog: Tf_updcatalog
           25
           150
           100
-          330
+          395
+          80
+          60
+        )
+      end
+    end
+    object TabSheetKernel: TTabSheet
+      Caption = 'Planetary satellites'
+      ClientHeight = 363
+      ClientWidth = 814
+      object GridKernel: TStringGrid
+        Left = 0
+        Height = 363
+        Top = 0
+        Width = 814
+        Align = alClient
+        AutoFillColumns = True
+        ColCount = 6
+        Columns = <        
+          item
+            ButtonStyle = cbsButtonColumn
+            Color = clBtnFace
+            MinSize = 25
+            MaxSize = 25
+            SizePriority = 0
+            Title.Caption = ''
+            Width = 25
+          end        
+          item
+            MinSize = 150
+            ReadOnly = True
+            SizePriority = 0
+            Title.Caption = 'Status'
+            Width = 150
+          end        
+          item
+            MinSize = 100
+            MaxSize = 100
+            ReadOnly = True
+            SizePriority = 0
+            Title.Caption = 'Catalog'
+            Width = 100
+          end        
+          item
+            MinSize = 200
+            MaxSize = 400
+            ReadOnly = True
+            Title.Caption = 'Description'
+            Width = 395
+          end        
+          item
+            MinSize = 80
+            MaxSize = 80
+            ReadOnly = True
+            SizePriority = 0
+            Title.Caption = 'Size'
+            Width = 80
+          end        
+          item
+            ButtonStyle = cbsButtonColumn
+            MinSize = 60
+            MaxSize = 60
+            SizePriority = 0
+            Title.Caption = 'Info'
+            Width = 60
+          end>
+        DefaultColWidth = 120
+        FixedCols = 0
+        MouseWheelOption = mwGrid
+        Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goColSizing, goTabs, goAlwaysShowEditor, goThumbTracking, goCellHints, goCellEllipsis]
+        ParentShowHint = False
+        ShowHint = True
+        TabOrder = 0
+        OnDrawCell = GridDrawCell
+        OnButtonClick = GridButtonClick
+        OnGetCellHint = GridGetCellHint
+        ColWidths = (
+          25
+          150
+          100
+          395
           80
           60
         )

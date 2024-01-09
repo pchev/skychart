@@ -24,8 +24,8 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 
 interface
 
-uses u_constant, u_util, u_translation, UScaleDPI, downloaddialog, cu_httpdownload, u_unzip,
-  cu_catalog, FileUtil, cu_database,
+uses u_constant, u_util, u_translation, UScaleDPI, downloaddialog, cu_calceph,
+  cu_httpdownload, u_unzip, cu_catalog, FileUtil, cu_database,
   Classes, SysUtils, Forms, Controls, Graphics, Dialogs, ExtCtrls, Grids, ComCtrls, StdCtrls, Types;
 
 type
@@ -50,6 +50,7 @@ type
     ButtonRefresh: TButton;
     ButtonClose: TButton;
     ButtonAbort: TButton;
+    GridKernel: TStringGrid;
     GridPicture: TStringGrid;
     GridVar: TStringGrid;
     GridDouble: TStringGrid;
@@ -63,6 +64,7 @@ type
     PanelDownload: TPanel;
     ProgressBar1: TProgressBar;
     ProgressCat: TLabel;
+    TabSheetKernel: TTabSheet;
     TabSheetPicture: TTabSheet;
     TabSheetStar: TTabSheet;
     TabSheetVar: TTabSheet;
@@ -223,6 +225,7 @@ begin
   TabSheetDouble.Caption:=rsDoubleStar;
   TabSheetDSO.Caption:=rsNebulae;
   TabSheetPicture.Caption:=rsDSOCatalogPi;
+  TabSheetKernel.Caption:=rsPlanetarySat;
   GridStar.Columns[1].Title.Caption:=rsStatus;
   GridStar.Columns[2].Title.Caption:=rsCatalog;
   GridStar.Columns[3].Title.Caption:=rsDescription;
@@ -248,6 +251,11 @@ begin
   GridPicture.Columns[3].Title.Caption:=rsDescription;
   GridPicture.Columns[4].Title.Caption:=rsSize;
   GridPicture.Columns[5].Title.Caption:=rsInfo;
+  GridKernel.Columns[1].Title.Caption:=rsStatus;
+  GridKernel.Columns[2].Title.Caption:=rsCatalog;
+  GridKernel.Columns[3].Title.Caption:=rsDescription;
+  GridKernel.Columns[4].Title.Caption:=rsSize;
+  GridKernel.Columns[5].Title.Caption:=rsInfo;
   ButtonSetup.Caption:=rsOpenCatalogS;
   ButtonAbort.Caption:=rsAbort;
   ButtonClose.Caption:=rsClose;
@@ -275,6 +283,7 @@ begin
   ClearGrid(GridDouble);
   ClearGrid(GridDSO);
   ClearGrid(GridPicture);
+  ClearGrid(GridKernel);
 end;
 
 procedure Tf_updcatalog.ButtonCloseClick(Sender: TObject);
@@ -310,6 +319,7 @@ begin
   ClearGrid(GridDouble);
   ClearGrid(GridDSO);
   ClearGrid(GridPicture);
+  ClearGrid(GridKernel);
   row := Tstringlist.Create;
   fn := slash(PrivateCatalogDir)+'catalog_list.txt';
   AssignFile(f,fn);
@@ -326,6 +336,7 @@ begin
     else if row[0]='variable star' then grid:=GridVar
     else if row[0]='dso' then grid:=GridDSO
     else if row[0]='picture' then grid:=GridPicture
+    else if row[0]='kernel' then grid:=GridKernel
     else continue;
     info:=TCatInfo.Create(row);
     info.SearchInstalled(PrivateCatalogDir);
@@ -345,6 +356,7 @@ begin
   ShowStatus(GridDouble);
   ShowStatus(GridDSO);
   ShowStatus(GridPicture);
+  ShowStatus(GridKernel);
 end;
 
 function Tf_updcatalog.UpdateList(ForceDownload: boolean; out txt: string): boolean;
@@ -717,8 +729,14 @@ try
             ProgressBar1.Visible:=false;
           end;
           if Assigned(FSaveConfig) then FSaveConfig(self);
+        end
+        else if InstallInfo.catnum=2 then  // spice kernel
+        begin
+          if InstallInfo.cattype='kernel' then
+          begin
+            Load_Calceph_Files;
+          end;
         end;
-
      end
      else begin
        ShowMessage('Unzip error : '+fn);

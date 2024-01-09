@@ -47,6 +47,7 @@ uses calceph, math, dynlibs, u_constant, u_util, LazFileUtils, Classes,sysutils;
     MaxSpkFiles = 100;
 
   Procedure Load_LibCalceph;
+  Procedure Load_Calceph_Files;
   Procedure InitCalcephSat(n: integer; eph_files: array of string);
   Procedure CloseCalcephSat;
   Function CalcephComputeSat(jdt: double; target, center: integer; out pv: TDoubleArray): boolean;
@@ -98,7 +99,7 @@ uses calceph, math, dynlibs, u_constant, u_util, LazFileUtils, Classes,sysutils;
 
 var ephsat,ephbody: Pt_calcephbin;
     LastError: string;
-    CalcephFolder: string;
+    CalcephFolder,PrivateCalcephFolder: string;
     CalcephBaseOk, CalcephExtOk: boolean;
 
 implementation
@@ -167,6 +168,36 @@ begin
   end;
   except
     libcalceph:=0;
+  end;
+end;
+
+Procedure Load_Calceph_Files;
+var fn: array of string;
+    i: integer;
+begin
+  PrivateCalcephFolder:=slash(PrivateCatalogDir) + 'spice_eph';
+  CalcephFolder:=slash(Appdir) + slash('data') + 'spice_eph';
+  SetLength(fn,2);
+  fn[0]:=slash(PrivateCalcephFolder)+'cdcbase.bsp';
+  if not FileExistsUTF8(fn[0]) then
+    fn[0]:=slash(CalcephFolder)+'cdcbase.bsp';
+  fn[1]:=slash(PrivateCalcephFolder)+'cdcext.bsp';
+  if not FileExistsUTF8(fn[1]) then
+    fn[1]:=slash(CalcephFolder)+'cdcext.bsp';
+  if FileExistsUTF8(fn[0]) then begin
+    i:=1;
+    CalcephBaseOk:=true;
+    if FileExistsUTF8(fn[1]) then begin
+      i:=2;
+      CalcephExtOk:=true;
+    end;
+    SetLength(fn,i);
+    InitCalcephSat(i,fn);
+    if libcalceph=0 then begin
+      CalcephBaseOk:=false;
+      CalcephExtOk:=false;
+    end
+    else WriteTrace('libcalceph loaded');
   end;
 end;
 
