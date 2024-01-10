@@ -632,7 +632,6 @@ begin
   magmax := MagnitudeMin;
   { activate the star catalog}
   InitStarC(dsbase, 5.5);
-  InitStarC(bsc, 6.5);
   InitStarC(sky2000, 9.5);
   InitStarC(DefStar, 10);
   InitStarC(tyc, 11);
@@ -4579,8 +4578,8 @@ begin
         FindAtPosCat(vostar);
       if Fcatalog.cfgcat.starcaton[DefStar - BaseStar] then
         FindAtPosCat(DefStar);
-      if Fcatalog.cfgcat.starcaton[bsc - BaseStar] then
-        FindAtPosCat(bsc);
+      if Fcatalog.cfgcat.starcaton[starindex - BaseStar] then
+        FindAtPosCat(starindex);
       if Fcatalog.cfgcat.starcaton[dsbase - BaseStar] then
         FindAtPosCat(dsbase);
       if Fcatalog.cfgcat.starcaton[sky2000 - BaseStar] then
@@ -4830,8 +4829,8 @@ begin
         FindAtPosCat(vostar);
       if Fcatalog.cfgcat.starcaton[DefStar - BaseStar] then
         FindAtPosCat(DefStar);
-      if Fcatalog.cfgcat.starcaton[bsc - BaseStar] then
-        FindAtPosCat(bsc);
+      if Fcatalog.cfgcat.starcaton[starindex - BaseStar] then
+        FindAtPosCat(starindex);
       if Fcatalog.cfgcat.starcaton[dsbase - BaseStar] then
         FindAtPosCat(dsbase);
       if Fcatalog.cfgcat.starcaton[sky2000 - BaseStar] then

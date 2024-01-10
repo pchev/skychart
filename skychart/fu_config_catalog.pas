@@ -738,7 +738,7 @@ procedure Tf_config_catalog.ShowCDCStar;
 begin
   defbox.Checked := ccat.StarCatDef[DefStar - BaseStar];
   GAIAbox.Checked := ccat.StarCatDef[gaia - BaseStar];
-  bscbox.Checked := ccat.StarCatDef[bsc - BaseStar];
+  bscbox.Checked := ccat.StarCatDef[starindex - BaseStar];
   skybox.Checked := ccat.StarCatDef[sky2000 - BaseStar];
   tycbox.Checked := ccat.StarCatDef[tyc - BaseStar];
   ty2box.Checked := ccat.StarCatDef[tyc2 - BaseStar];
@@ -788,7 +788,7 @@ begin
   hnbase2.Value := ccat.StarCatField[hn290 - BaseStar, 2];
   def3.Text := changetext(systoutf8(ccat.StarCatPath[DefStar - BaseStar]), def3.Text);
   gaia3.Text := changetext(systoutf8(ccat.StarCatPath[gaia - BaseStar]), gaia3.Text);
-  bsc3.Text := changetext(systoutf8(ccat.StarCatPath[bsc - BaseStar]), bsc3.Text);
+  bsc3.Text := changetext(systoutf8(ccat.StarCatPath[starindex - BaseStar]), bsc3.Text);
   sky3.Text := changetext(systoutf8(ccat.StarCatPath[sky2000 - BaseStar]), sky3.Text);
   tyc3.Text := changetext(systoutf8(ccat.StarCatPath[tyc - BaseStar]), tyc3.Text);
   ty23.Text := changetext(systoutf8(ccat.StarCatPath[tyc2 - BaseStar]), ty23.Text);

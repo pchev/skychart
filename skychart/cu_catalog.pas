@@ -376,7 +376,7 @@ begin
     while (curcat > (BaseStar)) and (not cfgcat.starcaton[curcat - BaseStar]) do
       Dec(curcat);
 
-    if CurCat=bsc then begin
+    if CurCat=starindex then begin
       Dec(curcat);  // only used for index now
       continue;
     end;
@@ -440,7 +440,7 @@ begin
         Result := GetVOcatS(rec);
       end;
 
-    bsc: Result := GetBSC(rec);
+    starindex: Result := GetBSC(rec);
 
   end;
 
@@ -456,7 +456,7 @@ begin
 
       Result := False;
 
-      if CurCat=bsc then begin
+      if CurCat=starindex then begin
         Dec(curcat);  // only used for index now
         continue;
       end;
@@ -589,9 +589,9 @@ begin
         SetVOCatpath(slash(VODir));
         OpenVOCatwin(Result);
       end;
-    bsc:
+    starindex:
       begin
-        SetBscPath(cfgcat.starcatpath[bsc - BaseStar]);
+        SetBscPath(cfgcat.starcatpath[starindex - BaseStar]);
         OpenBSCwin(Result);
       end;
       else
@@ -622,7 +622,7 @@ begin
     dsgsc: CloseDSgsc;
     gcstar: CloseGcat;
     vostar: CloseVOCat;
-    bsc: CloseBSC;
+    starindex: CloseBSC;
   else
     Result := False;
   end;
@@ -1267,7 +1267,7 @@ begin
   fillchar(EmptyRec, sizeof(GcatRec), 0);
   Result := True;
   case cat of
-    bsc:
+    starindex:
     begin
       EmptyRec.options.flabel := StarLabel;
       EmptyRec.options.ShortName := 'BSC';
@@ -4090,9 +4090,9 @@ begin
           SetGCVPath(cfgcat.VarStarCatPath[gcvs - BaseVar]);
           FindGCVS(id, ra, Dec, Result);
         end;
-      S_GC: if IsBSCPath(cfgcat.StarCatPath[bsc - BaseStar]) then
+      S_GC: if IsBSCPath(cfgcat.StarCatPath[starindex - BaseStar]) then
         begin
-          SetBSCPath(cfgcat.StarCatPath[bsc - BaseStar]);
+          SetBSCPath(cfgcat.StarCatPath[starindex - BaseStar]);
           FindNumGC(strtointdef(id, 0), ra, Dec, Result);
         end;
       S_GSC:
@@ -4107,29 +4107,29 @@ begin
         else if cfgcat.StarCatDef[gscc - BaseStar] then
           FindNumGSCC(id, ra, Dec, Result);
       end;
-      S_SAO: if IsBSCPath(cfgcat.StarCatPath[bsc - BaseStar]) then
+      S_SAO: if IsBSCPath(cfgcat.StarCatPath[starindex - BaseStar]) then
         begin
-          SetBSCPath(cfgcat.StarCatPath[bsc - BaseStar]);
+          SetBSCPath(cfgcat.StarCatPath[starindex - BaseStar]);
           FindNumSAO(strtointdef(id, 0), ra, Dec, Result);
         end;
-      S_HD: if IsBSCPath(cfgcat.StarCatPath[bsc - BaseStar]) then
+      S_HD: if IsBSCPath(cfgcat.StarCatPath[starindex - BaseStar]) then
         begin
-          SetBSCPath(cfgcat.StarCatPath[bsc - BaseStar]);
+          SetBSCPath(cfgcat.StarCatPath[starindex - BaseStar]);
           FindNumHD(strtointdef(id, 0), ra, Dec, Result);
         end;
-      S_BD: if IsBSCPath(cfgcat.StarCatPath[bsc - BaseStar]) then
+      S_BD: if IsBSCPath(cfgcat.StarCatPath[starindex - BaseStar]) then
         begin
-          SetBSCPath(cfgcat.StarCatPath[bsc - BaseStar]);
+          SetBSCPath(cfgcat.StarCatPath[starindex - BaseStar]);
           FindNumBD(id, ra, Dec, Result);
         end;
-      S_CD: if IsBSCPath(cfgcat.StarCatPath[bsc - BaseStar]) then
+      S_CD: if IsBSCPath(cfgcat.StarCatPath[starindex - BaseStar]) then
         begin
-          SetBSCPath(cfgcat.StarCatPath[bsc - BaseStar]);
+          SetBSCPath(cfgcat.StarCatPath[starindex - BaseStar]);
           FindNumCD(id, ra, Dec, Result);
         end;
-      S_CPD: if IsBSCPath(cfgcat.StarCatPath[bsc - BaseStar]) then
+      S_CPD: if IsBSCPath(cfgcat.StarCatPath[starindex - BaseStar]) then
         begin
-          SetBSCPath(cfgcat.StarCatPath[bsc - BaseStar]);
+          SetBSCPath(cfgcat.StarCatPath[starindex - BaseStar]);
           FindNumCPD(id, ra, Dec, Result);
         end;
       S_HR:
@@ -4699,7 +4699,7 @@ begin
       dsbase: OpenDSbase(xx1, xx2, yy1, yy2, ok);
       dstyc: OpenDSTyc(xx1, xx2, yy1, yy2, ok);
       dsgsc: OpenDSGsc(xx1, xx2, yy1, yy2, ok);
-      bsc: OpenBSC(xx1, xx2, yy1, yy2, ok);
+      starindex: OpenBSC(xx1, xx2, yy1, yy2, ok);
       gcvs: OpenGCV(xx1, xx2, yy1, yy2, ok);
       wds: OpenWDS(xx1, xx2, yy1, yy2, ok);
       sac: OpenSAC(xx1, xx2, yy1, yy2, ok);
@@ -4806,7 +4806,7 @@ begin
       dsbase: ok := GetDSbase(rec);
       dstyc: ok := GetDSTyc(rec);
       dsgsc: ok := GetDSGsc(rec);
-      bsc: ok := GetBSC(rec);
+      starindex: ok := GetBSC(rec);
       gcvs: ok := GetGCVS(rec);
       wds: ok := GetWDS(rec);
       sac:
@@ -5040,7 +5040,7 @@ begin
       dsbase: OpenDSbasewin(ok);
       dstyc: OpenDSTYCwin(ok);
       dsgsc: OpenDSGSCwin(ok);
-      bsc: OpenBSCwin(ok);
+      starindex: OpenBSCwin(ok);
       gcvs: OpenGCVwin(ok);
       wds: OpenWDSwin(ok);
       sac: OpenSACwin(ok);
@@ -5147,7 +5147,7 @@ begin
       dsbase: ok := GetDSbase(rec);
       dstyc: ok := GetDSTyc(rec);
       dsgsc: ok := GetDSGsc(rec);
-      bsc: ok := GetBSC(rec);
+      starindex: ok := GetBSC(rec);
       gcvs: ok := GetGCVS(rec);
       wds: ok := GetWDS(rec);
       sac:
@@ -5524,9 +5524,9 @@ begin
       ok := FindAtPos(microcat, x1, y1, x2, y2, nextobj, True, searchcenter, cfgsc, rec);
       CloseMCT;
     end;
-    if (not ok) and cfgcat.starcaton[bsc - BaseStar] then
+    if (not ok) and cfgcat.starcaton[starindex - BaseStar] then
     begin
-      ok := FindAtPos(bsc, x1, y1, x2, y2, nextobj, True, searchcenter, cfgsc, rec);
+      ok := FindAtPos(starindex, x1, y1, x2, y2, nextobj, True, searchcenter, cfgsc, rec);
       CloseBSC;
     end;
   end;
@@ -5567,7 +5567,7 @@ function Tcatalog.CheckPath(cat: integer; catpath: string): boolean;
 begin
   case cat of
     DefStar: Result := IsDefaultStarspath(catpath);
-    bsc: Result := IsBSCPath(catpath);
+    starindex: Result := IsBSCPath(catpath);
     sky2000: Result := IsSkyPath(catpath);
     tyc: Result := IsTYCPath(catpath);
     tyc2: Result := IsTY2Path(catpath);
