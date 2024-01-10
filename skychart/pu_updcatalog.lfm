@@ -129,6 +129,16 @@ object f_updcatalog: Tf_updcatalog
       Caption = 'To configure the catalog details'
       ParentColor = False
     end
+    object LabelInfo: TLabel
+      Left = 8
+      Height = 42
+      Top = 8
+      Width = 800
+      AutoSize = False
+      Caption = 'LabelInfo'
+      ParentColor = False
+      WordWrap = True
+    end
   end
   object PageControl1: TPageControl
     Left = 0
@@ -139,6 +149,7 @@ object f_updcatalog: Tf_updcatalog
     Align = alClient
     TabIndex = 0
     TabOrder = 2
+    OnChange = PageControl1Change
     object TabSheetStar: TTabSheet
       Caption = 'Stars'
       ClientHeight = 363
@@ -181,7 +192,7 @@ object f_updcatalog: Tf_updcatalog
             MaxSize = 400
             ReadOnly = True
             Title.Caption = 'Description'
-            Width = 395
+            Width = 375
           end        
           item
             MinSize = 80
@@ -193,11 +204,11 @@ object f_updcatalog: Tf_updcatalog
           end        
           item
             ButtonStyle = cbsButtonColumn
-            MinSize = 60
-            MaxSize = 60
+            MinSize = 80
+            MaxSize = 80
             SizePriority = 0
             Title.Caption = 'Info'
-            Width = 60
+            Width = 80
           end>
         DefaultColWidth = 120
         FixedCols = 0
@@ -213,9 +224,9 @@ object f_updcatalog: Tf_updcatalog
           25
           150
           100
-          395
+          375
           80
-          60
+          80
         )
       end
     end
@@ -261,7 +272,7 @@ object f_updcatalog: Tf_updcatalog
             MaxSize = 400
             ReadOnly = True
             Title.Caption = 'Description'
-            Width = 395
+            Width = 375
           end        
           item
             MinSize = 80
@@ -273,11 +284,11 @@ object f_updcatalog: Tf_updcatalog
           end        
           item
             ButtonStyle = cbsButtonColumn
-            MinSize = 60
-            MaxSize = 60
+            MinSize = 80
+            MaxSize = 80
             SizePriority = 0
             Title.Caption = 'Info'
-            Width = 60
+            Width = 80
           end>
         DefaultColWidth = 120
         FixedCols = 0
@@ -293,9 +304,9 @@ object f_updcatalog: Tf_updcatalog
           25
           150
           100
-          395
+          375
           80
-          60
+          80
         )
       end
     end
@@ -341,7 +352,7 @@ object f_updcatalog: Tf_updcatalog
             MaxSize = 400
             ReadOnly = True
             Title.Caption = 'Description'
-            Width = 395
+            Width = 375
           end        
           item
             MinSize = 80
@@ -353,11 +364,11 @@ object f_updcatalog: Tf_updcatalog
           end        
           item
             ButtonStyle = cbsButtonColumn
-            MinSize = 60
-            MaxSize = 60
+            MinSize = 80
+            MaxSize = 80
             SizePriority = 0
             Title.Caption = 'Info'
-            Width = 60
+            Width = 80
           end>
         DefaultColWidth = 120
         FixedCols = 0
@@ -373,9 +384,9 @@ object f_updcatalog: Tf_updcatalog
           25
           150
           100
-          395
+          375
           80
-          60
+          80
         )
       end
     end
@@ -421,7 +432,7 @@ object f_updcatalog: Tf_updcatalog
             MaxSize = 400
             ReadOnly = True
             Title.Caption = 'Description'
-            Width = 395
+            Width = 375
           end        
           item
             MinSize = 80
@@ -433,11 +444,11 @@ object f_updcatalog: Tf_updcatalog
           end        
           item
             ButtonStyle = cbsButtonColumn
-            MinSize = 60
-            MaxSize = 60
+            MinSize = 80
+            MaxSize = 80
             SizePriority = 0
             Title.Caption = 'Info'
-            Width = 60
+            Width = 80
           end>
         DefaultColWidth = 120
         FixedCols = 0
@@ -453,9 +464,9 @@ object f_updcatalog: Tf_updcatalog
           25
           150
           100
-          395
+          375
           80
-          60
+          80
         )
       end
     end
@@ -501,7 +512,7 @@ object f_updcatalog: Tf_updcatalog
             MaxSize = 400
             ReadOnly = True
             Title.Caption = 'Description'
-            Width = 395
+            Width = 375
           end        
           item
             MinSize = 80
@@ -513,11 +524,11 @@ object f_updcatalog: Tf_updcatalog
           end        
           item
             ButtonStyle = cbsButtonColumn
-            MinSize = 60
-            MaxSize = 60
+            MinSize = 80
+            MaxSize = 80
             SizePriority = 0
             Title.Caption = 'Info'
-            Width = 60
+            Width = 80
           end>
         DefaultColWidth = 120
         FixedCols = 0
@@ -533,9 +544,9 @@ object f_updcatalog: Tf_updcatalog
           25
           150
           100
-          395
+          375
           80
-          60
+          80
         )
       end
     end
@@ -581,7 +592,7 @@ object f_updcatalog: Tf_updcatalog
             MaxSize = 400
             ReadOnly = True
             Title.Caption = 'Description'
-            Width = 395
+            Width = 375
           end        
           item
             MinSize = 80
@@ -593,11 +604,11 @@ object f_updcatalog: Tf_updcatalog
           end        
           item
             ButtonStyle = cbsButtonColumn
-            MinSize = 60
-            MaxSize = 60
+            MinSize = 80
+            MaxSize = 80
             SizePriority = 0
             Title.Caption = 'Info'
-            Width = 60
+            Width = 80
           end>
         DefaultColWidth = 120
         FixedCols = 0
@@ -613,9 +624,9 @@ object f_updcatalog: Tf_updcatalog
           25
           150
           100
-          395
+          375
           80
-          60
+          80
         )
       end
     end

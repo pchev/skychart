@@ -56,6 +56,7 @@ type
     GridDouble: TStringGrid;
     GridDSO: TStringGrid;
     Label1: TLabel;
+    LabelInfo: TLabel;
     LabelAction: TLabel;
     LabelProgress: TLabel;
     PageControl1: TPageControl;
@@ -84,6 +85,7 @@ type
     procedure GridButtonClick(Sender: TObject; aCol, aRow: Integer);
     procedure GridGetCellHint(Sender: TObject; ACol, ARow: Integer; var HintText: String);
     procedure GridDrawCell(Sender: TObject; aCol, aRow: Integer; aRect: TRect; aState: TGridDrawState);
+    procedure PageControl1Change(Sender: TObject);
   private
     Fcatalog: Tcatalog;
     Fcmain: Tconf_main;
@@ -270,6 +272,7 @@ begin
   ScaleDPI(Self);
   SetLang;
   PageControl1.ActivePageIndex:=0;
+  LabelInfo.Caption:=rsInstallStarC;
 end;
 
 procedure Tf_updcatalog.FormShow(Sender: TObject);
@@ -297,6 +300,18 @@ end;
 procedure Tf_updcatalog.FormCloseQuery(Sender: TObject; var CanClose: Boolean);
 begin
   CanClose := not FRunning;
+end;
+
+procedure Tf_updcatalog.PageControl1Change(Sender: TObject);
+begin
+  case PageControl1.ActivePageIndex of
+    0 : LabelInfo.Caption:=rsInstallStarC;
+    1 : LabelInfo.Caption:=rsInstallOneOf;
+    2 : LabelInfo.Caption:=rsInstallOneOf2;
+    3 : LabelInfo.Caption:=rsInstallAddit;
+    4 : LabelInfo.Caption:=rsInstallPictu;
+    5 : LabelInfo.Caption:=rsInstallEphem;
+  end;
 end;
 
 procedure Tf_updcatalog.ClearGrid(g:TStringGrid);

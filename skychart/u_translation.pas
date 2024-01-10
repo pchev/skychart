@@ -1601,6 +1601,12 @@ resourcestring
   rsIndex = 'Index';
   rsStarCatalogI = 'Star catalog index';
   rsToConfigureT = 'To configure the catalog details';
+  rsInstallStarC = 'Install more stars down to the lowest required magnitude';
+  rsInstallOneOf = 'Install one of the variable star catalog, depending on your interest and instrumentation';
+  rsInstallOneOf2 = 'Install one of the double star catalog, depending on your interest and instrumentation';
+  rsInstallAddit = 'Install additional DSO catalog for the objects you want to observe';
+  rsInstallPictu = 'Install pictures for this DSO catalog';
+  rsInstallEphem = 'Install ephemeris data to improve the computation of solar system objects';
 
 // also update upsi_translation
 
