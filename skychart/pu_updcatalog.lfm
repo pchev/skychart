@@ -48,6 +48,8 @@ object f_updcatalog: Tf_updcatalog
       Align = alTop
       ClientHeight = 50
       ClientWidth = 816
+      Color = clBtnFace
+      ParentColor = False
       TabOrder = 0
       object LabelProgress: TLabel
         Left = 8
