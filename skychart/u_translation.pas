@@ -1494,7 +1494,6 @@ resourcestring
   rsGetFromTeles = 'Get from telescope';
   rsMainMenu = 'Main menu';
   rsUnsupportedF = 'Unsupported file extension: %sPlease fix it.';
-  rsLimitTheNumb = 'Limit the number of level 3 faint stars';
   rsSwapButton = 'Swap button';
   rsTarget = 'Target';
   rsHandPad = 'HandPad';
@@ -1597,9 +1596,11 @@ resourcestring
   rsInstalling = 'Installing';
   rsCloseTheSetu = 'Close the Setup window and launch the catalog installer tool?';
   rsRefreshTheLi = 'Refresh the list';
-  rsUseTheMenuTo = 'Use the menu "%s/%s" to install a variable star catalog';
-  rsUseTheMenuT2 = 'Use the menu "%s/%s" to install a double star catalog';
+  rsUseTheButton = 'Use the button below or the menu "%s/%s" to install a double and variable star catalog';
   rsOpenCatalogS = 'Open Catalog Setup';
+  rsIndex = 'Index';
+  rsStarCatalogI = 'Star catalog index';
+  rsToConfigureT = 'To configure the catalog details';
 
 // also update upsi_translation
 

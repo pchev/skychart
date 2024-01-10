@@ -376,6 +376,10 @@ begin
     while (curcat > (BaseStar)) and (not cfgcat.starcaton[curcat - BaseStar]) do
       Dec(curcat);
 
+    if CurCat=bsc then begin
+      Dec(curcat);  // only used for index now
+      continue;
+    end;
     if (curcat <= BaseStar) then
       Result := False
     else begin
@@ -452,6 +456,10 @@ begin
 
       Result := False;
 
+      if CurCat=bsc then begin
+        Dec(curcat);  // only used for index now
+        continue;
+      end;
       if (curcat <= BaseStar) then
         break
       else

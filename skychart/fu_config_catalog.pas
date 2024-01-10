@@ -54,13 +54,12 @@ type
     ButtonInstallCat2: TButton;
     fsac1: TLongEdit;
     fsac2: TLongEdit;
-    LabelWDS: TLabel;
-    LabelGCVS: TLabel;
+    Label99: TLabel;
+    LabelNewCat: TLabel;
     Label98: TLabel;
     OngcBox: TCheckBox;
     frc31: TLongEdit;
     frc32: TLongEdit;
-    GaiaLimit: TCheckBox;
     Fgaia1: TLongEdit;
     Fgaia2: TLongEdit;
     hnName: TComboBox;
@@ -92,8 +91,6 @@ type
     CatgenButton: TButton;
     delobj: TButton;
     DownloadDialog1: TDownloadDialog;
-    Fbsc1: TLongEdit;
-    Fbsc2: TLongEdit;
     fgcm1: TLongEdit;
     fgcm2: TLongEdit;
     fgpn1: TLongEdit;
@@ -136,7 +133,6 @@ type
     Label6: TLabel;
     Label89: TLabel;
     Label96: TLabel;
-    Label97: TLabel;
     LabelDownload: TLabel;
     sh23: TDirectoryEdit;
     drk3: TDirectoryEdit;
@@ -180,8 +176,6 @@ type
     mct3: TDirectoryEdit;
     unb3: TDirectoryEdit;
     UNBbox: TCheckBox;
-    wds3: TDirectoryEdit;
-    gcv3: TDirectoryEdit;
     dsgsc3: TDirectoryEdit;
     dstyc3: TDirectoryEdit;
     dsbase3: TDirectoryEdit;
@@ -226,13 +220,6 @@ type
     fusn2: TLongEdit;
     fgscc2: TLongEdit;
     fgscf2: TLongEdit;
-    Fgcv2: TLongEdit;
-    Fwds2: TLongEdit;
-    Fwds1: TLongEdit;
-    Fgcv1: TLongEdit;
-    GCVBox: TCheckBox;
-    IRVar: TCheckBox;
-    WDSbox: TCheckBox;
     Label3: TLabel;
     Label15: TLabel;
     Label116: TLabel;
@@ -240,7 +227,6 @@ type
     Label118: TLabel;
     Label88: TLabel;
     Label91: TLabel;
-    Label93: TLabel;
     Label94: TLabel;
     TYCbox: TCheckBox;
     Ftyc1: TLongEdit;
@@ -266,7 +252,6 @@ type
     procedure Button9Click(Sender: TObject);
     procedure CatgenClick(Sender: TObject);
     procedure delobjClick(Sender: TObject);
-    procedure GaiaLimitChange(Sender: TObject);
     procedure hnNameChange(Sender: TObject);
     procedure maxrowsChange(Sender: TObject);
     procedure PageControl1Change(Sender: TObject);
@@ -301,15 +286,6 @@ type
     procedure CDCStarField1Change(Sender: TObject);
     procedure CDCStarField2Change(Sender: TObject);
     procedure CDCStarPathChange(Sender: TObject);
-    procedure GCVBoxClick(Sender: TObject);
-    procedure IRVarClick(Sender: TObject);
-    procedure Fgcv1Change(Sender: TObject);
-    procedure Fgcv2Change(Sender: TObject);
-    procedure gcv3Change(Sender: TObject);
-    procedure WDSboxClick(Sender: TObject);
-    procedure Fwds1Change(Sender: TObject);
-    procedure Fwds2Change(Sender: TObject);
-    procedure wds3Change(Sender: TObject);
     procedure CDCNebSelClick(Sender: TObject);
     procedure CDCNebField1Change(Sender: TObject);
     procedure CDCNebField2Change(Sender: TObject);
@@ -385,18 +361,17 @@ begin
   Button6.Caption := rsDelete;
   Page2.Caption := rsCdCStars;
   Label2.Caption := rsCDCStarsCata;
-  GaiaLimit.Caption := rsLimitTheNumb;
   Label16.Caption := rsMin2;
   Label28.Caption := rsFieldNumber;
   Label17.Caption := rsMax2;
   Label27.Caption := rsFilesPath;
   Label18.Caption := rsStars;
+  label99.Caption := rsIndex+' SAO, BD, HD, GC';
+  BSCbox.Caption := rsStarCatalogI;
   Label19.Caption := rsVariables;
-  LabelGCVS.Caption:=Format(rsUseTheMenuTo, [rsUpdate1, rsInstallObjec]);
-  LabelWDS.Caption:=Format(rsUseTheMenuT2, [rsUpdate1, rsInstallObjec]);
+  LabelNewCat.Caption:=Format(rsUseTheButton, [rsUpdate1, rsInstallObjec]);
   Label20.Caption := rsDoubles;
   USNBright.Caption := rsBrightStars;
-  IRVar.Caption := rsShowIRVariab;
   Page3.Caption := rsCdCNebulae;
   Label3.Caption := rsCDCNebulaeCa;
   Label22.Caption := rsNebulae;
@@ -414,9 +389,7 @@ begin
   Label88.Caption := rsCDCObsoleteC;
   Label91.Caption := rsReplacedBy + ' GAIA';
   Label96.Caption := rsReplacedBy + ' XHIP';
-  Label93.Caption := rsReplacedBy + ' UCAC4';
-  Label95.Caption := rsReplacedBy + ' PGC/LEDA';
-  Label97.Caption := rsReplacedBy + ' NOMAD';
+  Label95.Caption := rsReplacedBy + ' Hyperleda';
   Label94.Caption := rsNotAvailable;
   Page4b.Caption := rsObsolete+blank+rsNebulae;
   Label92.Caption := rsCDCObsoleteC;
@@ -777,9 +750,6 @@ begin
   unbbox.Checked := ccat.StarCatDef[usnob - BaseStar];
   usnbright.Checked := ccat.UseUSNOBrightStars;
   mctbox.Checked := ccat.StarCatDef[microcat - BaseStar];
-  gcvbox.Checked := ccat.VarStarCatDef[gcvs - BaseVar];
-  irvar.Checked := ccat.UseGSVSIr;
-  wdsbox.Checked := ccat.DblStarCatDef[wds - BaseDbl];
   dsbasebox.Checked := ccat.StarCatDef[dsbase - BaseStar];
   dstycbox.Checked := ccat.StarCatDef[dstyc - BaseStar];
   dsgscbox.Checked := ccat.StarCatDef[dsgsc - BaseStar];
@@ -788,8 +758,6 @@ begin
   fdef2.Value := ccat.StarCatField[DefStar - BaseStar, 2];
   fgaia1.Value := ccat.StarCatField[gaia - BaseStar, 1];
   fgaia2.Value := ccat.StarCatField[gaia - BaseStar, 2];
-  fbsc1.Value := ccat.StarCatField[bsc - BaseStar, 1];
-  fbsc2.Value := ccat.StarCatField[bsc - BaseStar, 2];
   fsky1.Value := ccat.StarCatField[sky2000 - BaseStar, 1];
   fsky2.Value := ccat.StarCatField[sky2000 - BaseStar, 2];
   ftyc1.Value := ccat.StarCatField[tyc - BaseStar, 1];
@@ -810,10 +778,6 @@ begin
   funb2.Value := ccat.StarCatField[usnob - BaseStar, 2];
   fmct1.Value := ccat.StarCatField[microcat - BaseStar, 1];
   fmct2.Value := ccat.StarCatField[microcat - BaseStar, 2];
-  fgcv1.Value := ccat.VarStarCatField[gcvs - BaseVar, 1];
-  fgcv2.Value := ccat.VarStarCatField[gcvs - BaseVar, 2];
-  fwds1.Value := ccat.DblStarCatField[wds - BaseDbl, 1];
-  fwds2.Value := ccat.DblStarCatField[wds - BaseDbl, 2];
   dsbase1.Value := ccat.StarCatField[dsbase - BaseStar, 1];
   dsbase2.Value := ccat.StarCatField[dsbase - BaseStar, 2];
   dstyc1.Value := ccat.StarCatField[dstyc - BaseStar, 1];
@@ -835,14 +799,11 @@ begin
   usn3.Text := changetext(systoutf8(ccat.StarCatPath[usnoa - BaseStar]), usn3.Text);
   unb3.Text := changetext(systoutf8(ccat.StarCatPath[usnob - BaseStar]), unb3.Text);
   mct3.Text := changetext(systoutf8(ccat.StarCatPath[microcat - BaseStar]), mct3.Text);
-  gcv3.Text := changetext(systoutf8(ccat.VarStarCatPath[gcvs - BaseVar]), gcv3.Text);
-  wds3.Text := changetext(systoutf8(ccat.DblStarCatPath[wds - BaseDbl]), wds3.Text);
   dsbase3.Text := changetext(systoutf8(ccat.StarCatPath[dsbase - BaseStar]), dsbase3.Text);
   dstyc3.Text := changetext(systoutf8(ccat.StarCatPath[dstyc - BaseStar]), dstyc3.Text);
   dsgsc3.Text := changetext(systoutf8(ccat.StarCatPath[dsgsc - BaseStar]), dsgsc3.Text);
   hnbase3.Text := changetext(systoutf8(ccat.StarCatPath[hn290 - BaseStar]), hnbase3.Text);
   Upd290List(hnbase3.Text);
-  GaiaLimit.Checked := ccat.LimitGaiaCount;
 end;
 
 procedure Tf_config_catalog.ShowFov;
@@ -1349,91 +1310,6 @@ begin
   end;
 end;
 
-procedure Tf_config_catalog.GCVBoxClick(Sender: TObject);
-begin
-  ccat.VarStarCatDef[gcvs - BaseVar] := GCVBox.Checked;
-  ShowCDCStar;
-end;
-
-procedure Tf_config_catalog.IRVarClick(Sender: TObject);
-begin
-  ccat.UseGSVSIr := irvar.Checked;
-end;
-
-procedure Tf_config_catalog.Fgcv1Change(Sender: TObject);
-begin
-  if LockChange then
-    exit;
-  ccat.VarStarCatField[gcvs - BaseVar, 1] := Fgcv1.Value;
-end;
-
-procedure Tf_config_catalog.Fgcv2Change(Sender: TObject);
-begin
-  if LockChange then
-    exit;
-  ccat.VarStarCatField[gcvs - BaseVar, 2] := Fgcv2.Value;
-end;
-
-procedure Tf_config_catalog.gcv3Change(Sender: TObject);
-begin
-  if LockCatPath then
-    exit;
-  try
-    LockCatPath := True;
-    gcv3.Text := trim(gcv3.Text);
-    ccat.VarStarCatPath[gcvs - BaseVar] := utf8tosys(gcv3.Text);
-    if ccat.VarStarCatDef[gcvs - BaseVar] then
-      if catalog.checkpath(gcvs, utf8tosys(gcv3.Text)) then
-        gcv3.color := textcolor
-      else
-        gcv3.color := clRed
-    else
-      gcv3.color := textcolor;
-  finally
-    LockCatPath := False;
-  end;
-end;
-
-procedure Tf_config_catalog.WDSboxClick(Sender: TObject);
-begin
-  ccat.DblStarCatDef[wds - BaseDbl] := WDSbox.Checked;
-  ShowCDCStar;
-end;
-
-procedure Tf_config_catalog.Fwds1Change(Sender: TObject);
-begin
-  if LockChange then
-    exit;
-  ccat.DblStarCatField[wds - BaseDbl, 1] := Fwds1.Value;
-end;
-
-procedure Tf_config_catalog.Fwds2Change(Sender: TObject);
-begin
-  if LockChange then
-    exit;
-  ccat.DblStarCatField[wds - BaseDbl, 2] := Fwds2.Value;
-end;
-
-procedure Tf_config_catalog.wds3Change(Sender: TObject);
-begin
-  if LockCatPath then
-    exit;
-  try
-    LockCatPath := True;
-    wds3.Text := trim(wds3.Text);
-    ccat.DblStarCatPath[wds - BaseDbl] := utf8tosys(wds3.Text);
-    if ccat.DblStarCatDef[wds - BaseDbl] then
-      if catalog.checkpath(wds, utf8tosys(wds3.Text)) then
-        wds3.color := textcolor
-      else
-        wds3.color := clRed
-    else
-      wds3.color := textcolor;
-  finally
-    LockCatPath := False;
-  end;
-end;
-
 procedure Tf_config_catalog.CDCNebSelClick(Sender: TObject);
 begin
   if Sender is TCheckBox then
@@ -1833,11 +1709,6 @@ begin
   stringgrid1.cells[7, p] := '';
   stringgrid1.cells[8, p] := '';
   DeleteObjRow(p);
-end;
-
-procedure Tf_config_catalog.GaiaLimitChange(Sender: TObject);
-begin
-  ccat.LimitGaiaCount:=GaiaLimit.Checked;
 end;
 
 procedure Tf_config_catalog.DeleteObjRow(p: integer);

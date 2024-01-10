@@ -96,9 +96,11 @@ object f_updcatalog: Tf_updcatalog
       end
     end
     object ButtonClose: TButton
+      AnchorSideTop.Control = Label1
+      AnchorSideTop.Side = asrCenter
       Left = 721
       Height = 25
-      Top = 56
+      Top = 59
       Width = 75
       Anchors = [akTop, akRight]
       Caption = 'Close'
@@ -106,13 +108,26 @@ object f_updcatalog: Tf_updcatalog
       TabOrder = 1
     end
     object ButtonSetup: TButton
-      Left = 8
+      AnchorSideLeft.Control = Label1
+      AnchorSideLeft.Side = asrBottom
+      AnchorSideTop.Control = Label1
+      AnchorSideTop.Side = asrCenter
+      Left = 215
       Height = 25
-      Top = 56
+      Top = 59
       Width = 248
+      BorderSpacing.Left = 12
       Caption = 'Open Catalog Setup'
       OnClick = ButtonSetupClick
       TabOrder = 2
+    end
+    object Label1: TLabel
+      Left = 12
+      Height = 18
+      Top = 62
+      Width = 191
+      Caption = 'To configure the catalog details'
+      ParentColor = False
     end
   end
   object PageControl1: TPageControl
@@ -609,7 +624,7 @@ object f_updcatalog: Tf_updcatalog
     Enabled = False
     Interval = 2000
     OnTimer = EndInstallTimerTimer
-    Left = 328
-    Top = 464
+    Left = 32
+    Top = 216
   end
 end

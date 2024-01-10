@@ -1538,11 +1538,6 @@ begin
         First := False;
       end;
     end;
-    if First and Fcatalog.cfgcat.starcaton[bsc - BaseStar] then
-    begin
-      firstcat := 'BSC';
-      First := False;
-    end;
     timelimit := now + 10 / secday;
     if Fcatalog.OpenStar then
       while Fcatalog.readstar(rec) do

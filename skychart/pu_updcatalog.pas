@@ -55,6 +55,7 @@ type
     GridVar: TStringGrid;
     GridDouble: TStringGrid;
     GridDSO: TStringGrid;
+    Label1: TLabel;
     LabelAction: TLabel;
     LabelProgress: TLabel;
     PageControl1: TPageControl;
@@ -257,6 +258,7 @@ begin
   GridKernel.Columns[3].Title.Caption:=rsDescription;
   GridKernel.Columns[4].Title.Caption:=rsSize;
   GridKernel.Columns[5].Title.Caption:=rsInfo;
+  Label1.Caption := rsToConfigureT+':';
   ButtonSetup.Caption:=rsOpenCatalogS;
   ButtonAbort.Caption:=rsAbort;
   ButtonClose.Caption:=rsClose;
