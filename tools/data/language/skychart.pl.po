@@ -2,14 +2,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: skychart\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-01-05 15:24+0000\n"
+"POT-Creation-Date: 2024-01-10 12:57+0000\n"
 "PO-Revision-Date: 2023-11-10 17:13+0000\n"
 "Last-Translator: Jerzy Rokicki <Unknown>\n"
 "Language-Team: French <kde-i18n-doc@kde.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2024-01-07 19:32+0000\n"
+"X-Launchpad-Export-Date: 2024-01-10 13:12+0000\n"
 "X-Generator: Launchpad (build e1eeab5b20e19239bd7d5f36676f7a52988db88b)\n"
 "X-Poedit-Country: Poland\n"
 "Language: fr\n"
@@ -2643,6 +2643,10 @@ msgstr "Stopień jasności gwiazd"
 msgid "Increment time"
 msgstr "Przyrost czasu"
 
+#: u_translation.rsindex
+msgid "Index"
+msgstr ""
+
 #: u_translation.rsindicatehere
 msgid "Indicate here how to compute the required values from the data stored in the catalog text file."
 msgstr "Wskaż tutaj jak obliczyć wymaganą wartość z danych przechowywanych w pliku tekstowym katalogu."
@@ -2970,10 +2974,6 @@ msgstr "Graniczna wielkość gwiazdowa:"
 #: u_translation.rslimitingsize
 msgid "Limiting size (arcminutes):"
 msgstr "Graniczny rozmiar (arc-minuty) :"
-
-#: u_translation.rslimitthenumb
-msgid "Limit the number of level 3 faint stars"
-msgstr ""
 
 #: u_translation.rsline1
 msgid "Line"
@@ -5414,6 +5414,10 @@ msgstr "Gwiazdy"
 msgid "Star and nebula limit"
 msgstr "Limit dla gwiazd i mgławic"
 
+#: u_translation.rsstarcatalogi
+msgid "Star catalog index"
+msgstr ""
+
 #: u_translation.rsstarcolourbv
 msgid "Star colour (B-V):"
 msgstr "Kolor gwiazdy (współczynnik B-V):"
@@ -5732,6 +5736,10 @@ msgstr "Pobranie TLE zakończone powodzeniem"
 msgid "to"
 msgstr "do"
 
+#: u_translation.rstoconfiguret
+msgid "To configure the catalog details"
+msgstr ""
+
 #: u_translation.rstoday
 msgid "Today"
 msgstr "Dziś"
@@ -6046,6 +6054,11 @@ msgstr "Użyj czasu systemowego"
 msgid "Use TCP/IP server"
 msgstr "Użyj serwera TCP/IP"
 
+#: u_translation.rsusethebutton
+#, object-pascal-format
+msgid "Use the button below or the menu \"%s/%s\" to install a double and variable star catalog"
+msgstr ""
+
 #: u_translation.rsusetheintern
 msgid "Use the internal INDI gui panel"
 msgstr ""
@@ -6054,16 +6067,6 @@ msgstr ""
 #, object-pascal-format
 msgid "Use the menu or button \"%s\" to configure this driver."
 msgstr "Użyj menu albo przycisku \"%s\" żeby skonfigurować sterownik."
-
-#: u_translation.rsusethemenut2
-#, object-pascal-format
-msgid "Use the menu \"%s/%s\" to install a double star catalog"
-msgstr ""
-
-#: u_translation.rsusethemenuto
-#, object-pascal-format
-msgid "Use the menu \"%s/%s\" to install a variable star catalog"
-msgstr ""
 
 #: u_translation.rsusetheproper
 msgid "Use the proper motion to correct the position for the given epoch"

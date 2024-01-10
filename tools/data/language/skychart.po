@@ -5758,10 +5758,6 @@ msgstr ""
 msgid "Unsupported file extension: %sPlease fix it."
 msgstr ""
 
-#: u_translation:rslimitthenumb
-msgid "Limit the number of level 3 faint stars"
-msgstr ""
-
 #: u_translation:rsswapbutton
 msgid "Swap button"
 msgstr ""
@@ -6170,15 +6166,23 @@ msgstr ""
 msgid "Refresh the list"
 msgstr ""
 
-#: u_translation:rsusethemenuto
-msgid "Use the menu \"%s/%s\" to install a variable star catalog"
-msgstr ""
-
-#: u_translation:rsusethemenut2
-msgid "Use the menu \"%s/%s\" to install a double star catalog"
+#: u_translation:rsusethebutton
+msgid "Use the button below or the menu \"%s/%s\" to install a double and variable star catalog"
 msgstr ""
 
 #: u_translation:rsopencatalogs
 msgid "Open Catalog Setup"
+msgstr ""
+
+#: u_translation:rsindex
+msgid "Index"
+msgstr ""
+
+#: u_translation:rsstarcatalogi
+msgid "Star catalog index"
+msgstr ""
+
+#: u_translation:rstoconfiguret
+msgid "To configure the catalog details"
 msgstr ""
 

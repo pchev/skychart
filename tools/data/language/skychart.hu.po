@@ -3,14 +3,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: skychart.en\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-01-05 15:24+0000\n"
+"POT-Creation-Date: 2024-01-10 12:57+0000\n"
 "PO-Revision-Date: 2017-01-14 17:43+0000\n"
 "Last-Translator: Patrick Chevalley <Unknown>\n"
 "Language-Team: <translation@ap-i.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2024-01-07 19:32+0000\n"
+"X-Launchpad-Export-Date: 2024-01-10 13:12+0000\n"
 "X-Generator: Launchpad (build e1eeab5b20e19239bd7d5f36676f7a52988db88b)\n"
 
 #: u_translation.rs102cddss
@@ -2640,6 +2640,10 @@ msgstr "Fényes csillagok méretének növelése"
 msgid "Increment time"
 msgstr "Idő előre"
 
+#: u_translation.rsindex
+msgid "Index"
+msgstr ""
+
 #: u_translation.rsindicatehere
 msgid "Indicate here how to compute the required values from the data stored in the catalog text file."
 msgstr "Jelöld ki hogy miként számolja a betöltendő értéket a program a katalógus text fájlban találhatóból"
@@ -2967,10 +2971,6 @@ msgstr "Határmagnitúdó:"
 #: u_translation.rslimitingsize
 msgid "Limiting size (arcminutes):"
 msgstr "Határméret (ívperc):"
-
-#: u_translation.rslimitthenumb
-msgid "Limit the number of level 3 faint stars"
-msgstr ""
 
 #: u_translation.rsline1
 msgid "Line"
@@ -5411,6 +5411,10 @@ msgstr "Csillag"
 msgid "Star and nebula limit"
 msgstr ""
 
+#: u_translation.rsstarcatalogi
+msgid "Star catalog index"
+msgstr ""
+
 #: u_translation.rsstarcolourbv
 msgid "Star colour (B-V):"
 msgstr "Csillagok színe (B-V):"
@@ -5729,6 +5733,10 @@ msgstr ""
 msgid "to"
 msgstr "-ig:"
 
+#: u_translation.rstoconfiguret
+msgid "To configure the catalog details"
+msgstr ""
+
 #: u_translation.rstoday
 msgid "Today"
 msgstr "Ma"
@@ -6043,6 +6051,11 @@ msgstr "A rendszeridő használata"
 msgid "Use TCP/IP server"
 msgstr "TCP/IP szerver használata"
 
+#: u_translation.rsusethebutton
+#, object-pascal-format
+msgid "Use the button below or the menu \"%s/%s\" to install a double and variable star catalog"
+msgstr ""
+
 #: u_translation.rsusetheintern
 msgid "Use the internal INDI gui panel"
 msgstr ""
@@ -6051,16 +6064,6 @@ msgstr ""
 #, object-pascal-format
 msgid "Use the menu or button \"%s\" to configure this driver."
 msgstr "Használd a menüt vagy a \"%s\" gombot a driver beállításához."
-
-#: u_translation.rsusethemenut2
-#, object-pascal-format
-msgid "Use the menu \"%s/%s\" to install a double star catalog"
-msgstr ""
-
-#: u_translation.rsusethemenuto
-#, object-pascal-format
-msgid "Use the menu \"%s/%s\" to install a variable star catalog"
-msgstr ""
 
 #: u_translation.rsusetheproper
 msgid "Use the proper motion to correct the position for the given epoch"

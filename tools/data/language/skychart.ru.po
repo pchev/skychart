@@ -2,14 +2,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: skychart.ru\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-01-05 15:24+0000\n"
-"PO-Revision-Date: 2023-12-31 07:10+0000\n"
+"POT-Creation-Date: 2024-01-10 12:57+0000\n"
+"PO-Revision-Date: 2024-01-09 09:28+0000\n"
 "Last-Translator: Aleksey Kabanov <Unknown>\n"
 "Language-Team: Zaporozhye Astronomical Club Altair <astroclub@ua.fm, http://astroclub.zp.ua>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2024-01-07 19:32+0000\n"
+"X-Launchpad-Export-Date: 2024-01-10 13:12+0000\n"
 "X-Generator: Launchpad (build e1eeab5b20e19239bd7d5f36676f7a52988db88b)\n"
 "Language: ru_UA\n"
 
@@ -960,7 +960,7 @@ msgstr "Закрыть файлы"
 
 #: u_translation.rsclosethesetu
 msgid "Close the Setup window and launch the catalog installer tool?"
-msgstr ""
+msgstr "Закрыть окно настроек и запустить инструмент установки каталогов?"
 
 #: u_translation.rsclusterandne
 msgid "Cluster and nebula"
@@ -2640,6 +2640,10 @@ msgstr "Приращение яркости"
 msgid "Increment time"
 msgstr "Шаг вперёд"
 
+#: u_translation.rsindex
+msgid "Index"
+msgstr ""
+
 #: u_translation.rsindicatehere
 msgid "Indicate here how to compute the required values from the data stored in the catalog text file."
 msgstr "Укажите здесь, как вычислить нужную величину из данных, размещённых в текстовом файле каталога."
@@ -2724,15 +2728,15 @@ msgstr "Неудачное включение! %s"
 
 #: u_translation.rsinstall
 msgid "Install"
-msgstr ""
+msgstr "Установить"
 
 #: u_translation.rsinstalled
 msgid "Installed"
-msgstr ""
+msgstr "Установлено"
 
 #: u_translation.rsinstalling
 msgid "Installing"
-msgstr ""
+msgstr "Установка"
 
 #: u_translation.rsinstallnewve
 #, object-pascal-format
@@ -2741,7 +2745,7 @@ msgstr ""
 
 #: u_translation.rsinstallobjec
 msgid "Install object catalog"
-msgstr ""
+msgstr "Установить каталог объектов"
 
 #: u_translation.rsinternet
 msgid "Internet"
@@ -2967,10 +2971,6 @@ msgstr "Предельная звёздная величина:"
 #: u_translation.rslimitingsize
 msgid "Limiting size (arcminutes):"
 msgstr "Предельный угловой размер (минут, '):"
-
-#: u_translation.rslimitthenumb
-msgid "Limit the number of level 3 faint stars"
-msgstr "Ограничить количество слабых звёзд"
 
 #: u_translation.rsline1
 msgid "Line"
@@ -3856,7 +3856,7 @@ msgstr "Открыть карту"
 
 #: u_translation.rsopencatalogs
 msgid "Open Catalog Setup"
-msgstr ""
+msgstr "Открыть настройки каталогов"
 
 #: u_translation.rsopencluster
 msgid "Open cluster"
@@ -4500,7 +4500,7 @@ msgstr "Обновление, мс"
 
 #: u_translation.rsrefreshtheli
 msgid "Refresh the list"
-msgstr ""
+msgstr "Обновить список"
 
 #: u_translation.rsreleasenotes
 msgid "Release notes"
@@ -4897,7 +4897,7 @@ msgstr "Выбрать скрипт"
 
 #: u_translation.rsselectthecat
 msgid "Select the catalog to install or remove"
-msgstr ""
+msgstr "Выберите каталог для установки или удаления"
 
 #: u_translation.rsselectthefie
 msgid "Select the fields to use and their position in the text file"
@@ -5411,6 +5411,10 @@ msgstr "Звезда"
 msgid "Star and nebula limit"
 msgstr "Предел звёзд и туманностей"
 
+#: u_translation.rsstarcatalogi
+msgid "Star catalog index"
+msgstr ""
+
 #: u_translation.rsstarcolourbv
 msgid "Star colour (B-V):"
 msgstr "Цвет звёзд (B-V) :"
@@ -5477,7 +5481,7 @@ msgstr "Начало объекта"
 
 #: u_translation.rsstatus
 msgid "Status"
-msgstr ""
+msgstr "Состояние"
 
 #: u_translation.rsstatusbar
 msgid "Status bar"
@@ -5729,6 +5733,10 @@ msgstr "TLE загружен"
 msgid "to"
 msgstr "до"
 
+#: u_translation.rstoconfiguret
+msgid "To configure the catalog details"
+msgstr ""
+
 #: u_translation.rstoday
 msgid "Today"
 msgstr "Сегодня"
@@ -5920,7 +5928,7 @@ msgstr "Отменить последнее изменение"
 
 #: u_translation.rsuninstall
 msgid "Uninstall"
-msgstr ""
+msgstr "Удалить"
 
 #: u_translation.rsunits
 msgid "Units"
@@ -6043,6 +6051,11 @@ msgstr "Использовать системное время"
 msgid "Use TCP/IP server"
 msgstr "Использовать TCP/IP сервер"
 
+#: u_translation.rsusethebutton
+#, object-pascal-format
+msgid "Use the button below or the menu \"%s/%s\" to install a double and variable star catalog"
+msgstr ""
+
 #: u_translation.rsusetheintern
 msgid "Use the internal INDI gui panel"
 msgstr "Использовать внутреннюю панель интерфейса INDI"
@@ -6051,16 +6064,6 @@ msgstr "Использовать внутреннюю панель интерф�
 #, object-pascal-format
 msgid "Use the menu or button \"%s\" to configure this driver."
 msgstr "Используйте меню или кнопку «%s» для настройки этого драйвера."
-
-#: u_translation.rsusethemenut2
-#, object-pascal-format
-msgid "Use the menu \"%s/%s\" to install a double star catalog"
-msgstr ""
-
-#: u_translation.rsusethemenuto
-#, object-pascal-format
-msgid "Use the menu \"%s/%s\" to install a variable star catalog"
-msgstr ""
 
 #: u_translation.rsusetheproper
 msgid "Use the proper motion to correct the position for the given epoch"
