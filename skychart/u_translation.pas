@@ -1607,6 +1607,7 @@ resourcestring
   rsInstallAddit = 'Install additional DSO catalog for the objects you want to observe';
   rsInstallPictu = 'Install pictures for this DSO catalog';
   rsInstallEphem = 'Install ephemeris data to improve the computation of solar system objects';
+  rsInstallSpeci = 'Specialized catalog for specific use';
   rsSpecializedD = 'Specialized data';
 
 // also update upsi_translation

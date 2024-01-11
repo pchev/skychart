@@ -6186,3 +6186,35 @@ msgstr ""
 msgid "To configure the catalog details"
 msgstr ""
 
+#: u_translation:rsinstallstarc
+msgid "Install more stars down to the lowest required magnitude"
+msgstr ""
+
+#: u_translation:rsinstalloneof
+msgid "Install one of the variable star catalog, depending on your interest and instrumentation"
+msgstr ""
+
+#: u_translation:rsinstalloneof2
+msgid "Install one of the double star catalog, depending on your interest and instrumentation"
+msgstr ""
+
+#: u_translation:rsinstalladdit
+msgid "Install additional DSO catalog for the objects you want to observe"
+msgstr ""
+
+#: u_translation:rsinstallpictu
+msgid "Install pictures for this DSO catalog"
+msgstr ""
+
+#: u_translation:rsinstallephem
+msgid "Install ephemeris data to improve the computation of solar system objects"
+msgstr ""
+
+#: u_translation:rsinstallspeci
+msgid "Specialized catalog for specific use"
+msgstr ""
+
+#: u_translation:rsspecializedd
+msgid "Specialized data"
+msgstr ""
+

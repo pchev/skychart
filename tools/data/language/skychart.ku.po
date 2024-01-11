@@ -6,14 +6,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: skychart\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2024-01-10 12:57+0000\n"
+"POT-Creation-Date: 2024-01-11 17:15+0000\n"
 "PO-Revision-Date: 2017-07-01 21:44+0000\n"
 "Last-Translator: Rokar ✌ <Unknown>\n"
 "Language-Team: Kurdish <ku@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2024-01-10 13:12+0000\n"
+"X-Launchpad-Export-Date: 2024-01-11 17:28+0000\n"
 "X-Generator: Launchpad (build e1eeab5b20e19239bd7d5f36676f7a52988db88b)\n"
 
 #: u_translation.rs102cddss
@@ -2733,8 +2733,16 @@ msgstr ""
 msgid "Install"
 msgstr ""
 
+#: u_translation.rsinstalladdit
+msgid "Install additional DSO catalog for the objects you want to observe"
+msgstr ""
+
 #: u_translation.rsinstalled
 msgid "Installed"
+msgstr ""
+
+#: u_translation.rsinstallephem
+msgid "Install ephemeris data to improve the computation of solar system objects"
 msgstr ""
 
 #: u_translation.rsinstalling
@@ -2748,6 +2756,26 @@ msgstr ""
 
 #: u_translation.rsinstallobjec
 msgid "Install object catalog"
+msgstr ""
+
+#: u_translation.rsinstalloneof
+msgid "Install one of the variable star catalog, depending on your interest and instrumentation"
+msgstr ""
+
+#: u_translation.rsinstalloneof2
+msgid "Install one of the double star catalog, depending on your interest and instrumentation"
+msgstr ""
+
+#: u_translation.rsinstallpictu
+msgid "Install pictures for this DSO catalog"
+msgstr ""
+
+#: u_translation.rsinstallspeci
+msgid "Specialized catalog for specific use"
+msgstr ""
+
+#: u_translation.rsinstallstarc
+msgid "Install more stars down to the lowest required magnitude"
 msgstr ""
 
 #: u_translation.rsinternet
@@ -5356,6 +5384,10 @@ msgstr "Başûr"
 
 #: u_translation.rsspacer
 msgid "Spacer"
+msgstr ""
+
+#: u_translation.rsspecializedd
+msgid "Specialized data"
 msgstr ""
 
 #: u_translation.rsspectralclas

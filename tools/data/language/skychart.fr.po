@@ -5,14 +5,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: skychart.fr\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-01-10 12:57+0000\n"
-"PO-Revision-Date: 2024-01-10 13:09+0000\n"
+"POT-Creation-Date: 2024-01-11 17:15+0000\n"
+"PO-Revision-Date: 2024-01-11 17:26+0000\n"
 "Last-Translator: Patrick Chevalley <Unknown>\n"
 "Language-Team: French <kde-i18n-doc@kde.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2024-01-10 13:12+0000\n"
+"X-Launchpad-Export-Date: 2024-01-11 17:28+0000\n"
 "X-Generator: Launchpad (build e1eeab5b20e19239bd7d5f36676f7a52988db88b)\n"
 "Language: fr\n"
 
@@ -2733,9 +2733,17 @@ msgstr "Erreur d'insertion ! %s"
 msgid "Install"
 msgstr "Installer"
 
+#: u_translation.rsinstalladdit
+msgid "Install additional DSO catalog for the objects you want to observe"
+msgstr "Installer des catalogues de nébuleuses supplémentaires pour les objets que vous voulez observer"
+
 #: u_translation.rsinstalled
 msgid "Installed"
 msgstr "Installé"
+
+#: u_translation.rsinstallephem
+msgid "Install ephemeris data to improve the computation of solar system objects"
+msgstr "Installer des données d'éphémérides pour améliorer le calcul des objets du système solaire"
 
 #: u_translation.rsinstalling
 msgid "Installing"
@@ -2749,6 +2757,26 @@ msgstr "Installer la nouvelle version %s en remplacement de %s"
 #: u_translation.rsinstallobjec
 msgid "Install object catalog"
 msgstr "Installer des catalogues d'objets"
+
+#: u_translation.rsinstalloneof
+msgid "Install one of the variable star catalog, depending on your interest and instrumentation"
+msgstr "Installer un des catalogues d'étoile variable, selon l’intérêt et l'instrument d'observation"
+
+#: u_translation.rsinstalloneof2
+msgid "Install one of the double star catalog, depending on your interest and instrumentation"
+msgstr "Installer un des catalogues d'étoile double, selon l’intérêt et l'instrument d'observation"
+
+#: u_translation.rsinstallpictu
+msgid "Install pictures for this DSO catalog"
+msgstr "Installer des images pour ces catalogues de nébuleuses"
+
+#: u_translation.rsinstallspeci
+msgid "Specialized catalog for specific use"
+msgstr "Catalogues spécialisés pour une utilisation spécifique"
+
+#: u_translation.rsinstallstarc
+msgid "Install more stars down to the lowest required magnitude"
+msgstr "Installer plus d'étoiles jusqu'à la magnitude la plus faible indiquée"
 
 #: u_translation.rsinternet
 msgid "Internet"
@@ -5357,6 +5385,10 @@ msgstr "Sud"
 #: u_translation.rsspacer
 msgid "Spacer"
 msgstr "Espace"
+
+#: u_translation.rsspecializedd
+msgid "Specialized data"
+msgstr "Données spécialisées"
 
 #: u_translation.rsspectralclas
 msgid "Spectral class"

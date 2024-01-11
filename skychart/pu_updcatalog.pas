@@ -320,6 +320,7 @@ begin
     3 : LabelInfo.Caption:=rsInstallAddit;
     4 : LabelInfo.Caption:=rsInstallPictu;
     5 : LabelInfo.Caption:=rsInstallEphem;
+    6 : LabelInfo.Caption:=rsInstallSpeci;
   end;
 end;
 
