@@ -50,6 +50,7 @@ type
     ButtonRefresh: TButton;
     ButtonClose: TButton;
     ButtonAbort: TButton;
+    GridExpert: TStringGrid;
     GridKernel: TStringGrid;
     GridPicture: TStringGrid;
     GridVar: TStringGrid;
@@ -66,6 +67,7 @@ type
     PanelDownload: TPanel;
     ProgressBar1: TProgressBar;
     ProgressCat: TLabel;
+    TabSheetExpert: TTabSheet;
     TabSheetKernel: TTabSheet;
     TabSheetPicture: TTabSheet;
     TabSheetStar: TTabSheet;
@@ -230,6 +232,7 @@ begin
   TabSheetDSO.Caption:=rsNebulae;
   TabSheetPicture.Caption:=rsDSOCatalogPi;
   TabSheetKernel.Caption:=rsSolarSystem;
+  TabSheetExpert.Caption:=rsSpecializedD;
   GridStar.Columns[1].Title.Caption:=rsStatus;
   GridStar.Columns[2].Title.Caption:=rsCatalog;
   GridStar.Columns[3].Title.Caption:=rsDescription;
@@ -260,6 +263,11 @@ begin
   GridKernel.Columns[3].Title.Caption:=rsDescription;
   GridKernel.Columns[4].Title.Caption:=rsSize;
   GridKernel.Columns[5].Title.Caption:=rsInfo;
+  GridExpert.Columns[1].Title.Caption:=rsStatus;
+  GridExpert.Columns[2].Title.Caption:=rsCatalog;
+  GridExpert.Columns[3].Title.Caption:=rsDescription;
+  GridExpert.Columns[4].Title.Caption:=rsSize;
+  GridExpert.Columns[5].Title.Caption:=rsInfo;
   Label1.Caption := rsToConfigureT+':';
   ButtonSetup.Caption:=rsOpenCatalogS;
   ButtonAbort.Caption:=rsAbort;
@@ -290,6 +298,7 @@ begin
   ClearGrid(GridDSO);
   ClearGrid(GridPicture);
   ClearGrid(GridKernel);
+  ClearGrid(GridExpert);
 end;
 
 procedure Tf_updcatalog.ButtonCloseClick(Sender: TObject);
@@ -338,6 +347,7 @@ begin
   ClearGrid(GridDSO);
   ClearGrid(GridPicture);
   ClearGrid(GridKernel);
+  ClearGrid(GridExpert);
   row := Tstringlist.Create;
   fn := slash(PrivateCatalogDir)+'catalog_list.txt';
   if FileExists(fn) then begin
@@ -356,6 +366,7 @@ begin
       else if row[0]='dso' then grid:=GridDSO
       else if row[0]='picture' then grid:=GridPicture
       else if row[0]='kernel' then grid:=GridKernel
+      else if row[0]='expert' then grid:=GridExpert
       else continue;
       info:=TCatInfo.Create(row);
       info.SearchInstalled(PrivateCatalogDir);
@@ -376,6 +387,7 @@ begin
     ShowStatus(GridDSO);
     ShowStatus(GridPicture);
     ShowStatus(GridKernel);
+    ShowStatus(GridExpert);
   end;
 end;
 
