@@ -806,7 +806,7 @@ end else if cattype=ctText then begin
     if FileTIsOpen then CloseRegion;
 end;
 OpenFile(nomfich,ok);
-if onCache and (CacheZone[CurCache,s]=0) then FillCache;
+if ok and onCache and (CacheZone[CurCache,s]=0) then FillCache;
 CurCacheRec:=-1;
 end;
 
