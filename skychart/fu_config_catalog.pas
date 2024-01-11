@@ -79,6 +79,12 @@ type
     Label95: TLabel;
     Panel1: TPanel;
     Panel2: TPanel;
+    Panel3: TPanel;
+    Panel4: TPanel;
+    Panel5: TPanel;
+    Panel6: TPanel;
+    Panel7: TPanel;
+    Panel8: TPanel;
     rc33: TDirectoryEdit;
     RC3box: TCheckBox;
     sac3: TDirectoryEdit;
