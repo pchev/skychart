@@ -441,7 +441,10 @@ begin
       end;
       dl.ConfirmDownload := False;
       dl.QuickCancel := FileExists(fn);
-      dl.URL := URL_CATALOG_LIST;
+      if cdcbeta then
+        dl.URL := URL_CATALOG_LIST_BETA
+      else
+        dl.URL := URL_CATALOG_LIST;
       dl.SaveToFile := fn;
       result:=dl.Execute;
       txt:=dl.ResponseText;
