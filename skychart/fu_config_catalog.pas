@@ -42,7 +42,6 @@ type
     addobj: TButton;
     addcat: TButton;
     bsc3: TDirectoryEdit;
-    BSCbox: TCheckBox;
     Button1: TButton;
     ButtonInstallCat: TButton;
     Button5: TButton;
@@ -74,7 +73,6 @@ type
     Label122: TLabel;
     Label21: TLabel;
     Label7: TLabel;
-    Label90: TLabel;
     Label92: TLabel;
     Label95: TLabel;
     Panel1: TPanel;
@@ -137,7 +135,6 @@ type
     Label121: TLabel;
     Label4: TLabel;
     Label6: TLabel;
-    Label89: TLabel;
     Label96: TLabel;
     LabelDownload: TLabel;
     sh23: TDirectoryEdit;
@@ -372,8 +369,7 @@ begin
   Label17.Caption := rsMax2;
   Label27.Caption := rsFilesPath;
   Label18.Caption := rsStars;
-  label99.Caption := rsIndex+' SAO, BD, HD, GC';
-  BSCbox.Caption := rsStarCatalogI;
+  label99.Caption := rsStarCatalogI+' SAO, BD, HD, GC';
   Label19.Caption := rsVariables;
   LabelNewCat.Caption:=Format(rsUseTheButton, [rsUpdate1, rsInstallObjec]);
   Label20.Caption := rsDoubles;
@@ -744,7 +740,6 @@ procedure Tf_config_catalog.ShowCDCStar;
 begin
   defbox.Checked := ccat.StarCatDef[DefStar - BaseStar];
   GAIAbox.Checked := ccat.StarCatDef[gaia - BaseStar];
-  bscbox.Checked := ccat.StarCatDef[starindex - BaseStar];
   skybox.Checked := ccat.StarCatDef[sky2000 - BaseStar];
   tycbox.Checked := ccat.StarCatDef[tyc - BaseStar];
   ty2box.Checked := ccat.StarCatDef[tyc2 - BaseStar];

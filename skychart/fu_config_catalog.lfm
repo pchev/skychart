@@ -111,16 +111,6 @@ object f_config_catalog: Tf_config_catalog
           ParentColor = False
           ParentFont = False
         end
-        object Label89: TLabel
-          Left = 69
-          Height = 18
-          Top = 92
-          Width = 21
-          Caption = 'pm'
-          Constraints.MaxHeight = 28
-          ParentColor = False
-          ParentFont = False
-        end
         object DefBox: TCheckBox
           Tag = 1
           Left = 93
@@ -184,16 +174,6 @@ object f_config_catalog: Tf_config_catalog
           ParentFont = False
           TabOrder = 3
           OnChange = CDCStarPathChange
-        end
-        object Label90: TLabel
-          Left = 69
-          Height = 18
-          Top = 139
-          Width = 21
-          Caption = 'pm'
-          Constraints.MaxHeight = 28
-          ParentColor = False
-          ParentFont = False
         end
         object GAIABox: TCheckBox
           Tag = 19
@@ -288,25 +268,8 @@ object f_config_catalog: Tf_config_catalog
             WordWrap = True
           end
         end
-        object BSCbox: TCheckBox
-          Tag = 16
-          AnchorSideTop.Side = asrCenter
-          Left = 93
-          Height = 22
-          Top = 248
-          Width = 138
-          HelpContext = 100
-          Caption = 'Star catalog index'
-          Constraints.MaxHeight = 28
-          OnClick = CDCStarSelClick
-          ParentFont = False
-          ParentShowHint = False
-          ShowHint = True
-          TabOrder = 10
-        end
         object bsc3: TDirectoryEdit
           Tag = 16
-          AnchorSideTop.Control = BSCbox
           AnchorSideTop.Side = asrCenter
           Left = 269
           Height = 28
@@ -319,14 +282,14 @@ object f_config_catalog: Tf_config_catalog
           NumGlyphs = 1
           MaxLength = 0
           ParentFont = False
-          TabOrder = 11
+          TabOrder = 10
           OnChange = CDCStarPathChange
         end
         object Label99: TLabel
           Left = 8
-          Height = 61
+          Height = 46
           Top = 250
-          Width = 81
+          Width = 249
           AutoSize = False
           Caption = 'Indexes SAO BD HD GC'
           ParentColor = False

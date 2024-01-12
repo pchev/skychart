@@ -1598,7 +1598,6 @@ resourcestring
   rsRefreshTheLi = 'Refresh the list';
   rsUseTheButton = 'Use the button below or the menu "%s/%s" to install a double and variable star catalog';
   rsOpenCatalogS = 'Open Catalog Setup';
-  rsIndex = 'Index';
   rsStarCatalogI = 'Star catalog index';
   rsToConfigureT = 'To configure the catalog details';
   rsInstallStarC = 'Install more stars down to the lowest required magnitude';
