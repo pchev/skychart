@@ -863,6 +863,7 @@ begin
     ProgressBar1.Visible:=false;
     PanelDownload.Visible:=false;
   end;
+  if Assigned(FSaveConfig) then FSaveConfig(self);
 end;
 
 procedure Tf_updcatalog.ButtonSetupClick(Sender: TObject);
