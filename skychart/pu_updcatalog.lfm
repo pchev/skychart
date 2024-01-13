@@ -29,6 +29,7 @@ object f_updcatalog: Tf_updcatalog
       Caption = 'Refresh the list'
       OnClick = ButtonRefreshClick
       TabOrder = 0
+      Visible = False
     end
   end
   object Panel2: TPanel
