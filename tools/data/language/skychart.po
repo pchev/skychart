@@ -6174,10 +6174,6 @@ msgstr ""
 msgid "Open Catalog Setup"
 msgstr ""
 
-#: u_translation:rsindex
-msgid "Index"
-msgstr ""
-
 #: u_translation:rsstarcatalogi
 msgid "Star catalog index"
 msgstr ""

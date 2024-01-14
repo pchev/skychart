@@ -6,14 +6,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: skychart\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2024-01-11 17:15+0000\n"
-"PO-Revision-Date: 2023-09-05 03:00+0000\n"
+"POT-Creation-Date: 2024-01-12 19:57+0000\n"
+"PO-Revision-Date: 2024-01-12 01:37+0000\n"
 "Last-Translator: Worachate Boonplod <Unknown>\n"
 "Language-Team: Thai <th@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2024-01-11 17:28+0000\n"
+"X-Launchpad-Export-Date: 2024-01-14 16:28+0000\n"
 "X-Generator: Launchpad (build e1eeab5b20e19239bd7d5f36676f7a52988db88b)\n"
 
 #: u_translation.rs102cddss
@@ -963,7 +963,7 @@ msgstr "ปิดแฟ้ม"
 
 #: u_translation.rsclosethesetu
 msgid "Close the Setup window and launch the catalog installer tool?"
-msgstr ""
+msgstr "ปิดหน้าต่างการติดตั้งและเปิดใช้งานเครื่องมือติดตั้งบัญชีวัตถุ?"
 
 #: u_translation.rsclusterandne
 msgid "Cluster and nebula"
@@ -1823,7 +1823,7 @@ msgstr "วาดเส้นขอบฟ้าตามมุมก้มปร
 
 #: u_translation.rsdrawtheposit
 msgid "Draw the position of the pole between the following years"
-msgstr ""
+msgstr "วาดตำแหน่งของขั้วระหว่างปีต่อไปนี้"
 
 #: u_translation.rsdrift
 msgid "Yearly drift"
@@ -2643,10 +2643,6 @@ msgstr "การเพิ่มขึ้นของดาวสว่าง"
 msgid "Increment time"
 msgstr "เพิ่มเวลา"
 
-#: u_translation.rsindex
-msgid "Index"
-msgstr ""
-
 #: u_translation.rsindicatehere
 msgid "Indicate here how to compute the required values from the data stored in the catalog text file."
 msgstr "อธิบายวิธีการคำนวณค่าที่ต้องใช้จากบัญชีซึ่งเก็บข้อมูลในรูปของแฟ้มตัวอักษร"
@@ -2731,52 +2727,52 @@ msgstr "การแทรกล้มเหลว! %s"
 
 #: u_translation.rsinstall
 msgid "Install"
-msgstr ""
+msgstr "ติดตั้ง"
 
 #: u_translation.rsinstalladdit
 msgid "Install additional DSO catalog for the objects you want to observe"
-msgstr ""
+msgstr "ติดตั้งบัญชีวัตถุห้วงลึกเพิ่มเติมสำหรับวัตถุที่คุณต้องการจะสังเกต"
 
 #: u_translation.rsinstalled
 msgid "Installed"
-msgstr ""
+msgstr "ติดตั้งแล้ว"
 
 #: u_translation.rsinstallephem
 msgid "Install ephemeris data to improve the computation of solar system objects"
-msgstr ""
+msgstr "ติดตั้งข้อมูลอิเฟเมอริสเพื่อปรับปรุงการคำนวณตำแหน่งวัตถุในระบบสุริยะ"
 
 #: u_translation.rsinstalling
 msgid "Installing"
-msgstr ""
+msgstr "กำลังติดตั้ง"
 
 #: u_translation.rsinstallnewve
 #, object-pascal-format
 msgid "Install new version %s over %s"
-msgstr ""
+msgstr "ติดตั้งรุ่น %s ทับรุ่น %s"
 
 #: u_translation.rsinstallobjec
 msgid "Install object catalog"
-msgstr ""
+msgstr "ติดตั้งบัญชีวัตถุ"
 
 #: u_translation.rsinstalloneof
 msgid "Install one of the variable star catalog, depending on your interest and instrumentation"
-msgstr ""
+msgstr "ติดตั้งบัญชีดาวแปรแสง โดยขึ้นกับความสนใจและอุปกรณ์ของคุณ"
 
 #: u_translation.rsinstalloneof2
 msgid "Install one of the double star catalog, depending on your interest and instrumentation"
-msgstr ""
+msgstr "ติดตั้งบัญชีดาวคู่ โดยขึ้นกับความสนใจและอุปกรณ์ของคุณ"
 
 #: u_translation.rsinstallpictu
 msgid "Install pictures for this DSO catalog"
-msgstr ""
+msgstr "ติดตั้งรูปภาพสำหรับบัญชีวัตถุท้องฟ้าห้วงลึกนี้"
 
 #: u_translation.rsinstallspeci
 msgid "Specialized catalog for specific use"
-msgstr ""
+msgstr "บัญชีเฉพาะสำหรับการใช้ที่เจาะจง"
 
 #: u_translation.rsinstallstarc
 msgid "Install more stars down to the lowest required magnitude"
-msgstr ""
+msgstr "ติดตั้งดาวฤกษ์มากขึ้นถึงโชติมาตรจางที่สุดที่จำเป็นต้องใช้"
 
 #: u_translation.rsinternet
 msgid "Internet"
@@ -2901,7 +2897,7 @@ msgstr "ป้ายชื่อ"
 
 #: u_translation.rslabelevery
 msgid "Label every"
-msgstr ""
+msgstr "แสดงทุก"
 
 #: u_translation.rslabelobject
 msgid "Label object"
@@ -3415,7 +3411,7 @@ msgstr "เส้นอื่น ๆ"
 
 #: u_translation.rsmissingprere
 msgid "Missing prerequisites"
-msgstr ""
+msgstr "ไม่มีสิ่งที่จำเป็น"
 
 #: u_translation.rsmissingscrip
 msgid "Missing script title!"
@@ -3887,7 +3883,7 @@ msgstr "เปิดแผนที่"
 
 #: u_translation.rsopencatalogs
 msgid "Open Catalog Setup"
-msgstr ""
+msgstr "เปิดการตั้งค่าบัญชี"
 
 #: u_translation.rsopencluster
 msgid "Open cluster"
@@ -4168,7 +4164,7 @@ msgstr "มุมเอียงของขั้ว"
 
 #: u_translation.rspoleprecessi
 msgid "Pole precession"
-msgstr ""
+msgstr "การหมุนควงของขั้ว"
 
 #: u_translation.rsport
 msgid "Port:"
@@ -4531,7 +4527,7 @@ msgstr "อัตรารีเฟรช"
 
 #: u_translation.rsrefreshtheli
 msgid "Refresh the list"
-msgstr ""
+msgstr "เรียกรายชื่อใหม่"
 
 #: u_translation.rsreleasenotes
 msgid "Release notes"
@@ -4928,7 +4924,7 @@ msgstr "เลือกสคริปต์"
 
 #: u_translation.rsselectthecat
 msgid "Select the catalog to install or remove"
-msgstr ""
+msgstr "เลือกบัญชีเพื่อติดตั้งหรือถอน"
 
 #: u_translation.rsselectthefie
 msgid "Select the fields to use and their position in the text file"
@@ -5388,7 +5384,7 @@ msgstr "ช่องว่าง"
 
 #: u_translation.rsspecializedd
 msgid "Specialized data"
-msgstr ""
+msgstr "ข้อมูลเฉพาะ"
 
 #: u_translation.rsspectralclas
 msgid "Spectral class"
@@ -5448,7 +5444,7 @@ msgstr "ขีดจำกัดดาวฤกษ์และเนบิวล
 
 #: u_translation.rsstarcatalogi
 msgid "Star catalog index"
-msgstr ""
+msgstr "ดัชนีบัญชีดาวฤกษ์"
 
 #: u_translation.rsstarcolourbv
 msgid "Star colour (B-V):"
@@ -5516,7 +5512,7 @@ msgstr "จุดเริ่มต้นของวัตถุ"
 
 #: u_translation.rsstatus
 msgid "Status"
-msgstr ""
+msgstr "สถานะ"
 
 #: u_translation.rsstatusbar
 msgid "Status bar"
@@ -5770,7 +5766,7 @@ msgstr "ถึง"
 
 #: u_translation.rstoconfiguret
 msgid "To configure the catalog details"
-msgstr ""
+msgstr "เพื่อปรับแต่งรายละเอียดของบัญชี"
 
 #: u_translation.rstoday
 msgid "Today"
@@ -5963,7 +5959,7 @@ msgstr "ยกเลิกการเปลี่ยนแปลงล่าส
 
 #: u_translation.rsuninstall
 msgid "Uninstall"
-msgstr ""
+msgstr "ถอนการติดตั้ง"
 
 #: u_translation.rsunits
 msgid "Units"
@@ -6089,7 +6085,7 @@ msgstr "ใช้เซิร์ฟเวอร์ TCP/IP"
 #: u_translation.rsusethebutton
 #, object-pascal-format
 msgid "Use the button below or the menu \"%s/%s\" to install a double and variable star catalog"
-msgstr ""
+msgstr "ใช้ปุ่มด้านล่างหรือรายการเลือก \"%s/%s\" เพื่อติดตั้งบัญชีดาวคู่และดาวแปรแสง"
 
 #: u_translation.rsusetheintern
 msgid "Use the internal INDI gui panel"

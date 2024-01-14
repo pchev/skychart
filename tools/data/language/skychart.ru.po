@@ -2,14 +2,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: skychart.ru\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-01-11 17:15+0000\n"
+"POT-Creation-Date: 2024-01-12 19:57+0000\n"
 "PO-Revision-Date: 2024-01-09 09:28+0000\n"
 "Last-Translator: Aleksey Kabanov <Unknown>\n"
 "Language-Team: Zaporozhye Astronomical Club Altair <astroclub@ua.fm, http://astroclub.zp.ua>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2024-01-11 17:28+0000\n"
+"X-Launchpad-Export-Date: 2024-01-14 16:28+0000\n"
 "X-Generator: Launchpad (build e1eeab5b20e19239bd7d5f36676f7a52988db88b)\n"
 "Language: ru_UA\n"
 
@@ -2639,10 +2639,6 @@ msgstr "Приращение яркости"
 #: u_translation.rsincrementtim
 msgid "Increment time"
 msgstr "Шаг вперёд"
-
-#: u_translation.rsindex
-msgid "Index"
-msgstr ""
 
 #: u_translation.rsindicatehere
 msgid "Indicate here how to compute the required values from the data stored in the catalog text file."
