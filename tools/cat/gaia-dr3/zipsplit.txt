@@ -1,0 +1,10 @@
+# split the big zip in 1GB slice
+zipsplit -n 1073741824 GDR3p3s.zip
+
+# put the header in the last slice
+unzip GDR3p3s1.zip gaia/gaia3/gaia.hdr
+zip -d GDR3p3s1.zip gaia/gaia3/gaia.hdr
+zip GDR3p3s8.zip gaia/gaia3/gaia.hdr
+
+# create the download list
+md5sum GDR3p3s*.zip > GaiaDR3_3.list

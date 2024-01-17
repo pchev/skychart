@@ -25,7 +25,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 interface
 
 uses u_constant, u_util, u_translation, UScaleDPI, downloaddialog, cu_calceph,
-  cu_httpdownload, u_unzip, cu_catalog, FileUtil, cu_database, cu_planet,
+  cu_httpdownload, u_unzip, cu_catalog, FileUtil, cu_database, cu_planet, md5,
   Classes, SysUtils, Forms, Controls, Graphics, Dialogs, ExtCtrls, Grids, ComCtrls, StdCtrls, Types;
 
 type
@@ -97,6 +97,8 @@ type
     InstallInfo: TCatInfo;
     httpdownload: THTTPBigDownload;
     FRunning: boolean;
+    flist,flistsum: TStringList;
+    flistpos: integer;
     procedure ClearGrid(g:TStringGrid);
     procedure LoadCatalogList;
     function UpdateList(ForceDownload: boolean; out txt: string): boolean;
@@ -104,9 +106,14 @@ type
     procedure InstallDlg(info: TCatInfo);
     procedure UninstallDlg(info: TCatInfo);
     procedure Install(info: TCatInfo);
+    procedure InstallOne(info: TCatInfo);
+    procedure InstallList(info: TCatInfo);
+    procedure DownloadList;
+    procedure DownloadListComplete;
     procedure Uninstall(info: TCatInfo);
     procedure ShowProgress;
     procedure DownloadComplete;
+    procedure ActivateCatalog;
     procedure DownloadError;
     procedure UnzipProgress(Sender : TObject);
   public
@@ -281,6 +288,7 @@ begin
   SetLang;
   PageControl1.ActivePageIndex:=0;
   LabelInfo.Caption:=rsInstallStarC;
+  ButtonRefresh.Visible:=true;
 end;
 
 procedure Tf_updcatalog.FormShow(Sender: TObject);
@@ -622,16 +630,25 @@ begin
 end;
 
 procedure Tf_updcatalog.Install(info: TCatInfo);
-var fn,ext: string;
+var ext: string;
 begin
-  if Info.catnum<>3 then begin
-    ext := LowerCase(ExtractFileExt(info.url));
-    if ext<>'.zip' then begin
-      ShowMessage('Catalog file download is '+ext+', only .zip is supported');
-      EndInstallTimer.Enabled:=true;
-      Exit;
-    end;
+  ext := LowerCase(ExtractFileExt(info.url));
+  if (Info.catnum=3) or (ext='.zip') then begin
+    InstallOne(info);
+  end
+  else if ext='.list' then begin
+    InstallList(info);
+  end
+  else begin
+    ShowMessage('Catalog file download is '+ext+', only .zip is supported');
+    EndInstallTimer.Enabled:=true;
+    Exit;
   end;
+end;
+
+procedure Tf_updcatalog.InstallOne(info: TCatInfo);
+var fn: string;
+begin
   httpdownload:=THTTPBigDownload.Create(true);
   if Fcmain.HttpProxy then
   begin
@@ -682,114 +699,18 @@ begin
 end;
 
 procedure Tf_updcatalog.DownloadComplete;
-var f: textfile;
-    fn: string;
-    i,j: integer;
+var fn: string;
 begin
 try
   ButtonAbort.Visible:=false;
   fn:=httpdownload.filename;
   if httpdownload.HttpResult and FileExists(fn) then
   begin
+     u_unzip.ProgressIndex:=0;
      if (InstallInfo.catnum=3) or FileUnzipWithPath(PChar(fn), PChar(PrivateCatalogDir), @UnzipProgress) then
      begin
-        AssignFile(f,slash(PrivateCatalogDir)+slash(InstallInfo.path)+InstallInfo.catname+'_version.txt');
-        Rewrite(f);
-        WriteLn(f,InstallInfo.version);
-        CloseFile(f);
+        ActivateCatalog;
         if (InstallInfo.catnum<>3) then DeleteFile(fn);
-
-        if InstallInfo.catnum>BaseStar then begin      // standard catalog
-          if InstallInfo.cattype='star' then
-          begin
-            Fcatalog.cfgcat.starcatpath[InstallInfo.catnum - BaseStar] := slash(PrivateCatalogDir)+slash(InstallInfo.path);
-            Fcatalog.cfgcat.starcatdef[InstallInfo.catnum - BaseStar] := true;
-            Fcatalog.cfgcat.starcatfield[InstallInfo.catnum - BaseStar, 1] := InstallInfo.minlevel;
-            Fcatalog.cfgcat.starcatfield[InstallInfo.catnum - BaseStar, 2] := InstallInfo.maxlevel;
-            if InstallInfo.catnum=gaia then begin
-              Fcatalog.cfgcat.GaiaLevel:=1;
-              Fcatalog.cfgcat.LimitGaiaCount:=false;
-            end;
-          end
-          else if InstallInfo.cattype='double star' then
-          begin
-            Fcatalog.cfgcat.dblstarcatpath[InstallInfo.catnum - BaseDbl] := slash(PrivateCatalogDir)+slash(InstallInfo.path);
-            Fcatalog.cfgcat.dblstarcatdef[InstallInfo.catnum - BaseDbl] := true;
-            Fcatalog.cfgcat.dblstarcatfield[InstallInfo.catnum - BaseDbl, 1] := InstallInfo.minlevel;
-            Fcatalog.cfgcat.dblstarcatfield[InstallInfo.catnum - BaseDbl, 2] := InstallInfo.maxlevel;
-          end
-          else if InstallInfo.cattype='variable star' then
-          begin
-            Fcatalog.cfgcat.varstarcatpath[InstallInfo.catnum - BaseVar] := slash(PrivateCatalogDir)+slash(InstallInfo.path);
-            Fcatalog.cfgcat.varstarcatdef[InstallInfo.catnum - BaseVar] := true;
-            Fcatalog.cfgcat.varstarcatfield[InstallInfo.catnum - BaseVar, 1] := InstallInfo.minlevel;
-            Fcatalog.cfgcat.varstarcatfield[InstallInfo.catnum - BaseVar, 2] := InstallInfo.maxlevel;
-          end
-          else if InstallInfo.cattype='dso' then
-          begin
-            Fcatalog.cfgcat.nebcatpath[InstallInfo.catnum - BaseNeb] := slash(PrivateCatalogDir)+slash(InstallInfo.path);
-            Fcatalog.cfgcat.nebcatdef[InstallInfo.catnum - BaseNeb] := true;
-            Fcatalog.cfgcat.nebcatfield[InstallInfo.catnum - BaseNeb, 1] := InstallInfo.minlevel;
-            Fcatalog.cfgcat.nebcatfield[InstallInfo.catnum - BaseNeb, 2] := InstallInfo.maxlevel;
-          end;
-          if Assigned(FSaveConfig) then FSaveConfig(self);
-        end
-        else if InstallInfo.catnum=0 then  // Catgen catalog
-        begin
-          i := -1;
-          for j := 0 to Fcatalog.cfgcat.GCatNum - 1 do
-            if Fcatalog.cfgcat.GCatLst[j].shortname = trim(InstallInfo.shortname) then
-              i := j;
-          if i < 0 then
-          begin
-            Fcatalog.cfgcat.GCatNum := Fcatalog.cfgcat.GCatNum + 1;
-            SetLength(Fcatalog.cfgcat.GCatLst, Fcatalog.cfgcat.GCatNum);
-            i := Fcatalog.cfgcat.GCatNum - 1;
-          end;
-          Fcatalog.cfgcat.GCatLst[i].shortname := trim(InstallInfo.shortname);
-          Fcatalog.cfgcat.GCatLst[i].path := slash(PrivateCatalogDir)+slash(InstallInfo.path);
-          Fcatalog.cfgcat.GCatLst[i].min := InstallInfo.minlevel;
-          Fcatalog.cfgcat.GCatLst[i].max := InstallInfo.maxlevel;
-          Fcatalog.cfgcat.GCatLst[i].Actif := true;
-          Fcatalog.cfgcat.GCatLst[i].magmax := 0;
-          Fcatalog.cfgcat.GCatLst[i].Name := '';
-          Fcatalog.cfgcat.GCatLst[i].cattype := 0;
-          Fcatalog.cfgcat.GCatLst[i].ForceColor := False;
-          Fcatalog.cfgcat.GCatLst[i].col := 0;
-          if not Fcatalog.GetInfo(Fcatalog.cfgcat.GCatLst[i].path,
-            Fcatalog.cfgcat.GCatLst[i].shortname, Fcatalog.cfgcat.GCatLst[i].magmax,
-            Fcatalog.cfgcat.GCatLst[i].cattype, Fcatalog.cfgcat.GCatLst[i].version,
-            Fcatalog.cfgcat.GCatLst[i].Name) then
-            Fcatalog.cfgcat.GCatLst[i].Actif := False;
-          if Assigned(FSaveConfig) then FSaveConfig(self);
-        end
-        else if InstallInfo.catnum=1 then  // Pictures
-        begin
-          if InstallInfo.cattype='picture' then
-          begin
-            ProgressCat.Visible:=true;
-            ProgressBar1.Visible:=true;
-            cmain.ImagePath:=slash(PrivateCatalogDir)+'pictures';
-            Fcdb.ScanImagesDirectory(cmain.ImagePath, ProgressCat, ProgressBar1);
-            ProgressCat.Visible:=false;
-            ProgressBar1.Visible:=false;
-          end;
-          if Assigned(FSaveConfig) then FSaveConfig(self);
-        end
-        else if InstallInfo.catnum=2 then  // spice kernel
-        begin
-          if InstallInfo.cattype='kernel' then
-          begin
-            Load_Calceph_Files;
-          end;
-        end
-        else if InstallInfo.catnum=3 then  // JPL ephemeris
-        begin
-          if InstallInfo.cattype='kernel' then
-          begin
-            Fplanet.load_de(MaxInt); // clear current file in cache
-          end;
-        end;
      end
      else begin
        ShowMessage('Unzip error : '+fn);
@@ -804,10 +725,114 @@ finally
 end;
 end;
 
+procedure Tf_updcatalog.ActivateCatalog;
+var f: textfile;
+    i,j: integer;
+begin
+  AssignFile(f,slash(PrivateCatalogDir)+slash(InstallInfo.path)+InstallInfo.catname+'_version.txt');
+  Rewrite(f);
+  WriteLn(f,InstallInfo.version);
+  CloseFile(f);
+
+  if InstallInfo.catnum>BaseStar then begin      // standard catalog
+    if InstallInfo.cattype='star' then
+    begin
+      Fcatalog.cfgcat.starcatpath[InstallInfo.catnum - BaseStar] := slash(PrivateCatalogDir)+slash(InstallInfo.path);
+      Fcatalog.cfgcat.starcatdef[InstallInfo.catnum - BaseStar] := true;
+      Fcatalog.cfgcat.starcatfield[InstallInfo.catnum - BaseStar, 1] := InstallInfo.minlevel;
+      Fcatalog.cfgcat.starcatfield[InstallInfo.catnum - BaseStar, 2] := InstallInfo.maxlevel;
+      if InstallInfo.catnum=gaia then begin
+        Fcatalog.cfgcat.GaiaLevel:=1;
+        Fcatalog.cfgcat.LimitGaiaCount:=false;
+      end;
+    end
+    else if InstallInfo.cattype='double star' then
+    begin
+      Fcatalog.cfgcat.dblstarcatpath[InstallInfo.catnum - BaseDbl] := slash(PrivateCatalogDir)+slash(InstallInfo.path);
+      Fcatalog.cfgcat.dblstarcatdef[InstallInfo.catnum - BaseDbl] := true;
+      Fcatalog.cfgcat.dblstarcatfield[InstallInfo.catnum - BaseDbl, 1] := InstallInfo.minlevel;
+      Fcatalog.cfgcat.dblstarcatfield[InstallInfo.catnum - BaseDbl, 2] := InstallInfo.maxlevel;
+    end
+    else if InstallInfo.cattype='variable star' then
+    begin
+      Fcatalog.cfgcat.varstarcatpath[InstallInfo.catnum - BaseVar] := slash(PrivateCatalogDir)+slash(InstallInfo.path);
+      Fcatalog.cfgcat.varstarcatdef[InstallInfo.catnum - BaseVar] := true;
+      Fcatalog.cfgcat.varstarcatfield[InstallInfo.catnum - BaseVar, 1] := InstallInfo.minlevel;
+      Fcatalog.cfgcat.varstarcatfield[InstallInfo.catnum - BaseVar, 2] := InstallInfo.maxlevel;
+    end
+    else if InstallInfo.cattype='dso' then
+    begin
+      Fcatalog.cfgcat.nebcatpath[InstallInfo.catnum - BaseNeb] := slash(PrivateCatalogDir)+slash(InstallInfo.path);
+      Fcatalog.cfgcat.nebcatdef[InstallInfo.catnum - BaseNeb] := true;
+      Fcatalog.cfgcat.nebcatfield[InstallInfo.catnum - BaseNeb, 1] := InstallInfo.minlevel;
+      Fcatalog.cfgcat.nebcatfield[InstallInfo.catnum - BaseNeb, 2] := InstallInfo.maxlevel;
+    end;
+    if Assigned(FSaveConfig) then FSaveConfig(self);
+  end
+  else if InstallInfo.catnum=0 then  // Catgen catalog
+  begin
+    i := -1;
+    for j := 0 to Fcatalog.cfgcat.GCatNum - 1 do
+      if Fcatalog.cfgcat.GCatLst[j].shortname = trim(InstallInfo.shortname) then
+        i := j;
+    if i < 0 then
+    begin
+      Fcatalog.cfgcat.GCatNum := Fcatalog.cfgcat.GCatNum + 1;
+      SetLength(Fcatalog.cfgcat.GCatLst, Fcatalog.cfgcat.GCatNum);
+      i := Fcatalog.cfgcat.GCatNum - 1;
+    end;
+    Fcatalog.cfgcat.GCatLst[i].shortname := trim(InstallInfo.shortname);
+    Fcatalog.cfgcat.GCatLst[i].path := slash(PrivateCatalogDir)+slash(InstallInfo.path);
+    Fcatalog.cfgcat.GCatLst[i].min := InstallInfo.minlevel;
+    Fcatalog.cfgcat.GCatLst[i].max := InstallInfo.maxlevel;
+    Fcatalog.cfgcat.GCatLst[i].Actif := true;
+    Fcatalog.cfgcat.GCatLst[i].magmax := 0;
+    Fcatalog.cfgcat.GCatLst[i].Name := '';
+    Fcatalog.cfgcat.GCatLst[i].cattype := 0;
+    Fcatalog.cfgcat.GCatLst[i].ForceColor := False;
+    Fcatalog.cfgcat.GCatLst[i].col := 0;
+    if not Fcatalog.GetInfo(Fcatalog.cfgcat.GCatLst[i].path,
+      Fcatalog.cfgcat.GCatLst[i].shortname, Fcatalog.cfgcat.GCatLst[i].magmax,
+      Fcatalog.cfgcat.GCatLst[i].cattype, Fcatalog.cfgcat.GCatLst[i].version,
+      Fcatalog.cfgcat.GCatLst[i].Name) then
+      Fcatalog.cfgcat.GCatLst[i].Actif := False;
+    if Assigned(FSaveConfig) then FSaveConfig(self);
+  end
+  else if InstallInfo.catnum=1 then  // Pictures
+  begin
+    if InstallInfo.cattype='picture' then
+    begin
+      ProgressCat.Visible:=true;
+      ProgressBar1.Visible:=true;
+      cmain.ImagePath:=slash(PrivateCatalogDir)+'pictures';
+      Fcdb.ScanImagesDirectory(cmain.ImagePath, ProgressCat, ProgressBar1);
+      ProgressCat.Visible:=false;
+      ProgressBar1.Visible:=false;
+    end;
+    if Assigned(FSaveConfig) then FSaveConfig(self);
+  end
+  else if InstallInfo.catnum=2 then  // spice kernel
+  begin
+    if InstallInfo.cattype='kernel' then
+    begin
+      Load_Calceph_Files;
+    end;
+  end
+  else if InstallInfo.catnum=3 then  // JPL ephemeris
+  begin
+    if InstallInfo.cattype='kernel' then
+    begin
+      Fplanet.load_de(MaxInt); // clear current file in cache
+    end;
+  end;
+end;
+
 procedure Tf_updcatalog.DownloadError;
 begin
 try
  ShowMessage('Download error: '+httpdownload.HttpErr);
+ if flist<>nil then FreeAndNil(flist);
+ if flistsum<>nil then FreeAndNil(flistsum);
 finally
   EndInstallTimer.Enabled:=true;
 end;
@@ -822,6 +847,7 @@ begin
   ButtonClose.Enabled:=true;
   ButtonRefresh.Enabled:=true;
   ButtonSetup.Enabled:=true;
+  u_unzip.ProgressIndex:=0;
 end;
 
 procedure Tf_updcatalog.ButtonAbortClick(Sender: TObject);
@@ -871,6 +897,201 @@ begin
   if assigned(FOpenSetup) then FOpenSetup(self);
 end;
 
+procedure Tf_updcatalog.InstallList(info:TCatInfo);
+var
+  dl: TDownloadDialog;
+  f: TextFile;
+  fn,txt,buf: string;
+  row: TStringList;
+  ok: boolean;
+  i:integer;
+begin
+  fn := slash(TempDir)+'catalog.list';
+  DeleteFile(fn);
+  dl := TDownloadDialog.Create(self);
+  dl.ScaleDpi:=UScaleDPI.scale;
+  try
+    if Fcmain.HttpProxy then
+    begin
+      dl.SocksProxy := '';
+      dl.SocksType := '';
+      dl.HttpProxy := Fcmain.ProxyHost;
+      dl.HttpProxyPort := Fcmain.ProxyPort;
+      dl.HttpProxyUser := Fcmain.ProxyUser;
+      dl.HttpProxyPass := Fcmain.ProxyPass;
+    end
+    else if Fcmain.SocksProxy then
+    begin
+      dl.HttpProxy := '';
+      dl.SocksType := Fcmain.SocksType;
+      dl.SocksProxy := Fcmain.ProxyHost;
+      dl.HttpProxyPort := Fcmain.ProxyPort;
+      dl.HttpProxyUser := Fcmain.ProxyUser;
+      dl.HttpProxyPass := Fcmain.ProxyPass;
+    end
+    else
+    begin
+      dl.SocksProxy := '';
+      dl.SocksType := '';
+      dl.HttpProxy := '';
+      dl.HttpProxyPort := '';
+      dl.HttpProxyUser := '';
+      dl.HttpProxyPass := '';
+    end;
+    dl.ConfirmDownload := False;
+    dl.QuickCancel := false;
+    dl.URL:=info.url;
+    dl.SaveToFile := fn;
+    ok:=dl.Execute;
+    txt:=dl.ResponseText;
+  finally
+    dl.Free;
+  end;
+  if ok and FileExists(fn) then begin
+    flist:=TStringList.Create;
+    flistsum:=TStringList.Create;
+    row:=TStringList.Create;
+    AssignFile(f,fn);
+    Reset(f);
+    repeat
+      ReadLn(f,buf);
+      Splitarg(buf,' ',row);
+      if row.Count<>2 then continue;
+      i:=flist.Add(trim(row[1]));
+      i:=flistsum.Add(trim(row[0]));
+    until eof(f);
+    CloseFile(f);
+    row.Free;
+    i:=flist.count;
+    if flist.Count>0 then begin
+      flistpos:=0;
+      InstallInfo:=info;
+      DownloadList;
+    end
+    else begin
+      ShowMessage(rsError+': no file to download');
+      EndInstallTimer.Enabled:=true;
+    end;
+  end
+  else begin
+    ShowMessage(rsError+': '+txt);
+    EndInstallTimer.Enabled:=true;
+  end;
+end;
+
+procedure Tf_updcatalog.DownloadList;
+var fn,sum: string;
+begin
+try
+  httpdownload:=THTTPBigDownload.Create(true);
+  if Fcmain.HttpProxy then
+  begin
+    httpdownload.SocksProxy := '';
+    httpdownload.SocksType := '';
+    httpdownload.HttpProxy := Fcmain.ProxyHost;
+    httpdownload.HttpProxyPort := Fcmain.ProxyPort;
+    httpdownload.HttpProxyUser := Fcmain.ProxyUser;
+    httpdownload.HttpProxyPass := Fcmain.ProxyPass;
+  end
+  else if Fcmain.SocksProxy then
+  begin
+    httpdownload.HttpProxy := '';
+    httpdownload.SocksType := Fcmain.SocksType;
+    httpdownload.SocksProxy := Fcmain.ProxyHost;
+    httpdownload.HttpProxyPort := Fcmain.ProxyPort;
+    httpdownload.HttpProxyUser := Fcmain.ProxyUser;
+    httpdownload.HttpProxyPass := Fcmain.ProxyPass;
+  end
+  else
+  begin
+    httpdownload.SocksProxy := '';
+    httpdownload.SocksType := '';
+    httpdownload.HttpProxy := '';
+    httpdownload.HttpProxyPort := '';
+    httpdownload.HttpProxyUser := '';
+    httpdownload.HttpProxyPass := '';
+  end;
+  PanelDownload.Visible:=true;
+  LabelProgress.Caption:='';
+  repeat
+    fn:=slash(TempDir)+'catalog_'+inttostr(flistpos)+'.zip';
+    LabelAction.Caption:=rsInstalling+' '+InstallInfo.catname+', '+rsDownloadFile+' '+IntToStr(flistpos+1)+'/'+IntToStr(flist.Count)+' '+Ellipsis;
+    Application.ProcessMessages;
+    if (flistpos<flist.Count-1) and FileExists(fn) then begin
+      sum:=MD5Print(MD5File(fn));
+      if sum=flistsum[flistpos] then begin
+        inc(flistpos);
+        Continue;
+      end;
+    end;
+    break;
+  until false;
+  httpdownload.url:=ExtractFilePath(InstallInfo.url)+flist[flistpos];
+  httpdownload.filename:=fn;
+  httpdownload.onProgress:=@ShowProgress;
+  httpdownload.onDownloadComplete:=@DownloadListComplete;
+  httpdownload.onDownloadError:=@DownloadError;
+  ButtonAbort.Visible:=true;
+  httpdownload.Start;
+except
+  on E: Exception do begin
+    ShowMessage(rsError+': '+E.Message);
+    EndInstallTimer.Enabled:=true;
+  end;
+end;
+end;
+
+procedure Tf_updcatalog.DownloadListComplete;
+var fn: string;
+    i: integer;
+begin
+try
+    fn:=httpdownload.filename;
+    if httpdownload.HttpResult and FileExists(fn) then
+    begin
+      inc(flistpos);
+      if flistpos<flist.Count then begin
+        DownloadList;
+      end
+      else begin
+        ButtonAbort.Visible:=false;
+        u_unzip.ProgressIndex:=0;
+        for i:=0 to flist.Count-1 do begin
+          fn:=slash(TempDir)+'catalog_'+inttostr(i)+'.zip';
+          LabelAction.Caption:=rsInstalling+' '+InstallInfo.catname+', '+rsUnzipFile+' '+IntToStr(i+1)+'/'+IntToStr(flist.Count)+' '+Ellipsis;
+          if FileUnzipWithPath(PChar(fn), PChar(PrivateCatalogDir), @UnzipProgress) then begin
+            DeleteFile(fn);
+            u_unzip.ProgressIndex:=u_unzip.ProgressIndex+u_unzip.ProgressCount;
+          end
+          else begin
+            ShowMessage('Unzip error : '+fn);
+            EndInstallTimer.Enabled:=true;
+            exit;
+          end;
+        end;
+        try
+        ActivateCatalog;
+        finally
+          FreeAndNil(flist);
+          FreeAndNil(flistsum);
+          EndInstallTimer.Enabled:=true;
+        end;
+      end;
+    end
+    else
+    begin
+      FreeAndNil(flist);
+      FreeAndNil(flistsum);
+      ShowMessage('Download error: '+httpdownload.HttpErr);
+      EndInstallTimer.Enabled:=true;
+    end;
+except
+  on E: Exception do begin
+    ShowMessage(rsError+': '+E.Message);
+    EndInstallTimer.Enabled:=true;
+  end;
+end;
+end;
 
 end.
 

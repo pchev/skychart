@@ -1608,6 +1608,7 @@ resourcestring
   rsInstallEphem = 'Install ephemeris data to improve the computation of solar system objects';
   rsInstallSpeci = 'Specialized catalog for specific use';
   rsSpecializedD = 'Specialized data';
+  rsUnzipFile = 'Unzip file';
 
 // also update upsi_translation
 

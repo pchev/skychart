@@ -23,6 +23,8 @@ function FileUnzipAll(fnzip, TempDir: PChar): boolean;
 function FileUnzipWithPath(fnzip, TempDir: PChar; progress:TNotifyEvent=nil): boolean;
 
 var ProgressMessage: string;
+    ProgressCount: Integer;
+    ProgressIndex: Integer = 0;
 
 const
   CASESENSITIVITY = 0;
@@ -388,6 +390,7 @@ begin
   opt_extract_without_path := 0;
   opt_overwrite := 1;
   n := 0;
+  ProgressCount:=0;
 
   if unzGoToFirstFile(uf) = UNZ_OK then
   begin
@@ -399,19 +402,20 @@ begin
         Inc(n);
       ok := unzGoToNextFile(uf) = UNZ_OK;
       if (progress<>nil)and((n mod 100) = 0) then begin
-        ProgressMessage:=inttostr(n)+' files extracted...';
+        ProgressMessage:=inttostr(ProgressIndex+n)+' files extracted...';
         progress(nil);
       end;
     until not ok;
 
   end;
   Result := n > 0;
+  ProgressCount:=n;
   chdir(olddir);
   unzCloseCurrentFile(uf);
   unzClose(uf);
 
   if (progress<>nil) then begin
-    ProgressMessage:='Completed extraction of '+inttostr(n)+' files';
+    ProgressMessage:='Completed extraction of '+inttostr(ProgressIndex+n)+' files';
     progress(nil);
   end;
 
