@@ -96,7 +96,7 @@ type
     FSaveConfig, FOpenSetup: TNotifyEvent;
     InstallInfo: TCatInfo;
     httpdownload: THTTPBigDownload;
-    FRunning: boolean;
+    FRunning,FAbort: boolean;
     flist,flistsum: TStringList;
     flistpos: integer;
     procedure ClearGrid(g:TStringGrid);
@@ -118,6 +118,7 @@ type
     procedure UnzipProgress(Sender : TObject);
   public
     procedure SetLang;
+    procedure Abort;
     property Running: boolean read FRunning;
     property cmain: Tconf_main read Fcmain write Fcmain;
     property catalog: Tcatalog read Fcatalog write Fcatalog;
@@ -289,6 +290,8 @@ begin
   PageControl1.ActivePageIndex:=0;
   LabelInfo.Caption:=rsInstallStarC;
   ButtonRefresh.Visible:=true;
+  FAbort:=false;
+  FRunning:=false;
 end;
 
 procedure Tf_updcatalog.FormShow(Sender: TObject);
@@ -511,6 +514,7 @@ begin
     begin
       if FRunning then Exit;
       FRunning:=True;
+      FAbort:=false;
       ButtonClose.Enabled:=false;
       ButtonRefresh.Enabled:=false;
       ButtonSetup.Enabled:=false;
@@ -841,6 +845,8 @@ end;
 procedure Tf_updcatalog.EndInstallTimerTimer(Sender: TObject);
 begin
   EndInstallTimer.Enabled:=false;
+  if flist<>nil then FreeAndNil(flist);
+  if flistsum<>nil then FreeAndNil(flistsum);
   PanelDownload.Visible:=false;
   LoadCatalogList;
   FRunning:=False;
@@ -852,6 +858,12 @@ end;
 
 procedure Tf_updcatalog.ButtonAbortClick(Sender: TObject);
 begin
+  Abort;
+end;
+
+procedure Tf_updcatalog.Abort;
+begin
+  FAbort:=true;
   httpdownload.Abort;
 end;
 
@@ -1017,6 +1029,10 @@ try
     fn:=slash(TempDir)+'catalog_'+inttostr(flistpos)+'.zip';
     LabelAction.Caption:=rsInstalling+' '+InstallInfo.catname+', '+rsDownloadFile+' '+IntToStr(flistpos+1)+'/'+IntToStr(flist.Count)+' '+Ellipsis;
     Application.ProcessMessages;
+    if FAbort then begin
+      EndInstallTimer.Enabled:=true;
+      exit;
+    end;
     if (flistpos<flist.Count-1) and FileExists(fn) then begin
       sum:=MD5Print(MD5File(fn));
       if sum=flistsum[flistpos] then begin

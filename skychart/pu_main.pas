@@ -477,6 +477,7 @@ type
     procedure AnimationTimerTimer(Sender: TObject);
     procedure BlinkImageExecute(Sender: TObject);
     procedure FileRenameChartExecute(Sender: TObject);
+    procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
     procedure LockMagnitudeExecute(Sender: TObject);
     procedure MenuLockChartClick(Sender: TObject);
     procedure MDEditToolBar(Sender: TObject; Button: TMouseButton;
@@ -2086,6 +2087,20 @@ begin
          end;
       end;
     end;
+end;
+
+procedure Tf_main.FormCloseQuery(Sender: TObject; var CanClose: Boolean);
+begin
+   if (f_updcatalog<>nil) and f_updcatalog.Running then begin
+     if MessageDlg('Catalog installation is in progress.'+crlf+'Do you want to interrupt the download?',mtConfirmation,mbYesNo,0)=mrYes then begin
+       CanClose:=true;
+       f_updcatalog.Abort;
+     end
+     else
+       CanClose:=false
+   end
+   else
+     CanClose:=true;
 end;
 
 procedure Tf_main.PlanetInfoExecute(Sender: TObject);
