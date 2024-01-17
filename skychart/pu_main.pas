@@ -12245,6 +12245,7 @@ begin
      f_updcatalog.onSaveConfig := SaveCatalogConfig;
      f_updcatalog.onOpenSetup := OpenCatalogSetup;
   end;
+  if f_updcatalog.Running then exit;
   f_updcatalog.catalog:=catalog;
   f_updcatalog.cmain:=cfgm;
   f_updcatalog.cdb := cdcdb;
