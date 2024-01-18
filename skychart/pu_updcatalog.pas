@@ -289,7 +289,7 @@ begin
   SetLang;
   PageControl1.ActivePageIndex:=0;
   LabelInfo.Caption:=rsInstallStarC;
-  ButtonRefresh.Visible:=true;
+  ButtonRefresh.Visible:=false;
   FAbort:=false;
   FRunning:=false;
 end;
