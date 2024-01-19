@@ -145,7 +145,7 @@ var
   {$ENDIF}
   {$IFDEF WINDOWS}
   ip,mask: string;
-  ipb,maskb,br: DWord;
+  ipb,maskb,br: Integer;
   hasIP, hasMask: boolean;
   FSWbemLocator : OLEVariant;
   FWMIService   : OLEVariant;
@@ -474,11 +474,34 @@ var J: TAscomResult;
 begin
   J:=ManagementGet('http://'+srv.ip+':'+srv.port+'/management/v'+IntToStr(srv.apiversion)+'/description');
   try
-    d:=J.GetName('Value');
-    srv.servername:=GetInsensitivePath(d,'ServerName').AsString;
-    srv.manufacturer:=GetInsensitivePath(d,'Manufacturer').AsString;
-    srv.version:=GetInsensitivePath(d,'ManufacturerVersion').AsString;
-    srv.location:=GetInsensitivePath(d,'Location').AsString;
+    try
+      d:=J.GetName('Value');
+      try
+      srv.servername:=GetInsensitivePath(d,'ServerName').AsString;
+      except
+       srv.servername:='';
+      end;
+      try
+      srv.manufacturer:=GetInsensitivePath(d,'Manufacturer').AsString;
+      except
+       srv.manufacturer:='';
+      end;
+      try
+      srv.version:=GetInsensitivePath(d,'ManufacturerVersion').AsString;
+      except
+       srv.version:='';
+      end;
+      try
+      srv.location:=GetInsensitivePath(d,'Location').AsString;
+      except
+       srv.location:='';
+      end;
+    except
+     srv.servername:='';
+     srv.manufacturer:='';
+     srv.version:='';
+     srv.location:='';
+    end;
   finally
     J.Free;
   end;
