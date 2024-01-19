@@ -555,11 +555,18 @@ end;
 procedure TDiscoverThread.Execute;
 begin
   try
+  {$IFDEF WINDOWS}
+  CoInitialize(nil);
+  {$ENDIF}
   ServerList:=AlpacaDiscoverBlocking(port);
   finally
   working := False;
+  {$IFDEF WINDOWS}
+  CoUninitialize;
+  {$ENDIF}
   end;
 end;
+
 
 end.
 
