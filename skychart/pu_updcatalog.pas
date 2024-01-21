@@ -881,17 +881,20 @@ end;
 procedure Tf_updcatalog.Uninstall(info: TCatInfo);
 var dir: string;
 begin
+try
   if (trim(PrivateCatalogDir)='')or(trim(info.path)='') then exit;
   if (info.catnum=0)and(info.shortname<>'') then
     Fcatalog.removeGcat(info.shortname);
   dir:=slash(PrivateCatalogDir)+slash(info.path);
+  PanelDownload.Visible:=true;
+  LabelAction.Caption:=rsDelete+blank+dir;
+  Application.ProcessMessages;
   if not DeleteDirectory(dir,false) then begin
     ShowMessage('Error deleting '+dir);
     exit;
   end;
   if (info.catnum=1)and(info.cattype='picture') then
   begin
-    PanelDownload.Visible:=true;
     ProgressCat.Visible:=true;
     ProgressBar1.Visible:=true;
     Application.ProcessMessages;
@@ -899,9 +902,12 @@ begin
     Fcdb.ScanImagesDirectory(cmain.ImagePath, ProgressCat, ProgressBar1);
     ProgressCat.Visible:=false;
     ProgressBar1.Visible:=false;
-    PanelDownload.Visible:=false;
   end;
   if Assigned(FSaveConfig) then FSaveConfig(self);
+finally
+  LabelAction.Caption:='';
+  PanelDownload.Visible:=false;
+end;
 end;
 
 procedure Tf_updcatalog.ButtonSetupClick(Sender: TObject);
