@@ -2102,7 +2102,7 @@ begin
      a:=rmod(a + pi, pi2);
      aa:=round(a*rad2deg);
      if aa=360 then aa:=0;
-     if (aa>180)or(aa<0)or(aa>360) then exit;
+     if (aa>270)or(aa<0)or(aa>360) then exit;
      ch:=c.horizonlist[aa];
     end;
     hr:=rmod(hhr+24,24);
@@ -2138,7 +2138,7 @@ begin
      a:=rmod(a + pi, pi2);
      aa:=round(a*rad2deg);
      if aa=0 then aa:=360;
-     if (aa<180)or(aa<0)or(aa>360) then exit;
+     if (aa<90)or(aa<0)or(aa>360) then exit;
      ch:=c.horizonlist[aa];
     end;
     hs:=rmod(hhs+24,24);
