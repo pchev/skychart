@@ -3965,7 +3965,7 @@ var
   searchdir, fn, ImgCat,id: string;
   bmp: TBGRAbitmap;
   ipla, isat: integer;
-  i,ii, p, l, y, m, d, precision, idx: integer;
+  i,ii, pii, p, l, y, m, d, precision, idx: integer;
   isStar, isSolarSystem, isd2k, isvo, isOsr, isArtSat: boolean;
   ApparentValid, supconj: boolean;
   ra, Dec, q, a, h, ag, airm, hg, hr, ht, hs, hrl,hsl, azr, azs, al, j1, j2, j3, rar, der, rat,
@@ -4632,6 +4632,7 @@ begin
       tazs := LONmToStr(rad2deg * Azs);
     end;
     if sc.cfgsc.HorizonRise and (sc.cfgsc.HorizonMax > musec) then begin
+      pii:=i;
       if ObjRise(rar,der,sc.cfgsc,hrl,al,ii) then begin
          thr := rsLocalHorizon + blank + artostr3(rmod(hrl + 24, 24));
          tazr:=LONmToStr(rad2deg * al);
@@ -4642,6 +4643,7 @@ begin
          tazs:=LONmToStr(rad2deg * al);
          i:=ii;
       end;
+      if (pii=1) and (abs(hsl-hrl)<0.05) then i:=1; // detect circumpolar
     end;
     culmalt := 90 - sc.cfgsc.ObsLatitude + rad2deg * sc.cfgsc.FindDec;
     if culmalt > 90 then

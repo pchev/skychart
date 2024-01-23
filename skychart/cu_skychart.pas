@@ -4215,7 +4215,7 @@ var
   txt, thr, tht, ths, tazr, tazs: string;
   cjd0, ra, Dec, h, hr, ht, hs, azr, azs, j1, j2, j3, rar, der, rat, det, ras, des: double;
   hrl,hsl,al,lha: double;
-  i, ii, y, m, d: integer;
+  i, ii, pii, y, m, d: integer;
 begin
   lha:=-9999;
   if (cfgsc.Equinoxtype = 2) then
@@ -4258,6 +4258,7 @@ begin
       if lha>pi then lha:=lha-pi2;
     end;
     if cfgsc.HorizonRise and (cfgsc.HorizonMax > musec) then begin
+      pii:=i;
       if ObjRise(rar,der,cfgsc,hrl,al,ii) then begin
          thr := artostr3(rmod(hrl + 24, 24));
          tazr:=LONmToStr(rad2deg * al);
@@ -4268,6 +4269,7 @@ begin
          tazs:=LONmToStr(rad2deg * al);
          i:=ii;
       end;
+      if (pii=1) and (abs(hsl-hrl)<0.05) then i:=1;  // detect circumpolar
     end;
 
     txt := '';
