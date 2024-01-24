@@ -840,13 +840,16 @@ end;
 function Tcatalog.OpenNeb: boolean;
 begin
   numcat := MaxNebCatalog;
-  curcat := BaseNeb + 1;
-  while ((curcat - BaseNeb) <= numcat) and (not cfgcat.nebcaton[curcat - BaseNeb]) do
-    Inc(curcat);
-  if ((curcat - BaseNeb) > numcat) then
-    Result := False
-  else
-    Result := OpenNebCat;
+  curcat := BaseNeb;
+  repeat
+    inc(CurCat);
+    while ((curcat - BaseNeb) <= numcat) and (not cfgcat.nebcaton[curcat - BaseNeb]) do
+      Inc(curcat);
+    if ((curcat - BaseNeb) > numcat) then
+      Result := False
+    else
+      Result := OpenNebCat;
+  until Result or ((curcat - BaseNeb) > numcat);
 end;
 
 function Tcatalog.CloseNeb: boolean;
