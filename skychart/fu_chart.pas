@@ -289,7 +289,7 @@ type
     FPlanetInfo: TNotifyEvent;
     FSendCoordpointAtsky: TSendCoordpointAtsky;
     movefactor, zoomfactor: double;
-    xcursor, ycursor, skipmove, movecamnum, moveguidetype, moveguidenum: integer;
+    xcursor, ycursor, skipmove: integer;
     MovingCircle, FNightVision, StartCircle, lockkey, movecam, moveguide,
     frommovecam, printing: boolean;
     LockMouseWheel, lockblink: boolean;
@@ -1973,33 +1973,33 @@ begin
 end;
 
 procedure Tf_chart.MoveCamera(angle: single);
-var
+var i: integer;
   rot: single;
 begin
   rot := 0;
   if movecam then
   begin
-    sc.cfgsc.rectangle[movecamnum, 3] := sc.cfgsc.rectangle[movecamnum, 3] + angle;
-    sc.cfgsc.rectangle[movecamnum, 3] := rmod(sc.cfgsc.rectangle[movecamnum, 3] + 360, 360);
-    rot := sc.cfgsc.rectangle[movecamnum, 3];
+    for i := 1 to sc.cfgsc.nrectangle do
+      if sc.cfgsc.rectangleok[i] and (sc.cfgsc.rectangle[i, 4] = 0) then
+        begin
+          rot := rmod(sc.cfgsc.rectangle[i, 3] + angle + 360, 360);
+          sc.cfgsc.rectangle[i, 3] := rot;
+        end;
   end;
   if moveguide then
   begin
-    case moveguidetype of
-      0:
+    for i := 1 to sc.cfgsc.ncircle do
+      if sc.cfgsc.circleok[i] and (sc.cfgsc.circle[i, 3] > 0) then
       begin
-        sc.cfgsc.circle[moveguidenum, 2] := sc.cfgsc.circle[moveguidenum, 2] + angle;
-        sc.cfgsc.circle[moveguidenum, 2] := rmod(sc.cfgsc.circle[moveguidenum, 2] + 360, 360);
-        rot := sc.cfgsc.circle[moveguidenum, 2];
+        rot := rmod(sc.cfgsc.circle[i, 2] + angle + 360, 360);
+        sc.cfgsc.circle[i, 2] := rot;
       end;
-      1:
+    for i := 1 to sc.cfgsc.nrectangle do
+      if sc.cfgsc.rectangleok[i] and (sc.cfgsc.rectangle[i, 4] > 0) then
       begin
-        sc.cfgsc.rectangle[moveguidenum, 3] := sc.cfgsc.rectangle[moveguidenum, 3] + angle;
-        sc.cfgsc.rectangle[moveguidenum, 3] :=
-          rmod(sc.cfgsc.rectangle[moveguidenum, 3] + 360, 360);
-        rot := sc.cfgsc.rectangle[moveguidenum, 3];
+        rot := rmod(sc.cfgsc.rectangle[i, 3] + angle + 360, 360);
+        sc.cfgsc.rectangle[i, 3] := rot;
       end;
-    end;
   end;
   frommovecam := True;
   Refresh(True, False);
@@ -2009,7 +2009,7 @@ end;
 
 procedure Tf_chart.SetCameraRotation(cam: integer);
 var
-  size, maxsize: double;
+  camerafound: boolean;
   guiderfound: boolean;
   i: integer;
 begin
@@ -2034,45 +2034,32 @@ begin
       2: moveguide := True;
     end;
     if movecam then
-    begin // find main camera (max rectangle size with null offset)
-      maxsize := 0;
+    begin // is a main camera to move (rectangle with null offset)
+      camerafound := false;
       for i := 1 to sc.cfgsc.nrectangle do
         if sc.cfgsc.rectangleok[i] and (sc.cfgsc.rectangle[i, 4] = 0) then
         begin
-          size := sc.cfgsc.rectangle[i, 1] * sc.cfgsc.rectangle[i, 2];
-          if size > maxsize then
-          begin
-            maxsize := size;
-            movecamnum := i;
-          end;
+          camerafound := true;
+          sc.cfgsc.rectangle[i, 5] := 1;
         end;
-      if maxsize = 0 then
+      if not camerafound then
         movecam := False
-      else
-        sc.cfgsc.rectangle[movecamnum, 5] := 1;
     end;
     if moveguide then
-    begin // find first guider (first circle or rectangle with offset > 0)
+    begin // is a guider to move (circle or rectangle with offset > 0)
       guiderfound := False;
       for i := 1 to sc.cfgsc.ncircle do
         if sc.cfgsc.circleok[i] and (sc.cfgsc.circle[i, 3] > 0) then
         begin
           guiderfound := True;
-          moveguidenum := i;
-          moveguidetype := 0;
           sc.cfgsc.circle[i, 4] := 1;
-          break;
         end;
-      if not guiderfound then
-        for i := 1 to sc.cfgsc.nrectangle do
-          if sc.cfgsc.rectangleok[i] and (sc.cfgsc.rectangle[i, 4] > 0) then
-          begin
-            guiderfound := True;
-            moveguidenum := i;
-            moveguidetype := 1;
-            sc.cfgsc.rectangle[i, 5] := 1;
-            break;
-          end;
+      for i := 1 to sc.cfgsc.nrectangle do
+        if sc.cfgsc.rectangleok[i] and (sc.cfgsc.rectangle[i, 4] > 0) then
+        begin
+          guiderfound := True;
+          sc.cfgsc.rectangle[i, 5] := 1;
+        end;
       if not guiderfound then
         moveguide := False;
     end;
