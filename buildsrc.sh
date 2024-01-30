@@ -42,11 +42,6 @@ else
 fi
 cd $builddir
 
-# download jpleph
-cd $verdir/BaseData
-wget http://sourceforge.net/projects/skychart/files/4-source_data/data_jpleph.tgz
-cd $builddir
-
 # tar files
 tar cvJf $verdir.tar.xz $verdir
 
@@ -54,5 +49,4 @@ mv $verdir.tar.xz $wd/
 
 cd $wd
 rm -rf $builddir
-
 
