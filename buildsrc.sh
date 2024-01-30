@@ -18,7 +18,13 @@ cd $builddir
 if [[ $? -ne 0 ]]; then exit 1;fi
 
 # export sources
-svn export $repo/trunk $verdir
+#svn export $repo/trunk $verdir
+git clone --depth=1 $repo $verdir
+if [[ $? -ne 0 ]]; then exit 1;fi
+
+cd $verdir
+rm -rf .git .gitignore
+cd ..
 
 # revision include
 cat <<EOF > $verdir/skychart/revision.inc
