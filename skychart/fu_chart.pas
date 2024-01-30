@@ -7041,8 +7041,6 @@ end;
 procedure Tf_chart.MenuNewMosaicClick(Sender: TObject);
 var ra,de: double;
 begin
-  if MovingCircle or (sc.cfgsc.NumCircle >= MaxCircle) then
-    exit;
   GetAdXy(Xcursor, Ycursor, ra, de, sc.cfgsc);
   NewMosaic(ra,de,false);
 end;
@@ -7159,6 +7157,11 @@ procedure Tf_chart.NewMosaic(ra,de: double; resizechart: boolean);
 var i,n:integer;
     w: double;
 begin
+  // check incompatible option
+  if MovingCircle or (sc.cfgsc.NumCircle >= MaxCircle) then
+    exit;
+  if movecam or moveguide then
+    SetCameraRotation(0);
   // save current values
   ShowCircle := sc.cfgsc.ShowCircle;
   ncircle := sc.cfgsc.ncircle;
