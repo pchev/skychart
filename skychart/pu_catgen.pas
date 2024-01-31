@@ -2773,6 +2773,10 @@ end;
 {$endif}
 
 procedure Tf_catgen.BuildBinCat;
+var fn:string;
+    f: file;
+    n: integer;
+    ahdr: TFileHeader;
 begin
   Fprogress.onAbortClick := @ProgressAbort;
   Fprogress.progressbar1.max := 4;
@@ -2784,6 +2788,24 @@ begin
   Fprogress.Show;
   application.ProcessMessages;
   BuildHeader;
+  if OutputAppend.Checked then begin
+    fn:=destdir + lowercase(trim(catheader.ShortName)) + '.hdr';
+    if FileExists(fn) then begin
+      AssignFile(f,fn);
+      reset(f,1);
+      blockread(f,ahdr,sizeof(ahdr),n);
+      CloseFile(f);
+      if ahdr.version<>catheader.version then
+         raise exception.Create('Cannot append to catalog, version differ');
+      if ahdr.FileNum<>catheader.FileNum then
+         raise exception.Create('Cannot append to catalog, number of file differ');
+      if ahdr.reclen<>catheader.reclen then
+         raise exception.Create('Cannot append to catalog, record length differ, '+inttostr(catheader.reclen)+'/'+inttostr(ahdr.reclen));
+    end
+    else begin
+      raise exception.Create('Cannot append to non existing catalog '+fn);
+    end;
+  end;
   Fprogress.progressbar2.position := 1;
   Fprogress.invalidate;
   Fprogress.label1.Caption := rsCreateFiles;
