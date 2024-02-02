@@ -960,7 +960,6 @@ end;
 procedure Tpop_indi.StopMoveTimerTimer(Sender: TObject);
 begin
   StopMoveTimer.Enabled:=false;
-  ScopeAbortSlew;
   ScopeMoveAxis(0, '0');
   ScopeMoveAxis(1, '0');
   case FLastArrow of
