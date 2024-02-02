@@ -8139,6 +8139,7 @@ begin
         end;
         TelescopeTimer.Interval := 500;
         TelescopeTimer.Enabled := True;
+        Image1.Invalidate;
       end
       else
       begin
