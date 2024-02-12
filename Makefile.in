@@ -75,6 +75,8 @@ revision:
 else
 install: 
 	./install.sh $(PREFIX) $(CPU_TARGET)
+installdbg: 
+	./installdbg.sh $(PREFIX) $(CPU_TARGET)
 uninstall: 
 	./uninstall.sh $(PREFIX)
 install_win: 
