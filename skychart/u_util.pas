@@ -3845,6 +3845,12 @@ var
   k, p: integer;
   txt, c: string;
 begin
+  {$ifdef lclqt5}
+  exit;              // make repeated Alt key press to crash
+  {$endif}
+  {$ifdef lclcocoa}
+  exit;
+  {$endif}
 
   if level > MaxMenulevel then
     exit;
