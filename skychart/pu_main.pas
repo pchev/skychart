@@ -9592,9 +9592,9 @@ begin
   lsec := '"';
   {$ifdef lclqt5}
   accel := '';          // make repeated Alt key press to crash
-  {$elseif lclcocoa}
-  accel := '';
   {$else}
+  {$ifdef lclcocoa}
+  accel := '';
   {$else}
   accel := '&';
   {$endif}
