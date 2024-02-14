@@ -9598,6 +9598,7 @@ begin
   {$else}
   accel := '&';
   {$endif}
+  {$endif}
   // Tool bar
   ToolBarMain.Caption := rsMainBar;
   ToolBarObj.Caption := rsObjectBar;
