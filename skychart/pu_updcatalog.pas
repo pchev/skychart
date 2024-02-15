@@ -580,6 +580,7 @@ procedure Tf_updcatalog.GridDrawCell(Sender: TObject; aCol, aRow: Integer; aRect
 begin
   if (aCol=colinstall)and(aRow>0) then begin
     with sender as TStringGrid do begin
+     if Objects[colinstall,ARow] <> nil then
       with Objects[colinstall,ARow] as TCatInfo do begin
          if installed then begin
            if newversion then
