@@ -264,6 +264,7 @@ begin
   end
   else
   begin
+    try
     p := IpHtmlPanel1.VScrollPos;
     NewHTML := TSimpleIpHtml.Create;
     NewHTML.OnGetImageX := HTMLGetImageX;
@@ -276,6 +277,8 @@ begin
     begin
       IpHtmlPanel1.Update;
       IpHtmlPanel1.VScrollPos := p;
+    end;
+    except
     end;
   end;
 end;
