@@ -30,22 +30,18 @@ interface
 
 uses
   u_help, u_translation, u_util, u_constant, Clipbrd, UScaleDPI, LCLVersion,
-  LCLIntf, SysUtils, Classes, Graphics, Controls, Forms, LazUTF8, LazFileUtils, IpHtml,
+  LCLIntf, SysUtils, Classes, Graphics, Controls, Forms, LazUTF8, LazFileUtils, IpHtml, Ipfilebroker,
   Dialogs, StdCtrls, ComCtrls, ExtCtrls, Menus, StdActns, ActnList, LResources,
   Buttons, LazHelpHTML_fix, types;
 
 type
   Tstr1func = procedure(txt: string) of object;
 
-  TSimpleIpHtml = class(TIpHtml)
-  public
-    property OnGetImageX;
-  end;
-
   { Tf_detail }
 
   Tf_detail = class(TForm)
     EditCopy: TAction;
+    IpHtmlDataProvider1: TIpHtmlDataProvider;
     IpHtmlPanel1: TIpHtmlPanel;
     Memo1: TMemo;
     SelectAll: TAction;
@@ -72,6 +68,7 @@ type
     procedure Timer1Timer(Sender: TObject);
   private
     { Private declarations }
+    locktext: boolean;
     FCenter: Tstr1func;
     FNeighbor: Tstr1func;
     FHTMLText: string;
@@ -248,15 +245,18 @@ procedure Tf_detail.FormCreate(Sender: TObject);
 begin
   ScaleDPI(Self);
   FTextOnly := False;
+  locktext := False;
   SetLang;
 end;
 
 procedure Tf_detail.SetHTMLText(const Value: string);
 var
-  NewHTML: TSimpleIpHtml;
   sstream: TStringStream;
   p: integer;
 begin
+if locktext then exit;
+try
+  locktext := True;
   if FTextOnly then
   begin
     memo1.Clear;
@@ -265,14 +265,11 @@ begin
   else
   begin
     try
-    p := IpHtmlPanel1.VScrollPos;
-    NewHTML := TSimpleIpHtml.Create;
-    NewHTML.OnGetImageX := HTMLGetImageX;
-    sstream := TStringStream.Create(Value);
-    NewHTML.LoadFromStream(sstream);
-    sstream.Free;
+    p := IpHtmlPanel1.VScrollPos;  // save old position
     IpHtmlPanel1.DefaultFontSize := FHtmlFontSize;  // HTML font is already sized for DPI
-    IpHtmlPanel1.SetHtml(NewHTML);
+    sstream := TStringStream.Create(Value);
+    IpHtmlPanel1.SetHtmlFromStream(sstream);
+    sstream.Free;
     if FSameposition then
     begin
       IpHtmlPanel1.Update;
@@ -281,6 +278,9 @@ begin
     except
     end;
   end;
+finally
+ locktext := False;
+end;
 end;
 
 end.

@@ -11,8 +11,6 @@ object f_detail: Tf_detail
   OnKeyDown = FormKeyDown
   OnShow = FormShow
   ParentFont = True
-  LCLVersion = '1.6.2.0'
-  Visible = False
   object Memo1: TMemo
     Left = 0
     Height = 425
@@ -25,6 +23,29 @@ object f_detail: Tf_detail
     ReadOnly = True
     ScrollBars = ssAutoVertical
     TabOrder = 2
+  end
+  object IpHtmlPanel1: TIpHtmlPanel
+    Left = 0
+    Height = 425
+    Top = 36
+    Width = 393
+    Align = alClient
+    DataProvider = IpHtmlDataProvider1
+    FixedTypeface = 'Courier New'
+    DefaultTypeFace = 'default'
+    DefaultFontSize = 12
+    FlagErrors = False
+    PopupMenu = PopupMenu1
+    PrintSettings.MarginLeft = 0.5
+    PrintSettings.MarginTop = 0.5
+    PrintSettings.MarginRight = 0.5
+    PrintSettings.MarginBottom = 0.5
+    PrintSettings.Preview.Left = 480
+    PrintSettings.Preview.Top = 300
+    PrintSettings.Preview.Width = 1440
+    PrintSettings.Preview.Height = 900
+    TabOrder = 1
+    OnHotClick = IpHtmlPanel1HotClick
   end
   object Panel1: TPanel
     Left = 0
@@ -68,23 +89,9 @@ object f_detail: Tf_detail
       TabOrder = 1
     end
   end
-  object IpHtmlPanel1: TIpHtmlPanel
-    Left = 0
-    Height = 425
-    Top = 36
-    Width = 393
-    Align = alClient
-    FixedTypeface = 'Courier New'
-    DefaultTypeFace = 'default'
-    DefaultFontSize = 12
-    FlagErrors = False
-    PopupMenu = PopupMenu1
-    TabOrder = 1
-    OnHotClick = IpHtmlPanel1HotClick
-  end
   object ActionList1: TActionList
-    left = 72
-    top = 208
+    Left = 72
+    Top = 208
     object SelectAll: TAction
       Caption = 'SelectAll'
       OnExecute = SelectAllExecute
@@ -97,8 +104,8 @@ object f_detail: Tf_detail
     end
   end
   object PopupMenu1: TPopupMenu
-    left = 72
-    top = 144
+    Left = 72
+    Top = 144
     object SelectAll1: TMenuItem
       Action = SelectAll
       OnClick = SelectAllExecute
@@ -112,7 +119,12 @@ object f_detail: Tf_detail
     Enabled = False
     Interval = 100
     OnTimer = Timer1Timer
-    left = 207
-    top = 149
+    Left = 207
+    Top = 149
+  end
+  object IpHtmlDataProvider1: TIpHtmlDataProvider
+    OnGetImage = HTMLGetImageX
+    Left = 65
+    Top = 307
   end
 end
