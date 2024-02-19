@@ -422,8 +422,11 @@
         <IsPartOfProject Value="True"/>
       </Unit0>
       <Unit1>
-        <Filename Value="u_satellite.pas"/>
+        <Filename Value="pu_main.pas"/>
         <IsPartOfProject Value="True"/>
+        <ComponentName Value="f_main"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Form"/>
       </Unit1>
       <Unit2>
         <Filename Value="cu_database.pas"/>
@@ -692,11 +695,8 @@
         <ResourceBaseClass Value="Form"/>
       </Unit45>
       <Unit46>
-        <Filename Value="pu_main.pas"/>
+        <Filename Value="u_satellite.pas"/>
         <IsPartOfProject Value="True"/>
-        <ComponentName Value="f_main"/>
-        <HasResources Value="True"/>
-        <ResourceBaseClass Value="Form"/>
       </Unit46>
       <Unit47>
         <Filename Value="pu_observatory_db.pas"/>
