@@ -68,7 +68,7 @@ type
     procedure Timer1Timer(Sender: TObject);
   private
     { Private declarations }
-    locktext: boolean;
+    LockText, CanRetry: boolean;
     FCenter: Tstr1func;
     FNeighbor: Tstr1func;
     FHTMLText: string;
@@ -202,6 +202,7 @@ begin
   timer1.Enabled := True;  { fixed in cocoa }
   {$endif}
   {$endif}
+  CanRetry:=true;
   FSameposition := False;
   memo1.Visible := FTextOnly;
   IpHtmlPanel1.Visible := not FTextOnly;
@@ -245,7 +246,7 @@ procedure Tf_detail.FormCreate(Sender: TObject);
 begin
   ScaleDPI(Self);
   FTextOnly := False;
-  locktext := False;
+  LockText := False;
   SetLang;
 end;
 
@@ -254,9 +255,9 @@ var
   sstream: TStringStream;
   p: integer;
 begin
-if locktext then exit;
+if LockText then exit;
 try
-  locktext := True;
+  LockText := True;
   if FTextOnly then
   begin
     memo1.Clear;
@@ -264,10 +265,10 @@ try
   end
   else
   begin
+    sstream := TStringStream.Create(Value);
     try
     p := IpHtmlPanel1.VScrollPos;  // save old position
     IpHtmlPanel1.DefaultFontSize := FHtmlFontSize;  // HTML font is already sized for DPI
-    sstream := TStringStream.Create(Value);
     IpHtmlPanel1.SetHtmlFromStream(sstream);
     sstream.Free;
     if FSameposition then
@@ -275,11 +276,33 @@ try
       IpHtmlPanel1.Update;
       IpHtmlPanel1.VScrollPos := p;
     end;
+    CanRetry:=true;
     except
+      if CanRetry then begin
+        // uncorrectable error condition in IpHtmlPanel1, try to create a new one and retry.
+        IpHtmlPanel1 := TIpHtmlPanel.Create(self);
+        IpHtmlPanel1.Parent:=self;
+        IpHtmlPanel1.Align := alClient;
+        IpHtmlPanel1.DataProvider := IpHtmlDataProvider1;
+        IpHtmlPanel1.FixedTypeface := 'Courier New';
+        IpHtmlPanel1.DefaultTypeFace := 'default';
+        IpHtmlPanel1.DefaultFontSize := 12;
+        IpHtmlPanel1.FlagErrors := False;
+        IpHtmlPanel1.PopupMenu := PopupMenu1;
+        IpHtmlPanel1.TabOrder := 1;
+        IpHtmlPanel1.OnHotClick := IpHtmlPanel1HotClick;
+        Canretry:=False;
+        LockText := False;
+        SetHTMLText(Value);
+      end;
+      try
+       sstream.Free;
+      except
+      end;
     end;
   end;
 finally
- locktext := False;
+ LockText := False;
 end;
 end;
 
