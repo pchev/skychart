@@ -3928,7 +3928,6 @@ begin
         Fcatalog.GetAltName(rec, txt);
       cfgsc.FindId := txt;
       cfgsc.FindName := txt;
-      txt := rec.options.ShortName + b + txt;
       Desc := Desc + ' V*' + tab + txt + tab;
       if rec.variable.valid[vvMagmax] then
       begin
@@ -3985,7 +3984,6 @@ begin
         Fcatalog.GetAltName(rec, txt);
       cfgsc.FindId := txt;
       cfgsc.FindName := txt;
-      txt := rec.options.ShortName + b + txt;
       Desc := Desc + ' D*' + tab + txt + tab;
       if rec.double.valid[vdMag1] then
       begin
