@@ -1,13 +1,12 @@
 object f_info: Tf_info
   Left = 306
-  Height = 493
+  Height = 498
   Top = 162
-  Width = 711
+  Width = 718
   ActiveControl = TitlePanel
   Caption = 'Info'
-  ClientHeight = 493
-  ClientWidth = 711
-  DesignTimePPI = 95
+  ClientHeight = 498
+  ClientWidth = 718
   OnClose = FormClose
   OnCreate = FormCreate
   OnShow = FormShow
@@ -15,19 +14,19 @@ object f_info: Tf_info
   object Panel1: TPanel
     Left = 0
     Height = 35
-    Top = 458
-    Width = 711
+    Top = 463
+    Width = 718
     Align = alBottom
-    ClientHeight = 31
-    ClientWidth = 707
+    ClientHeight = 35
+    ClientWidth = 718
     FullRepaint = False
     ParentFont = False
     TabOrder = 1
     object Button1: TButton
-      Left = 626
+      Left = 636
       Height = 25
       Top = 1
-      Width = 74
+      Width = 75
       Anchors = [akTop, akRight]
       BorderSpacing.InnerBorder = 4
       Cancel = True
@@ -38,10 +37,10 @@ object f_info: Tf_info
       TabOrder = 1
     end
     object Button4: TButton
-      Left = 539
+      Left = 548
       Height = 25
       Top = 1
-      Width = 76
+      Width = 77
       Anchors = [akTop, akRight]
       Caption = 'Help'
       OnClick = Button4Click
@@ -53,7 +52,7 @@ object f_info: Tf_info
     Left = 0
     Height = 26
     Top = 0
-    Width = 711
+    Width = 718
     Align = alTop
     Alignment = taLeftJustify
     ParentFont = False
@@ -61,9 +60,9 @@ object f_info: Tf_info
   end
   object PageControl1: TPageControl
     Left = 0
-    Height = 432
+    Height = 437
     Top = 26
-    Width = 711
+    Width = 718
     ActivePage = TabSheet2
     Align = alClient
     ParentFont = False
@@ -71,32 +70,32 @@ object f_info: Tf_info
     TabOrder = 2
     object TabSheet1: TTabSheet
       Caption = 'TabSheet1'
-      ClientHeight = 428
-      ClientWidth = 707
+      ClientHeight = 402
+      ClientWidth = 714
       ParentFont = False
       object Page1: TPanel
         Left = 0
-        Height = 401
+        Height = 402
         Top = 0
-        Width = 701
+        Width = 714
         Align = alClient
-        ClientHeight = 397
-        ClientWidth = 697
+        ClientHeight = 402
+        ClientWidth = 714
         ParentFont = False
         TabOrder = 0
         object Panel2: TPanel
           Left = 1
           Height = 28
-          Top = 372
-          Width = 699
+          Top = 373
+          Width = 712
           Align = alBottom
-          ClientHeight = 24
-          ClientWidth = 695
+          ClientHeight = 28
+          ClientWidth = 712
           FullRepaint = False
           ParentFont = False
           TabOrder = 1
           object serverinfo: TLabel
-            Left = 683
+            Left = 700
             Height = 1
             Top = 6
             Width = 1
@@ -109,7 +108,7 @@ object f_info: Tf_info
             Left = 12
             Height = 25
             Top = 2
-            Width = 74
+            Width = 75
             BorderSpacing.InnerBorder = 4
             Caption = 'Refresh'
             OnClick = Button2Click
@@ -117,10 +116,10 @@ object f_info: Tf_info
             TabOrder = 0
           end
           object CheckBox1: TCheckBox
-            Left = 103
-            Height = 21
+            Left = 104
+            Height = 22
             Top = 2
-            Width = 99
+            Width = 104
             Caption = 'AutoRefresh'
             Checked = True
             OnClick = CheckBox1Click
@@ -131,12 +130,12 @@ object f_info: Tf_info
         end
         object StringGrid1: TStringGrid
           Left = 1
-          Height = 371
+          Height = 372
           Top = 1
-          Width = 699
+          Width = 712
           Align = alClient
           ColCount = 1
-          DefaultColWidth = 792
+          DefaultColWidth = 800
           FixedCols = 0
           FixedRows = 0
           GridLineWidth = 0
@@ -153,26 +152,26 @@ object f_info: Tf_info
     end
     object TabSheet2: TTabSheet
       Caption = 'TabSheet2'
-      ClientHeight = 428
-      ClientWidth = 707
+      ClientHeight = 402
+      ClientWidth = 714
       ParentFont = False
       object Page2: TPanel
         Left = 0
-        Height = 401
+        Height = 402
         Top = 0
-        Width = 701
+        Width = 714
         Align = alClient
-        ClientHeight = 397
-        ClientWidth = 697
+        ClientHeight = 402
+        ClientWidth = 714
         ParentFont = False
         TabOrder = 0
         object StringGrid2: TStringGrid
           Left = 1
-          Height = 372
+          Height = 373
           Top = 1
-          Width = 699
+          Width = 712
           Align = alClient
-          DefaultColWidth = 69
+          DefaultColWidth = 70
           FixedCols = 0
           FixedRows = 0
           HeaderHotZones = [gzNormal, gzFixedCols]
@@ -190,19 +189,19 @@ object f_info: Tf_info
         object Panel3: TPanel
           Left = 1
           Height = 27
-          Top = 373
-          Width = 699
+          Top = 374
+          Width = 712
           Align = alBottom
-          ClientHeight = 23
-          ClientWidth = 695
+          ClientHeight = 27
+          ClientWidth = 712
           FullRepaint = False
           ParentFont = False
           TabOrder = 0
           object Button3: TButton
-            Left = 450
+            Left = 464
             Height = 25
             Top = 1
-            Width = 74
+            Width = 75
             Anchors = [akTop, akRight]
             BorderSpacing.InnerBorder = 4
             Caption = 'Search'
@@ -211,10 +210,10 @@ object f_info: Tf_info
             TabOrder = 2
           end
           object Edit1: TEdit
-            Left = 363
+            Left = 376
             Height = 28
             Top = 0
-            Width = 84
+            Width = 85
             Anchors = [akTop, akRight]
             Constraints.MaxHeight = 28
             OnKeyUp = Edit1KeyUp
@@ -222,10 +221,10 @@ object f_info: Tf_info
             TabOrder = 1
           end
           object ButtonPrint: TButton
-            Left = 529
+            Left = 544
             Height = 25
             Top = 1
-            Width = 74
+            Width = 75
             Anchors = [akTop, akRight]
             BorderSpacing.InnerBorder = 4
             Caption = 'Print'
@@ -234,10 +233,10 @@ object f_info: Tf_info
             TabOrder = 3
           end
           object Button7: TButton
-            Left = 616
+            Left = 632
             Height = 25
             Top = 0
-            Width = 74
+            Width = 75
             Anchors = [akTop, akRight]
             BorderSpacing.InnerBorder = 4
             Caption = 'Save'
@@ -246,23 +245,23 @@ object f_info: Tf_info
             TabOrder = 4
           end
           object ComboBox1: TComboBox
-            Left = 260
+            Left = 272
             Height = 28
             Top = 0
-            Width = 95
+            Width = 96
             Anchors = [akTop, akRight]
             Constraints.MaxHeight = 28
-            ItemHeight = 0
+            ItemHeight = 18
             OnChange = ComboBox1Change
             ParentFont = False
             Style = csDropDownList
             TabOrder = 0
           end
           object SortLabel: TLabel
-            Left = 194
-            Height = 19
+            Left = 205
+            Height = 18
             Top = 6
-            Width = 57
+            Width = 58
             Alignment = taRightJustify
             Anchors = [akTop, akRight]
             Caption = 'SortLabel'
@@ -273,7 +272,7 @@ object f_info: Tf_info
             Left = 8
             Height = 25
             Top = 0
-            Width = 160
+            Width = 162
             Caption = 'Add to observing list'
             OnClick = Button5Click
             TabOrder = 5
@@ -283,24 +282,24 @@ object f_info: Tf_info
     end
     object TabSheet3: TTabSheet
       Caption = 'TabSheet3'
-      ClientHeight = 428
-      ClientWidth = 707
+      ClientHeight = 402
+      ClientWidth = 714
       ParentFont = False
       object Page3: TPanel
         Left = 0
-        Height = 401
+        Height = 402
         Top = 0
-        Width = 701
+        Width = 714
         Align = alClient
-        ClientHeight = 397
-        ClientWidth = 697
+        ClientHeight = 402
+        ClientWidth = 714
         ParentFont = False
         TabOrder = 0
         object ProgressMemo: TMemo
           Left = 1
-          Height = 399
+          Height = 400
           Top = 1
-          Width = 699
+          Width = 712
           Align = alClient
           ParentFont = False
           TabOrder = 0
@@ -309,24 +308,24 @@ object f_info: Tf_info
     end
     object TabSheet4: TTabSheet
       Caption = 'TabSheet4'
-      ClientHeight = 428
-      ClientWidth = 707
+      ClientHeight = 402
+      ClientWidth = 714
       ParentFont = False
       object Page4: TPanel
         Left = 0
-        Height = 401
+        Height = 402
         Top = 0
-        Width = 701
+        Width = 714
         Align = alClient
-        ClientHeight = 397
-        ClientWidth = 697
+        ClientHeight = 402
+        ClientWidth = 714
         ParentFont = False
         TabOrder = 0
         object InfoMemo: TMemo
           Left = 1
-          Height = 399
+          Height = 400
           Top = 1
-          Width = 699
+          Width = 712
           Align = alClient
           Color = clWindow
           Font.Color = clWindowText
@@ -341,8 +340,8 @@ object f_info: Tf_info
     end
   end
   object PopupMenu1: TPopupMenu
-    left = 16
-    top = 269
+    Left = 16
+    Top = 272
     object closeconnection: TMenuItem
       Caption = 'Close Connection'
       OnClick = closeconnectionClick
@@ -352,12 +351,12 @@ object f_info: Tf_info
     Enabled = False
     Interval = 2000
     OnTimer = Timer1Timer
-    left = 16
-    top = 55
+    Left = 16
+    Top = 56
   end
   object PopupMenu2: TPopupMenu
-    left = 16
-    top = 340
+    Left = 16
+    Top = 344
     object outslectionner1: TMenuItem
       Caption = '&Tout sélectionner'
       Hint = 'Tout sélectionner|Sélectionner l''intégralité du document'
@@ -375,7 +374,7 @@ object f_info: Tf_info
   object SaveDialog1: TSaveDialog
     FilterIndex = 0
     Options = [ofOverwritePrompt, ofHideReadOnly, ofExtensionDifferent, ofNoReadOnlyReturn, ofEnableSizing, ofViewDetail]
-    left = 24
-    top = 127
+    Left = 24
+    Top = 128
   end
 end

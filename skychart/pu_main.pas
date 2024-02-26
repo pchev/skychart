@@ -830,7 +830,7 @@ type
     function GetScopeRates(cname: string; arg: TStringList): string;
     procedure SendInfo(Sender: TObject; origin, str: string);
     function GenericSearch(cname, Num: string; var ar1, de1: double;
-      idresult: boolean = True; track: boolean = False): boolean;
+      idresult: boolean = True; track: boolean = False; gtype: string = ''): boolean;
     procedure ObsListSearch(obj: string; ra, de: double);
     procedure ObsListSlew(obj: string; ra, de: double);
     procedure GetObjectCoord(obj: string; var lbl: string; var ra, de: double);
@@ -10246,7 +10246,7 @@ begin
 end;
 
 function Tf_main.GenericSearch(cname, Num: string; var ar1, de1: double;
-  idresult: boolean = True; track: boolean = False): boolean;
+  idresult: boolean = True; track: boolean = False; gtype: string = ''): boolean;
 var
   ok: boolean;
   i: integer;
@@ -10291,18 +10291,22 @@ begin
       ok := catalog.SearchNebulae(Num, ar1, de1);
       if ok then
         goto findit;
-      // variable star
-      stype := 'V*';
-      itype := ftVar;
-      ok := catalog.SearchVarStar(Num, ar1, de1);
-      if ok then
-        goto findit;
-      // double star
-      stype := 'D*';
-      itype := ftDbl;
-      ok := catalog.SearchDblStar(Num, ar1, de1);
-      if ok then
-        goto findit;
+      if (gtype='') or (gtype='V*') then begin
+        // variable star
+        stype := 'V*';
+        itype := ftVar;
+        ok := catalog.SearchVarStar(Num, ar1, de1);
+        if ok then
+          goto findit;
+      end;
+      if (gtype='') or (gtype='D*') then begin
+        // double star
+        stype := 'D*';
+        itype := ftDbl;
+        ok := catalog.SearchDblStar(Num, ar1, de1);
+        if ok then
+          goto findit;
+      end;
       // star
       stype := '*';
       itype := ftStar;
@@ -11451,7 +11455,7 @@ begin
       if MultiFrame1.Childs[i].Caption = chart then
         with MultiFrame1.Childs[i].DockedObject as Tf_chart do
         begin
-          GenericSearch(chart,nm,ra,dec);
+          GenericSearch(chart,nm,ra,dec,true,false,cat);
           f_detail.Hide;
           identlabelClick(nil);
           UpdateBtn(sc.cfgsc.flipx, sc.cfgsc.flipy, Connect1.Checked,

@@ -378,7 +378,7 @@ begin
     Dec := strtofloat(s + copy(buf, 2, 2)) + strtofloat(s + copy(buf, 4 + length(ldeg), 2)) /
       60 + strtofloat(s + copy(buf, 6 + length(ldeg) + length(lmin), 4)) / 3600;
     nm := StringGrid2.Cells[4, Row];
-    cat := StringGrid2.Cells[0, Row];
+    cat := StringGrid2.Cells[3, Row];
     desc := '';
     for i := 1 to StringGrid2.ColCount - 1 do
     begin
