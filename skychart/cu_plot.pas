@@ -1106,13 +1106,13 @@ begin
     begin
       // external ellipse
       ds2 := trunc(ds / 2) + cfgchart.drawpen;
-      cbmp.EllipseAntialias(x, y, ds2, ds2, ColorToBGRA(cfgplot.Color[0]), cfgchart.DrawPen);
+      cbmp.EllipseAntialias(x, y, ds2, ds2, ColorToBGRA(cfgplot.Color[11]), cfgchart.DrawPen);
       // external ellipse outline
       ds2 := trunc(ds / 2);
-      cbmp.EllipseAntialias(x, y, ds2, ds2, ColorToBGRA(cfgplot.Color[11]), cfgchart.DrawPen);
+      cbmp.FillEllipseAntialias(x, y, ds2, ds2, ColorToBGRA(cfgplot.Color[0])); //, cfgchart.DrawPen);
       // internal ellipse
       ds2 := trunc(dsm / 2);
-      cbmp.EllipseAntialias(x, y, ds2, ds2, ColorToBGRA(cfgplot.Color[0]), cfgchart.DrawPen);
+      cbmp.EllipseAntialias(x, y, ds2, ds2, ColorToBGRA(cfgplot.Color[11]), cfgchart.DrawPen);
     end
     else
     if cnv <> nil then
