@@ -406,7 +406,7 @@ object f_config_catalog: Tf_config_catalog
           ParentFont = False
           TabOrder = 1
           object Label22: TLabel
-            Left = 16
+            Left = 8
             Height = 38
             Top = 12
             Width = 82
@@ -417,7 +417,7 @@ object f_config_catalog: Tf_config_catalog
             WordWrap = True
           end
           object Label23: TLabel
-            Left = 12
+            Left = 8
             Height = 38
             Top = 99
             Width = 84
@@ -428,7 +428,7 @@ object f_config_catalog: Tf_config_catalog
             WordWrap = True
           end
           object Label24: TLabel
-            Left = 12
+            Left = 8
             Height = 44
             Top = 148
             Width = 84
@@ -439,7 +439,7 @@ object f_config_catalog: Tf_config_catalog
             WordWrap = True
           end
           object Label25: TLabel
-            Left = 12
+            Left = 8
             Height = 38
             Top = 197
             Width = 83
@@ -450,7 +450,7 @@ object f_config_catalog: Tf_config_catalog
             WordWrap = True
           end
           object Label26: TLabel
-            Left = 12
+            Left = 8
             Height = 38
             Top = 245
             Width = 84
@@ -1781,11 +1781,11 @@ object f_config_catalog: Tf_config_catalog
         end
         object GroupBox2: TGroupBox
           Left = 16
-          Height = 121
+          Height = 134
           Top = 218
           Width = 463
           Caption = 'HNSKY'
-          ClientHeight = 91
+          ClientHeight = 104
           ClientWidth = 459
           ParentFont = False
           TabOrder = 1
@@ -1936,7 +1936,7 @@ object f_config_catalog: Tf_config_catalog
           ParentFont = False
         end
         object Label91: TLabel
-          Left = 9
+          Left = 8
           Height = 59
           Top = 88
           Width = 81
@@ -1959,7 +1959,7 @@ object f_config_catalog: Tf_config_catalog
         end
         object TYCbox: TCheckBox
           Tag = 3
-          Left = 93
+          Left = 94
           Height = 22
           Hint = 'The Tycho Catalogue (ESA 1997)'
           Top = 121
@@ -1974,7 +1974,7 @@ object f_config_catalog: Tf_config_catalog
         end
         object Ftyc1: TLongEdit
           Tag = 3
-          Left = 289
+          Left = 288
           Height = 28
           Hint = '0..10'
           Top = 121
@@ -1990,7 +1990,7 @@ object f_config_catalog: Tf_config_catalog
         end
         object Ftyc2: TLongEdit
           Tag = 3
-          Left = 329
+          Left = 328
           Height = 28
           Hint = '0..10'
           Top = 121
@@ -2006,7 +2006,7 @@ object f_config_catalog: Tf_config_catalog
         end
         object TICbox: TCheckBox
           Tag = 5
-          Left = 93
+          Left = 94
           Height = 22
           Hint = 'Tycho Input Catalog  (Revised Version) (Egret+ 1992)'
           Top = 161
@@ -2022,7 +2022,7 @@ object f_config_catalog: Tf_config_catalog
         end
         object Ftic1: TLongEdit
           Tag = 5
-          Left = 289
+          Left = 288
           Height = 28
           Hint = '0..10'
           Top = 161
@@ -2038,7 +2038,7 @@ object f_config_catalog: Tf_config_catalog
         end
         object Ftic2: TLongEdit
           Tag = 5
-          Left = 329
+          Left = 328
           Height = 28
           Hint = '0..10'
           Top = 161
@@ -2070,7 +2070,7 @@ object f_config_catalog: Tf_config_catalog
         end
         object fgsc1: TLongEdit
           Tag = 8
-          Left = 290
+          Left = 288
           Height = 28
           Hint = '0..10'
           Top = 200
@@ -2086,7 +2086,7 @@ object f_config_catalog: Tf_config_catalog
         end
         object fgsc2: TLongEdit
           Tag = 8
-          Left = 330
+          Left = 328
           Height = 28
           Hint = '0..10'
           Top = 200
@@ -2102,7 +2102,7 @@ object f_config_catalog: Tf_config_catalog
         end
         object MCTBox: TCheckBox
           Tag = 10
-          Left = 92
+          Left = 94
           Height = 22
           Hint = 'AUDE MicroCat CDROM'
           Top = 376
@@ -2150,7 +2150,7 @@ object f_config_catalog: Tf_config_catalog
         end
         object tyc3: TDirectoryEdit
           Tag = 3
-          Left = 367
+          Left = 366
           Height = 28
           Top = 121
           Width = 109
@@ -2166,7 +2166,7 @@ object f_config_catalog: Tf_config_catalog
         end
         object tic3: TDirectoryEdit
           Tag = 5
-          Left = 367
+          Left = 366
           Height = 28
           Top = 161
           Width = 109
@@ -2182,7 +2182,7 @@ object f_config_catalog: Tf_config_catalog
         end
         object gsc3: TDirectoryEdit
           Tag = 8
-          Left = 368
+          Left = 366
           Height = 28
           Top = 200
           Width = 109
@@ -2214,7 +2214,7 @@ object f_config_catalog: Tf_config_catalog
         end
         object usn3: TDirectoryEdit
           Tag = 9
-          Left = 369
+          Left = 366
           Height = 28
           Top = 297
           Width = 109
@@ -2230,7 +2230,7 @@ object f_config_catalog: Tf_config_catalog
         end
         object gscc3: TDirectoryEdit
           Tag = 7
-          Left = 368
+          Left = 366
           Height = 28
           Top = 265
           Width = 109
@@ -2246,7 +2246,7 @@ object f_config_catalog: Tf_config_catalog
         end
         object gscf3: TDirectoryEdit
           Tag = 6
-          Left = 368
+          Left = 366
           Height = 28
           Top = 233
           Width = 109
@@ -2262,7 +2262,7 @@ object f_config_catalog: Tf_config_catalog
         end
         object fgscf2: TLongEdit
           Tag = 6
-          Left = 330
+          Left = 328
           Height = 28
           Hint = '0..10'
           Top = 233
@@ -2278,7 +2278,7 @@ object f_config_catalog: Tf_config_catalog
         end
         object fgscc2: TLongEdit
           Tag = 7
-          Left = 330
+          Left = 328
           Height = 28
           Hint = '0..10'
           Top = 265
@@ -2294,7 +2294,7 @@ object f_config_catalog: Tf_config_catalog
         end
         object fusn2: TLongEdit
           Tag = 9
-          Left = 331
+          Left = 328
           Height = 28
           Hint = '0..10'
           Top = 297
@@ -2310,7 +2310,7 @@ object f_config_catalog: Tf_config_catalog
         end
         object fusn1: TLongEdit
           Tag = 9
-          Left = 291
+          Left = 288
           Height = 28
           Hint = '0..10'
           Top = 297
@@ -2326,7 +2326,7 @@ object f_config_catalog: Tf_config_catalog
         end
         object fgscc1: TLongEdit
           Tag = 7
-          Left = 290
+          Left = 288
           Height = 28
           Hint = '0..10'
           Top = 265
@@ -2342,7 +2342,7 @@ object f_config_catalog: Tf_config_catalog
         end
         object fgscf1: TLongEdit
           Tag = 6
-          Left = 290
+          Left = 288
           Height = 28
           Hint = '0..10'
           Top = 233
@@ -2358,7 +2358,7 @@ object f_config_catalog: Tf_config_catalog
         end
         object USNbox: TCheckBox
           Tag = 9
-          Left = 95
+          Left = 94
           Height = 22
           Hint = '- USNO-SA1.0 '#13#10'- USNO-A1.0 '#13#10'- USNO-A2.0'#13#10'  U.S. Naval Observatory CDROM''s'
           Top = 297
@@ -2454,10 +2454,10 @@ object f_config_catalog: Tf_config_catalog
         end
         object SKYbox: TCheckBox
           Tag = 2
-          Left = 93
+          Left = 94
           Height = 22
           Hint = 'SKY2000 - Master Star Catalog  (Sande+ 1998)'
-          Top = 39
+          Top = 40
           Width = 81
           HelpContext = 101
           Caption = 'SKY2000'
@@ -2481,7 +2481,7 @@ object f_config_catalog: Tf_config_catalog
         end
         object UNBbox: TCheckBox
           Tag = 17
-          Left = 95
+          Left = 94
           Height = 22
           Hint = '- USNO-B1.0 '#13#10' U.S. Naval Observatory format, 180 directory, each with 10 .acc and 10 .cat files.'
           Top = 330
@@ -2497,7 +2497,7 @@ object f_config_catalog: Tf_config_catalog
         end
         object funb1: TLongEdit
           Tag = 17
-          Left = 291
+          Left = 288
           Height = 28
           Hint = '0..10'
           Top = 330
@@ -2513,7 +2513,7 @@ object f_config_catalog: Tf_config_catalog
         end
         object funb2: TLongEdit
           Tag = 17
-          Left = 331
+          Left = 328
           Height = 28
           Hint = '0..10'
           Top = 330
@@ -2529,7 +2529,7 @@ object f_config_catalog: Tf_config_catalog
         end
         object unb3: TDirectoryEdit
           Tag = 17
-          Left = 368
+          Left = 366
           Height = 28
           Top = 330
           Width = 109
@@ -2561,7 +2561,7 @@ object f_config_catalog: Tf_config_catalog
         end
         object Fty21: TLongEdit
           Tag = 4
-          Left = 289
+          Left = 288
           Height = 28
           Hint = '0..10'
           Top = 88
@@ -2577,7 +2577,7 @@ object f_config_catalog: Tf_config_catalog
         end
         object Fty22: TLongEdit
           Tag = 4
-          Left = 329
+          Left = 328
           Height = 28
           Hint = '0..10'
           Top = 88
@@ -2593,7 +2593,7 @@ object f_config_catalog: Tf_config_catalog
         end
         object ty23: TDirectoryEdit
           Tag = 4
-          Left = 368
+          Left = 366
           Height = 28
           Top = 88
           Width = 112
