@@ -44,6 +44,7 @@ type
     IpHtmlDataProvider1: TIpHtmlDataProvider;
     IpHtmlPanel1: TIpHtmlPanel;
     Memo1: TMemo;
+    PageControl1: TPageControl;
     SelectAll: TAction;
     Panel1: TPanel;
     Button1: TButton;
@@ -53,6 +54,8 @@ type
     Copy1: TMenuItem;
     Button2: TButton;
     Button3: TButton;
+    TabSheet1: TTabSheet;
+    TabSheet2: TTabSheet;
     Timer1: TTimer;
     procedure Button1Click(Sender: TObject);
     procedure Button2Click(Sender: TObject);
@@ -76,6 +79,7 @@ type
     FSameposition: boolean;
     Fkeydown: TKeyEvent;
     FHtmlFontSize: integer;
+    procedure SetTextOnly(value: boolean);
     procedure SetHTMLText(const Value: string);
   public
     { Public declarations }
@@ -84,7 +88,7 @@ type
     objname: string;
     InfoUrlNum: integer;
     property Text: string read FHTMLText write SetHTMLText;
-    property TextOnly: boolean read FTextOnly write FTextOnly;
+    property TextOnly: boolean read FTextOnly write SetTextOnly;
     property HtmlFontSize: integer read FHtmlFontSize write FHtmlFontSize;
     property Sameposition: boolean read FSameposition write FSameposition;
     property OnCenterObj: Tstr1func read FCenter write FCenter;
@@ -204,8 +208,6 @@ begin
   {$endif}
   CanRetry:=true;
   FSameposition := False;
-  memo1.Visible := FTextOnly;
-  IpHtmlPanel1.Visible := not FTextOnly;
 end;
 
 procedure Tf_detail.HTMLGetImageX(Sender: TIpHtmlNode; const URL: string;
@@ -230,7 +232,6 @@ begin
   end;
 end;
 
-
 procedure Tf_detail.Timer1Timer(Sender: TObject);
 begin
   timer1.Enabled := False;
@@ -246,8 +247,18 @@ procedure Tf_detail.FormCreate(Sender: TObject);
 begin
   ScaleDPI(Self);
   FTextOnly := False;
+  PageControl1.ActivePageIndex:=1;
   LockText := False;
   SetLang;
+end;
+
+procedure Tf_detail.SetTextOnly(value: boolean);
+begin
+  FTextOnly:=value;
+  if FTextOnly then
+    PageControl1.ActivePageIndex:=0
+  else
+    PageControl1.ActivePageIndex:=1;
 end;
 
 procedure Tf_detail.SetHTMLText(const Value: string);
@@ -281,7 +292,7 @@ try
       if CanRetry then begin
         // uncorrectable error condition in IpHtmlPanel1, try to create a new one and retry.
         IpHtmlPanel1 := TIpHtmlPanel.Create(self);
-        IpHtmlPanel1.Parent:=self;
+        IpHtmlPanel1.Parent:=TabSheet2;
         IpHtmlPanel1.Align := alClient;
         IpHtmlPanel1.DataProvider := IpHtmlDataProvider1;
         IpHtmlPanel1.FixedTypeface := 'Courier New';
@@ -292,6 +303,12 @@ try
         IpHtmlPanel1.TabOrder := 1;
         IpHtmlPanel1.OnHotClick := IpHtmlPanel1HotClick;
         Canretry:=False;
+        LockText := False;
+        SetHTMLText(Value);
+      end
+      else begin
+        // fail again, set to text display
+        TextOnly:=true;
         LockText := False;
         SetHTMLText(Value);
       end;
