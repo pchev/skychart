@@ -1263,6 +1263,7 @@ begin
   catalog.cfgcat.GCatLst[i].Name := '';
   catalog.cfgcat.GCatLst[i].cattype := 0;
   catalog.cfgcat.GCatLst[i].ForceColor := False;
+  catalog.cfgcat.GCatLst[i].Search := False;
   catalog.cfgcat.GCatLst[i].col := 0;
   if catalog.cfgcat.GCatLst[i].Actif then
   begin
@@ -5755,7 +5756,7 @@ begin
   begin
     for i := 0 to ccat.GCatNum - 1 do
     begin
-      if ccat.GCatLst[i].Actif then
+      if ccat.GCatLst[i].Actif or ccat.GCatLst[i].Search then
       begin
         if not catalog.GetInfo(ccat.GCatLst[i].path, ccat.GCatLst[i].shortname,
           ccat.GCatLst[i].magmax, ccat.GCatLst[i].cattype,
@@ -7194,13 +7195,16 @@ begin
             catalog.cfgcat.GCatLst[j].Actif :=
               ReadBool(section, 'CatActif' + IntToStr(i),
               catalog.cfgcat.GCatLst[i].Actif);
+            catalog.cfgcat.GCatLst[j].Search :=
+              ReadBool(section, 'CatSearch' + IntToStr(i),
+              catalog.cfgcat.GCatLst[i].Search);
             catalog.cfgcat.GCatLst[j].ForceColor :=
               ReadBool(section, 'CatForceColor' + IntToStr(i), False);
             catalog.cfgcat.GCatLst[j].Col :=
               ReadInteger(section, 'CatColor' + IntToStr(i), 0);
             catalog.cfgcat.GCatLst[j].magmax := 0;
             catalog.cfgcat.GCatLst[j].cattype := 0;
-            if catalog.cfgcat.GCatLst[j].Actif then
+            if catalog.cfgcat.GCatLst[j].Actif or catalog.cfgcat.GCatLst[j].Search then
             begin
               if not catalog.GetInfo(catalog.cfgcat.GCatLst[j].path,
                 catalog.cfgcat.GCatLst[j].shortname,
@@ -8735,6 +8739,7 @@ begin
           WriteFloat(section, 'CatMin' + IntToStr(i), catalog.cfgcat.GCatLst[i].min);
           WriteFloat(section, 'CatMax' + IntToStr(i), catalog.cfgcat.GCatLst[i].max);
           WriteBool(section, 'CatActif' + IntToStr(i), catalog.cfgcat.GCatLst[i].Actif);
+          WriteBool(section, 'CatSearch' + IntToStr(i), catalog.cfgcat.GCatLst[i].Search);
           WriteBool(section, 'CatForceColor' + IntToStr(i),
             catalog.cfgcat.GCatLst[i].ForceColor);
           WriteInteger(section, 'CatColor' + IntToStr(i), catalog.cfgcat.GCatLst[i].Col);

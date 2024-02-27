@@ -53,6 +53,12 @@ type
     ButtonInstallCat2: TButton;
     fsac1: TLongEdit;
     fsac2: TLongEdit;
+    Image1: TImage;
+    Image2: TImage;
+    Image3: TImage;
+    Label10: TLabel;
+    Label8: TLabel;
+    Label9: TLabel;
     Label99: TLabel;
     LabelNewCat: TLabel;
     Label98: TLabel;
@@ -657,6 +663,8 @@ begin
     stringgrid3.cells[4, i] := systoutf8(ccat.GCatLst[j].path);
     if ccat.GCatLst[j].actif then
       stringgrid3.cells[0, i] := '1'
+    else if ccat.GCatLst[j].Search then
+      stringgrid3.cells[0, i] := '2'
     else
       stringgrid3.cells[0, i] := '0';
     n := catalog.GetCatType(stringgrid3.Cells[4, i], stringgrid3.Cells[1, i]);
@@ -846,6 +854,12 @@ begin
         Canvas.FillRect(Rect);
         ImageList1.Draw(Canvas, Rect.left + 2, Rect.top + 2, 3);
       end
+      else if (cells[acol, arow] = '2') then
+      begin
+        Canvas.Brush.Color := clWindow;
+        Canvas.FillRect(Rect);
+        ImageList1.Draw(Canvas, Rect.left + 2, Rect.top + 2, 4);
+      end
       else
       begin
         Canvas.Brush.Color := clWindow;
@@ -896,14 +910,16 @@ begin
   case col of
     0:
     begin
-      if stringgrid3.Cells[col, row] = '1' then
+      if not fileexistsutf8(slash(stringgrid3.cells[4, row]) + stringgrid3.cells[1, row] + '.hdr') then
         stringgrid3.Cells[col, row] := '0'
-      else
-      if fileexistsutf8(slash(stringgrid3.cells[4, row]) +
-        stringgrid3.cells[1, row] + '.hdr') then
-        stringgrid3.Cells[col, row] := '1'
-      else
-        stringgrid3.Cells[col, row] := '0';
+      else begin
+        if stringgrid3.Cells[col, row] = '0' then
+          stringgrid3.Cells[col, row] := '1'
+        else if stringgrid3.Cells[col, row] = '1' then
+          stringgrid3.Cells[col, row] := '2'
+        else if stringgrid3.Cells[col, row] = '2' then
+          stringgrid3.Cells[col, row] := '0'
+      end;
     end;
     5:
     begin
@@ -1390,6 +1406,7 @@ begin
     else
       ccat.GCatLst[i].max := 0;
     ccat.GCatLst[i].Actif := stringgrid3.cells[0, i + 1] = '1';
+    ccat.GCatLst[i].Search:= stringgrid3.cells[0, i + 1] = '2';
     ccat.GCatLst[i].magmax := 0;
     ccat.GCatLst[i].Name := '';
     ccat.GCatLst[i].cattype := 0;
