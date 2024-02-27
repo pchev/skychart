@@ -6104,6 +6104,8 @@ begin
       Result := rsMagnitude + ' ' + 'RP' + d + Value
     else if key = 'MG' then
       Result := rsMagnitude + ' ' + 'G' + d + Value
+    else if key = 'MP' then
+      Result := rsMagnitude + ' ' + rsPhotographic2 + d + Value
     else if key = 'BT' then
       Result := rsMagnitudeTyc + d + Value
     else if key = 'VT' then
