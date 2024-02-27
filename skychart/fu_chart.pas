@@ -4269,6 +4269,16 @@ begin
       begin
          amagn:=StrToFloatDef(trim(copy(buf2,4,99)),-999);
       end;
+      if (uppercase(copy(buf2, 1, 7)) = 'MEPOCH:') then
+      begin
+         j1:=StrToFloatDef(trim(copy(buf2,8,99)),0);
+         if j1 <> 0 then begin
+           if j1<100000 then j1:=j1+2400000;
+           djd(j1,y,m,d,h);
+           buf2:=buf2+', '+isodate(y, m, d);
+           if h<>0 then buf2:=buf2+blank+TimeToStrShort(h);
+         end;
+      end;
       if isvo or isOsr then
         txt := txt + bold(buf2)
       else
