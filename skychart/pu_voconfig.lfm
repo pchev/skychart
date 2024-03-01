@@ -11,22 +11,22 @@ object f_voconfig: Tf_voconfig
   Font.Height = -11
   Font.Name = 'MS Sans Serif'
   OnCreate = FormCreate
+  OnDestroy = FormDestroy
   OnShow = FormShow
-  LCLVersion = '2.0.10.0'
   object PageControl1: TPageControl
     Left = 0
     Height = 516
     Top = 0
     Width = 783
-    ActivePage = TabDetail
+    ActivePage = TabCat
     Align = alClient
     ShowTabs = False
-    TabIndex = 1
+    TabIndex = 0
     TabOrder = 0
     object TabCat: TTabSheet
       Caption = 'Catalog List'
-      ClientHeight = 482
-      ClientWidth = 773
+      ClientHeight = 512
+      ClientWidth = 779
       object Panel1: TPanel
         Left = 0
         Height = 96
@@ -61,6 +61,8 @@ object f_voconfig: Tf_voconfig
           TabOrder = 1
         end
         object Button12: TButton
+          AnchorSideTop.Control = Button11
+          AnchorSideTop.Side = asrCenter
           Left = 612
           Height = 25
           Top = 22
@@ -71,28 +73,33 @@ object f_voconfig: Tf_voconfig
           TabOrder = 3
         end
         object ServerList: TComboBox
+          AnchorSideTop.Control = Button11
+          AnchorSideTop.Side = asrCenter
           Left = 292
-          Height = 26
-          Top = 23
+          Height = 32
+          Top = 18
           Width = 305
-          ItemHeight = 0
+          ItemHeight = 16
           OnChange = ServerListChange
           Style = csDropDownList
           TabOrder = 4
         end
         object CatDescEdit: TEdit
+          AnchorSideTop.Control = Button11
+          AnchorSideTop.Side = asrCenter
           Left = 152
-          Height = 22
-          Top = 24
+          Height = 30
+          Top = 19
           Width = 104
           OnKeyUp = CatDescEditKeyUp
           TabOrder = 0
         end
         object Label1: TLabel
+          AnchorSideTop.Control = Label2
           Left = 292
-          Height = 14
-          Top = 5
-          Width = 100
+          Height = 16
+          Top = 3
+          Width = 88
           Caption = 'Select mirror site'
           ParentColor = False
         end
@@ -107,9 +114,9 @@ object f_voconfig: Tf_voconfig
         end
         object Label2: TLabel
           Left = 20
-          Height = 14
+          Height = 16
           Top = 3
-          Width = 94
+          Width = 83
           Caption = 'Search Catalogs'
           ParentColor = False
         end
@@ -132,8 +139,8 @@ object f_voconfig: Tf_voconfig
     end
     object TabDetail: TTabSheet
       Caption = 'Catalog Detail'
-      ClientHeight = 482
-      ClientWidth = 773
+      ClientHeight = 512
+      ClientWidth = 779
       ImageIndex = 1
       object PageControl2: TPageControl
         Left = 0
@@ -155,9 +162,9 @@ object f_voconfig: Tf_voconfig
         TabOrder = 0
         object Label6: TLabel
           Left = 9
-          Height = 13
+          Height = 16
           Top = 9
-          Width = 368
+          Width = 334
           Caption = 'Make selection of the table and column you want to your catalog'
           ParentColor = False
         end
@@ -191,9 +198,9 @@ object f_voconfig: Tf_voconfig
         end
         object LabelStatus: TLabel
           Left = 12
-          Height = 13
+          Height = 16
           Top = 10
-          Width = 65
+          Width = 60
           Caption = 'LabelStatus'
           ParentColor = False
         end
@@ -201,8 +208,8 @@ object f_voconfig: Tf_voconfig
     end
     object TabData: TTabSheet
       Caption = 'Catalog Data'
-      ClientHeight = 482
-      ClientWidth = 773
+      ClientHeight = 512
+      ClientWidth = 779
       ImageIndex = 2
       object DataGrid: TStringGrid
         Left = 0
@@ -227,7 +234,7 @@ object f_voconfig: Tf_voconfig
         TabOrder = 1
         object tn: TEdit
           Left = 8
-          Height = 22
+          Height = 30
           Top = 8
           Width = 252
           Color = clBtnFace
@@ -248,8 +255,8 @@ object f_voconfig: Tf_voconfig
     end
     object TabRegistry: TTabSheet
       Caption = 'Registry'
-      ClientHeight = 482
-      ClientWidth = 773
+      ClientHeight = 512
+      ClientWidth = 779
       ImageIndex = 3
       TabVisible = False
       object RadioGroup1: TRadioGroup
@@ -267,8 +274,8 @@ object f_voconfig: Tf_voconfig
         ChildSizing.ShrinkVertical = crsScaleChilds
         ChildSizing.Layout = cclLeftToRightThenTopToBottom
         ChildSizing.ControlsPerLine = 1
-        ClientHeight = 125
-        ClientWidth = 431
+        ClientHeight = 117
+        ClientWidth = 429
         ItemIndex = 0
         Items.Strings = (
           'VizieR Catalogue Service'
@@ -288,9 +295,9 @@ object f_voconfig: Tf_voconfig
       end
       object Label5: TLabel
         Left = 204
-        Height = 19
+        Height = 23
         Top = 224
-        Width = 254
+        Width = 219
         Caption = 'Not used at the moment !!!!'
         Font.Height = 16
         Font.Name = 'MS Sans Serif'

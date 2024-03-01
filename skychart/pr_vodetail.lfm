@@ -1,60 +1,59 @@
 object f_vodetail: Tf_vodetail
   Left = 0
-  Height = 559
+  Height = 565
   Top = 0
-  Width = 1216
+  Width = 1229
   HorzScrollBar.Page = 758
   VertScrollBar.Page = 426
   Align = alClient
   Caption = 'f_vodetail'
-  ClientHeight = 559
-  ClientWidth = 1216
-  DesignTimePPI = 95
+  ClientHeight = 565
+  ClientWidth = 1229
   OnCreate = FormCreate
   object MainPanel: TPanel
     Left = 0
-    Height = 559
+    Height = 565
     Top = 0
-    Width = 1216
+    Width = 1229
     Align = alClient
-    ClientHeight = 559
-    ClientWidth = 1216
+    ClientHeight = 565
+    ClientWidth = 1229
     ParentFont = False
     TabOrder = 0
     object Panel1: TPanel
       Left = 1
-      Height = 215
-      Top = 343
-      Width = 1214
+      Height = 217
+      Top = 347
+      Width = 1227
       Align = alBottom
-      ClientHeight = 215
-      ClientWidth = 1214
+      ClientHeight = 217
+      ClientWidth = 1227
       ParentFont = False
       TabOrder = 1
       TabStop = True
       object Table: TLabel
         Left = 4
-        Height = 19
+        Height = 18
         Top = 12
-        Width = 55
+        Width = 53
         Caption = 'Table......'
         ParentColor = False
         ParentFont = False
       end
       object Rows: TLabel
-        Left = 165
-        Height = 19
+        Left = 167
+        Height = 18
         Top = 12
-        Width = 68
+        Width = 64
         Caption = 'Rows.........'
         ParentColor = False
         ParentFont = False
       end
       object Button1: TButton
-        Left = 577
+        Left = 583
         Height = 25
-        Top = 180
-        Width = 158
+        Top = 182
+        Width = 160
         BorderSpacing.InnerBorder = 4
         Caption = 'Download catalog'
         OnClick = GetData
@@ -62,10 +61,10 @@ object f_vodetail: Tf_vodetail
         TabOrder = 15
       end
       object RadioGroup1: TRadioGroup
-        Left = 332
-        Height = 102
-        Top = 103
-        Width = 207
+        Left = 335
+        Height = 103
+        Top = 104
+        Width = 209
         AutoFill = True
         ChildSizing.LeftRightSpacing = 6
         ChildSizing.TopBottomSpacing = 6
@@ -75,7 +74,7 @@ object f_vodetail: Tf_vodetail
         ChildSizing.ShrinkVertical = crsScaleChilds
         ChildSizing.Layout = cclLeftToRightThenTopToBottom
         ChildSizing.ControlsPerLine = 1
-        ClientHeight = 100
+        ClientHeight = 99
         ClientWidth = 205
         Items.Strings = (
           'Cannot draw                 .'
@@ -87,50 +86,60 @@ object f_vodetail: Tf_vodetail
         TabOrder = 14
       end
       object Label9: TLabel
+        AnchorSideTop.Control = DefSize
+        AnchorSideTop.Side = asrCenter
         Left = 8
-        Height = 19
-        Top = 147
-        Width = 171
+        Height = 18
+        Top = 156
+        Width = 161
         Caption = 'Default size '' .......................'
         ParentColor = False
         ParentFont = False
       end
       object Label10: TLabel
+        AnchorSideTop.Control = DefMag
+        AnchorSideTop.Side = asrCenter
         Left = 8
-        Height = 19
-        Top = 94
-        Width = 166
+        Height = 18
+        Top = 96
+        Width = 160
         Caption = 'Default magnitude.............'
         ParentColor = False
         ParentFont = False
       end
       object FullDownload: TCheckBox
-        Left = 553
-        Height = 23
-        Top = 105
-        Width = 217
+        Left = 559
+        Height = 22
+        Top = 106
+        Width = 213
         Caption = 'Download full catalog...............'
         OnChange = FullDownloadChange
         ParentFont = False
         TabOrder = 9
       end
       object Label1: TLabel
+        AnchorSideTop.Control = ComboBox1
+        AnchorSideTop.Side = asrCenter
         Left = 8
-        Height = 19
-        Top = 123
-        Width = 176
+        Height = 18
+        Top = 126
+        Width = 164
         Caption = 'Object type ..........................'
         Constraints.MaxHeight = 28
         ParentColor = False
         ParentFont = False
       end
       object ComboBox1: TComboBox
-        Left = 156
+        AnchorSideLeft.Control = DefMag
+        AnchorSideTop.Control = DefMag
+        AnchorSideTop.Side = asrBottom
+        Left = 160
         Height = 28
-        Top = 118
-        Width = 162
+        Top = 121
+        Width = 164
+        BorderSpacing.Top = 2
         Constraints.MaxHeight = 28
-        ItemHeight = 0
+        ItemHeight = 24
         ItemIndex = 14
         Items.Strings = (
           'Unknow'
@@ -158,10 +167,10 @@ object f_vodetail: Tf_vodetail
         Text = 'Circle'
       end
       object ButtonBack: TButton
-        Left = 648
+        Left = 655
         Height = 25
         Top = 8
-        Width = 87
+        Width = 88
         Caption = '< Back'
         Constraints.MaxHeight = 28
         OnClick = ButtonBackClick
@@ -169,21 +178,24 @@ object f_vodetail: Tf_vodetail
         TabOrder = 3
       end
       object DefMag: TLongEdit
-        Left = 158
+        Left = 160
         Height = 28
-        Top = 90
-        Width = 79
+        Top = 91
+        Width = 80
         Constraints.MaxHeight = 28
         ParentFont = False
         TabOrder = 8
         Value = 12
       end
       object DefSize: TLongEdit
-        Left = 158
+        AnchorSideLeft.Control = DefMag
+        AnchorSideTop.Control = ComboBox1
+        AnchorSideTop.Side = asrBottom
+        Left = 160
         Height = 28
         Hint = '0..36000'
-        Top = 143
-        Width = 79
+        Top = 151
+        Width = 80
         Constraints.MaxHeight = 28
         ParentFont = False
         ParentShowHint = False
@@ -193,10 +205,10 @@ object f_vodetail: Tf_vodetail
         MaxValue = 36000
       end
       object Button2: TButton
-        Left = 577
+        Left = 583
         Height = 25
-        Top = 143
-        Width = 158
+        Top = 145
+        Width = 160
         Caption = 'Data preview'
         Constraints.MaxHeight = 28
         OnClick = Button2Click
@@ -204,31 +216,37 @@ object f_vodetail: Tf_vodetail
         TabOrder = 12
       end
       object Shape1: TShape
-        Left = 158
+        AnchorSideLeft.Control = DefMag
+        AnchorSideTop.Control = DefSize
+        AnchorSideTop.Side = asrBottom
+        Left = 160
         Height = 24
-        Top = 170
+        Top = 181
         Width = 24
+        BorderSpacing.Top = 2
         Constraints.MaxHeight = 28
         OnMouseUp = Shape1MouseUp
         Shape = stRoundSquare
       end
       object CheckBox1: TCheckBox
+        AnchorSideTop.Control = Shape1
+        AnchorSideTop.Side = asrCenter
         Left = 8
-        Height = 23
-        Top = 170
-        Width = 171
+        Height = 22
+        Top = 182
+        Width = 163
         Caption = 'Force color....................'
         OnChange = CheckBox1Change
         ParentFont = False
         TabOrder = 13
       end
       object MagField: TComboBox
-        Left = 80
+        Left = 81
         Height = 28
-        Top = 55
-        Width = 129
+        Top = 56
+        Width = 130
         Constraints.MaxHeight = 28
-        ItemHeight = 0
+        ItemHeight = 18
         OnChange = FieldChange
         ParentFont = False
         Style = csDropDownList
@@ -236,62 +254,62 @@ object f_vodetail: Tf_vodetail
       end
       object Label2: TLabel
         Left = 8
-        Height = 19
-        Top = 59
-        Width = 66
+        Height = 18
+        Top = 60
+        Width = 67
         Caption = 'Magnitude'
         Constraints.MaxHeight = 28
         ParentColor = False
         ParentFont = False
       end
       object SizeField: TComboBox
-        Left = 284
+        Left = 287
         Height = 28
-        Top = 55
-        Width = 129
+        Top = 56
+        Width = 130
         Constraints.MaxHeight = 28
-        ItemHeight = 0
+        ItemHeight = 18
         OnChange = FieldChange
         ParentFont = False
         Style = csDropDownList
         TabOrder = 5
       end
       object Label3: TLabel
-        Left = 237
-        Height = 19
-        Top = 59
-        Width = 23
+        Left = 239
+        Height = 18
+        Top = 60
+        Width = 24
         Caption = 'Size'
         Constraints.MaxHeight = 28
         ParentColor = False
         ParentFont = False
       end
       object NameField: TComboBox
-        Left = 607
+        Left = 613
         Height = 28
-        Top = 55
-        Width = 129
+        Top = 56
+        Width = 130
         Constraints.MaxHeight = 28
-        ItemHeight = 0
+        ItemHeight = 18
         OnChange = FieldChange
         ParentFont = False
         Style = csDropDownList
         TabOrder = 7
       end
       object Label4: TLabel
-        Left = 427
-        Height = 19
-        Top = 59
-        Width = 36
+        Left = 431
+        Height = 18
+        Top = 60
+        Width = 37
         Caption = 'Name'
         ParentColor = False
         ParentFont = False
       end
       object Prefix: TEdit
-        Left = 482
+        Left = 487
         Height = 28
-        Top = 56
-        Width = 97
+        Top = 57
+        Width = 98
         Constraints.MaxHeight = 28
         OnChange = PrefixChange
         ParentFont = False
@@ -299,10 +317,10 @@ object f_vodetail: Tf_vodetail
         Text = 'Prefix'
       end
       object tn: TStaticText
-        Left = 54
+        Left = 55
         Height = 36
         Top = 10
-        Width = 103
+        Width = 104
         BorderStyle = sbsSingle
         Caption = 'tn'
         Constraints.MaxHeight = 36
@@ -310,10 +328,10 @@ object f_vodetail: Tf_vodetail
         TabOrder = 0
       end
       object tr: TStaticText
-        Left = 225
+        Left = 227
         Height = 36
         Top = 10
-        Width = 83
+        Width = 84
         BorderStyle = sbsSingle
         Caption = 'tr'
         Constraints.MaxHeight = 36
@@ -321,10 +339,10 @@ object f_vodetail: Tf_vodetail
         TabOrder = 1
       end
       object desc: TStaticText
-        Left = 314
+        Left = 317
         Height = 36
         Top = 10
-        Width = 327
+        Width = 330
         BorderStyle = sbsSingle
         Caption = 'desc'
         Constraints.MaxHeight = 36
@@ -334,13 +352,13 @@ object f_vodetail: Tf_vodetail
     end
     object Grid: TStringGrid
       Left = 1
-      Height = 342
+      Height = 346
       Top = 1
-      Width = 1214
+      Width = 1227
       Align = alClient
       BorderStyle = bsNone
       ColCount = 6
-      DefaultColWidth = 99
+      DefaultColWidth = 100
       FixedCols = 0
       GridLineWidth = 0
       Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goColSizing]
@@ -374,7 +392,7 @@ object f_vodetail: Tf_vodetail
       'ColorS=F0FBFF'
       'ColorT=A4A0A0'
     )
-    left = 40
-    top = 48
+    Left = 40
+    Top = 49
   end
 end

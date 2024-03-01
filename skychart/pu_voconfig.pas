@@ -76,6 +76,7 @@ type
     Button13: TButton;
     procedure CatDescEditKeyUp(Sender: TObject; var Key: word; Shift: TShiftState);
     procedure CloseTimerTimer(Sender: TObject);
+    procedure FormDestroy(Sender: TObject);
     procedure Searchbyposition(Sender: TObject);
     procedure ButtonCloseClick(Sender: TObject);
     procedure ButtonHelpClick(Sender: TObject);
@@ -94,6 +95,7 @@ type
     Fvourlnum: integer;
     FReloadFeedback: TDownloadFeedback;
     Fvo_maxrecord: integer;
+    FExtraName: TStringList;
     procedure SetServerList;
     procedure FillGrid(fr: Tf_vodetail; i, n, nactive: integer; active: boolean);
     procedure FillCatList;
@@ -235,7 +237,13 @@ begin
   CatList.ColWidths[2] := 400;
   PageControl1.ActivePage := TabCat;
   LabelStatus.Caption := '';
+  FExtraName:=TStringList.Create;
   Setlang;
+end;
+
+procedure Tf_voconfig.FormDestroy(Sender: TObject);
+begin
+ FExtraName.Free;
 end;
 
 procedure Tf_voconfig.SetServerList;
@@ -526,6 +534,9 @@ begin
       fr.field_name := nactive;
       fr.nameprefix := trim(VO_Detail1.RecName[n][i - 1]) + ' ';
     end;
+  end
+  else begin
+    FExtraName.Add(VO_Detail1.RecName[n][i - 1]);
   end;
 end;
 
@@ -549,6 +560,7 @@ begin
       VO_Detail1.BaseUrl := vo_url[VO_Catalogs1.vo_source, ServerList.ItemIndex + 1, 1];
       VO_Detail1.vo_type := VO_Catalogs1.vo_type;
       VO_Detail1.Update(buf, True);
+      FExtraName.Clear;
       for n := 0 to Pagecontrol2.PageCount - 1 do
         Pagecontrol2.Pages[0].Free;
       for n := 0 to VO_Detail1.NumTables - 1 do
@@ -632,6 +644,8 @@ begin
           Prefix.Text := nameprefix;
         end;
       end;
+      for i:=0 to FExtraName.Count-1 do
+        fr.NameField.Items.Add(FExtraName[i]);
       if Pagecontrol2.PageCount = 0 then
       begin
         ClearCatalog;
@@ -697,6 +711,7 @@ begin
     end;
     for n := 0 to Pagecontrol2.PageCount - 1 do
       Pagecontrol2.Pages[0].Free;
+    FExtraName.Clear;
     n := 0;
     tb := TTabSheet.Create(PageControl2);
     tb.PageControl := Pagecontrol2;
@@ -825,6 +840,8 @@ begin
     begin
       ClearCatalog;
     end;
+    for i:=0 to FExtraName.Count-1 do
+       fr.NameField.Items.Add(FExtraName[i]);
     fr.ButtonBack.Visible := False;
     fr.FullDownload.Checked := fullcat;
     fr.DefMag.Value := dm;
