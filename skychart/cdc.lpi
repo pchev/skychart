@@ -238,6 +238,7 @@
               <OverflowChecks Value="True"/>
               <StackChecks Value="True"/>
             </Checks>
+            <StackSize Value="8388608"/>
             <Optimizations>
               <OptimizationLevel Value="0"/>
             </Optimizations>

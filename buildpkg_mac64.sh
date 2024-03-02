@@ -35,7 +35,7 @@ if [[ $lastrev -ne $currentrev ]]; then
   ./configure $configopt prefix=$builddir target=x86_64-darwin
   if [[ $? -ne 0 ]]; then exit 1;fi
   make CPU_TARGET=x86_64 clean
-  fpcopts="-CX -XX -Xs -Cs800000" make CPU_TARGET=x86_64
+  fpcopts="-CX -XX -Xs -Cs8388608" make CPU_TARGET=x86_64
   if [[ $? -ne 0 ]]; then exit 1;fi
   make install
   if [[ $? -ne 0 ]]; then exit 1;fi
@@ -70,7 +70,7 @@ if [[ $lastrev -ne $currentrev ]]; then
     cd $wd
     rm -rf $basedir
     make CPU_TARGET=x86_64 clean
-    fpcopts="-g -gl -Ci -Co -Ct" make CPU_TARGET=x86_64
+    fpcopts="-g -gl -Ci -Co -Ct -Cs8388608" Make CPU_TARGET=x86_64
     if [[ $? -ne 0 ]]; then exit 1;fi
     mkdir $basedir
     mkdir $basedir/debug
