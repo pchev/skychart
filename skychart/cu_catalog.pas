@@ -376,8 +376,8 @@ begin
     while (curcat > (BaseStar)) and (not cfgcat.starcaton[curcat - BaseStar]) do
       Dec(curcat);
 
-    if CurCat=starindex then begin
-      Dec(curcat);  // only used for index now
+    if CurCat=unused1 then begin
+      Dec(curcat);
       continue;
     end;
     if (curcat <= BaseStar) then
@@ -440,8 +440,6 @@ begin
         Result := GetVOcatS(rec);
       end;
 
-    starindex: Result := GetBSC(rec);
-
   end;
 
   if (not Result) and (curcat > (BaseStar+1)) then
@@ -456,8 +454,8 @@ begin
 
       Result := False;
 
-      if CurCat=starindex then begin
-        Dec(curcat);  // only used for index now
+      if CurCat=unused1 then begin
+        Dec(curcat);
         continue;
       end;
       if (curcat <= BaseStar) then
@@ -589,11 +587,6 @@ begin
         SetVOCatpath(slash(VODir));
         OpenVOCatwin(Result);
       end;
-    starindex:
-      begin
-        SetBscPath(cfgcat.starcatpath[starindex - BaseStar]);
-        OpenBSCwin(Result);
-      end;
       else
         Result := False;
   end;
@@ -622,7 +615,6 @@ begin
     dsgsc: CloseDSgsc;
     gcstar: CloseGcat;
     vostar: CloseVOCat;
-    starindex: CloseBSC;
   else
     Result := False;
   end;
@@ -1270,33 +1262,6 @@ begin
   fillchar(EmptyRec, sizeof(GcatRec), 0);
   Result := True;
   case cat of
-    starindex:
-    begin
-      EmptyRec.options.flabel := StarLabel;
-      EmptyRec.options.ShortName := 'BSC';
-      EmptyRec.options.LongName := 'Bright Stars Catalog';
-      EmptyRec.options.rectype := rtStar;
-      EmptyRec.options.Equinox := 2000;
-      EmptyRec.options.EquinoxJD := jd2000;
-      EmptyRec.options.Epoch := 2000;
-      EmptyRec.options.MagMax := 6.5;
-      EmptyRec.options.UsePrefix := 1;
-      EmptyRec.options.altname[1] := True;
-      EmptyRec.options.altname[2] := True;
-      EmptyRec.options.flabel[16] := 'HR';
-      EmptyRec.options.flabel[17] := 'HD';
-      EmptyRec.options.flabel[18] := rsCommonName;
-      EmptyRec.options.flabel[19] := 'Flamsteed';
-      EmptyRec.options.flabel[20] := 'Bayer';
-      Emptyrec.star.valid[vsId] := True;
-      Emptyrec.star.valid[vsMagv] := True;
-      Emptyrec.star.valid[vsB_v] := True;
-      Emptyrec.star.valid[vsSp] := True;
-      Emptyrec.star.valid[vsPmra] := True;
-      Emptyrec.star.valid[vsPmdec] := True;
-      EmptyRec.vstr[1] := True;
-      EmptyRec.vstr[2] := True;
-    end;
     sky2000:
     begin
       EmptyRec.options.flabel := StarLabel;
@@ -4093,11 +4058,6 @@ begin
           SetGCVPath(cfgcat.VarStarCatPath[gcvs - BaseVar]);
           FindGCVS(id, ra, Dec, Result);
         end;
-      S_GC: if IsBSCPath(cfgcat.StarCatPath[starindex - BaseStar]) then
-        begin
-          SetBSCPath(cfgcat.StarCatPath[starindex - BaseStar]);
-          FindNumGC(strtointdef(id, 0), ra, Dec, Result);
-        end;
       S_GSC:
       begin
         SetGSCPath(cfgcat.StarCatPath[gsc - BaseStar]);
@@ -4110,31 +4070,6 @@ begin
         else if cfgcat.StarCatDef[gscc - BaseStar] then
           FindNumGSCC(id, ra, Dec, Result);
       end;
-      S_SAO: if IsBSCPath(cfgcat.StarCatPath[starindex - BaseStar]) then
-        begin
-          SetBSCPath(cfgcat.StarCatPath[starindex - BaseStar]);
-          FindNumSAO(strtointdef(id, 0), ra, Dec, Result);
-        end;
-      S_HD: if IsBSCPath(cfgcat.StarCatPath[starindex - BaseStar]) then
-        begin
-          SetBSCPath(cfgcat.StarCatPath[starindex - BaseStar]);
-          FindNumHD(strtointdef(id, 0), ra, Dec, Result);
-        end;
-      S_BD: if IsBSCPath(cfgcat.StarCatPath[starindex - BaseStar]) then
-        begin
-          SetBSCPath(cfgcat.StarCatPath[starindex - BaseStar]);
-          FindNumBD(id, ra, Dec, Result);
-        end;
-      S_CD: if IsBSCPath(cfgcat.StarCatPath[starindex - BaseStar]) then
-        begin
-          SetBSCPath(cfgcat.StarCatPath[starindex - BaseStar]);
-          FindNumCD(id, ra, Dec, Result);
-        end;
-      S_CPD: if IsBSCPath(cfgcat.StarCatPath[starindex - BaseStar]) then
-        begin
-          SetBSCPath(cfgcat.StarCatPath[starindex - BaseStar]);
-          FindNumCPD(id, ra, Dec, Result);
-        end;
       S_HR:
       begin
         SetXHIPPath(cfgcat.StarCatPath[DefStar - BaseStar]);
@@ -4702,7 +4637,6 @@ begin
       dsbase: OpenDSbase(xx1, xx2, yy1, yy2, ok);
       dstyc: OpenDSTyc(xx1, xx2, yy1, yy2, ok);
       dsgsc: OpenDSGsc(xx1, xx2, yy1, yy2, ok);
-      starindex: OpenBSC(xx1, xx2, yy1, yy2, ok);
       gcvs: OpenGCV(xx1, xx2, yy1, yy2, ok);
       wds: OpenWDS(xx1, xx2, yy1, yy2, ok);
       sac: OpenSAC(xx1, xx2, yy1, yy2, ok);
@@ -4809,7 +4743,6 @@ begin
       dsbase: ok := GetDSbase(rec);
       dstyc: ok := GetDSTyc(rec);
       dsgsc: ok := GetDSGsc(rec);
-      starindex: ok := GetBSC(rec);
       gcvs: ok := GetGCVS(rec);
       wds: ok := GetWDS(rec);
       sac:
@@ -5043,7 +4976,6 @@ begin
       dsbase: OpenDSbasewin(ok);
       dstyc: OpenDSTYCwin(ok);
       dsgsc: OpenDSGSCwin(ok);
-      starindex: OpenBSCwin(ok);
       gcvs: OpenGCVwin(ok);
       wds: OpenWDSwin(ok);
       sac: OpenSACwin(ok);
@@ -5150,7 +5082,6 @@ begin
       dsbase: ok := GetDSbase(rec);
       dstyc: ok := GetDSTyc(rec);
       dsgsc: ok := GetDSGsc(rec);
-      starindex: ok := GetBSC(rec);
       gcvs: ok := GetGCVS(rec);
       wds: ok := GetWDS(rec);
       sac:
@@ -5527,11 +5458,6 @@ begin
       ok := FindAtPos(microcat, x1, y1, x2, y2, nextobj, True, searchcenter, cfgsc, rec);
       CloseMCT;
     end;
-    if (not ok) and cfgcat.starcaton[starindex - BaseStar] then
-    begin
-      ok := FindAtPos(starindex, x1, y1, x2, y2, nextobj, True, searchcenter, cfgsc, rec);
-      CloseBSC;
-    end;
   end;
 { if (not ok) and Catalog1Show then FindCatalogue1(ar,de,dx,dx,nextobj,ok,nom,ma,desc);
   if (not ok) and Catalog2Show then FindCatalogue2(ar,de,dx,dx,nextobj,ok,nom,ma,desc,notes);
@@ -5570,7 +5496,6 @@ function Tcatalog.CheckPath(cat: integer; catpath: string): boolean;
 begin
   case cat of
     DefStar: Result := IsDefaultStarspath(catpath);
-    starindex: Result := IsBSCPath(catpath);
     sky2000: Result := IsSkyPath(catpath);
     tyc: Result := IsTYCPath(catpath);
     tyc2: Result := IsTY2Path(catpath);

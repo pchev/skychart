@@ -4578,8 +4578,6 @@ begin
         FindAtPosCat(vostar);
       if Fcatalog.cfgcat.starcaton[DefStar - BaseStar] then
         FindAtPosCat(DefStar);
-      if Fcatalog.cfgcat.starcaton[starindex - BaseStar] then
-        FindAtPosCat(starindex);
       if Fcatalog.cfgcat.starcaton[dsbase - BaseStar] then
         FindAtPosCat(dsbase);
       if Fcatalog.cfgcat.starcaton[sky2000 - BaseStar] then
@@ -4829,8 +4827,6 @@ begin
         FindAtPosCat(vostar);
       if Fcatalog.cfgcat.starcaton[DefStar - BaseStar] then
         FindAtPosCat(DefStar);
-      if Fcatalog.cfgcat.starcaton[starindex - BaseStar] then
-        FindAtPosCat(starindex);
       if Fcatalog.cfgcat.starcaton[dsbase - BaseStar] then
         FindAtPosCat(dsbase);
       if Fcatalog.cfgcat.starcaton[sky2000 - BaseStar] then

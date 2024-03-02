@@ -31,7 +31,7 @@ uses u_constant, u_util, u_translation, UScaleDPI, downloaddialog, cu_calceph,
 type
 
   TCatInfo = class(TObject)
-    installed, prereqok, newversion: boolean;
+    installed, prereqok, newversion, index: boolean;
     catnum,minlevel,maxlevel: integer;
     cattype,cdcminversion,version,catname,desc,size,url,prereq,path,shortname: string;
     installedversion,infourl: string;
@@ -137,11 +137,20 @@ const colaction=0; colinstall=1; colname=2; coldesc=3; colsize=4; colinfo=5;
 {$R *.lfm}
 
 constructor TCatInfo.Create(data:Tstringlist);
+var ct: TStringList;
 begin
   inherited Create;
-// star;4.3;20240101;GAIA DR3 part 2;Complement stars to magnitude 15;1.1 GB;
-// https://vega.ap-i.net/pub/GaiaDR3/GaiaDR3_2.zip;GAIA DR3 part 1;gaia/gaia2;0;5
-  cattype:=data[0];
+  ct := Tstringlist.Create;
+  Splitrec2(data[0],'-',ct);
+  if ct.Count>=2 then begin
+    cattype:=ct[0];
+    index:=(ct[1]='index');
+  end
+  else begin
+    cattype:=ct[0];
+    index:=false;
+  end;
+  ct.Free;
   cdcminversion:=data[1];
   version:=data[2];
   catname:=data[3];
@@ -369,10 +378,11 @@ begin
       ReadLn(f,buf);
       if copy(buf,1,1)='#' then continue;
       Splitrec2(buf,';',row);
-      if row.Count<>14 then continue;
+      if row.Count<14 then continue;
       if row[1] > cdcver then continue; // skip catalog not supported by this version of the program
       // type of object
       if row[0]='star' then grid:=GridStar
+      else if row[0]='star-index' then grid:=GridStar
       else if row[0]='double star' then grid:=GridDouble
       else if row[0]='variable star' then grid:=GridVar
       else if row[0]='dso' then grid:=GridDSO
@@ -790,7 +800,14 @@ begin
     Fcatalog.cfgcat.GCatLst[i].path := slash(PrivateCatalogDir)+slash(InstallInfo.path);
     Fcatalog.cfgcat.GCatLst[i].min := InstallInfo.minlevel;
     Fcatalog.cfgcat.GCatLst[i].max := InstallInfo.maxlevel;
-    Fcatalog.cfgcat.GCatLst[i].Actif := true;
+    if InstallInfo.index then begin
+      Fcatalog.cfgcat.GCatLst[i].Actif := false;
+      Fcatalog.cfgcat.GCatLst[i].Search := true;
+    end
+    else begin
+      Fcatalog.cfgcat.GCatLst[i].Actif := true;
+      Fcatalog.cfgcat.GCatLst[i].Search := false;
+    end;
     Fcatalog.cfgcat.GCatLst[i].magmax := 0;
     Fcatalog.cfgcat.GCatLst[i].Name := '';
     Fcatalog.cfgcat.GCatLst[i].cattype := 0;

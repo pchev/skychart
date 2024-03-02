@@ -96,17 +96,20 @@ object f_config_catalog: Tf_config_catalog
         object Label19: TLabel
           Left = 8
           Height = 18
-          Top = 336
+          Top = 304
           Width = 56
           Caption = 'Variables'
           ParentColor = False
           ParentFont = False
         end
         object Label20: TLabel
-          Left = 8
+          AnchorSideLeft.Control = Label19
+          AnchorSideLeft.Side = asrBottom
+          Left = 76
           Height = 18
-          Top = 360
+          Top = 304
           Width = 51
+          BorderSpacing.Left = 12
           Caption = 'Doubles'
           ParentColor = False
           ParentFont = False
@@ -248,7 +251,7 @@ object f_config_catalog: Tf_config_catalog
           TabOrder = 8
         end
         object Panel2: TPanel
-          Left = 88
+          Left = 8
           Height = 90
           Top = 336
           Width = 379
@@ -268,33 +271,17 @@ object f_config_catalog: Tf_config_catalog
             WordWrap = True
           end
         end
-        object bsc3: TDirectoryEdit
-          Tag = 16
-          AnchorSideTop.Side = asrCenter
-          Left = 269
-          Height = 28
-          Top = 245
-          Width = 190
-          OnAcceptDirectory = CDCAcceptDirectory
-          ShowHidden = False
-          ButtonWidth = 23
-          Constraints.MaxHeight = 28
-          NumGlyphs = 1
-          MaxLength = 0
-          ParentFont = False
-          TabOrder = 10
-          OnChange = CDCStarPathChange
-        end
         object Label99: TLabel
-          Left = 8
-          Height = 46
-          Top = 250
-          Width = 249
-          AutoSize = False
+          AnchorSideLeft.Control = Label20
+          AnchorSideLeft.Side = asrBottom
+          Left = 139
+          Height = 18
+          Top = 304
+          Width = 142
+          BorderSpacing.Left = 12
           Caption = 'Indexes SAO BD HD GC'
           ParentColor = False
           ParentFont = False
-          WordWrap = True
         end
       end
       object Page3: TTabSheet

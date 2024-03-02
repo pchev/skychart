@@ -6826,9 +6826,6 @@ begin
   catalog.cfgcat.starcatfield[DefStar - BaseStar, 2] := 10;
   catalog.cfgcat.starcatdef[vostar - BaseStar] := False;
   catalog.cfgcat.starcatfield[vostar - BaseStar, 2] := 10;
-  catalog.cfgcat.starcatpath[starindex - BaseStar] :=
-    catalog.cfgcat.starcatpath[starindex - BaseStar] + PathDelim + 'starindex';
-  catalog.cfgcat.starcatfield[starindex - BaseStar, 2] := 0;
   catalog.cfgcat.starcatpath[sky2000 - BaseStar] :=
     catalog.cfgcat.starcatpath[sky2000 - BaseStar] + PathDelim + 'sky2000';
   catalog.cfgcat.starcatfield[sky2000 - BaseStar, 1] := 6;

@@ -41,7 +41,6 @@ type
   Tf_config_catalog = class(TFrame)
     addobj: TButton;
     addcat: TButton;
-    bsc3: TDirectoryEdit;
     Button1: TButton;
     ButtonInstallCat: TButton;
     Button5: TButton;
@@ -797,7 +796,6 @@ begin
   hnbase2.Value := ccat.StarCatField[hn290 - BaseStar, 2];
   def3.Text := changetext(systoutf8(ccat.StarCatPath[DefStar - BaseStar]), def3.Text);
   gaia3.Text := changetext(systoutf8(ccat.StarCatPath[gaia - BaseStar]), gaia3.Text);
-  bsc3.Text := changetext(systoutf8(ccat.StarCatPath[starindex - BaseStar]), bsc3.Text);
   sky3.Text := changetext(systoutf8(ccat.StarCatPath[sky2000 - BaseStar]), sky3.Text);
   tyc3.Text := changetext(systoutf8(ccat.StarCatPath[tyc - BaseStar]), tyc3.Text);
   ty23.Text := changetext(systoutf8(ccat.StarCatPath[tyc2 - BaseStar]), ty23.Text);

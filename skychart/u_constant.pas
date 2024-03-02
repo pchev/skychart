@@ -475,7 +475,7 @@ const
   dsgsc = 1013;
   gcstar = 1014;
   vostar = 1015;
-  starindex = 1016;
+  unused1 = 1016;
   usnob = 1017;
   hn290 = 1018;
   gaia  = 1019;
