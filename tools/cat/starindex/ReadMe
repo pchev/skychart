@@ -1,0 +1,319 @@
+I/131A      SAO Star Catalog J2000     (SAO Staff 1966; USNO, ADC 1990)
+================================================================================
+Smithsonian Astrophysical Observatory Star Catalog
+    SAO Staff
+   <Smithsonian Astrophysical Observatory (1966)>
+================================================================================
+ADC_Keywords: Positional data ; Proper motions
+
+Description:
+    This machine-readable SAO catalog from the Astronomical Data Center is
+    based on an original binary version of the Smithsonian Astrophysical
+    Observatory Star Catalog (SAO, SAO Staff 1966). Subsequent
+    improvements by T. A. Nagy (1979) included the addition of equatorial
+    coordinates in radians and cross-identifications from the Table of
+    Correspondences SAO/HD/DM/GC (Morin 1973). As a prelude to creation of
+    the 1984 version of the SAO, a new version of the SAO-HD-GC-DM Cross
+    Index was prepared (Roman, Warren, and Schofield 1983). The 1984
+    version of the SAO contained the corrected and extended cross
+    identifications, all errata published up to January 1984 and known to
+    the ADC, numerous errors forwarded to the ADC by colleagues, and
+    errors discovered at the ADC during the course of this work. Clayton
+    A. Smith of the U. S. Naval Observatory provided J2000.0 positions and
+    proper motions for the SAO stars. Published and unpublished errors
+    discovered in the previous version (1984) have been corrected (up to
+    May 1991). The catalog contains SAO number; the right ascension and
+    declination with a B1950.0 equinox and epoch; annual proper motion and
+    its standard deviation, photographic and visual magnitudes; spectral
+    type; references to sources; the Durchmusterung (DM) identifier if the
+    star is listed in the Bonner DM (BD), Cordoba DM (CD), or Cape
+    Photographic DM (CP); component identification; The Henry Draper
+    (Extension) (HD or HDE) number; and J2000 positions and proper
+    motions. Multiple-star component identifications have been added to
+    stars where more than one SAO entry has the same DM number. The Henry
+    Draper Extension (HDE) numbers have been added for stars found in both
+    volumes of the extension. Data for duplicate SAO entries (those
+    referring to the same star) have been flagged. J2000 positions in
+    usual units and in radians have been added.
+
+File Summary:
+--------------------------------------------------------------------------------
+ FileName  Lrecl   Records    Explanations
+--------------------------------------------------------------------------------
+ReadMe        80         .    This file
+sao.dat      204    258997    The SAO J2000.0 catalogue
+doc.txt       85      1479    Complete Documentation (extracted from the
+                              CD-ROM "Selected Astronomical Catalogs",
+                              Vol. 1, NASA 1991)
+--------------------------------------------------------------------------------
+
+Byte-by-byte Description of file: sao.dat
+--------------------------------------------------------------------------------
+   Bytes Format  Units   Label    Explanations
+--------------------------------------------------------------------------------
+   1-  6  I6     ---     SAO      [1/258997]+ SAO Catalog number
+       7  A1     ---     delFlag  [D] if star deleted (ignore all fields)
+   8-  9  I2     h       RAh      Hours RA, Equinox=B1950, Epoch=1950.0
+  10- 11  I2     min     RAm      Minutes RA, equinox B1950, Epoch=1950.0
+  12- 17  F6.3   s       RAs      Seconds RA, equinox B1950, Epoch=1950.0
+  18- 24  F7.4   s/a     pmRA     Annual proper motion in RA, FK4 system
+  25- 26  I2     mas/a e_pmRA     Standard deviation in pmRA
+      27  A1     ---     RA2mf    [+-] '+', add 1, or '-', substract 1,
+                                    RA minute: indication that the minutes
+                                    of time associated with the seconds
+                                    portion RA2 must be increased or
+                                    decreased by 1
+  28- 33  F6.3   s       RA2s     Seconds portion of RA, original epoch,
+                                    precessed to B1950
+  34- 35  I2     10mas e_RA2s     Standard deviation of RA2
+  36- 41  F6.1   a       EpRA2    Epoch of RA2 (RA original epoch)
+      42  A1     ---     DE-      Sign Dec, equinox B1950, Epoch=1950.0
+  43- 44  I2     deg     DEd      Degrees Dec, equinox B1950, Epoch=1950.0
+  45- 46  I2     arcmin  DEm      Minutes Dec, equinox B1950, Epoch=1950.0
+  47- 51  F5.2   arcsec  DEs      Seconds Dec, equinox B1950, Epoch=1950.0
+  52- 57  F6.3  arcsec/a pmDE     ? Annual proper motion in Dec, FK4 system (10)
+  58- 59  I2     mas/a e_pmDE     Standard deviation of Dec proper motion
+      60  A1     ---     DE2mf    [+-] '+', add 1, or '-', substract 1:
+                                    Indication that the arcminutes
+                                    associated with DE2 must be increased or
+                                    decreased by 1
+  61- 65  F5.2   arcsec  DE2s     Seconds of Declination, original epoch,
+                                    precessed to B1950
+  66- 67  I2     10mas e_DE2s     Standard deviation of DE2
+  68- 73  F6.1   a       EpDE2    Epoch of DE2 (Declinaation original epoch)
+  74- 76  I3     10mas e_Pos      Standard deviation of position at epoch 1950.0
+  77- 80  F4.1   mag     Pmag     []?=99.9 Photographic magnitude
+  81- 84  F4.1   mag     Vmag     []?=99.9 Visual magnitude
+  85- 87  A3     ---     SpType   Spectral type, '+++' for composite spectra
+  88- 89  I2     ---   r_Vmag     Coded source of visual magnitude (1)
+  90- 91  I2     ---   r_Num      Coded source of star number and footnotes (2)
+      92  I1     ---   r_Pmag     Coded source of photographic magnitude (3)
+      93  I1     ---   r_pmRA     Coded source of proper motions (4)
+      94  I1     ---   r_SpType   Coded source of spectral type (5)
+      95  I1     ---     Rem      Coded remarks duplicity and variability (6)
+      96  I1     ---   a_Vmag     Accuracy of V: 0 = 2 decimals, 1=1 decimal
+      97  I1     ---   a_Pmag     Accuracy of Ptg: 0 = 2 decimals, 1=1 decimal
+  98- 99  I2     ---   r_Cat      Code for source catalog (7)
+ 100-104  I5     ---     CatNum   Number in source catalog
+ 105-117  A13    ---     DM       Durchmusterung identification (9)
+ 118-123  A6     ---     HD       Henry Draper Catalog (HD or HDE) number (A6)
+                                    (Catalogue <III/135>)
+     124  A1     ---   m_HD       HD component and multiple code (8)
+ 125-129  A5     ---     GC       Boss General Catalog (GC) number
+                                    (Catalogue <I/113>)
+ 130-139  D10.8  rad     RArad    Right ascension, 1950.0, in radians
+ 140-150  D11.8  rad     DErad    Declination, 1950.0, in radians
+ 151-152  I2     h       RA2000h  Hours RA, equinox, epoch J2000.0
+ 153-154  I2     min     RA2000m  Minutes RA, equinox, epoch J2000.0
+ 155-160  F6.3   s       RA2000s  Seconds RA, equinox, epoch J2000.0
+ 161-167  F7.4   s/a     pmRA2000 Annual proper motion in FK5 system
+     168  A1     ---     DE2000-  Sign Dec, equinox, epoch J2000.0
+ 169-170  I2     deg     DE2000d  Degrees Dec, equinox, epoch J2000.0
+ 171-172  I2     arcmin  DE2000m  Minutes Dec, equinox, epoch J2000.0
+ 173-177  F5.2   arcsec  DE2000s  Seconds Dec, equinox, epoch J2000.0
+ 178-183  F6.3  arcsec/a pmDE2000 ? Annual proper motion in FK5 system (10)
+ 184-193  D10.8  rad    RA2000rad Right ascension, J2000.0, in radians
+ 194-204  D11.8  rad    DE2000rad Declination, J2000.0, in radians
+--------------------------------------------------------------------------------
+Note (1): Visual Magnitude Sources:
+  -------------------------------------------------------------------------
+         Photo-
+  Visual visual Magnitude source
+  -------------------------------------------------------------------------
+    0           Does not appear in source catalog
+    1      21   Determined by source catalog
+    2      22   Determined by source catalog or by authority in footnote
+    3      23   Source cited in source catalog introduction
+           24   Source unspecified
+    5           Taken from "Bonner Durchmusterung"
+    8           Based on Durchmusterung magnitudes and visual estimates
+    9           Taken from AGK1
+   10           Taken from Cordoba Zones (Resultados)
+   12           Taken from CGA (Perrine 1911a, b) or Cordoba Zones
+   13           Taken from Harvard publications
+   14           Taken from Harvard or San Luis photometry
+   15           Taken from the "Henry Draper Catalogue"
+   16           Combined magnitude of component stars
+   17           Arithmetic mean of maximum and minimum magnitudes of a
+                  variable star
+  -------------------------------------------------------------------------
+   Always check the duplicity / variability code (Note 6) when using
+   magnitudes. When blank, code = 0 and field = 99.9.
+
+Note (2): Star-Number Sources and Footnotes:
+  --------------------------------------------------
+    Footnote
+  without with  Star Number
+  --------------------------------------------------
+    0      16   Source catalog only
+    1      17   Source catalog and BD
+    2      18   Source catalog and CD
+    3      19   Source catalog and CPD
+    4      20   Cordoba B (Resultados) and CD
+    5      21   Cordoba A (Resultados) and CD
+    6      22   AGK1 and BD
+    7           GC and BD
+    8      24   Cordoba B (Resultados) and CPD
+    9           Cordoba A (Resultados) and CPD
+  --------------------------------------------------
+  When blank, the code for DM is 0 or 16, footnote is 0 through 9,
+  and field is all zeros. Footnotes and star numbers are those
+  appearing in the source catalogs.
+
+Note (3): Photographic Magnitude Sources:
+  ---------------------------------------------------
+  Code  Source
+  ---------------------------------------------------
+    0   Does not appear in source catalog
+    1   Determined by source catalog
+    4   Taken from magnitudes of the CPD and diameters
+        of the  Cape Astrographic Catalogue
+    8   Source cited in source catalog introduction
+    9   Columbia Contributions Numbers 30 and 31
+        (Schilt and Hill 1937, 1938)
+  ---------------------------------------------------
+  When blank, code is 0 and field is all zeros.
+
+Note (4): Proper-Motion Sources:
+  ---------------------------------------------------------
+  Code  Source
+  ---------------------------------------------------------
+    1   Determined by source catalog
+    3   Determined by comparison of catalog and Greenwich AC
+    5   Determined by comparison of catalog and AGK1
+    6   Determined by comparison of catalog and Greenwich AC
+        on the basis of the smallest difference in positions
+        (see page xiii of source reference)
+    8   Determined by comparison of catalog and AGK1 on the
+        basis of the smallest difference in positions
+        (see page xiii of source reference)
+  ---------------------------------------------------------
+
+Note (5): Spectral-Type Sources:
+  ----------------------------------------------------------
+  Code  Source
+  ----------------------------------------------------------
+    0   Taken from the Henry Draper Catalogue or no
+        spectrum in source catalog
+    1   Taken from the HD with M stars reclassified by Miss Cannon
+    2   Classified by G. G. Cillie
+    3   Classified by Goedicke
+    4   Classified by D. Hoffleit
+    5   Classified by M. W. Mayall
+    6   Classified at Leander McCormick Observatory
+    7   Classified by Nassau and Seyfert
+  ----------------------------------------------------------
+  If the spectrum is composite, "+++" is stored in the field
+  and the code is 0.
+
+Note (6):  Miscellaneous Coded Remarks for Duplicity and Variability:
+  -----------------------------------------------------
+  Code  Meaning
+  -----------------------------------------------------
+    0   No additional information
+    1   Double star - see source catalog for source
+    2   Double star in Aitken's Double Star Catalogue
+        (Aitken 1932)
+    3   Double star in Burnham's Double Star Catalogue
+        (Burnham 1906)
+    4   Variable star in visual magnitude in source catalog
+    5   Variable star in photographic magnitude in source catalog
+    6   Variable star in both magnitudes
+    7   Both double and variable, in either visual or
+        photographic magnitudes
+  -----------------------------------------------------
+  When blank, code is 0, no field is involved.
+
+Note (7): References for the Source Catalogs:
+  -----------------------------------------------------
+         No.      Abbreviated Title
+  -----------------------------------------------------
+         01       AGK2, Volume 1
+         02       AGK2, Volume 2
+         03       AGK2, Volume 5
+         04       AGK2, Volume 6
+         05       AGK2, Volume 7
+         06       AGK2, Volume 8
+         20       Yale Transactions 11
+         21       Yale Transactions 12   Part I
+         22       Yale Transactions 12   Part II
+         23       Yale Transactions 13   Part I
+         24       Yale Transactions 13   Part II
+         25       Yale Transactions 14
+         26       Yale Transactions 16
+         27       Yale Transactions 17
+         28       Yale Transactions 18
+         29       Yale Transactions 19
+         30       Yale Transactions 20
+         31       Yale Transactions 21
+         32       Yale Transactions 22   Part I
+         33       Yale Transactions 22   Part II
+         34       Yale Transactions 24
+         35       Yale Transactions 25
+         36       Yale Transactions 26   Part I
+         37       Yale Transactions 26   Part II
+         38       Yale Transactions 27
+         40       Cape Annals 17
+         41       Cape Annals 18
+         42       Cape Annals 19
+         43       Cape Annals 20
+         48       Cape Zone
+         60       Melbourne 3
+         61       Melbourne 4
+         70       GC
+         71       FK3
+         74       FK4
+  -----------------------------------------------------
+
+Note (8):  Explanation of HD Codes:
+  -------------------------------------------------------------
+  Code   Meaning
+  -------------------------------------------------------------
+    0    Single star or primary with a companion > 0.3 mag
+         (visual) fainter.
+    1    Brighter component with a companion <= 0.3 mag fainter.
+    2    Fainter component with a companion <= 0.3 mag brighter.
+    9    The "SAO Catalog" entry refers to two consecutive
+         HD numbers, the lower of which is given.
+  -------------------------------------------------------------
+
+Note (9): The DM designation is coded as:
+    catalog 'BD', 'CD', 'CP' (A2)
+    zone and number (A8), and 
+    component identification (A2) if there are two or more SAO stars 
+       having the same DM number
+    supplement letter (A1) for BD (Warren and Kress, Catalogue <I/71>)
+
+Note (10): There are 3 blank values for the Declination proper motions for:
+  SAO 208759     (pmDE=-0.180 in printed catalogue)
+  SAO 208795     (pmDE=-0.042 in printed catalogue)
+  SAO 212470     (pmDE=-0.072 in printed catalogue)
+--------------------------------------------------------------------------------
+
+See also:
+  A more recent catalogue with better position and proper motion data,
+  the so-called "PPM Catalogue" (Positions and Proper Motions)
+  has been prepared at ARI (Astronomisches Rechen-Institut at Heidelberg,
+  Germany); is is made of two parts:
+  I/146 : PPM North Star Catalogue, 181731 stars;
+  I/193 : PPM South Star Catalogue, 197179 stars.
+
+References:
+   Morin, D. 1973, Table of Correspondences SAO/HD/DM/GC, Obs. de Meudon,
+      unpublished                                       =IV/12
+   Nagy, T.A. 1979, Documentation for the Machine-Readable Version of the
+      Smithsonian Astrophysical Observatory Catalog(ue) (EBCDIC Version),
+      Systems and Applied Sciences Corporation R-SAW-7/79-34
+   Roman, N.G., Warren Jr., W.H., and Schofield Jr., N.J. 1983, Documentation
+      for the Machine-Readable Version of the SAO-HD-GC-DM Cross Index,
+      Version 1983, NSSDC/WDC-A-R&S 83-17
+
+Historical Notes:
+ * Changes since 1984 Version: see in file "sao.doc", section 4.
+   by Nancy G. Roman and Wayne H. Warren.
+ * October 1991: CD-ROM ""Selected Astronomical Catalogs" Vol. 1,
+   directory:  /astrom/saoj2000
+ * 24-Jun-1993: First standardized document at CDS
+ * 25-Oct-1995: Standardized document revisited.
+================================================================================
+(End)                                     Francois Ochsenbein [CDS]  27-Oct-1995
