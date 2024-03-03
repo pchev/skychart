@@ -96,20 +96,21 @@ object f_config_catalog: Tf_config_catalog
         object Label19: TLabel
           Left = 8
           Height = 18
-          Top = 304
+          Top = 224
           Width = 56
           Caption = 'Variables'
           ParentColor = False
           ParentFont = False
         end
         object Label20: TLabel
-          AnchorSideLeft.Control = Label19
+          AnchorSideLeft.Control = Label11
           AnchorSideLeft.Side = asrBottom
+          AnchorSideTop.Control = Label19
           Left = 76
           Height = 18
-          Top = 304
+          Top = 224
           Width = 51
-          BorderSpacing.Left = 12
+          BorderSpacing.Left = 8
           Caption = 'Doubles'
           ParentColor = False
           ParentFont = False
@@ -244,22 +245,27 @@ object f_config_catalog: Tf_config_catalog
         object ButtonInstallCat: TButton
           Left = 8
           Height = 27
-          Top = 440
+          Top = 360
           Width = 300
           Caption = 'Install object catalog'
           OnClick = ButtonInstallCatClick
           TabOrder = 8
         end
         object Panel2: TPanel
+          AnchorSideLeft.Control = Label19
+          AnchorSideTop.Control = Label19
+          AnchorSideTop.Side = asrBottom
           Left = 8
           Height = 90
-          Top = 336
+          Top = 250
           Width = 379
+          BorderSpacing.Top = 8
           BevelOuter = bvNone
           ClientHeight = 90
           ClientWidth = 379
           TabOrder = 9
           object LabelNewCat: TLabel
+            AnchorSideTop.Side = asrBottom
             Left = 0
             Height = 90
             Top = 0
@@ -272,16 +278,39 @@ object f_config_catalog: Tf_config_catalog
           end
         end
         object Label99: TLabel
-          AnchorSideLeft.Control = Label20
+          AnchorSideLeft.Control = Label12
           AnchorSideLeft.Side = asrBottom
+          AnchorSideTop.Control = Label19
           Left = 139
           Height = 18
-          Top = 304
+          Top = 224
           Width = 142
-          BorderSpacing.Left = 12
+          BorderSpacing.Left = 8
           Caption = 'Indexes SAO BD HD GC'
           ParentColor = False
           ParentFont = False
+        end
+        object Label11: TLabel
+          AnchorSideLeft.Control = Label19
+          AnchorSideLeft.Side = asrBottom
+          AnchorSideTop.Control = Label19
+          Left = 64
+          Height = 18
+          Top = 224
+          Width = 4
+          Caption = ','
+          ParentColor = False
+        end
+        object Label12: TLabel
+          AnchorSideLeft.Control = Label20
+          AnchorSideLeft.Side = asrBottom
+          AnchorSideTop.Control = Label19
+          Left = 127
+          Height = 18
+          Top = 224
+          Width = 4
+          Caption = ','
+          ParentColor = False
         end
       end
       object Page3: TTabSheet

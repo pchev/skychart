@@ -56,6 +56,8 @@ type
     Image2: TImage;
     Image3: TImage;
     Label10: TLabel;
+    Label11: TLabel;
+    Label12: TLabel;
     Label8: TLabel;
     Label9: TLabel;
     Label99: TLabel;
