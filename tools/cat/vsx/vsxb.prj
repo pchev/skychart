@@ -4,7 +4,7 @@ type=1
 shortname=VSXb
 longname=Bright VSX stars
 numfiles=1
-inputfiles0=vsxmag14-05.dat
+inputfiles0=vsxb.dat
 caturl=
 
 [Page2]
@@ -12,7 +12,7 @@ ratype=3
 dectype=1
 equinox=2000
 epoch=2000
-magmax=14
+magmax=13
 identifierformat=0
 highprecpm=0
 nebsize=0

@@ -2,9 +2,9 @@
 binarycat=0
 type=1
 shortname=VSX
-longname=Variable Star Index
+longname=VSX variable stars
 numfiles=1
-inputfiles0=vsx.dat
+inputfiles0=vsxv.dat
 caturl=
 
 [Page2]
