@@ -393,7 +393,7 @@ begin
       for i:=1 to tt.Count-1 do begin
         buf:=FindVarSubType(tt[i]);
         if trim(buf)='' then buf:=FindVarType(tt[i]);
-        result:=result+buf+crlf;
+        result:=result+buf+crlf+crlf;
       end;
       exit;
     end;
