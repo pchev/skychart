@@ -337,7 +337,7 @@ begin
   txt:=FindVarType(t);
   if trim(txt)<>'' then begin
     f_info.setpage(3);
-    f_info.TitlePanel.Caption :='Variable star type';
+    f_info.TitlePanel.Caption :='Variable star type '+trim(t);
     f_info.Button1.Caption := rsClose;
     f_info.InfoMemo.Text:=txt;
     f_info.show;
@@ -371,11 +371,14 @@ begin
     exit;
   end;
   t:=tt[0];
+  if pos(':',t)>0 then
+    result:='Classification is uncertain'+crlf+crlf
+  else
+    result:='';
   t:=StringReplace(t,':','',[rfReplaceAll]);
-  result:='';
   for i:=0 to Length(vartype)-1 do begin
     if vartype[i].code=t then begin
-      result:=t+crlf+vartype[i].desc+crlf+crlf;
+      result:=result+t+crlf+vartype[i].desc+crlf+crlf;
       break;
     end;
   end;
