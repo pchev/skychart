@@ -196,6 +196,8 @@ data/sample/lc_familylookup.txt
 data/sample/us.dat
 data/sample/world.dat
 data/sample/aavsoeasy.dat
+data/sample/vsxtype.txt
+data/sample/vsxsubtype.txt
 data/script/LocationTime.cdcps
 data/script/ObserverTool.cdcps
 data/script/PHDguiding.cdcps

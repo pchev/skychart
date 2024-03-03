@@ -1,0 +1,111 @@
+AR
+Detached systems of the AR Lacertae type. Both components are subgiants not filling their inner equipotential surfaces.
+ 
+BD
+Binary systems with at least one brown dwarf component.
+ 
+D
+Detached systems, with components not filling their inner Roche lobes.
+ 
+DM
+Detached main-sequence systems. Both components are main-sequence stars and do not fill their inner Roche lobes.
+ 
+DS
+Detached systems with a subgiant. The subgiant also does not fill its inner critical surface.
+ 
+DW
+Systems similar to W UMa systems in physical properties (KW), but not in contact.
+ 
+EL
+EL CVn-type binaries, consisting of a core helium-composition pre-white dwarf and an early-type main-sequence companion.
+ 
+GS
+Systems with one or both giant and supergiant components; one of the components may be a main sequence star.
+ 
+HW
+HW Vir-type systems consisting of a hot subdwarf and a red or brown dwarf companion. These show a significant reflection effect.
+ 
+K
+Contact systems, both components filling their inner critical surfaces.
+ 
+KE
+Contact systems of early (O-A) spectral type, both components being close in size to their inner critical surfaces.
+ 
+KW
+Contact systems of the W UMa type, with ellipsoidal components of F0-K spectral type. Primary components are main-sequence stars and secondaries lie below and to the left of the main sequence in the (MV, B-V) diagram.
+ 
+PN
+Binary systems having, among their components, nuclei of planetary nebulae.
+Example: UU Sge.
+ 
+SD
+Semi-detached systems in which the surface of the less massive component is close to its inner Roche lobe.
+ 
+WD
+Binary systems with at least one white-dwarf component, or a single rotating white dwarf.
+
+PSR
+Binary systems having a pulsar as the compact object that strongly irradiates a low mass companion. Example: QX Sge (E/PSR).
+ 
+ROT
+T Tauri stars showing periodic variability due to spots. For those members of this class where special features are well known, the subtype classifications of CTTS/ROT or WTTS/ROT may be applied. Where not precisely known, the subtype of TTS/ROT is used.
+ 
+RS
+Used as a subtype for eclipsing or ellipsoidal systems showing chromospheric activity (RS-type variability).
+ 
+(B)
+Double-mode ("beat") pulsators of the types BCEP(B), DSCT(B), HADS(B), SXPHE(B), DCEP(B), and DCEPS(B). Double-mode RR Lyrae stars are denoted by the type RRD.
+ 
+BL
+RR Lyrae stars showing the Blazhko effect.
+ 
+GWLIB
+GW Librae stars, subtype of ZZ Ceti stars, non-radially pulsating white dwarfs in cataclysmic systems, see ZZ/GWLIB.
+ 
+O
+Some DAV stars (ZZA-type) with temperatures between 10600 and 11300 K show repeated outbursts, recurring on irregular intervals of order days and lasting for several hours. These are given as ZZA/O stars.
+ 
+DIP
+Dippers, stars showing dips in their light curve. These are usually YSOs of spectral types K and M (example: EPIC 204278916) but in some cases the dips may not be associated to stellar youth and appear in earlier type stars (example: KIC 8462852). The amplitude of the dips may be deeper than 1 mag. Some are quasi-periodic and some are irregular. The possible explanation for the dips involves circumstellar disks and transiting cometary-like debris.
+ 
+WR
+Binary systems with at least one Wolf-Rayet component.
+ 
+(YY)
+When this suffix is added to any of the YSO-type eruptive variables (prototype YY Orionis) it indicates the presence of absorption components on the redward sides of emission lines, which is a sign of the infall of matter toward the stars' surfaces.
+ 
+IBWD
+Interacting Binary White Dwarfs. Close binary systems with ultra short periods (5-70 minutes). Also known as AM CVn-type stars or Helium dwarf novae because they lack hydrogen lines in their spectra. Outbursting IBWD objects can be identified by some outburst properties: short (5-6 d.) superoutbursts (that may be double); rapid fadings but long-fading tails lasting 100-200 d. and without IR-excess; smaller amplitudes than UGWZ stars and fainter superoutburst absolute magnitudes (<4).
+ 
+V
+V Sge subtype of the CBSS variables. They belong to the CBSS class but are not detected as supersoft X-ray emitters. In V Sge stars, lines are usually stronger and broader when compared to the rest of the CBSS but this might be a selection effect associated with chemical abundance. Environments and stars with low chemical abundance have weaker winds so supersoft X-rays can escape and not be absorbed by the interstellar medium or the stellar wind. This is the case of the Magellanic Clouds. The opposite happens in stars and environmets with high chemical abundance where the soft photons are either absorbed by the stellar wind or by the interstellar medium (or both).
+Examples: V Sge, WX Cen.
+ 
+VY
+VY Scl subtype. They are cataclysmic binary systems with a hot (35,000-65,000 K) and luminous white dwarf that occasionally undergo fadings of more than 1 magnitude (up to several magnitudes) due to a low rate of mass transfer. These fadings might last from days to years. At maximum they vary up to 1 magnitude. They are usually nova-like variables that show no outbursts but some dwarf nnovae also show similar fadings. Orbital periods usually range between 0.12 and 0.18 d.
+Examples: VY Scl, MV Lyr.
+ 
+BHXB
+Black Hole X-ray Binaries. Interacting binary systems where X-rays are produced by material accreting from a secondary companion star onto a black hole (BH) primary through an accretion disk. Most of them (the transient sources) are a subtype of the LMXB but there are also some HMXB that are BHXB (usually the persistent sources, which spend most of their time in an X-ray bright state). They show outbursts as a consequence of instabilities developing in the accretion disk that cause more rapid mass transfer onto the BH and lead to bright X-ray emission. They also get brighter in the optical bands by several magnitudes. Example: V0404 Cyg
+ 
+XB
+X-ray bursters. Close binary systems showing X-ray and optical bursts, their duration being from several seconds to ten minutes, with amplitudes of about 0.1 mag. in V.
+Examples: V801 Ara, V926 Sco.
+ 
+XJ
+X-ray binaries characterized by the presence of relativistic jets evident at X-ray and radio wavelengths, as well as in the optical spectrum in the form of emission components showing periodic displacements with relativistic velocities. Examples: V1343 Aql
+ 
+XN
+X-ray systems that occasionally rapidly increase in brightness by 1-9 mag. in V simultaneously with the X-ray range.
+ 
+XP
+X-ray pulsar systems. The primary component is usually an ellipsoidal early-type supergiant. The reflection effect is very small and light variability is mainly caused by the ellipsoidal primary component's rotation. Periods of light changes are between 1 and 10 days; the period of the pulsar in the system is from 1 s. to 100 min. Light amplitudes usually do not exceed several tenths of a magnitude. Example: GP Vel.
+ 
+XPR
+X-ray pulsar (XP) systems featuring the presence of the reflection effect. The mean light of the system is brightest when the primary component is irradiated by X rays; it is faintest during a low state of the X-ray source. The total light amplitude may reach 2-3 mag. in V.
+Example: HZ Her.
+ 
+XBR
+X-ray bursters (XB) featuring the presence of the reflection effect.
+Example: V801 Ara.
+ 

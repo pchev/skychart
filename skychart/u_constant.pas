@@ -849,6 +849,14 @@ const
 {$endif}
 
 type
+  TVartype = record
+     code,desc: string;
+  end;
+
+var
+  VarType,VarSubtype: array of TVartype;
+
+type
   Tplanetlst = array[0..MaxPlSim, 1..MaxPla, 1..10] of double;  //ra,de,jd,diam,mag,dist,phase,ra2000,de2000,distgeocentric
   // 1..9 : planet ; 10 : soleil ; 11 : lune ; 12..15 : jup sat ; 16..23 : sat sat ;
   //24..28 : ura sat ; 29..30 : mar sat ; 31 : sat ring ; 32 : earth shadow ; 33:Phoebe; 34:Triton; 35: Nereid; 36: Charon

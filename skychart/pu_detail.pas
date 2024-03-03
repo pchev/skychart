@@ -29,7 +29,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 interface
 
 uses
-  u_help, u_translation, u_util, u_constant, Clipbrd, UScaleDPI, LCLVersion,
+  u_help, u_translation, u_util, u_constant, pu_info, Clipbrd, UScaleDPI, LCLVersion,
   LCLIntf, SysUtils, Classes, Graphics, Controls, Forms, LazUTF8, LazFileUtils, IpHtml, Ipfilebroker,
   Dialogs, StdCtrls, ComCtrls, ExtCtrls, Menus, StdActns, ActnList, LResources,
   Buttons, LazHelpHTML_fix, types;
@@ -81,6 +81,9 @@ type
     FHtmlFontSize: integer;
     procedure SetTextOnly(value: boolean);
     procedure SetHTMLText(const Value: string);
+    procedure ShowVarType(t:string);
+    function FindVarType(t:string):string;
+    function FindVarSubType(t:string):string;
   public
     { Public declarations }
     source_chart: string;
@@ -147,6 +150,11 @@ begin
   begin
     NodeA := TIpHtmlNodeA(IpHtmlPanel1.HotNode);
     src := NodeA.HRef;
+    if copy(src,1,7)='VarType' then
+    begin
+      ShowVarType(copy(src,8,99));
+      exit;
+    end;
     i := strtointdef(src, -1);
     if i > 0 then
     begin
@@ -321,6 +329,91 @@ try
 finally
  LockText := False;
 end;
+end;
+
+procedure Tf_detail.ShowVarType(t:string);
+var txt: string;
+begin
+  txt:=FindVarType(t);
+  if trim(txt)<>'' then begin
+    f_info.setpage(3);
+    f_info.TitlePanel.Caption :='Variable star type';
+    f_info.Button1.Caption := rsClose;
+    f_info.InfoMemo.Text:=txt;
+    f_info.show;
+  end;
+end;
+
+function Tf_detail.FindVarType(t:string):string;
+var i: integer;
+  buf: string;
+  tt: TStringList;
+begin
+  tt:=TStringList.Create;
+  try
+  t:=trim(t);
+  result:=t+crlf+crlf;
+  SplitRec2(t,'+',tt);
+  if tt.count>1 then begin
+    for i:=0 to tt.Count-1 do begin
+      result:=result+FindVarType(tt[i]);
+      if i<(tt.count-1) then result:=result+'And'+crlf+crlf;
+    end;
+    exit;
+  end;
+  t:=tt[0];
+  SplitRec2(t,'|',tt);
+  if tt.count>1 then begin
+    for i:=0 to tt.Count-1 do begin
+      result:=result+FindVarType(tt[i]);
+      if i<(tt.count-1) then result:=result+'Or'+crlf+crlf;
+    end;
+    exit;
+  end;
+  t:=tt[0];
+  t:=StringReplace(t,':','',[rfReplaceAll]);
+  result:='';
+  for i:=0 to Length(vartype)-1 do begin
+    if vartype[i].code=t then begin
+      result:=t+crlf+vartype[i].desc+crlf+crlf;
+      break;
+    end;
+  end;
+  SplitRec2(t,'/',tt);
+  if tt.count>1 then begin
+    t:=tt[0];
+    t:=StringReplace(t,':','',[rfReplaceAll]);
+    for i:=0 to Length(vartype)-1 do begin
+      if vartype[i].code=t then begin
+        result:=result+t+crlf+vartype[i].desc+crlf+crlf;
+        break;
+      end;
+    end;
+    if tt.count>1 then begin
+      for i:=1 to tt.Count-1 do begin
+        buf:=FindVarSubType(tt[i]);
+        if trim(buf)='' then buf:=FindVarType(tt[i]);
+        result:=result+buf+crlf;
+      end;
+      exit;
+    end;
+  end;
+  finally
+   tt.free;
+  end;
+end;
+
+function Tf_detail.FindVarSubType(t:string):string;
+var i: integer;
+begin
+  t:=StringReplace(t,':','',[rfReplaceAll]);
+  result:='';
+  for i:=0 to Length(varsubtype)-1 do begin
+    if varsubtype[i].code=t then begin
+      result:=t+crlf+varsubtype[i].desc;
+      break;
+    end;
+  end;
 end;
 
 end.

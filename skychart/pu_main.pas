@@ -880,6 +880,8 @@ type
     procedure LoadDeltaT;
     procedure LoadLeapseconds(CanUpdate: boolean=true);
     procedure LoadIERS;
+    procedure LoadVartype;
+    procedure LoadVarsubtype;
   end;
 
 var
@@ -1458,6 +1460,10 @@ begin
     LoadDeltaT;
     LoadIERS;
     LoadLeapseconds(true);
+    if VerboseMsg then
+      WriteTrace('Load VarType');
+    LoadVartype;
+    LoadVarsubtype;
     // must read db configuration before to create this one!
     if VerboseMsg then
       WriteTrace('Create DB');
@@ -13734,6 +13740,76 @@ begin
   finally
     closefile(f);
   end;
+end;
+
+procedure Tf_main.LoadVartype;
+var i: integer;
+    nexttype: boolean;
+    buf: string;
+    f: TextFile;
+begin
+try
+  SetLength(vartype,1000);
+  AssignFile(f,slash(Appdir) + slash('data') + slash('sample') + 'vsxtype.txt');   // https://www.aavso.org/vsx/index.php?view=about.vartypes
+  Reset(f);
+  i:=0;
+  nexttype:=true;
+  repeat
+    readln(f,buf);
+    if trim(buf)='' then begin // next type
+      inc(i);
+      nexttype:=true;
+      Continue;
+    end;
+    if nexttype then begin
+      vartype[i].code:=trim(buf);
+      vartype[i].desc:='';
+      nexttype:=false;
+    end
+    else begin
+      vartype[i].desc:=trim(vartype[i].desc+crlf+trim(buf));
+    end;
+  until eof(f);
+  CloseFile(f);
+  SetLength(vartype,i+1);
+except
+  SetLength(vartype,0);
+end;
+end;
+
+procedure Tf_main.LoadVarsubtype;
+var i: integer;
+    nexttype: boolean;
+    buf: string;
+    f: TextFile;
+begin
+try
+  SetLength(varsubtype,1000);
+  AssignFile(f,slash(Appdir) + slash('data') + slash('sample') + 'vsxsubtype.txt');   // https://www.aavso.org/vsx/index.php?view=about.vartypes
+  Reset(f);
+  i:=0;
+  nexttype:=true;
+  repeat
+    readln(f,buf);
+    if trim(buf)='' then begin // next type
+      inc(i);
+      nexttype:=true;
+      Continue;
+    end;
+    if nexttype then begin
+      varsubtype[i].code:=trim(buf);
+      varsubtype[i].desc:='';
+      nexttype:=false;
+    end
+    else begin
+      varsubtype[i].desc:=trim(varsubtype[i].desc+crlf+trim(buf));
+    end;
+  until eof(f);
+  CloseFile(f);
+  SetLength(varsubtype,i+1);
+except
+  SetLength(varsubtype,0);
+end;
 end;
 
 ///////////////////////////////////////////////////////////////////////////////////

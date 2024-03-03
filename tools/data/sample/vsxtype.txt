@@ -1,0 +1,645 @@
+E
+Eclipsing binary systems. These are binary systems with orbital planes so close to the observer's line of sight (the inclination of the orbital plane to the plane orthogonal to the line of sight is close to 90 deg.) that the components periodically eclipse each other. Consequently, the observer finds changes of the apparent combined brightness of the system with the period coincident with that of the components' orbital motion.
+ 
+EA
+β Persei-type (Algol) eclipsing systems. Binaries with spherical or slightly ellipsoidal components. It is possible to specify, for their light curves, the moments of the beginning and end of the eclipses. Between eclipses the light remains almost constant or varies insignificantly because of reflection effects, slight ellipsoidality of the components, or physical variations. Secondary minima may be absent. An extremely wide range of periods is observed, from 0.2 to ≥10000 days. Light amplitudes are also quite different and may reach several magnitudes.
+ 
+EB
+β Lyrae-type eclipsing systems. These are eclipsing systems having ellipsoidal components and light curves for which it is impossible to specify the exact times of onset and end of eclipses because of a continuous change of the system's apparent combined brightness between eclipses; secondary minimum is observed in all cases, its depth usually being considerably smaller than that of the primary minimum; periods are mainly longer than 0.5 days. The components generally belong to early spectral types (B-A). Light amplitudes are usually <2 mag. in V.
+ 
+EP
+Stars showing planetary transits.
+Prototype: V376 Peg.
+ 
+EW
+W Ursae Majoris-type eclipsing variables. These are eclipsers with periods usually shorter than 1 day, consisting of ellipsoidal components almost in contact and having light curves for which it is impossible to specify the exact times of onset and end of eclipses. The depths of the primary and secondary minima are almost equal or differ insignificantly. Light amplitudes are usually <0.8 mag. in V. The components generally belong to spectral types F-G and later.
+ 
+EC
+Contact binaries in ASAS-3. Both components filling or close to filling their Roche lobes. These are mostly EW variables.
+ 
+ED
+Detached eclipsing binaries (EA) in ASAS-3.
+ 
+ESD
+Semi-detached eclipsing binaries (EA or EB) in ASAS-3.
+ 
+ACV
+α2 Canum Venaticorum variables. These are main-sequence stars with spectral types B8p-A7p and displaying strong magnetic fields. Spectra show abnormally strong lines of Si, Sr, Cr, and rare earths whose intensities vary with rotation. They exhibit magnetic field and brightness changes (periods of 0.5-160 days or more). The amplitudes of the brightness changes are usually within 0.01-0.1 mag. in V.
+ 
+BY
+BY Draconis-type variables, which are emission-line dwarfs of dKe-dMe spectral type showing quasi-periodic light changes with periods from a fraction of a day to 120 days and amplitudes from several hundredths to 0.5 mag. in V. The light variability is caused by axial rotation of a star with a variable degree of non-uniformity of the surface brightness (spots) and chromospheric activity. Some of these stars also show flares similar to those of UV Ceti stars, and in those cases they also belong to the latter type and are simultaneously considered eruptive variables.
+ 
+CTTS/ROT
+Classical T Tauri stars showing periodic variability due to spots. They have extensive disks that result in strong emission lines (EW(Hα) ≥ 10Å).
+GCVS types INT and IT.
+ 
+ELL
+Rotating ellipsoidal variables. These are close binary systems with ellipsoidal components, which change combined brightnesses with periods equal to those of orbital motion because of changes in emitting areas toward an observer. Eclipsing binaries may also show ellipsoidal variability but the ELL objects listed in VSX are those showing no eclipses. Light amplitudes usually do not exceed 0.1 mag. in V but may reach 0.3 mag. in some cases.
+Examples: b Per
+ 
+FKCOM
+FK Comae Berenices-type variables. These are rapidly rotating single G and K-type giants with nonuniform surface brightnesses. Their photometric behaviour is similar to that of RS CVn systems but the absorption lines and Ca II reversals exhibit extreme rotational broadening, with a projected equatorial velocity of 100-160 km/s. They have strong magnetic activity and X-ray emission and contain the hottest coronal plasmas among active stars. Periods of light variation (up to several days) are equal to rotational periods, and amplitudes are several tenths of a magnitude. It is not excluded that these objects are the product of further evolution of W UMa close binary systems (binary coalescence).
+Examples: FK Com, YY Men.
+ 
+HB
+Heartbeat stars. A type of eccentric binary stars (e >0.2) whose light curves resemble a cardiogram. They are ellipsoidal variables that undergo extreme dynamic tidal forces. As the two stars pass through periastron, brightness variations occur as a consequence of tidal deformation and mutual irradiation. There may also be tidally induced pulsations present. The morphology of the photometric periastron variation (heartbeat) depends strongly on the eccentricity, inclination and argument of periastron. The amplitude of variations is very small, usually below 0.01 mag. but it may exceed 0.3 mag. in extreme cases.
+ 
+LERI
+λ Eri type variables. Be stars with the light variation caused by rotational modulation or non-radial pulsations. Their light curves are usually double-waved and with changing amplitude. Periods in the order of 0.3 - 3 d.
+ 
+PSR
+Optically variable pulsars, which are rapidly rotating neutron stars with strong magnetic fields, radiating in the radio, optical, and X-ray regions. Pulsars emit narrow beams of radiation, and periods of their light changes coincide with rotational periods (from 0.004 to 4 s), while amplitudes of the light pulses reach 0.8 mag.
+Example: CM Tau.
+ 
+R
+Close binary systems characterized by the presence of strong reflection (re-radiation) of the light of the hot star illuminating the surface of the cooler companion. Light curves are sinusoidal with the period equal to Porb, maximum brightness coinciding with the passage of the hot star in front of the companion. The eclipse may be absent. The range of light variation may reach 1 mag. in V.
+Example: KV Vel.
+ 
+ROT
+Spotted stars that weren't classified into a particular class. All the SPOTTED stars in the UNSW list and the very small amplitude spotted stars found by Kepler are included here. Also, some stars that don't fit the current subtypes due to their physical properties have been classified as such (brown dwarfs and white dwarfs with spots). It may be used as a subtype when a T Tauri star shows rotational variability (TTS/ROT, CTTS/ROT or WTTS/ROT).
+ 
+RS
+RS Canum Venaticorum-type binary systems. The primaries are usually giants from late F to late K spectral type. A significant property of these systems is the presence in their spectra of strong Ca II H and K emission lines of variable intensity, indicating increased chromospheric activity of the solar type. These systems are also characterized by the presence of radio and X-ray emission. Their light curves look like sine waves outside eclipses, with amplitudes and positions changing slowly with time. The presence of this wave (often called a distortion wave) is explained by differential rotation of the star, its surface being covered with groups of spots; the period of the rotation of a spot group is usually close to the period of orbital motion but still differs from it, which is the reason for the slow change (migration) of the phases of the distortion wave minimum and maximum in the mean light curve in the case of the eclipsing binaries (E/RS). The variability of the wave's amplitude (which may be up to 0.5 mag. in V) is explained by the existence of a long-period stellar activity cycle similar to the 11-year solar activity cycle, during which the number and total area of spots on the star's surface vary. Small amplitude flares are often observed too.
+ 
+SXARI
+SX Arietis-type variables. These are main-sequence B0p-B9p stars with variable-intensity He I and Si III lines and magnetic fields. They are sometimes called helium variables. Periods of light and magnetic field changes (about 1 day) coincide with rotational periods, while amplitudes are approximately 0.1 mag. in V. These stars are high-temperature analogs of the ACV variables.
+ 
+SXARI/E
+sigma Ori E stars. Subset of the SXARI variables. Rapidly and rigidly rotating stars with strong magnetic fields that show eclipse-like dimmings probably caused by magnetospherically confined circumstellar disk material that occults the central star.
+ 
+TTS/ROT
+T Tauri stars showing periodic variability due to spots, but not yet classified as Classical (CTTS/ROT) or Weak-lined (WTTS/ROT).
+ 
+WTTS/ROT
+Weak-lined T Tauri stars showing periodic variability due to spots. A T Tauri star that lacks strong emission lines in its optical spectrum (EW(Hα) < 10Å), and lacks both strong stellar winds and a circumstellar accretion disk. Also known as naked T Tauri star.
+GCVS types INT and IT.
+ 
+NSIN ELL
+Designation in the OGLE catalogues for stars with strictly periodic light curves, which are evidently non-sinusoidal and are likely to be ellipsoidal variables.
+ 
+ACEP
+Anomalous Cepheids. Stars with periods characteristic of comparatively long-period RRAB variables (0.4 to 2 days), but considerably brighter by luminosity. They are more massive (1.3 to 2.2 solar masses) than RR Lyrae stars. They are metal-poor A and early F-type stars.
+GCVS type BLBOO.
+ 
+ACYG
+Variables of the α Cygni type, which are non-radially pulsating supergiants of Bep-AepIa spectral types. The light changes with amplitudes of the order of 0.1 mag. often seem irregular, being caused by the superposition of many oscillations with close periods. Cycles from several days to several weeks are observed.
+ 
+AHB1
+"Above Horizontal Branch" variables of subtype 1, also known as XX Vir variables. Pulsating variables with periods between 0.7 and 3 d. showing highly asymmetric light curves (rise durations <25%) of large amplitude and low metallicity ([Fe/H] <-1), crossing the instability strip from the blue to the red on their way to the AGB after helium core exhaustion. They have low masses and higher luminosities (Mv = +0.2 to -1.4; ~1 mag. brighter) than the RR Lyrae stars of the same period. There is controversy in the literature about their nomenclature. They were originally called RRD but now that designation is used for the double-mode RR Lyrae stars. They were also called "short period type II cepheids" and have been classified among the CWB variables but their light curves are different from the BL Her stars (which show humps in their light curves and longer rise durations) and are very similar to the light curves of RRAB-type stars with periods around 0.5 d. AHB1 stars occupy the same region in the HR-diagram as the anomalous cepheids (ACEP) but their light curves are different (1994A&A...283..111S). Some researchers (OGLE team) have explained this saying that the AHB1 variables are fundamental mode ACEP while the other ACEP with more symmetrical light curves and smaller amplitudes are supposed to be first overtone ACEP. However, AHB1 and ACEP show different evolutionary paths and masses. ACEP are more massive (1.3 - 2.2 solar masses), they are not post-HB stars and appear predominantly in the dwarf spheroidal galaxies, but are almost absent in Galactic globular clusters, while the AHB1 stars are absent in dwarf spheroidals but are present in globular clusters (2006ARA&A..44...93S). Examples: XX Vir, BF Ser
+ 
+BCEP
+Variables of the β Cephei type (β Cep, β CMa), which are non-superigiant pulsating O8-B6 stars with light and radial-velocity variations caused by low-order pressure and gravity mode pulsations. Periods are in the range of 0.1 - 0.6 days and light amplitudes go from 0.01 to 0.3 mag. in V. The light curves are similar in shape to average radial-velocity curves but lag in phase by a quarter of the period, so that maximum brightness corresponds to maximum contraction, i.e., to minimum stellar radius. The majority of these stars probably show radial pulsations, but some display nonradial pulsations; multi-periodicity is characteristic of many of these stars.
+Example: V469 Per.
+ 
+BCEPS
+A short-period group of β Cep variables. The spectral types are B2-B3 IV-V; periods and light amplitudes are in the ranges 0.02 - 0.04 days and 0.015 - 0.025 days, respectively, i.e., an order of magnitude smaller than the normally observed ones. Elimination of this type proposed by GCVS.
+ 
+BLAP
+Blue large-amplitude pulsators. Blue stars with similar temperature (~30,000 K) as hot subdwarfs but lower surface gravity, which points to the presence of inflated envelopes. They might be core helium-burning stars that suffered significant mass loss or -more likely- hydrogen shell-burning stripped red giants. They show very regular brightness variations with periods in the range of 20-40 minutes and amplitudes from 0.2 to 0.4 magnitudes in the optical passbands. The light curve shape is similar to those of the RRAB-type stars.
+ 
+BXCIR
+Hydrogen-deficient B stars (Extreme Helium stars) showing low-amplitude variations in light (0.1 mag. in V) and radial velocity due to radial pulsations driven by the κ (kappa) mechanism through Z-bump instability. They show a unique and very regular period of around 0.1 days.
+Examples: BX Cir, V652 Her.
+ 
+CEP
+Cepheids. Radially pulsating, high luminosity (classes Ib-II) variables with periods in the range of 1-135 days and amplitudes from several hundredths to 2 mag. in V (in the B band, the amplitudes are greater). Spectral type at maximum light is F; at minimum, the types are G-K. The longer the period of light variation, the later is the spectral type. The maximum of the surface-layer expansion velocity almost coinciding with maximum light. There are several subtypes (see DCEP, DCEP(B), DCEPS, DCEPS(B), CWA, CWB and ACEP). Some DCEP and CW stars are quite often called Cepheids because it is often impossible to discriminate between them on the basis of the light curves for periods in the range 3 - 10 days. However, these are distinct groups of entirely different objects in different evolutionary stages. One of the significant spectral differences between W Virginis stars and Cepheids is the presence, during a certain phase interval, of hydrogen-line emission in the former and of Ca II H and K emission in the latter.
+ 
+CW
+Variables of the W Virginis type. These are pulsating variables of the galactic spherical component (old disk) population with periods of approximately 0.8 to 35 days and amplitudes from 0.3 to 1.2 mag. in V. They obey a period-luminosity relation different from that for δ Cep variables (see DCEP). For an equal period value, the W Vir variables are fainter than the δ Cep stars by 0.7 - 2 mag. The light curves of W Vir variables for some period intervals differ from those of δ Cep variables for corresponding periods either by amplitudes or by the presence of humps on their descending branches, sometimes turning into broad flat maxima. W Vir variables are present in globular clusters and at high galactic latitudes. They may be separated into the subtypes CWA and CWB.
+ 
+CWA
+W Virginis variables with periods longer than 8 days. The longer period ones start showing different minima getting mixed with the RVA class.
+ 
+CWB
+W Virginis variables with periods shorter than 8 days. Also known as BL Herculis variables.
+ 
+CWB(B)
+BL Herculis cepheids displaying the presence of two pulsation modes (the fundamental mode and the first overtone).
+ 
+CWBS
+BL Herculis cepheids pulsating in the first overtone. Discovered by the OGLE team in the Large Magellanic Clouds.
+ 
+DCEP
+These are the classical Cepheids, or δ Cephei-type variables. Comparatively young objects that have left the main sequence and evolved into the instability strip of the Hertzsprung-Russell (H-R) diagram, they obey the well-known Cepheid period-luminosity relation and belong to the young disk population. DCEP stars are present in open clusters. They display a certain relation between the shapes of their light curves and their periods. They are fundamental mode pulsators.
+ 
+DCEP(B)
+Classical cepheids displaying the presence of two or more simultaneously operating pulsation modes (usually the fundamental tone with the period P0 and the first overtone P1). The periods P0 are in the range from 2 to 7 days, with the ratio P1/P0 = 0.70-0.71.
+GCVS type CEP(B).
+Examples: TU Cas, V367 Sct.
+ 
+DCEPS
+These are δ Cep variables having light amplitudes <0.5 mag. in V (<0.7 mag. in B) and almost symmetrical light curves (M-m approx. 0.4 - 0.5 periods); as a rule, their periods do not exceed 7 days. They are first-overtone pulsators.
+ 
+DCEPS(B)
+First/second overtone double-mode Cepheid variables. Period ratio P2/P1 = 0.80.
+GCVS type CEP(B).
+ 
+DSCT
+Variables of the δ Scuti type. These are pulsating variables of spectral types A0-F5 III-V displaying light amplitudes from 0.003 to 0.9 mag. in V (those with amplitudes larger than 0.15 mag. and assymetric light curves are designated HADS) and periods from 0.01 to 0.2 days. The shapes of the light curves, periods, and amplitudes usually vary greatly. Radial as well as non-radial pulsations are observed. The variability of some members of this type appears sporadically and sometimes completely ceases, this being a consequence of strong amplitude modulation with the lower value of the amplitude not exceeding 0.001 mag. in some cases. The maximum of the surface layer expansion does not lag behind the maximum light for more than 0.1 periods. DSCT stars are representatives of the galactic disk (flat component), SXPHE stars are halo objects.
+ 
+DSCTC
+Low-amplitude group of δ Scuti variables (light amplitude <0.1 mag. in V). The majority of this type's representatives are stars of luminosity class V; objects of this subtype generally are representative of the δ Sct variables in open clusters. This type has become obsolete in VSX since most DSCT have small amplitudes and the only clear distinction is the one between DSCT and HADS (amplitudes <0.15 mag.).
+ 
+DWLYN
+Hybrid sub-dwarf pulsators showing both V1093HER and V361HYA-type variability.
+ 
+GDOR
+γ Doradus stars. They are high order g-mode non-radial pulsators, dwarfs (luminosity classes IV and V) from spectral types A7 to F7 showing one or multiple frequencies of variability. Periods range from 0.25 to 4 days. Amplitudes usually do not exceed 0.1 mag. but there is a subgroup of high amplitude multiperiodic objects (HAGDOR) that may reach amplitudes of up to 0.4 mag. Example: NSV 1858
+ 
+HADS
+High Amplitude δ Scuti stars. They are radial pulsators showing asymmetric light curves (steep ascending branches) and amplitudes >0.15 mag.
+ 
+HADS(B)
+First/second overtone double-mode δ Scuti variables. Period ratios P1/P0 = 0.77 and P2/P1 = 0.80.
+ 
+L
+Slow irregular variables. The light variations of these stars show no evidence of periodicity, or any periodicity present is very poorly defined and appears only occasionally. Stars are often attributed to this type because of being insufficiently studied. Many type L variables are really semi-regulars or belong to other types.
+ 
+LB
+Slow irregular variables of late spectral types (K, M, C, S); as a rule, they are giants. This type is also ascribed, in the GCVS, to slow red irregular variables in the case of unknown spectral types and luminosities.
+Example: CO Cyg.
+ 
+LC
+Irregular variable supergiants of late spectral types having amplitudes of about 1 mag. in V.
+Example: TZ Cas.
+ 
+M
+ο (omicron) Ceti-type (Mira) variables. These are long-period variable giants with characteristic late-type emission spectra (Me, Ce, Se) and light amplitudes from 2.5 to 11 mag. in V. Their periodicity is well pronounced, and the periods lie in the range between 80 and 1000 days. Infrared amplitudes are usually less than in the visible and may be <2.5 mag. For example, in the K band they usually do not exceed 0.9 mag.
+ 
+ORG
+Oscillating Red Giants. Red giants showing small amplitude non-radial oscillations. These stars have convective envelopes where turbulent motions act over various time scales and velocities, producing acoustic noise which can stochastically drive or damp resonant, p-mode oscillations. The oscillation amplitudes are believed to scale with the luminosity. Pulsation periods range from minutes to several hours to days. They have been found in the long and uninterrupted observations from space (CoRoT, Kepler, and TESS missions).
+ 
+PPN
+Yellow supergiant post-AGB stars embedded in protoplanetary nebulae and displaying SRD variability with periods ranging from 35 to 200 days. They are early F to late G-type supergiants with infrared excess at high Galactic latitudes.
+ 
+PVTEL
+Variables of the PV Telescopii type. These are hydrogen-deficient supergiants. They were subdivided in three types (I, II and II) in IBVS 5817.
+ 
+PVTELI
+Hydrogen-deficient A or late-B supergiants showing low-amplitude quasi-periodic light variations due to radial pulsations driven by strange-mode instability on a time-scale of 5 - 30 days; radial velocity variations are also seen.
+ 
+PVTELII
+Hydrogen-deficient O or early-B supergiants showing low-amplitude quasi-periodic light variations due to non-radial g-mode pulsations driven by strange-mode instability on a time-scale of 0.5 - 5 days; radial velocity and line-profile variations are also seen.
+ 
+PVTELIII
+Hydrogen-deficient and carbon-rich F or G supergiants showing low-amplitude quasi-periodic light variations on a time-scale of 20 - 100 days but not deep minima like the RCB stars; radial velocity variations are also seen.
+ 
+roAm
+Rapidly oscillating Am variables. Pulsation periods are in the range of 60 to 170 cycles/day (8-22 min.), while amplitudes of light variation caused by the pulsation are less than 0.01 mag. in V.
+ 
+roAp
+Rapidly oscillating Ap variables. These are pulsating variables oscillating in high-overtone, low-degree, non-radial pressure modes. Pulsation periods are in the range of 0.003-0.015 days (4-21 min.), while amplitudes of light variation caused by the pulsation are about 0.01 mag. in V. The pulsational variations are superposed on those caused by rotation.
+GCVS type ACVO.
+ 
+RR
+Variables of the RR Lyrae type, which are radially-pulsating giant A-F stars having amplitudes from 0.2 to 2 mag. in V. Cases of variable light-curve shapes as well as variable periods are known. If these changes are periodic, they are called the "Blazhko effect" (denoted by the subtype BL). The majority of these stars belong to the spherical component of the Galaxy; they are present, sometimes in large numbers, in some globular clusters, where they are known as pulsating horizontal-branch stars. Like Cepheids, maximum expansion velocities of surface layers for these stars practically coincide with maximum light.
+ 
+RRAB
+RR Lyrae variables with asymmetric light curves (steep ascending branches), periods from 0.3 to 1.0 days, and amplitudes from 0.5 to 2 mag. in V. They are fundamental mode pulsators.
+ 
+RRC
+RR Lyrae variables with nearly symmetric, sometimes sinusoidal, light curves, periods from 0.2 to 0.5 days, and amplitudes not greater than 0.8 mag. in V. They are overtone pulsators.
+Example: SX UMa.
+ 
+RRD
+Double-mode RR Lyrae stars which pulsate in the fundamental mode as well as in the first overtone with a period ratio of 0.74 and a fundamental period near 0.5 days (or in the first and second overtones with a period ratio of 0.80).
+GCVS class RR(B).
+ 
+RV
+Variables of the RV Tauri type. These are radially pulsating supergiants having spectral types F-G at maximum light and K-M at minimum. The light curves are characterized by the presence of double waves with alternating primary and secondary minima that can vary in depth so that primary minima may become secondary and vice versa. The complete light amplitude may reach 3-4 mag. in V. Periods between two adjacent primary minima (usually called formal periods) lie in the range 30-150 days (these are the periods appearing in the Catalogue). Two subtypes, RVA and RVB, are recognized.
+ 
+RVA
+RV Tauri variables that do not vary in mean magnitude.
+Example: AC Her.
+ 
+RVB
+RV Tauri variables that periodically (with periods from 600 to 1500 days and amplitudes up to 2 mag in V) vary in mean magnitude.
+Examples: DF Cyg, RV Tau.
+ 
+SPB
+Slowly pulsating B stars showing both light and line profile variability. Main sequence B2-B9 stars (3-9 solar masses) that pulsate in the high radial order low degree g-modes. Periods may be multiple and range from 0.4 to 5 days and amplitudes are smaller than 0.1 magnitudes. Also known as 53 Persei stars.
+GCVS type LPB.
+Examples: ι (iota) Her, V469 Per, V539 Ara.
+ 
+SPBe
+Rapidly rotating Be stars showing g-mode non-radial pulsations. Unlike SPB stars, prograde modes are predominantly excited among the high-order g-modes in SPBe stars. Amplitudes range from undetectable to about 0.2 mag.
+Example: bet CMi
+ 
+SR
+Semi-regular variables, which are giants or supergiants of intermediate and late spectral types showing noticeable periodicity in their light changes, accompanied or sometimes interrupted by various irregularities. Periods lie in the range from 20 to >2000 days, while the shapes of the light curves are rather different and variable, and the amplitudes may be from several hundredths to several magnitudes (usually 1-2 mag. in V).
+ 
+SRA
+Semi-regular late-type (M, C, S or Me, Ce, Se) giants displaying persistent periodicity and usually small (<2.5 mag. in V) light amplitudes. Amplitudes and light-curve shapes generally vary and periods are in the range of 35-1200 days. Many of these stars differ from Miras only by showing smaller light amplitudes.
+Example: Z Aqr.
+ 
+SRB
+Semi-regular late-type (M, C, S or Me, Ce, Se) giants with poorly defined periodicity (mean cycles in the range of 20 to 2300 days) or with alternating intervals of periodic and slow irregular changes, and even with light constancy intervals. Every star of this type may usually be assigned a certain mean period (cycle), which is the value given in the catalog. In a number of cases, the simultaneous presence of two or more periods of light variation is observed.
+Examples: RR CrB, AF Cyg.
+ 
+SRC
+Semi-regular late-type (M, C, S or Me, Ce, Se) supergiants with amplitudes of about 1 mag. and periods of light variation from 30 days to several thousand days.
+Example: μ Cep.
+ 
+SRD
+Semi-regular variable giants and supergiants of F, G, or K spectral types, sometimes with emission lines in their spectra. Amplitudes of light variation are in the range from 0.1 to 4 mag. and the range of periods is from 30 to 1100 days.
+Examples: U Lup, SV UMa.
+ 
+SRS
+Semi-regular pulsating red giants with short periods (several days to a month), probably high-overtone pulsators.
+Prototype: AU Ari.
+ 
+SXPHE
+Phenomenologically, these resemble HADS variables but they are pulsating sub-dwarfs of the spherical component, or old disk galactic population, with spectral types in the range A2-F5. They may show several simultaneous periods of oscillation, generally in the range 0.04-0.08 days, with variable-amplitude light changes that may reach 0.7 mag. in V. These stars are present in globular clusters.
+ 
+SXPHE(B)
+Old population analogs to the double-mode HADS(B) stars.
+ 
+V361HYA
+Very rapidly pulsating hot sub-dwarf B stars with periods between 90 and 600 seconds exhibiting pressure-mode pulsations. Amplitudes are within several hundredths of a magnitude. Also known as EC 14026 variables.
+GCVS class RPHS.
+Prototype: V361 Hya = EC 14026-2647.
+ 
+V1093HER
+Slowly pulsating sub-dwarf B stars with periods between 45 and 180 minutes exhibiting gravity-mode pulsations. Also known as PG 1716 variables.
+ 
+ZZ
+ZZ Ceti variables. These are non-radially pulsating white dwarfs that change their brightnesses with periods from 30 s. to 25 min. and amplitudes from 0.001 to 0.2 mag. in V. They usually show several close period values.
+ 
+ZZA
+ZZ Cet-type variables of DA spectral type (DAV stars) having only hydrogen absorption lines in their spectra. These are the classical ZZ Cet stars. A subset of them shows outbursts and are listed in the eruptive group as ZZA/O.
+ 
+ZZB
+ZZ Cet-type variables of DB spectral type (DBV stars) having only helium absorption lines in their spectra. Also known as V777 Herculis stars.
+ 
+ZZ/GWLIB
+GW Librae stars. Non-radially pulsating white dwarfs in cataclysmic systems with low accretion rates having hydrogen and helium absorption lines in their spectra. They show low-amplitude and non-commensurate periodic signals which are roughly constant over a few days, but somewhat transient in frequency and amplitude on longer time-scales.
+ 
+ZZO
+ZZ Cet type variables of the DO spectral type (DOV stars) showing HeII and and CIV absorption lines in their spectra. Also known as GW Virginis stars.
+ 
+ZZLep
+ZZ Leporis stars: variable central stars of planetary nebulae. These are hot stars (spectral type O) with temperatures less than 50000 K and with hydrogen-rich spectra, showing variations on the order of hours and of days. The most plausible mechanisms for the variability are pulsation or variations in the stellar mass loss rate, or both. Reference: 2003ASPC..292..183H.
+ 
+LPV
+Long Period Variables (red stars) of unspecified type (survey type).
+ 
+CW-FO
+First Overtone CW stars in ASAS-3. All of the stars originally classified as first overtone pulsators of the CW class in ASAS have been found to be in error, as this type of star does not exist.
+ 
+CW-FU
+Fundamental mode CW stars in ASAS-3.
+ 
+DCEP-FO
+First Overtone classical Cepheids (DCEPS) in ASAS-3.
+ 
+DCEP-FU
+Fundamental mode classical Cepheids (DCEP) in ASAS-3.
+ 
+DSCTr
+δ Scuti subtype in ASAS-3. They show larger amplitudes but most of them are actually contact binaries with twice the period given in the ASAS catalogue.
+ 
+PULS
+Pulsating variables of unspecified type.
+ 
+BE
+GCVS-type for Be stars that show variability but no light outbursts (GCAS variables). Most of them may be LERI variables.
+ 
+cPNB[e]
+Compact proto-planetary and planetary nebulae B[e] stars.
+ 
+CTTS
+Classical T Tauri stars. They have extensive disks that result in strong emission lines (EW(Hα) ≥ 10Å).
+GCVS types INT and IT.
+ 
+DPV
+Double Periodic Variables. They are semi-detached interacting binaries (with a B-type component) with optically thick disks around the gainer, that experience regular cycles of mass loss into the interstellar medium and are characterized by orbital photometric variability (ellipsoidal, DPV/ELL or eclipsing, DPV/E) in time scales of few days and a long photometric cycle lasting roughly 33 times the orbital period.
+ 
+DYPer
+Hydrogen-deficient stars that show unpredictable fading events but slower declines and roughly symmetric recoveries rather than the rapid decline and slow recovery observed in RCB stars. The amplitude of the declines is smaller than those of RCB stars. Spectroscopically they seem to be normal C-type stars with evidence for C13 in their spectra, whereas one of the defining characteristics of RCB stars is the lack of this isotope of carbon. At maximum they show semiregular behaviour with periods typical of SR stars and longer than the pulsations seen in RCB stars. They are also 10 times fainter on average.
+Example: DY Per.
+ 
+EXOR
+Named after EX Lupi, and collectively known in the literature as EXors, these are eruptive T Tauri stars that show brightening episodes of several magnitudes in time scales of several months or a few years. The EXor stage appears to follow the FUor one, more than being a less evident manifestation of the same phase. They are less luminous and present different emission-line spectra than those of FUors (which are dominated by absorption features). They also show repetitive outbursts instead of a unique major one. EXor outbursts are thought to be triggered by instabilities in the magnetic connection between the star and disk. They are also known as Subfuors.
+Examples: EX Lup, V1118 Ori, V1143 Ori.
+ 
+FF
+Final Flash objects. Stars undergoing final helium shell flash burning, a very late thermal pulse in the post-AGB stage. They undergo RCB-like fadings after the initial brightening before being hidden by a thick dust debris cloud which results in extremely large amplitudes (>10 mag.). Examples: V4334 Sgr, V0605 Aql, FG Sge.
+ 
+FSCMa
+B[e]-type stars (spectral types ranging from O9 to A2) that exhibit much stronger Hydrogen emission lines than those seen in classical Be stars and also exhibit forbidden (low excitation) lines of FeII, [FeII], [NII], [OI] and strong IR excesses, which are indicative of compact dust envelopes. They are also not fast rotators like the Be stars. They are most likely binary systems that currently undergo or have recently undergone a phase of a rapid mass exchange, associated with dust formation. The secondaries are typically 2-3 magnitudes fainter than their primaries. Complex structure of the circumstellar environments significantly veils the underlying stars and requires multitechnique investigation. They are located outside star formation regions and they probably main sequence stars (not supergiants). Their light curves show irregular long-term variations with long term (years) mean magnitude changes up to 2 magnitudes in V. Most of the stars in this group were previously considered as Unclassified B[e] stars.
+Examples: FS CMa, V0743 Mon.
+ 
+FUOR
+Variables of the FU Orionis type, which are collectively known in the literature as FUors. Characterized by a unique major gradual increase in brightness by about 4-6 mag. following which they show a complex absorption spectrum much like that of a F or G-type supergiant star, a powerful shortward-shifted P Cyg-like absorption component at Hα and a strong Li I λ6707 absorption line. FUor outbursts are thought to be triggered by instabilities in the disk. They may stay constant at maximum brightness or decline slowly by 1-2 mag. several months after the initial rise. These variables probably mark one of the evolutionary stages of T Tauri-type stars as evidenced by an outburst of one member, V1057 Cyg, but its decline (2.5 mag. in 11 years) commenced immediately after maximum brightness was attained. All presently known FUors are coupled with reflecting cometary nebulae.
+GCVS type FU.
+ 
+GCAS
+Eruptive irregular variables of the γ Cassiopeiae type. These are rapidly rotating O9-A0 III-Ve stars with mass outflow from their equatorial zones. The formation of equatorial rings or disks is accompanied by a temporary brightening (pole-on stars like ω CMa) or fading (equator-on stars like Pleione). Light amplitudes may reach 1.5 mag. in V.
+ 
+I
+Poorly studied irregular variables with unknown features of light variations and spectral types. This is a very inhomogeneous group of objects. It is usually applied to young stellar objects (YSO), if they are evolved red giants they are given the type L.
+ 
+IA
+Poorly studied irregular variables of early (O-A) spectral type.
+ 
+IB
+Poorly studied irregular variables of intermediate (F-G) to late (K-M) spectral type.
+ 
+IN
+Orion variables. Irregular, eruptive variables connected with bright or dark diffuse nebulae or observed in the regions of these nebulae. Some of them may show cyclic light variations caused by axial rotation. In the Spectrum-Luminosity diagram, they are found in the area of the main sequence and subgiants. They are probably young objects that, during the course of further evolution, will become light-constant stars on the zero-age main sequence (ZAMS). The range of brightness variations may reach several magnitudes.
+ 
+INA
+Orion variables of early spectral types (B-A or Ae). They are often characterized by occasional abrupt Algol-like fadings.
+Example: T Ori.
+ 
+INAT
+INT-type stars with abrupt fadings (INA type).
+ 
+INB
+Orion variables of intermediate and late spectral types, F-M or Fe-Me (BH Cep, AH Ori). F-type stars may show Algol-like fadings similar to those of many INA stars; K-M stars may produce flares along with irregular light variations.
+ 
+INS
+IN stars showing rapid light variations (up to 1 mag. in 1-10 days).
+ 
+INSA
+ISA stars observed in nebulosity.
+ 
+INSB
+ISB stars observed in nebulosity.
+ 
+INST
+INT stars showing rapid light variations.
+ 
+INT
+Orion variables of the T Tauri type observed only in diffuse nebulae. Stars are assigned to this type on the basis of the following (purely spectroscopic) criteria: spectral types are in the range Fe-Me. The spectra of most typical stars resemble the spectrum of the solar chromosphere. The feature specific to the type is the presence of the fluorescent emission lines Fe II 4046, 4132 Å (anomalously intense in the spectra of these stars), emission lines [Si II] and [O I], as well as the absorption line Li I λ6707. Known as CTTS (Classical T Tauri Stars).
+ 
+IS
+Rapid irregular variables having no apparent connection with diffuse nebulae and showing light changes of about 0.5 - 1.0 mag. within several hours or days.
+ 
+ISA
+Rapid irregular variables of the early spectral types, B-A or Ae. UX Orionis (ISA in the GCVS) is the prototype of a subgroup of Herbig Ae/Be stars knows as UXOR that show irregular variations with a wide range of amplitudes from barely detectable to more than 4 mag. in V. Large-amplitude variability is confined to stars with spectral types later than B8. There are two principal components: (1) irregular variations on time-scales of days around a mean brightness level that changes on a much longer time-scale (typically years), sometimes in a quasi-cyclic fashion, and (2) occasional episodes of deep minima, occurring at irregular intervals but more frequently near the low points of the brightness cycles.
+Examples: UX Ori, CQ Tau, BF Ori.
+ 
+ISB
+Rapid irregular variables of the intermediate and late spectral types, F-M and Fe-Me.
+ 
+RCB
+Variables of the R Coronae Borealis type. These are hydrogen-deficient, carbon- and helium-rich, high-luminosity stars belonging to the spectral types Bpe-C, which are simultaneously eruptive and pulsating variables. They show slow non-periodic fadings by 1-9 mag. in V lasting from a month or more to several hundred days. These events show a rapid decline and slow recovery and are superposed on cyclic pulsations with amplitudes up to several tenths of a magnitude and periods in the range 30-100 days. These stars may be the result of a merger of a helium and a carbon white dwarfs. Some post-AGB objects, especially carbon stars showing fadings, may show RCB properties but they don't share the same origin and they have been classified as DY Per stars.
+Examples: R CrB, RY Sgr.
+ 
+SDOR
+Variables of the S Doradus type. These are eruptive, high-luminosity Bpec-Fpec stars showing irregular (sometimes cyclic) light changes with amplitudes in the range 1-7 mag. in V. They belong to the brightest blue stars of their parent galaxies. As a rule, these stars are connected with diffuse nebulae and surrounded by expanding envelopes.
+Examples: P Cyg, η Car. Also known as LBV. The SDOR variability is known in the literature as an aspect of the LBV phenomenon, consisting of photospheric pulsations with time scales of hundreds to thousands of days and excursions to the redder part of the HR-diagram when the star is brighter (SDOR phases). Besides, they also display micro-variations, stochastic variability and eruptions.
+ 
+TTS
+T Tauri Stars. When their properties are well-known, they are classified in two sub-groups: CTTS (Classical) and WTTS (Weak-lined).
+GCVS types IT and INT.
+ 
+UV
+Eruptive variables of the UV Ceti type, these are K Ve-M Ve stars sometimes displaying flare activity with amplitudes from several tenths of a magnitude up to 6 mag. in V. The amplitude is considerably greater in the ultraviolet spectral region. Maximum light is attained in several seconds or dozens of seconds after the beginning of a flare; the star returns to its normal brightness in several minutes or dozens of minutes.
+ 
+UVN
+Flaring Orion variables of spectral types Ke-Me. These are phenomenologically almost identical to UV Ceti variables observed in the solar neighborhood. In addition to being related to nebulae, they are normally characterized by being of earlier spectral type and greater luminosity, with slower development of flares (Example: V389 Ori). They are possibly a specific subgroup of INB variables with irregular variations superimposed by flares.
+ 
+UXOR
+UX Orionis stars, which are collectively known in the literature as UXors. Subgroup of Young Stellar Objects that show irregular variations with a wide range of amplitudes from barely detectable to more than 4 mag in V. Most of them are Herbig Ae/Be stars but there are some T Tauri stars with later spectral types also showing the same behaviour. Large-amplitude variability is confined to stars with spectral types later than B8. There are two principal components: (1) irregular variations on time-scales of days around a mean brightness level that changes on a much longer time-scale (typically years), sometimes in a quasi-cyclic fashion, and (2) occasional episodes of deep minima, occurring at irregular intervals but more frequently near the low points of the brightness cycles. UXors show increased polarization when the optical light of the star becomes fainter (presence of clumps in our line of sight) and redder, while in extreme visual minima there is a color reversal. Currently mixed among the ISA, INA or INSA classes in the GCVS.
+Examples: UX Ori, CQ Tau, BF Ori.
+ 
+WR
+Eruptive Wolf-Rayet variables. Stars with broad emission features of He I and He II as well as C II-C IV, O II-O IV, and N III-N V. They display irregular light changes with amplitudes up to 0.1 mag. in V, which are probably caused by physical processes, in particular, by non-stable mass outflow from their atmospheres.
+ 
+WTTS
+Weak-lined T Tauri stars. A T Tauri star that lacks strong emission lines in its optical spectrum (EW(Hα) < 10Å), and lacks both strong stellar winds and a circumstellar accretion disk. Also known as naked T Tauri star.
+GCVS types INT and IT.
+ 
+ZZA/O
+DAV stars (ZZA type) with temperatures between 10600 and 11300 K showing repeated outbursts, recurring on irregular intervals of order days and lasting for several hours. They show rich pulsation spectra dominated by low-frequency (800-1400 s. period) pulsations that are unstable in amplitude and period.
+ 
+YSO
+Young Stellar Object of unspecified variable type. Pre-main sequence star, likely TTS.
+ 
+AM
+AM Herculis-type variables; close binary systems consisting of a dK-dM type dwarf and a superstrong magnetic white dwarf primary, in which the magnetic field of the primary not only prevents the formation of an accretion disk but also synchronizes the primary's rotation with its orbital period. They are characterized by variable linear and circular polarization of light. The total range of light variations may reach 4-5 mag. in V. Also known as polars.
+ 
+CBSS
+Close-binary supersoft source. Super soft X-rays are believed to be produced in high luminosity close binary systems by steady nuclear burning on the surface of an accreting white dwarf (WD). Orbital periods range from 0.15 to 4 d. The high mass transfer rate has been suggested to be caused by dynamical instability, expected when the donor star is more massive than the accreting object. When the orbital period is smaller than ~6 hours, this mechanism does not work and the CBSS with such periods are believed to be fed by a distinct mechanism: the wind-driven accretion. Their spectra show high-ionization species like O VI and N V; the emission of He II λ4686 is stronger than twice the strength of Hβ. There may be indication of jets. The orbital light curve can have shapes of either double eclipse or sine wave.
+Examples: QR And, MR Vel.
+ 
+CBSS/V
+V Sagittae-type stars. They belong to the CBSS class but are not detected as supersoft X-ray emitters. In V Sge stars, lines are usually stronger and broader when compared to the rest of the CBSS but this might be a selection effect associated with chemical abundance. Environments and stars with low chemical abundance have weaker winds so supersoft X-rays can escape and not be absorbed by the interstellar medium or the stellar wind. This is the case of the Magellanic Clouds. The opposite happens in stars and environmets with high chemical abundance where the soft photons are either absorbed by the stellar wind or by the interstellar medium (or both).
+Examples: V Sge, WX Cen.
+ 
+DQ
+DQ Herculis type. Magnetic cataclysmic variables with a red dwarf secondary and a white dwarf primary component that generates a magnetic field weaker than the field associated with AM Herculis stars and that is not strong enough to synchronize the orbits of the rotating white dwarf with the orbital period of the system. Also known as intermediate polars (IP).
+ 
+DQ/AE
+Propellers. AE Aqr subtype of intermediate polars with a persistent outflow whose expulsion from the binary is powered by the spin-down of a rapidly rotating, magnetized white dwarf.
+Example: AE Aqr.
+ 
+IBWD
+Interacting Binary White Dwarfs . Close binary systems with ultra short periods (5-70 minutes). Also known as AM CVn-type stars or Helium dwarf novae because they lack hydrogen lines in their spectra. Outbursting IBWD objects can be identified by some outburst properties: short (5-6 d.) superoutbursts (that may be double); rapid fadings but long-fading tails lasting 100-200 d. and without IR-excess; smaller amplitudes than UGWZ stars and fainter superoutburst absolute magnitudes (<4).
+ 
+N
+Novae. Close binary systems with orbital periods from 0.05 to 230 days. One of the components of these systems is a hot white dwarf star that suddenly, during a time interval from one to several dozen or several hundred days, increases its brightness by 7-19 mag. in V, then returns gradually to its former brightness over several months, years, or decades. Small changes at minimum light may be present. Cool components may be giants, subgiants, or dwarfs of K-M type. The spectra of novae near maximum light resemble A-F absorption spectra of luminous stars at first. Then broad emission lines (bands) of hydrogen, helium, and other elements with absorption components indicating the presence of a rapidly expanding envelope appear in the spectrum. As the light decreases, the composite spectrum begins to show forbidden lines characteristic of the spectra of gas nebulae excited by hot stars. At minimum light, the spectra of novae are generally continuous or resemble the spectra of Wolf-Rayet stars. Only spectra of the most massive systems show traces of cool components. Some novae reveal pulsations of hot components with periods of approximately 100 s. and amplitudes of about 0.05 mag. in V after an outburst. Some novae eventually turn out to be eclipsing systems. According to the features of their light variations, novae are subdivided into fast (NA), slow (NB), very slow (NC), and recurrent (NR) categories.
+ 
+NA
+Fast novae displaying rapid light increases and then, having achieved maximum light, fading by 3 mag. in 100 or fewer days.
+Example: GK Per.
+ 
+NB
+Slow novae that fade after maximum light by 3 mag. in ≥ 150 days. Here the presence of the well-known "dip" in the light curves of novae similar to T Aur and DQ Her is not taken into account: The rate of fading is estimated on the basis of a smooth curve, its parts before and after the "dip" being a direct continuation of one another.
+Example: RR Pic.
+ 
+NC
+Novae with a very slow development and remaining at maximum light for more than a decade, then fading very slowly. Before an outburst these objects may show long-period light changes with amplitudes of 1-2 mag. in V; cool components of these systems are probably giants or supergiants, sometimes semi-regular variables, and even Mira variables. Outburst amplitudes may reach 10 mag. High excitation emission spectra resemble those of planetary nebulae, Wolf-Rayet stars, and symbiotic variables (they are called "symbiotic novae"). The possibility that these objects are planetary nebulae in the process of formation is not excluded.
+Example: RR Tel.
+ 
+NL
+Nova-like stars. Cataclysmic variables where the mass transfer rate is above a certain limit and their accretion disks are stable because they are nearly fully ionized to their outer (tidal cut off) boundary and this condition suppresses dwarf nova outbursts. Also known as UX (UX Ursae Majoris stars).
+ 
+NL/VY
+Anti-dwarf novae. VY Sculptoris stars. They are cataclysmic binary systems with a hot (35,000-65,000 K) and luminous white dwarf that occasionally undergo fadings of more than 1 magnitude (up to several magnitudes) due to a low rate of mass transfer. These fadings might last from days to years. At maximum they vary up to 1 magnitude. They show no outbursts even though at minimum they fall into the dwarf novae instability strip. This could be caused by the possible magnetic nature of the white dwarf. Orbital periods usually range between 0.12 and 0.18 d.
+Examples: VY Scl, MV Lyr.
+ 
+NR
+Recurrent novae, which differ from typical novae by the fact that two or more outbursts (instead of a single one) separated by 10-80 years have been observed.
+Examples: T CrB, T Pyx.
+ 
+SN
+Supernovae. Stars that increase, as a result of a final explosion, their brightnesses by 20 mag and more, then fade slowly. The spectrum is characterized by the presence of very broad emission bands, their widths being several times greater than those of the bright bands observed in the spectra of novae. The expansion velocities of SN envelopes are in the thousands of km/s. According to the light curve shape and the spectral features, supernovae are subdivided into types I and II.
+Examples: B Cas, CM Tau.
+ 
+SN I
+Type I supernovae. Absorption lines of Ca II, Si, etc., but no hydrogen lines are present in the spectra. The expanding envelope almost lacks hydrogen. During 20-30 days following maximum light, the brightness decreases by approximately 0.1 mag per day, then the rate of fading slows and reaches a constant value of 0.014/day.
+ 
+SN Ia
+CO white dwarf accreting matter from (or merging with) a companion till it reaches the Chandrasekhar limit. No hydrogen. Silicon and iron lines. Mv -19.3. Detonation, no remnant.
+ 
+SN Iax
+Also known as SN Ia 02cx-like. CO white dwarf accreting matter from a nondegenerate He star that lost its outer hydrogen envelope. Mv -14.2/-18.9. The white dwarf is likely not destroyed (partial deflagration). Prototype: SN 2002cx
+ 
+SN Ia-00cx-like
+Subclass of SNe Ia. Their spectra are dominated by persistent Fe III lines and maintain a high ionisation and excitation in its ejecta for a longer time than most other SNe Ia. They are extremely rare and seem to stem from relatively old progenitors.
+ 
+SN Ia-02es-like
+Subclass of SNe Ia that are subluminous but with slowly declining light curves that show wide maximum peaks, with longer rise times of 19-20 d. and slower decline. They are similar to 91bg / 86G-like SNe in most respects.
+ 
+SN Ia-06gz-like
+Extremely luminous SNe Ia. Also called “super-Chandrasekhar” supernovae. They show broad light curves and moderately low ejecta velocities and are characterised by an unusually high U-band and UV flux and blue UV optical colours. Their peak luminosities lie between MB -19.5 and -20.4 and -unlike any other subclass of SNe Ia-, they are also overluminous by ~1 mag. in the NIR. They show a tendency to explode in rather low-mass galaxies.
+ 
+SN Ia-86G-like
+Objects with properties intermediate between 91bg-like and normal SNe Ia. Their light curves show rapid declines and peak around MB -18, showing double maxima in the NIR, with the first peak preceding those in bluer bands, in analogy to normal SNe Ia. However, the secondary maxima are very weak, and occur soon after the first peaks.
+ 
+SN Ia-91bg-like
+Subclass of SNe Ia that have peak luminosities that are 1.5-2.5 mag. fainter than normal SNe Ia (MB ~-16.7-17.7). They have faster declining light curves, and their ejecta velocities are small at any epoch in comparison with normal SNe Ia. They show rather red maximum-light colours (B-V ~0.5-0.6). They are mostly found in massive elliptical or S0 galaxies with a low star-formation rate.
+ 
+SN Ia-91T-like
+Subclass of SNe Ia characterised by high peak luminosities (0.2-0.5 mag. brighter than normal SNe Ia) and broad light curves, but especially by a peculiar pre-maximum spectroscopic evolution with Fe III lines dominating the early spectra. They predominantly explode in late-type galaxies and are therefore likely associated with young stellar populations.
+ 
+SN Ia-99aa-like
+Objects with properties intermediate between 91T-like and normal SNe Ia. Ca II lines are predominant in the very early spectra and their transition to a normal SN Ia-like appearance is much faster than in 91T-like SNe Ia.
+ 
+SN Ia-Ca-rich
+Extremely short-lived, fast-declining transients residing in the luminosity gap between classical novae and supernovae (peak magnitudes between -14.0 and -16.5). Their light curves are similar to 91bg-like SNe or fast-evolving SNe Ib/c, with single peaks in the NIR bands, rise times of 9-15 d., fast post-maximum declines and relatively red colours at peak (B-V ~0.6). These objects are characterised by He-rich and H-free early-time spectra, formally leading to an SN Ib classification. They turn nebular very early, so that after 50-100 d. the ejecta seem to be transparent. They have rather low inferred ejecta masses. They are different from both SNe Ia and stripped core-collapse SNe during the nebular phase, but closer to core-collapse SNe than to SNe Ia with their Fe dominated nebular spectra. They are usually located at very large distances from the centres of their hosts, which tend to be E or S0 galaxies, so they seem to be low mass old stars.
+ 
+SN Ia-CSM
+Subclass of SNe Ia that show spectral ambiguities arising from a strong contribution from circumstellar material interaction. They do not showing evidence for intermediate-mass elements and their spectra exhibit broad iron features, a low [Fe III]/[Fe II] ratio most similar to the super-Chandrasekhar supernovae (also similar absolute magnitudes, brighter than -19.5) and strong [Ca II] at late epochs.
+ 
+SN Ib
+Intermediate mass WN progenitor. He lines. "Stripped core-collapse supernovae".
+ 
+SN Ic
+WC or WO progenitors. No H and He. O, Mg and Ca lines. Mv -17/-20. "Stripped core-collapse supernovae".
+ 
+SN Ic-BL
+Broad-lined SN Ic supernovae. Some are associated with soft, long gamma ray bursts. Broad lines require high photospheric velocities. They are sometimes referred to as hypernovae.
+ 
+SN II
+Type II supernovae. Lines of hydrogen and other elements are apparent in their spectra. The expanding envelope consists mainly of H and He. Light curves show greater diversity than those of type I supernovae. Usually after 40-100 days since maximum light, the rate of fading is 0.1 mag per day.
+ 
+SN IIa
+CO white dwarf with a 6-7 solar masses main sequence companion. Mix of SN Ia and SN IIn. SN Ia surrounded by circumstellar matter (H) stripped from the companion. Mv -20/-21.
+ 
+SN IIb
+Intermediate mass WN progenitor? Massive binary? Rapidly declining light curve. Spectra evolve from strong H lines to strong He lines (Mix of II and Ib subclasses). Outer layers stripped by companion?
+ 
+SN IId
+SN II-L supernovae with Double P-Cygni profiles indicating the occurrence of strong wind episodes shortly before the explosion. Flattening in the light curve at later stages because of the interaction between the ejecta and the circumstellar material.
+ 
+SN II-L
+Intermediate mass late WN progenitor. Rapid and Linear decline in its light curve. Strong He lines. H envelope <2 SM. Mv -18.
+ 
+SN IIn
+LBV progenitors. Strong Narrow H-lines indicative of copious mass loss. Mv -17/-20.
+ 
+SN II-P
+Low mass red supergiants progenitors. Extended Plateau optical light curves. H envelope 10 SM. Mv -16/-18.
+ 
+SN-pec
+When a supernova resembles one of the types but shows different features (e.g. under-luminosity) the suffix -pec is added to the type. (SN Ib-pec)
+ 
+UG
+U Geminorum-type variables, quite often called dwarf novae. They are close binary systems consisting of a dwarf or subgiant K-M star that fills the volume of its inner Roche lobe and a white dwarf surrounded by an accretion disk. Orbital periods are in the range 0.003-0.5 days. Usually only small, in some cases rapid, light fluctuations are observed, but from time to time the brightness of a system increases rapidly by several magnitudes and, after an interval of from several days to a month or more, returns to the original state. Intervals between two consecutive outbursts for a given star may vary greatly, but every star is characterized by a certain mean value of these intervals, i.e., a mean cycle that corresponds to the mean light amplitude. The longer the cycle, the greater the amplitude. The period given in VSX is usually the orbital period. Outburst cycles are given between parentheses. These systems are frequently sources of X-ray emission. The spectrum of a system at minimum is continuous, with broad H and He emission lines. At maximum these lines almost disappear or become shallow absorption lines. Some of these systems are eclipsing, possibly indicating that the primary minimum is caused by the eclipse of a hot spot that originates in the accretion disk from the infall of a gaseous stream from the K-M star. According to the characteristics of the light changes, U Gem variables may be subdivided into three types: SS Cyg-type (UGSS), SU UMa-type (UGSU), and Z Cam-type (UGZ).
+ 
+UGER
+ER Ursae Majoris-type subclass of UGSU dwarf novae. These stars typically spend a third of their time in super-outburst with a super-cycle of 20-90 days. Outside of super-outburst they typically pack in a rapid succession of normal outbursts. The period given in VSX is usually the orbital period. Outburst cycles are given between parentheses. Amplitudes are smaller (around 3 mag.) than in other dwarf novae due to a higher mass transfer rate.
+ 
+UGSS
+SS Cygni-type variables. They increase in brightness by 2-6 mag. in V in 1-2 days and in several subsequent days return to their original brightnesses. The values of the cycle are in the range 10 days to several thousand. The period given in VSX is usually the orbital period. Outburst cycles are given between parentheses.
+Examples: SS Cyg, U Gem.
+ 
+UGSU
+SU Ursae Majoris-type variables. These are characterized by the presence of two types of outbursts called "normal" and "super-outbursts". Normal, short outbursts are similar to those of UGSS stars, while super-outbursts are brighter by 2 mag., are more than five times longer (wider), and occur several times less frequently. During super-outbursts the light curves show superposed periodic oscillations (super-humps), their periods being close to the orbital ones and amplitudes being about 0.2-0.3 mag. in V. Orbital periods are shorter than 0.1 days; companions are of dM spectral type. The period given in VSX is usually the orbital period. Outburst cycles are given between parentheses.
+ 
+UGWZ
+WZ Sagittae type subclass of UGSU dwarf novae in which the interval between super-outbursts is unusually long (>4 years) due to a very low mass-transfer rate, while normal outbursts are few or absent. They show double-waved early superhumps coincident with the orbital period (as a manifestation of the 2:1 resonance) for several days at the beginning of their outbursts (the low inclination systems may show a similar period of time without variations before the onset of ordinary superhumps). They undergo re-brightenings. Orbital periods range from 0.05 to 0.08 d. Amplitudes are larger than ~7 magnitudes.
+ 
+UGZ
+Z Camelopardalis-type stars. These also show cyclic outbursts, differing from UGSS variables by the fact that sometimes after an outburst they do not return to the original brightness, but during several cycles retain a magnitude between maximum and minimum. The values of cycles are from 10 to 40 days, while light amplitudes are from 2 to 5 mag. in V. The period given in VSX is usually the orbital period. Outburst cycles are given between parentheses.
+ 
+UGZ/IW
+IW And stars. Also known as anomalous Z Cam stars. A subset of the UGZ class. They show outbursts arising from standstills and eclipsing-like light curves.
+Examples: IW And, V0513 Cas
+ 
+V838MON
+Luminous red transients of the V838 Monocerotis type that become redder in outburst and are thought to be the result of the merger of a contact binary. After the outburst they get hidden in a dusty disk. The amplitudes are 9-13 mag. Also known as Luminous Red Novae (LNR).
+Examples: V838 Mon, V1309 Sco, V4332 Sgr.
+ 
+WDP
+White dwarf pulsars. Binary systems with a rapidly rotating white dwarf that is highly magnetized (up to 500 MG). Magnetic interactions between the two component stars, coupled with synchrotron radiation from the white dwarf, power the observed polarized and non-polarized emission.
+Example: AR Sco.
+ 
+ZAND
+Symbiotic variables of the Z Andromedae type. They are close binaries consisting of a hot star, a star of late type, and an extended envelope excited by the hot star's radiation. The combined brightness displays irregular variations with amplitudes up to 4 mag. in V. A very inhomogeneous group of objects.
+ 
+CV
+Cataclysmic Variables of unspecified type.
+ 
+HMXB
+High Mass X-ray Binaries. Systems with a massive star (usually an O or B star, a Be star or a blue supergiant) and a compact object (generally a neutron star, a black hole or a white dwarf). A fraction of the stellar wind of the normal star is captured by the compact object and produces X-rays as it falls onto it or onto an accretion disk that's surrounding it. In X-ray binaries, the subtypes indicate which kind of behavior the binary displays, like X-ray bursts (XB), large amplitude outbursts also in the visual (XN), reflection effect (XR) or it may also inform about the object's nature, e.g.: if the compact object is a pulsar (XP). Refer to the subtypes list below.
+ 
+IMXB
+Intermediate-mass X-ray binaries. Binary systems where a compact object – black hole (BH), neutron star (NS) or white dwarf (WD) – is accreting matter from a companion star of spectral type A or F. IMXBs are rarely observe because when the companion is more massive than the accretor but not massive enough to have strong winds, wind accretion proceeds at a very low rate and Roche lobe accretion is thought to be unstable. For NSs and WDs in IMXBs mass flows from the more massive to the lighter star and angular momentum conservation shrinks the orbit, leading to enhanced mass transfer. The bright XRB phase is therefore intense and short lived.
+ 
+LMXB
+Low Mass X-ray Binaries. Systems where one of the components is either a black hole or a neutron star. The other, donor, component usually fills its Roche lobe and therefore transfers mass to the compact object. The donor can be a normal dwarf, a white dwarf, or an evolved star (red giant). X-rays are emitted as the mass falls onto the compact object or onto an accretion disk that's surrounding it. The X-ray emission is incident upon the atmosphere of the cooler companion of the compact object and is reradiated in the form of optical high-temperature radiation (reflection effect), thus making that area of the cooler companion's surface an earlier spectral type. These effects lead to quite a peculiar complex character of optical variability in such systems. In X-ray binaries, the subtypes indicate which kind of behavior the binary displays, like X-ray bursts (XB), large amplitude outbursts also in the visual (XN), reflection effect (XR) or it may also inform about the object's nature, e.g.: if the compact object is a pulsar (XP). Refer to the subtypes list below.
+ 
+X
+Sources of strong, variable X-ray emission which do not belong to or are not yet attributed to any other type of variable stars. Most of the X-type variables turn out to be HMXB, IMXB, LMXB, AM or DQ-type binary systems. The subtypes of HMXB and LMXB systems are listed in the subtypes section.
+ 
+AGN
+Active Galactic Nuclei. Optically variable extragalactic objects only included for historical reasons or observing campaigns.
+GCVS type GAL.
+ 
+BLLAC
+Extragalactic BL Lacertae-type objects. These are compact quasi-stellar objects showing almost continuous spectra with weak emission and absorption lines and relatively rapid irregular light changes with amplitudes up to 3 mag. in V or more. Sources of strong X-ray radiation and radio waves, their emission displays strong and variable linear polarization in the visible and infrared spectral regions.
+ 
+GRB
+Optical counterparts of gamma ray bursts (GRBs). Bursts can last from ten milliseconds to several minutes. The initial burst is usually followed by a longer-lived "afterglow" emitted at longer wavelengths.
+ 
+TDE
+Tidal disruption event. Flare of electromagnetic radiation observed when a star approaches sufficiently close to a supermassive black hole in an active galaxy nucleus and is pulled apart by the black hole's tidal forces, with a fraction of its mass being captured into an accretion disk around the black hole. In the case of a partial TDE, the star survives the encounter with the SMBH and only a fraction of the stellar material is tidally stripped, leaving the stellar core intact. Partial TDEs can repeat, causing episodic mass transfer from the star to the SMBH at every pericenter passage, resulting in a series of low-level flares that repeat on the orbital timescale.
+Example: ASASSN-14ko.
+ 
+QSO
+Optically variable quasi-stellar extragalactic sources (quasars) that earlier were erroneously considered to be variable stars.
+ 
+Microlens
+Microlensing event. Symmetric brightening of a star caused by the presence of a separate gravitational influence intervening in line of sight. It may last from seconds to years. Microlensing events, which are a kind of extrinsic variables that, like supernovae, are a once in a lifetime event, and the star won't be observed as variable again.
+Example: GSC 03656-01328.
+ 
+*
+Unique variable stars outside the range of the classifications. These probably represent either short stages of transition from one variability type to another or the earliest and latest evolutionary stages of these types, or they are insufficiently studied members of future new types of variables.
+ 
+CST
+Non-variable stars (constant), formerly suspected to be variable and hastily designated. Further observations have not confirmed their variability.
+ 
+S
+Unstudied variable stars with rapid light changes.
+ 
+VBD
+Variable brown dwarfs.
+ 
+APER
+Used in the OGLE catalogues for stars that show aperiodic light variations.
+ 
+MISC
+Miscellaneous variable stars. Usually red variables (L, SR) or other types of irregular stars I, BE) that can't be classified more specifically by the automatic analysis made by the surveys.
+ 
+non-cv
+Stars that were once classified as CVs but then were found to be constant or belong to other types of variable stars or objects. Used in Downes Catalogue and Atlas of Cataclysmic Variables .
+ 
+NSIN
+Designation in the OGLE catalogues for stars with strictly periodic light curves, which are evidently non-sinusoidal.
+ 
+PER
+Periodic variable of unspecified type. Used in the OGLE catalogues for stars with a dominating periodicity, but showing also amplitude and/or phase changes or the periodic changes superimposed on the variability on a longer rime-scale. A majority of semi-regular variables fall into this category.
+ 
+SIN
+Designation in the OGLE catalogues for stars with sinusoidal light curves showing the evidence of a single periodicity. This category may include such variables as the mono-periodic SPB, ACV, GDOR, also some ELL (with half the orbital period) and chromospherically active stars, etc
+ 
+Transient
+Ultraviolet transient source. Used in the GALEX Ultraviolet Variability Catalog.
+ 
+VAR
+Variable star of unspecified type. Used for suspected variables lacking deeper studies.
