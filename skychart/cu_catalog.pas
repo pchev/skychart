@@ -2337,6 +2337,10 @@ begin
             FormatGCatN(rec)
           else
           begin
+            if (ctype = rtVar)and(rec.options.Amplitudeflag>0) then begin
+              if rec.str[rec.options.Amplitudeflag]<>' ' then
+                rec.variable.magmin:=rec.variable.magmax+rec.variable.magmin;
+            end;
             rec.ra := deg2rad * rec.ra;
             rec.Dec := deg2rad * rec.Dec;
           end;
