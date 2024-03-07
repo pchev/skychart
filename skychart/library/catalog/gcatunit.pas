@@ -226,6 +226,8 @@ Procedure OpenGCatfile(nomfich : string; var ok : boolean);
 procedure OpenGCatFileNum(fnum:integer; var ok:boolean);
 Procedure ReadGCatRec(recnum:integer; var lin : GCatrec; var ok : boolean);
 
+var gcatquick: boolean = false;
+
 implementation
 
 var
@@ -806,7 +808,7 @@ end else if cattype=ctText then begin
     if FileTIsOpen then CloseRegion;
 end;
 OpenFile(nomfich,ok);
-if ok and onCache and (CacheZone[CurCache,s]=0) then FillCache;
+if ok and onCache and (not gcatquick) and (CacheZone[CurCache,s]=0) then FillCache;
 CurCacheRec:=-1;
 end;
 

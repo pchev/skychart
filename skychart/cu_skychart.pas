@@ -339,7 +339,7 @@ begin
     if cfgsc.quick and FPlot.cfgplot.red_move then
     begin
       Fcatalog.cfgshr.StarFilter := True;
-      //if Fplot.cfgplot.plaplot=2 then Fplot.cfgplot.plaplot := 1;
+      if Fplot.cfgplot.plaplot=2 then Fplot.cfgplot.plaplot := 1;
     end
     else
     begin
@@ -396,10 +396,10 @@ begin
     begin
       // then the lines if planet opaque or not line mode
       DrawGrid(False);
+      DrawConstL;
+      DrawConstB;
       if not (cfgsc.quick and FPlot.cfgplot.red_move) then
       begin
-        DrawConstL;
-        DrawConstB;
         DrawEcliptic;
         DrawGalactic;
         DrawEquator;
@@ -615,10 +615,10 @@ begin
     Fcatalog.cfgcat.StarMagMax := Fcatalog.cfgshr.StarMagFilter[FieldNum];
   if cfgsc.quick and FPlot.cfgplot.red_move then begin
     Fcatalog.cfgcat.Quick := true;
-    Fcatalog.cfgcat.StarMagMax := min(16,Fcatalog.cfgcat.StarMagMax - 2);
   end
   else
     Fcatalog.cfgcat.Quick := false;
+  gcatquick:=Fcatalog.cfgcat.Quick;
   Fcatalog.cfgcat.NebMagMax := Fcatalog.cfgshr.NebMagFilter[FieldNum];
   Fcatalog.cfgcat.NebSizeMin := Fcatalog.cfgshr.NebSizeFilter[FieldNum];
 
@@ -707,9 +707,6 @@ begin
   cfgsc.StarMagMax := Fcatalog.cfgcat.StarMagMax;
   cfgsc.NebFilter := Fcatalog.cfgshr.NebFilter;
   cfgsc.NebMagMax := Fcatalog.cfgcat.NebMagMax;
-  if cfgsc.quick and FPlot.cfgplot.red_move and
-    (Fplot.cfgchart.min_ma = Fcatalog.cfgcat.StarMagMax) then
-    Fplot.cfgchart.min_ma := Fplot.cfgchart.min_ma + 2;
   cfgsc.ONGCimg := FFits.ImagesForCatalog('ONGC');
   Result := True;
 end;

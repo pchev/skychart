@@ -292,7 +292,7 @@ type
     xcursor, ycursor, skipmove: integer;
     MovingCircle, FNightVision, StartCircle, lockkey, movecam, moveguide,
     frommovecam, printing: boolean;
-    LockMouseWheel, lockblink: boolean;
+    lockblink: boolean;
     KeyPressTime: double;
     SaveColor: Starcolarray;
     SavebgColor: TColor;
@@ -2777,21 +2777,25 @@ var
   zf: double;
   x, y: integer;
 begin
-  try
-  if LockMouseWheel then
-    exit;
-  LockMouseWheel := True;
+  RefreshTimer.Enabled := False;
   try
     if VerboseMsg then
       WriteTrace(Caption + ' Image1MouseWheel');
     handled := True;
-    //lock_TrackCursor:=true;
-    if wheeldelta > 0 then
-      zf := 1.25
-    else
-      zf := 0.8;
+    if wheeldelta > 0 then  begin
+      if ssCtrl in Shift then
+        zf := 1.25
+      else
+        zf := 1.5;
+    end
+    else  begin
+       if ssCtrl in Shift then
+        zf := 0.8
+      else
+        zf := 0.66667;
+    end;
     sc.Zoom(zf);
-    if ssShift in Shift then
+    if not (ssShift in Shift) then
     begin
       x := MousePos.X;
       y := MousePos.Y;
@@ -2799,11 +2803,10 @@ begin
       y := y + round((sc.cfgsc.Ycentre - y) / zf);
       sc.MovetoXY(x, y);
     end;
+    sc.cfgsc.Quick := True;
     Refresh(True, False);
-    Application.ProcessMessages;
-  finally
-    LockMouseWheel := False;
-  end;
+    sc.cfgsc.Quick := False;
+    RefreshTimer.Enabled := True;
   except
     on E: Exception do WriteTrace('Mousewheel error: ' + E.Message);
   end;
@@ -3399,8 +3402,6 @@ begin
   end
   else
   begin
-    if lastquick then
-      Refresh(True, True); //the mouse as leave during a quick refresh
     if not sc.cfgsc.ShowScale then
       ShowCoord(x, y);
   end;
@@ -3844,8 +3845,10 @@ begin
     sc.cfgsc.fov := yy;
     if VerboseMsg then
       WriteTrace(Caption + ' ZoomCursor');
-    Refresh(True, True);
-    application.ProcessMessages;
+    sc.cfgsc.Quick := True;
+    Refresh(True, False);
+    sc.cfgsc.Quick := False;
+    RefreshTimer.Enabled := True;
   finally
     LockTrackCursor := False;
   end;
