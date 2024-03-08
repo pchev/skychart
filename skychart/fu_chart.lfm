@@ -61,7 +61,7 @@ object f_chart: Tf_chart
   end
   object RefreshTimer: TTimer
     Enabled = False
-    Interval = 100
+    Interval = 300
     OnTimer = RefreshTimerTimer
     Left = 307
     Top = 24
