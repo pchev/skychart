@@ -25,7 +25,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 interface
 
 uses u_constant, u_util, u_translation, UScaleDPI, downloaddialog, cu_calceph,
-  cu_httpdownload, u_unzip, cu_catalog, FileUtil, cu_database, cu_planet, md5,
+  cu_httpdownload, cu_catalog, FileUtil, cu_database, cu_planet, md5, zipper,
   Classes, SysUtils, Forms, Controls, Graphics, Dialogs, ExtCtrls, Grids, ComCtrls, StdCtrls, Types;
 
 type
@@ -96,9 +96,11 @@ type
     FSaveConfig, FOpenSetup: TNotifyEvent;
     InstallInfo: TCatInfo;
     httpdownload: THTTPBigDownload;
+    FUnZipper: TUnZipper;
     FRunning,FAbort: boolean;
     flist,flistsum: TStringList;
-    flistpos: integer;
+    flistpos,ProgressIndex,ProgressCount: integer;
+    ProgressMessage: string;
     procedure ClearGrid(g:TStringGrid);
     procedure LoadCatalogList;
     function UpdateList(ForceDownload: boolean; out txt: string): boolean;
@@ -115,7 +117,7 @@ type
     procedure DownloadComplete;
     procedure ActivateCatalog;
     procedure DownloadError;
-    procedure UnzipProgress(Sender : TObject);
+    procedure ProgressEvent(Sender : TObject; Const Ratio : Double);
   public
     procedure SetLang;
     procedure Abort;
@@ -296,6 +298,8 @@ procedure Tf_updcatalog.FormCreate(Sender: TObject);
 begin
   ScaleDPI(Self);
   SetLang;
+  FUnZipper:=TUnZipper.Create;
+  FUnZipper.OnEndFile:=@ProgressEvent;
   PageControl1.ActivePageIndex:=0;
   LabelInfo.Caption:=rsInstallStarC;
   ButtonRefresh.Visible:=false;
@@ -312,6 +316,7 @@ end;
 
 procedure Tf_updcatalog.FormDestroy(Sender: TObject);
 begin
+  FUNZipper.Free;
   ClearGrid(GridStar);
   ClearGrid(GridVar);
   ClearGrid(GridDouble);
@@ -715,20 +720,35 @@ end;
 
 procedure Tf_updcatalog.DownloadComplete;
 var fn: string;
+    ok: boolean;
 begin
 try
   ButtonAbort.Visible:=false;
   fn:=httpdownload.filename;
   if httpdownload.HttpResult and FileExists(fn) then
   begin
-     u_unzip.ProgressIndex:=0;
-     if (InstallInfo.catnum=3) or FileUnzipWithPath(PChar(fn), PChar(PrivateCatalogDir), @UnzipProgress) then
+     ProgressIndex:=0;
+     ok:=true;
+     if (InstallInfo.catnum<>3) then begin
+       try
+       ProgressCount:=0;
+       FUnZipper.FileName:=fn;
+       FUnZipper.OutputPath:=PrivateCatalogDir;
+       FUnZipper.UseUTF8:=True;
+       FUnZipper.Examine;
+       FUnZipper.UnZipAllFiles
+       except
+          on E: Exception do
+          begin
+            ok:=false;
+            ShowMessage('Unzip error : '+E.Message)
+          end;
+       end;
+     end;
+     if ok then
      begin
         ActivateCatalog;
         if (InstallInfo.catnum<>3) then DeleteFile(fn);
-     end
-     else begin
-       ShowMessage('Unzip error : '+fn);
      end;
   end
   else
@@ -871,7 +891,7 @@ begin
   ButtonClose.Enabled:=true;
   ButtonRefresh.Enabled:=true;
   ButtonSetup.Enabled:=true;
-  u_unzip.ProgressIndex:=0;
+  ProgressIndex:=0;
 end;
 
 procedure Tf_updcatalog.ButtonAbortClick(Sender: TObject);
@@ -890,10 +910,14 @@ begin
   LabelProgress.Caption:=httpdownload.progresstext;
 end;
 
-procedure Tf_updcatalog.UnzipProgress(Sender : TObject);
+procedure Tf_updcatalog.ProgressEvent(Sender : TObject; Const Ratio : Double);
 begin
- LabelProgress.Caption:=u_unzip.ProgressMessage;
- Application.ProcessMessages;
+  inc(ProgressCount);
+  if (ProgressCount mod 100) = 0 then begin
+    ProgressMessage:=inttostr(ProgressIndex+ProgressCount)+' files extracted...';
+    LabelProgress.Caption:=ProgressMessage;
+    Application.ProcessMessages;
+  end;
 end;
 
 procedure Tf_updcatalog.Uninstall(info: TCatInfo);
@@ -940,7 +964,6 @@ var
   fn,txt,buf: string;
   row: TStringList;
   ok: boolean;
-  i:integer;
 begin
   fn := slash(TempDir)+'catalog.list';
   DeleteFile(fn);
@@ -993,12 +1016,11 @@ begin
       ReadLn(f,buf);
       Splitarg(buf,' ',row);
       if row.Count<>2 then continue;
-      i:=flist.Add(trim(row[1]));
-      i:=flistsum.Add(trim(row[0]));
+      flist.Add(trim(row[1]));
+      flistsum.Add(trim(row[0]));
     until eof(f);
     CloseFile(f);
     row.Free;
-    i:=flist.count;
     if flist.Count>0 then begin
       flistpos:=0;
       InstallInfo:=info;
@@ -1084,6 +1106,7 @@ end;
 procedure Tf_updcatalog.DownloadListComplete;
 var fn: string;
     i: integer;
+    ok: boolean;
 begin
 try
     fn:=httpdownload.filename;
@@ -1095,16 +1118,30 @@ try
       end
       else begin
         ButtonAbort.Visible:=false;
-        u_unzip.ProgressIndex:=0;
+        ProgressIndex:=0;
         for i:=0 to flist.Count-1 do begin
           fn:=slash(TempDir)+'catalog_'+inttostr(i)+'.zip';
           LabelAction.Caption:=rsInstalling+' '+InstallInfo.catname+', '+rsUnzipFile+' '+IntToStr(i+1)+'/'+IntToStr(flist.Count)+' '+Ellipsis;
-          if FileUnzipWithPath(PChar(fn), PChar(PrivateCatalogDir), @UnzipProgress) then begin
+          ok:=true;
+          try
+          ProgressCount:=0;
+          FUnZipper.FileName:=fn;
+          FUnZipper.OutputPath:=PrivateCatalogDir;
+          FUnZipper.UseUTF8:=True;
+          FUnZipper.Examine;
+          FUnZipper.UnZipAllFiles
+          except
+             on E: Exception do
+             begin
+               ok:=false;
+               ShowMessage('Unzip error : '+E.Message)
+             end;
+          end;
+          if ok then begin
             DeleteFile(fn);
-            u_unzip.ProgressIndex:=u_unzip.ProgressIndex+u_unzip.ProgressCount;
+            ProgressIndex:=ProgressIndex+ProgressCount;
           end
           else begin
-            ShowMessage('Unzip error : '+fn);
             EndInstallTimer.Enabled:=true;
             exit;
           end;
