@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# ensure decimal dot
+export LC_ALL=C
+
 # Download leap seconds file
 
 source="ftp://hpiers.obspm.fr/iers/bul/bulc/ntp/leap-seconds.list"
@@ -7,6 +10,9 @@ rm leap-seconds.list
 wget $source
 
 ## Create Delta T file for Cartes du Ciel 
+
+# available again but stay with cddis for now
+#source="https://maia.usno.navy.mil/ser7"
 
 source="ftps://gdc.cddis.eosdis.nasa.gov/products/iers"
 
