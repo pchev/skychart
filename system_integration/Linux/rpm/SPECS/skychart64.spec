@@ -9,7 +9,7 @@ Packager: Patrick Chevalley
 BuildRoot: %_topdir/%{name}
 BuildArch: x86_64
 Provides: skychart
-Requires: libpasastro chealpix qt5pas glib2 libjpeg libpng sqlite xplanet espeak
+Requires: libpasastro libchealpix.so.0()(64bit) libQt5Pas.so.1()(64bit) libglib-2.0.so.0 sqlite3 xplanet espeak
 AutoReqProv: no
 
 %description
