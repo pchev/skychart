@@ -872,9 +872,12 @@ end;
 procedure Tf_updcatalog.DownloadError;
 begin
 try
+ try
  ShowMessage('Download error: '+httpdownload.HttpErr);
  if flist<>nil then FreeAndNil(flist);
  if flistsum<>nil then FreeAndNil(flistsum);
+ except
+ end;
 finally
   EndInstallTimer.Enabled:=true;
 end;
@@ -883,8 +886,11 @@ end;
 procedure Tf_updcatalog.EndInstallTimerTimer(Sender: TObject);
 begin
   EndInstallTimer.Enabled:=false;
+  try
   if flist<>nil then FreeAndNil(flist);
   if flistsum<>nil then FreeAndNil(flistsum);
+  except
+  end;
   PanelDownload.Visible:=false;
   LoadCatalogList;
   FRunning:=False;
@@ -901,8 +907,19 @@ end;
 
 procedure Tf_updcatalog.Abort;
 begin
-  FAbort:=true;
-  httpdownload.Abort;
+try
+  if FAbort then begin
+    // second tentative, force aborting
+    httpdownload.AbortForce;
+    EndInstallTimer.Enabled:=true;
+  end
+  else begin
+    // try soft abort
+    FAbort:=true;
+    httpdownload.Abort;
+  end;
+except
+end;
 end;
 
 procedure Tf_updcatalog.ShowProgress;

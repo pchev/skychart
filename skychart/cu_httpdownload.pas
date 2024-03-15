@@ -57,6 +57,7 @@ type   THTTPBigDownload = class(TThread)
     constructor Create(CreateSuspended: boolean);
     procedure Execute; override;
     procedure Abort;
+    procedure AbortForce;
     property HttpProxy: string read Fproxy write Fproxy;
     property HttpProxyPort: string read Fproxyport write Fproxyport;
     property HttpProxyUser: string read Fproxyuser write Fproxyuser;
@@ -199,7 +200,10 @@ try
     begin // error
       FHttpResult := False;
       if ok then begin
-        FHttpErr := FHttpErr + http.ResultString
+        FHttpErr := trim(FHttpErr +' '+ http.ResultString);
+      end
+      else begin
+        FHttpErr := trim(FHttpErr +' '+ http.Sock.LastErrorDesc);
       end;
       if assigned(FDownloadError) then Synchronize(FDownloadError);
       break;
@@ -312,6 +316,15 @@ begin
   FHttpErr:='Aborted by user';
   FHttpResult:=false;
   http.Abort;
+end;
+
+procedure THTTPBigDownload.AbortForce;
+begin
+  try
+    http.Sock.AbortSocket;
+    Terminate;
+  except
+  end;
 end;
 
 end.
