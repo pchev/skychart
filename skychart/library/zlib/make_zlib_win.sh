@@ -1,11 +1,11 @@
 #!/bin/bash
 
 # get source code
-wget http://zlib.net/zlib-1.2.11.tar.gz
+wget https://zlib.net/zlib-1.3.1.tar.gz
 if [[ $? != 0 ]]; then echo error ; exit 1; fi
-tar xf zlib-1.2.11.tar.gz
+tar xf zlib-1.3.1.tar.gz
 if [[ $? != 0 ]]; then echo error ; exit 1; fi
-cd zlib-1.2.11
+cd zlib-1.3.1
 if [[ $? != 0 ]]; then echo error ; exit 1; fi
 
 # win32
