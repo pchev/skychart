@@ -97,7 +97,7 @@ type
     InstallInfo: TCatInfo;
     httpdownload: THTTPBigDownload;
     FUnZipper: TUnZipper;
-    FRunning,FAbort: boolean;
+    FRunning,FAbort,Falreadycomplete: boolean;
     flist,flistsum: TStringList;
     flistpos,ProgressIndex,ProgressCount: integer;
     ProgressMessage: string;
@@ -1088,6 +1088,7 @@ try
   end;
   PanelDownload.Visible:=true;
   LabelProgress.Caption:='';
+  Falreadycomplete:=false;
   repeat
     fn:=slash(TempDir)+'catalog_'+inttostr(flistpos)+'.zip';
     LabelAction.Caption:=rsInstalling+' '+InstallInfo.catname+', '+rsDownloadFile+' '+IntToStr(flistpos+1)+'/'+IntToStr(flist.Count)+' '+Ellipsis;
@@ -1096,9 +1097,15 @@ try
       EndInstallTimer.Enabled:=true;
       exit;
     end;
-    if (flistpos<flist.Count-1) and FileExists(fn) then begin
+    if (flistpos<=flist.Count-1) and FileExists(fn) then begin
       sum:=MD5Print(MD5File(fn));
       if sum=flistsum[flistpos] then begin
+        if flistpos=(flist.Count-1) then begin
+          httpdownload.filename:=fn;
+          Falreadycomplete:=true;
+          DownloadListComplete;
+          exit;
+        end;
         inc(flistpos);
         Continue;
       end;
@@ -1127,7 +1134,7 @@ var fn: string;
 begin
 try
     fn:=httpdownload.filename;
-    if httpdownload.HttpResult and FileExists(fn) then
+    if Falreadycomplete or (httpdownload.HttpResult and FileExists(fn)) then
     begin
       inc(flistpos);
       if flistpos<flist.Count then begin
@@ -1155,7 +1162,6 @@ try
              end;
           end;
           if ok then begin
-            DeleteFile(fn);
             ProgressIndex:=ProgressIndex+ProgressCount;
           end
           else begin
@@ -1164,6 +1170,12 @@ try
           end;
         end;
         try
+        if ok then begin
+          for i:=0 to flist.Count-1 do begin
+            fn:=slash(TempDir)+'catalog_'+inttostr(i)+'.zip';
+            if FileExists(fn) then DeleteFile(fn);
+          end;
+        end;
         ActivateCatalog;
         finally
           FreeAndNil(flist);
