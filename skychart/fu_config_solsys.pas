@@ -28,7 +28,7 @@ interface
 uses
   u_help, u_translation, u_constant, u_util, u_projection, cu_database, cu_radec, cu_calceph,
   LCLIntf, SysUtils, Classes, Graphics, Controls, Forms, Dialogs, Math, IniFiles, tlntsend,
-  Spin, enhedits, StdCtrls, Buttons, ExtCtrls, ComCtrls, LResources, UScaleDPI, Clipbrd,
+  Spin, enhedits, StdCtrls, Buttons, ExtCtrls, ComCtrls, LResources, UScaleDPI, Clipbrd, gzio,
   downloaddialog, jdcalendar, EditBtn, CheckLst, Menus, Process, LazHelpHTML_fix, LazUTF8, LazFileUtils, Types;
 
 type
@@ -761,7 +761,12 @@ begin
           rewrite(ffile, 1);
           repeat
             l := gzread(gzf, @gzbuf, length(gzbuf));
-            blockwrite(ffile, gzbuf, l, n);
+            if l>0 then begin
+              blockwrite(ffile, gzbuf, l, n);
+            end
+            else begin
+              break;
+            end;
           until gzeof(gzf);
         finally
           gzclose(gzf);

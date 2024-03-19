@@ -29,7 +29,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 interface
 
 uses
-  u_help, u_translation, UScaleDPI,
+  u_help, u_translation, UScaleDPI, gzio,
   dynlibs, u_constant, u_util, Math, LazUTF8, IpHtml,
   LCLIntf, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
   StdCtrls, Buttons, LResources, downloaddialog, LazHelpHTML_fix;
@@ -204,7 +204,7 @@ begin
     hide;
     application.ProcessMessages;
     Result := False;
-    if cfgdss.OnlineDSS and zlibok then
+    if cfgdss.OnlineDSS then
     begin // Online DSS
       if cmain.HttpProxy then
       begin
@@ -276,12 +276,17 @@ begin
           firstrec := True;
           repeat
             l := gzread(gzf, @gzbuf, length(gzbuf));
-            blockwrite(fitsfile, gzbuf, l, n);
-            if firstrec then
-            begin
-              firstrec := False;
-              if copy(gzbuf, 1, 6) = 'SIMPLE' then
-                Result := True;
+            if l>0 then begin
+              blockwrite(fitsfile, gzbuf, l, n);
+              if firstrec then
+              begin
+                firstrec := False;
+                if copy(gzbuf, 1, 6) = 'SIMPLE' then
+                  Result := True;
+              end;
+            end
+            else begin
+              break;
             end;
           until gzeof(gzf);
         finally

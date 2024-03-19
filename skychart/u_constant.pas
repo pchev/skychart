@@ -1442,21 +1442,6 @@ var
 const
   maxfitslist = 15;  // must corespond to value in cdcwcs.c
 
-//  zlib
-type
-  Tgzopen = function(path, mode: PChar): pointer; cdecl;
-  Tgzread = function(gzFile: pointer; buf: pointer; len: cardinal): longint; cdecl;
-  Tgzeof = function(gzFile: pointer): longbool; cdecl;
-  Tgzclose = function(gzFile: pointer): longint; cdecl;
-
-var
-  gzopen: Tgzopen;
-  gzread: Tgzread;
-  gzeof: Tgzeof;
-  gzclose: Tgzclose;
-  zlibok: boolean;
-  zlib: TLibHandle;
-
 //  libpasspice
 const
   SpiceFirstYear = 2000;

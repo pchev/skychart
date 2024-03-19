@@ -26,7 +26,6 @@ if [ $OS_TARGET = win32 ]; then
   strip -v -o $destdir/libchealpix.dll skychart/library/chealpix/libchealpix.dll
   strip -v -o $destdir/libcalceph.dll skychart/library/calceph/libcalceph.dll
   unzip -d $destdir system_integration/Windows/data/sqlite3.zip
-  unzip -d $destdir system_integration/Windows/data/zlib.zip
   unzip -d $destdir system_integration/Windows/data/openssl-win32.zip
   install -m 755 -d $destdir/data
   install -m 755 -d $destdir/data/planet
@@ -43,7 +42,6 @@ if [ $OS_TARGET = win64 ]; then
   strip -v -o $destdir/libchealpix.dll skychart/library/chealpix/libchealpix.dll
   strip -v -o $destdir/libcalceph.dll skychart/library/calceph/libcalceph.dll
   unzip -d $destdir system_integration/Windows/data/sqlite3_x64.zip
-  unzip -d $destdir system_integration/Windows/data/zlib_x64.zip
   unzip -d $destdir system_integration/Windows/data/openssl-win64.zip
   install -m 755 -d $destdir/data
   install -m 755 -d $destdir/data/planet

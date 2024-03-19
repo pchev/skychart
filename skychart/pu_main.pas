@@ -2803,20 +2803,6 @@ begin
     {$endif}
     i:=round((c.red+c.green+c.blue)/3);
     DarkTheme:=(i<128);
-    step := 'Load zlib';
-    if VerboseMsg then
-      WriteTrace(step);
-    zlib := LoadLibrary(libz);
-    if zlib <> 0 then
-    begin
-      gzopen := Tgzopen(GetProcedureAddress(zlib, 'gzopen'));
-      gzread := Tgzread(GetProcedureAddress(zlib, 'gzread'));
-      gzclose := Tgzclose(GetProcedureAddress(zlib, 'gzclose'));
-      gzeof := Tgzeof(GetProcedureAddress(zlib, 'gzeof'));
-      zlibok := True;
-    end
-    else
-      zlibok := False;
     step := 'Load plan404';
     if VerboseMsg then
       WriteTrace(step);
