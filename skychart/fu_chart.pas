@@ -76,9 +76,6 @@ type
     MenuFinderCircle: TMenuItem;
     AllAtThisPos: TMenuItem;
     ImgList1: TMenuItem;
-    MenuCircle1: TMenuItem;
-    MenuCircle9: TMenuItem;
-    MenuCircle10: TMenuItem;
     EyepieceMask: TMenuItem;
     CopyCoord: TMenuItem;
     CopyCoord1: TMenuItem;
@@ -106,23 +103,6 @@ type
     MenuViewObsList: TMenuItem;
     MenuSAMP: TMenuItem;
     MenuSAMP1: TMenuItem;
-    MenuRectangle2: TMenuItem;
-    MenuRectangle10: TMenuItem;
-    MenuRectangle1: TMenuItem;
-    MenuCircle2: TMenuItem;
-    MenuCircle3: TMenuItem;
-    MenuCircle4: TMenuItem;
-    MenuCircle5: TMenuItem;
-    MenuCircle6: TMenuItem;
-    MenuCircle7: TMenuItem;
-    MenuCircle8: TMenuItem;
-    MenuRectangle3: TMenuItem;
-    MenuRectangle4: TMenuItem;
-    MenuRectangle5: TMenuItem;
-    MenuRectangle6: TMenuItem;
-    MenuRectangle7: TMenuItem;
-    MenuRectangle8: TMenuItem;
-    MenuRectangle9: TMenuItem;
     SelectCircle: TMenuItem;
     SelectRectangle: TMenuItem;
     nsearch1: TMenuItem;
@@ -2490,7 +2470,8 @@ end;
 
 procedure Tf_chart.PopupMenuChartPopup(Sender: TObject);
 var
-  xc, yc: integer;
+  i, xc, yc: integer;
+  m: TMenuItem;
 begin
   if assigned(FImageSetFocus) then
     FImageSetFocus(self);
@@ -2592,67 +2573,29 @@ begin
   end;
   if assigned(FSetScriptMenu) then
     FSetScriptMenu(self);
-  MenuCircle1.Checked := sc.cfgsc.circleok[1];
-  MenuCircle2.Checked := sc.cfgsc.circleok[2];
-  MenuCircle3.Checked := sc.cfgsc.circleok[3];
-  MenuCircle4.Checked := sc.cfgsc.circleok[4];
-  MenuCircle5.Checked := sc.cfgsc.circleok[5];
-  MenuCircle6.Checked := sc.cfgsc.circleok[6];
-  MenuCircle7.Checked := sc.cfgsc.circleok[7];
-  MenuCircle8.Checked := sc.cfgsc.circleok[8];
-  MenuCircle9.Checked := sc.cfgsc.circleok[9];
-  MenuCircle10.Checked := sc.cfgsc.circleok[10];
-  MenuCircle1.Caption := formatfloat(f2, sc.cfgsc.circle[1, 1]) + lmin + blank +
-    sc.cfgsc.circlelbl[1];
-  MenuCircle2.Caption := formatfloat(f2, sc.cfgsc.circle[2, 1]) + lmin + blank +
-    sc.cfgsc.circlelbl[2];
-  MenuCircle3.Caption := formatfloat(f2, sc.cfgsc.circle[3, 1]) + lmin + blank +
-    sc.cfgsc.circlelbl[3];
-  MenuCircle4.Caption := formatfloat(f2, sc.cfgsc.circle[4, 1]) + lmin + blank +
-    sc.cfgsc.circlelbl[4];
-  MenuCircle5.Caption := formatfloat(f2, sc.cfgsc.circle[5, 1]) + lmin + blank +
-    sc.cfgsc.circlelbl[5];
-  MenuCircle6.Caption := formatfloat(f2, sc.cfgsc.circle[6, 1]) + lmin + blank +
-    sc.cfgsc.circlelbl[6];
-  MenuCircle7.Caption := formatfloat(f2, sc.cfgsc.circle[7, 1]) + lmin + blank +
-    sc.cfgsc.circlelbl[7];
-  MenuCircle8.Caption := formatfloat(f2, sc.cfgsc.circle[8, 1]) + lmin + blank +
-    sc.cfgsc.circlelbl[8];
-  MenuCircle9.Caption := formatfloat(f2, sc.cfgsc.circle[9, 1]) + lmin + blank +
-    sc.cfgsc.circlelbl[9];
-  MenuCircle10.Caption := formatfloat(f2, sc.cfgsc.circle[10, 1]) + lmin +
-    blank + sc.cfgsc.circlelbl[10];
 
-  MenuRectangle1.Checked := sc.cfgsc.rectangleok[1];
-  MenuRectangle2.Checked := sc.cfgsc.rectangleok[2];
-  MenuRectangle3.Checked := sc.cfgsc.rectangleok[3];
-  MenuRectangle4.Checked := sc.cfgsc.rectangleok[4];
-  MenuRectangle5.Checked := sc.cfgsc.rectangleok[5];
-  MenuRectangle6.Checked := sc.cfgsc.rectangleok[6];
-  MenuRectangle7.Checked := sc.cfgsc.rectangleok[7];
-  MenuRectangle8.Checked := sc.cfgsc.rectangleok[8];
-  MenuRectangle9.Checked := sc.cfgsc.rectangleok[9];
-  MenuRectangle10.Checked := sc.cfgsc.rectangleok[10];
-  MenuRectangle1.Caption := formatfloat(f2, sc.cfgsc.rectangle[1, 1]) + lmin +
-    'x' + formatfloat(f2, sc.cfgsc.rectangle[1, 2]) + lmin + blank + sc.cfgsc.rectanglelbl[1];
-  MenuRectangle2.Caption := formatfloat(f2, sc.cfgsc.rectangle[2, 1]) + lmin +
-    'x' + formatfloat(f2, sc.cfgsc.rectangle[2, 2]) + lmin + blank + sc.cfgsc.rectanglelbl[2];
-  MenuRectangle3.Caption := formatfloat(f2, sc.cfgsc.rectangle[3, 1]) + lmin +
-    'x' + formatfloat(f2, sc.cfgsc.rectangle[3, 2]) + lmin + blank + sc.cfgsc.rectanglelbl[3];
-  MenuRectangle4.Caption := formatfloat(f2, sc.cfgsc.rectangle[4, 1]) + lmin +
-    'x' + formatfloat(f2, sc.cfgsc.rectangle[4, 2]) + lmin + blank + sc.cfgsc.rectanglelbl[4];
-  MenuRectangle5.Caption := formatfloat(f2, sc.cfgsc.rectangle[5, 1]) + lmin +
-    'x' + formatfloat(f2, sc.cfgsc.rectangle[5, 2]) + lmin + blank + sc.cfgsc.rectanglelbl[5];
-  MenuRectangle6.Caption := formatfloat(f2, sc.cfgsc.rectangle[6, 1]) + lmin +
-    'x' + formatfloat(f2, sc.cfgsc.rectangle[6, 2]) + lmin + blank + sc.cfgsc.rectanglelbl[6];
-  MenuRectangle7.Caption := formatfloat(f2, sc.cfgsc.rectangle[7, 1]) + lmin +
-    'x' + formatfloat(f2, sc.cfgsc.rectangle[7, 2]) + lmin + blank + sc.cfgsc.rectanglelbl[7];
-  MenuRectangle8.Caption := formatfloat(f2, sc.cfgsc.rectangle[8, 1]) + lmin +
-    'x' + formatfloat(f2, sc.cfgsc.rectangle[8, 2]) + lmin + blank + sc.cfgsc.rectanglelbl[8];
-  MenuRectangle9.Caption := formatfloat(f2, sc.cfgsc.rectangle[9, 1]) + lmin +
-    'x' + formatfloat(f2, sc.cfgsc.rectangle[9, 2]) + lmin + blank + sc.cfgsc.rectanglelbl[9];
-  MenuRectangle10.Caption := formatfloat(f2, sc.cfgsc.rectangle[10, 1]) +
-    lmin + 'x' + formatfloat(f2, sc.cfgsc.rectangle[10, 2]) + lmin + blank + sc.cfgsc.rectanglelbl[10];
+  SelectCircle.Clear;
+  for i:=1 to sc.cfgsc.ncircle do begin
+    m:=TMenuItem.Create(SelectCircle);
+    m.OnClick:=MenuCircleClick;
+    m.showalwayscheckable:=true;
+    m.tag:=i;
+    m.Checked := sc.cfgsc.circleok[i];
+    m.Caption := formatfloat(f2, sc.cfgsc.circle[i, 1]) + lmin + blank + sc.cfgsc.circlelbl[i];
+    SelectCircle.Add(m);
+  end;
+
+  SelectRectangle.Clear;
+  for i:=1 to sc.cfgsc.nrectangle do begin
+    m:=TMenuItem.Create(SelectRectangle);
+    m.OnClick:=MenuRectangleClick;
+    m.showalwayscheckable:=true;
+    m.tag:=i;
+    m.Checked := sc.cfgsc.rectangleok[i];
+    m.Caption := formatfloat(f2, sc.cfgsc.rectangle[i, 1]) + lmin +
+      'x' + formatfloat(f2, sc.cfgsc.rectangle[i, 2]) + lmin + blank + sc.cfgsc.rectanglelbl[i];
+    SelectRectangle.Add(m);
+  end;
 end;
 
 procedure Tf_chart.TrackOn1Click(Sender: TObject);

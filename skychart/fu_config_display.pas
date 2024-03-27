@@ -1692,7 +1692,7 @@ begin
   circlegrid.Cells[3, 0] := rsRotation;
   circlegrid.Cells[4, 0] := rsOffset;
   circlegrid.Cells[5, 0] := rsDescription;
-  circlegrid.RowCount := csc.ncircle + 1;
+  circlegrid.RowCount := csc.ncircle + 2;
   for i := 1 to csc.ncircle do
   begin
     if csc.circleok[i] then
@@ -1733,7 +1733,7 @@ begin
   rectanglegrid.Cells[4, 0] := rsRotation;
   rectanglegrid.Cells[5, 0] := rsOffset;
   rectanglegrid.Cells[6, 0] := rsDescription;
-  rectanglegrid.RowCount := csc.nrectangle + 1;
+  rectanglegrid.RowCount := csc.nrectangle + 2;
   for i := 1 to csc.nrectangle do
   begin
     if csc.rectangleok[i] then
@@ -2283,6 +2283,12 @@ var
   x: single;
   n: integer;
 begin
+  if ARow>csc.ncircle then begin
+    csc.ncircle:=ARow;
+    SetLength(csc.circle, csc.ncircle + 1);
+    SetLength(csc.circleok, csc.ncircle + 1);
+    SetLength(csc.circlelbl, csc.ncircle + 1);
+  end;
   case ACol of
     2:
     begin
@@ -2352,6 +2358,12 @@ var
   x: single;
   n: integer;
 begin
+  if ARow>csc.nrectangle then begin
+    csc.nrectangle:=ARow;
+    SetLength(csc.rectangle, csc.nrectangle + 1);
+    SetLength(csc.rectangleok, csc.nrectangle + 1);
+    SetLength(csc.rectanglelbl, csc.nrectangle + 1);
+  end;
   case ACol of
     2:
     begin
