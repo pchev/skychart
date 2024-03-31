@@ -35,6 +35,7 @@ uses
 type
 
   TSendVoTable = procedure(client, tname, tid, url: string) of object;
+  TCatalogGridList = array[1..5] of TStringGrid;
 
   { Tf_config_catalog }
 
@@ -322,6 +323,7 @@ type
     FSendVoTable: TSendVoTable;
     FCatGen: Tf_catgen;
     textcolor: TColor;
+    CatalogGridList: TCatalogGridList;
     procedure ShowGCat;
     procedure ShowCDCStar;
     procedure ShowCDCNeb;
@@ -463,6 +465,11 @@ begin
   cplot := mycplot;
   cmain := mycmain;
   inherited Create(AOwner);
+  CatalogGridList[1]:=CatalogGridStar;
+  CatalogGridList[2]:=CatalogGridVar;
+  CatalogGridList[3]:=CatalogGridDbl;
+  CatalogGridList[4]:=CatalogGridNeb;
+  CatalogGridList[5]:=CatalogGridLin;
   PageControl1.ShowTabs := False;
   textcolor := 0;
   LabelDownload.Caption := '';
@@ -674,8 +681,8 @@ var
   end;
 
 begin
-  for g in [CatalogGridStar,CatalogGridVar,CatalogGridDbl,CatalogGridNeb,CatalogGridLin] do begin
-    GCatTitle(g);
+  for i:=1 to 5 do begin
+    GCatTitle(CatalogGridList[i]);
   end;
   CatalogEmpty := True;
   for j := 0 to ccat.GCatnum - 1 do
@@ -1469,14 +1476,15 @@ end;
 
 procedure Tf_config_catalog.ActivateGCat;
 var
-  i, j, x, v: integer;
+  i, j, g, x, v: integer;
   buf: string;
   grid: TStringGrid;
 begin
   ccat.GCatNum := 0;
   i:=-1;
-  for grid in [CatalogGridStar,CatalogGridVar,CatalogGridDbl,CatalogGridNeb,CatalogGridLin] do begin
-    ccat.GCatNum := ccat.GCatNum + grid.RowCount - 1;
+  for g:=1 to 5 do begin
+    grid:=CatalogGridList[i];
+     ccat.GCatNum := ccat.GCatNum + grid.RowCount - 1;
     SetLength(ccat.GCatLst, ccat.GCatNum);
     for j := 1 to grid.RowCount-1 do
     begin
