@@ -221,6 +221,7 @@ type
     function GetMaxField(path, cat: string): string;
     function GetCatType(path, cat: string): integer;
     function GetNebColorSet(path, cat: string): boolean;
+    function GetStarColorSet(path, cat: string): boolean;
     function GetCatURL(path, cat: string): string;
     function GetCatTxtFile(path, cat: string): string;
     function GetVOstarmag: double;
@@ -1893,6 +1894,18 @@ begin
   Result := ok and (v = rtNeb) and (GCatH.flen[14] > 0);
 end;
 
+function Tcatalog.GetStarColorSet(path, cat: string): boolean;
+var
+  GCatH: TCatHeader;
+  info: TCatHdrInfo;
+  v: integer;
+  ok: boolean;
+begin
+  SetGcatPath(path, cat);
+  GetGCatInfo(GcatH, info, v, GCatFilter, ok);
+  Result := ok and (v = rtStar) and (GCatH.StarType > 0);
+end;
+
 function Tcatalog.GetCatURL(path, cat: string): string;
 var
   GCatH: TCatHeader;
@@ -2037,6 +2050,13 @@ begin
   rec.star.pmra := deg2rad * rec.star.pmra / 3600;
   rec.star.pmdec := deg2rad * rec.star.pmdec / 3600;
   rec.star.valid[vsGreekSymbol] := False;
+
+  if rec.options.StarType>0 then begin
+    if cfgcat.GCatLst[CurGCat - 1].col = 0 then
+      cfgcat.GCatLst[CurGCat - 1].col:=clYellow;
+    rec.options.StarColor:=cfgcat.GCatLst[CurGCat - 1].col;
+  end;
+
   bsccat := (rec.vstr[3] and (trim(rec.options.flabel[lOffsetStr + 3]) = 'CommonName')) and
     (rec.vstr[4] and (trim(rec.options.flabel[lOffsetStr + 4]) = 'Fl')) and
     (rec.vstr[5] and (trim(rec.options.flabel[lOffsetStr + 5]) = 'Bayer')) and

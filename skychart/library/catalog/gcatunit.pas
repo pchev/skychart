@@ -101,6 +101,8 @@ TCatOption = packed record
           altprefix: Tvalid;
           flabel   : Tlabellst;
           Amplitudeflag: Integer;
+          StarType  : Integer;
+          StarColor : Integer;
           end;
 GCatrec = packed record
           ra,dec   : double ;
@@ -135,7 +137,8 @@ TCatHeader = packed record
          IdFormat : Longint;
          HighPrecPM:LongBool;
          IdPrefix : LongBool;
-         Spare1   : array[1..7] of Longint;
+         StarType : LongInt;
+         Spare1   : array[1..6] of Longint;
          fpos     : array[1..40] of Longint;
          Spare2   : array[1..15] of Longint;
          flen     : array[1..40] of Longint;
@@ -168,7 +171,8 @@ TFileHeader = packed record
          IdFormat : Longint;
          HighPrecPM:LongBool;
          IdPrefix : LongBool;
-         Spare1   : array[1..7] of Longint;
+         StarType : LongInt;
+         Spare1   : array[1..6] of Longint;
          fpos     : array[1..40] of Longint;
          Spare2   : array[1..15] of Longint;
          flen     : array[1..40] of Longint;
@@ -269,6 +273,8 @@ begin
   emptyrec.options.Size:=catheader.Size;
   emptyrec.options.Units:=catheader.Units;
   emptyrec.options.ObjType:=catheader.ObjType;
+  emptyrec.options.StarType:=catheader.StarType;
+  emptyrec.options.StarColor:=$00FFFF;
   emptyrec.options.LogSize:=catheader.LogSize;
   emptyrec.options.UsePrefix:=catheader.UsePrefix;
   emptyrec.options.Amplitudeflag:=-1;
@@ -475,6 +481,7 @@ if fileexists(Gcatpath+slashchar+catname+'.hdr') then begin
   catheader.Size:=hdr.Size;
   catheader.Units:=hdr.Units;
   catheader.ObjType:=hdr.ObjType;
+  catheader.StarType:=hdr.StarType;
   catheader.LogSize:=hdr.LogSize;
   catheader.UsePrefix:=hdr.UsePrefix;
   catheader.IxKeylen:=hdr.IxKeylen;

@@ -163,6 +163,7 @@ type
     procedure PlotBorder(LeftMargin, RightMargin, TopMargin, BottomMargin,
       HeaderHeight, FooterHeight: integer; whitebg: boolean);
     function PlotStar(xx, yy: single; ma, b_v: double): integer;
+    function PlotStarMark(xx, yy: single; ma: double; startype,size,color: integer): integer;
     function PlotVarStar(x, y: single; vmax, vmin: double): integer;
     function PlotDblStar(x, y, r: single; ma, sep, pa, b_v: double): integer;
     procedure PlotDeepSkyObject(Axx, Ayy: single; Adim, Ama, Asbr, Apixscale: double;
@@ -1073,6 +1074,21 @@ begin
       0: Result := PlotStar0(xx, yy, ma, b_v);
       1: Result := PlotStar1(xx, yy, ma, b_v);
       2: Result := PlotStar2(xx, yy, ma, b_v);
+    end;
+
+end;
+
+function TSplot.PlotStarMark(xx, yy: single; ma: double; startype,size,color: integer): integer;
+begin
+
+  Result := round(max(size/2, cfgplot.MinDsoSize * cfgchart.drawpen));
+
+  if not cfgplot.Invisible then
+
+    case startype of
+      1: PlotDSOCircle(xx, yy, size, 0, 0, 1, 0, true, color);
+      2: PlotDSORectangle(xx, yy, size, 0, 0, 1, 0, true, color);
+      3: PlotDSOlozenge(xx, yy, size, 0, 0, 1, 0, true, color);
     end;
 
 end;

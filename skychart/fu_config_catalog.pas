@@ -641,7 +641,7 @@ end;
 procedure Tf_config_catalog.ShowGCat;
 var
   i, j, n: integer;
-  ncolor: boolean;
+  ncolor,scolor: boolean;
   caturl: string;
 begin
   stringgrid3.RowCount := ccat.GCatnum + 1;
@@ -670,12 +670,19 @@ begin
       stringgrid3.cells[0, i] := '0';
     n := catalog.GetCatType(stringgrid3.Cells[4, i], stringgrid3.Cells[1, i]);
     ncolor := catalog.GetNebColorSet(stringgrid3.Cells[4, i], stringgrid3.Cells[1, i]);
+    scolor := catalog.GetStarColorSet(stringgrid3.Cells[4, i], stringgrid3.Cells[1, i]);
     if ((n = 4) and (not ncolor)) or (n = 5) then
     begin  // rtneb, rtlin
       if ccat.GCatLst[j].ForceColor and (ccat.GCatLst[j].col > 0) then
         stringgrid3.cells[6, i] := IntToStr(ccat.GCatLst[j].col)
       else
         stringgrid3.cells[6, i] := '';
+    end
+    else if (n = 1) and scolor then
+    begin  // rtstar with symbol drawing
+      if ccat.GCatLst[j].col = 0 then
+        ccat.GCatLst[j].col := clYellow;
+      stringgrid3.cells[6, i] := IntToStr(ccat.GCatLst[j].col)
     end
     else
       stringgrid3.cells[6, i] := 'N';
@@ -927,9 +934,8 @@ begin
     end;
     6:
     begin
-      i := catalog.GetCatType(stringgrid3.Cells[4, row], stringgrid3.Cells[1, row]);
-      if (i = 4) or (i = 5) then
-      begin  // rtneb, rtlin
+      if stringgrid3.Cells[col, row] <> 'N' then
+      begin  // editable color
         ColorDialog1.Color := StrToIntDef(stringgrid3.Cells[col, row], clBlack);
         if ColorDialog1.Execute then
         begin
@@ -1029,6 +1035,8 @@ begin
     i := catalog.GetCatType(stringgrid3.Cells[4, row], stringgrid3.Cells[1, row]);
     if (i = 4) or (i = 5) then   // rtneb, rtlin
       stringgrid3.Cells[6, row] := ''
+    else if (i = 1) and catalog.GetStarColorSet(stringgrid3.Cells[4, row], stringgrid3.Cells[1, row]) then
+      stringgrid3.Cells[6, row] := inttostr(clYellow)
     else
       stringgrid3.Cells[6, row] := 'N';
   finally
@@ -1076,7 +1084,11 @@ begin
   if ((Acol = 1) or (Acol = 4)) and (Arow > 0) then
   begin
     i := catalog.GetCatType(stringgrid3.Cells[4, arow], stringgrid3.Cells[1, arow]);
-    if not ((i = 4) or (i = 5)) then   // rtneb, rtlin
+    if (i = 4) or (i = 5) then   // rtneb, rtlin
+      stringgrid3.Cells[6, arow] := ''
+    else if (i = 1) and catalog.GetStarColorSet(stringgrid3.Cells[4, arow], stringgrid3.Cells[1, arow]) then
+      stringgrid3.Cells[6, arow] := inttostr(clYellow)
+    else
       stringgrid3.Cells[6, arow] := 'N';
   end;
 end;
@@ -1105,6 +1117,8 @@ begin
   stringgrid3.cells[2, p] := '';
   stringgrid3.cells[3, p] := '';
   stringgrid3.cells[4, p] := '';
+  stringgrid3.cells[5, p] := '';
+  stringgrid3.cells[6, p] := '';
   DeleteGCatRow(p);
   catalog.CleanCache;
 end;
@@ -1122,6 +1136,8 @@ begin
     stringgrid3.cells[2, 1] := '';
     stringgrid3.cells[3, 1] := '';
     stringgrid3.cells[4, 1] := '';
+    stringgrid3.cells[5, 1] := '';
+    stringgrid3.cells[6, 1] := '';
     CatalogEmpty := True;
   end
   else
@@ -1133,7 +1149,10 @@ begin
       stringgrid3.cells[2, i] := stringgrid3.cells[2, i + 1];
       stringgrid3.cells[3, i] := stringgrid3.cells[3, i + 1];
       stringgrid3.cells[4, i] := stringgrid3.cells[4, i + 1];
-    end;
+      stringgrid3.cells[5, i] := stringgrid3.cells[5, i + 1];
+      stringgrid3.cells[6, i] := stringgrid3.cells[6, i + 1];
+      stringgrid3.cells[7, i] := stringgrid3.cells[7, i + 1];
+   end;
     stringgrid3.RowCount := stringgrid3.RowCount - 1;
   end;
 end;

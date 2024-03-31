@@ -40,6 +40,7 @@ skychart/library/catalog/lib
 tools/sac_images/units/
 # ignore various files
 skychart/cdc.lps
+skychart/catgen.lps
 tools/doc/*.pdf
 tools/doc/pdflist.txt
 tools/doc/wiki_doc/

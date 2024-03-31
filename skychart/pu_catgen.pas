@@ -31,7 +31,7 @@ uses
   SysUtils, Classes, Graphics, Controls, Forms, Dialogs, UScaleDPI,
   StdCtrls, ExtCtrls, ComCtrls, CheckLst, EnhEdits,
   Buttons, Math, Inifiles, Grids, mwFixedRecSort, mwCompFrom,
-  LCLProc, LResources, EditBtn, LazHelpHTML_fix;
+  LCLProc, LResources, EditBtn, Spin, LazHelpHTML_fix;
 
 const
   l_sup = 10;
@@ -43,9 +43,14 @@ type
   Tf_catgen = class(TForm)
     Button13: TButton;
     CBPrefixName: TCheckBox;
+    StarDrawing: TComboBox;
     IdPrefixLabel: TCheckBox;
     HighPrecPM: TCheckBox;
     FieldPrefixLabel: TCheckBox;
+    Label24: TLabel;
+    Label25: TLabel;
+    Label26: TLabel;
+    StarDrawingSize: TSpinEdit;
     UpdateURL: TEdit;
     StarParameters: TGroupBox;
     Label22: TLabel;
@@ -371,6 +376,7 @@ const
   lab_num: array[1..l_sup] of string =
     ('Num1', 'Num2', 'Num3', 'Num4', 'Num5', 'Num6', 'Num7', 'Num8', 'Num9', 'Num10');
   nebtype: array[1..19] of integer = (1, 12, 2, 3, 4, 5, 13, 6, 11, 7, 8, 9, 10, 255, 0, 14, 15, 16, 17);
+  startype: array[1..4] of integer = (0, 1, 2, 3);
   LineOp: array[1..5] of byte = (0, 1, 2, 3, 4);
   nebunits: array[1..3] of integer = (1, 60, 3600);
   pageFiles = 0;
@@ -1024,7 +1030,7 @@ var
   buf: shortstring;
   CatPrefix: boolean;
 begin
-  for i := 1 to 7 do
+  for i := 1 to 6 do
     catheader.Spare1[i] := 0;
   for i := 1 to 15 do
     catheader.Spare2[i] := 0;
@@ -1121,7 +1127,15 @@ begin
   catheader.IdFormat:=IdentifierFormat.ItemIndex;
   catheader.HighPrecPM:=HighPrecPM.Checked;
   catheader.IdPrefix:=IdPrefixLabel.Checked;
-  if catheader.version = 'CDCNEB 1' then
+  if catheader.version = 'CDCSTAR1' then
+  begin
+    catheader.StarType := startype[StarDrawing.ItemIndex + 1];
+    if catheader.StarType = 0 then
+      catheader.Size := 0
+    else
+      catheader.Size := StarDrawingSize.Value;
+  end
+  else if catheader.version = 'CDCNEB 1' then
   begin
     catheader.MagMax := floatedit2.Value;
     catheader.Size := NebDefaultSize.Value;
@@ -1679,7 +1693,7 @@ var
   curpos: integer;
   buf: shortstring;
 begin
-  for i := 1 to 7 do
+  for i := 1 to 6 do
     catheader.Spare1[i] := 0;
   for i := 1 to 15 do
     catheader.Spare2[i] := 0;

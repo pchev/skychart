@@ -1595,7 +1595,10 @@ begin
             Fplot.PlotLine(xx, yy, xxp, yyp, Fplot.cfgplot.Color[15], 1);
           end;
 
-          rs := Fplot.PlotStar(xx, yy, rec.star.magv, rec.star.b_v);
+          if rec.options.StarType=0 then
+            rs := Fplot.PlotStar(xx, yy, rec.star.magv, rec.star.b_v)
+          else
+            rs := Fplot.PlotStarMark(xx, yy, rec.star.magv, rec.options.StarType, rec.options.Size, rec.options.StarColor);
           if ((cfgsc.DrawAllStarLabel or (rec.options.ShortName = firstcat)) and
             (rec.star.magv < cfgsc.StarmagMax - cfgsc.LabelMagDiff[1])) then
           begin
