@@ -1483,8 +1483,8 @@ begin
   ccat.GCatNum := 0;
   i:=-1;
   for g:=1 to 5 do begin
-    grid:=CatalogGridList[i];
-     ccat.GCatNum := ccat.GCatNum + grid.RowCount - 1;
+    grid:=CatalogGridList[g];
+    ccat.GCatNum := ccat.GCatNum + grid.RowCount - 1;
     SetLength(ccat.GCatLst, ccat.GCatNum);
     for j := 1 to grid.RowCount-1 do
     begin
