@@ -982,91 +982,6 @@ object f_config_catalog: Tf_config_catalog
         ClientHeight = 476
         ClientWidth = 498
         ParentFont = False
-        object StringGrid3: TStringGrid
-          Left = 0
-          Height = 326
-          Top = 50
-          Width = 498
-          Align = alClient
-          ColCount = 8
-          Columns = <          
-            item
-              MaxSize = 202
-              Title.Caption = 'Cat'
-              Width = 51
-            end          
-            item
-              ButtonStyle = cbsPickList
-              MaxSize = 202
-              PickList.Strings = (
-                '0'
-                '1'
-                '2'
-                '3'
-                '4'
-                '5'
-                '6'
-                '7'
-                '8'
-                '9'
-                '10'
-              )
-              Title.Caption = 'Min'
-              Width = 40
-            end          
-            item
-              ButtonStyle = cbsPickList
-              MaxSize = 202
-              PickList.Strings = (
-                '0'
-                '1'
-                '2'
-                '3'
-                '4'
-                '5'
-                '6'
-                '7'
-                '8'
-                '9'
-                '10'
-              )
-              Title.Caption = 'Max'
-              Width = 40
-            end          
-            item
-              MaxSize = 141
-              Title.Caption = 'Path'
-              Width = 167
-            end          
-            item
-              ButtonStyle = cbsNone
-              MaxSize = 202
-              Title.Caption = ' '
-              Width = 30
-            end          
-            item
-              MaxSize = 202
-              Title.Caption = 'Color'
-              Width = 51
-            end          
-            item
-              MaxSize = 202
-              Title.Caption = 'Refresh'
-              Width = 56
-            end>
-          DefaultColWidth = 24
-          DefaultRowHeight = 24
-          GridLineWidth = 0
-          Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goRowMoving, goEditing, goAlwaysShowEditor]
-          ParentFont = False
-          RowCount = 2
-          TabOrder = 0
-          TitleStyle = tsStandard
-          OnDrawCell = StringGrid3DrawCell
-          OnMouseUp = StringGrid3MouseUp
-          OnSelectCell = StringGrid3SelectCell
-          OnSetEditText = StringGrid3SetEditText
-        end
         object Panel3: TPanel
           Left = 0
           Height = 50
@@ -1075,7 +990,7 @@ object f_config_catalog: Tf_config_catalog
           Align = alTop
           ClientHeight = 50
           ClientWidth = 498
-          TabOrder = 1
+          TabOrder = 0
           object Label37: TLabel
             AnchorSideTop.Control = CatgenButton
             AnchorSideTop.Side = asrCenter
@@ -1107,7 +1022,7 @@ object f_config_catalog: Tf_config_catalog
           Align = alBottom
           ClientHeight = 100
           ClientWidth = 498
-          TabOrder = 2
+          TabOrder = 1
           object addcat: TButton
             Left = 154
             Height = 25
@@ -1280,6 +1195,466 @@ object f_config_catalog: Tf_config_catalog
             BorderSpacing.Left = 8
             Caption = 'Search only'
             ParentColor = False
+          end
+        end
+        object PageControlGCat: TPageControl
+          Left = 0
+          Height = 326
+          Top = 50
+          Width = 498
+          ActivePage = TabSheetGcatStar
+          Align = alClient
+          TabIndex = 0
+          TabOrder = 2
+          object TabSheetGcatStar: TTabSheet
+            Caption = 'TabSheetGcatStar'
+            ClientHeight = 291
+            ClientWidth = 494
+            object CatalogGridStar: TStringGrid
+              Left = 0
+              Height = 291
+              Top = 0
+              Width = 494
+              Align = alClient
+              ColCount = 8
+              Columns = <              
+                item
+                  MaxSize = 202
+                  Title.Caption = 'Cat'
+                  Width = 51
+                end              
+                item
+                  ButtonStyle = cbsPickList
+                  MaxSize = 202
+                  PickList.Strings = (
+                    '0'
+                    '1'
+                    '2'
+                    '3'
+                    '4'
+                    '5'
+                    '6'
+                    '7'
+                    '8'
+                    '9'
+                    '10'
+                  )
+                  Title.Caption = 'Min'
+                  Width = 40
+                end              
+                item
+                  ButtonStyle = cbsPickList
+                  MaxSize = 202
+                  PickList.Strings = (
+                    '0'
+                    '1'
+                    '2'
+                    '3'
+                    '4'
+                    '5'
+                    '6'
+                    '7'
+                    '8'
+                    '9'
+                    '10'
+                  )
+                  Title.Caption = 'Max'
+                  Width = 40
+                end              
+                item
+                  MaxSize = 141
+                  Title.Caption = 'Path'
+                  Width = 167
+                end              
+                item
+                  ButtonStyle = cbsNone
+                  MaxSize = 202
+                  Title.Caption = ' '
+                  Width = 30
+                end              
+                item
+                  MaxSize = 202
+                  Title.Caption = 'Color'
+                  Width = 51
+                end              
+                item
+                  MaxSize = 202
+                  Title.Caption = 'Refresh'
+                  Width = 56
+                end>
+              DefaultColWidth = 24
+              DefaultRowHeight = 24
+              GridLineWidth = 0
+              Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goRowMoving, goEditing, goAlwaysShowEditor]
+              ParentFont = False
+              RowCount = 2
+              TabOrder = 0
+              TitleStyle = tsStandard
+              OnDrawCell = CatalogGridDrawCell
+              OnMouseUp = CatalogGridMouseUp
+              OnSelectCell = CatalogGridSelectCell
+              OnSetEditText = CatalogGridSetEditText
+            end
+          end
+          object TabSheetGcatVar: TTabSheet
+            Caption = 'TabSheetGcatVar'
+            ClientHeight = 291
+            ClientWidth = 494
+            object CatalogGridVar: TStringGrid
+              Left = 0
+              Height = 291
+              Top = 0
+              Width = 494
+              Align = alClient
+              ColCount = 8
+              Columns = <              
+                item
+                  MaxSize = 202
+                  Title.Caption = 'Cat'
+                  Width = 51
+                end              
+                item
+                  ButtonStyle = cbsPickList
+                  MaxSize = 202
+                  PickList.Strings = (
+                    '0'
+                    '1'
+                    '2'
+                    '3'
+                    '4'
+                    '5'
+                    '6'
+                    '7'
+                    '8'
+                    '9'
+                    '10'
+                  )
+                  Title.Caption = 'Min'
+                  Width = 40
+                end              
+                item
+                  ButtonStyle = cbsPickList
+                  MaxSize = 202
+                  PickList.Strings = (
+                    '0'
+                    '1'
+                    '2'
+                    '3'
+                    '4'
+                    '5'
+                    '6'
+                    '7'
+                    '8'
+                    '9'
+                    '10'
+                  )
+                  Title.Caption = 'Max'
+                  Width = 40
+                end              
+                item
+                  MaxSize = 141
+                  Title.Caption = 'Path'
+                  Width = 167
+                end              
+                item
+                  ButtonStyle = cbsNone
+                  MaxSize = 202
+                  Title.Caption = ' '
+                  Width = 30
+                end              
+                item
+                  MaxSize = 202
+                  Title.Caption = 'Color'
+                  Width = 51
+                end              
+                item
+                  MaxSize = 202
+                  Title.Caption = 'Refresh'
+                  Width = 56
+                end>
+              DefaultColWidth = 24
+              DefaultRowHeight = 24
+              GridLineWidth = 0
+              Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goRowMoving, goEditing, goAlwaysShowEditor]
+              ParentFont = False
+              RowCount = 2
+              TabOrder = 0
+              TitleStyle = tsStandard
+              OnDrawCell = CatalogGridDrawCell
+              OnMouseUp = CatalogGridMouseUp
+              OnSelectCell = CatalogGridSelectCell
+              OnSetEditText = CatalogGridSetEditText
+            end
+          end
+          object TabSheetGcatDbl: TTabSheet
+            Caption = 'TabSheetGcatDbl'
+            ClientHeight = 291
+            ClientWidth = 494
+            object CatalogGridDbl: TStringGrid
+              Left = 0
+              Height = 291
+              Top = 0
+              Width = 494
+              Align = alClient
+              ColCount = 8
+              Columns = <              
+                item
+                  MaxSize = 202
+                  Title.Caption = 'Cat'
+                  Width = 51
+                end              
+                item
+                  ButtonStyle = cbsPickList
+                  MaxSize = 202
+                  PickList.Strings = (
+                    '0'
+                    '1'
+                    '2'
+                    '3'
+                    '4'
+                    '5'
+                    '6'
+                    '7'
+                    '8'
+                    '9'
+                    '10'
+                  )
+                  Title.Caption = 'Min'
+                  Width = 40
+                end              
+                item
+                  ButtonStyle = cbsPickList
+                  MaxSize = 202
+                  PickList.Strings = (
+                    '0'
+                    '1'
+                    '2'
+                    '3'
+                    '4'
+                    '5'
+                    '6'
+                    '7'
+                    '8'
+                    '9'
+                    '10'
+                  )
+                  Title.Caption = 'Max'
+                  Width = 40
+                end              
+                item
+                  MaxSize = 141
+                  Title.Caption = 'Path'
+                  Width = 167
+                end              
+                item
+                  ButtonStyle = cbsNone
+                  MaxSize = 202
+                  Title.Caption = ' '
+                  Width = 30
+                end              
+                item
+                  MaxSize = 202
+                  Title.Caption = 'Color'
+                  Width = 51
+                end              
+                item
+                  MaxSize = 202
+                  Title.Caption = 'Refresh'
+                  Width = 56
+                end>
+              DefaultColWidth = 24
+              DefaultRowHeight = 24
+              GridLineWidth = 0
+              Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goRowMoving, goEditing, goAlwaysShowEditor]
+              ParentFont = False
+              RowCount = 2
+              TabOrder = 0
+              TitleStyle = tsStandard
+              OnDrawCell = CatalogGridDrawCell
+              OnMouseUp = CatalogGridMouseUp
+              OnSelectCell = CatalogGridSelectCell
+              OnSetEditText = CatalogGridSetEditText
+            end
+          end
+          object TabSheetGcatNeb: TTabSheet
+            Caption = 'TabSheetGcatNeb'
+            ClientHeight = 291
+            ClientWidth = 494
+            object CatalogGridNeb: TStringGrid
+              Left = 0
+              Height = 291
+              Top = 0
+              Width = 494
+              Align = alClient
+              ColCount = 8
+              Columns = <              
+                item
+                  MaxSize = 202
+                  Title.Caption = 'Cat'
+                  Width = 51
+                end              
+                item
+                  ButtonStyle = cbsPickList
+                  MaxSize = 202
+                  PickList.Strings = (
+                    '0'
+                    '1'
+                    '2'
+                    '3'
+                    '4'
+                    '5'
+                    '6'
+                    '7'
+                    '8'
+                    '9'
+                    '10'
+                  )
+                  Title.Caption = 'Min'
+                  Width = 40
+                end              
+                item
+                  ButtonStyle = cbsPickList
+                  MaxSize = 202
+                  PickList.Strings = (
+                    '0'
+                    '1'
+                    '2'
+                    '3'
+                    '4'
+                    '5'
+                    '6'
+                    '7'
+                    '8'
+                    '9'
+                    '10'
+                  )
+                  Title.Caption = 'Max'
+                  Width = 40
+                end              
+                item
+                  MaxSize = 141
+                  Title.Caption = 'Path'
+                  Width = 167
+                end              
+                item
+                  ButtonStyle = cbsNone
+                  MaxSize = 202
+                  Title.Caption = ' '
+                  Width = 30
+                end              
+                item
+                  MaxSize = 202
+                  Title.Caption = 'Color'
+                  Width = 51
+                end              
+                item
+                  MaxSize = 202
+                  Title.Caption = 'Refresh'
+                  Width = 56
+                end>
+              DefaultColWidth = 24
+              DefaultRowHeight = 24
+              GridLineWidth = 0
+              Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goRowMoving, goEditing, goAlwaysShowEditor]
+              ParentFont = False
+              RowCount = 2
+              TabOrder = 0
+              TitleStyle = tsStandard
+              OnDrawCell = CatalogGridDrawCell
+              OnMouseUp = CatalogGridMouseUp
+              OnSelectCell = CatalogGridSelectCell
+              OnSetEditText = CatalogGridSetEditText
+            end
+          end
+          object TabSheetGcatLin: TTabSheet
+            Caption = 'TabSheetGcatLin'
+            ClientHeight = 291
+            ClientWidth = 494
+            object CatalogGridLin: TStringGrid
+              Left = 0
+              Height = 291
+              Top = 0
+              Width = 494
+              Align = alClient
+              ColCount = 8
+              Columns = <              
+                item
+                  MaxSize = 202
+                  Title.Caption = 'Cat'
+                  Width = 51
+                end              
+                item
+                  ButtonStyle = cbsPickList
+                  MaxSize = 202
+                  PickList.Strings = (
+                    '0'
+                    '1'
+                    '2'
+                    '3'
+                    '4'
+                    '5'
+                    '6'
+                    '7'
+                    '8'
+                    '9'
+                    '10'
+                  )
+                  Title.Caption = 'Min'
+                  Width = 40
+                end              
+                item
+                  ButtonStyle = cbsPickList
+                  MaxSize = 202
+                  PickList.Strings = (
+                    '0'
+                    '1'
+                    '2'
+                    '3'
+                    '4'
+                    '5'
+                    '6'
+                    '7'
+                    '8'
+                    '9'
+                    '10'
+                  )
+                  Title.Caption = 'Max'
+                  Width = 40
+                end              
+                item
+                  MaxSize = 141
+                  Title.Caption = 'Path'
+                  Width = 167
+                end              
+                item
+                  ButtonStyle = cbsNone
+                  MaxSize = 202
+                  Title.Caption = ' '
+                  Width = 30
+                end              
+                item
+                  MaxSize = 202
+                  Title.Caption = 'Color'
+                  Width = 51
+                end              
+                item
+                  MaxSize = 202
+                  Title.Caption = 'Refresh'
+                  Width = 56
+                end>
+              DefaultColWidth = 24
+              DefaultRowHeight = 24
+              GridLineWidth = 0
+              Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goRowMoving, goEditing, goAlwaysShowEditor]
+              ParentFont = False
+              RowCount = 2
+              TabOrder = 0
+              TitleStyle = tsStandard
+              OnDrawCell = CatalogGridDrawCell
+              OnMouseUp = CatalogGridMouseUp
+              OnSelectCell = CatalogGridSelectCell
+              OnSetEditText = CatalogGridSetEditText
+            end
           end
         end
       end
