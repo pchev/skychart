@@ -480,8 +480,12 @@ begin
     { TODO : check cocoa dark theme color}
     if DarkTheme then begin
       StringGrid1.FixedColor := clBackground;
-      CatalogGrid1.FixedColor := clBackground;
       StringGrid4.FixedColor := clBackground;
+      CatalogGridStar.FixedColor := clBackground;
+      CatalogGridVar.FixedColor := clBackground;
+      CatalogGridDbl.FixedColor := clBackground;
+      CatalogGridNeb.FixedColor := clBackground;
+      CatalogGridLin.FixedColor := clBackground;
     end;
   {$endif}
 end;
