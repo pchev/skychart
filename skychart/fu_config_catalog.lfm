@@ -25,11 +25,11 @@ object f_config_catalog: Tf_config_catalog
       Height = 480
       Top = 1
       Width = 502
-      ActivePage = Page2
+      ActivePage = Page1
       Align = alClient
       ParentFont = False
       ShowTabs = False
-      TabIndex = 0
+      TabIndex = 2
       TabOrder = 1
       OnChange = PageControl1Change
       OnChanging = PageControl1Changing
@@ -1262,6 +1262,7 @@ object f_config_catalog: Tf_config_catalog
                   Width = 40
                 end              
                 item
+                  Alignment = taRightJustify
                   MaxSize = 141
                   Title.Caption = 'Path'
                   Width = 167
@@ -1352,6 +1353,7 @@ object f_config_catalog: Tf_config_catalog
                   Width = 40
                 end              
                 item
+                  Alignment = taRightJustify
                   MaxSize = 141
                   Title.Caption = 'Path'
                   Width = 167
@@ -1442,6 +1444,7 @@ object f_config_catalog: Tf_config_catalog
                   Width = 40
                 end              
                 item
+                  Alignment = taRightJustify
                   MaxSize = 141
                   Title.Caption = 'Path'
                   Width = 167
@@ -1532,6 +1535,7 @@ object f_config_catalog: Tf_config_catalog
                   Width = 40
                 end              
                 item
+                  Alignment = taRightJustify
                   MaxSize = 141
                   Title.Caption = 'Path'
                   Width = 167
@@ -1622,6 +1626,7 @@ object f_config_catalog: Tf_config_catalog
                   Width = 40
                 end              
                 item
+                  Alignment = taRightJustify
                   MaxSize = 141
                   Title.Caption = 'Path'
                   Width = 167
