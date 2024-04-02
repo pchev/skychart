@@ -1,7 +1,7 @@
 [Page1]
 binarycat=0
 type=3
-shortname=gcm
+shortname=GCM
 longname=Globular Clusters in the Milky Way
 numfiles=1
 inputfiles0=catalog.txt
