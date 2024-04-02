@@ -43,7 +43,6 @@ type
     addobj: TButton;
     addcat: TButton;
     Button1: TButton;
-    ButtonInstallCat: TButton;
     Button5: TButton;
     Button6: TButton;
     Button7: TButton;
@@ -62,18 +61,12 @@ type
     Image2: TImage;
     Image3: TImage;
     Label10: TLabel;
-    Label11: TLabel;
-    Label12: TLabel;
     Label8: TLabel;
     Label9: TLabel;
-    Label99: TLabel;
-    LabelNewCat: TLabel;
     Label98: TLabel;
     OngcBox: TCheckBox;
     frc31: TLongEdit;
     frc32: TLongEdit;
-    Fgaia1: TLongEdit;
-    Fgaia2: TLongEdit;
     hnName: TComboBox;
     hn290Box: TCheckBox;
     hnbase1: TLongEdit;
@@ -90,7 +83,6 @@ type
     Label95: TLabel;
     PageControlGCat: TPageControl;
     Panel1: TPanel;
-    Panel2: TPanel;
     Panel3: TPanel;
     Panel4: TPanel;
     Panel5: TPanel;
@@ -127,8 +119,6 @@ type
     fpgc2: TLongEdit;
     Fsky1: TLongEdit;
     Fsky2: TLongEdit;
-    Fdef1: TLongEdit;
-    Fdef2: TLongEdit;
     funb1: TLongEdit;
     funb2: TLongEdit;
     fw4: TLabel;
@@ -182,10 +172,6 @@ type
     StringGrid1: TStringGrid;
     StringGrid4: TStringGrid;
     Page1b: TTabSheet;
-    def3: TDirectoryEdit;
-    DefBox: TCheckBox;
-    gaia3: TDirectoryEdit;
-    GAIABox: TCheckBox;
     Page4b: TTabSheet;
     TabSheetGcatStar: TTabSheet;
     TabSheetGcatVar: TTabSheet;
@@ -207,18 +193,9 @@ type
     ty23: TDirectoryEdit;
     MainPanel: TPanel;
     Page1: TTabSheet;
-    Page2: TTabSheet;
     Page3: TTabSheet;
     Page4: TTabSheet;
     Label37: TLabel;
-    Label2: TLabel;
-    Label16: TLabel;
-    Label28: TLabel;
-    Label17: TLabel;
-    Label27: TLabel;
-    Label18: TLabel;
-    Label19: TLabel;
-    Label20: TLabel;
     TY2Box: TCheckBox;
     Fty21: TLongEdit;
     Fty22: TLongEdit;
@@ -380,7 +357,6 @@ begin
   Label37.Caption := rsStarsAndNebu;
   addcat.Caption := rsAdd;
   delcat.Caption := rsDelete;
-  ButtonInstallCat.Caption:=rsInstallObjec;
   ButtonInstallCat1.Caption:=rsInstallObjec;
   ButtonInstallCat2.Caption:=rsInstallObjec;
   ColorDialog1.Title := rsSelectColorB;
@@ -390,17 +366,6 @@ begin
   Button5.Caption := rsAdd;
   Button7.Caption := rsUpdate1;
   Button6.Caption := rsDelete;
-  Page2.Caption := rsCdCStars;
-  Label2.Caption := rsCDCStarsCata;
-  Label16.Caption := rsMin2;
-  Label28.Caption := rsFieldNumber;
-  Label17.Caption := rsMax2;
-  Label27.Caption := rsFilesPath;
-  Label18.Caption := rsStars;
-  label99.Caption := rsStarCatalogI+' SAO, BD, HD, GC';
-  Label19.Caption := rsVariables;
-  LabelNewCat.Caption:=Format(rsUseTheButton, [rsUpdate1, rsInstallObjec]);
-  Label20.Caption := rsDoubles;
   USNBright.Caption := rsBrightStars;
   Page3.Caption := rsCdCNebulae;
   Label3.Caption := rsCDCNebulaeCa;
@@ -822,8 +787,6 @@ end;
 
 procedure Tf_config_catalog.ShowCDCStar;
 begin
-  defbox.Checked := ccat.StarCatDef[DefStar - BaseStar];
-  GAIAbox.Checked := ccat.StarCatDef[gaia - BaseStar];
   skybox.Checked := ccat.StarCatDef[sky2000 - BaseStar];
   tycbox.Checked := ccat.StarCatDef[tyc - BaseStar];
   ty2box.Checked := ccat.StarCatDef[tyc2 - BaseStar];
@@ -839,10 +802,6 @@ begin
   dstycbox.Checked := ccat.StarCatDef[dstyc - BaseStar];
   dsgscbox.Checked := ccat.StarCatDef[dsgsc - BaseStar];
   hn290Box.Checked := ccat.StarCatDef[hn290 - BaseStar];
-  fdef1.Value := ccat.StarCatField[DefStar - BaseStar, 1];
-  fdef2.Value := ccat.StarCatField[DefStar - BaseStar, 2];
-  fgaia1.Value := ccat.StarCatField[gaia - BaseStar, 1];
-  fgaia2.Value := ccat.StarCatField[gaia - BaseStar, 2];
   fsky1.Value := ccat.StarCatField[sky2000 - BaseStar, 1];
   fsky2.Value := ccat.StarCatField[sky2000 - BaseStar, 2];
   ftyc1.Value := ccat.StarCatField[tyc - BaseStar, 1];
@@ -871,8 +830,6 @@ begin
   dsgsc2.Value := ccat.StarCatField[dsgsc - BaseStar, 2];
   hnbase1.Value := ccat.StarCatField[hn290 - BaseStar, 1];
   hnbase2.Value := ccat.StarCatField[hn290 - BaseStar, 2];
-  def3.Text := changetext(systoutf8(ccat.StarCatPath[DefStar - BaseStar]), def3.Text);
-  gaia3.Text := changetext(systoutf8(ccat.StarCatPath[gaia - BaseStar]), gaia3.Text);
   sky3.Text := changetext(systoutf8(ccat.StarCatPath[sky2000 - BaseStar]), sky3.Text);
   tyc3.Text := changetext(systoutf8(ccat.StarCatPath[tyc - BaseStar]), tyc3.Text);
   ty23.Text := changetext(systoutf8(ccat.StarCatPath[tyc2 - BaseStar]), ty23.Text);
