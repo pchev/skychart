@@ -1,0 +1,99 @@
+VII/9               Lynds' Catalogue of Bright Nebulae    (Lynds 1965)
+================================================================================
+Catalogue of bright nebulae
+     Lynds B.T.
+    <Astrophys. J. Suppl. Ser. 12, 163 (1965)>
+    =1965ApJS...12..163L
+================================================================================
+ADC_Keywords: Nebulae ; H II regions
+
+Description:
+    The Catalogue of Bright Nebulae lists the galactic and equatorial
+    coordinates of the center of the cloud, the dimensions of the nebulae
+    as measured on the photograph on which it appeared at its brightest,
+    the area of nebulosity in square degrees, color as compared between
+    the blue and red Palomar plates, a brightness index on a scale of 6,
+    an identification number that indicates the complexity of the
+    nebulosity, and a cross reference to NGC (Cat. <VII.1>), Index
+    Catalogue (IC), Sharpless (1959) Catalogue of HII Regions (Cat.
+    <VII/20>), Cederblad (1956) Catalogue of Diffuse Galactic Nebulae,
+    and Dorschner and Gurtler (1963).
+
+File Summary:
+--------------------------------------------------------------------------------
+ FileName    Lrecl    Records    Explanations
+--------------------------------------------------------------------------------
+ReadMe          80          .    This file
+catalog.dat     68       1125    The LBN Catalogue
+--------------------------------------------------------------------------------
+
+Byte-by-byte Description of file: catalog.dat
+--------------------------------------------------------------------------------
+   Bytes Format  Units   Label    Explanations
+--------------------------------------------------------------------------------
+   2-  5  I4     ---     Seq      [1/1125]+ Running number (1)
+   7- 12  F6.2   deg     GLON     [0/360[+= Galactic longitude of cloud center
+  14- 19  F6.2   deg     GLAT     Galactic latitude of the cloud center
+  21- 22  I2     h       RAh      Hours RA, 1950.0
+  24- 25  I2     min     RAm      Minutes RA, 1950.0
+      28  A1     ---     DE-      Sign Dec, 1950.0
+  29- 30  I2     deg     DEd      Degrees Dec, 1950.0
+  32- 33  I2     arcmin  DEm      Minutes Dec, 1950.0
+  36- 39  I4     arcmin  Diam1    Largest dimension of nebula
+  41- 43  I3     arcmin  Diam2    Smallest dimension of nebula
+  45- 51  F7.3   deg2    Area     Area of nebulosity
+      53  I1     ---     Color    [1/4] Color index (2)
+      55  I1     ---     Bright   [1/6] Brightness scale (3)
+  57- 59  I3     ---     ID       Identification number (4)
+  61- 68  A8     ---     Name     Other name of nebulosity (5)
+--------------------------------------------------------------------------------
+Note (1): This number represents the sequence in the published paper;
+     see also the History below.
+Note (2): The following codes are used for Color:
+     '1' if brighter on blue Palomar plate;
+     '2' if equal on red and blue Palomar plates;
+     '3' if brighter on red Palomar plate;
+     '4' if visible only on the red Palomar plate.
+    This parameter is zero only for the two nebulae
+        #191 (074.53-08.42 = NGC 6960) and #844 (189.13+02.97 = IC 443)
+Note (3): the brightness scale varies from '1' (brightest) to
+          '6' (barely detectable).
+    This parameter is zero only for the sane two nebulae
+        #191 (074.53-08.42 = NGC 6960) and #844 (189.13+02.97 = IC 443)
+Note (4): ID indicates whether or not the object
+     is an isolated region (=0)
+     or a region of different brightness located in a more extensive
+          complex of nebulosities.
+Note (5): Abbreviations are
+    NGC = New General Catalogue (NGC, cat. <VII/1>)
+    IC  = Index Catalogue
+    S   = Sharpless HII Regions (Sh 2-), 1959, Cat. <VII/20>
+    C   = Catalogue of Diffuse Galactic Nebulae, Cederblad 1959,
+          Medd. Lund Ser.2, No 119
+    DG  = Dorschner and Gurtler 1963, AN 287, 257
+--------------------------------------------------------------------------------
+
+History:
+  * The catalogue is extracted (in June 1994) from the CD-ROM of NASA/ADC
+    "Selected Astronomical Catalogs Vol. 1" with the following corrections:
+    - #582 (118.25+04.84) (shifted column)
+    - Nebulae with identical central positions where checked against
+      the publication and reordered according to the published catalogue.
+      The following galactic central positions refer to 2 or more
+      nebulae:
+        007.03-02.26  008.44+36.18  011.54+36.11  014.12+00.06
+        020.36-01.27  021.10-00.60  078.21+02.48  084.28-01.32
+        084.81+03.88  085.58+04.24  112.16+00.23  118.25+04.84
+        123.88-01.93  166.39-23.63  169.24-00.94  184.36-28.85
+        189.78-13.76  194.69-15.60  204.44-00.56  204.60-13.66
+        206.39-01.87  206.90-16.56  208.69-02.51  243.16+00.32
+        353.76+17.61
+  * The first "Seq" column, a number which is now found in the
+    literature, was added at CDS in December 1996.
+
+References:
+  Cederblad, S. 1956, Medd. Lund, Ser. 2, No. 119
+  Sharpless, S. 1959, ApJS, 6, 257 (Catalog <VII/20>)
+  Dorschner, J., and Gurtler, J. 1963, AN, 287, 257
+================================================================================
+(End)                                    Francois Ochsenbein [CDS]   16-Dec-1996
