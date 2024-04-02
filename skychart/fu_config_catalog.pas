@@ -318,7 +318,7 @@ type
   private
     { Private declarations }
     HintX, HintY: integer;
-    catalogempty, LockChange, LockCatPath, LockActivePath: boolean;
+    LockChange, LockCatPath, LockActivePath: boolean;
     FApplyConfig,FInstallCatalog: TNotifyEvent;
     FSendVoTable: TSendVoTable;
     FCatGen: Tf_catgen;
@@ -362,6 +362,9 @@ type
   end;
 
 implementation
+
+const
+  ReservedRow : array[1..5] of integer = (2,0,0,1,0);
 
 {$R *.lfm}
 
@@ -688,7 +691,29 @@ begin
   for i:=1 to 5 do begin
     GCatTitle(CatalogGridList[i]);
   end;
-  CatalogEmpty := True;
+  CatalogGridStar.RowCount:=ReservedRow[CatalogGridStar.tag]+1;
+  CatalogGridStar.cells[0, 1] := BoolToStr(ccat.StarCatDef[DefStar - BaseStar],'1','0');
+  CatalogGridStar.cells[1, 1] := 'Gaia - Hipparcos';
+  CatalogGridStar.cells[2, 1] := IntToStr(ccat.StarCatField[DefStar - BaseStar, 1]);
+  CatalogGridStar.cells[3, 1] := IntToStr(ccat.StarCatField[DefStar - BaseStar, 2]);
+  CatalogGridStar.cells[4, 1] := systoutf8(ccat.StarCatPath[DefStar - BaseStar]);
+  CatalogGridStar.cells[6, 1] := 'N';
+  CatalogGridStar.cells[7, 1] := '0';
+  CatalogGridStar.cells[0, 2] := BoolToStr(ccat.StarCatDef[gaia - BaseStar],'1','0');
+  CatalogGridStar.cells[1, 2] := 'Gaia Catalog';
+  CatalogGridStar.cells[2, 2] := IntToStr(ccat.StarCatField[gaia - BaseStar, 1]);
+  CatalogGridStar.cells[3, 2] := IntToStr(ccat.StarCatField[gaia - BaseStar, 2]);
+  CatalogGridStar.cells[4, 2] := systoutf8(ccat.StarCatPath[gaia - BaseStar]);
+  CatalogGridStar.cells[6, 2] := 'N';
+  CatalogGridStar.cells[7, 2] := '0';
+  CatalogGridNeb.RowCount:=ReservedRow[CatalogGridNeb.tag]+1;
+  CatalogGridNeb.cells[0, 1] := BoolToStr(ccat.NebCatDef[ngc - BaseNeb],'1','0');
+  CatalogGridNeb.cells[1, 1] := 'Open NGC';
+  CatalogGridNeb.cells[2, 1] := IntToStr(ccat.NebCatField[ngc - BaseNeb, 1]);
+  CatalogGridNeb.cells[3, 1] := IntToStr(ccat.NebCatField[ngc - BaseNeb, 2]);
+  CatalogGridNeb.cells[4, 1] := systoutf8(ccat.NebCatPath[ngc - BaseNeb]);
+  CatalogGridNeb.cells[6, 1] := 'N';
+  CatalogGridNeb.cells[7, 1] := '0';
   for j := 0 to ccat.GCatnum - 1 do
   begin
     n := catalog.GetCatType(systoutf8(ccat.GCatLst[j].path), ccat.GCatLst[j].shortname);
@@ -700,8 +725,6 @@ begin
       5:  g := CatalogGridLin; // rtLin
       else g := CatalogGridStar;
     end;
-    if catalogempty then
-      catalogempty := False;
     g.RowCount := g.RowCount+1;
     i := g.RowCount - 1;
     g.cells[1, i] := ccat.GCatLst[j].shortname;
@@ -919,6 +942,12 @@ begin
         ImageList1.Draw(Canvas, Rect.left + 2, Rect.top + 2, 2);
       end;
     end
+    else if (Acol = 1) and (Arow > 0) and (Arow <= ReservedRow[tag]) then
+    begin
+      Canvas.Brush.Color := FixedColor;
+      Canvas.FillRect(Rect);
+      Canvas.TextOut(Rect.Left, Rect.Top,cells[acol, arow]);
+     end
     else if (Acol = 5) and (Arow > 0) then
     begin
       ImageList1.Draw(Canvas, Rect.left + 2, Rect.top + 2, 0);
@@ -962,15 +991,24 @@ begin
   case col of
     0:
     begin
-      if not fileexistsutf8(slash(TStringGrid(sender).cells[4, row]) + TStringGrid(sender).cells[1, row] + '.hdr') then
-        TStringGrid(sender).Cells[col, row] := '0'
-      else begin
+      if row<=ReservedRow[TStringGrid(Sender).tag] then
+      begin
         if TStringGrid(sender).Cells[col, row] = '0' then
           TStringGrid(sender).Cells[col, row] := '1'
-        else if TStringGrid(sender).Cells[col, row] = '1' then
-          TStringGrid(sender).Cells[col, row] := '2'
-        else if TStringGrid(sender).Cells[col, row] = '2' then
+        else
+          TStringGrid(sender).Cells[col, row] := '0';
+      end
+      else begin
+        if not fileexistsutf8(slash(TStringGrid(sender).cells[4, row]) + TStringGrid(sender).cells[1, row] + '.hdr') then
           TStringGrid(sender).Cells[col, row] := '0'
+        else begin
+          if TStringGrid(sender).Cells[col, row] = '0' then
+            TStringGrid(sender).Cells[col, row] := '1'
+          else if TStringGrid(sender).Cells[col, row] = '1' then
+            TStringGrid(sender).Cells[col, row] := '2'
+          else if TStringGrid(sender).Cells[col, row] = '2' then
+            TStringGrid(sender).Cells[col, row] := '0'
+        end;
       end;
     end;
     5:
@@ -1107,7 +1145,7 @@ end;
 procedure Tf_config_catalog.CatalogGridSelectCell(Sender: TObject;
   ACol, ARow: integer; var CanSelect: boolean);
 begin
-  if (Acol = 5) or (Acol = 6) or (Acol = 7) then
+  if (Acol = 5) or (Acol = 6) or (Acol = 7) or ((Acol = 1)and(ARow<=ReservedRow[TStringGrid(Sender).tag])) then
     canselect := False
   else
     canselect := True;
@@ -1159,7 +1197,6 @@ begin
       4: g := CatalogGridNeb;
       5: g := CatalogGridLin;
     end;
-    catalogempty := False;
     g.rowcount := g.rowcount + 1;
     r := g.rowcount - 1;
     g.cells[0, r] := '1';
@@ -1189,14 +1226,16 @@ begin
     4: g := CatalogGridLin;
   end;
   p := g.selection.top;
-  g.cells[1, p] := '';
-  g.cells[2, p] := '';
-  g.cells[3, p] := '';
-  g.cells[4, p] := '';
-  g.cells[5, p] := '';
-  g.cells[6, p] := '';
-  DeleteGCatRow(g, p);
-  catalog.CleanCache;
+  if p > ReservedRow[g.tag] then begin
+    g.cells[1, p] := '';
+    g.cells[2, p] := '';
+    g.cells[3, p] := '';
+    g.cells[4, p] := '';
+    g.cells[5, p] := '';
+    g.cells[6, p] := '';
+    DeleteGCatRow(g, p);
+    catalog.CleanCache;
+  end;
 end;
 
 procedure Tf_config_catalog.DeleteGCatRow(grid: TStringGrid; p: integer);
@@ -1214,7 +1253,6 @@ begin
     grid.cells[4, 1] := '';
     grid.cells[5, 1] := '';
     grid.cells[6, 1] := '';
-    CatalogEmpty := True;
   end
   else
   begin
@@ -1484,13 +1522,28 @@ var
   buf: string;
   grid: TStringGrid;
 begin
+  ccat.StarCatDef[DefStar - BaseStar]      := CatalogGridStar.cells[0, 1] = '1';
+  ccat.StarCatField[DefStar - BaseStar, 1] := StrToIntDef(CatalogGridStar.cells[2, 1] , 0);
+  ccat.StarCatField[DefStar - BaseStar, 2] := StrToIntDef(CatalogGridStar.cells[3, 1] , 0);
+  ccat.StarCatPath[DefStar - BaseStar]     := CatalogGridStar.cells[4, 1];
+
+  ccat.StarCatDef[gaia - BaseStar]         := CatalogGridStar.cells[0, 2] = '1';
+  ccat.StarCatField[gaia - BaseStar, 1]    := StrToIntDef(CatalogGridStar.cells[2, 2] , 0);
+  ccat.StarCatField[gaia - BaseStar, 2]    := StrToIntDef(CatalogGridStar.cells[3, 2] , 0);
+  ccat.StarCatPath[gaia - BaseStar]        := CatalogGridStar.cells[4, 2];
+
+  ccat.NebCatDef[ngc - BaseNeb]            := CatalogGridNeb.cells[0, 1] = '1';
+  ccat.NebCatField[ngc - BaseNeb, 1]       := StrToIntDef(CatalogGridNeb.cells[2, 1] , 0);
+  ccat.NebCatField[ngc - BaseNeb, 2]       := StrToIntDef(CatalogGridNeb.cells[3, 1] , 0);
+  ccat.NebCatPath[ngc - BaseNeb]           := CatalogGridNeb.cells[4, 1];
+
   ccat.GCatNum := 0;
   i:=-1;
   for g:=1 to 5 do begin
     grid:=CatalogGridList[g];
     ccat.GCatNum := ccat.GCatNum + grid.RowCount - 1;
     SetLength(ccat.GCatLst, ccat.GCatNum);
-    for j := 1 to grid.RowCount-1 do
+    for j := ReservedRow[grid.tag]+1 to grid.RowCount-1 do
     begin
       inc(i);
       buf := grid.cells[1, j];
