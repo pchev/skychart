@@ -688,7 +688,7 @@ begin
       3:  g := CatalogGridDbl; // rtDbl
       4:  g := CatalogGridNeb; // rtNeb
       5:  g := CatalogGridLin; // rtLin
-      else g := CatalogGridStar;
+      else  continue;
     end;
     g.RowCount := g.RowCount+1;
     i := g.RowCount - 1;
