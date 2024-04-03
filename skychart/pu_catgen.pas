@@ -1205,6 +1205,9 @@ begin
       ixlen := catheader.flen[n];
       if ixlen > 0 then
       begin
+        if catheader.IdPrefix then begin
+          ixlen:=ixlen+Length(flabel[n]);
+        end;
         usealt[0].i := nextpos;
         if CatPrefix then
           usealt[0].l := trim(CatShortName.Text)
@@ -1310,6 +1313,9 @@ begin
       ixlen := catheader.flen[n];
       if ixlen > 0 then
       begin
+        if catheader.IdPrefix then begin
+          ixlen:=ixlen+Length(flabel[n]);
+        end;
         usealt[0].i := nextpos;
         if CatPrefix then
           usealt[0].l := trim(CatShortName.Text)
@@ -1399,6 +1405,9 @@ begin
       ixlen := catheader.flen[n];
       if ixlen > 0 then
       begin
+        if catheader.IdPrefix then begin
+          ixlen:=ixlen+Length(flabel[n]);
+        end;
         usealt[0].i := nextpos;
         if CatPrefix then
           usealt[0].l := trim(CatShortName.Text)
@@ -1488,6 +1497,9 @@ begin
       ixlen := catheader.flen[n];
       if ixlen > 0 then
       begin
+        if catheader.IdPrefix then begin
+          ixlen:=ixlen+Length(flabel[n]);
+        end;
         usealt[0].i := nextpos;
         if CatPrefix then
           usealt[0].l := trim(CatShortName.Text)
@@ -1589,6 +1601,9 @@ begin
       ixlen := catheader.flen[n];
       if ixlen > 0 then
       begin
+        if catheader.IdPrefix then begin
+          ixlen:=ixlen+Length(flabel[n]);
+        end;
         usealt[0].i := nextpos;
         if CatPrefix then
           usealt[0].l := trim(CatShortName.Text)
