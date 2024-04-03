@@ -4069,7 +4069,7 @@ begin
         end;
       end;
       Desc := Desc + tab + txt + tab;
-      if rec.neb.valid[vnMag] and (rec.options.flabel[5] <> 'DrkMagFilter') then
+      if rec.neb.valid[vnMag] and (rec.options.flabel[5] <> 'DrkMagFilter') and (copy(rec.options.flabel[5],1,2) <> '__') then
       begin
         if (rec.neb.mag < 90) then
           str(rec.neb.mag: 5: 2, txt)
@@ -4084,7 +4084,7 @@ begin
         if rec.vstr[i] and rec.options.altname[i] and (trim(rec.str[i]) > '') then
           Desc := Desc + trim(rec.options.flabel[lOffsetStr + i]) + dp + rec.str[i] + tab;
       end;
-      if rec.neb.valid[vnSbr] then
+      if rec.neb.valid[vnSbr] and (copy(rec.options.flabel[lOffset + vnSbr],1,2) <> '__') then
       begin
         if (rec.neb.sbr < 90) then
           str(rec.neb.sbr: 5: 2, txt)

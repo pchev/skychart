@@ -4181,6 +4181,8 @@ begin
     end;
     if (otype <> 'Pl') and (uppercase(copy(buf2,1,6)) = 'CSTAR ') then
       continue;
+    if copy(buf2,1,2) = '__' then  // pseudo value to help drawing
+      continue;
     if isd2k and (copy(buf2, 1, 4) = 'Dim:') then
       continue;
     if copy(buf2,1,11) = 'MotionArcm:' then
