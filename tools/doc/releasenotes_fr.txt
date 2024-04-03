@@ -5,6 +5,7 @@ Ceci remplace les précédents téléchargements "Catalogues supplémentaires".
 Les anciens catalogues GCVS et WDS sont désormais obsolètes et doivent être réinstallés avec le nouvel outil.
 Il existe un choix entre différentes versions de catalogue d'étoiles variables et doubles en fonction de vos besoins.
 Plus de catalogues de nébuleuses sont inclus et les images sont mise à jour pour OpenNGC et Sh2.
+Des nouvelles versions pour GCM, LBN, OCL doivent être réinstallées.
 
 Nouveau calcul des satellites planétaire avec la librairie CALCEPH:
 Pour avoir la meilleur précision possible de la position il est maintenant possible de la calculer en utilisant un kernel SPICE.

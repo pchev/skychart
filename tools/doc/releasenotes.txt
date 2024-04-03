@@ -5,6 +5,7 @@ This replace the previous "Additional catalog" download.
 The old GCVS and WDS catalog are now obsolete and must be reinstalled with the new tool.
 There is choice for different version of variable and double star catalog depending on your needs.
 More DSO catalog are included and the DSO pictures are updated for OpenNGC and Sh2.
+New version for GCM, LBN, OCL need to be reinstalled.
 
 Linux version is now build with Qt5. This imply some change in prerequisit packages and in the way to modify the program theme.
 
