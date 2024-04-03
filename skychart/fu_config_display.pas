@@ -2560,14 +2560,14 @@ begin
       shpOCl.Brush.Color := 16776960;
       shpGCl.Brush.Color := 16776960;
       shpPNe.Brush.Color := 8454016;
-      shpDN.Brush.Color := 4210752;
+      shpDN.Brush.Color := 16777215;
       shpEN.Brush.Color := 8454016;
       shpRN.Brush.Color := 8454016;
-      shpSN.Brush.Color := 0;
+      shpSN.Brush.Color := 255;
       shpGxy.Brush.Color := 255;
       shpGxyCl.Brush.Color := 255;
-      shpQ.Brush.Color := 0;
-      shpGL.Brush.Color := 0;
+      shpQ.Brush.Color := 255;
+      shpGL.Brush.Color := 255;
       shpNE.Brush.Color := 16777215;
     end;
     1:
@@ -2576,10 +2576,10 @@ begin
       shpOCl.Brush.Color := 45311;
       shpGCl.Brush.Color := 16777088;
       shpPNe.Brush.Color := 8453888;
-      shpDN.Brush.Color := 4210752;
+      shpDN.Brush.Color := 16777215;
       shpEN.Brush.Color := 255;
       shpRN.Brush.Color := 16744448;
-      shpSN.Brush.Color := 0;
+      shpSN.Brush.Color := 255;
       shpGxy.Brush.Color := 255;
       shpGxyCl.Brush.Color := 255;
       shpQ.Brush.Color := 8421631;
