@@ -193,6 +193,7 @@ type
       Shift: TShiftState; X, Y: integer);
     procedure Button11Click(Sender: TObject);
     procedure BtnHelpClick(Sender: TObject);
+    procedure StarDrawingChange(Sender: TObject);
   private
     Fcatgenadv: Tf_catgenadv;
     Fprogress: Tf_progress;
@@ -3158,6 +3159,7 @@ begin
     OutlineCloseContour.Checked := ini.ReadBool('Page2', 'closedline', OutlineCloseContour.Checked);
     StarDrawing.ItemIndex := ini.ReadInteger('Page2', 'stardrawing', 0);
     StarDrawingSize.Value := ini.ReadInteger('Page2', 'stardrawingsize', 15);
+    StarDrawingChange(nil);
     n := ini.readInteger('Page3', 'numitem', 0);
     for i := 0 to n - 1 do
       FieldList.Checked[i] :=
@@ -3378,6 +3380,13 @@ end;
 procedure Tf_catgen.BtnHelpClick(Sender: TObject);
 begin
   ShowHelp;
+end;
+
+procedure Tf_catgen.StarDrawingChange(Sender: TObject);
+begin
+  StarDrawingSize.Visible := StarDrawing.ItemIndex>0;
+  Label25.Visible := StarDrawingSize.Visible;
+  Label26.Visible := StarDrawingSize.Visible;
 end;
 
 procedure Tf_catgen.ProgressAbort(Sender: TObject);

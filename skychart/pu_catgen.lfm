@@ -3525,6 +3525,7 @@ object f_catgen: Tf_catgen
             'Square'
             'Losange'
           )
+          OnChange = StarDrawingChange
           TabOrder = 2
           Text = 'Star'
         end
