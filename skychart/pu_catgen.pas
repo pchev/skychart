@@ -3060,6 +3060,8 @@ begin
     ini.writeInteger('Page2', 'linecolor', OutlineColor.Brush.color);
     ini.writeInteger('Page2', 'drawingtype', OutlineType.ItemIndex);
     ini.writeBool('Page2', 'closedline', OutlineCloseContour.Checked);
+    ini.WriteInteger('Page2', 'stardrawing', StarDrawing.ItemIndex);
+    ini.WriteInteger('Page2', 'stardrawingsize', StarDrawingSize.Value);
     ini.writeInteger('Page3', 'numitem', FieldList.Items.Count);
     for i := 0 to FieldList.Items.Count - 1 do
       ini.writeBool('Page3', 'field' + IntToStr(i), FieldList.Checked[i]);
@@ -3154,6 +3156,8 @@ begin
     OutlineColor.Brush.color := ini.readInteger('Page2', 'linecolor', OutlineColor.Brush.color);
     OutlineType.ItemIndex := ini.readInteger('Page2', 'drawingtype', OutlineType.ItemIndex);
     OutlineCloseContour.Checked := ini.ReadBool('Page2', 'closedline', OutlineCloseContour.Checked);
+    StarDrawing.ItemIndex := ini.ReadInteger('Page2', 'stardrawing', 0);
+    StarDrawingSize.Value := ini.ReadInteger('Page2', 'stardrawingsize', 15);
     n := ini.readInteger('Page3', 'numitem', 0);
     for i := 0 to n - 1 do
       FieldList.Checked[i] :=

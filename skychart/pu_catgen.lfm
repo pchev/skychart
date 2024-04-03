@@ -3544,7 +3544,7 @@ object f_catgen: Tf_catgen
           MaxValue = 100
           MinValue = 5
           TabOrder = 3
-          Value = 5
+          Value = 15
         end
         object Label26: TLabel
           Left = 312
