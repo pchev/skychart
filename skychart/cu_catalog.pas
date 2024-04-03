@@ -932,36 +932,7 @@ begin
   InitRec(curcat);
   MessierStrPos := -1;
   case curcat of
-    sac:
-    begin
-      SetSacPath(cfgcat.nebcatpath[sac - BaseNeb]);
-      OpenSACwin(Result);
-    end;
     ngc: Result := OpenNGC;
-    lbn:
-    begin
-      SetlbnPath(cfgcat.nebcatpath[lbn - BaseNeb]);
-      Openlbnwin(Result);
-    end;
-    sh2: Result := OpenSH2;
-    drk: Result := OpenDRK;
-    rc3:
-    begin
-      Setrc3Path(cfgcat.nebcatpath[rc3 - BaseNeb]);
-      Openrc3win(Result);
-    end;
-    pgc: Result := OpenPGC;
-    ocl:
-    begin
-      SetoclPath(cfgcat.nebcatpath[ocl - BaseNeb]);
-      Openoclwin(Result);
-    end;
-    gcm:
-    begin
-      SetgcmPath(cfgcat.nebcatpath[gcm - BaseNeb]);
-      Opengcmwin(Result);
-    end;
-    gpn: Result := OpenGPN;
     gcneb:
     begin
       VerGCat := rtNeb;
@@ -995,16 +966,7 @@ function Tcatalog.CloseNebCat: boolean;
 begin
   Result := True;
   case curcat of
-    sac: CloseSAC;
     ngc: CloseNGC;
-    lbn: CloseLBN;
-    sh2: CloseSH2;
-    drk: CloseDRK;
-    rc3: CloseRC3;
-    pgc: ClosePGC;
-    ocl: CloseOCL;
-    gcm: CloseGCM;
-    gpn: CloseGPN;
     gcneb: CloseGcat;
     voneb: CloseVOCat;
     uneb: CurrentUserObj := MaxInt;

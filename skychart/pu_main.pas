@@ -5453,7 +5453,17 @@ begin
     cfgm.persdir := privatedir;
     ConfigCatalog.f_config_catalog1.cmain.Assign(cfgm);
     formpos(ConfigCatalog, mouse.cursorpos.x, mouse.cursorpos.y);
-    ConfigCatalog.f_config_catalog1.PageControl1.PageIndex := page;
+    case page of
+      0: ConfigCatalog.f_config_catalog1.PageControl1.PageIndex := 0;  // default, star
+      1: begin
+           ConfigCatalog.f_config_catalog1.PageControl1.PageIndex := 0;
+           ConfigCatalog.f_config_catalog1.PageControlGCat.PageIndex := 3; // dso
+         end;
+      2: ConfigCatalog.f_config_catalog1.PageControl1.PageIndex := 0;  // ?
+      3: ConfigCatalog.f_config_catalog1.PageControl1.PageIndex := 1;  // vo
+      4: ConfigCatalog.f_config_catalog1.PageControl1.PageIndex := 2;  // user object
+    end;
+
     ShowModalForm(ConfigCatalog);
     if ConfigCatalog.ModalResult = mrOk then
     begin
@@ -6875,8 +6885,7 @@ begin
     catalog.cfgcat.varstarcatfield[i, 1] := 0;
     catalog.cfgcat.varstarcatfield[i, 2] := 0;
   end;
-  // gcvs removed, replaced by new version from Catgen
-  for i := 1 to maxdblstarcatalog do
+   for i := 1 to maxdblstarcatalog do
   begin
     catalog.cfgcat.dblstarcatpath[i] := 'cat';
     catalog.cfgcat.dblstarcatdef[i] := False;
@@ -6884,7 +6893,6 @@ begin
     catalog.cfgcat.dblstarcatfield[i, 1] := 0;
     catalog.cfgcat.dblstarcatfield[i, 2] := 0;
   end;
-  // wds removed, replaced by new version from Catgen
   for i := 1 to maxnebcatalog do
   begin
     catalog.cfgcat.nebcatpath[i] := 'cat';
@@ -6897,27 +6905,10 @@ begin
   catalog.cfgcat.nebcatfield[uneb - BaseNeb, 2] := 10;
   catalog.cfgcat.nebcatdef[voneb - BaseNeb] := False;
   catalog.cfgcat.nebcatfield[voneb - BaseNeb, 2] := 10;
-  catalog.cfgcat.nebcatpath[sac - BaseNeb] := 'cat' + PathDelim + 'sac';
-  catalog.cfgcat.nebcatfield[sac - BaseNeb, 2] := 10;
   catalog.cfgcat.nebcatpath[ngc - BaseNeb] := 'cat' + PathDelim + 'openngc';
   catalog.cfgcat.nebcatfield[ngc - BaseNeb, 2] := 10;
   catalog.cfgcat.nebcatdef[ngc - BaseNeb] := True;
-  catalog.cfgcat.nebcatpath[lbn - BaseNeb] := 'cat' + PathDelim + 'lbn';
-  catalog.cfgcat.nebcatfield[lbn - BaseNeb, 2] := 10;
-  catalog.cfgcat.nebcatpath[sh2 - BaseNeb] := 'cat' + PathDelim + 'sh2';
-  catalog.cfgcat.nebcatfield[sh2 - BaseNeb, 2] := 10;
-  catalog.cfgcat.nebcatpath[drk - BaseNeb] := 'cat' + PathDelim + 'barnard';
-  catalog.cfgcat.nebcatfield[drk - BaseNeb, 2] := 10;
-  catalog.cfgcat.nebcatpath[rc3 - BaseNeb] := 'cat' + PathDelim + 'rc3';
-  catalog.cfgcat.nebcatfield[rc3 - BaseNeb, 2] := 5;
-  catalog.cfgcat.nebcatpath[pgc - BaseNeb] := 'cat' + PathDelim + 'leda';
-  catalog.cfgcat.nebcatfield[pgc - BaseNeb, 2] := 5;
-  catalog.cfgcat.nebcatpath[ocl - BaseNeb] := 'cat' + PathDelim + 'ocl';
-  catalog.cfgcat.nebcatfield[ocl - BaseNeb, 2] := 10;
-  catalog.cfgcat.nebcatpath[gcm - BaseNeb] := 'cat' + PathDelim + 'gcm';
-  catalog.cfgcat.nebcatfield[gcm - BaseNeb, 2] := 10;
-  catalog.cfgcat.nebcatpath[gpn - BaseNeb] := 'cat' + PathDelim + 'gpn';
-  catalog.cfgcat.nebcatfield[gpn - BaseNeb, 2] := 5;
+
   catalog.cfgshr.FieldNum[0] := 0.5;
   catalog.cfgshr.FieldNum[1] := 1;
   catalog.cfgshr.FieldNum[2] := 2;
@@ -7271,36 +7262,7 @@ begin
           begin    // Upgrade to new default catalog
             catalog.cfgcat.starcatpath[DefStar - BaseStar] := slash('cat') + 'xhip';
           end;
-          for i := 1 to maxvarstarcatalog do
-          begin
-            catalog.cfgcat.varstarcatdef[i] :=
-              ReadBool(section, 'varstarcatdef' + IntToStr(i),
-              catalog.cfgcat.varstarcatdef[i]);
-            catalog.cfgcat.varstarcaton[i] :=
-              ReadBool(section, 'varstarcaton' + IntToStr(i),
-              catalog.cfgcat.varstarcaton[i]);
-            catalog.cfgcat.varstarcatfield[i, 1] :=
-              ReadInteger(section, 'varstarcatfield1' + IntToStr(i),
-              catalog.cfgcat.varstarcatfield[i, 1]);
-            catalog.cfgcat.varstarcatfield[i, 2] :=
-              ReadInteger(section, 'varstarcatfield2' + IntToStr(i),
-              catalog.cfgcat.varstarcatfield[i, 2]);
-          end;
-          for i := 1 to maxdblstarcatalog do
-          begin
-            catalog.cfgcat.dblstarcatdef[i] :=
-              ReadBool(section, 'dblstarcatdef' + IntToStr(i),
-              catalog.cfgcat.dblstarcatdef[i]);
-            catalog.cfgcat.dblstarcaton[i] :=
-              ReadBool(section, 'dblstarcaton' + IntToStr(i),
-              catalog.cfgcat.dblstarcaton[i]);
-            catalog.cfgcat.dblstarcatfield[i, 1] :=
-              ReadInteger(section, 'dblstarcatfield1' + IntToStr(i),
-              catalog.cfgcat.dblstarcatfield[i, 1]);
-            catalog.cfgcat.dblstarcatfield[i, 2] :=
-              ReadInteger(section, 'dblstarcatfield2' + IntToStr(i),
-              catalog.cfgcat.dblstarcatfield[i, 2]);
-          end;
+
           for i := 1 to maxnebcatalog do
           begin
             catalog.cfgcat.nebcatdef[i] :=
@@ -8615,6 +8577,51 @@ begin
     catalog.cfgcat.dblstarcatfield[wds - BaseDbl, 1] := 0;
     catalog.cfgcat.dblstarcatfield[wds - BaseDbl, 2] := 10;
   end;
+  if Config_Version < '4.3s' then begin
+    // neb catalog replaced with catgen, def can be upgraded for barnard, gpn, leda, sh2 that already use catgen
+    if catalog.cfgcat.NebCatDef[drk-BaseNeb] then begin
+       SetGCat(catalog.cfgcat.NebCatPath[drk-BaseNeb], 'b', '1', inttostr(catalog.cfgcat.NebCatField[drk-BaseNeb, 1]), inttostr(catalog.cfgcat.NebCatField[drk-BaseNeb, 2]));
+    end;
+    if catalog.cfgcat.NebCatDef[gpn-BaseNeb] then begin
+       SetGCat(catalog.cfgcat.NebCatPath[gpn-BaseNeb], 'gpn', '1', inttostr(catalog.cfgcat.NebCatField[gpn-BaseNeb, 1]), inttostr(catalog.cfgcat.NebCatField[gpn-BaseNeb, 2]));
+    end;
+    if catalog.cfgcat.NebCatDef[pgc-BaseNeb] then begin
+       SetGCat(catalog.cfgcat.NebCatPath[pgc-BaseNeb], 'pgc', '1', inttostr(catalog.cfgcat.NebCatField[pgc-BaseNeb, 1]), inttostr(catalog.cfgcat.NebCatField[pgc-BaseNeb, 2]));
+    end;
+    if catalog.cfgcat.NebCatDef[sh2-BaseNeb] then begin
+       SetGCat(catalog.cfgcat.NebCatPath[sh2-BaseNeb], 'sh 2', '1', inttostr(catalog.cfgcat.NebCatField[sh2-BaseNeb, 1]), inttostr(catalog.cfgcat.NebCatField[sh2-BaseNeb, 2]));
+    end;
+    catalog.cfgcat.NebCatDef[drk-BaseNeb]:=false;
+    catalog.cfgcat.NebCatOn[drk-BaseNeb]:=false;
+    catalog.cfgcat.NebCatPath[drk-BaseNeb]:='';
+    catalog.cfgcat.NebCatDef[gpn-BaseNeb]:=false;
+    catalog.cfgcat.NebCatOn[gpn-BaseNeb]:=false;
+    catalog.cfgcat.NebCatPath[gpn-BaseNeb]:='';
+    catalog.cfgcat.NebCatDef[pgc-BaseNeb]:=false;
+    catalog.cfgcat.NebCatOn[pgc-BaseNeb]:=false;
+    catalog.cfgcat.NebCatPath[pgc-BaseNeb]:='';
+    catalog.cfgcat.NebCatDef[sh2-BaseNeb]:=false;
+    catalog.cfgcat.NebCatOn[sh2-BaseNeb]:=false;
+    catalog.cfgcat.NebCatPath[sh2-BaseNeb]:='';
+    // other old catalog lbn,ocl,gcm are disabled and need to reinstall a new catgen version
+    catalog.cfgcat.NebCatDef[lbn-BaseNeb]:=false;
+    catalog.cfgcat.NebCatOn[lbn-BaseNeb]:=false;
+    catalog.cfgcat.NebCatPath[lbn-BaseNeb]:='';
+    catalog.cfgcat.NebCatDef[ocl-BaseNeb]:=false;
+    catalog.cfgcat.NebCatOn[ocl-BaseNeb]:=false;
+    catalog.cfgcat.NebCatPath[ocl-BaseNeb]:='';
+    catalog.cfgcat.NebCatDef[gcm-BaseNeb]:=false;
+    catalog.cfgcat.NebCatOn[gcm-BaseNeb]:=false;
+    catalog.cfgcat.NebCatPath[gcm-BaseNeb]:='';
+    // sac and rc3 are removed
+    catalog.cfgcat.NebCatDef[sac-BaseNeb]:=false;
+    catalog.cfgcat.NebCatOn[sac-BaseNeb]:=false;
+    catalog.cfgcat.NebCatPath[sac-BaseNeb]:='';
+    catalog.cfgcat.NebCatDef[rc3-BaseNeb]:=false;
+    catalog.cfgcat.NebCatOn[rc3-BaseNeb]:=false;
+    catalog.cfgcat.NebCatPath[rc3-BaseNeb]:='';
+  end;
+
 end;
 
 procedure Tf_main.SaveVersion;

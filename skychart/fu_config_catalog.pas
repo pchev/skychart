@@ -48,25 +48,18 @@ type
     Button7: TButton;
     Button8: TButton;
     Button9: TButton;
-    ButtonInstallCat1: TButton;
     ButtonInstallCat2: TButton;
     CatalogGridLin: TStringGrid;
     CatalogGridNeb: TStringGrid;
     CatalogGridDbl: TStringGrid;
     CatalogGridVar: TStringGrid;
     CatalogGridStar: TStringGrid;
-    fsac1: TLongEdit;
-    fsac2: TLongEdit;
     Image1: TImage;
     Image2: TImage;
     Image3: TImage;
     Label10: TLabel;
     Label8: TLabel;
     Label9: TLabel;
-    Label98: TLabel;
-    OngcBox: TCheckBox;
-    frc31: TLongEdit;
-    frc32: TLongEdit;
     hnName: TComboBox;
     hn290Box: TCheckBox;
     hnbase1: TLongEdit;
@@ -79,44 +72,19 @@ type
     Label122: TLabel;
     Label21: TLabel;
     Label7: TLabel;
-    Label92: TLabel;
-    Label95: TLabel;
     PageControlGCat: TPageControl;
-    Panel1: TPanel;
     Panel3: TPanel;
     Panel4: TPanel;
     Panel5: TPanel;
     Panel6: TPanel;
     Panel7: TPanel;
     Panel8: TPanel;
-    rc33: TDirectoryEdit;
-    RC3box: TCheckBox;
-    sac3: TDirectoryEdit;
-    SacBox: TCheckBox;
-    sh2box: TCheckBox;
-    drkbox: TCheckBox;
     ColorDialog1: TColorDialog;
     ComboBox1: TComboBox;
     delcat: TButton;
     CatgenButton: TButton;
     delobj: TButton;
     DownloadDialog1: TDownloadDialog;
-    fgcm1: TLongEdit;
-    fgcm2: TLongEdit;
-    fgpn1: TLongEdit;
-    fgpn2: TLongEdit;
-    flbn1: TLongEdit;
-    flbn2: TLongEdit;
-    fsh21: TLongEdit;
-    fsh22: TLongEdit;
-    fdrk1: TLongEdit;
-    fdrk2: TLongEdit;
-    fngc1: TLongEdit;
-    fngc2: TLongEdit;
-    focl1: TLongEdit;
-    focl2: TLongEdit;
-    fpgc1: TLongEdit;
-    fpgc2: TLongEdit;
     Fsky1: TLongEdit;
     Fsky2: TLongEdit;
     funb1: TLongEdit;
@@ -131,40 +99,18 @@ type
     fw1: TLabel;
     fw2: TLabel;
     fw3: TLabel;
-    gcm3: TDirectoryEdit;
-    GCMbox: TCheckBox;
-    gpn3: TDirectoryEdit;
-    GPNbox: TCheckBox;
     ImageList1: TImageList;
-    Label121: TLabel;
     Label4: TLabel;
     Label6: TLabel;
     Label96: TLabel;
     LabelDownload: TLabel;
-    sh23: TDirectoryEdit;
-    drk3: TDirectoryEdit;
     maxrows: TLongEdit;
     Label1: TLabel;
-    LabelWarning: TLabel;
-    Label22: TLabel;
-    Label23: TLabel;
-    Label24: TLabel;
-    Label25: TLabel;
-    Label26: TLabel;
     Label5: TLabel;
     fw10: TLabel;
-    lbn3: TDirectoryEdit;
-    LBNbox: TCheckBox;
-    ngc3: TDirectoryEdit;
     FOVPanel: TPanel;
-    ocl3: TDirectoryEdit;
-    OCLbox: TCheckBox;
     OpenDialog2: TOpenDialog;
     Page5: TTabSheet;
-    PanelDef: TPanel;
-    PanelSpec: TPanel;
-    pgc3: TDirectoryEdit;
-    PGCBox: TCheckBox;
     Page1a: TTabSheet;
     SaveDialog1: TSaveDialog;
     sky3: TDirectoryEdit;
@@ -172,7 +118,6 @@ type
     StringGrid1: TStringGrid;
     StringGrid4: TStringGrid;
     Page1b: TTabSheet;
-    Page4b: TTabSheet;
     TabSheetGcatStar: TTabSheet;
     TabSheetGcatVar: TTabSheet;
     TabSheetGcatDbl: TTabSheet;
@@ -193,7 +138,6 @@ type
     ty23: TDirectoryEdit;
     MainPanel: TPanel;
     Page1: TTabSheet;
-    Page3: TTabSheet;
     Page4: TTabSheet;
     Label37: TLabel;
     TY2Box: TCheckBox;
@@ -218,11 +162,6 @@ type
     fusn2: TLongEdit;
     fgscc2: TLongEdit;
     fgscf2: TLongEdit;
-    Label3: TLabel;
-    Label15: TLabel;
-    Label116: TLabel;
-    Label117: TLabel;
-    Label118: TLabel;
     Label88: TLabel;
     Label91: TLabel;
     Label94: TLabel;
@@ -284,10 +223,6 @@ type
     procedure CDCStarField1Change(Sender: TObject);
     procedure CDCStarField2Change(Sender: TObject);
     procedure CDCStarPathChange(Sender: TObject);
-    procedure CDCNebSelClick(Sender: TObject);
-    procedure CDCNebField1Change(Sender: TObject);
-    procedure CDCNebField2Change(Sender: TObject);
-    procedure CDCNebPathChange(Sender: TObject);
     procedure ActivateGCat;
     procedure ActivateUserObjects;
     procedure ShowFov;
@@ -303,7 +238,6 @@ type
     CatalogGridList: TCatalogGridList;
     procedure ShowGCat;
     procedure ShowCDCStar;
-    procedure ShowCDCNeb;
     procedure ShowVO;
     procedure ShowUserObjects;
     procedure ReloadVO(fn: string);
@@ -357,7 +291,6 @@ begin
   Label37.Caption := rsStarsAndNebu;
   addcat.Caption := rsAdd;
   delcat.Caption := rsDelete;
-  ButtonInstallCat1.Caption:=rsInstallObjec;
   ButtonInstallCat2.Caption:=rsInstallObjec;
   ColorDialog1.Title := rsSelectColorB;
   Page1a.Caption := rsVOCatalog;
@@ -367,29 +300,13 @@ begin
   Button7.Caption := rsUpdate1;
   Button6.Caption := rsDelete;
   USNBright.Caption := rsBrightStars;
-  Page3.Caption := rsCdCNebulae;
-  Label3.Caption := rsCDCNebulaeCa;
-  Label22.Caption := rsNebulae;
-  Label23.Caption := rsGalaxies;
-  Label24.Caption := rsOpenCluster;
-  Label25.Caption := rsGlobularClus;
-  Label26.Caption := rsPlanetaryNeb;
-  Label15.Caption := rsFieldNumber;
-  Label116.Caption := rsMin2;
-  Label117.Caption := rsMax2;
-  Label118.Caption := rsFilesPath;
-  Label121.Caption := rsDefault;
   Page5.Caption := rsOtherSoftwar;
   Page4.Caption := rsObsolete+blank+rsStars;
   Label88.Caption := rsCDCObsoleteC;
   Label91.Caption := rsReplacedBy + ' GAIA';
   Label96.Caption := rsReplacedBy + ' XHIP';
-  Label95.Caption := rsReplacedBy + ' Hyperleda';
   Label94.Caption := rsNotAvailable;
-  Page4b.Caption := rsObsolete+blank+rsNebulae;
-  Label92.Caption := rsCDCObsoleteC;
   Label5.Caption := rsFovNumber;
-  LabelWarning.Caption := rsWarningYouAr2;
   if Fcatgen <> nil then
     Fcatgen.SetLang;
   SetHelp(self, hlpCatalog);
@@ -482,7 +399,6 @@ begin
   ShowVO;
   ShowUserObjects;
   ShowCDCStar;
-  ShowCDCNeb;
   ShowFov;
   LockChange := False;
 end;
@@ -733,56 +649,6 @@ begin
     Result := newtext + blank
   else
     Result := newtext;
-end;
-
-procedure Tf_config_catalog.ShowCDCNeb;
-var
-  spec, def: boolean;
-begin
-  OngcBox.Checked := ccat.NebCatDef[ngc - BaseNeb];
-  SacBox.Checked := ccat.NebCatDef[sac - BaseNeb];
-  lbnbox.Checked := ccat.NebCatDef[lbn - BaseNeb];
-  sh2box.Checked := ccat.NebCatDef[sh2 - BaseNeb];
-  drkbox.Checked := ccat.NebCatDef[drk - BaseNeb];
-  rc3box.Checked := ccat.NebCatDef[rc3 - BaseNeb];
-  pgcbox.Checked := ccat.NebCatDef[pgc - BaseNeb];
-  oclbox.Checked := ccat.NebCatDef[ocl - BaseNeb];
-  gcmbox.Checked := ccat.NebCatDef[gcm - BaseNeb];
-  gpnbox.Checked := ccat.NebCatDef[gpn - BaseNeb];
-  fsac1.Value := ccat.NebCatField[sac - BaseNeb, 1];
-  fngc1.Value := ccat.NebCatField[ngc - BaseNeb, 1];
-  flbn1.Value := ccat.NebCatField[lbn - BaseNeb, 1];
-  fsh21.Value := ccat.NebCatField[sh2 - BaseNeb, 1];
-  fdrk1.Value := ccat.NebCatField[drk - BaseNeb, 1];
-  frc31.Value := ccat.NebCatField[rc3 - BaseNeb, 1];
-  fpgc1.Value := ccat.NebCatField[pgc - BaseNeb, 1];
-  focl1.Value := ccat.NebCatField[ocl - BaseNeb, 1];
-  fgcm1.Value := ccat.NebCatField[gcm - BaseNeb, 1];
-  fgpn1.Value := ccat.NebCatField[gpn - BaseNeb, 1];
-  fsac2.Value := ccat.NebCatField[sac - BaseNeb, 2];
-  fngc2.Value := ccat.NebCatField[ngc - BaseNeb, 2];
-  flbn2.Value := ccat.NebCatField[lbn - BaseNeb, 2];
-  fsh22.Value := ccat.NebCatField[sh2 - BaseNeb, 2];
-  fdrk2.Value := ccat.NebCatField[drk - BaseNeb, 2];
-  frc32.Value := ccat.NebCatField[rc3 - BaseNeb, 2];
-  fpgc2.Value := ccat.NebCatField[pgc - BaseNeb, 2];
-  focl2.Value := ccat.NebCatField[ocl - BaseNeb, 2];
-  fgcm2.Value := ccat.NebCatField[gcm - BaseNeb, 2];
-  fgpn2.Value := ccat.NebCatField[gpn - BaseNeb, 2];
-  sac3.Text := changetext(systoutf8(ccat.NebCatPath[sac - BaseNeb]), sac3.Text);
-  ngc3.Text := changetext(systoutf8(ccat.NebCatPath[ngc - BaseNeb]), ngc3.Text);
-  lbn3.Text := changetext(systoutf8(ccat.NebCatPath[lbn - BaseNeb]), lbn3.Text);
-  sh23.Text := changetext(systoutf8(ccat.NebCatPath[sh2 - BaseNeb]), sh23.Text);
-  drk3.Text := changetext(systoutf8(ccat.NebCatPath[drk - BaseNeb]), drk3.Text);
-  rc33.Text := changetext(systoutf8(ccat.NebCatPath[rc3 - BaseNeb]), rc33.Text);
-  pgc3.Text := changetext(systoutf8(ccat.NebCatPath[pgc - BaseNeb]), pgc3.Text);
-  ocl3.Text := changetext(systoutf8(ccat.NebCatPath[ocl - BaseNeb]), ocl3.Text);
-  gcm3.Text := changetext(systoutf8(ccat.NebCatPath[gcm - BaseNeb]), gcm3.Text);
-  gpn3.Text := changetext(systoutf8(ccat.NebCatPath[gpn - BaseNeb]), gpn3.Text);
-  def := OngcBox.Checked;
-  spec := lbnbox.Checked or rc3box.Checked or pgcbox.Checked or oclbox.Checked or
-    gcmbox.Checked or gpnbox.Checked;
-  LabelWarning.Visible := (def and spec);
 end;
 
 procedure Tf_config_catalog.ShowCDCStar;
@@ -1411,62 +1277,6 @@ begin
         else
           color := textcolor;
         if ((tag+BaseStar) = hn290) and (color=textcolor) then Upd290List(ccat.StarCatPath[tag]);
-      end;
-  finally
-    LockCatPath := False;
-  end;
-end;
-
-procedure Tf_config_catalog.CDCNebSelClick(Sender: TObject);
-begin
-  if Sender is TCheckBox then
-    with Sender as TCheckBox do
-    begin
-      ccat.NebCatDef[tag] := Checked;
-      ShowCDCNeb;
-    end;
-end;
-
-procedure Tf_config_catalog.CDCNebField1Change(Sender: TObject);
-begin
-  if LockChange then
-    exit;
-  if Sender is TLongEdit then
-    with Sender as TLongEdit do
-    begin
-      ccat.NebCatField[tag, 1] := Value;
-    end;
-end;
-
-procedure Tf_config_catalog.CDCNebField2Change(Sender: TObject);
-begin
-  if LockChange then
-    exit;
-  if Sender is TLongEdit then
-    with Sender as TLongEdit do
-    begin
-      ccat.NebCatField[tag, 2] := Value;
-    end;
-end;
-
-procedure Tf_config_catalog.CDCNebPathChange(Sender: TObject);
-begin
-  if LockCatPath then
-    exit;
-  try
-    LockCatPath := True;
-    if Sender is TDirectoryEdit then
-      with Sender as TDirectoryEdit do
-      begin
-        Text := trim(Text);
-        ccat.NebCatPath[tag] := utf8tosys(Text);
-        if ccat.NebCatDef[tag] then
-          if catalog.checkpath(tag + BaseNeb, utf8tosys(Text)) then
-            color := textcolor
-          else
-            color := clRed
-        else
-          color := textcolor;
       end;
   finally
     LockCatPath := False;
