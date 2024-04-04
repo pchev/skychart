@@ -62,9 +62,6 @@ type
     procedure SetLang;
   end;
 
-var
-  f_fov: Tf_fov;
-
 implementation
 
 const

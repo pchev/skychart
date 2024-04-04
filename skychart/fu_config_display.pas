@@ -562,6 +562,7 @@ type
     FApplyConfig: TNotifyEvent;
     LockChange: boolean;
     CCol, CRow, RCol, RRow: integer;
+    f_fov: Tf_fov;
     procedure ShowDisplay;
     procedure ShowFonts;
     procedure ShowColor;

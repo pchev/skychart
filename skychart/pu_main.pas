@@ -2019,7 +2019,7 @@ end;
 
 procedure Tf_main.SetupPicturesExecute(Sender: TObject);
 begin
-  SetupPicturesPage(1);
+  SetupPicturesPage(-1);
 end;
 
 procedure Tf_main.ListImgExecute(Sender: TObject);
@@ -4805,12 +4805,12 @@ end;
 
 procedure Tf_main.SetupTimeExecute(Sender: TObject);
 begin
-  SetupTimePage(0);
+  SetupTimePage(-1);
 end;
 
 procedure Tf_main.SetupCalendarExecute(Sender: TObject);
 begin
-  SetupCalendarPage(0);
+  SetupCalendarPage(-1);
 end;
 
 procedure Tf_main.ConfigPopupExecute(Sender: TObject);
@@ -4820,13 +4820,13 @@ end;
 
 procedure Tf_main.SetupCalendarPage(page: integer);
 begin
-  if ConfigCalendar <> nil then
-    exit;
-  ConfigCalendar := Tf_configcalendar.Create(self);
-  try
+  if ConfigCalendar = nil then begin
+    ConfigCalendar := Tf_configcalendar.Create(self);
     ConfigCalendar.f_config_calendar1.PageControl1.ShowTabs := True;
     ConfigCalendar.f_config_calendar1.PageControl1.PageIndex := 0;
     ConfigCalendar.f_config_calendar1.onApplyConfig := ApplyConfigCalendar;
+  end;
+  try
     ConfigCalendar.f_config_calendar1.csc.Assign(def_cfgsc);
     if MultiFrame1.ActiveObject is Tf_chart then
       with MultiFrame1.ActiveObject as Tf_chart do
@@ -4834,7 +4834,7 @@ begin
         ConfigCalendar.f_config_calendar1.csc.Assign(sc.cfgsc);
       end;
     formpos(ConfigCalendar, mouse.cursorpos.x, mouse.cursorpos.y);
-    ConfigCalendar.f_config_calendar1.PageControl1.PageIndex := page;
+    if page>=0 then ConfigCalendar.f_config_calendar1.PageControl1.PageIndex := page;
     ConfigCalendar.showmodal;
     if ConfigCalendar.ModalResult = mrOk then
     begin
@@ -4842,8 +4842,6 @@ begin
         nil, nil, nil, False);
     end;
   finally
-    ConfigCalendar.Free;
-    ConfigCalendar := nil;
   end;
 end;
 
@@ -4854,14 +4852,14 @@ end;
 
 procedure Tf_main.SetupTimePage(page: integer);
 begin
-  if ConfigTime <> nil then
-    exit;
-  ConfigTime := Tf_configtime.Create(self);
-  try
+  if ConfigTime = nil then begin
+    ConfigTime := Tf_configtime.Create(self);
     ConfigTime.f_config_time1.PageControl1.ShowTabs := True;
     ConfigTime.f_config_time1.PageControl1.PageIndex := 0;
     ConfigTime.f_config_time1.onApplyConfig := ApplyConfigTime;
     ConfigTime.f_config_time1.onGetTwilight := GetTwilight;
+  end;
+  try
     ConfigTime.f_config_time1.ccat.Assign(catalog.cfgcat);
     ConfigTime.f_config_time1.cshr.Assign(catalog.cfgshr);
     ConfigTime.f_config_time1.cplot.Assign(def_cfgplot);
@@ -4876,7 +4874,7 @@ begin
     cfgm.persdir := privatedir;
     ConfigTime.f_config_time1.cmain.Assign(cfgm);
     formpos(ConfigTime, mouse.cursorpos.x, mouse.cursorpos.y);
-    ConfigTime.f_config_time1.PageControl1.PageIndex := page;
+    if page>=0 then ConfigTime.f_config_time1.PageControl1.PageIndex := page;
     ConfigTime.showmodal;
     if ConfigTime.ModalResult = mrOk then
     begin
@@ -4885,8 +4883,6 @@ begin
         ConfigTime.f_config_time1.cplot, nil, False);
     end;
   finally
-    ConfigTime.Free;
-    ConfigTime := nil;
   end;
 end;
 
@@ -4904,7 +4900,7 @@ end;
 
 procedure Tf_main.SetupChartExecute(Sender: TObject);
 begin
-  SetupChartPage(0);
+  SetupChartPage(-1);
 end;
 
 procedure Tf_main.SetupConfigExecute(Sender: TObject);
@@ -4951,8 +4947,6 @@ begin
 
   finally
     screen.cursor := crDefault;
-    f_config.Free;
-    f_config := nil;
   end;
 end;
 
@@ -4964,13 +4958,13 @@ end;
 
 procedure Tf_main.SetupChartPage(page: integer);
 begin
-  if ConfigChart <> nil then
-    exit;
-  ConfigChart := Tf_configchart.Create(self);
-  try
+  if ConfigChart = nil then begin
+    ConfigChart := Tf_configchart.Create(self);
     ConfigChart.f_config_chart1.PageControl1.ShowTabs := True;
     ConfigChart.f_config_chart1.PageControl1.PageIndex := 0;
     ConfigChart.f_config_chart1.onApplyConfig := ApplyConfigChart;
+  end;
+  try
     ConfigChart.f_config_chart1.ccat.Assign(catalog.cfgcat);
     ConfigChart.f_config_chart1.cshr.Assign(catalog.cfgshr);
     ConfigChart.f_config_chart1.cplot.Assign(def_cfgplot);
@@ -4984,7 +4978,7 @@ begin
     cfgm.persdir := privatedir;
     ConfigChart.f_config_chart1.cmain.Assign(cfgm);
     formpos(ConfigChart, mouse.cursorpos.x, mouse.cursorpos.y);
-    ConfigChart.f_config_chart1.PageControl1.PageIndex := page;
+    if page>=0 then ConfigChart.f_config_chart1.PageControl1.PageIndex := page;
     ConfigChart.showmodal;
     if ConfigChart.ModalResult = mrOk then
     begin
@@ -4993,8 +4987,6 @@ begin
         ConfigChart.f_config_chart1.cplot, nil, False);
     end;
   finally
-    ConfigChart.Free;
-    ConfigChart := nil;
   end;
 end;
 
@@ -5007,23 +4999,23 @@ end;
 
 procedure Tf_main.SetupSolSysExecute(Sender: TObject);
 begin
-  SetupSolsysPage(0);
+  SetupSolsysPage(-1);
 end;
 
 procedure Tf_main.SetupSolsysPage(page: integer; directdownload: boolean = False);
 var inif: TMemIniFile;
     section: string;
 begin
-  if ConfigSolsys <> nil then
-    exit;
-  ConfigSolsys := Tf_configsolsys.Create(self);
-  try
+  if ConfigSolsys = nil then begin
+    ConfigSolsys := Tf_configsolsys.Create(self);
     ConfigSolsys.f_config_solsys1.PageControl1.ShowTabs := True;
     ConfigSolsys.f_config_solsys1.PageControl1.PageIndex := 0;
     ConfigSolsys.f_config_solsys1.onApplyConfig := ApplyConfigSolsys;
     ConfigSolsys.f_config_solsys1.onPrepareAsteroid := PrepareAsteroid;
     ConfigSolsys.f_config_solsys1.onDisableAsteroid := DisableAsteroid;
     ConfigSolsys.f_config_solsys1.onEnableAsteroid := EnableAsteroid;
+  end;
+  try
     ConfigSolsys.f_config_solsys1.cdb := cdcdb;
     ConfigSolsys.f_config_solsys1.ccat.Assign(catalog.cfgcat);
     ConfigSolsys.f_config_solsys1.cshr.Assign(catalog.cfgshr);
@@ -5038,7 +5030,7 @@ begin
     cfgm.persdir := privatedir;
     ConfigSolsys.f_config_solsys1.cmain.Assign(cfgm);
     formpos(ConfigSolsys, mouse.cursorpos.x, mouse.cursorpos.y);
-    ConfigSolsys.f_config_solsys1.PageControl1.PageIndex := page;
+    if page>=0 then ConfigSolsys.f_config_solsys1.PageControl1.PageIndex := page;
     if directdownload then
     begin
       case page of
@@ -5119,8 +5111,6 @@ begin
       end;
     end;
   finally
-    ConfigSolsys.Free;
-    ConfigSolsys := nil;
   end;
 end;
 
@@ -5175,19 +5165,19 @@ end;
 
 procedure Tf_main.SetupSystemExecute(Sender: TObject);
 begin
-  SetupSystemPage(0);
+  SetupSystemPage(-1);
 end;
 
 procedure Tf_main.SetupSystemPage(page: integer);
 begin
-  if ConfigSystem <> nil then
-    exit;
-  ConfigSystem := Tf_configsystem.Create(self);
-  try
+  if ConfigSystem = nil then begin
+    ConfigSystem := Tf_configsystem.Create(self);
     ConfigSystem.f_config_system1.PageControl1.ShowTabs := True;
     ConfigSystem.f_config_system1.PageControl1.PageIndex := 0;
     ConfigSystem.f_config_system1.onApplyConfig := ApplyConfigSystem;
     ConfigSystem.f_config_system1.onSaveAndRestart := SaveAndRestart;
+  end;
+  try
     ConfigSystem.f_config_system1.cdb := cdcdb;
     ConfigSystem.f_config_system1.ccat.Assign(catalog.cfgcat);
     ConfigSystem.f_config_system1.cshr.Assign(catalog.cfgshr);
@@ -5202,7 +5192,7 @@ begin
     cfgm.persdir := privatedir;
     ConfigSystem.f_config_system1.cmain.Assign(cfgm);
     formpos(ConfigSystem, mouse.cursorpos.x, mouse.cursorpos.y);
-    ConfigSystem.f_config_system1.PageControl1.PageIndex := page;
+    if page>=0 then ConfigSystem.f_config_system1.PageControl1.PageIndex := page;
     ConfigSystem.showmodal;
     if ConfigSystem.ModalResult = mrOk then
     begin
@@ -5212,8 +5202,6 @@ begin
         ConfigSystem.f_config_system1.cplot, nil, False);
     end;
   finally
-    ConfigSystem.Free;
-    ConfigSystem := nil;
   end;
 end;
 
@@ -5245,8 +5233,6 @@ begin
   activateconfig(ConfigSystem.f_config_system1.cmain, ConfigSystem.f_config_system1.csc,
     ConfigSystem.f_config_system1.ccat, ConfigSystem.f_config_system1.cshr,
     ConfigSystem.f_config_system1.cplot, nil, False);
-  ConfigSystem.Free;
-  ConfigSystem := nil;
 end;
 
 procedure Tf_main.ApplyConfigSystem(Sender: TObject);
@@ -5258,23 +5244,23 @@ end;
 
 procedure Tf_main.SetupInternetExecute(Sender: TObject);
 begin
-  SetupInternetPage(0);
+  SetupInternetPage(-1);
 end;
 
 procedure Tf_main.SetupInternetPage(page: integer);
 begin
-  if ConfigInternet <> nil then
-    exit;
-  ConfigInternet := Tf_configinternet.Create(self);
-  try
+  if ConfigInternet = nil then begin
+    ConfigInternet := Tf_configinternet.Create(self);
     ConfigInternet.f_config_internet1.PageControl1.ShowTabs := True;
     ConfigInternet.f_config_internet1.PageControl1.PageIndex := 0;
     ConfigInternet.f_config_internet1.onApplyConfig := ApplyConfigInternet;
+  end;
+  try
     cfgm.persdir := privatedir;
     ConfigInternet.f_config_internet1.cmain.Assign(cfgm);
     ConfigInternet.f_config_internet1.cdss.Assign(f_getdss.cfgdss);
     formpos(ConfigInternet, mouse.cursorpos.x, mouse.cursorpos.y);
-    ConfigInternet.f_config_internet1.PageControl1.PageIndex := page;
+    if page>=0 then ConfigInternet.f_config_internet1.PageControl1.PageIndex := page;
     ConfigInternet.showmodal;
     if ConfigInternet.ModalResult = mrOk then
     begin
@@ -5282,8 +5268,6 @@ begin
         nil, ConfigInternet.f_config_internet1.cdss, False);
     end;
   finally
-    ConfigInternet.Free;
-    ConfigInternet := nil;
   end;
 end;
 
@@ -5295,13 +5279,13 @@ end;
 
 procedure Tf_main.SetupPicturesPage(page: integer; action: integer = 0);
 begin
-  if ConfigPictures <> nil then
-    exit;
-  ConfigPictures := Tf_configpictures.Create(self);
-  try
+  if ConfigPictures = nil then begin
+    ConfigPictures := Tf_configpictures.Create(self);
     ConfigPictures.f_config_pictures1.PageControl1.ShowTabs := True;
     ConfigPictures.f_config_pictures1.PageControl1.PageIndex := 0;
     ConfigPictures.f_config_pictures1.onApplyConfig := ApplyConfigPictures;
+  end;
+  try
     ConfigPictures.f_config_pictures1.cdb := cdcdb;
     ConfigPictures.f_config_pictures1.cdss.Assign(f_getdss.cfgdss);
     ConfigPictures.f_config_pictures1.Fits := Fits;
@@ -5319,7 +5303,7 @@ begin
     cfgm.persdir := privatedir;
     ConfigPictures.f_config_pictures1.cmain.Assign(cfgm);
     formpos(ConfigPictures, mouse.cursorpos.x, mouse.cursorpos.y);
-    ConfigPictures.f_config_pictures1.PageControl1.PageIndex := page;
+    if page>=0 then ConfigPictures.f_config_pictures1.PageControl1.PageIndex := page;
     //ConfigPictures.show;
     ConfigPictures.f_config_pictures1.backimgChange(self);
     //ConfigPictures.hide;
@@ -5340,8 +5324,6 @@ begin
         ConfigPictures.f_config_pictures1.cdss, False);
     end;
   finally
-    ConfigPictures.Free;
-    ConfigPictures := nil;
   end;
 end;
 
@@ -5356,19 +5338,19 @@ end;
 
 procedure Tf_main.SetupObservatoryExecute(Sender: TObject);
 begin
-  SetupObservatoryPage(0);
+  SetupObservatoryPage(-1);
 end;
 
 procedure Tf_main.SetupObservatoryPage(page: integer; posx: integer = 0;
   posy: integer = 0);
 begin
-  if ConfigObservatory <> nil then
-    exit;
-  ConfigObservatory := Tf_configobservatory.Create(self);
-  try
+  if ConfigObservatory = nil then begin
+    ConfigObservatory := Tf_configobservatory.Create(self);
     ConfigObservatory.f_config_observatory1.PageControl1.ShowTabs := True;
     ConfigObservatory.f_config_observatory1.PageControl1.PageIndex := 0;
     ConfigObservatory.f_config_observatory1.onApplyConfig := ApplyConfigObservatory;
+  end;
+  try
     ConfigObservatory.f_config_observatory1.cdb := cdcdb;
     ConfigObservatory.f_config_observatory1.ccat.Assign(catalog.cfgcat);
     ConfigObservatory.f_config_observatory1.cshr.Assign(catalog.cfgshr);
@@ -5393,7 +5375,7 @@ begin
       posy := Screen.Height div 2 - ConfigObservatory.Height div 2;
       formpos(ConfigObservatory, posx, posy);
     end;
-    ConfigObservatory.f_config_observatory1.PageControl1.PageIndex := page;
+    if page>=0 then ConfigObservatory.f_config_observatory1.PageControl1.PageIndex := page;
     ShowModalForm(ConfigObservatory);
     if ConfigObservatory.ModalResult = mrOk then
     begin
@@ -5404,8 +5386,6 @@ begin
         ConfigObservatory.f_config_observatory1.cplot, nil, False);
     end;
   finally
-    ConfigObservatory.Free;
-    ConfigObservatory := nil;
   end;
 end;
 
@@ -5420,21 +5400,21 @@ end;
 
 procedure Tf_main.SetupCatalogExecute(Sender: TObject);
 begin
-  SetupCatalogPage(0);
+  SetupCatalogPage(-1);
 end;
 
 procedure Tf_main.SetupCatalogPage(page: integer);
 begin
-  if ConfigCatalog <> nil then
-    exit;
-  ConfigCatalog := Tf_configcatalog.Create(self);
-  try
-    ConfigCatalog.f_config_catalog1.catalog := catalog;
+  if ConfigCatalog = nil then begin
+    ConfigCatalog := Tf_configcatalog.Create(self);
     ConfigCatalog.f_config_catalog1.PageControl1.ShowTabs := True;
     ConfigCatalog.f_config_catalog1.PageControl1.PageIndex := 0;
     ConfigCatalog.f_config_catalog1.onApplyConfig := ApplyConfigCatalog;
     ConfigCatalog.f_config_catalog1.onSendVoTable := SendVoTable;
     ConfigCatalog.f_config_catalog1.onInstallCatalog := OpenUpdCatalog;
+  end;
+  try
+    ConfigCatalog.f_config_catalog1.catalog := catalog;
     ConfigCatalog.f_config_catalog1.ccat.Assign(catalog.cfgcat);
     ConfigCatalog.f_config_catalog1.cshr.Assign(catalog.cfgshr);
     ConfigCatalog.f_config_catalog1.cplot.Assign(def_cfgplot);
@@ -5475,8 +5455,6 @@ begin
         nil, False);
     end;
   finally
-    ConfigCatalog.Free;
-    ConfigCatalog := nil;
   end;
 end;
 
@@ -5525,7 +5503,7 @@ end;
 
 procedure Tf_main.SetupDisplayExecute(Sender: TObject);
 begin
-  SetupDisplayPage(0);
+  SetupDisplayPage(-1);
 end;
 
 procedure Tf_main.SetupDisplayPage(pagegroup: integer);
@@ -5568,7 +5546,7 @@ begin
   ConfigDisplay.f_config_display1.cmain.Assign(cfgm);
   ///////////////////////////////
 {$endif}
-  ConfigDisplay.f_config_display1.PageControl1.PageIndex := pagegroup;
+  if pagegroup>=0 then ConfigDisplay.f_config_display1.PageControl1.PageIndex := pagegroup;
   ShowModalForm(ConfigDisplay);
   if ConfigDisplay.ModalResult = mrOk then
   begin
@@ -5577,8 +5555,6 @@ begin
       ConfigDisplay.f_config_display1.cshr, ConfigDisplay.f_config_display1.cplot,
       nil, False);
   end;
-  ConfigDisplay.Free;
-  ConfigDisplay := nil;
 end;
 
 procedure Tf_main.ApplyConfigDisplay(Sender: TObject);
@@ -12309,7 +12285,7 @@ end;
 
 procedure Tf_main.OpenCatalogSetupAsync(Data: PtrInt);
 begin
-  SetupCatalogPage(0);
+  SetupCatalogPage(-1);
 end;
 
 procedure Tf_main.SaveCatalogConfig(Sender: TObject);
