@@ -1595,6 +1595,7 @@ resourcestring
   rsUninstall = 'Uninstall';
   rsInstalling = 'Installing';
   rsCloseTheSetu = 'Close the Setup window and launch the catalog installer tool?';
+  rsCloseTheSet2 = 'Close the Setup window and launch the catalog generation tool?';
   rsRefreshTheLi = 'Refresh the list';
   rsUseTheButton = 'Use the button below or the menu "%s/%s" to install a double and variable star catalog';
   rsOpenCatalogS = 'Open Catalog Setup';

@@ -26,8 +26,8 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 interface
 
 uses
-  u_ccdconfig, u_help, u_translation, u_constant, u_util, cu_catalog, pu_catgen,
-  pu_catgenadv, pu_progressbar, LazUTF8, LazFileUtils, pu_voconfig,
+  u_ccdconfig, u_help, u_translation, u_constant, u_util, cu_catalog,
+  pu_progressbar, LazUTF8, LazFileUtils, pu_voconfig,
   Math, LCLIntf, SysUtils, UScaleDPI,
   Classes, Graphics, Controls, Forms, Dialogs, ExtCtrls, StdCtrls, enhedits,
   downloaddialog, Grids, Buttons, ComCtrls, LResources, EditBtn, LazHelpHTML_fix;
@@ -231,9 +231,8 @@ type
     { Private declarations }
     HintX, HintY: integer;
     LockChange, LockCatPath, LockActivePath: boolean;
-    FApplyConfig,FInstallCatalog: TNotifyEvent;
+    FApplyConfig,FInstallCatalog,FRunCatgen: TNotifyEvent;
     FSendVoTable: TSendVoTable;
-    FCatGen: Tf_catgen;
     textcolor: TColor;
     CatalogGridList: TCatalogGridList;
     procedure ShowGCat;
@@ -270,6 +269,7 @@ type
     property onApplyConfig: TNotifyEvent read FApplyConfig write FApplyConfig;
     property onSendVoTable: TSendVoTable read FSendVoTable write FSendVoTable;
     property onInstallCatalog: TNotifyEvent read FInstallCatalog write FInstallCatalog;
+    property onRunCatgen: TNotifyEvent read FRunCatgen write FRunCatgen;
   end;
 
 implementation
@@ -307,8 +307,6 @@ begin
   Label96.Caption := rsReplacedBy + ' XHIP';
   Label94.Caption := rsNotAvailable;
   Label5.Caption := rsFovNumber;
-  if Fcatgen <> nil then
-    Fcatgen.SetLang;
   SetHelp(self, hlpCatalog);
   page1b.Caption := rsUserDefinedO;
   label6.Caption := rsUserDefinedO;
@@ -382,8 +380,6 @@ begin
   mycshr.Free;
   mycplot.Free;
   mycmain.Free;
-  if Fcatgen <> nil then
-    Fcatgen.Free;
   inherited Destroy;
 end;
 
@@ -427,10 +423,9 @@ end;
 
 procedure Tf_config_catalog.CatgenClick(Sender: TObject);
 begin
-  if Fcatgen = nil then
-    Fcatgen := Tf_catgen.Create(self);
-  FormPos(Fcatgen, mouse.CursorPos.x, mouse.CursorPos.y);
-  ShowModalForm(Fcatgen);
+  if MessageDlg(rsCloseTheSet2, mtConfirmation, mbYesNo, 0)=mryes then begin
+    if Assigned(FRunCatgen) then FRunCatgen(self);
+  end;
 end;
 
 procedure Tf_config_catalog.Button5Click(Sender: TObject);

@@ -39,7 +39,7 @@ uses
   cu_database, fu_chart, cu_tcpserver, pu_config_time, pu_config_observatory, pu_precession,
   pu_config_display, pu_config_pictures, pu_indigui, pu_config_catalog, pu_prepoint,
   pu_config_solsys, pu_config_chart, pu_config_system, pu_config_internet, pu_updcatalog,
-  cu_radec, pu_config_calendar, pu_planetinfo, cu_sampclient, cu_vodata,
+  cu_radec, pu_config_calendar, pu_planetinfo, cu_sampclient, cu_vodata, pu_catgen,
   pu_obslist, fu_script, pu_scriptengine, u_constant, u_util, UScaleDPI,
   u_ccdconfig, blcksock, synsock, dynlibs, FileUtil, ExtendedNotebook, LCLVersion, LCLType,
   InterfaceBase, LCLIntf, SysUtils, Classes, Graphics, Forms, Controls, Menus,
@@ -777,6 +777,8 @@ type
     procedure OpenUpdCatalogAsync(Data: PtrInt);
     procedure OpenCatalogSetup(Sender: TObject);
     procedure OpenCatalogSetupAsync(Data: PtrInt);
+    procedure RunCatgen(Sender: TObject);
+    procedure RunCatgenAsync(Data: PtrInt);
 
   public
     { Public declarations }
@@ -4918,6 +4920,7 @@ begin
     f_config.catalog := catalog;
     f_config.db := cdcdb;
     f_config.f_config_catalog1.onInstallCatalog := OpenUpdCatalog;
+    f_config.f_config_catalog1.onRunCatgen := RunCatgen;
   end;
   try
     f_config.ccat := catalog.cfgcat;
@@ -5412,6 +5415,7 @@ begin
     ConfigCatalog.f_config_catalog1.onApplyConfig := ApplyConfigCatalog;
     ConfigCatalog.f_config_catalog1.onSendVoTable := SendVoTable;
     ConfigCatalog.f_config_catalog1.onInstallCatalog := OpenUpdCatalog;
+    ConfigCatalog.f_config_catalog1.onRunCatgen := RunCatgen;
   end;
   try
     ConfigCatalog.f_config_catalog1.catalog := catalog;
@@ -12273,6 +12277,29 @@ end;
 procedure Tf_main.OpenUpdCatalogAsync(Data: PtrInt);
 begin
   MenuUpdCatalogClick(nil);
+end;
+
+procedure Tf_main.RunCatgen(Sender: TObject);
+begin
+  if (ConfigCatalog<>nil)and(sender=ConfigCatalog.f_config_catalog1) then begin
+    ConfigCatalog.ModalResult:=mrOK;
+    ConfigCatalog.Close;
+    Application.QueueAsyncCall(RunCatgenAsync,0);
+  end;
+  if (f_config<>nil)and(sender=f_config.f_config_catalog1) then begin
+    f_config.ModalResult:=mrOK;
+    f_config.Close;
+    Application.QueueAsyncCall(RunCatgenAsync,0);
+  end;
+end;
+
+procedure Tf_main.RunCatgenAsync(Data: PtrInt);
+begin
+  if f_catgen=nil then begin
+     Application.CreateForm(Tf_catgen, f_catgen);
+  end;
+  FormPos(f_catgen, mouse.CursorPos.x, mouse.CursorPos.y);
+ f_catgen.show;
 end;
 
 procedure Tf_main.OpenCatalogSetup(Sender: TObject);
