@@ -47,26 +47,13 @@ object f_config_catalog: Tf_config_catalog
           ClientHeight = 50
           ClientWidth = 498
           TabOrder = 0
-          object Label37: TLabel
-            AnchorSideTop.Control = CatgenButton
-            AnchorSideTop.Side = asrCenter
+          object ButtonInstallCat2: TButton
             Left = 15
-            Height = 18
-            Top = 15
-            Width = 259
-            Caption = 'Stars and Nebulae catalogs prepared with '
-            ParentColor = False
-            ParentFont = False
-          end
-          object CatgenButton: TButton
-            Left = 372
-            Height = 25
-            Top = 12
-            Width = 97
-            BorderSpacing.InnerBorder = 4
-            Caption = 'CatGen'
-            OnClick = CatgenClick
-            ParentFont = False
+            Height = 27
+            Top = 10
+            Width = 356
+            Caption = 'Install object catalog'
+            OnClick = ButtonInstallCatClick
             TabOrder = 0
           end
         end
@@ -80,33 +67,32 @@ object f_config_catalog: Tf_config_catalog
           ClientWidth = 498
           TabOrder = 1
           object addcat: TButton
-            Left = 154
+            AnchorSideTop.Control = delcat
+            AnchorSideRight.Control = delcat
+            Left = 251
             Height = 25
-            Top = 32
-            Width = 76
+            Top = 65
+            Width = 97
+            Anchors = [akTop, akRight]
+            BorderSpacing.Right = 20
             Caption = 'Add'
             OnClick = AddCatClick
             ParentFont = False
             TabOrder = 0
           end
           object delcat: TButton
-            Left = 259
+            AnchorSideLeft.Control = CatgenButton
+            AnchorSideTop.Control = CatgenButton
+            AnchorSideTop.Side = asrBottom
+            Left = 368
             Height = 25
-            Top = 32
-            Width = 76
+            Top = 65
+            Width = 97
+            BorderSpacing.Top = 8
             Caption = 'Delete'
             OnClick = DelCatClick
             ParentFont = False
             TabOrder = 1
-          end
-          object ButtonInstallCat2: TButton
-            Left = 16
-            Height = 27
-            Top = 68
-            Width = 316
-            Caption = 'Install object catalog'
-            OnClick = ButtonInstallCatClick
-            TabOrder = 2
           end
           object Image1: TImage
             Left = 15
@@ -251,6 +237,28 @@ object f_config_catalog: Tf_config_catalog
             BorderSpacing.Left = 8
             Caption = 'Search only'
             ParentColor = False
+          end
+          object Label37: TLabel
+            AnchorSideTop.Control = CatgenButton
+            AnchorSideTop.Side = asrCenter
+            Left = 15
+            Height = 18
+            Top = 35
+            Width = 259
+            Caption = 'Stars and Nebulae catalogs prepared with '
+            ParentColor = False
+            ParentFont = False
+          end
+          object CatgenButton: TButton
+            Left = 368
+            Height = 25
+            Top = 32
+            Width = 97
+            BorderSpacing.InnerBorder = 4
+            Caption = 'CatGen'
+            OnClick = CatgenClick
+            ParentFont = False
+            TabOrder = 2
           end
         end
         object PageControlGCat: TPageControl
