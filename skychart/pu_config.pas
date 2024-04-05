@@ -119,6 +119,7 @@ type
     procedure ActivateChanges;
     procedure EnableAsteroid(Sender: TObject);
     procedure DisableAsteroid(Sender: TObject);
+    function GetActivePage: integer;
   public
     { Déclarations publiques }
     f_config_catalog1: Tf_config_catalog;
@@ -143,6 +144,9 @@ type
 
 var
   f_config: Tf_config;
+
+const
+  numpages: array[0..9] of integer = (6,4,3,7,6,6,11,5,5,2);
 
 implementation
 
@@ -432,10 +436,33 @@ begin
   cmain.configpage_j := j;
 end;
 
+function Tf_config.GetActivePage: integer;
+var c,i : integer;
+begin
+  c:=1;
+  for i:=0 to PageControl1.ActivePageIndex-1 do
+     c:=c+numpages[i];
+  case PageControl1.ActivePageIndex of
+    0: c:=c+f_config_system1.PageControl1.ActivePageIndex;
+    1: c:=c+f_config_time1.PageControl1.ActivePageIndex;
+    2: c:=c+f_config_observatory1.PageControl1.ActivePageIndex;
+    3: c:=c+f_config_chart1.PageControl1.ActivePageIndex;
+    4: c:=c+f_config_catalog1.PageControl1.ActivePageIndex;
+    5: c:=c+f_config_solsys1.PageControl1.ActivePageIndex;
+    6: c:=c+f_config_display1.PageControl1.ActivePageIndex;
+    7: c:=c+f_config_pictures1.PageControl1.ActivePageIndex;
+    8: c:=c+f_config_internet1.PageControl1.ActivePageIndex;
+    9: c:=c+f_config_calendar1.PageControl1.ActivePageIndex;
+  end;
+  result:=c;
+end;
+
 procedure Tf_config.ActivateChanges;
 begin
-  if Treeview1.selected <> nil then
-    cmain.configpage := Treeview1.selected.absoluteindex;
+  if PanelConfig.visible and (Treeview1.selected <> nil) then
+    cmain.configpage := Treeview1.selected.absoluteindex
+  else
+    cmain.configpage := GetActivePage;
   if PageControl1.PageIndex = 4 then
   begin // config catalog
     if f_config_catalog1.PageControl1.ActivePage = f_config_catalog1.Page1 then
