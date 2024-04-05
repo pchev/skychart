@@ -4971,6 +4971,7 @@ begin
       f_config.Apply.Left:=f_config.OKBtn.Left+f_config.OKBtn.Width+DoScaleX(10);
       f_config.Parent:=nil;
       f_config.Align:=alNone;
+      f_config.BorderStyle:=bsSizeable;
       Application.QueueAsyncCall(HideConfigAsync,0);
       except
       end;
@@ -5042,6 +5043,7 @@ begin
   Splitter1.Visible := True;
   ScriptPanel.Visible := True;
   Splitter1.ResizeControl := ScriptPanel;
+  f_config.BorderStyle:=bsNone;
   f_config.PanelConfig.Visible:=false;
   f_config.ShowTabs(true);
   f_config.Show;
