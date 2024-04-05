@@ -122,6 +122,7 @@ type
   public
     { Déclarations publiques }
     f_config_catalog1: Tf_config_catalog;
+    procedure ShowTabs(onoff:boolean);
     procedure SetLang;
     property ccat: Tconf_catalog read Fccat write SetCcat;
     property cshr: Tconf_shared read Fcshr write SetCshr;
@@ -213,6 +214,18 @@ begin
   OKBtn.Caption := rsOK;
   CancelBtn.Caption := rsCancel;
   HelpBtn.Caption := rsHelp;
+
+  TabSheet0.Caption := rsGeneral;
+  TabSheet1.Caption := rsDateTime2;
+  TabSheet2.Caption := rsObservatory;
+  TabSheet3.Caption := rsChartCoordin;
+  TabSheet4.Caption := rsCatalog;
+  TabSheet5.Caption := rsSolarSystem;
+  TabSheet6.Caption := rsDisplay;
+  TabSheet7.Caption := rsPictures;
+  TabSheet9.Caption := rsUpdate1;
+  TabSheet10.Caption := rsCalendar;
+
   if f_config_catalog1 <> nil then
     f_config_catalog1.SetLang;
   if f_config_chart1 <> nil then
@@ -301,6 +314,21 @@ begin
   Treeview1.selected := Treeview1.items[0];
   Treeview1.selected := Treeview1.items[cmain.configpage];
   lastSelectedNode := Treeview1.selected;
+end;
+
+procedure Tf_config.ShowTabs(onoff:boolean);
+begin
+  PageControl1.ShowTabs:=onoff;
+  f_config_system1.PageControl1.ShowTabs:=onoff;
+  f_config_time1.PageControl1.ShowTabs:=onoff;
+  f_config_observatory1.PageControl1.ShowTabs:=onoff;
+  f_config_chart1.PageControl1.ShowTabs:=onoff;
+  f_config_catalog1.PageControl1.ShowTabs:=onoff;
+  f_config_solsys1.PageControl1.ShowTabs:=onoff;
+  f_config_display1.PageControl1.ShowTabs:=onoff;
+  f_config_pictures1.PageControl1.ShowTabs:=onoff;
+  f_config_internet1.PageControl1.ShowTabs:=onoff;
+  f_config_calendar1.PageControl1.ShowTabs:=onoff;
 end;
 
 procedure Tf_config.TreeView1Change(Sender: TObject; Node: TTreeNode);

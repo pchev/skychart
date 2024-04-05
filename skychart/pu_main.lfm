@@ -3663,6 +3663,12 @@ object f_main: Tf_main
           ShortCut = 119
           OnClick = MenuToolboxClick
         end
+        object MenuToolbox9: TMenuItem
+          Tag = 8
+          Caption = 'MenuToolbox9'
+          ShortCut = 120
+          OnClick = MenuToolboxClick
+        end
       end
       object MenuViewScrollBar: TMenuItem
         Caption = 'Scroll Bar'

@@ -33,33 +33,32 @@ object f_config_system: Tf_config_system
       object Page1: TTabSheet
         Caption = 'Page1'
         ClientHeight = 524
-        ClientWidth = 493
+        ClientWidth = 499
         ParentFont = False
         object LanguageList: TCheckListBox
           Left = 0
           Height = 474
           Top = 50
-          Width = 493
+          Width = 499
           Align = alClient
           ExtendedSelect = False
           ItemHeight = 0
           OnItemClick = LanguageListItemClick
           ParentFont = False
           TabOrder = 0
-          TopIndex = -1
         end
         object Panel1: TPanel
           Left = 0
           Height = 50
           Top = 0
-          Width = 493
+          Width = 499
           Align = alTop
           ClientHeight = 50
-          ClientWidth = 493
+          ClientWidth = 499
           TabOrder = 1
           object Label14: TLabel
             Left = 19
-            Height = 19
+            Height = 18
             Top = 16
             Width = 119
             Caption = 'Language selection'
@@ -71,13 +70,13 @@ object f_config_system: Tf_config_system
       object Page2: TTabSheet
         Caption = 'Page2'
         ClientHeight = 524
-        ClientWidth = 493
+        ClientWidth = 499
         ParentFont = False
         object TelescopeSelect: TRadioGroup
           Left = 0
           Height = 78
           Top = 26
-          Width = 493
+          Width = 499
           Align = alTop
           AutoFill = True
           Caption = 'TelescopeSelect'
@@ -89,8 +88,8 @@ object f_config_system: Tf_config_system
           ChildSizing.ShrinkVertical = crsScaleChilds
           ChildSizing.Layout = cclLeftToRightThenTopToBottom
           ChildSizing.ControlsPerLine = 3
-          ClientHeight = 58
-          ClientWidth = 491
+          ClientHeight = 48
+          ClientWidth = 495
           Columns = 3
           Items.Strings = (
             'INDI'
@@ -105,7 +104,7 @@ object f_config_system: Tf_config_system
           Left = 0
           Height = 315
           Top = 104
-          Width = 493
+          Width = 499
           ActivePage = TabSheet3
           Align = alClient
           ParentFont = False
@@ -115,23 +114,23 @@ object f_config_system: Tf_config_system
           object TabSheet1: TTabSheet
             Caption = 'TabSheet1'
             ClientHeight = 311
-            ClientWidth = 483
+            ClientWidth = 495
             ParentFont = False
             object INDI: TPanel
               Left = 0
               Height = 311
               Top = 0
-              Width = 483
+              Width = 495
               Align = alClient
               ClientHeight = 311
-              ClientWidth = 483
+              ClientWidth = 495
               ParentFont = False
               TabOrder = 0
               object INDILabel: TLabel
                 Left = 8
-                Height = 19
+                Height = 18
                 Top = 7
-                Width = 63
+                Width = 61
                 Caption = 'INDILabel'
                 ParentColor = False
                 ParentFont = False
@@ -157,9 +156,9 @@ object f_config_system: Tf_config_system
                 end
                 object Label2: TLabel
                   Left = 4
-                  Height = 19
+                  Height = 18
                   Top = 11
-                  Width = 149
+                  Width = 151
                   Caption = 'Control Panel command '
                   ParentColor = False
                   ParentFont = False
@@ -167,9 +166,9 @@ object f_config_system: Tf_config_system
               end
               object InternalIndiGui: TCheckBox
                 Left = 8
-                Height = 21
+                Height = 22
                 Top = 80
-                Width = 215
+                Width = 217
                 Caption = 'Use the internal INDI gui panel'
                 OnClick = InternalIndiGuiClick
                 ParentFont = False
@@ -177,9 +176,9 @@ object f_config_system: Tf_config_system
               end
               object IndiMsg: TLabel
                 Left = 14
-                Height = 19
+                Height = 18
                 Top = 129
-                Width = 3
+                Width = 4
                 Caption = ' '
                 ParentColor = False
                 ParentFont = False
@@ -199,23 +198,23 @@ object f_config_system: Tf_config_system
           object TabSheet2: TTabSheet
             Caption = 'TabSheet2'
             ClientHeight = 311
-            ClientWidth = 483
+            ClientWidth = 495
             ParentFont = False
             object TelescopeManual: TPanel
               Left = 0
               Height = 311
               Top = 0
-              Width = 483
+              Width = 495
               Align = alClient
               ClientHeight = 311
-              ClientWidth = 483
+              ClientWidth = 495
               ParentFont = False
               TabOrder = 0
               object ManualMountType: TRadioGroup
                 Left = 1
                 Height = 41
-                Top = 90
-                Width = 481
+                Top = 89
+                Width = 493
                 Align = alTop
                 AutoFill = True
                 ChildSizing.LeftRightSpacing = 6
@@ -226,8 +225,8 @@ object f_config_system: Tf_config_system
                 ChildSizing.ShrinkVertical = crsScaleChilds
                 ChildSizing.Layout = cclLeftToRightThenTopToBottom
                 ChildSizing.ControlsPerLine = 2
-                ClientHeight = 21
-                ClientWidth = 479
+                ClientHeight = 37
+                ClientWidth = 489
                 Columns = 2
                 Items.Strings = (
                   'Equatorial'
@@ -240,8 +239,8 @@ object f_config_system: Tf_config_system
               object Label7: TLabel
                 Left = 1
                 Height = 70
-                Top = 20
-                Width = 481
+                Top = 19
+                Width = 493
                 Align = alTop
                 AutoSize = False
                 Caption = 'Set how the mount move on each axis when you turn the driving knob.'#13#10'Then the Telescope button show you the turns you must do to go from one object to another.'
@@ -251,9 +250,9 @@ object f_config_system: Tf_config_system
               end
               object TelescopeManualLabel: TLabel
                 Left = 1
-                Height = 19
+                Height = 18
                 Top = 1
-                Width = 481
+                Width = 493
                 Align = alTop
                 Caption = 'TelescopeManualLabel'
                 ParentColor = False
@@ -261,9 +260,9 @@ object f_config_system: Tf_config_system
               end
               object PageControl3: TPageControl
                 Left = 1
-                Height = 179
-                Top = 131
-                Width = 481
+                Height = 180
+                Top = 130
+                Width = 493
                 ActivePage = TabSheet6
                 Align = alClient
                 ParentFont = False
@@ -272,31 +271,31 @@ object f_config_system: Tf_config_system
                 TabOrder = 1
                 object TabSheet5: TTabSheet
                   Caption = 'TabSheet5'
-                  ClientHeight = 175
-                  ClientWidth = 471
+                  ClientHeight = 176
+                  ClientWidth = 489
                   ParentFont = False
                   object EquatorialMount: TPanel
                     Left = 0
-                    Height = 175
+                    Height = 176
                     Top = 0
-                    Width = 471
+                    Width = 489
                     Align = alClient
-                    ClientHeight = 175
-                    ClientWidth = 471
+                    ClientHeight = 176
+                    ClientWidth = 489
                     ParentFont = False
                     TabOrder = 0
                     object Label3: TLabel
                       Left = 16
-                      Height = 19
+                      Height = 18
                       Top = 16
-                      Width = 97
+                      Width = 98
                       Caption = 'Right Ascension'
                       ParentColor = False
                       ParentFont = False
                     end
                     object Label4: TLabel
                       Left = 16
-                      Height = 19
+                      Height = 18
                       Top = 94
                       Width = 69
                       Caption = 'Declination'
@@ -305,18 +304,18 @@ object f_config_system: Tf_config_system
                     end
                     object Label5: TLabel
                       Left = 243
-                      Height = 19
+                      Height = 18
                       Top = 16
-                      Width = 74
+                      Width = 75
                       Caption = 'turns / hour'
                       ParentColor = False
                       ParentFont = False
                     end
                     object Label6: TLabel
                       Left = 243
-                      Height = 19
+                      Height = 18
                       Top = 94
-                      Width = 89
+                      Width = 87
                       Caption = 'turns / degree'
                       ParentColor = False
                       ParentFont = False
@@ -345,9 +344,9 @@ object f_config_system: Tf_config_system
                     end
                     object RevertTurnsRa: TCheckBox
                       Left = 129
-                      Height = 21
+                      Height = 22
                       Top = 40
-                      Width = 119
+                      Width = 122
                       Caption = 'Revert RA knob'
                       OnClick = TurnsRaChange
                       ParentFont = False
@@ -355,9 +354,9 @@ object f_config_system: Tf_config_system
                     end
                     object RevertTurnDec: TCheckBox
                       Left = 129
-                      Height = 21
+                      Height = 22
                       Top = 121
-                      Width = 127
+                      Width = 130
                       Caption = 'Revert DEC knob'
                       OnClick = TurnsDecChange
                       ParentFont = False
@@ -367,22 +366,22 @@ object f_config_system: Tf_config_system
                 end
                 object TabSheet6: TTabSheet
                   Caption = 'TabSheet6'
-                  ClientHeight = 175
-                  ClientWidth = 471
+                  ClientHeight = 176
+                  ClientWidth = 489
                   ParentFont = False
                   object AltAzMount: TPanel
                     Left = 0
-                    Height = 175
+                    Height = 176
                     Top = 0
-                    Width = 471
+                    Width = 489
                     Align = alClient
-                    ClientHeight = 175
-                    ClientWidth = 471
+                    ClientHeight = 176
+                    ClientWidth = 489
                     ParentFont = False
                     TabOrder = 0
                     object Label8: TLabel
                       Left = 16
-                      Height = 19
+                      Height = 18
                       Top = 16
                       Width = 51
                       Caption = 'Azimuth'
@@ -391,27 +390,27 @@ object f_config_system: Tf_config_system
                     end
                     object Label9: TLabel
                       Left = 16
-                      Height = 19
+                      Height = 18
                       Top = 94
-                      Width = 49
+                      Width = 48
                       Caption = 'Altitude'
                       ParentColor = False
                       ParentFont = False
                     end
                     object Label10: TLabel
                       Left = 243
-                      Height = 19
+                      Height = 18
                       Top = 16
-                      Width = 89
+                      Width = 87
                       Caption = 'turns / degree'
                       ParentColor = False
                       ParentFont = False
                     end
                     object Label11: TLabel
                       Left = 243
-                      Height = 19
+                      Height = 18
                       Top = 94
-                      Width = 89
+                      Width = 87
                       Caption = 'turns / degree'
                       ParentColor = False
                       ParentFont = False
@@ -440,9 +439,9 @@ object f_config_system: Tf_config_system
                     end
                     object RevertTurnsAz: TCheckBox
                       Left = 129
-                      Height = 21
+                      Height = 22
                       Top = 40
-                      Width = 117
+                      Width = 120
                       Caption = 'Revert Az knob'
                       OnClick = TurnsAzChange
                       ParentFont = False
@@ -450,9 +449,9 @@ object f_config_system: Tf_config_system
                     end
                     object RevertTurnsAlt: TCheckBox
                       Left = 129
-                      Height = 21
+                      Height = 22
                       Top = 121
-                      Width = 119
+                      Width = 121
                       Caption = 'Revert Alt knob'
                       OnClick = TurnsAltChange
                       ParentFont = False
@@ -466,16 +465,16 @@ object f_config_system: Tf_config_system
           object TabSheet4: TTabSheet
             Caption = 'TabSheet4'
             ClientHeight = 311
-            ClientWidth = 483
+            ClientWidth = 495
             ParentFont = False
             object ASCOMPanel: TPanel
               Left = 0
               Height = 311
               Top = 0
-              Width = 483
+              Width = 495
               Align = alClient
               ClientHeight = 311
-              ClientWidth = 483
+              ClientWidth = 495
               ParentFont = False
               TabOrder = 0
               object ASCOMLabel: TLabel
@@ -494,16 +493,16 @@ object f_config_system: Tf_config_system
           object TabSheet3: TTabSheet
             Caption = 'TabSheet3'
             ClientHeight = 311
-            ClientWidth = 483
+            ClientWidth = 495
             ParentFont = False
             object InterfacePanel: TPanel
               Left = 0
               Height = 311
               Top = 0
-              Width = 483
+              Width = 495
               Align = alClient
               ClientHeight = 311
-              ClientWidth = 483
+              ClientWidth = 495
               ParentFont = False
               TabOrder = 0
               object InterfaceLabel: TLabel
@@ -524,16 +523,16 @@ object f_config_system: Tf_config_system
           Left = 0
           Height = 26
           Top = 0
-          Width = 493
+          Width = 499
           Align = alTop
           ClientHeight = 26
-          ClientWidth = 493
+          ClientWidth = 499
           TabOrder = 2
           object Label13: TLabel
             Left = 0
-            Height = 19
+            Height = 18
             Top = 0
-            Width = 108
+            Width = 107
             Caption = 'Telescope Setting'
             ParentColor = False
             ParentFont = False
@@ -543,26 +542,26 @@ object f_config_system: Tf_config_system
           Left = 0
           Height = 105
           Top = 419
-          Width = 493
+          Width = 499
           Align = alBottom
           Caption = 'Line for telescope pointing limit'
-          ClientHeight = 85
-          ClientWidth = 491
+          ClientHeight = 75
+          ClientWidth = 495
           TabOrder = 3
           object TelLimitDecMaxActive: TCheckBox
             Left = 4
-            Height = 21
+            Height = 22
             Top = 13
-            Width = 155
+            Width = 161
             Caption = 'Maximum declination'
             OnChange = TelLimitDecMaxActiveChange
             TabOrder = 0
           end
           object TelLimitDecMinActive: TCheckBox
             Left = 4
-            Height = 21
+            Height = 22
             Top = 48
-            Width = 152
+            Width = 158
             Caption = 'Minimum declination'
             OnChange = TelLimitDecMinActiveChange
             TabOrder = 1
@@ -571,9 +570,9 @@ object f_config_system: Tf_config_system
             AnchorSideTop.Control = TelLimitDecMaxActive
             AnchorSideTop.Side = asrCenter
             Left = 248
-            Height = 21
+            Height = 22
             Top = 13
-            Width = 119
+            Width = 124
             Caption = 'East hour angle'
             OnChange = TelLimitHaEActiveChange
             TabOrder = 2
@@ -582,9 +581,9 @@ object f_config_system: Tf_config_system
             AnchorSideTop.Control = TelLimitDecMinActive
             AnchorSideTop.Side = asrCenter
             Left = 248
-            Height = 21
+            Height = 22
             Top = 48
-            Width = 125
+            Width = 129
             Caption = 'West hour angle'
             OnChange = TelLimitHaWActiveChange
             TabOrder = 3
@@ -593,8 +592,8 @@ object f_config_system: Tf_config_system
             AnchorSideTop.Control = TelLimitDecMaxActive
             AnchorSideTop.Side = asrCenter
             Left = 408
-            Height = 29
-            Top = 9
+            Height = 32
+            Top = 8
             Width = 72
             MaxValue = 12
             OnChange = TelLimitHaEChange
@@ -605,8 +604,8 @@ object f_config_system: Tf_config_system
             AnchorSideTop.Control = TelLimitDecMinActive
             AnchorSideTop.Side = asrCenter
             Left = 408
-            Height = 29
-            Top = 44
+            Height = 32
+            Top = 43
             Width = 72
             MaxValue = 12
             OnChange = TelLimitHaWChange
@@ -617,8 +616,8 @@ object f_config_system: Tf_config_system
             AnchorSideTop.Control = TelLimitDecMaxActive
             AnchorSideTop.Side = asrCenter
             Left = 176
-            Height = 29
-            Top = 9
+            Height = 32
+            Top = 8
             Width = 64
             DecimalPlaces = 1
             MaxValue = 90
@@ -631,8 +630,8 @@ object f_config_system: Tf_config_system
             AnchorSideTop.Control = TelLimitDecMinActive
             AnchorSideTop.Side = asrCenter
             Left = 176
-            Height = 29
-            Top = 44
+            Height = 32
+            Top = 43
             Width = 64
             DecimalPlaces = 1
             MaxValue = 90
@@ -646,16 +645,16 @@ object f_config_system: Tf_config_system
       object Page3: TTabSheet
         Caption = 'Page3'
         ClientHeight = 524
-        ClientWidth = 493
+        ClientWidth = 499
         ParentFont = False
         object SqliteBox: TPanel
           Left = 0
           Height = 98
           Top = 26
-          Width = 493
+          Width = 499
           Align = alTop
           ClientHeight = 98
-          ClientWidth = 493
+          ClientWidth = 499
           ParentFont = False
           TabOrder = 0
           object dbnamesqlite: TEdit
@@ -682,9 +681,9 @@ object f_config_system: Tf_config_system
           end
           object SqliteBoxLabel: TLabel
             Left = 13
-            Height = 19
+            Height = 18
             Top = 12
-            Width = 91
+            Width = 90
             Caption = 'SqliteBoxLabel'
             ParentColor = False
             ParentFont = False
@@ -694,11 +693,11 @@ object f_config_system: Tf_config_system
           Left = 0
           Height = 63
           Top = 210
-          Width = 493
+          Width = 499
           Align = alTop
           Caption = 'Directory'
-          ClientHeight = 43
-          ClientWidth = 491
+          ClientHeight = 33
+          ClientWidth = 495
           ParentFont = False
           TabOrder = 2
           object Label157: TLabel
@@ -726,10 +725,10 @@ object f_config_system: Tf_config_system
           Left = 0
           Height = 86
           Top = 124
-          Width = 493
+          Width = 499
           Align = alTop
-          ClientHeight = 84
-          ClientWidth = 491
+          ClientHeight = 82
+          ClientWidth = 495
           ParentFont = False
           TabOrder = 1
           object chkdb: TButton
@@ -748,18 +747,18 @@ object f_config_system: Tf_config_system
           Left = 0
           Height = 82
           Top = 336
-          Width = 493
+          Width = 499
           Align = alTop
           Caption = 'Desktop environment'
-          ClientHeight = 62
-          ClientWidth = 491
+          ClientHeight = 52
+          ClientWidth = 495
           ParentFont = False
           TabOrder = 3
           object Label12: TLabel
             Left = 205
-            Height = 19
+            Height = 18
             Top = 8
-            Width = 132
+            Width = 134
             Caption = 'URL launch command'
             ParentColor = False
             ParentFont = False
@@ -771,7 +770,7 @@ object f_config_system: Tf_config_system
             Width = 130
             AutoCompleteText = [cbactSearchAscending]
             Constraints.MaxHeight = 28
-            ItemHeight = 0
+            ItemHeight = 24
             Items.Strings = (
               'FreeDesktop'
               'Other'
@@ -799,18 +798,18 @@ object f_config_system: Tf_config_system
           Left = 0
           Height = 63
           Top = 273
-          Width = 493
+          Width = 499
           Align = alTop
           Caption = 'Screen resolution'
-          ClientHeight = 43
-          ClientWidth = 491
+          ClientHeight = 33
+          ClientWidth = 495
           ParentFont = False
           TabOrder = 4
           object UseScaling: TCheckBox
             Left = 16
-            Height = 21
+            Height = 22
             Top = 9
-            Width = 279
+            Width = 282
             Caption = 'Adjust the windows size to the screen DPI'
             OnChange = UseScalingChange
             ParentFont = False
@@ -823,16 +822,16 @@ object f_config_system: Tf_config_system
           Left = 0
           Height = 26
           Top = 0
-          Width = 493
+          Width = 499
           Align = alTop
           ClientHeight = 26
-          ClientWidth = 493
+          ClientWidth = 499
           TabOrder = 5
           object Label153: TLabel
             Left = 0
-            Height = 19
+            Height = 18
             Top = 0
-            Width = 92
+            Width = 91
             Caption = 'System Setting'
             ParentColor = False
             ParentFont = False
@@ -842,42 +841,42 @@ object f_config_system: Tf_config_system
       object Page4: TTabSheet
         Caption = 'Page4'
         ClientHeight = 524
-        ClientWidth = 493
+        ClientWidth = 499
         ParentFont = False
         object GroupBox3: TGroupBox
           Left = 0
           Height = 524
           Top = 0
-          Width = 493
+          Width = 499
           Align = alClient
           Caption = 'TCP/IP Server'
-          ClientHeight = 504
-          ClientWidth = 491
+          ClientHeight = 494
+          ClientWidth = 495
           ParentFont = False
           TabOrder = 0
           object Label54: TLabel
             Left = 16
-            Height = 19
+            Height = 18
             Top = 84
-            Width = 126
+            Width = 121
             Caption = 'Server IP Interface :'
             ParentColor = False
             ParentFont = False
           end
           object Label55: TLabel
             Left = 16
-            Height = 19
+            Height = 18
             Top = 129
-            Width = 95
+            Width = 91
             Caption = 'Server IP Port :'
             ParentColor = False
             ParentFont = False
           end
           object UseIPserver: TCheckBox
             Left = 16
-            Height = 21
+            Height = 22
             Top = 32
-            Width = 137
+            Width = 138
             Caption = 'Use TCP/IP Server'
             OnClick = UseIPserverClick
             ParentFont = False
@@ -919,8 +918,8 @@ object f_config_system: Tf_config_system
             ChildSizing.ShrinkVertical = crsScaleChilds
             ChildSizing.Layout = cclLeftToRightThenTopToBottom
             ChildSizing.ControlsPerLine = 1
-            ClientHeight = 85
-            ClientWidth = 354
+            ClientHeight = 75
+            ClientWidth = 352
             Items.Strings = (
               'Force J2000'
               'Current chart coordinate system'
@@ -934,11 +933,11 @@ object f_config_system: Tf_config_system
       object Page5: TTabSheet
         Caption = 'Page5'
         ClientHeight = 524
-        ClientWidth = 493
+        ClientWidth = 499
         ParentFont = False
         object Label15: TLabel
           Left = 19
-          Height = 19
+          Height = 18
           Top = 24
           Width = 109
           Caption = 'VO SAMP settings'
@@ -958,9 +957,9 @@ object f_config_system: Tf_config_system
         end
         object Label17: TLabel
           Left = 19
-          Height = 19
+          Height = 18
           Top = 159
-          Width = 169
+          Width = 167
           Caption = 'For more information, see :'
           ParentColor = False
           ParentFont = False
@@ -968,9 +967,9 @@ object f_config_system: Tf_config_system
         object Label18: TLabel
           Cursor = crHandPoint
           Left = 191
-          Height = 19
+          Height = 18
           Top = 159
-          Width = 244
+          Width = 239
           Caption = 'http://www.ivoa.net/documents/SAMP/'
           Font.Color = clBlue
           Font.Style = [fsUnderline]
@@ -980,9 +979,9 @@ object f_config_system: Tf_config_system
         end
         object CheckBox1: TCheckBox
           Left = 45
-          Height = 21
+          Height = 22
           Top = 264
-          Width = 336
+          Width = 338
           Caption = 'Ask for confirmation before to jump to coordinates'
           OnChange = CheckBox1Change
           ParentFont = False
@@ -990,9 +989,9 @@ object f_config_system: Tf_config_system
         end
         object CheckBox2: TCheckBox
           Left = 45
-          Height = 21
+          Height = 22
           Top = 328
-          Width = 305
+          Width = 307
           Caption = 'Ask for confirmation before to load the image'
           OnChange = CheckBox2Change
           ParentFont = False
@@ -1000,9 +999,9 @@ object f_config_system: Tf_config_system
         end
         object CheckBox3: TCheckBox
           Left = 45
-          Height = 21
+          Height = 22
           Top = 417
-          Width = 298
+          Width = 300
           Caption = 'Ask for confirmation before to load the table'
           OnChange = CheckBox3Change
           ParentFont = False
@@ -1010,9 +1009,9 @@ object f_config_system: Tf_config_system
         end
         object CheckBox4: TCheckBox
           Left = 19
-          Height = 21
+          Height = 22
           Top = 239
-          Width = 293
+          Width = 297
           Caption = 'Receive coordinates from other applications'
           OnChange = CheckBox4Change
           ParentFont = False
@@ -1020,9 +1019,9 @@ object f_config_system: Tf_config_system
         end
         object CheckBox5: TCheckBox
           Left = 19
-          Height = 21
+          Height = 22
           Top = 304
-          Width = 294
+          Width = 298
           Caption = 'Receive FITS images from other applications'
           OnChange = CheckBox5Change
           ParentFont = False
@@ -1030,9 +1029,9 @@ object f_config_system: Tf_config_system
         end
         object CheckBox6: TCheckBox
           Left = 19
-          Height = 21
+          Height = 22
           Top = 393
-          Width = 303
+          Width = 307
           Caption = 'Receive VO table data from other applications'
           OnChange = CheckBox6Change
           ParentFont = False
@@ -1040,9 +1039,9 @@ object f_config_system: Tf_config_system
         end
         object CheckBox7: TCheckBox
           Left = 19
-          Height = 21
+          Height = 22
           Top = 199
-          Width = 385
+          Width = 388
           Caption = 'Try to auto-connect to a SAMP hub when the program start'
           OnChange = CheckBox7Change
           ParentFont = False
@@ -1050,9 +1049,9 @@ object f_config_system: Tf_config_system
         end
         object CheckBox8: TCheckBox
           Left = 45
-          Height = 21
+          Height = 22
           Top = 449
-          Width = 219
+          Width = 221
           Caption = 'Keep tables on exit for later use'
           OnChange = CheckBox8Change
           ParentFont = False
@@ -1060,9 +1059,9 @@ object f_config_system: Tf_config_system
         end
         object CheckBox9: TCheckBox
           Left = 45
-          Height = 21
+          Height = 22
           Top = 353
-          Width = 226
+          Width = 229
           Caption = 'Keep images on exit for later use'
           OnChange = CheckBox9Change
           ParentFont = False

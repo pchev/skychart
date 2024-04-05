@@ -53,6 +53,7 @@ type
   { Tf_main }
 
   Tf_main = class(TForm)
+    MenuToolbox9: TMenuItem;
     MenuUpdCatalog: TMenuItem;
     PolePrecession: TAction;
     FileRenameChart: TAction;
@@ -696,7 +697,7 @@ type
     CursorImage1: TCursorImage;
     SaveState: TWindowState;
     samp: TSampClient;
-    numscript: integer;
+    numscript, SaveScriptPanelWidth: integer;
     Fscript: array of Tf_script;
     ActiveScript: integer;
     FTelescopeConnected: boolean;
@@ -865,6 +866,8 @@ type
     procedure SetScriptMenuCaption;
     procedure ShowScriptPanel(n: integer); overload;
     procedure ShowScriptPanel(n: integer; showonly: boolean); overload;
+    procedure ShowConfigPanel(show: boolean);
+    procedure HideConfigAsync(Data: PtrInt);
     procedure ViewToolsBar(ForceVisible: boolean);
     procedure InitDS2000;
     function PrepareAsteroid(jd1, jd2, step: double; msg: TStrings): boolean;
@@ -4822,6 +4825,7 @@ end;
 
 procedure Tf_main.SetupCalendarPage(page: integer);
 begin
+  if not SetupCalendar.Enabled then exit;
   if ConfigCalendar = nil then begin
     ConfigCalendar := Tf_configcalendar.Create(self);
     ConfigCalendar.f_config_calendar1.PageControl1.ShowTabs := True;
@@ -4854,6 +4858,7 @@ end;
 
 procedure Tf_main.SetupTimePage(page: integer);
 begin
+  if not SetupTime.Enabled then exit;
   if ConfigTime = nil then begin
     ConfigTime := Tf_configtime.Create(self);
     ConfigTime.f_config_time1.PageControl1.ShowTabs := True;
@@ -4953,6 +4958,106 @@ begin
   end;
 end;
 
+procedure Tf_main.ShowConfigPanel(show: boolean);
+begin
+  if (not show) then
+  begin   // hide panel
+    if (f_config <> nil) then begin
+      try
+      f_config.PanelConfig.Visible:=true;
+      f_config.ShowTabs(false);
+      f_config.OKBtn.Visible:=true;
+      f_config.CancelBtn.Visible:=true;
+      f_config.Apply.Left:=f_config.OKBtn.Left+f_config.OKBtn.Width+DoScaleX(10);
+      f_config.Parent:=nil;
+      f_config.Align:=alNone;
+      Application.QueueAsyncCall(HideConfigAsync,0);
+      except
+      end;
+    end;
+    Splitter1.Visible := False;
+    ScriptPanel.Visible := False;
+    ScriptPanel.Width := SaveScriptPanelWidth;
+    // enable config menu
+    SetupTime.Enabled:=true;
+    SetupObservatory.Enabled:=true;
+    SetupDisplay.Enabled:=true;
+    SetupCatalog.Enabled:=true;
+    SetupChart.Enabled:=true;
+    SetupSolSys.Enabled:=true;
+    SetupSystem.Enabled:=true;
+    SetupInternet.Enabled:=true;
+    SetupConfig.Enabled:=true;
+    SetupCalendar.Enabled:=true;
+    SetupPictures.Enabled:=true;
+    ConfigPopup.Enabled:=true;
+  end
+  else begin  // show panel
+  // same as SetupConfigExecute
+  if f_config = nil then
+  begin
+    f_config := Tf_config.Create(application);
+    f_config.onApplyConfig := ApplyConfig;
+    f_config.onSaveAndRestart := SaveAndRestart;
+    f_config.onPrepareAsteroid := PrepareAsteroid;
+    f_config.onEnableAsteroid:=EnableAsteroid;
+    f_config.onDisableAsteroid:=DisableAsteroid;
+    f_config.onGetTwilight := GetTwilight;
+    f_config.Fits := fits;
+    f_config.catalog := catalog;
+    f_config.db := cdcdb;
+    f_config.f_config_catalog1.onInstallCatalog := OpenUpdCatalog;
+    f_config.f_config_catalog1.onRunCatgen := RunCatgen;
+  end;
+  f_config.ccat := catalog.cfgcat;
+  f_config.cshr := catalog.cfgshr;
+  f_config.cplot := def_cfgplot;
+  f_config.csc := def_cfgsc;
+  if MultiFrame1.ActiveObject is Tf_chart then
+    with MultiFrame1.ActiveObject as Tf_chart do
+    begin
+      f_config.csc := sc.cfgsc;
+      f_config.cplot := sc.plot.cfgplot;
+    end;
+  cfgm.persdir := privatedir;
+  f_config.cmain := cfgm;
+  f_config.cdss := f_getdss.cfgdss;
+  f_config.applyall.Checked := cfgm.updall;
+  // disable config menu
+  SetupTime.Enabled:=false;
+  SetupObservatory.Enabled:=false;
+  SetupDisplay.Enabled:=false;
+  SetupCatalog.Enabled:=false;
+  SetupChart.Enabled:=false;
+  SetupSolSys.Enabled:=false;
+  SetupSystem.Enabled:=false;
+  SetupInternet.Enabled:=false;
+  SetupConfig.Enabled:=false;
+  SetupCalendar.Enabled:=false;
+  SetupPictures.Enabled:=false;
+  ConfigPopup.Enabled:=false;
+  // panel specific
+  SaveScriptPanelWidth:=ScriptPanel.Width;
+  ScriptPanel.Width:=DoScaleX(500); // config panel width
+  Splitter1.Visible := True;
+  ScriptPanel.Visible := True;
+  Splitter1.ResizeControl := ScriptPanel;
+  f_config.PanelConfig.Visible:=false;
+  f_config.ShowTabs(true);
+  f_config.Show;
+  f_config.OKBtn.Visible:=false;
+  f_config.CancelBtn.Visible:=false;
+  f_config.Apply.Left:=f_config.HelpBtn.Left+f_config.HelpBtn.Width+DoScaleX(10);
+  f_config.Parent:=ScriptPanel;
+  f_config.Align:=alTop;
+  end;
+end;
+
+procedure Tf_main.HideConfigAsync(Data: PtrInt);
+begin
+  if (f_config <> nil) then f_config.Close;
+end;
+
 procedure Tf_main.ApplyConfig(Sender: TObject);
 begin
   activateconfig(f_config.cmain, f_config.csc, f_config.ccat, f_config.cshr,
@@ -4961,6 +5066,7 @@ end;
 
 procedure Tf_main.SetupChartPage(page: integer);
 begin
+  if not SetupChart.Enabled then exit;
   if ConfigChart = nil then begin
     ConfigChart := Tf_configchart.Create(self);
     ConfigChart.f_config_chart1.PageControl1.ShowTabs := True;
@@ -5009,6 +5115,7 @@ procedure Tf_main.SetupSolsysPage(page: integer; directdownload: boolean = False
 var inif: TMemIniFile;
     section: string;
 begin
+  if not SetupSolSys.Enabled then exit;
   if ConfigSolsys = nil then begin
     ConfigSolsys := Tf_configsolsys.Create(self);
     ConfigSolsys.f_config_solsys1.PageControl1.ShowTabs := True;
@@ -5173,6 +5280,7 @@ end;
 
 procedure Tf_main.SetupSystemPage(page: integer);
 begin
+  if not SetupSystem.Enabled then exit;
   if ConfigSystem = nil then begin
     ConfigSystem := Tf_configsystem.Create(self);
     ConfigSystem.f_config_system1.PageControl1.ShowTabs := True;
@@ -5252,6 +5360,7 @@ end;
 
 procedure Tf_main.SetupInternetPage(page: integer);
 begin
+  if not SetupInternet.Enabled then exit;
   if ConfigInternet = nil then begin
     ConfigInternet := Tf_configinternet.Create(self);
     ConfigInternet.f_config_internet1.PageControl1.ShowTabs := True;
@@ -5282,6 +5391,7 @@ end;
 
 procedure Tf_main.SetupPicturesPage(page: integer; action: integer = 0);
 begin
+  if not SetupPictures.Enabled then exit;
   if ConfigPictures = nil then begin
     ConfigPictures := Tf_configpictures.Create(self);
     ConfigPictures.f_config_pictures1.PageControl1.ShowTabs := True;
@@ -5347,6 +5457,7 @@ end;
 procedure Tf_main.SetupObservatoryPage(page: integer; posx: integer = 0;
   posy: integer = 0);
 begin
+  if not SetupObservatory.Enabled then exit;
   if ConfigObservatory = nil then begin
     ConfigObservatory := Tf_configobservatory.Create(self);
     ConfigObservatory.f_config_observatory1.PageControl1.ShowTabs := True;
@@ -5408,6 +5519,7 @@ end;
 
 procedure Tf_main.SetupCatalogPage(page: integer);
 begin
+  if not SetupCatalog.Enabled then exit;
   if ConfigCatalog = nil then begin
     ConfigCatalog := Tf_configcatalog.Create(self);
     ConfigCatalog.f_config_catalog1.PageControl1.ShowTabs := True;
@@ -5512,6 +5624,7 @@ end;
 
 procedure Tf_main.SetupDisplayPage(pagegroup: integer);
 begin
+  if not SetupDisplay.Enabled then exit;
   if ConfigDisplay = nil then
   begin
     ConfigDisplay := Tf_configdisplay.Create(self);
@@ -8077,6 +8190,7 @@ begin
         f_detail.Width := ReadInteger(section, 'Detail_Width', f_detail.Width);
         f_detail.Height := ReadInteger(section, 'Detail_Height', f_detail.Height);
         ScriptPanel.Width := ReadInteger(section, 'ScriptWidth', ScriptPanel.Width);
+        SaveScriptPanelWidth := ScriptPanel.Width;
         GregorianStart := ReadInteger(section, 'GregorianStart', GregorianStart);
         GregorianStartJD := ReadInteger(section, 'GregorianStartJD', GregorianStartJD);
       except
@@ -13418,6 +13532,7 @@ begin
   MenuToolbox6.Caption := Fscript[5].PanelTitle.Caption;
   MenuToolbox7.Caption := Fscript[6].PanelTitle.Caption;
   MenuToolbox8.Caption := Fscript[7].PanelTitle.Caption;
+  MenuToolbox9.Caption := rsAllConfigura;
 end;
 
 procedure Tf_main.ShowScriptPanel(n: integer);
@@ -13429,8 +13544,12 @@ procedure Tf_main.ShowScriptPanel(n: integer; showonly: boolean);
 var
   i: integer;
 begin
-  if n < numscript then
+  if n < numscript then   // standard script
   begin
+    if (f_config<>nil) and (f_config.Visible) then begin
+      // hide config panel before to open the script
+      ShowConfigPanel(false);
+    end;
     for i := 0 to numscript - 1 do
     begin
       if i = n then
@@ -13455,6 +13574,26 @@ begin
         Fscript[i].ShowScript(False);
     end;
     ActiveScript := n;
+  end
+  // other function that use the script panel
+  else if n = 8 then begin  // config panel
+    if (f_config<>nil) and (f_config.Visible) then begin
+      // hide config panel
+      ShowConfigPanel(false);
+    end
+    else begin
+      // show panel
+      // close previous script if any
+      for i := 0 to numscript - 1 do begin
+        if Fscript[i].Visible then
+        begin
+          Fscript[i].ShowScript(False);
+          Splitter1.Visible := False;
+          ScriptPanel.Visible := False;
+        end
+      end;
+      ShowConfigPanel(true);
+    end;
   end;
 end;
 
