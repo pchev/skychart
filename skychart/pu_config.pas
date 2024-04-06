@@ -143,9 +143,6 @@ type
 var
   f_config: Tf_config;
 
-const
-  numpages: array[0..9] of integer = (6,4,3,7,6,6,11,5,5,2);
-
 implementation
 
 {$R *.lfm}
