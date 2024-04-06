@@ -4226,6 +4226,7 @@ object f_main: Tf_main
     Top = 433
   end
   object SampDownload: TDownloadDialog
+    HttpDirectDownload = False
     Timeout = 5000
     FtpFwMode = 0
     FtpFwPassive = True

@@ -1610,6 +1610,10 @@ resourcestring
   rsInstallSpeci = 'Specialized catalog for specific use';
   rsSpecializedD = 'Specialized data';
   rsUnzipFile = 'Unzip file';
+  rsSelectYourPr = 'Select your preference for the button layout';
+  rsThisLayoutCa = 'This layout can be modified later using the menu Setup , Toolbar editor';
+  rsMoreButtonsF = 'More buttons for quick access to many functions';
+  rsFewerButtons = 'Fewer buttons for a cleaner space, access to other functions from the menu';
 
 // also update upsi_translation
 

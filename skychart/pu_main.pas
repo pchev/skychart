@@ -44,7 +44,7 @@ uses
   u_ccdconfig, blcksock, synsock, dynlibs, FileUtil, ExtendedNotebook, LCLVersion, LCLType,
   InterfaceBase, LCLIntf, SysUtils, Classes, Graphics, Forms, Controls, Menus,
   Math, StdCtrls, Dialogs, Buttons, ExtCtrls, ComCtrls, StdActns, types,
-  Printers, ActnList, IniFiles, Spin, Clipbrd, MultiFrame, ChildFrame,
+  Printers, ActnList, IniFiles, Spin, Clipbrd, MultiFrame, ChildFrame, pu_selectlayout,
   BGRABitmap, BGRABitmapTypes, LResources, enhedits, cu_healpix, downloaddialog,
   LazHelpHTML_fix, UniqueInstance, ButtonPanel, ExtDlgs;
 
@@ -726,6 +726,7 @@ type
     procedure SetupInternetPage(page: integer);
     procedure ApplyConfigInternet(Sender: TObject);
     procedure FirstSetup;
+    procedure SelectLayout;
     procedure ShowReleaseNotes(shownext: boolean);
     function Find(kind: integer; num: string; def_ra: double = 0; def_de: double = 0): string;
     procedure FindInfo(Sender: TObject);
@@ -1733,7 +1734,6 @@ begin
     f_info.InfoMemo.Text := CondUTF8Decode(f_info.InfoMemo.Text);
     f_info.showmodal;
   end;
-  SaveDefault;
 end;
 
 procedure Tf_main.FirstSetup;
@@ -1749,8 +1749,60 @@ begin
     def_cfgsc.tz.TimeZoneFile :=
       ZoneDir + StringReplace(def_cfgsc.ObsTZ, '/', PathDelim, [rfReplaceAll]);
   end;
+  SelectLayout;
   SavePrivateConfig(configfile);
   SaveChartConfig(configfile, nil, False);
+end;
+
+procedure Tf_main.SelectLayout;
+var i: integer;
+begin
+  Application.CreateForm(Tf_selectlayout, f_selectlayout);
+  f_selectlayout.ShowModal;
+  if f_selectlayout.ModalResult=mrYes then begin
+    nummainbar := numstandardmainbar;
+    numobjectbar := numstandardobjectbar;
+    numleftbar := numstandardleftbar;
+    numrightbar := numstandardrightbar;
+    configmainbar.Clear;
+    configobjectbar.Clear;
+    configleftbar.Clear;
+    configrightbar.Clear;
+    for i := 1 to nummainbar do
+      configmainbar.Add(standardmainbar[i]);
+    for i := 1 to numobjectbar do
+      configobjectbar.Add(standardobjectbar[i]);
+    for i := 1 to numleftbar do
+      configleftbar.Add(standardleftbar[i]);
+    for i := 1 to numrightbar do
+      configrightbar.Add(standardrightbar[i]);
+    MenuViewMainBar.Checked := True;
+    MenuViewObjectBar.Checked := True;
+    MenuViewLeftBar.Checked := True;
+    MenuViewRightBar.Checked := True;
+  end
+  else begin
+    nummainbar := numdefaultmainbar;
+    numobjectbar := numdefaultobjectbar;
+    numleftbar := numdefaultleftbar;
+    numrightbar := numdefaultrightbar;
+    configmainbar.Clear;
+    configobjectbar.Clear;
+    configleftbar.Clear;
+    configrightbar.Clear;
+    for i := 1 to nummainbar do
+      configmainbar.Add(defaultmainbar[i]);
+    for i := 1 to numobjectbar do
+      configobjectbar.Add(defaultobjectbar[i]);
+    for i := 1 to numleftbar do
+      configleftbar.Add(defaultleftbar[i]);
+    for i := 1 to numrightbar do
+      configrightbar.Add(defaultrightbar[i]);
+    MenuViewMainBar.Checked := True;
+    MenuViewObjectBar.Checked := False;
+    MenuViewLeftBar.Checked := False;
+    MenuViewRightBar.Checked := False;
+  end;
 end;
 
 procedure Tf_main.SaveImageExecute(Sender: TObject);
@@ -8361,7 +8413,6 @@ begin
     f_getdss.cfgdss.DSSurl[8, 1] := URL_DSS8;
     f_getdss.cfgdss.DSSurl[9, 0] := URL_DSS_NAME9;
     f_getdss.cfgdss.DSSurl[9, 1] := URL_DSS9;
-    SaveDefault;
   end;
   if Config_Version < '3.0.1.5f' then
   begin
@@ -8695,7 +8746,10 @@ begin
     catalog.cfgcat.NebCatOn[rc3-BaseNeb]:=false;
     catalog.cfgcat.NebCatPath[rc3-BaseNeb]:='';
   end;
-
+  if Config_Version < '4.3t' then begin
+    SelectLayout;
+  end;
+  SaveDefault;
 end;
 
 procedure Tf_main.SaveVersion;
