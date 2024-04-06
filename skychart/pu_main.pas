@@ -211,8 +211,6 @@ type
     ViewClock: TAction;
     HTMLBrowserHelpViewer1: THTMLBrowserHelpViewer;
     HTMLHelpDatabase1: THTMLHelpDatabase;
-    MenuItem24: TMenuItem;
-    MenuItem25: TMenuItem;
     N26: TMenuItem;
     MenuEditLabels: TMenuItem;
     MenuDSS: TMenuItem;
@@ -233,24 +231,11 @@ type
     MenuLessNeb: TMenuItem;
     MenuConfig: TMenuItem;
     SetupConfig: TAction;
-    MenuItem12: TMenuItem;
-    MenuItem13: TMenuItem;
-    MenuItem14: TMenuItem;
-    MenuItem15: TMenuItem;
-    MenuItem16: TMenuItem;
-    MenuItem17: TMenuItem;
-    MenuItem18: TMenuItem;
-    MenuItem19: TMenuItem;
     MenuChartConfig: TMenuItem;
-    MenuItem20: TMenuItem;
-    MenuItem21: TMenuItem;
-    MenuItem22: TMenuItem;
-    MenuItem23: TMenuItem;
     MenuSolsysConfig: TMenuItem;
     MenuGeneralConfig: TMenuItem;
     MenuInternetConfig: TMenuItem;
     MenuVariableStar: TMenuItem;
-    PopupConfig: TPopupMenu;
     SetupInternet: TAction;
     SetupSystem: TAction;
     SetupSolSys: TAction;
@@ -4821,7 +4806,7 @@ end;
 
 procedure Tf_main.ConfigPopupExecute(Sender: TObject);
 begin
-  PopupConfig.PopUp(mouse.cursorpos.x, mouse.cursorpos.y);
+  ShowScriptPanel(8, False);
 end;
 
 procedure Tf_main.SetupCalendarPage(page: integer);
@@ -4985,7 +4970,6 @@ begin
     SetupConfig.Enabled:=true;
     SetupCalendar.Enabled:=true;
     SetupPictures.Enabled:=true;
-    ConfigPopup.Enabled:=true;
   end
   else begin  // show panel
   // same as SetupConfigExecute
@@ -5029,7 +5013,6 @@ begin
   SetupConfig.Enabled:=false;
   SetupCalendar.Enabled:=false;
   SetupPictures.Enabled:=false;
-  ConfigPopup.Enabled:=false;
   // panel specific
   SaveScriptPanelWidth:=ScriptPanel.Width;
   ScriptPanel.Width:=DoScaleX(500); // config panel width

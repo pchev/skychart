@@ -4193,63 +4193,6 @@ object f_main: Tf_main
     Left = 291
     Top = 307
   end
-  object PopupConfig: TPopupMenu
-    Left = 57
-    Top = 170
-    object MenuItem12: TMenuItem
-      Action = SetupTime
-      OnClick = SetupTimeExecute
-    end
-    object MenuItem13: TMenuItem
-      Action = SetupObservatory
-      OnClick = SetupObservatoryExecute
-    end
-    object MenuItem14: TMenuItem
-      Action = SetupChart
-      OnClick = SetupChartExecute
-    end
-    object MenuItem15: TMenuItem
-      Action = SetupCatalog
-      OnClick = SetupCatalogExecute
-    end
-    object MenuItem16: TMenuItem
-      Action = SetupSolSys
-      OnClick = SetupSolSysExecute
-    end
-    object MenuItem17: TMenuItem
-      Action = SetupDisplay
-      OnClick = SetupDisplayExecute
-    end
-    object MenuItem18: TMenuItem
-      Action = SetupPictures
-    end
-    object MenuItem19: TMenuItem
-      Action = SetupSystem
-      OnClick = SetupSystemExecute
-    end
-    object MenuItem20: TMenuItem
-      Action = SetupInternet
-      OnClick = SetupInternetExecute
-    end
-    object MenuItem25: TMenuItem
-      Caption = '-'
-    end
-    object MenuItem24: TMenuItem
-      Action = SetupConfig
-      OnClick = SetupConfigExecute
-    end
-    object MenuItem21: TMenuItem
-      Caption = '-'
-    end
-    object MenuItem22: TMenuItem
-      Action = SaveConfiguration
-      OnClick = SaveConfigurationExecute
-    end
-    object MenuItem23: TMenuItem
-      Action = SaveConfigOnExit
-      OnClick = SaveConfigOnExitExecute
-    end
-  end
   object HTMLHelpDatabase1: THTMLHelpDatabase
     AutoRegister = True
     Left = 81
