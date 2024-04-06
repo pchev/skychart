@@ -49,7 +49,7 @@ uses
   pu_config_calendar, pu_planetinfo, pu_imglist, cu_plansat, cu_smallsat,
   pu_fov, pu_edittoolbar, fu_script, pu_scriptengine, pu_pascaleditor,
   uPSI_CheckLst, upsi_translation, u_scriptsocket, pu_scriptconfig, pu_tour, pu_updcatalog,
-  UScaleDPI, u_ccdconfig, u_orbits, u_speech, cu_healpix, cu_ascomrest, pu_mosaic, pu_prepoint, calceph, cu_calceph, cu_httpdownload, cu_alpacamanagement;
+  UScaleDPI, u_ccdconfig, u_orbits, u_speech, cu_healpix, cu_ascomrest, pu_mosaic, pu_prepoint, calceph, cu_calceph, cu_httpdownload, cu_alpacamanagement, pu_config;
   
 var i : integer;
     buf, p, step : string;

@@ -1,4 +1,4 @@
-unit pu_config;
+unit pu_configdirect;
 
 {$MODE Delphi}{$H+}
 
@@ -23,7 +23,8 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 }
 {
- Configuration form
+ Configuration form for use in script panel
+ it share the config with the current chart instead of working with a copy
 }
 
 interface
@@ -40,12 +41,10 @@ uses
 
 type
 
-  { Tf_config }
+  { Tf_configdirect }
 
-  Tf_config = class(TForm)
+  Tf_configdirect = class(TForm)
     PageControl1: TPageControl;
-    PanelConfig: TPanel;
-    Panel3: TPanel;
     Panel4: TPanel;
     Splitter1: TSplitter;
     TabSheet1: TTabSheet;
@@ -58,24 +57,12 @@ type
     TabSheet7: TTabSheet;
     TabSheet0: TTabSheet;
     TabSheet9: TTabSheet;
-    TreeView1: TTreeView;
-    previous: TButton;
-    Next: TButton;
     PanelBottom: TPanel;
-    Applyall: TCheckBox;
-    OKBtn: TButton;
     Apply: TButton;
-    CancelBtn: TButton;
     HelpBtn: TButton;
-    procedure FormClose(Sender: TObject; var CloseAction: TCloseAction);
-    procedure FormDestroy(Sender: TObject);
     procedure HelpBtnClick(Sender: TObject);
-    procedure OKBtnClick(Sender: TObject);
-    procedure TreeView1Change(Sender: TObject; Node: TTreeNode);
     procedure FormCreate(Sender: TObject);
     procedure FormShow(Sender: TObject);
-    procedure nextClick(Sender: TObject);
-    procedure previousClick(Sender: TObject);
     procedure ApplyClick(Sender: TObject);
   private
     { Déclarations privées }
@@ -95,9 +82,7 @@ type
     Fcplot: Tconf_plot;
     Fcmain: Tconf_main;
     Fcdss: Tconf_dss;
-    lastSelectedNode: TTreeNode;
     FApplyConfig,FDisableAsteroid,FEnableAsteroid: TNotifyEvent;
-    FSaveAndRestart: TNotifyEvent;
     FPrepareAsteroid: TPrepareAsteroid;
     FGetTwilight: TGetTwilight;
     function GetFits: TFits;
@@ -112,10 +97,8 @@ type
     procedure SetCplot(Value: Tconf_plot);
     procedure SetCmain(Value: Tconf_main);
     procedure SetCdss(Value: Tconf_dss);
-    procedure SysSaveAndRestart(Sender: TObject);
     function SolSysPrepareAsteroid(jd1, jd2, step: double; msg: TStrings): boolean;
     procedure TimeGetTwilight(jd0: double; out ht: double);
-    procedure ShowPage(i, j: integer);
     procedure ActivateChanges;
     procedure EnableAsteroid(Sender: TObject);
     procedure DisableAsteroid(Sender: TObject);
@@ -123,6 +106,7 @@ type
     { Déclarations publiques }
     f_config_catalog1: Tf_config_catalog;
     procedure SetLang;
+    procedure UpdateBtn;
     property ccat: Tconf_catalog read Fccat write SetCcat;
     property cshr: Tconf_shared read Fcshr write SetCshr;
     property csc: Tconf_skychart read Fcsc write SetCsc;
@@ -133,7 +117,6 @@ type
     property catalog: Tcatalog read GetCatalog write SetCatalog;
     property db: Tcdcdb read GetDB write SetDB;
     property onApplyConfig: TNotifyEvent read FApplyConfig write FApplyConfig;
-    property onSaveAndRestart: TNotifyEvent read FSaveAndRestart write FSaveAndRestart;
     property onPrepareAsteroid: TPrepareAsteroid read FPrepareAsteroid write FPrepareAsteroid;
     property onGetTwilight: TGetTwilight read FGetTwilight write FGetTwilight;
     property onDisableAsteroid: TNotifyEvent read FDisableAsteroid write FDisableAsteroid;
@@ -141,7 +124,7 @@ type
   end;
 
 var
-  f_config: Tf_config;
+  f_configdirect: Tf_configdirect;
 
 const
   numpages: array[0..9] of integer = (6,4,3,7,6,6,11,5,5,2);
@@ -150,72 +133,23 @@ implementation
 
 {$R *.lfm}
 
-procedure Tf_config.SetLang;
-var i: integer;
+procedure Tf_configdirect.SetLang;
 begin
   Caption := rsConfiguratio;
-  i:=0;
-  TreeView1.items[i].Text := '1- ' + rsGeneral;  inc(i);
-  TreeView1.items[i].Text :=   '1- ' + rsLanguage2;  inc(i);
-  TreeView1.items[i].Text :=   '2- ' + rsTelescope;  inc(i);
-  TreeView1.items[i].Text :=   '3- ' + rsGeneral;  inc(i);
-  TreeView1.items[i].Text :=   '4- ' + rsServer;  inc(i);
-  TreeView1.items[i].Text :=   '5- ' + 'SAMP';  inc(i);
-  TreeView1.items[i].Text := '2- ' + rsDateTime2;  inc(i);
-  TreeView1.items[i].Text :=   '1- ' + rsDateTime2;  inc(i);
-  TreeView1.items[i].Text :=   '2- ' + rsTimeSimulati;  inc(i);
-  TreeView1.items[i].Text :=   '3- ' + rsAnimation;  inc(i);
-  TreeView1.items[i].Text :='3- ' + rsObservatory;  inc(i);
-  TreeView1.items[i].Text :=  '1- ' + rsObservatory;  inc(i);
-  TreeView1.items[i].Text :=  '2- ' + rsHorizon;  inc(i);
-  TreeView1.items[i].Text :='4- ' + rsChartCoordin;  inc(i);
-  TreeView1.items[i].Text :=  '1- ' + rsChartCoordin;  inc(i);
-  TreeView1.items[i].Text :=  '2- ' + rsFieldOfVisio;  inc(i);
-  TreeView1.items[i].Text :=  '3- ' + rsProjection;  inc(i);
-  TreeView1.items[i].Text :=  '4- ' + rsObjectFilter;  inc(i);
-  TreeView1.items[i].Text :=  '5- ' + rsGridSpacing;  inc(i);
-  TreeView1.items[i].Text :=  '6- ' + rsObjectList;  inc(i);
-  TreeView1.items[i].Text :='5- ' + rsCatalog;  inc(i);
-  TreeView1.items[i].Text :=  '1- ' + rsCatalog;  inc(i);
-  TreeView1.items[i].Text :=  '2- ' + 'VO ' + rsCatalog;  inc(i);
-  TreeView1.items[i].Text :=  '3- ' + rsUserDefinedO;  inc(i);
-  TreeView1.items[i].Text :=  '4- ' + rsOtherSoftwar;  inc(i);
-  TreeView1.items[i].Text :=  '5- ' + rsObsolete+blank+rsStars;  inc(i);
-  TreeView1.items[i].Text :='6- ' + rsSolarSystem;  inc(i);
-  TreeView1.items[i].Text :=  '1- ' + rsSolarSystem;  inc(i);
-  TreeView1.items[i].Text :=  '2- ' + rsPlanet;  inc(i);
-  TreeView1.items[i].Text :=  '3- ' + rsComet;  inc(i);
-  TreeView1.items[i].Text :=  '4- ' + rsAsteroid;  inc(i);
-  TreeView1.items[i].Text :=  '5- ' + rsSPICEEphemer;  inc(i);
-  TreeView1.items[i].Text :='7- ' + rsDisplay;  inc(i);
-  TreeView1.items[i].Text :=  '1- ' + rsDisplay;  inc(i);
-  TreeView1.items[i].Text :=  '2- ' + rsDisplayColou;  inc(i);
-  TreeView1.items[i].Text :=  '3- ' + rsDeepSkyObjec;  inc(i);
-  TreeView1.items[i].Text :=  '4- ' + rsSkyBackgroun;  inc(i);
-  TreeView1.items[i].Text :=  '5- ' + rsGrids;  inc(i);
-  TreeView1.items[i].Text :=  '6- ' + rsLines;  inc(i);
-  TreeView1.items[i].Text :=  '7- ' + rsLabels;  inc(i);
-  TreeView1.items[i].Text :=  '8- ' + rsFonts;  inc(i);
-  TreeView1.items[i].Text :=  '9- ' + rsFinderCircle;  inc(i);
-  TreeView1.items[i].Text :=  '10- ' + rsFinderRectan;  inc(i);
-  TreeView1.items[i].Text :='8- ' + rsPictures;  inc(i);
-  TreeView1.items[i].Text :=  '1- ' + rsObject;  inc(i);
-  TreeView1.items[i].Text :=  '2- ' + rsBackground;  inc(i);
-  TreeView1.items[i].Text :=  '3- ' + rsDSSRealSky;  inc(i);
-  TreeView1.items[i].Text :=  '4- ' + rsImageArchive;  inc(i);
-  TreeView1.items[i].Text :='9- ' + rsUpdate1;  inc(i);
-  TreeView1.items[i].Text :=  '1- ' + rsOrbitalEleme;  inc(i);
-  TreeView1.items[i].Text :=  '2- ' + rsOnlineDSSPic;  inc(i);
-  TreeView1.items[i].Text :=  '3- ' + rsArtificialSa2;  inc(i);
-  TreeView1.items[i].Text :=  '4- ' + rsProxy;  inc(i);
-  TreeView1.items[i].Text :='10- ' + rsCalendar;  inc(i);
-  TreeView1.items[i].Text :=  '1- ' + rsGraphs;  inc(i);
-
-  Applyall.Caption := rsApplyChangeT;
   Apply.Caption := rsApply;
-  OKBtn.Caption := rsOK;
-  CancelBtn.Caption := rsCancel;
   HelpBtn.Caption := rsHelp;
+
+  TabSheet0.Caption := rsGeneral;
+  TabSheet1.Caption := rsDateTime2;
+  TabSheet2.Caption := rsObservatory;
+  TabSheet3.Caption := rsChartCoordin;
+  TabSheet4.Caption := rsCatalog;
+  TabSheet5.Caption := rsSolarSystem;
+  TabSheet6.Caption := rsDisplay;
+  TabSheet7.Caption := rsPictures;
+  TabSheet9.Caption := rsUpdate1;
+  TabSheet10.Caption := rsCalendar;
+
   if f_config_catalog1 <> nil then
     f_config_catalog1.SetLang;
   if f_config_chart1 <> nil then
@@ -239,7 +173,7 @@ begin
   SetHelp(self, hlpMenuSetup);
 end;
 
-procedure Tf_config.FormCreate(Sender: TObject);
+procedure Tf_configdirect.FormCreate(Sender: TObject);
 begin
   f_config_system1:= Tf_config_system.Create(Self);
   f_config_time1:= Tf_config_time.Create(Self);
@@ -271,25 +205,33 @@ begin
   f_config_pictures1.Align:=alClient;
   f_config_internet1.Align:=alClient;
   f_config_calendar1.Align:=alClient;
-  Fcsc := Tconf_skychart.Create;
-  Fccat := Tconf_catalog.Create;
-  Fcshr := Tconf_shared.Create;
-  Fcplot := Tconf_plot.Create;
-  Fcmain := Tconf_main.Create;
-  Fcdss := Tconf_dss.Create;
+  f_config_system1.PageControl1.ShowTabs:=true;
+  f_config_time1.PageControl1.ShowTabs:=true;
+  f_config_observatory1.PageControl1.ShowTabs:=true;
+  f_config_chart1.PageControl1.ShowTabs:=true;
+  f_config_catalog1.PageControl1.ShowTabs:=true;
+  f_config_solsys1.PageControl1.ShowTabs:=true;
+  f_config_display1.PageControl1.ShowTabs:=true;
+  f_config_pictures1.PageControl1.ShowTabs:=true;
+  f_config_internet1.PageControl1.ShowTabs:=true;
+  f_config_calendar1.PageControl1.ShowTabs:=true;
   ScaleDPI(Self);
   SetLang;
   f_config_solsys1.onPrepareAsteroid := SolSysPrepareAsteroid;
-  f_config_system1.onSaveAndRestart := SysSaveAndRestart;
   f_config_time1.onGetTwilight := TimeGetTwilight;
 end;
 
-procedure Tf_config.FormShow(Sender: TObject);
+procedure Tf_configdirect.FormShow(Sender: TObject);
 {$ifdef mswindows}var
   i: integer;
 {$endif}
 begin
   locktree := False;
+  UpdateBtn;
+end;
+
+procedure Tf_configdirect.UpdateBtn;
+begin
   f_config_time1.Init;
   f_config_observatory1.Init;
   f_config_chart1.Init;
@@ -300,117 +242,10 @@ begin
   f_config_system1.Init;
   f_config_internet1.Init;
   f_config_calendar1.Init;
-  TreeView1.FullCollapse;
-  Treeview1.selected := Treeview1.items[0];
-  Treeview1.selected := Treeview1.items[cmain.configpage];
-  lastSelectedNode := Treeview1.selected;
 end;
 
-procedure Tf_config.TreeView1Change(Sender: TObject; Node: TTreeNode);
-var
-  i, j: integer;
+procedure Tf_configdirect.ActivateChanges;
 begin
-  if locktree then
-    exit;
-  if node = nil then
-  begin
-    Treeview1.selected := lastSelectedNode;
-    exit;
-  end;
-  try
-    if node.level = 0 then
-    begin
-      Treeview1.selected := Treeview1.items[(Treeview1.selected.absoluteindex + 1)];
-      TreeView1Change(Sender, Treeview1.selected);
-    end
-    else
-    begin
-      locktree := True;
-      i := node.parent.index;
-      j := node.index;
-      ShowPage(i, j);
-      TreeView1.FullCollapse;
-      node.Parent.Expand(True);
-    end;
-    lastSelectedNode := Treeview1.selected;
-    application.ProcessMessages;
-  finally
-    locktree := False;
-  end;
-end;
-
-procedure Tf_config.ShowPage(i, j: integer);
-begin
-  // before the page change:
-  if PageControl1.PageIndex = 4 then
-  begin // config catalog
-    if f_config_catalog1.PageControl1.ActivePage = f_config_catalog1.Page1 then
-      f_config_catalog1.ActivateGCat;
-    if f_config_catalog1.PageControl1.ActivePage = f_config_catalog1.Page1b then
-      f_config_catalog1.ActivateUserObjects;
-  end;
-  // page change
-  PageControl1.PageIndex := i;
-  case i of
-    0:
-    begin
-      f_config_system1.PageControl1.PageIndex := j;
-      f_config_system1.Init;
-    end;
-    1:
-    begin
-      f_config_time1.PageControl1.PageIndex := j;
-      f_config_time1.Init;
-    end;
-    2:
-    begin
-      f_config_observatory1.PageControl1.PageIndex := j;
-      f_config_observatory1.Init;
-    end;
-    3:
-    begin
-      f_config_chart1.PageControl1.PageIndex := j;
-      f_config_chart1.Init;
-    end;
-    4:
-    begin
-      f_config_catalog1.PageControl1.PageIndex := j;
-      f_config_catalog1.Init;
-    end;
-    5:
-    begin
-      f_config_solsys1.PageControl1.PageIndex := j;
-      f_config_solsys1.Init;
-    end;
-    6:
-    begin
-      f_config_display1.PageControl1.PageIndex := j;
-      f_config_display1.Init;
-    end;
-    7:
-    begin
-      f_config_pictures1.PageControl1.PageIndex := j;
-      f_config_pictures1.Init;
-    end;
-    8:
-    begin
-      f_config_internet1.PageControl1.PageIndex := j;
-      f_config_internet1.Init;
-    end;
-    9:
-    begin
-      f_config_calendar1.PageControl1.PageIndex := j;
-      f_config_calendar1.Init;
-    end;
-  end;
-  cmain.configpage_i := i;
-  cmain.configpage_j := j;
-end;
-
-procedure Tf_config.ActivateChanges;
-begin
-  if Treeview1.selected <> nil then
-    cmain.configpage := Treeview1.selected.absoluteindex;
   if PageControl1.PageIndex = 4 then
   begin // config catalog
     if f_config_catalog1.PageControl1.ActivePage = f_config_catalog1.Page1 then
@@ -421,22 +256,7 @@ begin
   Fcdss := f_config_internet1.cdss;
 end;
 
-procedure Tf_config.FormClose(Sender: TObject; var CloseAction: TCloseAction);
-begin
-  ActivateChanges;
-end;
-
-procedure Tf_config.FormDestroy(Sender: TObject);
-begin
-  Fcsc.Free;
-  Fccat.Free;
-  Fcshr.Free;
-  Fcplot.Free;
-  Fcmain.Free;
-  Fcdss.Free;
-end;
-
-procedure Tf_config.HelpBtnClick(Sender: TObject);
+procedure Tf_configdirect.HelpBtnClick(Sender: TObject);
 begin
   case PageControl1.PageIndex of
     0: f_config_system1.ShowHelp;
@@ -452,48 +272,7 @@ begin
   end;
 end;
 
-procedure Tf_config.OKBtnClick(Sender: TObject);
-begin
-  f_config_observatory1.Button6Click(nil);
-  f_config_solsys1.ActivateJplEph;
-end;
-
-procedure Tf_config.nextClick(Sender: TObject);
-begin
-  if (Treeview1.selected <> nil) and (Treeview1.selected.absoluteindex <
-    Treeview1.items.Count - 1) then
-  begin
-    Treeview1.selected := Treeview1.selected.GetNext;
-    treeview1.topitem := Treeview1.selected;
-    TreeView1Change(Sender, Treeview1.selected);
-  end;
-end;
-
-procedure Tf_config.previousClick(Sender: TObject);
-var
-  i: integer;
-begin
-  if (Treeview1.selected <> nil) and (Treeview1.selected.absoluteindex > 1) then
-  begin
-    locktree := True;
-    Treeview1.selected := Treeview1.selected.GetPrev;
-    if Treeview1.selected.level = 0 then
-      Treeview1.selected := Treeview1.selected.GetPrev;
-    i := Treeview1.selected.absoluteindex;
-    locktree := False;
-    Treeview1.selected := Treeview1.items[i];
-    treeview1.topitem := Treeview1.selected;
-    TreeView1Change(Sender, Treeview1.selected);
-  end;
-end;
-
-procedure Tf_config.SysSaveAndRestart(Sender: TObject);
-begin
-  if Assigned(FSaveAndRestart) then
-    FSaveAndRestart(self);
-end;
-
-function Tf_config.SolSysPrepareAsteroid(jd1, jd2, step: double; msg: TStrings): boolean;
+function Tf_configdirect.SolSysPrepareAsteroid(jd1, jd2, step: double; msg: TStrings): boolean;
 begin
   if assigned(FPrepareAsteroid) then
     Result := FPrepareAsteroid(jd1, jd2, step, msg)
@@ -501,17 +280,17 @@ begin
     Result := False;
 end;
 
-procedure Tf_config.EnableAsteroid(Sender: TObject);
+procedure Tf_configdirect.EnableAsteroid(Sender: TObject);
 begin
    if assigned(FEnableAsteroid) then FEnableAsteroid(self);
 end;
 
-procedure Tf_config.DisableAsteroid(Sender: TObject);
+procedure Tf_configdirect.DisableAsteroid(Sender: TObject);
 begin
    if assigned(FDisableAsteroid) then FDisableAsteroid(self);
 end;
 
-procedure Tf_config.TimeGetTwilight(jd0: double; out ht: double);
+procedure Tf_configdirect.TimeGetTwilight(jd0: double; out ht: double);
 begin
   if assigned(FGetTwilight) then
     FGetTwilight(jd0, ht)
@@ -519,32 +298,32 @@ begin
     ht := -99;
 end;
 
-function Tf_config.GetFits: TFits;
+function Tf_configdirect.GetFits: TFits;
 begin
   Result := f_config_pictures1.Fits;
 end;
 
-procedure Tf_config.SetFits(Value: TFits);
+procedure Tf_configdirect.SetFits(Value: TFits);
 begin
   f_config_pictures1.Fits := Value;
 end;
 
-function Tf_config.GetCatalog: Tcatalog;
+function Tf_configdirect.GetCatalog: Tcatalog;
 begin
   Result := f_config_catalog1.catalog;
 end;
 
-procedure Tf_config.SetCatalog(Value: Tcatalog);
+procedure Tf_configdirect.SetCatalog(Value: Tcatalog);
 begin
   f_config_catalog1.catalog := Value;
 end;
 
-function Tf_config.GetDB: Tcdcdb;
+function Tf_configdirect.GetDB: Tcdcdb;
 begin
   Result := f_config_system1.cdb;
 end;
 
-procedure Tf_config.SetDB(Value: Tcdcdb);
+procedure Tf_configdirect.SetDB(Value: Tcdcdb);
 begin
   f_config_system1.cdb := Value;
   f_config_solsys1.cdb := Value;
@@ -553,9 +332,9 @@ begin
   f_config_time1.cdb := Value;
 end;
 
-procedure Tf_config.SetCcat(Value: Tconf_catalog);
+procedure Tf_configdirect.SetCcat(Value: Tconf_catalog);
 begin
-  Fccat.Assign(Value);
+  Fccat := Value;
   f_config_time1.ccat := Fccat;
   f_config_observatory1.ccat := Fccat;
   f_config_chart1.ccat := Fccat;
@@ -566,9 +345,9 @@ begin
   f_config_system1.ccat := Fccat;
 end;
 
-procedure Tf_config.SetCshr(Value: Tconf_shared);
+procedure Tf_configdirect.SetCshr(Value: Tconf_shared);
 begin
-  Fcshr.Assign(Value);
+  Fcshr := Value;
   f_config_time1.cshr := Fcshr;
   f_config_observatory1.cshr := Fcshr;
   f_config_chart1.cshr := Fcshr;
@@ -579,9 +358,9 @@ begin
   f_config_system1.cshr := Fcshr;
 end;
 
-procedure Tf_config.SetCsc(Value: Tconf_skychart);
+procedure Tf_configdirect.SetCsc(Value: Tconf_skychart);
 begin
-  Fcsc.Assign(Value);
+  Fcsc := Value;
   f_config_time1.csc := Fcsc;
   f_config_observatory1.csc := Fcsc;
   f_config_chart1.csc := Fcsc;
@@ -593,9 +372,9 @@ begin
   f_config_calendar1.csc := Fcsc;
 end;
 
-procedure Tf_config.SetCplot(Value: Tconf_plot);
+procedure Tf_configdirect.SetCplot(Value: Tconf_plot);
 begin
-  Fcplot.Assign(Value);
+  Fcplot := Value;
   f_config_time1.cplot := Fcplot;
   f_config_observatory1.cplot := Fcplot;
   f_config_chart1.cplot := Fcplot;
@@ -606,9 +385,9 @@ begin
   f_config_system1.cplot := Fcplot;
 end;
 
-procedure Tf_config.SetCmain(Value: Tconf_main);
+procedure Tf_configdirect.SetCmain(Value: Tconf_main);
 begin
-  Fcmain.Assign(Value);
+  Fcmain := Value;
   f_config_time1.cmain := Fcmain;
   f_config_observatory1.cmain := Fcmain;
   f_config_chart1.cmain := Fcmain;
@@ -620,14 +399,14 @@ begin
   f_config_internet1.cmain := Fcmain;
 end;
 
-procedure Tf_config.SetCdss(Value: Tconf_dss);
+procedure Tf_configdirect.SetCdss(Value: Tconf_dss);
 begin
-  Fcdss.Assign(Value);
+  Fcdss := Value;
   f_config_pictures1.cdss := Fcdss;
   f_config_internet1.cdss := Fcdss;
 end;
 
-procedure Tf_config.applyClick(Sender: TObject);
+procedure Tf_configdirect.applyClick(Sender: TObject);
 begin
   f_config_observatory1.Button6Click(nil);
   f_config_solsys1.ActivateJplEph;

@@ -40,7 +40,7 @@ uses
   pu_config_display, pu_config_pictures, pu_indigui, pu_config_catalog, pu_prepoint,
   pu_config_solsys, pu_config_chart, pu_config_system, pu_config_internet, pu_updcatalog,
   cu_radec, pu_config_calendar, pu_planetinfo, cu_sampclient, cu_vodata, pu_catgen,
-  pu_obslist, fu_script, pu_scriptengine, u_constant, u_util, UScaleDPI,
+  pu_obslist, fu_script, pu_scriptengine, u_constant, u_util, UScaleDPI, pu_configdirect,
   u_ccdconfig, blcksock, synsock, dynlibs, FileUtil, ExtendedNotebook, LCLVersion, LCLType,
   InterfaceBase, LCLIntf, SysUtils, Classes, Graphics, Forms, Controls, Menus,
   Math, StdCtrls, Dialogs, Buttons, ExtCtrls, ComCtrls, StdActns, types,
@@ -716,6 +716,7 @@ type
     procedure ScaleMainForm;
     procedure ResizeBtn;
     procedure ViewTopPanel;
+    procedure ApplyConfigdirect(Sender: TObject);
     procedure ApplyConfig(Sender: TObject);
     procedure ApplyConfigTime(Sender: TObject);
     procedure ApplyConfigObservatory(Sender: TObject);
@@ -867,7 +868,7 @@ type
     procedure ShowScriptPanel(n: integer); overload;
     procedure ShowScriptPanel(n: integer; showonly: boolean); overload;
     procedure ShowConfigPanel(show: boolean);
-    procedure HideConfigAsync(Data: PtrInt);
+    procedure HideConfigDirectAsync(Data: PtrInt);
     procedure ViewToolsBar(ForceVisible: boolean);
     procedure InitDS2000;
     function PrepareAsteroid(jd1, jd2, step: double; msg: TStrings): boolean;
@@ -4962,17 +4963,10 @@ procedure Tf_main.ShowConfigPanel(show: boolean);
 begin
   if (not show) then
   begin   // hide panel
-    if (f_config <> nil) then begin
+    if (f_configdirect <> nil) then begin
       try
-      f_config.PanelConfig.Visible:=true;
-      f_config.ShowTabs(false);
-      f_config.OKBtn.Visible:=true;
-      f_config.CancelBtn.Visible:=true;
-      f_config.Apply.Left:=f_config.OKBtn.Left+f_config.OKBtn.Width+DoScaleX(10);
-      f_config.Parent:=nil;
-      f_config.Align:=alNone;
-      f_config.BorderStyle:=bsSizeable;
-      Application.QueueAsyncCall(HideConfigAsync,0);
+      f_configdirect.Parent:=nil;
+      Application.QueueAsyncCall(HideConfigDirectAsync(),0);
       except
       end;
     end;
@@ -4995,35 +4989,34 @@ begin
   end
   else begin  // show panel
   // same as SetupConfigExecute
-  if f_config = nil then
+  if f_configdirect = nil then
   begin
-    f_config := Tf_config.Create(application);
-    f_config.onApplyConfig := ApplyConfig;
-    f_config.onSaveAndRestart := SaveAndRestart;
-    f_config.onPrepareAsteroid := PrepareAsteroid;
-    f_config.onEnableAsteroid:=EnableAsteroid;
-    f_config.onDisableAsteroid:=DisableAsteroid;
-    f_config.onGetTwilight := GetTwilight;
-    f_config.Fits := fits;
-    f_config.catalog := catalog;
-    f_config.db := cdcdb;
-    f_config.f_config_catalog1.onInstallCatalog := OpenUpdCatalog;
-    f_config.f_config_catalog1.onRunCatgen := RunCatgen;
+    f_configdirect := Tf_configdirect.Create(application);
+    f_configdirect.onApplyConfig := ApplyConfigdirect;
+    f_configdirect.onPrepareAsteroid := PrepareAsteroid;
+    f_configdirect.onEnableAsteroid:=EnableAsteroid;
+    f_configdirect.onDisableAsteroid:=DisableAsteroid;
+    f_configdirect.onGetTwilight := GetTwilight;
+    f_configdirect.Fits := fits;
+    f_configdirect.catalog := catalog;
+    f_configdirect.db := cdcdb;
+    f_configdirect.f_config_catalog1.onInstallCatalog := OpenUpdCatalog;
+    f_configdirect.f_config_catalog1.onRunCatgen := RunCatgen;
+    f_configdirect.PageControl1.ActivePageIndex:=1;
   end;
-  f_config.ccat := catalog.cfgcat;
-  f_config.cshr := catalog.cfgshr;
-  f_config.cplot := def_cfgplot;
-  f_config.csc := def_cfgsc;
+  f_configdirect.ccat := catalog.cfgcat;
+  f_configdirect.cshr := catalog.cfgshr;
+  f_configdirect.cplot := def_cfgplot;
+  f_configdirect.csc := def_cfgsc;
   if MultiFrame1.ActiveObject is Tf_chart then
     with MultiFrame1.ActiveObject as Tf_chart do
     begin
-      f_config.csc := sc.cfgsc;
-      f_config.cplot := sc.plot.cfgplot;
+      f_configdirect.csc := sc.cfgsc;
+      f_configdirect.cplot := sc.plot.cfgplot;
     end;
   cfgm.persdir := privatedir;
-  f_config.cmain := cfgm;
-  f_config.cdss := f_getdss.cfgdss;
-  f_config.applyall.Checked := cfgm.updall;
+  f_configdirect.cmain := cfgm;
+  f_configdirect.cdss := f_getdss.cfgdss;
   // disable config menu
   SetupTime.Enabled:=false;
   SetupObservatory.Enabled:=false;
@@ -5043,21 +5036,24 @@ begin
   Splitter1.Visible := True;
   ScriptPanel.Visible := True;
   Splitter1.ResizeControl := ScriptPanel;
-  f_config.BorderStyle:=bsNone;
-  f_config.PanelConfig.Visible:=false;
-  f_config.ShowTabs(true);
-  f_config.Show;
-  f_config.OKBtn.Visible:=false;
-  f_config.CancelBtn.Visible:=false;
-  f_config.Apply.Left:=f_config.HelpBtn.Left+f_config.HelpBtn.Width+DoScaleX(10);
-  f_config.Parent:=ScriptPanel;
-  f_config.Align:=alTop;
+  f_configdirect.Show;
+  f_configdirect.Parent:=ScriptPanel;
+  f_configdirect.Align:=alTop;
   end;
 end;
 
-procedure Tf_main.HideConfigAsync(Data: PtrInt);
+procedure Tf_main.HideConfigDirectAsync(Data: PtrInt);
 begin
-  if (f_config <> nil) then f_config.Close;
+  if (f_configdirect <> nil) then f_configdirect.Close;
+end;
+
+procedure Tf_main.ApplyConfigdirect(Sender: TObject);
+begin
+ if MultiFrame1.ActiveObject is Tf_chart then
+    with MultiFrame1.ActiveObject as Tf_chart do
+    begin
+      Refresh(false,false);
+    end;
 end;
 
 procedure Tf_main.ApplyConfig(Sender: TObject);
@@ -10686,6 +10682,12 @@ begin
       SetFov08.Caption := tbFOV8.hint;
       SetFov09.Caption := tbFOV9.hint;
       SetFov10.Caption := tbFOV10.hint;
+      if (f_configdirect<>nil) and (f_configdirect.Visible)
+      then begin
+        f_configdirect.csc := sc.cfgsc;
+        f_configdirect.cplot := sc.plot.cfgplot;
+        f_configdirect.UpdateBtn;
+      end;
     end;
     if tc <> FTelescopeConnected then
       TelescopeChange(MultiFrame1.ActiveChild.Caption, tc);
@@ -13548,7 +13550,7 @@ var
 begin
   if n < numscript then   // standard script
   begin
-    if (f_config<>nil) and (f_config.Visible) then begin
+    if (f_configdirect<>nil) and (f_configdirect.Visible) then begin
       // hide config panel before to open the script
       ShowConfigPanel(false);
     end;
@@ -13579,7 +13581,7 @@ begin
   end
   // other function that use the script panel
   else if n = 8 then begin  // config panel
-    if (f_config<>nil) and (f_config.Visible) then begin
+    if (f_configdirect<>nil) and (f_configdirect.Visible) then begin
       // hide config panel
       ShowConfigPanel(false);
     end

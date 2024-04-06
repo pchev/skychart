@@ -417,7 +417,7 @@
         <DefaultFilename Value="component/zoomimage/zoomimage.lpk"/>
       </Item25>
     </RequiredPackages>
-    <Units Count="92">
+    <Units Count="93">
       <Unit0>
         <Filename Value="cdc.lpr"/>
         <IsPartOfProject Value="True"/>
@@ -663,9 +663,9 @@
         <IsPartOfProject Value="True"/>
       </Unit39>
       <Unit40>
-        <Filename Value="pu_config.pas"/>
+        <Filename Value="pu_configdirect.pas"/>
         <IsPartOfProject Value="True"/>
-        <ComponentName Value="f_config"/>
+        <ComponentName Value="f_configdirect"/>
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
       </Unit40>
@@ -967,6 +967,13 @@
         <Filename Value="cu_alpacamanagement.pas"/>
         <IsPartOfProject Value="True"/>
       </Unit91>
+      <Unit92>
+        <Filename Value="pu_config.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="f_config"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Form"/>
+      </Unit92>
     </Units>
   </ProjectOptions>
   <CompilerOptions>
