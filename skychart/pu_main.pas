@@ -8746,9 +8746,6 @@ begin
     catalog.cfgcat.NebCatOn[rc3-BaseNeb]:=false;
     catalog.cfgcat.NebCatPath[rc3-BaseNeb]:='';
   end;
-  if Config_Version < '4.3t' then begin
-    SelectLayout;
-  end;
   SaveDefault;
 end;
 
