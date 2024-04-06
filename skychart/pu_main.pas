@@ -4950,7 +4950,6 @@ begin
   begin   // hide panel
     if (f_configdirect <> nil) then begin
       try
-      f_configdirect.Parent:=nil;
       Application.QueueAsyncCall(HideConfigDirectAsync(),0);
       except
       end;
