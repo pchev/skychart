@@ -5,6 +5,7 @@
            - added Resolution support
 }
 {*****************************************************************************}
+{ Imports the writer for the BMP image format }
 unit BGRAWriteBMP;
 {$mode objfpc}
 {$h+}
@@ -14,15 +15,18 @@ interface
 uses SysUtils, Classes, FPImage, FPWriteBMP, BGRABitmapTypes;
 
 type
-
+  {* Extends the TFPWriterBMP to save resolution }
   TBGRAWriterBMP = class (TFPWriterBMP)
   protected
+    {$IF FPC_FULLVERSION<30203}
     function SaveHeader(Stream:TStream; Img: TFPCustomImage):boolean; override;
+    {$ENDIF}
   end;
 
 
 implementation
 
+{$IF FPC_FULLVERSION<30203}
 function TBGRAWriterBMP.SaveHeader(Stream:TStream; Img : TFPCustomImage):boolean;
 begin
   if (Img is TCustomUniversalBitmap) then
@@ -35,6 +39,7 @@ begin
 
   Result:=Inherited SaveHeader(Stream, Img);
 end;
+{$ENDIF}
 
 initialization
   if ImageHandlers.ImageWriter['BMP Format']=nil

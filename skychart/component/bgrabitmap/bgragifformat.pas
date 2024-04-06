@@ -1,4 +1,6 @@
 // SPDX-License-Identifier: LGPL-3.0-linking-exception
+
+{ Structure and algorithms to read/write GIF files }
 unit BGRAGifFormat;
 
 {$mode objfpc}{$H+}
@@ -10,24 +12,29 @@ uses
   BGRAPalette;
 
 type
-  //what to do when finishing a frame and starting the next one
+  { What to do when finishing a frame and starting the next one }
   TDisposeMode = (dmNone,        //undefined value
                   dmKeep,        //keep the changes done by the frame
-                  dmErase,       //clear everything after the frame
-                  dmRestore);    //restore to how it was before the frame
+                  dmErase,       //clear everything after the frame (used by GIF but not available in PNG)
+                  dmRestore,     //restore to how it was before the frame
+                  dmEraseArea    //clear the rectangular area changed by the frame (not used by GIF but by PNG)
+                  );
 
-  //one image in the array
+  { One image in the GIF animation }
   TGifSubImage = record
     Image:    TBGRABitmap;       //image to draw at the beggining of the frame
     Position: TPoint;            //relative position of the image in the frame
     DelayMs:    integer;         //time in milliseconds to wait before going to next frame
     DisposeMode: TDisposeMode;   //what do do when going to next frame
     HasLocalPalette: boolean;    //the image has its own palette
+    DrawMode: TDrawMode;         //always dmSetExceptTransparent for GIF files
   end;
   TGifSubImageArray = array of TGifSubImage;
 
+  { Signature for a GIF file }
   TGIFSignature = packed array[1..6] of char; //'GIF87a' or 'GIF89a'
 
+  { Screen descriptor for GIF rendering }
   TGIFScreenDescriptor = packed record
     Width, Height: word;
     flags,                    //screen bit depth  = ((flags shr 4) and 7) + 1
@@ -36,38 +43,30 @@ type
     AspectRatio64 : byte;     //0 if not specified, otherwise aspect ratio is (AspectRatio64 + 15) / 64
   end;
 
+  { Image descriptor of GIF frame }
   TGIFImageDescriptor = packed record
     x, y, Width, Height: word;
     flags: byte;
   end;
 
-  TGIFImageDescriptorWithHeader = packed record
-    ImageIntroducer: byte;
-    Image: TGIFImageDescriptor;
-  end;
-
+  { GIF extension block }
   TGIFExtensionBlock = packed record
     FunctionCode: byte;
   end;
 
+  { GIF graphic control extension }
   TGIFGraphicControlExtension = packed record
     flags: byte;
     DelayHundredthSec: word;
     TransparentColorIndex: byte;
   end;
 
-  TGIFGraphicControlExtensionWithHeader = packed record
-    ExtensionIntroducer: byte;
-    FunctionCode: byte;
-    BlockSize: byte;
-    GraphicControl: TGIFGraphicControlExtension;
-    BlockTerminator: byte;
-  end;
-
+  { 8-bit RGB values }
   TPackedRGBTriple = packed record
     r, g, b: byte;
   end;
 
+  { Data describing a GIF file }
   TGIFData = record
     Width, Height: integer;
     AspectRatio: single;
@@ -76,8 +75,7 @@ type
     Images: array of TGifSubImage;
   end;
 
-  { EColorQuantizerMissing }
-
+  { Exception raised when no color quantizer is available }
   EColorQuantizerMissing = class(Exception)
     constructor Create;
     constructor Create(AMessage: string);
@@ -399,6 +397,11 @@ begin
   begin
     bytinbuf:= 0;
     AStream.ReadBuffer(bytinbuf, 1);
+    if bytinbuf = 1 then
+    begin
+      AStream.ReadBuffer(bytinbuf, 1); // skip extra
+      AStream.ReadBuffer(bytinbuf, 1); // check again for block terminator
+    end;
     if bytinbuf <> 0 then
       raise exception.Create('Invalid GIF format: expecting block terminator');
   end;
@@ -716,6 +719,7 @@ var
     result.Images[NbImages].DelayMs    := DelayMs;
     result.Images[NbImages].DisposeMode := disposeMode;
     result.Images[NbImages].HasLocalPalette := localPalette <> nil;
+    result.Images[NbImages].DrawMode:= dmSetExceptTransparent;
     Inc(NbImages);
 
     Interlaced := GIFImageDescriptor.flags and GIFImageDescriptor_InterlacedFlag =
@@ -864,6 +868,22 @@ begin
   end;
   setlength(result.Images, NbImages);
 end;
+
+type
+  { Image descriptor with introducer }
+  TGIFImageDescriptorWithHeader = packed record
+    ImageIntroducer: byte;
+    Image: TGIFImageDescriptor;
+  end;
+
+  { GIF graphic control extension with its header }
+  TGIFGraphicControlExtensionWithHeader = packed record
+    ExtensionIntroducer: byte;
+    FunctionCode: byte;
+    BlockSize: byte;
+    GraphicControl: TGIFGraphicControlExtension;
+    BlockTerminator: byte;
+  end;
 
 procedure GIFSaveToStream(AData: TGifData; Stream: TStream; AQuantizerFactory: TBGRAColorQuantizerAny;
           ADitheringAlgorithm: TDitheringAlgorithm);
@@ -1090,6 +1110,7 @@ var
     var
       ext: TGIFGraphicControlExtensionWithHeader;
       transpIndex: integer;
+      disposeMode: TDisposeMode;
     begin
       fillchar({%H-}ext, sizeof(ext), 0);
       try
@@ -1098,6 +1119,8 @@ var
         ext.BlockSize := sizeof(ext.GraphicControl);
         ext.GraphicControl.DelayHundredthSec := (AData.Images[AFrame].DelayMs+5) div 10;
         ext.GraphicControl.TransparentColorIndex := 0;
+        disposeMode := AData.Images[AFrame].DisposeMode;
+        if disposeMode = dmEraseArea then disposeMode := dmErase;
         ext.GraphicControl.flags := integer(AData.Images[AFrame].DisposeMode) shl GIFGraphicControlExtension_DisposeModeShift;
         ext.BlockTerminator := GIFBlockTerminator;
         with AData.Images[AFrame].Position do

@@ -1,4 +1,6 @@
 // SPDX-License-Identifier: LGPL-3.0-linking-exception
+
+{ Palette of colors for various purposes, loading/saving into various formats }
 unit BGRAPalette;
 
 {$mode objfpc}{$H+}
@@ -24,11 +26,13 @@ const
   palCustom : TBGRAPaletteFormat = 100;
 
 type
+  { Indexed color in palette }
   TBGRAIndexedPaletteEntry = packed record
     Color: TBGRAPixel;
     Index: UInt32;
   end;
   PBGRAIndexedPaletteEntry = ^TBGRAIndexedPaletteEntry;
+  { Weighted color in palette }
   TBGRAWeightedPaletteEntry = packed record
     Color: TBGRAPixel;
     Weight: UInt32;
@@ -38,8 +42,7 @@ type
 
   TBGRAPixelComparer = function (p1,p2 : PBGRAPixel): boolean;
 
-  { TBGRACustomPalette }
-
+  { Abstract class containing a palette }
   TBGRACustomPalette = class
   private
     function GetDominantColor: TBGRAPixel;
@@ -59,8 +62,9 @@ type
   end;
 
 type
-  { TBGRAAvgLvlPalette }
+  { @abstract(Abstract implementation of a BGRA palette using a binary tree.)
 
+    It ensures relatively fast and average access time even with many entries. }
   TBGRAAvgLvlPalette = class(TBGRACustomPalette)
   protected
     FTree: TAVLTree;
@@ -85,8 +89,7 @@ type
     function GetAsArrayOfWeightedColor: ArrayOfWeightedColor; override;
   end;
 
-  { TBGRAPalette }
-
+  { Palette of colors, roughly sorted by luminosity }
   TBGRAPalette = class(TBGRAAvgLvlPalette)
   protected
     function CreateEntry(AColor: TBGRAPixel): PBGRAPixel; virtual;
@@ -113,8 +116,7 @@ type
     function SuggestPaletteFormat(AFilenameUTF8: string): TBGRAPaletteFormat; virtual;
   end;
 
-  { TBGRAIndexedPalette }
-
+  { Indexed palette of colors }
   TBGRAIndexedPalette = class(TBGRAPalette)
   private
     FCurrentIndex: UInt32;
@@ -128,8 +130,10 @@ type
     procedure Clear; override;
   end;
 
-  { TBGRAWeightedPalette }
+  { @abstract(Palette of weighted colors.)
 
+    The weight is similar to a number of occurrences. It can be increased or decreased.
+  }
   TBGRAWeightedPalette = class(TBGRAPalette)
   private
   protected
@@ -141,12 +145,12 @@ type
     constructor Create(AColors: ArrayOfWeightedColor); override;
     function GetAsArrayOfWeightedColor: ArrayOfWeightedColor; override;
     function IncColor(AValue: TBGRAPixel; out NewWeight: UInt32): boolean;
+    procedure IncColors(ABitmap: TBGRACustomBitmap); overload; virtual;
     function DecColor(AValue: TBGRAPixel; out NewWeight: UInt32): boolean;
     property Weight[AIndex: Integer]: UInt32 read GetWeightByIndex;
   end;
 
-  { TBGRAReferencePalette }
-
+  { Palette of colors indirectly specify by a pointer }
   TBGRAReferencePalette = class(TBGRAAvgLvlPalette)
   protected
     procedure FreeEntry({%H-}AEntry: PBGRAPixel); override;
@@ -155,8 +159,7 @@ type
     function RemoveColor(AValue: PBGRAPixel): boolean;
   end;
 
-  { TBGRACustomApproxPalette }
-
+  { Abstract palette that can find an approximate matching color }
   TBGRACustomApproxPalette = class(TBGRACustomPalette)
   private
     function FindNearestColorIgnoreAlpha(AValue: TBGRAPixel): TBGRAPixel; inline;
@@ -171,8 +174,7 @@ type
     property Weight[AIndex: Integer]: UInt32 read GetWeightByIndex;
   end;
 
-  { TBGRA16BitPalette }
-
+  { Palette containing all possible 16-bit colors. }
   TBGRA16BitPalette = class(TBGRACustomApproxPalette)
   protected
     function GetCount: integer; override;
@@ -186,8 +188,11 @@ type
     function FindNearestColorIndex(AValue: TBGRAPixel): integer; override;
   end;
 
-  { TBGRACustomColorQuantizer }
+  { @abstract(Abstract class for color quantization.)
 
+    Quantization is the process by which each color is reduced to an index into a palette.
+    Surrounding pixels can affect the approximate color, an effect called dithering.
+  }
   TBGRACustomColorQuantizer = class
   protected
     function GetDominantColor: TBGRAPixel; virtual;
@@ -862,6 +867,21 @@ begin
     NewWeight := PBGRAWeightedPaletteEntry(Entry)^.Weight;
     AddLastColor(Entry);
     result := true;
+  end;
+end;
+
+procedure TBGRAWeightedPalette.IncColors(ABitmap: TBGRACustomBitmap);
+var p: PBGRAPixel;
+  n: integer;
+  w: UInt32;
+begin
+  n := ABitmap.NbPixels;
+  p := ABitmap.Data;
+  while n > 0 do
+  begin
+    IncColor(p^, w);
+    inc(p);
+    dec(n);
   end;
 end;
 

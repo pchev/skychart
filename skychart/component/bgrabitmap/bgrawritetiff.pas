@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: LGPL-3.0-linking-exception
 {
-    The original file is part of the Free Pascal run time library.
+    The original file FPReadTiff is part of the Free Pascal run time library.
     Copyright (c) 2012 by the Free Pascal development team
 
     Tiff writer for fpImage modified by circular.
@@ -31,20 +31,24 @@
            - added Resolution support
 }
 {*****************************************************************************}
+
+{ Implements the writer for the TIFF image format }
 unit BGRAWriteTiff;
 
 {$mode objfpc}{$H+}
 
+{$i bgrabitmap.inc}
+
+{$IFNDEF BGRABITMAP_EXTENDED_COLORSPACE}{$STOP This unit need extended colorspaces}{$ENDIF}
+
 interface
 
 uses
-  Math, SysUtils, BGRAClasses, BGRABitmapTypes, BGRAReadTiff, zbase, zdeflate,
+  Math, SysUtils, BGRAClasses, BGRABitmapTypes, zbase, zdeflate,
   FPimage, FPTiffCmn;
 
 type
-
-  { TTiffWriterEntry }
-
+  { Entry in a TIFF file }
   TTiffWriterEntry = class
   public
     Tag: Word;
@@ -56,25 +60,7 @@ type
     destructor Destroy; override;
   end;
 
-  TTiffWriterChunk = record
-    Data: Pointer;
-    Bytes: LongWord;
-  end;
-  PTiffWriterChunk = ^TTiffWriterChunk;
-
-  { TTiffWriterChunkOffsets }
-
-  TTiffWriterChunkOffsets = class(TTiffWriterEntry)
-  public
-    Chunks: PTiffWriterChunk;
-    ChunkByteCounts: TTiffWriterEntry;
-    constructor Create(ChunkType: TTiffChunkType);
-    destructor Destroy; override;
-    procedure SetCount(NewCount: LongWord);
-  end;
-
-  { TBGRAWriterTiff }
-
+  {* Extends the TFPCustomImageWriter to write the TIFF image format }
   TBGRAWriterTiff = class(TFPCustomImageWriter)
   private
     FPremultiplyRGB: boolean;
@@ -123,6 +109,24 @@ function CompressDeflate(InputData: PByte; InputCount: LongWord;
   ErrorMsg: PAnsiString = nil): boolean;
 
 implementation
+
+uses BGRAReadTiff;
+
+type
+  TTiffWriterChunk = record
+    Data: Pointer;
+    Bytes: LongWord;
+  end;
+  PTiffWriterChunk = ^TTiffWriterChunk;
+
+  TTiffWriterChunkOffsets = class(TTiffWriterEntry)
+  public
+    Chunks: PTiffWriterChunk;
+    ChunkByteCounts: TTiffWriterEntry;
+    constructor Create(ChunkType: TTiffChunkType);
+    destructor Destroy; override;
+    procedure SetCount(NewCount: LongWord);
+  end;
 
 function CompareTiffWriteEntries(Entry1, Entry2: Pointer): integer;
 begin
@@ -539,19 +543,23 @@ var
 
   procedure WriteResolutionValues;
   begin
+    {$IF FPC_FULLVERSION<30203}
     if (Img is TCustomUniversalBitmap) then
     with TCustomUniversalBitmap(Img) do
+    {$ELSE}
+    with Img do
+    {$ENDIF}
     begin
         IFD.ResolutionUnit :=ResolutionUnitToTifResolutionUnit(ResolutionUnit);
         IFD.XResolution.Numerator :=Trunc(ResolutionX*1000);
         IFD.XResolution.Denominator :=1000;
         IFD.YResolution.Numerator :=Trunc(ResolutionY*1000);
         IFD.YResolution.Denominator :=1000;
-
-        Img.Extra[TiffResolutionUnit]:=IntToStr(IFD.ResolutionUnit);
-        Img.Extra[TiffXResolution]:=TiffRationalToStr(IFD.XResolution);
-        Img.Extra[TiffYResolution]:=TiffRationalToStr(IFD.YResolution);
      end;
+
+    Img.Extra[TiffResolutionUnit]:=IntToStr(IFD.ResolutionUnit);
+    Img.Extra[TiffXResolution]:=TiffRationalToStr(IFD.XResolution);
+    Img.Extra[TiffYResolution]:=TiffRationalToStr(IFD.YResolution);
   end;
 
 

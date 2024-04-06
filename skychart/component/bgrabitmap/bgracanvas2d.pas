@@ -1,14 +1,19 @@
 // SPDX-License-Identifier: LGPL-3.0-linking-exception
+
+{ @abstract(Equivalent to HTML Canvas (supports affine transformation, gradients and clipping).)
+
+  To use it, access Canvas2D property of a TBGRABitmap object or create an instance of TBGRACanvas2D.
+
+  Fonctions are similar to Javascript [CanvasRenderingContext2D](https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D)}
 unit BGRACanvas2D;
 
 { To do :
 
-  draw text with a different precision if the matrix is scaled
-  drawImage(in image, in double sx, in double sy, in double sw, in double sh, in double dx, in double dy, in double dw, in double dh)
-  -> using FillPoly with texture coordinates
+  partial image
+    drawImage(in image, in double sx, in double sy, in double sw, in double sh, in double dx, in double dy, in double dw, in double dh)
+    -> using FillPoly with texture coordinates
   linear gradient any transformation
   clearPath clipping
-  createRadialGradient
   globalCompositeOperation
   image data functions
 }
@@ -24,11 +29,13 @@ uses
 type
   ArrayOfString = array of string;
 
+  { Interface for a texture/scanner for Tcanvas2D }
   IBGRACanvasTextureProvider2D = interface
     function getTexture: IBGRAScanner;
     property texture: IBGRAScanner read GetTexture;
   end;
 
+  { Interface for a gradient for TCanvas2D }
   IBGRACanvasGradient2D = interface(IBGRACanvasTextureProvider2D)
     procedure addColorStop(APosition: single; AColor: TBGRAPixel);
     procedure addColorStop(APosition: single; AColor: TColor);
@@ -42,14 +49,12 @@ type
     property repetition: TBGRAGradientRepetition read GetRepetition write SetRepetition;
   end;
 
-  { TBGRACanvasTextureProvider2D }
-
+  { @abstract(Provides a texture to a TCanvas2D.) }
   TBGRACanvasTextureProvider2D = class(TInterfacedObject,IBGRACanvasTextureProvider2D)
     function getTexture: IBGRAScanner; virtual; abstract;
   end;
 
-  { TBGRACanvasState2D }
-
+  { Saved state of a TCanvas2D }
   TBGRACanvasState2D = class
   private
     FClipMask: TGrayscaleMask;
@@ -87,12 +92,120 @@ type
     property clipMaskReadWrite: TGrayscaleMask read GetClipMaskReadWrite;
   end;
 
+  { Text measurement in TBGRACanvas2D }
   TCanvas2dTextSize = record
     width,height: single;
   end;
 
-  { TBGRACanvas2D }
+  { @abstract(Implementation of [Canvas2d](https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D) similar to HTML.)
 
+    Comparison between TBGRACanvas2D and Javascript HTML canvas:
+
+    @table(
+    @rowHead( @cell(BGRABitmap) @cell(JavaScript) )
+    @row(
+
+	@cell(@LongCode(#
+uses BGRABitmap, BGRABitmapTypes, BGRACanvas2D;
+
+procedure TForm1.FormPaint(Sender: TObject);
+var
+  bmp: TBGRABitmap;
+  ctx: TBGRACanvas2D;
+  gradient: IBGRACanvasGradient2D;
+begin
+  bmp := TBGRABitmap.Create(ClientWidth, ClientHeight, StrToBGRA('#E0E2E5'));
+  ctx := bmp.Canvas2d;
+
+  // Draw the outer rounded rectangle
+  gradient := ctx.createLinearGradient(100, 20, 100, 180);
+  gradient.addColorStop(0, 'white');
+  gradient.addColorStop(1, '#7C878A');
+  ctx.fillStyle(gradient);
+  ctx.beginPath();
+  ctx.roundRect(20, 20, 160, 160, 20);
+  ctx.save();
+  ctx.shadowBlur := 10;
+  ctx.shadowColor('rgba(0,0,0, .8)');
+  ctx.shadowOffsetX := 0;
+  ctx.shadowOffsetY := 10;
+  ctx.fill();
+  ctx.restore();
+
+  // Draw the blue circle with gradient
+  gradient := ctx.createLinearGradient(100, 30, 100, 170);
+  gradient.addColorStop(0, '#CAEBF5');
+  gradient.addColorStop(1, '#0F5369');
+  ctx.strokeStyle(gradient);
+  ctx.beginPath();
+  ctx.arc(100, 100, 70, 0, Pi * 2);
+  ctx.lineWidth := 10;
+  ctx.stroke();
+
+  gradient := ctx.createLinearGradient(100, 50, 100, 150);
+  gradient.addColorStop(0, '#003C50');
+  gradient.addColorStop(1, '#53E6FF');
+  ctx.strokeStyle(gradient);
+  ctx.beginPath();
+  ctx.arc(100, 100, 60, 0, Pi * 2);
+  ctx.lineWidth := 10;
+  ctx.stroke();
+
+  bmp.Draw(Canvas, 0,0, true);
+  bmp.Free;
+end;
+
+	#))
+
+	@cell(
+	Try on [JSFiddle](https://jsfiddle.net/qvcps6u2/)
+	@LongCode(#
+var my_canvas = document.getElementById('canvas'),
+    ctx = my_canvas.getContext("2d");
+
+ctx.fillStyle = "#E0E2E5";
+ctx.fillRect(0, 0, 200, 200);
+
+// Draw the outer rounded rectangle
+var gradient = ctx.createLinearGradient(100, 20, 100, 180);
+gradient.addColorStop(0, "white");
+gradient.addColorStop(1, "#7C878A");
+ctx.fillStyle = gradient;
+ctx.beginPath();
+ctx.roundRect(20, 20, 160, 160, 20);
+ctx.save();
+ctx.shadowBlur = 10;
+ctx.shadowColor = "rgba(0,0,0, .6)";
+ctx.shadowOffsetX = 0;
+ctx.shadowOffsetY = 10;
+ctx.fill();
+ctx.restore();
+
+// Draw the blue circle with gradient
+gradient = ctx.createLinearGradient(100, 30, 100, 170);
+gradient.addColorStop(0, "#CAEBF5");
+gradient.addColorStop(1, "#0F5369");
+ctx.strokeStyle = gradient;
+ctx.beginPath();
+ctx.arc(100, 100, 70, 0, Math.PI * 2);
+ctx.lineWidth = 10;
+ctx.stroke();
+
+gradient = ctx.createLinearGradient(100, 50, 100, 150);
+gradient.addColorStop(0, "#003C50");
+gradient.addColorStop(1, "#53E6FF");
+ctx.strokeStyle = gradient;
+ctx.beginPath();
+ctx.arc(100, 100, 60, 0, Math.PI * 2);
+ctx.lineWidth = 10;
+ctx.stroke();
+	#))
+
+	)
+  )
+
+  @image(../doc/blue_circular_bevel_js.png)
+}
   TBGRACanvas2D = class(IBGRAPath)
   private
     FSurface: TBGRACustomBitmap;
@@ -197,6 +310,7 @@ type
 
     procedure save;
     procedure restore;
+    procedure copyStateFrom(AOtherCanvas2D: TBGRACanvas2D);
     procedure scale(x,y: single); overload;
     procedure scale(factor: single); overload;
     procedure rotate(angleRadCW: single);
@@ -300,6 +414,8 @@ type
 
     procedure drawImage(image: TBGRACustomBitmap; dx,dy: single; AFilter: TResampleFilter = rfLinear); overload;
     procedure drawImage(image: TBGRACustomBitmap; dx,dy,dw,dh: single; AFilter: TResampleFilter = rfLinear); overload;
+    procedure mask(image: TBGRACustomBitmap; dx,dy: single; AFilter: TResampleFilter = rfLinear); overload;
+    procedure mask(image: TBGRACustomBitmap; dx,dy,dw,dh: single; AFilter: TResampleFilter = rfLinear); overload;
 
     function getLineStyle: TBGRAPenStyle;
     procedure lineStyle(const AValue: array of single); overload;
@@ -353,7 +469,7 @@ type
 
 implementation
 
-uses Math, BGRAFillInfo, BGRAPolygon, BGRABlend, FPWriteJPEG, FPWriteBMP, base64;
+uses Math, BGRAFillInfo, BGRAPolygon, BGRABlend, FPWriteJPEG, FPWriteBMP, base64, BGRAFilterBlur;
 
 type
   TColorStop = record
@@ -364,8 +480,7 @@ type
   TGradientArrayOfColors = array of TBGRAPixel;
   TGradientArrayOfPositions = array of single;
 
-  { TBGRACanvasGradient2D }
-
+  { Gradient for TCanvas2D }
   TBGRACanvasGradient2D = class(TBGRACanvasTextureProvider2D, IBGRACanvasGradient2D)
   private
     colorStops: array of TColorStop;
@@ -397,8 +512,7 @@ type
     property repetition: TBGRAGradientRepetition read GetRepetition write SetRepetition;
   end;
 
-  { TBGRACanvasLinearGradient2D }
-
+  { Linear gradient for TCanvas2D }
   TBGRACanvasLinearGradient2D = class(TBGRACanvasGradient2D)
   protected
     o1,o2: TPointF;
@@ -409,8 +523,7 @@ type
     constructor Create(p0,p1: TPointF; transform: TAffineMatrix);
   end;
 
-  { TBGRACanvasRadialGradient2D }
-
+  { Radial gradient for TCanvas2D }
   TBGRACanvasRadialGradient2D = class(TBGRACanvasGradient2D)
   protected
     c0,c1: TPointF;
@@ -423,8 +536,7 @@ type
     constructor Create(p0: TPointF; r0: single; p1: TPointF; r1: single; transform: TAffineMatrix; flipGradient: boolean=false);
   end;
 
-  { TBGRACanvasPattern2D }
-
+  { Brush texture for TCanvas2D }
   TBGRACanvasPattern2D = class(TBGRACanvasTextureProvider2D)
   protected
     scanner: TBGRACustomScanner;
@@ -1728,14 +1840,14 @@ begin
     if shadowFastest then
     begin
       if shadowBlur*invSqrt2 >= 0.5 then
-        bmp := AMask.FilterBlurRadial(round(shadowBlur*invSqrt2),rbBox);
+        bmp := BGRAFilterBlur.FilterBlurRadial(AMask, shadowBlur*invSqrt2, shadowBlur*invSqrt2, rbBox);
     end
     else
     begin
       if (shadowBlur < 5) and (abs(shadowBlur-round(shadowBlur)) > 1e-6) then
-        bmp := AMask.FilterBlurRadial(round(shadowBlur*10),rbPrecise)
+        bmp := BGRAFilterBlur.FilterBlurRadial(AMask, shadowBlur*10, shadowBlur*10, rbPrecise)
       else
-        bmp := AMask.FilterBlurRadial(round(shadowBlur),rbFast);
+        bmp := BGRAFilterBlur.FilterBlurRadial(AMask, shadowBlur, shadowBlur, rbFast);
     end;
   end;
   if currentState.clipMaskReadOnly <> nil then
@@ -1943,13 +2055,21 @@ begin
   end;
 end;
 
+procedure TBGRACanvas2D.copyStateFrom(AOtherCanvas2D: TBGRACanvas2D);
+begin
+  StateStack.Add(currentState);
+  currentState := AOtherCanvas2D.currentState.Duplicate;
+end;
+
 procedure TBGRACanvas2D.scale(x, y: single);
 begin
+  if (x = 1) and (y = 1) then exit;
   currentState.transform(AffineMatrixScale(x,y));
 end;
 
 procedure TBGRACanvas2D.scale(factor: single);
 begin
+  if factor = 1 then exit;
   currentState.transform( AffineMatrixScale(factor,factor) );
 end;
 
@@ -2827,26 +2947,54 @@ begin
 end;
 
 procedure TBGRACanvas2D.drawImage(image: TBGRACustomBitmap; dx, dy: single; AFilter: TResampleFilter);
-var
-  m: TAffineMatrix;
 begin
-  if (image.Width = 0) or (image.Height = 0) then exit;
-  m := matrix*AffineMatrixTranslation(dx, dy);
-  if pixelCenteredCoordinates then
-    m := AffineMatrixTranslation(0.5, 0.5)*m;
-  Surface.PutImageAffine(m, image, AFilter, GetDrawMode, currentState.globalAlpha, false);
+  if not Assigned(image) or (image.Width = 0) or (image.Height = 0) then exit;
+  drawImage(image, dx, dy, image.Width, image.Height, AFilter);
 end;
 
 procedure TBGRACanvas2D.drawImage(image: TBGRACustomBitmap; dx, dy, dw, dh: single; AFilter: TResampleFilter);
 var
   m: TAffineMatrix;
 begin
-  if (image.Width = 0) or (image.Height = 0) then exit;
+  if not Assigned(image) or (image.Width = 0) or (image.Height = 0) then exit;
   m := matrix*AffineMatrixTranslation(dx, dy)*AffineMatrixScale(dw/image.Width,dh/image.Height);
   if pixelCenteredCoordinates then
     m := AffineMatrixTranslation(0.5, 0.5)*m;
   Surface.PutImageAffine(m, image, AFilter, GetDrawMode, currentState.globalAlpha, false);
 end;
+
+procedure TBGRACanvas2D.mask(image: TBGRACustomBitmap; dx, dy: single;
+  AFilter: TResampleFilter);
+begin
+  if not Assigned(image) or (image.Width = 0) or (image.Height = 0) then exit;
+  mask(image, dx, dy, image.Width, image.Height, AFilter);
+end;
+
+procedure TBGRACanvas2D.mask(image: TBGRACustomBitmap; dx, dy, dw,
+  dh: single; AFilter: TResampleFilter);
+var
+  m: TAffineMatrix;
+  tempColored: TBGRACustomBitmap;
+  grayMask: TGrayscaleMask;
+begin
+  if not Assigned(image) or (image.Width = 0) or (image.Height = 0) then exit;
+  m := matrix*AffineMatrixTranslation(dx, dy)*AffineMatrixScale(dw/image.Width,dh/image.Height);
+  if pixelCenteredCoordinates then
+    m := AffineMatrixTranslation(0.5, 0.5)*m;
+  tempColored := BGRABitmapFactory.Create(Width, Height, BGRABlack);
+  tempColored.PutImageAffine(m, image, AFilter, GetDrawMode, currentState.globalAlpha, false);
+  tempColored.InplaceGrayscale(False);
+  grayMask := TGrayscaleMask.Create(tempColored, cGreen);
+  tempColored.Free;
+  if currentState.clipMaskReadOnly = nil then
+    currentState.SetClipMask(grayMask, true)
+  else
+  begin
+    currentState.clipMaskReadWrite.ApplyMask(grayMask);
+    grayMask.Free;
+  end;
+end;
+
 
 end.
 

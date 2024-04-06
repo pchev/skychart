@@ -5,19 +5,19 @@
            - added Resolution support
 }
 {*****************************************************************************}
+
+{ Provides reader for JPEG image format }
 unit BGRAReadJpeg;
 
 {$mode objfpc}{$H+}
 
-//issue #40327 TFPReaderJPEG.Finfo inaccesible to descendant classes
-//if your version of fcl-image is older than issue #40327 solution comment the next line
-//{$define HAVE_COMPRESSINFO}
-
 interface
 
 uses
-  BGRAClasses, BGRABitmapTypes, Classes, Types, SysUtils, FPReadJPEG, FPImage,
-  JPEGLib, JdAPImin, JDataSrc, JdAPIstd, JmoreCfg;
+  {$IF FPC_FULLVERSION<30203}
+   JPEGLib, JdAPImin, JDataSrc, JdAPIstd, JmoreCfg,
+  {$ENDIF}
+  BGRABitmapTypes, Classes, SysUtils, FPReadJPEG, FPImage;
 
 type
   TJPEGScale = FPReadJPEG.TJPEGScale;
@@ -33,26 +33,24 @@ const
   jpBestSpeed = FPReadJPEG.jpBestSpeed;
 
 type
-  { TBGRAReaderJpeg }
-
+  { Reader for JPEG image format }
   TBGRAReaderJpeg = class(TFPReaderJPEG)
     constructor Create; override;
   protected
-    {$ifndef HAVE_COMPRESSINFO}
+    {$IF FPC_FULLVERSION<30203}
     CompressInfo: jpeg_decompress_struct;
     FError: jpeg_error_mgr;
-    {$endif}
 
     procedure ReadResolutionValues(Img: TFPCustomImage); virtual;
     procedure InternalRead(Str: TStream; Img: TFPCustomImage); override;
+    {$ENDIF}
+
     function InternalCheck(Str: TStream): boolean; override;
   end;
 
-function density_unitToResolutionUnit(Adensity_unit: UINT8): TResolutionUnit;
-function ResolutionUnitTodensity_unit(AResolutionUnit: TResolutionUnit): UINT8;
-
 implementation
 
+{$IF FPC_FULLVERSION<30203}
 function density_unitToResolutionUnit(Adensity_unit: UINT8): TResolutionUnit;
 begin
   Case Adensity_unit of
@@ -62,20 +60,9 @@ begin
   end;
 end;
 
-function ResolutionUnitTodensity_unit(AResolutionUnit: TResolutionUnit): UINT8;
-begin
-  Case AResolutionUnit of
-  ruPixelsPerInch: Result :=1;
-  ruPixelsPerCentimeter: Result :=2;
-  else Result :=0;
-  end;
-end;
-
-{$ifndef HAVE_COMPRESSINFO}
 var
   jpeg_std_error: jpeg_error_mgr;
-
-{$endif}
+{$ENDIF}
 
 { TBGRAReaderJpeg }
 
@@ -85,6 +72,7 @@ begin
   Performance := jpBestQuality;
 end;
 
+{$IF FPC_FULLVERSION<30203}
 procedure TBGRAReaderJpeg.ReadResolutionValues(Img: TFPCustomImage);
 begin
   if (Img is TCustomUniversalBitmap) then
@@ -100,9 +88,6 @@ procedure TBGRAReaderJpeg.InternalRead(Str: TStream; Img: TFPCustomImage);
 begin
   inherited InternalRead(Str, Img);
 
-  {$ifdef HAVE_COMPRESSINFO}
-  ReadResolutionValues;
-  {$else}
   //I'm forced to re-read Compress Info because it's not declared as Protected see issue #40327
   FillChar(CompressInfo,SizeOf(CompressInfo),0);
 
@@ -120,8 +105,8 @@ begin
        jpeg_Destroy_Decompress(@CompressInfo);
     end;
   end;
-  {$endif}
 end;
+{$ENDIF}
 
 function TBGRAReaderJpeg.InternalCheck(Str: TStream): boolean;
 var {%H-}magic: packed array[0..3] of byte;
@@ -136,7 +121,7 @@ begin
   if (magic[0] = $ff) and (magic[1] = $d8) and (magic[2] = $ff) and (magic[3] >= $c0) then result := true;
 end;
 
-{$ifndef HAVE_COMPRESSINFO}
+{$IF FPC_FULLVERSION<30203}
 procedure JPEGError(CurInfo: j_common_ptr);
 begin
   if CurInfo=nil then exit;
@@ -168,10 +153,10 @@ begin
   CurInfo^.err^.num_warnings := 0;
   CurInfo^.err^.msg_code := 0;
 end;
-{$endif}
+{$ENDIF}
 
 initialization
-{$ifndef HAVE_COMPRESSINFO}
+{$IF FPC_FULLVERSION<30203}
   with jpeg_std_error do begin
     error_exit:=@JPEGError;
     emit_message:=@EmitMessage;
@@ -179,7 +164,7 @@ initialization
     format_message:=@FormatMessage;
     reset_error_mgr:=@ResetErrorMgr;
   end;
-{$endif}
+{$ENDIF}
 
   DefaultBGRAImageReader[ifJpeg] := TBGRAReaderJpeg;
 

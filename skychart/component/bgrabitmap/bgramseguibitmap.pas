@@ -1,5 +1,8 @@
 // SPDX-License-Identifier: LGPL-3.0-linking-exception
+
+{ Implementation of BGRABitmap for MSEgui }
 unit BGRAMSEguiBitmap;
+{ It should NOT be added to the **uses** clause. }
 
 {$mode objfpc}{$H+}
 
@@ -10,9 +13,7 @@ uses
   BGRAText, msebitmap;
 
 type
-
-  { TBGRAMSEguiBitmap }
-
+  { Implementation of TBGRABitmap for MSEgui }
   TBGRAMSEguiBitmap = class(TBGRADefaultBitmap)
   protected
     procedure CopyDataToBitmap(AData: Pointer; AWidth,AHeight: integer; ALineOrder: TRawImageLineOrder; ABitmap: TBitmap);
@@ -28,6 +29,7 @@ type
     function GetCanvas: TCanvas; override;
   public
     procedure Assign(ASource: TPersistent); override;
+    procedure AssignToBitmap(ADestination: TBitmap);
     destructor Destroy; override;
     procedure GetImageFromCanvas({%H-}CanvasSource: TCanvas; {%H-}x, {%H-}y: integer); override; //not available
     procedure DataDrawTransparent({%H-}ACanvas: TCanvas; {%H-}Rect: TRect; {%H-}AData: Pointer;
@@ -41,8 +43,7 @@ type
   end;
   
 type
-  { TBitmapTracker }
-
+  { Tracker of bitmap changes }
   TBitmapTracker = class(TMaskedBitmap)
   protected
     FUser: TBGRADefaultBitmap;
@@ -165,6 +166,11 @@ begin
     InvalidateBitmap;
   end else
     inherited Assign(ASource);
+end;
+
+procedure TBGRAMSEguiBitmap.AssignToBitmap(ADestination: TBitmap);
+begin
+  ADestination.Assign(Bitmap);
 end;
 
 procedure TBGRAMSEguiBitmap.DoLoadFromBitmap; 

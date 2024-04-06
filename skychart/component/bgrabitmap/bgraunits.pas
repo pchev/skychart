@@ -1,4 +1,6 @@
 // SPDX-License-Identifier: LGPL-3.0-linking-exception
+
+{ Definition of units of measure (distances) used in CSS }
 unit BGRAUnits;
 
 {$mode objfpc}{$H+}
@@ -16,6 +18,7 @@ type
               cuCentimeter, cuMillimeter,
               cuInch, cuPica, cuPoint,
               cuFontEmHeight, cuFontXHeight, cuPercent);
+  { Floating-point value expressed in a CSS unit }
   TFloatWithCSSUnit = record
     value: single;
     CSSUnit: TCSSUnit;
@@ -34,8 +37,7 @@ const
          'em','ex','%');
 
 type
-  { TCSSUnitConverter }
-
+  { Converter for CSS units }
   TCSSUnitConverter = class
   protected
     FViewBoxHeight: TFloatWithCSSUnit;
@@ -261,7 +263,9 @@ end;
 function TCSSUnitConverter.ConvertHeight(y: single; sourceUnit,
   destUnit: TCSSUnit; containerHeight: single): single;
 begin
-  if sourceUnit = cuCustom then
+  if sourceUnit = destUnit then
+    result := y
+  else if sourceUnit = cuCustom then
   with DefaultUnitHeight do
   begin
     result := y*ConvertHeight(value,CSSUnit, destUnit, containerHeight)
