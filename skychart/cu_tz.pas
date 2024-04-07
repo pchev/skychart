@@ -46,6 +46,8 @@ uses
   Classes, SysUtils, Math;
 
 type
+  TsSize   = longint;
+
   ttzhead=packed record
     tzh_identifier : array[0..3] of AnsiChar;
     tzh_version : AnsiChar;
@@ -70,7 +72,7 @@ type
   pleap=^tleap;
   tleap=record
     transition : int64;
-    change     : int64;
+    change     : longint;
   end;
 
   TTZInfo = record
@@ -109,7 +111,7 @@ type
     function GetLocalTimezone(timer:int64;timerIsUTC:Boolean;var ATZInfo:TTZInfo;var ATZInfoEx:TTZInfoEx):Boolean;
     procedure GetLocalTimezone(timer:int64);
     function find_transition(timer:int64;timerIsUTC:Boolean;var trans_start,trans_end:int64):pttinfo;
-    function ReadTimezoneFile(fn: shortstring):boolean;
+    function ReadTimezoneFile(fn: string):boolean;
     function GetTZName: string;
     procedure SetDate(Value: TDateTime);
     function GetDate: TDateTime;
@@ -233,8 +235,23 @@ var
     else
       Exit(0);
   end;
+var
+  timerLoUTC, timerHiUTC: int64;
+
 begin
+  if (num_transitions>0) and not timerIsUTC then
+   begin
+     timerLoUTC:=timer-types[type_idxs[0]].offset;
+     timerHiUTC:=timer-types[type_idxs[num_transitions-1]].offset;
+   end
+  else
+   begin
+     timerLoUTC:=timer;
+     timerHiUTC:=timer;
+   end;
+  
   if (num_transitions=0) or (timer<transitions[0]) then
+   { timer is before the first transition } 
    begin
      i:=0;
      while (i<num_types) and (types[i].isdst) do
@@ -246,6 +263,15 @@ begin
      trans_end:=high(trans_end);
    end
   else
+  if (num_transitions>0) and (timerHiUTC>=transitions[num_transitions-1]) then
+   { timer is after the last transition }
+   begin
+     i:=type_idxs[num_transitions-1];
+     trans_start:=transitions[num_transitions-1];
+     trans_end:=high(trans_end);
+   end
+  else
+   { timer inbetween } 
    begin
       // Use binary search.
       L := 1;
@@ -263,8 +289,8 @@ begin
              found:=true; // break cycle
         end;
       end;
-     if not found then begin
-       i:=num_transitions; // use last std transition to not fallback to LMT in the future
+      if not found then begin
+        Exit(nil);
      end;
      trans_start:=transitions[i-1];
      trans_end:=transitions[i];
@@ -284,7 +310,7 @@ end;
 procedure TCdCTimeZone.DoGetLocalTimezoneEx(timer:int64;info:pttinfo;var ATZInfoEx:TTZInfoEx);
 var
   i : longint;
-  names: array[Boolean] of pchar;
+  names: array[Boolean] of PAnsiChar;
 begin
   names[true]:=nil;
   names[false]:=nil;
@@ -400,7 +426,7 @@ begin
   UnlockTZInfo;
 end;
 
-function TCdCTimeZone.ReadTimezoneFile(fn: shortstring):boolean;
+function TCdCTimeZone.ReadTimezoneFile(fn: string):boolean;
 
 function decode(const l:longint):longint;
 begin
@@ -425,20 +451,32 @@ const
 var
   buf    : array[0..bufsize-1] of byte;
   bufptr : pbyte;
+  bufbytes : tsSize;
+  bufoverflow : boolean;
   f      : file;
   tzhead : ttzhead;
 
-  procedure readfilebuf;
-  var Count: longint;
+  function readfilebuf : TsSize;
   begin
     bufptr := @buf[0];
-    blockread(f, buf, bufsize, Count);
+    blockread(f, buf, bufsize, bufbytes);
+    readfilebuf:=bufbytes;
+  end;
+
+  Procedure checkbufptr(asize : integer);
+  var
+    a : tssize;
+  begin
+    a:=bufptr-@buf+asize;
+    if (a>bufbytes) then
+      bufoverflow:=true;
   end;
 
   function readbufbyte: byte;
   begin
     if bufptr > @buf[bufsize-1] then
       readfilebuf;
+    checkbufptr(1);
     readbufbyte := bufptr^;
     inc(bufptr);
   end;
@@ -454,6 +492,7 @@ var
         numbytes := count;
       if numbytes > 0 then
       begin
+        checkbufptr(numbytes);
         if assigned(dest) then
           move(bufptr^, dest^, numbytes);
         inc(bufptr, numbytes);
@@ -552,13 +591,12 @@ var
      end;
 
     readbuf(zone_names,tzhead.tzh_charcnt);
-
     if version=2 then
       begin // read 64bit values
         for i:=0 to num_leaps-1 do
          begin
            readbuf(@leaps[i].transition,sizeof(int64));
-           readbuf(@leaps[i].change,sizeof(int64));
+           readbuf(@leaps[i].change,sizeof(longint));
            leaps[i].transition:=decode(leaps[i].transition);
            leaps[i].change:=decode(leaps[i].change);
          end;
@@ -582,6 +620,13 @@ var
 
     readdata:=true;
   end;
+  
+  procedure ClearCurrentTZinfo;
+  var
+    i:integer;
+  begin
+    fTZInfo := Default(TTZInfo);
+  end;
 
 begin
   if (fn<>'') and FileExists(fn) and ((FileGetAttr(fn) and faDirectory) = 0) then
@@ -589,10 +634,12 @@ begin
     Filemode := 0;
     system.Assign(f, fn);
     reset(f, 1);
+    bufoverflow:=false;
     bufptr := @buf[bufsize-1]+1;
     tzhead:=default(ttzhead);
     LockTZInfo;
-    ReadTimezoneFile:=(readheader() and readdata());
+    ReadTimezoneFile:=(readheader() and readdata()) and not BufOverflow;
+    ClearCurrentTZinfo;
     UnlockTZInfo;
     closefile(f);
   end;
