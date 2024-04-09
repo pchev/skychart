@@ -5070,9 +5070,9 @@ begin
   Splitter1.Visible := True;
   ScriptPanel.Visible := True;
   Splitter1.ResizeControl := ScriptPanel;
-  f_configdirect.Show;
   f_configdirect.Parent:=ScriptPanel;
   f_configdirect.Align:=alTop;
+  f_configdirect.Show;
   end;
 end;
 

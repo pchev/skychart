@@ -75,7 +75,7 @@ type
     f_config_pictures1: Tf_config_pictures;
     f_config_internet1: Tf_config_internet;
     f_config_calendar1: Tf_config_calendar;
-    locktree: boolean;
+    lockupd: boolean;
     Fccat: Tconf_catalog;
     Fcshr: Tconf_shared;
     Fcsc: Tconf_skychart;
@@ -216,6 +216,7 @@ begin
   SetLang;
   f_config_solsys1.onPrepareAsteroid := SolSysPrepareAsteroid;
   f_config_time1.onGetTwilight := TimeGetTwilight;
+  lockupd := False;
 end;
 
 procedure Tf_configdirect.FormShow(Sender: TObject);
@@ -223,12 +224,14 @@ procedure Tf_configdirect.FormShow(Sender: TObject);
   i: integer;
 {$endif}
 begin
-  locktree := False;
   UpdateBtn;
 end;
 
 procedure Tf_configdirect.UpdateBtn;
 begin
+  if lockupd then exit;
+  try
+  lockupd:=true;
   f_config_time1.Init;
   f_config_observatory1.Init;
   f_config_chart1.Init;
@@ -239,6 +242,9 @@ begin
   f_config_system1.Init;
   f_config_internet1.Init;
   f_config_calendar1.Init;
+  finally
+    lockupd:=false;
+  end;
 end;
 
 procedure Tf_configdirect.ActivateChanges;
