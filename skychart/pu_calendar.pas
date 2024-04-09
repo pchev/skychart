@@ -29,7 +29,7 @@ uses
   u_help, u_translation, Math, cu_database, u_satellite, Printers, LCLIntf,
   SysUtils, Classes, Graphics, Controls, Forms, FileUtil, Dialogs, StdCtrls,
   FileCtrl, enhedits, Grids, ComCtrls, IniFiles, jdcalendar, cu_planet, u_unzip,
-  u_constant, pu_image, downloaddialog, Buttons, ExtCtrls, ActnList, StdActns,
+  u_constant, downloaddialog, Buttons, ExtCtrls, ActnList, StdActns,
   UScaleDPI, LResources, LazHelpHTML_fix, CheckLst, types;
 
 type
@@ -174,7 +174,6 @@ type
   private
     { Private declarations }
     initial, lockclick: boolean;
-    ShowImage: Tf_image;
     Fplanet: Tplanet;
     FGetChartConfig: TScFunc;
     Fupdchart: TScFunc;
@@ -265,8 +264,6 @@ begin
   AzNorth := True;
   if VerboseMsg then
     WriteTrace('Create Tf_image');
-  ShowImage := Tf_image.Create(self);
-  ShowImage.Position := poScreenCenter;
   decodedate(now, yy, mm, dd);
   date1.JD := jdd(yy, mm, dd, 0);
   date2.JD := date1.JD + 5;
@@ -342,7 +339,6 @@ begin
     FreeCoord(PlutonGrid);
     FreeCoord(Cometgrid);
     FreeCoord(Asteroidgrid);
-    ShowImage.Free;
     config.Free;
     for i := low(PlanetGraphs) to high(PlanetGraphs) do
       PlanetGraphs[i].Free;
@@ -518,8 +514,6 @@ begin
   Solartitle;
   LunarTitle;
   SatTitle;
-  if ShowImage <> nil then
-    ShowImage.SetLang;
   SetHelp(self, hlpCalInput);
   SetHelp(twilight, hlpCalTw);
   SetHelp(planets, hlpCalPla);

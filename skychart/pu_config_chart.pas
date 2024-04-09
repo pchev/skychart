@@ -29,7 +29,7 @@ uses
   u_help, u_translation, u_constant, u_projection, u_util, fu_config_chart,
   LCLIntf, SysUtils, Classes, Graphics, Controls, Forms, Dialogs, UScaleDPI,
   StdCtrls, ExtCtrls, enhedits, ComCtrls, LResources,
-  Buttons, cu_zoomimage, LazHelpHTML_fix;
+  Buttons, LazHelpHTML_fix;
 
 type
 

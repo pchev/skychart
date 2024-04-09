@@ -192,7 +192,7 @@ begin
       // Resize
       BitmapResize(FBitmap, TmpBmp, Width / FBitmap.Width);
       // refresh the image
-      Paint;
+      Invalidate;
       if Assigned(FOnPosChange) then
         FOnPosChange(Self);
     except
