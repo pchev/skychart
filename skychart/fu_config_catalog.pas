@@ -200,6 +200,7 @@ type
     procedure PageControl1Changing(Sender: TObject; var AllowChange: boolean);
     procedure StringGrid1DrawCell(Sender: TObject; aCol, aRow: integer;
       aRect: TRect; aState: TGridDrawState);
+    procedure StringGrid1MouseDown(Sender: TObject; Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
     procedure StringGrid1MouseUp(Sender: TObject; Button: TMouseButton;
       Shift: TShiftState; X, Y: integer);
     procedure StringGrid1SelectCell(Sender: TObject; aCol, aRow: integer;
@@ -218,6 +219,7 @@ type
     procedure CDCAcceptDirectory(Sender: TObject; var Value: string);
     procedure StringGrid4DrawCell(Sender: TObject; aCol, aRow: integer;
       aRect: TRect; aState: TGridDrawState);
+    procedure StringGrid4MouseDown(Sender: TObject; Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
     procedure StringGrid4MouseMove(Sender: TObject; Shift: TShiftState;
       X, Y: integer);
     procedure StringGrid4MouseUp(Sender: TObject; Button: TMouseButton;
@@ -1161,6 +1163,14 @@ begin
   end;
 end;
 
+procedure Tf_config_catalog.StringGrid4MouseDown(Sender: TObject; Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
+var
+  col, row: integer;
+begin
+  TStringGrid(sender).MouseToCell(X, Y, Col, Row);
+  RowMouseDown:=row;
+end;
+
 procedure Tf_config_catalog.StringGrid4MouseMove(Sender: TObject;
   Shift: TShiftState; X, Y: integer);
 var
@@ -1202,7 +1212,7 @@ var
   config: TCCDconfig;
 begin
   StringGrid4.MouseToCell(X, Y, Col, Row);
-  if row = 0 then
+  if (row = 0) or (row <> RowMouseDown) then
     exit;
   case col of
     0:
@@ -1584,13 +1594,21 @@ begin
   end;
 end;
 
+procedure Tf_config_catalog.StringGrid1MouseDown(Sender: TObject; Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
+  var
+  col, row: integer;
+begin
+  TStringGrid(sender).MouseToCell(X, Y, Col, Row);
+  RowMouseDown:=row;
+end;
+
 procedure Tf_config_catalog.StringGrid1MouseUp(Sender: TObject;
   Button: TMouseButton; Shift: TShiftState; X, Y: integer);
 var
   col, row: integer;
 begin
   StringGrid1.MouseToCell(X, Y, Col, Row);
-  if row = 0 then
+  if (row = 0) or (row <> RowMouseDown) then
     exit;
   case col of
     0:

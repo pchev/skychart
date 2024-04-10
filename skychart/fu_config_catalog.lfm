@@ -795,6 +795,7 @@ object f_config_catalog: Tf_config_catalog
           TabOrder = 0
           TitleStyle = tsStandard
           OnDrawCell = StringGrid4DrawCell
+          OnMouseDown = StringGrid4MouseDown
           OnMouseMove = StringGrid4MouseMove
           OnMouseUp = StringGrid4MouseUp
           OnSelectCell = StringGrid4SelectCell
@@ -989,6 +990,7 @@ object f_config_catalog: Tf_config_catalog
           TabOrder = 0
           TitleStyle = tsStandard
           OnDrawCell = StringGrid1DrawCell
+          OnMouseDown = StringGrid1MouseDown
           OnMouseUp = StringGrid1MouseUp
           OnSelectCell = StringGrid1SelectCell
         end
