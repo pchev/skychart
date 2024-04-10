@@ -5359,15 +5359,15 @@ begin
       ok := FindAtPos(wds, x1, y1, x2, y2, nextobj, True, searchcenter, cfgsc, rec);
       CloseWDS;
     end;
-    if (not ok) and cfgcat.starcaton[DefStar - BaseStar] then
-    begin
-      ok := FindAtPos(DefStar, x1, y1, x2, y2, nextobj, True, searchcenter, cfgsc, rec);
-      CloseDefaultStars;
-    end;
     if (not ok) then
     begin
       ok := FindAtPos(gcstar, x1, y1, x2, y2, nextobj, True, searchcenter, cfgsc, rec);
       CloseGcat;
+    end;
+    if (not ok) and cfgcat.starcaton[DefStar - BaseStar] then
+    begin
+      ok := FindAtPos(DefStar, x1, y1, x2, y2, nextobj, True, searchcenter, cfgsc, rec);
+      CloseDefaultStars;
     end;
     if (not ok) and cfgcat.starcaton[dsbase - BaseStar] then
     begin
