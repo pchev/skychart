@@ -187,6 +187,7 @@ type
     procedure Button7Click(Sender: TObject);
     procedure Button8Click(Sender: TObject);
     procedure Button9Click(Sender: TObject);
+    procedure CatalogGridMouseDown(Sender: TObject; Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
     procedure CatgenClick(Sender: TObject);
     procedure delobjClick(Sender: TObject);
     procedure hnNameChange(Sender: TObject);
@@ -229,7 +230,7 @@ type
 
   private
     { Private declarations }
-    HintX, HintY: integer;
+    HintX, HintY, RowMouseDown: integer;
     LockChange, LockCatPath, LockActivePath: boolean;
     FApplyConfig,FInstallCatalog,FRunCatgen: TNotifyEvent;
     FSendVoTable: TSendVoTable;
@@ -798,13 +799,21 @@ begin
   end;
 end;
 
+procedure Tf_config_catalog.CatalogGridMouseDown(Sender: TObject; Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
+var
+  col, row: integer;
+begin
+  TStringGrid(sender).MouseToCell(X, Y, Col, Row);
+  RowMouseDown:=row;
+end;
+
 procedure Tf_config_catalog.CatalogGridMouseUp(Sender: TObject;
   Button: TMouseButton; Shift: TShiftState; X, Y: integer);
 var
-  i, col, row: integer;
+  col, row: integer;
 begin
   TStringGrid(sender).MouseToCell(X, Y, Col, Row);
-  if row = 0 then
+  if (row = 0) or (row <> RowMouseDown) then
     exit;
   case col of
     0:

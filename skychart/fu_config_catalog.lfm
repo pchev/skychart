@@ -357,6 +357,7 @@ object f_config_catalog: Tf_config_catalog
               TabOrder = 0
               TitleStyle = tsStandard
               OnDrawCell = CatalogGridDrawCell
+              OnMouseDown = CatalogGridMouseDown
               OnMouseUp = CatalogGridMouseUp
               OnSelectCell = CatalogGridSelectCell
               OnSetEditText = CatalogGridSetEditText
@@ -449,6 +450,7 @@ object f_config_catalog: Tf_config_catalog
               TabOrder = 0
               TitleStyle = tsStandard
               OnDrawCell = CatalogGridDrawCell
+              OnMouseDown = CatalogGridMouseDown
               OnMouseUp = CatalogGridMouseUp
               OnSelectCell = CatalogGridSelectCell
               OnSetEditText = CatalogGridSetEditText
@@ -541,6 +543,7 @@ object f_config_catalog: Tf_config_catalog
               TabOrder = 0
               TitleStyle = tsStandard
               OnDrawCell = CatalogGridDrawCell
+              OnMouseDown = CatalogGridMouseDown
               OnMouseUp = CatalogGridMouseUp
               OnSelectCell = CatalogGridSelectCell
               OnSetEditText = CatalogGridSetEditText
@@ -633,6 +636,7 @@ object f_config_catalog: Tf_config_catalog
               TabOrder = 0
               TitleStyle = tsStandard
               OnDrawCell = CatalogGridDrawCell
+              OnMouseDown = CatalogGridMouseDown
               OnMouseUp = CatalogGridMouseUp
               OnSelectCell = CatalogGridSelectCell
               OnSetEditText = CatalogGridSetEditText
@@ -725,6 +729,7 @@ object f_config_catalog: Tf_config_catalog
               TabOrder = 0
               TitleStyle = tsStandard
               OnDrawCell = CatalogGridDrawCell
+              OnMouseDown = CatalogGridMouseDown
               OnMouseUp = CatalogGridMouseUp
               OnSelectCell = CatalogGridSelectCell
               OnSetEditText = CatalogGridSetEditText
@@ -2314,6 +2319,7 @@ object f_config_catalog: Tf_config_catalog
     Top = 534
   end
   object DownloadDialog1: TDownloadDialog
+    HttpDirectDownload = False
     Timeout = 90000
     FtpFwMode = 0
     FtpFwPassive = True
