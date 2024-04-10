@@ -1,0 +1,160 @@
+III/70              Luyten's White Dwarf Catalogues     (Luyten, 1970-77)
+================================================================================
+White Dwarfs
+       Luyten W.J.
+      <Univ. of Minnesota, Minneapolis (1970)>
+White Dwarfs II
+       Luyten W.J.
+      <Univ. of Minnesota, Minneapolis (1977)>
+================================================================================
+ADC_Keywords: Stars, white dwarf; Proper motions
+
+Description:
+
+    The catalogue includes all probable white dwarf and degenerate stars
+    found in the Proper Motion and Faint Blue Star Surveys conducted by
+    W.J. Luyten. The catalogue was originally published in two booklets,
+    one in 1970 (3035 entries), and the part II in 1977 (3511 entries).
+
+    As a guideline for the inclusion of stars into this catalogue, the
+    author has used stars which present minimal values of the
+    combined proper motions - magnitude quantity H defined by
+
+    H = m + 5 + 5 log {mu} ({mu} is the proper motion in arcsec/yr)
+
+    which show the minimal H values according to the color class:
+
+       b  13.5   f  15.5    g-k 17.7
+       a  14.4   g  17.0     k  18.3
+
+    with the following exceptions:
+
+    a) evidence from photoelectric colors or spectra indicate the
+       object is a degenerate star (e.g. LB 3303) or
+
+    b) the object is close to the antapex (which is the case for
+       many stars at alpha=21h and delta =+42{deg}, plate 234).
+
+    The bluest stars (color classes b or a) will probably prove to be
+    genuine white dwarfs; probably no more than 40% of the yellower
+    objects (color class k) will prove to be genuine degenerates.
+
+File Summary:
+--------------------------------------------------------------------------------
+  FileName   Lrecl  Records   Explanations
+--------------------------------------------------------------------------------
+ReadMe          80        .   This file
+catalog.dat     80     6546   The Combined Catalogue
+remarks.dat     80      602   Remarks to flagged stars
+--------------------------------------------------------------------------------
+
+Byte-by-byte Description of file: catalog.dat
+--------------------------------------------------------------------------------
+   Bytes Format Units    Label     Explanations
+--------------------------------------------------------------------------------
+   1-  4  I4     ---     Seq       [1/6546]+ Sequential number
+   6- 14  A9     ---     LP       *Luyten Proper Motion designation
+      15  A1     ---     Rem       [*] indicates a remark in the "remarks" file
+  17- 27  A11    ---     Name      Other Name of the white dwarf
+  29- 30  I2     h       RAh       Right Ascension 1950 (hours)
+  32- 33  I2     min     RAm       Right Ascension 1950 (minutes)
+  35- 36  I2     s       RAs       Right Ascension 1950 (seconds)
+      38  A1     ---     DE-       Declination 1950 (sign)
+  39- 40  I2     deg     DEd       Declination 1950 (degrees)
+  42- 45  F4.1   arcmin  DEm       Declination 1950 (minutes)
+  47- 50  F4.1   mag     Rmag     *?=99.9 Red magnitude
+      52  A1     ---   l_Pmag     *[>] Limit flag on Pmag
+  53- 56  F4.1   mag     Pmag      Photographic magnitude
+      57  A1     ---   u_Pmag      Uncertainty flag (:) on Pmag
+  59- 61  A3     ---     spClass   [ DAobafgkm-] Spectral or color class
+      62  A1     ---   u_spClass   Uncertainty flag (:) on Color class
+  64- 68  F5.3 arcsec/yr pm       *Total proper motion
+  70- 72  I3     deg     pmPA     *[0,360[ Direction of the proper motion
+      73  A1     ---   u_pmPA      Uncertainty flag (:) on pmPA
+  75- 78  I4     ---     vSeq     *Sequence number within each volume
+      80  I1     ---     vNo       [1,2] Volume number
+--------------------------------------------------------------------------------
+
+Note on LP: the number is made of the Palomar Sky Survey (PSS) plate
+    number, followed by a dash and a running number of the star within
+    the PSS plate area. For close stars, the number may be followed by
+    a letter (a, b or B)
+
+Note on Rmag: the first white dwarf catalogue did not contain any value
+    for the red magnitude so a dummy value of 99.9 has been added for all
+    entries from the first catalogue.
+
+Note on l_Pmag:
+    When objects are near the magnitude limit a plus ('+') sign was given
+    in the published catalogue in lieu of a value (e.g. LP 544-28 and LP
+    544-29 from the second volume of white dwarfs). For these cases a
+    greater than sign ('>') is given in this byte, otherwise blank.
+
+Note on pm, pmPA:
+  The direction of the proper motion is measured from North Eastwards.
+  The RA and Dec components are:
+  pmRA.cos(Dec) = pm * sin(pmPA)    and   pmDec = pm * cos(pmPA)
+
+Note on vSeq, vNo:
+    vNo indicates the volume (1 or 2) from which the entry was
+    originally published; the vSeq number ranges from 1 to 3035 for volume 1,
+    and from 1 to 3511 for volume 2.
+--------------------------------------------------------------------------------
+
+Byte-by-byte Description of file: remarks.dat
+--------------------------------------------------------------------------------
+   Bytes Format Units   Label     Explanations
+--------------------------------------------------------------------------------
+   1-  4  I4    ---     vSeq      Sequence number within given volume (1)
+       6  I1    ---     vNo       [1,2] Volume of white dwarfs (1)
+       7  A1    ---     ---       [:] (1)
+   8- 16  A9    ---     Name      Name of the star (LP when no acronym) (1)
+  18- 80  A63   ---     Text      Text of remark
+--------------------------------------------------------------------------------
+Note (1): bytes 1-16 are repeated in consecutive records
+      when the note is longer than 63 characters.
+--------------------------------------------------------------------------------
+
+History:
+
+  * April 1980 (from Theresa A. Nagy and Robert S. Hill, Systems and
+    Applied Sciences Corporation for NASA):
+
+    All of the data were keypunched, proofread and written onto magnetic
+    tape at the Goddard Space Flight Center.
+
+    Volume I has 2934 entries, according to its introduction; 99 entries
+    were added after the introduction had gone to press, making 3033
+    entries. However, the keypunching, proofreading, and computer checking
+    yielded 3035 entries. All entries were sorted according to right
+    ascension, though in the published version, the added group of 99
+    entries is separate.
+
+    White Dwarfs II has 3513 entries, according to its introduction.
+    However, the keypunching, proofreading, and computer checking yielded
+    3511 entries. Sequence (vSeq) and volume number (vNo) were added to
+    each entry.
+
+    The format of the entries from the Volume 1 was altered to make it
+    like the Volume 2: tenths of minute in RA were converted to seconds,
+    and a zero was inserted as tenth of arcminute in declination.
+
+    Two entries were altered:
+    a) LP 322-897 (vNo=2, vSeq=1966) with RA reported as 13 08.4
+       was converted to 13 08 24
+    b) BD-07 3632 (vNo=2, vSeq=2056) with RA reported as 13 27.40
+       was converted to 13 27 40
+
+  * 21-Dec-1999 (Francois Ochsenbein, CDS, Strasbourg)
+    Two further errors were corrected:
+    => LP 234-1664 (vNo=1, vSeq=2705) had a proper motion of 0.1arcsec
+       with an angle of 955 degrees; the values were corrected to
+       0.21 arcsec and 95 degrees, according to the proper motion survey
+    => LP 587-9 (vNo=2, vSeq=288) indicates a proper motion angle of
+       412 degrees; its value was changed to 142 degrees, to be consistent
+       with LP.
+    The secondary names included in the remarks were added in the "Name"
+    column when possible, and the documentation was added.
+
+================================================================================
+(End)                                     Francois Ochsenbein [CDS]  21-Dec-1999

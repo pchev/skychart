@@ -1,0 +1,306 @@
+III/227    General Catalog of galactic Carbon stars, 3d Ed.   (Alksnis+ 2001)
+================================================================================
+A general catalogue of galactic carbon stars by C.B. Stephenson. Third edition.
+     Alksnis A., Balklavs A., Dzervitis U., Eglitis I., Paupers O., Pundure I.
+    <Baltic Astronomy, 10, 1 (2001)>
+    =2001BaltA..10....1A
+================================================================================
+ADC_Keywords: Stars, carbon ;
+Keywords: catalogs - Stars: carbon, fundamental parameters
+
+Description:
+    This is a corrected and slightly modified machine-readable version of
+    the Catalogue (Table1 of the paper) published in the Baltic Astronomy,
+    10, No 1/2, 2001 (and the Errata in vol. 10, p. 461). The catalog is
+    an updated and revised version of Stephenson's Catalogue of Galactic
+    Cool Carbon Stars (2nd edition) (Cat. <III/156>).
+
+File Summary:
+--------------------------------------------------------------------------------
+  File name   Lrecl   Records    Explanations
+--------------------------------------------------------------------------------
+ReadMe          80          .    This file
+catalog.dat    137       6891    General catalogue of galactic carbon stars
+remarks.dat     80       1867    Individual remarks
+lists.dat      192        278    Abbreviations and References
+--------------------------------------------------------------------------------
+
+Byte-by-byte Description of files: catalog.dat
+--------------------------------------------------------------------------------
+  Bytes   Format   Units   Label      Explanations
+--------------------------------------------------------------------------------
+   1-  9   A9      ---    Jname    Star designation (based on J2000 position)
+  12- 15   I4      ---    CGCS     CGCS number (1)
+  18- 19   I2     h       RAh      Right ascension (J2000.0) (2)
+  21- 22   I2     min     RAm      Right ascension J2000.0)
+  24- 27   F4.1   s       RAs      Right ascension J2000.0)
+      30   A1     ---     DE-      [-+] Declination sign
+  31- 32   I2     deg     DEd      Declination J2000.0)
+  34- 35   I2     arcmin  DEm      Declination J2000.0)
+  37- 38   I2     arcsec  DEs      Declination J2000.0)
+  41       A1      ---   l_Bmag    [<] limit flag on B
+  42- 45   F4.1    mag     Bmag    ? B magnitude (3)
+  46       A1      ---   u_Bmag    [:] uncertainty flag on B
+  49- 52   F4.1    mag     Vmag    ? V magnitude (4)
+  53       A1      ---   u_Vmag    [:] uncertainty flag on V
+  56- 59   F4.1    mag     irmag   ? red or near-IR magnitude (5)
+  60       A1      ---   n_irmag   [rRJHKL ] IR band
+  61       A1      ---   u_irmag   [:] uncertainty flag on ir
+  64- 68   F5.1    deg    GLON     Galactic longitude
+  70- 74   F5.1    deg    GLAT     Galactic latitude
+  77- 94   A18     ---     Sp      ? Spectral type (6)
+  95-128   A34     ---     Names   Designations (7)
+ 129-136   A8      ---     Notes   ? Notes (8)
+ 137       I1      ---     Pr      ? Precision class of the coordinates (9)
+--------------------------------------------------------------------------------
+Note (1): This is the number from the first column of the catalog from the
+    2nd edition (CGCCS, Cat. <III/156>). We have not introduced a new
+    running number to avoid overcrowding of identifiers for an object. For
+    new entries the running numbers begin with No. 6001 and are given in
+    the sequence of R.A. (J2000).
+
+Note (2):
+    In case of multiple finding lists, the coordinates are averages from
+    multiple sources, heavily weighted in favour of the most accurate, if
+    any. When Ste (for Stephenson) is included among the designations,
+    the star has almost invariably been measured for position at the
+    Warner and Swasey Obs. on one or even more objective-prism plates,
+    with a resulting precision of 1-2". The astrometric reduction
+    procedure used by Stephenson is explained in Publs. Warner and Swasey
+    Obs. Vol. 2, No. 4, Sec. II. More than 2000 stars of the catalog have
+    post CCCS position determinations done at the Warner and Swasey
+    Observatory.
+
+    The coordinates are given to 0.1 sec in RA and 1 arcsec in DEC,
+    notwithstanding the precision class of the position of the object.
+    The estimated precision of the coordinates is indicated in the last
+    column. For many stars of CGCCS the equatorial coordinates have been
+    improved on the basis of new determinations, e.g., by Aaronson et al.
+    (1989ApJS...70..637A, 1990ApJS...73..841A), MacConnell (2000, Priv.
+    Comm.), Maehara & Soyano (1988AnTok..22...59M, 1990PNAOJ...1..207M),
+    Soyano & Maehara (1991PNAOJ...2..203M, 1993PNAOJ...3..259S,
+    1999PNAOJ...5..149S).
+
+    For more than 300 carbon stars equatorial coordinates were taken from
+    the Hipparcos Catalogue (<I/239>) after approximation to the format of
+    this catalog. These stars can be recognized as bright stars with the
+    highest precision class 0 in the last column of the catalog.
+
+Note (3):
+    B magnitudes essentially all come from photographic plates; thousands
+    of them are based only upon an average plate calibration used for an
+    entire survey. Thus the magnitudes are almost never accurate to 0.1
+    mag, to which they are commonly given, and errors of over a whole
+    magnitude should be common, even discounting variability.
+
+Note (4):
+    V magnitudes essentially all come from photographic plates; For some
+    stars V magnitudes from Paupers et al. (1993BaltA...2..268P) are used.
+
+Note (5):
+    The infrared magnitudes are normally the sort defined by a Kodak
+    N-type photographic plate exposed through a filter similar to the
+    Schott RG8 or 695 filter. Such infrared magnitudes are close to the
+    system of Kron & Smith (1951ApJ...113..324K), and have now been
+    published for several thousand carbon stars.
+
+Note (6):
+    This column displays the earliest more reliable determinations of
+    spectral type in the R/N notation. Here also are classifications in
+    the scheme of Morgan & Keenan (1941ApJ....94..501K); this scheme is
+    still a good compact description of the spectrum. Sources of quoted
+    classifications are coded here in parentheses.
+
+    Below we list abbreviations for papers consisting mainly of
+    reobservation of stars selected from finding lists:
+
+        Bidun   Bidelman, unpublished.
+        De      Dean (1976AJ.....81..364D).
+        HD, HDE Henry Draper Catalogue and the extensions (Cat. <III/135>).
+                The second extension, HA 112, is cited as CannMay49..
+        Her52   Herbig (1952, Trans. I.A.U., Vol. 8, 807).
+        IRAS C  Little-Marenin et al. (1987AJ.....93..663L)
+        K-M     Keenan & Morgan (1941ApJ....94..501K)
+        Lund21  Lundmark (1921PASP...33..314).
+        San41   Sanford (1941PASP...53..291S).
+        San     Sanford (1944ApJ....99..145S).
+        Sh      Shane (1928, Bull. Lick Obs., 13, 123).
+        War     Warner (1963MNRAS.126...61W).
+        WPB     Bidelman (1954ApJS....1..175B).
+        Yam     Yamashita (1972AnTok..13..169Y, 1975AnTok..15...47Y).
+
+    Carbon star candidates in this column are marked by lower case c
+    (Guglielmo et al., 1998A&A...334..609G and references therein).
+
+Note (7):
+    This column gives the star's occurence in various finding lists,
+    including unpublished ones. Some CCCS stars repeated here are still
+    called unpublished, which means only that I had no reference to a
+    separate publication when the CCCS went to press. For some of those
+    stars, the CCCS is the only place they have been published; for
+    others, they have since appeared in separate lists by their
+    discoverers. In the latter case I have sometimes changed the
+    discoverer designation to reflect separate subsequent publication, and
+    sometimes not; in the great majority of cases, CCCS stars there called
+    unpublished have since been confirmed in other surveys.
+
+    There are finding lists with no special concentration on carbon stars.
+    These are the Bright Star Catalog number, cited, as in all editions of
+    the Bright Star Catalog, as an HR number (and usually put at the head
+    of the list); HD or HDE numbers (listed as a number without other
+    characters); BD or CD numbers in a notation close to the usual one;
+    and the GCVS designation. The intent was to give CD numbers only if
+    the CD magnitude is 9.5 or brighter. Any CPD (Cape Photographic
+    Durchmusterung) nos. in the catalog are inadvertent unless spelled out
+    as such, a fact due to the circumstance that carbon stars are red
+    stars and the CD is red-biased, not only relative to the CPD but even,
+    though this does not appear to be widely known, relative to the BD.
+
+    Other finding lists: an explanation for the coding of these are in the
+    "lists.dat" file. The largest unpublished lists are by Stephenson
+    (Ste), a combination of stars now published in the CCCS and infrared
+    survey products appearing in the present catalog; Sanduleak (Sndlk),
+    whose entries are almost exclusively confined to CCCS stars; Victor
+    Blanco (VB); and MacConnell (MacCon). Although there are several
+    published MacConnell lists cited here, some of the MacCons may have
+    since become separately published; but see also the special note under
+    MacCon in the lists.dat file.
+
+    Coding: Whenever a number appears separated from the initial part of
+    the designation by a blank space, the number is a published one
+    assigned by the corresponding discoverer, hyphens if any separating
+    table numbers from numbers within tables. Numbers following alphabetic
+    abbreviations without a blank space represent the year of publication
+    where this was for some reason helpful to me (generally, where the
+    same author has produced more than one paper). So "Kurt88 4" means
+    star No. 4 in a table of carbon stars in Westerlund (1988,
+    Astrofizika, 29, 405).
+
+    The meaning of the abbreviations are in the "lists.dat" file.
+    Here some comments on some abbreviations:
+
+      D  : The Dearborn Observatory objective-prism surveys for red stars.
+           The carbon stars thus found were abstracted as lists of
+           exclusively carbon stars, in the papers just cited, and were
+           duplicated in longer lists containing all red stars found; the
+           D numbers given in the catalog refer to the short lists, with one
+           or two exceptions spelled out in the notes to the table.
+
+           The notes also refer in other contexts to the "longer" Dearborn
+           lists, with the meaning just explained. The "short" list numbers
+           for carbon stars are continuous from paper to paper.
+
+     Hen : Rybski (1972, unpublished). Most of the carbon stars discussed by
+           Rybski were found on objective-prism plates by Henize, and by
+           him assigned the numbers which Rybski refers to as Hen numbers
+           and Stephenson quote in the catalog. There is no connection between
+           these Hen numbers and others occurring in the literature -- even
+           in the case of the occasional Hen numbers for carbon stars cited
+           by Wray (1966, unpublished), who however, also assigns his own
+           numbers and which are quoted in the catalog as Wray.
+
+    Krum : L.E. Krumenaker, unpublished. At Warner and Swasey we had by 1972
+           taken duplicate objective-prism plates of the northern Milky Way
+           for about half of the fields surveyed by Hamburg in the
+           Hamburg-Cleveland survey for luminous stars in the Northern
+           Milky Way. Although carbon stars were identified and measured
+           for position by the Hamburg  workers, and eventually published
+           (Hardorp et al., 1973A&A....22..129H), the Hamburg limiting
+           magnitude for carbon stars was not very faint (cf. Hardorp et
+           al., 1973A&A....22..129H ). Hence Krumenaker searched for carbon
+           stars on the new Case material already mentioned. On the other
+           hand, the mag. limit for R/N classification is already fairly
+           uniform between Hamburg and Cleveland (Stephenson,
+           1989PW&SO...3...53S).
+
+     Kub : W.R. Kubinec, unpublished. These carbon stars are discussed by
+           Kbinec, without position data, in 1989PW&SO...3...53S. He
+           measured the approximate positions specially for the catalog.
+
+ NassCol : The numerical C types quoted from this paper are defined in the
+           paper; they essentially describe the CN strength, and the
+           redness, of the spectrum in the infrared.
+
+Note (8):
+    Four symbols were introduced in the CCCS and are retained here:
+
+  (1) An asterisk indicates that the catalog equates two or more data in
+      literal contradiction to one or more papers cited; for example, a much
+      later paper may be reporting a new carbon star already so identified
+      in a much earlier paper, which implies that perhaps there are two
+      carbon stars in the area. This was a natural flag to use in the CCCS,
+      where carbon stars were mainly reported in a few large and well-known
+      surveys. It is no longer natural now, where the main pre-publication
+      comparison has been with the CCCS, and there have meanwhile been many
+      relatively short lists. Thus, I have added few if any new asterisks.
+      Finally, a single asterisk meant that my fusing of two or more reports
+      was based on coordinates alone, without any plate re-examination. In
+      fact, many or most of these cases have now been routinely re-examined
+      through later, systematic, surveys; but I have retained the asterisk
+      to show the historical order.
+
+  (2) A double asterisk means the same as a single one, except that I have
+      specially re-examined plates with the identification problem in mind.
+      As in (1), many of these have been further checked routinely by later,
+      systematic surveys, where the finding of only one star allows the
+      strong presumption that only one carbon star is involved. There are
+      few or no new double asterisks in the present edition.
+
+  (3) A plus sign signals a GCVS identification made by me by comparing an
+      objective prism plate with a published identification chart. These,
+      too, are mostly holdovers from the CCCS, because the host of more
+      accurate coordinates for carbon stars in the present edition usually
+      restricts any challenge to identifying a carbon star with a GCVS
+      cool-giant variability type to the question (at least on deep plates):
+      is there any other banded spectrum near the carbon star?
+
+  (4) An R signals further remarks at the end of the catalog.
+
+    The object of the remarks is twofold. First, remarks are intended as
+    an extension to the entries Designations and Spectrum of the catalog
+    comprising matter for which there was no place in the catalog. Second,
+    remarks contain information about considerable disagreement in the
+    position of a star determined by different authors or cases when there
+    is some doubt if the data refer to the same star. We repeat
+    Stephenson's remarks, although in a shortened form, in which he
+    confirms discoveries or points to certain spectral and photometric
+    peculiarities (outstanding spectral lines and bands, very red color
+    etc.). Also we indicate the cases when a carbon star lies in the sky
+    within boundaries of some star clusters and note conclusions about the
+    membership, if possible. Also the stars with such distinguishing
+    features as circumstellar silicate envelopes, detached gas and dust
+    shells, maser emission, binarity and bipolar molecular outflows are
+    marked.
+
+Note (9):
+    Estimated precision class of the equatorial coordinates of the star:
+     0-1 for +/-0.1 arcsec,
+       2 for +/-1 arcsec,
+       3 for +/-0.1 arcmin.
+    Values of the precision class have been estimated by comparing
+    coordinates of the stars determined by different authors. The highest
+    precision class 0 was assigned only to the positions determined by
+    Hipparcos, by MacConnell (2000, Priv. Comm) and for dwarf carbon stars.
+--------------------------------------------------------------------------------
+
+Byte-by-byte Description of file: remarks.dat
+--------------------------------------------------------------------------------
+   Bytes Format Units   Label     Explanations
+--------------------------------------------------------------------------------
+   1-  9  A9    ---     Jname     Star designation (based on J2000 position)
+  12- 15  I4    ---     CGCS      CGCS number, as in catalog.dat file
+  17- 80  A64   ---     Rem       Text of the remark
+--------------------------------------------------------------------------------
+
+Byte-by-byte Description of file: lists.dat
+--------------------------------------------------------------------------------
+   Bytes Format Units   Label     Explanations
+--------------------------------------------------------------------------------
+   1- 15  A15   ---     Code      Reference list abbreviation, or blank
+  17- 35  A19   ---     BibCode   BibCode
+  37- 61  A25   ---     Aut       Author names
+  63-192  A130  ---     Com       Comments
+--------------------------------------------------------------------------------
+
+================================================================================
+(End)                    Veta Avedisova [INASAN]                     31-May-2001

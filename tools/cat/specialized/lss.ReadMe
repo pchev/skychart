@@ -1,0 +1,172 @@
+III/43              Luminous Stars in the Southern Milky Way  (Stephenson+ 1971)
+================================================================================
+Catalogue of Luminous Stars in the Southern Milky Way
+     Stephenson C.B., Sanduleak N.
+    <Publ. Warner & Swasey Obs. 1 (1971)>
+    =1971PW&SO...1a...1S
+================================================================================
+ADC_Keywords: Milky Way ; Stars, luminous ; Spectral types
+
+Description (adapted from the Introduction of the Catalogue):
+    This Catalogue represents an extension to the entire Southern Milky
+    Way of the objective-prism survey for intrinsically luminous stars in
+    the Northern Milky Way <III/76> that was carried out jointly by the
+    Hamburg and Warner and Swasey observatories.
+
+    The object has been to survey the Southern Milky Way with plates as
+    similar as possible to the plates used for the Northern Milky Way,
+    including similarity of limiting magnitude. To this end the objective
+    prism that was used with the Warner and Swasey Schmidt telescope for
+    the Northern survey was sent to Cerro Tololo, Chile, where it was used
+    by Sanduleak to photograph the Southern Milky Way with the Schmidt
+    telescope of the University of Michigan.
+
+    The survey was planned to have a minimum extent in galactic latitude
+    of +/-10deg. On each field three spectral plates were taken, all
+    intended to have spectral widening near 0.2 mm. One blue-region
+    (Kodak IIa-O) plate was given an exposure of 11 minutes, and another
+    was double-exposed for 3 minutes and 10 seconds. A red plate
+    (Kodak 103a-F plus Schott GG 14 filter) was also taken for the
+    detection of any appreciable H{alpha} emission, with three exposures
+    nominally 9 minutes, 1 minute and 10 seconds. The dispersion is 580
+    Angstroems/mm at H{gamma} and about 1000 Angstroems/mm near H{alpha};
+    a Michigan objective prism of 4deg angle, was used to obtain the
+    H{alpha} plates.
+
+    The spectral classification system is that discussed by Slettebak and
+    Stock (1957) and Nassau and Stephenson (1960). An important result of
+    the generally excellent quality of the new survey plates is that the
+    ce stars (OB stars apparently having the Balmer continuum in emission)
+    are easily recognised.
+
+    The magnitudes are based upon eye estimates of image density on the
+    blue-region spectral plates, calibrated by published magnitude
+    sequences, and are generally characterised by a probable error of
+    1/3 to 1/4 mag.
+
+    The equatorial coordinates for the stars have been derived from
+    measurements of the objective-prism plates, using the SAO <I/131>
+    catalogue for reference stars.  The positions derived in this way are
+    accurate to 1" to 2" of arc, providing spectral lines are visible for
+    measurement. When spectral lines are not visible, the coordinate
+    parallel to the spectral dispersion -- always the declination --
+    becomes 10" or somewhat more uncertain.
+
+
+File Summary:
+--------------------------------------------------------------------------------
+ FileName    Lrecl    Records    Explanations
+--------------------------------------------------------------------------------
+ReadMe          80          .    This file
+main.dat       117       5132    The LSS Catalogue
+rem.dat         80        357    Remarks and Notes
+--------------------------------------------------------------------------------
+
+See also:
+    III/76 : Luminous Stars in the Northern Milky Way (Hardorp+ 1959-1965)
+      V/92 : Photometric and Spectroscopic Databases for LSS Stars (Reed+ 1997)
+    II/154 : Individual UBV Observations of LSS Stars (Drilling 1989)
+     V/125 : Photometry and Spectroscopy for Luminous Stars (Reed 2005)
+
+Byte-per-byte Description of file: main.dat
+--------------------------------------------------------------------------------
+   Bytes Format  Units   Label    Explanations
+--------------------------------------------------------------------------------
+   1-  3  A3     ---     Mod      [*] Not blank if modifications have been
+                                      done to the original catalogue
+   4-  7  I4     ---     LSS      [1/5132]+ Designation in the catalogue
+   9- 16  A8     ---     DM       Durchmusterung (BD north of -22deg, or CD)
+                                   identification from the original catalogue
+  17- 18  A2     ---   n_DM       [NSFP ] Note (North, South, Following,
+                                          Preceding) about DM identification
+  19- 32  A14    ---     SpType   Spectral type from original catalogue (1)
+  34- 36  I3     0.1mag  Pmag     ? Photographic magnitude
+      37  A1     ---   u_Pmag     Uncertainty flag (:) on Pmag
+  38- 39  I2     h       RAh      Right Ascension 1950 (hours)
+  40- 41  I2     min     RAm      Right Ascension 1950 (minutes)
+  42- 44  I3     0.1s    RAds     Right Ascension 1950 (deci-seconds)
+      45  A1     ---   u_RAds     Uncertainty flag (:) on RA
+      46  A1     ---     DE-      Declination 1950 (sign)
+  47- 48  I2     deg     DEd      Declination 1950 (degrees)
+  49- 50  I2     arcmin  DEm      Declination 1950 (minutes)
+  51- 52  I2     arcsec  DEs      Declination 1950 (seconds)
+      53  A1     ---   u_DEs      Uncertainty flag (:) on DE
+  54- 82  A29    ---     Rem      Remarks (2)
+  83- 96  A14    ---     DM1      Durchmusterung identification from CSI (3)
+  97-110  A14    ---     DM2      Second DM identification (3)
+ 111-117  A7     ---     HD       Henry Draper Catalogue identification
+                                  (followed by A or B for multiple, or
+                                  / for merged HD numbers)
+--------------------------------------------------------------------------------
+Note (1): spectral annotations (all reported in uppercase letters):
+    ce = the Balmer continuum appears to be in emission;
+    le = at least one emission line, nearly always a Balmer line,
+         is visible on a blue region plate;
+     h = H{alpha} was noted in emission on an independently
+         scanned H{alpha} plate;
+     r = the spectrum appears distinctly reddened;
+    rr = the spectrum appears extremely reddened.
+     : = a colon means that everything preceding it is uncertain,
+    () = parentheses mean that the data within the parentheses are uncertain;
+     ! = an exclamation point denotes that the datum immediately preceding
+         it is exceptionally pronounced.
+   Ia+ = A luminosity class of Ia+ indicates an apparent luminosity
+         brighter than Ia.
+     * = newer classifications by Reed and Beatty, 1995ApJS...97..189R
+Note (2): the remarks include:
+    * Previously published spectral type given in the catalogue of
+      Jaschek et al (1964) for HD stars;
+    * designation in the 2d edition of the General Catalogue of
+      Variable Stars for stars for which a DM number is given;
+    * presence in the Catatogue of Stars Suspected of Variability
+      (indicated by "CSV"), for stars with a DM number;
+    * designation in the Innes double-star catalogue (SDS) or that
+      of Aitken (ADS), for stars with a DM number;
+    * designation in the Bright Star Catalogue.
+    * the notation "Hbeta wk" means that the Balmer decrement
+      (not merely H{beta}) is abnormal, suggesting that there is unseen
+      line emission in the blue region.
+    * the remark that the ultraviolet is steep or weak usually means
+      that there is a suspicion of a Balmer jump.
+    * "Flat continuum" refers to an OB star that is unusually intense
+      in the ultraviolet and exceptionally lacking in apparent space
+      reddening; such stars are sometimes white dwarfs, hot subdwarfs,
+      old novae, etc.
+    * "R" indicates further remarks in the notes (file "rem.dat") to
+      the catalogue; these notes often contain information relevant to
+      identifying a star in a crowded region.
+Note (3): designations from the Catalogue of Stellar Identifications
+    (CSI developed at CDS) are indicated .. as the first two letters;
+    the other designations in the first two letters are BD (Bonn),
+    CD (Cordoba), or CP (Cape Photographic)
+--------------------------------------------------------------------------------
+
+Byte-per-byte Description of file: rem.dat
+--------------------------------------------------------------------------------
+   Bytes Format  Units   Label    Explanations
+--------------------------------------------------------------------------------
+   2-  5  I4     ---     LSS      [1/5132]+= Designation in the catalogue
+   7- 80  A74    ---     Text     Text of remarks; LSS is repeated when the
+                                    text is made of several lines
+--------------------------------------------------------------------------------
+
+See also:
+  III/76        : Luminous Stars in the Northern Milky Way.
+  J/ApJS/97/189 : A Spectroscopic Database for LSS stars by  Reed and Beatty
+
+References:
+  Jaschek, C., Conde, H., and Sierra, A.C., 1964, Obs. Astron.,
+    La Plata, Serie Astronomica, XXVIII (2).
+  Nassau, J.J., and Stephenson, C.B, 1960, Astrophys. J., 132, 131.
+  Slettebak, A,, and Stock, J. 1957, Zeitschr. Astroph., 42, 67.
+
+Historical Notes:
+  * Errors in the "Luminous Stars in the Milky Way"  reported by
+    Bischoff M. (1978BICDS..14...15B)
+  * Version 25-Oct-1993: First electronic description.
+  * Version 14-Apr-1994: HD number of LSS 1969 reported by S. Nishimura
+        changed from 30562G to 305627
+  * 05-Oct-1995: Standardized the Documentation at CDS, and added the
+    Description and Notes in this file.
+================================================================================
+(End)                                     Francois Ochsenbein [CDS]  05-Oct-1995

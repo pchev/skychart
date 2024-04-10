@@ -1,0 +1,187 @@
+III/76A    Luminous Stars in the Northern Milky Way (LS) (Hardorp+ 1959-1965)
+================================================================================
+Luminous Stars in the Northern Milky Way, Volumes I-VI
+     Hardorp J., Rohlfs K., Stock J., Slettebak A.
+    <Hamburg-Bergedorf I (1959)>
+     Stok J., Nassau J.J., Stephenson C.B.
+    <Hamburg-Bergedorf II (1960)>
+     Hardorp J., Theile I. Voigt H.H.
+    <Hamburg-Bergedorf III (1964)>
+     Nassau J.J., Stephenson C.B.
+    <Hamburg-Bergedorf IV (1963)>
+     Hardorp J., Theile I. Voigt H.H.
+    <Hamburg-Bergedorf V (1965)>
+     Nassau J.J., Stephenson C.B., Mac-Donnell D.J.
+    <Hamburg-Bergedorf VI (1965)>
+================================================================================
+ADC_Keywords: Stars, luminous ; Milky Way ; Spectral types
+
+Description:
+    The catalog contains a series of works published in the period 1959
+    to 1965, resulting from a joint survey of the Hamburg and Warner and
+    Swasey Observatories for early-type stars of high luminosity. This
+    survey was conducted using objective-prism plates taken with the
+    Schmidt telescopes of the Hamburg, Warner and Swasey, and University
+    of Michigan Observatories.
+
+    The catalog contains all stars of the six source publications in a
+    single file; the notes and remarks published in Volumes II, IV, and
+    VI are included in the separate file "notes.dat".
+
+File Summary:
+--------------------------------------------------------------------------------
+ FileName    Lrecl  Records    Explanations
+--------------------------------------------------------------------------------
+ReadMe          80        .    This file
+ls.dat          77     7392    The Catalogue
+notes.dat       80      167    Remarks originally in volumes II, IV and VI.
+--------------------------------------------------------------------------------
+
+See also:
+    III/43 : Luminous Stars in the Southern Milky Way (Stephenson+ 1971)
+     V/125 : Photometry and Spectroscopy for Luminous Stars (Reed 2005)
+
+Byte-by-byte Description of file: ls.dat
+--------------------------------------------------------------------------------
+  Bytes Format Units   Label    Explanations
+--------------------------------------------------------------------------------
+  1-  7  A7    ---     LS      *LS number in the form sign, zone, number
+      8  I1    ---     Vol     *[1/6]  Volume number of published catalogue in
+                                       which the star is listed.
+  9- 18  A10   ---     BD       Durchmusterung (BD present in bytes 9-10).
+                                   Bytes 11-13 contain the zone, and
+                                   bytes 14-18 the number in the zone.
+     19  A1    ---     m_BD    *Code for duplicity in BD designation
+ 20- 36  A17   ---     Sp      *Estimated spectral type.
+ 37- 39  I3    dmag    Pmag    *? Photographic magnitude (see also u_Pmag)
+     40  A1    ---     u_Pmag  *[:Vm] Remarks about accuracy, variability, band
+ 41- 42  I2    h       RAh      Right Ascension B1950 (hours)
+ 43- 44  I2    min     RAm      Right Ascension B1950 (minutes)
+ 45- 48  F4.1  s       RAs      Right Ascension B1950 (seconds)
+     49  A1    ---     DE-      Declination B1950 (sign)
+ 50- 51  I2    deg     DEd      Declination B1950 (degrees)
+ 52- 53  I2    arcmin  DEm      Declination B1950 (minutes)
+ 54- 55  I2    arcsec  DEs      ? Declination B1950 (seconds)
+     56  A1    ---     u_DEs    Colon (:) for uncertain coordinates.
+ 57- 76  A20   ---     Remarks *Remarks; an "*" indicates a note detailed
+                                    in the "notes.dat" file.
+     77  A1    ---     AGK2     [*] indicates an AGK2 star (volumes III and V)
+--------------------------------------------------------------------------------
+Note on LS, Vol:
+    The LS column is made of a declination zone (a sign and 2 digits),
+    followed by a running number in the zone.
+    Note that a complete LS designation must include the volume number,
+    since the same zone/number combination representing different stars
+    may exist in two or more volumes. In practice, the LS designation
+    is written e.g. "LS II +34 26" for star from volume 2, numbered 26
+    in zone +34{deg}.
+
+Note on m_BD:
+    The note includes e.g. P (primary or preceding), S (secondary),
+    F (following), or remarks (?, 9 = BD and BD+1 stars together).
+
+Note on Sp:
+    All characters are in upper case. For uncertain spectral types
+    (enclosed in parentheses) the left parenthesis occurs in byte 20,
+    e.g., it is possible to select all uncertain types by retrieving all
+    stars having a "(" in byte 20. The types are uniform enough to allow a
+    search of byte 21 for all O, B, A,... stars, but the luminosity
+    classes are not uniform. Plus and minus signs occur for their
+    superscript counterparts and the following abbreviations are employed:
+      CE - continuous emission near the Balmer limit
+      LE - line emission, usually >= 1 members of the Balmer series if not
+           otherwise specified, observed on the blue plates
+       H - H-alpha observed in emission
+       R - reddened
+       P - peculiar
+      () - enclose uncertain information
+       : - entire spectral type uncertain
+    Exclamation points (!) can occur in the field. The W for Wolf-Rayet
+    types is in byte 21. The entire field is blank when no data are given.
+
+Note on Pmag, u_Pmag:
+  The Pmag column contains generally a photographic magnitude, unless
+  the u_Pmag column contains a "m" indicating a visual or photovisual
+  magnitude (Ptv) taken from the Henry Draper Catalogue (Cat. <III/135>).
+  A 'V' in the u_Pmag column indicates a variable star, and a colon (:)
+  an uncertain magnitude.
+
+Note on Remarks:
+    The remarks include slit spectral classifications, mostly from
+    Morgan, Code and Whitford (1955ApJS....2...41M) and Hiltner
+    (1956ApJS....2..389H); Aitken double-star (ADS) identifications;
+    variable-star names; "AGK2" if star occurs in that catalogue (see Cat.
+    <I/61>) ; number of star included in the list of Brodskaya and Shajn
+    (1958IzKry..20..299B); and miscellaneous short remarks.
+    An "*" indicates a note detailed in the "notes.dat" file.
+--------------------------------------------------------------------------------
+
+Byte-by-byte Description of file: notes.dat
+--------------------------------------------------------------------------------
+  Bytes Format Units   Label   Explanations
+--------------------------------------------------------------------------------
+  1-  7  A7    ---     LS     *LS number, as in the file ls.dat
+      8  I1    ---     Vol    *[1/6]  Volume number, as in the file ls.dat
+ 10- 80  A71   ---     Text    Text of note
+--------------------------------------------------------------------------------
+Note on LS, Vol:
+     Columns are repeated when the note requires several lines.
+--------------------------------------------------------------------------------
+
+History:
+    The main part of LS catalogue was originally keypunched at CDS,
+    Strasbourg, as catalogue numbered III/15, around 1972.
+
+    It was later documented and completed by Wayne H. Warren Jr.,
+    at ADC/Goddard in 1982, as catalogue numbered III/76, with the
+    following changes (from document NSSDC/WDC-A-R&S 82-12):
+
+   "The LSN catalogue was received on magnetic tape from the Centre de
+    Donnees Stellaires, Strasbourg. As received, the single file had a
+    logical record length of 83 bytes. The following modifications and
+    additions were made to the catalogue at the Astronomical Data Center,
+    NASA Goddard Space Flight Center:
+    1.  Preceding zeroes were removed from the LSN number, BD number, and
+        m(pg) fields.
+    2.  LSN number zones from -00 degrees southward were coded 90, 91, ....
+        These were changed to -00, -01, -02, ... to match the real zones.
+        Signs were added to all LSN numbers and declination fields.
+    3.  Uncertain spectral types (surrounded by parentheses) were shifted
+        such that the "(" always occurs in byte 20 of the record.
+    4.  The characters "VAR" in a few mpg fields were changed to "999" so
+        that the field can be read with a numerical format specification
+        if desired.
+    5.  General editing was performed on the remarks field to separate words,
+        star names, etc., to correct punching errors (such as zero in O
+        spectral types, misspellings, etc.), and to add R codes to records
+        having remarks not indicated in the data file.  Duplicate stars,
+        indicated by I and II in the first column of volumes III and V)
+        are denoted by VOL I and VOL II in remarks.
+    6.  Commas in the coordinate fields to indicate lower accuracy were changed
+        to seconds of time and arcseconds in right ascension and declination so
+        that they will not interfere with numerical format specifications.
+    7.  All ampersands (&) were converted to plus (+) signs.  (They were present
+        due to the creation of the file in an older character coding system.)
+    8.  Bytes 74 to 82 of each record were found to be never used; hence, the
+        asterisks in byte 83 of the original records were moved to byte 77 and
+        the record length was shortened to 77 bytes.
+    9.  The completed file was sorted by increasing right ascension and added to
+        the catalogue as a second file.
+   10.  The remarks published in Volumes II, IV and VI were computerized and
+        added as the third file. "
+
+  * 07-Dec-2000: standardized documentation added at CDS (Francois Ochsenbein),
+    and two missing stars (volume IV, stars -12 59 and -00 5) were added.
+    The volume number was introduced in the notes, to remove the existing
+    ambiguities. This version of the LS was numbered III/76A.
+
+  * 26-Aug-2003: the hour of the right ascension of the four stars
+    LS I +63 197-200 have been corrected (from 02h to 03h)
+
+Acknowledgements:
+    A large fraction of this documentation was taken from the
+    "Documentation for the Machine-Readable version of Luminous Stars in
+    the Northern Milky Way" (April 1982) by Wayne H. Warren Jr., at
+    ADC/Goddard, document document NSSDC/WDC-A-R&S 82-12.
+================================================================================
+(End)                                   Francois Ochsenbein [CDS]    07-Dec-2000

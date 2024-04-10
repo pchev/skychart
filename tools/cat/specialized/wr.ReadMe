@@ -1,0 +1,257 @@
+CdC instruction:
+download files table13.dat table14.dat table15.dat table28.dat from III/215
+merge in a single file with the following command:
+paste table13.dat table14.dat table15.dat table28.dat | column -s $'\t' -t > wr.dat
+
+
+III/215          7th Catalog of Galactic Wolf-Rayet stars  (van der Hucht, 2001)
+================================================================================
+The Seventh Catalogue of Galactic Wolf-Rayet stars
+     van der Hucht K.A.
+    <New Astronomy Reviews 45, 135 (2001)>
+    =2001NewAR..45..135V
+================================================================================
+ADC_Keywords: Stars, Wolf-Rayet ;
+Keywords: Catalogs; Galaxy: center; Galaxy: evolution;
+          Galaxy: open clusters and associations: general;
+          Galaxy: solar neighbourhood; Galaxy: structure;
+          Galaxy: stellar content; ISM: H I bubbles; ISM: H II regions;
+          ISM: ring nebulae; Stars: binaries: spectroscopic;
+          Stars: binaries: visual; Stars: circumstellar matter: dust;
+          Stars: distances; Stars: evolution; Stars: fundamental parameters;
+          Stars: masses; Stars: statistics; Stars: winds; Stars: Wolf Rayet
+
+Description:
+    The VIIth catalogue of galactic Population I Wolf Rayet stars provides
+    improved  coordinates,  spectral types  and bv photometry  of known WR
+    stars  and adds  71 new WR stars  to the previous  WR catalogue.  This
+    census  of galactic  WR stars  reaches 227  stars,  comprising  127 WN
+    stars,  87 WC stars,  10 WN/WC stars and 3 WO stars.  This includes 15
+    WNL  and 11 WCL stars within 30 pc of the Galactic Center.  We compile
+    and  discuss WR  spectral classification,   variability,  periodicity,
+    binarity, terminal wind velocities, correlation with open clusters and
+    OB  associations,  and correlation with H I bubbles,  H II regions and
+    ring nebulae.  Intrinsic  colours and  absolute visual  magnitudes per
+    subtype  are re-assessed for a re-determination of optical photometric
+    distances  and  galactic  distribution  of  WR  stars.  In  the  solar
+    neighbourhood we find  projected  on  the  galactic  plane  a  surface
+    density of 3.3 WR stars per kpc^2^,  with a WC/WN number ratio of 1.5,
+    and  a WR binary frequency (including probable binaries)  of 39%.  The
+    galactocentric  distance (R_WR_)  distribution per subtype shows R_WR_
+    increasing with decreasing  WR  subtype,   both  for  the  WN  and  WC
+    subtypes.  This R_WR_  distribution  allows  for  the  possibility  of
+    WNE->WCE and WNL->WCL subtype evolution.
+
+    The successive catalogues of galactic WR stars are:
+    I    55 stars  Campbell, 1884 Astronomy and Astrophysics 13, 448
+                   (Northfield, Minn: Goodsell Observatory)
+    II  108 stars  Fleming, 1912 Harvard College Obs. Ann. 56, 165
+    III  92 stars  Payne, 1930 The Stars of High Luminosity,
+                   Harvard Obs. Monographs No. 3, p. 19
+    IV  123 stars  Roberts, 1962AJ.....67...79R
+    V   127 stars  Smith, 1968MNRAS.138..109S
+    VI  157 stars  van der Hucht et al., 1981SSRv...28..227V
+    VII 227 stars  van der Hucht, 2001NewAR..45..135V, this paper
+
+File Summary:
+--------------------------------------------------------------------------------
+ FileName    Lrecl  Records   Explanations
+--------------------------------------------------------------------------------
+ReadMe          80        .   This file
+table13.dat    148      226   Locations of galactic WR stars
+table14.dat    213      226   Environment of galactic WR stars
+table15.dat    232      226   Parameters of galactic WR stars
+table28.dat    187      226   Photometric distances of galactic WR stars
+refs.dat        80      440   References quoted in tables
+notes.txt       80      569   Notes from all tables
+allrefs.dat    430      683   All references of the paper
+addendum.txt    76       60   Some new WR stars (included in next edition)
+--------------------------------------------------------------------------------
+
+See also:
+    ftp://saturn.sron.nl/pub/karelh/UPLOADS/VIIWRCAT.dir : FTP site
+
+Byte-by-byte Description of file: table13.dat
+--------------------------------------------------------------------------------
+   Bytes Format Units   Label     Explanations
+--------------------------------------------------------------------------------
+       1  A1    ---     New       [N*] non-blank indicates a new star, and
+                                       * indicates a note in the file notes.txt
+   2-  6  A5    ---     WR        Running number from the VIth Catalogue (1)
+   9- 22  A14   ---     Name      Star name (2)
+  26- 34  A9    ---     GCVS      Variable star name
+  38- 52  A15   ---     OName     Other name HD, Th, He3-, Wra, or AS (2)
+  56- 67  A12   ---     LS        LS, LSS, SPH and SS catalogue numbers
+  70- 83  A14   ---     Aname     Astrometric catalogue numbers (3)
+  87- 88  I2    h       RAh       Right Ascension J2000 (hours)
+  90- 91  I2    min     RAm       Right Ascension J2000 (minutes)
+  93- 97  F5.2  s       RAs       Right Ascension J2000 (seconds)
+     101  A1    ---     DE-       Declination J2000 (sign)
+ 102-103  I2    deg     DEd       Declination J2000 (degrees)
+ 105-106  I2    arcmin  DEm       Declination J2000 (minutes)
+ 108-112  F5.2  arcsec  DEs       Declination J2000 (seconds)
+ 116-120  A5    ---   r_Pos       Position Reference
+ 123-128  F6.2  deg     GLON      Galactic Longitude
+ 131-136  F6.2  deg     GLAT      Galactic Latitude
+ 140-148  A9    ---   r_FC        References for finding charts
+--------------------------------------------------------------------------------
+
+Note (1): VIth catalogue by van der Hucht et al., 1981SSRv...28..227V
+
+Note (2): Bayer name, HR number, IC number, and miscellaneous
+     designations from discovery papers listed in file refs.dat
+
+Note (3): Astrometric catalogue numbers from:
+    Hip : ESA 1997, The Hipparcos and Tycho Catalogues,
+          The Hipparcos Catalogue, 1997, ESA-SP1200, Cat. <I/239>
+    PPM : Roser & Bastian 1991, Cats <I/146> and <I/193>
+    GSC : Guide Star Catalog, Jenkner et al. 1990, Cat. <I/220>
+    Tyc : ESA 1997, The Hipparcos and Tycho Catalogues, ESA-SP1200, Cat. <I/239>
+--------------------------------------------------------------------------------
+
+Byte-by-byte Description of file: table14.dat
+--------------------------------------------------------------------------------
+   Bytes Format Units  Label  Explanations
+--------------------------------------------------------------------------------
+   2-  6  A5    ---    WR     Running number as in table13
+   9- 25  A17   ---    Name   Other name of the star
+  29- 44  A16   ---    OpCl   Correlation with open cluster (G1)
+  48- 60  A13   ---    OB     Correlation with OB association (G1)
+  64- 85  A22   ---  r_OB     References of correlation with cluster/association
+  89-147  A59   ---    Neb    Correlation with ring nebula, HII region,
+                                or HI bubble (1)
+ 151-213  A63   ---  r_Neb    References of correlations with nebulae
+--------------------------------------------------------------------------------
+Note (1): abbreviations used:
+    r       : ring
+    2r      : double ring
+    3r      : triple ring
+    r:      : probable ring
+    diff.   : diffuse
+    v. diff.: very diffuse
+    ext.    : extended
+    fil.    : filamentary [OIII]
+--------------------------------------------------------------------------------
+
+
+Byte-by-byte Description of file: table15.dat
+--------------------------------------------------------------------------------
+   Bytes Format Units   Label  Explanations
+--------------------------------------------------------------------------------
+   2-  6  A5    ---     WR     Running number as in table13
+   9- 25  A17   ---     Name   Other name of the star
+  29- 44  A16   ---     SpType MK Spectral Classification (1)
+  48- 61  A14   ---   r_SpType References of the Spectral Classification
+      64  A1    ---   l_vmag   Limit flag on vmag
+  65- 69  F5.2  mag     vmag   ?Magnitude in Smith system (1968MNRAS.138..109S)
+      70  A1    ---   u_vmag   [:)] Uncertainty flag
+  75- 79  F5.2  mag     b-v    ?Color index in Smith sys. (1968MNRAS.138..109S)
+      80  A1    ---   u_b-v    [:)] Uncertainty flag
+  84- 88  A5    ---   r_vmag   Reference of the photometry
+  92- 95  I4    km/s    vinf   ? Terminal wind velocity (2)
+      96  A1    ---     ---    [-] Indicates a range
+  97-100  I4    km/s    vinf2  ? Upper range of vinf
+ 104-112  A9    ---   r_vinf   References for vinf
+     116  A1    ---   l_Per    [>~] Limit flag on Per
+ 117-125  F9.4  d       Per    ? Periodicity
+ 126-156  A31   ---   n_Per    Notes on period: mean errors, Other periods, etc
+ 160-178  A19   ---     Binary Notes about binarity (G1)
+ 182-232  A51   ---   r_Per    References for Periodicities, Binarity,etc
+--------------------------------------------------------------------------------
+Note (1): a complete description of the spectral classification for WR
+    stars can be found in: van der Hucht, K.A. 1996, in: J.-M. Vreux, A.
+    Detal, D. Frai pont-Caro, E. Gosset & G. Rauw (eds.), Wolf-Rayet Stars
+    in the Framework of Stel lar Evolution, Proc. 33rd Liege Int. Astroph.
+    Coll. (Liege: Univ. of Liege), p.1.
+
+    Abbreviations used:
+    d  : persistent hot dust formation
+    ed : episodic hot dust formation
+    pd : periodic hot dust formation
+    vd : variable persistent hot dust formation
+
+Note (2):
+    Terminal wind velocity from (in order of preference)
+    - P-Cyg profiles of IR HeI lines;
+    - P-Cyg profiles of UV resonance lines, where
+      vinf = Vblack = 0.76 Vedge, see Prinja et al. 1990ApJ...361..607P);
+    - optical emission lines (Torres et al. 1986ApJ...300..379T)
+      corrected with a factor 0.83 (Prinja et al. 1990ApJ...361..607P):
+--------------------------------------------------------------------------------
+
+Byte-by-byte Description of file: table28.dat
+--------------------------------------------------------------------------------
+   Bytes Format Units   Label     Explanations
+--------------------------------------------------------------------------------
+   2-  6  A5    ---     WR        Running number as in table13
+   9- 24  A16   ---     Name      Other name of the star
+  27- 46  A20   ---     SpType    MK Spectral Classification
+      50  A1    ---   l_vmag      Limit flag on vmag
+  51- 55  F5.2  mag     vmag      ? Magnitude in Smith'68 system
+      56  A1    ---   u_vmag      [:)] Uncertanty flag
+  61- 65  F5.2  mag     b-v       ? Color index in Smith'68 system
+      66  A1    ---   u_b-v       [:)] Uncertanty flag
+  70- 74  F5.2  mag     (b-v)0    ? Intrinsic color
+  78- 82  F5.2  mag     E(b-v)    ? Color excess
+      83  A1    ---   u_E(b-v)    [)] Uncertainty flag
+  87- 91  F5.2  mag     Av        ? Interstellar Absorption
+  95- 99  F5.2  mag     v0        ? Unreddened v magnitude
+ 103-107  F5.2  mag     Mv(WR)    ? Absolute magnitude of the WR star
+ 111-115  F5.2  mag     dM        ? Magnitude difference with companion
+                                        M(comp) - M(WR)
+ 119-123  F5.2  mag     Mv(sys)   ? Absolute magnitude of system (when multiple)
+ 128-132  F5.2  mag     v0-Mv     ? Distance modulus
+ 136-140  F5.2  kpc     d         ? Distance
+ 144-148  I5    pc      z         ? Distance from the galactic plane,
+                                        positive towards North
+ 152-156  F5.2  kpc     R         ? Galactocentric distance
+ 159-181  A23   ---     ClOB      Correlation with cluster/OB association
+     187  A1    ---     Note      [*] Indicates a note detailed in notes.dat
+--------------------------------------------------------------------------------
+
+
+Byte-by-byte Description of file: refs.dat
+--------------------------------------------------------------------------------
+   Bytes Format Units   Label     Explanations
+--------------------------------------------------------------------------------
+   1-  6  A6    ---     Ref       Reference code used in the tables
+                                    (repeated when several lines)
+   8- 80  A73   ---     Text      Text of reference, starting by the
+                                    19-digit bibcode
+--------------------------------------------------------------------------------
+
+Byte-by-byte Description of file: allrefs.dat
+--------------------------------------------------------------------------------
+   Bytes Format Units   Label     Explanations
+--------------------------------------------------------------------------------
+   1- 19  A19   ---     BibCode   19-digit bibcode
+  21-430  A410  ---     Text      Details of reference
+--------------------------------------------------------------------------------
+
+Global Notes:
+Note (G1): abbreviations and symbols used:
+      : means probable open cluster / OB association member according to
+        Lundstrom & Stenholm 1984A&AS...58..163L
+      ? means possible open cluster / OB association member according to
+        Lundstr\"om & Stenholm 1984A&AS...58..163L
+     () spectral type of visual binary (VB) component.
+      a absorption line(s) present in optical spectrum.
+    CWB colliding wind binary.
+ d.e.l. diluted emission lines.
+   t.w. this work.
+
+History:
+  * 01-Apr-2001: From the FTP site
+    ftp://saturn.sron.nl/pub/karelh/UPLOADS/VIIWRCAT.dir
+  * 23-Jul-2001: 8 truncated LS numbers corrected for WR#
+    119 151 152 153 154 155 156 157
+  * 23-Jun-2005: file "addendum.txt" lists 24 new WR stars which
+    will be included in the next edition.
+
+Author's address:
+    Karel A. van der Hucht
+    Space Research Organization Netherlands, Sorbonnelaan 2,
+    N 3584 CA Utrecht, The Netherlands
+    K.A.van.der.Hucht@sron.nl
+================================================================================
+(End)                                   Francois Ochsenbein [CDS]    21-May-2001
