@@ -43,6 +43,8 @@ type
     addobj: TButton;
     addcat: TButton;
     Button1: TButton;
+    Button2: TButton;
+    Button3: TButton;
     Button5: TButton;
     Button6: TButton;
     Button7: TButton;
@@ -181,6 +183,8 @@ type
     PageControl1: TPageControl;
     procedure addobjClick(Sender: TObject);
     procedure Button1Click(Sender: TObject);
+    procedure Button2Click(Sender: TObject);
+    procedure Button3Click(Sender: TObject);
     procedure ButtonInstallCatClick(Sender: TObject);
     procedure Button5Click(Sender: TObject);
     procedure Button6Click(Sender: TObject);
@@ -248,6 +252,7 @@ type
     procedure DeleteObjRow(p: integer);
     procedure ReloadFeedback(txt: string);
     procedure Upd290List(path: string);
+    procedure MoveCatalogRow(direction:integer);
   public
     { Public declarations }
     catalog: Tcatalog;
@@ -1498,6 +1503,36 @@ begin
   url := 'file://' + slash(VODir) + stringgrid4.cells[2, p];
   if assigned(FSendVoTable) then
     FSendVoTable(client, tname, tid, url);
+end;
+
+procedure Tf_config_catalog.MoveCatalogRow(direction:integer);
+var
+  rfrom,rto: integer;
+  g: TStringGrid;
+begin
+  case PageControlGCat.ActivePageIndex of
+    0: g := CatalogGridStar;
+    1: g := CatalogGridVar;
+    2: g := CatalogGridDbl;
+    3: g := CatalogGridNeb;
+    4: g := CatalogGridLin;
+  end;
+  rfrom := g.selection.top;
+  if rfrom <= ReservedRow[g.Tag] then exit;
+  rto := rfrom + direction;
+  if (rto <= ReservedRow[g.Tag]) or (rto >= g.RowCount) then exit;
+  g.ExchangeColRow(false,rfrom,rto);
+end;
+
+
+procedure Tf_config_catalog.Button2Click(Sender: TObject);
+begin
+  MoveCatalogRow(-1);
+end;
+
+procedure Tf_config_catalog.Button3Click(Sender: TObject);
+begin
+  MoveCatalogRow(1);
 end;
 
 procedure Tf_config_catalog.ButtonInstallCatClick(Sender: TObject);

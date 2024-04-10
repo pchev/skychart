@@ -260,6 +260,24 @@ object f_config_catalog: Tf_config_catalog
             ParentFont = False
             TabOrder = 2
           end
+          object Button2: TButton
+            Left = 368
+            Height = 25
+            Top = 1
+            Width = 40
+            Caption = '^'
+            OnClick = Button2Click
+            TabOrder = 3
+          end
+          object Button3: TButton
+            Left = 425
+            Height = 25
+            Top = 1
+            Width = 40
+            Caption = 'v'
+            OnClick = Button3Click
+            TabOrder = 4
+          end
         end
         object PageControlGCat: TPageControl
           Left = 0
@@ -351,7 +369,7 @@ object f_config_catalog: Tf_config_catalog
               DefaultColWidth = 24
               DefaultRowHeight = 24
               GridLineWidth = 0
-              Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goRowMoving, goEditing, goAlwaysShowEditor]
+              Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goEditing, goAlwaysShowEditor]
               ParentFont = False
               RowCount = 2
               TabOrder = 0
@@ -444,7 +462,7 @@ object f_config_catalog: Tf_config_catalog
               DefaultColWidth = 24
               DefaultRowHeight = 24
               GridLineWidth = 0
-              Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goRowMoving, goEditing, goAlwaysShowEditor]
+              Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goEditing, goAlwaysShowEditor]
               ParentFont = False
               RowCount = 2
               TabOrder = 0
@@ -537,7 +555,7 @@ object f_config_catalog: Tf_config_catalog
               DefaultColWidth = 24
               DefaultRowHeight = 24
               GridLineWidth = 0
-              Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goRowMoving, goEditing, goAlwaysShowEditor]
+              Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goEditing, goAlwaysShowEditor]
               ParentFont = False
               RowCount = 2
               TabOrder = 0
@@ -630,7 +648,7 @@ object f_config_catalog: Tf_config_catalog
               DefaultColWidth = 24
               DefaultRowHeight = 24
               GridLineWidth = 0
-              Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goRowMoving, goEditing, goAlwaysShowEditor]
+              Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goEditing, goAlwaysShowEditor]
               ParentFont = False
               RowCount = 2
               TabOrder = 0
@@ -723,7 +741,7 @@ object f_config_catalog: Tf_config_catalog
               DefaultColWidth = 24
               DefaultRowHeight = 24
               GridLineWidth = 0
-              Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goRowMoving, goEditing, goAlwaysShowEditor]
+              Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goEditing, goAlwaysShowEditor]
               ParentFont = False
               RowCount = 2
               TabOrder = 0
