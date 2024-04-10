@@ -192,6 +192,7 @@ type
     procedure Button8Click(Sender: TObject);
     procedure Button9Click(Sender: TObject);
     procedure CatalogGridMouseDown(Sender: TObject; Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
+    procedure CatalogGridGetCellHint(Sender: TObject; ACol, ARow: Integer; var HintText: String);
     procedure CatgenClick(Sender: TObject);
     procedure delobjClick(Sender: TObject);
     procedure hnNameChange(Sender: TObject);
@@ -554,9 +555,10 @@ end;
 
 procedure Tf_config_catalog.ShowGCat;
 var
-  i, j, n: integer;
+  i, j, n, v: integer;
   ncolor,scolor: boolean;
-  caturl: string;
+  caturl,ver,longname: string;
+  magmax: single;
   g: TStringGrid;
 
   procedure GCatTitle(grid: TStringGrid);
@@ -611,6 +613,8 @@ begin
     end;
     g.RowCount := g.RowCount+1;
     i := g.RowCount - 1;
+    catalog.GetInfo(systoutf8(ccat.GCatLst[j].path), ccat.GCatLst[j].shortname, magmax,v,ver,longname);
+    g.cells[5, i] := longname;
     g.cells[1, i] := ccat.GCatLst[j].shortname;
     g.cells[2, i] := formatfloat(f0, ccat.GCatLst[j].min);
     g.cells[3, i] := formatfloat(f0, ccat.GCatLst[j].max);
@@ -776,6 +780,8 @@ begin
      end
     else if (Acol = 5) and (Arow > 0) then
     begin
+      Canvas.Brush.Color := clWindow;
+      Canvas.FillRect(Rect);
       ImageList1.Draw(Canvas, Rect.left + 2, Rect.top + 2, 0);
     end
     else if (Acol = 6) and (Arow > 0) then
@@ -812,6 +818,15 @@ var
 begin
   TStringGrid(sender).MouseToCell(X, Y, Col, Row);
   RowMouseDown:=row;
+end;
+
+procedure Tf_config_catalog.CatalogGridGetCellHint(Sender: TObject; ACol, ARow: Integer; var HintText: String);
+begin
+  if ARow>0 then begin
+    HintText:=TStringGrid(Sender).Cells[5, ARow];
+    if HintText='' then
+      HintText:=TStringGrid(Sender).Cells[1, ARow];
+  end;
 end;
 
 procedure Tf_config_catalog.CatalogGridMouseUp(Sender: TObject;
