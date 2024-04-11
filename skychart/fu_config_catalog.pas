@@ -652,6 +652,11 @@ begin
     else
       g.cells[7, i] := '0';
   end;
+  CatalogGridStar.ClearSelections;
+  CatalogGridVar.ClearSelections;
+  CatalogGridDbl.ClearSelections;
+  CatalogGridNeb.ClearSelections;
+  CatalogGridLin.ClearSelections;
 end;
 
 function changetext(newtext, oldtext: string): string;
@@ -788,7 +793,8 @@ begin
     begin
       Canvas.Brush.Color := clWindow;
       Canvas.FillRect(Rect);
-      ImageList1.Draw(Canvas, Rect.left + 2, Rect.top + 2, 0);
+      if (ARow > ReservedRow[TStringGrid(Sender).tag]) then
+        ImageList1.Draw(Canvas, Rect.left + 2, Rect.top + 2, 0);
     end
     else if (Acol = 6) and (Arow > 0) then
     begin
@@ -886,7 +892,8 @@ begin
     end;
     5:
     begin
-      EditGCatPath(TStringGrid(sender), row);
+      if (row>ReservedRow[TStringGrid(Sender).tag]) then
+        EditGCatPath(TStringGrid(sender), row);
     end;
     6:
     begin
@@ -1038,7 +1045,9 @@ end;
 procedure Tf_config_catalog.CatalogGridSelectCell(Sender: TObject;
   ACol, ARow: integer; var CanSelect: boolean);
 begin
-  if (Acol = 5) or (Acol = 6) or (Acol = 7) or ((Acol = 1)and(ARow<=ReservedRow[TStringGrid(Sender).tag])) then
+  if (Acol = 5) or (Acol = 6) or (Acol = 7) or
+     ((Acol = 4) and (ARow<=ReservedRow[TStringGrid(Sender).tag]) and(TStringGrid(Sender).Cells[1,arow]<>'Gaia Catalog') ) or
+     (((Acol = 1)or(Acol = 5))and(ARow<=ReservedRow[TStringGrid(Sender).tag])) then
     canselect := False
   else
     canselect := True;
@@ -1049,20 +1058,24 @@ procedure Tf_config_catalog.CatalogGridSetEditText(Sender: TObject;
 var
   i: integer;
 begin
-  if (Acol = 4) and (Arow > 0) then
-    if not fileexists(slash(Value) + TStringGrid(sender).cells[1, arow] + '.hdr') then
-    begin
-      TStringGrid(sender).Canvas.Brush.Color := clRed;
-      TStringGrid(sender).Canvas.FillRect(TStringGrid(sender).CellRect(ACol, ARow));
-      TStringGrid(sender).cells[0, arow] := '0';
+  if (Acol = 4) and (Arow > 0) then begin
+    if (TStringGrid(sender).tag=1) and (arow=2) then begin  // gaia
+      if (not DirectoryExists(slash(Value) + 'gaia1')) then
+         TStringGrid(sender).cells[0, arow] := '0';
+    end
+    else begin
+      if (not fileexists(slash(Value) + TStringGrid(sender).cells[1, arow] + '.hdr')) then
+        TStringGrid(sender).cells[0, arow] := '0';
     end;
-  if (Acol = 1) and (Arow > 0) then
+  end;
+  if (Acol = 1) and (Arow > 0) then begin
     if not fileexists(slash(TStringGrid(sender).cells[4, arow]) + Value + '.hdr') then
     begin
       TStringGrid(sender).Canvas.Brush.Color := clRed;
       TStringGrid(sender).Canvas.FillRect(TStringGrid(sender).CellRect(ACol, ARow));
       TStringGrid(sender).cells[0, arow] := '0';
     end;
+  end;
   if ((Acol = 2) or (Acol = 3)) and (Arow > 0) and (Value > '') then
   begin
     if not IsNumber(Value) then

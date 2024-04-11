@@ -308,6 +308,8 @@ object f_config_catalog: Tf_config_catalog
                 end              
                 item
                   ButtonStyle = cbsPickList
+                  DropDownRows = 11
+                  MinSize = 15
                   MaxSize = 202
                   PickList.Strings = (
                     '0'
@@ -322,11 +324,13 @@ object f_config_catalog: Tf_config_catalog
                     '9'
                     '10'
                   )
+                  ReadOnly = False
                   Title.Caption = 'Min'
-                  Width = 40
+                  Width = 50
                 end              
                 item
                   ButtonStyle = cbsPickList
+                  DropDownRows = 11
                   MaxSize = 202
                   PickList.Strings = (
                     '0'
@@ -342,7 +346,7 @@ object f_config_catalog: Tf_config_catalog
                     '10'
                   )
                   Title.Caption = 'Max'
-                  Width = 40
+                  Width = 50
                 end              
                 item
                   Alignment = taRightJustify
@@ -377,6 +381,7 @@ object f_config_catalog: Tf_config_catalog
               DefaultColWidth = 24
               DefaultRowHeight = 24
               GridLineWidth = 0
+              MouseWheelOption = mwGrid
               Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goEditing, goAlwaysShowEditor, goCellHints]
               ParentFont = False
               ParentShowHint = False
@@ -412,6 +417,7 @@ object f_config_catalog: Tf_config_catalog
                 end              
                 item
                   ButtonStyle = cbsPickList
+                  DropDownRows = 11
                   MaxSize = 202
                   PickList.Strings = (
                     '0'
@@ -427,10 +433,11 @@ object f_config_catalog: Tf_config_catalog
                     '10'
                   )
                   Title.Caption = 'Min'
-                  Width = 40
+                  Width = 50
                 end              
                 item
                   ButtonStyle = cbsPickList
+                  DropDownRows = 11
                   MaxSize = 202
                   PickList.Strings = (
                     '0'
@@ -446,7 +453,7 @@ object f_config_catalog: Tf_config_catalog
                     '10'
                   )
                   Title.Caption = 'Max'
-                  Width = 40
+                  Width = 50
                 end              
                 item
                   Alignment = taRightJustify
@@ -481,6 +488,7 @@ object f_config_catalog: Tf_config_catalog
               DefaultColWidth = 24
               DefaultRowHeight = 24
               GridLineWidth = 0
+              MouseWheelOption = mwGrid
               Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goEditing, goAlwaysShowEditor, goCellHints]
               ParentFont = False
               ParentShowHint = False
@@ -516,6 +524,7 @@ object f_config_catalog: Tf_config_catalog
                 end              
                 item
                   ButtonStyle = cbsPickList
+                  DropDownRows = 11
                   MaxSize = 202
                   PickList.Strings = (
                     '0'
@@ -531,10 +540,11 @@ object f_config_catalog: Tf_config_catalog
                     '10'
                   )
                   Title.Caption = 'Min'
-                  Width = 40
+                  Width = 50
                 end              
                 item
                   ButtonStyle = cbsPickList
+                  DropDownRows = 11
                   MaxSize = 202
                   PickList.Strings = (
                     '0'
@@ -550,7 +560,7 @@ object f_config_catalog: Tf_config_catalog
                     '10'
                   )
                   Title.Caption = 'Max'
-                  Width = 40
+                  Width = 50
                 end              
                 item
                   Alignment = taRightJustify
@@ -585,6 +595,7 @@ object f_config_catalog: Tf_config_catalog
               DefaultColWidth = 24
               DefaultRowHeight = 24
               GridLineWidth = 0
+              MouseWheelOption = mwGrid
               Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goEditing, goAlwaysShowEditor, goCellHints]
               ParentFont = False
               ParentShowHint = False
@@ -620,6 +631,7 @@ object f_config_catalog: Tf_config_catalog
                 end              
                 item
                   ButtonStyle = cbsPickList
+                  DropDownRows = 11
                   MaxSize = 202
                   PickList.Strings = (
                     '0'
@@ -635,10 +647,11 @@ object f_config_catalog: Tf_config_catalog
                     '10'
                   )
                   Title.Caption = 'Min'
-                  Width = 40
+                  Width = 50
                 end              
                 item
                   ButtonStyle = cbsPickList
+                  DropDownRows = 11
                   MaxSize = 202
                   PickList.Strings = (
                     '0'
@@ -654,7 +667,7 @@ object f_config_catalog: Tf_config_catalog
                     '10'
                   )
                   Title.Caption = 'Max'
-                  Width = 40
+                  Width = 50
                 end              
                 item
                   Alignment = taRightJustify
@@ -689,6 +702,7 @@ object f_config_catalog: Tf_config_catalog
               DefaultColWidth = 24
               DefaultRowHeight = 24
               GridLineWidth = 0
+              MouseWheelOption = mwGrid
               Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goEditing, goAlwaysShowEditor, goCellHints]
               ParentFont = False
               ParentShowHint = False
@@ -724,6 +738,7 @@ object f_config_catalog: Tf_config_catalog
                 end              
                 item
                   ButtonStyle = cbsPickList
+                  DropDownRows = 11
                   MaxSize = 202
                   PickList.Strings = (
                     '0'
@@ -739,10 +754,11 @@ object f_config_catalog: Tf_config_catalog
                     '10'
                   )
                   Title.Caption = 'Min'
-                  Width = 40
+                  Width = 50
                 end              
                 item
                   ButtonStyle = cbsPickList
+                  DropDownRows = 11
                   MaxSize = 202
                   PickList.Strings = (
                     '0'
@@ -758,7 +774,7 @@ object f_config_catalog: Tf_config_catalog
                     '10'
                   )
                   Title.Caption = 'Max'
-                  Width = 40
+                  Width = 50
                 end              
                 item
                   Alignment = taRightJustify
@@ -793,6 +809,7 @@ object f_config_catalog: Tf_config_catalog
               DefaultColWidth = 24
               DefaultRowHeight = 24
               GridLineWidth = 0
+              MouseWheelOption = mwGrid
               Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goEditing, goAlwaysShowEditor, goCellHints]
               ParentFont = False
               ParentShowHint = False
