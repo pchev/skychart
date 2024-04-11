@@ -299,7 +299,7 @@ object f_config_catalog: Tf_config_catalog
               Top = 0
               Width = 494
               Align = alClient
-              ColCount = 10
+              ColCount = 11
               Columns = <              
                 item
                   MaxSize = 202
@@ -324,7 +324,6 @@ object f_config_catalog: Tf_config_catalog
                     '9'
                     '10'
                   )
-                  ReadOnly = False
                   Title.Caption = 'Min'
                   Width = 50
                 end              
@@ -376,6 +375,10 @@ object f_config_catalog: Tf_config_catalog
                 end              
                 item
                   Title.Caption = 'size'
+                  Visible = False
+                end              
+                item
+                  Title.Caption = 'label'
                   Visible = False
                 end>
               DefaultColWidth = 24
@@ -408,7 +411,7 @@ object f_config_catalog: Tf_config_catalog
               Top = 0
               Width = 494
               Align = alClient
-              ColCount = 10
+              ColCount = 11
               Columns = <              
                 item
                   MaxSize = 202
@@ -483,6 +486,10 @@ object f_config_catalog: Tf_config_catalog
                 end              
                 item
                   Title.Caption = 'size'
+                  Visible = False
+                end              
+                item
+                  Title.Caption = 'label'
                   Visible = False
                 end>
               DefaultColWidth = 24
@@ -515,7 +522,7 @@ object f_config_catalog: Tf_config_catalog
               Top = 0
               Width = 494
               Align = alClient
-              ColCount = 10
+              ColCount = 11
               Columns = <              
                 item
                   MaxSize = 202
@@ -590,6 +597,10 @@ object f_config_catalog: Tf_config_catalog
                 end              
                 item
                   Title.Caption = 'size'
+                  Visible = False
+                end              
+                item
+                  Title.Caption = 'label'
                   Visible = False
                 end>
               DefaultColWidth = 24
@@ -622,7 +633,7 @@ object f_config_catalog: Tf_config_catalog
               Top = 0
               Width = 494
               Align = alClient
-              ColCount = 10
+              ColCount = 11
               Columns = <              
                 item
                   MaxSize = 202
@@ -697,6 +708,10 @@ object f_config_catalog: Tf_config_catalog
                 end              
                 item
                   Title.Caption = 'size'
+                  Visible = False
+                end              
+                item
+                  Title.Caption = 'label'
                   Visible = False
                 end>
               DefaultColWidth = 24
@@ -729,7 +744,7 @@ object f_config_catalog: Tf_config_catalog
               Top = 0
               Width = 494
               Align = alClient
-              ColCount = 10
+              ColCount = 11
               Columns = <              
                 item
                   MaxSize = 202
@@ -804,6 +819,10 @@ object f_config_catalog: Tf_config_catalog
                 end              
                 item
                   Title.Caption = 'size'
+                  Visible = False
+                end              
+                item
+                  Title.Caption = 'label'
                   Visible = False
                 end>
               DefaultColWidth = 24

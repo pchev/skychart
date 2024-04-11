@@ -35,6 +35,7 @@ type
   Tf_catalog_detail = class(TForm)
     Button1: TButton;
     Button2: TButton;
+    cbLabel: TCheckBox;
     ColorBox1: TColorBox;
     Label1: TLabel;
     Label24: TLabel;

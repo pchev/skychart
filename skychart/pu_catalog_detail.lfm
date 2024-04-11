@@ -1,14 +1,14 @@
 object f_catalog_detail: Tf_catalog_detail
   Left = 369
-  Height = 212
+  Height = 236
   Top = 30
   Width = 279
   Caption = 'f_catalog_detail'
-  ClientHeight = 212
+  ClientHeight = 236
   ClientWidth = 279
   object PageControl1: TPageControl
     Left = 0
-    Height = 170
+    Height = 194
     Top = 0
     Width = 279
     ActivePage = TabSheetStar
@@ -18,7 +18,7 @@ object f_catalog_detail: Tf_catalog_detail
     TabOrder = 0
     object TabSheetStar: TTabSheet
       Caption = 'TabSheetStar'
-      ClientHeight = 166
+      ClientHeight = 190
       ClientWidth = 275
       object Label24: TLabel
         Left = 24
@@ -98,12 +98,20 @@ object f_catalog_detail: Tf_catalog_detail
           TabOrder = 1
         end
       end
+      object cbLabel: TCheckBox
+        Left = 24
+        Height = 22
+        Top = 160
+        Width = 94
+        Caption = 'Show label'
+        TabOrder = 2
+      end
     end
   end
   object Panel1: TPanel
     Left = 0
     Height = 42
-    Top = 170
+    Top = 194
     Width = 279
     Align = alBottom
     ClientHeight = 42

@@ -1257,6 +1257,7 @@ begin
   catalog.cfgcat.GCatLst[i].Name := '';
   catalog.cfgcat.GCatLst[i].cattype := 0;
   catalog.cfgcat.GCatLst[i].ForceColor := False;
+  catalog.cfgcat.GCatLst[i].ForceLabel := False;
   catalog.cfgcat.GCatLst[i].Search := False;
   catalog.cfgcat.GCatLst[i].col := 0;
   catalog.cfgcat.GCatLst[i].startype := 0;
@@ -7296,6 +7297,7 @@ begin
             catalog.cfgcat.GCatLst[j].Actif := ReadBool(section, 'CatActif' + IntToStr(i), catalog.cfgcat.GCatLst[i].Actif);
             catalog.cfgcat.GCatLst[j].Search := ReadBool(section, 'CatSearch' + IntToStr(i), catalog.cfgcat.GCatLst[i].Search);
             catalog.cfgcat.GCatLst[j].ForceColor := ReadBool(section, 'CatForceColor' + IntToStr(i), False);
+            catalog.cfgcat.GCatLst[j].ForceLabel := ReadBool(section, 'CatForceLabel' + IntToStr(i), False);
             catalog.cfgcat.GCatLst[j].Col := ReadInteger(section, 'CatColor' + IntToStr(i), 0);
             catalog.cfgcat.GCatLst[j].startype := ReadInteger(section, 'CatStarType' + IntToStr(i), 0);
             catalog.cfgcat.GCatLst[j].starsize := ReadInteger(section, 'CatStarSize' + IntToStr(i), 0);
@@ -8861,6 +8863,7 @@ begin
           WriteBool(section, 'CatActif' + IntToStr(i), catalog.cfgcat.GCatLst[i].Actif);
           WriteBool(section, 'CatSearch' + IntToStr(i), catalog.cfgcat.GCatLst[i].Search);
           WriteBool(section, 'CatForceColor' + IntToStr(i),catalog.cfgcat.GCatLst[i].ForceColor);
+          WriteBool(section, 'CatForceLabel' + IntToStr(i),catalog.cfgcat.GCatLst[i].ForceLabel);
           WriteInteger(section, 'CatColor' + IntToStr(i), catalog.cfgcat.GCatLst[i].Col);
           WriteInteger(section, 'CatStarType' + IntToStr(i), catalog.cfgcat.GCatLst[i].startype);
           WriteInteger(section, 'CatStarSize' + IntToStr(i), catalog.cfgcat.GCatLst[i].starsize);

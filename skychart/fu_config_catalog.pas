@@ -623,6 +623,10 @@ begin
     g.cells[5, i] := longname;
     g.cells[8, i] := IntToStr(ccat.GCatLst[j].startype);
     g.cells[9, i] := IntToStr(ccat.GCatLst[j].starsize);
+    if ccat.GCatLst[j].ForceLabel then
+      g.cells[10, i] := '1'
+    else
+      g.cells[10, i] := '0';
     if ccat.GCatLst[j].actif then
       g.cells[0, i] := '1'
     else if ccat.GCatLst[j].Search then
@@ -904,12 +908,14 @@ begin
           f_catalog_detail.Drawing.ItemIndex:=StrToInt(TStringGrid(sender).Cells[8, row]);
           f_catalog_detail.DrawingSize.Value:=StrToInt(TStringGrid(sender).Cells[9, row]);
           f_catalog_detail.ColorBox1.Selected:=StrToIntDef(TStringGrid(sender).Cells[col, row], clBlack);
+          f_catalog_detail.cbLabel.Checked:=(TStringGrid(sender).Cells[10, row]='1');
           f_catalog_detail.DrawingChange(nil);
           f_catalog_detail.ShowModal;
           if f_catalog_detail.ModalResult = mrOK then
           begin
             TStringGrid(sender).Cells[8, row] := IntToStr(f_catalog_detail.Drawing.ItemIndex);
             TStringGrid(sender).Cells[9, row] := IntToStr(f_catalog_detail.DrawingSize.Value);
+            TStringGrid(sender).Cells[10, row] := BoolToStr(f_catalog_detail.cbLabel.Checked,'1','0');
             if f_catalog_detail.ColorBox1.Selected = 0 then
               TStringGrid(sender).Cells[col, row] := ''
             else
@@ -1430,6 +1436,7 @@ begin
       ccat.GCatLst[i].cattype := grid.tag;
       ccat.GCatLst[i].startype := StrToIntDef(grid.cells[8, j],0);
       ccat.GCatLst[i].starsize := StrToIntDef(grid.cells[9, j],0);
+      ccat.GCatLst[i].ForceLabel := grid.cells[10, j] = '1';
       buf := grid.cells[6, j];
       val(buf, x, v);
       if v = 0 then

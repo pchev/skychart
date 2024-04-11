@@ -1603,7 +1603,7 @@ begin
             rs := Fplot.PlotStar(xx, yy, rec.star.magv, rec.star.b_v)
           else
             rs := Fplot.PlotStarMark(xx, yy, rec.star.magv, Fcatalog.cfgcat.GCatLst[j].startype, Fcatalog.cfgcat.GCatLst[j].starsize, Fcatalog.cfgcat.GCatLst[j].col);
-          if ((cfgsc.DrawAllStarLabel or (rec.options.ShortName = firstcat)) and
+          if ((cfgsc.DrawAllStarLabel or (rec.options.ShortName = firstcat) or ((j>=0)and(j<Fcatalog.cfgcat.GCatNum)and(Fcatalog.cfgcat.GCatLst[j].ForceLabel))) and
             (rec.star.magv < cfgsc.StarmagMax - cfgsc.LabelMagDiff[1])) then
           begin
             lis := rec.star.id + FormatFloat(f6, lra) + FormatFloat(f6, ldec);

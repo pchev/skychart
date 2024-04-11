@@ -834,6 +834,7 @@ begin
     Fcatalog.cfgcat.GCatLst[i].startype := 0;
     Fcatalog.cfgcat.GCatLst[i].starsize := 0;
     Fcatalog.cfgcat.GCatLst[i].ForceColor := False;
+    Fcatalog.cfgcat.GCatLst[i].ForceLabel := False;
     Fcatalog.cfgcat.GCatLst[i].col := 0;
     if not Fcatalog.GetInfo(Fcatalog.cfgcat.GCatLst[i].path,
       Fcatalog.cfgcat.GCatLst[i].shortname, Fcatalog.cfgcat.GCatLst[i].magmax,
