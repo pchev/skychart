@@ -27,7 +27,7 @@ interface
 
 uses
   u_ccdconfig, u_help, u_translation, u_constant, u_util, cu_catalog,
-  pu_progressbar, LazUTF8, LazFileUtils, pu_voconfig,
+  pu_progressbar, LazUTF8, LazFileUtils, pu_voconfig, pu_catalog_detail,
   Math, LCLIntf, SysUtils, UScaleDPI,
   Classes, Graphics, Controls, Forms, Dialogs, ExtCtrls, StdCtrls, enhedits,
   downloaddialog, Grids, Buttons, ComCtrls, LResources, EditBtn, LazHelpHTML_fix;
@@ -56,6 +56,7 @@ type
     CatalogGridDbl: TStringGrid;
     CatalogGridVar: TStringGrid;
     CatalogGridStar: TStringGrid;
+    ColorDialog1: TColorDialog;
     Image1: TImage;
     Image2: TImage;
     Image3: TImage;
@@ -81,7 +82,6 @@ type
     Panel6: TPanel;
     Panel7: TPanel;
     Panel8: TPanel;
-    ColorDialog1: TColorDialog;
     ComboBox1: TComboBox;
     delcat: TButton;
     CatgenButton: TButton;
@@ -357,6 +357,8 @@ begin
   cplot := mycplot;
   cmain := mycmain;
   inherited Create(AOwner);
+  if f_catalog_detail=nil then
+     Application.CreateForm(Tf_catalog_detail, f_catalog_detail);
   CatalogGridList[1]:=CatalogGridStar;
   CatalogGridList[2]:=CatalogGridVar;
   CatalogGridList[3]:=CatalogGridDbl;
@@ -555,7 +557,7 @@ end;
 
 procedure Tf_config_catalog.ShowGCat;
 var
-  i, j, n, v: integer;
+  i, j, n, v,st,sz: integer;
   ncolor,scolor: boolean;
   caturl,ver,longname: string;
   magmax: single;
@@ -613,12 +615,14 @@ begin
     end;
     g.RowCount := g.RowCount+1;
     i := g.RowCount - 1;
-    catalog.GetInfo(systoutf8(ccat.GCatLst[j].path), ccat.GCatLst[j].shortname, magmax,v,ver,longname);
-    g.cells[5, i] := longname;
+    catalog.GetInfo(systoutf8(ccat.GCatLst[j].path), ccat.GCatLst[j].shortname, magmax,v,st,sz,ver,longname);
     g.cells[1, i] := ccat.GCatLst[j].shortname;
     g.cells[2, i] := formatfloat(f0, ccat.GCatLst[j].min);
     g.cells[3, i] := formatfloat(f0, ccat.GCatLst[j].max);
     g.cells[4, i] := systoutf8(ccat.GCatLst[j].path);
+    g.cells[5, i] := longname;
+    g.cells[8, i] := IntToStr(ccat.GCatLst[j].startype);
+    g.cells[9, i] := IntToStr(ccat.GCatLst[j].starsize);
     if ccat.GCatLst[j].actif then
       g.cells[0, i] := '1'
     else if ccat.GCatLst[j].Search then
@@ -747,6 +751,8 @@ end;
 
 procedure Tf_config_catalog.CatalogGridDrawCell(Sender: TObject;
   ACol, ARow: integer; Rect: TRect; State: TGridDrawState);
+var cx,cy : integer;
+    pp: array[0..3] of TPoint;
 begin
   with Sender as TStringGrid do
   begin
@@ -791,10 +797,28 @@ begin
       Canvas.FillRect(Rect);
       if cells[acol, arow] <> 'N' then
       begin
+        cx := Rect.Left +(abs(Rect.Right - Rect.Left) div 2);
+        cy := Rect.Top + (abs(Rect.Bottom - Rect.Top) div 2);
         Canvas.Brush.Color := StrToIntDef(cells[acol, arow], clWhite);
         Canvas.Pen.Color := clBtnShadow;
-        Canvas.EllipseC(Rect.Left + (abs(Rect.Right - Rect.Left) div 2),
-          Rect.Top + (abs(Rect.Bottom - Rect.Top) div 2), 6, 6);
+        if cells[8, arow] = '1' then       // circle
+          Canvas.EllipseC( cx, cy , 6, 6)
+        else if cells[8, arow] = '2' then  // square
+          Canvas.Rectangle(cx-6,cy-6,cx+6,cy+6)
+        else if cells[8, arow] = '3' then  // losange
+        begin
+          pp[0].X:=cx;
+          pp[0].Y:=cy-6;
+          pp[1].X:=cx+6;
+          pp[1].Y:=cy;
+          pp[2].X:=cx;
+          pp[2].Y:=cy+6;
+          pp[3].X:=cx-6;
+          pp[3].Y:=cy;
+          Canvas.Polygon(pp);
+        end
+        else
+          Canvas.EllipseC( cx, cy , 6, 6);
       end;
     end
     else if (Acol = 7) and (Arow > 0) then
@@ -867,14 +891,34 @@ begin
     6:
     begin
       if TStringGrid(sender).Cells[col, row] <> 'N' then
-      begin  // editable color
-        ColorDialog1.Color := StrToIntDef(TStringGrid(sender).Cells[col, row], clBlack);
-        if ColorDialog1.Execute then
-        begin
-          if ColorDialog1.Color = 0 then
-            TStringGrid(sender).Cells[col, row] := ''
-          else
-            TStringGrid(sender).Cells[col, row] := IntToStr(ColorDialog1.Color);
+      begin
+        if TStringGrid(sender).Tag = 1 then begin  // star
+          // editable shape and color
+          f_catalog_detail.Drawing.ItemIndex:=StrToInt(TStringGrid(sender).Cells[8, row]);
+          f_catalog_detail.DrawingSize.Value:=StrToInt(TStringGrid(sender).Cells[9, row]);
+          f_catalog_detail.ColorBox1.Selected:=StrToIntDef(TStringGrid(sender).Cells[col, row], clBlack);
+          f_catalog_detail.DrawingChange(nil);
+          f_catalog_detail.ShowModal;
+          if f_catalog_detail.ModalResult = mrOK then
+          begin
+            TStringGrid(sender).Cells[8, row] := IntToStr(f_catalog_detail.Drawing.ItemIndex);
+            TStringGrid(sender).Cells[9, row] := IntToStr(f_catalog_detail.DrawingSize.Value);
+            if f_catalog_detail.ColorBox1.Selected = 0 then
+              TStringGrid(sender).Cells[col, row] := ''
+            else
+              TStringGrid(sender).Cells[col, row] := IntToStr(f_catalog_detail.ColorBox1.Selected);
+          end;
+        end
+        else begin  // DSO
+          // editable color
+          ColorDialog1.Color := StrToIntDef(TStringGrid(sender).Cells[col, row], clBlack);
+          if ColorDialog1.Execute then
+          begin
+           if ColorDialog1.Color = 0 then
+             TStringGrid(sender).Cells[col, row] := ''
+           else
+             TStringGrid(sender).Cells[col, row] := IntToStr(ColorDialog1.Color);
+          end;
         end;
       end;
     end;
@@ -1031,9 +1075,10 @@ begin
 end;
 
 procedure Tf_config_catalog.AddCatClick(Sender: TObject);
-var i,r: integer;
+var i,r,v,st,sz: integer;
+    m: single;
     g: TStringGrid;
-    path,sname: string;
+    path,sname,vv,lname: string;
 begin
   if SelectGCat(path,sname) then begin
     i := catalog.GetCatType(path, sname);
@@ -1055,10 +1100,15 @@ begin
     g.Cells[3, r] := catalog.GetMaxField(path, sname);
     if (i = 4) or (i = 5) then   // rtneb, rtlin
       g.Cells[6, r] := ''
-    else if (i = 1) and catalog.GetStarColorSet(path, sname) then
-      g.Cells[6, r] := inttostr(clYellow)
+    else if (i = 1) and catalog.GetStarColorSet(path, sname) then begin
+      g.Cells[6, r] := inttostr(clYellow);
+    end
     else
       g.Cells[6, r] := 'N';
+    catalog.GetInfo(path, sname,m,v,st,sz,vv,lname);
+    g.Cells[5, r] := lname;
+    g.Cells[8, r] := inttostr(st);
+    g.Cells[9, r] := inttostr(sz);
   end;
 end;
 
@@ -1364,7 +1414,9 @@ begin
       ccat.GCatLst[i].Search:= grid.cells[0, j] = '2';
       ccat.GCatLst[i].magmax := 0;
       ccat.GCatLst[i].Name := '';
-      ccat.GCatLst[i].cattype := 0;
+      ccat.GCatLst[i].cattype := grid.tag;
+      ccat.GCatLst[i].startype := StrToIntDef(grid.cells[8, j],0);
+      ccat.GCatLst[i].starsize := StrToIntDef(grid.cells[9, j],0);
       buf := grid.cells[6, j];
       val(buf, x, v);
       if v = 0 then

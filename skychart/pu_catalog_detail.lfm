@@ -1,0 +1,132 @@
+object f_catalog_detail: Tf_catalog_detail
+  Left = 369
+  Height = 212
+  Top = 30
+  Width = 279
+  Caption = 'f_catalog_detail'
+  ClientHeight = 212
+  ClientWidth = 279
+  object PageControl1: TPageControl
+    Left = 0
+    Height = 170
+    Top = 0
+    Width = 279
+    ActivePage = TabSheetStar
+    Align = alClient
+    ShowTabs = False
+    TabIndex = 0
+    TabOrder = 0
+    object TabSheetStar: TTabSheet
+      Caption = 'TabSheetStar'
+      ClientHeight = 166
+      ClientWidth = 275
+      object Label24: TLabel
+        Left = 24
+        Height = 18
+        Top = 21
+        Width = 53
+        Caption = 'Draw as '
+        ParentColor = False
+      end
+      object Drawing: TComboBox
+        Left = 104
+        Height = 32
+        Top = 16
+        Width = 113
+        ItemHeight = 24
+        ItemIndex = 0
+        Items.Strings = (
+          'Star'
+          'Circle'
+          'Square'
+          'Losange'
+        )
+        OnChange = DrawingChange
+        TabOrder = 0
+        Text = 'Star'
+      end
+      object PanelStar: TPanel
+        Left = 24
+        Height = 96
+        Top = 64
+        Width = 226
+        BevelOuter = bvNone
+        ClientHeight = 96
+        ClientWidth = 226
+        TabOrder = 1
+        object Label25: TLabel
+          Left = 0
+          Height = 18
+          Top = 13
+          Width = 59
+          Caption = 'mark size'
+          ParentColor = False
+        end
+        object DrawingSize: TSpinEdit
+          Left = 80
+          Height = 32
+          Top = 8
+          Width = 58
+          MaxValue = 100
+          MinValue = 5
+          TabOrder = 0
+          Value = 15
+        end
+        object Label26: TLabel
+          Left = 152
+          Height = 18
+          Top = 13
+          Width = 15
+          Caption = 'px'
+          ParentColor = False
+        end
+        object Label1: TLabel
+          Left = 0
+          Height = 18
+          Top = 57
+          Width = 34
+          Caption = 'Color'
+          ParentColor = False
+        end
+        object ColorBox1: TColorBox
+          Left = 80
+          Height = 32
+          Top = 56
+          Width = 128
+          Style = [cbStandardColors, cbExtendedColors, cbCustomColor, cbPrettyNames]
+          ItemHeight = 20
+          TabOrder = 1
+        end
+      end
+    end
+  end
+  object Panel1: TPanel
+    Left = 0
+    Height = 42
+    Top = 170
+    Width = 279
+    Align = alBottom
+    ClientHeight = 42
+    ClientWidth = 279
+    TabOrder = 1
+    object Button1: TButton
+      Left = 144
+      Height = 25
+      Top = 7
+      Width = 75
+      Caption = 'OK'
+      ModalResult = 1
+      TabOrder = 0
+    end
+    object Button2: TButton
+      Left = 40
+      Height = 25
+      Top = 7
+      Width = 75
+      Cancel = True
+      Caption = 'Cancel'
+      ModalResult = 2
+      TabOrder = 1
+    end
+  end
+end

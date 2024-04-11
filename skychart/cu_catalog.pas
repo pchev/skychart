@@ -217,7 +217,7 @@ type
     procedure GetAltName(rec: GCatrec; var txt: string);
     function CheckPath(cat: integer; catpath: string): boolean;
     function GetInfo(path, shortname: string; var magmax: single;
-      var v: integer; var version, longname: string): boolean;
+      var v,startype,starsize: integer; var version, longname: string): boolean;
     function GetMaxField(path, cat: string): string;
     function GetCatType(path, cat: string): integer;
     function GetNebColorSet(path, cat: string): boolean;
@@ -245,6 +245,7 @@ type
     property FindId: string read FFindId;
     property FindRecOK: boolean read FFindRecOK;
     property FindRec: GCatrec read FFindRec write FFindRec;
+    property CurrentGcat: integer read CurGCat;
   published
     { Published declarations }
   end;
@@ -1797,7 +1798,7 @@ begin
 end;
 
 function Tcatalog.GetInfo(path, shortname: string; var magmax: single;
-  var v: integer; var version, longname: string): boolean;
+  var v,startype,starsize: integer; var version, longname: string): boolean;
 var
   GcatH: TCatHeader;
   info: TCatHdrInfo;
@@ -1807,6 +1808,8 @@ begin
   magmax := GcatH.MagMax;
   version := GcatH.version;
   longname := GcatH.LongName;
+  startype := GcatH.StarType;
+  starsize := GcatH.Size;
 end;
 
 function Tcatalog.GetMaxField(path, cat: string): string;
@@ -2012,13 +2015,6 @@ begin
   rec.star.pmra := deg2rad * rec.star.pmra / 3600;
   rec.star.pmdec := deg2rad * rec.star.pmdec / 3600;
   rec.star.valid[vsGreekSymbol] := False;
-
-  if rec.options.StarType>0 then begin
-    if cfgcat.GCatLst[CurGCat - 1].col = 0 then
-      cfgcat.GCatLst[CurGCat - 1].col:=clYellow;
-    rec.options.StarColor:=cfgcat.GCatLst[CurGCat - 1].col;
-  end;
-
   bsccat := (rec.vstr[3] and (trim(rec.options.flabel[lOffsetStr + 3]) = 'CommonName')) and
     (rec.vstr[4] and (trim(rec.options.flabel[lOffsetStr + 4]) = 'Fl')) and
     (rec.vstr[5] and (trim(rec.options.flabel[lOffsetStr + 5]) = 'Bayer')) and

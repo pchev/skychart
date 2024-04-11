@@ -1259,11 +1259,14 @@ begin
   catalog.cfgcat.GCatLst[i].ForceColor := False;
   catalog.cfgcat.GCatLst[i].Search := False;
   catalog.cfgcat.GCatLst[i].col := 0;
+  catalog.cfgcat.GCatLst[i].startype := 0;
+  catalog.cfgcat.GCatLst[i].starsize := 0;
   if catalog.cfgcat.GCatLst[i].Actif then
   begin
     if not catalog.GetInfo(catalog.cfgcat.GCatLst[i].path,
       catalog.cfgcat.GCatLst[i].shortname, catalog.cfgcat.GCatLst[i].magmax,
-      catalog.cfgcat.GCatLst[i].cattype, catalog.cfgcat.GCatLst[i].version,
+      catalog.cfgcat.GCatLst[i].cattype, catalog.cfgcat.GCatLst[i].startype,
+      catalog.cfgcat.GCatLst[i].starsize, catalog.cfgcat.GCatLst[i].version,
       catalog.cfgcat.GCatLst[i].Name) then
       catalog.cfgcat.GCatLst[i].Actif := False;
   end;
@@ -5830,7 +5833,7 @@ procedure Tf_main.activateconfig(cmain: Tconf_main; csc: Tconf_skychart;
   ccat: Tconf_catalog; cshr: Tconf_shared; cplot: Tconf_plot;
   cdss: Tconf_dss; applyall: boolean);
 var
-  i: integer;
+  i,v1,v2: integer;
   dbchange, themechange, nightchange, langchange, starchange, showast: boolean;
 begin
   dbchange := False;
@@ -5887,6 +5890,7 @@ begin
       begin
         if not catalog.GetInfo(ccat.GCatLst[i].path, ccat.GCatLst[i].shortname,
           ccat.GCatLst[i].magmax, ccat.GCatLst[i].cattype,
+          v1,v2,
           ccat.GCatLst[i].version, ccat.GCatLst[i].Name) then
           ccat.GCatLst[i].Actif := False;
       end;
@@ -7156,7 +7160,7 @@ end;
 procedure Tf_main.ReadChartConfig(filename: string; usecatalog, resizemain: boolean;
   var cplot: Tconf_plot; var csc: Tconf_skychart);
 var
-  i, j, t, l, w, h, n: integer;
+  i, j, t, l, w, h, n, v1, v2: integer;
   inif: TMemIniFile;
   section, buf,buf0,buf1,buf2,buf3: string;
 begin
@@ -7284,29 +7288,17 @@ begin
           for i := 0 to catalog.cfgcat.GCatNum - 1 do
           begin
             Inc(j);
-            catalog.cfgcat.GCatLst[j].shortname :=
-              Readstring(section, 'CatName' + IntToStr(i),
-              catalog.cfgcat.GCatLst[i].shortname);
-            catalog.cfgcat.GCatLst[j].Name :=
-              Readstring(section, 'CatLongName' + IntToStr(i),
-              catalog.cfgcat.GCatLst[i].Name);
-            catalog.cfgcat.GCatLst[j].path :=
-              ExtractSubPath(ConfigAppdir, Readstring(section,
-              'CatPath' + IntToStr(i), catalog.cfgcat.GCatLst[i].path));
-            catalog.cfgcat.GCatLst[j].min :=
-              ReadFloat(section, 'CatMin' + IntToStr(i), catalog.cfgcat.GCatLst[i].min);
-            catalog.cfgcat.GCatLst[j].max :=
-              ReadFloat(section, 'CatMax' + IntToStr(i), catalog.cfgcat.GCatLst[i].max);
-            catalog.cfgcat.GCatLst[j].Actif :=
-              ReadBool(section, 'CatActif' + IntToStr(i),
-              catalog.cfgcat.GCatLst[i].Actif);
-            catalog.cfgcat.GCatLst[j].Search :=
-              ReadBool(section, 'CatSearch' + IntToStr(i),
-              catalog.cfgcat.GCatLst[i].Search);
-            catalog.cfgcat.GCatLst[j].ForceColor :=
-              ReadBool(section, 'CatForceColor' + IntToStr(i), False);
-            catalog.cfgcat.GCatLst[j].Col :=
-              ReadInteger(section, 'CatColor' + IntToStr(i), 0);
+            catalog.cfgcat.GCatLst[j].shortname := Readstring(section, 'CatName' + IntToStr(i), catalog.cfgcat.GCatLst[i].shortname);
+            catalog.cfgcat.GCatLst[j].Name := Readstring(section, 'CatLongName' + IntToStr(i), catalog.cfgcat.GCatLst[i].Name);
+            catalog.cfgcat.GCatLst[j].path := ExtractSubPath(ConfigAppdir, Readstring(section, 'CatPath' + IntToStr(i), catalog.cfgcat.GCatLst[i].path));
+            catalog.cfgcat.GCatLst[j].min := ReadFloat(section, 'CatMin' + IntToStr(i), catalog.cfgcat.GCatLst[i].min);
+            catalog.cfgcat.GCatLst[j].max := ReadFloat(section, 'CatMax' + IntToStr(i), catalog.cfgcat.GCatLst[i].max);
+            catalog.cfgcat.GCatLst[j].Actif := ReadBool(section, 'CatActif' + IntToStr(i), catalog.cfgcat.GCatLst[i].Actif);
+            catalog.cfgcat.GCatLst[j].Search := ReadBool(section, 'CatSearch' + IntToStr(i), catalog.cfgcat.GCatLst[i].Search);
+            catalog.cfgcat.GCatLst[j].ForceColor := ReadBool(section, 'CatForceColor' + IntToStr(i), False);
+            catalog.cfgcat.GCatLst[j].Col := ReadInteger(section, 'CatColor' + IntToStr(i), 0);
+            catalog.cfgcat.GCatLst[j].startype := ReadInteger(section, 'CatStarType' + IntToStr(i), 0);
+            catalog.cfgcat.GCatLst[j].starsize := ReadInteger(section, 'CatStarSize' + IntToStr(i), 0);
             catalog.cfgcat.GCatLst[j].magmax := 0;
             catalog.cfgcat.GCatLst[j].cattype := 0;
             if catalog.cfgcat.GCatLst[j].Actif or catalog.cfgcat.GCatLst[j].Search then
@@ -7315,9 +7307,16 @@ begin
                 catalog.cfgcat.GCatLst[j].shortname,
                 catalog.cfgcat.GCatLst[j].magmax,
                 catalog.cfgcat.GCatLst[j].cattype,
+                v1,
+                v2,
                 catalog.cfgcat.GCatLst[j].version,
-                catalog.cfgcat.GCatLst[j].Name) then
-                catalog.cfgcat.GCatLst[j].Actif := False;
+                catalog.cfgcat.GCatLst[j].Name)
+                then
+                  catalog.cfgcat.GCatLst[j].Actif := False;
+                if catalog.cfgcat.GCatLst[j].startype = 0 then
+                  catalog.cfgcat.GCatLst[j].startype := v1;
+                if catalog.cfgcat.GCatLst[j].starsize = 0 then
+                  catalog.cfgcat.GCatLst[j].starsize := v2;
             end;
           end;
           catalog.cfgcat.GCatNum := j + 1;
@@ -8861,9 +8860,11 @@ begin
           WriteFloat(section, 'CatMax' + IntToStr(i), catalog.cfgcat.GCatLst[i].max);
           WriteBool(section, 'CatActif' + IntToStr(i), catalog.cfgcat.GCatLst[i].Actif);
           WriteBool(section, 'CatSearch' + IntToStr(i), catalog.cfgcat.GCatLst[i].Search);
-          WriteBool(section, 'CatForceColor' + IntToStr(i),
-            catalog.cfgcat.GCatLst[i].ForceColor);
+          WriteBool(section, 'CatForceColor' + IntToStr(i),catalog.cfgcat.GCatLst[i].ForceColor);
           WriteInteger(section, 'CatColor' + IntToStr(i), catalog.cfgcat.GCatLst[i].Col);
+          WriteInteger(section, 'CatStarType' + IntToStr(i), catalog.cfgcat.GCatLst[i].startype);
+          WriteInteger(section, 'CatStarSize' + IntToStr(i), catalog.cfgcat.GCatLst[i].starsize);
+
         end;
         n := Length(catalog.cfgcat.UserObjects);
         WriteInteger(section, 'UserObjectsNum', n);

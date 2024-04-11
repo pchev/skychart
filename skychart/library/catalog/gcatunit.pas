@@ -101,8 +101,6 @@ TCatOption = packed record
           altprefix: Tvalid;
           flabel   : Tlabellst;
           Amplitudeflag: Integer;
-          StarType  : Integer;
-          StarColor : Integer;
           end;
 GCatrec = packed record
           ra,dec   : double ;
@@ -273,8 +271,6 @@ begin
   emptyrec.options.Size:=catheader.Size;
   emptyrec.options.Units:=catheader.Units;
   emptyrec.options.ObjType:=catheader.ObjType;
-  emptyrec.options.StarType:=catheader.StarType;
-  emptyrec.options.StarColor:=$00FFFF;
   emptyrec.options.LogSize:=catheader.LogSize;
   emptyrec.options.UsePrefix:=catheader.UsePrefix;
   emptyrec.options.Amplitudeflag:=-1;

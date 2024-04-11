@@ -831,13 +831,20 @@ begin
     Fcatalog.cfgcat.GCatLst[i].magmax := 0;
     Fcatalog.cfgcat.GCatLst[i].Name := '';
     Fcatalog.cfgcat.GCatLst[i].cattype := 0;
+    Fcatalog.cfgcat.GCatLst[i].startype := 0;
+    Fcatalog.cfgcat.GCatLst[i].starsize := 0;
     Fcatalog.cfgcat.GCatLst[i].ForceColor := False;
     Fcatalog.cfgcat.GCatLst[i].col := 0;
     if not Fcatalog.GetInfo(Fcatalog.cfgcat.GCatLst[i].path,
       Fcatalog.cfgcat.GCatLst[i].shortname, Fcatalog.cfgcat.GCatLst[i].magmax,
-      Fcatalog.cfgcat.GCatLst[i].cattype, Fcatalog.cfgcat.GCatLst[i].version,
+      Fcatalog.cfgcat.GCatLst[i].cattype, Fcatalog.cfgcat.GCatLst[i].startype,
+      Fcatalog.cfgcat.GCatLst[i].starsize, Fcatalog.cfgcat.GCatLst[i].version,
       Fcatalog.cfgcat.GCatLst[i].Name) then
       Fcatalog.cfgcat.GCatLst[i].Actif := False;
+    if Fcatalog.cfgcat.GCatLst[i].startype>0 then begin
+      Fcatalog.cfgcat.GCatLst[i].col := clYellow;
+      if Fcatalog.cfgcat.GCatLst[i].starsize = 0 then Fcatalog.cfgcat.GCatLst[i].starsize := 10;
+    end;
     if Assigned(FSaveConfig) then FSaveConfig(self);
   end
   else if InstallInfo.catnum=1 then  // Pictures

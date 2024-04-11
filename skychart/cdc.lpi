@@ -417,7 +417,7 @@
         <DefaultFilename Value="component/zoomimage/zoomimage.lpk"/>
       </Item25>
     </RequiredPackages>
-    <Units Count="93">
+    <Units Count="94">
       <Unit0>
         <Filename Value="cdc.lpr"/>
         <IsPartOfProject Value="True"/>
@@ -974,6 +974,13 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
       </Unit92>
+      <Unit93>
+        <Filename Value="pu_catalog_detail.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="f_catalog_detail"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Form"/>
+      </Unit93>
     </Units>
   </ProjectOptions>
   <CompilerOptions>

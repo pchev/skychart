@@ -290,16 +290,16 @@ object f_config_catalog: Tf_config_catalog
           TabOrder = 2
           object TabSheetGcatStar: TTabSheet
             Caption = 'TabSheetGcatStar'
-            ClientHeight = 292
+            ClientHeight = 291
             ClientWidth = 494
             object CatalogGridStar: TStringGrid
               Tag = 1
               Left = 0
-              Height = 292
+              Height = 291
               Top = 0
               Width = 494
               Align = alClient
-              ColCount = 8
+              ColCount = 10
               Columns = <              
                 item
                   MaxSize = 202
@@ -365,6 +365,14 @@ object f_config_catalog: Tf_config_catalog
                   MaxSize = 202
                   Title.Caption = 'Refresh'
                   Width = 56
+                end              
+                item
+                  Title.Caption = 'drawing'
+                  Visible = False
+                end              
+                item
+                  Title.Caption = 'size'
+                  Visible = False
                 end>
               DefaultColWidth = 24
               DefaultRowHeight = 24
@@ -386,16 +394,16 @@ object f_config_catalog: Tf_config_catalog
           end
           object TabSheetGcatVar: TTabSheet
             Caption = 'TabSheetGcatVar'
-            ClientHeight = 292
+            ClientHeight = 291
             ClientWidth = 494
             object CatalogGridVar: TStringGrid
               Tag = 2
               Left = 0
-              Height = 292
+              Height = 291
               Top = 0
               Width = 494
               Align = alClient
-              ColCount = 8
+              ColCount = 10
               Columns = <              
                 item
                   MaxSize = 202
@@ -461,6 +469,14 @@ object f_config_catalog: Tf_config_catalog
                   MaxSize = 202
                   Title.Caption = 'Refresh'
                   Width = 56
+                end              
+                item
+                  Title.Caption = 'drawing'
+                  Visible = False
+                end              
+                item
+                  Title.Caption = 'size'
+                  Visible = False
                 end>
               DefaultColWidth = 24
               DefaultRowHeight = 24
@@ -482,16 +498,16 @@ object f_config_catalog: Tf_config_catalog
           end
           object TabSheetGcatDbl: TTabSheet
             Caption = 'TabSheetGcatDbl'
-            ClientHeight = 292
+            ClientHeight = 291
             ClientWidth = 494
             object CatalogGridDbl: TStringGrid
               Tag = 3
               Left = 0
-              Height = 292
+              Height = 291
               Top = 0
               Width = 494
               Align = alClient
-              ColCount = 8
+              ColCount = 10
               Columns = <              
                 item
                   MaxSize = 202
@@ -557,6 +573,14 @@ object f_config_catalog: Tf_config_catalog
                   MaxSize = 202
                   Title.Caption = 'Refresh'
                   Width = 56
+                end              
+                item
+                  Title.Caption = 'drawing'
+                  Visible = False
+                end              
+                item
+                  Title.Caption = 'size'
+                  Visible = False
                 end>
               DefaultColWidth = 24
               DefaultRowHeight = 24
@@ -578,16 +602,16 @@ object f_config_catalog: Tf_config_catalog
           end
           object TabSheetGcatNeb: TTabSheet
             Caption = 'TabSheetGcatNeb'
-            ClientHeight = 292
+            ClientHeight = 291
             ClientWidth = 494
             object CatalogGridNeb: TStringGrid
               Tag = 4
               Left = 0
-              Height = 292
+              Height = 291
               Top = 0
               Width = 494
               Align = alClient
-              ColCount = 8
+              ColCount = 10
               Columns = <              
                 item
                   MaxSize = 202
@@ -653,6 +677,14 @@ object f_config_catalog: Tf_config_catalog
                   MaxSize = 202
                   Title.Caption = 'Refresh'
                   Width = 56
+                end              
+                item
+                  Title.Caption = 'drawing'
+                  Visible = False
+                end              
+                item
+                  Title.Caption = 'size'
+                  Visible = False
                 end>
               DefaultColWidth = 24
               DefaultRowHeight = 24
@@ -674,16 +706,16 @@ object f_config_catalog: Tf_config_catalog
           end
           object TabSheetGcatLin: TTabSheet
             Caption = 'TabSheetGcatLin'
-            ClientHeight = 292
+            ClientHeight = 291
             ClientWidth = 494
             object CatalogGridLin: TStringGrid
-              Tag = 5
+              Tag = 1
               Left = 0
-              Height = 292
+              Height = 291
               Top = 0
               Width = 494
               Align = alClient
-              ColCount = 8
+              ColCount = 10
               Columns = <              
                 item
                   MaxSize = 202
@@ -749,6 +781,14 @@ object f_config_catalog: Tf_config_catalog
                   MaxSize = 202
                   Title.Caption = 'Refresh'
                   Width = 56
+                end              
+                item
+                  Title.Caption = 'drawing'
+                  Visible = False
+                end              
+                item
+                  Title.Caption = 'size'
+                  Visible = False
                 end>
               DefaultColWidth = 24
               DefaultRowHeight = 24
@@ -2240,33 +2280,6 @@ object f_config_catalog: Tf_config_catalog
     Left = 113
     Top = 534
   end
-  object ColorDialog1: TColorDialog
-    Color = clBlack
-    CustomColors.Strings = (
-      'ColorA=000000'
-      'ColorB=000080'
-      'ColorC=008000'
-      'ColorD=008080'
-      'ColorE=800000'
-      'ColorF=800080'
-      'ColorG=808000'
-      'ColorH=808080'
-      'ColorI=C0C0C0'
-      'ColorJ=0000FF'
-      'ColorK=00FF00'
-      'ColorL=00FFFF'
-      'ColorM=FF0000'
-      'ColorN=FF00FF'
-      'ColorO=FFFF00'
-      'ColorP=FFFFFF'
-      'ColorQ=C0DCC0'
-      'ColorR=F0CAA6'
-      'ColorS=F0FBFF'
-      'ColorT=A4A0A0'
-    )
-    Left = 57
-    Top = 534
-  end
   object ImageList1: TImageList
     Left = 8
     Top = 534
@@ -2360,7 +2373,34 @@ object f_config_catalog: Tf_config_catalog
     FtpFwPassive = True
     ConfirmDownload = True
     QuickCancel = False
-    Left = 424
+    Left = 464
     Top = 448
+  end
+  object ColorDialog1: TColorDialog
+    Color = clBlack
+    CustomColors.Strings = (
+      'ColorA=000000'
+      'ColorB=000080'
+      'ColorC=008000'
+      'ColorD=008080'
+      'ColorE=800000'
+      'ColorF=800080'
+      'ColorG=808000'
+      'ColorH=808080'
+      'ColorI=C0C0C0'
+      'ColorJ=0000FF'
+      'ColorK=00FF00'
+      'ColorL=00FFFF'
+      'ColorM=FF0000'
+      'ColorN=FF00FF'
+      'ColorO=FFFF00'
+      'ColorP=FFFFFF'
+      'ColorQ=C0DCC0'
+      'ColorR=F0CAA6'
+      'ColorS=F0FBFF'
+      'ColorT=A4A0A0'
+    )
+    Left = 464
+    Top = 488
   end
 end

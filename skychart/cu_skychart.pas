@@ -1534,10 +1534,14 @@ begin
         First := False;
       end;
     end;
+    j:=-99;
     timelimit := now + 10 / secday;
     if Fcatalog.OpenStar then
       while Fcatalog.readstar(rec) do
       begin
+        if (catalog.CurrentGcat-1) <> j then begin
+          j:=catalog.CurrentGcat - 1;
+        end;
         if now > timelimit then
         begin
           cfgsc.msg := Format(rsItTakeTooLon, [rsStars, trim(rec.options.LongName)]);
@@ -1595,10 +1599,10 @@ begin
             Fplot.PlotLine(xx, yy, xxp, yyp, Fplot.cfgplot.Color[15], 1);
           end;
 
-          if rec.options.StarType=0 then
+          if (j<0) or (j>Fcatalog.cfgcat.GCatNum-1) or (Fcatalog.cfgcat.GCatLst[j].startype=0) then
             rs := Fplot.PlotStar(xx, yy, rec.star.magv, rec.star.b_v)
           else
-            rs := Fplot.PlotStarMark(xx, yy, rec.star.magv, rec.options.StarType, rec.options.Size, rec.options.StarColor);
+            rs := Fplot.PlotStarMark(xx, yy, rec.star.magv, Fcatalog.cfgcat.GCatLst[j].startype, Fcatalog.cfgcat.GCatLst[j].starsize, Fcatalog.cfgcat.GCatLst[j].col);
           if ((cfgsc.DrawAllStarLabel or (rec.options.ShortName = firstcat)) and
             (rec.star.magv < cfgsc.StarmagMax - cfgsc.LabelMagDiff[1])) then
           begin
