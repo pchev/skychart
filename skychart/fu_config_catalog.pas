@@ -826,7 +826,7 @@ begin
         cx := Rect.Left +(abs(Rect.Right - Rect.Left) div 2);
         cy := Rect.Top + (abs(Rect.Bottom - Rect.Top) div 2);
         Canvas.Brush.Color := StrToIntDef(cells[acol, arow], clWindow);
-        Canvas.Pen.Color := clBtnShadow;
+        Canvas.Pen.Color := clWindowText;
         if cells[8, arow] = '1' then       // circle
           Canvas.EllipseC( cx, cy , 6, 6)
         else if cells[8, arow] = '2' then  // square
