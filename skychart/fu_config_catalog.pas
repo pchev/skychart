@@ -634,22 +634,38 @@ begin
     else
       g.cells[0, i] := '0';
     ncolor := catalog.GetNebColorSet(g.Cells[4, i], g.Cells[1, i]);
-    scolor := catalog.GetStarColorSet(g.Cells[4, i], g.Cells[1, i]);
-    if ((n = 4) and (not ncolor)) or (n = 5) then
-    begin  // rtneb, rtlin
+    scolor := ccat.GCatLst[j].ForceColor or catalog.GetStarColorSet(g.Cells[4, i], g.Cells[1, i]);
+
+    if (n = 1) then begin    // rtstar
+      if scolor then begin
+        if ccat.GCatLst[j].col = 0 then
+          ccat.GCatLst[j].col := clYellow;
+        g.cells[6, i] := IntToStr(ccat.GCatLst[j].col)
+      end
+      else
+        g.cells[6, i] := '';
+    end;
+    if (n = 2) then         // rtvar
+      g.cells[6, i] := 'N';
+    if (n = 3) then         // rtdbl
+        g.cells[6, i] := 'N';
+    if (n = 4) then begin   // rtneb
+      if ncolor then
+        g.cells[6, i] := 'N'
+      else begin
+        if ccat.GCatLst[j].ForceColor and (ccat.GCatLst[j].col > 0) then
+          g.cells[6, i] := IntToStr(ccat.GCatLst[j].col)
+        else
+          g.cells[6, i] := '';
+      end;
+    end;
+    if (n = 5) then begin   // rtlin
       if ccat.GCatLst[j].ForceColor and (ccat.GCatLst[j].col > 0) then
         g.cells[6, i] := IntToStr(ccat.GCatLst[j].col)
       else
         g.cells[6, i] := '';
-    end
-    else if (n = 1) and scolor then
-    begin  // rtstar with symbol drawing
-      if ccat.GCatLst[j].col = 0 then
-        ccat.GCatLst[j].col := clYellow;
-      g.cells[6, i] := IntToStr(ccat.GCatLst[j].col)
-    end
-    else
-      g.cells[6, i] := 'N';
+    end;
+
     caturl := catalog.GetCatURL(g.Cells[4, i], g.Cells[1, i]);
     if trim(caturl) > '' then
       g.cells[7, i] := '1'
@@ -809,7 +825,7 @@ begin
       begin
         cx := Rect.Left +(abs(Rect.Right - Rect.Left) div 2);
         cy := Rect.Top + (abs(Rect.Bottom - Rect.Top) div 2);
-        Canvas.Brush.Color := StrToIntDef(cells[acol, arow], clWhite);
+        Canvas.Brush.Color := StrToIntDef(cells[acol, arow], clWindow);
         Canvas.Pen.Color := clBtnShadow;
         if cells[8, arow] = '1' then       // circle
           Canvas.EllipseC( cx, cy , 6, 6)
@@ -827,8 +843,16 @@ begin
           pp[3].Y:=cy;
           Canvas.Polygon(pp);
         end
-        else
-          Canvas.EllipseC( cx, cy , 6, 6);
+        else begin
+          if sender = CatalogGridStar then begin
+            Canvas.Brush.Color := clWindowText;
+            Canvas.EllipseC( cx, cy , 2, 2);
+          end
+          else begin
+            Canvas.Brush.Color := clWindow;
+            Canvas.EllipseC( cx, cy , 6, 6);
+          end;
+        end;
       end;
     end
     else if (Acol = 7) and (Arow > 0) then
