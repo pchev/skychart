@@ -3826,7 +3826,7 @@ begin
     begin   // stars
       // type and name
       if rec.star.valid[vsId] then
-        txt := rec.star.id
+        txt := wordspace(rec.star.id)
       else
         txt := '';
       if trim(txt) = '' then
