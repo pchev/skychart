@@ -1246,6 +1246,7 @@ if ok then begin
          else
            lin.star.id:=IntToStr(GetRecQWord(3));
         end;
+        if catheader.IdPrefix then lin.star.id:=lin.options.flabel[lOffset+vsId]+' '+lin.star.id;
         if catheader.flen[4]>0 then begin lin.star.magv:=GetRecSmallint(4)/1000; if lin.star.magv>32 then lin.star.magv:=99;end else lin.star.magv:=99;;
         if catheader.flen[5]>0 then begin lin.star.b_v:=GetRecSmallint(5)/1000;  if lin.star.b_v>32  then lin.star.b_v:=99.9;end else lin.star.b_v:=99.9;
         if catheader.flen[6]>0 then begin lin.star.magb:=GetRecSmallint(6)/1000; if lin.star.magb>32 then lin.star.magb:=99;end else lin.star.magb:=99;
@@ -1269,6 +1270,7 @@ if ok then begin
         end;
     rtvar : begin  // variables stars 1
         if catheader.flen[3]>0 then lin.variable.id:=GetRecString(3);
+        if catheader.IdPrefix then lin.variable.id:=lin.options.flabel[lOffset+vsId]+' '+lin.variable.id;
         if catheader.flen[4]>0 then begin lin.variable.magmax:=GetRecSmallint(4)/1000; if lin.variable.magmax>32 then lin.variable.magmax:=99.9;end;
         if catheader.flen[5]>0 then begin lin.variable.magmin:=GetRecSmallint(5)/1000; if lin.variable.magmin>32 then lin.variable.magmin:=99.9;end;
         if catheader.flen[6]>0 then lin.variable.period:=GetRecSingle(6);
@@ -1281,6 +1283,7 @@ if ok then begin
         end;
     rtdbl : begin  // doubles stars 1
         if catheader.flen[3]>0 then lin.double.id:=GetRecString(3);
+        if catheader.IdPrefix then lin.double.id:=lin.options.flabel[lOffset+vsId]+' '+lin.double.id;
         if catheader.flen[4]>0 then begin lin.double.mag1:=GetRecSmallint(4)/1000; if lin.double.mag1>32 then lin.double.mag1:=99.9;end;
         if catheader.flen[5]>0 then begin lin.double.mag2:=GetRecSmallint(5)/1000; if lin.double.mag2>32 then lin.double.mag2:=99.9;end;
         if catheader.flen[6]>0 then lin.double.sep:=GetRecSmallint(6)/10;
@@ -1293,6 +1296,7 @@ if ok then begin
         end;
     rtneb : begin  // nebulae 1
         if catheader.flen[3]>0 then lin.neb.id:=GetRecString(3);
+        if catheader.IdPrefix then lin.neb.id:=lin.options.flabel[lOffset+vsId]+' '+lin.neb.id;
         if catheader.flen[4]>0 then lin.neb.nebtype:=GetRecByte(4);
         if catheader.flen[5]>0 then begin lin.neb.mag:=GetRecSmallint(5)/1000; if lin.neb.mag>32 then lin.neb.mag:=99.9;end;
         if catheader.flen[6]>0 then begin lin.neb.sbr:=GetRecSmallint(6)/1000; if lin.neb.sbr>32 then lin.neb.sbr:=99.9;end;
