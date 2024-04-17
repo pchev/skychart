@@ -1,0 +1,293 @@
+Preparation for CdC:
+
+cat groups.dat | sed 's/^/G /' > groups
+catgen groups.prj
+
+catgen galaxies.prj
+
+
+
+
+VII/213             Hickson's Compact groups of Galaxies   (Hickson+ 1982-1994)
+================================================================================
+Systematic Properties of Compact Groups of Galaxies
+     Hickson P.
+    <Astrophys. J. 255, 382 + Erratum 259, 930 (1982)>
+    =1982ApJ...255..382H
+A photometric catalog of compact groups of galaxies.
+     Hickson P., Kindl E., Auman J.R.
+    <Astrophys. J. Suppl. Ser. 70, 687 (1989)>
+    =1989ApJS...70..687H
+The luminosity function of compact groups of galaxies
+     Mendes de Oliveira C., Hickson P.
+    <Astrophys. J. 380, 30 (1991)>
+    =1991ApJ...380...30M
+Dynamical properties of compact groups of galaxies.
+     Hickson P., Mendes de Oliveira C., Huchra J.P., Palumbo G.G.C.
+    <Astrophys. J. 399, 353 (1992)>
+    =1992ApJ...399..353H
+Morphology of galaxies in compact groups.
+     Mendes de Oliveira C., Hickson P.
+    <Astrophys. J., 427, 684 (1994)>
+    =1994ApJ...427..684M
+================================================================================
+ADC_Keywords:  Clusters, galaxy ; Galaxies, optical ; Redshifts ;
+               Galaxies, photometry ; Velocity dispersion
+
+Description:
+    The catalog of groups (file "groups.dat") is a list of 100 compact
+    groups of galaxies identified by a systematic search of the Palomar
+    Observatory Sky Survey red prints. Each group contains four or more
+    galaxies, has an estimated mean surface brightness brighter than 26.0
+    magnitude per arcsec^2^ and satisfies an isolation criterion.
+    Dynamical parameters were derived for 92 of the 100 groups, which are
+    listed in file "dynamics.dat"; the Hubble constant was assumed to be
+    Ho=100km/s/Mpc.
+
+    Data about individual galaxies in these groups are merged into the
+    "galaxies.dat" file; these data include photometric parameters,
+    morphology, redshifts and absolute magnitudes originally published in
+    four different papers. They result from CCD observations at CFHT
+    (Canada-France-Hawaii Telescope) in 1983-1985. Redshifts were
+    observed at the 1.5m telescope of the F.L. Whipple Observatory on
+    Mt. Hopkins, Arizona, over the period 1984-1986, in wavelength range
+    470-710nm; the remaining fainter galaxies were observed with the CFHT.
+
+
+File Summary:
+--------------------------------------------------------------------------------
+ FileName    Lrecl  Records   Explanations
+--------------------------------------------------------------------------------
+ReadMe          80        .   This file
+groups.dat      72      100   Catalog of groups (1982 paper, and errata)
+dynamics.dat    94       92   Dynamical properties (1992 paper, table3)
+galaxies.dat   130      463   Photometric and Velocity data for galaxies
+                                (combined tables from 1989 and 1992 papers)
+morpho.dat      92      210   Morphology (1994 paper, table2)
+--------------------------------------------------------------------------------
+
+See also:
+    J/A+AS/117/39 : Far-IR properties of Hickson Compact Groups (Allam+, 1996)
+    J/A+A/325/473 : HCG HI-deficiency (Huchtmeier 1997)
+    J/AJ/123/2976 : The UZC-SSRS2 group catalog (Ramella+, 2002)
+
+Byte-by-byte Description of file: groups.dat
+--------------------------------------------------------------------------------
+  Bytes  Format  Units   Label    Explanations
+--------------------------------------------------------------------------------
+  1- 3   I3      ---     HCG      [1/100]+ Number of the group in this catalog
+  5- 6   I2      h       RAh      Right Ascension 1950 hours
+  7- 8   I2      min     RAm      Right Ascension minutes
+  9-10   I2      s       RAs      Right Ascension seconds
+    11   A1      ---     DE-      Declination sign
+ 12-13   I2      deg     DEd      Declination degrees (1950)
+ 14-15   I2      arcmin  DEm      Declination arcminutes
+ 16-17   I2      arcsec  DEs      [0,60] Declination arcseconds
+    18   A1      ---     Dyna     [*] '*' when group has dynamical parameters
+ 20-21   A2      ---     Type    *Group type
+ 22-23   I2      ---     MCount  *Member count
+ 24-28   F5.1    arcmin  AngSize *Angular size
+ 29-33   F5.1    mag     TotMag  *Total magnitude of group
+ 34-38   F5.1    mag     Emag    *Brightest member magnitude
+ 39-44   F6.3    ---     z       *? Redshift
+ 46-51   A6      ---     Aname1  *Alternate name 1
+ 53-58   A6      ---     Aname2  *Alternate name 2
+ 60-65   A6      ---     Aname3  *Alternate name 3
+ 67-72   A6      ---     Aname4  *Alternate name 4
+--------------------------------------------------------------------------------
+Note on Type:
+   Two-character code (a letter followed by a number)
+   classifying the group according to its two brightest members:
+      S    The brightest galaxy is a spiral galaxy.
+      E    The brightest galaxy is not a spiral galaxy.
+      1    m(b) - m(a) >= 1.0
+      2    0.5 <= m(b) - m(a) < 1.0
+      3    m(b) - m(a) < 0.5
+      where m(a) and m(b) are the estimated red magnitudes of the brightest
+      and second brightest members, respectively, of the cluster.
+Note on MCount:
+   Number of galaxies in the group. Only those galaxies within three
+   magnitudes of the brightest galaxy are counted as members.
+Note on AngSize:
+   Angular diameter, in arcminutes, of the smallest circle containing the
+   geometric centers of all group members.
+Note on TotMag:
+   Total estimated red magnitude of those galaxies counted as group members
+   (see member count, above.)
+Note on Emag:
+   Estimated red magnitude of the brightest galaxy in the group, in units
+   of magnitude.
+Note on z:
+   Corrected redshift of the brightest galaxy. In all but ten cases this
+   field is blank; prefer the group redshift supplied in the file
+   "dynamics.dat".
+Note on Aname1, Aname2, Aname3, Aname4:
+   Other designations of the group, if any (at most, four).
+--------------------------------------------------------------------------------
+
+Byte-by-byte Description of file: dynamics.dat
+--------------------------------------------------------------------------------
+   Bytes Format Units   Label     Explanations
+--------------------------------------------------------------------------------
+   1-  3  I3    ---     HCG       [1/100]+= Group number
+   6- 11  F6.4  ---     z         Group Redshift derived from the median
+                                        galaxy heliocentric velocity
+      14  I1    ---     n         Number of galaxies with accordant velocities
+  17- 20  F4.2 [km/s]   log(sV)   Radial velocity dispersion
+  22- 26  F5.2 [km/s]   log(V)    ? Estimated instrinsic 3D velocity dispersion
+  28- 32  F5.2 [kpc]    log(R)    Median projected separation
+  35- 39  F5.2  ---   log(Ho.tc)  Crossing time (expressed in 1/Ho units)
+  42- 46  F5.2  [g]     log(Mv)   ? Virial mass of group in log. scale
+  49- 53  F5.2  [g]     log(Mp)   ? Projected mass
+  56- 60  F5.2  [g]     log(Ma)   ? Average mass
+  63- 67  F5.2  [g]     log(Mm)   ? Median mass
+  70- 74  F5.2  [g]     log(M)    ? Adopted mass
+  77- 81  F5.2  [W]     log(L)    Total blue luminosity
+                                    of the accordant galaxies
+  83- 87  F5.2 [Sun]    log(M/L)  ? Mass-to-light ratio
+  89- 94  F6.2 [g/cm3]  log(rho)  ? Mass density
+--------------------------------------------------------------------------------
+
+Byte-by-byte Description of file: galaxies.dat
+--------------------------------------------------------------------------------
+   Bytes Format Units   Label   Explanations
+--------------------------------------------------------------------------------
+   1-  3  I3    ---     HCG     [1/100]+= Hickson Group number (groups.dat)
+       4  A1    ---   m_HCG     [a-i]! Galaxy in HCG group
+   6-  7  I2    h       RAh     Right Ascension B1950 (hours)
+   8-  9  I2    min     RAm     Right Ascension B1950 (minutes)
+  10- 14  F5.2  s       RAs     Right Ascension B1950 (seconds)
+      15  A1    ---     DE-     Declination B1950 (sign)
+  16- 17  I2    deg     DEd     Declination B1950 (degrees)
+  18- 19  I2    arcmin  DEm     Declination B1950 (minutes)
+  20- 23  F4.1  arcsec  DEs     Declination B1950 (seconds)
+  25- 29  F5.1  arcsec  a       Semi-major axis at 25.0mag/arcsec^2^ isophote
+  31- 34  F4.1  arcsec  b       Semi-minor axis at 25.0mag/arcsec^2^ isophote
+  37- 40  A4    ---     MType   Hubble Morphological type
+  42- 43  I2    ---     T      *Numeric morphological type
+      44  A1    ---     morph   [m] when more morphology in file "morpho.dat"
+  45- 49  I5    km/s    RVhel   ? Heliocentric velocity
+  51- 53  I3    km/s  e_RVhel   ? Estimated rms in RVhel
+      55  I1    ---   q_RVhel  *[0/2]?  Confidence code on RVhel
+  57- 61  F5.2  mag     Bmag    B magnitude within 24.5mag/arcsec^2^ isophote
+      63  I1    ---   q_Bmag   *[0,4] Confidence level for Bmag
+  65- 69  F5.1  arcsec  DBmag  *Diameter of B=24.5mag/arcsec^2^ isophote
+  71- 75  F5.2  mag     Rmag    R magnitude within 24.0mag/arcsec^2^ isophote
+      77  I1    ---   q_Rmag   *[0,4] Confidence level for Rmag
+  79- 83  F5.1  ---     DRmag  *Diameter of R=24.0mag/arcsec^2^ isophote
+  85- 88  F4.2  mag     B-R     Colour within the 24.5mag/arcsec^2^ isophote
+  90- 94  F5.2  mag     BTmag   B_T_ asymptotic magnitude
+  96-100  F5.2  mag     BTc     B_T_ asymptotic magnitude corrected for
+                                        internal and external extinction
+ 102-105  F4.2  mag   e_BTmag   Mean error on BTmag
+ 107-111  F5.1  mag  MB-5log(h) ? Absolute magnitude of individual galaxies,
+                                    h=Ho/100, Ho=Hubble constant
+ 113-130  A18   ---     Names     Other names
+--------------------------------------------------------------------------------
+Note on T: the morphological type codes are:
+    ---------------------------
+    Hubble      Code     RC2
+    ---------------------------
+    E0-E7        0       -4, -5
+    S0, SB0      1       -2
+    S0a, SB0a    2        0
+    Sa, SBa      3        1
+    Sab, SBab    4        2
+    Sb, SBb      5        3
+    Sbc, SBbc    6        4
+    Sc, SBc      7        5
+    Scd, SBcd    8        6
+    Sd, SBd      9        7
+    Sdm, SBdm   10        8
+    Sm, SDm     11        9
+    Im, IBm     12       10
+    cI          13       11
+    ---------------------------
+Note on q_RVhel: the confidence code is
+     0 = highest confidence: spectral features clearly visible
+     1 = lower confidence: spectral features not clearly visible
+     2 = lowest confidence: very noisy spectra with no obvious features.
+         Only 3 galaxies have q_RVhel=2.
+Note on q_Bmag, q_Rmag: confidence levels are:
+     0 = good
+     1 = uncertain due to overlapping isophotes
+     2 = uncertain due to contamination
+     3 = uncertain due to poor calibration
+     4 = uncertain due to clouds.
+     (value 5 for HCG 64c unexplained)
+Note on DBmag, DRmag:
+     the diameter is defined as  sqrt(Area/{pi})
+--------------------------------------------------------------------------------
+
+Byte-by-byte Description of file: morpho.dat
+--------------------------------------------------------------------------------
+   Bytes Format Units   Label     Explanations
+--------------------------------------------------------------------------------
+   1-  3  I3    ---     HCG       [1/100]+= Hickson Group number (groups.dat)
+       4  A1    ---   m_HCG       [a-i]! Galaxy in HCG group
+   8- 12  I5    km/s    RVhel     ? Heliocentric velocity
+  16- 19  A4    ---     MType     Morphological type
+  24- 92  A69   ---     Comments *Comments
+--------------------------------------------------------------------------------
+Note on Comments: Abbreviations used in comments:
+        [string 'ansac' in 58a is unexplained]
+  asym.    = asymmetric
+  emission = galaxy with emission lines in its nuclear spectrum
+  IR       = infrared emitter (Hickson et al. 1989ApJ...341..679H,
+             Sulentic & de Mello Rabaca 1993ApJ...410..520S)
+  morpho   = morphology
+  n.c.i.   = nonconcentric isophotes
+  r.c.     = rotation curve
+  radio    = radio-loud galaxies (Menon & Hickson 1985; Menon 1993)
+  tail-like= galaxy has tail-like features
+  vel.     = velocity
+  WR       = galaxy exhibits Wolf-Rayet spectral features
+--------------------------------------------------------------------------------
+
+Remarks and Modifications:
+  * History of Catalogue VII/85:
+    The catalogue was originally prepared at the Centre de Donnees
+    astronomiques, Strasbourg (CDS), in 1986. It was then received by the
+    Astronomical Data Center (ADC), NASA Goddard Space Flight Center, in
+    December 1986.
+
+    The original tape consisted of a single text file containing the
+    catalog data from Table 1 of Systematic Properties of Compact Groups
+    of Galaxies, in a slightly more compact format. ADC personnel deleted
+    eight blank columns from the end of each record in the file to reduce
+    the record size from 80 to 72 bytes and ran a FORTRAN program to check
+    the validity of each field according to its data type and value. Two
+    minor typographic errors discovered in the computer-readable version
+    were then corrected by referring to the published catalog. A possible
+    error was also detected, but not changed, in record number 97, where
+    the DEC seconds field contains a value of 60 (this value appears in
+    the printed version).
+
+    P. Hickson kindly supplied a list of errata including some corrections
+    in addition to the published erratum. This list is reproduced below;
+    the indicated changes have already been made to the catalog data.
+
+       ERRATUM
+        HCG      AngSize       TotMag          Emag
+         14       6.7           12.1           13.0
+         22       5.0           10.5           11.1
+         60       2.3           13.4           14.4
+         69       1.9           12.2           13.1
+         82       3.1           12.2           13.1
+        HCG    RAh/RAm/RAs DEd/DEm/DEs
+         03     00 31 39   -07 52 07
+         31     04 59 08   -04 19 42
+         74     15 17 14   +21 04 27
+         89     21 17 34   -04 07 17
+
+ * Catalogue VII/213 (F. Ochsenbein, CDS, 07-Jun-1999)
+   This catalogue is a merged version of:
+   - VII/85 (1982ApJ...255..382H), with its ReadMe description made
+     by C.-H. Joseph Lyu [Hughes STX/NASA] on 16-Oct-1995, and of:
+   - 1991ApJ...380...30M (absolute magnitudes) kindly supplied by
+     Claudia Mendes de Oliveira <coliveira@eso.org> in March 1994.
+   - 1989ApJS...70..687H, 1992ApJ...399..353H and 1994ApJ...427..684M
+     kindly supplied by Heinz Andernach; these tables were prepared
+     via OCR and proofread by him in April 1995.
+================================================================================
+(End)                                     Francois Ochsenbein [CDS]  07-Jun-1999
