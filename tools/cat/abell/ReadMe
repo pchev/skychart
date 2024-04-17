@@ -1,0 +1,166 @@
+VII/4A              Abell and Zwicky Clusters of Galaxies   (Abell+ 1974)
+================================================================================
+Catalogue of Abell and Zwicky Clusters of Galaxies
+     ABELL G.O.
+    <Astrophys. J. Suppl. Ser. 3, 211 (1958)>
+    =1958ApJS....3..211A
+     CORWIN H.G.
+    <Astron. J. 79, 1356 (1974)>
+    =1974AJ.....79.1356C
+     ZWICKY F., HERZOG E., WILD P., KARPOWICZ M., KOWAL C.T.: 1961-68
+    <Catalogue of galaxies and of clusters of galaxies,
+     California Institute of Technology, Pasadena, 6vols.>
+================================================================================
+ADC_Keywords: Clusters, galaxy ;
+
+Description:
+    See the complete documentation written by Robert S. Hill (file adc.doc)
+
+File Summary:
+--------------------------------------------------------------------------------
+ FileName    Lrecl    Records    Explanations
+--------------------------------------------------------------------------------
+ReadMe          80          .    This file
+adc.doc         80        614    Documentation written by Robert S. Hill
+abell          130       2712    Abell Clusters (Abell, 1958; Corwin, 1974)
+zwicky         130       9134    Zwicky Clusters (Zwicky et al., 1961-68)
+zwindex        130       9134    Zwicky Clusters index
+--------------------------------------------------------------------------------
+
+See also:
+    VII/201 : Cross-Identifications in Abell / Zwicky clusters (Kalinkov+ 1998)
+
+Byte-by-byte Description of file: abell
+--------------------------------------------------------------------------------
+   Bytes Format  Units   Label    Explanations
+--------------------------------------------------------------------------------
+   2-  5  I4     ---     Abell    Abell cluster number
+       7  I1     ---     n_Abell  [1/2] '2' if in Abell's statistical sample,
+                                        '1' if not
+   9- 10  I2     h       RAh      Hours RA, 1950.0
+  12- 15  F4.1   min     RAm      Minutes RA, 1950.0
+      17  A1     ---     DE-      Sign Dec, 1950.0
+  18- 19  I2     deg     DEd      Degrees Dec, 1950.0
+  21- 22  I2     arcmin  DEm      Minutes Dec, 1950.0
+  25- 28  F4.1   mag     Mag10    Magnitude of 10th brightest cluster member
+      31  I1     ---    DistGroup [0/7] Distance group (1)
+      34  I1     ---    RichGroup [0/5] Richness group (2)
+  37- 42  F6.2   deg     GLON     Galactic longitude
+  44- 49  F6.2   deg     GLAT     Galactic latitude
+  52- 58  F7.4   ---     RLamb    Lambert distance from pole (3)
+  60- 66  F7.4   ---     XLamb    Lambert X coordinate (3)
+  68- 74  F7.4   ---     YLamb    Lambert Y coordinate (3)
+  77- 82  F6.2   deg     SGLON    Supergalactic longitude (de Vaucouleur's
+                                    system)
+  84- 89  F6.2   deg     SGLAT    Supergalactic latitude
+  92- 95  F4.2   deg     ClusRad  Corrected Abell cluster radius
+  98-103  F6.3   deg2    ClusArea Cluster area computed from ClusRad
+ 106-109  I4    ct/deg2  Pop      Mean apparent population (galaxies/sq.deg)
+ 112-114  I3     Mpc     Dist     Radial distance to cluster
+ 117-120  I4     Mpc     DistX    X component of Distance
+ 122-125  I4     Mpc     DistY    Y component of Distance
+ 127-130  I4     Mpc     DistZ    Z component of Distance
+--------------------------------------------------------------------------------
+Note (1): DistGroup is Based on the magnitude of the 10th brightest member;
+   it is defined as follows:
+   '0'= < 13.3                  '4'= 15.7 - 16.4
+   '1'= 13.3 - 14.0             '5'= 16.5 - 17.2
+   '2'= 14.1 - 14.8             '6'= 17.3 - 18.0
+   '3'= 14.9 - 15.6             '7'= > 18.0
+Note (2): RichGroup depends on galaxy counts as follows:
+   '0'= 30 - 40                 '3'= 130 - 199
+   '1'= 50 - 79                 '4'= 200 - 299
+   '2'= 80 - 129                '5'= 300 or over.
+Note (3): The Lambert projection is an equal-area projection, where the
+    distance to the center (nearest galactic pole) RLamb is defined by:
+        RLamb = 2 sin (theta/2)     where theta = polar distance = (90-b)
+    and the position angle is the longitude.
+    RLamb is negative for clusters located in southern galactic hemisphere.
+    The cartesian values XLamb and YLamb are defined by:
+        XLamb = RLamb sin(l)        (component directed toward l=90deg)
+        YLamb = RLamb cos(l)        (component directed toward l=0deg)
+    RLamb, XLamb and YLamb are therefore in range [-sqrt(2), +sqrt(2)]
+--------------------------------------------------------------------------------
+
+Byte-by-byte Description of file: zwicky
+--------------------------------------------------------------------------------
+   Bytes Format  Units   Label    Explanations
+--------------------------------------------------------------------------------
+   2-  5  I4     ---     Zwicky   Zwicky cluster number
+   8-  9  I2     h       RAh      Hours RA, 1950.0
+  11- 14  F4.1   min     RAm      Minutes RA, 1950.0
+      17  A1     ---     DE-      Sign Dec, 1950.0
+  18- 19  I2     deg     DEd      Degrees Dec, 1950.0
+  21- 22  I2     arcmin  DEm      Minutes Dec, 1950.0
+      26  I1     ---     Type     [1/3] Cluster type (1)
+  30- 33  I4     ---     GalCnt   Population of cluster (number of galaxies)
+  37- 40  F4.1   cm      Diam     Diameter of cluster
+      44  I1     ---    DistGroup Distance group (2)
+  48- 53  F6.2   deg     GLON     Galactic longitude
+  56- 61  F6.2   deg     GLAT     Galactic latitude
+  65- 71  F7.4   ---     RLamb    Lambert distance from pole (3)
+  74- 80  F7.4   ---     XLamb    Lambert X coordinate (3)
+  83- 89  F7.4   ---     YLamb    Lambert Y coordinate (3)
+  93- 98  F6.2   deg     SGLON    Supergalactic longitude, de Vaucouleur's
+                                    system
+ 101-106  F6.2   deg     SGLAT    Supergalactic latitude
+ 110-113  F4.2   deg     ClusRad  Cluster radius: 0.09326 * Diam
+ 116-122  F7.3   deg2    ClusArea Cluster area: 0.02733 * Diam**2
+ 126-130  I5     ct/deg2 Pop      Mean apparent population (galaxies/sq.deg)
+--------------------------------------------------------------------------------
+Note (1): Cluster type is '1'=open; '2'=medium compact; '3'=compact
+Note (2): DistGroup is:
+        '1'= near               '4'= very distant
+        '2'= medium distant     '5'= extremely distant
+        '3'= distant
+Note (3): Lambert projection is explained above in Note(3) of file: abell.
+--------------------------------------------------------------------------------
+
+Byte-by-byte Description of file: zwindex
+--------------------------------------------------------------------------------
+   Bytes Format  Units   Label    Explanations
+--------------------------------------------------------------------------------
+   2-  5  I4     ---     Zwicky   Zwicky cluster number
+   8-  9  I2     h       RAh      Hours RA, 1950.0
+  11- 14  F4.1   min     RAm      Minutes RA, 1950.0
+      17  A1     ---     DE-      Sign Dec, 1950.0
+  18- 19  I2     deg     DEd      Degrees Dec, 1950.0
+  21- 22  I2     arcmin  DEm      Minutes Dec, 1950.0
+  25- 27  I3     ---     Area1    [1/559]? Plate area containing cluster (1)
+  29- 31  I3     ---     Number1  [1/120]? Cluster number within plate area (1)
+  34- 36  I3     ---     Area2    [1/559]? Plate area containing cluster (1)
+  38- 40  I3     ---     Number2  [1/120]? Cluster number within plate area (1)
+  43- 45  I3     ---     Area3    [1/559]? Plate area containing cluster (1)
+  47- 49  I3     ---     Number3  [1/120]? Cluster number within plate area (1)
+  52- 54  I3     ---     Area4    [1/559]? Plate area containing cluster (1)
+  56- 58  I3     ---     Number4  [1/120]? Cluster number within plate area (1)
+  61- 63  I3     ---     Area5    [1/559]? Plate area containing cluster (1)
+  65- 67  I3     ---     Number5  [1/120]? Cluster number within plate area (1)
+  70- 72  I3     ---     Area6    [1/559]? Plate area containing cluster (1)
+  74- 76  I3     ---     Number6  [1/120]? Cluster number within plate area (1)
+  79- 81  I3     ---     Area7    [1/559]? Plate area containing cluster (1)
+  83- 85  I3     ---     Number7  [1/120]? Cluster number within plate area (1)
+  88- 90  I3     ---     Area8    [1/559]? Plate area containing cluster (1)
+  92- 94  I3     ---     Number8  [1/120]? Cluster number within plate area (1)
+  97- 99  I3     ---     Area9    [1/559]? Plate area containing cluster (1)
+ 101-103  I3     ---     Number9  [1/120]? Cluster number within plate area (1)
+ 106-108  I3     ---     Area10   [1/559]? Plate area containing cluster (1)
+ 110-112  I3     ---     Number10 [1/120]? Cluster number within plate area (1)
+ 115-117  I3     ---     Area11   [1/559]? Plate area containing cluster (1)
+ 119-121  I3     ---     Number11 [1/120]? Cluster number within plate area (1)
+ 124-126  I3     ---     Area12   [1/559]? Plate area containing cluster (1)
+ 128-130  I3     ---     Number12 [1/120]? Cluster number within plate area (1)
+--------------------------------------------------------------------------------
+Note (1):
+    Up to 12 Zwicky plate numbers and cluster numbers within the plates
+    (a cluster often spreads into several plate areas). Pairs are sorted
+    in order of increasing order of plate-area number.
+
+Historical Notes:
+  * The catalogue has been prepared initially by the Bulgarian Academy of
+    Sciences
+  * See in "adc.doc" file, section 4, from the
+    "Selected Astronomical Catalogs" Vol. 1 CD-ROM (1992), directory:
+    /cd6/nonstell/galaxies/abzwclus
+================================================================================
+(End)                                    Francois Ochsenbein [CDS]   12-Apr-1995
