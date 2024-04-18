@@ -180,7 +180,7 @@ begin
     readln(f,installedversion);
     CloseFile(f);
     installedversion:=trim(installedversion);
-    newversion:=(installedversion<>version);
+    newversion:=(installedversion<version);
   end
   else begin
     newversion:=false;
