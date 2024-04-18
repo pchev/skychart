@@ -1,0 +1,8 @@
+Exoplanet catalog for use with Cartes du Ciel software.
+
+The data are from http://www.openexoplanetcatalogue.com/
+
+The include script exoplanet.sh allow to get the data file from
+this site and expand the tabulation to make it to the right format.
+
+Then run Catgen with exoplanet.prj
