@@ -299,12 +299,12 @@ object f_config_catalog: Tf_config_catalog
               Top = 0
               Width = 494
               Align = alClient
-              ColCount = 11
+              ColCount = 12
               Columns = <              
                 item
                   MaxSize = 202
                   Title.Caption = 'Cat'
-                  Width = 118
+                  Width = 140
                 end              
                 item
                   ButtonStyle = cbsPickList
@@ -325,7 +325,7 @@ object f_config_catalog: Tf_config_catalog
                     '10'
                   )
                   Title.Caption = 'Min'
-                  Width = 50
+                  Width = 45
                 end              
                 item
                   ButtonStyle = cbsPickList
@@ -345,7 +345,7 @@ object f_config_catalog: Tf_config_catalog
                     '10'
                   )
                   Title.Caption = 'Max'
-                  Width = 50
+                  Width = 45
                 end              
                 item
                   Alignment = taRightJustify
@@ -362,12 +362,12 @@ object f_config_catalog: Tf_config_catalog
                 item
                   MaxSize = 202
                   Title.Caption = 'Color'
-                  Width = 51
+                  Width = 45
                 end              
                 item
                   MaxSize = 202
                   Title.Caption = 'Refresh'
-                  Width = 56
+                  Width = 54
                 end              
                 item
                   Title.Caption = 'drawing'
@@ -380,12 +380,16 @@ object f_config_catalog: Tf_config_catalog
                 item
                   Title.Caption = 'label'
                   Visible = False
+                end              
+                item
+                  Title.Caption = 'shortname'
+                  Visible = False
                 end>
               DefaultColWidth = 24
               DefaultRowHeight = 24
               GridLineWidth = 0
               MouseWheelOption = mwGrid
-              Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goEditing, goAlwaysShowEditor, goCellHints]
+              Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goRangeSelect, goColSizing, goEditing, goAlwaysShowEditor, goFixedColSizing, goCellHints]
               ParentFont = False
               ParentShowHint = False
               RowCount = 2
@@ -411,12 +415,12 @@ object f_config_catalog: Tf_config_catalog
               Top = 0
               Width = 494
               Align = alClient
-              ColCount = 11
+              ColCount = 12
               Columns = <              
                 item
                   MaxSize = 202
                   Title.Caption = 'Cat'
-                  Width = 118
+                  Width = 140
                 end              
                 item
                   ButtonStyle = cbsPickList
@@ -436,7 +440,7 @@ object f_config_catalog: Tf_config_catalog
                     '10'
                   )
                   Title.Caption = 'Min'
-                  Width = 50
+                  Width = 45
                 end              
                 item
                   ButtonStyle = cbsPickList
@@ -456,7 +460,7 @@ object f_config_catalog: Tf_config_catalog
                     '10'
                   )
                   Title.Caption = 'Max'
-                  Width = 50
+                  Width = 45
                 end              
                 item
                   Alignment = taRightJustify
@@ -473,12 +477,12 @@ object f_config_catalog: Tf_config_catalog
                 item
                   MaxSize = 202
                   Title.Caption = 'Color'
-                  Width = 51
+                  Width = 45
                 end              
                 item
                   MaxSize = 202
                   Title.Caption = 'Refresh'
-                  Width = 56
+                  Width = 54
                 end              
                 item
                   Title.Caption = 'drawing'
@@ -491,12 +495,16 @@ object f_config_catalog: Tf_config_catalog
                 item
                   Title.Caption = 'label'
                   Visible = False
+                end              
+                item
+                  Title.Caption = 'shortname'
+                  Visible = False
                 end>
               DefaultColWidth = 24
               DefaultRowHeight = 24
               GridLineWidth = 0
               MouseWheelOption = mwGrid
-              Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goEditing, goAlwaysShowEditor, goCellHints]
+              Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goRangeSelect, goColSizing, goEditing, goAlwaysShowEditor, goFixedColSizing, goCellHints]
               ParentFont = False
               ParentShowHint = False
               RowCount = 2
@@ -522,12 +530,12 @@ object f_config_catalog: Tf_config_catalog
               Top = 0
               Width = 494
               Align = alClient
-              ColCount = 11
+              ColCount = 12
               Columns = <              
                 item
                   MaxSize = 202
                   Title.Caption = 'Cat'
-                  Width = 118
+                  Width = 140
                 end              
                 item
                   ButtonStyle = cbsPickList
@@ -547,7 +555,7 @@ object f_config_catalog: Tf_config_catalog
                     '10'
                   )
                   Title.Caption = 'Min'
-                  Width = 50
+                  Width = 45
                 end              
                 item
                   ButtonStyle = cbsPickList
@@ -567,7 +575,7 @@ object f_config_catalog: Tf_config_catalog
                     '10'
                   )
                   Title.Caption = 'Max'
-                  Width = 50
+                  Width = 45
                 end              
                 item
                   Alignment = taRightJustify
@@ -584,12 +592,12 @@ object f_config_catalog: Tf_config_catalog
                 item
                   MaxSize = 202
                   Title.Caption = 'Color'
-                  Width = 51
+                  Width = 45
                 end              
                 item
                   MaxSize = 202
                   Title.Caption = 'Refresh'
-                  Width = 56
+                  Width = 54
                 end              
                 item
                   Title.Caption = 'drawing'
@@ -602,12 +610,16 @@ object f_config_catalog: Tf_config_catalog
                 item
                   Title.Caption = 'label'
                   Visible = False
+                end              
+                item
+                  Title.Caption = 'shortname'
+                  Visible = False
                 end>
               DefaultColWidth = 24
               DefaultRowHeight = 24
               GridLineWidth = 0
               MouseWheelOption = mwGrid
-              Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goEditing, goAlwaysShowEditor, goCellHints]
+              Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goRangeSelect, goColSizing, goEditing, goAlwaysShowEditor, goFixedColSizing, goCellHints]
               ParentFont = False
               ParentShowHint = False
               RowCount = 2
@@ -633,12 +645,12 @@ object f_config_catalog: Tf_config_catalog
               Top = 0
               Width = 494
               Align = alClient
-              ColCount = 11
+              ColCount = 12
               Columns = <              
                 item
                   MaxSize = 202
                   Title.Caption = 'Cat'
-                  Width = 118
+                  Width = 140
                 end              
                 item
                   ButtonStyle = cbsPickList
@@ -658,7 +670,7 @@ object f_config_catalog: Tf_config_catalog
                     '10'
                   )
                   Title.Caption = 'Min'
-                  Width = 50
+                  Width = 45
                 end              
                 item
                   ButtonStyle = cbsPickList
@@ -678,7 +690,7 @@ object f_config_catalog: Tf_config_catalog
                     '10'
                   )
                   Title.Caption = 'Max'
-                  Width = 50
+                  Width = 45
                 end              
                 item
                   Alignment = taRightJustify
@@ -695,12 +707,12 @@ object f_config_catalog: Tf_config_catalog
                 item
                   MaxSize = 202
                   Title.Caption = 'Color'
-                  Width = 51
+                  Width = 45
                 end              
                 item
                   MaxSize = 202
                   Title.Caption = 'Refresh'
-                  Width = 56
+                  Width = 54
                 end              
                 item
                   Title.Caption = 'drawing'
@@ -713,12 +725,16 @@ object f_config_catalog: Tf_config_catalog
                 item
                   Title.Caption = 'label'
                   Visible = False
+                end              
+                item
+                  Title.Caption = 'shortname'
+                  Visible = False
                 end>
               DefaultColWidth = 24
               DefaultRowHeight = 24
               GridLineWidth = 0
               MouseWheelOption = mwGrid
-              Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goEditing, goAlwaysShowEditor, goCellHints]
+              Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goRangeSelect, goColSizing, goEditing, goAlwaysShowEditor, goFixedColSizing, goCellHints]
               ParentFont = False
               ParentShowHint = False
               RowCount = 2
@@ -744,12 +760,12 @@ object f_config_catalog: Tf_config_catalog
               Top = 0
               Width = 494
               Align = alClient
-              ColCount = 11
+              ColCount = 12
               Columns = <              
                 item
                   MaxSize = 202
                   Title.Caption = 'Cat'
-                  Width = 118
+                  Width = 140
                 end              
                 item
                   ButtonStyle = cbsPickList
@@ -769,7 +785,7 @@ object f_config_catalog: Tf_config_catalog
                     '10'
                   )
                   Title.Caption = 'Min'
-                  Width = 50
+                  Width = 45
                 end              
                 item
                   ButtonStyle = cbsPickList
@@ -789,7 +805,7 @@ object f_config_catalog: Tf_config_catalog
                     '10'
                   )
                   Title.Caption = 'Max'
-                  Width = 50
+                  Width = 45
                 end              
                 item
                   Alignment = taRightJustify
@@ -806,12 +822,12 @@ object f_config_catalog: Tf_config_catalog
                 item
                   MaxSize = 202
                   Title.Caption = 'Color'
-                  Width = 51
+                  Width = 45
                 end              
                 item
                   MaxSize = 202
                   Title.Caption = 'Refresh'
-                  Width = 56
+                  Width = 54
                 end              
                 item
                   Title.Caption = 'drawing'
@@ -824,12 +840,16 @@ object f_config_catalog: Tf_config_catalog
                 item
                   Title.Caption = 'label'
                   Visible = False
+                end              
+                item
+                  Title.Caption = 'shortname'
+                  Visible = False
                 end>
               DefaultColWidth = 24
               DefaultRowHeight = 24
               GridLineWidth = 0
               MouseWheelOption = mwGrid
-              Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goEditing, goAlwaysShowEditor, goCellHints]
+              Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goRangeSelect, goColSizing, goEditing, goAlwaysShowEditor, goFixedColSizing, goCellHints]
               ParentFont = False
               ParentShowHint = False
               RowCount = 2

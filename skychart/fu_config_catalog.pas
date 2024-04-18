@@ -616,11 +616,15 @@ begin
     g.RowCount := g.RowCount+1;
     i := g.RowCount - 1;
     catalog.GetInfo(systoutf8(ccat.GCatLst[j].path), ccat.GCatLst[j].shortname, magmax,v,st,sz,ver,longname);
-    g.cells[1, i] := ccat.GCatLst[j].shortname;
+    longname := trim(longname);
+    if longname > '' then
+      g.cells[1, i] := longname
+    else
+      g.cells[1, i] := ccat.GCatLst[j].shortname;
+    g.cells[11, i] := ccat.GCatLst[j].shortname;
     g.cells[2, i] := formatfloat(f0, ccat.GCatLst[j].min);
     g.cells[3, i] := formatfloat(f0, ccat.GCatLst[j].max);
     g.cells[4, i] := systoutf8(ccat.GCatLst[j].path);
-    g.cells[5, i] := longname;
     g.cells[8, i] := IntToStr(ccat.GCatLst[j].startype);
     g.cells[9, i] := IntToStr(ccat.GCatLst[j].starsize);
     if ccat.GCatLst[j].ForceLabel then
@@ -633,8 +637,8 @@ begin
       g.cells[0, i] := '2'
     else
       g.cells[0, i] := '0';
-    ncolor := catalog.GetNebColorSet(g.Cells[4, i], g.Cells[1, i]);
-    scolor := ccat.GCatLst[j].ForceColor or catalog.GetStarColorSet(g.Cells[4, i], g.Cells[1, i]);
+    ncolor := catalog.GetNebColorSet(g.Cells[4, i], g.Cells[11, i]);
+    scolor := ccat.GCatLst[j].ForceColor or catalog.GetStarColorSet(g.Cells[4, i], g.Cells[11, i]);
 
     if (n = 1) then begin    // rtstar
       if scolor then begin
@@ -666,7 +670,7 @@ begin
         g.cells[6, i] := '';
     end;
 
-    caturl := catalog.GetCatURL(g.Cells[4, i], g.Cells[1, i]);
+    caturl := catalog.GetCatURL(g.Cells[4, i], g.Cells[11, i]);
     if trim(caturl) > '' then
       g.cells[7, i] := '1'
     else
@@ -849,7 +853,6 @@ begin
             Canvas.EllipseC( cx, cy , 2, 2);
           end
           else begin
-            Canvas.Brush.Color := clWindow;
             Canvas.EllipseC( cx, cy , 6, 6);
           end;
         end;
@@ -876,14 +879,15 @@ var
 begin
   TStringGrid(sender).MouseToCell(X, Y, Col, Row);
   RowMouseDown:=row;
+  TStringGrid(sender).Selection:=Rect(0,row,4,row);
 end;
 
 procedure Tf_config_catalog.CatalogGridGetCellHint(Sender: TObject; ACol, ARow: Integer; var HintText: String);
 begin
   if ARow>0 then begin
-    HintText:=TStringGrid(Sender).Cells[5, ARow];
+    HintText:=TStringGrid(Sender).Cells[1, ARow];
     if HintText='' then
-      HintText:=TStringGrid(Sender).Cells[1, ARow];
+      HintText:=TStringGrid(Sender).Cells[11, ARow];
   end;
 end;
 
@@ -906,7 +910,7 @@ begin
           TStringGrid(sender).Cells[col, row] := '0';
       end
       else begin
-        if not fileexistsutf8(slash(TStringGrid(sender).cells[4, row]) + TStringGrid(sender).cells[1, row] + '.hdr') then
+        if not fileexistsutf8(slash(TStringGrid(sender).cells[4, row]) + TStringGrid(sender).cells[11, row] + '.hdr') then
           TStringGrid(sender).Cells[col, row] := '0'
         else begin
           if TStringGrid(sender).Cells[col, row] = '0' then
@@ -963,7 +967,7 @@ begin
     begin
       if TStringGrid(sender).Cells[col, row] = '1' then
       begin
-        ReloadCat(TStringGrid(sender).Cells[4, row], TStringGrid(sender).Cells[1, row]);
+        ReloadCat(TStringGrid(sender).Cells[4, row], TStringGrid(sender).Cells[11, row]);
       end;
     end;
   end;
@@ -1051,22 +1055,25 @@ end;
 
 procedure Tf_config_catalog.EditGCatPath(grid: TStringGrid; row: integer);
 var
-  sname,path: string;
-  i: integer;
+  sname,path,ver,longname: string;
+  i,v,st,sz: integer;
+  m: single;
 begin
   path := grid.Cells[4, row];
-  sname := grid.Cells[1, row];
+  sname := grid.Cells[11, row];
   if SelectGCat(path,sname) then
     begin
-      grid.Cells[1, row] := sname;
+      grid.Cells[11, row] := sname;
       grid.Cells[4, row] := path;
       grid.Cells[2, row] := '0';
-      grid.Cells[3, row] := catalog.GetMaxField(grid.Cells[4, row], grid.Cells[1, row]);
+      grid.Cells[3, row] := catalog.GetMaxField(grid.Cells[4, row], grid.Cells[11, row]);
+      catalog.GetInfo(path,sname,m,v,st,sz,ver,longname);
+      grid.Cells[1, row] := longname;
     end;
-    i := catalog.GetCatType(grid.Cells[4, row], grid.Cells[1, row]);
+    i := catalog.GetCatType(grid.Cells[4, row], grid.Cells[11, row]);
     if (i = 4) or (i = 5) then   // rtneb, rtlin
       grid.Cells[6, row] := ''
-    else if (i = 1) and catalog.GetStarColorSet(grid.Cells[4, row], grid.Cells[1, row]) then
+    else if (i = 1) and catalog.GetStarColorSet(grid.Cells[4, row], grid.Cells[11, row]) then
       grid.Cells[6, row] := inttostr(clYellow)
     else
       grid.Cells[6, row] := 'N';
@@ -1075,9 +1082,9 @@ end;
 procedure Tf_config_catalog.CatalogGridSelectCell(Sender: TObject;
   ACol, ARow: integer; var CanSelect: boolean);
 begin
-  if (Acol = 5) or (Acol = 6) or (Acol = 7) or
+  if (Acol = 1) or (Acol = 5) or (Acol = 6) or (Acol = 7) or
      ((Acol = 4) and (ARow<=ReservedRow[TStringGrid(Sender).tag]) and(TStringGrid(Sender).Cells[1,arow]<>'Gaia Catalog') ) or
-     (((Acol = 1)or(Acol = 5))and(ARow<=ReservedRow[TStringGrid(Sender).tag])) then
+     (((Acol = 5))and(ARow<=ReservedRow[TStringGrid(Sender).tag])) then
     canselect := False
   else
     canselect := True;
@@ -1094,16 +1101,8 @@ begin
          TStringGrid(sender).cells[0, arow] := '0';
     end
     else begin
-      if (not fileexists(slash(Value) + TStringGrid(sender).cells[1, arow] + '.hdr')) then
+      if (not fileexists(slash(Value) + TStringGrid(sender).cells[11, arow] + '.hdr')) then
         TStringGrid(sender).cells[0, arow] := '0';
-    end;
-  end;
-  if (Acol = 1) and (Arow > 0) then begin
-    if not fileexists(slash(TStringGrid(sender).cells[4, arow]) + Value + '.hdr') then
-    begin
-      TStringGrid(sender).Canvas.Brush.Color := clRed;
-      TStringGrid(sender).Canvas.FillRect(TStringGrid(sender).CellRect(ACol, ARow));
-      TStringGrid(sender).cells[0, arow] := '0';
     end;
   end;
   if ((Acol = 2) or (Acol = 3)) and (Arow > 0) and (Value > '') then
@@ -1137,7 +1136,7 @@ begin
     g.rowcount := g.rowcount + 1;
     r := g.rowcount - 1;
     g.cells[0, r] := '1';
-    g.Cells[1, r] := sname;
+    g.Cells[11, r] := sname;
     g.Cells[4, r] := path;
     g.Cells[2, r] := '0';
     g.Cells[3, r] := catalog.GetMaxField(path, sname);
@@ -1149,7 +1148,7 @@ begin
     else
       g.Cells[6, r] := 'N';
     catalog.GetInfo(path, sname,m,v,st,sz,vv,lname);
-    g.Cells[5, r] := lname;
+    g.Cells[1, r] := lname;
     g.Cells[8, r] := inttostr(st);
     g.Cells[9, r] := inttostr(sz);
   end;
@@ -1175,6 +1174,7 @@ begin
     g.cells[4, p] := '';
     g.cells[5, p] := '';
     g.cells[6, p] := '';
+    g.cells[11, p] := '';
     DeleteGCatRow(g, p);
     catalog.CleanCache;
   end;
@@ -1195,6 +1195,7 @@ begin
     grid.cells[4, 1] := '';
     grid.cells[5, 1] := '';
     grid.cells[6, 1] := '';
+    grid.cells[11, 1] := '';
   end
   else
   begin
@@ -1208,6 +1209,7 @@ begin
       grid.cells[5, i] := grid.cells[5, i + 1];
       grid.cells[6, i] := grid.cells[6, i + 1];
       grid.cells[7, i] := grid.cells[7, i + 1];
+      grid.cells[11, i] := grid.cells[11, i + 1];
    end;
     grid.RowCount := grid.RowCount - 1;
   end;
@@ -1440,8 +1442,7 @@ begin
     for j := ReservedRow[grid.tag]+1 to grid.RowCount-1 do
     begin
       inc(i);
-      buf := grid.cells[1, j];
-      ccat.GCatLst[i].shortname := grid.cells[1, j];
+      ccat.GCatLst[i].shortname := grid.cells[11, j];
       ccat.GCatLst[i].path := utf8tosys(grid.cells[4, j]);
       val(grid.cells[2, j], x, v);
       if v = 0 then
@@ -1643,6 +1644,7 @@ begin
   rto := rfrom + direction;
   if (rto <= ReservedRow[g.Tag]) or (rto >= g.RowCount) then exit;
   g.ExchangeColRow(false,rfrom,rto);
+  g.Selection:=Rect(0,rto,4,rto);
 end;
 
 
