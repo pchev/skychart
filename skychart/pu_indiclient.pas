@@ -470,7 +470,7 @@ begin
   InitTimer.Enabled := False;
   pos_x.Text := '';
   pos_y.Text := '';
-  if (client <> nil) then
+  if (client <> nil) and (not client.Terminated) then
   begin
     client.Terminate;
   end;
