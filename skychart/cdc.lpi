@@ -20,7 +20,7 @@
     <MacroValues Count="1">
       <Macro2 Name="LCLWidgetType" Value="qt5"/>
     </MacroValues>
-    <BuildModes Count="7">
+    <BuildModes Count="8">
       <Item1 Name="release" Default="True"/>
       <Item2 Name="debug">
         <MacroValues Count="1">
@@ -315,11 +315,62 @@
           </Other>
         </CompilerOptions>
       </Item7>
-      <SharedMatrixOptions Count="4">
+      <Item8 Name="qt6">
+        <MacroValues Count="1">
+          <Macro5 Name="LCLWidgetType" Value="qt6"/>
+        </MacroValues>
+        <CompilerOptions>
+          <Version Value="11"/>
+          <Target>
+            <Filename Value="units/$(TargetCPU)-$(TargetOS)-$(LCLWidgetType)/skychart"/>
+          </Target>
+          <SearchPaths>
+            <UnitOutputDirectory Value="units/$(TargetCPU)-$(TargetOS)-$(LCLWidgetType)"/>
+          </SearchPaths>
+          <Parsing>
+            <SyntaxOptions>
+              <CStyleOperator Value="False"/>
+            </SyntaxOptions>
+          </Parsing>
+          <CodeGeneration>
+            <Checks>
+              <IOChecks Value="True"/>
+              <RangeChecks Value="True"/>
+              <OverflowChecks Value="True"/>
+              <StackChecks Value="True"/>
+            </Checks>
+            <Optimizations>
+              <OptimizationLevel Value="0"/>
+            </Optimizations>
+          </CodeGeneration>
+          <Linking>
+            <Debugging>
+              <DebugInfoType Value="dsDwarf2"/>
+              <UseHeaptrc Value="True"/>
+            </Debugging>
+            <Options>
+              <Win32>
+                <GraphicApplication Value="True"/>
+              </Win32>
+            </Options>
+          </Linking>
+          <Other>
+            <Verbosity>
+              <ShowHints Value="False"/>
+            </Verbosity>
+            <CompilerMessages>
+              <IgnoredMessages idx6058="True"/>
+            </CompilerMessages>
+            <CustomOptions Value="-CF64 -dUSEHEAPTRC"/>
+          </Other>
+        </CompilerOptions>
+      </Item8>
+      <SharedMatrixOptions Count="5">
         <Item1 ID="368139646039" Modes="windows,win64" Type="IDEMacro" MacroName="LCLWidgetType" Value="win32"/>
         <Item2 ID="313858106277" Modes="debug heap,release,debug" Type="IDEMacro" MacroName="LCLWidgetType" Value="qt5"/>
         <Item3 ID="515644909926" Modes="cocoa" Type="IDEMacro" MacroName="LCLWidgetType" Value="cocoa"/>
         <Item4 ID="737246237302" Modes="gtk2" Type="IDEMacro" MacroName="LCLWidgetType" Value="gtk2"/>
+        <Item5 ID="059983004358" Modes="qt6" Type="IDEMacro" MacroName="LCLWidgetType" Value="qt6"/>
       </SharedMatrixOptions>
     </BuildModes>
     <PublishOptions>
