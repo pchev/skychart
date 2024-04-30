@@ -2717,7 +2717,7 @@ end;
 procedure Tf_chart.Image1MouseWheel(Sender: TObject; Shift: TShiftState;
   WheelDelta: integer; MousePos: TPoint; var Handled: boolean);
 var
-  zf: double;
+  zf,a,d,x1,y1: double;
   x, y: integer;
 begin
   RefreshTimer.Enabled := False;
@@ -2742,9 +2742,13 @@ begin
     begin
       x := MousePos.X;
       y := MousePos.Y;
-      x := x + round((sc.cfgsc.Xcentre - x) / zf);
-      y := y + round((sc.cfgsc.Ycentre - y) / zf);
-      sc.MovetoXY(x, y);
+      XYwindow(x, y, x1, y1, sc.cfgsc);
+      x1 := x1 - x1/zf;
+      y1 := y1 - y1/zf;
+      InvProj(x1, y1, a, d, sc.cfgsc);
+      a := rmod(pi4 + a, pi2);
+      sc.cfgsc.racentre:=a;
+      sc.cfgsc.decentre:=d;
     end;
     sc.cfgsc.Quick := True;
     Refresh(True, False);

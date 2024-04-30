@@ -480,6 +480,7 @@ object f_chart: Tf_chart
     Top = 204
   end
   object DownloadDialog1: TDownloadDialog
+    HttpDirectDownload = False
     Timeout = 90000
     FtpFwMode = 0
     FtpFwPassive = True
