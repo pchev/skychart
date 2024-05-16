@@ -99,7 +99,7 @@ type
     function ProcessData(s: TMemoryStream): boolean;
     procedure ProcessDataThread(s: TMemoryStream);
     procedure ProcessDataAsync(Data: PtrInt);
-    procedure OpenProtocolTrace(fnraw, fnlog, fnerr: string);
+    procedure OpenProtocolTrace;
     procedure CloseProtocolTrace;
     procedure WriteProtocolTrace(buf: string);
     procedure WriteProtocolRaw(buf: string);
@@ -219,30 +219,30 @@ begin
 {$endif}
 end;
 
-procedure TIndiBlobClient.OpenProtocolTrace(fnraw, fnlog, fnerr: string);
+procedure TIndiBlobClient.OpenProtocolTrace;
 begin
   try
     if not FProtocolTrace then
       exit;
-    if fnraw <> '' then
-      fnraw := expandfilename(fnraw);
-    if fnlog <> '' then
-      fnlog := expandfilename(fnlog);
-    if fnerr <> '' then
-      fnerr := expandfilename(fnerr);
+    if FProtocolRawFile <> '' then
+      FProtocolRawFile := expandfilename(FProtocolRawFile);
+    if FProtocolTraceFile <> '' then
+      FProtocolTraceFile := expandfilename(FProtocolTraceFile);
+    if FProtocolErrorFile <> '' then
+      FProtocolErrorFile := expandfilename(FProtocolErrorFile);
     Filemode := 2;
-    assignfile(FPTraw, fnraw);
+    assignfile(FPTraw, FProtocolRawFile);
     rewrite(FPTraw);
-    writeln(FPTraw, FormatDateTime('yyyy"-"mm"-"dd"T"hh":"nn":"ss.zzz', Now) +
-      '  Start trace');
-    assignfile(FPTlog, fnlog);
+    writeln(FPTraw, FormatDateTime('yyyy"-"mm"-"dd"T"hh":"nn":"ss.zzz', Now) + '  Start trace');
+    flush(FPTraw);
+    assignfile(FPTlog, FProtocolTraceFile);
     rewrite(FPTlog);
-    writeln(FPTlog, FormatDateTime('yyyy"-"mm"-"dd"T"hh":"nn":"ss.zzz', Now) +
-      '  Start trace');
-    assignfile(FPTerr, fnerr);
+    writeln(FPTlog, FormatDateTime('yyyy"-"mm"-"dd"T"hh":"nn":"ss.zzz', Now) + '  Start trace');
+    flush(FPTlog);
+    assignfile(FPTerr, FProtocolErrorFile);
     rewrite(FPTerr);
-    writeln(FPTerr, FormatDateTime('yyyy"-"mm"-"dd"T"hh":"nn":"ss.zzz', Now) +
-      '  Start trace');
+    writeln(FPTerr, FormatDateTime('yyyy"-"mm"-"dd"T"hh":"nn":"ss.zzz', Now) + '  Start trace');
+    flush(FPTerr);
   except
 {$I-}
     FProtocolTrace := False;
@@ -275,6 +275,7 @@ begin
   try
     if FProtocolTrace then begin
        WriteLn(FPTlog, FormatDateTime('yyyy"-"mm"-"dd"T"hh":"nn":"ss.zzz', Now) + '  ' + buf);
+       flush(FPTlog);
     end;
   except
 {$I-}
@@ -292,6 +293,7 @@ begin
   try
     if FProtocolTrace then begin
        WriteLn(FPTraw, FormatDateTime('yyyy"-"mm"-"dd"T"hh":"nn":"ss.zzz', Now) + '  ' + buf);
+       flush(FPTraw);
     end;
   except
 {$I-}
@@ -309,6 +311,7 @@ begin
   try
     if FProtocolTrace then begin
       WriteLn(FPTerr, FormatDateTime('yyyy"-"mm"-"dd"T"hh":"nn":"ss.zzz', Now) + '  ' + buf);
+      flush(FPTerr);
     end;
   except
 {$I-}
@@ -385,7 +388,7 @@ begin
     tcpclient := TTCPClient.Create;
     s := TMemoryStream.Create;
     try
-      OpenProtocolTrace(FProtocolRawFile, FProtocolTraceFile, FProtocolErrorFile);
+      OpenProtocolTrace;
       {$ifdef withCriticalsection}
       InitCriticalSection(SendCriticalSection);
       {$endif}
@@ -482,6 +485,7 @@ begin
         until False;
       end;
     finally
+      FErrorDesc:=tcpclient.GetErrorDesc;
       if FProtocolTrace then
         WriteProtocolTrace('Disconnect, socket status=' + tcpclient.Sock.LastErrorDesc);
       FConnected := False;
@@ -673,6 +677,11 @@ begin
     begin
       if terminated then
         break;
+      if copy(GetNodeName(Node), 1, 13)='getProperties' then begin
+        // skip snoop device query to not create empty tab
+        Node := Node.NextSibling;
+        continue;
+      end;
       dp := findDev(Node, True, errmsg);
       if dp=nil then begin
         Node := Node.NextSibling;
@@ -764,7 +773,7 @@ var
 begin
   {$ifdef UNIX}
   try
-  if (pos('.', host) = 0) and (not ResolveHostByName(host, H)) then
+  if (host<>'localhost') and (pos('.', host) = 0) and (not ResolveHostByName(host, H)) then
   begin
     // try to add the default domain
     buf := FirstWord(DefaultDomainList);
