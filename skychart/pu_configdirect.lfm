@@ -43,21 +43,21 @@ object f_configdirect: Tf_configdirect
       TabOrder = 1
     end
   end
-  object Panel4: TPanel
-    Left = 5
+  object Panel1: TPanel
+    Left = 0
     Height = 619
     Top = 0
-    Width = 495
+    Width = 500
     Align = alClient
     ClientHeight = 619
-    ClientWidth = 495
+    ClientWidth = 500
     ParentFont = False
     TabOrder = 1
     object PageControl1: TPageControl
       Left = 1
       Height = 617
       Top = 1
-      Width = 493
+      Width = 498
       ActivePage = TabSheet0
       Align = alClient
       MultiLine = True
@@ -67,51 +67,174 @@ object f_configdirect: Tf_configdirect
       Options = [nboMultiLine]
       object TabSheet0: TTabSheet
         Caption = 'TabSheet0'
+        ClientHeight = 582
+        ClientWidth = 494
         ParentFont = False
+        object ScrollBox1: TScrollBox
+          Left = 0
+          Height = 582
+          Top = 0
+          Width = 494
+          HorzScrollBar.Page = 1
+          HorzScrollBar.Visible = False
+          VertScrollBar.Page = 1
+          Align = alClient
+          TabOrder = 0
+        end
       end
       object TabSheet1: TTabSheet
         Caption = 'TabSheet1'
+        ClientHeight = 582
+        ClientWidth = 494
         ParentFont = False
+        object ScrollBox2: TScrollBox
+          Left = 0
+          Height = 582
+          Top = 0
+          Width = 494
+          HorzScrollBar.Page = 1
+          HorzScrollBar.Visible = False
+          VertScrollBar.Page = 1
+          Align = alClient
+          TabOrder = 0
+        end
       end
       object TabSheet2: TTabSheet
         Caption = 'TabSheet2'
+        ClientHeight = 582
+        ClientWidth = 494
         ParentFont = False
+        object ScrollBox3: TScrollBox
+          Left = 0
+          Height = 582
+          Top = 0
+          Width = 494
+          HorzScrollBar.Page = 1
+          HorzScrollBar.Visible = False
+          VertScrollBar.Page = 1
+          Align = alClient
+          TabOrder = 0
+        end
       end
       object TabSheet3: TTabSheet
         Caption = 'TabSheet3'
+        ClientHeight = 582
+        ClientWidth = 494
         ParentFont = False
+        object ScrollBox4: TScrollBox
+          Left = 0
+          Height = 582
+          Top = 0
+          Width = 494
+          HorzScrollBar.Page = 1
+          HorzScrollBar.Visible = False
+          VertScrollBar.Page = 1
+          Align = alClient
+          TabOrder = 0
+        end
       end
       object TabSheet4: TTabSheet
         Caption = 'TabSheet4'
+        ClientHeight = 582
+        ClientWidth = 494
         ParentFont = False
+        object ScrollBox5: TScrollBox
+          Left = 0
+          Height = 582
+          Top = 0
+          Width = 494
+          HorzScrollBar.Page = 1
+          HorzScrollBar.Visible = False
+          VertScrollBar.Page = 1
+          Align = alClient
+          TabOrder = 0
+        end
       end
       object TabSheet5: TTabSheet
         Caption = 'TabSheet5'
+        ClientHeight = 582
+        ClientWidth = 494
         ParentFont = False
+        object ScrollBox6: TScrollBox
+          Left = 0
+          Height = 582
+          Top = 0
+          Width = 494
+          HorzScrollBar.Page = 1
+          HorzScrollBar.Visible = False
+          VertScrollBar.Page = 1
+          Align = alClient
+          TabOrder = 0
+        end
       end
       object TabSheet6: TTabSheet
         Caption = 'TabSheet6'
+        ClientHeight = 582
+        ClientWidth = 494
         ParentFont = False
+        object ScrollBox7: TScrollBox
+          Left = 0
+          Height = 582
+          Top = 0
+          Width = 494
+          HorzScrollBar.Page = 1
+          HorzScrollBar.Visible = False
+          VertScrollBar.Page = 1
+          Align = alClient
+          TabOrder = 0
+        end
       end
       object TabSheet7: TTabSheet
         Caption = 'TabSheet7'
+        ClientHeight = 582
+        ClientWidth = 494
         ParentFont = False
+        object ScrollBox8: TScrollBox
+          Left = 0
+          Height = 582
+          Top = 0
+          Width = 494
+          HorzScrollBar.Page = 1
+          HorzScrollBar.Visible = False
+          VertScrollBar.Page = 1
+          Align = alClient
+          TabOrder = 0
+        end
       end
       object TabSheet9: TTabSheet
         Caption = 'TabSheet9'
+        ClientHeight = 582
+        ClientWidth = 494
         ParentFont = False
+        object ScrollBox9: TScrollBox
+          Left = 0
+          Height = 582
+          Top = 0
+          Width = 494
+          HorzScrollBar.Page = 1
+          HorzScrollBar.Visible = False
+          VertScrollBar.Page = 1
+          Align = alClient
+          TabOrder = 0
+        end
       end
       object TabSheet10: TTabSheet
         Caption = 'TabSheet10'
+        ClientHeight = 582
+        ClientWidth = 494
         ParentFont = False
+        object ScrollBox10: TScrollBox
+          Left = 0
+          Height = 582
+          Top = 0
+          Width = 494
+          HorzScrollBar.Page = 1
+          HorzScrollBar.Visible = False
+          VertScrollBar.Page = 1
+          Align = alClient
+          TabOrder = 0
+        end
       end
     end
-  end
-  object Splitter1: TSplitter
-    Left = 0
-    Height = 619
-    Top = 0
-    Width = 5
-    Beveled = True
   end
 end

@@ -36,289 +36,300 @@ object f_config_display: Tf_config_display
         ClientHeight = 528
         ClientWidth = 504
         ParentFont = False
-        object Panel5: TPanel
+        object Panel13: TPanel
           Left = 0
-          Height = 259
+          Height = 260
           Top = 141
           Width = 504
-          Align = alClient
-          ClientHeight = 259
+          Align = alTop
+          Caption = 'Panel13'
+          ClientHeight = 260
           ClientWidth = 504
-          ParentFont = False
           TabOrder = 3
-          Visible = False
-          object Label9: TLabel
-            Left = 38
-            Height = 18
-            Top = 49
-            Width = 100
-            Caption = 'Stars bitmap file'
-            ParentColor = False
-            ParentFont = False
-          end
-          object FileNameEdit1: TFileNameEdit
-            Left = 37
-            Height = 32
-            Top = 85
-            Width = 335
-            OnAcceptFileName = FileNameEdit1AcceptFileName
-            DialogOptions = []
-            FilterIndex = 0
-            HideDirectories = False
-            ButtonWidth = 23
-            NumGlyphs = 1
-            MaxLength = 0
+          object Panel5: TPanel
+            Left = 1
+            Height = 258
+            Top = 1
+            Width = 502
+            Align = alClient
+            ClientHeight = 258
+            ClientWidth = 502
             ParentFont = False
             TabOrder = 0
-            OnChange = FileNameEdit1Change
+            Visible = False
+            object Label9: TLabel
+              Left = 38
+              Height = 18
+              Top = 49
+              Width = 100
+              Caption = 'Stars bitmap file'
+              ParentColor = False
+              ParentFont = False
+            end
+            object FileNameEdit1: TFileNameEdit
+              Left = 37
+              Height = 32
+              Top = 85
+              Width = 335
+              OnAcceptFileName = FileNameEdit1AcceptFileName
+              DialogOptions = []
+              FilterIndex = 0
+              HideDirectories = False
+              ButtonWidth = 23
+              NumGlyphs = 1
+              MaxLength = 0
+              ParentFont = False
+              TabOrder = 0
+              OnChange = FileNameEdit1Change
+            end
+            object Button7: TButton
+              Left = 38
+              Height = 25
+              Top = 147
+              Width = 100
+              Caption = 'Default'
+              OnClick = Button7Click
+              ParentFont = False
+              TabOrder = 1
+            end
           end
-          object Button7: TButton
-            Left = 38
-            Height = 25
-            Top = 147
-            Width = 100
-            Caption = 'Default'
-            OnClick = Button7Click
+          object Panel4: TPanel
+            Left = 1
+            Height = 258
+            Top = 1
+            Width = 502
+            Align = alClient
+            ClientHeight = 258
+            ClientWidth = 502
             ParentFont = False
             TabOrder = 1
+            Visible = False
+            object StarButton7: TButton
+              Left = 226
+              Height = 25
+              Top = 194
+              Width = 96
+              BorderSpacing.InnerBorder = 4
+              Caption = 'Big stars'
+              OnClick = StarButton7Click
+              ParentFont = False
+              TabOrder = 4
+            end
+            object StarButton6: TButton
+              Left = 121
+              Height = 25
+              Top = 194
+              Width = 96
+              BorderSpacing.InnerBorder = 4
+              Caption = 'Small stars'
+              OnClick = StarButton6Click
+              ParentFont = False
+              TabOrder = 3
+            end
+            object StarButton5: TButton
+              Left = 16
+              Height = 25
+              Top = 194
+              Width = 96
+              BorderSpacing.InnerBorder = 4
+              Caption = 'Default'
+              OnClick = StarButton5Click
+              ParentFont = False
+              TabOrder = 2
+            end
+            object StarDynBar1: TTrackBar
+              Left = 194
+              Height = 43
+              Top = 86
+              Width = 227
+              Frequency = 10
+              Max = 150
+              Min = 50
+              OnChange = StarDynBar1Change
+              PageSize = 10
+              Position = 50
+              ParentFont = False
+              TabOrder = 1
+            end
+            object StarSizeBar1: TTrackBar
+              Left = 194
+              Height = 43
+              Top = 30
+              Width = 227
+              Frequency = 5
+              Max = 50
+              Min = 1
+              OnChange = StarSizeBar1Change
+              PageSize = 5
+              Position = 1
+              ParentFont = False
+              TabOrder = 0
+            end
+            object Label259: TLabel
+              Left = 24
+              Height = 18
+              Top = 86
+              Width = 53
+              Caption = 'Contrast'
+              ParentColor = False
+              ParentFont = False
+            end
+            object Label258: TLabel
+              Left = 24
+              Height = 18
+              Top = 30
+              Width = 103
+              Caption = 'Bright Stars Size '
+              ParentColor = False
+              ParentFont = False
+            end
           end
-        end
-        object Panel4: TPanel
-          Left = 0
-          Height = 259
-          Top = 141
-          Width = 504
-          Align = alClient
-          ClientHeight = 259
-          ClientWidth = 504
-          ParentFont = False
-          TabOrder = 2
-          Visible = False
-          object StarButton7: TButton
-            Left = 226
-            Height = 25
-            Top = 194
-            Width = 96
-            BorderSpacing.InnerBorder = 4
-            Caption = 'Big stars'
-            OnClick = StarButton7Click
-            ParentFont = False
-            TabOrder = 4
-          end
-          object StarButton6: TButton
-            Left = 121
-            Height = 25
-            Top = 194
-            Width = 96
-            BorderSpacing.InnerBorder = 4
-            Caption = 'Small stars'
-            OnClick = StarButton6Click
-            ParentFont = False
-            TabOrder = 3
-          end
-          object StarButton5: TButton
-            Left = 16
-            Height = 25
-            Top = 194
-            Width = 96
-            BorderSpacing.InnerBorder = 4
-            Caption = 'Default'
-            OnClick = StarButton5Click
+          object Panel7: TPanel
+            Left = 1
+            Height = 258
+            Top = 1
+            Width = 502
+            Align = alClient
+            ClientHeight = 258
+            ClientWidth = 502
             ParentFont = False
             TabOrder = 2
-          end
-          object StarDynBar1: TTrackBar
-            Left = 194
-            Height = 43
-            Top = 86
-            Width = 227
-            Frequency = 10
-            Max = 150
-            Min = 50
-            OnChange = StarDynBar1Change
-            PageSize = 10
-            Position = 50
-            ParentFont = False
-            TabOrder = 1
-          end
-          object StarSizeBar1: TTrackBar
-            Left = 194
-            Height = 43
-            Top = 30
-            Width = 227
-            Frequency = 5
-            Max = 50
-            Min = 1
-            OnChange = StarSizeBar1Change
-            PageSize = 5
-            Position = 1
-            ParentFont = False
-            TabOrder = 0
-          end
-          object Label259: TLabel
-            Left = 24
-            Height = 18
-            Top = 86
-            Width = 53
-            Caption = 'Contrast'
-            ParentColor = False
-            ParentFont = False
-          end
-          object Label258: TLabel
-            Left = 24
-            Height = 18
-            Top = 30
-            Width = 103
-            Caption = 'Bright Stars Size '
-            ParentColor = False
-            ParentFont = False
-          end
-        end
-        object Panel7: TPanel
-          Left = 0
-          Height = 259
-          Top = 141
-          Width = 504
-          Align = alClient
-          ClientHeight = 259
-          ClientWidth = 504
-          ParentFont = False
-          TabOrder = 4
-          Visible = False
-          object StarButton4: TButton
-            Left = 340
-            Height = 25
-            Top = 194
-            Width = 96
-            BorderSpacing.InnerBorder = 4
-            Caption = 'Black/White'
-            OnClick = StarButton4Click
-            ParentFont = False
-            TabOrder = 7
-          end
-          object StarButton3: TButton
-            Left = 226
-            Height = 25
-            Top = 194
-            Width = 96
-            BorderSpacing.InnerBorder = 4
-            Caption = 'High Color'
-            OnClick = StarButton3Click
-            ParentFont = False
-            TabOrder = 6
-          end
-          object StarButton2: TButton
-            Left = 121
-            Height = 25
-            Top = 194
-            Width = 96
-            BorderSpacing.InnerBorder = 4
-            Caption = 'Naked Eye'
-            OnClick = StarButton2Click
-            ParentFont = False
-            TabOrder = 5
-          end
-          object StarButton1: TButton
-            Left = 16
-            Height = 25
-            Top = 194
-            Width = 96
-            BorderSpacing.InnerBorder = 4
-            Caption = 'Default'
-            OnClick = StarButton1Click
-            ParentFont = False
-            TabOrder = 4
-          end
-          object Label257: TLabel
-            Left = 24
-            Height = 18
-            Top = 61
-            Width = 160
-            Caption = 'Increment for Bright Stars'
-            ParentColor = False
-            ParentFont = False
-          end
-          object Label263: TLabel
-            Left = 24
-            Height = 18
-            Top = 143
-            Width = 99
-            Caption = 'Color saturation'
-            ParentColor = False
-            ParentFont = False
-          end
-          object Label262: TLabel
-            Left = 24
-            Height = 18
-            Top = 102
-            Width = 53
-            Caption = 'Contrast'
-            ParentColor = False
-            ParentFont = False
-          end
-          object Label256: TLabel
-            Left = 24
-            Height = 18
-            Top = 16
-            Width = 95
-            Caption = 'Faint Stars Size '
-            ParentColor = False
-            ParentFont = False
-          end
-          object StarSizeBar: TTrackBar
-            Left = 195
-            Height = 43
-            Top = 16
-            Width = 227
-            Frequency = 5
-            Max = 50
-            Min = 1
-            OnChange = StarSizeBarChange
-            PageSize = 5
-            Position = 1
-            ParentFont = False
-            TabOrder = 0
-          end
-          object SizeContrastBar: TTrackBar
-            Left = 195
-            Height = 43
-            Top = 61
-            Width = 227
-            Frequency = 10
-            Max = 100
-            Min = 10
-            OnChange = SizeContrastBarChange
-            PageSize = 10
-            Position = 10
-            ParentFont = False
-            TabOrder = 1
-          end
-          object StarContrastBar: TTrackBar
-            Left = 195
-            Height = 43
-            Top = 102
-            Width = 227
-            Frequency = 100
-            Max = 1000
-            Min = 100
-            OnChange = StarContrastBarChange
-            PageSize = 100
-            Position = 100
-            ParentFont = False
-            TabOrder = 2
-          end
-          object SaturationBar: TTrackBar
-            Left = 195
-            Height = 43
-            Top = 143
-            Width = 227
-            Frequency = 28
-            Max = 255
-            OnChange = SaturationBarChange
-            PageSize = 28
-            Position = 0
-            ParentFont = False
-            TabOrder = 3
+            Visible = False
+            object StarButton4: TButton
+              Left = 340
+              Height = 25
+              Top = 194
+              Width = 96
+              BorderSpacing.InnerBorder = 4
+              Caption = 'Black/White'
+              OnClick = StarButton4Click
+              ParentFont = False
+              TabOrder = 7
+            end
+            object StarButton3: TButton
+              Left = 226
+              Height = 25
+              Top = 194
+              Width = 96
+              BorderSpacing.InnerBorder = 4
+              Caption = 'High Color'
+              OnClick = StarButton3Click
+              ParentFont = False
+              TabOrder = 6
+            end
+            object StarButton2: TButton
+              Left = 121
+              Height = 25
+              Top = 194
+              Width = 96
+              BorderSpacing.InnerBorder = 4
+              Caption = 'Naked Eye'
+              OnClick = StarButton2Click
+              ParentFont = False
+              TabOrder = 5
+            end
+            object StarButton1: TButton
+              Left = 16
+              Height = 25
+              Top = 194
+              Width = 96
+              BorderSpacing.InnerBorder = 4
+              Caption = 'Default'
+              OnClick = StarButton1Click
+              ParentFont = False
+              TabOrder = 4
+            end
+            object Label257: TLabel
+              Left = 24
+              Height = 18
+              Top = 61
+              Width = 160
+              Caption = 'Increment for Bright Stars'
+              ParentColor = False
+              ParentFont = False
+            end
+            object Label263: TLabel
+              Left = 24
+              Height = 18
+              Top = 143
+              Width = 99
+              Caption = 'Color saturation'
+              ParentColor = False
+              ParentFont = False
+            end
+            object Label262: TLabel
+              Left = 24
+              Height = 18
+              Top = 102
+              Width = 53
+              Caption = 'Contrast'
+              ParentColor = False
+              ParentFont = False
+            end
+            object Label256: TLabel
+              Left = 24
+              Height = 18
+              Top = 16
+              Width = 95
+              Caption = 'Faint Stars Size '
+              ParentColor = False
+              ParentFont = False
+            end
+            object StarSizeBar: TTrackBar
+              Left = 195
+              Height = 43
+              Top = 16
+              Width = 227
+              Frequency = 5
+              Max = 50
+              Min = 1
+              OnChange = StarSizeBarChange
+              PageSize = 5
+              Position = 1
+              ParentFont = False
+              TabOrder = 0
+            end
+            object SizeContrastBar: TTrackBar
+              Left = 195
+              Height = 43
+              Top = 61
+              Width = 227
+              Frequency = 10
+              Max = 100
+              Min = 10
+              OnChange = SizeContrastBarChange
+              PageSize = 10
+              Position = 10
+              ParentFont = False
+              TabOrder = 1
+            end
+            object StarContrastBar: TTrackBar
+              Left = 195
+              Height = 43
+              Top = 102
+              Width = 227
+              Frequency = 100
+              Max = 1000
+              Min = 100
+              OnChange = StarContrastBarChange
+              PageSize = 100
+              Position = 100
+              ParentFont = False
+              TabOrder = 2
+            end
+            object SaturationBar: TTrackBar
+              Left = 195
+              Height = 43
+              Top = 143
+              Width = 227
+              Frequency = 28
+              Max = 255
+              OnChange = SaturationBarChange
+              PageSize = 28
+              Position = 0
+              ParentFont = False
+              TabOrder = 3
+            end
           end
         end
         object stardisplay: TRadioGroup
@@ -378,13 +389,13 @@ object f_config_display: Tf_config_display
         end
         object Panel1: TPanel
           Left = 0
-          Height = 128
-          Top = 400
+          Height = 127
+          Top = 401
           Width = 504
-          Align = alBottom
-          ClientHeight = 128
+          Align = alClient
+          ClientHeight = 127
           ClientWidth = 504
-          TabOrder = 5
+          TabOrder = 2
           object red_moveBox: TCheckBox
             Left = 28
             Height = 22
@@ -2494,7 +2505,7 @@ object f_config_display: Tf_config_display
           Height = 74
           Top = 454
           Width = 504
-          Align = alBottom
+          Align = alClient
           BevelOuter = bvNone
           ClientHeight = 74
           ClientWidth = 504
@@ -2564,7 +2575,7 @@ object f_config_display: Tf_config_display
           Height = 90
           Top = 364
           Width = 504
-          Align = alBottom
+          Align = alTop
           BevelOuter = bvNone
           ClientHeight = 90
           ClientWidth = 504
@@ -2643,7 +2654,7 @@ object f_config_display: Tf_config_display
           Height = 316
           Top = 48
           Width = 504
-          Align = alClient
+          Align = alTop
           BevelOuter = bvNone
           ClientHeight = 316
           ClientWidth = 504
@@ -4182,20 +4193,12 @@ object f_config_display: Tf_config_display
         ClientHeight = 528
         ClientWidth = 504
         ParentFont = False
-        object Label307: TLabel
-          Left = 26
-          Height = 18
-          Top = 13
-          Width = 181
-          Caption = 'Finder circle (Eyepiece/Telrad)'
-          ParentColor = False
-          ParentFont = False
-        end
         object Circlegrid: TStringGrid
-          Left = 26
-          Height = 358
-          Top = 45
-          Width = 456
+          Left = 0
+          Height = 368
+          Top = 50
+          Width = 504
+          Align = alClient
           ColCount = 6
           DefaultColWidth = 71
           DefaultRowHeight = 30
@@ -4213,55 +4216,84 @@ object f_config_display: Tf_config_display
           OnSelectCell = CirclegridSelectCell
           OnSetEditText = CirclegridSetEditText
         end
-        object CenterMark1: TCheckBox
-          Left = 26
-          Height = 22
-          Top = 416
-          Width = 164
-          Caption = 'Mark the chart center '
-          OnClick = CenterMark1Click
-          ParentFont = False
-          TabOrder = 2
-        end
-        object CheckBox1: TCheckBox
-          Left = 296
-          Height = 22
-          Top = 416
-          Width = 94
-          Caption = 'Show label'
-          OnClick = CheckBox1Click
-          ParentFont = False
+        object Panel14: TPanel
+          Left = 0
+          Height = 50
+          Top = 0
+          Width = 504
+          Align = alTop
+          ClientHeight = 50
+          ClientWidth = 504
           TabOrder = 1
+          object Label307: TLabel
+            Left = 26
+            Height = 18
+            Top = 13
+            Width = 181
+            Caption = 'Finder circle (Eyepiece/Telrad)'
+            ParentColor = False
+            ParentFont = False
+          end
+          object ButtonComputeCircle: TButton
+            Left = 342
+            Height = 25
+            Top = 14
+            Width = 116
+            Caption = 'Compute'
+            OnClick = ButtonComputeCircleClick
+            ParentFont = False
+            TabOrder = 0
+          end
         end
-        object CheckBox3: TCheckBox
-          Left = 296
-          Height = 22
-          Top = 447
-          Width = 133
-          Caption = 'Show mark index'
-          OnClick = MarkNumberClick
-          ParentFont = False
-          TabOrder = 3
-        end
-        object ButtonComputeCircle: TButton
-          Left = 342
-          Height = 25
-          Top = 14
-          Width = 116
-          Caption = 'Compute'
-          OnClick = ButtonComputeCircleClick
-          ParentFont = False
-          TabOrder = 4
-        end
-        object CheckBox7: TCheckBox
-          Left = 26
-          Height = 22
-          Top = 447
-          Width = 164
-          Caption = 'Chart center crosshair'
-          OnClick = CheckBox7Click
-          ParentFont = False
-          TabOrder = 5
+        object Panel15: TPanel
+          Left = 0
+          Height = 110
+          Top = 418
+          Width = 504
+          Align = alBottom
+          ClientHeight = 110
+          ClientWidth = 504
+          TabOrder = 2
+          object CenterMark1: TCheckBox
+            Left = 16
+            Height = 22
+            Top = 8
+            Width = 164
+            Caption = 'Mark the chart center '
+            OnClick = CenterMark1Click
+            ParentFont = False
+            TabOrder = 0
+          end
+          object CheckBox1: TCheckBox
+            Left = 286
+            Height = 22
+            Top = 8
+            Width = 94
+            Caption = 'Show label'
+            OnClick = CheckBox1Click
+            ParentFont = False
+            TabOrder = 1
+          end
+          object CheckBox3: TCheckBox
+            Left = 286
+            Height = 22
+            Top = 39
+            Width = 133
+            Caption = 'Show mark index'
+            OnClick = MarkNumberClick
+            ParentFont = False
+            TabOrder = 2
+          end
+          object CheckBox7: TCheckBox
+            Left = 16
+            Height = 22
+            Top = 39
+            Width = 164
+            Caption = 'Chart center crosshair'
+            OnClick = CheckBox7Click
+            ParentFont = False
+            TabOrder = 3
+          end
         end
       end
       object PageRectangle: TTabSheet
@@ -4269,20 +4301,12 @@ object f_config_display: Tf_config_display
         ClientHeight = 528
         ClientWidth = 504
         ParentFont = False
-        object Label308: TLabel
-          Left = 26
-          Height = 18
-          Top = 13
-          Width = 196
-          Caption = 'Finder rectangle (CCD / Camera)'
-          ParentColor = False
-          ParentFont = False
-        end
         object RectangleGrid: TStringGrid
-          Left = 26
-          Height = 337
-          Top = 45
-          Width = 456
+          Left = 0
+          Height = 368
+          Top = 50
+          Width = 504
+          Align = alClient
           ColCount = 7
           DefaultColWidth = 61
           DefaultRowHeight = 30
@@ -4300,62 +4324,92 @@ object f_config_display: Tf_config_display
           OnSelectCell = RectangleGridSelectCell
           OnSetEditText = RectangleGridSetEditText
         end
-        object CenterMark2: TCheckBox
-          Left = 26
-          Height = 22
-          Top = 416
-          Width = 164
-          Caption = 'Mark the chart center '
-          OnClick = CenterMark1Click
-          ParentFont = False
-          TabOrder = 2
-        end
-        object CheckBox2: TCheckBox
-          Left = 300
-          Height = 22
-          Top = 416
-          Width = 94
-          Caption = 'Show label'
-          OnClick = CheckBox2Click
-          ParentFont = False
+        object Panel16: TPanel
+          Left = 0
+          Height = 50
+          Top = 0
+          Width = 504
+          Align = alTop
+          ClientHeight = 50
+          ClientWidth = 504
           TabOrder = 1
+          object Label308: TLabel
+            Left = 26
+            Height = 18
+            Top = 13
+            Width = 196
+            Caption = 'Finder rectangle (CCD / Camera)'
+            ParentColor = False
+            ParentFont = False
+          end
+          object ButtonComputeRectangle: TButton
+            Left = 342
+            Height = 25
+            Top = 14
+            Width = 116
+            Caption = 'Compute'
+            OnClick = ButtonComputeRectangleClick
+            ParentFont = False
+            TabOrder = 0
+          end
         end
-        object CheckBox4: TCheckBox
-          Left = 300
-          Height = 22
-          Top = 447
-          Width = 133
-          Caption = 'Show mark index'
-          OnClick = MarkNumberClick
-          ParentFont = False
-          TabOrder = 3
-        end
-        object ButtonComputeRectangle: TButton
-          Left = 342
-          Height = 25
-          Top = 14
-          Width = 116
-          Caption = 'Compute'
-          OnClick = ButtonComputeRectangleClick
-          ParentFont = False
-          TabOrder = 4
-        end
-        object Label16: TLabel
-          Left = 26
-          Height = 18
-          Top = 386
-          Width = 387
-          Caption = 'Do not use row 10, it is reserved for external software interface.'
-          ParentColor = False
-        end
-        object cbAltAzMark: TCheckBox
-          Left = 26
-          Height = 22
-          Top = 447
-          Width = 261
-          Caption = 'Orientation from zenith in Alt/Az chart'
-          OnClick = cbAltAzMarkClick
-          TabOrder = 5
+        object Panel17: TPanel
+          Left = 0
+          Height = 110
+          Top = 418
+          Width = 504
+          Align = alBottom
+          Caption = 'Panel17'
+          ClientHeight = 110
+          ClientWidth = 504
+          TabOrder = 2
+          object CenterMark2: TCheckBox
+            Left = 26
+            Height = 22
+            Top = 38
+            Width = 164
+            Caption = 'Mark the chart center '
+            OnClick = CenterMark1Click
+            ParentFont = False
+            TabOrder = 0
+          end
+          object CheckBox2: TCheckBox
+            Left = 300
+            Height = 22
+            Top = 38
+            Width = 94
+            Caption = 'Show label'
+            OnClick = CheckBox2Click
+            ParentFont = False
+            TabOrder = 1
+          end
+          object CheckBox4: TCheckBox
+            Left = 300
+            Height = 22
+            Top = 69
+            Width = 133
+            Caption = 'Show mark index'
+            OnClick = MarkNumberClick
+            ParentFont = False
+            TabOrder = 2
+          end
+          object Label16: TLabel
+            Left = 26
+            Height = 18
+            Top = 8
+            Width = 387
+            Caption = 'Do not use row 10, it is reserved for external software interface.'
+            ParentColor = False
+          end
+          object cbAltAzMark: TCheckBox
+            Left = 26
+            Height = 22
+            Top = 69
+            Width = 261
+            Caption = 'Orientation from zenith in Alt/Az chart'
+            OnClick = cbAltAzMarkClick
+            TabOrder = 3
+          end
         end
       end
     end

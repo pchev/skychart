@@ -490,7 +490,7 @@ object f_config_chart: Tf_config_chart
         end
         object fw6: TFloatEdit
           Tag = 6
-          Left = 176
+          Left = 174
           Height = 28
           Hint = '0..360'
           Top = 294
@@ -1106,11 +1106,11 @@ object f_config_chart: Tf_config_chart
         end
         object GroupBox2: TGroupBox
           Left = 9
-          Height = 170
+          Height = 178
           Top = 16
           Width = 454
           Caption = 'Stars Filter'
-          ClientHeight = 140
+          ClientHeight = 148
           ClientWidth = 450
           ParentFont = False
           TabOrder = 0
@@ -1461,11 +1461,11 @@ object f_config_chart: Tf_config_chart
         end
         object GroupBox1: TGroupBox
           Left = 9
-          Height = 272
-          Top = 186
+          Height = 286
+          Top = 200
           Width = 454
           Caption = 'Nebulae Filter'
-          ClientHeight = 242
+          ClientHeight = 256
           ClientWidth = 450
           ParentFont = False
           TabOrder = 1

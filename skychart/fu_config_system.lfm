@@ -106,7 +106,7 @@ object f_config_system: Tf_config_system
           Top = 104
           Width = 499
           ActivePage = TabSheet3
-          Align = alClient
+          Align = alTop
           ParentFont = False
           ShowTabs = False
           TabIndex = 3
@@ -543,7 +543,7 @@ object f_config_system: Tf_config_system
           Height = 105
           Top = 419
           Width = 499
-          Align = alBottom
+          Align = alClient
           Caption = 'Line for telescope pointing limit'
           ClientHeight = 75
           ClientWidth = 495

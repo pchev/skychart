@@ -5070,12 +5070,12 @@ begin
   SetupPictures.Enabled:=false;
   // panel specific
   SaveScriptPanelWidth:=ScriptPanel.Width;
-  ScriptPanel.Width:=DoScaleX(500); // config panel width
+  ScriptPanel.Width:=DoScaleX(520); // config panel width
   Splitter1.Visible := True;
   ScriptPanel.Visible := True;
   Splitter1.ResizeControl := ScriptPanel;
   f_configdirect.Parent:=ScriptPanel;
-  f_configdirect.Align:=alTop;
+  f_configdirect.Align:=alClient;
   f_configdirect.Show;
   end;
 end;

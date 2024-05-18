@@ -829,7 +829,7 @@ object f_config_observatory: Tf_config_observatory
             Height = 28
             Hint = '5..7.5'
             Top = 58
-            Width = 66
+            Width = 42
             Constraints.MaxHeight = 28
             ParentFont = False
             ParentShowHint = False
@@ -852,9 +852,9 @@ object f_config_observatory: Tf_config_observatory
           end
         end
         object RefDefault: TButton
-          Left = 389
+          Left = 408
           Height = 25
-          Top = 470
+          Top = 464
           Width = 76
           Caption = 'Default'
           OnClick = RefDefaultClick
@@ -890,6 +890,7 @@ object f_config_observatory: Tf_config_observatory
     Top = 507
   end
   object DownloadDialog1: TDownloadDialog
+    HttpDirectDownload = False
     Timeout = 90000
     FtpFwMode = 0
     FtpFwPassive = True

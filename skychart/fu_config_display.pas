@@ -135,6 +135,11 @@ type
     Panel1: TPanel;
     Panel10: TPanel;
     Panel11: TPanel;
+    Panel13: TPanel;
+    Panel14: TPanel;
+    Panel15: TPanel;
+    Panel16: TPanel;
+    Panel17: TPanel;
     Panel8: TPanel;
     Panel9: TPanel;
     PanelRot: TPanel;
