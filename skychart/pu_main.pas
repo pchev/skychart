@@ -1756,6 +1756,7 @@ begin
   SelectLayout;
   SavePrivateConfig(configfile);
   SaveChartConfig(configfile, nil, False);
+  Application.QueueAsyncCall(OpenUpdCatalogAsync,0);
 end;
 
 procedure Tf_main.SelectLayout;
