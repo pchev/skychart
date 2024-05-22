@@ -6495,10 +6495,12 @@ begin
   if sc.catalog.cfgshr.NebMagFilter[10]<10 then
   for i:=1 to MaxField do begin
     sc.catalog.cfgshr.NebMagFilter[i] := sc.catalog.cfgshr.NebMagFilter[i] + 0.5;
-    if sc.catalog.cfgshr.NebMagFilter[i] > 20 then
+    if (i<=3)and(sc.catalog.cfgshr.NebMagFilter[i] >= 20) then
       sc.catalog.cfgshr.NebMagFilter[i] := 99;
     sc.catalog.cfgshr.NebSizeFilter[i] := sc.catalog.cfgshr.NebSizeFilter[i] / 1.5;
-    if sc.catalog.cfgshr.NebSizeFilter[i] < 0.1 then
+    if i>3 then
+      sc.catalog.cfgshr.NebSizeFilter[i]:=max(0.1,sc.catalog.cfgshr.NebSizeFilter[i])
+    else if (sc.catalog.cfgshr.NebSizeFilter[i] < 0.1) then
       sc.catalog.cfgshr.NebSizeFilter[i] := 0;
   end;
   if (not sc.cfgsc.TrackOn) and (sc.cfgsc.Projpole = Altaz) then
