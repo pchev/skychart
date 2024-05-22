@@ -1300,6 +1300,7 @@ object f_config_chart: Tf_config_chart
                 TabOrder = 0
                 OnChange = fsmagChange
                 MaxValue = 99
+                Digits = 1
               end
               object fsmag1: TFloatEdit
                 Tag = 2
@@ -1315,6 +1316,7 @@ object f_config_chart: Tf_config_chart
                 TabOrder = 1
                 OnChange = fsmagChange
                 MaxValue = 99
+                Digits = 1
               end
               object fsmag2: TFloatEdit
                 Tag = 3
@@ -1330,6 +1332,7 @@ object f_config_chart: Tf_config_chart
                 TabOrder = 2
                 OnChange = fsmagChange
                 MaxValue = 99
+                Digits = 1
               end
               object fsmag3: TFloatEdit
                 Tag = 4
@@ -1345,6 +1348,7 @@ object f_config_chart: Tf_config_chart
                 TabOrder = 3
                 OnChange = fsmagChange
                 MaxValue = 99
+                Digits = 1
               end
               object fsmag4: TFloatEdit
                 Tag = 5
@@ -1360,6 +1364,7 @@ object f_config_chart: Tf_config_chart
                 TabOrder = 4
                 OnChange = fsmagChange
                 MaxValue = 99
+                Digits = 1
               end
               object fsmag5: TFloatEdit
                 Tag = 6
@@ -1375,6 +1380,7 @@ object f_config_chart: Tf_config_chart
                 TabOrder = 5
                 OnChange = fsmagChange
                 MaxValue = 99
+                Digits = 1
               end
               object fsmag6: TFloatEdit
                 Tag = 7
@@ -1390,6 +1396,7 @@ object f_config_chart: Tf_config_chart
                 TabOrder = 6
                 OnChange = fsmagChange
                 MaxValue = 99
+                Digits = 1
               end
               object fsmag7: TFloatEdit
                 Tag = 8
@@ -1405,6 +1412,7 @@ object f_config_chart: Tf_config_chart
                 TabOrder = 7
                 OnChange = fsmagChange
                 MaxValue = 99
+                Digits = 1
               end
               object fsmag8: TFloatEdit
                 Tag = 9
@@ -1420,6 +1428,7 @@ object f_config_chart: Tf_config_chart
                 TabOrder = 8
                 OnChange = fsmagChange
                 MaxValue = 99
+                Digits = 1
               end
               object fsmag9: TFloatEdit
                 Tag = 10
@@ -1435,6 +1444,7 @@ object f_config_chart: Tf_config_chart
                 TabOrder = 9
                 OnChange = fsmagChange
                 MaxValue = 99
+                Digits = 1
               end
             end
             object StarAutoBox: TCheckBox
@@ -1619,6 +1629,7 @@ object f_config_chart: Tf_config_chart
               TabOrder = 0
               OnChange = fmagChange
               MaxValue = 99
+              Digits = 1
             end
             object fmag1: TFloatEdit
               Tag = 2
@@ -1634,6 +1645,7 @@ object f_config_chart: Tf_config_chart
               TabOrder = 1
               OnChange = fmagChange
               MaxValue = 99
+              Digits = 1
             end
             object fmag2: TFloatEdit
               Tag = 3
@@ -1649,6 +1661,7 @@ object f_config_chart: Tf_config_chart
               TabOrder = 2
               OnChange = fmagChange
               MaxValue = 99
+              Digits = 1
             end
             object fmag3: TFloatEdit
               Tag = 4
@@ -1664,6 +1677,7 @@ object f_config_chart: Tf_config_chart
               TabOrder = 3
               OnChange = fmagChange
               MaxValue = 99
+              Digits = 1
             end
             object fmag4: TFloatEdit
               Tag = 5
@@ -1679,6 +1693,7 @@ object f_config_chart: Tf_config_chart
               TabOrder = 4
               OnChange = fmagChange
               MaxValue = 99
+              Digits = 1
             end
             object fmag5: TFloatEdit
               Tag = 6
@@ -1694,6 +1709,7 @@ object f_config_chart: Tf_config_chart
               TabOrder = 5
               OnChange = fmagChange
               MaxValue = 99
+              Digits = 1
             end
             object fmag6: TFloatEdit
               Tag = 7
@@ -1709,6 +1725,7 @@ object f_config_chart: Tf_config_chart
               TabOrder = 6
               OnChange = fmagChange
               MaxValue = 99
+              Digits = 1
             end
             object fdim0: TFloatEdit
               Tag = 1
@@ -1724,6 +1741,7 @@ object f_config_chart: Tf_config_chart
               TabOrder = 10
               OnChange = fdimChange
               MaxValue = 1000
+              Digits = 2
             end
             object fdim1: TFloatEdit
               Tag = 2
@@ -1739,6 +1757,7 @@ object f_config_chart: Tf_config_chart
               TabOrder = 11
               OnChange = fdimChange
               MaxValue = 1000
+              Digits = 2
             end
             object fdim2: TFloatEdit
               Tag = 3
@@ -1754,6 +1773,7 @@ object f_config_chart: Tf_config_chart
               TabOrder = 12
               OnChange = fdimChange
               MaxValue = 1000
+              Digits = 2
             end
             object fdim3: TFloatEdit
               Tag = 4
@@ -1769,6 +1789,7 @@ object f_config_chart: Tf_config_chart
               TabOrder = 13
               OnChange = fdimChange
               MaxValue = 1000
+              Digits = 2
             end
             object fdim4: TFloatEdit
               Tag = 5
@@ -1784,6 +1805,7 @@ object f_config_chart: Tf_config_chart
               TabOrder = 14
               OnChange = fdimChange
               MaxValue = 1000
+              Digits = 2
             end
             object fdim5: TFloatEdit
               Tag = 6
@@ -1799,6 +1821,7 @@ object f_config_chart: Tf_config_chart
               TabOrder = 15
               OnChange = fdimChange
               MaxValue = 1000
+              Digits = 2
             end
             object fdim6: TFloatEdit
               Tag = 7
@@ -1814,6 +1837,7 @@ object f_config_chart: Tf_config_chart
               TabOrder = 16
               OnChange = fdimChange
               MaxValue = 1000
+              Digits = 2
             end
             object fmag7: TFloatEdit
               Tag = 8
@@ -1829,6 +1853,7 @@ object f_config_chart: Tf_config_chart
               TabOrder = 7
               OnChange = fmagChange
               MaxValue = 99
+              Digits = 1
             end
             object fmag8: TFloatEdit
               Tag = 9
@@ -1844,6 +1869,7 @@ object f_config_chart: Tf_config_chart
               TabOrder = 8
               OnChange = fmagChange
               MaxValue = 99
+              Digits = 1
             end
             object fmag9: TFloatEdit
               Tag = 10
@@ -1859,6 +1885,7 @@ object f_config_chart: Tf_config_chart
               TabOrder = 9
               OnChange = fmagChange
               MaxValue = 99
+              Digits = 1
             end
             object fdim7: TFloatEdit
               Tag = 8
@@ -1874,6 +1901,7 @@ object f_config_chart: Tf_config_chart
               TabOrder = 17
               OnChange = fdimChange
               MaxValue = 1000
+              Digits = 2
             end
             object fdim8: TFloatEdit
               Tag = 9
@@ -1889,6 +1917,7 @@ object f_config_chart: Tf_config_chart
               TabOrder = 18
               OnChange = fdimChange
               MaxValue = 1000
+              Digits = 2
             end
             object fdim9: TFloatEdit
               Tag = 10
@@ -1904,6 +1933,7 @@ object f_config_chart: Tf_config_chart
               TabOrder = 19
               OnChange = fdimChange
               MaxValue = 1000
+              Digits = 2
             end
             object BigNebBox: TCheckBox
               Left = 4

@@ -298,7 +298,6 @@ end;
 
 function Tskychart.Refresh(newtime: boolean): boolean;
 var
-  savmag: double;
   savebg: Tcolor;
   savfilter, saveautofilter, savfillmw, scopemark, savApparentPos: boolean;
   saveplaplot: integer;
@@ -313,7 +312,6 @@ begin
     else
       WriteTrace('SkyChart ' + cfgsc.chartname + ': Full Refresh');
   end;
-  savmag := Fcatalog.cfgshr.StarMagFilter[cfgsc.FieldNum];
   savApparentPos := cfgsc.ApparentPos;
   savfilter := Fcatalog.cfgshr.StarFilter;
   saveautofilter := Fcatalog.cfgshr.AutoStarFilter;
@@ -510,7 +508,6 @@ begin
     cfgsc.ApparentPos := savApparentPos;
     if cfgsc.quick and FPlot.cfgplot.red_move then
     begin
-      Fcatalog.cfgshr.StarMagFilter[cfgsc.FieldNum] := savmag;
       Fcatalog.cfgshr.StarFilter := savfilter;
       Fcatalog.cfgshr.AutoStarFilter := saveautofilter;
       Fplot.cfgplot.plaplot := saveplaplot;

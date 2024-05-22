@@ -6444,6 +6444,7 @@ begin
 end;
 
 procedure Tf_chart.cmd_MoreStar;
+var i: integer;
 begin
   if VerboseMsg then
     WriteTrace(Caption + ' cmd_MoreStar');
@@ -6451,11 +6452,10 @@ begin
     sc.catalog.cfgshr.AutoStarFilterMag := min(16, sc.catalog.cfgshr.AutoStarFilterMag + 0.5)
   else
   begin
-    sc.catalog.cfgshr.StarMagFilter[sc.cfgsc.FieldNum] :=
-      sc.catalog.cfgshr.StarMagFilter[sc.cfgsc.FieldNum] + 0.5;
-    if sc.catalog.cfgshr.StarMagFilter[sc.cfgsc.FieldNum] >
-      sc.plot.cfgchart.max_catalog_mag then
-      sc.catalog.cfgshr.StarMagFilter[sc.cfgsc.FieldNum] := 99;
+    if sc.catalog.cfgshr.StarMagFilter[10]<8 then
+    for i:=1 to MaxField do begin
+      sc.catalog.cfgshr.StarMagFilter[i] := sc.catalog.cfgshr.StarMagFilter[i] + 0.5;
+    end;
   end;
   if (not sc.cfgsc.TrackOn) and (sc.cfgsc.Projpole = Altaz) then
   begin
@@ -6466,6 +6466,7 @@ begin
 end;
 
 procedure Tf_chart.cmd_LessStar;
+var i: integer;
 begin
   if VerboseMsg then
     WriteTrace(Caption + ' cmd_LessStar');
@@ -6473,11 +6474,10 @@ begin
     sc.catalog.cfgshr.AutoStarFilterMag := max(MagnitudeMin, sc.catalog.cfgshr.AutoStarFilterMag - 0.5)
   else
   begin
-    if sc.catalog.cfgshr.StarMagFilter[sc.cfgsc.FieldNum] >= 99 then
-      sc.catalog.cfgshr.StarMagFilter[sc.cfgsc.FieldNum] := sc.plot.cfgchart.min_ma
-    else
-      sc.catalog.cfgshr.StarMagFilter[sc.cfgsc.FieldNum] :=
-        max(MagnitudeMin, sc.catalog.cfgshr.StarMagFilter[sc.cfgsc.FieldNum] - 0.5);
+    if sc.catalog.cfgshr.StarMagFilter[10]>1 then
+    for i:=1 to MaxField do begin
+      sc.catalog.cfgshr.StarMagFilter[i] := sc.catalog.cfgshr.StarMagFilter[i] - 0.5;
+    end;
   end;
   if (not sc.cfgsc.TrackOn) and (sc.cfgsc.Projpole = Altaz) then
   begin
@@ -6488,17 +6488,19 @@ begin
 end;
 
 procedure Tf_chart.cmd_MoreNeb;
+var i: integer;
 begin
   if VerboseMsg then
     WriteTrace(Caption + ' cmd_MoreNeb');
-  sc.catalog.cfgshr.NebMagFilter[sc.cfgsc.FieldNum] :=
-    sc.catalog.cfgshr.NebMagFilter[sc.cfgsc.FieldNum] + 0.5;
-  if sc.catalog.cfgshr.NebMagFilter[sc.cfgsc.FieldNum] > 15 then
-    sc.catalog.cfgshr.NebMagFilter[sc.cfgsc.FieldNum] := 99;
-  sc.catalog.cfgshr.NebSizeFilter[sc.cfgsc.FieldNum] :=
-    sc.catalog.cfgshr.NebSizeFilter[sc.cfgsc.FieldNum] / 1.5;
-  if sc.catalog.cfgshr.NebSizeFilter[sc.cfgsc.FieldNum] < 0.1 then
-    sc.catalog.cfgshr.NebSizeFilter[sc.cfgsc.FieldNum] := 0;
+  if sc.catalog.cfgshr.NebMagFilter[10]<10 then
+  for i:=1 to MaxField do begin
+    sc.catalog.cfgshr.NebMagFilter[i] := sc.catalog.cfgshr.NebMagFilter[i] + 0.5;
+    if sc.catalog.cfgshr.NebMagFilter[i] > 20 then
+      sc.catalog.cfgshr.NebMagFilter[i] := 99;
+    sc.catalog.cfgshr.NebSizeFilter[i] := sc.catalog.cfgshr.NebSizeFilter[i] / 1.5;
+    if sc.catalog.cfgshr.NebSizeFilter[i] < 0.1 then
+      sc.catalog.cfgshr.NebSizeFilter[i] := 0;
+  end;
   if (not sc.cfgsc.TrackOn) and (sc.cfgsc.Projpole = Altaz) then
   begin
     sc.cfgsc.TrackOn := True;
@@ -6508,23 +6510,23 @@ begin
 end;
 
 procedure Tf_chart.cmd_LessNeb;
+var i: integer;
 begin
   if VerboseMsg then
     WriteTrace(Caption + ' cmd_LessNeb');
-  if sc.catalog.cfgshr.NebMagFilter[sc.cfgsc.FieldNum] >= 99 then
-    sc.catalog.cfgshr.NebMagFilter[sc.cfgsc.FieldNum] := 20
-  else
-    sc.catalog.cfgshr.NebMagFilter[sc.cfgsc.FieldNum] :=
-      sc.catalog.cfgshr.NebMagFilter[sc.cfgsc.FieldNum] - 0.5;
-  if sc.catalog.cfgshr.NebMagFilter[sc.cfgsc.FieldNum] < MagnitudeMin then
-    sc.catalog.cfgshr.NebMagFilter[sc.cfgsc.FieldNum] := MagnitudeMin;
-  if sc.catalog.cfgshr.NebSizeFilter[sc.cfgsc.FieldNum] <= 0 then
-    sc.catalog.cfgshr.NebSizeFilter[sc.cfgsc.FieldNum] := 0.1
-  else
-    sc.catalog.cfgshr.NebSizeFilter[sc.cfgsc.FieldNum] :=
-      sc.catalog.cfgshr.NebSizeFilter[sc.cfgsc.FieldNum] * 1.5;
-  if sc.catalog.cfgshr.NebSizeFilter[sc.cfgsc.FieldNum] > 200 then
-    sc.catalog.cfgshr.NebSizeFilter[sc.cfgsc.FieldNum] := 200;
+  if sc.catalog.cfgshr.NebMagFilter[10]>2 then
+  for i:=1 to MaxField do begin
+    if sc.catalog.cfgshr.NebMagFilter[i] >= 99 then
+      sc.catalog.cfgshr.NebMagFilter[i] := min(20,DefNebMagFilter[i]+4)
+    else
+      sc.catalog.cfgshr.NebMagFilter[i] := sc.catalog.cfgshr.NebMagFilter[i] - 0.5;
+    if sc.catalog.cfgshr.NebSizeFilter[i] <= 0 then
+      sc.catalog.cfgshr.NebSizeFilter[i] := DefNebSizeFilter[i]+0.1
+    else
+      sc.catalog.cfgshr.NebSizeFilter[i] := sc.catalog.cfgshr.NebSizeFilter[i] * 1.5;
+    if sc.catalog.cfgshr.NebSizeFilter[i] > 200 then
+      sc.catalog.cfgshr.NebSizeFilter[i] := 200;
+  end;
   if (not sc.cfgsc.TrackOn) and (sc.cfgsc.Projpole = Altaz) then
   begin
     sc.cfgsc.TrackOn := True;

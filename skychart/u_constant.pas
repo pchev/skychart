@@ -444,6 +444,10 @@ const
   Gal = 2;
   Ecl = 3;
   ProjectionName = 'HAI MER CAR ARC TAN SIN';
+  DefAutoStarFilterMag = 7.5;
+  DefStarMagFilter: array[0..MaxField] of double = (21,21,18,14,11,9,8,7,6,5,4);
+  DefNebMagFilter: array [0..MaxField] of double = (99,99,99,99,20,15,13,10.5,9,6,6);
+  DefNebSizeFilter: array [0..MaxField] of double = (0,0,0,1,1,2,3,6,20,30,60);
   ftAll = 0;
   ftStar = 1;
   ftVar = 2;
@@ -1035,12 +1039,9 @@ type
     BigNebLimit: double;             // some catalog include very big objects that cover a quarter of the sky
     AutoStarFilter: boolean;         // automatic limit
     AutoStarFilterMag: double;       // automatic limit reference magnitude
-    StarMagFilter: array [0..MaxField] of double;
-    // Limiting mag. for each field
-    NebMagFilter: array [0..MaxField] of double;
-    // Limiting mag. for each field
-    NebSizeFilter: array [0..MaxField] of double;
-    // Limiting size for each field
+    StarMagFilter: array [0..MaxField] of double;    // Limiting mag. for each field
+    NebMagFilter: array [0..MaxField] of double;     // Limiting mag. for each field
+    NebSizeFilter: array [0..MaxField] of double;    // Limiting size for each field
     HourGridSpacing: array [0..MaxField] of double;
     DegreeGridSpacing: array [0..MaxField] of double;
     ShowCRose, SimplePointer: boolean; //  compass rose
