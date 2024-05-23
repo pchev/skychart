@@ -159,6 +159,7 @@ begin
   V.Password:=cp6;
   Fdevice:=cp4;
   if Assigned(FonStatusChange) then FonStatusChange(self);
+  wait(0.5);
   V.Device:=Fdevice;
   V.Timeout:=5000;
   V.Put('Connected',true);

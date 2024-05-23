@@ -64,6 +64,7 @@ type
     elev: TEdit;
     GroupBox2: TGroupBox;
     GroupBox3: TGroupBox;
+    GroupBox4: TGroupBox;
     IndiServerHost: TEdit;
     IndiServerPort: TEdit;
     IndiTimer: TTimer;
@@ -87,6 +88,7 @@ type
     MountIndiDevice: TComboBox;
     PageControl1: TPageControl;
     Handpad: TPanel;
+    Pagecontrol2: TPageControl;
     PanelCredential: TPanel;
     Panel3: TPanel;
     parkled: TShape;
@@ -96,6 +98,8 @@ type
     ReadIntBox: TComboBox;
     StopMoveTimer: TTimer;
     INDIpage: TTabSheet;
+    Log: TTabSheet;
+    Observatory: TTabSheet;
     trackingled: TShape;
     ButtonTracking: TSpeedButton;
     ButtonHide: TButton;
@@ -186,9 +190,9 @@ type
     FCanParkUnpark: boolean;
     hasSync: Boolean;
     MountType: integer;  // 0: ascom, 1: alpaca, 2: indi
-    FLongitude: double;                // Observatory longitude (Positive East of Greenwich}
-    FLatitude: double;                 // Observatory latitude
-    FElevation: double;                // Observatory elevation
+    FLongitude: double;                // Log longitude (Positive East of Greenwich}
+    FLatitude: double;                 // Log latitude
+    FElevation: double;                // Log elevation
     curdeg_x, curdeg_y: double;        // current equatorial position in degrees
     cur_az, cur_alt: double;           // current alt-az position in degrees
     FSlewing: boolean;
@@ -349,12 +353,14 @@ begin
          DriverMsg:=rsFrom + ' ' + AscomDevice.Text+':'+crlf+StringReplace(rsASCOMDriverE, 'ASCOM', 'telescope', [])+': '+'%s'+crlf+rsIfYouCannotF;
          Fmount:=T_ascommount.Create(self);
          Fmount.onStatusChange:=@MountStatus;
+         Fmount.onMsg:=@MountMessage;
          Fmount.Connect(AscomDevice.Text);
       end;
       1: begin
          DriverMsg:=rsFrom + ' ' + 'telescope/'+ARestDevice.Text+':'+crlf+StringReplace(rsASCOMDriverE, 'ASCOM', 'telescope', [])+': '+'%s'+crlf+rsIfYouCannotF;
          Fmount:=T_ascomrestmount.Create(self);
          Fmount.onStatusChange:=@MountStatus;
+         Fmount.onMsg:=@MountMessage;
          Fmount.Connect(ARestHost.Text,ARestPort.Text,ARestProtocol.Text,'telescope/'+ARestDevice.Text,ARestUser.Text,ARestPass.Text);
       end;
       2: begin
@@ -379,50 +385,68 @@ Procedure Tpop_scope.MountStatus(Sender: TObject);
 var nrates: integer;
   rates: TStringList;
 begin
-if Fmount.Status = devConnected then begin
-  FConnected := True;
-  Initialized := True;
-  try
-  FCanSetTracking := pos('CanSetTracking;',Fmount.Capability)>=0;
-  FCanParkUnpark := pos('CanPark;',Fmount.Capability)>=0;
-  hasSync := pos('CanSync;',Fmount.Capability)>=0;
-  Handpad.Visible:=pos('CanMoveAxis;',Fmount.Capability)>=0;
-  if handpad.Visible then begin
-    try
-    rates:=TStringList.Create;
-    GetScopeRates(nrates, rates);
-    if (nrates>0) then begin
-       AxisRates.Items.Assign(rates);
-       if  AxisRates.Items.Count>0 then AxisRates.ItemIndex:=0;
+  case  Fmount.Status of
+    devConnected:  begin
+      FConnected := True;
+      Initialized := True;
+      try
+      FCanSetTracking := pos('CanSetTracking;',Fmount.Capability)>=0;
+      FCanParkUnpark := pos('CanPark;',Fmount.Capability)>=0;
+      hasSync := pos('CanSync;',Fmount.Capability)>=0;
+      Handpad.Visible:=pos('CanMoveAxis;',Fmount.Capability)>=0;
+      if handpad.Visible then begin
+        try
+        rates:=TStringList.Create;
+        GetScopeRates(nrates, rates);
+        if (nrates>0) then begin
+           AxisRates.Items.Assign(rates);
+           if  AxisRates.Items.Count>0 then AxisRates.ItemIndex:=0;
+        end;
+        rates.Free;
+        FlipNS.ItemIndex:=0;
+        except
+          Handpad.Visible:=false;
+        end;
+      end;
+      except
+        FCanSetTracking := false;
+        FCanParkUnpark := false;
+        hasSync := false;
+        Handpad.Visible:=false;
+      end;
+      FlipNS.Visible:=Handpad.Visible;
+      Label4.Visible:=Handpad.Visible;
+      AxisRates.Visible:=Handpad.Visible;
+      ShowCoordinates;
+      FSlewing:=GetSlewing;
+      led.brush.color := clLime;
+      timer1.Enabled := True;
+      ButtonConnect.Enabled := False;
+      ButtonDisconnect.Enabled := True;
+      ButtonSelect.Enabled := False;
+      ButtonConfigure.Enabled := False;
+      ButtonSetTime.Enabled := True;
+      ButtonSetLocation.Enabled := True;
+      ButtonGetLocation.Enabled := True;
+      UpdTrackingButton;
     end;
-    rates.Free;
-    FlipNS.ItemIndex:=0;
-    except
-      Handpad.Visible:=false;
+    devConnecting:  begin
+      led.brush.color := clYellow;
+
+    end;
+    devDisconnected:  begin
+      led.brush.color := clRed;
+      ButtonConnect.Enabled := True;
+      ButtonDisconnect.Enabled := False;
+      ButtonSelect.Enabled := True;
+      ButtonConfigure.Enabled := True;
+      ButtonSetTime.Enabled := False;
+      ButtonSetLocation.Enabled := False;
+      ButtonGetLocation.Enabled := False;
+      UpdTrackingButton;
+      UpdParkButton;
     end;
   end;
-  except
-    FCanSetTracking := false;
-    FCanParkUnpark := false;
-    hasSync := false;
-    Handpad.Visible:=false;
-  end;
-  FlipNS.Visible:=Handpad.Visible;
-  Label4.Visible:=Handpad.Visible;
-  AxisRates.Visible:=Handpad.Visible;
-  ShowCoordinates;
-  FSlewing:=GetSlewing;
-  led.brush.color := clLime;
-  timer1.Enabled := True;
-  ButtonConnect.Enabled := False;
-  ButtonDisconnect.Enabled := True;
-  ButtonSelect.Enabled := False;
-  ButtonConfigure.Enabled := False;
-  ButtonSetTime.Enabled := True;
-  ButtonSetLocation.Enabled := True;
-  ButtonGetLocation.Enabled := True;
-  UpdTrackingButton;
-end;
 end;
 
 procedure Tpop_scope.MountMessage(msg:string; level: integer=1);
@@ -622,7 +646,12 @@ begin
   ButtonSelect.Caption := rsSelect;
   ButtonConfigure.Caption := rsConfigure;
   ButtonAbout.Caption := rsAbout;
-  GroupBox5.Caption := rsObservatory;
+  Label75.Caption := rsINDIServerHo;
+  Label130.Caption := rsINDIServerPo;
+  Label260.Caption := rsTelescopeNam;
+  BtnGet.Caption := rsGet;
+  Observatory.Caption := rsObservatory;
+  Log.Caption:='Journal';
   Label15.Caption := rsLatitude;
   Label16.Caption := rsLongitude;
   label2.Caption:=rsAltitude;
@@ -638,7 +667,6 @@ begin
   ButtonHide.Caption := rsHide;
   Label4.Caption:=rsSpeed;
   flipns.Hint:=rsFlipNSMoveme;
-
   SetHelp(self, hlpASCOM);
 end;
 
@@ -803,6 +831,10 @@ end;
 
 procedure Tpop_scope.ButtonHelpClick(Sender: TObject);
 begin
+  if PageControl1.ActivePageIndex=2 then
+    SetHelp(self, hlpINDI)
+  else
+    SetHelp(self, hlpASCOM);
   ShowHelp;
 end;
 

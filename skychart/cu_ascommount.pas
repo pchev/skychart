@@ -154,6 +154,7 @@ begin
   FStatus := devConnecting;
   FDevice:=cp1;
   if Assigned(FonStatusChange) then FonStatusChange(self);
+  wait(0.5);
   V:=Unassigned;
   V:=CreateOleObject(Fdevice);
   V.connected:=true;
