@@ -1065,7 +1065,6 @@ resourcestring
   rsCopyFrom = 'Copy from:';
   rsToFile = 'to file:';
   rsASCOMTelesc = 'ASCOM telescope interface';
-  rsIntTelesco = 'Integrated telescope driver.';
   rsUseTheMenuOr = 'Use the menu or button "%s" to configure this driver.';
   rsOtherSoftwar = 'Other software data';
   rsInvalidPath = 'Invalid path: ';
@@ -1280,7 +1279,6 @@ resourcestring
   rsStartGraphAt = 'Start graph at local noon';
   rsSelectCircle = 'Select Circle';
   rsSelectRectan = 'Select Rectangle';
-  rsAdvancedSett2 = 'Advanced setting';
   rsDoNotChangeA = 'Do not change anything here if you are not sure what you do!';
   rsForceEqSys = 'Force EqSys';
   rsBrightest = 'Brightest';
@@ -1484,9 +1482,6 @@ resourcestring
   rsTour = 'Tour';
   rsActivateVoic = 'Activate voice';
   rsCannotDownlo = 'Cannot download PDF help now';
-  rsThisDirectDr = 'This direct driver is kept for compatibility, it may work '
-    + 'or not for you. But the preference is to use the INDI or ASCOM driver '
-    + 'for your telescope.';
   rsComputeRiseS = 'Compute rise/set time relative to this line';
   rsSlewingTo = 'Slewing to %s / %s';
   rsSyncedTo = 'Synced to %s / %s';
@@ -1614,6 +1609,20 @@ resourcestring
   rsThisLayoutCa = 'This layout can be modified later using the menu Setup , Toolbar editor';
   rsMoreButtonsF = 'More buttons for quick access to many functions';
   rsFewerButtons = 'Fewer buttons for a cleaner space, access to other functions from the menu';
+  rsConnected3 = 'Connected';  // keep duplicate for compatibility with ccdciel source
+  rsDisconnected3 = 'Disconnected';
+  rsMountCapabil = 'Mount capabilities: %s';
+  rsSlewToEQ = 'Slewing to %s %s/%s';
+  rsCannotSyncWh = 'Cannot Sync when the mount is not tracking';
+  rsSyncToEQ = 'Sync to %s %s/%s';
+  rsStartTracking = 'start tracking';
+  rsStopTelescop = 'Stop telescope motion.';
+  rsTrue = 'True';
+  rsFalse = 'False';
+  rsConnectionEr = 'Connection error: %s';
+  rsDisconnectio = 'Disconnection error: %s';
+  rsError2 = 'Error';
+  rsNoResponseFr = 'No response from server';
 
 // also update upsi_translation
 

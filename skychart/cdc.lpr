@@ -41,8 +41,8 @@ uses
   Printer4Lazarus, lazcontrols, pascalscript, downldialog, laz_synapse, pu_catgen, pu_obslist,
   pu_catgenadv, pu_progressbar, mrecsort, pu_addlabel, pu_print, u_translation,
   pu_splash, pu_about, cu_tz, uniqueinstance_package, u_help, LCLProc, pu_clock,
-  u_unzip, cu_tcpserver, pu_indiclient, u_satellite, pu_main, pu_observatory_db,
-  pu_ascomclient, uDE, pu_voconfig, pr_vodetail,
+  u_unzip, cu_tcpserver, u_satellite, pu_main, pu_observatory_db,
+  pu_mount, uDE, pu_voconfig, pr_vodetail,
   lazvo, multiframepackage, fu_config_time, fu_config_catalog,
   fu_config_chart, fu_config_display, fu_config_internet, fu_config_observatory,
   fu_config_pictures, fu_config_solsys, fu_config_system, fu_config_calendar,
@@ -50,7 +50,7 @@ uses
   pu_fov, pu_edittoolbar, fu_script, pu_scriptengine, pu_pascaleditor,
   uPSI_CheckLst, upsi_translation, u_scriptsocket, pu_scriptconfig, pu_tour, pu_updcatalog,
   UScaleDPI, u_ccdconfig, u_orbits, u_speech, cu_healpix, cu_ascomrest, pu_mosaic, pu_prepoint,
-  calceph, cu_calceph, cu_httpdownload, cu_alpacamanagement, pu_config, pu_catalog_detail;
+  calceph, cu_calceph, cu_httpdownload, cu_alpacamanagement, pu_config, pu_catalog_detail, cu_indimount, cu_ascomrestmount, cu_ascommount, cu_mount;
   
 var i : integer;
     buf, p, step : string;

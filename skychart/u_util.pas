@@ -102,6 +102,7 @@ function isodate(a, m, d: integer): string;
 function LeapYear(Year: longint): boolean;
 function DayofYear(y, m, d: integer): integer;
 procedure iso2date(dt: string; out a, m, d: integer);
+function DateIso2DateTime(dt: string): double;
 function datejd(dt:string): double;
 function jddate(jd: double): string;
 function jddate2(jd: double): string;
@@ -163,6 +164,7 @@ function TruncDecimal(val: Extended; decimal: byte): Extended;
 procedure Wait(wt:single=5);
 function CleanName(fn:string):string;
 function MessageDlgCenter(const aCaption, aMsg: string; DlgType: TMsgDlgType; Buttons: TMsgDlgButtons): TModalResult;
+function isLocalIP(ip:string): boolean;
 
 {$ifdef unix}
 function ExecFork(cmd: string; p1: string = ''; p2: string = ''; p3: string = '';
@@ -2027,6 +2029,51 @@ begin
   a:=StrToIntDef(copy(dt,1,4),0);
   m:=StrToIntDef(copy(dt,6,2),0);
   d:=StrToIntDef(copy(dt,9,2),0);
+end;
+
+function DateIso2DateTime(dt: string): double;
+var
+  sy, y, m, d, p: integer;
+  h: double;
+begin
+  Result := 0;
+  sy := 1;
+  h := 0;
+  dt := trim(dt);
+  if length(dt) > 2 then
+  begin
+    if dt[1] = '-' then
+    begin
+      sy := -1;
+      Delete(dt, 1, 1);
+    end;
+    if dt[1] = '+' then
+    begin
+      sy := 1;
+      Delete(dt, 1, 1);
+    end;
+  end;
+  p := pos('-', dt);
+  if p = 0 then
+    exit;
+  y := sy * StrToInt(trim(copy(dt, 1, p - 1)));
+  dt := copy(dt, p + 1, 999);
+  p := pos('-', dt);
+  if p = 0 then
+    exit;
+  m := StrToInt(trim(copy(dt, 1, p - 1)));
+  dt := copy(dt, p + 1, 999);
+  p := pos('T', dt);
+  if p = 0 then
+    p := pos(' ', dt);
+  if p = 0 then
+    d := StrToInt(trim(dt))     // no time part
+  else
+  begin
+    d := StrToInt(trim(copy(dt, 1, p - 1)));
+    h := StrToTime(trim(copy(dt,p+1,99)),':');
+  end;
+  result := EncodeDate(y, m, d) + h;
 end;
 
 function jddatetime(jd: double; fy, fm, fd, fh, fn, fs: boolean): string;
@@ -4068,6 +4115,26 @@ begin
    f.Position := poOwnerFormCenter;
    result := f.ShowModal;
    f.Free;
+end;
+
+function isLocalIP(ip:string): boolean;
+var ipstr:Tstringlist;
+begin
+  result:=false;
+  ipstr:=Tstringlist.Create;
+  try
+  SplitRec(ip,'.',ipstr);
+  if ipstr[0]='127' then
+    result:=true
+  else if ipstr[0]='10' then
+    result:=true
+  else if (ipstr[0]='192')and(ipstr[1]='168') then
+    result:=true
+  else if (ipstr[0]='172')and(ipstr[1]>='16')and(ipstr[1]<='31') then
+    result:=true;
+  finally
+    ipstr.Free;
+  end;
 end;
 
 end.

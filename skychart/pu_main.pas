@@ -1456,6 +1456,7 @@ begin
     LoadDeltaT;
     LoadIERS;
     LoadLeapseconds(true);
+    jdtoday:=DateTimetoJD(now);
     if VerboseMsg then
       WriteTrace('Load VarType');
     LoadVartype;
@@ -3490,24 +3491,17 @@ end;
 
 procedure Tf_main.TelescopePanelExecute(Sender: TObject);
 begin
-  if cfgm.InternalIndiPanel then
+  if not IndiGUIready then
   begin
-    if not IndiGUIready then
-    begin
-      f_indigui := Tf_indigui.Create(self);
-      ScaleDPI(f_indigui);
-      f_indigui.onDestroy := IndiGUIdestroy;
-      f_indigui.IndiServer := def_cfgsc.IndiServerHost;
-      f_indigui.IndiPort := def_cfgsc.IndiServerPort;
-      f_indigui.IndiDevice := '';
-      IndiGUIready := True;
-    end;
-    f_indigui.Show;
-  end
-  else
-  begin
-    execnowait(cfgm.IndiPanelCmd);
+    f_indigui := Tf_indigui.Create(self);
+    ScaleDPI(f_indigui);
+    f_indigui.onDestroy := IndiGUIdestroy;
+    f_indigui.IndiServer := def_cfgsc.IndiServerHost;
+    f_indigui.IndiPort := def_cfgsc.IndiServerPort;
+    f_indigui.IndiDevice := '';
+    IndiGUIready := True;
   end;
+  f_indigui.Show;
 end;
 
 procedure Tf_main.IndiGUIdestroy(Sender: TObject);
@@ -6465,8 +6459,6 @@ begin
   cfgm.AutoRefreshDelay := 60;
   cfgm.ServerIPaddr := '127.0.0.1';
   cfgm.ServerIPport := '3292'; // x'CDC' :o)
-  cfgm.IndiPanelCmd := dcd_cmd;
-  cfgm.InternalIndiPanel := True;
   cfgm.TextOnlyDetail := False;
   cfgm.AutostartServer := True;
   cfgm.ServerCoordSys:=1;
@@ -6875,21 +6867,26 @@ begin
   def_cfgsc.ShowCircle := False;
   def_cfgsc.ShowCrosshair := False;
   def_cfgsc.EyepieceMask := False;
-  def_cfgsc.IndiLoadConfig := False;
+  def_cfgsc.AscomDevice := '';
+  def_cfgsc.TelescopeAltAz := False;
+  def_cfgsc.TelescopeInterval := 1000;
+  {$ifdef mswindows}
+   def_cfgsc.TelescopeInterface:=0;
+  {$else}
+   def_cfgsc.TelescopeInterface:=2;
+  {$endif}
+  def_cfgsc.AlpacaProtocol := 0;
+  def_cfgsc.AlpacaHost := '127.0.0.1';
+  def_cfgsc.AlpacaPort := 32323;
+  def_cfgsc.AlpacaUser := '';
+  def_cfgsc.AlpacaPass := '';
+  def_cfgsc.AlpacaDevice := 0;
+  def_cfgsc.TelescopeLeft := 0;
+  def_cfgsc.TelescopeTop := 0;
   def_cfgsc.IndiServerHost := 'localhost';
   def_cfgsc.IndiServerPort := '7624';
   def_cfgsc.IndiDevice := 'Telescope Simulator';
-  def_cfgsc.IndiTelescope := False;
-  def_cfgsc.IndiTop := 0;
-  def_cfgsc.IndiLeft := 0;
-  def_cfgsc.ASCOMTelescope := False;
   def_cfgsc.ManualTelescope := False;
-{$ifdef unix}
-  def_cfgsc.IndiTelescope := True;
-{$endif}
-{$ifdef mswindows}
-  def_cfgsc.ASCOMTelescope := True;
-{$endif}
   def_cfgsc.ManualTelescopeType := 0;
   def_cfgsc.TelescopeTurnsX := 6;    // Vixen GP
   def_cfgsc.TelescopeTurnsY := 0.4;
@@ -8016,9 +8013,6 @@ begin
           cfgm.PlanetDir := buf;
         cfgm.ServerIPaddr := ReadString(section, 'ServerIPaddr', cfgm.ServerIPaddr);
         cfgm.ServerIPport := ReadString(section, 'ServerIPport', cfgm.ServerIPport);
-        cfgm.IndiPanelCmd := ReadString(section, 'IndiPanelCmd', cfgm.IndiPanelCmd);
-        cfgm.InternalIndiPanel :=
-          ReadBool(section, 'InternalIndiPanel', cfgm.InternalIndiPanel);
         cfgm.TextOnlyDetail := ReadBool(section, 'TextOnlyDetail', cfgm.TextOnlyDetail);
         cfgm.AutostartServer :=
           ReadBool(section, 'AutostartServer', cfgm.AutostartServer);
@@ -8165,19 +8159,23 @@ begin
           ReadString(section, 'ffovc_cx', catalog.cfgshr.ffovc_cx);
         catalog.cfgshr.ffovc_cy :=
           ReadString(section, 'ffovc_cy', catalog.cfgshr.ffovc_cy);
-        def_cfgsc.IndiLoadConfig :=
-          ReadBool(section, 'IndiLoadConfig', def_cfgsc.IndiLoadConfig);
+        def_cfgsc.AscomDevice := ReadString(section, 'AscomDevice', def_cfgsc.AscomDevice);
+        def_cfgsc.TelescopeAltAz := ReadBool(section, 'TelescopeAltAz', def_cfgsc.TelescopeAltAz);
+        def_cfgsc.TelescopeInterval := ReadInteger(section, 'TelescopeInterval', def_cfgsc.TelescopeInterval);
+        def_cfgsc.TelescopeInterface := ReadInteger(section, 'TelescopeInterface', def_cfgsc.TelescopeInterface);
+        def_cfgsc.AlpacaProtocol := ReadInteger(section, 'AlpacaProtocol', def_cfgsc.AlpacaProtocol);
+        def_cfgsc.AlpacaHost := ReadString(section, 'AlpacaHost', def_cfgsc.AlpacaHost);
+        def_cfgsc.AlpacaPort := ReadInteger(section, 'AlpacaPort', def_cfgsc.AlpacaPort);
+        def_cfgsc.AlpacaUser := DecryptStr(hextostr(ReadString(section, 'AlpacaUser', '')), encryptpwd);
+        def_cfgsc.AlpacaPass := DecryptStr(hextostr(ReadString(section, 'AlpacaPass', '')), encryptpwd);
+        def_cfgsc.AlpacaDevice := ReadInteger(section, 'AlpacaDevice', def_cfgsc.AlpacaDevice);
+        def_cfgsc.TelescopeLeft := ReadInteger(section, 'TelescopeLeft', def_cfgsc.TelescopeLeft);
+        def_cfgsc.TelescopeTop := ReadInteger(section, 'TelescopeTop', def_cfgsc.TelescopeTop);
         def_cfgsc.IndiServerHost :=
           ReadString(section, 'IndiServerHost', def_cfgsc.IndiServerHost);
         def_cfgsc.IndiServerPort :=
           ReadString(section, 'IndiServerPort', def_cfgsc.IndiServerPort);
         def_cfgsc.IndiDevice := ReadString(section, 'IndiDevice', def_cfgsc.IndiDevice);
-        def_cfgsc.IndiTelescope :=
-          ReadBool(section, 'IndiTelescope', def_cfgsc.IndiTelescope);
-        def_cfgsc.IndiLeft := ReadInteger(section, 'IndiLeft', def_cfgsc.IndiLeft);
-        def_cfgsc.IndiTop := ReadInteger(section, 'IndiTop', def_cfgsc.IndiTop);
-        def_cfgsc.ASCOMTelescope :=
-          ReadBool(section, 'ASCOMTelescope', def_cfgsc.ASCOMTelescope);
         def_cfgsc.ManualTelescope :=
           ReadBool(section, 'ManualTelescope', def_cfgsc.ManualTelescope);
         def_cfgsc.ManualTelescopeType :=
@@ -8186,17 +8184,6 @@ begin
           ReadFloat(section, 'TelescopeTurnsX', def_cfgsc.TelescopeTurnsX);
         def_cfgsc.TelescopeTurnsY :=
           ReadFloat(section, 'TelescopeTurnsY', def_cfgsc.TelescopeTurnsY);
-        if not (def_cfgsc.IndiTelescope or def_cfgsc.ASCOMTelescope or
-                def_cfgsc.ManualTelescope) then
-        begin
-  {$ifdef unix}
-          def_cfgsc.IndiTelescope := True;
-  {$endif}
-  {$ifdef mswindows}
-          def_cfgsc.ASCOMTelescope := True;
-  {$endif}
-        end;
-        TelescopePanel.Visible := def_cfgsc.IndiTelescope;
         def_cfgsc.TelLimitDecMax := ReadFloat(section, 'TelLimitDecMax', def_cfgsc.TelLimitDecMax);
         def_cfgsc.TelLimitDecMin := ReadFloat(section, 'TelLimitDecMin', def_cfgsc.TelLimitDecMin);
         def_cfgsc.TelLimitHaE := ReadFloat(section, 'TelLimitHaE', def_cfgsc.TelLimitHaE);
@@ -8393,7 +8380,8 @@ procedure Tf_main.UpdateConfig;
 var
   i,n: integer;
   b1, b2: boolean;
-  inif: TMemIniFile;
+  inif,ini: TMemIniFile;
+  ConfigPath,ScopeConfig: string;
 begin
   if Config_Version < '3.0.1.3d' then
   begin
@@ -8747,6 +8735,35 @@ begin
     catalog.cfgcat.NebCatDef[rc3-BaseNeb]:=false;
     catalog.cfgcat.NebCatOn[rc3-BaseNeb]:=false;
     catalog.cfgcat.NebCatPath[rc3-BaseNeb]:='';
+  end;
+  if Config_Version < '4.3t' then begin
+    // merge telescope config file
+    ConfigPath:=ExtractFilePath(Configfile);
+    if DirectoryExists(ConfigPath) then
+      ScopeConfig := slash(ConfigPath) + 'scope.ini'
+    else
+      ScopeConfig := slash(extractfilepath(ParamStr(0))) + 'scope.ini';
+    if FileExists(ScopeConfig) then begin
+      ini := TMeminifile.Create(ScopeConfig);
+      def_cfgsc.AscomDevice := ini.readstring('Ascom', 'name', '');
+      def_cfgsc.TelescopeAltAz := ini.ReadBool('Ascom', 'AltAz', False);
+      def_cfgsc.TelescopeInterval := ini.ReadInteger('Ascom', 'read_interval', 1000);
+      i := ini.ReadInteger('AscomRemote', 'remote', 0);
+      {$ifdef mswindows}
+       def_cfgsc.TelescopeInterface:=i;
+      {$else}
+       def_cfgsc.TelescopeInterface:=2;
+      {$endif}
+      def_cfgsc.AlpacaProtocol := ini.ReadInteger('AscomRemote', 'protocol', 0);
+      def_cfgsc.AlpacaHost := ini.readstring('AscomRemote', 'host', '127.0.0.1');
+      def_cfgsc.AlpacaPort := ini.ReadInteger('AscomRemote', 'port', 32323);
+      def_cfgsc.AlpacaUser := DecryptStr(hextostr(ini.readstring('AscomRemote', 'u', '')), encryptpwd);
+      def_cfgsc.AlpacaPass := DecryptStr(hextostr(ini.readstring('AscomRemote', 'p', '')), encryptpwd);
+      def_cfgsc.AlpacaDevice := ini.ReadInteger('AscomRemote', 'device', 0);
+      def_cfgsc.TelescopeLeft := ini.ReadInteger('Position', 'left', 0);
+      def_cfgsc.TelescopeTop := ini.ReadInteger('Position', 'top', 0);
+      ini.Free;
+    end;
   end;
   SaveDefault;
 end;
@@ -9357,8 +9374,6 @@ begin
         WriteString(section, 'PlanetDir', cfgm.PlanetDir);
         WriteString(section, 'ServerIPaddr', cfgm.ServerIPaddr);
         WriteString(section, 'ServerIPport', cfgm.ServerIPport);
-        WriteString(section, 'IndiPanelCmd', cfgm.IndiPanelCmd);
-        WriteBool(section, 'InternalIndiPanel', cfgm.InternalIndiPanel);
         WriteBool(section, 'TextOnlyDetail', cfgm.TextOnlyDetail);
         WriteBool(section, 'AutostartServer', cfgm.AutostartServer);
         WriteInteger(section, 'ServerCoordSys', cfgm.ServerCoordSys);
@@ -9457,28 +9472,47 @@ begin
               WriteString(section, 'ObsName' + IntToStr(i), cfgm.ObsNameList[i]);
             end;
           end;
-        WriteBool(section, 'IndiTelescope', def_cfgsc.IndiTelescope);
-        WriteBool(section, 'ASCOMTelescope', def_cfgsc.ASCOMTelescope);
         WriteBool(section, 'ManualTelescope', def_cfgsc.ManualTelescope);
         WriteInteger(section, 'ManualTelescopeType', def_cfgsc.ManualTelescopeType);
         WriteFloat(section, 'TelescopeTurnsX', def_cfgsc.TelescopeTurnsX);
         WriteFloat(section, 'TelescopeTurnsY', def_cfgsc.TelescopeTurnsY);
         if MultiFrame1.ActiveObject is Tf_chart then
         with (MultiFrame1.ActiveObject as Tf_chart).sc do begin
-          WriteBool(section, 'IndiLoadConfig', cfgsc.IndiLoadConfig);
+          WriteString(section, 'AscomDevice', cfgsc.AscomDevice);
+          WriteBool(section, 'TelescopeAltAz', cfgsc.TelescopeAltAz);
+          WriteInteger(section, 'TelescopeInterval', cfgsc.TelescopeInterval);
+          WriteInteger(section, 'TelescopeInterface', cfgsc.TelescopeInterface);
+          WriteInteger(section, 'AlpacaProtocol', cfgsc.AlpacaProtocol);
+          WriteString(section, 'AlpacaHost', cfgsc.AlpacaHost);
+          WriteInteger(section, 'AlpacaPort', cfgsc.AlpacaPort);
+          WriteString(section, 'AlpacaUser', strtohex(encryptStr(cfgsc.AlpacaUser, encryptpwd)));
+          WriteString(section, 'AlpacaPass', strtohex(encryptStr(cfgsc.AlpacaPass, encryptpwd)));
+          WriteInteger(section, 'AlpacaDevice', cfgsc.AlpacaDevice);
+          WriteInteger(section, 'TelescopeLeft', cfgsc.TelescopeLeft);
+          WriteInteger(section, 'TelescopeTop', cfgsc.TelescopeTop);
           WriteString(section, 'IndiServerHost', cfgsc.IndiServerHost);
           WriteString(section, 'IndiServerPort', cfgsc.IndiServerPort);
           WriteString(section, 'IndiDevice', cfgsc.IndiDevice);
-          WriteInteger(section, 'IndiLeft', cfgsc.IndiLeft);
-          WriteInteger(section, 'IndiTop', cfgsc.IndiTop);
+          WriteString(section, 'IndiServerHost', cfgsc.IndiServerHost);
+          WriteString(section, 'IndiServerPort', cfgsc.IndiServerPort);
+          WriteString(section, 'IndiDevice', cfgsc.IndiDevice);
         end
         else begin
-          WriteBool(section, 'IndiLoadConfig', def_cfgsc.IndiLoadConfig);
+          WriteString(section, 'AscomDevice', def_cfgsc.AscomDevice);
+          WriteBool(section, 'TelescopeAltAz', def_cfgsc.TelescopeAltAz);
+          WriteInteger(section, 'TelescopeInterval', def_cfgsc.TelescopeInterval);
+          WriteInteger(section, 'TelescopeInterface', def_cfgsc.TelescopeInterface);
+          WriteInteger(section, 'AlpacaProtocol', def_cfgsc.AlpacaProtocol);
+          WriteString(section, 'AlpacaHost', def_cfgsc.AlpacaHost);
+          WriteInteger(section, 'AlpacaPort', def_cfgsc.AlpacaPort);
+          WriteString(section, 'AlpacaUser', strtohex(encryptStr(def_cfgsc.AlpacaUser, encryptpwd)));
+          WriteString(section, 'AlpacaPass', strtohex(encryptStr(def_cfgsc.AlpacaPass, encryptpwd)));
+          WriteInteger(section, 'AlpacaDevice', def_cfgsc.AlpacaDevice);
+          WriteInteger(section, 'TelescopeLeft', def_cfgsc.TelescopeLeft);
+          WriteInteger(section, 'TelescopeTop', def_cfgsc.TelescopeTop);
           WriteString(section, 'IndiServerHost', def_cfgsc.IndiServerHost);
           WriteString(section, 'IndiServerPort', def_cfgsc.IndiServerPort);
           WriteString(section, 'IndiDevice', def_cfgsc.IndiDevice);
-          WriteInteger(section, 'IndiLeft', def_cfgsc.IndiLeft);
-          WriteInteger(section, 'IndiTop', def_cfgsc.IndiTop);
         end;
         WriteFloat(section, 'TelLimitDecMax', def_cfgsc.TelLimitDecMax);
         WriteFloat(section, 'TelLimitDecMin', def_cfgsc.TelLimitDecMin);
@@ -10599,7 +10633,7 @@ begin
       end
       else
       begin
-        MenuTelescopeControlPanel.Visible := sc.cfgsc.IndiTelescope;
+        MenuTelescopeControlPanel.Visible := True;
         MenuTelescopeSlew.Visible := True;
         MenuTelescopeSync.Visible := True;
         TelescopeSlew.Enabled := True;

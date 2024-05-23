@@ -1049,7 +1049,6 @@ begin
   CL.AddConstantN('rsCopyFrom', 'String').SetString(rsCopyFrom);
   CL.AddConstantN('rsToFile', 'String').SetString(rsToFile);
   CL.AddConstantN('rsASCOMTelesc', 'String').SetString(rsASCOMTelesc);
-  CL.AddConstantN('rsIntTelesco', 'String').SetString(rsIntTelesco);
   CL.AddConstantN('rsUseTheMenuOr', 'String').SetString(rsUseTheMenuOr);
   CL.AddConstantN('rsOtherSoftwar', 'String').SetString(rsOtherSoftwar);
   CL.AddConstantN('rsInvalidPath', 'String').SetString(rsInvalidPath);
@@ -1253,7 +1252,6 @@ begin
   CL.AddConstantN('rsStartGraphAt', 'String').SetString(rsStartGraphAt);
   CL.AddConstantN('rsSelectCircle', 'String').SetString(rsSelectCircle);
   CL.AddConstantN('rsSelectRectan', 'String').SetString(rsSelectRectan);
-  CL.AddConstantN('rsAdvancedSett2', 'String').SetString(rsAdvancedSett2);
   CL.AddConstantN('rsDoNotChangeA', 'String').SetString(rsDoNotChangeA);
   CL.AddConstantN('rsForceEqSys', 'String').SetString(rsForceEqSys);
   CL.AddConstantN('rsBrightest', 'String').SetString(rsBrightest);

@@ -26,7 +26,6 @@ interface
 
 uses
   u_help, u_translation, u_constant, cu_database,
-  indibaseclient, indibasedevice, indiapi,
   Dialogs, Controls, Buttons, enhedits, ComCtrls, Classes,
   LCLIntf, SysUtils, Graphics, Forms, LazUTF8, LazFileUtils, Math,
   ExtCtrls, StdCtrls, LResources, EditBtn, LazHelpHTML_fix, CheckLst, Spin, Types;
@@ -45,8 +44,6 @@ type
     TelLimitHaEActive: TCheckBox;
     TelLimitDecMinActive: TCheckBox;
     TelescopeLimit: TGroupBox;
-    IndiMsg: TLabel;
-    INDILabel2: TLabel;
     LanguageList: TCheckListBox;
     Panel1: TPanel;
     Panel2: TPanel;
@@ -56,7 +53,6 @@ type
     UseScaling: TCheckBox;
     CheckBox1: TCheckBox;
     GroupBox2: TGroupBox;
-    InternalIndiGui: TCheckBox;
     CheckBox2: TCheckBox;
     CheckBox3: TCheckBox;
     CheckBox4: TCheckBox;
@@ -65,24 +61,18 @@ type
     CheckBox7: TCheckBox;
     CheckBox8: TCheckBox;
     CheckBox9: TCheckBox;
-    InterfaceLabel: TLabel;
-    InterfacePanel: TPanel;
-    INDILabel: TLabel;
-    ASCOMLabel: TLabel;
+    TelescopeLabel: TLabel;
     Label15: TLabel;
     Label16: TLabel;
     Label17: TLabel;
     Label18: TLabel;
-    ASCOMPanel: TPanel;
+    TelescopePanel: TPanel;
     PageControl2: TPageControl;
     PageControl3: TPageControl;
-    ExternalControlPanel: TPanel;
     SqliteBoxLabel: TLabel;
     SqliteBox: TPanel;
-    TabSheet1: TTabSheet;
     TabSheet2: TTabSheet;
-    TabSheet3: TTabSheet;
-    TabSheet4: TTabSheet;
+    TabSheet1: TTabSheet;
     TabSheet5: TTabSheet;
     TabSheet6: TTabSheet;
     Page5: TTabSheet;
@@ -91,7 +81,6 @@ type
     Language: TTabSheet;
     Page1: TTabSheet;
     TelescopeManual: TPanel;
-    INDI: TPanel;
     Label12: TLabel;
     LinuxCmd: TEdit;
     LinuxDesktopBox: TComboBox;
@@ -115,8 +104,6 @@ type
     chkdb: TButton;
     Label1: TLabel;
     dbnamesqlite: TEdit;
-    Label2: TLabel;
-    PanelCmd: TEdit;
     Label7: TLabel;
     EquatorialMount: TPanel;
     Label3: TLabel;
@@ -159,7 +146,6 @@ type
     procedure CheckBox7Change(Sender: TObject);
     procedure CheckBox8Change(Sender: TObject);
     procedure CheckBox9Change(Sender: TObject);
-    procedure InternalIndiGuiClick(Sender: TObject);
     procedure Label18Click(Sender: TObject);
     procedure LinuxCmdChange(Sender: TObject);
     procedure LinuxDesktopBoxChange(Sender: TObject);
@@ -168,7 +154,6 @@ type
     procedure ipaddrChange(Sender: TObject);
     procedure ipportChange(Sender: TObject);
     procedure TelescopeSelectClick(Sender: TObject);
-    procedure PanelCmdChange(Sender: TObject);
     procedure TurnsRaChange(Sender: TObject);
     procedure TurnsDecChange(Sender: TObject);
     procedure ManualMountTypeClick(Sender: TObject);
@@ -253,17 +238,12 @@ begin
   Label11.Caption := rsTurnsDegree;
   RevertTurnsAz.Caption := rsRevertAzKnob;
   RevertTurnsAlt.Caption := rsRevertAltKno;
-  INDILabel.Caption := rsINDIDriverSe;
-  INDILabel2.Caption := Format(rsUseTheMenuOr, [rsConnectTeles]);
-  Label2.Caption := rsControlPanel2;
-  InternalIndiGui.Caption:=rsUseTheIntern;
   Label14.Caption := rsLanguageSele;
   ManualMountType.Items[0] := rsEquatorialMo;
   ManualMountType.Items[1] := rsAltAzMount;
   TelescopeSelect.Caption := rsSelectTheTel;
-  TelescopeSelect.Items[0] := rsINDIDriver;
+  TelescopeSelect.Items[0] := 'ASCOM, Alpaca, INDI';
   TelescopeSelect.Items[1] := rsManualMount;
-  TelescopeSelect.Items[2] := 'ASCOM';
   TelescopeLimit.Caption:=rsLineForTeles;
   TelLimitDecMaxActive.Caption:=rsMaximumDecli;
   TelLimitDecMinActive.Caption:=rsMinimumDecli;
@@ -282,12 +262,7 @@ begin
   CheckBox7.Caption := rsTryToAutoCon;
   CheckBox8.Caption := rsKeepTablesOn;
   CheckBox9.Caption := rsKeepImagesOn;
-  ASCOMLabel.Caption := rsASCOMTelesc + crlf + Format(rsUseTheMenuOr, [rsConnectTeles]);
-  {$ifndef mswindows}
-  ASCOMLabel.Caption := ASCOMLabel.Caption + crlf + crlf + Format(rsASCOMRemote, [compile_system]);
-  {$endif}
-  InterfaceLabel.Caption := rsObsolete + crlf + crlf + rsIntTelesco + crlf + crlf +
-    rsThisDirectDr + crlf + crlf + Format(rsUseTheMenuOr, [rsConnectTeles]);
+  TelescopeLabel.Caption := 'ASCOM, Alpaca, INDI' + crlf + Format(rsUseTheMenuOr, [rsConnectTeles]);
   SetHelp(self, hlpCfgSys);
 end;
 
@@ -322,7 +297,6 @@ end;
 procedure Tf_config_system.Init;
 begin
   LockChange := True;
-  IndiMsg.Caption:='';
 {$if defined(mswindows) or defined(darwin)}
   GroupBoxLinux.Visible := False;
 {$endif}
@@ -414,9 +388,6 @@ end;
 procedure Tf_config_system.ShowTelescope;
 begin
 
-  InternalIndiGui.Checked := cmain.InternalIndiPanel;
-  PanelCmd.Text := cmain.IndiPanelCmd;
-  ExternalControlPanel.Visible := (not cmain.InternalIndiPanel);
   TelLimitDecMaxActive.Checked:=csc.TelLimitDecMaxActive;
   TelLimitDecMax.Value:=csc.TelLimitDecMax;
   TelLimitDecMinActive.Checked:=csc.TelLimitDecMinActive;
@@ -435,12 +406,10 @@ begin
   RevertTurnsAlt.Checked := csc.TelescopeTurnsY < 0;
   ManualMountType.ItemIndex := csc.ManualTelescopeType;
   ManualMountTypeClick(nil);
-  if csc.IndiTelescope then
-    Telescopeselect.ItemIndex := 0
-  else if csc.ASCOMTelescope then
-    Telescopeselect.ItemIndex := 2
+  if csc.ManualTelescope then
+    Telescopeselect.ItemIndex := 1
   else
-    Telescopeselect.ItemIndex := 1;
+    Telescopeselect.ItemIndex := 0;
   TelescopeselectClick(self);
 end;
 
@@ -502,12 +471,6 @@ begin
   if LockChange then
     exit;
   OpenFileCMD := LinuxCmd.Text;
-end;
-
-procedure Tf_config_system.InternalIndiGuiClick(Sender: TObject);
-begin
-  cmain.InternalIndiPanel := InternalIndiGui.Checked;
-  ExternalControlPanel.Visible := (not cmain.InternalIndiPanel);
 end;
 
 procedure Tf_config_system.Label18Click(Sender: TObject);
@@ -659,22 +622,11 @@ end;
 
 procedure Tf_config_system.TelescopeSelectClick(Sender: TObject);
 begin
-  csc.IndiTelescope := Telescopeselect.ItemIndex = 0;
   csc.ManualTelescope := Telescopeselect.ItemIndex = 1;
-  csc.ASCOMTelescope := Telescopeselect.ItemIndex = 2;
-  if csc.IndiTelescope then
-    PageControl2.ActivePage := TabSheet1;
   if csc.ManualTelescope then
-    PageControl2.ActivePage := TabSheet2;
-  if csc.ASCOMTelescope then
-    PageControl2.ActivePage := TabSheet4;
-end;
-
-procedure Tf_config_system.PanelCmdChange(Sender: TObject);
-begin
-  if LockChange then
-    exit;
-  cmain.IndiPanelCmd := PanelCmd.Text;
+    PageControl2.ActivePage := TabSheet2
+  else
+    PageControl2.ActivePage := TabSheet1;
 end;
 
 procedure Tf_config_system.TurnsRaChange(Sender: TObject);

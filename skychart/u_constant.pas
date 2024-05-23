@@ -91,6 +91,10 @@ const
   MonthName: array [1..12] of
     string = ('January', 'February', 'March', 'April', 'May', 'June', 'July',
     'August', 'September', 'October', 'November', 'December');
+  NullCoord:double=-9999;
+  NullInt: integer=-9999;
+  debug_msg = false;
+  TrackRateName :array [0..3] of string = ('TRACK_SIDEREAL','TRACK_LUNAR','TRACK_SOLAR','TRACK_CUSTOM');
   km_au = 149597870.691;
   clight = 299792.458;
   grsun = 1.974126e-8;  // twice the gravitational radius of the Sun
@@ -433,6 +437,7 @@ const
   f13 = '0.0000000000000';
   s6 = '+0.000000;-0.000000;+0.000000';
   dateiso = 'yyyy"-"mm"-"dd"T"hh":"nn":"ss.zzz';
+  dateisoshort = 'yyyy"-"mm"-"dd"T"hh":"nn":"ss';
   labspacing = 6;
   numlabtype = 11;
   numfont = 7;
@@ -974,6 +979,11 @@ type
   end;
   TAsteroidSearchNames = array of TAsteroidSearchName;
 
+  TDevInterface = (INDI, ASCOM, INCAMERA, INTELESCOPE, ASCOMREST, MANUAL);
+  TNotifyMsg = procedure(msg:string; level: integer=1) of object;
+  TEqmodAlign=(alADDPOINT,alSTDSYNC,alUNSUPPORTED);
+  TAlignmentMode=(algAltAz,algPolar,algGermanPolar);
+  TTrackRate =(trSidereal, trLunar, trSolar, trCustom);
 
   Tconf_catalog = class(TObject)    // catalog setting
   public
@@ -1128,11 +1138,11 @@ type
     TelLimitDecMax,TelLimitDecMin,TelLimitHaE,TelLimitHaW: double;
     TelLimitDecMaxActive,TelLimitDecMinActive,TelLimitHaEActive,TelLimitHaWActive:Boolean;
     PMon, DrawPMon, ApparentPos, CoordExpertMode, SunOnline, DSLforcecolor, DSLsurface, SurfaceBlure: boolean;
-    ManualTelescopeType, CoordType, DSLcolor, SurfaceAlpha: integer;
-    IndiServerHost, IndiServerPort, IndiDevice: string;
-    IndiLeft, IndiTop: integer;
-    IndiLoadConfig, ShowCircle, ShowCrosshair, IndiTelescope, ASCOMTelescope,
-    ManualTelescope, ShowImages,
+    TelescopeInterface,ManualTelescopeType, CoordType, DSLcolor, SurfaceAlpha: integer;
+    IndiServerHost, IndiServerPort, IndiDevice, AscomDevice, AlpacaHost, AlpacaUser, AlpacaPass : string;
+    TelescopeInterval, AlpacaProtocol, AlpacaPort, AlpacaDevice, TelescopeLeft, TelescopeTop : integer;
+    TelescopeAltAz: boolean;
+    ShowCircle, ShowCrosshair, ManualTelescope, ShowImages,
     EyepieceMask, ShowImageList, ShowImageLabel, ShowBackgroundImage,
     showstars, shownebulae, showline, showlabelall, Editlabels,
     OptimizeLabels, RotLabel, AltAzMark: boolean;
@@ -1310,9 +1320,9 @@ type
     TextOnlyDetail, SimpleMove, SimpleDetail, KioskMode, KioskDebug,
     CenterAtNoon: boolean;
     PrintDesc, PrintCmd1, PrintCmd2: string;
-    PrintTmpPath, ThemeName, IndiPanelCmd, AnimRecDir, AnimRecPrefix, AnimRecExt: string;
+    PrintTmpPath, ThemeName, AnimRecDir, AnimRecPrefix, AnimRecExt: string;
     NightColor: integer;
-    PrintHeader, PrintFooter, InternalIndiPanel: boolean;
+    PrintHeader, PrintFooter: boolean;
     AnimOpt, Animffmpeg: string;
     ServerIPaddr, ServerIPport: shortstring;
     AnimFps: double;
@@ -1541,6 +1551,9 @@ var
   leapsecondexpires: double;
   iers: array of array of double;   // date, ut1-utc, polex, poley
   numiers: integer;
+  // for mount compatibility with ccdciel
+  jdtoday, ObsTimeZone: double;
+  MountTrackingAlert: boolean;
 
 {$ifdef darwin}
   OpenFileCMD: string = 'open';
@@ -2463,17 +2476,24 @@ begin
   CoordExpertMode := Source.CoordExpertMode;
   CoordType := Source.CoordType;
   ManualTelescopeType := Source.ManualTelescopeType;
+  TelescopeInterface := Source.TelescopeInterface;
+  TelescopeAltAz := Source.TelescopeAltAz;
   IndiServerHost := Source.IndiServerHost;
   IndiServerPort := Source.IndiServerPort;
   IndiDevice := Source.IndiDevice;
-  IndiLoadConfig := Source.IndiLoadConfig;
-  IndiLeft := Source.IndiLeft;
-  IndiTop := Source.IndiTop;
+  AscomDevice := Source.AscomDevice ;
+  AlpacaHost := Source.AlpacaHost ;
+  AlpacaUser := Source.AlpacaUser ;
+  AlpacaPass := Source.AlpacaPass ;
+  TelescopeInterval := Source.TelescopeInterval ;
+  AlpacaProtocol := Source.AlpacaProtocol ;
+  AlpacaPort := Source.AlpacaPort ;
+  AlpacaDevice := Source.AlpacaDevice ;
+  TelescopeLeft := Source.TelescopeLeft ;
+  TelescopeTop := Source.TelescopeTop ;
   ShowCircle := Source.ShowCircle;
   ShowCrosshair := Source.ShowCrosshair;
   EyepieceMask := Source.EyepieceMask;
-  IndiTelescope := Source.IndiTelescope;
-  ASCOMTelescope := Source.ASCOMTelescope;
   ManualTelescope := Source.ManualTelescope;
   ShowImages := Source.ShowImages;
   ShowBackgroundImage := Source.ShowBackgroundImage;
@@ -3067,8 +3087,6 @@ begin
   PrintCopies := Source.PrintCopies;
   ThemeName := Source.ThemeName;
   NightColor := Source.NightColor;
-  IndiPanelCmd := Source.IndiPanelCmd;
-  InternalIndiPanel := Source.InternalIndiPanel;
   ProxyHost := Source.ProxyHost;
   ProxyPort := Source.ProxyPort;
   ProxyUser := Source.ProxyUser;

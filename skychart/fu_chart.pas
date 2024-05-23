@@ -31,8 +31,7 @@ interface
 
 uses
   BGRABitmap, BGRABitmapTypes, u_orbits,
-  pu_ascomclient, pu_indiclient,
-  pu_getdss, pu_imglist, pu_prepoint,
+  pu_mount, pu_getdss, pu_imglist, pu_prepoint,
   u_translation, pu_detail, cu_skychart, u_constant, u_util, pu_image,
   gcatunit, pu_obslist, pu_mosaic,
   u_projection, Printers, Math, downloaddialog, IntfGraphics,
@@ -278,7 +277,6 @@ type
     SavebgColor: TColor;
     SaveLabelColor: array[1..numlabtype] of Tcolor;
     PrintPreview: Tf_image;
-    Fpop_indi: Tpop_indi;
     Fpop_scope: Tpop_scope;
     ScopeSlewing: boolean;
     FSendImageFits: TSendImageFits;
@@ -294,14 +292,10 @@ type
     rectangleok: array of boolean;
     rectanglelbl: array of string;
     CircleLst: array[0..MaxCircle, 1..2] of double;
-    procedure ConnectINDI(Sender: TObject; autoconnect: boolean = False);
-    procedure SlewINDI(Sender: TObject);
-    procedure SyncINDI(Sender: TObject);
-    procedure AbortSlewINDI(Sender: TObject);
-    procedure ConnectASCOM(Sender: TObject; autoconnect: boolean = False);
-    procedure SlewASCOM(Sender: TObject);
-    procedure SyncASCOM(Sender: TObject);
-    procedure AbortSlewASCOM(Sender: TObject);
+    procedure ConnectTelescope(Sender: TObject; autoconnect: boolean = False);
+    procedure SlewTelescope(Sender: TObject);
+    procedure SyncTelescope(Sender: TObject);
+    procedure AbortSlewTelescope(Sender: TObject);
     procedure SetNightVision(Value: boolean);
     procedure Image1Click(Sender: TObject);
     procedure Image1DblClick(Sender: TObject);
@@ -580,8 +574,6 @@ begin
   DownloadDialog1.msgCancelBtn := rsCancel;
   if sc <> nil then
     sc.SetLang;
-  if Fpop_indi <> nil then
-    Fpop_indi.SetLang;
   if Fpop_scope <> nil then
     Fpop_scope.SetLang;
   // Menu accelerator
@@ -704,16 +696,6 @@ begin
       if Connect1.Checked then
         Fpop_scope.ScopeDisconnect(ok);
       Fpop_scope.Free;
-    end;
-    if Fpop_indi <> nil then
-    begin
-      if Connect1.Checked then
-      begin
-        Fpop_indi.ScopeDisconnect(ok, False);
-        Application.ProcessMessages;
-        ISleep(500);
-      end;
-      Fpop_indi.Free;
     end;
     if f_imglist <> nil then
       f_imglist.Free;
@@ -5409,27 +5391,13 @@ var
   ok: boolean;
 begin
   ok := False;
-  if sc.cfgsc.ASCOMTelescope then
+  Connect1.Checked := Fpop_scope.ScopeConnected;
+  if Connect1.Checked then
   begin
-    Connect1.Checked := Fpop_scope.ScopeConnected;
-    if Connect1.Checked then
-    begin
-      Fpop_scope.ScopeGetEqSys(sc.cfgsc.TelescopeJD);
-      if sc.cfgsc.TelescopeJD <> 0 then
-        sc.cfgsc.TelescopeJD := jd(trunc(sc.cfgsc.TelescopeJD), 0, 0, 0);
-      Fpop_scope.ScopeGetRaDec(ra, Dec, ok);
-    end;
-  end
-  else if sc.cfgsc.IndiTelescope then
-  begin
-    Connect1.Checked := Fpop_indi.ScopeConnected;
-    if Connect1.Checked then
-    begin
-      Fpop_indi.ScopeGetEqSys(sc.cfgsc.TelescopeJD);
-      if sc.cfgsc.TelescopeJD <> 0 then
-        sc.cfgsc.TelescopeJD := jd(trunc(sc.cfgsc.TelescopeJD), 0, 0, 0);
-      Fpop_indi.ScopeGetRaDec(ra, Dec, ok);
-    end;
+    Fpop_scope.ScopeGetEqSys(sc.cfgsc.TelescopeJD);
+    if sc.cfgsc.TelescopeJD <> 0 then
+      sc.cfgsc.TelescopeJD := jd(trunc(sc.cfgsc.TelescopeJD), 0, 0, 0);
+    Fpop_scope.ScopeGetRaDec(ra, Dec, ok);
   end;
   if ok then begin
     if format = 'F' then
@@ -5447,14 +5415,7 @@ begin
   rates.Clear;
   if Connect1.Checked then
   begin
-    if sc.cfgsc.ASCOMTelescope then
-    begin
-      Fpop_scope.GetScopeRates(n0, rates);
-    end;
-    if sc.cfgsc.INDITelescope then
-    begin
-      Fpop_indi.GetScopeRates(n0, rates);
-    end;
+    Fpop_scope.GetScopeRates(n0, rates);
   end;
 end;
 
@@ -5467,38 +5428,18 @@ begin
   Result := msgFailed;
   if Connect1.Checked then
   begin
-    if sc.cfgsc.ASCOMTelescope then
+    n0 := 0;
+    srate := TStringList.Create;
+    Fpop_scope.GetScopeRates(n0, srate);
+    if n0 > 0 then
     begin
-      n0 := 0;
-      n1 := 0;
-      Fpop_scope.GetScopeRates(n0, n1, @ax0r, @ax1r);
-      if n0 > 0 then
-      begin
-        Result := msgOK + tab + IntToStr(n0) + tab;
-        Result := Result + IntToStr(n1) + tab;
-        for i := 0 to n0 - 1 do
-          Result := Result + formatfloat(f4, ax0r[i]) + tab;
-        for i := 0 to n1 - 1 do
-          Result := Result + formatfloat(f4, ax1r[i]) + tab;
-      end
-      else
-        Result := msgFailed;
-    end;
-    if sc.cfgsc.INDITelescope then
-    begin
-      n0 := 0;
-      srate := TStringList.Create;
-      Fpop_indi.GetScopeRates(n0, srate);
-      if n0 > 0 then
-      begin
-        Result := msgOK + tab + IntToStr(n0) + tab;
-        Result := Result + '0' + tab;
-        for i := 0 to n0 - 1 do
-          Result := Result + srate[i] + tab;
-      end
-      else
-        Result := msgFailed;
-    end;
+      Result := msgOK + tab + IntToStr(n0) + tab;
+      Result := Result + '0' + tab;
+      for i := 0 to n0 - 1 do
+        Result := Result + srate[i] + tab;
+    end
+    else
+      Result := msgFailed;
   end;
 end;
 
@@ -5510,25 +5451,11 @@ begin
   Result := msgFailed;
   if Connect1.Checked then
   begin
-    if sc.cfgsc.ASCOMTelescope then
-    begin
-      val(axis, ax, n);
-      if n <> 0 then
-        exit;
-      val(rate, rt, n);
-      if n <> 0 then
-        exit;
-      Fpop_scope.ScopeMoveAxis(ax, rt);
-      Result := msgOK;
-    end;
-    if sc.cfgsc.IndiTelescope then
-    begin
-      val(axis, ax, n);
-      if n <> 0 then
-        exit;
-      Fpop_indi.ScopeMoveAxis(ax, rate);
-      Result := msgOK;
-    end;
+    val(axis, ax, n);
+    if n <> 0 then
+      exit;
+    Fpop_scope.ScopeMoveAxis(ax, rate);
+    Result := msgOK;
   end;
 end;
 
@@ -5542,16 +5469,8 @@ begin
     val(rate, rt, n);
     if n <> 0 then
       exit;
-    if sc.cfgsc.ASCOMTelescope then
-    begin
-      Fpop_scope.SetRefreshRate(rt);
-      Result := msgOK;
-    end;
-    if sc.cfgsc.IndiTelescope then
-    begin
-      Fpop_indi.SetRefreshRate(rt);
-      Result := msgOK;
-    end;
+    Fpop_scope.SetRefreshRate(rt);
+    Result := msgOK;
   end;
 end;
 
@@ -5563,16 +5482,8 @@ end;
 function Tf_chart.cmd_ConnectTelescope: string;
 begin
   Result := msgFailed;
-  if sc.cfgsc.ASCOMTelescope then
-  begin
-    ConnectASCOM(self, True);
-    Result := msgOK
-  end
-  else if sc.cfgsc.IndiTelescope then
-  begin
-    ConnectINDI(self, True);
-    Result := msgOK
-  end;
+  ConnectTelescope(self, True);
+  Result := msgOK
 end;
 
 function Tf_chart.cmd_DisconnectINDI: string;
@@ -5585,25 +5496,12 @@ var
   ok: boolean;
 begin
   Result := msgFailed;
-  if sc.cfgsc.ASCOMTelescope then
-  begin
-    if (not Connect1.Checked) or (Fpop_scope = nil) then
-      exit;
-    Fpop_scope.ScopeDisconnect(ok);
-    Connect1.Checked := False;
-    if ok then
-      Result := msgOK;
-  end
-  else if sc.cfgsc.IndiTelescope then
-  begin
-    if (not Connect1.Checked) or (Fpop_indi = nil) then
-      exit;
-    Fpop_indi.ScopeDisconnect(ok);
-    Connect1.Checked := False;
-    ISleep(500);
-    if ok then
-      Result := msgOK;
-  end;
+  if (not Connect1.Checked) or (Fpop_scope = nil) then
+    exit;
+  Fpop_scope.ScopeDisconnect(ok);
+  Connect1.Checked := False;
+  if ok then
+    Result := msgOK;
 end;
 
 function Tf_chart.cmd_SyncINDI(RA2, DE2: string): string;
@@ -5635,16 +5533,8 @@ begin
     ra := rmod(ra + pi2, pi2);
     if Connect1.Checked then
     begin
-      if sc.cfgsc.ASCOMTelescope then
-      begin
-        Fpop_scope.ScopeAlign('sync', ra * rad2deg / 15, Dec * rad2deg);
-        Result := msgOK;
-      end
-      else if sc.cfgsc.IndiTelescope then
-      begin
-        Fpop_indi.ScopeAlign('sync', ra * rad2deg / 15, Dec * rad2deg);
-        Result := msgOK;
-      end;
+      Fpop_scope.ScopeAlign('sync', ra * rad2deg / 15, Dec * rad2deg);
+      Result := msgOK;
     end;
   end;
 end;
@@ -5664,18 +5554,8 @@ begin
   begin
     if (RA1 = '') and (DE1 = '') then
     begin
-
-      if sc.cfgsc.ASCOMTelescope then
-      begin
-        SlewASCOM(self);
-        Result := msgOK;
-      end
-      else if sc.cfgsc.IndiTelescope then
-      begin
-        SlewINDI(self);
-        Result := msgOK;
-      end;
-
+      SlewTelescope(self);
+      Result := msgOK;
     end
     else
     begin
@@ -5696,16 +5576,8 @@ begin
           precession(sc.cfgsc.JDChart, sc.cfgsc.TelescopeJD, ra, Dec);
         end;
         ra := rmod(ra + pi2, pi2);
-        if sc.cfgsc.ASCOMTelescope then
-        begin
-          Fpop_scope.ScopeGoto(ra * rad2deg / 15, Dec * rad2deg, ok);
-          Result := msgOK;
-        end
-        else if sc.cfgsc.IndiTelescope then
-        begin
-          Fpop_indi.ScopeGoto(ra * rad2deg / 15, Dec * rad2deg, ok);
-          Result := msgOK;
-        end;
+        Fpop_scope.ScopeGoto(ra * rad2deg / 15, Dec * rad2deg, ok);
+        Result := msgOK;
       end
       else
         Result := msgFailed + ' out of range';
@@ -5724,16 +5596,8 @@ begin
   Result := msgFailed;
   if Connect1.Checked then
   begin
-    if sc.cfgsc.ASCOMTelescope then
-    begin
-      AbortSlewASCOM(self);
-      Result := msgOK;
-    end
-    else if sc.cfgsc.IndiTelescope then
-    begin
-      AbortSlewINDI(self);
-      Result := msgOK;
-    end;
+    AbortSlewTelescope(self);
+    Result := msgOK;
   end;
 end;
 
@@ -5742,14 +5606,7 @@ begin
   Result := msgFailed;
   if Connect1.Checked then
   begin
-    if sc.cfgsc.ASCOMTelescope then
-    begin
-      result:=BoolToStr(Fpop_scope.Slewing,msgTrue,msgFalse);
-    end
-    else if sc.cfgsc.IndiTelescope then
-    begin
-      result:=BoolToStr(Fpop_indi.Slewing,msgTrue,msgFalse);
-    end;
+    result:=BoolToStr(Fpop_scope.Slewing,msgTrue,msgFalse);
   end;
 end;
 
@@ -6939,17 +6796,13 @@ procedure Tf_chart.Connect1Click(Sender: TObject);
 begin
   if VerboseMsg then
     WriteTrace(Caption + ' Connect Telescope');
-  if sc.cfgsc.ASCOMTelescope then
-  begin
-    ConnectASCOM(Sender);
-  end
-  else if sc.cfgsc.ManualTelescope then
+  if sc.cfgsc.ManualTelescope then
   begin
     sc.cfgsc.TelescopeJD := 0;
   end
-  else if sc.cfgsc.IndiTelescope then
+  else
   begin
-    ConnectINDI(Sender);
+    ConnectTelescope(Sender);
   end;
   if (not sc.cfgsc.TrackOn) then
     sc.cfgsc.TrackName := rsTelescope;
@@ -6959,14 +6812,7 @@ procedure Tf_chart.Slew1Click(Sender: TObject);
 begin
   if Connect1.Checked then
   begin
-    if sc.cfgsc.ASCOMTelescope then
-    begin
-      SlewASCOM(Sender);
-    end
-    else if sc.cfgsc.IndiTelescope then
-    begin
-      SlewINDI(Sender);
-    end;
+    SlewTelescope(Sender);
   end
   else if assigned(Fshowinfo) then
     Fshowinfo(rsTelescopeNot);
@@ -6976,14 +6822,7 @@ procedure Tf_chart.AbortSlew1Click(Sender: TObject);
 begin
   if Connect1.Checked then
   begin
-    if sc.cfgsc.ASCOMTelescope then
-    begin
-      AbortSlewASCOM(Sender);
-    end
-    else if sc.cfgsc.IndiTelescope then
-    begin
-      AbortSlewINDI(Sender);
-    end;
+    AbortSlewTelescope(Sender);
   end;
 end;
 
@@ -6994,14 +6833,7 @@ begin
     if Connect1.Checked and (mrYes = MessageDlg(Format(rsPleaseConfir, [sc.cfgsc.FindName]),
       mtConfirmation, [mbYes, mbNo], 0)) then
     begin
-      if sc.cfgsc.ASCOMTelescope then
-      begin
-        SyncASCOM(Sender);
-      end
-      else if sc.cfgsc.IndiTelescope then
-      begin
-        SyncINDI(Sender);
-      end;
+      SyncTelescope(Sender);
     end
     else if assigned(Fshowinfo) then
       Fshowinfo(rsTelescopeNot);
@@ -7839,108 +7671,9 @@ begin
   end;
 end;
 
-// INDI interface
+// ASCOM and INDI interface
 
-procedure Tf_chart.ConnectINDI(Sender: TObject; autoconnect: boolean = False);
-var
-  ok: boolean;
-begin
-  if Fpop_indi = nil then
-  begin
-    Fpop_indi := Tpop_indi.Create(self);
-    Fpop_indi.csc := sc.cfgsc;
-    Fpop_indi.onObservatoryCoord:=ObservatoryFromTelescope;
-    Fpop_indi.SetLang;
-    Fpop_indi.SetPos;
-  end;
-  sc.cfgsc.autorefresh:=true;
-  sc.cfgsc.UseSystemTime:=true;
-  if Connect1.Checked then
-  begin
-    Fpop_indi.ScopeShow;
-  end
-  else
-  begin
-    Fpop_indi.ScopeReadConfig(ExtractFilePath(Configfile));
-    Fpop_indi.ScopeSetObs(sc.cfgsc.ObsLatitude, -sc.cfgsc.ObsLongitude, sc.cfgsc.ObsAltitude);
-    if autoconnect then
-    begin
-      Fpop_indi.ScopeConnect(ok);
-      Connect1.Checked := True;
-    end
-    else
-    begin
-      Fpop_indi.ScopeShow;
-    end;
-    TelescopeTimer.Interval := 2000;
-    TelescopeTimer.Enabled := True;
-  end;
-  if assigned(FUpdateBtn) then
-    FUpdateBtn(sc.cfgsc.flipx, sc.cfgsc.flipy, Connect1.Checked, self);
-end;
-
-procedure Tf_chart.SlewINDI(Sender: TObject);
-var
-  ra, Dec: double;
-  ok: boolean;
-begin
-  if sc.cfgsc.FindName <> '' then
-  begin
-    ra := sc.cfgsc.FindRA;
-    Dec := sc.cfgsc.FindDec;
-    if sc.cfgsc.TelescopeJD = 0 then
-    begin
-      precession(sc.cfgsc.JDChart, sc.cfgsc.CurJDUT, ra, Dec);
-    end
-    else
-    begin
-      if sc.cfgsc.ApparentPos then
-        mean_equatorial(ra, Dec, sc.cfgsc, True, sc.cfgsc.FindType < ftPla);
-      precession(sc.cfgsc.JDChart, sc.cfgsc.TelescopeJD, ra, Dec);
-    end;
-    ra := rmod(ra + pi2, pi2);
-    Fpop_indi.ScopeGoto(ra * rad2deg / 15, Dec * rad2deg, ok);
-    Fshowinfo(Format(rsSlewingTo, [ARtoStr(ra * rad2deg / 15), DEToStr(dec * rad2deg)]));
-  end
-  else
-    Fshowinfo(rsNoTargetObje);
-end;
-
-procedure Tf_chart.AbortSlewINDI(Sender: TObject);
-begin
-  Fpop_indi.ScopeAbortSlew;
-  Fshowinfo(rsAbortSlew);
-end;
-
-procedure Tf_chart.SyncINDI(Sender: TObject);
-var
-  ra, Dec: double;
-begin
-  if sc.cfgsc.FindName <> '' then
-  begin
-    ra := sc.cfgsc.FindRA;
-    Dec := sc.cfgsc.FindDec;
-    if sc.cfgsc.TelescopeJD = 0 then
-    begin
-      precession(sc.cfgsc.JDChart, sc.cfgsc.CurJDUT, ra, Dec);
-    end
-    else
-    begin
-      if sc.cfgsc.ApparentPos then
-        mean_equatorial(ra, Dec, sc.cfgsc, True, sc.cfgsc.FindType < ftPla);
-      precession(sc.cfgsc.JDChart, sc.cfgsc.TelescopeJD, ra, Dec);
-    end;
-    ra := rmod(ra + pi2, pi2);
-    Fpop_indi.ScopeAlign(sc.cfgsc.FindName, ra * rad2deg / 15, Dec * rad2deg);
-    Fshowinfo(Format(rsSyncedTo, [ARtoStr(ra * rad2deg / 15), DEToStr(dec * rad2deg)]));
-  end
-  else
-    Fshowinfo(rsNoTargetObje);
-end;
-
-// Windows only ASCOM interface
-
-procedure Tf_chart.ConnectASCOM(Sender: TObject; autoconnect: boolean = False);
+procedure Tf_chart.ConnectTelescope(Sender: TObject; autoconnect: boolean = False);
 var
   ok: boolean;
 begin
@@ -7948,6 +7681,7 @@ begin
   begin
     Fpop_scope := Tpop_scope.Create(self);
     Fpop_scope.SetLang;
+    Fpop_scope.csc:=sc.cfgsc;
     Fpop_scope.onObservatoryCoord:=ObservatoryFromTelescope;
   end;
   sc.cfgsc.autorefresh:=true;
@@ -7958,7 +7692,7 @@ begin
   end
   else
   begin
-    Fpop_scope.ScopeReadConfig(ExtractFilePath(Configfile));
+    Fpop_scope.ScopeLoadConfig;
     Fpop_scope.ScopeSetObs(sc.cfgsc.ObsLatitude, -sc.cfgsc.ObsLongitude, sc.cfgsc.ObsAltitude);
     if autoconnect then
     begin
@@ -7977,7 +7711,7 @@ begin
     FUpdateBtn(sc.cfgsc.flipx, sc.cfgsc.flipy, Connect1.Checked, self);
 end;
 
-procedure Tf_chart.SlewASCOM(Sender: TObject);
+procedure Tf_chart.SlewTelescope(Sender: TObject);
 var
   ra, Dec: double;
   ok: boolean;
@@ -8004,13 +7738,13 @@ begin
     Fshowinfo(rsNoTargetObje);
 end;
 
-procedure Tf_chart.AbortSlewASCOM(Sender: TObject);
+procedure Tf_chart.AbortSlewTelescope(Sender: TObject);
 begin
   Fpop_scope.ScopeAbortSlew;
   Fshowinfo(rsAbortSlew);
 end;
 
-procedure Tf_chart.SyncASCOM(Sender: TObject);
+procedure Tf_chart.SyncTelescope(Sender: TObject);
 var
   ra, Dec: double;
 begin
@@ -8050,7 +7784,7 @@ begin
       ok := False;
       //if VerboseMsg then WriteTrace(caption+' TelescopeTimerTimer');
       newconnection := Connect1.Checked;
-      if sc.cfgsc.ASCOMTelescope and (Fpop_scope <> nil) then
+      if (Fpop_scope <> nil) then
       begin
         Connect1.Checked := Fpop_scope.ScopeConnected;
         if Connect1.Checked then
@@ -8060,18 +7794,6 @@ begin
             sc.cfgsc.TelescopeJD := jd(trunc(sc.cfgsc.TelescopeJD), 0, 0, 0);
           Fpop_scope.ScopeGetRaDec(ra, Dec, ok);
           slewing:=Fpop_scope.Slewing;
-        end;
-      end
-      else if sc.cfgsc.IndiTelescope and (Fpop_indi <> nil) then
-      begin
-        Connect1.Checked := Fpop_indi.ScopeConnected;
-        if Connect1.Checked then
-        begin
-          Fpop_indi.ScopeGetEqSys(sc.cfgsc.TelescopeJD);
-          if sc.cfgsc.TelescopeJD <> 0 then
-            sc.cfgsc.TelescopeJD := jd(trunc(sc.cfgsc.TelescopeJD), 0, 0, 0);
-          Fpop_indi.ScopeGetRaDec(ra, Dec, ok);
-          slewing:=Fpop_indi.Slewing;
         end;
       end;
       newconnection := (not newconnection) and Connect1.Checked;
@@ -8207,14 +7929,6 @@ end;
 
 procedure Tf_chart.ObservatoryFromTelescope(Sender: TObject);
 begin
-  if Sender = Fpop_indi then
-  begin
-     sc.cfgsc.ObsLatitude:=Fpop_indi.Latitude;
-     sc.cfgsc.ObsLongitude:=-Fpop_indi.Longitude;
-     sc.cfgsc.ObsAltitude:=Fpop_indi.Elevation;
-     sc.cfgsc.ObsName:='Telescope';
-  end
-  else
   if Sender = Fpop_scope then
   begin
      sc.cfgsc.ObsLatitude:=Fpop_scope.Latitude;

@@ -87,14 +87,13 @@ object f_config_system: Tf_config_system
           ChildSizing.ShrinkHorizontal = crsScaleChilds
           ChildSizing.ShrinkVertical = crsScaleChilds
           ChildSizing.Layout = cclLeftToRightThenTopToBottom
-          ChildSizing.ControlsPerLine = 3
+          ChildSizing.ControlsPerLine = 2
           ClientHeight = 48
           ClientWidth = 495
-          Columns = 3
+          Columns = 2
           Items.Strings = (
-            'INDI'
+            'ASCOM, Alpaca, INDI'
             'Manual'
-            'ASCOM'
           )
           OnClick = TelescopeSelectClick
           ParentFont = False
@@ -105,18 +104,18 @@ object f_config_system: Tf_config_system
           Height = 315
           Top = 104
           Width = 499
-          ActivePage = TabSheet3
+          ActivePage = TabSheet1
           Align = alTop
           ParentFont = False
           ShowTabs = False
-          TabIndex = 3
+          TabIndex = 0
           TabOrder = 1
           object TabSheet1: TTabSheet
             Caption = 'TabSheet1'
             ClientHeight = 311
             ClientWidth = 495
             ParentFont = False
-            object INDI: TPanel
+            object TelescopePanel: TPanel
               Left = 0
               Height = 311
               Top = 0
@@ -126,71 +125,15 @@ object f_config_system: Tf_config_system
               ClientWidth = 495
               ParentFont = False
               TabOrder = 0
-              object INDILabel: TLabel
-                Left = 8
-                Height = 18
-                Top = 7
-                Width = 61
-                Caption = 'INDILabel'
-                ParentColor = False
-                ParentFont = False
-              end
-              object ExternalControlPanel: TPanel
-                Left = 0
-                Height = 45
-                Top = 112
-                Width = 449
-                ClientHeight = 45
-                ClientWidth = 449
-                ParentFont = False
-                TabOrder = 0
-                object PanelCmd: TEdit
-                  Left = 174
-                  Height = 28
-                  Top = 7
-                  Width = 260
-                  Constraints.MaxHeight = 28
-                  OnChange = PanelCmdChange
-                  ParentFont = False
-                  TabOrder = 0
-                end
-                object Label2: TLabel
-                  Left = 4
-                  Height = 18
-                  Top = 11
-                  Width = 151
-                  Caption = 'Control Panel command '
-                  ParentColor = False
-                  ParentFont = False
-                end
-              end
-              object InternalIndiGui: TCheckBox
-                Left = 8
-                Height = 22
-                Top = 80
-                Width = 217
-                Caption = 'Use the internal INDI gui panel'
-                OnClick = InternalIndiGuiClick
-                ParentFont = False
-                TabOrder = 1
-              end
-              object IndiMsg: TLabel
-                Left = 14
-                Height = 18
-                Top = 129
-                Width = 4
-                Caption = ' '
-                ParentColor = False
-                ParentFont = False
-              end
-              object INDILabel2: TLabel
-                Left = 8
-                Height = 49
-                Top = 32
-                Width = 432
+              object TelescopeLabel: TLabel
+                Left = 21
+                Height = 234
+                Top = 24
+                Width = 405
                 AutoSize = False
-                Caption = 'INDILabel2'
+                Caption = 'TelescopeLabel'
                 ParentColor = False
+                ParentFont = False
                 WordWrap = True
               end
             end
@@ -459,62 +402,6 @@ object f_config_system: Tf_config_system
                     end
                   end
                 end
-              end
-            end
-          end
-          object TabSheet4: TTabSheet
-            Caption = 'TabSheet4'
-            ClientHeight = 311
-            ClientWidth = 495
-            ParentFont = False
-            object ASCOMPanel: TPanel
-              Left = 0
-              Height = 311
-              Top = 0
-              Width = 495
-              Align = alClient
-              ClientHeight = 311
-              ClientWidth = 495
-              ParentFont = False
-              TabOrder = 0
-              object ASCOMLabel: TLabel
-                Left = 21
-                Height = 234
-                Top = 24
-                Width = 405
-                AutoSize = False
-                Caption = 'ASCOMLabel'
-                ParentColor = False
-                ParentFont = False
-                WordWrap = True
-              end
-            end
-          end
-          object TabSheet3: TTabSheet
-            Caption = 'TabSheet3'
-            ClientHeight = 311
-            ClientWidth = 495
-            ParentFont = False
-            object InterfacePanel: TPanel
-              Left = 0
-              Height = 311
-              Top = 0
-              Width = 495
-              Align = alClient
-              ClientHeight = 311
-              ClientWidth = 495
-              ParentFont = False
-              TabOrder = 0
-              object InterfaceLabel: TLabel
-                Left = 21
-                Height = 234
-                Top = 24
-                Width = 405
-                AutoSize = False
-                Caption = 'InterfaceLabel'
-                ParentColor = False
-                ParentFont = False
-                WordWrap = True
               end
             end
           end
