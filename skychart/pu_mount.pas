@@ -651,7 +651,7 @@ begin
   Label260.Caption := rsTelescopeNam;
   BtnGet.Caption := rsGet;
   Observatory.Caption := rsObservatory;
-  Log.Caption:='Journal';
+  Log.Caption:=rsMessages2;
   Label15.Caption := rsLatitude;
   Label16.Caption := rsLongitude;
   label2.Caption:=rsAltitude;

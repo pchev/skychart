@@ -1623,6 +1623,7 @@ resourcestring
   rsDisconnectio = 'Disconnection error: %s';
   rsError2 = 'Error';
   rsNoResponseFr = 'No response from server';
+  rsMessages2 = 'Messages';
 
 // also update upsi_translation
 
