@@ -9,7 +9,7 @@ object pop_scope: Tpop_scope
   ClientHeight = 640
   ClientWidth = 352
   OnClose = FormClose
-  OnCloseQuery = kill
+  OnCloseQuery = FormCloseQuery
   OnCreate = FormCreate
   OnShow = FormShow
   Position = poDefaultPosOnly

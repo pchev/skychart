@@ -4,7 +4,7 @@ unit pu_mount;
 
 {------------- interface for ASCOM telescope driver. ----------------------------
 
-Copyright (C) 2000 Patrick Chevalley
+Copyright (C) 2000, 2024 Patrick Chevalley
 
 http://www.ap-i.net
 pch@ap-i.net
@@ -35,7 +35,7 @@ uses
   indibaseclient, indibasedevice, cu_ascomrest, math, LCLIntf, u_util, u_constant, u_help, u_translation,
   Messages, SysUtils, Classes, Graphics, Controls,
   Forms, Dialogs, UScaleDPI, LazSysUtils, cu_alpacamanagement,
-  StdCtrls, Buttons, inifiles, ComCtrls, Menus, ExtCtrls, Arrow, Spin;
+  StdCtrls, Buttons, ComCtrls, Menus, ExtCtrls, Arrow, Spin;
 
 type
 
@@ -151,12 +151,12 @@ type
     procedure ButtonParkClick(Sender: TObject);
     procedure CheckBoxOnTopChange(Sender: TObject);
     procedure FormClose(Sender: TObject; var CloseAction: TCloseAction);
+    procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
     procedure FormCreate(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure IndiServerHostChange(Sender: TObject);
     procedure IndiServerPortChange(Sender: TObject);
     procedure IndiTimerTimer(Sender: TObject);
-    procedure kill(Sender: TObject; var CanClose: boolean);
     procedure MountIndiDeviceSelect(Sender: TObject);
     procedure PageControl1Change(Sender: TObject);
     procedure PageControl1Changing(Sender: TObject; var AllowChange: Boolean);
@@ -182,7 +182,6 @@ type
     Fmount: T_mount;
     feqsys: TCheckBox;
     leqsys: TComboBox;
-    FConfig: string;
     CoordLock: boolean;
     Initialized: boolean;
     FConnected: boolean;
@@ -228,13 +227,10 @@ type
     procedure ScopeSetObs(la, lo, alt: double);
     procedure ScopeAlign(Source: string; ra, Dec: double);
     procedure ScopeGetRaDec(var ar, de: double; var ok: boolean);
-    procedure ScopeGetAltAz(var alt, az: double; var ok: boolean);
     procedure ScopeGoto(ar, de: double; var ok: boolean);
     procedure ScopeAbortSlew;
-    procedure ScopeReset;
     function ScopeInitialized: boolean;
     function ScopeConnected: boolean;
-    procedure ScopeClose;
     procedure GetScopeRates(var nrates: integer; var rates: TStringList);
     procedure ScopeMoveAxis(axis: integer; rate: string);
     property Longitude: double read FLongitude;
@@ -458,16 +454,10 @@ begin
   Memomsg.SelLength:=0;
 end;
 
-procedure Tpop_scope.ScopeClose;
-begin
-  Release;
-end;
-
 function Tpop_scope.ScopeConnected: boolean;
 begin
   Result := FConnected;
 end;
-
 
 function Tpop_scope.ScopeConnectedReal: boolean;
 begin
@@ -524,21 +514,7 @@ begin
     ok := False;
 end;
 
-procedure Tpop_scope.ScopeGetAltAz(var alt, az: double; var ok: boolean);
-begin
-  if ScopeConnected then
-  begin
-      az := cur_az;
-      alt := cur_alt;
-      ok := True;
-  end
-  else
-    ok := False;
-end;
-
 procedure Tpop_scope.ScopeGetEquatorialSystem(var EqSys: double);
-var
-  i: integer;
 begin
   try
   EqSys:=Fmount.Equinox;
@@ -550,10 +526,6 @@ end;
 procedure Tpop_scope.ScopeGetEqSys(var EqSys: double);
 begin
   ScopeGetEquatorialSystem(eqsys);
-end;
-
-procedure Tpop_scope.ScopeReset;
-begin
 end;
 
 procedure Tpop_scope.ScopeSetObs(la, lo, alt: double);
@@ -604,13 +576,8 @@ end;
 
 procedure Tpop_scope.GetScopeRates(var nrates: integer; var rates: TStringList);
 var
-  i, j, n0, n1: integer;
-  ax0r, ax1r: array of double;
-  min, max, step, rate, x: double;
   r: TStringList;
 begin
-  n0 := 0;
-  n1 := 0;
   rates.Clear;
   r:=fmount.SlewRates;
   rates.Assign(r);
@@ -702,8 +669,7 @@ begin
  end;
 end;
 
-
-procedure Tpop_scope.kill(Sender: TObject; var CanClose: boolean);
+procedure Tpop_scope.FormCloseQuery(Sender: TObject; var CanClose: Boolean);
 begin
   if ScopeConnected then
   begin
