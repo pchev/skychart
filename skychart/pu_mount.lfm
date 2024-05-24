@@ -13,80 +13,10 @@ object pop_scope: Tpop_scope
   OnCreate = FormCreate
   OnShow = FormShow
   Position = poDefaultPosOnly
-  object GroupBox3: TGroupBox
-    Left = 0
-    Height = 75
-    Top = 569
-    Width = 352
-    Align = alTop
-    ClientHeight = 71
-    ClientWidth = 348
-    ParentFont = False
-    TabOrder = 1
-    object ButtonHide: TButton
-      Left = 213
-      Height = 25
-      Top = 6
-      Width = 66
-      Caption = 'Hide'
-      OnClick = ButtonHideClick
-      ParentFont = False
-      TabOrder = 1
-    end
-    object ButtonDisconnect: TButton
-      Left = 116
-      Height = 25
-      Top = 6
-      Width = 85
-      Caption = 'Disconnect'
-      Enabled = False
-      OnClick = ButtonDisconnectClick
-      ParentFont = False
-      TabOrder = 3
-    end
-    object led: TShape
-      Left = 84
-      Height = 25
-      Top = 7
-      Width = 25
-      Brush.Color = clRed
-    end
-    object ButtonHelp: TButton
-      Left = 213
-      Height = 25
-      Top = 42
-      Width = 66
-      Caption = 'Help'
-      OnClick = ButtonHelpClick
-      ParentFont = False
-      TabOrder = 2
-    end
-    object ButtonConnect: TButton
-      Left = 4
-      Height = 25
-      Top = 6
-      Width = 75
-      Caption = 'Connect'
-      OnClick = ButtonConnectClick
-      ParentFont = False
-      TabOrder = 0
-    end
-    object CheckBoxOnTop: TCheckBox
-      AnchorSideTop.Control = ButtonHelp
-      AnchorSideTop.Side = asrCenter
-      Left = 7
-      Height = 22
-      Top = 43
-      Width = 114
-      Caption = 'Always on top'
-      OnChange = CheckBoxOnTopChange
-      TabOrder = 4
-    end
-  end
   object Panel1: TPanel
     Left = 0
     Height = 189
-    Top = 380
+    Top = 372
     Width = 352
     Align = alTop
     ClientHeight = 189
@@ -234,7 +164,7 @@ object pop_scope: Tpop_scope
       AnchorSideTop.Side = asrCenter
       Left = 57
       Height = 18
-      Top = 5
+      Top = 7
       Width = 82
       Caption = 'Refresh rate :'
       ParentColor = False
@@ -244,7 +174,7 @@ object pop_scope: Tpop_scope
       AnchorSideTop.Side = asrCenter
       Left = 224
       Height = 28
-      Top = 0
+      Top = 2
       Width = 91
       Constraints.MaxHeight = 28
       ItemHeight = 24
@@ -259,13 +189,13 @@ object pop_scope: Tpop_scope
       ParentFont = False
       TabOrder = 5
     end
-    object GroupBox4: TGroupBox
+    object PanelHandpad: TPanel
       Left = 193
       Height = 100
       Top = 88
       Width = 158
-      ClientHeight = 96
-      ClientWidth = 154
+      ClientHeight = 100
+      ClientWidth = 158
       TabOrder = 6
       object Handpad: TPanel
         Left = 62
@@ -416,7 +346,7 @@ object pop_scope: Tpop_scope
       object Label4: TLabel
         Left = 8
         Height = 18
-        Top = 5
+        Top = 7
         Width = 38
         Caption = 'Speed'
         ParentColor = False
@@ -425,7 +355,7 @@ object pop_scope: Tpop_scope
       object AxisRates: TComboBox
         Left = 62
         Height = 28
-        Top = 0
+        Top = 2
         Width = 85
         Constraints.MaxHeight = 28
         ItemHeight = 18
@@ -444,7 +374,7 @@ object pop_scope: Tpop_scope
     Align = alTop
     ParentFont = False
     TabIndex = 0
-    TabOrder = 2
+    TabOrder = 1
     OnChange = PageControl1Change
     OnChanging = PageControl1Changing
     object ASCOMLocal: TTabSheet
@@ -721,14 +651,14 @@ object pop_scope: Tpop_scope
       Caption = 'INDI'
       ClientHeight = 179
       ClientWidth = 348
-      object GroupBox2: TGroupBox
+      object PanelIndi: TPanel
         Left = 0
         Height = 176
         Top = 0
         Width = 348
         Align = alTop
-        ClientHeight = 172
-        ClientWidth = 344
+        ClientHeight = 176
+        ClientWidth = 348
         ParentFont = False
         TabOrder = 0
         object IndiServerPort: TEdit
@@ -816,20 +746,20 @@ object pop_scope: Tpop_scope
   end
   object Pagecontrol2: TPageControl
     Left = 0
-    Height = 166
+    Height = 158
     Top = 214
     Width = 352
     ActivePage = Log
     Align = alTop
     TabIndex = 0
-    TabOrder = 3
+    TabOrder = 2
     object Log: TTabSheet
       Caption = 'Log'
-      ClientHeight = 131
+      ClientHeight = 123
       ClientWidth = 348
       object Memomsg: TMemo
         Left = 0
-        Height = 131
+        Height = 123
         Top = 0
         Width = 348
         Align = alClient
@@ -841,16 +771,16 @@ object pop_scope: Tpop_scope
     end
     object Observatory: TTabSheet
       Caption = 'Observatory'
-      ClientHeight = 131
+      ClientHeight = 123
       ClientWidth = 348
-      object GroupBox5: TGroupBox
+      object PanelObs: TPanel
         Left = 0
-        Height = 134
+        Height = 123
         Top = 0
         Width = 348
-        Align = alTop
-        ClientHeight = 130
-        ClientWidth = 344
+        Align = alClient
+        ClientHeight = 123
+        ClientWidth = 348
         ParentFont = False
         TabOrder = 0
         object Label15: TLabel
@@ -948,6 +878,76 @@ object pop_scope: Tpop_scope
           Text = '0'
         end
       end
+    end
+  end
+  object PanelBottom: TPanel
+    Left = 0
+    Height = 75
+    Top = 561
+    Width = 352
+    Align = alTop
+    ClientHeight = 75
+    ClientWidth = 352
+    ParentFont = False
+    TabOrder = 3
+    object ButtonHide: TButton
+      Left = 213
+      Height = 25
+      Top = 6
+      Width = 66
+      Caption = 'Hide'
+      OnClick = ButtonHideClick
+      ParentFont = False
+      TabOrder = 1
+    end
+    object ButtonDisconnect: TButton
+      Left = 116
+      Height = 25
+      Top = 6
+      Width = 85
+      Caption = 'Disconnect'
+      Enabled = False
+      OnClick = ButtonDisconnectClick
+      ParentFont = False
+      TabOrder = 3
+    end
+    object led: TShape
+      Left = 84
+      Height = 25
+      Top = 7
+      Width = 25
+      Brush.Color = clRed
+    end
+    object ButtonHelp: TButton
+      Left = 213
+      Height = 25
+      Top = 42
+      Width = 66
+      Caption = 'Help'
+      OnClick = ButtonHelpClick
+      ParentFont = False
+      TabOrder = 2
+    end
+    object ButtonConnect: TButton
+      Left = 4
+      Height = 25
+      Top = 6
+      Width = 75
+      Caption = 'Connect'
+      OnClick = ButtonConnectClick
+      ParentFont = False
+      TabOrder = 0
+    end
+    object CheckBoxOnTop: TCheckBox
+      AnchorSideTop.Control = ButtonHelp
+      AnchorSideTop.Side = asrCenter
+      Left = 7
+      Height = 22
+      Top = 43
+      Width = 114
+      Caption = 'Always on top'
+      OnChange = CheckBoxOnTopChange
+      TabOrder = 4
     end
   end
   object Timer1: TTimer
