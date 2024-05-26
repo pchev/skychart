@@ -594,6 +594,8 @@ begin
           SizeField.ItemIndex := 0;
           MagField.ItemIndex := 0;
           NameField.ItemIndex := 0;
+          PanelStarSymbol.Visible := false;
+          cbStarDrawing.ItemIndex := 0;
           Grid.ColCount := 6;
           Grid.ColWidths[0] := 20;
           Grid.ColWidths[1] := 100;
@@ -859,6 +861,7 @@ begin
     fr.cbForcecolor.Checked := (fr.forcecolor = 1);
     fr.startype := st;
     fr.cbStarDrawing.ItemIndex:=st;
+    fr.PanelStarSymbol.Visible:=(st>0);
     fr.starcolor := sc;
     fr.Shape2.Brush.Color:=sc;
     fr.starsize := ss;

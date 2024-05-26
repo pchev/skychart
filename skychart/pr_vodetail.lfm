@@ -428,59 +428,72 @@ object f_vodetail: Tf_vodetail
           Caption = 'Draw as '
           ParentColor = False
         end
-        object Label25: TLabel
-          Left = 0
-          Height = 18
-          Top = 45
-          Width = 59
-          Caption = 'mark size'
-          ParentColor = False
-        end
-        object StarDrawingSize: TSpinEdit
+        object PanelStarSymbol: TPanel
           AnchorSideTop.Control = cbStarDrawing
           AnchorSideTop.Side = asrBottom
-          Left = 160
-          Height = 28
-          Top = 32
-          Width = 58
-          BorderSpacing.Top = 2
-          Constraints.MaxHeight = 28
-          MaxValue = 100
-          MinValue = 5
-          OnChange = StarDrawingSizeChange
-          TabOrder = 1
-          Value = 15
-        end
-        object Label26: TLabel
-          Left = 160
-          Height = 18
-          Top = 45
-          Width = 15
-          Caption = 'px'
-          ParentColor = False
-        end
-        object Label5: TLabel
-          AnchorSideTop.Control = Shape2
-          AnchorSideTop.Side = asrCenter
           Left = 0
-          Height = 18
-          Top = 65
-          Width = 34
-          Caption = 'Color'
-          ParentColor = False
-        end
-        object Shape2: TShape
-          AnchorSideLeft.Control = DefMag
-          AnchorSideTop.Control = StarDrawingSize
-          AnchorSideTop.Side = asrBottom
-          Left = 162
-          Height = 24
-          Top = 62
-          Width = 24
-          BorderSpacing.Top = 2
-          Constraints.MaxHeight = 28
-          OnMouseUp = Shape2MouseUp
-          Shape = stRoundSquare
+          Height = 59
+          Top = 30
+          Width = 296
+          BevelOuter = bvNone
+          ClientHeight = 59
+          ClientWidth = 296
+          TabOrder = 1
+          object StarDrawingSize: TSpinEdit
+            Left = 160
+            Height = 28
+            Top = 2
+            Width = 58
+            BorderSpacing.Top = 2
+            Constraints.MaxHeight = 28
+            MaxValue = 100
+            MinValue = 5
+            OnChange = StarDrawingSizeChange
+            TabOrder = 0
+            Value = 15
+          end
+          object Label25: TLabel
+            AnchorSideTop.Control = StarDrawingSize
+            AnchorSideTop.Side = asrCenter
+            Left = 0
+            Height = 18
+            Top = 7
+            Width = 59
+            Caption = 'mark size'
+            ParentColor = False
+          end
+          object Label26: TLabel
+            AnchorSideTop.Control = StarDrawingSize
+            AnchorSideTop.Side = asrCenter
+            Left = 232
+            Height = 18
+            Top = 7
+            Width = 15
+            Caption = 'px'
+            ParentColor = False
+          end
+          object Label5: TLabel
+            AnchorSideTop.Control = Shape2
+            AnchorSideTop.Side = asrCenter
+            Left = 0
+            Height = 18
+            Top = 35
+            Width = 34
+            Caption = 'Color'
+            ParentColor = False
+          end
+          object Shape2: TShape
+            AnchorSideTop.Control = StarDrawingSize
+            AnchorSideTop.Side = asrBottom
+            Left = 160
+            Height = 24
+            Top = 32
+            Width = 24
+            BorderSpacing.Top = 2
+            Constraints.MaxHeight = 28
+            OnMouseUp = Shape2MouseUp
+            Shape = stRoundSquare
+          end
         end
       end
     end

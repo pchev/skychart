@@ -44,6 +44,7 @@ type
     ColorDialog1: TColorDialog;
     cbObjecttype: TComboBox;
     cbStarDrawing: TComboBox;
+    PanelStarSymbol: TPanel;
     Shape2: TShape;
     StarDrawingSize: TSpinEdit;
     Label24: TLabel;
@@ -213,6 +214,7 @@ end;
 procedure Tf_vodetail.cbStarDrawingChange(Sender: TObject);
 begin
   startype:=cbStarDrawing.ItemIndex;
+  PanelStarSymbol.Visible:=(startype>0);
 end;
 
 procedure Tf_vodetail.Button2Click(Sender: TObject);
