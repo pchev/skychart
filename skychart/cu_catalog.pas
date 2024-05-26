@@ -457,7 +457,6 @@ begin
       Result := False;
 
       if CurCat=unused1 then begin
-        Dec(curcat);
         continue;
       end;
       if (curcat <= BaseStar) then
