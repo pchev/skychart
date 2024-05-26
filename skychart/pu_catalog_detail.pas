@@ -25,7 +25,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 
 interface
 
-uses
+uses u_translation, UScaleDPI,
   Classes, SysUtils, Forms, Controls, Graphics, Dialogs, ComCtrls, ExtCtrls, StdCtrls, Spin, ColorBox;
 
 type
@@ -48,10 +48,11 @@ type
     DrawingSize: TSpinEdit;
     TabSheetStar: TTabSheet;
     procedure DrawingChange(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
   private
 
   public
-
+    procedure Setlang;
   end;
 
 var
@@ -63,10 +64,30 @@ implementation
 
 { Tf_catalog_detail }
 
+procedure Tf_catalog_detail.FormCreate(Sender: TObject);
+begin
+  ScaleDPI(Self);
+  Setlang;
+end;
+
+procedure Tf_catalog_detail.Setlang;
+begin
+  caption := rsDrawing;
+  Label24.Caption := rsDrawAs;
+  Drawing.Items[0] := rsStar;
+  Drawing.Items[1] := rsCircle;
+  Drawing.Items[2] := rsSquare;
+  Drawing.Items[3] := rsLosange;
+  Label25.Caption := rsMarkSize;
+  Label1.Caption := rsColor;
+  cbLabel.Caption := rsShowLabels;
+end;
+
 procedure Tf_catalog_detail.DrawingChange(Sender: TObject);
 begin
   PanelStar.Visible := Drawing.ItemIndex > 0;
 end;
+
 
 
 end.

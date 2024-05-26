@@ -1596,10 +1596,13 @@ begin
             Fplot.PlotLine(xx, yy, xxp, yyp, Fplot.cfgplot.Color[15], 1);
           end;
 
-          if (j<0) or (j>Fcatalog.cfgcat.GCatNum-1) or (Fcatalog.cfgcat.GCatLst[j].startype=0) then
-            rs := Fplot.PlotStar(xx, yy, rec.star.magv, rec.star.b_v)
-          else
-            rs := Fplot.PlotStarMark(xx, yy, rec.star.magv, Fcatalog.cfgcat.GCatLst[j].startype, Fcatalog.cfgcat.GCatLst[j].starsize, Fcatalog.cfgcat.GCatLst[j].col);
+          if (j>=0) and (j<=Fcatalog.cfgcat.GCatNum-1) and (Fcatalog.cfgcat.GCatLst[j].startype<>0) then // gcat as symbol
+            rs := Fplot.PlotStarMark(xx, yy, rec.star.magv, Fcatalog.cfgcat.GCatLst[j].startype, Fcatalog.cfgcat.GCatLst[j].starsize, Fcatalog.cfgcat.GCatLst[j].col)
+          else if rec.options.StarColor>0 then  // VO as symbol
+            rs := Fplot.PlotStarMark(xx, yy, rec.star.magv, rec.options.ObjType, rec.options.Size, rec.options.StarColor)
+          else  // draw as star
+            rs := Fplot.PlotStar(xx, yy, rec.star.magv, rec.star.b_v);
+
           if ((cfgsc.DrawAllStarLabel or (rec.options.ShortName = firstcat) or ((j>=0)and(j<Fcatalog.cfgcat.GCatNum)and(Fcatalog.cfgcat.GCatLst[j].ForceLabel))) and
             (rec.star.magv < cfgsc.StarmagMax - cfgsc.LabelMagDiff[1])) then
           begin

@@ -74,7 +74,7 @@ var
    Defsize: integer;
    Defmag: double;
    active,VODocOK: boolean;
-   drawtype: integer;
+   drawtype,startype,starcolor,starsize: integer;
    drawcolor,forcecolor,forcesize,forcename,forcemag: integer;
    flabels: Tlabellst;
    unit_pmra, unit_pmdec, unit_size: double;
@@ -232,6 +232,8 @@ begin
   emptyrec.options.LogSize:=0;
   emptyrec.options.UsePrefix:=0;
   emptyrec.options.UseColor:=forcecolor;
+  emptyrec.options.Amplitudeflag:=-1;
+  emptyrec.options.StarColor:=-1;
   for n:=1 to 10 do emptyrec.options.altname[n]:=false;
   emptyrec.options.flabel:=flabels;
   emptyrec.options.flabel[lOffset+vsComment]:='File';
@@ -245,6 +247,11 @@ begin
            if field_pmra>=0 then emptyrec.star.valid[vsPmra]:=true;
            if field_pmdec>=0 then emptyrec.star.valid[vsPmdec]:=true;
            emptyrec.options.flabel[lOffset+vsMagv]:='No mag';
+           if startype<>0 then begin
+             emptyrec.options.StarColor:=starcolor;
+             emptyrec.options.ObjType:=startype;
+             emptyrec.options.Size:=starsize;
+           end;
       end;
   rtneb : begin
           emptyrec.neb.valid[vnId]:=true;
@@ -411,6 +418,9 @@ drawcolor:=config.GetValue('VOcat/plot/drawcolor',$808080);
 forcecolor:=config.GetValue('VOcat/plot/forcecolor',0);
 DefSize:=config.GetValue('VOcat/default/defsize',1);
 Defmag:=config.GetValue('VOcat/default/defmag',10);
+startype:=config.GetValue('VOcat/plot/startype',0);
+starsize:=config.GetValue('VOcat/plot/starsize',10);
+starcolor:=config.GetValue('VOcat/plot/starcolor',$808080);
 finally
 config.free;
 end;

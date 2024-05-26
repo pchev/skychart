@@ -31,7 +31,7 @@ interface
 uses
   u_translation, u_voconstant, UScaleDPI,
   Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
-  StdCtrls, Grids, ExtCtrls, enhedits, LResources, Buttons;
+  StdCtrls, Grids, ExtCtrls, enhedits, LResources, Buttons, Spin, ColorBox;
 
 type
 
@@ -40,10 +40,20 @@ type
   Tf_vodetail = class(TForm)
     Button2: TButton;
     ButtonBack: TButton;
-    CheckBox1: TCheckBox;
+    cbForcecolor: TCheckBox;
     ColorDialog1: TColorDialog;
-    ComboBox1: TComboBox;
+    cbObjecttype: TComboBox;
+    cbStarDrawing: TComboBox;
+    Shape2: TShape;
+    StarDrawingSize: TSpinEdit;
+    Label24: TLabel;
+    Label25: TLabel;
+    Label26: TLabel;
+    Label5: TLabel;
     MagField: TComboBox;
+    PanelDso: TPanel;
+    PanelNone: TPanel;
+    PanelStar: TPanel;
     SizeField: TComboBox;
     NameField: TComboBox;
     Prefix: TEdit;
@@ -69,8 +79,9 @@ type
     Button1: TButton;
     procedure Button2Click(Sender: TObject);
     procedure ButtonBackClick(Sender: TObject);
-    procedure CheckBox1Change(Sender: TObject);
-    procedure ComboBox1Change(Sender: TObject);
+    procedure cbForcecolorChange(Sender: TObject);
+    procedure cbObjecttypeChange(Sender: TObject);
+    procedure cbStarDrawingChange(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure FullDownloadChange(Sender: TObject);
     procedure GetData(Sender: TObject);
@@ -81,6 +92,8 @@ type
     procedure RadioGroup1Click(Sender: TObject);
     procedure Shape1MouseUp(Sender: TObject; Button: TMouseButton;
       Shift: TShiftState; X, Y: integer);
+    procedure Shape2MouseUp(Sender: TObject; Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
+    procedure StarDrawingSizeChange(Sender: TObject);
   private
     { Private declarations }
     FPreviewData, FGetData, FUpdateconfig, FGoback: TNotifyEvent;
@@ -93,6 +106,7 @@ type
     forcecolor: integer;
     drawtype: integer;
     tablenum: integer;
+    startype, starcolor, starsize: integer;
     field_size, field_mag, field_name, forcesize, forcemag, forcename: integer;
     nameprefix: string;
     procedure Setlang;
@@ -117,27 +131,34 @@ begin
   ButtonBack.Caption := '< ' + rsBack;
   Button1.Caption := rsDownloadCata;
   Button2.Caption := rsDataPreview;
-  CheckBox1.Caption := rsForceColor + '   ';
+  cbForcecolor.Caption := rsForceColor + '   ';
   RadioGroup1.Items[0] := rsCannotDraw + '   ';
   RadioGroup1.Items[1] := rsDrawAsStar + '   ';
   RadioGroup1.Items[2] := rsDrawAsDSO + '    ';
-  ComboBox1.Items[0] := rsUnknowObject;
-  ComboBox1.Items[1] := rsGalaxy;
-  ComboBox1.Items[2] := rsOpenCluster;
-  ComboBox1.Items[3] := rsGlobularClus;
-  ComboBox1.Items[4] := rsPlanetaryNeb;
-  ComboBox1.Items[5] := rsBrightNebula;
-  ComboBox1.Items[6] := rsClusterAndNe;
-  ComboBox1.Items[7] := rsStar;
-  ComboBox1.Items[8] := rsDoubleStar;
-  ComboBox1.Items[9] := rsTripleStar;
-  ComboBox1.Items[10] := rsAsterism;
-  ComboBox1.Items[11] := rsKnot;
-  ComboBox1.Items[12] := rsGalaxyCluste;
-  ComboBox1.Items[13] := rsDarkNebula;
-  ComboBox1.Items[14] := rsCircle;
-  ComboBox1.Items[15] := rsSquare;
-  ComboBox1.Items[16] := rsLosange;
+  cbObjecttype.Items[0] := rsUnknowObject;
+  cbObjecttype.Items[1] := rsGalaxy;
+  cbObjecttype.Items[2] := rsOpenCluster;
+  cbObjecttype.Items[3] := rsGlobularClus;
+  cbObjecttype.Items[4] := rsPlanetaryNeb;
+  cbObjecttype.Items[5] := rsBrightNebula;
+  cbObjecttype.Items[6] := rsClusterAndNe;
+  cbObjecttype.Items[7] := rsStar;
+  cbObjecttype.Items[8] := rsDoubleStar;
+  cbObjecttype.Items[9] := rsTripleStar;
+  cbObjecttype.Items[10] := rsAsterism;
+  cbObjecttype.Items[11] := rsKnot;
+  cbObjecttype.Items[12] := rsGalaxyCluste;
+  cbObjecttype.Items[13] := rsDarkNebula;
+  cbObjecttype.Items[14] := rsCircle;
+  cbObjecttype.Items[15] := rsSquare;
+  cbObjecttype.Items[16] := rsLosange;
+  cbStarDrawing.Items[0] := rsStar;
+  cbStarDrawing.Items[1] := rsCircle;
+  cbStarDrawing.Items[2] := rsSquare;
+  cbStarDrawing.Items[3] := rsLosange;
+  Label24.Caption := rsDrawAs;
+  Label25.Caption := rsMarkSize;
+  Label5.Caption := rsColor;
   Label2.Caption := rsMagnitude;
   Label3.Caption := rsSize;
   Label4.Caption := rsName;
@@ -176,17 +197,22 @@ begin
     FGoback(self);
 end;
 
-procedure Tf_vodetail.CheckBox1Change(Sender: TObject);
+procedure Tf_vodetail.cbForcecolorChange(Sender: TObject);
 begin
-  if CheckBox1.Checked then
+  if cbForcecolor.Checked then
     forcecolor := 1
   else
     forcecolor := 0;
 end;
 
-procedure Tf_vodetail.ComboBox1Change(Sender: TObject);
+procedure Tf_vodetail.cbObjecttypeChange(Sender: TObject);
 begin
-  drawtype := ComboBox1.ItemIndex;
+  drawtype := cbObjecttype.ItemIndex;
+end;
+
+procedure Tf_vodetail.cbStarDrawingChange(Sender: TObject);
+begin
+  startype:=cbStarDrawing.ItemIndex;
 end;
 
 procedure Tf_vodetail.Button2Click(Sender: TObject);
@@ -201,12 +227,18 @@ begin
   Setlang;
   needdownload := True;
   drawtype := 14;
-  ComboBox1.ItemIndex := drawtype;
+  cbObjecttype.ItemIndex := drawtype;
   drawcolor := clGray;
   ColorDialog1.Color := drawcolor;
   shape1.Brush.Color := drawcolor;
   forcecolor := 0;
-  CheckBox1.Checked := (forcecolor = 1);
+  cbForcecolor.Checked := (forcecolor = 1);
+  startype:=0;
+  cbStarDrawing.ItemIndex:=startype;
+  starcolor:=clGray;
+  shape2.Brush.Color:=starcolor;
+  starsize:=8;
+  StarDrawingSize.Value:=starsize;
 end;
 
 procedure Tf_vodetail.GridMouseUp(Sender: TObject; Button: TMouseButton;
@@ -284,6 +316,7 @@ end;
 procedure Tf_vodetail.Shape1MouseUp(Sender: TObject; Button: TMouseButton;
   Shift: TShiftState; X, Y: integer);
 begin
+  ColorDialog1.Color := drawcolor;
   if ColorDialog1.Execute then
   begin
     drawcolor := ColorDialog1.Color;
@@ -291,16 +324,34 @@ begin
   end;
 end;
 
+procedure Tf_vodetail.Shape2MouseUp(Sender: TObject; Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
+begin
+  ColorDialog1.Color := starcolor;
+  if ColorDialog1.Execute then
+  begin
+    starcolor := ColorDialog1.Color;
+    Shape2.Brush.Color := starcolor;
+  end;
+end;
+
+procedure Tf_vodetail.StarDrawingSizeChange(Sender: TObject);
+begin
+  starsize:=StarDrawingSize.Value;
+end;
+
 procedure Tf_vodetail.RadioGroup1Click(Sender: TObject);
 begin
   case RadioGroup1.ItemIndex of
     0:
-    begin
+    begin // cannot draw
+      PanelStar.Visible:=False;
+      PanelDso.Visible:=False;
+      PanelNone.Visible:=True;
       Button1.Enabled := False;
       FullDownload.Enabled := False;
-      ComboBox1.Enabled := False;
+      cbObjecttype.Enabled := False;
       DefSize.Enabled := False;
-      CheckBox1.Enabled := False;
+      cbForcecolor.Enabled := False;
       Shape1.Enabled := False;
       label1.Enabled := False;
       label9.Enabled := False;
@@ -310,12 +361,15 @@ begin
       NameField.Enabled := False;
     end;
     1:
-    begin
+    begin // Star
+      PanelStar.Visible:=True;
+      PanelDso.Visible:=False;
+      PanelNone.Visible:=False;
       Button1.Enabled := True;
       FullDownload.Enabled := True;
-      ComboBox1.Enabled := False;
+      cbObjecttype.Enabled := False;
       DefSize.Enabled := False;
-      CheckBox1.Enabled := False;
+      cbForcecolor.Enabled := False;
       Shape1.Enabled := False;
       label1.Enabled := False;
       label9.Enabled := False;
@@ -325,12 +379,15 @@ begin
       NameField.Enabled := True;
     end;
     2:
-    begin
+    begin // DSO
+      PanelStar.Visible:=False;
+      PanelDso.Visible:=True;
+      PanelNone.Visible:=False;
       Button1.Enabled := True;
       FullDownload.Enabled := True;
-      ComboBox1.Enabled := True;
+      cbObjecttype.Enabled := True;
       DefSize.Enabled := True;
-      CheckBox1.Enabled := True;
+      cbForcecolor.Enabled := True;
       Shape1.Enabled := True;
       label1.Enabled := True;
       label9.Enabled := True;

@@ -342,6 +342,7 @@ begin
   StringGrid1.Columns[0].PickList.Add(rsCircle);
   StringGrid1.Columns[0].PickList.Add(rsSquare);
   StringGrid1.Columns[0].PickList.Add(rsLosange);
+  if f_catalog_detail<>nil then f_catalog_detail.Setlang;
 end;
 
 constructor Tf_config_catalog.Create(AOwner: TComponent);

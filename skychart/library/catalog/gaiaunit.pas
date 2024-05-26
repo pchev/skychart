@@ -118,6 +118,8 @@ begin
   emptyrec.options.flabel:=catheader.flabel;
   emptyrec.options.ShortName:=catheader.shortname;
   emptyrec.options.LongName:=catheader.LongName;
+  emptyrec.options.Amplitudeflag:=-1;
+  emptyrec.options.StarColor:=-1;
   case catversion of
   rtstar : begin  // Star 1
       if catheader.flen[3]>0 then emptyrec.star.valid[vsId]:=true;

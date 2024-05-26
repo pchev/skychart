@@ -664,6 +664,7 @@ var
   buf, tablen, baseurl, objtype, np: string;
   fullcat, act: boolean;
   dt, dc, ds, dm, fc: integer;
+  st,sc,ss: integer;
   tb: TTabSheet;
   fr: Tf_vodetail;
   votype: Tvo_type;
@@ -692,6 +693,9 @@ begin
     fc := config.GetValue('VOcat/plot/forcecolor', 0);
     ds := config.GetValue('VOcat/default/defsize', 60);
     dm := config.GetValue('VOcat/default/defmag', 12);
+    st := config.GetValue('VOcat/plot/startype', 0);
+    sc := config.GetValue('VOcat/plot/starcolor', $808080);
+    ss := config.GetValue('VOcat/plot/starsize', 8);
     ActiveFieldNum := config.GetValue('VOcat/fields/fieldcount', 0);
     ActiveFields.Clear;
     for i := 0 to ActiveFieldNum-1 do
@@ -847,12 +851,18 @@ begin
     fr.DefMag.Value := dm;
     fr.DefSize.Value := ds;
     fr.drawtype := dt;
-    fr.ComboBox1.ItemIndex := fr.drawtype;
+    fr.cbObjecttype.ItemIndex := fr.drawtype;
     fr.drawcolor := dc;
     fr.ColorDialog1.Color := fr.drawcolor;
     fr.shape1.Brush.Color := fr.drawcolor;
     fr.forcecolor := fc;
-    fr.CheckBox1.Checked := (fr.forcecolor = 1);
+    fr.cbForcecolor.Checked := (fr.forcecolor = 1);
+    fr.startype := st;
+    fr.cbStarDrawing.ItemIndex:=st;
+    fr.starcolor := sc;
+    fr.Shape2.Brush.Color:=sc;
+    fr.starsize := ss;
+    fr.StarDrawingSize.Value:=ss;
     fr.needdownload := False;
     fr.Button1.Caption := rsUpdate1;
     Pagecontrol1.ActivePage := TabDetail;
@@ -970,6 +980,9 @@ begin
         config.SetValue('VOcat/plot/drawtype', drawtype);
         config.SetValue('VOcat/plot/drawcolor', drawcolor);
         config.SetValue('VOcat/plot/forcecolor', forcecolor);
+        config.SetValue('VOcat/plot/startype', startype);
+        config.SetValue('VOcat/plot/starcolor', starcolor);
+        config.SetValue('VOcat/plot/starsize', starsize);
         config.SetValue('VOcat/default/defsize', DefSize.Value);
         config.SetValue('VOcat/default/defmag', DefMag.Value);
         config.DeletePath('VOcat/fields');
@@ -1080,6 +1093,9 @@ begin
         config.SetValue('VOcat/plot/drawtype', drawtype);
         config.SetValue('VOcat/plot/drawcolor', drawcolor);
         config.SetValue('VOcat/plot/forcecolor', forcecolor);
+        config.SetValue('VOcat/plot/startype', startype);
+        config.SetValue('VOcat/plot/starcolor', starcolor);
+        config.SetValue('VOcat/plot/starsize', starsize);
         config.SetValue('VOcat/default/defsize', DefSize.Value);
         config.SetValue('VOcat/default/defmag', DefMag.Value);
         config.DeletePath('VOcat/fields');

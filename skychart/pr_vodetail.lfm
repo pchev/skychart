@@ -32,18 +32,22 @@ object f_vodetail: Tf_vodetail
       TabOrder = 1
       TabStop = True
       object Table: TLabel
+        AnchorSideTop.Control = tn
+        AnchorSideTop.Side = asrCenter
         Left = 4
         Height = 18
-        Top = 12
+        Top = 15
         Width = 53
         Caption = 'Table......'
         ParentColor = False
         ParentFont = False
       end
       object Rows: TLabel
+        AnchorSideTop.Control = tn
+        AnchorSideTop.Side = asrCenter
         Left = 167
         Height = 18
-        Top = 12
+        Top = 15
         Width = 64
         Caption = 'Rows.........'
         ParentColor = False
@@ -58,12 +62,12 @@ object f_vodetail: Tf_vodetail
         Caption = 'Download catalog'
         OnClick = GetData
         ParentFont = False
-        TabOrder = 15
+        TabOrder = 11
       end
       object RadioGroup1: TRadioGroup
-        Left = 335
-        Height = 103
-        Top = 104
+        Left = 344
+        Height = 104
+        Top = 106
         Width = 209
         AutoFill = True
         ChildSizing.LeftRightSpacing = 6
@@ -74,7 +78,7 @@ object f_vodetail: Tf_vodetail
         ChildSizing.ShrinkVertical = crsScaleChilds
         ChildSizing.Layout = cclLeftToRightThenTopToBottom
         ChildSizing.ControlsPerLine = 1
-        ClientHeight = 99
+        ClientHeight = 100
         ClientWidth = 205
         Items.Strings = (
           'Cannot draw                 .'
@@ -83,29 +87,7 @@ object f_vodetail: Tf_vodetail
         )
         OnClick = RadioGroup1Click
         ParentFont = False
-        TabOrder = 14
-      end
-      object Label9: TLabel
-        AnchorSideTop.Control = DefSize
-        AnchorSideTop.Side = asrCenter
-        Left = 8
-        Height = 18
-        Top = 156
-        Width = 161
-        Caption = 'Default size '' .......................'
-        ParentColor = False
-        ParentFont = False
-      end
-      object Label10: TLabel
-        AnchorSideTop.Control = DefMag
-        AnchorSideTop.Side = asrCenter
-        Left = 8
-        Height = 18
-        Top = 96
-        Width = 160
-        Caption = 'Default magnitude.............'
-        ParentColor = False
-        ParentFont = False
+        TabOrder = 10
       end
       object FullDownload: TCheckBox
         Left = 559
@@ -115,94 +97,20 @@ object f_vodetail: Tf_vodetail
         Caption = 'Download full catalog...............'
         OnChange = FullDownloadChange
         ParentFont = False
-        TabOrder = 9
-      end
-      object Label1: TLabel
-        AnchorSideTop.Control = ComboBox1
-        AnchorSideTop.Side = asrCenter
-        Left = 8
-        Height = 18
-        Top = 126
-        Width = 164
-        Caption = 'Object type ..........................'
-        Constraints.MaxHeight = 28
-        ParentColor = False
-        ParentFont = False
-      end
-      object ComboBox1: TComboBox
-        AnchorSideLeft.Control = DefMag
-        AnchorSideTop.Control = DefMag
-        AnchorSideTop.Side = asrBottom
-        Left = 160
-        Height = 28
-        Top = 121
-        Width = 164
-        BorderSpacing.Top = 2
-        Constraints.MaxHeight = 28
-        ItemHeight = 24
-        ItemIndex = 14
-        Items.Strings = (
-          'Unknow'
-          'Galaxy'
-          'Open cluster'
-          'Globular cluster'
-          'Planetary nebula'
-          'Bright nebula'
-          'Cluster+Nebula'
-          'Star'
-          'Double star'
-          'Triple star'
-          'Asterism'
-          'Knot'
-          'Galaxy cluster'
-          'Dark nebula'
-          'Circle'
-          'Rectangle'
-          'Lozenge'
-        )
-        OnChange = ComboBox1Change
-        ParentFont = False
-        Style = csDropDownList
-        TabOrder = 10
-        Text = 'Circle'
+        TabOrder = 8
       end
       object ButtonBack: TButton
+        AnchorSideTop.Control = tn
+        AnchorSideTop.Side = asrCenter
         Left = 655
         Height = 25
-        Top = 8
+        Top = 12
         Width = 88
         Caption = '< Back'
         Constraints.MaxHeight = 28
         OnClick = ButtonBackClick
         ParentFont = False
         TabOrder = 3
-      end
-      object DefMag: TLongEdit
-        Left = 160
-        Height = 28
-        Top = 91
-        Width = 80
-        Constraints.MaxHeight = 28
-        ParentFont = False
-        TabOrder = 8
-        Value = 12
-      end
-      object DefSize: TLongEdit
-        AnchorSideLeft.Control = DefMag
-        AnchorSideTop.Control = ComboBox1
-        AnchorSideTop.Side = asrBottom
-        Left = 160
-        Height = 28
-        Hint = '0..36000'
-        Top = 151
-        Width = 80
-        Constraints.MaxHeight = 28
-        ParentFont = False
-        ParentShowHint = False
-        ShowHint = True
-        TabOrder = 11
-        Value = 60
-        MaxValue = 36000
       end
       object Button2: TButton
         Left = 583
@@ -213,38 +121,16 @@ object f_vodetail: Tf_vodetail
         Constraints.MaxHeight = 28
         OnClick = Button2Click
         ParentFont = False
-        TabOrder = 12
-      end
-      object Shape1: TShape
-        AnchorSideLeft.Control = DefMag
-        AnchorSideTop.Control = DefSize
-        AnchorSideTop.Side = asrBottom
-        Left = 160
-        Height = 24
-        Top = 181
-        Width = 24
-        BorderSpacing.Top = 2
-        Constraints.MaxHeight = 28
-        OnMouseUp = Shape1MouseUp
-        Shape = stRoundSquare
-      end
-      object CheckBox1: TCheckBox
-        AnchorSideTop.Control = Shape1
-        AnchorSideTop.Side = asrCenter
-        Left = 8
-        Height = 22
-        Top = 182
-        Width = 163
-        Caption = 'Force color....................'
-        OnChange = CheckBox1Change
-        ParentFont = False
-        TabOrder = 13
+        TabOrder = 9
       end
       object MagField: TComboBox
+        AnchorSideTop.Control = tn
+        AnchorSideTop.Side = asrBottom
         Left = 81
         Height = 28
-        Top = 56
+        Top = 46
         Width = 130
+        BorderSpacing.Top = 4
         Constraints.MaxHeight = 28
         ItemHeight = 18
         OnChange = FieldChange
@@ -253,9 +139,11 @@ object f_vodetail: Tf_vodetail
         TabOrder = 4
       end
       object Label2: TLabel
+        AnchorSideTop.Control = MagField
+        AnchorSideTop.Side = asrCenter
         Left = 8
         Height = 18
-        Top = 60
+        Top = 51
         Width = 67
         Caption = 'Magnitude'
         Constraints.MaxHeight = 28
@@ -263,9 +151,10 @@ object f_vodetail: Tf_vodetail
         ParentFont = False
       end
       object SizeField: TComboBox
+        AnchorSideTop.Control = MagField
         Left = 287
         Height = 28
-        Top = 56
+        Top = 46
         Width = 130
         Constraints.MaxHeight = 28
         ItemHeight = 18
@@ -275,9 +164,11 @@ object f_vodetail: Tf_vodetail
         TabOrder = 5
       end
       object Label3: TLabel
+        AnchorSideTop.Control = MagField
+        AnchorSideTop.Side = asrCenter
         Left = 239
         Height = 18
-        Top = 60
+        Top = 51
         Width = 24
         Caption = 'Size'
         Constraints.MaxHeight = 28
@@ -285,9 +176,11 @@ object f_vodetail: Tf_vodetail
         ParentFont = False
       end
       object NameField: TComboBox
+        AnchorSideTop.Control = MagField
+        AnchorSideTop.Side = asrCenter
         Left = 613
         Height = 28
-        Top = 56
+        Top = 46
         Width = 130
         Constraints.MaxHeight = 28
         ItemHeight = 18
@@ -297,18 +190,21 @@ object f_vodetail: Tf_vodetail
         TabOrder = 7
       end
       object Label4: TLabel
+        AnchorSideTop.Control = MagField
+        AnchorSideTop.Side = asrCenter
         Left = 431
         Height = 18
-        Top = 60
+        Top = 51
         Width = 37
         Caption = 'Name'
         ParentColor = False
         ParentFont = False
       end
       object Prefix: TEdit
+        AnchorSideTop.Control = MagField
         Left = 487
         Height = 28
-        Top = 57
+        Top = 46
         Width = 98
         Constraints.MaxHeight = 28
         OnChange = PrefixChange
@@ -319,7 +215,7 @@ object f_vodetail: Tf_vodetail
       object tn: TStaticText
         Left = 55
         Height = 36
-        Top = 10
+        Top = 6
         Width = 104
         BorderStyle = sbsSingle
         Caption = 'tn'
@@ -328,9 +224,10 @@ object f_vodetail: Tf_vodetail
         TabOrder = 0
       end
       object tr: TStaticText
+        AnchorSideTop.Control = tn
         Left = 227
         Height = 36
-        Top = 10
+        Top = 6
         Width = 84
         BorderStyle = sbsSingle
         Caption = 'tr'
@@ -339,15 +236,252 @@ object f_vodetail: Tf_vodetail
         TabOrder = 1
       end
       object desc: TStaticText
+        AnchorSideTop.Control = tn
+        AnchorSideTop.Side = asrCenter
         Left = 317
         Height = 36
-        Top = 10
+        Top = 6
         Width = 330
         BorderStyle = sbsSingle
         Caption = 'desc'
         Constraints.MaxHeight = 36
         ParentFont = False
         TabOrder = 2
+      end
+      object PanelDso: TPanel
+        Left = 8
+        Height = 104
+        Top = 106
+        Width = 328
+        BevelOuter = bvNone
+        ClientHeight = 104
+        ClientWidth = 328
+        TabOrder = 12
+        object Label1: TLabel
+          AnchorSideTop.Control = cbObjecttype
+          AnchorSideTop.Side = asrCenter
+          Left = 0
+          Height = 18
+          Top = 7
+          Width = 164
+          Caption = 'Object type ..........................'
+          Constraints.MaxHeight = 28
+          ParentColor = False
+          ParentFont = False
+        end
+        object Label9: TLabel
+          AnchorSideTop.Control = DefSize
+          AnchorSideTop.Side = asrCenter
+          Left = 0
+          Height = 18
+          Top = 35
+          Width = 161
+          Caption = 'Default size '' .......................'
+          ParentColor = False
+          ParentFont = False
+        end
+        object cbObjecttype: TComboBox
+          AnchorSideLeft.Control = DefMag
+          AnchorSideTop.Side = asrBottom
+          Left = 160
+          Height = 28
+          Top = 2
+          Width = 167
+          BorderSpacing.Top = 2
+          Constraints.MaxHeight = 28
+          ItemHeight = 24
+          ItemIndex = 14
+          Items.Strings = (
+            'Unknow'
+            'Galaxy'
+            'Open cluster'
+            'Globular cluster'
+            'Planetary nebula'
+            'Bright nebula'
+            'Cluster+Nebula'
+            'Star'
+            'Double star'
+            'Triple star'
+            'Asterism'
+            'Knot'
+            'Galaxy cluster'
+            'Dark nebula'
+            'Circle'
+            'Rectangle'
+            'Lozenge'
+          )
+          OnChange = cbObjecttypeChange
+          ParentFont = False
+          Style = csDropDownList
+          TabOrder = 0
+          Text = 'Circle'
+        end
+        object DefSize: TLongEdit
+          AnchorSideLeft.Control = DefMag
+          AnchorSideTop.Control = cbObjecttype
+          AnchorSideTop.Side = asrBottom
+          Left = 162
+          Height = 28
+          Hint = '0..36000'
+          Top = 30
+          Width = 81
+          Constraints.MaxHeight = 28
+          ParentFont = False
+          ParentShowHint = False
+          ShowHint = True
+          TabOrder = 1
+          Value = 60
+          MaxValue = 36000
+        end
+        object cbForcecolor: TCheckBox
+          AnchorSideTop.Control = Shape1
+          AnchorSideTop.Side = asrCenter
+          Left = 0
+          Height = 22
+          Top = 64
+          Width = 163
+          Caption = 'Force color....................'
+          OnChange = cbForcecolorChange
+          ParentFont = False
+          TabOrder = 2
+        end
+        object Shape1: TShape
+          AnchorSideLeft.Control = DefMag
+          AnchorSideTop.Control = DefSize
+          AnchorSideTop.Side = asrBottom
+          Left = 162
+          Height = 24
+          Top = 63
+          Width = 24
+          BorderSpacing.Top = 5
+          Constraints.MaxHeight = 28
+          OnMouseUp = Shape1MouseUp
+          Shape = stRoundSquare
+        end
+      end
+      object Label10: TLabel
+        AnchorSideTop.Control = DefMag
+        AnchorSideTop.Side = asrCenter
+        Left = 8
+        Height = 18
+        Top = 79
+        Width = 160
+        Caption = 'Default magnitude.............'
+        ParentColor = False
+        ParentFont = False
+      end
+      object DefMag: TLongEdit
+        AnchorSideTop.Control = MagField
+        AnchorSideTop.Side = asrBottom
+        Left = 168
+        Height = 28
+        Top = 74
+        Width = 80
+        Constraints.MaxHeight = 28
+        ParentFont = False
+        TabOrder = 13
+        Value = 12
+      end
+      object PanelNone: TPanel
+        Left = 8
+        Height = 104
+        Top = 106
+        Width = 328
+        BevelOuter = bvNone
+        TabOrder = 14
+      end
+      object PanelStar: TPanel
+        Left = 8
+        Height = 104
+        Top = 106
+        Width = 328
+        BevelOuter = bvNone
+        ClientHeight = 104
+        ClientWidth = 328
+        TabOrder = 15
+        object cbStarDrawing: TComboBox
+          Left = 160
+          Height = 28
+          Top = 2
+          Width = 113
+          Constraints.MaxHeight = 28
+          ItemHeight = 24
+          ItemIndex = 0
+          Items.Strings = (
+            'Star'
+            'Circle'
+            'Square'
+            'Losange'
+          )
+          OnChange = cbStarDrawingChange
+          Style = csDropDownList
+          TabOrder = 0
+          Text = 'Star'
+        end
+        object Label24: TLabel
+          AnchorSideTop.Control = cbStarDrawing
+          AnchorSideTop.Side = asrCenter
+          Left = 0
+          Height = 18
+          Top = 7
+          Width = 53
+          Caption = 'Draw as '
+          ParentColor = False
+        end
+        object Label25: TLabel
+          Left = 0
+          Height = 18
+          Top = 45
+          Width = 59
+          Caption = 'mark size'
+          ParentColor = False
+        end
+        object StarDrawingSize: TSpinEdit
+          AnchorSideTop.Control = cbStarDrawing
+          AnchorSideTop.Side = asrBottom
+          Left = 160
+          Height = 28
+          Top = 32
+          Width = 58
+          BorderSpacing.Top = 2
+          Constraints.MaxHeight = 28
+          MaxValue = 100
+          MinValue = 5
+          OnChange = StarDrawingSizeChange
+          TabOrder = 1
+          Value = 15
+        end
+        object Label26: TLabel
+          Left = 160
+          Height = 18
+          Top = 45
+          Width = 15
+          Caption = 'px'
+          ParentColor = False
+        end
+        object Label5: TLabel
+          AnchorSideTop.Control = Shape2
+          AnchorSideTop.Side = asrCenter
+          Left = 0
+          Height = 18
+          Top = 65
+          Width = 34
+          Caption = 'Color'
+          ParentColor = False
+        end
+        object Shape2: TShape
+          AnchorSideLeft.Control = DefMag
+          AnchorSideTop.Control = StarDrawingSize
+          AnchorSideTop.Side = asrBottom
+          Left = 162
+          Height = 24
+          Top = 62
+          Width = 24
+          BorderSpacing.Top = 2
+          Constraints.MaxHeight = 28
+          OnMouseUp = Shape2MouseUp
+          Shape = stRoundSquare
+        end
       end
     end
     object Grid: TStringGrid

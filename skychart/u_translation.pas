@@ -1624,6 +1624,8 @@ resourcestring
   rsError2 = 'Error';
   rsNoResponseFr = 'No response from server';
   rsMessages2 = 'Messages';
+  rsDrawAs = 'Draw as';
+  rsMarkSize = 'Mark size';
 
 // also update upsi_translation
 

@@ -101,6 +101,7 @@ TCatOption = packed record
           altprefix: Tvalid;
           flabel   : Tlabellst;
           Amplitudeflag: Integer;
+          StarColor: integer;
           end;
 GCatrec = packed record
           ra,dec   : double ;
@@ -274,6 +275,7 @@ begin
   emptyrec.options.LogSize:=catheader.LogSize;
   emptyrec.options.UsePrefix:=catheader.UsePrefix;
   emptyrec.options.Amplitudeflag:=-1;
+  emptyrec.options.StarColor:=-1;
   for n:=1 to 10 do emptyrec.options.altname[n]:=(catheader.altname[n]=1);
   for n:=1 to 10 do emptyrec.options.altprefix[n]:=(catheader.AltPrefix[n]=1);
   emptyrec.options.flabel:=catheader.flabel;
