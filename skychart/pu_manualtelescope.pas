@@ -145,13 +145,13 @@ begin
     top := top + P.Y - startpoint.Y;
     if top < 0 then
       top := 0;
-    if top > (screen.Height - Height) then
-      top := screen.Height - Height;
+    if top > (screen.DesktopHeight - Height) then
+      top := screen.DesktopHeight - Height;
     left := left + P.X - startpoint.X;
     if left < 0 then
       left := 0;
-    if left > (screen.Width - Width) then
-      left := screen.Width - Width;
+    if left > (screen.DesktopWidth - Width) then
+      left := screen.DesktopWidth - Width;
     startpoint := P;
     application.ProcessMessages;
     lockmove := False;

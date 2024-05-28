@@ -2636,8 +2636,8 @@ begin
     else
       left := margin;
 
-    if left + Width > (Screen.Width - margin) then
-      left := Screen.Width - Width - margin;
+    if left + Width > (Screen.DesktopWidth - margin) then
+      left := Screen.DesktopWidth - Width - margin;
     if left < 0 then
       left := 0;
 
@@ -2646,8 +2646,8 @@ begin
     else
       top := margin;
 
-    if top + Height > (Screen.Height - margin) then
-      top := Screen.Height - Height - margin;
+    if top + Height > (Screen.DesktopHeight - margin) then
+      top := Screen.DesktopHeight - Height - margin;
     if top < 0 then
       top := 0;
   end;

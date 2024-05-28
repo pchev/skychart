@@ -5516,7 +5516,7 @@ begin
       formpos(ConfigObservatory, posx, posy)
     else
     begin
-      posx := Screen.Width div 2 - ConfigObservatory.Width div 2;
+      posx := Screen.Width div 2 - ConfigObservatory.Width div 2;  // first setup
       posy := Screen.Height div 2 - ConfigObservatory.Height div 2;
       formpos(ConfigObservatory, posx, posy);
     end;
@@ -7180,29 +7180,29 @@ begin
           if l<0 then l:=0;
           if (w < 0) or (h < 0) then
           begin
-            if screen.Width > screen.Height then
+            if screen.DesktopWidth > screen.DesktopHeight then
             begin
-              h := round(screen.Height - 100);
+              h := round(screen.DesktopHeight - 100);
               w := round(h * 4 / 3);
             end
             else
             begin
-              w := round(screen.Width - 100);
+              w := round(screen.DesktopWidth - 100);
               h := w;
             end;
           end;
-          if w > screen.Width then
+          if w > screen.DesktopWidth then
           begin
             l := 0;
-            w := screen.Width - 80;
+            w := screen.DesktopWidth - 80;
           end;
-          if h > screen.Height then
+          if h > screen.DesktopHeight then
           begin
             t := 0;
-            h := screen.Height - 80;
+            h := screen.DesktopHeight - 80;
           end;
-          if (t+h)>screen.Height then t:=0;
-          if (l+w)>screen.Width then l:=0;
+          if (t+h)>screen.DesktopHeight then t:=0;
+          if (l+w)>screen.DesktopWidth then l:=0;
           f_main.SetBounds(l, t, w, h);
         end;
         for i := 0 to MaxField do
