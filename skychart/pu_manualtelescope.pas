@@ -137,21 +137,23 @@ procedure Tf_manualtelescope.FormMouseMove(Sender: TObject; Shift: TShiftState;
   X, Y: integer);
 var
   P: Tpoint;
+  dt: TRect;
 begin
   if moving and (not lockmove) then
   begin
     lockmove := True;
+    dt := screen.DesktopRect;
     P := clienttoscreen(Point(X, Y));
     top := top + P.Y - startpoint.Y;
-    if top < 0 then
-      top := 0;
-    if top > (screen.DesktopHeight - Height) then
-      top := screen.DesktopHeight - Height;
+    if top < dt.Top then
+      top := dt.Top;
+    if top > (dt.Height - Height) then
+      top := dt.Height - Height;
     left := left + P.X - startpoint.X;
-    if left < 0 then
-      left := 0;
-    if left > (screen.DesktopWidth - Width) then
-      left := screen.DesktopWidth - Width;
+    if left < dt.Left then
+      left := dt.Left;
+    if left > (dt.Width - Width) then
+      left := dt.Width - Width;
     startpoint := P;
     application.ProcessMessages;
     lockmove := False;

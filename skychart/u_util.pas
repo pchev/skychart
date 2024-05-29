@@ -2624,32 +2624,34 @@ end;
 procedure FormPos(form: TForm; x, y: integer; safemargin: boolean = True);
 var
   margin: integer; //minimal distance from screen border
+  dt: TRect;
 begin
+  dt := screen.DesktopRect;
   if safemargin then
     margin:=60
   else
     margin:=0;
   with Form do
   begin
-    if x > margin then
+    if x > (dt.Left+margin) then
       left := x
     else
-      left := margin;
+      left := dt.Left+margin;
 
-    if left + Width > (Screen.DesktopWidth - margin) then
-      left := Screen.DesktopWidth - Width - margin;
-    if left < 0 then
-      left := 0;
+    if left + Width > (dt.Width - margin) then
+      left := dt.Width - Width - margin;
+    if left < dt.Left then
+      left := dt.Left;
 
-    if y > margin then
+    if y > (dt.Top + margin) then
       top := y
     else
-      top := margin;
+      top := dt.Top + margin;
 
-    if top + Height > (Screen.DesktopHeight - margin) then
-      top := Screen.DesktopHeight - Height - margin;
-    if top < 0 then
-      top := 0;
+    if top + Height > (dt.Height - margin) then
+      top := dt.Height - Height - margin;
+    if top < dt.Top then
+      top := dt.Top;
   end;
 
 end;

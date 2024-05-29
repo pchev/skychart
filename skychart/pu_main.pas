@@ -7160,6 +7160,7 @@ procedure Tf_main.ReadChartConfig(filename: string; usecatalog, resizemain: bool
   var cplot: Tconf_plot; var csc: Tconf_skychart);
 var
   i, j, t, l, w, h, n, v1, v2: integer;
+  dt: TRect;
   inif: TMemIniFile;
   section, buf,buf0,buf1,buf2,buf3: string;
 begin
@@ -7172,37 +7173,38 @@ begin
         csc.chartname:=ReadString(section,'ChartName','');
         if resizemain then
         begin
+          dt := screen.DesktopRect;
           t := ReadInteger(section, 'WinTop', 40);
           l := ReadInteger(section, 'WinLeft', 40);
-          w := ReadInteger(section, 'WinWidth', -1);
-          h := ReadInteger(section, 'WinHeight', -1);
-          if t<0 then t:=0;
-          if l<0 then l:=0;
-          if (w < 0) or (h < 0) then
+          w := ReadInteger(section, 'WinWidth', -999999);
+          h := ReadInteger(section, 'WinHeight', -999999);
+          if t<dt.Top then t:=dt.Top;
+          if l<dt.Left then l:=dt.Left;
+          if (w < -999990) or (h < -999990) then
           begin
-            if screen.DesktopWidth > screen.DesktopHeight then
+            if dt.Width > dt.Height then
             begin
-              h := round(screen.DesktopHeight - 100);
+              h := round(dt.Height - 100);
               w := round(h * 4 / 3);
             end
             else
             begin
-              w := round(screen.DesktopWidth - 100);
+              w := round(dt.Width - 100);
               h := w;
             end;
           end;
-          if w > screen.DesktopWidth then
+          if w > dt.Width then
           begin
-            l := 0;
-            w := screen.DesktopWidth - 80;
+            l := dt.Left;
+            w := dt.Width - 80;
           end;
-          if h > screen.DesktopHeight then
+          if h > dt.Height then
           begin
-            t := 0;
-            h := screen.DesktopHeight - 80;
+            t := dt.Top;
+            h := dt.Height - 80;
           end;
-          if (t+h)>screen.DesktopHeight then t:=0;
-          if (l+w)>screen.DesktopWidth then l:=0;
+          if (t+h)>dt.Height then t:=dt.Top;
+          if (l+w)>dt.Width then l:=dt.Left;
           f_main.SetBounds(l, t, w, h);
         end;
         for i := 0 to MaxField do
@@ -12177,6 +12179,7 @@ end;
 procedure Tf_main.ViewFullScreenExecute(Sender: TObject);
 var
   lPrevStyle: longint;
+  m: TMonitor;
 begin
   MenuFullScreen.Checked := not MenuFullScreen.Checked;
   if MenuFullScreen.Checked then
@@ -12185,16 +12188,17 @@ begin
     cfgm.saveleft := left;
     cfgm.savewidth := Width;
     cfgm.saveheight := Height;
+    m := screen.MonitorFromWindow(f_main.handle);
     lPrevStyle := GetWindowLong(f_main.handle, GWL_STYLE);
     SetWindowLong(f_main.handle, GWL_STYLE,
       (lPrevStyle and (not WS_THICKFRAME) and (not WS_BORDER) and
       (not WS_CAPTION) and (not WS_MINIMIZEBOX) and (not WS_MAXIMIZEBOX)));
     SetWindowPos(f_main.handle, 0, 0, 0, 0, 0, SWP_FRAMECHANGED or
       SWP_NOMOVE or SWP_NOSIZE or SWP_NOZORDER);
-    top := 0;
-    left := 0;
-    Width := screen.Width;
-    Height := screen.Height;
+    top := m.Top;
+    left := m.Left;
+    Width := m.Width;
+    Height := m.Height;
   end
   else
   begin
