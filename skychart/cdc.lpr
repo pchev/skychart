@@ -140,6 +140,7 @@ begin
     if VerboseMsg then WriteTrace(step);
     Application.CreateForm(Tf_mosaic, f_mosaic);
     Application.CreateForm(Tf_prepoint, f_prepoint);
+    Application.CreateForm(Tf_updcatalog, f_updcatalog);
     step:='Main Init';
     if VerboseMsg then WriteTrace(step);
     f_main.init;

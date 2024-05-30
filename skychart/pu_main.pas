@@ -1702,6 +1702,12 @@ begin
        if MultiFrame1.Childs[i].DockedObject is Tf_chart then
          Tf_chart(MultiFrame1.Childs[i].DockedObject).locked:=false;
     InitScriptPanel;
+    f_updcatalog.onSaveConfig := SaveCatalogConfig;
+    f_updcatalog.onOpenSetup := OpenCatalogSetup;
+    f_updcatalog.catalog:=catalog;
+    f_updcatalog.cmain:=cfgm;
+    f_updcatalog.cdb := cdcdb;
+    f_updcatalog.ConsistencyCheck;
     if not Application.ShowMainForm then
       InitOK := True;  // no formshow if --daemon
   except
@@ -12442,15 +12448,7 @@ end;
 
 procedure Tf_main.MenuUpdCatalogClick(Sender: TObject);
 begin
-  if f_updcatalog=nil then begin
-     Application.CreateForm(Tf_updcatalog, f_updcatalog);
-     f_updcatalog.onSaveConfig := SaveCatalogConfig;
-     f_updcatalog.onOpenSetup := OpenCatalogSetup;
-  end;
   if f_updcatalog.Running then exit;
-  f_updcatalog.catalog:=catalog;
-  f_updcatalog.cmain:=cfgm;
-  f_updcatalog.cdb := cdcdb;
   f_updcatalog.Show;
 end;
 

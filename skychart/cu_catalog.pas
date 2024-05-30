@@ -1827,7 +1827,7 @@ begin
     732: Result := '5';
     9537: Result := '3';
     else
-      Result := '7';
+      Result := '3';
   end;
 end;
 

@@ -25,7 +25,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 interface
 
 uses u_constant, u_util, u_translation, UScaleDPI, downloaddialog, cu_calceph,
-  cu_httpdownload, cu_catalog, FileUtil, cu_database, cu_planet, md5, zipper,
+  cu_httpdownload, cu_catalog, FileUtil, cu_database, cu_planet, md5, zipper, LazFileUtils,
   Classes, SysUtils, Forms, Controls, Graphics, Dialogs, ExtCtrls, Grids, ComCtrls, StdCtrls, Types;
 
 type
@@ -121,6 +121,7 @@ type
   public
     procedure SetLang;
     procedure Abort;
+    procedure ConsistencyCheck;
     property Running: boolean read FRunning;
     property cmain: Tconf_main read Fcmain write Fcmain;
     property catalog: Tcatalog read Fcatalog write Fcatalog;
@@ -1205,6 +1206,68 @@ except
     EndInstallTimer.Enabled:=true;
   end;
 end;
+end;
+
+procedure Tf_updcatalog.ConsistencyCheck;
+var fs,fc: TSearchRec;
+    i,j,k,m: integer;
+    c,d,cn: string;
+    modified: boolean;
+    t: TDateTime;
+begin
+  // Check that catalog installed in PrivateCatalogDir are defined in the current configuration
+  // if not, it is added as inactive
+  i := FindFirst(slash(PrivateCatalogDir)+'*',faDirectory,fs);
+  while i = 0 do begin
+    if copy(fs.name,1,1)<>'.' then begin
+      c:=fs.name;
+      d:=slash(PrivateCatalogDir)+c;
+      j:=FindFirst(slash(d)+'*.hdr',0,fc);
+      if j=0 then begin
+        cn:=ExtractFileNameOnly(fc.name);
+        m := -1;
+        for k := 0 to Fcatalog.cfgcat.GCatNum - 1 do
+          if Fcatalog.cfgcat.GCatLst[k].shortname = cn then begin
+            m := k;
+            break;
+          end;
+        if m < 0 then begin
+          WriteTrace('Add missing '+c+' '+cn);
+          Fcatalog.cfgcat.GCatNum := Fcatalog.cfgcat.GCatNum + 1;
+          SetLength(Fcatalog.cfgcat.GCatLst, Fcatalog.cfgcat.GCatNum);
+          m := Fcatalog.cfgcat.GCatNum - 1;
+          Fcatalog.cfgcat.GCatLst[m].shortname := cn;
+          Fcatalog.cfgcat.GCatLst[m].path := d;
+          Fcatalog.cfgcat.GCatLst[m].min := 0;
+          Fcatalog.cfgcat.GCatLst[m].max := StrToIntDef(Fcatalog.GetMaxField(d,cn),10);
+          Fcatalog.cfgcat.GCatLst[m].Actif := false;
+          Fcatalog.cfgcat.GCatLst[m].Search := false;
+          Fcatalog.cfgcat.GCatLst[m].magmax := 0;
+          Fcatalog.cfgcat.GCatLst[m].Name := '';
+          Fcatalog.cfgcat.GCatLst[m].cattype := 0;
+          Fcatalog.cfgcat.GCatLst[m].startype := 0;
+          Fcatalog.cfgcat.GCatLst[m].starsize := 0;
+          Fcatalog.cfgcat.GCatLst[m].ForceColor := False;
+          Fcatalog.cfgcat.GCatLst[m].ForceLabel := False;
+          Fcatalog.cfgcat.GCatLst[m].col := 0;
+          Fcatalog.GetInfo(Fcatalog.cfgcat.GCatLst[m].path,
+            Fcatalog.cfgcat.GCatLst[m].shortname, Fcatalog.cfgcat.GCatLst[m].magmax,
+            Fcatalog.cfgcat.GCatLst[m].cattype, Fcatalog.cfgcat.GCatLst[m].startype,
+            Fcatalog.cfgcat.GCatLst[m].starsize, Fcatalog.cfgcat.GCatLst[m].version,
+            Fcatalog.cfgcat.GCatLst[m].Name);
+          if Fcatalog.cfgcat.GCatLst[m].startype>0 then begin
+            Fcatalog.cfgcat.GCatLst[m].col := clYellow;
+            if Fcatalog.cfgcat.GCatLst[m].starsize = 0 then Fcatalog.cfgcat.GCatLst[m].starsize := 10;
+          end;
+          modified := true;
+        end;
+      end;
+      FindClose(fc);
+    end;
+    i := findnext(fs);
+  end;
+  FindClose(fs);
+  if modified and Assigned(FSaveConfig) then FSaveConfig(self);
 end;
 
 end.
