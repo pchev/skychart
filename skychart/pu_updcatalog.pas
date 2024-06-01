@@ -171,10 +171,14 @@ end;
 
 procedure TCatInfo.SearchInstalled(basedir:string);
 var f: TextFile;
-    vf: string;
+    vf,hf: string;
 begin
   vf:=slash(basedir)+slash(path)+catname+'_version.txt';
   installed:=FileExists(vf);
+  if installed and (catnum=0) then begin
+    hf:=slash(basedir)+slash(path)+shortname+'.hdr';
+    installed:=installed and FileExists(hf);
+  end;
   if installed then begin
     AssignFile(f,vf);
     Reset(f);
