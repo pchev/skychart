@@ -409,7 +409,7 @@ begin
       grid.Cells[colname,grid.RowCount-1]:=info.catname;
       grid.Cells[coldesc,grid.RowCount-1]:=info.desc;
       grid.Cells[colsize,grid.RowCount-1]:=info.size;
-      grid.Cells[colinfo,grid.RowCount-1]:='->';
+      grid.Cells[colinfo,grid.RowCount-1]:='?';
     until eof(f);
     CloseFile(f);
     row.Free;
