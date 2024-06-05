@@ -6,15 +6,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: skychart\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2024-01-12 19:57+0000\n"
+"POT-Creation-Date: 2024-06-05 07:33+0000\n"
 "PO-Revision-Date: 2017-07-01 21:44+0000\n"
 "Last-Translator: Rokar ✌ <Unknown>\n"
 "Language-Team: Kurdish <ku@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2024-01-14 16:28+0000\n"
-"X-Generator: Launchpad (build e1eeab5b20e19239bd7d5f36676f7a52988db88b)\n"
+"X-Launchpad-Export-Date: 2024-06-05 07:56+0000\n"
+"X-Generator: Launchpad (build 4d1350fd3710dfe10d207fa9961e224cc481dca3)\n"
 
 #: u_translation.rs102cddss
 msgid "102 CD DSS"
@@ -209,10 +209,6 @@ msgstr ""
 
 #: u_translation.rsadvancedsear
 msgid "Advanced search"
-msgstr ""
-
-#: u_translation.rsadvancedsett2
-msgid "Advanced setting"
 msgstr ""
 
 #: u_translation.rsage
@@ -723,6 +719,10 @@ msgstr ""
 msgid "%sCannot open database %s! %s"
 msgstr ""
 
+#: u_translation.rscannotsyncwh
+msgid "Cannot Sync when the mount is not tracking"
+msgstr ""
+
 #: u_translation.rscannotwritet
 msgid "Cannot write to"
 msgstr ""
@@ -961,6 +961,10 @@ msgstr ""
 msgid "Close files"
 msgstr ""
 
+#: u_translation.rsclosetheset2
+msgid "Close the Setup window and launch the catalog generation tool?"
+msgstr ""
+
 #: u_translation.rsclosethesetu
 msgid "Close the Setup window and launch the catalog installer tool?"
 msgstr ""
@@ -1093,7 +1097,7 @@ msgstr ""
 msgid "Connect"
 msgstr "Bê girêdan"
 
-#: u_translation.rsconnected
+#: u_translation.rsconnected3
 msgid "Connected"
 msgstr "Hate girêdan"
 
@@ -1105,6 +1109,11 @@ msgstr ""
 #: u_translation.rsconnectedtos
 #, object-pascal-format
 msgid "Connected to the SQL database %s"
+msgstr ""
+
+#: u_translation.rsconnectioner
+#, object-pascal-format
+msgid "Connection error: %s"
 msgstr ""
 
 #: u_translation.rsconnectionli
@@ -1638,8 +1647,17 @@ msgstr ""
 msgid "Disconnect"
 msgstr "Veqetîne"
 
+#: u_translation.rsdisconnected3
+msgid "Disconnected"
+msgstr ""
+
 #: u_translation.rsdisconnectfr
 msgid "Disconnect from SAMP"
+msgstr ""
+
+#: u_translation.rsdisconnectio
+#, object-pascal-format
+msgid "Disconnection error: %s"
 msgstr ""
 
 #: u_translation.rsdisplay
@@ -1791,6 +1809,10 @@ msgstr ""
 
 #: u_translation.rsdrawalinetha
 msgid "Draw a line that displays the proper motion for the next"
+msgstr ""
+
+#: u_translation.rsdrawas
+msgid "Draw as"
 msgstr ""
 
 #: u_translation.rsdrawasdso
@@ -2011,7 +2033,7 @@ msgstr ""
 msgid "Equinox"
 msgstr ""
 
-#: u_translation.rserror
+#: u_translation.rserror2
 msgid "Error"
 msgstr "Çewtî"
 
@@ -2118,6 +2140,10 @@ msgstr ""
 msgid "Faint Stars Size "
 msgstr ""
 
+#: u_translation.rsfalse
+msgid "False"
+msgstr ""
+
 #: u_translation.rsfamily
 msgid "Family"
 msgstr ""
@@ -2137,6 +2163,10 @@ msgstr "Bijarte"
 #: u_translation.rsfebruary
 msgid "February"
 msgstr "Sibat"
+
+#: u_translation.rsfewerbuttons
+msgid "Fewer buttons for a cleaner space, access to other functions from the menu"
+msgstr ""
 
 #: u_translation.rsffmpegprogra
 msgid "ffmpeg program path"
@@ -2782,10 +2812,6 @@ msgstr ""
 msgid "Internet localization"
 msgstr ""
 
-#: u_translation.rsinttelesco
-msgid "Integrated telescope driver."
-msgstr ""
-
 #: u_translation.rsinvalidepoch
 #, object-pascal-format
 msgid "invalid epoch on line%s: %s"
@@ -3261,6 +3287,10 @@ msgstr "Adar"
 msgid "Mark"
 msgstr ""
 
+#: u_translation.rsmarksize
+msgid "Mark size"
+msgstr ""
+
 #: u_translation.rsmarkthechart
 msgid "Mark the centre of the chart"
 msgstr ""
@@ -3361,6 +3391,10 @@ msgstr ""
 msgid "Messages:"
 msgstr ""
 
+#: u_translation.rsmessages2
+msgid "Messages"
+msgstr ""
+
 #: u_translation.rsmeters
 msgid "Meters"
 msgstr ""
@@ -3433,6 +3467,10 @@ msgstr "Meh"
 msgid "Moon"
 msgstr ""
 
+#: u_translation.rsmorebuttonsf
+msgid "More buttons for quick access to many functions"
+msgstr ""
+
 #: u_translation.rsmoreinformat
 msgid "More informations"
 msgstr ""
@@ -3476,6 +3514,11 @@ msgstr ""
 
 #: u_translation.rsmosaicsize
 msgid "Mosaic size"
+msgstr ""
+
+#: u_translation.rsmountcapabil
+#, object-pascal-format
+msgid "Mount capabilities: %s"
 msgstr ""
 
 #: u_translation.rsmovelabel
@@ -3645,6 +3688,10 @@ msgstr ""
 
 #: u_translation.rsnopropermo
 msgid "(uncorrected for proper motion, no pm data available from this catalog)"
+msgstr ""
+
+#: u_translation.rsnoresponsefr
+msgid "No response from server"
 msgstr ""
 
 #: u_translation.rsnorth
@@ -4946,6 +4993,10 @@ msgstr ""
 msgid "Select time units"
 msgstr ""
 
+#: u_translation.rsselectyourpr
+msgid "Select your preference for the button layout"
+msgstr ""
+
 #: u_translation.rssemi
 msgid "Semi"
 msgstr ""
@@ -5296,6 +5347,11 @@ msgstr ""
 msgid "Slew to cursor position"
 msgstr ""
 
+#: u_translation.rsslewtoeq
+#, object-pascal-format
+msgid "Slewing to %s %s/%s"
+msgstr ""
+
 #: u_translation.rsslower
 msgid "Slower"
 msgstr ""
@@ -5510,6 +5566,10 @@ msgstr ""
 msgid "Start of object"
 msgstr ""
 
+#: u_translation.rsstarttracking
+msgid "start tracking"
+msgstr ""
+
 #: u_translation.rsstatus
 msgid "Status"
 msgstr ""
@@ -5536,6 +5596,10 @@ msgstr "Sekinandin"
 
 #: u_translation.rsstoptcpipser
 msgid "Stop TCP/IP server"
+msgstr ""
+
+#: u_translation.rsstoptelescop
+msgid "Stop telescope motion."
 msgstr ""
 
 #: u_translation.rssun
@@ -5589,6 +5653,11 @@ msgstr "Wekhev bike"
 #: u_translation.rssyncedto
 #, object-pascal-format
 msgid "Synced to %s / %s"
+msgstr ""
+
+#: u_translation.rssynctoeq
+#, object-pascal-format
+msgid "Sync to %s %s/%s"
 msgstr ""
 
 #: u_translation.rssynodicmonth
@@ -5707,10 +5776,6 @@ msgstr ""
 msgid "This catalog contain %s records. It is not possible to download in full for performance reason."
 msgstr ""
 
-#: u_translation.rsthisdirectdr
-msgid "This direct driver is kept for compatibility, it may work or not for you. But the preference is to use the INDI or ASCOM driver for your telescope."
-msgstr ""
-
 #: u_translation.rsthisfilecont
 #, object-pascal-format
 msgid "This file contain %s elements.%sThis is probably a base file you want to load without the \"Append\" option.%sIt can affect the performance to append all this data to the current file%sDo you want to continue anyway?"
@@ -5718,6 +5783,10 @@ msgstr ""
 
 #: u_translation.rsthisfilewasn
 msgid "This file was not recognized as a MPCORB file."
+msgstr ""
+
+#: u_translation.rsthislayoutca
+msgid "This layout can be modified later using the menu Setup , Toolbar editor"
 msgstr ""
 
 #: u_translation.rsthisprogrami
@@ -5872,6 +5941,10 @@ msgstr ""
 msgid "Troposphere temperature lapse rate (K/km)"
 msgstr ""
 
+#: u_translation.rstrue
+msgid "True"
+msgstr ""
+
 #: u_translation.rstrueequatore
 msgid "true equator, equinox and epoch of the date"
 msgstr ""
@@ -5992,6 +6065,10 @@ msgstr ""
 
 #: u_translation.rsunsupporteds
 msgid "Unsupported SAMP hub profile. Must be a File URL"
+msgstr ""
+
+#: u_translation.rsunzipfile
+msgid "Unzip file"
 msgstr ""
 
 #: u_translation.rsup

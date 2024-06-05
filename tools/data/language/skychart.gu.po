@@ -6,15 +6,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: skychart\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2024-01-12 19:57+0000\n"
+"POT-Creation-Date: 2024-06-05 07:33+0000\n"
 "PO-Revision-Date: 2022-01-28 18:17+0000\n"
 "Last-Translator: Bhargav Joshi <Unknown>\n"
 "Language-Team: Gujarati <gu@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2024-01-14 16:28+0000\n"
-"X-Generator: Launchpad (build e1eeab5b20e19239bd7d5f36676f7a52988db88b)\n"
+"X-Launchpad-Export-Date: 2024-06-05 07:56+0000\n"
+"X-Generator: Launchpad (build 4d1350fd3710dfe10d207fa9961e224cc481dca3)\n"
 
 #: u_translation.rs102cddss
 msgid "102 CD DSS"
@@ -210,10 +210,6 @@ msgstr "વિગતવાર"
 #: u_translation.rsadvancedsear
 msgid "Advanced search"
 msgstr "અગ્રિમ શોધ"
-
-#: u_translation.rsadvancedsett2
-msgid "Advanced setting"
-msgstr "ઊંડાણ માં ગોઠવણ"
 
 #: u_translation.rsage
 msgid "Age"
@@ -723,6 +719,10 @@ msgstr "તમારું IP સરનામું મેળવી શકાત
 msgid "%sCannot open database %s! %s"
 msgstr "%s ડેટાબેઝ %s ખોલી શકાતો નથી! %s"
 
+#: u_translation.rscannotsyncwh
+msgid "Cannot Sync when the mount is not tracking"
+msgstr ""
+
 #: u_translation.rscannotwritet
 msgid "Cannot write to"
 msgstr "ને લખી શકતા નથી"
@@ -961,6 +961,10 @@ msgstr "બંધ સમોચ્ચ"
 msgid "Close files"
 msgstr "ફાઇલ્સ બંધ કરો"
 
+#: u_translation.rsclosetheset2
+msgid "Close the Setup window and launch the catalog generation tool?"
+msgstr ""
+
 #: u_translation.rsclosethesetu
 msgid "Close the Setup window and launch the catalog installer tool?"
 msgstr ""
@@ -1093,7 +1097,7 @@ msgstr "ફાઇલ કાઢી નાખવાની પુષ્ટિ ક�
 msgid "Connect"
 msgstr "જોડાવો"
 
-#: u_translation.rsconnected
+#: u_translation.rsconnected3
 msgid "Connected"
 msgstr "જોડાયેલ"
 
@@ -1106,6 +1110,11 @@ msgstr "%s  જોડાયેલ છે %s, નકશો વાપરી %s , �
 #, object-pascal-format
 msgid "Connected to the SQL database %s"
 msgstr "SQL ડેટાબેસ થી જોડાયેલ છે %s"
+
+#: u_translation.rsconnectioner
+#, object-pascal-format
+msgid "Connection error: %s"
+msgstr ""
 
 #: u_translation.rsconnectionli
 msgid "Connection lines between each position"
@@ -1638,9 +1647,18 @@ msgstr "નિર્દેશિકા મળી નથી! કૃપા કર�
 msgid "Disconnect"
 msgstr "સંપર્ક તોડવો"
 
+#: u_translation.rsdisconnected3
+msgid "Disconnected"
+msgstr ""
+
 #: u_translation.rsdisconnectfr
 msgid "Disconnect from SAMP"
 msgstr "SAMP થી જોડાણ તોડી નાખવું"
+
+#: u_translation.rsdisconnectio
+#, object-pascal-format
+msgid "Disconnection error: %s"
+msgstr ""
 
 #: u_translation.rsdisplay
 msgid "Display"
@@ -1792,6 +1810,10 @@ msgstr "શું તમે તેને સાચવવા માંગો છ�
 #: u_translation.rsdrawalinetha
 msgid "Draw a line that displays the proper motion for the next"
 msgstr "એક રેખા દોરો જે આગામી માટે યોગ્ય ગતિ દર્શાવે છે"
+
+#: u_translation.rsdrawas
+msgid "Draw as"
+msgstr ""
 
 #: u_translation.rsdrawasdso
 msgid "Draw as DSO"
@@ -2011,7 +2033,7 @@ msgstr "સંપાત:"
 msgid "Equinox"
 msgstr "સંપાત"
 
-#: u_translation.rserror
+#: u_translation.rserror2
 msgid "Error"
 msgstr "ભૂલ"
 
@@ -2118,6 +2140,10 @@ msgstr "ઝાંખું"
 msgid "Faint Stars Size "
 msgstr "જીણા તારાઓ નું કદ "
 
+#: u_translation.rsfalse
+msgid "False"
+msgstr ""
+
 #: u_translation.rsfamily
 msgid "Family"
 msgstr "પરિવાર"
@@ -2137,6 +2163,10 @@ msgstr "મનગમતુ"
 #: u_translation.rsfebruary
 msgid "February"
 msgstr "ફેબ્રુઆરી"
+
+#: u_translation.rsfewerbuttons
+msgid "Fewer buttons for a cleaner space, access to other functions from the menu"
+msgstr ""
 
 #: u_translation.rsffmpegprogra
 msgid "ffmpeg program path"
@@ -2782,10 +2812,6 @@ msgstr "ઇન્ટરનેટ"
 msgid "Internet localization"
 msgstr "ઇન્ટરનેટ સ્થાનિકીકરણ"
 
-#: u_translation.rsinttelesco
-msgid "Integrated telescope driver."
-msgstr "સંકલિત ટેલિસ્કોપ ડ્રાઈવર."
-
 #: u_translation.rsinvalidepoch
 #, object-pascal-format
 msgid "invalid epoch on line%s: %s"
@@ -3261,6 +3287,10 @@ msgstr "માર્ચ"
 msgid "Mark"
 msgstr "નિશાની કરો"
 
+#: u_translation.rsmarksize
+msgid "Mark size"
+msgstr ""
+
 #: u_translation.rsmarkthechart
 msgid "Mark the centre of the chart"
 msgstr "નકશા નું મધ્ય અંકિત કરો"
@@ -3361,6 +3391,10 @@ msgstr "બુધ"
 msgid "Messages:"
 msgstr "સંદેશાઓ:"
 
+#: u_translation.rsmessages2
+msgid "Messages"
+msgstr ""
+
 #: u_translation.rsmeters
 msgid "Meters"
 msgstr "મીટરો"
@@ -3433,6 +3467,10 @@ msgstr "મહિનો"
 msgid "Moon"
 msgstr "ચંદ્ર"
 
+#: u_translation.rsmorebuttonsf
+msgid "More buttons for quick access to many functions"
+msgstr ""
+
 #: u_translation.rsmoreinformat
 msgid "More informations"
 msgstr "વધુ માહિતી"
@@ -3477,6 +3515,11 @@ msgstr "મોઝેક કેન્દ્ર"
 #: u_translation.rsmosaicsize
 msgid "Mosaic size"
 msgstr "મોઝેક કદ"
+
+#: u_translation.rsmountcapabil
+#, object-pascal-format
+msgid "Mount capabilities: %s"
+msgstr ""
 
 #: u_translation.rsmovelabel
 msgid "Move label"
@@ -3646,6 +3689,10 @@ msgstr "કોઈ મુદ્રક મળ્યું નથી!"
 #: u_translation.rsnopropermo
 msgid "(uncorrected for proper motion, no pm data available from this catalog)"
 msgstr "(યોગ્ય ગતિ માટે અયોગ્ય, આ સૂચિપત્ર માં કોઈ pm ડેટા ઉપલબ્ધ નથી)"
+
+#: u_translation.rsnoresponsefr
+msgid "No response from server"
+msgstr ""
 
 #: u_translation.rsnorth
 msgid "North"
@@ -4946,6 +4993,10 @@ msgstr "તમારી  સૂચિ માં વસ્તુઓનો પ્�
 msgid "Select time units"
 msgstr "સમય એકમો પસંદ કરો"
 
+#: u_translation.rsselectyourpr
+msgid "Select your preference for the button layout"
+msgstr ""
+
 #: u_translation.rssemi
 msgid "Semi"
 msgstr "આંશિક"
@@ -5296,6 +5347,11 @@ msgstr "નકશા ના મધ્ય તરફ ફેરવો"
 msgid "Slew to cursor position"
 msgstr "કર્સર ના સ્થાને ખસેડો"
 
+#: u_translation.rsslewtoeq
+#, object-pascal-format
+msgid "Slewing to %s %s/%s"
+msgstr ""
+
 #: u_translation.rsslower
 msgid "Slower"
 msgstr "ધીમું"
@@ -5510,6 +5566,10 @@ msgstr "મહિનો શરૂ કરો"
 msgid "Start of object"
 msgstr "પદાર્થ શરૂ કરો"
 
+#: u_translation.rsstarttracking
+msgid "start tracking"
+msgstr ""
+
 #: u_translation.rsstatus
 msgid "Status"
 msgstr ""
@@ -5537,6 +5597,10 @@ msgstr "બંધ કરો"
 #: u_translation.rsstoptcpipser
 msgid "Stop TCP/IP server"
 msgstr "TCP/IP  સર્વર બંધ કરો"
+
+#: u_translation.rsstoptelescop
+msgid "Stop telescope motion."
+msgstr ""
 
 #: u_translation.rssun
 msgid "Sun"
@@ -5590,6 +5654,11 @@ msgstr "સમન્વયન"
 #, object-pascal-format
 msgid "Synced to %s / %s"
 msgstr "%s / %s તરફ લયબધ"
+
+#: u_translation.rssynctoeq
+#, object-pascal-format
+msgid "Sync to %s %s/%s"
+msgstr ""
 
 #: u_translation.rssynodicmonth
 msgid "Synodic month"
@@ -5707,10 +5776,6 @@ msgstr "આ ક્રિયા દેશ %s માટે તમામ ડેટ�
 msgid "This catalog contain %s records. It is not possible to download in full for performance reason."
 msgstr "આ સૂચિપત્રમાં %s રેકોર્ડ્સ છે. પ્રદર્શનના કારણોસર સંપૂર્ણ ડાઉનલોડ કરવું શક્ય નથી."
 
-#: u_translation.rsthisdirectdr
-msgid "This direct driver is kept for compatibility, it may work or not for you. But the preference is to use the INDI or ASCOM driver for your telescope."
-msgstr "આ સીધો  ડ્રાઈવર સુસંગતતા માટે રાખવામાં આવ્યો છે, તે તમારા માટે  કદાચ કામ કરી શકે છે કે નહીં. પરંતુ પ્રાધાન્ય તમારા ટેલિસ્કોપ માટે INDI અથવા ASCOM ડ્રાઇવરનો ઉપયોગ કરવાની છે."
-
 #: u_translation.rsthisfilecont
 #, object-pascal-format
 msgid "This file contain %s elements.%sThis is probably a base file you want to load without the \"Append\" option.%sIt can affect the performance to append all this data to the current file%sDo you want to continue anyway?"
@@ -5719,6 +5784,10 @@ msgstr "આ ફાઇલમાં %s તત્વો છે. %s આ કદાચ
 #: u_translation.rsthisfilewasn
 msgid "This file was not recognized as a MPCORB file."
 msgstr "આ ફાઇલને MPCORB ફાઇલ તરીકે ઓળખવામાં આવી ન હતી."
+
+#: u_translation.rsthislayoutca
+msgid "This layout can be modified later using the menu Setup , Toolbar editor"
+msgstr ""
 
 #: u_translation.rsthisprogrami
 msgid "This program is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License"
@@ -5872,6 +5941,10 @@ msgstr "ઉષ્ણકટિબંધીય વર્ષ"
 msgid "Troposphere temperature lapse rate (K/km)"
 msgstr "પૃથ્વીની સપાટીથી સમતાપ મંડળ નું તાપમાન વિરામ દર (K/km)"
 
+#: u_translation.rstrue
+msgid "True"
+msgstr ""
+
 #: u_translation.rstrueequatore
 msgid "true equator, equinox and epoch of the date"
 msgstr "સાચું વિષુવવૃત્ત, વિષુવવૃત્ત અને તારીખનો યુગ"
@@ -5993,6 +6066,10 @@ msgstr "અસમર્થિત ફાઇલ એક્સ્ટેંશન: %s
 #: u_translation.rsunsupporteds
 msgid "Unsupported SAMP hub profile. Must be a File URL"
 msgstr "અસમર્થિત SAMP હબ પ્રોફાઇલ. ફાઇલ URL હોવું આવશ્યક છે"
+
+#: u_translation.rsunzipfile
+msgid "Unzip file"
+msgstr ""
 
 #: u_translation.rsup
 msgid "Up"

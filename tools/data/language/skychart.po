@@ -1114,10 +1114,6 @@ msgstr ""
 msgid "Please check your Internet connection and the URL definition"
 msgstr ""
 
-#: u_translation:rserror
-msgid "Error"
-msgstr ""
-
 #: u_translation:rspleaseconfig
 msgid "Please configure your DSS file path first."
 msgstr ""
@@ -4114,10 +4110,6 @@ msgstr ""
 msgid "ASCOM telescope interface"
 msgstr ""
 
-#: u_translation:rsinttelesco
-msgid "Integrated telescope driver."
-msgstr ""
-
 #: u_translation:rsusethemenuor
 msgid "Use the menu or button \"%s\" to configure this driver."
 msgstr ""
@@ -4396,10 +4388,6 @@ msgstr ""
 
 #: u_translation:rsclear
 msgid "Clear"
-msgstr ""
-
-#: u_translation:rsconnected
-msgid "Connected"
 msgstr ""
 
 #: u_translation:rsdiconnected
@@ -4928,10 +4916,6 @@ msgstr ""
 
 #: u_translation:rsselectrectan
 msgid "Select Rectangle"
-msgstr ""
-
-#: u_translation:rsadvancedsett2
-msgid "Advanced setting"
 msgstr ""
 
 #: u_translation:rsdonotchangea
@@ -5726,10 +5710,6 @@ msgstr ""
 msgid "Cannot download PDF help now"
 msgstr ""
 
-#: u_translation:rsthisdirectdr
-msgid "This direct driver is kept for compatibility, it may work or not for you. But the preference is to use the INDI or ASCOM driver for your telescope."
-msgstr ""
-
 #: u_translation:rscomputerises
 msgid "Compute rise/set time relative to this line"
 msgstr ""
@@ -6162,6 +6142,10 @@ msgstr ""
 msgid "Close the Setup window and launch the catalog installer tool?"
 msgstr ""
 
+#: u_translation:rsclosetheset2
+msgid "Close the Setup window and launch the catalog generation tool?"
+msgstr ""
+
 #: u_translation:rsrefreshtheli
 msgid "Refresh the list"
 msgstr ""
@@ -6212,5 +6196,93 @@ msgstr ""
 
 #: u_translation:rsspecializedd
 msgid "Specialized data"
+msgstr ""
+
+#: u_translation:rsunzipfile
+msgid "Unzip file"
+msgstr ""
+
+#: u_translation:rsselectyourpr
+msgid "Select your preference for the button layout"
+msgstr ""
+
+#: u_translation:rsthislayoutca
+msgid "This layout can be modified later using the menu Setup , Toolbar editor"
+msgstr ""
+
+#: u_translation:rsmorebuttonsf
+msgid "More buttons for quick access to many functions"
+msgstr ""
+
+#: u_translation:rsfewerbuttons
+msgid "Fewer buttons for a cleaner space, access to other functions from the menu"
+msgstr ""
+
+#: u_translation:rsconnected3
+msgid "Connected"
+msgstr ""
+
+#: u_translation:rsdisconnected3
+msgid "Disconnected"
+msgstr ""
+
+#: u_translation:rsmountcapabil
+msgid "Mount capabilities: %s"
+msgstr ""
+
+#: u_translation:rsslewtoeq
+msgid "Slewing to %s %s/%s"
+msgstr ""
+
+#: u_translation:rscannotsyncwh
+msgid "Cannot Sync when the mount is not tracking"
+msgstr ""
+
+#: u_translation:rssynctoeq
+msgid "Sync to %s %s/%s"
+msgstr ""
+
+#: u_translation:rsstarttracking
+msgid "start tracking"
+msgstr ""
+
+#: u_translation:rsstoptelescop
+msgid "Stop telescope motion."
+msgstr ""
+
+#: u_translation:rstrue
+msgid "True"
+msgstr ""
+
+#: u_translation:rsfalse
+msgid "False"
+msgstr ""
+
+#: u_translation:rsconnectioner
+msgid "Connection error: %s"
+msgstr ""
+
+#: u_translation:rsdisconnectio
+msgid "Disconnection error: %s"
+msgstr ""
+
+#: u_translation:rserror2
+msgid "Error"
+msgstr ""
+
+#: u_translation:rsnoresponsefr
+msgid "No response from server"
+msgstr ""
+
+#: u_translation:rsmessages2
+msgid "Messages"
+msgstr ""
+
+#: u_translation:rsdrawas
+msgid "Draw as"
+msgstr ""
+
+#: u_translation:rsmarksize
+msgid "Mark size"
 msgstr ""
 

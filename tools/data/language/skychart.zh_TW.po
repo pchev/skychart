@@ -2,15 +2,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: skychart.zh\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-01-12 19:57+0000\n"
+"POT-Creation-Date: 2024-06-05 07:33+0000\n"
 "PO-Revision-Date: 2021-04-07 08:53+0000\n"
 "Last-Translator: Po-Hsu Lin <po-hsu.lin@canonical.com>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2024-01-14 16:28+0000\n"
-"X-Generator: Launchpad (build e1eeab5b20e19239bd7d5f36676f7a52988db88b)\n"
+"X-Launchpad-Export-Date: 2024-06-05 07:56+0000\n"
+"X-Generator: Launchpad (build 4d1350fd3710dfe10d207fa9961e224cc481dca3)\n"
 "X-Poedit-Country: CHINA\n"
 "X-Poedit-Language: Chinese\n"
 
@@ -208,10 +208,6 @@ msgstr "進階"
 #: u_translation.rsadvancedsear
 msgid "Advanced search"
 msgstr "進階搜尋"
-
-#: u_translation.rsadvancedsett2
-msgid "Advanced setting"
-msgstr ""
 
 #: u_translation.rsage
 msgid "Age"
@@ -721,6 +717,10 @@ msgstr ""
 msgid "%sCannot open database %s! %s"
 msgstr "%s資料庫無法開啟 %s！%s"
 
+#: u_translation.rscannotsyncwh
+msgid "Cannot Sync when the mount is not tracking"
+msgstr ""
+
 #: u_translation.rscannotwritet
 msgid "Cannot write to"
 msgstr "不能寫至"
@@ -959,6 +959,10 @@ msgstr "關閉外觀"
 msgid "Close files"
 msgstr "關閉檔案"
 
+#: u_translation.rsclosetheset2
+msgid "Close the Setup window and launch the catalog generation tool?"
+msgstr ""
+
 #: u_translation.rsclosethesetu
 msgid "Close the Setup window and launch the catalog installer tool?"
 msgstr ""
@@ -1091,7 +1095,7 @@ msgstr ""
 msgid "Connect"
 msgstr ""
 
-#: u_translation.rsconnected
+#: u_translation.rsconnected3
 msgid "Connected"
 msgstr ""
 
@@ -1104,6 +1108,11 @@ msgstr "%s 連接從 %s，使用星圖 %s，連接時間：%s"
 #, object-pascal-format
 msgid "Connected to the SQL database %s"
 msgstr "連接到 SQL 資料庫 %s"
+
+#: u_translation.rsconnectioner
+#, object-pascal-format
+msgid "Connection error: %s"
+msgstr ""
 
 #: u_translation.rsconnectionli
 msgid "Connection lines between each position"
@@ -1636,8 +1645,17 @@ msgstr "未發現目錄！請安裝星圖的圖片封包。"
 msgid "Disconnect"
 msgstr ""
 
+#: u_translation.rsdisconnected3
+msgid "Disconnected"
+msgstr ""
+
 #: u_translation.rsdisconnectfr
 msgid "Disconnect from SAMP"
+msgstr ""
+
+#: u_translation.rsdisconnectio
+#, object-pascal-format
+msgid "Disconnection error: %s"
 msgstr ""
 
 #: u_translation.rsdisplay
@@ -1790,6 +1808,10 @@ msgstr ""
 #: u_translation.rsdrawalinetha
 msgid "Draw a line that displays the proper motion for the next"
 msgstr "畫線表示天體未來的自行"
+
+#: u_translation.rsdrawas
+msgid "Draw as"
+msgstr ""
 
 #: u_translation.rsdrawasdso
 msgid "Draw as DSO"
@@ -2009,7 +2031,7 @@ msgstr "春分點："
 msgid "Equinox"
 msgstr "春分點"
 
-#: u_translation.rserror
+#: u_translation.rserror2
 msgid "Error"
 msgstr "錯誤"
 
@@ -2116,6 +2138,10 @@ msgstr "暗"
 msgid "Faint Stars Size "
 msgstr "暗星大小 "
 
+#: u_translation.rsfalse
+msgid "False"
+msgstr ""
+
 #: u_translation.rsfamily
 msgid "Family"
 msgstr ""
@@ -2134,6 +2160,10 @@ msgstr ""
 
 #: u_translation.rsfebruary
 msgid "February"
+msgstr ""
+
+#: u_translation.rsfewerbuttons
+msgid "Fewer buttons for a cleaner space, access to other functions from the menu"
 msgstr ""
 
 #: u_translation.rsffmpegprogra
@@ -2780,10 +2810,6 @@ msgstr "網際網路"
 msgid "Internet localization"
 msgstr ""
 
-#: u_translation.rsinttelesco
-msgid "Integrated telescope driver."
-msgstr ""
-
 #: u_translation.rsinvalidepoch
 #, object-pascal-format
 msgid "invalid epoch on line%s: %s"
@@ -3259,6 +3285,10 @@ msgstr ""
 msgid "Mark"
 msgstr ""
 
+#: u_translation.rsmarksize
+msgid "Mark size"
+msgstr ""
+
 #: u_translation.rsmarkthechart
 msgid "Mark the centre of the chart"
 msgstr "標示星圖中心"
@@ -3359,6 +3389,10 @@ msgstr "水星"
 msgid "Messages:"
 msgstr "訊息："
 
+#: u_translation.rsmessages2
+msgid "Messages"
+msgstr ""
+
 #: u_translation.rsmeters
 msgid "Meters"
 msgstr "公尺"
@@ -3431,6 +3465,10 @@ msgstr "月"
 msgid "Moon"
 msgstr "月球"
 
+#: u_translation.rsmorebuttonsf
+msgid "More buttons for quick access to many functions"
+msgstr ""
+
 #: u_translation.rsmoreinformat
 msgid "More informations"
 msgstr ""
@@ -3474,6 +3512,11 @@ msgstr ""
 
 #: u_translation.rsmosaicsize
 msgid "Mosaic size"
+msgstr ""
+
+#: u_translation.rsmountcapabil
+#, object-pascal-format
+msgid "Mount capabilities: %s"
 msgstr ""
 
 #: u_translation.rsmovelabel
@@ -3644,6 +3687,10 @@ msgstr "找不到印表機！"
 #: u_translation.rsnopropermo
 msgid "(uncorrected for proper motion, no pm data available from this catalog)"
 msgstr "，没有自行"
+
+#: u_translation.rsnoresponsefr
+msgid "No response from server"
+msgstr ""
 
 #: u_translation.rsnorth
 msgid "North"
@@ -4944,6 +4991,10 @@ msgstr "選擇星表內的天體類型"
 msgid "Select time units"
 msgstr ""
 
+#: u_translation.rsselectyourpr
+msgid "Select your preference for the button layout"
+msgstr ""
+
 #: u_translation.rssemi
 msgid "Semi"
 msgstr "半"
@@ -5294,6 +5345,11 @@ msgstr ""
 msgid "Slew to cursor position"
 msgstr ""
 
+#: u_translation.rsslewtoeq
+#, object-pascal-format
+msgid "Slewing to %s %s/%s"
+msgstr ""
+
 #: u_translation.rsslower
 msgid "Slower"
 msgstr ""
@@ -5508,6 +5564,10 @@ msgstr "開始月"
 msgid "Start of object"
 msgstr "天體開始"
 
+#: u_translation.rsstarttracking
+msgid "start tracking"
+msgstr ""
+
 #: u_translation.rsstatus
 msgid "Status"
 msgstr ""
@@ -5535,6 +5595,10 @@ msgstr ""
 #: u_translation.rsstoptcpipser
 msgid "Stop TCP/IP server"
 msgstr "停止 TCP/IP 伺服器"
+
+#: u_translation.rsstoptelescop
+msgid "Stop telescope motion."
+msgstr ""
 
 #: u_translation.rssun
 msgid "Sun"
@@ -5587,6 +5651,11 @@ msgstr "同步"
 #: u_translation.rssyncedto
 #, object-pascal-format
 msgid "Synced to %s / %s"
+msgstr ""
+
+#: u_translation.rssynctoeq
+#, object-pascal-format
+msgid "Sync to %s %s/%s"
 msgstr ""
 
 #: u_translation.rssynodicmonth
@@ -5705,10 +5774,6 @@ msgstr "這個動作從 NGA 和 GNIS 更新資料，復寫國家 %s 所有資料
 msgid "This catalog contain %s records. It is not possible to download in full for performance reason."
 msgstr ""
 
-#: u_translation.rsthisdirectdr
-msgid "This direct driver is kept for compatibility, it may work or not for you. But the preference is to use the INDI or ASCOM driver for your telescope."
-msgstr ""
-
 #: u_translation.rsthisfilecont
 #, object-pascal-format
 msgid "This file contain %s elements.%sThis is probably a base file you want to load without the \"Append\" option.%sIt can affect the performance to append all this data to the current file%sDo you want to continue anyway?"
@@ -5717,6 +5782,10 @@ msgstr ""
 #: u_translation.rsthisfilewasn
 msgid "This file was not recognized as a MPCORB file."
 msgstr "此檔案確認非 MPCORB 檔案。"
+
+#: u_translation.rsthislayoutca
+msgid "This layout can be modified later using the menu Setup , Toolbar editor"
+msgstr ""
 
 #: u_translation.rsthisprogrami
 msgid "This program is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License"
@@ -5870,6 +5939,10 @@ msgstr "回歸年"
 msgid "Troposphere temperature lapse rate (K/km)"
 msgstr ""
 
+#: u_translation.rstrue
+msgid "True"
+msgstr ""
+
 #: u_translation.rstrueequatore
 msgid "true equator, equinox and epoch of the date"
 msgstr "真赤道，春分點和曆元的日期"
@@ -5990,6 +6063,10 @@ msgstr ""
 
 #: u_translation.rsunsupporteds
 msgid "Unsupported SAMP hub profile. Must be a File URL"
+msgstr ""
+
+#: u_translation.rsunzipfile
+msgid "Unzip file"
 msgstr ""
 
 #: u_translation.rsup

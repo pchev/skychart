@@ -3,15 +3,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: skychart.pt\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-01-12 19:57+0000\n"
-"PO-Revision-Date: 2023-11-06 14:13+0000\n"
+"POT-Creation-Date: 2024-06-05 07:33+0000\n"
+"PO-Revision-Date: 2024-01-16 20:38+0000\n"
 "Last-Translator: Angelo Rober Pulici <Unknown>\n"
 "Language-Team: Angelo Rober Pulici <apulici@terra.com.br>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2024-01-14 16:28+0000\n"
-"X-Generator: Launchpad (build e1eeab5b20e19239bd7d5f36676f7a52988db88b)\n"
+"X-Launchpad-Export-Date: 2024-06-05 07:56+0000\n"
+"X-Generator: Launchpad (build 4d1350fd3710dfe10d207fa9961e224cc481dca3)\n"
 "Language: pt_BR\n"
 
 #: u_translation.rs102cddss
@@ -208,10 +208,6 @@ msgstr "Configurações Avançadas"
 #: u_translation.rsadvancedsear
 msgid "Advanced search"
 msgstr "Pesquisa Avançada"
-
-#: u_translation.rsadvancedsett2
-msgid "Advanced setting"
-msgstr "Configuração avançada"
 
 #: u_translation.rsage
 msgid "Age"
@@ -721,6 +717,10 @@ msgstr "Não é possível obter o seu endereço IP, ou nenhum local encontrado p
 msgid "%sCannot open database %s! %s"
 msgstr "%sNão pode abrir o banco de dados %s! %s"
 
+#: u_translation.rscannotsyncwh
+msgid "Cannot Sync when the mount is not tracking"
+msgstr ""
+
 #: u_translation.rscannotwritet
 msgid "Cannot write to"
 msgstr "Não é possível gravar"
@@ -959,9 +959,13 @@ msgstr "Contorno fechado"
 msgid "Close files"
 msgstr "Fechar ficheiros"
 
+#: u_translation.rsclosetheset2
+msgid "Close the Setup window and launch the catalog generation tool?"
+msgstr ""
+
 #: u_translation.rsclosethesetu
 msgid "Close the Setup window and launch the catalog installer tool?"
-msgstr ""
+msgstr "Fechar a janela Configuração e iniciar a ferramenta de instalação do catálogo?"
 
 #: u_translation.rsclusterandne
 msgid "Cluster and nebula"
@@ -1091,7 +1095,7 @@ msgstr "Confirmar eliminação do ficheiro: "
 msgid "Connect"
 msgstr "Conectar"
 
-#: u_translation.rsconnected
+#: u_translation.rsconnected3
 msgid "Connected"
 msgstr "Conectedo"
 
@@ -1104,6 +1108,11 @@ msgstr "%s conectado com %s, usando carta %s, tempo de conexão:%s"
 #, object-pascal-format
 msgid "Connected to the SQL database %s"
 msgstr "Ligado à base de dados SQL %s"
+
+#: u_translation.rsconnectioner
+#, object-pascal-format
+msgid "Connection error: %s"
+msgstr ""
 
 #: u_translation.rsconnectionli
 msgid "Connection lines between each position"
@@ -1636,9 +1645,18 @@ msgstr "Diretório não encontrado! Instale o pacote Skychart Pictures."
 msgid "Disconnect"
 msgstr "Desconectado"
 
+#: u_translation.rsdisconnected3
+msgid "Disconnected"
+msgstr ""
+
 #: u_translation.rsdisconnectfr
 msgid "Disconnect from SAMP"
 msgstr "Desconectar da SAMP"
+
+#: u_translation.rsdisconnectio
+#, object-pascal-format
+msgid "Disconnection error: %s"
+msgstr ""
 
 #: u_translation.rsdisplay
 msgid "Display"
@@ -1790,6 +1808,10 @@ msgstr "Deseja guardá-la?"
 #: u_translation.rsdrawalinetha
 msgid "Draw a line that displays the proper motion for the next"
 msgstr "Desenhar uma linha que represente o movimento próprio para os próximos"
+
+#: u_translation.rsdrawas
+msgid "Draw as"
+msgstr ""
 
 #: u_translation.rsdrawasdso
 msgid "Draw as DSO"
@@ -2009,7 +2031,7 @@ msgstr "Equinócio:"
 msgid "Equinox"
 msgstr "Equinócio"
 
-#: u_translation.rserror
+#: u_translation.rserror2
 msgid "Error"
 msgstr "Erro"
 
@@ -2116,6 +2138,10 @@ msgstr "Mais esbatida"
 msgid "Faint Stars Size "
 msgstr "Tamanho de Estrelas Débeis "
 
+#: u_translation.rsfalse
+msgid "False"
+msgstr ""
+
 #: u_translation.rsfamily
 msgid "Family"
 msgstr "Família"
@@ -2135,6 +2161,10 @@ msgstr "Favorito"
 #: u_translation.rsfebruary
 msgid "February"
 msgstr "Fevereiro"
+
+#: u_translation.rsfewerbuttons
+msgid "Fewer buttons for a cleaner space, access to other functions from the menu"
+msgstr ""
 
 #: u_translation.rsffmpegprogra
 msgid "ffmpeg program path"
@@ -2725,52 +2755,52 @@ msgstr "Inclusão falhou! %s"
 
 #: u_translation.rsinstall
 msgid "Install"
-msgstr ""
+msgstr "Instalar"
 
 #: u_translation.rsinstalladdit
 msgid "Install additional DSO catalog for the objects you want to observe"
-msgstr ""
+msgstr "Instale um catálogo DSO adicional para os objetos que você deseja observar"
 
 #: u_translation.rsinstalled
 msgid "Installed"
-msgstr ""
+msgstr "Instalado"
 
 #: u_translation.rsinstallephem
 msgid "Install ephemeris data to improve the computation of solar system objects"
-msgstr ""
+msgstr "Instale dados de efemérides para melhorar o cálculo de objetos do sistema solar"
 
 #: u_translation.rsinstalling
 msgid "Installing"
-msgstr ""
+msgstr "Instalando"
 
 #: u_translation.rsinstallnewve
 #, object-pascal-format
 msgid "Install new version %s over %s"
-msgstr ""
+msgstr "Instale a nova versão %s em %s"
 
 #: u_translation.rsinstallobjec
 msgid "Install object catalog"
-msgstr ""
+msgstr "Instalar catálogo de objetos"
 
 #: u_translation.rsinstalloneof
 msgid "Install one of the variable star catalog, depending on your interest and instrumentation"
-msgstr ""
+msgstr "Instale um dos catálogos de estrelas variáveis, dependendo do seu interesse e instrumentação"
 
 #: u_translation.rsinstalloneof2
 msgid "Install one of the double star catalog, depending on your interest and instrumentation"
-msgstr ""
+msgstr "Instale um dos catálogos de estrelas duplas, dependendo do seu interesse e instrumentação"
 
 #: u_translation.rsinstallpictu
 msgid "Install pictures for this DSO catalog"
-msgstr ""
+msgstr "Instale imagens para este catálogo DSO"
 
 #: u_translation.rsinstallspeci
 msgid "Specialized catalog for specific use"
-msgstr ""
+msgstr "Catálogo especializado para uso específico"
 
 #: u_translation.rsinstallstarc
 msgid "Install more stars down to the lowest required magnitude"
-msgstr ""
+msgstr "Instale mais estrelas até a magnitude mais baixa necessária"
 
 #: u_translation.rsinternet
 msgid "Internet"
@@ -2779,10 +2809,6 @@ msgstr "Internet"
 #: u_translation.rsinternetloca
 msgid "Internet localization"
 msgstr "Localização da Internet"
-
-#: u_translation.rsinttelesco
-msgid "Integrated telescope driver."
-msgstr "Driver de telescópio integrado."
 
 #: u_translation.rsinvalidepoch
 #, object-pascal-format
@@ -3259,6 +3285,10 @@ msgstr "Março"
 msgid "Mark"
 msgstr "Marca"
 
+#: u_translation.rsmarksize
+msgid "Mark size"
+msgstr ""
+
 #: u_translation.rsmarkthechart
 msgid "Mark the centre of the chart"
 msgstr "Marcar o centro da carta"
@@ -3359,6 +3389,10 @@ msgstr "Mercúrio"
 msgid "Messages:"
 msgstr "Mensagens:"
 
+#: u_translation.rsmessages2
+msgid "Messages"
+msgstr ""
+
 #: u_translation.rsmeters
 msgid "Meters"
 msgstr "Metros"
@@ -3409,7 +3443,7 @@ msgstr "Outras linhas"
 
 #: u_translation.rsmissingprere
 msgid "Missing prerequisites"
-msgstr ""
+msgstr "Pré-requisitos ausentes"
 
 #: u_translation.rsmissingscrip
 msgid "Missing script title!"
@@ -3430,6 +3464,10 @@ msgstr "Mês"
 #: u_translation.rsmoon
 msgid "Moon"
 msgstr "Lua"
+
+#: u_translation.rsmorebuttonsf
+msgid "More buttons for quick access to many functions"
+msgstr ""
 
 #: u_translation.rsmoreinformat
 msgid "More informations"
@@ -3475,6 +3513,11 @@ msgstr "Centro do mosaico"
 #: u_translation.rsmosaicsize
 msgid "Mosaic size"
 msgstr "Tamanho de mosaico"
+
+#: u_translation.rsmountcapabil
+#, object-pascal-format
+msgid "Mount capabilities: %s"
+msgstr ""
 
 #: u_translation.rsmovelabel
 msgid "Move label"
@@ -3644,6 +3687,10 @@ msgstr "Impressora não encontrada!"
 #: u_translation.rsnopropermo
 msgid "(uncorrected for proper motion, no pm data available from this catalog)"
 msgstr "(não corrigido para o movimento correto, nenhum dado de \"pm\" disponível neste catálogo)"
+
+#: u_translation.rsnoresponsefr
+msgid "No response from server"
+msgstr ""
 
 #: u_translation.rsnorth
 msgid "North"
@@ -3881,7 +3928,7 @@ msgstr "Abrir uma carta"
 
 #: u_translation.rsopencatalogs
 msgid "Open Catalog Setup"
-msgstr ""
+msgstr "Abrir Configuração de Catálogo"
 
 #: u_translation.rsopencluster
 msgid "Open cluster"
@@ -4525,7 +4572,7 @@ msgstr "Taxa de atualização"
 
 #: u_translation.rsrefreshtheli
 msgid "Refresh the list"
-msgstr ""
+msgstr "Atualizar a lista"
 
 #: u_translation.rsreleasenotes
 msgid "Release notes"
@@ -4922,7 +4969,7 @@ msgstr "Selecionar script"
 
 #: u_translation.rsselectthecat
 msgid "Select the catalog to install or remove"
-msgstr ""
+msgstr "Selecione o catálogo para instalar ou remover"
 
 #: u_translation.rsselectthefie
 msgid "Select the fields to use and their position in the text file"
@@ -4943,6 +4990,10 @@ msgstr "Selecionar o tipo de objeto no seu catálogo"
 #: u_translation.rsselecttimeun
 msgid "Select time units"
 msgstr "Selecione as unidades de tempo"
+
+#: u_translation.rsselectyourpr
+msgid "Select your preference for the button layout"
+msgstr ""
 
 #: u_translation.rssemi
 msgid "Semi"
@@ -5294,6 +5345,11 @@ msgstr "Mover para o centro da carta"
 msgid "Slew to cursor position"
 msgstr "Mover p/ a posição do cursor"
 
+#: u_translation.rsslewtoeq
+#, object-pascal-format
+msgid "Slewing to %s %s/%s"
+msgstr ""
+
 #: u_translation.rsslower
 msgid "Slower"
 msgstr "Mais lento"
@@ -5382,7 +5438,7 @@ msgstr "Espaçador"
 
 #: u_translation.rsspecializedd
 msgid "Specialized data"
-msgstr ""
+msgstr "Dados especializados"
 
 #: u_translation.rsspectralclas
 msgid "Spectral class"
@@ -5442,7 +5498,7 @@ msgstr "Limite de estrelas e nebulosas"
 
 #: u_translation.rsstarcatalogi
 msgid "Star catalog index"
-msgstr ""
+msgstr "Índice de catálogo de  estrelas"
 
 #: u_translation.rsstarcolourbv
 msgid "Star colour (B-V):"
@@ -5508,9 +5564,13 @@ msgstr "Mês da Estrela"
 msgid "Start of object"
 msgstr "Início do objeto"
 
+#: u_translation.rsstarttracking
+msgid "start tracking"
+msgstr ""
+
 #: u_translation.rsstatus
 msgid "Status"
-msgstr ""
+msgstr "Status"
 
 #: u_translation.rsstatusbar
 msgid "Status bar"
@@ -5535,6 +5595,10 @@ msgstr "Parar"
 #: u_translation.rsstoptcpipser
 msgid "Stop TCP/IP server"
 msgstr "Parar servidor TCP/IP"
+
+#: u_translation.rsstoptelescop
+msgid "Stop telescope motion."
+msgstr ""
 
 #: u_translation.rssun
 msgid "Sun"
@@ -5588,6 +5652,11 @@ msgstr "Sincronizar"
 #, object-pascal-format
 msgid "Synced to %s / %s"
 msgstr "Sincronizado de %s / %s"
+
+#: u_translation.rssynctoeq
+#, object-pascal-format
+msgid "Sync to %s %s/%s"
+msgstr ""
 
 #: u_translation.rssynodicmonth
 msgid "Synodic month"
@@ -5705,10 +5774,6 @@ msgstr "Esta ação substitui todo o conteúdo do banco de dados para o país%s 
 msgid "This catalog contain %s records. It is not possible to download in full for performance reason."
 msgstr "Este catálogo contêm %s registos. Não é possível transferir em completo devido ao desempenho."
 
-#: u_translation.rsthisdirectdr
-msgid "This direct driver is kept for compatibility, it may work or not for you. But the preference is to use the INDI or ASCOM driver for your telescope."
-msgstr "Este controlador direto é mantido para compatibilidade, este pode funcionar ou não para si. Mas a preferência é utilizar o controlador INDI ou ASCOM para o seu telescópio."
-
 #: u_translation.rsthisfilecont
 #, object-pascal-format
 msgid "This file contain %s elements.%sThis is probably a base file you want to load without the \"Append\" option.%sIt can affect the performance to append all this data to the current file%sDo you want to continue anyway?"
@@ -5717,6 +5782,10 @@ msgstr "Este arquivo contém %s elementos.%s Este é provavelmente um arquivo ba
 #: u_translation.rsthisfilewasn
 msgid "This file was not recognized as a MPCORB file."
 msgstr "Este ficheiro não foi reconhecido como um ficheiro MPCORB."
+
+#: u_translation.rsthislayoutca
+msgid "This layout can be modified later using the menu Setup , Toolbar editor"
+msgstr ""
 
 #: u_translation.rsthisprogrami
 msgid "This program is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License"
@@ -5764,7 +5833,7 @@ msgstr "até"
 
 #: u_translation.rstoconfiguret
 msgid "To configure the catalog details"
-msgstr ""
+msgstr "Para configurar os detalhes do catálogo"
 
 #: u_translation.rstoday
 msgid "Today"
@@ -5870,6 +5939,10 @@ msgstr "Ano Tropical"
 msgid "Troposphere temperature lapse rate (K/km)"
 msgstr "Taxa de queda de temperatura da Troposfera (K/km)"
 
+#: u_translation.rstrue
+msgid "True"
+msgstr ""
+
 #: u_translation.rstrueequatore
 msgid "true equator, equinox and epoch of the date"
 msgstr "equador verdadeiro, equinócio e época da data"
@@ -5957,7 +6030,7 @@ msgstr "Anular última alteração"
 
 #: u_translation.rsuninstall
 msgid "Uninstall"
-msgstr ""
+msgstr "Desinstalar"
 
 #: u_translation.rsunits
 msgid "Units"
@@ -5991,6 +6064,10 @@ msgstr "Extensão de ficheiro não suportada: % sPor favor corrija-a."
 #: u_translation.rsunsupporteds
 msgid "Unsupported SAMP hub profile. Must be a File URL"
 msgstr "Perfil de \"hub\" SAMP não suportado. Deve ser um URL de Ficheiro"
+
+#: u_translation.rsunzipfile
+msgid "Unzip file"
+msgstr ""
 
 #: u_translation.rsup
 msgid "Up"
@@ -6083,7 +6160,7 @@ msgstr "Usar Servidor TCP/IP"
 #: u_translation.rsusethebutton
 #, object-pascal-format
 msgid "Use the button below or the menu \"%s/%s\" to install a double and variable star catalog"
-msgstr ""
+msgstr "Utilize o botão abaixo ou o menu \"%s/%s\" para instalar um catálogo de estrelas duplas e variáveis"
 
 #: u_translation.rsusetheintern
 msgid "Use the internal INDI gui panel"

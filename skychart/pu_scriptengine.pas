@@ -2329,7 +2329,7 @@ begin
     on E: Exception do
     begin
       CompileMemo.Lines.Add(E.Message);
-      CompileMemo.Lines.Add(rsError);
+      CompileMemo.Lines.Add(rsError2);
     end;
   end;
 end;

@@ -293,7 +293,6 @@ resourcestring
   rsPleaseEnterA = 'Please enter an object identifier.';
   rsNotFound = '%s not found';
   rsPleaseCheckY = 'Please check your Internet connection and the URL definition';
-  rsError = 'Error';
   rsPleaseConfig = 'Please configure your DSS file path first.';
   rsFieldTooWidt = 'Field too wide! Maximum is %s';
   rsEstimatedFil = 'Estimated file size: %sMB %sDo you want to continue?';
@@ -1139,7 +1138,6 @@ resourcestring
     + 'properly.';
   rsSeeHttpAscom = 'See %s for more information.';
   rsClear = 'Clear';
-  rsConnected = 'Connected';
   rsDiconnected = 'Diconnected';
   rsStop = 'Stop';
   rsClearTarget = 'Clear Target';
@@ -1609,7 +1607,7 @@ resourcestring
   rsThisLayoutCa = 'This layout can be modified later using the menu Setup , Toolbar editor';
   rsMoreButtonsF = 'More buttons for quick access to many functions';
   rsFewerButtons = 'Fewer buttons for a cleaner space, access to other functions from the menu';
-  rsConnected3 = 'Connected';  // keep duplicate for compatibility with ccdciel source
+  rsConnected3 = 'Connected';
   rsDisconnected3 = 'Disconnected';
   rsMountCapabil = 'Mount capabilities: %s';
   rsSlewToEQ = 'Slewing to %s %s/%s';

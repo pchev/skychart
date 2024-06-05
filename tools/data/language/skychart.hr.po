@@ -4,15 +4,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: skychart.en\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-01-12 19:57+0000\n"
+"POT-Creation-Date: 2024-06-05 07:33+0000\n"
 "PO-Revision-Date: 2016-12-11 08:48+0000\n"
 "Last-Translator: Patrick Chevalley <Unknown>\n"
 "Language-Team: French <kde-i18n-doc@kde.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2024-01-14 16:28+0000\n"
-"X-Generator: Launchpad (build e1eeab5b20e19239bd7d5f36676f7a52988db88b)\n"
+"X-Launchpad-Export-Date: 2024-06-05 07:56+0000\n"
+"X-Generator: Launchpad (build 4d1350fd3710dfe10d207fa9961e224cc481dca3)\n"
 "Language: fr\n"
 
 #: u_translation.rs102cddss
@@ -209,10 +209,6 @@ msgstr "Napredno"
 #: u_translation.rsadvancedsear
 msgid "Advanced search"
 msgstr "Napredne opcije"
-
-#: u_translation.rsadvancedsett2
-msgid "Advanced setting"
-msgstr ""
 
 #: u_translation.rsage
 msgid "Age"
@@ -722,6 +718,10 @@ msgstr ""
 msgid "%sCannot open database %s! %s"
 msgstr "%sNe mogu otvoriti bazu podataka %s! %s"
 
+#: u_translation.rscannotsyncwh
+msgid "Cannot Sync when the mount is not tracking"
+msgstr ""
+
 #: u_translation.rscannotwritet
 msgid "Cannot write to"
 msgstr "NE mogu zapisati na"
@@ -960,6 +960,10 @@ msgstr "Zatvoren obris"
 msgid "Close files"
 msgstr "Zatvori datoteku"
 
+#: u_translation.rsclosetheset2
+msgid "Close the Setup window and launch the catalog generation tool?"
+msgstr ""
+
 #: u_translation.rsclosethesetu
 msgid "Close the Setup window and launch the catalog installer tool?"
 msgstr ""
@@ -1092,7 +1096,7 @@ msgstr ""
 msgid "Connect"
 msgstr "Spoji"
 
-#: u_translation.rsconnected
+#: u_translation.rsconnected3
 msgid "Connected"
 msgstr "Spojeno"
 
@@ -1105,6 +1109,11 @@ msgstr ""
 #, object-pascal-format
 msgid "Connected to the SQL database %s"
 msgstr "Spoji se na SQL bazu podataka %s"
+
+#: u_translation.rsconnectioner
+#, object-pascal-format
+msgid "Connection error: %s"
+msgstr ""
 
 #: u_translation.rsconnectionli
 msgid "Connection lines between each position"
@@ -1637,8 +1646,17 @@ msgstr "Direktorij nije pronađen! Molimo instalirajte Skychart Pictures package
 msgid "Disconnect"
 msgstr "Iskopčaj"
 
+#: u_translation.rsdisconnected3
+msgid "Disconnected"
+msgstr ""
+
 #: u_translation.rsdisconnectfr
 msgid "Disconnect from SAMP"
+msgstr ""
+
+#: u_translation.rsdisconnectio
+#, object-pascal-format
+msgid "Disconnection error: %s"
 msgstr ""
 
 #: u_translation.rsdisplay
@@ -1791,6 +1809,10 @@ msgstr ""
 #: u_translation.rsdrawalinetha
 msgid "Draw a line that displays the proper motion for the next"
 msgstr "Iscrtaj liniju gibanja za pravilno gibanje za sljedeći"
+
+#: u_translation.rsdrawas
+msgid "Draw as"
+msgstr ""
 
 #: u_translation.rsdrawasdso
 msgid "Draw as DSO"
@@ -2010,7 +2032,7 @@ msgstr "Ravnodnevnica:"
 msgid "Equinox"
 msgstr "Ravnodnevnica"
 
-#: u_translation.rserror
+#: u_translation.rserror2
 msgid "Error"
 msgstr "Greška"
 
@@ -2117,6 +2139,10 @@ msgstr "Slabije"
 msgid "Faint Stars Size "
 msgstr "Umanji veličinu zvijezda "
 
+#: u_translation.rsfalse
+msgid "False"
+msgstr ""
+
 #: u_translation.rsfamily
 msgid "Family"
 msgstr ""
@@ -2135,6 +2161,10 @@ msgstr "Favorit"
 
 #: u_translation.rsfebruary
 msgid "February"
+msgstr ""
+
+#: u_translation.rsfewerbuttons
+msgid "Fewer buttons for a cleaner space, access to other functions from the menu"
 msgstr ""
 
 #: u_translation.rsffmpegprogra
@@ -2781,10 +2811,6 @@ msgstr "Internet"
 msgid "Internet localization"
 msgstr ""
 
-#: u_translation.rsinttelesco
-msgid "Integrated telescope driver."
-msgstr "Integrirani driver za teleskop"
-
 #: u_translation.rsinvalidepoch
 #, object-pascal-format
 msgid "invalid epoch on line%s: %s"
@@ -3260,6 +3286,10 @@ msgstr ""
 msgid "Mark"
 msgstr ""
 
+#: u_translation.rsmarksize
+msgid "Mark size"
+msgstr ""
+
 #: u_translation.rsmarkthechart
 msgid "Mark the centre of the chart"
 msgstr "Označi sredinu karte"
@@ -3360,6 +3390,10 @@ msgstr "Merkur"
 msgid "Messages:"
 msgstr "Poruke:"
 
+#: u_translation.rsmessages2
+msgid "Messages"
+msgstr ""
+
 #: u_translation.rsmeters
 msgid "Meters"
 msgstr "Metri"
@@ -3432,6 +3466,10 @@ msgstr "Mjesec"
 msgid "Moon"
 msgstr "Mjesec"
 
+#: u_translation.rsmorebuttonsf
+msgid "More buttons for quick access to many functions"
+msgstr ""
+
 #: u_translation.rsmoreinformat
 msgid "More informations"
 msgstr ""
@@ -3475,6 +3513,11 @@ msgstr ""
 
 #: u_translation.rsmosaicsize
 msgid "Mosaic size"
+msgstr ""
+
+#: u_translation.rsmountcapabil
+#, object-pascal-format
+msgid "Mount capabilities: %s"
 msgstr ""
 
 #: u_translation.rsmovelabel
@@ -3644,6 +3687,10 @@ msgstr "Nije pronađen pisač!"
 
 #: u_translation.rsnopropermo
 msgid "(uncorrected for proper motion, no pm data available from this catalog)"
+msgstr ""
+
+#: u_translation.rsnoresponsefr
+msgid "No response from server"
 msgstr ""
 
 #: u_translation.rsnorth
@@ -4945,6 +4992,10 @@ msgstr "Odaberite vrstu objekta u vašem katalogu"
 msgid "Select time units"
 msgstr ""
 
+#: u_translation.rsselectyourpr
+msgid "Select your preference for the button layout"
+msgstr ""
+
 #: u_translation.rssemi
 msgid "Semi"
 msgstr "Polu"
@@ -5295,6 +5346,11 @@ msgstr ""
 msgid "Slew to cursor position"
 msgstr "Okreni na mjesto kursora"
 
+#: u_translation.rsslewtoeq
+#, object-pascal-format
+msgid "Slewing to %s %s/%s"
+msgstr ""
+
 #: u_translation.rsslower
 msgid "Slower"
 msgstr ""
@@ -5509,6 +5565,10 @@ msgstr "Započni mjesec"
 msgid "Start of object"
 msgstr "Početak objekta"
 
+#: u_translation.rsstarttracking
+msgid "start tracking"
+msgstr ""
+
 #: u_translation.rsstatus
 msgid "Status"
 msgstr ""
@@ -5536,6 +5596,10 @@ msgstr "Stop"
 #: u_translation.rsstoptcpipser
 msgid "Stop TCP/IP server"
 msgstr "Stop TCP/IP server"
+
+#: u_translation.rsstoptelescop
+msgid "Stop telescope motion."
+msgstr ""
 
 #: u_translation.rssun
 msgid "Sun"
@@ -5588,6 +5652,11 @@ msgstr "Sinkronizacija"
 #: u_translation.rssyncedto
 #, object-pascal-format
 msgid "Synced to %s / %s"
+msgstr ""
+
+#: u_translation.rssynctoeq
+#, object-pascal-format
+msgid "Sync to %s %s/%s"
 msgstr ""
 
 #: u_translation.rssynodicmonth
@@ -5706,10 +5775,6 @@ msgstr "Ova će akcija prebrisati sav sadržaj za zemlju %s, sa svježim podacim
 msgid "This catalog contain %s records. It is not possible to download in full for performance reason."
 msgstr ""
 
-#: u_translation.rsthisdirectdr
-msgid "This direct driver is kept for compatibility, it may work or not for you. But the preference is to use the INDI or ASCOM driver for your telescope."
-msgstr ""
-
 #: u_translation.rsthisfilecont
 #, object-pascal-format
 msgid "This file contain %s elements.%sThis is probably a base file you want to load without the \"Append\" option.%sIt can affect the performance to append all this data to the current file%sDo you want to continue anyway?"
@@ -5718,6 +5783,10 @@ msgstr ""
 #: u_translation.rsthisfilewasn
 msgid "This file was not recognized as a MPCORB file."
 msgstr "Ova datoteka nije prepoznata kao MPCORB datoteka."
+
+#: u_translation.rsthislayoutca
+msgid "This layout can be modified later using the menu Setup , Toolbar editor"
+msgstr ""
 
 #: u_translation.rsthisprogrami
 msgid "This program is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License"
@@ -5871,6 +5940,10 @@ msgstr "Tropska godina"
 msgid "Troposphere temperature lapse rate (K/km)"
 msgstr ""
 
+#: u_translation.rstrue
+msgid "True"
+msgstr ""
+
 #: u_translation.rstrueequatore
 msgid "true equator, equinox and epoch of the date"
 msgstr "pravi ekvator, ekvinocij i epoha datuma"
@@ -5991,6 +6064,10 @@ msgstr ""
 
 #: u_translation.rsunsupporteds
 msgid "Unsupported SAMP hub profile. Must be a File URL"
+msgstr ""
+
+#: u_translation.rsunzipfile
+msgid "Unzip file"
 msgstr ""
 
 #: u_translation.rsup

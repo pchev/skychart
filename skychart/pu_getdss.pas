@@ -314,7 +314,7 @@ begin
       end;
       if (DownloadDialog1.ResponseText <> '') and (not Result) then
       begin
-        Caption := rsError;
+        Caption := rsError2;
         Label1.Caption := DownloadDialog1.ResponseText;
         RenameFile(ExpandFileName(cfgdss.dssfile), ExpandFileName(cfgdss.dssfile) + '.txt');
         Memo1.Visible:=true;

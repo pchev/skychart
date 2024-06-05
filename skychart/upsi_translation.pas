@@ -299,7 +299,7 @@ begin
   CL.AddConstantN('rsPleaseEnterA', 'String').SetString(rsPleaseEnterA);
   CL.AddConstantN('rsNotFound', 'String').SetString(rsNotFound);
   CL.AddConstantN('rsPleaseCheckY', 'String').SetString(rsPleaseCheckY);
-  CL.AddConstantN('rsError', 'String').SetString(rsError);
+  CL.AddConstantN('rsError', 'String').SetString(rsError2);
   CL.AddConstantN('rsPleaseConfig', 'String').SetString(rsPleaseConfig);
   CL.AddConstantN('rsFieldTooWidt', 'String').SetString(rsFieldTooWidt);
   CL.AddConstantN('rsEstimatedFil', 'String').SetString(rsEstimatedFil);
@@ -1119,7 +1119,7 @@ begin
   CL.AddConstantN('rsPleaseEnsure', 'String').SetString(rsPleaseEnsure);
   CL.AddConstantN('rsSeeHttpAscom', 'String').SetString(rsSeeHttpAscom);
   CL.AddConstantN('rsClear', 'String').SetString(rsClear);
-  CL.AddConstantN('rsConnected', 'String').SetString(rsConnected);
+  CL.AddConstantN('rsConnected', 'String').SetString(rsConnected3);
   CL.AddConstantN('rsDiconnected', 'String').SetString(rsDiconnected);
   CL.AddConstantN('rsStop', 'String').SetString(rsStop);
   CL.AddConstantN('rsClearTarget', 'String').SetString(rsClearTarget);

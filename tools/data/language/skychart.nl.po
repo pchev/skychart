@@ -3,15 +3,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: skychart.en\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-01-12 19:57+0000\n"
+"POT-Creation-Date: 2024-06-05 07:33+0000\n"
 "PO-Revision-Date: 2023-02-01 13:43+0000\n"
 "Last-Translator: Marc Fokker <marc@marcfokker.nl>\n"
 "Language-Team: <translation@ap-i.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2024-01-14 16:28+0000\n"
-"X-Generator: Launchpad (build e1eeab5b20e19239bd7d5f36676f7a52988db88b)\n"
+"X-Launchpad-Export-Date: 2024-06-05 07:56+0000\n"
+"X-Generator: Launchpad (build 4d1350fd3710dfe10d207fa9961e224cc481dca3)\n"
 
 #: u_translation.rs102cddss
 msgid "102 CD DSS"
@@ -207,10 +207,6 @@ msgstr "Geavanceerd"
 #: u_translation.rsadvancedsear
 msgid "Advanced search"
 msgstr "Geavanceerd zoeken"
-
-#: u_translation.rsadvancedsett2
-msgid "Advanced setting"
-msgstr "Geavanceerde instelling"
 
 #: u_translation.rsage
 msgid "Age"
@@ -720,6 +716,10 @@ msgstr "Kan niet je IP-adres achterhalen, of geen locatie gevonden voor dit adre
 msgid "%sCannot open database %s! %s"
 msgstr "%sKan niet de database %s openen! %s"
 
+#: u_translation.rscannotsyncwh
+msgid "Cannot Sync when the mount is not tracking"
+msgstr ""
+
 #: u_translation.rscannotwritet
 msgid "Cannot write to"
 msgstr "Kan niet schrijven naar"
@@ -958,6 +958,10 @@ msgstr "Gesloten contour"
 msgid "Close files"
 msgstr "Sluit bestanden"
 
+#: u_translation.rsclosetheset2
+msgid "Close the Setup window and launch the catalog generation tool?"
+msgstr ""
+
 #: u_translation.rsclosethesetu
 msgid "Close the Setup window and launch the catalog installer tool?"
 msgstr ""
@@ -1090,7 +1094,7 @@ msgstr "Bevestig verwijderen van bestand: "
 msgid "Connect"
 msgstr "Verbind"
 
-#: u_translation.rsconnected
+#: u_translation.rsconnected3
 msgid "Connected"
 msgstr "Verbonden"
 
@@ -1103,6 +1107,11 @@ msgstr "%s verbonden met %s, gebruikt kaart %s, verbonden tijd:%s"
 #, object-pascal-format
 msgid "Connected to the SQL database %s"
 msgstr "Verbonden met SQL database %s"
+
+#: u_translation.rsconnectioner
+#, object-pascal-format
+msgid "Connection error: %s"
+msgstr ""
 
 #: u_translation.rsconnectionli
 msgid "Connection lines between each position"
@@ -1635,9 +1644,18 @@ msgstr "Map niet gevonden! Installeer het Skychart Pictures pakket."
 msgid "Disconnect"
 msgstr "Ontkoppel"
 
+#: u_translation.rsdisconnected3
+msgid "Disconnected"
+msgstr ""
+
 #: u_translation.rsdisconnectfr
 msgid "Disconnect from SAMP"
 msgstr "Ontkoppel van SAMP"
+
+#: u_translation.rsdisconnectio
+#, object-pascal-format
+msgid "Disconnection error: %s"
+msgstr ""
 
 #: u_translation.rsdisplay
 msgid "Display"
@@ -1789,6 +1807,10 @@ msgstr "Wil je dit opslaan?"
 #: u_translation.rsdrawalinetha
 msgid "Draw a line that displays the proper motion for the next"
 msgstr "Beeld een lijn af die de eigenbeweging weergeeft voor de volgende"
+
+#: u_translation.rsdrawas
+msgid "Draw as"
+msgstr ""
 
 #: u_translation.rsdrawasdso
 msgid "Draw as DSO"
@@ -2008,7 +2030,7 @@ msgstr "Equinox:"
 msgid "Equinox"
 msgstr "Equinox"
 
-#: u_translation.rserror
+#: u_translation.rserror2
 msgid "Error"
 msgstr "Fout"
 
@@ -2115,6 +2137,10 @@ msgstr "Zwakker"
 msgid "Faint Stars Size "
 msgstr "Zwakke sterren grootte "
 
+#: u_translation.rsfalse
+msgid "False"
+msgstr ""
+
 #: u_translation.rsfamily
 msgid "Family"
 msgstr "Familie"
@@ -2134,6 +2160,10 @@ msgstr "Favoriet"
 #: u_translation.rsfebruary
 msgid "February"
 msgstr "februari"
+
+#: u_translation.rsfewerbuttons
+msgid "Fewer buttons for a cleaner space, access to other functions from the menu"
+msgstr ""
 
 #: u_translation.rsffmpegprogra
 msgid "ffmpeg program path"
@@ -2779,10 +2809,6 @@ msgstr "Internet"
 msgid "Internet localization"
 msgstr "Internet localisatie"
 
-#: u_translation.rsinttelesco
-msgid "Integrated telescope driver."
-msgstr "Geïntegreerde telescoop stuurprogramma"
-
 #: u_translation.rsinvalidepoch
 #, object-pascal-format
 msgid "invalid epoch on line%s: %s"
@@ -3258,6 +3284,10 @@ msgstr "maart"
 msgid "Mark"
 msgstr "Markeren"
 
+#: u_translation.rsmarksize
+msgid "Mark size"
+msgstr ""
+
 #: u_translation.rsmarkthechart
 msgid "Mark the centre of the chart"
 msgstr "Markeer het kaartcentrum"
@@ -3358,6 +3388,10 @@ msgstr "Mercurius"
 msgid "Messages:"
 msgstr "Berichten:"
 
+#: u_translation.rsmessages2
+msgid "Messages"
+msgstr ""
+
 #: u_translation.rsmeters
 msgid "Meters"
 msgstr "Meters"
@@ -3430,6 +3464,10 @@ msgstr "Maand"
 msgid "Moon"
 msgstr "Maan"
 
+#: u_translation.rsmorebuttonsf
+msgid "More buttons for quick access to many functions"
+msgstr ""
+
 #: u_translation.rsmoreinformat
 msgid "More informations"
 msgstr "Meer informatie"
@@ -3474,6 +3512,11 @@ msgstr "Mozaïek centrum"
 #: u_translation.rsmosaicsize
 msgid "Mosaic size"
 msgstr "Mozaïek afmetingen"
+
+#: u_translation.rsmountcapabil
+#, object-pascal-format
+msgid "Mount capabilities: %s"
+msgstr ""
 
 #: u_translation.rsmovelabel
 msgid "Move label"
@@ -3643,6 +3686,10 @@ msgstr "Geen printer gevonden!"
 #: u_translation.rsnopropermo
 msgid "(uncorrected for proper motion, no pm data available from this catalog)"
 msgstr "(Niet gecorrigeerd voor eigenbeweging, geen eigenbewegingsinformatie beschikbaar in deze catalogus.)"
+
+#: u_translation.rsnoresponsefr
+msgid "No response from server"
+msgstr ""
 
 #: u_translation.rsnorth
 msgid "North"
@@ -4943,6 +4990,10 @@ msgstr "Selecteer het objecttype in uw catalogus"
 msgid "Select time units"
 msgstr "Selecteer tijdseenheid"
 
+#: u_translation.rsselectyourpr
+msgid "Select your preference for the button layout"
+msgstr ""
+
 #: u_translation.rssemi
 msgid "Semi"
 msgstr "Semi"
@@ -5293,6 +5344,11 @@ msgstr "Zwenk naar kaart-centrum"
 msgid "Slew to cursor position"
 msgstr "Zwenk naar aanwijzerpositie"
 
+#: u_translation.rsslewtoeq
+#, object-pascal-format
+msgid "Slewing to %s %s/%s"
+msgstr ""
+
 #: u_translation.rsslower
 msgid "Slower"
 msgstr "Langzamer"
@@ -5507,6 +5563,10 @@ msgstr "Begin maand"
 msgid "Start of object"
 msgstr "Begin van object"
 
+#: u_translation.rsstarttracking
+msgid "start tracking"
+msgstr ""
+
 #: u_translation.rsstatus
 msgid "Status"
 msgstr ""
@@ -5534,6 +5594,10 @@ msgstr "Stop"
 #: u_translation.rsstoptcpipser
 msgid "Stop TCP/IP server"
 msgstr "Stop TCP/IP server"
+
+#: u_translation.rsstoptelescop
+msgid "Stop telescope motion."
+msgstr ""
 
 #: u_translation.rssun
 msgid "Sun"
@@ -5587,6 +5651,11 @@ msgstr "Synchroniseer telescoop"
 #, object-pascal-format
 msgid "Synced to %s / %s"
 msgstr "Gesynchroniseerd met %s / %s"
+
+#: u_translation.rssynctoeq
+#, object-pascal-format
+msgid "Sync to %s %s/%s"
+msgstr ""
 
 #: u_translation.rssynodicmonth
 msgid "Synodic month"
@@ -5704,10 +5773,6 @@ msgstr "Deze handeling vervangt alle database inhoud van het land %s met verse g
 msgid "This catalog contain %s records. It is not possible to download in full for performance reason."
 msgstr "Deze catalogus bevat %s records. Vanwege de programma-performance is het niet mogelijk alles te downloaden."
 
-#: u_translation.rsthisdirectdr
-msgid "This direct driver is kept for compatibility, it may work or not for you. But the preference is to use the INDI or ASCOM driver for your telescope."
-msgstr "Deze directe driver is behouden voor compatibiliteit. Het kan in jouw geval functioneren, maar misschien ook niet. Gebruik bij voorkeur de INDI of ASCOM driver voor je telescoop."
-
 #: u_translation.rsthisfilecont
 #, object-pascal-format, fuzzy, badformat
 msgid "This file contain %s elements.%sThis is probably a base file you want to load without the \"Append\" option.%sIt can affect the performance to append all this data to the current file%sDo you want to continue anyway?"
@@ -5716,6 +5781,10 @@ msgstr "Dit bestand bevat %s elementen. %s Dit is een basisbestand dat je waarsc
 #: u_translation.rsthisfilewasn
 msgid "This file was not recognized as a MPCORB file."
 msgstr "Het bestand is niet herkend als een MPCORB bestand."
+
+#: u_translation.rsthislayoutca
+msgid "This layout can be modified later using the menu Setup , Toolbar editor"
+msgstr ""
 
 #: u_translation.rsthisprogrami
 msgid "This program is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License"
@@ -5869,6 +5938,10 @@ msgstr "Tropisch jaar"
 msgid "Troposphere temperature lapse rate (K/km)"
 msgstr "Troposferische temperatuurgradiënt (K/km)"
 
+#: u_translation.rstrue
+msgid "True"
+msgstr ""
+
 #: u_translation.rstrueequatore
 msgid "true equator, equinox and epoch of the date"
 msgstr "werkelijke equator, equinox, en epoche van de datum"
@@ -5990,6 +6063,10 @@ msgstr "Niet-ondersteunde bestandsextensie: %sGelieve dit op te lossen."
 #: u_translation.rsunsupporteds
 msgid "Unsupported SAMP hub profile. Must be a File URL"
 msgstr "Niet ondersteunde SAMP hub profiel. Moet een bestands-URL zijn"
+
+#: u_translation.rsunzipfile
+msgid "Unzip file"
+msgstr ""
 
 #: u_translation.rsup
 msgid "Up"

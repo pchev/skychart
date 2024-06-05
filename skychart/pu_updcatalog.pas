@@ -493,7 +493,7 @@ begin
     ShowMessage(rsUpdatedSucce);
   end
   else
-    ShowMessage(rsError+': '+txt);
+    ShowMessage(rsError2+': '+txt);
 end;
 
 procedure Tf_updcatalog.ShowStatus(grid: TStringGrid);
@@ -1057,12 +1057,12 @@ begin
       DownloadList;
     end
     else begin
-      ShowMessage(rsError+': no file to download');
+      ShowMessage(rsError2+': no file to download');
       EndInstallTimer.Enabled:=true;
     end;
   end
   else begin
-    ShowMessage(rsError+': '+txt);
+    ShowMessage(rsError2+': '+txt);
     EndInstallTimer.Enabled:=true;
   end;
 end;
@@ -1134,7 +1134,7 @@ try
   httpdownload.Start;
 except
   on E: Exception do begin
-    ShowMessage(rsError+': '+E.Message);
+    ShowMessage(rsError2+': '+E.Message);
     EndInstallTimer.Enabled:=true;
   end;
 end;
@@ -1206,7 +1206,7 @@ try
     end;
 except
   on E: Exception do begin
-    ShowMessage(rsError+': '+E.Message);
+    ShowMessage(rsError2+': '+E.Message);
     EndInstallTimer.Enabled:=true;
   end;
 end;

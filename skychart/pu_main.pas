@@ -12300,7 +12300,7 @@ begin
   buf := rsSAMPStatus + ':' + blank;
   if SampConnected then
   begin
-    buf := buf + rsConnected + crlf;
+    buf := buf + rsConnected3 + crlf;
     buf := buf + rsClientList + ':' + crlf;
     for i := 0 to samp.Clients.Count - 1 do
     begin
