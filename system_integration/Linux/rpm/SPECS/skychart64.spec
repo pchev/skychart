@@ -49,7 +49,6 @@ Planetarium software for the advanced amateur astronomer.
 /usr/share/skychart/cat/milkyway
 /usr/share/skychart/cat/openngc
 /usr/share/skychart/cat/RealSky
-/usr/share/skychart/cat/sac
 /usr/share/skychart/cat/xhip
 /usr/share/skychart/doc/html_doc
 /usr/share/skychart/doc/releasenotes*.txt
