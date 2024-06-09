@@ -253,6 +253,7 @@ end;
 
 procedure Tpop_scope.ShowCoordinates;
 var ok: boolean;
+    st: double;
 begin
   if ScopeInitialized then
   begin
@@ -269,7 +270,8 @@ begin
     if ShowAltAz.Checked then
     begin
       try
-        Eq2Hz(csc.CurST - deg2rad*Curdeg_x, deg2rad*Curdeg_y, Cur_az, Cur_alt, csc);
+        st := CurrentSidtim(csc.ObsLongitude, csc.eqeq);
+        Eq2Hz(st - deg2rad*Curdeg_x, deg2rad*Curdeg_y, Cur_az, Cur_alt, csc);
         Cur_az:=rad2deg*rmod(cur_az + pi, pi2);
         Cur_alt:=rad2deg*cur_alt;
       except

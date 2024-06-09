@@ -29,7 +29,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 interface
 
 uses
-  u_constant, u_util, Math, SysUtils, Graphics;
+  u_constant, u_util, Math, LazSysUtils, SysUtils, Graphics;
 
 const
   refmethod = 1;    // Refraction method: 0=norefraction, 1=Bennett, 2=slalib
@@ -66,6 +66,7 @@ function PositionAngle(ac, dc, ar, de: double): double;
 function Jd(annee, mois, jour: integer; Heure: double): double;
 procedure Djd(jd: double; var annee, mois, jour: integer; var Heure: double);
 function SidTim(jd0, ut, long: double; eqeq: double = 0): double;
+Function CurrentSidTim(long: double; eqeq: double = 0): double;
 procedure ProperMotion(var r0, d0: double; t, pr, pd: double;
   fullmotion: boolean; px, rv: double; out distfact:double);
 procedure Paralaxe(SideralTime, dist, ar1, de1: double; var ar, de, q: double; c: Tconf_skychart; coordepoch: double = 0);
@@ -1051,6 +1052,17 @@ begin
   te := 100.46061837 + 36000.770053608 * t + 0.000387933 * t * t - t * t * t / 38710000;
   te := te + rad2deg * eqeq;
   Result := deg2rad * Rmod(te - long + 1.00273790935 * ut * 15, 360);
+end;
+
+Function CurrentSidTim(long: double; eqeq: double = 0): double;
+var t,jd0,CurTime: double;
+    Year, Month, Day: Word;
+begin
+t:=NowUTC;
+DecodeDate(t, Year, Month, Day);
+CurTime:=frac(t)*24;
+jd0:=jd(Year,Month,Day,0);
+result:=Sidtim(jd0,CurTime,long,eqeq);
 end;
 
 procedure ProperMotion(var r0, d0: double; t, pr, pd: double;
