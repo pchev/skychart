@@ -271,7 +271,7 @@ begin
     begin
       try
         st := CurrentSidtim(csc.ObsLongitude, csc.eqeq);
-        Eq2Hz(st - deg2rad*Curdeg_x, deg2rad*Curdeg_y, Cur_az, Cur_alt, csc);
+        Eq2Hz(st - deg2rad*Curdeg_x, deg2rad*Curdeg_y, Cur_az, Cur_alt, csc, 0);
         Cur_az:=rad2deg*rmod(cur_az + pi, pi2);
         Cur_alt:=rad2deg*cur_alt;
       except
