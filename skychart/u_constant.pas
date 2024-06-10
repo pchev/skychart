@@ -876,7 +876,7 @@ type
   //70:Himalia 71:Elara 72:Pasiphae 73:Sinope 74:Lysithea 75:Carme 76:Ananke 77:Leda
   Tcometlst = array of array[1..MaxComet, 1..10] of double;
   // ra, dec, magn, diam, tail_ra, tail_dec, jd, epoch, ra2000, dec2000
-  TcometName = array of array[1..MaxComet, 1..2] of string[27];   // id, name
+  TcometName = array of array[1..MaxComet, 1..2] of string[36];   // id, name
   Tasteroidlst = array of array[1..MaxAsteroid, 1..7] of double;
   // ra, dec, magn, jd, epoch, ra2000, dec2000
   TasteroidName = array of array[1..MaxAsteroid, 1..2] of string[27]; // id, name

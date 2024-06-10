@@ -519,7 +519,7 @@ begin
         g := trim(copy(buf, 97, 4));
         if trim(g) = '' then
           g := '4.0';
-        nam := stringreplace(trim(copy(buf, 103, 27)), '"', '\"', [rfreplaceall]);
+        nam := stringreplace(trim(copy(buf, 103, 36)), '"', '\"', [rfreplaceall]);
         eq := '2000';
         if nl = 1 then
         begin
