@@ -1091,7 +1091,6 @@ var
 begin
   try
   DownloadDialog1.ConfirmDownload := False;
-  DownloadDialog1.QuickCancel := True;
   DownloadDialog1.URL := URL_GRS;
   fn := slash(TempDir) + 'grs.txt';
   DownloadDialog1.SaveToFile := fn;
