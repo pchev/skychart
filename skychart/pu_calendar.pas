@@ -3388,6 +3388,8 @@ begin
     begin
       if trim(cmain.TleUrlList[i - 1]) = '' then
         continue;
+      if pos('IRIDIUM',uppercase(cmain.TleUrlList[i - 1]))>0 then
+        continue;
       DownloadDialog1.URL := cmain.TleUrlList[i - 1];
       DownloadMemo.Lines.Add('');
       DownloadMemo.Lines.Add(DownloadDialog1.URL);

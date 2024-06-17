@@ -523,6 +523,7 @@ var
   abuf: string;
 begin
 
+  try
   ok := DownloadDaemon.ok;
 
   if ok and ((http.ResultCode = 200) or (http.ResultCode = 0)) then
@@ -596,6 +597,12 @@ begin
     DF.modalresult := mrOk
   else
     DF.modalresult := mrCancel;
+
+  except
+    on E: Exception do begin
+     FResponse:=E.Message;
+  end;
+  end;
 end;
 
 procedure TDownloadDialog.FTPComplete;

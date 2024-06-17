@@ -1090,6 +1090,7 @@ var
   y, m, d: integer;
   h: double;
 begin
+  try
   dl := TDownloadDialog.Create(self);
   dl.ScaleDpi:=UScaleDPI.scale;
   dl.SocksProxy := '';
@@ -1122,8 +1123,18 @@ begin
     finally
       inif.Free;
     end;
+  end
+  else begin
+    WriteTrace('DownloadGRS error: ' + dl.ResponseText);
+    MessageDlg('Error: ' + dl.ResponseText, mtError, [mbOK], 0);
   end;
   dl.Free;
+  except
+    on E: Exception do begin
+     WriteTrace('DownloadGRS error: ' + E.Message);
+     MessageDlg('Error: ' + E.Message, mtError, [mbOK], 0);
+    end;
+  end;
 end;
 
 

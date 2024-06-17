@@ -5198,6 +5198,7 @@ begin
           inif.WriteFloat(section, 'GRSdrift', ConfigSolsys.f_config_solsys1.csc.GRSdrift);
           inif.Updatefile;
           inif.Free;
+          ConfigSolsys.Close;
         end;
         2:
         begin
@@ -5221,6 +5222,7 @@ begin
             RefreshAllChild(False);
             ShowMessage(rsCometUpdateS);
           end;
+          ConfigSolsys.Close;
         end;
         3:
         begin
@@ -5243,6 +5245,7 @@ begin
             RefreshAllChild(False);
             ShowMessage(rsAsteroidUpda);
           end;
+          ConfigSolsys.Close;
         end;
       end;
     end
