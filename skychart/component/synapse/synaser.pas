@@ -1,9 +1,9 @@
 {==============================================================================|
-| Project : Ararat Synapse                                       | 007.007.000 |
+| Project : Ararat Synapse                                       | 007.007.003 |
 |==============================================================================|
 | Content: Serial port support                                                 |
 |==============================================================================|
-| Copyright (c)2001-2022, Lukas Gebauer                                        |
+| Copyright (c)2001-2023, Lukas Gebauer                                        |
 | All rights reserved.                                                         |
 |                                                                              |
 | Redistribution and use in source and binary forms, with or without           |
@@ -33,7 +33,7 @@
 | DAMAGE.                                                                      |
 |==============================================================================|
 | The Initial Developer of the Original Code is Lukas Gebauer (Czech Republic).|
-| Portions created by Lukas Gebauer are Copyright (c)2001-2021.                |
+| Portions created by Lukas Gebauer are Copyright (c)2001-2023.                |
 | All Rights Reserved.                                                         |
 |==============================================================================|
 | Contributor(s):                                                              |
@@ -236,11 +236,7 @@ const
     {$IFDEF CPUARM}
     MaxRates = 19; //CPUARM
     {$ELSE}
-     {$IFDEF CPUARM}
-        MaxRates = 19;  //UNIX ARM
-     {$ELSE}
-        MaxRates = 30; //UNIX
-     {$ENDIF}
+    MaxRates = 30; //UNIX
     {$ENDIF}
   {$ENDIF}
 {$ELSE}
@@ -2008,10 +2004,17 @@ begin
 end;
 
 procedure TBlockSerial.Flush;
+var
+  Data : Integer;
 begin
 {$IFNDEF MSWINDOWS}
   {$IFDEF ANDROID}
+    Data := 1;
+    {$IFNDEF FPC}
     ioctl(FHandle, TCSBRK, 1);
+    {$ELSE}
+    FpIOCtl(FHandle, TCSBRK, @Data);
+    {$ENDIF}    
   {$ELSE}
     SerialCheck(tcdrain(FHandle));
   {$ENDIF}
@@ -2424,7 +2427,7 @@ end;
 {$IFNDEF MSWINDOWS}
 function GetSerialPortNames: string;
 const
-  ATTR = {$IFDEF POSIX}$7FFFFFFF{$ELSE}$FFFFFFFF{$ENDIF};
+  ATTR = {$IFDEF POSIX}$7FFFFFFF{$ELSE}longint($FFFFFFFF){$ENDIF};
 var
   sr : TSearchRec;
 begin
@@ -2449,6 +2452,15 @@ begin
   end;
   FindClose(sr);
   if FindFirst('/dev/ttyAM*', ATTR, sr) = 0 then begin
+    repeat
+      if (sr.Attr and ATTR) = Sr.Attr then begin
+        if Result <> '' then Result := Result + ',';
+        Result := Result + '/dev/' + sr.Name;
+      end;
+    until FindNext(sr) <> 0;
+  end;
+  FindClose(sr);
+  if FindFirst('/dev/ttyACM*', ATTR, sr) = 0 then begin
     repeat
       if (sr.Attr and ATTR) = Sr.Attr then begin
         if Result <> '' then Result := Result + ',';

@@ -8,11 +8,7 @@ unit laz_synapse;
 interface
 
 uses
-  asn1util, blcksock, clamsend, dnssend, ftpsend, ftptsend, httpsend, 
-  imapsend, ldapsend, mimeinln, mimemess, mimepart, nntpsend, pingsend, 
-  pop3send, slogsend, smtpsend, snmpsend, sntpsend, synachar, synacode, 
-  synacrypt, synadbg, synafpc, synaicnv, synaip, synamisc, synaser, synautil, 
-  synsock, tlntsend, ssl_openssl, ssl_openssl_lib;
+  asn1util, blcksock, clamsend, dnssend, ftpsend, ftptsend, httpsend, imapsend, ldapsend, mimeinln, mimemess, mimepart, nntpsend, pingsend, pop3send, slogsend, smtpsend, snmpsend, sntpsend, synachar, synacode, synacrypt, synadbg, synafpc, synaicnv, synaip, synamisc, synaser, synautil, synsock, tlntsend, ssl_openssl3, ssl_openssl3_lib;
 
 implementation
 

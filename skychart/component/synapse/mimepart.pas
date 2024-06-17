@@ -1,5 +1,5 @@
 {==============================================================================|
-| Project : Ararat Synapse                                       | 002.009.002 |
+| Project : Ararat Synapse                                       | 002.009.003 |
 |==============================================================================|
 | Content: MIME support procedures and functions                               |
 |==============================================================================|
@@ -337,7 +337,7 @@ type
   end;
 
 const
-  MaxMimeType = 25;
+  MaxMimeType = 26;
   MimeType: array[0..MaxMimeType, 0..2] of string =
   (
     ('AU', 'audio', 'basic'),
@@ -365,7 +365,8 @@ const
     ('TIFF', 'image', 'TIFF'),
     ('WAV', 'audio', 'x-wav'),
     ('WPD', 'application', 'Wordperfect5.1'),
-    ('ZIP', 'application', 'ZIP')
+    ('ZIP', 'application', 'ZIP'),
+    ('XML', 'application', 'xml')
     );
 
 {:Generates a unique boundary string.}
@@ -1071,7 +1072,7 @@ begin
         FSecondary := 'octet-stream';
     end;
   if FDescription <> '' then
-    FHeaders.Insert(0, 'Content-Description: ' + FDescription);
+    FHeaders.Insert(0, 'Content-Description: ' + InlineCodeEx(FDescription, FTargetCharset));
   if FDisposition <> '' then
   begin
     s := '';

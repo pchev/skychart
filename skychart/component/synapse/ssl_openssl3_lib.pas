@@ -1,9 +1,9 @@
 {==============================================================================|
-| Project : Ararat Synapse                                       | 004.000.001 |
+| Project : Ararat Synapse                                       | 001.000.002 |
 |==============================================================================|
-| Content: SSL support by OpenSSL 1.1                                          |
+| Content: SSL support by OpenSSL 3.0                                          |
 |==============================================================================|
-| Copyright (c)1999-2021, Lukas Gebauer                                        |
+| Copyright (c)1999-2023, Lukas Gebauer                                        |
 | All rights reserved.                                                         |
 |                                                                              |
 | Redistribution and use in source and binary forms, with or without           |
@@ -33,7 +33,7 @@
 | DAMAGE.                                                                      |
 |==============================================================================|
 | The Initial Developer of the Original Code is Lukas Gebauer (Czech Republic).|
-| Portions created by Lukas Gebauer are Copyright (c)2002-2021.                |
+| Portions created by Lukas Gebauer are Copyright (c)2002-2023.                |
 | Portions created by Petr Fejfar are Copyright (c)2011-2012.                  |
 | All Rights Reserved.                                                         |
 |==============================================================================|
@@ -59,7 +59,7 @@ Special thanks to Gregor Ibic <gregor.ibic@intelicom.si>
 {$ENDIF}
 {$IFDEF BCB}
   {$ObjExportAll On}
-  (*$HPPEMIT 'namespace ssl_openssl_lib { using System::Shortint; }' *)
+  (*$HPPEMIT 'namespace ssl_openssl3_lib { using System::Shortint; }' *)
 {$ENDIF}
 
 //old Delphi does not have MSWINDOWS define.
@@ -72,10 +72,10 @@ Special thanks to Gregor Ibic <gregor.ibic@intelicom.si>
 {:@abstract(OpenSSL support)
 
 This unit is Pascal interface to OpenSSL library (used by @link(ssl_openssl) unit).
-OpenSSL 1.1 is loaded dynamicly on-demand. If this library is not found in system,
+OpenSSL 3.0 is loaded dynamicly on-demand. If this library is not found in system,
 requested OpenSSL function just return errorcode.
 }
-unit ssl_openssl11_lib;
+unit ssl_openssl3_lib;
 
 interface
 
@@ -103,8 +103,8 @@ uses
 var
   {$IFNDEF MSWINDOWS}
     {$IFDEF DARWIN}
-    DLLSSLName: string = 'libssl.dylib';
-    DLLUtilName: string = 'libcrypto.dylib';
+    DLLSSLName: string = 'libssl.3.dylib';
+    DLLUtilName: string = 'libcrypto.3.dylib';
     {$ELSE}
      {$IFDEF OS2}
       {$IFDEF OS2GCC}
@@ -115,17 +115,17 @@ var
     DLLUtilName: string = 'crypto.dll';
       {$ENDIF OS2GCC}
      {$ELSE OS2} //linux
-    DLLSSLName: string = 'libssl.so.1.1';
-    DLLUtilName: string = 'libcrypto.so.1.1';
+    DLLSSLName: string = 'libssl.so.3';
+    DLLUtilName: string = 'libcrypto.so.3';
      {$ENDIF OS2}
     {$ENDIF}
   {$ELSE}
     {$IFDEF WIN64}
-  DLLSSLName: string = 'libssl-1_1-x64.dll';
-  DLLUtilName: string = 'libcrypto-1_1-x64.dll';
+  DLLSSLName: string = 'libssl-3-x64.dll';
+  DLLUtilName: string = 'libcrypto-3-x64.dll';
     {$ELSE}
-  DLLSSLName: string = 'libssl-1_1.dll';
-  DLLUtilName: string = 'libcrypto-1_1.dll';
+  DLLSSLName: string = 'libssl-3.dll';
+  DLLUtilName: string = 'libcrypto-3.dll';
     {$ENDIF}
   {$ENDIF}
 
@@ -227,6 +227,9 @@ const
   EVP_PKEY_RSA = 6;
 
   SSL_CTRL_SET_TLSEXT_HOSTNAME = 55;
+  SSL_CTRL_SET_MIN_PROTO_VERSION = 123;
+  SSL_CTRL_SET_MAX_PROTO_VERSION = 124;
+
   TLSEXT_NAMETYPE_host_name = 0;
 
   TLS1_VERSION = $0301;
@@ -262,8 +265,6 @@ var
 //  function SslCtxLoadVerifyLocations(ctx: PSSL_CTX; const CAfile: PChar; const CApath: PChar):Integer;
   function SslCtxLoadVerifyLocations(ctx: PSSL_CTX; const CAfile: AnsiString; const CApath: AnsiString):Integer;
   function SslCtxCtrl(ctx: PSSL_CTX; cmd: integer; larg: integer; parg: SslPtr): integer;
-  function SslCtxSetMinProtoVersion(ctx: PSSL_CTX; version: integer): integer;
-  function SslCtxSetMaxProtoVersion(ctx: PSSL_CTX; version: integer): integer;
   function SslNew(ctx: PSSL_CTX):PSSL;
   procedure SslFree(ssl: PSSL);
   function SslAccept(ssl: PSSL):Integer;
@@ -380,8 +381,6 @@ type
   TSslCtxSetDefaultPasswdCbUserdata = procedure(ctx: PSSL_CTX; u: SslPtr); cdecl;
   TSslCtxLoadVerifyLocations = function(ctx: PSSL_CTX; const CAfile: PAnsiChar; const CApath: PAnsiChar):Integer; cdecl;
   TSslCtxCtrl = function(ctx: PSSL_CTX; cmd: integer; larg: integer; parg: SslPtr): integer; cdecl;
-  TSslCtxSetMinProtoVersion = function(ctx: PSSL_CTX; version: integer): integer; cdecl;
-  TSslCtxSetMaxProtoVersion = function(ctx: PSSL_CTX; version: integer): integer; cdecl;
   TSslNew = function(ctx: PSSL_CTX):PSSL; cdecl;
   TSslFree = procedure(ssl: PSSL); cdecl;
   TSslAccept = function(ssl: PSSL):Integer; cdecl;
@@ -502,9 +501,7 @@ var
   _SSLGetVerifyResult: TSSLGetVerifyResult = nil;
   _SSLCtrl: TSSLCtrl = nil;
   _SslSet1Host: TSslSet1Host = nil;
-  _SslCtxSetMinProtoVersion: TSslCtxSetMinProtoVersion = nil;
-  _SslCtxSetMaxProtoVersion: TSslCtxSetMaxProtoVersion = nil;
-
+  
 // libeay.dll
 
   _OPENSSL_sk_new_null: TOPENSSL_sk_new_null  = nil;
@@ -707,22 +704,6 @@ function SslCtxCtrl(ctx: PSSL_CTX; cmd: integer; larg: integer; parg: SslPtr): i
 begin
   if InitSSLInterface and Assigned(_SslCtxCtrl) then
     Result := _SslCtxCtrl(ctx, cmd, larg, parg)
-  else
-    Result := 0;
-end;
-
-function SslCtxSetMinProtoVersion(ctx: PSSL_CTX; version: integer): integer;
-begin
-  if InitSSLInterface and Assigned(_SslCtxSetMinProtoVersion) then
-    Result := _SslCtxSetMinProtoVersion(ctx, version)
-  else
-    Result := 0;
-end;
-
-function SslCtxSetMaxProtoVersion(ctx: PSSL_CTX; version: integer): integer;
-begin
-  if InitSSLInterface and Assigned(_SslCtxSetMaxProtoVersion) then
-    Result := _SslCtxSetMaxProtoVersion(ctx, version)
   else
     Result := 0;
 end;
@@ -1313,8 +1294,6 @@ begin
         _SslCtxSetDefaultPasswdCbUserdata := GetProcAddr(SSLLibHandle, 'SSL_CTX_set_default_passwd_cb_userdata');
         _SslCtxLoadVerifyLocations := GetProcAddr(SSLLibHandle, 'SSL_CTX_load_verify_locations');
         _SslCtxCtrl := GetProcAddr(SSLLibHandle, 'SSL_CTX_ctrl');
-        _SslCtxSetMinProtoVersion := GetProcAddr(SSLLibHandle, 'SSL_CTX_set_min_proto_version');
-        _SslCtxSetMaxProtoVersion := GetProcAddr(SSLLibHandle, 'SSL_CTX_set_max_proto_version');
         _SslNew := GetProcAddr(SSLLibHandle, 'SSL_new');
         _SslFree := GetProcAddr(SSLLibHandle, 'SSL_free');
         _SslAccept := GetProcAddr(SSLLibHandle, 'SSL_accept');
@@ -1324,7 +1303,7 @@ begin
         _SslPeek := GetProcAddr(SSLLibHandle, 'SSL_peek');
         _SslWrite := GetProcAddr(SSLLibHandle, 'SSL_write');
         _SslPending := GetProcAddr(SSLLibHandle, 'SSL_pending');
-        _SslGetPeerCertificate := GetProcAddr(SSLLibHandle, 'SSL_get_peer_certificate');
+        _SslGetPeerCertificate := GetProcAddr(SSLLibHandle, 'SSL_get1_peer_certificate');
         _SslGetVersion := GetProcAddr(SSLLibHandle, 'SSL_get_version');
         _SslCtxSetVerify := GetProcAddr(SSLLibHandle, 'SSL_CTX_set_verify');
         _SslGetCurrentCipher := GetProcAddr(SSLLibHandle, 'SSL_get_current_cipher');
@@ -1333,7 +1312,7 @@ begin
         _SslGetVerifyResult := GetProcAddr(SSLLibHandle, 'SSL_get_verify_result');
         _SslCtrl := GetProcAddr(SSLLibHandle, 'SSL_ctrl');
         _SslSet1Host := GetProcAddr(SSLLibHandle, 'SSL_set1_host');
-
+        
         _OPENSSL_sk_new_null:= GetProcAddr(SSLUtilHandle, 'OPENSSL_sk_new_null');
         _OPENSSL_sk_num:= GetProcAddr(SSLUtilHandle, 'OPENSSL_sk_num');
         _OPENSSL_sk_value:= GetProcAddr(SSLUtilHandle, 'OPENSSL_sk_value');
@@ -1418,7 +1397,7 @@ begin
         if SSLUtilHandle <> 0 then
         begin
           FreeLibrary(SSLUtilHandle);
-          SSLLibHandle := 0;
+          SSLUtilHandle := 0;
         end;
         Result := False;
       end;
@@ -1436,16 +1415,6 @@ begin
   SSLCS.Enter;
   try
     SSLloaded := false;
-    if SSLLibHandle <> 0 then
-    begin
-      FreeLibrary(SSLLibHandle);
-      SSLLibHandle := 0;
-    end;
-    if SSLUtilHandle <> 0 then
-    begin
-      FreeLibrary(SSLUtilHandle);
-      SSLLibHandle := 0;
-    end;
 
     _SslGetError := nil;
     _SslCtxSetCipherList := nil;
@@ -1483,8 +1452,6 @@ begin
     _SslGetVerifyResult := nil;
     _SslCtrl := nil;
     _SslSet1Host := nil;
-    _SslCtxSetMinProtoVersion := nil;
-    _SslCtxSetMaxProtoVersion := nil;
 
     _X509New := nil;
     _X509Free := nil;
@@ -1533,6 +1500,18 @@ begin
     _DESsetoddparity := nil;
     _DESsetkeychecked := nil;
     _DESecbencrypt := nil;
+
+    if SSLUtilHandle <> 0 then
+    Begin
+      FreeLibrary(SSLUtilHandle);
+      SSLUtilHandle := 0;
+    end;
+    if SSLLibHandle <> 0 then
+    Begin
+      FreeLibrary(SSLLibHandle);
+      SSLLibHandle := 0;
+    end;
+
   finally
     SSLCS.Leave;
   end;

@@ -1,5 +1,5 @@
 {==============================================================================|
-| Project : Ararat Synapse                                       | 003.009.000 |
+| Project : Ararat Synapse                                       | 003.009.001 |
 |==============================================================================|
 | Content: SSL support by OpenSSL                                              |
 |==============================================================================|
@@ -116,8 +116,8 @@ const
 var
   {$IFNDEF MSWINDOWS}
     {$IFDEF DARWIN}
-    DLLSSLName: string = 'libssl.3.dylib';       // versioned library required since Big Sur
-    DLLUtilName: string = 'libcrypto.3.dylib';
+    DLLSSLName: string = 'libssl.dylib';
+    DLLUtilName: string = 'libcrypto.dylib';
     {$ELSE}
      {$IFDEF OS2}
       {$IFDEF OS2GCC}
@@ -812,6 +812,7 @@ var
   function SSLCipherGetBits(c: SslPtr; var alg_bits: Integer):Integer;
   function SSLGetVerifyResult(ssl: PSSL):Integer;
   function SSLCtrl(ssl: PSSL; cmd: integer; larg: integer; parg: SslPtr):Integer;
+  function SslSet1Host(ssl: PSSL; hostname: PAnsiChar):Integer;
 
 // libeay.dll
   function X509New: PX509;
@@ -938,6 +939,7 @@ type
   TSSLCipherGetBits = function(c: SslPtr; alg_bits: PInteger):Integer; cdecl;
   TSSLGetVerifyResult = function(ssl: PSSL):Integer; cdecl;
   TSSLCtrl = function(ssl: PSSL; cmd: integer; larg: integer; parg: SslPtr):Integer; cdecl;
+  TSslSet1Host = function(ssl: PSSL; hostname: PAnsiChar):Integer; cdecl;
 
   TSSLSetTlsextHostName = function(ssl: PSSL; buf: PAnsiChar):Integer; cdecl;
 
@@ -1046,6 +1048,7 @@ var
   _SSLCipherGetBits: TSSLCipherGetBits = nil;
   _SSLGetVerifyResult: TSSLGetVerifyResult = nil;
   _SSLCtrl: TSSLCtrl = nil;
+  _SslSet1Host: TSslSet1Host = nil;
 
 // libeay.dll
   _X509New: TX509New = nil;
@@ -1463,6 +1466,14 @@ begin
     Result := X509_V_ERR_APPLICATION_VERIFICATION;
 end;
 
+function SslSet1Host(ssl: PSSL; hostname: PAnsiChar):Integer;
+begin
+  if InitSSLInterface and Assigned(_SslSet1Host) then
+    Result := _SslSet1Host(ssl, hostname)
+  else
+    Result := 0;
+end;
+
 // libeay.dll
 function X509New: PX509;
 begin
@@ -1783,7 +1794,7 @@ end;
 function d2iX509bio(b: PBIO; x: PX509): PX509; {pf}
 begin
   if InitSSLInterface and Assigned(_d2iX509bio) then
-    Result := _d2iX509bio(x,b)
+    Result := _d2iX509bio(b, x)
   else
     Result := nil;
 end;
@@ -1925,8 +1936,8 @@ end;
 
 function InitSSLInterface: Boolean;
 var
-  s,lver,buf: string;
-  i,x,lver1,lver2,lver3: integer;
+  s: string;
+  i: integer;
 begin
   {pf}
   if SSLLoaded then
@@ -1960,40 +1971,6 @@ begin
       {$ELSE}
       SSLUtilHandle := LoadLib(DLLUtilName);
       SSLLibHandle := LoadLib(DLLSSLName);
-      {$IFDEF DARWIN}
-      if SSLLibHandle=0 then begin
-        // try to load libraries from Frameworks
-        buf:=extractfilepath(paramstr(0));
-        DLLSSLName:=expandfilename(buf+'/../Frameworks')+'/'+DLLSSLName;
-        DLLUtilName:=expandfilename(buf+'/../Frameworks')+'/'+DLLUtilName;
-        SSLUtilHandle := LoadLib(DLLUtilName);
-        SSLLibHandle := LoadLib(DLLSSLName);
-      end;
-      {$ENDIF}
-      {$IFDEF Linux}
-         if SSLLibHandle=0 then begin    // try versioned library name
-           for lver1:=3 downto 0 do begin
-             if lver1=2 then continue;   // no openssl 2.0
-             lver:='.'+IntToStr(lver1);
-             SSLLibHandle := LoadLib(DLLSSLName+lver);
-             if SSLLibHandle<>0 then break;
-             for lver2:=9 downto 0 do begin
-               if (lver1>0)and(lver2>1) then continue;  // only 1.1 and 3.0, but 0.9
-               lver:='.'+IntToStr(lver1)+'.'+IntToStr(lver2);
-               SSLLibHandle := LoadLib(DLLSSLName+lver);
-               if SSLLibHandle<>0 then break;
-               for lver3:=9 downto 0 do begin
-                 lver:='.'+IntToStr(lver1)+'.'+IntToStr(lver2)+'.'+IntToStr(lver3);
-                 SSLLibHandle := LoadLib(DLLSSLName+lver);
-                 if SSLLibHandle<>0 then break;
-               end;
-               if SSLLibHandle<>0 then break;
-             end;
-             if SSLLibHandle<>0 then break;
-           end;
-           SSLUtilHandle := LoadLib(DLLUtilName+lver);
-         end;
-      {$ENDIF}
       {$ENDIF}
 {$ENDIF}
       if (SSLLibHandle <> 0) and (SSLUtilHandle <> 0) then
@@ -2044,6 +2021,7 @@ begin
         _SslCipherGetBits := GetProcAddr(SSLLibHandle, 'SSL_CIPHER_get_bits');
         _SslGetVerifyResult := GetProcAddr(SSLLibHandle, 'SSL_get_verify_result');
         _SslCtrl := GetProcAddr(SSLLibHandle, 'SSL_ctrl');
+        _SslSet1Host := GetProcAddr(SSLLibHandle, 'SSL_set1_host');
 
         _X509New := GetProcAddr(SSLUtilHandle, 'X509_new');
         _X509Free := GetProcAddr(SSLUtilHandle, 'X509_free');
@@ -2234,6 +2212,7 @@ begin
     _SslCipherGetBits := nil;
     _SslGetVerifyResult := nil;
     _SslCtrl := nil;
+    _SslSet1Host := nil;
 
     _X509New := nil;
     _X509Free := nil;

@@ -27,7 +27,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 
 interface
 
-uses  u_util, blcksock, HTTPsend, FTPSend, ssl_openssl,
+uses  u_util, blcksock, HTTPsend, FTPSend, ssl_openssl3,
   Classes, SysUtils;
 
 const FSpeedPosMax=50;

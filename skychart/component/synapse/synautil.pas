@@ -1,9 +1,9 @@
 {==============================================================================|
-| Project : Ararat Synapse                                       | 004.015.007 |
+| Project : Ararat Synapse                                       | 004.016.001 |
 |==============================================================================|
 | Content: support procedures and functions                                    |
 |==============================================================================|
-| Copyright (c)1999-2017, Lukas Gebauer                                        |
+| Copyright (c)1999-2024, Lukas Gebauer                                        |
 | All rights reserved.                                                         |
 |                                                                              |
 | Redistribution and use in source and binary forms, with or without           |
@@ -33,7 +33,7 @@
 | DAMAGE.                                                                      |
 |==============================================================================|
 | The Initial Developer of the Original Code is Lukas Gebauer (Czech Republic).|
-| Portions created by Lukas Gebauer are Copyright (c) 1999-2017.               |
+| Portions created by Lukas Gebauer are Copyright (c) 1999-2024.               |
 | Portions created by Hernan Sanchez are Copyright (c) 2000.                   |
 | Portions created by Petr Fejfar are Copyright (c)2011-2012.                  |
 | All Rights Reserved.                                                         |
@@ -92,7 +92,9 @@ uses
   System.IO,
 {$ENDIF}
 {$IFDEF DELPHIX_SEATTLE_UP}
-  AnsiStrings,
+  {$IFNDEF NEXTGEN}
+    AnsiStrings,
+  {$ENDIF}
 {$ENDIF}
   SysUtils, Classes, SynaFpc;
 
@@ -123,6 +125,9 @@ function TimeZone: string;
  specification. Four digit year is used to break any Y2K concerns. (Example
  'Fri, 15 Oct 1999 21:14:56 +0200')}
 function Rfc822DateTime(t: TDateTime): string;
+
+{:Returns date and time in format defined in RFC-3339 in format "yyyy-mm-ddThh:nn:ss.zzz"}
+function Rfc3339DateTime(t: TDateTime): string;
 
 {:Returns date and time in format defined in C compilers in format "mmm dd hh:nn:ss"}
 function CDateTime(t: TDateTime): string;
@@ -403,16 +408,16 @@ var
      'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'),
     ('Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',  //English
      'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'),
-    ('jan', 'fév', 'mar', 'avr', 'mai', 'jun', //French
-     'jul', 'aoû', 'sep', 'oct', 'nov', 'déc'),
+    ('jan', 'f v', 'mar', 'avr', 'mai', 'jun', //French
+     'jul', 'ao ', 'sep', 'oct', 'nov', 'd c'),
     ('jan', 'fev', 'mar', 'avr', 'mai', 'jun',  //French#2
      'jul', 'aou', 'sep', 'oct', 'nov', 'dec'),
     ('Jan', 'Feb', 'Mar', 'Apr', 'Mai', 'Jun',  //German
      'Jul', 'Aug', 'Sep', 'Okt', 'Nov', 'Dez'),
-    ('Jan', 'Feb', 'Mär', 'Apr', 'Mai', 'Jun',  //German#2
+    ('Jan', 'Feb', 'M r', 'Apr', 'Mai', 'Jun',  //German#2
      'Jul', 'Aug', 'Sep', 'Okt', 'Nov', 'Dez'),
-    ('Led', 'Úno', 'Bøe', 'Dub', 'Kvì', 'Èen',  //Czech
-     'Èec', 'Srp', 'Záø', 'Øíj', 'Lis', 'Pro')
+    ('Led', ' no', 'B e', 'Dub', 'Kv ', ' en',  //Czech
+     ' ec', 'Srp', 'Z  ', '  j', 'Lis', 'Pro')
      );
 
 
@@ -487,6 +492,13 @@ begin
   DecodeDate(t, wYear, wMonth, wDay);
   Result := Format('%s, %d %s %s %s', [MyDayNames[DayOfWeek(t)], wDay,
     MyMonthNames[1, wMonth], FormatDateTime('yyyy hh":"nn":"ss', t), TimeZone]);
+end;
+
+{==============================================================================}
+
+function Rfc3339DateTime(t: TDateTime): string;
+begin
+  Result := FormatDateTime('yyyy"-"mm"-"dd"T"hh":"nn":"ss"."zzz', t) + Timezone;
 end;
 
 {==============================================================================}

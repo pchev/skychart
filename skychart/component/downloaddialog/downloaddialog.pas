@@ -26,7 +26,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 interface
 
 uses
-  LResources, blcksock, HTTPsend, FTPSend, FileUtil, ssl_openssl,
+  LResources, blcksock, HTTPsend, FTPSend, FileUtil, ssl_openssl3,
   Classes, SysUtils, LazUTF8, Dialogs, Buttons, Graphics, Forms,
   Controls, StdCtrls, ExtCtrls;
 
