@@ -1084,27 +1084,18 @@ end;
 
 procedure Tf_config_solsys.BtnDownloadGRSClick(Sender: TObject);
 var
-  dl: TDownloadDialog;
   inif: TMeminifile;
   fn, section: string;
   y, m, d: integer;
   h: double;
 begin
   try
-  dl := TDownloadDialog.Create(self);
-  dl.ScaleDpi:=UScaleDPI.scale;
-  dl.SocksProxy := '';
-  dl.SocksType := '';
-  dl.HttpProxy := '';
-  dl.HttpProxyPort := '';
-  dl.HttpProxyUser := '';
-  dl.HttpProxyPass := '';
-  dl.ConfirmDownload := False;
-  dl.QuickCancel := True;
-  dl.URL := URL_GRS;
+  DownloadDialog1.ConfirmDownload := False;
+  DownloadDialog1.QuickCancel := True;
+  DownloadDialog1.URL := URL_GRS;
   fn := slash(TempDir) + 'grs.txt';
-  dl.SaveToFile := fn;
-  if dl.Execute and FileExists(fn) then
+  DownloadDialog1.SaveToFile := fn;
+  if DownloadDialog1.Execute and FileExists(fn) then
   begin
     inif := TMeminifile.Create(fn);
     try
@@ -1125,10 +1116,9 @@ begin
     end;
   end
   else begin
-    WriteTrace('DownloadGRS error: ' + dl.ResponseText);
-    MessageDlg('Error: ' + dl.ResponseText, mtError, [mbOK], 0);
+    WriteTrace('DownloadGRS error: ' + DownloadDialog1.ResponseText);
+    MessageDlg('Error: ' + DownloadDialog1.ResponseText, mtError, [mbOK], 0);
   end;
-  dl.Free;
   except
     on E: Exception do begin
      WriteTrace('DownloadGRS error: ' + E.Message);
