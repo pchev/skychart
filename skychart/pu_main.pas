@@ -5198,6 +5198,8 @@ begin
           inif.WriteFloat(section, 'GRSdrift', ConfigSolsys.f_config_solsys1.csc.GRSdrift);
           inif.Updatefile;
           inif.Free;
+          ConfigSolsys.Panel1.Visible := True;
+          ConfigSolsys.f_config_solsys1.PageControl1.ShowTabs := True;
           ConfigSolsys.Close;
         end;
         2:
@@ -5222,6 +5224,12 @@ begin
             RefreshAllChild(False);
             ShowMessage(rsCometUpdateS);
           end;
+          ConfigSolsys.Panel1.Visible := True;
+          ConfigSolsys.f_config_solsys1.PageControl1.ShowTabs := True;
+          ConfigSolsys.f_config_solsys1.ComPageControl.ShowTabs := True;
+          ConfigSolsys.f_config_solsys1.ComPageControl1.ShowTabs := True;
+          ConfigSolsys.f_config_solsys1.DownloadComet.Visible := True;
+          ConfigSolsys.f_config_solsys1.ConfirmDownload := True;
           ConfigSolsys.Close;
         end;
         3:
@@ -5245,6 +5253,13 @@ begin
             RefreshAllChild(False);
             ShowMessage(rsAsteroidUpda);
           end;
+          ConfigSolsys.Panel1.Visible := True;
+          ConfigSolsys.f_config_solsys1.PageControl1.ShowTabs := True;
+          ConfigSolsys.f_config_solsys1.AstPageControl.ShowTabs := True;
+          ConfigSolsys.f_config_solsys1.AstPageControl2.ShowTabs := True;
+          ConfigSolsys.f_config_solsys1.DownloadAsteroid.Visible := True;
+          ConfigSolsys.f_config_solsys1.ConfirmDownload := True;
+          ConfigSolsys.f_config_solsys1.autoprocess := False;
           ConfigSolsys.Close;
         end;
       end;
