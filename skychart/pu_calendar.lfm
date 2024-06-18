@@ -949,7 +949,6 @@ object f_calendar: Tf_calendar
     FtpFwMode = 0
     FtpFwPassive = True
     ConfirmDownload = True
-    QuickCancel = False
     Left = 408
     Top = 232
   end

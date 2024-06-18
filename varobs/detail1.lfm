@@ -553,7 +553,6 @@ object DetailForm: TDetailForm
     FtpFwMode = 0
     FtpFwPassive = True
     ConfirmDownload = True
-    QuickCancel = False
     left = 28
     top = 75
   end

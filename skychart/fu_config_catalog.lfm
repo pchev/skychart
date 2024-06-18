@@ -2289,7 +2289,6 @@ object f_config_catalog: Tf_config_catalog
     FtpFwMode = 0
     FtpFwPassive = True
     ConfirmDownload = True
-    QuickCancel = False
     Left = 464
     Top = 448
   end

@@ -895,7 +895,6 @@ object f_config_observatory: Tf_config_observatory
     FtpFwMode = 0
     FtpFwPassive = True
     ConfirmDownload = True
-    QuickCancel = False
     Left = 176
     Top = 507
   end

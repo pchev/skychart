@@ -385,7 +385,6 @@ object f_observatory_db: Tf_observatory_db
     FtpFwMode = 0
     FtpFwPassive = True
     ConfirmDownload = True
-    QuickCancel = False
     left = 24
     top = 245
   end
