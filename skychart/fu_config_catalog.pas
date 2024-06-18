@@ -193,6 +193,7 @@ type
     procedure Button9Click(Sender: TObject);
     procedure CatalogGridMouseDown(Sender: TObject; Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
     procedure CatalogGridGetCellHint(Sender: TObject; ACol, ARow: Integer; var HintText: String);
+    procedure CatalogGridStarValidateEntry(Sender: TObject; aCol, aRow: Integer; const OldValue: string; var NewValue: String);
     procedure CatgenClick(Sender: TObject);
     procedure delobjClick(Sender: TObject);
     procedure hnNameChange(Sender: TObject);
@@ -783,48 +784,55 @@ procedure Tf_config_catalog.CatalogGridDrawCell(Sender: TObject;
   ACol, ARow: integer; Rect: TRect; State: TGridDrawState);
 var cx,cy : integer;
     pp: array[0..3] of TPoint;
+    bcol,tcol: TColor;
 begin
   with Sender as TStringGrid do
   begin
+    if arow = Selection.top then begin
+      bcol:=clHighlight;
+      tcol:=clHighlightText;
+    end
+    else begin
+      bcol:=clWindow;
+      tcol:=clWindowText;
+    end;
+    Canvas.Brush.Color:=bcol;
+    Canvas.Font.Color:=tcol;
     if (Acol = 0) and (Arow > 0) then
     begin
       Canvas.Brush.style := bssolid;
       if (cells[acol, arow] = '1') then
       begin
-        Canvas.Brush.Color := clWindow;
         Canvas.FillRect(Rect);
         ImageList1.Draw(Canvas, Rect.left + 2, Rect.top + 2, 3);
       end
       else if (cells[acol, arow] = '2') then
       begin
-        Canvas.Brush.Color := clWindow;
         Canvas.FillRect(Rect);
         ImageList1.Draw(Canvas, Rect.left + 2, Rect.top + 2, 4);
       end
       else
       begin
-        Canvas.Brush.Color := clWindow;
         Canvas.FillRect(Rect);
         ImageList1.Draw(Canvas, Rect.left + 2, Rect.top + 2, 2);
       end;
     end
     else if (Acol = 1) and (Arow > 0) and (Arow <= ReservedRow[tag]) then
     begin
-      Canvas.Brush.Color := FixedColor;
       Canvas.FillRect(Rect);
       Canvas.TextOut(Rect.Left, Rect.Top,cells[acol, arow]);
      end
     else if (Acol = 5) and (Arow > 0) then
     begin
-      Canvas.Brush.Color := clWindow;
+      Canvas.Brush.Color:=clWindow;
       Canvas.FillRect(Rect);
       if (ARow > ReservedRow[TStringGrid(Sender).tag]) then
         ImageList1.Draw(Canvas, Rect.left + 2, Rect.top + 2, 0);
     end
     else if (Acol = 6) and (Arow > 0) then
     begin
+      Canvas.Brush.Color:=clWindow;
       Canvas.Brush.style := bssolid;
-      Canvas.Brush.Color := clWindow;
       Canvas.FillRect(Rect);
       if cells[acol, arow] <> 'N' then
       begin
@@ -867,7 +875,7 @@ begin
       end
       else
       begin
-        Canvas.Brush.Color := Color;
+        Canvas.Brush.Color:=clWindow;
         Canvas.FillRect(Rect);
       end;
     end;
@@ -1087,8 +1095,10 @@ begin
      ((Acol = 4) and (ARow<=ReservedRow[TStringGrid(Sender).tag]) and(TStringGrid(Sender).Cells[1,arow]<>'Gaia Catalog') ) or
      (((Acol = 5))and(ARow<=ReservedRow[TStringGrid(Sender).tag])) then
     canselect := False
-  else
+  else begin
     canselect := True;
+  end;
+  TStringGrid(Sender).Selection:=Rect(0,ARow,0,ARow);
 end;
 
 procedure Tf_config_catalog.CatalogGridSetEditText(Sender: TObject;
@@ -1106,13 +1116,30 @@ begin
         TStringGrid(sender).cells[0, arow] := '0';
     end;
   end;
-  if ((Acol = 2) or (Acol = 3)) and (Arow > 0) and (Value > '') then
-  begin
-    if not IsNumber(Value) then
+end;
+
+procedure Tf_config_catalog.CatalogGridStarValidateEntry(Sender: TObject; aCol, aRow: Integer; const OldValue: string; var NewValue: String);
+begin
+  if arow>0 then begin
+    if Acol = 2 then
     begin
-      TStringGrid(sender).Canvas.Brush.Color := clRed;
-      TStringGrid(sender).Canvas.FillRect(TStringGrid(sender).CellRect(ACol, ARow));
-      TStringGrid(sender).cells[0, arow] := '0';
+      if not IsNumber(NewValue) then
+      begin
+        if IsNumber(OldValue) then
+          NewValue:=OldValue
+        else
+          NewValue:='0';
+      end;
+    end;
+    if Acol = 3 then
+    begin
+      if not IsNumber(NewValue) then
+      begin
+        if IsNumber(OldValue) then
+          NewValue:=OldValue
+        else
+          NewValue:='10';
+      end;
     end;
   end;
 end;

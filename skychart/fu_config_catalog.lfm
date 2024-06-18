@@ -307,43 +307,15 @@ object f_config_catalog: Tf_config_catalog
                   Width = 140
                 end              
                 item
-                  ButtonStyle = cbsPickList
                   DropDownRows = 11
                   MinSize = 15
                   MaxSize = 202
-                  PickList.Strings = (
-                    '0'
-                    '1'
-                    '2'
-                    '3'
-                    '4'
-                    '5'
-                    '6'
-                    '7'
-                    '8'
-                    '9'
-                    '10'
-                  )
                   Title.Caption = 'Min'
                   Width = 45
                 end              
                 item
-                  ButtonStyle = cbsPickList
                   DropDownRows = 11
                   MaxSize = 202
-                  PickList.Strings = (
-                    '0'
-                    '1'
-                    '2'
-                    '3'
-                    '4'
-                    '5'
-                    '6'
-                    '7'
-                    '8'
-                    '9'
-                    '10'
-                  )
                   Title.Caption = 'Max'
                   Width = 45
                 end              
@@ -402,6 +374,7 @@ object f_config_catalog: Tf_config_catalog
               OnMouseUp = CatalogGridMouseUp
               OnSelectCell = CatalogGridSelectCell
               OnSetEditText = CatalogGridSetEditText
+              OnValidateEntry = CatalogGridStarValidateEntry
             end
           end
           object TabSheetGcatVar: TTabSheet
@@ -423,42 +396,14 @@ object f_config_catalog: Tf_config_catalog
                   Width = 140
                 end              
                 item
-                  ButtonStyle = cbsPickList
                   DropDownRows = 11
                   MaxSize = 202
-                  PickList.Strings = (
-                    '0'
-                    '1'
-                    '2'
-                    '3'
-                    '4'
-                    '5'
-                    '6'
-                    '7'
-                    '8'
-                    '9'
-                    '10'
-                  )
                   Title.Caption = 'Min'
                   Width = 45
                 end              
                 item
-                  ButtonStyle = cbsPickList
                   DropDownRows = 11
                   MaxSize = 202
-                  PickList.Strings = (
-                    '0'
-                    '1'
-                    '2'
-                    '3'
-                    '4'
-                    '5'
-                    '6'
-                    '7'
-                    '8'
-                    '9'
-                    '10'
-                  )
                   Title.Caption = 'Max'
                   Width = 45
                 end              
@@ -538,42 +483,14 @@ object f_config_catalog: Tf_config_catalog
                   Width = 140
                 end              
                 item
-                  ButtonStyle = cbsPickList
                   DropDownRows = 11
                   MaxSize = 202
-                  PickList.Strings = (
-                    '0'
-                    '1'
-                    '2'
-                    '3'
-                    '4'
-                    '5'
-                    '6'
-                    '7'
-                    '8'
-                    '9'
-                    '10'
-                  )
                   Title.Caption = 'Min'
                   Width = 45
                 end              
                 item
-                  ButtonStyle = cbsPickList
                   DropDownRows = 11
                   MaxSize = 202
-                  PickList.Strings = (
-                    '0'
-                    '1'
-                    '2'
-                    '3'
-                    '4'
-                    '5'
-                    '6'
-                    '7'
-                    '8'
-                    '9'
-                    '10'
-                  )
                   Title.Caption = 'Max'
                   Width = 45
                 end              
@@ -653,42 +570,14 @@ object f_config_catalog: Tf_config_catalog
                   Width = 140
                 end              
                 item
-                  ButtonStyle = cbsPickList
                   DropDownRows = 11
                   MaxSize = 202
-                  PickList.Strings = (
-                    '0'
-                    '1'
-                    '2'
-                    '3'
-                    '4'
-                    '5'
-                    '6'
-                    '7'
-                    '8'
-                    '9'
-                    '10'
-                  )
                   Title.Caption = 'Min'
                   Width = 45
                 end              
                 item
-                  ButtonStyle = cbsPickList
                   DropDownRows = 11
                   MaxSize = 202
-                  PickList.Strings = (
-                    '0'
-                    '1'
-                    '2'
-                    '3'
-                    '4'
-                    '5'
-                    '6'
-                    '7'
-                    '8'
-                    '9'
-                    '10'
-                  )
                   Title.Caption = 'Max'
                   Width = 45
                 end              
@@ -768,42 +657,14 @@ object f_config_catalog: Tf_config_catalog
                   Width = 140
                 end              
                 item
-                  ButtonStyle = cbsPickList
                   DropDownRows = 11
                   MaxSize = 202
-                  PickList.Strings = (
-                    '0'
-                    '1'
-                    '2'
-                    '3'
-                    '4'
-                    '5'
-                    '6'
-                    '7'
-                    '8'
-                    '9'
-                    '10'
-                  )
                   Title.Caption = 'Min'
                   Width = 45
                 end              
                 item
-                  ButtonStyle = cbsPickList
                   DropDownRows = 11
                   MaxSize = 202
-                  PickList.Strings = (
-                    '0'
-                    '1'
-                    '2'
-                    '3'
-                    '4'
-                    '5'
-                    '6'
-                    '7'
-                    '8'
-                    '9'
-                    '10'
-                  )
                   Title.Caption = 'Max'
                   Width = 45
                 end              
