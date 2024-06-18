@@ -43,7 +43,7 @@ uses
   pu_obslist, fu_script, pu_scriptengine, u_constant, u_util, UScaleDPI, pu_configdirect,
   u_ccdconfig, blcksock, synsock, dynlibs, FileUtil, ExtendedNotebook, LCLVersion, LCLType,
   InterfaceBase, LCLIntf, SysUtils, Classes, Graphics, Forms, Controls, Menus,
-  Math, StdCtrls, Dialogs, Buttons, ExtCtrls, ComCtrls, StdActns, types,
+  Math, StdCtrls, Dialogs, Buttons, ExtCtrls, ComCtrls, StdActns, types, cu_httpdownload,
   Printers, ActnList, IniFiles, Spin, Clipbrd, MultiFrame, ChildFrame, pu_selectlayout,
   BGRABitmap, BGRABitmapTypes, LResources, enhedits, cu_healpix, downloaddialog,
   LazHelpHTML_fix, UniqueInstance, ButtonPanel, ExtDlgs;
@@ -687,6 +687,7 @@ type
     ActiveScript: integer;
     FTelescopeConnected: boolean;
     AccelList: array[0..MaxMenulevel] of string;
+    httpdownload: THTTPBigDownload;
     procedure ProcessParams1;
     procedure ProcessParams2;
     procedure ProcessParamsQuit;
@@ -872,6 +873,9 @@ type
     procedure LoadDeltaT;
     procedure LoadLeapseconds(CanUpdate: boolean=true);
     procedure LoadIERS;
+    procedure DownloadLeapSeconds;
+    procedure DownloadLeapSecondsComplete;
+    procedure DownloadIERSComplete;
     procedure LoadVartype;
     procedure LoadVarsubtype;
   end;
@@ -13911,16 +13915,104 @@ begin
     numleapseconds:=n;
     if CanUpdate and (leapsecondexpires>0) and ((leapsecondexpires-DateTimetoJD(now))<30) then begin
       // expire in less than one month, refresh now
-      if QuickDownload(URL_LEAPSECOND, fname, true) then begin
-        LoadLeapseconds(false);
-        fname:=slash(privatedir)+'finals.data';
-        if QuickDownload(URL_IERS, fname, false) then
-          LoadIERS;
-      end
+      DownloadLeapSeconds;
     end;
   finally
     line.free;
   end;
+end;
+
+procedure Tf_main.DownloadLeapSeconds;
+begin
+  httpdownload:=THTTPBigDownload.Create(true);
+  if cfgm.HttpProxy then
+  begin
+    httpdownload.SocksProxy := '';
+    httpdownload.SocksType := '';
+    httpdownload.HttpProxy := cfgm.ProxyHost;
+    httpdownload.HttpProxyPort := cfgm.ProxyPort;
+    httpdownload.HttpProxyUser := cfgm.ProxyUser;
+    httpdownload.HttpProxyPass := cfgm.ProxyPass;
+  end
+  else if cfgm.SocksProxy then
+  begin
+    httpdownload.HttpProxy := '';
+    httpdownload.SocksType := cfgm.SocksType;
+    httpdownload.SocksProxy := cfgm.ProxyHost;
+    httpdownload.HttpProxyPort := cfgm.ProxyPort;
+    httpdownload.HttpProxyUser := cfgm.ProxyUser;
+    httpdownload.HttpProxyPass := cfgm.ProxyPass;
+  end
+  else
+  begin
+    httpdownload.SocksProxy := '';
+    httpdownload.SocksType := '';
+    httpdownload.HttpProxy := '';
+    httpdownload.HttpProxyPort := '';
+    httpdownload.HttpProxyUser := '';
+    httpdownload.HttpProxyPass := '';
+  end;
+  httpdownload.url:=URL_LEAPSECOND;
+  httpdownload.filename:=slash(privatedir)+'leap-seconds.new';
+  httpdownload.onDownloadComplete:=DownloadLeapSecondsComplete;
+  httpdownload.Start;
+end;
+
+procedure Tf_main.DownloadLeapSecondsComplete;
+var fn: string;
+begin
+  fn:=slash(privatedir)+'leap-seconds.list';
+  if FileExists(httpdownload.filename) and (FileSize(httpdownload.filename)>0) then begin
+    DeleteFile(fn);
+    RenameFile(httpdownload.filename,fn);
+  end
+  else begin
+    exit;
+  end;
+  LoadLeapseconds(false);
+  httpdownload:=THTTPBigDownload.Create(true);
+  if cfgm.HttpProxy then
+  begin
+    httpdownload.SocksProxy := '';
+    httpdownload.SocksType := '';
+    httpdownload.HttpProxy := cfgm.ProxyHost;
+    httpdownload.HttpProxyPort := cfgm.ProxyPort;
+    httpdownload.HttpProxyUser := cfgm.ProxyUser;
+    httpdownload.HttpProxyPass := cfgm.ProxyPass;
+  end
+  else if cfgm.SocksProxy then
+  begin
+    httpdownload.HttpProxy := '';
+    httpdownload.SocksType := cfgm.SocksType;
+    httpdownload.SocksProxy := cfgm.ProxyHost;
+    httpdownload.HttpProxyPort := cfgm.ProxyPort;
+    httpdownload.HttpProxyUser := cfgm.ProxyUser;
+    httpdownload.HttpProxyPass := cfgm.ProxyPass;
+  end
+  else
+  begin
+    httpdownload.SocksProxy := '';
+    httpdownload.SocksType := '';
+    httpdownload.HttpProxy := '';
+    httpdownload.HttpProxyPort := '';
+    httpdownload.HttpProxyUser := '';
+    httpdownload.HttpProxyPass := '';
+  end;
+  httpdownload.url:=URL_IERS;
+  httpdownload.filename:=slash(privatedir)+'finals.new';
+  httpdownload.onDownloadComplete:=DownloadIERSComplete;
+  httpdownload.Start;
+end;
+
+procedure Tf_main.DownloadIERSComplete;
+var fn: string;
+begin
+  fn:=slash(privatedir)+'finals.data';
+  if FileExists(httpdownload.filename) and (FileSize(httpdownload.filename)>0) then begin
+    DeleteFile(fn);
+    RenameFile(httpdownload.filename,fn);
+    LoadIERS;
+  end
 end;
 
 procedure Tf_main.LoadIERS;
