@@ -1708,6 +1708,8 @@ begin
     f_updcatalog.cmain:=cfgm;
     f_updcatalog.cdb := cdcdb;
     f_updcatalog.ConsistencyCheck;
+    if firstuse then
+      Application.QueueAsyncCall(OpenUpdCatalogAsync,0);
     if not Application.ShowMainForm then
       InitOK := True;  // no formshow if --daemon
   except
@@ -1763,7 +1765,6 @@ begin
   SelectLayout;
   SavePrivateConfig(configfile);
   SaveChartConfig(configfile, nil, False);
-  Application.QueueAsyncCall(OpenUpdCatalogAsync,0);
 end;
 
 procedure Tf_main.SelectLayout;
@@ -6480,7 +6481,7 @@ begin
   cfgm.CenterAtNoon := True;
   cfgm.SimpleMove := True;
   cfgm.updall := True;
-  cfgm.AutoRefreshDelay := 60;
+  cfgm.AutoRefreshDelay := 30;
   cfgm.ServerIPaddr := '127.0.0.1';
   cfgm.ServerIPport := '3292'; // x'CDC' :o)
   cfgm.TextOnlyDetail := False;
@@ -6667,7 +6668,7 @@ begin
   def_cfgsc.winx := clientwidth;
   def_cfgsc.winy := clientheight;
   def_cfgsc.UseSystemTime := True;
-  def_cfgsc.AutoRefresh := False;
+  def_cfgsc.AutoRefresh := True;
   def_cfgsc.JDchart := jd2000;
   def_cfgsc.LastJDchart := -1E25;
   def_cfgsc.racentre := 1.4;
