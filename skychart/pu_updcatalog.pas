@@ -472,7 +472,6 @@ begin
         dl.HttpProxyPass := '';
       end;
       dl.ConfirmDownload := False;
-      dl.QuickCancel := FileExists(fn);
       if cdcbeta then
         dl.URL := URL_CATALOG_LIST_BETA
       else
@@ -1030,7 +1029,6 @@ begin
       dl.HttpProxyPass := '';
     end;
     dl.ConfirmDownload := False;
-    dl.QuickCancel := false;
     dl.URL:=info.url;
     dl.SaveToFile := fn;
     ok:=dl.Execute;

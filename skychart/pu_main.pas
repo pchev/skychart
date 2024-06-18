@@ -754,7 +754,7 @@ type
     procedure IndiGUIdestroy(Sender: TObject);
     procedure PositionApply(Sender: TObject);
     procedure ZoomBarApply(Sender: TObject);
-    function QuickDownload(url, fn: string; quickcancel: boolean = True): boolean;
+    function QuickDownload(url, fn: string): boolean;
     function LoadMPCORB(fn:string): string;
     procedure EditToolBar(barnum: integer);
     procedure EnableAsteroid(Sender: TObject);
@@ -1994,7 +1994,7 @@ begin
   begin
     // download pdf
     pdfurl := URL_DocPDF + pdfname;
-    if QuickDownload(pdfurl, pdffn, False) then
+    if QuickDownload(pdfurl, pdffn) then
     begin
       // delete old pdf files
       i := FindFirstUTF8(slash(TempDir) + 'doc_*_' + dlg + '.pdf', 0, fs);
@@ -12552,18 +12552,18 @@ try
   else begin
     dt1:='0000-00-00';
   end;
-  if QuickDownload(URL_Asteroid_Lightcurve_Date, fn, False) then begin
+  if QuickDownload(URL_Asteroid_Lightcurve_Date, fn) then begin
     AssignFile(f,fn);
     reset(f);
     readln(f,dt2);
     closefile(f);
     if dt1<>dt2 then begin
       fn :=slash(tempdir)+'lc_summary.txt';
-      if QuickDownload(URL_Asteroid_Lightcurve_Database, fn, False) then begin
+      if QuickDownload(URL_Asteroid_Lightcurve_Database, fn) then begin
         cdcdb.LoadAstExt(fn);
       end;
       fn :=slash(tempdir)+'lc_familylookup.txt';
-      if QuickDownload(URL_Asteroid_Lightcurve_Family, fn, False) then begin
+      if QuickDownload(URL_Asteroid_Lightcurve_Family, fn) then begin
         cdcdb.LoadAstFam(fn);
       end;
     end;
@@ -12582,7 +12582,7 @@ var
   fn: string;
 begin
     fn :=slash(privatedir)+'leap-seconds.list';
-    if QuickDownload(URL_LEAPSECOND, fn, False) then begin
+    if QuickDownload(URL_LEAPSECOND, fn) then begin
       LoadLeapseconds(false);
     end
     else begin
@@ -12590,11 +12590,11 @@ begin
       exit;
     end;
     fn:=slash(privatedir)+'finals.data';
-    if QuickDownload(URL_IERS, fn, false) then begin
+    if QuickDownload(URL_IERS, fn) then begin
       LoadIERS;
     end;
     fn :=slash(privatedir)+'deltat.txt';
-    if QuickDownload(URL_DELTAT, fn, False) then begin
+    if QuickDownload(URL_DELTAT, fn) then begin
       LoadDeltaT;
       ShowMessage(rsUpdatedSucce);
     end;
@@ -12627,7 +12627,7 @@ begin
     f_calendar.Close;
 end;
 
-function Tf_main.QuickDownload(url, fn: string; quickcancel: boolean = True): boolean;
+function Tf_main.QuickDownload(url, fn: string): boolean;
 var
   dl: TDownloadDialog;
 begin
@@ -12663,7 +12663,6 @@ begin
       dl.HttpProxyPass := '';
     end;
     dl.ConfirmDownload := False;
-    dl.QuickCancel := quickcancel;
     dl.URL := url;
     dl.SaveToFile := fn;
     Result := dl.Execute and FileExists(fn);
@@ -12682,7 +12681,7 @@ begin
   {%H-}begin
     url := 'https://www.ap-i.net/pub/skychart/beta.txt';
     fn := slash(TempDir) + 'beta.txt';
-    if QuickDownload(url, fn, False) then
+    if QuickDownload(url, fn) then
     begin
       AssignFile(f, fn);
       reset(f);
@@ -12706,7 +12705,7 @@ begin
   {%H-}begin
     url := 'https://www.ap-i.net/pub/skychart/version.txt';
     fn := slash(TempDir) + 'version.txt';
-    if QuickDownload(url, fn, False) then
+    if QuickDownload(url, fn) then
     begin
       AssignFile(f, fn);
       reset(f);

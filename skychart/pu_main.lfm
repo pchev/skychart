@@ -4231,7 +4231,6 @@ object f_main: Tf_main
     FtpFwMode = 0
     FtpFwPassive = True
     ConfirmDownload = False
-    QuickCancel = False
     Left = 388
     Top = 428
   end

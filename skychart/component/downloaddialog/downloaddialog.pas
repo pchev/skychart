@@ -95,7 +95,6 @@ type
     FUsername, FPassword, FFWhost, FFWport, FFWUsername, FFWPassword: string;
     FDownloadFile, FCopyfrom, Ftofile, FDownload, FCancel: string;
     FConfirmDownload: boolean;
-    FQuickCancel: boolean;
     FScaleDpi: double;
     DF: TForm;
     okButton, cancelButton: TButton;
@@ -146,7 +145,6 @@ type
     property FtpFwUserName: string read FFWUsername write FFWUsername;
     property FtpFwPassword: string read FFWPassword write FFWPassword;
     property ConfirmDownload: boolean read FConfirmDownload write FConfirmDownload;
-    property QuickCancel: boolean read FQuickCancel write FQuickCancel;
     property onFeedback: TDownloadFeedback read FDownloadFeedback
       write FDownloadFeedback;
   end;
@@ -194,7 +192,6 @@ begin
   Timer1.Interval := 2000;
   Timer1.OnTimer := @Timer1Timer;
   FTimeout := 90000;
-  FQuickCancel := False;
   Fproxy := '';
   FSocksproxy := '';
   FFWMode := 0;
@@ -354,10 +351,7 @@ end;
 procedure TDownloadDialog.Timer1Timer(Sender: TObject);
 begin
   Timer1.Enabled := False;
-  if FQuickCancel then
-    BtnCancel(nil)
-  else
-    DF.ShowModal;
+  DF.ShowModal;
 end;
 
 procedure TDownloadDialog.FormClose(Sender: TObject; var CloseAction: TCloseAction);
