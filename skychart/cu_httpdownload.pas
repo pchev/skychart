@@ -156,6 +156,7 @@ try
     FSockreadcount := 0;
     http.Sock.OnStatus := @SockStatus;
     http.sock.OnMonitor := @SockMonitor;
+    http.Sock.ConnectionTimeout:=10000;
 
     FMillis := GetTickCount64;
     ok := http.HTTPMethod('GET', Furl);
