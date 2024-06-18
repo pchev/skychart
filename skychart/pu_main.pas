@@ -701,7 +701,7 @@ type
     procedure ScaleMainForm;
     procedure ResizeBtn;
     procedure ViewTopPanel;
-    procedure ApplyConfigdirect(Sender: TObject);
+    procedure RefreshActiveChart(Sender: TObject);
     procedure ApplyConfig(Sender: TObject);
     procedure ApplyConfigTime(Sender: TObject);
     procedure ApplyConfigObservatory(Sender: TObject);
@@ -1704,6 +1704,7 @@ begin
     InitScriptPanel;
     f_updcatalog.onSaveConfig := SaveCatalogConfig;
     f_updcatalog.onOpenSetup := OpenCatalogSetup;
+    f_updcatalog.onChartRefresh := RefreshActiveChart;
     f_updcatalog.catalog:=catalog;
     f_updcatalog.cmain:=cfgm;
     f_updcatalog.cdb := cdcdb;
@@ -5033,7 +5034,7 @@ begin
   if f_configdirect = nil then
   begin
     f_configdirect := Tf_configdirect.Create(application);
-    f_configdirect.onApplyConfig := ApplyConfigdirect;
+    f_configdirect.onApplyConfig := RefreshActiveChart;
     f_configdirect.onPrepareAsteroid := PrepareAsteroid;
     f_configdirect.onEnableAsteroid:=EnableAsteroid;
     f_configdirect.onDisableAsteroid:=DisableAsteroid;
@@ -5087,7 +5088,7 @@ begin
   if (f_configdirect <> nil) then f_configdirect.Close;
 end;
 
-procedure Tf_main.ApplyConfigdirect(Sender: TObject);
+procedure Tf_main.RefreshActiveChart(Sender: TObject);
 begin
  if MultiFrame1.ActiveObject is Tf_chart then
     with MultiFrame1.ActiveObject as Tf_chart do

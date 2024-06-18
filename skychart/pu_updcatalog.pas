@@ -93,7 +93,7 @@ type
     Fcmain: Tconf_main;
     Fcdb: Tcdcdb;
     Fplanet: TPlanet;
-    FSaveConfig, FOpenSetup: TNotifyEvent;
+    FSaveConfig, FOpenSetup, FChartRefresh: TNotifyEvent;
     InstallInfo: TCatInfo;
     httpdownload: THTTPBigDownload;
     FUnZipper: TUnZipper;
@@ -128,6 +128,7 @@ type
     property cdb: Tcdcdb read Fcdb write Fcdb;
     property onSaveConfig: TNotifyEvent read FSaveConfig write FSaveConfig;
     property onOpenSetup: TNotifyEvent read FOpenSetup write FOpenSetup;
+    property onChartRefresh: TNotifyEvent read FChartRefresh write FChartRefresh;
   end;
 
 var
@@ -911,6 +912,7 @@ begin
   ButtonRefresh.Enabled:=true;
   ButtonSetup.Enabled:=true;
   ProgressIndex:=0;
+  if assigned(FChartRefresh) then FChartRefresh(self);
 end;
 
 procedure Tf_updcatalog.ButtonAbortClick(Sender: TObject);
