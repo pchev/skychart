@@ -148,6 +148,7 @@ type
     function InsertDB(fname, cname, oname: string;
       ra, de, Width, Height, rotation: double): boolean;
     function ImagesForCatalog(catname: string): boolean;
+    procedure GetImagesCatalog(var imgcatlist: tstringlist);
     function GetFileName(catname, objectname: string; var filename: string): boolean;
     procedure GetAllHeader(var Result: TStringList);
     procedure ViewHeaders;
@@ -1789,6 +1790,16 @@ begin
     i := strtointdef(db1.QueryOne('select count(*) from cdc_fits where catalogname="' +
       uppercase(trim(catname)) + '"'), 0);
     Result := (i > 0);
+  end;
+end;
+
+procedure TFits.GetImagesCatalog(var imgcatlist: tstringlist);
+var i: integer;
+begin
+  imgcatlist.clear;
+  db1.query('select distinct catalogname from cdc_fits');
+  for i:=0 to db1.RowCount-1 do begin
+    imgcatlist.Add(db1.Results[i][0]);
   end;
 end;
 

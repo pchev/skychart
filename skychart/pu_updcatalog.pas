@@ -93,7 +93,7 @@ type
     Fcmain: Tconf_main;
     Fcdb: Tcdcdb;
     Fplanet: TPlanet;
-    FSaveConfig, FOpenSetup, FChartRefresh: TNotifyEvent;
+    FSaveConfig, FOpenSetup, FChartRefresh, FActivatePictures: TNotifyEvent;
     InstallInfo: TCatInfo;
     httpdownload: THTTPBigDownload;
     FUnZipper: TUnZipper;
@@ -129,6 +129,7 @@ type
     property onSaveConfig: TNotifyEvent read FSaveConfig write FSaveConfig;
     property onOpenSetup: TNotifyEvent read FOpenSetup write FOpenSetup;
     property onChartRefresh: TNotifyEvent read FChartRefresh write FChartRefresh;
+    property onActivatePictures: TNotifyEvent read FActivatePictures write FActivatePictures;
   end;
 
 var
@@ -863,6 +864,7 @@ begin
       Fcdb.ScanImagesDirectory(cmain.ImagePath, ProgressCat, ProgressBar1);
       ProgressCat.Visible:=false;
       ProgressBar1.Visible:=false;
+      if assigned(FActivatePictures) then FActivatePictures(self);
     end;
     if Assigned(FSaveConfig) then FSaveConfig(self);
   end

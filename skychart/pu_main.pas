@@ -703,6 +703,7 @@ type
     procedure ResizeBtn;
     procedure ViewTopPanel;
     procedure RefreshActiveChart(Sender: TObject);
+    procedure ActivatePictures(Sender: TObject);
     procedure ApplyConfig(Sender: TObject);
     procedure ApplyConfigTime(Sender: TObject);
     procedure ApplyConfigObservatory(Sender: TObject);
@@ -1709,6 +1710,7 @@ begin
     f_updcatalog.onSaveConfig := SaveCatalogConfig;
     f_updcatalog.onOpenSetup := OpenCatalogSetup;
     f_updcatalog.onChartRefresh := RefreshActiveChart;
+    f_updcatalog.onActivatePictures := ActivatePictures;
     f_updcatalog.catalog:=catalog;
     f_updcatalog.cmain:=cfgm;
     f_updcatalog.cdb := cdcdb;
@@ -5098,6 +5100,15 @@ begin
     with MultiFrame1.ActiveObject as Tf_chart do
     begin
       Refresh(false,false);
+    end;
+end;
+
+procedure Tf_main.ActivatePictures(Sender: TObject);
+begin
+ if MultiFrame1.ActiveObject is Tf_chart then
+    with MultiFrame1.ActiveObject as Tf_chart do
+    begin
+      cmd_SetShowPicture('ON');
     end;
 end;
 

@@ -451,6 +451,7 @@ type
     function cmd_GetTZ: string;
     function cmd_SetBGimage(onoff,setfov: string; loadnew: boolean=true): string;
     function cmd_LoadBGimage(fn,track: string): string;
+    procedure ActivateImageCatalog;
     function cmd_SetShowPicture(onoff: string): string;
     function cmd_PDSS(DssDir, ImagePath, ImageName, useexisting: string): string;
     function cmd_GetObjectList: string;
@@ -4790,6 +4791,31 @@ begin
     Result := msgFailed;
 end;
 
+procedure Tf_Chart.ActivateImageCatalog;
+var i,j: integer;
+    catlst: TStringList;
+    cat: string;
+begin
+   catlst:=TStringList.Create;
+   sc.Fits.GetImagesCatalog(catlst);
+   for i:=0 to catlst.Count-1 do begin
+     cat:=uppercase(catlst[i]);
+     if cat='ONGC' then begin
+       sc.catalog.cfgcat.NebCatDef[ngc - BaseNeb]:=True;
+       writeln(cat);
+     end
+     else begin
+       for j:=0 to sc.catalog.cfgcat.GCatNum-1 do begin
+         if cat=uppercase(sc.catalog.cfgcat.GCatLst[j].shortname) then begin
+           sc.catalog.cfgcat.GCatLst[j].Actif:=True;
+           writeln(sc.catalog.cfgcat.GCatLst[j].shortname);
+         end;
+       end;
+     end;
+   end;
+   catlst.free;
+end;
+
 function Tf_Chart.cmd_SetShowPicture(onoff: string): string;
 begin
   Result := msgOK;
@@ -4800,6 +4826,7 @@ begin
     WriteTrace(rsErrorPleaseC3);
     Result := msgFailed;
   end;
+  if sc.cfgsc.ShowImages then ActivateImageCatalog;
   Refresh(True, False);
 end;
 
