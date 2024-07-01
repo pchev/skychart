@@ -763,7 +763,10 @@ if Assigned(VoNode) then begin
     if (not raok)and(pos('error',TFieldData(VOFields.Objects[i]).ucd)=0)and(((lin.ra=-999) and (pos('pos.eq.ra',TFieldData(VOFields.Objects[i]).ucd)=1))or
        (pos('pos.eq.ra;meta.main',TFieldData(VOFields.Objects[i]).ucd)=1))
         then begin
-          lin.ra:=deg2rad*15*Str3ToAR(buf);
+          if TFieldData(VOFields.Objects[i]).units='deg' then
+            lin.ra:=deg2rad*Str3ToAR(buf)
+          else
+            lin.ra:=deg2rad*15*Str3ToAR(buf);
     end;
     if (not decok)and(pos('error',TFieldData(VOFields.Objects[i]).ucd)=0)and(((lin.dec=-999) and (pos('pos.eq.dec',TFieldData(VOFields.Objects[i]).ucd)=1))or
        (pos('pos.eq.dec;meta.main',TFieldData(VOFields.Objects[i]).ucd)=1))
