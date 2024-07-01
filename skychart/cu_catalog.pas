@@ -1907,6 +1907,8 @@ begin
     ReadVOCat(rec, Result);
     if not Result then
       break;
+    if IsNan(rec.ra) or IsNan(rec.dec) then
+      continue;
     if filter and cfgshr.StarFilter and (rec.star.magv > cfgcat.StarMagMax) then
       continue;
     break;
@@ -1923,6 +1925,8 @@ begin
     cfgcat.SampSelectIdent := False;
     if not Result then
       break;
+    if IsNan(rec.ra) or IsNan(rec.dec) then
+      continue;
     if not rec.neb.valid[vnMag] then
       rec.neb.mag := rec.options.MagMax;
     if filter and cfgshr.NebFilter and rec.neb.valid[vnMag] and
