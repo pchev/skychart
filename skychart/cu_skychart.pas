@@ -3633,7 +3633,7 @@ begin
     if (lrot>90)and(lrot<270) then lrot:=rmod(lrot+180,360);
     lis := 'PrePointLine' + FormatFloat(f6, ra) + FormatFloat(f6, de);
     lid := rshash(lis, $7FFFFFFF);
-    SetLabel(lid, xp, yp, 5, 2, 1, ARmtoStr(ltime), laTopLeft, lrot, 1, false);
+    SetLabel(lid, xp, yp, 5, 2, 1, TimToStr(ltime), laTopLeft, lrot, 1, false);
     for i:=1 to n do begin
       ra:=ra-dx;
       ltime:=ltime-dt;
@@ -3645,7 +3645,7 @@ begin
       Fplot.PlotLine(xp, yp, xx, yy, color, 1);
       if (i mod s) = 0 then begin
         Fplot.PlotSimMark(xx, yy, color);
-        SetLabel(lid, xx, yy, 5, 2, 1, ARmtoStr(ltime), laTopLeft, lrot, 1, false);
+        SetLabel(lid, xx, yy, 5, 2, 1, TimToStr(ltime), laTopLeft, lrot, 1, false);
       end;
       xp:=xx;
       yp:=yy;
