@@ -1565,7 +1565,7 @@ begin
         if cfgsc.PMon and rec.star.valid[vsPmra] and rec.star.valid[vsPmdec] then
         begin
           propermotion(rec.ra, rec.Dec, dyear, rec.star.pmra, rec.star.pmdec,
-                      ((abs(dyear)>50)and rec.star.valid[vsPx] and(rec.star.px>0)and(rec.star.px<0.8) and (trim(rec.options.flabel[26]) = 'RV')),
+                      ((abs(dyear)>50)and rec.star.valid[vsPx] and(rec.star.px>0)and(rec.star.px<0.8) and (uppercase(trim(rec.options.flabel[26])) = 'RV')),
                        rec.star.px, rec.num[1], distfact);
           catalog.AdjustStarForDistance(rec,distfact);
         end;
@@ -1587,7 +1587,7 @@ begin
           if cfgsc.DrawPMon and rec.star.valid[vsPmra] and rec.star.valid[vsPmdec] then
           begin
             propermotion(pra, pdec, cfgsc.DrawPMyear, rec.star.pmra, rec.star.pmdec,
-              (rec.star.valid[vsPx] and(rec.star.px>0)and(rec.star.px<0.8)and (trim(rec.options.flabel[26]) = 'RV')), rec.star.px, rec.num[1], distfact);
+              (rec.star.valid[vsPx] and(rec.star.px>0)and(rec.star.px<0.8)and (uppercase(trim(rec.options.flabel[26])) = 'RV')), rec.star.px, rec.num[1], distfact);
             precession(rec.options.EquinoxJD, cfgsc.JDChart, pra, pdec);
             if cfgsc.ApparentPos then
               apparent_equatorial(pra, pdec, cfgsc, True, True);
