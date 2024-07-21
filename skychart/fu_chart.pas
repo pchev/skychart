@@ -354,6 +354,7 @@ type
     procedure rotation(rot: double);
     procedure GetSunImage;
     procedure CKeyDown(Key: word; Shift: TShiftState);
+    function LoadMosaicFrameList: double;
     procedure NewMosaic(ra,de: double; resizechart: boolean);
     procedure EndMosaic(Sender: TObject);
     procedure SendMosaic(Sender: TObject);
@@ -6985,7 +6986,7 @@ begin
 end;
 
 procedure Tf_chart.NewMosaic(ra,de: double; resizechart: boolean);
-var i,n:integer;
+var i:integer;
     w: double;
 begin
   // check incompatible option
@@ -7033,23 +7034,29 @@ begin
   f_mosaic.onSendMosaic:=SendMosaic;
   f_mosaic.Ra.Value:=rad2deg*ra/15;
   f_mosaic.De.Value:=rad2deg*de;
-  f_mosaic.FrameList.Clear;
-  n:=1; // use first rectangle if none are selected
-  w:=0;
-  for i:=1 to sc.cfgsc.nrectangle do begin
-    if sc.cfgsc.rectangleok[i] and (sc.cfgsc.rectangle[i,4]=0) then begin
-       n:=i;
-    end;
-    f_mosaic.FrameList.Items.Add(formatfloat(f2, sc.cfgsc.rectangle[i, 1]) + lmin + 'x' + formatfloat(f2, sc.cfgsc.rectangle[i, 2]) + lmin + blank + sc.cfgsc.rectanglelbl[i]);
-  end;
-  f_mosaic.FrameList.ItemIndex := n-1;
-  w := sc.cfgsc.rectangle[n, 1];
-  f_mosaic.Rotation.Value := sc.cfgsc.rectangle[n, 3];
+  w := LoadMosaicFrameList;
   FormPos(f_mosaic,mouse.CursorPos.X, mouse.CursorPos.Y);
   f_mosaic.Show;
   if resizechart and (w>0) then begin
      sc.setfov(deg2rad * 2*f_mosaic.SizeX.Value*w/60)
   end;
+end;
+
+function Tf_chart.LoadMosaicFrameList;
+var i,n:integer;
+begin
+  f_mosaic.FrameList.Clear;
+  n:=1; // use first rectangle if none are selected
+  result:=0;
+  for i:=1 to sc.cfgsc.nrectangle do begin
+    if sc.cfgsc.rectangleok[i] and (sc.cfgsc.rectangle[i,4]=0) then begin
+       n:=i;
+    end;
+    f_mosaic.FrameList.Items.Add(formatfloat(f2, sc.cfgsc.rectangle[i, 1]) + lmin + 'x' + formatfloat(f2, sc.cfgsc.rectangle[i, 2]) + lmin + '_PA' + formatfloat(f2, sc.cfgsc.rectangle[i, 3]) + ldeg + blank + sc.cfgsc.rectanglelbl[i]);
+  end;
+  f_mosaic.FrameList.ItemIndex := n-1;
+  result := sc.cfgsc.rectangle[n, 1];
+  f_mosaic.Rotation.Value := sc.cfgsc.rectangle[n, 3];
 end;
 
 procedure Tf_chart.SendMosaic(Sender: TObject);
@@ -7111,6 +7118,7 @@ begin
   SetLength(sc.cfgsc.rectangleok, sc.cfgsc.nrectangle + 1);
   SetLength(sc.cfgsc.rectanglelbl, sc.cfgsc.nrectangle + 1);
   for i:=1 to sc.cfgsc.nrectangle do begin
+    if i=10 then continue;
     sc.cfgsc.rectangle[i,1]  := rectangle[i,1];
     sc.cfgsc.rectangle[i,2]  := rectangle[i,2];
     sc.cfgsc.rectangle[i,3]  := rectangle[i,3];
@@ -7391,8 +7399,9 @@ begin
     sc.cfgsc.rectangle[i, 3] := StrToFloatDef(rotation, 0);
     sc.cfgsc.rectangle[i, 4] := StrToFloatDef(offset, 0);
     sc.cfgsc.rectangle[i, 5] := 0;
-    sc.cfgsc.rectanglelbl[i] := 'R' + w + 'x' + h;
+    sc.cfgsc.rectanglelbl[i] := 'R' + w + 'x' + h +'_PA'+rotation+ldeg;
     Result := msgOK;
+    LoadMosaicFrameList;
   end
   else
     Result := msgFailed;

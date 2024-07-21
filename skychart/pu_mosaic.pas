@@ -267,7 +267,7 @@ end;
 procedure Tf_mosaic.FrameListChange(Sender: TObject);
 var buf,s: string;
     p: integer;
-    x,c: double;
+    x,c,r: double;
 begin
   // size is first part of text
   buf := FrameList.Text;
@@ -282,6 +282,17 @@ begin
   if c=0 then c:=0.00001;
   // ra offset in hour
   dra := dde / c / 15;
+  // rotation
+  p := pos('PA',buf);
+  if p<=0 then exit;
+  delete(buf,1,p+1);
+  p := pos(ldeg,buf);
+  if p<=0 then exit;
+  s := copy(buf,1,p-1);
+  r := StrToFloatDef(s,-1);
+  if r<0 then exit;
+  Rotation.Value:=r;
+  // apply change
   Apply;
 end;
 
