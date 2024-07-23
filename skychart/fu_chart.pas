@@ -7396,7 +7396,7 @@ begin
   begin
     sc.cfgsc.rectangle[i, 1] := StrToFloatDef(w, 60);
     sc.cfgsc.rectangle[i, 2] := StrToFloatDef(h, 60);
-    sc.cfgsc.rectangle[i, 3] := StrToFloatDef(rotation, 0);
+    sc.cfgsc.rectangle[i, 3] := rmod(StrToFloatDef(rotation, 0)+360,360);
     sc.cfgsc.rectangle[i, 4] := StrToFloatDef(offset, 0);
     sc.cfgsc.rectangle[i, 5] := 0;
     sc.cfgsc.rectanglelbl[i] := 'R' + w + 'x' + h +'_PA'+rotation+ldeg;

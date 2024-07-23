@@ -2391,7 +2391,7 @@ begin
     begin
       val(Value, x, n);
       if n = 0 then
-        csc.rectangle[Arow, 3] := x
+        csc.rectangle[Arow, 3] := rmod(x+360,360)
       else
         beep;
     end;

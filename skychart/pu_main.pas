@@ -7571,7 +7571,7 @@ begin
             ReadFloat(section, 'RectangleH' + IntToStr(i), csc.rectangle[i, 2]);
         for i := 1 to csc.nrectangle do
           csc.rectangle[i, 3] :=
-            ReadFloat(section, 'RectangleR' + IntToStr(i), csc.rectangle[i, 3]);
+            rmod(ReadFloat(section, 'RectangleR' + IntToStr(i), csc.rectangle[i, 3])+360,360);
         for i := 1 to csc.nrectangle do
           csc.rectangle[i, 4] :=
             ReadFloat(section, 'RectangleOffset' + IntToStr(i), csc.rectangle[i, 4]);
