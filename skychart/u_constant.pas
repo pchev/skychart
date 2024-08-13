@@ -1601,8 +1601,7 @@ const
   html_b = '<b>';
   htms_b = '</b>';
   html_h1 = '<font size="+1"><b>';
-  html_h2 = '<font size="+2"><b>';
-  htms_h2 = '</b></font><br>';
+  htms_h1 = '</b></font><br>';
   html_p = '<p>';
   htms_p = '</p>';
   html_br = '<br>';

@@ -1072,23 +1072,25 @@ end;
 
 procedure Tf_config_display.CirclegridDrawCell(Sender: TObject;
   aCol, aRow: integer; aRect: TRect; aState: TGridDrawState);
+var i: integer;
 begin
   with Sender as TStringGrid do
   begin
     if (Acol = 1) and (Arow > 0) then
     begin
+      i := (RowHeights[aRow]-ImageList1.Height) div 2;
       Canvas.Brush.style := bssolid;
       if (cells[acol, arow] = '1') then
       begin
         Canvas.Brush.Color := clWindow;
         Canvas.FillRect(aRect);
-        ImageList1.Draw(Canvas, aRect.left + 2, aRect.top + 2, 3);
+        ImageList1.Draw(Canvas, aRect.left + 2, aRect.top + i, 3);
       end
       else
       begin
         Canvas.Brush.Color := clWindow;
         Canvas.FillRect(aRect);
-        ImageList1.Draw(Canvas, aRect.left + 2, aRect.top + 2, 2);
+        ImageList1.Draw(Canvas, aRect.left + 2, aRect.top + i, 2);
       end;
     end;
   end;
@@ -1686,12 +1688,12 @@ procedure Tf_config_display.ShowCircle;
 var
   i: integer;
 begin
-  circlegrid.ColWidths[0] := 30;
-  circlegrid.ColWidths[1] := 30;
-  circlegrid.ColWidths[2] := 60;
-  circlegrid.ColWidths[3] := 60;
-  circlegrid.ColWidths[4] := 60;
-  circlegrid.ColWidths[5] := circlegrid.clientwidth - 30 - 245;
+  circlegrid.ColWidths[0] := DoScaleX(30);
+  circlegrid.ColWidths[1] := DoScaleX(30);
+  circlegrid.ColWidths[2] := DoScaleX(60);
+  circlegrid.ColWidths[3] := DoScaleX(60);
+  circlegrid.ColWidths[4] := DoScaleX(60);
+  circlegrid.ColWidths[5] := circlegrid.clientwidth - DoScaleX(30 + 245);
   circlegrid.Cells[0, 0] := 'n';
   circlegrid.Cells[1, 0] := 'x';
   circlegrid.Cells[2, 0] := rsFOV;
@@ -1725,13 +1727,13 @@ procedure Tf_config_display.ShowRectangle;
 var
   i: integer;
 begin
-  rectanglegrid.ColWidths[0] := 30;
-  rectanglegrid.ColWidths[1] := 30;
-  rectanglegrid.ColWidths[2] := 60;
-  rectanglegrid.ColWidths[3] := 60;
-  rectanglegrid.ColWidths[4] := 60;
-  rectanglegrid.ColWidths[5] := 60;
-  rectanglegrid.ColWidths[6] := rectanglegrid.clientwidth - 30 - 305;
+  rectanglegrid.ColWidths[0] := DoScaleX(30);
+  rectanglegrid.ColWidths[1] := DoScaleX(30);
+  rectanglegrid.ColWidths[2] := DoScaleX(60);
+  rectanglegrid.ColWidths[3] := DoScaleX(60);
+  rectanglegrid.ColWidths[4] := DoScaleX(60);
+  rectanglegrid.ColWidths[5] := DoScaleX(60);
+  rectanglegrid.ColWidths[6] := rectanglegrid.clientwidth - DoScaleX(30 + 305);
   rectanglegrid.Cells[0, 0] := 'n';
   rectanglegrid.Cells[1, 0] := 'x';
   rectanglegrid.Cells[2, 0] := rsWidth;
@@ -2749,23 +2751,25 @@ end;
 
 procedure Tf_config_display.RectangleGridDrawCell(Sender: TObject;
   aCol, aRow: integer; aRect: TRect; aState: TGridDrawState);
+var i: integer;
 begin
   with Sender as TStringGrid do
   begin
     if (Acol = 1) and (Arow > 0) then
     begin
+      i := (RowHeights[aRow]-ImageList1.Height) div 2;
       Canvas.Brush.style := bssolid;
       if (cells[acol, arow] = '1') then
       begin
         Canvas.Brush.Color := clWindow;
         Canvas.FillRect(aRect);
-        ImageList1.Draw(Canvas, aRect.left + 2, aRect.top + 2, 3);
+        ImageList1.Draw(Canvas, aRect.left + 2, aRect.top + i, 3);
       end
       else
       begin
         Canvas.Brush.Color := clWindow;
         Canvas.FillRect(aRect);
-        ImageList1.Draw(Canvas, aRect.left + 2, aRect.top + 2, 2);
+        ImageList1.Draw(Canvas, aRect.left + 2, aRect.top + i, 2);
       end;
     end;
   end;

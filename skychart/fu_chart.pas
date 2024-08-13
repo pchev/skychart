@@ -650,8 +650,8 @@ begin
   MovingCircle := False;
   HorScrollBar.onScroll := HorScrollBarScroll;
   VertScrollBar.onScroll := VertScrollBarScroll;
-  VertScrollBar.Width := 15;
-  HorScrollBar.Height := 15;
+  VertScrollBar.Width := DoScaleX(15);
+  HorScrollBar.Height := DoScaleY(15);
   VertScrollBar.Max := 90 * 3600;   // arcsecond position precision
   VertScrollBar.Min := -90 * 3600;
   VertScrollBar.SmallChange := 3600;
@@ -4017,7 +4017,7 @@ begin
       buf := sc.catalog.LongLabelObj('D*')
     else
       buf := sc.catalog.LongLabelObj(otype);
-    txt := txt + html_h2 + buf + htms_h2;
+    txt := txt + html_h1 + buf + htms_h1;
   end;
   buf := copy(desc, l + 1, 9999);
   // object name

@@ -11,6 +11,7 @@ object f_detail: Tf_detail
   OnKeyDown = FormKeyDown
   OnShow = FormShow
   ParentFont = True
+  Scaled = False
   object PageControl1: TPageControl
     Left = 0
     Height = 425

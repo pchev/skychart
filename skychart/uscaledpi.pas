@@ -5,7 +5,7 @@ unit UScaleDPI;
 interface
 
 uses
-  cu_radec, Math, Types, StdCtrls,
+  cu_radec, Math, Types, StdCtrls, Buttons,
   Forms, Graphics, Controls, ComCtrls, Grids, LCLType;
 
 procedure SetScale(cnv: TCanvas);
@@ -175,12 +175,22 @@ begin
   begin
     with TStringGrid(Control) do
     begin
+      DefaultRowHeight:=DoScaleY(DefaultRowHeight);
       for n := 0 to ColCount - 1 do
       begin
         ColWidths[n] := DoScaleX(ColWidths[n]);
       end;
     end;
     exit;
+  end;
+
+  if Control is TSpeedButton then
+  begin
+    with TSpeedButton(Control) do
+    begin
+      if Font.Height<0 then
+        Font.Height:=-DoScaleX(abs(Font.Height));
+    end;
   end;
 
   if Control is TWinControl then
