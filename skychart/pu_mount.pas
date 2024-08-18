@@ -380,7 +380,7 @@ begin
 end;
 
 Procedure Tpop_scope.MountStatus(Sender: TObject);
-var nrates: integer;
+var i,nrates: integer;
   rates: TStringList;
 begin
   case  Fmount.Status of
@@ -388,10 +388,10 @@ begin
       FConnected := True;
       Initialized := True;
       try
-      FCanSetTracking := pos('CanSetTracking;',Fmount.Capability)>=0;
-      FCanParkUnpark := pos('CanPark;',Fmount.Capability)>=0;
-      hasSync := pos('CanSync;',Fmount.Capability)>=0;
-      Handpad.Visible:=pos('CanMoveAxis;',Fmount.Capability)>=0;
+      FCanSetTracking := pos('CanSetTracking;',Fmount.Capability)>0;
+      FCanParkUnpark := pos('CanPark;',Fmount.Capability)>0;
+      hasSync := pos('CanSync;',Fmount.Capability)>0;
+      Handpad.Visible:=pos('CanMoveAxis;',Fmount.Capability)>0;
       if handpad.Visible then begin
         try
         rates:=TStringList.Create;
