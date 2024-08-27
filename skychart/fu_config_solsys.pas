@@ -27,7 +27,7 @@ interface
 
 uses
   u_help, u_translation, u_constant, u_util, u_projection, cu_database, cu_radec, cu_calceph,
-  LCLIntf, SysUtils, Classes, Graphics, Controls, Forms, Dialogs, Math, IniFiles, tlntsend,
+  LCLIntf, SysUtils, Classes, Graphics, Controls, Forms, Dialogs, Math, IniFiles, fpjson, jsonparser, base64,
   Spin, enhedits, StdCtrls, Buttons, ExtCtrls, ComCtrls, LResources, UScaleDPI, Clipbrd, gzio,
   downloaddialog, jdcalendar, EditBtn, CheckLst, Menus, Process, LazHelpHTML_fix, LazUTF8, LazFileUtils, Types;
 
@@ -42,6 +42,7 @@ type
     BtnSaveCom: TButton;
     BtnPastAst: TButton;
     BtnPastCom: TButton;
+    ButtonHelp: TButton;
     ButtonCancel: TButton;
     ButtonDownloadSpk: TButton;
     ButtonReturn: TButton;
@@ -73,7 +74,6 @@ type
     LabelTitle: TLabel;
     LabelDate2: TLabel;
     LabelDate1: TLabel;
-    Labelemail: TLabel;
     LabelObjSpk: TLabel;
     Panel10: TPanel;
     Panel3: TPanel;
@@ -97,7 +97,6 @@ type
     NumDays: TSpinEdit;
     SPKpopup: TPopupMenu;
     SPKobject: TEdit;
-    SPKemail: TEdit;
     Labelmsgspk: TLabel;
     EditEph: TEdit;
     GroupBox2: TGroupBox;
@@ -320,7 +319,6 @@ type
     procedure smallsatChange(Sender: TObject);
     procedure SPKdeleteClick(Sender: TObject);
     procedure SPKDeleteExpiredClick(Sender: TObject);
-    procedure SPKemailChange(Sender: TObject);
     procedure SPKListViewContextPopup(Sender: TObject; MousePos: TPoint; var Handled: Boolean);
     procedure SPKListViewItemChecked(Sender: TObject; Item: TListItem);
     procedure SPKRefreshAllClick(Sender: TObject);
@@ -345,7 +343,7 @@ type
     procedure ListSPK;
     procedure AsteroidFeedback(txt: string);
     procedure CometFeedback(txt: string);
-    function HorizonSPK(obj:string; date1,date2: TDateTime; email: string; out filetodownload: string):boolean;
+    function HorizonAPI(obj:string; date1,date2: TDateTime):boolean;
   public
     { Public declarations }
     cdb: Tcdcdb;
@@ -535,9 +533,9 @@ begin
   GRSJDDate.labels := Alabels;
   LabelTitle.Caption:=rsDownloadSola;
   LabelObjSpk.Caption:=rsObjectName;
-  Labelemail.Caption:=rsEmail;
   LabelDate1.Caption:=rsStartDate;
   LabelDate2.Caption:=rsNumberOfDays;
+  ButtonHelp.Caption:=rsHelp;
   ButtonDownloadSpk.Caption:=rsDownload;
   CheckAllSPK.Caption:=rsSelectAll;
   ButtonReturn.Caption:=rsReturn;
@@ -1552,7 +1550,6 @@ begin
   PanelSPKlist.visible:=true;
   DateEdit1.Date:=now;
   NumDays.Value:=cmain.HorizonNumDay;
-  SPKemail.Text:=cmain.HorizonEmail;
   ListSPK;
 end;
 
@@ -1696,11 +1693,6 @@ finally
 end;
 end;
 
-procedure Tf_config_solsys.SPKemailChange(Sender: TObject);
-begin
-  cmain.HorizonEmail  := SPKemail.Text;
-end;
-
 procedure Tf_config_solsys.ButtonReturnClick(Sender: TObject);
 begin
   PanelSPKmemo.visible:=false;
@@ -1713,7 +1705,7 @@ begin
 end;
 
 procedure Tf_config_solsys.ButtonDownloadSpkClick(Sender: TObject);
-var obj,email,dlf,fn: string;
+var obj: string;
     dt1,dt2: TDateTime;
 begin
 try
@@ -1729,162 +1721,119 @@ try
     Labelmsgspk.Caption:=rsRequiredFiel+': '+rsObjectName;
     exit;
   end;
-  email:=trim(SPKemail.Text);
-  if (email='')or(pos('@',email)=0) then begin
-    Labelmsgspk.Caption:=rsRequiredFiel+': '+rsEmail;
-    exit;
-  end;
   dt1:=DateEdit1.Date;
   dt2:=dt1+NumDays.Value;
-  if HorizonSPK(obj,dt1,dt2,email,dlf) and (not CancelDownloadSpk) then begin
-    MemoSPK.lines.add('Downloading file '+dlf);
-    Application.ProcessMessages;
-    fn:=CleanName(obj);
-    DownloadDialog1.URL := dlf;
-    DownloadDialog1.SaveToFile := slash(SPKdir) + fn + '.bsp';
-    DownloadDialog1.onFeedback := nil;
-    DownloadDialog1.ConfirmDownload := False;
-    if DownloadDialog1.Execute then begin
-      ListSPK;
-    end
-    else
-    begin
-      ShowMessage(Format(rsCancel2, [DownloadDialog1.ResponseText]));
-      CancelDownloadSpk:=true;
-    end;
-    PanelSPKmemo.visible:=false;
-    PanelSPKlist.visible:=true;
-    ButtonReturn.Visible:=true;
-    ButtonCancel.Visible:=false;
+
+  if HorizonAPI(obj,dt1,dt2) then begin
+     ListSPK;
+     PanelSPKmemo.visible:=false;
+     PanelSPKlist.visible:=true;
+     ButtonReturn.Visible:=true;
+     ButtonCancel.Visible:=false;
   end;
+
 finally
   InitCalcephBody(csc);
 end;
 end;
 
-function Tf_config_solsys.HorizonSPK(obj:string; date1,date2: TDateTime; email: string; out filetodownload: string):boolean;
-var tn: TTelnetSend;
-    dt1,dt2: string;
-    ok: boolean;
+function Tf_config_solsys.HorizonAPI(obj:string; date1,date2: TDateTime):boolean;
+var dl: TDownloadDialog;
+    dt1,dt2,url,fn,tmpfn: string;
+    i: integer;
+    mem: TMemoryStream;
+    strmem: TStringStream;
+    data: TJSONObject;
+    b64str: TBase64DecodingStream;
 begin
   result:=false;
   dt1:=FormatDateTime('yyyy"-"mm"-"dd',date1);
   dt2:=FormatDateTime('yyyy"-"mm"-"dd',date2);
   MemoSPK.Lines.Add('Request SPK file for '+obj+' between '+dt1+' and '+dt2);
-  MemoSPK.Lines.Add('Start telnet session with '+Horizon_Telnet_Host+':'+Horizon_Telnet_Port);
   Application.ProcessMessages;
-  tn := TTelnetSend.Create;
+  fn:=slash(SPKdir) + CleanName(obj)+ '.bsp';
+  tmpfn:=slash(SPKdir) + 'tmpfile.txt';
+  obj:=obj+';';
+  obj:=StringReplace(obj,'=','%3D',[rfReplaceAll]);
+  obj:=StringReplace(obj,';','%3B',[rfReplaceAll]);
+  dl := TDownloadDialog.Create(self);
+  dl.ScaleDpi:=UScaleDPI.scale;
   try
-    tn.Timeout:=(5000);
-    tn.TermType:='vt102';
-    tn.TargetHost:=Horizon_Telnet_Host;
-    tn.TargetPort:=Horizon_Telnet_Port;
-    tn.Login;
-    ok := (tn.Sock.LastError = 0);
-    if not ok then exit;
-    Application.ProcessMessages;
-    if CancelDownloadSpk then exit;
-
-    // paging off
-    if not tn.WaitFor('Horizons>') then exit;
-    Application.ProcessMessages;
-    if CancelDownloadSpk then exit;
-    tn.Send('PAGE' + crlf);
-
-    // set I/O model 2
-    if not tn.WaitFor('Horizons>') then exit;
-    Application.ProcessMessages;
-    if CancelDownloadSpk then exit;
-    tn.Send('##2' + crlf);
-
-    // send object name
-    if not tn.WaitFor('Horizons>') then exit;
-    Application.ProcessMessages;
-    if CancelDownloadSpk then exit;
-    tn.Send('"'+obj+'"' + crlf);
-
-    // eventual space sensitive prompt
-    if tn.WaitFor('Continue [ <cr>=yes, n=no, ? ] :') then
-      tn.Send(crlf);
-    Application.ProcessMessages;
-    if CancelDownloadSpk then exit;
-
-    // select spk, at this point it may fail if the selection is not unique,
-    // in this case let the user see the log and retry with a more selective name
-    if not tn.WaitFor('[S]PK,?,<cr>:') then exit;
-    Application.ProcessMessages;
-    if CancelDownloadSpk then exit;
-    tn.Send('s' + crlf);
-
-    // enter email
-    if not tn.WaitFor('e-mail address [?]:') then exit;
-    Application.ProcessMessages;
-    if CancelDownloadSpk then exit;
-    tn.Send(email + crlf);
-
-    // confirm email
-    if not tn.WaitFor('[yes(<cr>),no]') then exit;
-    Application.ProcessMessages;
-    if CancelDownloadSpk then exit;
-    tn.Send(crlf);
-
-    // select binary format
-    if not tn.WaitFor('[Binary, ASCII, 1, ?] :') then exit;
-    Application.ProcessMessages;
-    if CancelDownloadSpk then exit;
-    tn.Send('b'+crlf);
-
-    // start and stop date
-    if not tn.WaitFor('SPK object START') then exit;
-    Application.ProcessMessages;
-    if CancelDownloadSpk then exit;
-    tn.Send(dt1+crlf);
-    if not tn.WaitFor('SPK object STOP') then exit;
-    if CancelDownloadSpk then exit;
-    tn.Send(dt2+crlf);
-
-    // prompt to add more
-    if not tn.WaitFor('[ YES, NO, ? ] :') then exit;
-    Application.ProcessMessages;
-    if CancelDownloadSpk then exit;
-    tn.Send('no'+crlf);
-
-    // extract to download url for the file
-    if not tn.WaitFor('Full path   :') then exit;
-    Application.ProcessMessages;
-    if CancelDownloadSpk then exit;
-    filetodownload:=tn.RecvTerminated(crlf);
-
-    filetodownload:=trim(filetodownload);
-    result:=filetodownload<>'';
-
-    // return to main prompt
-    if not tn.WaitFor('[R]edisplay, ?, <cr>:') then exit;
-    tn.Send(crlf);
-
-    // quit
-    if not tn.WaitFor('Horizons>') then exit;
-    tn.Send('x' + crlf);
-
-  finally
-    if not Result then begin
-      if CancelDownloadSpk then begin
-        MemoSPK.lines.add(rsAbortedByUse);
+    if cmain.HttpProxy then
+    begin
+      dl.SocksProxy := '';
+      dl.SocksType := '';
+      dl.HttpProxy := cmain.ProxyHost;
+      dl.HttpProxyPort := cmain.ProxyPort;
+      dl.HttpProxyUser := cmain.ProxyUser;
+      dl.HttpProxyPass := cmain.ProxyPass;
+    end
+    else if cmain.SocksProxy then
+    begin
+      dl.HttpProxy := '';
+      dl.SocksType := cmain.SocksType;
+      dl.SocksProxy := cmain.ProxyHost;
+      dl.HttpProxyPort := cmain.ProxyPort;
+      dl.HttpProxyUser := cmain.ProxyUser;
+      dl.HttpProxyPass := cmain.ProxyPass;
+    end
+    else
+    begin
+      dl.SocksProxy := '';
+      dl.SocksType := '';
+      dl.HttpProxy := '';
+      dl.HttpProxyPort := '';
+      dl.HttpProxyUser := '';
+      dl.HttpProxyPass := '';
+    end;
+    dl.ConfirmDownload := False;
+    url := Horizon_API+'?format=json&EPHEM_TYPE=SPK&OBJ_DATA=NO';
+    url:=url+'&COMMAND='''+obj+'''&START_TIME='''+dt1+'''&STOP_TIME='''+dt2+'''';
+    dl.URL := url;
+    dl.SaveToFile := tmpfn;
+    if dl.Execute and FileExists(tmpfn) then begin
+      try
+      mem:=TMemoryStream.Create;
+      mem.LoadFromFile(tmpfn);
+      data:=TJSONObject(GetJSON(mem));
+      i:=data.IndexOfName('spk');
+      if i>=0 then begin
+        strmem:=TStringStream.Create(data.Items[i].AsString);
+        strmem.Position:=0;
+        b64str:=TBase64DecodingStream.Create(strmem);
+        mem.clear;
+        mem.CopyFrom(b64str, b64str.Size);
+        mem.SaveToFile(fn);
+        result:=true;
+        strmem.free;
+        b64str.free;
       end
       else begin
-        MemoSPK.lines.add(tn.SessionLog);
-        MemoSPK.lines.add(tn.Sock.LastErrorDesc);
+        i:=data.IndexOfName('result');
+        if i>=100 then begin
+          MemoSPK.Lines.Add(data.Items[i].AsString);
+        end
+        else begin
+          MemoSPK.Lines.LoadFromFile(tmpfn);
+        end;
       end;
-      MemoSPK.lines.add('');
-      MemoSPK.SelStart := length(MemoSPK.Text) - 1;
+      mem.free;
+      data.free;
+      except
+        on E: Exception do begin
+          ShowMessage('Error: ' + E.Message);
+          MemoSPK.Lines.LoadFromFile(tmpfn);
+          result:=false;
+        end;
+      end;
+    end
+    else begin
+      ShowMessage(Format(rsCancel2, [DownloadDialog1.ResponseText]));
       CancelDownloadSpk:=true;
-      ButtonCancel.Visible:=false;
-      ButtonReturn.Visible:=true;
-      PanelSPKmemo.visible:=true;
-      PanelSPKlist.visible:=false;
-      Application.ProcessMessages;
+      result:=false;
     end;
-    tn.free;
+  finally
+    dl.Free;
   end;
 end;
 

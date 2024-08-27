@@ -577,9 +577,8 @@ const
   baseurl_world = 'https://www.ap-i.net/pub/skychart/gn/cntyfile/';
   location_url = 'https://ap-i.net/geoip/iploc.php';
 
-  // Horizon Telnet
-  Horizon_Telnet_Host = 'ssd.jpl.nasa.gov';
-  Horizon_Telnet_Port = '6775';
+  // Horizon API
+  Horizon_API = 'https://ssd.jpl.nasa.gov/api/horizons.api';
   Horizon_Help = 'https://ssd.jpl.nasa.gov/?horizons_doc#intro';
 
   //Default URL
@@ -1340,7 +1339,6 @@ type
     ObslistAirmassLimit1, ObslistAirmassLimit2, ObslistHourAngleLimit1,
     ObslistHourAngleLimit2: boolean;
     tlelst: string;
-    HorizonEmail:string;
     HorizonNumDay: integer;
     constructor Create;
     destructor Destroy; override;
@@ -3098,7 +3096,6 @@ begin
   ConfirmDownload := Source.ConfirmDownload;
   starshape_file := Source.starshape_file;
   tlelst := Source.tlelst;
-  HorizonEmail:=Source.HorizonEmail;
   HorizonNumDay:=Source.HorizonNumDay;
   CometUrlList.Clear;
   for i := 0 to Source.CometUrlList.Count - 1 do

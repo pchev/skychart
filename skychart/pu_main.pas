@@ -6542,7 +6542,6 @@ begin
   cfgm.starshape_file := '';
   cfgm.tlelst := '';
   cfgm.HorizonNumDay:=15;
-  cfgm.HorizonEmail:='';
   cfgm.SampAutoconnect := False;
   cfgm.SampKeepTables := False;
   cfgm.SampKeepImages := False;
@@ -8122,7 +8121,6 @@ begin
         cfgm.starshape_file :=
           ReadString(section, 'starshape_file', cfgm.starshape_file);
         cfgm.tlelst := ReadString(section, 'tlelst', cfgm.tlelst);
-        cfgm.HorizonEmail := ReadString(section, 'HorizonEmail', cfgm.HorizonEmail);
         cfgm.HorizonNumDay := ReadInteger(section, 'HorizonNumDay', cfgm.HorizonNumDay);
         j := ReadInteger(section, 'CometUrlCount', 0);
         if (j > 0) then
@@ -9459,7 +9457,6 @@ begin
         WriteString(section, 'AnonPass', cfgm.AnonPass);
         WriteString(section, 'starshape_file', cfgm.starshape_file);
         WriteString(section, 'tlelst', f_calendar.tle1.Text);
-        WriteString(section, 'HorizonEmail', cfgm.HorizonEmail);
         WriteInteger(section, 'HorizonNumDay', cfgm.HorizonNumDay);
         j := cfgm.CometUrlList.Count;
         WriteInteger(section, 'CometUrlCount', j);
