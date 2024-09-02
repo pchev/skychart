@@ -624,7 +624,7 @@ procedure Tf_config_chart.ShowProjection;
     cb.items.add('ARC ' + rsZenitalEquid);
     if cshr.fieldnum[n] <= 180 then
       cb.items.add('TAN ' + rsGnomonic);
-    if cshr.fieldnum[n] <= 90 then
+    if cshr.fieldnum[n] <= 180 then
       cb.items.add('SIN ' + rsSlantOrthogr);
     i := (pos(csc.projname[n], ProjectionName) - 1) div 4;
     if (i >= 0) and (i < cb.Items.Count) then
