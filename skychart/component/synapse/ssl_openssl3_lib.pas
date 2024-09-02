@@ -1271,14 +1271,13 @@ begin
     if not IsSSLloaded then
     begin
       {$IFDEF DARWIN}
-      // try to load libraries from Frameworks
+      // load libraries from Frameworks
       buf:=extractfilepath(paramstr(0));
       DLLSSLName:=expandfilename(buf+'/../Frameworks')+'/'+DLLSSLName;
       DLLUtilName:=expandfilename(buf+'/../Frameworks')+'/'+DLLUtilName;
-      {$ELSE}
+      {$ENDIF}
       SSLUtilHandle := LoadLib(DLLUtilName);
       SSLLibHandle := LoadLib(DLLSSLName);
-      {$ENDIF}
 
       if (SSLLibHandle <> 0) and (SSLUtilHandle <> 0) then
       begin
