@@ -1256,7 +1256,7 @@ end;
 
 function InitSSLInterface: Boolean;
 var
-  s: string;
+  s,buf: string;
   x: integer;
 begin
   {pf}
