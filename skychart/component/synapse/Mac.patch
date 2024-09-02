@@ -1,0 +1,27 @@
+--- a/ssl_openssl3_lib.pas	2024-09-02 18:32:47.502359598 +0200
++++ b/ssl_openssl3_lib.pas	2024-09-02 18:33:13.134259377 +0200
+@@ -1256,7 +1256,7 @@
+ 
+ function InitSSLInterface: Boolean;
+ var
+-  s: string;
++  s,buf: string;
+   x: integer;
+ begin
+   {pf}
+@@ -1270,8 +1270,15 @@
+   try
+     if not IsSSLloaded then
+     begin
++      {$IFDEF DARWIN}
++      // load libraries from Frameworks
++      buf:=extractfilepath(paramstr(0));
++      DLLSSLName:=expandfilename(buf+'/../Frameworks')+'/'+DLLSSLName;
++      DLLUtilName:=expandfilename(buf+'/../Frameworks')+'/'+DLLUtilName;
++      {$ENDIF}
+       SSLUtilHandle := LoadLib(DLLUtilName);
+       SSLLibHandle := LoadLib(DLLSSLName);
++
+       if (SSLLibHandle <> 0) and (SSLUtilHandle <> 0) then
+       begin
+         _SslGetError := GetProcAddr(SSLLibHandle, 'SSL_get_error');
