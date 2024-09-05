@@ -4803,13 +4803,11 @@ begin
      cat:=uppercase(catlst[i]);
      if cat='ONGC' then begin
        sc.catalog.cfgcat.NebCatDef[ngc - BaseNeb]:=True;
-       writeln(cat);
      end
      else begin
        for j:=0 to sc.catalog.cfgcat.GCatNum-1 do begin
          if cat=uppercase(sc.catalog.cfgcat.GCatLst[j].shortname) then begin
            sc.catalog.cfgcat.GCatLst[j].Actif:=True;
-           writeln(sc.catalog.cfgcat.GCatLst[j].shortname);
          end;
        end;
      end;
