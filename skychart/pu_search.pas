@@ -617,11 +617,15 @@ begin
      http.Document.SaveToFile(vo_sesame);
      result:=LoadSesame(vo_sesame);
 
-     if not Result then
+     if not Result then begin
         StatusLabel.Caption:=format(rsNotFound,[num]);
+        num:='Not found';
+     end;
   end
-  else
+  else begin
     StatusLabel.Caption:=StatusLabel.Caption+' '+rsOnlineSearch;
+    num:='Not found';
+  end;
 
   http.Clear;
 
@@ -661,6 +665,8 @@ begin
   GetSearchText;
   if trim(num)='' then
     ShowMessage(rsPleaseEnterA)
+  else if trim(num)='Not found' then
+      ShowMessage(format(rsNotFound,['']))
   else
     if assigned(FFindInfo) then FFindInfo(self);
 end;
@@ -669,8 +675,12 @@ end;
 procedure Tf_search.btnFindClick(Sender: TObject);
 begin
   GetSearchText;
-  if trim(num)='' then ShowMessage(rsPleaseEnterA)
-                  else ModalResult := mrOk;
+  if trim(num)='' then
+    ShowMessage(rsPleaseEnterA)
+  else if trim(num)='Not found' then
+    ShowMessage(format(rsNotFound,['']))
+  else
+    ModalResult := mrOk;
 end;
 
 procedure Tf_search.IdKeyDown(Sender: TObject; var Key: Word;
