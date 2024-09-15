@@ -64,6 +64,7 @@ type
     Panel1: TPanel;
     Panel2: TPanel;
     GridStar: TStringGrid;
+    PanelInfo: TPanel;
     PanelDownload: TPanel;
     ProgressBar1: TProgressBar;
     ProgressCat: TLabel;
@@ -309,6 +310,8 @@ begin
   FUnZipper.OnEndFile:=@ProgressEvent;
   PageControl1.ActivePageIndex:=0;
   LabelInfo.Caption:=rsInstallStarC;
+  PanelInfo.Visible:=true;
+  PanelDownload.Visible:=false;
   ButtonRefresh.Visible:=false;
   FAbort:=false;
   FRunning:=false;
@@ -317,6 +320,7 @@ end;
 procedure Tf_updcatalog.FormShow(Sender: TObject);
 begin
   FRunning:=false;
+  PanelInfo.Visible:=true;
   PanelDownload.Visible:=false;
   LoadCatalogList;
 end;
@@ -716,6 +720,7 @@ begin
   httpdownload.onProgress:=@ShowProgress;
   httpdownload.onDownloadComplete:=@DownloadComplete;
   httpdownload.onDownloadError:=@DownloadError;
+  PanelInfo.Visible:=false;
   PanelDownload.Visible:=true;
   ButtonAbort.Visible:=true;
   LabelAction.Caption:=rsInstalling+' '+info.catname+Ellipsis;
@@ -906,6 +911,7 @@ begin
   if flistsum<>nil then FreeAndNil(flistsum);
   except
   end;
+  PanelInfo.Visible:=true;
   PanelDownload.Visible:=false;
   LoadCatalogList;
   FRunning:=False;
@@ -961,6 +967,7 @@ try
   if (info.catnum=0)and(info.shortname<>'') then
     Fcatalog.removeGcat(info.shortname);
   dir:=slash(PrivateCatalogDir)+slash(info.path);
+  PanelInfo.Visible:=false;
   PanelDownload.Visible:=true;
   LabelAction.Caption:=rsDelete+blank+dir;
   Application.ProcessMessages;
@@ -981,6 +988,7 @@ try
   if Assigned(FSaveConfig) then FSaveConfig(self);
 finally
   LabelAction.Caption:='';
+  PanelInfo.Visible:=true;
   PanelDownload.Visible:=false;
 end;
 end;
@@ -1101,6 +1109,7 @@ try
     httpdownload.HttpProxyUser := '';
     httpdownload.HttpProxyPass := '';
   end;
+  PanelInfo.Visible:=false;
   PanelDownload.Visible:=true;
   LabelProgress.Caption:='';
   Falreadycomplete:=false;
