@@ -12164,10 +12164,10 @@ begin
       end;
     end;
   end;
-  if cfgm.KioskMode or ((Activecontrol <> nil) and
-    ((Activecontrol.Name = 'quicksearch') or (Activecontrol.Name = 'EditTimeVal') or
-    (Activecontrol.Name = 'TimeVal') or (Activecontrol.Name = 'TimeU') or
-    (pos('_', ActiveControl.Name) > 0))) then
+  if cfgm.KioskMode or ((Activecontrol <> nil) and ((Activecontrol.Name <> '') and
+    (Activecontrol.Name <> 'MultiFrame1') and (Activecontrol.Name <> 'PanelTop') and
+    (Activecontrol.Name <> 'PanelLeft') and (Activecontrol.Name <> 'PanelRight')))
+  then
     exit
   else
     (MultiFrame1.ActiveObject as Tf_chart).CKeyDown(Key, Shift);
