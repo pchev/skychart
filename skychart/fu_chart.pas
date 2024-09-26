@@ -4221,6 +4221,10 @@ begin
            buf2 := 'T: '+'<a href="VarType '+trim(copy(buf2,3,99))+'">' + trim(copy(buf2,3,99)) + '</a>' + blank;
         end;
       end;
+      if (uppercase(copy(buf2, 1, 5)) = 'LINK:') then
+      begin
+         buf2 := 'Link: '+'<a href="Link '+trim(copy(buf2,6,999))+'">' + trim(copy(buf2,6,999)) + '</a>' + blank;
+      end;
       if isvo or isOsr then
         txt := txt + bold(buf2)
       else
