@@ -155,12 +155,18 @@ begin
       ShowVarType(copy(src,8,99));
       exit;
     end;
-     if copy(src,1,4)='Link' then
-     begin
-       url:=trim(copy(src,5,999));
-       ExecuteFile(url);
-       exit;
-     end;
+    if copy(src,1,4)='Link' then
+    begin
+      url:=trim(copy(src,5,999));
+      ExecuteFile(url);
+      exit;
+    end;
+    if (copy(src,1,7)='http://')or(copy(src,1,8)='https://') then
+    begin
+      url:=trim(src);
+      ExecuteFile(url);
+      exit;
+    end;
     i := strtointdef(src, -1);
     if i > 0 then
     begin
