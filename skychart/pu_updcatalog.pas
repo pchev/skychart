@@ -408,6 +408,8 @@ begin
       else continue;
       info:=TCatInfo.Create(row);
       info.SearchInstalled(PrivateCatalogDir);
+      if info.newversion and (grid.Parent<>nil)and(grid.Parent is TTabSheet)and(copy(TTabSheet(grid.Parent).Caption,1,1)<>'*') then
+        TTabSheet(grid.Parent).Caption:='* '+TTabSheet(grid.Parent).Caption;
       info.grid:=grid;
       grid.RowCount:=grid.RowCount+1;
       grid.Objects[colinstall,grid.RowCount-1]:=info;
@@ -579,7 +581,7 @@ with sender as TStringGrid do begin
    with Objects[colinstall,ARow] as TCatInfo do begin
       if installed then begin
         if newversion then
-          txt:=rsNewVersionAv+': '+version
+          txt:=rsNewVersionAv+', '+Format(rsInstallNewVe, [version, installedversion])
         else
           txt:=rsInstalled+': '+slash(PrivateCatalogDir)+slash(path);
       end
