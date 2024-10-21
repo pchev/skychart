@@ -2,20 +2,20 @@ object f_config_time: Tf_config_time
   Left = 0
   Height = 536
   Top = 0
-  Width = 505
+  Width = 501
   ClientHeight = 536
-  ClientWidth = 505
+  ClientWidth = 501
   ParentFont = False
   TabOrder = 0
   object MainPanel: TPanel
     Left = 0
     Height = 536
     Top = 0
-    Width = 505
+    Width = 501
     Align = alClient
     BevelOuter = bvNone
     ClientHeight = 536
-    ClientWidth = 505
+    ClientWidth = 501
     ParentColor = False
     ParentFont = False
     TabOrder = 0
@@ -23,7 +23,7 @@ object f_config_time: Tf_config_time
       Left = 0
       Height = 536
       Top = 0
-      Width = 505
+      Width = 501
       ActivePage = Page1
       Align = alClient
       Anchors = [akLeft, akRight, akBottom]
@@ -35,16 +35,16 @@ object f_config_time: Tf_config_time
       object Page1: TTabSheet
         Caption = 'Time'
         ClientHeight = 532
-        ClientWidth = 501
+        ClientWidth = 497
         ParentFont = False
         object Panel8: TPanel
           Left = 0
           Height = 204
           Top = 328
-          Width = 501
+          Width = 497
           Align = alClient
           ClientHeight = 204
-          ClientWidth = 501
+          ClientWidth = 497
           ParentFont = False
           TabOrder = 1
           Visible = False
@@ -218,10 +218,10 @@ object f_config_time: Tf_config_time
           Left = 0
           Height = 238
           Top = 90
-          Width = 501
+          Width = 497
           Align = alTop
           ClientHeight = 238
-          ClientWidth = 501
+          ClientWidth = 497
           ParentFont = False
           TabOrder = 0
           object Label137: TLabel
@@ -664,10 +664,10 @@ object f_config_time: Tf_config_time
           Left = 0
           Height = 90
           Top = 0
-          Width = 501
+          Width = 497
           Align = alTop
           ClientHeight = 90
-          ClientWidth = 501
+          ClientWidth = 497
           TabOrder = 2
           object CheckBox1: TCheckBox
             Left = 18
@@ -723,13 +723,13 @@ object f_config_time: Tf_config_time
       object Page2: TTabSheet
         Caption = 'Simulation'
         ClientHeight = 532
-        ClientWidth = 501
+        ClientWidth = 497
         ParentFont = False
         object RadioGroup1: TRadioGroup
           Left = 0
           Height = 85
           Top = 322
-          Width = 501
+          Width = 497
           Align = alTop
           AutoFill = True
           Caption = 'Show Labels'
@@ -742,7 +742,7 @@ object f_config_time: Tf_config_time
           ChildSizing.Layout = cclLeftToRightThenTopToBottom
           ChildSizing.ControlsPerLine = 3
           ClientHeight = 55
-          ClientWidth = 497
+          ClientWidth = 493
           Columns = 3
           Items.Strings = (
             'None'
@@ -755,11 +755,11 @@ object f_config_time: Tf_config_time
           ParentFont = False
           TabOrder = 0
           object LongEdit1: TLongEdit
-            Left = 334
+            Left = 332
             Height = 24
             Hint = '2..500'
             Top = 25
-            Width = 157
+            Width = 155
             Constraints.MaxHeight = 28
             ParentFont = False
             ParentShowHint = False
@@ -775,7 +775,7 @@ object f_config_time: Tf_config_time
           Left = 0
           Height = 57
           Top = 407
-          Width = 501
+          Width = 497
           Align = alTop
           AutoFill = True
           Caption = 'Label Text'
@@ -787,8 +787,8 @@ object f_config_time: Tf_config_time
           ChildSizing.ShrinkVertical = crsScaleChilds
           ChildSizing.Layout = cclLeftToRightThenTopToBottom
           ChildSizing.ControlsPerLine = 3
-          ClientHeight = 57
-          ClientWidth = 501
+          ClientHeight = 27
+          ClientWidth = 493
           Columns = 3
           Items.Strings = (
             'Object Name'
@@ -806,7 +806,7 @@ object f_config_time: Tf_config_time
           Left = 0
           Height = 56
           Top = 464
-          Width = 501
+          Width = 497
           Align = alTop
           AutoFill = True
           Caption = 'Date Format'
@@ -818,8 +818,8 @@ object f_config_time: Tf_config_time
           ChildSizing.ShrinkVertical = crsScaleChilds
           ChildSizing.Layout = cclLeftToRightThenTopToBottom
           ChildSizing.ControlsPerLine = 6
-          ClientHeight = 56
-          ClientWidth = 501
+          ClientHeight = 26
+          ClientWidth = 493
           Columns = 6
           Items.Strings = (
             'Year'
@@ -840,10 +840,10 @@ object f_config_time: Tf_config_time
           Left = 0
           Height = 288
           Top = 0
-          Width = 501
+          Width = 497
           Align = alTop
           ClientHeight = 288
-          ClientWidth = 501
+          ClientWidth = 497
           TabOrder = 3
           object stepreset: TSpeedButton
             Left = 377
@@ -878,7 +878,7 @@ object f_config_time: Tf_config_time
             Left = 1
             Height = 18
             Top = 1
-            Width = 499
+            Width = 495
             Align = alTop
             Caption = 'Plot orbital motion of solar system objects'
             ParentColor = False
@@ -1021,10 +1021,10 @@ object f_config_time: Tf_config_time
             Left = 176
             Height = 32
             Top = 174
-            Width = 304
+            Width = 347
             BevelOuter = bvNone
             ClientHeight = 32
-            ClientWidth = 304
+            ClientWidth = 347
             TabOrder = 8
             object AsteroidFilter: TEdit
               Left = 0
@@ -1036,10 +1036,13 @@ object f_config_time: Tf_config_time
               TabOrder = 0
             end
             object btnAstFilter: TButton
-              Left = 80
+              AnchorSideLeft.Control = AsteroidFilter
+              AnchorSideLeft.Side = asrBottom
+              Left = 88
               Height = 24
               Top = 4
               Width = 76
+              BorderSpacing.Left = 8
               BorderSpacing.InnerBorder = 4
               Caption = 'Filter ->'
               OnClick = btnAstFilterClick
@@ -1047,10 +1050,13 @@ object f_config_time: Tf_config_time
               TabOrder = 1
             end
             object AsteroidList: TComboBox
-              Left = 160
+              AnchorSideLeft.Control = btnAstFilter
+              AnchorSideLeft.Side = asrBottom
+              Left = 172
               Height = 28
               Top = 4
               Width = 144
+              BorderSpacing.Left = 8
               Constraints.MaxHeight = 28
               ItemHeight = 18
               OnChange = AsteroidListChange
@@ -1065,11 +1071,11 @@ object f_config_time: Tf_config_time
             Left = 176
             Height = 32
             Top = 209
-            Width = 304
+            Width = 347
             BorderSpacing.Top = 3
             BevelOuter = bvNone
             ClientHeight = 32
-            ClientWidth = 304
+            ClientWidth = 347
             TabOrder = 9
             object CometFilter: TEdit
               Left = 0
@@ -1081,10 +1087,13 @@ object f_config_time: Tf_config_time
               TabOrder = 0
             end
             object btnCometFilter: TButton
-              Left = 80
+              AnchorSideLeft.Control = CometFilter
+              AnchorSideLeft.Side = asrBottom
+              Left = 88
               Height = 24
               Top = 4
               Width = 76
+              BorderSpacing.Left = 8
               BorderSpacing.InnerBorder = 4
               Caption = 'Filter ->'
               OnClick = btnCometFilterClick
@@ -1092,10 +1101,13 @@ object f_config_time: Tf_config_time
               TabOrder = 1
             end
             object CometList: TComboBox
-              Left = 160
+              AnchorSideLeft.Control = btnCometFilter
+              AnchorSideLeft.Side = asrBottom
+              Left = 172
               Height = 28
               Top = 4
               Width = 144
+              BorderSpacing.Left = 8
               Constraints.MaxHeight = 28
               ItemHeight = 18
               OnChange = CometListChange
@@ -1142,10 +1154,10 @@ object f_config_time: Tf_config_time
           Left = 0
           Height = 34
           Top = 288
-          Width = 501
+          Width = 497
           Align = alTop
           ClientHeight = 34
-          ClientWidth = 501
+          ClientWidth = 497
           TabOrder = 4
           object stepline: TCheckBox
             Left = 8
@@ -1172,17 +1184,17 @@ object f_config_time: Tf_config_time
       object Page3: TTabSheet
         Caption = 'Animation'
         ClientHeight = 532
-        ClientWidth = 501
+        ClientWidth = 497
         ParentFont = False
         object GroupBox1: TGroupBox
           Left = 0
           Height = 81
           Top = 0
-          Width = 501
+          Width = 497
           Align = alTop
           Caption = 'Real time options'
-          ClientHeight = 81
-          ClientWidth = 501
+          ClientHeight = 51
+          ClientWidth = 493
           ParentFont = False
           TabOrder = 0
           object Label2: TLabel
@@ -1213,11 +1225,11 @@ object f_config_time: Tf_config_time
           Left = 0
           Height = 451
           Top = 81
-          Width = 501
+          Width = 497
           Align = alClient
           Caption = 'Recording options'
-          ClientHeight = 451
-          ClientWidth = 501
+          ClientHeight = 421
+          ClientWidth = 493
           ParentFont = False
           TabOrder = 1
           object DirectoryEdit1: TDirectoryEdit

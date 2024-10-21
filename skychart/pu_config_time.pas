@@ -87,6 +87,7 @@ end;
 procedure Tf_configtime.FormCreate(Sender: TObject);
 begin
   f_config_time1:= Tf_config_time.Create(Self);
+  f_config_time1.PageControl1.ShowTabs := True;
   f_config_time1.parent:=Self ;
   f_config_time1.Align:=alClient;
   ScaleDPI(Self);
