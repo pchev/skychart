@@ -8,7 +8,7 @@ cd $workdir
 #Patrick Chevalley key used to sign the Skychart packages
 key=8B8B57C1AA716FC2
 
-aptversion=$(apt -v)
+aptversion=$(/usr/bin/apt -v)
 if [[ $? != 0 ]]; then
   echo "This script is intended to setup the Skychart Debian package with apt."
   echo "It look like this is not the case for your system."
