@@ -462,7 +462,9 @@ type
     procedure cmd_LessStar;
     procedure cmd_MoreNeb;
     procedure cmd_LessNeb;
-    procedure cmd_LockMagn;
+    procedure cmd_LockMagn; overload;
+    procedure cmd_LockMagn(mstar,mast,mcom,mneb,sneb: double); overload;
+    procedure cmd_UnLockMagn;
     function cmd_SetGridNum(onoff: string): string;
     function cmd_SetConstL(onoff: string): string;
     function cmd_SetConstB(onoff: string): string;
@@ -6432,6 +6434,27 @@ begin
     sc.cfgsc.lockNebMag  := sc.catalog.cfgcat.NebMagMax;
     sc.cfgsc.lockNebSize := sc.catalog.cfgcat.NebSizeMin;
   end;
+  sc.cfgsc.AstMagDiff := DefAstMagDiff;
+  sc.cfgsc.ComMagDiff := DefComMagDiff;
+  refresh(True, False);
+end;
+
+procedure Tf_chart.cmd_LockMagn(mstar,mast,mcom,mneb,sneb: double);
+begin
+  sc.cfgsc.lockMagn:=true;
+  sc.cfgsc.lockStarMag := mstar;
+  sc.cfgsc.lockNebMag  := mneb;
+  sc.cfgsc.lockNebSize := sneb;
+  sc.cfgsc.AstMagDiff := max(0,mast - mstar);
+  sc.cfgsc.ComMagDiff := max(0,mcom - mstar);
+  refresh(True, False);
+end;
+
+procedure Tf_chart.cmd_UnLockMagn;
+begin
+  sc.cfgsc.AstMagDiff := DefAstMagDiff;
+  sc.cfgsc.ComMagDiff := DefComMagDiff;
+  sc.cfgsc.lockMagn:=false;
   refresh(True, False);
 end;
 

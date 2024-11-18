@@ -4526,6 +4526,7 @@ begin
     begin
       f_position.onApply := PositionApply;
       f_position.cfgsc := sc.cfgsc;
+      f_position.catalog := sc.catalog;
       f_position.AzNorth := sc.catalog.cfgshr.AzNorth;
       formpos(f_position, mouse.cursorpos.x, mouse.cursorpos.y);
       f_position.showmodal;
@@ -4543,6 +4544,8 @@ begin
   if MultiFrame1.ActiveObject is Tf_chart then
     with MultiFrame1.ActiveObject as Tf_chart do
     begin
+      if VerboseMsg then
+        WriteTrace('PositionExecute');
       if f_position.LockPosition.Checked then
       begin
         sc.cfgsc.TrackName:=f_position.ra.Text+' '+f_position.de.Text;
@@ -4586,9 +4589,12 @@ begin
         sc.cfgsc.fov := deg2rad * f_position.fov.Value;
         sc.cfgsc.theta := deg2rad * f_position.rot.Value;
       end;
-      if VerboseMsg then
-        WriteTrace('PositionExecute');
-      refresh(True, False);
+      if f_position.LockMag.Checked then begin
+        cmd_LockMagn(f_position.StarMag.Value,f_position.AstMag.Value,f_position.ComMag.Value,f_position.DSOmag.Value,f_position.DSOsize.Value);
+      end
+      else begin
+        cmd_UnLockMagn;
+      end;
     end;
 end;
 
@@ -7744,10 +7750,12 @@ begin
         csc.AstSymbol := ReadInteger(section, 'AstSymbol', csc.AstSymbol);
         csc.AstmagMax := ReadFloat(section, 'AstmagMax', csc.AstmagMax);
         csc.AstmagDiff := ReadFloat(section, 'AstmagDiff', csc.AstmagDiff);
+        DefAstMagDiff := csc.AstmagDiff;
         csc.AstNEO := ReadBool(section, 'AstNEO', csc.AstNEO);
         csc.ComSymbol := ReadInteger(section, 'ComSymbol', csc.ComSymbol);
         csc.CommagMax := ReadFloat(section, 'CommagMax', csc.CommagMax);
         csc.CommagDiff := ReadFloat(section, 'CommagDiff', csc.CommagDiff);
+        DefComMagDiff := csc.Commagdiff;
         csc.MagLabel := ReadBool(section, 'MagLabel', csc.MagLabel);
         csc.NameLabel := ReadBool(section, 'NameLabel', csc.NameLabel);
         csc.DistLabel := ReadBool(section, 'DistLabel', csc.DistLabel);

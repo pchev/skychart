@@ -1,11 +1,11 @@
 object f_position: Tf_position
   Left = 481
-  Height = 338
+  Height = 485
   Top = 108
   Width = 653
   ActiveControl = PanelEq
   Caption = 'Position'
-  ClientHeight = 338
+  ClientHeight = 485
   ClientWidth = 653
   OnCreate = FormCreate
   OnShow = FormShow
@@ -22,7 +22,7 @@ object f_position: Tf_position
     TabOrder = 1
     object coord1: TLabel
       Left = 10
-      Height = 19
+      Height = 18
       Top = 46
       Width = 15
       Caption = 'Az'
@@ -31,7 +31,7 @@ object f_position: Tf_position
     end
     object coord2: TLabel
       Left = 327
-      Height = 19
+      Height = 18
       Top = 46
       Width = 17
       Caption = 'Alt'
@@ -40,9 +40,9 @@ object f_position: Tf_position
     end
     object coord: TLabel
       Left = 10
-      Height = 19
+      Height = 18
       Top = 10
-      Width = 35
+      Width = 36
       Caption = 'coord'
       ParentColor = False
       ParentFont = False
@@ -87,9 +87,9 @@ object f_position: Tf_position
       AnchorSideTop.Control = ra
       AnchorSideTop.Side = asrCenter
       Left = 10
-      Height = 19
+      Height = 18
       Top = 55
-      Width = 17
+      Width = 18
       Caption = 'RA'
       ParentColor = False
       ParentFont = False
@@ -98,7 +98,7 @@ object f_position: Tf_position
       AnchorSideTop.Control = ra
       AnchorSideTop.Side = asrCenter
       Left = 327
-      Height = 19
+      Height = 18
       Top = 55
       Width = 17
       Caption = 'DE'
@@ -107,9 +107,9 @@ object f_position: Tf_position
     end
     object LblEquinox: TLabel
       Left = 10
-      Height = 19
+      Height = 18
       Top = 10
-      Width = 67
+      Width = 68
       Caption = 'LblEquinox'
       ParentColor = False
       ParentFont = False
@@ -145,12 +145,12 @@ object f_position: Tf_position
       AnchorSideLeft.Side = asrBottom
       AnchorSideTop.Control = LblEquinox
       AnchorSideTop.Side = asrCenter
-      Left = 85
-      Height = 35
-      Top = 2
+      Left = 86
+      Height = 32
+      Top = 3
       Width = 146
       BorderSpacing.Left = 8
-      ItemHeight = 0
+      ItemHeight = 18
       OnChange = InputEquinoxChange
       Style = csDropDownList
       TabOrder = 2
@@ -160,7 +160,7 @@ object f_position: Tf_position
       AnchorSideLeft.Side = asrBottom
       AnchorSideTop.Control = InputEquinox
       AnchorSideTop.Side = asrCenter
-      Left = 239
+      Left = 240
       Height = 30
       Top = 4
       Width = 200
@@ -183,7 +183,7 @@ object f_position: Tf_position
     TabOrder = 2
     object Label3: TLabel
       Left = 10
-      Height = 19
+      Height = 18
       Top = 18
       Width = 25
       Caption = 'FOV'
@@ -192,7 +192,7 @@ object f_position: Tf_position
     end
     object Label4: TLabel
       Left = 370
-      Height = 19
+      Height = 18
       Top = 18
       Width = 52
       Caption = 'Rotation'
@@ -228,19 +228,19 @@ object f_position: Tf_position
   end
   object PanelLock: TPanel
     Left = 0
-    Height = 50
+    Height = 39
     Top = 233
     Width = 653
     Align = alTop
-    ClientHeight = 50
+    ClientHeight = 39
     ClientWidth = 653
     ParentFont = False
     TabOrder = 3
     object LockPosition: TCheckBox
-      Left = 50
-      Height = 21
+      Left = 10
+      Height = 22
       Top = 10
-      Width = 203
+      Width = 208
       Caption = 'Lock the chart at this position'
       ParentFont = False
       TabOrder = 0
@@ -249,7 +249,7 @@ object f_position: Tf_position
   object Panel5: TPanel
     Left = 0
     Height = 50
-    Top = 288
+    Top = 435
     Width = 653
     Align = alBottom
     ClientHeight = 50
@@ -299,6 +299,156 @@ object f_position: Tf_position
       ModalResult = 2
       ParentFont = False
       TabOrder = 3
+    end
+  end
+  object Panel1: TPanel
+    Left = 0
+    Height = 163
+    Top = 272
+    Width = 653
+    Align = alClient
+    BevelOuter = bvNone
+    ClientHeight = 163
+    ClientWidth = 653
+    TabOrder = 5
+    object Panel2: TPanel
+      Left = 0
+      Height = 132
+      Top = 31
+      Width = 653
+      Align = alClient
+      BevelOuter = bvNone
+      ClientHeight = 132
+      ClientWidth = 653
+      TabOrder = 0
+      object StarMag: TFloatSpinEdit
+        AnchorSideLeft.Control = Label2
+        AnchorSideTop.Control = Label2
+        AnchorSideTop.Side = asrBottom
+        Left = 21
+        Height = 32
+        Top = 26
+        Width = 70
+        BorderSpacing.Top = 4
+        DecimalPlaces = 1
+        MaxValue = 99
+        TabOrder = 0
+      end
+      object DsoMag: TFloatSpinEdit
+        AnchorSideLeft.Control = Label5
+        AnchorSideTop.Control = Label5
+        AnchorSideTop.Side = asrBottom
+        Left = 200
+        Height = 32
+        Top = 26
+        Width = 70
+        BorderSpacing.Top = 4
+        DecimalPlaces = 1
+        MaxValue = 99
+        TabOrder = 1
+      end
+      object DsoSize: TFloatSpinEdit
+        AnchorSideLeft.Control = Label1
+        AnchorSideTop.Control = Label1
+        AnchorSideTop.Side = asrBottom
+        Left = 373
+        Height = 32
+        Top = 26
+        Width = 70
+        BorderSpacing.Top = 4
+        DecimalPlaces = 1
+        MaxValue = 60
+        TabOrder = 2
+      end
+      object Label2: TLabel
+        Left = 21
+        Height = 18
+        Top = 4
+        Width = 26
+        Caption = 'Star'
+        ParentColor = False
+      end
+      object Label5: TLabel
+        AnchorSideTop.Control = Label2
+        Left = 200
+        Height = 18
+        Top = 4
+        Width = 27
+        Caption = 'DSO'
+        ParentColor = False
+      end
+      object Label1: TLabel
+        AnchorSideTop.Control = Label2
+        Left = 373
+        Height = 18
+        Top = 4
+        Width = 54
+        Caption = 'DSO size'
+        ParentColor = False
+      end
+      object Label6: TLabel
+        Left = 21
+        Height = 18
+        Top = 70
+        Width = 41
+        Caption = 'Comet'
+        ParentColor = False
+      end
+      object Label7: TLabel
+        AnchorSideTop.Control = Label6
+        Left = 200
+        Height = 18
+        Top = 70
+        Width = 51
+        Caption = 'Asteroid'
+        ParentColor = False
+      end
+      object ComMag: TFloatSpinEdit
+        AnchorSideLeft.Control = Label6
+        AnchorSideTop.Control = Label6
+        AnchorSideTop.Side = asrBottom
+        Left = 21
+        Height = 32
+        Top = 92
+        Width = 70
+        BorderSpacing.Top = 4
+        DecimalPlaces = 1
+        TabOrder = 3
+      end
+      object AstMag: TFloatSpinEdit
+        AnchorSideLeft.Control = Label7
+        AnchorSideTop.Control = Label7
+        AnchorSideTop.Side = asrBottom
+        Left = 200
+        Height = 32
+        Top = 92
+        Width = 70
+        BorderSpacing.Top = 4
+        DecimalPlaces = 1
+        TabOrder = 4
+      end
+    end
+    object Panel3: TPanel
+      Left = 0
+      Height = 31
+      Top = 0
+      Width = 653
+      Align = alTop
+      BevelOuter = bvNone
+      ClientHeight = 31
+      ClientWidth = 653
+      TabOrder = 1
+      object LockMag: TCheckBox
+        AnchorSideTop.Control = Panel3
+        AnchorSideTop.Side = asrCenter
+        Left = 10
+        Height = 22
+        Top = 4
+        Width = 157
+        Caption = 'Lock magnitude limit'
+        OnChange = LockMagChange
+        TabOrder = 0
+      end
     end
   end
 end

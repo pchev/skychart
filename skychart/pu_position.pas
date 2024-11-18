@@ -29,9 +29,9 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 interface
 
 uses
-  u_help, u_translation, u_constant, u_projection, u_util, Clipbrd,
+  u_help, u_translation, u_constant, u_projection, u_util, cu_catalog, Clipbrd,
   LCLIntf, SysUtils, Classes, Graphics, Controls, Forms, UScaleDPI,
-  Dialogs, StdCtrls, cu_radec, enhedits, ExtCtrls, LResources, Buttons;
+  Dialogs, StdCtrls, cu_radec, enhedits, ExtCtrls, LResources, Buttons, Spin;
 
 type
 
@@ -43,8 +43,22 @@ type
     Button3: TButton;
     Button4: TButton;
     ButtonPast: TButton;
+    ComMag: TFloatSpinEdit;
+    AstMag: TFloatSpinEdit;
+    Label6: TLabel;
+    Label7: TLabel;
+    LockMag: TCheckBox;
+    Panel2: TPanel;
+    Panel3: TPanel;
+    StarMag: TFloatSpinEdit;
+    DsoMag: TFloatSpinEdit;
+    DsoSize: TFloatSpinEdit;
     InputEquinox: TComboBox;
+    Label5: TLabel;
+    Label1: TLabel;
+    Label2: TLabel;
     LockPosition: TCheckBox;
+    Panel1: TPanel;
     PanelCoord: TPanel;
     coord1: TLabel;
     coord2: TLabel;
@@ -73,6 +87,7 @@ type
     procedure CoordChange(Sender: TObject);
     procedure InputEquinoxChange(Sender: TObject);
     procedure GetRaDec(out r,d: double);
+    procedure LockMagChange(Sender: TObject);
   private
     { Private declarations }
     lock: boolean;
@@ -85,6 +100,7 @@ type
     { Public declarations }
     AzNorth: boolean;
     cfgsc: Tconf_skychart;
+    catalog: Tcatalog;
     procedure SetLang;
     property onApply: TNotifyEvent read FApply write FApply;
   end;
@@ -111,6 +127,12 @@ begin
   Label3.Caption := rsFOV;
   Label4.Caption := rsRotation;
   LockPosition.Caption := rsLockTheChart;
+  LockMag.Caption:=rsLockMagnitud;
+  Label2.Caption:=rsStar;
+  Label5.Caption:=rsNebulae;
+  Label1.Caption:=rsLimitingSize;
+  Label6.Caption:=rsComet;
+  Label7.Caption:=rsAsteroid;
   SetHelp(self, hlpPosition);
 end;
 
@@ -179,6 +201,23 @@ begin
       PanelCoord.Visible := False;
   end;
   EqChange(self);
+  // magnitude / size
+  LockMag.Checked:=cfgsc.lockMagn;
+  if cfgsc.lockMagn then begin
+    StarMag.Value:=cfgsc.lockStarMag;
+    DsoMag.Value:=cfgsc.lockNebMag;
+    DsoSize.Value:=cfgsc.lockNebSize;
+    AstMag.Value:=cfgsc.lockStarMag+cfgsc.AstMagDiff;
+    ComMag.Value:=cfgsc.lockStarMag+cfgsc.ComMagDiff;
+  end
+  else begin
+    StarMag.Value:=catalog.cfgcat.StarMagMax;
+    DsoMag.Value:=catalog.cfgcat.NebMagMax;
+    DsoSize.Value:=catalog.cfgcat.NebSizeMin;
+    AstMag.Value:=catalog.cfgcat.StarMagMax+cfgsc.AstMagDiff;
+    ComMag.Value:=catalog.cfgcat.StarMagMax+cfgsc.ComMagDiff;
+  end;
+  Panel2.Enabled := LockMag.Checked;
 end;
 
 procedure Tf_position.FormCreate(Sender: TObject);
@@ -326,6 +365,11 @@ begin
   CurrentToChart(r,d);
   r := r*rad2deg/15;
   d := d*rad2deg;
+end;
+
+procedure Tf_position.LockMagChange(Sender: TObject);
+begin
+  Panel2.Enabled := LockMag.Checked;
 end;
 
 end.

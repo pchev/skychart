@@ -1534,6 +1534,7 @@ var
   Xplanetversion: string;
   nummainbar, numobjectbar, numleftbar, numrightbar: integer;
   configmainbar, configobjectbar, configleftbar, configrightbar: TStringList;
+  DefAstMagDiff, DefComMagDiff: double;
   CatAnimation, CatDirection, CatDrawing, CatEdit, CatFile, CatFilter,
   CatFOV, CatGrid, CatInformation, CatLabel, CatLines, CatLock, CatObject,
   CatOrientation, CatPictures, CatPrint, CatProjection, CatSearch, CatSetup,
