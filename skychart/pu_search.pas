@@ -449,7 +449,12 @@ begin
 
   Doc := nil;
 
+  try
   ReadXMLFile( Doc, fn);
+  except
+    result:=false;
+    exit;
+  end;
 
   if Doc = nil then
     exit;
@@ -562,7 +567,7 @@ end;
 
 function Tf_search.SearchOnline: boolean;
 var
-  url,cat,vo_sesame:string;
+  url,cat,vo_sesame,n:string;
 begin
 
   result:=false;
@@ -578,8 +583,11 @@ begin
     cat:='';
   end;
 
+  n := StringReplace(num, ' ', '%20', [rfReplaceAll]);
+  n := StringReplace(n, '+', '%2b', [rfReplaceAll]);
+
   url:=sesame_url[SesameUrlNum+1,1];
-  url:=url+'/-oxFI/'+cat+'?'+trim(StringReplace(num,' ','%20',[rfReplaceAll]));
+  url:=url+'/-oxFI/'+cat+'?'+trim(n);
   http.Clear;
   http.Sock.SocksIP:='';
   http.ProxyHost:='';
