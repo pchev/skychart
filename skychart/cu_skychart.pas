@@ -4878,9 +4878,6 @@ end;
 
 procedure Tskychart.DrawGrid(drawlabel: boolean);
 begin
-  if (cfgsc.ShowOnlyMeridian) or
-    ((deg2rad * Fcatalog.cfgshr.DegreeGridSpacing[cfgsc.FieldNum]) <= (cfgsc.fov / 2)) then
-  begin
     if VerboseMsg then
       WriteTrace('SkyChart ' + cfgsc.chartname + ': draw grid');
     if cfgsc.ShowGrid then
@@ -4917,19 +4914,15 @@ begin
     begin
       DrawEqGrid(drawlabel, True);
     end;
-  end;
 end;
 
 procedure Tskychart.DrawAltAzEqGrid;
 begin
-  if ((deg2rad * Fcatalog.cfgshr.DegreeGridSpacing[cfgsc.FieldNum]) <= (cfgsc.fov / 2)) then
-  begin
     if VerboseMsg then
       WriteTrace('SkyChart ' + cfgsc.chartname + ': draw alt/az EQ grid');
     if Fplot.cfgplot.UseBMP and cfgsc.horizonopaque and (cfgsc.ProjPole = AltAz) and
       cfgsc.ShowEqGrid then
       DrawEqGrid(False, True);
-  end;
 end;
 
 procedure Tskychart.DrawPole(pole: integer);
@@ -5240,7 +5233,10 @@ begin
         else
           lx := cfgsc.Xmax - (lh div 2);
       end;
-      if dra <= 15 * minarc then
+      if dra <= 10 * secarc then
+        Fplot.PlotText(lx, ly, 1, Fplot.cfgplot.LabelColor[7], laCenter, laTop,
+          arptostr(rmod(ra + pi2, pi2) * rad2deg / 15,1), cfgsc.WhiteBg, True, True, 5)
+      else if dra <= 15 * minarc then
         Fplot.PlotText(lx, ly, 1, Fplot.cfgplot.LabelColor[7], laCenter, laTop,
           artostr3(rmod(ra + pi2, pi2) * rad2deg / 15), cfgsc.WhiteBg, True, True, 5)
       else
@@ -5317,7 +5313,10 @@ begin
         lx:=round(xx);
         ly:=round(yy);
       end;
-      if dde <= 5 * minarc then
+      if dde <= 10 * secarc then
+        Fplot.PlotText(lx, ly, 1, Fplot.cfgplot.LabelColor[7], laLeft, laBottom,
+          deptostr(de * rad2deg,1), cfgsc.WhiteBg, True, True, 5)
+      else if dde <= 5 * minarc then
         Fplot.PlotText(lx, ly, 1, Fplot.cfgplot.LabelColor[7], laLeft, laBottom,
           detostr(de * rad2deg), cfgsc.WhiteBg, True, True, 5)
       else
@@ -5357,6 +5356,9 @@ begin
   begin
     n := cfgsc.FieldNum;
     dde := Fcatalog.cfgshr.DegreeGridSpacing[n];
+    while (deg2rad * dde) > (cfgsc.fov / 2) do begin
+       dde:=dde/2;
+    end;
     lda1 := Fcatalog.cfgshr.HourGridSpacing[n] * 15 * cos(cfgsc.decentre);
     lda2 := lda1;
     while (lda1 < dde) and (n < MaxField) do
@@ -5370,6 +5372,9 @@ begin
     if lda2 < lda1 then
       n := min(n - 1, MaxField);
     dra := Fcatalog.cfgshr.HourGridSpacing[n];
+    while (deg2rad * 15 * dra * cos(cfgsc.decentre)) > (cfgsc.fov / 2) do begin
+       dra:=dra/2;
+    end;
     if dde > 1000 then
       dde := dde - 1000;
     ra1 := deg2rad * trunc(rad2deg * cfgsc.racentre / 15 / dra) * dra * 15;
@@ -5599,7 +5604,10 @@ var
           al := rmod(rad2deg * a + 360, 360);
         if (al < 359.9999) or (cfgsc.fov < pid4) then
         begin
-          if dda <= 15 * minarc then
+          if dda <= 10 * secarc then
+            Fplot.PlotText(lx, ly, 1, Fplot.cfgplot.LabelColor[7], laCenter, laTop,
+              deptostr(al,1), cfgsc.WhiteBg, False, True, 5)
+          else if dda <= 15 * minarc then
             Fplot.PlotText(lx, ly, 1, Fplot.cfgplot.LabelColor[7], laCenter, laTop,
               lontostr(al), cfgsc.WhiteBg, False, True, 5)
           else
@@ -5678,7 +5686,10 @@ var
           lx:=round(xx);
           ly:=round(yy);
         end;
-        if ddh <= 5 * minarc then
+        if ddh <= 10 * secarc then
+          Fplot.PlotText(lx, ly, 1, Fplot.cfgplot.LabelColor[7], laLeft, laBottom,
+            DEpToStr(h * rad2deg,1), cfgsc.WhiteBg, False, True, 5)
+        else if ddh <= 5 * minarc then
           Fplot.PlotText(lx, ly, 1, Fplot.cfgplot.LabelColor[7], laLeft, laBottom,
             detostr(h * rad2deg), cfgsc.WhiteBg, False, True, 5)
         else
@@ -5699,6 +5710,9 @@ begin
   col := Fplot.cfgplot.Color[12];
   n := cfgsc.FieldNum;
   ddh := Fcatalog.cfgshr.DegreeGridSpacing[n];
+  while (deg2rad * ddh) > (cfgsc.fov / 2) do begin
+     ddh:=ddh/2;
+  end;
   lda1 := ddh * cos(cfgsc.hcentre);
   lda2 := lda1;
   while (lda1 < ddh) and (n < MaxField) do
@@ -5712,6 +5726,9 @@ begin
   if lda2 < lda1 then
     n := min(n - 1, MaxField);
   dda := Fcatalog.cfgshr.DegreeGridSpacing[n];
+  while (deg2rad * dda * cos(cfgsc.hcentre)) > (cfgsc.fov / 2) do begin
+     dda:=dda/2;
+  end;
   a1 := deg2rad * round(rad2deg * cfgsc.acentre / dda) * dda;
   h1 := deg2rad * round(rad2deg * cfgsc.hcentre / ddh) * ddh;
   dda := deg2rad * dda;
@@ -6526,7 +6543,10 @@ var
           else
             lx := cfgsc.Xmax - (lh div 2);
         end;
-        if dda <= 15 * minarc then
+        if dda <= 10 * secarc then
+          Fplot.PlotText(lx, ly, 1, Fplot.cfgplot.LabelColor[7], laCenter, laTop,
+            deptostr(rmod(a + pi2, pi2) * rad2deg,1), cfgsc.WhiteBg, True, True, 5)
+        else if dda <= 15 * minarc then
           Fplot.PlotText(lx, ly, 1, Fplot.cfgplot.LabelColor[7], laCenter, laTop,
             lontostr(rmod(a + pi2, pi2) * rad2deg), cfgsc.WhiteBg, True, True, 5)
         else
@@ -6600,7 +6620,10 @@ var
           lx:=round(xx);
           ly:=round(yy);
         end;
-        if ddh <= 5 * minarc then
+        if ddh <= 10 * secarc then
+          Fplot.PlotText(lx, ly, 1, Fplot.cfgplot.LabelColor[7], laLeft, laBottom,
+            deptostr(h * rad2deg,1), cfgsc.WhiteBg, True, True, 5)
+        else if ddh <= 5 * minarc then
           Fplot.PlotText(lx, ly, 1, Fplot.cfgplot.LabelColor[7], laLeft, laBottom,
             detostr(h * rad2deg), cfgsc.WhiteBg, True, True, 5)
         else
@@ -6621,6 +6644,9 @@ begin
   col := Fplot.cfgplot.Color[12];
   n := cfgsc.FieldNum;
   ddh := Fcatalog.cfgshr.DegreeGridSpacing[n];
+  while (deg2rad * ddh) > (cfgsc.fov / 2) do begin
+     ddh:=ddh/2;
+  end;
   lda1 := ddh * cos(cfgsc.bcentre);
   lda2 := lda1;
   while (lda1 < ddh) and (n < MaxField) do
@@ -6634,6 +6660,9 @@ begin
   if lda2 < lda1 then
     n := min(n - 1, MaxField);
   dda := Fcatalog.cfgshr.DegreeGridSpacing[n];
+  while (deg2rad * dda * cos(cfgsc.bcentre)) > (cfgsc.fov / 2) do begin
+     dda:=dda/2;
+  end;
   a1 := deg2rad * trunc(rad2deg * cfgsc.lcentre / dda) * dda;
   h1 := deg2rad * trunc(rad2deg * cfgsc.bcentre / ddh) * ddh;
   dda := deg2rad * dda;
@@ -6768,7 +6797,10 @@ var
           else
             lx := cfgsc.Xmax - (lh div 2);
         end;
-        if dda <= 15 * minarc then
+        if dda <= 10 * secarc then
+          Fplot.PlotText(lx, ly, 1, Fplot.cfgplot.LabelColor[7], laCenter, laTop,
+            deptostr(rmod(a + pi2, pi2) * rad2deg,1), cfgsc.WhiteBg, True, True, 5)
+        else if dda <= 15 * minarc then
           Fplot.PlotText(lx, ly, 1, Fplot.cfgplot.LabelColor[7], laCenter, laTop,
             lontostr(rmod(a + pi2, pi2) * rad2deg), cfgsc.WhiteBg, True, True, 5)
         else
@@ -6842,7 +6874,10 @@ var
           lx:=round(xx);
           ly:=round(yy);
         end;
-        if ddh <= 5 * minarc then
+        if ddh <= 10 * secarc then
+          Fplot.PlotText(lx, ly, 1, Fplot.cfgplot.LabelColor[7], laLeft, laBottom,
+            deptostr(h * rad2deg,1), cfgsc.WhiteBg, True, True, 5)
+        else if ddh <= 5 * minarc then
           Fplot.PlotText(lx, ly, 1, Fplot.cfgplot.LabelColor[7], laLeft, laBottom,
             detostr(h * rad2deg), cfgsc.WhiteBg, True, True, 5)
         else
@@ -6863,6 +6898,9 @@ begin
   col := Fplot.cfgplot.Color[12];
   n := cfgsc.FieldNum;
   ddh := Fcatalog.cfgshr.DegreeGridSpacing[n];
+  while (deg2rad * ddh) > (cfgsc.fov / 2) do begin
+     ddh:=ddh/2;
+  end;
   lda1 := ddh * cos(cfgsc.becentre);
   lda2 := lda1;
   while (lda1 < ddh) and (n < MaxField) do
@@ -6876,6 +6914,9 @@ begin
   if lda2 < lda1 then
     n := min(n - 1, MaxField);
   dda := Fcatalog.cfgshr.DegreeGridSpacing[n];
+  while (deg2rad * dda * cos(cfgsc.becentre)) > (cfgsc.fov / 2) do begin
+     dda:=dda/2;
+  end;
   a1 := deg2rad * trunc(rad2deg * cfgsc.lecentre / dda) * dda;
   h1 := deg2rad * trunc(rad2deg * cfgsc.becentre / ddh) * ddh;
   dda := deg2rad * dda;
@@ -8893,12 +8934,6 @@ var
 begin
   compassok := False;
   scaleok := False;
-  if (cfgsc.ShowGrid or cfgsc.ShowEqGrid) and
-    ((deg2rad * Fcatalog.cfgshr.DegreeGridSpacing[cfgsc.FieldNum]) > (cfgsc.fov / 2)) then
-  begin
-    compassok := True;
-    scaleok := True;
-  end;
   if Fcatalog.cfgshr.ShowCRose then
     compassok := True;
   if ((not cfgsc.ShowGrid) or cfgsc.ShowOnlyMeridian) and (not cfgsc.ShowEqGrid) and
