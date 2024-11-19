@@ -2,15 +2,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: skychart.ru\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-06-05 07:33+0000\n"
-"PO-Revision-Date: 2024-03-28 05:45+0000\n"
-"Last-Translator: Aleksey Kabanov <Unknown>\n"
+"POT-Creation-Date: 2024-11-19 10:01+0000\n"
+"PO-Revision-Date: 2024-09-28 17:05+0000\n"
+"Last-Translator: Sergey Tarantsov <tsn-ast@yandex.ru>\n"
 "Language-Team: Zaporozhye Astronomical Club Altair <astroclub@ua.fm, http://astroclub.zp.ua>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2024-06-05 07:56+0000\n"
-"X-Generator: Launchpad (build 4d1350fd3710dfe10d207fa9961e224cc481dca3)\n"
+"X-Launchpad-Export-Date: 2024-11-19 10:12+0000\n"
+"X-Generator: Launchpad (build 22ade00ab50b929fac63b8ee7252243aceda294a)\n"
 "Language: ru_UA\n"
 
 #: u_translation.rs102cddss
@@ -718,7 +718,7 @@ msgstr "%sНевозможно открыть базу данных %s! %s"
 
 #: u_translation.rscannotsyncwh
 msgid "Cannot Sync when the mount is not tracking"
-msgstr ""
+msgstr "Невозможно синхронизировать, если не включено слежение"
 
 #: u_translation.rscannotwritet
 msgid "Cannot write to"
@@ -960,7 +960,7 @@ msgstr "Закрыть файлы"
 
 #: u_translation.rsclosetheset2
 msgid "Close the Setup window and launch the catalog generation tool?"
-msgstr ""
+msgstr "Закрыть окно настроек и запустить инструмент генерации каталога?"
 
 #: u_translation.rsclosethesetu
 msgid "Close the Setup window and launch the catalog installer tool?"
@@ -1111,7 +1111,7 @@ msgstr "Подключено к SQL базе данных %s"
 #: u_translation.rsconnectioner
 #, object-pascal-format
 msgid "Connection error: %s"
-msgstr ""
+msgstr "Ошибка подключения: %s"
 
 #: u_translation.rsconnectionli
 msgid "Connection lines between each position"
@@ -1424,6 +1424,10 @@ msgstr "Десят. южная полярн дист."
 msgid "Declination"
 msgstr "Склонение"
 
+#: u_translation.rsdeclinationl
+msgid "Declination label on center"
+msgstr ""
+
 #: u_translation.rsdecoptions
 msgid "DEC options"
 msgstr "DEC опции"
@@ -1646,7 +1650,7 @@ msgstr "Отключить"
 
 #: u_translation.rsdisconnected3
 msgid "Disconnected"
-msgstr ""
+msgstr "Отключено"
 
 #: u_translation.rsdisconnectfr
 msgid "Disconnect from SAMP"
@@ -1655,7 +1659,7 @@ msgstr "Отключение SAMP"
 #: u_translation.rsdisconnectio
 #, object-pascal-format
 msgid "Disconnection error: %s"
-msgstr ""
+msgstr "Ошибка отключения: %s"
 
 #: u_translation.rsdisplay
 msgid "Display"
@@ -1777,8 +1781,8 @@ msgid "Download the latest orbital elements"
 msgstr "Загрузить элементы орбит в формате MPC"
 
 #: u_translation.rsdownloadsola
-msgid "Download Solar System object SPICE kernel from JPL Horizon"
-msgstr "Загрузите ядро ​​SPICE объектов Солнечной системы из JPL Horizon"
+msgid "Download comet or asteroid SPICE kernel from JPL Horizon"
+msgstr ""
 
 #: u_translation.rsdownloadtle
 msgid "Download TLE"
@@ -2163,7 +2167,7 @@ msgstr "Февраль"
 
 #: u_translation.rsfewerbuttons
 msgid "Fewer buttons for a cleaner space, access to other functions from the menu"
-msgstr ""
+msgstr "Меньше кнопок для аккуратного внешнего вида, доступ к остальным функциям через меню"
 
 #: u_translation.rsffmpegprogra
 msgid "ffmpeg program path"
@@ -2779,7 +2783,7 @@ msgstr "Установите новую версию %s поверх %s"
 
 #: u_translation.rsinstallobjec
 msgid "Install object catalog"
-msgstr "Установить каталог объектов"
+msgstr "Установка каталогов объектов"
 
 #: u_translation.rsinstalloneof
 msgid "Install one of the variable star catalog, depending on your interest and instrumentation"
@@ -3390,7 +3394,7 @@ msgstr "Сообщения:"
 
 #: u_translation.rsmessages2
 msgid "Messages"
-msgstr ""
+msgstr "Сообщения"
 
 #: u_translation.rsmeters
 msgid "Meters"
@@ -3466,7 +3470,7 @@ msgstr "Луна"
 
 #: u_translation.rsmorebuttonsf
 msgid "More buttons for quick access to many functions"
-msgstr ""
+msgstr "Больше кнопок для быстрого доступа к множеству функций"
 
 #: u_translation.rsmoreinformat
 msgid "More informations"
@@ -3516,7 +3520,7 @@ msgstr "Размер мозаики"
 #: u_translation.rsmountcapabil
 #, object-pascal-format
 msgid "Mount capabilities: %s"
-msgstr ""
+msgstr "Возможности монтировки: %s"
 
 #: u_translation.rsmovelabel
 msgid "Move label"
@@ -3689,7 +3693,7 @@ msgstr "(без коррекции собственного движения)"
 
 #: u_translation.rsnoresponsefr
 msgid "No response from server"
-msgstr ""
+msgstr "Нет ответа от сервера"
 
 #: u_translation.rsnorth
 msgid "North"
@@ -4992,7 +4996,7 @@ msgstr "Выберите единицы времени"
 
 #: u_translation.rsselectyourpr
 msgid "Select your preference for the button layout"
-msgstr ""
+msgstr "Выберите ваши предпочтения компоновки кнопок"
 
 #: u_translation.rssemi
 msgid "Semi"
@@ -5347,7 +5351,7 @@ msgstr "Повернуть в точку курсора"
 #: u_translation.rsslewtoeq
 #, object-pascal-format
 msgid "Slewing to %s %s/%s"
-msgstr ""
+msgstr "Поворот к %s %s/%s"
 
 #: u_translation.rsslower
 msgid "Slower"
@@ -5565,7 +5569,7 @@ msgstr "Начало объекта"
 
 #: u_translation.rsstarttracking
 msgid "start tracking"
-msgstr ""
+msgstr "Включено слежение"
 
 #: u_translation.rsstatus
 msgid "Status"
@@ -5597,7 +5601,7 @@ msgstr "Остановка TCP/IP сервера"
 
 #: u_translation.rsstoptelescop
 msgid "Stop telescope motion."
-msgstr ""
+msgstr "Остановить слежение"
 
 #: u_translation.rssun
 msgid "Sun"
@@ -5655,7 +5659,7 @@ msgstr "Синхронизировано с %s / %s"
 #: u_translation.rssynctoeq
 #, object-pascal-format
 msgid "Sync to %s %s/%s"
-msgstr ""
+msgstr "Синхронизация с %s %s/%s"
 
 #: u_translation.rssynodicmonth
 msgid "Synodic month"
@@ -5784,7 +5788,7 @@ msgstr "Данный файл не был определён, как MPCORB фа
 
 #: u_translation.rsthislayoutca
 msgid "This layout can be modified later using the menu Setup , Toolbar editor"
-msgstr ""
+msgstr "Эту компоновку можно изменить позже через меню настроек, редактов панели инструментов"
 
 #: u_translation.rsthisprogrami
 msgid "This program is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License"
@@ -6066,7 +6070,7 @@ msgstr "Неподдерживаемый профиль концентратор
 
 #: u_translation.rsunzipfile
 msgid "Unzip file"
-msgstr ""
+msgstr "Распаковать файл"
 
 #: u_translation.rsup
 msgid "Up"

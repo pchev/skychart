@@ -5971,7 +5971,7 @@ msgid "SPICE ephemeris"
 msgstr ""
 
 #: u_translation:rsdownloadsola
-msgid "Download Solar System object SPICE kernel from JPL Horizon"
+msgid "Download comet or asteroid SPICE kernel from JPL Horizon"
 msgstr ""
 
 #: u_translation:rsstartdate
@@ -6284,5 +6284,9 @@ msgstr ""
 
 #: u_translation:rsmarksize
 msgid "Mark size"
+msgstr ""
+
+#: u_translation:rsdeclinationl
+msgid "Declination label on center"
 msgstr ""
 

@@ -6,15 +6,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: skychart\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2024-06-05 07:33+0000\n"
+"POT-Creation-Date: 2024-11-19 10:01+0000\n"
 "PO-Revision-Date: 2022-06-25 16:41+0000\n"
 "Last-Translator: Sreten <Unknown>\n"
 "Language-Team: Serbian <sr@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2024-06-05 07:56+0000\n"
-"X-Generator: Launchpad (build 4d1350fd3710dfe10d207fa9961e224cc481dca3)\n"
+"X-Launchpad-Export-Date: 2024-11-19 10:13+0000\n"
+"X-Generator: Launchpad (build 22ade00ab50b929fac63b8ee7252243aceda294a)\n"
 
 #: u_translation.rs102cddss
 msgid "102 CD DSS"
@@ -1427,6 +1427,10 @@ msgstr ""
 msgid "Declination"
 msgstr ""
 
+#: u_translation.rsdeclinationl
+msgid "Declination label on center"
+msgstr ""
+
 #: u_translation.rsdecoptions
 msgid "DEC options"
 msgstr ""
@@ -1780,7 +1784,7 @@ msgid "Download the latest orbital elements"
 msgstr ""
 
 #: u_translation.rsdownloadsola
-msgid "Download Solar System object SPICE kernel from JPL Horizon"
+msgid "Download comet or asteroid SPICE kernel from JPL Horizon"
 msgstr ""
 
 #: u_translation.rsdownloadtle

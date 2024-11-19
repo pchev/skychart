@@ -3,15 +3,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: skychart.cs\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-06-05 07:33+0000\n"
-"PO-Revision-Date: 2024-01-21 19:28+0000\n"
+"POT-Creation-Date: 2024-11-19 10:01+0000\n"
+"PO-Revision-Date: 2024-06-06 07:24+0000\n"
 "Last-Translator: Stanislav Holub <Unknown>\n"
 "Language-Team: <translation@ap-i.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2024-06-05 07:56+0000\n"
-"X-Generator: Launchpad (build 4d1350fd3710dfe10d207fa9961e224cc481dca3)\n"
+"X-Launchpad-Export-Date: 2024-11-19 10:12+0000\n"
+"X-Generator: Launchpad (build 22ade00ab50b929fac63b8ee7252243aceda294a)\n"
 "X-Poedit-Bookmarks: 99,-1,-1,-1,-1,-1,-1,-1,-1,-1\n"
 
 #: u_translation.rs102cddss
@@ -719,7 +719,7 @@ msgstr "%sNelze otevřít databázi %s! %s"
 
 #: u_translation.rscannotsyncwh
 msgid "Cannot Sync when the mount is not tracking"
-msgstr ""
+msgstr "Nelze Synchronizovat, pokud není povoleno sledování"
 
 #: u_translation.rscannotwritet
 msgid "Cannot write to"
@@ -961,7 +961,7 @@ msgstr "Zavřít soubory"
 
 #: u_translation.rsclosetheset2
 msgid "Close the Setup window and launch the catalog generation tool?"
-msgstr ""
+msgstr "Zavřete okno Nastavení a spusťte nástroj pro generování katalogu?"
 
 #: u_translation.rsclosethesetu
 msgid "Close the Setup window and launch the catalog installer tool?"
@@ -1112,7 +1112,7 @@ msgstr "Připojeno k SQL databázi %s"
 #: u_translation.rsconnectioner
 #, object-pascal-format
 msgid "Connection error: %s"
-msgstr ""
+msgstr "Chyba připojení: %s"
 
 #: u_translation.rsconnectionli
 msgid "Connection lines between each position"
@@ -1425,6 +1425,10 @@ msgstr "Vzdálenost od jižního pólu"
 msgid "Declination"
 msgstr "Deklinace"
 
+#: u_translation.rsdeclinationl
+msgid "Declination label on center"
+msgstr ""
+
 #: u_translation.rsdecoptions
 msgid "DEC options"
 msgstr "Možnosti DEC"
@@ -1647,7 +1651,7 @@ msgstr "Odpojit"
 
 #: u_translation.rsdisconnected3
 msgid "Disconnected"
-msgstr ""
+msgstr "Odpojen"
 
 #: u_translation.rsdisconnectfr
 msgid "Disconnect from SAMP"
@@ -1656,7 +1660,7 @@ msgstr "Odpojení od SAMP"
 #: u_translation.rsdisconnectio
 #, object-pascal-format
 msgid "Disconnection error: %s"
-msgstr ""
+msgstr "Chyba odpojení: %s"
 
 #: u_translation.rsdisplay
 msgid "Display"
@@ -1778,8 +1782,8 @@ msgid "Download the latest orbital elements"
 msgstr "Stáhnout aktuální orbitální elementy"
 
 #: u_translation.rsdownloadsola
-msgid "Download Solar System object SPICE kernel from JPL Horizon"
-msgstr "Stáhnout SPICE pro objekty sluneční soustavy z JPL Horizon"
+msgid "Download comet or asteroid SPICE kernel from JPL Horizon"
+msgstr ""
 
 #: u_translation.rsdownloadtle
 msgid "Download TLE"
@@ -1811,7 +1815,7 @@ msgstr "Vykreslit linie vlastního pohybu pro dalších"
 
 #: u_translation.rsdrawas
 msgid "Draw as"
-msgstr ""
+msgstr "Kreslit jako"
 
 #: u_translation.rsdrawasdso
 msgid "Draw as DSO"
@@ -2140,7 +2144,7 @@ msgstr "Velikost slabých hvězd "
 
 #: u_translation.rsfalse
 msgid "False"
-msgstr ""
+msgstr "Nepravda"
 
 #: u_translation.rsfamily
 msgid "Family"
@@ -2164,7 +2168,7 @@ msgstr "Únor"
 
 #: u_translation.rsfewerbuttons
 msgid "Fewer buttons for a cleaner space, access to other functions from the menu"
-msgstr ""
+msgstr "Méně tlačítek pro přehlednější prostor, přístup k dalším funkcím z nabídky"
 
 #: u_translation.rsffmpegprogra
 msgid "ffmpeg program path"
@@ -3287,7 +3291,7 @@ msgstr "Značka"
 
 #: u_translation.rsmarksize
 msgid "Mark size"
-msgstr ""
+msgstr "Velikost značky"
 
 #: u_translation.rsmarkthechart
 msgid "Mark the centre of the chart"
@@ -3391,7 +3395,7 @@ msgstr "Zprávy:"
 
 #: u_translation.rsmessages2
 msgid "Messages"
-msgstr ""
+msgstr "Zprávy"
 
 #: u_translation.rsmeters
 msgid "Meters"
@@ -3467,7 +3471,7 @@ msgstr "Měsíc"
 
 #: u_translation.rsmorebuttonsf
 msgid "More buttons for quick access to many functions"
-msgstr ""
+msgstr "Více tlačítek pro rychlý přístup k mnoha funkcím"
 
 #: u_translation.rsmoreinformat
 msgid "More informations"
@@ -3517,7 +3521,7 @@ msgstr "Velikost Mozaiky"
 #: u_translation.rsmountcapabil
 #, object-pascal-format
 msgid "Mount capabilities: %s"
-msgstr ""
+msgstr "Možnosti montáže: %s"
 
 #: u_translation.rsmovelabel
 msgid "Move label"
@@ -3690,7 +3694,7 @@ msgstr "neopraveno o vlastní pohyb, v tomto katalogu nejsou pořebná data"
 
 #: u_translation.rsnoresponsefr
 msgid "No response from server"
-msgstr ""
+msgstr "Žádná odpověď ze serveru"
 
 #: u_translation.rsnorth
 msgid "North"
@@ -4993,7 +4997,7 @@ msgstr "Zvolte časové jednotky"
 
 #: u_translation.rsselectyourpr
 msgid "Select your preference for the button layout"
-msgstr ""
+msgstr "Vyberte požadované rozložení"
 
 #: u_translation.rssemi
 msgid "Semi"
@@ -5348,7 +5352,7 @@ msgstr "Přejet na pozici kurzoru"
 #: u_translation.rsslewtoeq
 #, object-pascal-format
 msgid "Slewing to %s %s/%s"
-msgstr ""
+msgstr "Přejezd na %s %s/%s"
 
 #: u_translation.rsslower
 msgid "Slower"
@@ -5566,7 +5570,7 @@ msgstr "Začátek objektu"
 
 #: u_translation.rsstarttracking
 msgid "start tracking"
-msgstr ""
+msgstr "spustit sledování"
 
 #: u_translation.rsstatus
 msgid "Status"
@@ -5598,7 +5602,7 @@ msgstr "Zastavit TCP/IP server."
 
 #: u_translation.rsstoptelescop
 msgid "Stop telescope motion."
-msgstr ""
+msgstr "Zastavit pohyb dalekohledu."
 
 #: u_translation.rssun
 msgid "Sun"
@@ -5656,7 +5660,7 @@ msgstr "Synchronizováno s %s / %s"
 #: u_translation.rssynctoeq
 #, object-pascal-format
 msgid "Sync to %s %s/%s"
-msgstr ""
+msgstr "Synchronizovat s %s %s/%s"
 
 #: u_translation.rssynodicmonth
 msgid "Synodic month"
@@ -5785,7 +5789,7 @@ msgstr "Soubor není formátu MPCORB."
 
 #: u_translation.rsthislayoutca
 msgid "This layout can be modified later using the menu Setup , Toolbar editor"
-msgstr ""
+msgstr "Toto rozložení lze později upravit pomocí nabídky Nastavení , Editor panelu nástrojů."
 
 #: u_translation.rsthisprogrami
 msgid "This program is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License"
@@ -5941,7 +5945,7 @@ msgstr "Gradient teploty v troposféře (K/km)"
 
 #: u_translation.rstrue
 msgid "True"
-msgstr ""
+msgstr "Pravda"
 
 #: u_translation.rstrueequatore
 msgid "true equator, equinox and epoch of the date"
@@ -6067,7 +6071,7 @@ msgstr "Nepodporovaný profil hubu SAMP. Musí to být adresa URL souboru"
 
 #: u_translation.rsunzipfile
 msgid "Unzip file"
-msgstr ""
+msgstr "Unzip soubor"
 
 #: u_translation.rsup
 msgid "Up"

@@ -3,15 +3,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: skychart.pt\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-06-05 07:33+0000\n"
-"PO-Revision-Date: 2024-01-16 20:30+0000\n"
+"POT-Creation-Date: 2024-11-19 10:01+0000\n"
+"PO-Revision-Date: 2024-06-10 18:41+0000\n"
 "Last-Translator: Angelo Rober Pulici <Unknown>\n"
 "Language-Team: Angelo Rober Pulici <apulici@terra.com.br>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2024-06-05 07:56+0000\n"
-"X-Generator: Launchpad (build 4d1350fd3710dfe10d207fa9961e224cc481dca3)\n"
+"X-Launchpad-Export-Date: 2024-11-19 10:13+0000\n"
+"X-Generator: Launchpad (build 22ade00ab50b929fac63b8ee7252243aceda294a)\n"
 "X-Poedit-Country: BRAZIL\n"
 "X-Poedit-Language: Portuguese\n"
 
@@ -720,7 +720,7 @@ msgstr "%sNão foi possível abrir o banco de dados %s! %s"
 
 #: u_translation.rscannotsyncwh
 msgid "Cannot Sync when the mount is not tracking"
-msgstr ""
+msgstr "Não é possível sincronizar quando a montagem não está rastreando"
 
 #: u_translation.rscannotwritet
 msgid "Cannot write to"
@@ -962,7 +962,7 @@ msgstr "Fechar arquivos"
 
 #: u_translation.rsclosetheset2
 msgid "Close the Setup window and launch the catalog generation tool?"
-msgstr ""
+msgstr "Fechar a janela Configuração e iniciar a ferramenta de geração de catálogo?"
 
 #: u_translation.rsclosethesetu
 msgid "Close the Setup window and launch the catalog installer tool?"
@@ -1113,7 +1113,7 @@ msgstr "Conectado a banco de dados SQL %s"
 #: u_translation.rsconnectioner
 #, object-pascal-format
 msgid "Connection error: %s"
-msgstr ""
+msgstr "Erro de conexão: %s"
 
 #: u_translation.rsconnectionli
 msgid "Connection lines between each position"
@@ -1426,6 +1426,10 @@ msgstr "Distância decimal do Polo Sul"
 msgid "Declination"
 msgstr "Declinação"
 
+#: u_translation.rsdeclinationl
+msgid "Declination label on center"
+msgstr ""
+
 #: u_translation.rsdecoptions
 msgid "DEC options"
 msgstr "Opções de DEC"
@@ -1648,7 +1652,7 @@ msgstr "Desconectado"
 
 #: u_translation.rsdisconnected3
 msgid "Disconnected"
-msgstr ""
+msgstr "Desconectado"
 
 #: u_translation.rsdisconnectfr
 msgid "Disconnect from SAMP"
@@ -1657,7 +1661,7 @@ msgstr "Desconectar da SAMP"
 #: u_translation.rsdisconnectio
 #, object-pascal-format
 msgid "Disconnection error: %s"
-msgstr ""
+msgstr "Erro de desconexão: %s"
 
 #: u_translation.rsdisplay
 msgid "Display"
@@ -1779,8 +1783,8 @@ msgid "Download the latest orbital elements"
 msgstr "Baixar os últimos elementos orbitais"
 
 #: u_translation.rsdownloadsola
-msgid "Download Solar System object SPICE kernel from JPL Horizon"
-msgstr "Baixe o objeto do Sistema Solar do kernel SPICE do JPL Horizon"
+msgid "Download comet or asteroid SPICE kernel from JPL Horizon"
+msgstr ""
 
 #: u_translation.rsdownloadtle
 msgid "Download TLE"
@@ -1812,7 +1816,7 @@ msgstr "Traçar o movimento próprio para os próximos"
 
 #: u_translation.rsdrawas
 msgid "Draw as"
-msgstr ""
+msgstr "Desenhe como"
 
 #: u_translation.rsdrawasdso
 msgid "Draw as DSO"
@@ -2141,7 +2145,7 @@ msgstr "Tamanho de estrelas tênues "
 
 #: u_translation.rsfalse
 msgid "False"
-msgstr ""
+msgstr "Falso"
 
 #: u_translation.rsfamily
 msgid "Family"
@@ -2165,7 +2169,7 @@ msgstr "Fevereiro"
 
 #: u_translation.rsfewerbuttons
 msgid "Fewer buttons for a cleaner space, access to other functions from the menu"
-msgstr ""
+msgstr "Menos botões para um espaço mais limpo, acesso a outras funções do menu"
 
 #: u_translation.rsffmpegprogra
 msgid "ffmpeg program path"
@@ -3288,7 +3292,7 @@ msgstr "Marca"
 
 #: u_translation.rsmarksize
 msgid "Mark size"
-msgstr ""
+msgstr "Tamanho da marca"
 
 #: u_translation.rsmarkthechart
 msgid "Mark the centre of the chart"
@@ -3392,7 +3396,7 @@ msgstr "Mensagens"
 
 #: u_translation.rsmessages2
 msgid "Messages"
-msgstr ""
+msgstr "Mensagens"
 
 #: u_translation.rsmeters
 msgid "Meters"
@@ -3468,7 +3472,7 @@ msgstr "Lua"
 
 #: u_translation.rsmorebuttonsf
 msgid "More buttons for quick access to many functions"
-msgstr ""
+msgstr "Mais botões de acesso rápido para muitas funções"
 
 #: u_translation.rsmoreinformat
 msgid "More informations"
@@ -3518,7 +3522,7 @@ msgstr "Tamanho do mosaico"
 #: u_translation.rsmountcapabil
 #, object-pascal-format
 msgid "Mount capabilities: %s"
-msgstr ""
+msgstr "Capacidades de montagem: %s"
 
 #: u_translation.rsmovelabel
 msgid "Move label"
@@ -3691,7 +3695,7 @@ msgstr "(sem correção de movimento próprio, dados indisponíveis neste catál
 
 #: u_translation.rsnoresponsefr
 msgid "No response from server"
-msgstr ""
+msgstr "Nenhuma resposta do servidor"
 
 #: u_translation.rsnorth
 msgid "North"
@@ -4994,7 +4998,7 @@ msgstr "Selecione as unidades de tempo"
 
 #: u_translation.rsselectyourpr
 msgid "Select your preference for the button layout"
-msgstr ""
+msgstr "Selecione sua preferência para o layout dos botões"
 
 #: u_translation.rssemi
 msgid "Semi"
@@ -5349,7 +5353,7 @@ msgstr "Girar posição do cursor"
 #: u_translation.rsslewtoeq
 #, object-pascal-format
 msgid "Slewing to %s %s/%s"
-msgstr ""
+msgstr "Girando para %s %s/%s"
 
 #: u_translation.rsslower
 msgid "Slower"
@@ -5567,7 +5571,7 @@ msgstr "Início do objeto"
 
 #: u_translation.rsstarttracking
 msgid "start tracking"
-msgstr ""
+msgstr "começar a rastrear"
 
 #: u_translation.rsstatus
 msgid "Status"
@@ -5599,7 +5603,7 @@ msgstr "Parar servidor TCP/IP"
 
 #: u_translation.rsstoptelescop
 msgid "Stop telescope motion."
-msgstr ""
+msgstr "Pare o movimento do telescópio."
 
 #: u_translation.rssun
 msgid "Sun"
@@ -5657,7 +5661,7 @@ msgstr "Sincronizado de  %s / %s"
 #: u_translation.rssynctoeq
 #, object-pascal-format
 msgid "Sync to %s %s/%s"
-msgstr ""
+msgstr "Sincronizar com %s %s/%s"
 
 #: u_translation.rssynodicmonth
 msgid "Synodic month"
@@ -5786,7 +5790,7 @@ msgstr "Este arquivo não foi reconhecido como um arquivo MPCORB."
 
 #: u_translation.rsthislayoutca
 msgid "This layout can be modified later using the menu Setup , Toolbar editor"
-msgstr ""
+msgstr "Este layout pode ser modificado posteriormente usando o menu Configuração , Editor da barra de ferramentas"
 
 #: u_translation.rsthisprogrami
 msgid "This program is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License"
@@ -5942,7 +5946,7 @@ msgstr "Taxa de queda de temperatura da Troposfera (K/km)"
 
 #: u_translation.rstrue
 msgid "True"
-msgstr ""
+msgstr "Verdadeiro"
 
 #: u_translation.rstrueequatore
 msgid "true equator, equinox and epoch of the date"
@@ -6068,7 +6072,7 @@ msgstr "Perfil  SAMP hub não suportado. Deve ser uma URL do arquivo"
 
 #: u_translation.rsunzipfile
 msgid "Unzip file"
-msgstr ""
+msgstr "Descompacte o arquivo"
 
 #: u_translation.rsup
 msgid "Up"
