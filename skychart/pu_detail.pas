@@ -29,7 +29,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 interface
 
 uses
-  u_help, u_translation, u_util, u_constant, pu_info, Clipbrd, UScaleDPI, LCLVersion,
+  u_help, u_translation, u_util, u_constant, pu_info, Clipbrd, UScaleDPI, LCLVersion, synacode,
   LCLIntf, SysUtils, Classes, Graphics, Controls, Forms, LazUTF8, LazFileUtils, IpHtml, Ipfilebroker,
   Dialogs, StdCtrls, ComCtrls, ExtCtrls, Menus, StdActns, ActnList, LResources,
   Buttons, LazHelpHTML_fix, types;
@@ -194,9 +194,7 @@ begin
           Delete(n, 1, 3);
         if copy(n,1,6)='UCAC4-' then
           n[6]:=' ';
-        n := StringReplace(n, ' ', '%20', [rfReplaceAll]);
-        n := StringReplace(n, '+', '%2b', [rfReplaceAll]);
-        n := StringReplace(n, '.', '%20', [rfReplaceAll]);
+        n := EncodeURLElement(n);
         url := infoname_url[i, 1];
         url := StringReplace(url, '$ID', n, []);
       end;

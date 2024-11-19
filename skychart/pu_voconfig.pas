@@ -30,7 +30,7 @@ interface
 
 uses
   u_ccdconfig, u_translation, u_constant, Messages, SysUtils, Classes,
-  Graphics, Controls, Forms, FileUtil,
+  Graphics, Controls, Forms, FileUtil, synacode,
   Dialogs, StdCtrls, Menus, pr_vodetail, ComCtrls, Grids, ExtCtrls, Math, UScaleDPI,
   LResources, Buttons, u_voconstant, cu_vocatalog, cu_vodetail, cu_vodata;
 
@@ -300,10 +300,7 @@ begin
   if trim(CatDescEdit.Text) > '' then
   begin
     screen.Cursor := crHourGlass;
-    sid:=StringReplace(trim(CatDescEdit.Text), ' ', '%20', [rfReplaceAll]);
-    sid:=StringReplace(sid, '+', '%2B', [rfReplaceAll]);
-    sid:=StringReplace(sid, '-', '%2D', [rfReplaceAll]);
-    sid:=StringReplace(sid, '/', '%2F', [rfReplaceAll]);
+    sid:=EncodeURLElement(trim(CatDescEdit.Text));
     buf := vo_url[VO_Catalogs1.vo_source, ServerList.ItemIndex + 1, 1];
     buf := buf + '-meta&-meta.max=1000&-words=' + sid;
     VO_Catalogs1.ListUrl := buf;

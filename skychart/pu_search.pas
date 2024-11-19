@@ -30,7 +30,7 @@ interface
 
 uses
   u_help, u_translation, u_constant, u_util, cu_database, cu_calceph,
-  httpsend, blcksock, XMLRead, DOM, LCLType, UScaleDPI,
+  httpsend, blcksock, XMLRead, DOM, LCLType, UScaleDPI, synacode,
   LCLIntf, Messages, SysUtils, Classes, Graphics, Controls, Forms,
   Dialogs, StdCtrls, ExtCtrls, Buttons, LResources, LazHelpHTML_fix, ComCtrls, Types;
 
@@ -583,8 +583,7 @@ begin
     cat:='';
   end;
 
-  n := StringReplace(num, ' ', '%20', [rfReplaceAll]);
-  n := StringReplace(n, '+', '%2b', [rfReplaceAll]);
+  n := EncodeURLElement(num);
 
   url:=sesame_url[SesameUrlNum+1,1];
   url:=url+'/-oxFI/'+cat+'?'+trim(n);

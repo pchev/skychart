@@ -33,7 +33,7 @@ uses
   BGRABitmap, BGRABitmapTypes, u_orbits,
   pu_mount, pu_getdss, pu_imglist, pu_prepoint,
   u_translation, pu_detail, cu_skychart, u_constant, u_util, pu_image,
-  gcatunit, pu_obslist, pu_mosaic,
+  gcatunit, pu_obslist, pu_mosaic, synacode,
   u_projection, Printers, Math, downloaddialog, IntfGraphics,
   contnrs, LCLType, UScaleDPI,
   PostscriptCanvas, FileUtil, Clipbrd, LCLIntf, Classes, Graphics, Dialogs, Types,
@@ -1432,9 +1432,7 @@ begin
       Delete(n, 1, 3);
     if copy(n,1,6)='UCAC4-' then
       n[6]:=' ';
-    n := StringReplace(n, ' ', '%20', [rfReplaceAll]);
-    n := StringReplace(n, '+', '%2b', [rfReplaceAll]);
-    n := StringReplace(n, '.', '%20', [rfReplaceAll]);
+    n := EncodeURLElement(n);
     url := infoname_url[i, 1];
     url := StringReplace(url, '$ID', n, []);
     ExecuteFile(url);
