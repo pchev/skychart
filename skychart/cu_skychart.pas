@@ -5258,7 +5258,7 @@ end;
 function Tskychart.DrawDEline(ra, de, da,dde,ra1: double; drawlabel: boolean; col,linewidth,dir,lh,lt: integer; linestyle: TFPPenStyle; var labelok:boolean): boolean;
 var
   n, w, lx, ly: integer;
-  x1, y1: double;
+  x1, y1,lra,lde: double;
   xx, yy, xxp, yyp: single;
   plotok: boolean;
 begin
@@ -5310,6 +5310,12 @@ begin
           else
             lx := cfgsc.Xmax - (lh div 2);
         end;
+        XYWindow(lx,ly,x1,y1,cfgsc);
+        InvProj(x1,y1,lra,lde,cfgsc);
+        projection(lra,de,x1,y1, cfgsc.ProjPole=Altaz, cfgsc);
+        WindowXY(x1, y1, xx, yy, cfgsc);
+        lx:=round(xx);
+        ly:=round(yy);
       end;
       if dde <= 5 * minarc then
         Fplot.PlotText(lx, ly, 1, Fplot.cfgplot.LabelColor[7], laLeft, laBottom,
@@ -5612,7 +5618,7 @@ var
   // draw altitude lines
   function DrawHline(a, h, da: double): boolean;
   var
-    x1, y1: double;
+    x1, y1, lla,llh: double;
     n, w, lx, ly: integer;
     xx, yy, xxp, yyp: single;
     plotok: boolean;
@@ -5665,6 +5671,12 @@ var
             else
               lx := cfgsc.Xmax - (lh div 2);
           end;
+          XYWindow(lx,ly,x1,y1,cfgsc);
+          InvProj2(x1,y1,-cfgsc.acentre, cfgsc.hcentre,lla,llh,cfgsc);
+          proj2(lla, h, -cfgsc.acentre, cfgsc.hcentre, x1, y1, cfgsc);
+          WindowXY(x1, y1, xx, yy, cfgsc);
+          lx:=round(xx);
+          ly:=round(yy);
         end;
         if ddh <= 5 * minarc then
           Fplot.PlotText(lx, ly, 1, Fplot.cfgplot.LabelColor[7], laLeft, laBottom,
@@ -6531,7 +6543,7 @@ var
 
   function DrawHline(a, h, da: double): boolean;
   var
-    x1, y1: double;
+    x1, y1,lla,llh: double;
     n, w, lx, ly: integer;
     xx, yy, xxp, yyp: single;
     plotok: boolean;
@@ -6581,6 +6593,12 @@ var
             else
               lx := cfgsc.Xmax - (lh div 2);
           end;
+          XYWindow(lx,ly,x1,y1,cfgsc);
+          InvProj2(x1,y1,cfgsc.lcentre, cfgsc.bcentre,lla,llh,cfgsc);
+          proj2(lla, h, cfgsc.lcentre, cfgsc.bcentre, x1, y1, cfgsc);
+          WindowXY(x1, y1, xx, yy, cfgsc);
+          lx:=round(xx);
+          ly:=round(yy);
         end;
         if ddh <= 5 * minarc then
           Fplot.PlotText(lx, ly, 1, Fplot.cfgplot.LabelColor[7], laLeft, laBottom,
@@ -6767,7 +6785,7 @@ var
 
   function DrawHline(a, h, da: double): boolean;
   var
-    x1, y1: double;
+    x1, y1, lla,llh: double;
     n, w, lx, ly: integer;
     xx, yy, xxp, yyp: single;
     plotok: boolean;
@@ -6817,6 +6835,12 @@ var
             else
               lx := cfgsc.Xmax - (lh div 2);
           end;
+          XYWindow(lx,ly,x1,y1,cfgsc);
+          InvProj2(x1,y1,cfgsc.lecentre, cfgsc.becentre,lla,llh,cfgsc);
+          proj2(lla, h, cfgsc.lecentre, cfgsc.becentre, x1, y1, cfgsc);
+          WindowXY(x1, y1, xx, yy, cfgsc);
+          lx:=round(xx);
+          ly:=round(yy);
         end;
         if ddh <= 5 * minarc then
           Fplot.PlotText(lx, ly, 1, Fplot.cfgplot.LabelColor[7], laLeft, laBottom,
