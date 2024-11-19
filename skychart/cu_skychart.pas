@@ -5283,27 +5283,33 @@ begin
         if (xx > 0) and (xx < cfgsc.Xmax) and (yy > 0) and (yy < cfgsc.Ymax) then
           plotok := True;
       end;
-    if drawlabel and (cfgsc.ShowGridNum) and (plotok) and (not labelok) and
+    if drawlabel and (cfgsc.ShowGridNum) and (plotok) and (not labelok) and (cfgsc.CenterDecGridNum or (
       (((dir = 1) and ((abs(xx - cfgsc.Xmin) < lt) and (yy > 0) and (yy < cfgsc.Ymax))) or
       ((dir = 2) and ((abs(xx - cfgsc.Xmin) < lt) and (yy > 0) and (yy < cfgsc.Ymax))) or
       ((dir = 3) and ((abs(yy - cfgsc.Ymax) < lt) and (xx > 0) and (xx < cfgsc.Xmax))) or
-      ((dir = 4) and ((abs(yy - cfgsc.Ymax) < lt) and (xx > 0) and (xx < cfgsc.Xmax)))) then
+      ((dir = 4) and ((abs(yy - cfgsc.Ymax) < lt) and (xx > 0) and (xx < cfgsc.Xmax)))) )) then
     begin
-      if dir > 2 then
-      begin
-        lx := round(xx);
-        if yy < (cfgsc.Ymax div 2) then
-          ly := (lh div 2)
-        else
-          ly := cfgsc.Ymax - (lh div 2);
+      if cfgsc.CenterDecGridNum then begin
+        lx:=round(xx);
+        ly:=round(yy);
       end
-      else
-      begin
-        ly := round(yy);
-        if xx < (cfgsc.Xmax div 2) then
-          lx := (lh div 2)
+      else begin
+        if dir > 2 then
+        begin
+          lx := round(xx);
+          if yy < (cfgsc.Ymax div 2) then
+            ly := (lh div 2)
+          else
+            ly := cfgsc.Ymax - (lh div 2);
+        end
         else
-          lx := cfgsc.Xmax - (lh div 2);
+        begin
+          ly := round(yy);
+          if xx < (cfgsc.Xmax div 2) then
+            lx := (lh div 2)
+          else
+            lx := cfgsc.Xmax - (lh div 2);
+        end;
       end;
       if dde <= 5 * minarc then
         Fplot.PlotText(lx, ly, 1, Fplot.cfgplot.LabelColor[7], laLeft, laBottom,
@@ -5632,27 +5638,33 @@ var
           if (xx > 0) and (xx < cfgsc.Xmax) and (yy > 0) and (yy < cfgsc.Ymax) then
             plotok := True;
         end;
-      if drawlabel and (cfgsc.ShowGridNum) and (plotok) and (not labelok) and
+      if drawlabel and (cfgsc.ShowGridNum) and (plotok) and (not labelok) and (cfgsc.CenterDecGridNum or (
         (((dir = 1) and ((abs(xx - cfgsc.Xmin) < lt) and (yy > 0) and (yy < cfgsc.Ymax))) or
         ((dir = 2) and ((abs(xx - cfgsc.Xmin) < lt) and (yy > 0) and (yy < cfgsc.Ymax))) or
         ((dir = 3) and ((abs(yy - cfgsc.Ymax) < lt) and (xx > 0) and (xx < cfgsc.Xmax))) or
-        ((dir = 4) and ((abs(yy - cfgsc.Ymax) < lt) and (xx > 0) and (xx < cfgsc.Xmax)))) then
+        ((dir = 4) and ((abs(yy - cfgsc.Ymax) < lt) and (xx > 0) and (xx < cfgsc.Xmax)))) )) then
       begin
-        if dir > 2 then
-        begin
-          lx := round(xx);
-          if yy < (cfgsc.Ymax div 2) then
-            ly := (lh div 2)
-          else
-            ly := cfgsc.Ymax - (lh div 2);
+        if cfgsc.CenterDecGridNum then begin
+          lx:=round(xx);
+          ly:=round(yy);
         end
-        else
-        begin
-          ly := round(yy);
-          if xx < (cfgsc.Xmax div 2) then
-            lx := (lh div 2)
+        else begin
+          if dir > 2 then
+          begin
+            lx := round(xx);
+            if yy < (cfgsc.Ymax div 2) then
+              ly := (lh div 2)
+            else
+              ly := cfgsc.Ymax - (lh div 2);
+          end
           else
-            lx := cfgsc.Xmax - (lh div 2);
+          begin
+            ly := round(yy);
+            if xx < (cfgsc.Xmax div 2) then
+              lx := (lh div 2)
+            else
+              lx := cfgsc.Xmax - (lh div 2);
+          end;
         end;
         if ddh <= 5 * minarc then
           Fplot.PlotText(lx, ly, 1, Fplot.cfgplot.LabelColor[7], laLeft, laBottom,
@@ -6542,27 +6554,33 @@ var
           if (xx > 0) and (xx < cfgsc.Xmax) and (yy > 0) and (yy < cfgsc.Ymax) then
             plotok := True;
         end;
-      if drawlabel and (cfgsc.ShowGridNum) and (plotok) and (not labelok) and
+      if drawlabel and (cfgsc.ShowGridNum) and (plotok) and (not labelok) and (cfgsc.CenterDecGridNum or (
         (((dir = 1) and ((abs(xx - cfgsc.Xmin) < lt) and (yy > 0) and (yy < cfgsc.Ymax))) or
         ((dir = 2) and ((abs(xx - cfgsc.Xmin) < lt) and (yy > 0) and (yy < cfgsc.Ymax))) or
         ((dir = 3) and ((abs(yy - cfgsc.Ymax) < lt) and (xx > 0) and (xx < cfgsc.Xmax))) or
-        ((dir = 4) and ((abs(yy - cfgsc.Ymax) < lt) and (xx > 0) and (xx < cfgsc.Xmax)))) then
+        ((dir = 4) and ((abs(yy - cfgsc.Ymax) < lt) and (xx > 0) and (xx < cfgsc.Xmax)))) )) then
       begin
-        if dir > 2 then
-        begin
-          lx := round(xx);
-          if yy < (cfgsc.Ymax div 2) then
-            ly := (lh div 2)
-          else
-            ly := cfgsc.Ymax - (lh div 2);
+        if cfgsc.CenterDecGridNum then begin
+          lx:=round(xx);
+          ly:=round(yy);
         end
-        else
-        begin
-          ly := round(yy);
-          if xx < (cfgsc.Xmax div 2) then
-            lx := (lh div 2)
+        else begin
+          if dir > 2 then
+          begin
+            lx := round(xx);
+            if yy < (cfgsc.Ymax div 2) then
+              ly := (lh div 2)
+            else
+              ly := cfgsc.Ymax - (lh div 2);
+          end
           else
-            lx := cfgsc.Xmax - (lh div 2);
+          begin
+            ly := round(yy);
+            if xx < (cfgsc.Xmax div 2) then
+              lx := (lh div 2)
+            else
+              lx := cfgsc.Xmax - (lh div 2);
+          end;
         end;
         if ddh <= 5 * minarc then
           Fplot.PlotText(lx, ly, 1, Fplot.cfgplot.LabelColor[7], laLeft, laBottom,
@@ -6772,27 +6790,33 @@ var
           if (xx > 0) and (xx < cfgsc.Xmax) and (yy > 0) and (yy < cfgsc.Ymax) then
             plotok := True;
         end;
-      if drawlabel and (cfgsc.ShowGridNum) and (plotok) and (not labelok) and
+      if drawlabel and (cfgsc.ShowGridNum) and (plotok) and (not labelok) and (cfgsc.CenterDecGridNum or (
         (((dir = 1) and ((abs(xx - cfgsc.Xmin) < lt) and (yy > 0) and (yy < cfgsc.Ymax))) or
         ((dir = 2) and ((abs(xx - cfgsc.Xmin) < lt) and (yy > 0) and (yy < cfgsc.Ymax))) or
         ((dir = 3) and ((abs(yy - cfgsc.Ymax) < lt) and (xx > 0) and (xx < cfgsc.Xmax))) or
-        ((dir = 4) and ((abs(yy - cfgsc.Ymax) < lt) and (xx > 0) and (xx < cfgsc.Xmax)))) then
+        ((dir = 4) and ((abs(yy - cfgsc.Ymax) < lt) and (xx > 0) and (xx < cfgsc.Xmax)))) )) then
       begin
-        if dir > 2 then
-        begin
-          lx := round(xx);
-          if yy < (cfgsc.Ymax div 2) then
-            ly := (lh div 2)
-          else
-            ly := cfgsc.Ymax - (lh div 2);
+        if cfgsc.CenterDecGridNum then begin
+          lx:=round(xx);
+          ly:=round(yy);
         end
-        else
-        begin
-          ly := round(yy);
-          if xx < (cfgsc.Xmax div 2) then
-            lx := (lh div 2)
+        else begin
+          if dir > 2 then
+          begin
+            lx := round(xx);
+            if yy < (cfgsc.Ymax div 2) then
+              ly := (lh div 2)
+            else
+              ly := cfgsc.Ymax - (lh div 2);
+          end
           else
-            lx := cfgsc.Xmax - (lh div 2);
+          begin
+            ly := round(yy);
+            if xx < (cfgsc.Xmax div 2) then
+              lx := (lh div 2)
+            else
+              lx := cfgsc.Xmax - (lh div 2);
+          end;
         end;
         if ddh <= 5 * minarc then
           Fplot.PlotText(lx, ly, 1, Fplot.cfgplot.LabelColor[7], laLeft, laBottom,

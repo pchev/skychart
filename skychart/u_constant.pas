@@ -1121,7 +1121,7 @@ type
     com_daypos, sunurlname, sunurl: string;
     CurYear, CurMonth, CurDay, DrawPMyear, sunurlsize, sunurlmargin,
     sunrefreshtime: integer;
-    ShowPluto, ShowConstl, ShowConstB, ShowEqGrid, ShowGrid, ShowGridNum,
+    ShowPluto, ShowConstl, ShowConstB, ShowEqGrid, ShowGrid, ShowGridNum, CenterDecGridNum,
     ShowOnlyMeridian, ShowAlwaysMeridian, UseSystemTime, countrytz: boolean;
     CurrentConstel: string;
     StyleGrid, StyleEqGrid, StyleConstL, StyleConstB, StyleEcliptic, StyleGalEq: TFPPenStyle;
@@ -2417,6 +2417,7 @@ begin
   ShowEqGrid := Source.ShowEqGrid;
   ShowGrid := Source.ShowGrid;
   ShowGridNum := Source.ShowGridNum;
+  CenterDecGridNum := Source.CenterDecGridNum;
   ShowOnlyMeridian := Source.ShowOnlyMeridian;
   ShowAlwaysMeridian := Source.ShowAlwaysMeridian;
   UseSystemTime := Source.UseSystemTime;

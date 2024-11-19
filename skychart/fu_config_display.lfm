@@ -1822,11 +1822,10 @@ object f_config_display: Tf_config_display
             TabOrder = 1
           end
           object GridNum: TCheckBox
-            AnchorSideTop.Control = CGrid
-            AnchorSideTop.Side = asrCenter
+            AnchorSideTop.Control = CheckBox8
             Left = 256
             Height = 22
-            Top = 8
+            Top = 152
             Width = 127
             Caption = 'Show Grid Label'
             OnClick = GridNumClick
@@ -1942,6 +1941,16 @@ object f_config_display: Tf_config_display
             Caption = 'Wide line for meridian'
             OnClick = MeridianWideLineClick
             TabOrder = 9
+          end
+          object CenterDecGridNum: TCheckBox
+            AnchorSideTop.Control = OnlyMeridian
+            Left = 256
+            Height = 22
+            Top = 192
+            Width = 152
+            Caption = 'Center latitude label'
+            OnClick = CenterDecGridNumClick
+            TabOrder = 10
           end
         end
         object GroupBox12: TGroupBox

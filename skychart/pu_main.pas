@@ -6751,6 +6751,7 @@ begin
   def_cfgsc.ShowEqGrid := False;
   def_cfgsc.ShowGrid := True;
   def_cfgsc.ShowGridNum := True;
+  def_cfgsc.CenterDecGridNum := False;
   def_cfgsc.ShowOnlyMeridian := False;
   def_cfgsc.ShowAlwaysMeridian := True;
   def_cfgsc.ShowConstL := True;
@@ -7697,6 +7698,7 @@ begin
         csc.AirmassMagnitude:=ReadBool(section, 'AirmassMagnitude', csc.AirmassMagnitude);
         csc.ShowGrid := ReadBool(section, 'ShowGrid', csc.ShowGrid);
         csc.ShowGridNum := ReadBool(section, 'ShowGridNum', csc.ShowGridNum);
+        csc.CenterDecGridNum := ReadBool(section, 'CenterDecGridNum', csc.CenterDecGridNum);
         csc.ShowOnlyMeridian :=
           ReadBool(section, 'ShowOnlyMeridian', csc.ShowOnlyMeridian);
         csc.ShowAlwaysMeridian :=
@@ -9163,6 +9165,7 @@ begin
         WriteBool(section, 'AirmassMagnitude', csc.AirmassMagnitude);
         WriteBool(section, 'ShowGrid', csc.ShowGrid);
         WriteBool(section, 'ShowGridNum', csc.ShowGridNum);
+        WriteBool(section, 'CenterDecGridNum', csc.CenterDecGridNum);
         WriteBool(section, 'ShowOnlyMeridian', csc.ShowOnlyMeridian);
         WriteBool(section, 'ShowAlwaysMeridian', csc.ShowAlwaysMeridian);
         WriteBool(section, 'ShowConstL', csc.ShowConstL);

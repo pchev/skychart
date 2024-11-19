@@ -1624,6 +1624,7 @@ resourcestring
   rsMessages2 = 'Messages';
   rsDrawAs = 'Draw as';
   rsMarkSize = 'Mark size';
+  rsDeclinationL = 'Declination label on center';
 
 // also update upsi_translation
 

@@ -48,6 +48,7 @@ type
     Button9: TButton;
     CheckBox1: TCheckBox;
     cbAltAzMark: TCheckBox;
+    CenterDecGridNum: TCheckBox;
     MeridianWideLine: TCheckBox;
     MagNoDecimal: TCheckBox;
     DSLsurface: TCheckBox;
@@ -420,6 +421,7 @@ type
     procedure ButtonComputeRectangleClick(Sender: TObject);
     procedure cbAltAzMarkClick(Sender: TObject);
     procedure CBStyleChange(Sender: TObject);
+    procedure CenterDecGridNumClick(Sender: TObject);
     procedure CFStyleChange(Sender: TObject);
     procedure CheckBox1Click(Sender: TObject);
     procedure CheckBox2Click(Sender: TObject);
@@ -715,6 +717,7 @@ begin
   galactic.Caption := rsShowGalactic;
   ShowEquator.Caption := rsShowCelestia;
   GridNum.Caption := rsShowGridLabe;
+  CenterDecGridNum.Caption := rsDeclinationL;
   GroupBox1.Caption := rsConstellatio2;
   Label132.Caption := rsConstellatio3;
   Constl.Caption := rsShowConstell3;
@@ -1565,6 +1568,7 @@ begin
   CheckBox8.Checked := csc.ShowAlwaysMeridian;
   MeridianWideLine.Checked := csc.MeridianWideLine;
   GridNum.Checked := csc.ShowGridNum;
+  CenterDecGridNum.Checked := csc.CenterDecGridNum;
   ShowLines.Checked := csc.showline;
   if csc.DSLforcecolor then
     ShowLineShape.Brush.Color := csc.DSLcolor
@@ -2140,6 +2144,11 @@ end;
 procedure Tf_config_display.GridNumClick(Sender: TObject);
 begin
   csc.ShowGridNum := GridNum.Checked;
+end;
+
+procedure Tf_config_display.CenterDecGridNumClick(Sender: TObject);
+begin
+  csc.CenterDecGridNum:=CenterDecGridNum.Checked;
 end;
 
 procedure Tf_config_display.eclipticClick(Sender: TObject);
