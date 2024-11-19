@@ -10468,7 +10468,7 @@ var
   i: integer;
   chart: TFrame;
   mag: double;
-  stype,buf: string;
+  stype,buf, sr, sn, sd: string;
   itype: integer;
 label
   findit;
@@ -10499,6 +10499,7 @@ begin
     begin
       ok := False;
       itype := ftAll;
+      sr:=''; sn:=''; sd:='';
       catalog.ClearSearch;
       sc.cfgsc.CurrentConstel:='';
       // nebula
@@ -10599,12 +10600,26 @@ begin
         if ok then
           goto findit;
       end;
+      // online search
+      f_search.Num:=Num;
+      ok:=f_search.SearchOnline;
+      if ok then begin
+        num:=f_search.sesame_name;
+        ar1:=f_search.ra;
+        de1:=f_search.de;
+        itype := ftOnline;
+        stype := 'OSR';
+        sr := f_search.sesame_resolver;
+        sn := f_search.sesame_name;
+        sd := f_search.sesame_desc;
+        goto findit;
+      end;
 
       Findit:
         Result := ok;
       if ok and idresult then
       begin
-        IdentSearchResult(num, stype, itype, ar1, de1);
+        IdentSearchResult(num, stype, itype, ar1, de1, sr, sn, sd);
         if track then begin
           sc.cfgsc.TrackOn := True;
           UpdateBtn(sc.cfgsc.flipx, sc.cfgsc.flipy, Connect1.Checked, MultiFrame1.ActiveObject);
