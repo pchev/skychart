@@ -10602,6 +10602,7 @@ begin
       end;
       // online search
       f_search.Num:=Num;
+      f_search.SesameCatNum:=3;
       ok:=f_search.SearchOnline;
       if ok then begin
         num:=f_search.sesame_name;
