@@ -689,6 +689,7 @@ var
     fx : file;
     lin : Tixrec;
 begin
+if (catshortname='4uc') and (copy(id,6,1)=' ') then id[6]:='-';
 buf:=uppercase(stringreplace(id,' ','',[rfReplaceAll]));
 idx:=path+slashchar+catshortname+'.ixr';
 ok:=false;
