@@ -3197,11 +3197,8 @@ begin
           WindowXY(x1, y1, xx, yy, cfgsc);
           if (xx > cfgsc.Xmin) and (xx < cfgsc.Xmax) and (yy > cfgsc.Ymin) and (yy < cfgsc.Ymax) then
           begin
-            if cfgsc.CometLst[j, i, 3] > (cfgsc.StarMagMax + cfgsc.ComMagDiff) then
-              continue;
             if ((doSimLabel(cfgsc.SimNb, j, cfgsc.SimLabel)) and
-              ((cfgsc.SimNb > 1) or (cfgsc.CometLst[j, i, 3] < cfgsc.StarMagMax + cfgsc.ComMagDiff -
-              cfgsc.LabelMagDiff[11]))) then
+              ((cfgsc.SimNb > 1) or (cfgsc.CometLst[j, i, 3] < cfgsc.StarMagMax + cfgsc.ComMagDiff - cfgsc.LabelMagDiff[11]))) then
             begin
               lis := cfgsc.CometName[j, i, 1] + FormatFloat(f3, cfgsc.CometLst[j, i, 9]) + FormatFloat(f3, cfgsc.CometLst[j, i, 10]);
               lid := rshash(lis, $7FFFFFFF);
@@ -3245,6 +3242,8 @@ begin
               end;
               SetLabel(lid, xx, yy, sz, 2, 11, ltxt, lalign, lori, 4, lopt);
             end;
+            if cfgsc.CometLst[j, i, 3] > (cfgsc.StarMagMax + cfgsc.ComMagDiff) then
+              continue;
             if projection(cfgsc.CometLst[j, i, 5], cfgsc.CometLst[j, i, 6], x1, y1, True, cfgsc) then
               WindowXY(x1, y1, cxx, cyy, cfgsc)
             else
