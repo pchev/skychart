@@ -5118,7 +5118,7 @@ begin
   if n < 1 then
     n := 1;
   xp := cfgsc.xmin + 10 + Fcatalog.cfgshr.CRoseSz * fplot.cfgchart.drawsize + sticksize;
-  y := cfgsc.ymax - sticksize;
+  y := cfgsc.ymax - 10 - round(Fcatalog.cfgshr.CRoseSz * fplot.cfgchart.drawsize / 2);
   FPlot.PlotLine(xp, y, xp, y - sticksize, Fplot.cfgplot.Color[12], 1);
   FPlot.PlotText(xp, y - sticksize, 1, Fplot.cfgplot.LabelColor[7], laCenter,
     laBottom, '0', cfgsc.WhiteBg);
@@ -8935,7 +8935,7 @@ begin
   scaleok := False;
   if Fcatalog.cfgshr.ShowCRose then
     compassok := True;
-  if ((not cfgsc.ShowGrid) or cfgsc.ShowOnlyMeridian) and (not cfgsc.ShowEqGrid) and
+  if ((not cfgsc.ShowGrid) or cfgsc.ShowOnlyMeridian or (cfgsc.fov<=60*minarc)) and (not cfgsc.ShowEqGrid) and
     Fcatalog.cfgshr.ShowCRose then
   begin
     compassok := True;
