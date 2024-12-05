@@ -43,6 +43,8 @@ type
     Button3: TButton;
     Button4: TButton;
     ButtonPast: TButton;
+    ShowAllVariable: TCheckBox;
+    ShowAllDouble: TCheckBox;
     ComMag: TFloatSpinEdit;
     AstMag: TFloatSpinEdit;
     Label6: TLabel;
@@ -202,6 +204,8 @@ begin
   end;
   EqChange(self);
   // magnitude / size
+  ShowAllDouble.Enabled:=catalog.CountDblCat>0;
+  ShowAllVariable.Enabled:=catalog.CountVarCat>0;
   LockMag.Checked:=cfgsc.lockMagn;
   if cfgsc.lockMagn then begin
     StarMag.Value:=cfgsc.lockStarMag;
@@ -209,6 +213,8 @@ begin
     DsoSize.Value:=cfgsc.lockNebSize;
     AstMag.Value:=cfgsc.lockStarMag+cfgsc.AstMagDiff;
     ComMag.Value:=cfgsc.lockStarMag+cfgsc.ComMagDiff;
+    ShowAllVariable.Checked:=ShowAllVariable.Enabled and catalog.cfgcat.ShowAllVariable;
+    ShowAllDouble.Checked:=ShowAllDouble.Enabled and catalog.cfgcat.ShowAllDouble;
   end
   else begin
     StarMag.Value:=catalog.cfgcat.StarMagMax;
@@ -216,6 +222,8 @@ begin
     DsoSize.Value:=catalog.cfgcat.NebSizeMin;
     AstMag.Value:=catalog.cfgcat.StarMagMax+cfgsc.AstMagDiff;
     ComMag.Value:=catalog.cfgcat.StarMagMax+cfgsc.ComMagDiff;
+    ShowAllVariable.Checked:=false;
+    ShowAllDouble.Checked:=false;
   end;
   Panel2.Enabled := LockMag.Checked;
 end;

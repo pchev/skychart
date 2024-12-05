@@ -990,6 +990,7 @@ type
     GCatNum: integer;
     UserObjects: array of TUserObjects;
     StarmagMax, NebMagMax, NebSizeMin: double;
+    ShowAllVariable, ShowAllDouble: boolean;
     SampSelectedTable, SampFindTable, SampFindUrl: string;
     SampSelectedNum, SampSelectX, SampSelectY, SampFindRec: integer;
     SampSelectedRec: array of integer;
@@ -2060,6 +2061,8 @@ begin
   StarmagMax := Source.StarmagMax;
   NebMagMax := Source.NebMagMax;
   NebSizeMin := Source.NebSizeMin;
+  ShowAllVariable := Source.ShowAllVariable;
+  ShowAllDouble := Source.ShowAllDouble;
   SampSelectedTable := Source.SampSelectedTable;
   SampSelectedNum := Source.SampSelectedNum;
   SetLength(SampSelectedRec, SampSelectedNum + 1);

@@ -173,9 +173,11 @@ type
     function OpenStar: boolean;
     function CloseStar: boolean;
     function ReadStar(var rec: GcatRec): boolean;
+    function CountVarCat: integer;
     function OpenVarStar: boolean;
     function CloseVarStar: boolean;
     function ReadVarStar(var rec: GcatRec): boolean;
+    function CountDblCat: integer;
     function OpenDblStar: boolean;
     function CloseDblStar: boolean;
     function ReadDblStar(var rec: GcatRec): boolean;
@@ -624,6 +626,15 @@ end;
 
 { Variables Stars }
 
+function Tcatalog.CountVarCat: integer;
+var i: integer;
+begin
+  result:=0;
+  for i:=0 to cfgcat.GCatNum-1 do
+    if cfgcat.GCatLst[i].Actif and (copy(cfgcat.GCatLst[i].version,1,6)='CDCVAR') then
+       inc(result);
+end;
+
 function Tcatalog.OpenVarStar: boolean;
 begin
   numcat := MaxVarStarCatalog;
@@ -731,6 +742,15 @@ begin
 end;
 
 { Doubles Stars }
+
+function Tcatalog.CountDblCat: integer;
+var i: integer;
+begin
+  result:=0;
+  for i:=0 to cfgcat.GCatNum-1 do
+    if cfgcat.GCatLst[i].Actif and (copy(cfgcat.GCatLst[i].version,1,6)='CDCDBL') then
+       inc(result);
+end;
 
 function Tcatalog.OpenDblStar: boolean;
 begin
@@ -2128,7 +2148,7 @@ begin
     ReadGCat(rec, Result);
     if not Result then
       break;
-    if cfgshr.StarFilter and (rec.variable.magmax > cfgcat.StarMagMax) then
+    if cfgshr.StarFilter and (not cfgcat.ShowAllVariable) and (rec.variable.magmax > cfgcat.StarMagMax) then
     begin
       if GCatFilter then
         NextGCat(Result);
@@ -2152,7 +2172,7 @@ begin
     ReadGCat(rec, Result);
     if not Result then
       break;
-    if cfgshr.StarFilter and (rec.double.mag1 > cfgcat.StarMagMax) then
+    if cfgshr.StarFilter and (not cfgcat.ShowAllDouble) and (rec.double.mag1 > cfgcat.StarMagMax) then
     begin
       if GCatFilter then
         NextGCat(Result);

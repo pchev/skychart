@@ -4590,7 +4590,9 @@ begin
         sc.cfgsc.theta := deg2rad * f_position.rot.Value;
       end;
       if f_position.LockMag.Checked then begin
-        cmd_LockMagn(f_position.StarMag.Value,f_position.AstMag.Value,f_position.ComMag.Value,f_position.DSOmag.Value,f_position.DSOsize.Value);
+        cmd_LockMagn(f_position.StarMag.Value,f_position.AstMag.Value,f_position.ComMag.Value,
+                     f_position.DSOmag.Value,f_position.DSOsize.Value,
+                     f_position.ShowAllDouble.Checked,f_position.ShowAllVariable.Checked);
       end
       else begin
         cmd_UnLockMagn;
@@ -6960,6 +6962,8 @@ begin
   catalog.cfgshr.AutoStarFilter := True;
   catalog.cfgshr.AutoStarFilterMag := DefAutoStarFilterMag;
   catalog.cfgcat.StarmagMax := 12;
+  catalog.cfgcat.ShowAllVariable := False;
+  catalog.cfgcat.ShowAllDouble := False;
   catalog.cfgshr.NebFilter := True;
   catalog.cfgshr.BigNebFilter := True;
   catalog.cfgshr.BigNebLimit := 211;

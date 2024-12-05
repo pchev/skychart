@@ -1208,8 +1208,8 @@ begin
        BGRADrawLine(x, y, x - round(r * sin(pa)), y - round(r * cos(pa)), ColorToBGRA(cfgplot.Color[15]), 1, cbmp)
     end
     else begin
-       BGRADrawLine(x - ds-2*cfgchart.drawsize, y, x - ds, y , ColorToBGRA(cfgplot.Color[15]), 1, cbmp);
-       BGRADrawLine(x + ds, y, x + ds+2*cfgchart.drawsize, y , ColorToBGRA(cfgplot.Color[15]), 1, cbmp);
+       BGRADrawLine(x - ds-4*cfgchart.drawsize, y, x - ds, y , ColorToBGRA(cfgplot.Color[15]), 1, cbmp);
+       BGRADrawLine(x + ds, y, x + ds+4*cfgchart.drawsize, y , ColorToBGRA(cfgplot.Color[15]), 1, cbmp);
     end;
   end
   else
@@ -1228,10 +1228,10 @@ begin
       end
       else begin
         Pen.Width := cfgchart.drawsize;
-        MoveTo(xx - ds-2*cfgchart.drawsize, yy);
+        MoveTo(xx - ds-4*cfgchart.drawsize, yy);
         LineTo(xx - ds, yy);
         MoveTo(xx + ds, yy);
-        LineTo(xx + ds+2*cfgchart.drawsize, yy);
+        LineTo(xx + ds+4*cfgchart.drawsize, yy);
       end;
     end;
 end;

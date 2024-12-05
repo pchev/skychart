@@ -1684,7 +1684,7 @@ begin
         end;
         lnum := 2;
         lp := 2;
-        if (rec.variable.magmax > catalog.cfgcat.StarMagMax) then
+        if (not catalog.cfgcat.ShowAllVariable) and (rec.variable.magmax > catalog.cfgcat.StarMagMax) then
           continue;
         lis := rec.variable.id + FormatFloat(f6, rec.ra) + FormatFloat(f6, rec.Dec);
         lid := rshash(lis, $7FFFFFFF);
@@ -1742,7 +1742,7 @@ begin
         end;
         lnum := 3;
         lp := 2;
-        if (rec.double.mag1 > catalog.cfgcat.StarMagMax) then
+        if (not catalog.cfgcat.ShowAllDouble) and (rec.double.mag1 > catalog.cfgcat.StarMagMax) then
           continue;
         lis := rec.double.id + FormatFloat(f6, rec.ra) + FormatFloat(f6, rec.Dec);
         lid := rshash(lis, $7FFFFFFF);

@@ -427,6 +427,26 @@ object f_position: Tf_position
         DecimalPlaces = 1
         TabOrder = 4
       end
+      object ShowAllVariable: TCheckBox
+        AnchorSideTop.Control = Label6
+        AnchorSideTop.Side = asrCenter
+        Left = 373
+        Height = 22
+        Top = 68
+        Width = 131
+        Caption = 'Show all variable'
+        TabOrder = 5
+      end
+      object ShowAllDouble: TCheckBox
+        AnchorSideTop.Control = ComMag
+        AnchorSideTop.Side = asrCenter
+        Left = 373
+        Height = 22
+        Top = 97
+        Width = 125
+        Caption = 'Show all double'
+        TabOrder = 6
+      end
     end
     object Panel3: TPanel
       Left = 0
