@@ -820,6 +820,7 @@ begin
   csc.sunurl := URL_SUN[i];
   csc.sunurlsize := URL_SUN_SIZE[i];
   csc.sunurlmargin := URL_SUN_MARGIN[i];
+  DeleteFile(slash(Tempdir) + 'sun.jpg');
 end;
 
 procedure Tf_config_solsys.ComboBox2Select(Sender: TObject);
