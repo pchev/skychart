@@ -139,7 +139,7 @@ object f_detail: Tf_detail
   end
   object Timer1: TTimer
     Enabled = False
-    Interval = 100
+    Interval = 50
     OnTimer = Timer1Timer
     Left = 207
     Top = 149

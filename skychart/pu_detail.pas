@@ -79,6 +79,7 @@ type
     FSameposition: boolean;
     Fkeydown: TKeyEvent;
     FHtmlFontSize: integer;
+    FSetPos: integer;
     procedure SetTextOnly(value: boolean);
     procedure SetHTMLText(const Value: string);
     procedure ShowVarType(t:string);
@@ -219,13 +220,9 @@ end;
 
 procedure Tf_detail.FormShow(Sender: TObject);
 begin
-  {$ifdef darwin}
-  {$ifdef lclcarbon}
-  timer1.Enabled := True;  { fixed in cocoa }
-  {$endif}
-  {$endif}
   CanRetry:=true;
   FSameposition := False;
+  FSetPos := 0;
 end;
 
 procedure Tf_detail.HTMLGetImageX(Sender: TIpHtmlNode; const URL: string;
@@ -253,7 +250,7 @@ end;
 procedure Tf_detail.Timer1Timer(Sender: TObject);
 begin
   timer1.Enabled := False;
-  BringToFront;
+  IpHtmlPanel1.VScrollPos := FSetPos;
 end;
 
 procedure Tf_detail.SelectAllExecute(Sender: TObject);
@@ -302,10 +299,13 @@ try
     sstream.Free;
     if FSameposition then
     begin
-      IpHtmlPanel1.Update;
-      IpHtmlPanel1.VScrollPos := p;
+      FSetPos := p;
+    end
+    else begin
+      FSetPos := 0;
     end;
     CanRetry:=true;
+    Timer1.Enabled := True;
     except
       if CanRetry then begin
         // uncorrectable error condition in IpHtmlPanel1, try to create a new one and retry.
