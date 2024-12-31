@@ -3891,7 +3891,7 @@ var
   ApparentValid, supconj: boolean;
   ra, Dec, q, a, h, ag, airm, hg, hr, ht, hs, hrl,hsl, azr, azs, al, j1, j2, j3, rar, der, rat,
   det, ras, des, culmalt, lha: double;
-  ra2000, de2000, radate, dedate, raapp, deapp, cjd, cjd0, cst, nst, njd, err, gw: double;
+  ra2000, de2000, radate, dedate, raapp, deapp, raobs, deobs, cjd, cjd0, cst, nst, njd, err, gw: double;
   r: TStringList;
   tp, ec, ap, an, ic, g, eq, cra1, cde1, dst1, cra, cdec, dist, pa, dst, dkm, rr, elong, phase, magn,
   diam, lc, ctar, ctde, rc, xc, yc, zc, ma, sa, dx, dy, illum, vel, lighttime: double;
@@ -4447,6 +4447,7 @@ begin
         if isSolarSystem and sc.cfgsc.PlanetParalaxe then
           Paralaxe(cst, sc.cfgsc.Finddist, raapp, deapp, raapp, deapp, q, sc.cfgsc);
         raapp := NormRA(raapp);
+        ApparentToObserved(raapp,deapp, sc.cfgsc, raobs, deobs);
       end;
       if isSolarSystem and sc.cfgsc.PlanetParalaxe then
       begin
@@ -4457,9 +4458,12 @@ begin
       if sc.cfgsc.CoordExpertMode then
         txt := txt + rsRA + ': ' + arptostr(rad2deg * sc.cfgsc.FindRA / 15, precision) +
           '   ' + rsDE + ':' + deptostr(rad2deg * sc.cfgsc.FindDec, precision) + html_br;
-      if (sc.cfgsc.CoordType <= 1) and ApparentValid then
+      if (sc.cfgsc.CoordType <= 1) and ApparentValid then begin
         txt := txt + html_b + rsApparent + blank + htms_b + rsRA + ': ' + arptostr(
           rad2deg * raapp / 15, precision) + '   ' + rsDE + ':' + deptostr(rad2deg * deapp, precision) + html_br;
+        txt := txt + html_b + 'Observed' + blank + htms_b + rsRA + ': ' + arptostr(
+          rad2deg * raobs / 15, precision) + '   ' + rsDE + ':' + deptostr(rad2deg * deobs, precision) + html_br;
+      end;
       if (sc.cfgsc.CoordType <= 1) then
         txt := txt + html_b + rsMeanOfTheDat + blank + htms_b + rsRA + ': ' + arptostr(
           rad2deg * radate / 15, precision) + '   ' + rsDE + ':' + deptostr(rad2deg * dedate, precision) + html_br;
