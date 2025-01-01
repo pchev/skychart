@@ -81,6 +81,7 @@ procedure Eq2Hz(HH, DE: double; var A, h: double; c: Tconf_skychart;
 procedure Hz2Eq(A, h: double; var hh, de: double; c: Tconf_skychart;
   method: smallint = refmethod);
 procedure ApparentToObserved(ra,de: double; c: Tconf_skychart; out obsra,obsde: double);
+procedure ObservedToApparent(obsra,obsde: double; c: Tconf_skychart; out ra,de: double);
 procedure Refraction(var h: double; flag: boolean; c: Tconf_skychart; method: smallint);
 function  AirMass(h: double): double;
 function  AtmAbsorption(sitealt,rh: double): double;
@@ -1289,6 +1290,15 @@ begin
   Eq2HZ(ha, de, a, h, c, 2);     // pole motion, diurnal abberation and slalib refraction
   Hz2Eq(a, h, ha, obsde, c, 0);  // geometric
   obsra:=rmod(c.CurST - ha + pi2, pi2);
+end;
+
+procedure ObservedToApparent(obsra,obsde: double; c: Tconf_skychart; out ra,de: double);
+var a,h,ha: double;
+begin
+  ha:=c.CurST - obsra;
+  Eq2HZ(ha, obsde, a, h, c, 0);  // geometric
+  Hz2Eq(a, h, ha, de, c, 2);     // pole motion, diurnal abberation and slalib refraction
+  ra:=rmod(c.CurST - ha + pi2, pi2);
 end;
 
 procedure Refraction(var h: double; flag: boolean; c: Tconf_skychart; method: smallint);
