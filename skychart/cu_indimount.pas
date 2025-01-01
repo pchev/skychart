@@ -32,7 +32,7 @@ uses cu_mount, indibaseclient, indibasedevice, indiapi, indicom, u_translation,
      {$ifdef AppSkychart}
      u_constant, u_util,
      {$endif}
-     {$ifdef AppskCcdciel}
+     {$ifdef AppCcdciel}
      u_global, u_utils,
      {$endif}
      ExtCtrls, Forms, Classes, SysUtils;
@@ -144,6 +144,7 @@ T_indimount = class(T_mount)
    function GetSlewRates: TstringList; override;
    function GetTrackRate: TTrackRate; override;
    procedure SetTrackRate(value: TTrackRate); override;
+   function GetMountRefraction: TMountRefraction; override;
  public
    constructor Create(AOwner: TComponent);override;
    destructor  Destroy; override;
@@ -1199,6 +1200,12 @@ begin
       end;
     end;
   end;
+end;
+
+function T_indimount.GetMountRefraction: TMountRefraction;
+begin
+  // no propetry in INDI ?
+  result:=refractUnknown;
 end;
 
 end.

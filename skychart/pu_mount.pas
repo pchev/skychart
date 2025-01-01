@@ -430,7 +430,7 @@ begin
     end;
     devConnecting:  begin
       led.brush.color := clYellow;
-
+      wait(0.5);
     end;
     devDisconnected:  begin
       led.brush.color := clRed;

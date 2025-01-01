@@ -94,6 +94,7 @@ T_mount = class(TComponent)
     function GetSlewRates: TstringList; virtual; abstract;
     function GetTrackRate: TTrackRate; virtual; abstract;
     procedure SetTrackRate(value: TTrackRate); virtual; abstract;
+    function GetMountRefraction: TMountRefraction; virtual; abstract;
  public
    {$ifdef AppCcdciel}
     DomeOpenActions: TDomeOpenActions;
@@ -152,6 +153,7 @@ T_mount = class(TComponent)
     property CanMoveAxis: boolean read FCanMoveAxis;
     Property SlewRates: TstringList read GetSlewRates;
     property AutoLoadConfig: boolean read FAutoLoadConfig write FAutoLoadConfig;
+    property MountRefraction: TMountRefraction read GetMountRefraction;
     {$ifdef AppCcdciel}
     property Safety: Tf_safety read Fsafety write Fsafety;
     property Dome: T_dome read FDome write FDome;

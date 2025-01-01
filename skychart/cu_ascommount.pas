@@ -32,7 +32,7 @@ uses  cu_mount, indiapi,
   {$ifdef AppSkychart}
   u_constant, u_util,
   {$endif}
-  {$ifdef AppskCcdciel}
+  {$ifdef AppCcdciel}
   u_global, u_utils,
   {$endif}
   {$ifdef mswindows}
@@ -88,6 +88,7 @@ T_ascommount = class(T_mount)
    function GetSlewRates: TstringList; override;
    function GetTrackRate: TTrackRate; override;
    procedure SetTrackRate(value: TTrackRate); override;
+   function GetMountRefraction: TMountRefraction; override;
 public
    constructor Create(AOwner: TComponent);override;
    destructor  Destroy; override;
@@ -154,7 +155,6 @@ begin
   FStatus := devConnecting;
   FDevice:=cp1;
   if Assigned(FonStatusChange) then FonStatusChange(self);
-  wait(0.5);
   V:=Unassigned;
   V:=CreateOleObject(Fdevice);
   V.connected:=true;
@@ -1202,6 +1202,21 @@ begin
     V.TrackingRate:=i;
     except
       on E: Exception do msg('Cannot set mount tracking rate: ' + E.Message,0);
+    end;
+  {$endif}
+end;
+
+function T_ascommount.GetMountRefraction: TMountRefraction;
+begin
+  result:=refractUnknown;
+  {$ifdef mswindows}
+    try
+    if V.DoesRefraction then
+      result:=refractTrue
+    else
+      result:=refractFalse;
+    except
+      result:=refractUnknown;
     end;
   {$endif}
 end;

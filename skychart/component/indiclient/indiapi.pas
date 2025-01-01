@@ -41,6 +41,7 @@ type
   BLOBHandling = (B_NEVER, B_ALSO, B_ONLY);
   TDeviceStatus = (devDisconnected, devConnecting, devConnected);
   TPierSide = (pierEast, pierWest, pierUnknown, pierNotImplemented);
+  TMountRefraction = (refractTrue, refractFalse, refractUnknown);
 
 var
   Ftrace: boolean = False;
