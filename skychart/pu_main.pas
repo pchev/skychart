@@ -728,7 +728,7 @@ type
     procedure SetupInternetPage(page: integer);
     procedure ApplyConfigInternet(Sender: TObject);
     procedure FirstSetup;
-    procedure SelectLayout;
+    procedure SelectLayout(allowcancel: boolean=false);
     procedure ShowReleaseNotes(shownext: boolean);
     function Find(kind: integer; num: string; def_ra: double = 0; def_de: double = 0): string;
     procedure FindInfo(Sender: TObject);
@@ -1716,7 +1716,12 @@ begin
     f_updcatalog.cdb := cdcdb;
     f_updcatalog.ConsistencyCheck;
     if firstuse then
-      Application.QueueAsyncCall(OpenUpdCatalogAsync,0);
+      Application.QueueAsyncCall(OpenUpdCatalogAsync,0)
+    else if Config_Version< '4.3a' then begin
+       // new in 4.3
+       SelectLayout(true);
+       Application.QueueAsyncCall(OpenUpdCatalogAsync,0);
+    end;
     if not Application.ShowMainForm then
       InitOK := True;  // no formshow if --daemon
   except
@@ -1774,10 +1779,11 @@ begin
   SaveChartConfig(configfile, nil, False);
 end;
 
-procedure Tf_main.SelectLayout;
+procedure Tf_main.SelectLayout(allowcancel: boolean=false);
 var i: integer;
 begin
   Application.CreateForm(Tf_selectlayout, f_selectlayout);
+  f_selectlayout.ShowCancel(allowcancel);
   f_selectlayout.ShowModal;
   if f_selectlayout.ModalResult=mrYes then begin
     nummainbar := numstandardmainbar;
@@ -1801,7 +1807,7 @@ begin
     MenuViewLeftBar.Checked := True;
     MenuViewRightBar.Checked := True;
   end
-  else begin
+  else if f_selectlayout.ModalResult=mrNo then begin
     nummainbar := numdefaultmainbar;
     numobjectbar := numdefaultobjectbar;
     numleftbar := numdefaultleftbar;
@@ -8820,6 +8826,7 @@ begin
       ini.Free;
     end;
   end;
+
   SaveDefault;
 end;
 

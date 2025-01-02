@@ -12,6 +12,7 @@ type
   { Tf_selectlayout }
 
   Tf_selectlayout = class(TForm)
+    ButtonCancel: TButton;
     Panel1: TPanel;
     Panel2: TPanel;
     Panel3: TPanel;
@@ -28,6 +29,7 @@ type
 
   public
     procedure SetLang;
+    procedure ShowCancel(onoff: boolean);
   end;
 
 var
@@ -49,6 +51,12 @@ begin
   Caption:=rsSkyCharts;
   Panel1.Caption:=rsSelectYourPr;
   Panel4.Caption:=rsThisLayoutCa;
+  ButtonCancel.Caption:=rsCancel;
+end;
+
+procedure Tf_selectlayout.ShowCancel(onoff: boolean);
+begin
+  ButtonCancel.Visible:=onoff;
 end;
 
 procedure Tf_selectlayout.SpeedButton1MouseEnter(Sender: TObject);

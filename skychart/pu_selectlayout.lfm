@@ -29738,6 +29738,17 @@ object f_selectlayout: Tf_selectlayout
     Align = alBottom
     BevelOuter = bvNone
     Caption = 'This layout can be modified later using the menu Setup , Toolbar editor'
+    ClientHeight = 35
+    ClientWidth = 922
     TabOrder = 3
+    object ButtonCancel: TButton
+      Left = 821
+      Height = 25
+      Top = 3
+      Width = 75
+      Caption = 'Cancel'
+      ModalResult = 2
+      TabOrder = 0
+    end
   end
 end
