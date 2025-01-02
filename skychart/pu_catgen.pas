@@ -1130,6 +1130,7 @@ begin
   catheader.IdPrefix:=IdPrefixLabel.Checked;
   if catheader.version = 'CDCSTAR1' then
   begin
+    catheader.MagMax := floatedit2.Value;
     catheader.StarType := startype[StarDrawing.ItemIndex + 1];
     if catheader.StarType = 0 then
       catheader.Size := 0
