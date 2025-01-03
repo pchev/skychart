@@ -623,6 +623,8 @@ const
   URL_Asteroid_Lightcurve_Family = 'https://www.ap-i.net/pub/skychart/asteroid/lc_familylookup.txt';
   URL_IVOASAMP = 'http://www.ivoa.net/documents/SAMP/';
 
+  URL_GRAPPA_Info = 'http://www.astrosurf.com/noctambule/GRAPPA3E_FrEn.html#english';
+
   URL_5MCSE = 'https://eclipse.gsfc.nasa.gov/5MCSE/plate%s.pdf';
 
   URL_DSS_NAME1 = 'DSS 1';

@@ -468,7 +468,7 @@
         <DefaultFilename Value="component/zoomimage/zoomimage.lpk"/>
       </Item25>
     </RequiredPackages>
-    <Units Count="97">
+    <Units Count="98">
       <Unit0>
         <Filename Value="cdc.lpr"/>
         <IsPartOfProject Value="True"/>
@@ -1041,6 +1041,10 @@
         <Filename Value="cu_indimount.pas"/>
         <IsPartOfProject Value="True"/>
       </Unit96>
+      <Unit97>
+        <Filename Value="u_grappavar.pas"/>
+        <IsPartOfProject Value="True"/>
+      </Unit97>
     </Units>
   </ProjectOptions>
   <CompilerOptions>

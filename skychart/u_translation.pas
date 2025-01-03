@@ -1625,6 +1625,7 @@ resourcestring
   rsDrawAs = 'Draw as';
   rsMarkSize = 'Mark size';
   rsDeclinationL = 'Declination label on center';
+  rsGAIAVariable = 'GAIA variable star information';
 
 // also update upsi_translation
 

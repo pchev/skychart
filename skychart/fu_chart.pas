@@ -30,7 +30,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 interface
 
 uses
-  BGRABitmap, BGRABitmapTypes, u_orbits,
+  BGRABitmap, BGRABitmapTypes, u_orbits, u_grappavar,
   pu_mount, pu_getdss, pu_imglist, pu_prepoint,
   u_translation, pu_detail, cu_skychart, u_constant, u_util, pu_image,
   gcatunit, pu_obslist, pu_mosaic, synacode,
@@ -3883,7 +3883,7 @@ function Tf_chart.FormatDesc: string;
 var
   desc, buf, buf2, otype, oname, txt, s1, s2, s3: string;
   thr, tht, ths, tazr, tazs, tculmalt: string;
-  searchdir, fn, ImgCat,id: string;
+  searchdir, fn, ImgCat: string;
   bmp: TBGRAbitmap;
   ipla, isat: integer;
   i,ii, pii, p, l, y, m, d, precision, idx: integer;
@@ -3893,11 +3893,12 @@ var
   det, ras, des, culmalt, lha: double;
   ra2000, de2000, radate, dedate, raapp, deapp, raobs, deobs, cjd, cjd0, cst, nst, njd, err, gw: double;
   r: TStringList;
-  tp, ec, ap, an, ic, g, eq, cra1, cde1, dst1, cra, cdec, dist, pa, dst, dkm, rr, elong, phase, magn,
-  diam, lc, ctar, ctde, rc, xc, yc, zc, ma, sa, dx, dy, illum, vel, lighttime: double;
-  nam, elem_id, ref: string;
+  ec, ap, an, ic, g, eq, cra1, cde1, dst1, cra, cdec, dist, pa, dst, dkm, rr, elong, phase, magn,
+  diam, rc, xc, yc, zc, ma, sa, dx, dy, illum, vel, lighttime: double;
+  nam, ref, gaiaid: string;
   emagn,amagn: double;
   ename, enum,efam,sh,sg,sg1,sg2,ediam,albedo,eperiod,amin,amax,u: string;
+  grappavar: TStringList;
 
   function Bold(s: string): string;
   var
@@ -4036,6 +4037,15 @@ begin
     else if (s1 > '') and (s3 > '') then
     begin
       oname := s3 + ' ' + sc.catalog.GenitiveConst(s1);
+    end;
+    if copy(oname,1,8)='Gaia DR3' then
+      gaiaid:=trim(copy(oname,9,99))
+    else begin
+      s1 := GetDetailValue('GAIA DR3:');
+      if s1>'' then
+        gaiaid:=trim(s1)
+      else
+        gaiaid:='';
     end;
   end;
   txt := txt + html_b + oname + htms_b + html_br;
@@ -4371,6 +4381,18 @@ begin
       if amin<>'' then txt:=txt + html_b + rsAmplitudeMin +': ' + htms_b + amin + html_br;
       if amax<>'' then txt:=txt + html_b + rsAmplitudeMax +': ' + htms_b + amax + html_br;
       txt:=txt + html_b + rsQualityFlag +': ' + htms_b + u + html_br;
+    end;
+  end;
+
+  // Gaia variable information
+  if gaiaid>'' then begin
+    if ReadGrappavar(gaiaid,grappavar) then begin
+      txt:=txt + html_br + html_b + '<a href="' + URL_GRAPPA_Info + '">' +
+           rsGAIAVariable+ '</a>' + ':' + htms_b;
+      for i:=0 to grappavar.Count-1 do
+        txt:=txt+ html_br + grappavar[i];
+      txt:=txt+html_br;
+      grappavar.Free;
     end;
   end;
 
