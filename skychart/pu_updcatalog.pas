@@ -24,7 +24,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 
 interface
 
-uses u_constant, u_util, u_translation, UScaleDPI, downloaddialog, cu_calceph,
+uses u_constant, u_util, u_translation, UScaleDPI, downloaddialog, cu_calceph, u_grappavar,
   cu_httpdownload, cu_catalog, FileUtil, cu_database, cu_planet, md5, zipper, LazFileUtils,
   Classes, SysUtils, Forms, Controls, Graphics, Dialogs, ExtCtrls, Grids, ComCtrls, StdCtrls, Types;
 
@@ -887,6 +887,14 @@ begin
     if InstallInfo.cattype='kernel' then
     begin
       Fplanet.load_de(MaxInt); // clear current file in cache
+    end;
+  end
+  else if InstallInfo.catnum=4 then  // grappavar
+  begin
+    if InstallInfo.cattype='variable star' then
+    begin
+      CloseGrappavar;
+      OpenGrappavar(slash(PrivateCatalogDir)+'grappavar');
     end;
   end;
 end;

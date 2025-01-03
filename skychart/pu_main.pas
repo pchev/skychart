@@ -1497,6 +1497,9 @@ begin
     catalog.LoadConstB(cfgm.ConstBfile);
     catalog.LoadMilkywaydot(slash(appdir) + slash('data') + slash('milkyway') + 'milkyway.dat');
     catalog.LoadStarName(slash(appdir) + slash('data') + slash('common_names'), Lang);
+    // open gaia grappavar
+    if DirectoryExists(slash(PrivateCatalogDir)+'grappavar') then
+      OpenGrappavar(slash(PrivateCatalogDir)+'grappavar');
     f_search.cfgshr := catalog.cfgshr;
     f_search.showpluto := def_cfgsc.ShowPluto;
     f_search.SesameUrlNum := cfgm.SesameUrlNum;
@@ -1707,9 +1710,6 @@ begin
        if MultiFrame1.Childs[i].DockedObject is Tf_chart then
          Tf_chart(MultiFrame1.Childs[i].DockedObject).locked:=false;
     InitScriptPanel;
-    // open gaia var
-    if catalog.cfgcat.StarCatDef[gaia - BaseStar] then
-      OpenGrappavar(catalog.cfgcat.starcatpath[gaia - BaseStar]);
     f_updcatalog.onSaveConfig := SaveCatalogConfig;
     f_updcatalog.onOpenSetup := OpenCatalogSetup;
     f_updcatalog.onChartRefresh := RefreshActiveChart;
