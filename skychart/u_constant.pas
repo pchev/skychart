@@ -591,8 +591,9 @@ const
   URL_LEAPSECOND = 'https://www.ap-i.net/pub/skychart/deltat/leap-seconds.list';
   URL_IERS = 'https://www.ap-i.net/pub/skychart/deltat/finals.data';
 
-  URL_CATALOG_LIST = 'https://www.ap-i.net/pub/skychart/catalogues/catalog_list.txt';
-  URL_CATALOG_LIST_BETA = 'https://vega.ap-i.net/pub/catalog/catalog_list.txt';
+  catalog_list = 'catalog_list.txt';
+  URL_CATALOG_LIST1 = 'https://vega.ap-i.net/pub/catalog/';  // faster download
+  URL_CATALOG_LIST2 = 'https://sourceforge.net/projects/skychart/files/catalog/'; // backup download from sourceforge
 
   URL_TLE = 'https://www.space-track.org';
   URL_QUICKSAT = 'https://www.mmccants.org';

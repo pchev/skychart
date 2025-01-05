@@ -440,7 +440,7 @@ var
 begin
   result:=false;
   txt:='';
-  fn := slash(PrivateCatalogDir)+'catalog_list.txt';
+  fn := slash(PrivateCatalogDir)+catalog_list;
   doDownload:=true;
   if (not ForceDownload) and FileExists(fn) then begin
     if FileAge(fn,ft) then begin
@@ -479,12 +479,16 @@ begin
         dl.HttpProxyPass := '';
       end;
       dl.ConfirmDownload := False;
-      if cdcbeta then
-        dl.URL := URL_CATALOG_LIST_BETA
-      else
-        dl.URL := URL_CATALOG_LIST;
+      // try availability of faster download
+      dl.URL := URL_CATALOG_LIST1+catalog_list;
       dl.SaveToFile := fn;
       result:=dl.Execute;
+      if not result then begin
+        // if not available try with sourceforge
+        dl.URL := URL_CATALOG_LIST2+catalog_list;
+        dl.SaveToFile := fn;
+        result:=dl.Execute;
+      end;
       txt:=dl.ResponseText;
     finally
       dl.Free;
