@@ -1144,7 +1144,7 @@ type
     TelescopeInterface,ManualTelescopeType, CoordType, DSLcolor, SurfaceAlpha: integer;
     IndiServerHost, IndiServerPort, IndiDevice, AscomDevice, AlpacaHost, AlpacaUser, AlpacaPass : string;
     TelescopeInterval, AlpacaProtocol, AlpacaPort, AlpacaDevice, TelescopeLeft, TelescopeTop : integer;
-    TelescopeAltAz: boolean;
+    TelescopeAltAz, TelescopeAutoconnect: boolean;
     ShowCircle, ShowCrosshair, ManualTelescope, ShowImages,
     EyepieceMask, ShowImageList, ShowImageLabel, ShowBackgroundImage,
     showstars, shownebulae, showline, showlabelall, Editlabels,
@@ -2483,6 +2483,7 @@ begin
   ManualTelescopeType := Source.ManualTelescopeType;
   TelescopeInterface := Source.TelescopeInterface;
   TelescopeAltAz := Source.TelescopeAltAz;
+  TelescopeAutoconnect := Source.TelescopeAutoconnect;
   IndiServerHost := Source.IndiServerHost;
   IndiServerPort := Source.IndiServerPort;
   IndiDevice := Source.IndiDevice;

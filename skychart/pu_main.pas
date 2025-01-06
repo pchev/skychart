@@ -1363,6 +1363,7 @@ begin
         RefreshTimer.Enabled := False;
         RefreshTimer.Enabled := True;
         f_main.ActiveControl := Image1;
+        if sc.cfgsc.TelescopeAutoconnect then cmd_ConnectTelescope;
       end;
   if ScriptPanel.Visible then
     Fscript[ActiveScript].ActivateEvent;
@@ -6928,6 +6929,7 @@ begin
   def_cfgsc.EyepieceMask := False;
   def_cfgsc.AscomDevice := '';
   def_cfgsc.TelescopeAltAz := False;
+  def_cfgsc.TelescopeAutoconnect := False;
   def_cfgsc.TelescopeInterval := 1000;
   {$ifdef mswindows}
    def_cfgsc.TelescopeInterface:=0;
@@ -8226,6 +8228,7 @@ begin
           ReadString(section, 'ffovc_cy', catalog.cfgshr.ffovc_cy);
         def_cfgsc.AscomDevice := ReadString(section, 'AscomDevice', def_cfgsc.AscomDevice);
         def_cfgsc.TelescopeAltAz := ReadBool(section, 'TelescopeAltAz', def_cfgsc.TelescopeAltAz);
+        def_cfgsc.TelescopeAutoconnect := ReadBool(section, 'TelescopeAutoconnect', def_cfgsc.TelescopeAutoconnect);
         def_cfgsc.TelescopeInterval := ReadInteger(section, 'TelescopeInterval', def_cfgsc.TelescopeInterval);
         def_cfgsc.TelescopeInterface := ReadInteger(section, 'TelescopeInterface', def_cfgsc.TelescopeInterface);
         def_cfgsc.AlpacaProtocol := ReadInteger(section, 'AlpacaProtocol', def_cfgsc.AlpacaProtocol);
@@ -9546,6 +9549,7 @@ begin
         with (MultiFrame1.ActiveObject as Tf_chart).sc do begin
           WriteString(section, 'AscomDevice', cfgsc.AscomDevice);
           WriteBool(section, 'TelescopeAltAz', cfgsc.TelescopeAltAz);
+          WriteBool(section, 'TelescopeAutoconnect', cfgsc.TelescopeAutoconnect);
           WriteInteger(section, 'TelescopeInterval', cfgsc.TelescopeInterval);
           WriteInteger(section, 'TelescopeInterface', cfgsc.TelescopeInterface);
           WriteInteger(section, 'AlpacaProtocol', cfgsc.AlpacaProtocol);
@@ -9566,6 +9570,7 @@ begin
         else begin
           WriteString(section, 'AscomDevice', def_cfgsc.AscomDevice);
           WriteBool(section, 'TelescopeAltAz', def_cfgsc.TelescopeAltAz);
+          WriteBool(section, 'TelescopeAutoconnect', def_cfgsc.TelescopeAutoconnect);
           WriteInteger(section, 'TelescopeInterval', def_cfgsc.TelescopeInterval);
           WriteInteger(section, 'TelescopeInterface', def_cfgsc.TelescopeInterface);
           WriteInteger(section, 'AlpacaProtocol', def_cfgsc.AlpacaProtocol);

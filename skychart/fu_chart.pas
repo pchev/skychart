@@ -7796,8 +7796,6 @@ begin
     TelescopeTimer.Interval := 2000;
     TelescopeTimer.Enabled := True;
   end;
-  if assigned(FUpdateBtn) then
-    FUpdateBtn(sc.cfgsc.flipx, sc.cfgsc.flipy, Connect1.Checked, self);
 end;
 
 procedure Tf_chart.SlewTelescope(Sender: TObject);

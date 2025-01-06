@@ -1063,7 +1063,7 @@ resourcestring
   rsDownloadFile = 'Download File';
   rsCopyFrom = 'Copy from:';
   rsToFile = 'to file:';
-  rsASCOMTelesc = 'ASCOM telescope interface';
+  rsASCOMTelesc = 'Telescope interface';
   rsUseTheMenuOr = 'Use the menu or button "%s" to configure this driver.';
   rsOtherSoftwar = 'Other software data';
   rsInvalidPath = 'Invalid path: ';

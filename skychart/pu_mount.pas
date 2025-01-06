@@ -65,6 +65,7 @@ type
     ButtonPark: TSpeedButton;
     ButtonSetLocation: TSpeedButton;
     ButtonSetTime: TSpeedButton;
+    cbAutoconnect: TCheckBox;
     CheckBoxOnTop: TCheckBox;
     elev: TEdit;
     FlipNS: TRadioGroup;
@@ -149,6 +150,7 @@ type
     procedure BtnIndiGuiClick(Sender: TObject);
     procedure ButtonGetLocationClick(Sender: TObject);
     procedure ButtonParkClick(Sender: TObject);
+    procedure cbAutoconnectChange(Sender: TObject);
     procedure CheckBoxOnTopChange(Sender: TObject);
     procedure FormClose(Sender: TObject; var CloseAction: TCloseAction);
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
@@ -652,6 +654,7 @@ begin
   end;
   AscomDevice.Text := csc.AscomDevice;
   ShowAltAz.Checked := csc.TelescopeAltAz;
+  cbAutoconnect.Checked := csc.TelescopeAutoconnect;
   ReadIntBox.Text := IntToStr(csc.TelescopeInterval);
   PageControl1.ActivePageIndex := csc.TelescopeInterface;
   ARestProtocol.ItemIndex := csc.AlpacaProtocol;
@@ -1249,6 +1252,11 @@ begin
         MessageDlg(format(DriverMsg,[E.Message]), mtWarning, [mbOK], 0);
     end;
   end;
+end;
+
+procedure Tpop_scope.cbAutoconnectChange(Sender: TObject);
+begin
+  csc.TelescopeAutoconnect := cbAutoconnect.Checked;
 end;
 
 procedure Tpop_scope.CheckBoxOnTopChange(Sender: TObject);
