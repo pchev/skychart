@@ -530,7 +530,7 @@ object pop_scope: Tpop_scope
           Left = 88
           Height = 28
           Top = 114
-          Width = 69
+          Width = 41
           Constraints.MaxHeight = 28
           MaxValue = 65535
           OnChange = ARestDeviceChange
@@ -551,6 +551,15 @@ object pop_scope: Tpop_scope
           ParentFont = False
           TabOrder = 2
           Value = 11111
+        end
+        object ARestId: TEdit
+          Left = 136
+          Height = 28
+          Top = 114
+          Width = 192
+          Constraints.MaxHeight = 28
+          OnChange = ARestIdChange
+          TabOrder = 8
         end
         object BtnDiscover: TButton
           Left = 8
@@ -622,7 +631,7 @@ object pop_scope: Tpop_scope
             Left = 208
             Height = 28
             Top = 2
-            Width = 120
+            Width = 119
             AutoSelect = False
             Constraints.MaxHeight = 28
             EchoMode = emPassword

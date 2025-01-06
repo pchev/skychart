@@ -5538,6 +5538,7 @@ end;
 function Tf_chart.cmd_ConnectTelescope: string;
 begin
   Result := msgFailed;
+  Fshowinfo(rsConnectTeles);
   ConnectTelescope(self, True);
   Result := msgOK
 end;

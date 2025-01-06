@@ -67,6 +67,7 @@ type
     ButtonSetTime: TSpeedButton;
     cbAutoconnect: TCheckBox;
     CheckBoxOnTop: TCheckBox;
+    ARestId: TEdit;
     elev: TEdit;
     FlipNS: TRadioGroup;
     PanelIndi: TPanel;
@@ -137,6 +138,7 @@ type
     procedure AlpacaMountListChange(Sender: TObject);
     procedure ARestDeviceChange(Sender: TObject);
     procedure ARestHostChange(Sender: TObject);
+    procedure ARestIdChange(Sender: TObject);
     procedure ARestPassChange(Sender: TObject);
     procedure ARestPortChange(Sender: TObject);
     procedure ARestProtocolChange(Sender: TObject);
@@ -214,6 +216,7 @@ type
     procedure IndiNewDevice(dp: Basedevice);
     procedure IndiDisconnected(Sender: TObject);
     procedure IndiGUIdestroy(Sender: TObject);
+    function SearchAlpacaDevice(id: string): boolean;
   public
     { Public declarations }
     csc: Tconf_skychart;
@@ -349,21 +352,33 @@ begin
   MountType:=PageControl1.ActivePageIndex;
   try
     case MountType of
-      0: begin
+      0: begin  // ASCOM
          DriverMsg:=rsFrom + ' ' + AscomDevice.Text+':'+crlf+StringReplace(rsASCOMDriverE, 'ASCOM', 'telescope', [])+': '+'%s'+crlf+rsIfYouCannotF;
          Fmount:=T_ascommount.Create(self);
          Fmount.onStatusChange:=@MountStatus;
          Fmount.onMsg:=@MountMessage;
          Fmount.Connect(AscomDevice.Text);
       end;
-      1: begin
+      1: begin  // Alpaca
          DriverMsg:=rsFrom + ' ' + 'telescope/'+ARestDevice.Text+':'+crlf+StringReplace(rsASCOMDriverE, 'ASCOM', 'telescope', [])+': '+'%s'+crlf+rsIfYouCannotF;
          Fmount:=T_ascomrestmount.Create(self);
          Fmount.onStatusChange:=@MountStatus;
          Fmount.onMsg:=@MountMessage;
          Fmount.Connect(ARestHost.Text,ARestPort.Text,ARestProtocol.Text,'telescope/'+ARestDevice.Text,ARestUser.Text,ARestPass.Text);
+         if (Fmount.Status<>devConnected)and(trim(ARestId.text)<>'') then begin
+           led.brush.color := clYellow;
+           MountMessage('Searching for '+ARestId.text+' ...');
+           if SearchAlpacaDevice(ARestId.text) then begin
+             MountMessage('Found new server address '+ARestHost.Text+':'+ARestPort.Text);
+             Fmount.Connect(ARestHost.Text,ARestPort.Text,ARestProtocol.Text,'telescope/'+ARestDevice.Text,ARestUser.Text,ARestPass.Text);
+           end
+           else begin
+             MountMessage('Not found!');
+             led.brush.color := clRed;
+           end;
+         end;
       end;
-      2: begin
+      2: begin  // INDI
          DriverMsg:=rsFrom + ' ' + csc.IndiDevice+': '+'%s'+crlf+rsIfYouCannotF;
          Fmount:=T_indimount.Create(self);
          Fmount.onStatusChange:=@MountStatus;
@@ -659,6 +674,7 @@ begin
   PageControl1.ActivePageIndex := csc.TelescopeInterface;
   ARestProtocol.ItemIndex := csc.AlpacaProtocol;
   PanelCredential.Visible:=(ARestProtocol.ItemIndex=1);
+  ARestId.Text := csc.AlpacaId;
   ARestHost.Text := csc.AlpacaHost;
   ARestPort.Value := csc.AlpacaPort;
   ARestUser.Text := csc.AlpacaUser;
@@ -975,32 +991,45 @@ begin
   csc.AscomDevice                 := AscomDevice.Text;
 end;
 
+function Tpop_scope.SearchAlpacaDevice(id: string): boolean;
+var i,j,k,n,p:integer;
+    devtype,devid: string;
+begin
+    result:=false;
+    AlpacaServerList:=AlpacaDiscover(AlpacaDiscoveryPort.Value);
+    n:=length(AlpacaServerList);
+    p:=0;
+    AlpacaMountList.Clear;
+    if n>0 then begin
+      AlpacaMountList.Items.Add('Discovered telescope...');
+      for i:=0 to length(AlpacaServerList)-1 do begin
+        for j:=0 to AlpacaServerList[i].devicecount-1 do begin
+          devtype:=UpperCase(AlpacaServerList[i].devices[j].DeviceType);
+          devid:=AlpacaServerList[i].devices[j].DeviceId;
+          if devtype='TELESCOPE' then begin
+            k:=AlpacaMountList.Items.Add(AlpacaServerList[i].devices[j].DeviceName+tab+AlpacaServerList[i].ip+tab+AlpacaServerList[i].port+tab+'telescope/'+tab+IntToStr(AlpacaServerList[i].devices[j].DeviceNumber)+tab+AlpacaServerList[i].devices[j].DeviceId);
+            if (id<>'')and(devid=id) then begin
+              p:=k;
+              result:=true;
+            end;
+          end;
+        end;
+      end;
+      AlpacaMountList.ItemIndex:=p;
+      AlpacaMountListChange(AlpacaMountList);
+    end;
+    if AlpacaMountList.Items.Count<2 then begin
+      AlpacaMountList.Clear;
+      AlpacaMountList.Items.Add('No Alpaca server found');
+      AlpacaMountList.ItemIndex:=0;
+    end;
+end;
+
 procedure Tpop_scope.BtnDiscoverClick(Sender: TObject);
-var i,j,n:integer;
-    devtype: string;
 begin
 try
   Screen.Cursor:=crHourGlass;
-  AlpacaServerList:=AlpacaDiscover(AlpacaDiscoveryPort.Value);
-  n:=length(AlpacaServerList);
-  AlpacaMountList.Clear;
-  if n>0 then begin
-    AlpacaMountList.Items.Add('Discovered telescope...');
-    for i:=0 to length(AlpacaServerList)-1 do begin
-      for j:=0 to AlpacaServerList[i].devicecount-1 do begin
-        devtype:=UpperCase(AlpacaServerList[i].devices[j].DeviceType);
-        if devtype='TELESCOPE' then begin
-          AlpacaMountList.Items.Add(AlpacaServerList[i].devices[j].DeviceName+tab+AlpacaServerList[i].ip+tab+AlpacaServerList[i].port+tab+'telescope/'+tab+IntToStr(AlpacaServerList[i].devices[j].DeviceNumber));
-        end;
-      end;
-    end;
-    AlpacaMountList.ItemIndex:=0;
-  end;
-  if AlpacaMountList.Items.Count<2 then begin
-    AlpacaMountList.Clear;
-    AlpacaMountList.Items.Add('No Alpaca server found');
-    AlpacaMountList.ItemIndex:=0;
-  end;
+  SearchAlpacaDevice(trim(ARestId.Text));
 finally
   Screen.Cursor:=crDefault;
 end;
@@ -1116,6 +1145,7 @@ begin
     ARestHost.Text:=lst[1];
     ARestPort.Text:=lst[2];
     ARestDevice.Value:=StrToInt(lst[4]);
+    ARestId.Text:=lst[5];
     ARestProtocol.ItemIndex:=0;
     PanelCredential.Visible:=(ARestProtocol.ItemIndex=1);
     lst.Free;
@@ -1130,6 +1160,11 @@ end;
 procedure Tpop_scope.ARestHostChange(Sender: TObject);
 begin
   csc.AlpacaHost                  := ARestHost.Text;
+end;
+
+procedure Tpop_scope.ARestIdChange(Sender: TObject);
+begin
+  csc.AlpacaId                    := ARestId.Text;
 end;
 
 procedure Tpop_scope.ARestPassChange(Sender: TObject);

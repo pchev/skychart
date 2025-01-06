@@ -6939,6 +6939,7 @@ begin
   def_cfgsc.AlpacaProtocol := 0;
   def_cfgsc.AlpacaHost := '127.0.0.1';
   def_cfgsc.AlpacaPort := 32323;
+  def_cfgsc.AlpacaId := '';
   def_cfgsc.AlpacaUser := '';
   def_cfgsc.AlpacaPass := '';
   def_cfgsc.AlpacaDevice := 0;
@@ -8232,6 +8233,7 @@ begin
         def_cfgsc.TelescopeInterval := ReadInteger(section, 'TelescopeInterval', def_cfgsc.TelescopeInterval);
         def_cfgsc.TelescopeInterface := ReadInteger(section, 'TelescopeInterface', def_cfgsc.TelescopeInterface);
         def_cfgsc.AlpacaProtocol := ReadInteger(section, 'AlpacaProtocol', def_cfgsc.AlpacaProtocol);
+        def_cfgsc.AlpacaId := ReadString(section, 'AlpacaId', def_cfgsc.AlpacaId);
         def_cfgsc.AlpacaHost := ReadString(section, 'AlpacaHost', def_cfgsc.AlpacaHost);
         def_cfgsc.AlpacaPort := ReadInteger(section, 'AlpacaPort', def_cfgsc.AlpacaPort);
         def_cfgsc.AlpacaUser := DecryptStr(hextostr(ReadString(section, 'AlpacaUser', '')), encryptpwd);
@@ -9553,6 +9555,7 @@ begin
           WriteInteger(section, 'TelescopeInterval', cfgsc.TelescopeInterval);
           WriteInteger(section, 'TelescopeInterface', cfgsc.TelescopeInterface);
           WriteInteger(section, 'AlpacaProtocol', cfgsc.AlpacaProtocol);
+          WriteString(section, 'AlpacaId', cfgsc.AlpacaId);
           WriteString(section, 'AlpacaHost', cfgsc.AlpacaHost);
           WriteInteger(section, 'AlpacaPort', cfgsc.AlpacaPort);
           WriteString(section, 'AlpacaUser', strtohex(encryptStr(cfgsc.AlpacaUser, encryptpwd)));
@@ -9574,6 +9577,7 @@ begin
           WriteInteger(section, 'TelescopeInterval', def_cfgsc.TelescopeInterval);
           WriteInteger(section, 'TelescopeInterface', def_cfgsc.TelescopeInterface);
           WriteInteger(section, 'AlpacaProtocol', def_cfgsc.AlpacaProtocol);
+          WriteString(section, 'AlpacaId', def_cfgsc.AlpacaId);
           WriteString(section, 'AlpacaHost', def_cfgsc.AlpacaHost);
           WriteInteger(section, 'AlpacaPort', def_cfgsc.AlpacaPort);
           WriteString(section, 'AlpacaUser', strtohex(encryptStr(def_cfgsc.AlpacaUser, encryptpwd)));

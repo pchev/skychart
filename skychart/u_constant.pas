@@ -1142,7 +1142,7 @@ type
     TelLimitDecMaxActive,TelLimitDecMinActive,TelLimitHaEActive,TelLimitHaWActive:Boolean;
     PMon, DrawPMon, ApparentPos, CoordExpertMode, SunOnline, DSLforcecolor, DSLsurface, SurfaceBlure: boolean;
     TelescopeInterface,ManualTelescopeType, CoordType, DSLcolor, SurfaceAlpha: integer;
-    IndiServerHost, IndiServerPort, IndiDevice, AscomDevice, AlpacaHost, AlpacaUser, AlpacaPass : string;
+    IndiServerHost, IndiServerPort, IndiDevice, AscomDevice, AlpacaHost, AlpacaId, AlpacaUser, AlpacaPass : string;
     TelescopeInterval, AlpacaProtocol, AlpacaPort, AlpacaDevice, TelescopeLeft, TelescopeTop : integer;
     TelescopeAltAz, TelescopeAutoconnect: boolean;
     ShowCircle, ShowCrosshair, ManualTelescope, ShowImages,
@@ -2488,6 +2488,7 @@ begin
   IndiServerPort := Source.IndiServerPort;
   IndiDevice := Source.IndiDevice;
   AscomDevice := Source.AscomDevice ;
+  AlpacaId := Source.AlpacaId ;
   AlpacaHost := Source.AlpacaHost ;
   AlpacaUser := Source.AlpacaUser ;
   AlpacaPass := Source.AlpacaPass ;

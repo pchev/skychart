@@ -116,7 +116,7 @@ begin
       if apiversions[j]=AlpacaCurrentVersion then result[i].apiversion:=AlpacaCurrentVersion;
     end;
     except
-      result[i].apiversion:=1;
+      result[i].apiversion:=-1;
     end;
     if result[i].apiversion=AlpacaCurrentVersion then begin
       try
