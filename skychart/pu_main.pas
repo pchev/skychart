@@ -686,6 +686,7 @@ type
     Fscript: array of Tf_script;
     ActiveScript: integer;
     FTelescopeConnected: boolean;
+    NoMenu: boolean;
     AccelList: array[0..MaxMenulevel] of string;
     httpdownload: THTTPBigDownload;
     procedure ProcessParams1;
@@ -1367,6 +1368,8 @@ begin
       end;
   if ScriptPanel.Visible then
     Fscript[ActiveScript].ActivateEvent;
+  if NoMenu then
+    menu:=nil;
   if VerboseMsg then
     WriteTrace('Exit Tf_main.InitTimerTimer');
 end;
@@ -2714,6 +2717,7 @@ begin
     DefaultFormatSettings.ThousandSeparator := ',';
     DefaultFormatSettings.DateSeparator := '/';
     DefaultFormatSettings.TimeSeparator := ':';
+    NoMenu:=False;
     NeedRestart := False;
     showsplash := True;
     ConfirmSaveConfig := True;
@@ -8023,6 +8027,7 @@ begin
           LinuxDesktop := 1;
         OpenFileCMD := ReadString(section, 'OpenFileCMD', OpenFileCMD);
 {$endif}
+        NoMenu := ReadBool(section, 'NoMenu', false);
         cfgm.btnsize := ReadInteger(section, 'BtnSize', cfgm.btnsize);
         cfgm.btncaption := ReadBool(section, 'BtnCaption', cfgm.btncaption);
         NightVision := ReadBool(section, 'NightVision', NightVision);
