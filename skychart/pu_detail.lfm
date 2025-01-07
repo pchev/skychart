@@ -2,11 +2,11 @@ object f_detail: Tf_detail
   Left = 249
   Height = 461
   Top = 209
-  Width = 393
+  Width = 471
   ActiveControl = Panel1
   Caption = 'Details'
   ClientHeight = 461
-  ClientWidth = 393
+  ClientWidth = 471
   OnCreate = FormCreate
   OnKeyDown = FormKeyDown
   OnShow = FormShow
@@ -16,7 +16,7 @@ object f_detail: Tf_detail
     Left = 0
     Height = 425
     Top = 36
-    Width = 393
+    Width = 471
     ActivePage = TabSheet2
     Align = alClient
     ShowTabs = False
@@ -25,12 +25,12 @@ object f_detail: Tf_detail
     object TabSheet1: TTabSheet
       Caption = 'TabSheet1'
       ClientHeight = 421
-      ClientWidth = 389
+      ClientWidth = 467
       object Memo1: TMemo
         Left = 0
         Height = 421
         Top = 0
-        Width = 389
+        Width = 467
         Align = alClient
         Lines.Strings = (
           'Memo1'
@@ -43,12 +43,12 @@ object f_detail: Tf_detail
     object TabSheet2: TTabSheet
       Caption = 'TabSheet2'
       ClientHeight = 421
-      ClientWidth = 389
+      ClientWidth = 467
       object IpHtmlPanel1: TIpHtmlPanel
         Left = 0
         Height = 421
         Top = 0
-        Width = 389
+        Width = 467
         Align = alClient
         DataProvider = IpHtmlDataProvider1
         FixedTypeface = 'Courier New'
@@ -73,17 +73,21 @@ object f_detail: Tf_detail
     Left = 0
     Height = 36
     Top = 0
-    Width = 393
+    Width = 471
     Align = alTop
     ClientHeight = 36
-    ClientWidth = 393
+    ClientWidth = 471
     FullRepaint = False
     TabOrder = 0
     object Button1: TButton
-      Left = 296
+      AnchorSideLeft.Control = Button4
+      AnchorSideLeft.Side = asrBottom
+      AnchorSideTop.Control = Button2
+      Left = 377
       Height = 25
       Top = 6
       Width = 91
+      BorderSpacing.Left = 4
       BorderSpacing.InnerBorder = 4
       Cancel = True
       Caption = 'Close'
@@ -101,14 +105,31 @@ object f_detail: Tf_detail
       TabOrder = 0
     end
     object Button3: TButton
-      Left = 176
+      AnchorSideLeft.Control = Button2
+      AnchorSideLeft.Side = asrBottom
+      AnchorSideTop.Control = Button2
+      Left = 172
       Height = 25
       Top = 6
       Width = 117
+      BorderSpacing.Left = 4
       BorderSpacing.InnerBorder = 4
       Caption = 'Neighbor'
       OnClick = Button3Click
       TabOrder = 1
+    end
+    object Button4: TButton
+      AnchorSideLeft.Control = Button3
+      AnchorSideLeft.Side = asrBottom
+      AnchorSideTop.Control = Button2
+      Left = 293
+      Height = 25
+      Top = 6
+      Width = 80
+      BorderSpacing.Left = 4
+      Caption = 'GrappaVar'
+      OnClick = Button4Click
+      TabOrder = 3
     end
   end
   object ActionList1: TActionList

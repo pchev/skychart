@@ -835,6 +835,7 @@ type
     procedure DetailToObslist(chart: string; ra, Dec: double; cat, nm, desc: string);
     procedure CenterFindObj(chart: string);
     procedure NeighborObj(chart: string);
+    procedure GrappaVarNeighborObj(chart: string);
     procedure ConnectDB(updversion: string = '');
     procedure ImageSetFocus(Sender: TObject);
     procedure SetScriptMenu(Sender: TObject);
@@ -1454,6 +1455,7 @@ begin
     f_info.OnAddToObsList:=DetailToObslist;
     f_detail.OnCenterObj := CenterFindObj;
     f_detail.OnNeighborObj := NeighborObj;
+    f_detail.OnVarNeighborObj := GrappaVarNeighborObj;
     f_detail.OnKeydown := FormKeyDown;
     f_obslist.planet := planet;
     f_obslist.FileNameEdit1.FileName := slash(HomeDir) + f_obslist.DefaultList;
@@ -11783,6 +11785,25 @@ begin
           de:=f_detail.de;
           Precession(jd2000,sc.cfgsc.JDChart,ra,de);
           ListRaDec(ra, de, 0.5*deg2rad, false, 10,100);
+          f_info.SortRadius(ra,de);
+          break;
+        end;
+end;
+
+procedure Tf_main.GrappaVarNeighborObj(chart: string);
+var
+  i: integer;
+  ra, de: double;
+begin
+  for i := 0 to MultiFrame1.ChildCount - 1 do
+    if MultiFrame1.Childs[i].DockedObject is Tf_chart then
+      if MultiFrame1.Childs[i].Caption = chart then
+        with MultiFrame1.Childs[i].DockedObject as Tf_chart do
+        begin
+          ra:=f_detail.ra;
+          de:=f_detail.de;
+          ListGrappaVar(ra, de);
+          Precession(jd2000,sc.cfgsc.JDChart,ra,de);
           f_info.SortRadius(ra,de);
           break;
         end;

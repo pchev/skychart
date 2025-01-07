@@ -29,7 +29,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 interface
 
 uses
-  u_help, u_translation, u_util, u_constant, pu_info, Clipbrd, UScaleDPI, LCLVersion, synacode,
+  u_help, u_translation, u_util, u_constant, pu_info, Clipbrd, UScaleDPI, LCLVersion, synacode, u_grappavar,
   LCLIntf, SysUtils, Classes, Graphics, Controls, Forms, LazUTF8, LazFileUtils, IpHtml, Ipfilebroker,
   Dialogs, StdCtrls, ComCtrls, ExtCtrls, Menus, StdActns, ActnList, LResources,
   Buttons, LazHelpHTML_fix, types;
@@ -40,6 +40,7 @@ type
   { Tf_detail }
 
   Tf_detail = class(TForm)
+    Button4: TButton;
     EditCopy: TAction;
     IpHtmlDataProvider1: TIpHtmlDataProvider;
     IpHtmlPanel1: TIpHtmlPanel;
@@ -60,6 +61,7 @@ type
     procedure Button1Click(Sender: TObject);
     procedure Button2Click(Sender: TObject);
     procedure Button3Click(Sender: TObject);
+    procedure Button4Click(Sender: TObject);
     procedure EditCopyExecute(Sender: TObject);
     procedure FormKeyDown(Sender: TObject; var Key: word; Shift: TShiftState);
     procedure FormShow(Sender: TObject);
@@ -73,7 +75,7 @@ type
     { Private declarations }
     LockText, CanRetry: boolean;
     FCenter: Tstr1func;
-    FNeighbor: Tstr1func;
+    FNeighbor, FVarNeighbor: Tstr1func;
     FHTMLText: string;
     FTextOnly: boolean;
     FSameposition: boolean;
@@ -97,6 +99,7 @@ type
     property Sameposition: boolean read FSameposition write FSameposition;
     property OnCenterObj: Tstr1func read FCenter write FCenter;
     property OnNeighborObj: Tstr1func read FNeighbor write FNeighbor;
+    property OnVarNeighborObj: Tstr1func read FVarNeighbor write FVarNeighbor;
     property OnKeydown: TKeyEvent read Fkeydown write Fkeydown;
     procedure SetLang;
   end;
@@ -138,6 +141,12 @@ procedure Tf_detail.Button3Click(Sender: TObject);
 begin
   if assigned(FNeighbor) then
     FNeighbor(source_chart);
+end;
+
+procedure Tf_detail.Button4Click(Sender: TObject);
+begin
+  if assigned(FVarNeighbor) then
+    FVarNeighbor(source_chart);
 end;
 
 procedure Tf_detail.IpHtmlPanel1HotClick(Sender: TObject);
@@ -223,6 +232,7 @@ begin
   CanRetry:=true;
   FSameposition := False;
   FSetPos := 0;
+  Button4.Visible:=GrappavarOpen;
 end;
 
 procedure Tf_detail.HTMLGetImageX(Sender: TIpHtmlNode; const URL: string;

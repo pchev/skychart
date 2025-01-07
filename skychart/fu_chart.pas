@@ -351,6 +351,7 @@ type
     procedure Identdetail(X, Y: integer);
     function ListXY(X, Y: integer; r: integer = 12; allobj:boolean=true; mincount:integer=0): boolean;
     function ListRaDec(ra, de, r: double; allobj:boolean=true; mincount:integer=0; maxcount:integer=100): boolean;
+    function ListGrappaVar(ra, de: double): boolean;
     procedure rotation(rot: double);
     procedure GetSunImage;
     procedure CKeyDown(Key: word; Shift: TShiftState);
@@ -3170,6 +3171,40 @@ begin
     end;
   until (c>=mincount)or(dx>(r*10))or(dx>(pid2));
   msg := msg + blank + rsSearchRadius + ': ' + DEToStrShort(rad2deg*dx, 0);
+  if assigned(FListInfo) then
+    FListInfo(buf, msg);
+end;
+
+function Tf_chart.ListGrappaVar(ra, de: double): boolean;
+var
+  list: TGrappaSearchList;
+  i,n:integer;
+  buf, msg: string;
+  cra,cde: double;
+begin
+  Result := False;
+  if locked then
+    exit;
+  ra := rmod(ra + pi2, pi2);
+  SearchGrappavar(ra,de, 6, list); // J2000 ,  fov=1°
+  n:=Length(list);
+  buf:='';
+  for i:=0 to n-1 do begin
+    cra:=deg2rad*list[i].ra;
+    cde:=deg2rad*list[i].dec;
+    CoordJ2000toChart(cra, cde);
+    buf:=buf + 'GrappaVar';
+    buf:=buf + tab + ARpToStr(rmod(rad2deg * cra / 15 + 24, 24));
+    buf:=buf + tab + DEpToStr(rad2deg * cde);
+    buf:=buf + tab + '  *';
+    buf:=buf + tab + 'Gaia DR3 '+IntToStr(list[i].source_id);
+    buf:=buf + tab + 'mG:'+FormatFloat(f3,list[i].g);
+    buf:=buf + tab + 'mBP:'+FormatFloat(f3,list[i].b);
+    buf:=buf + tab + 'mRP:'+FormatFloat(f3,list[i].r);
+    buf:=buf + tab + 'Class:'+list[i].variclass;
+    buf:=buf + crlf;
+  end;
+  msg:='Found '+inttostr(n)+' variable stars';
   if assigned(FListInfo) then
     FListInfo(buf, msg);
 end;

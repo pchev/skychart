@@ -14,8 +14,16 @@ unit u_grappavar;
 
 interface
 
-uses  u_util,
+uses  u_util, cu_healpix, math,
   Classes, SysUtils;
+
+Type
+   TGrappaSearchRec = record
+      source_id: Qword;
+      ra,dec,g,b,r: double;
+      variclass: ShortString;
+   end;
+   TGrappaSearchList = array of TGrappaSearchRec;
 
 const
    nf_GRAPPAvar = 'GRAPPAvar.dat';
@@ -31,10 +39,15 @@ const
                               '"ECL"','"ELL"','"EP"','"LPV"','"MICROLENSING"','"RCB"','"RR"',
                               '"RS"','"S"','"SDB"','"SN"','"SOLAR_LIKE"','"SPB"','"SYST"','"WD"',
                               '"YSO"','"GALAXY"');
+   max_search = 500;
+
+var
+   GrappavarOpen : boolean = false;
 
    procedure OpenGrappavar(dir: string);
    procedure CloseGrappavar;
    function ReadGrappavar(gaiaid: string; out info: TStringlist): boolean;
+   function SearchGrappavar(ra,de: double; hplevel: integer; out list: TGrappaSearchList): boolean;
 
 implementation
 
@@ -74,7 +87,6 @@ type
 
 var
    RRLyrae_ok,Cepheides_ok : boolean;
-   GrappavarOpen : boolean = false;
    fGRAPPAVar : file of TGRAPPAVar;
    GRAPPAVar : TGRAPPAVar;
 
@@ -222,6 +234,104 @@ except
   result:=false;
 end;
 end;
+
+function SearchGrappavar(ra,de: double; hplevel: integer; out list: TGrappaSearchList): boolean;
+// search in grappavar for stars in the pixel of size hplevel at position ra,dec
+var
+   Source_ID, divider, nside, ipix, cpix : QWord;
+   theta, phi: double;
+   k,n            : integer;
+   index,deb,fin     : longint;
+   trouve            : boolean;
+begin
+try
+  result:=false;
+  if not GrappavarOpen then
+    exit;
+  // libchealpix must be loaded
+  if @ang2pix_nest64=nil then
+    exit;
+  // select divider for pixel size
+  case hplevel of
+    4: divider:=2251799813685248;    //  4   FOV = 3.665°
+    5: divider:=562949953421312;     //  5   FOV = 1.832°
+    6: divider:=140737488355328;     //  6   FOV = 0.916°
+    7: divider:=35184372088832;      //  7   FOV = 0.458°
+    8: divider:=8796093022208;       //  8   FOV = 0.229°
+    9: divider:=2199023255552;       //  9   FOV = 0.115°
+    else exit;
+  end;
+  // healpix from coordinates
+  nside:=round(2**hplevel);
+  theta:=pi/2-de;
+  phi:=ra;
+  ang2pix_nest64(nside,theta,phi,ipix);
+  // first possible source_id in this pixel
+  Source_ID:=1+ipix*divider;
+  // search this pseudo-source, same code as above in ReadGrappavar
+  index:=1;
+  trouve:=false;
+  Seek(fGRAPPAVar,index-1);
+  read(fGrappaVar,GRAPPAVar);
+  if source_ID=GRAPPAVar.Source_ID then trouve:=true
+  else
+  begin
+     index:=max_GRAPPAVar;
+     Seek(fGRAPPAVar,index-1);
+     read(fGrappaVar,GRAPPAVar);
+     if source_ID=GRAPPAVar.Source_ID then trouve:=true
+     else
+     // On effectue une recherche par dicotomie :
+     begin
+        deb:=1; fin:=max_GRAPPAVar;
+        k:=0;
+        repeat
+           index:=(deb+fin) div 2;
+           Seek(fGRAPPAVar,index-1);
+           read(fGrappaVar,GRAPPAVar);
+           cpix:=GRAPPAVar.Source_ID div divider;
+           if source_ID=GRAPPAVar.Source_ID then trouve:=true
+           else
+           begin
+              if GRAPPAVar.Source_ID<Source_id then deb:=index
+              else fin:=index;
+              inc(k);
+           end;
+        until trouve or (k>25);;
+     end;
+  end;
+  // most likely not found but we can read sequentially from this position
+  Seek(fGRAPPAVar,index-1); // index-1 is the last star in the previous pixel
+  k:=0;
+  n:=0;
+  // initialize for maximum size
+  SetLength(list,max_search);
+  repeat
+     inc(k);
+     read(fGrappaVar,GRAPPAVar);
+     // pixel for this source
+     cpix:=GRAPPAVar.Source_ID div divider;
+     if cpix=ipix then begin
+       // in the pixel we want, add to result
+       inc(n);
+       list[n-1].source_id:=GRAPPAVar.Source_ID;
+       list[n-1].ra:=GRAPPAVar.RA/3600000;
+       list[n-1].dec:=GRAPPAVar.DEC/3600000-90;
+       list[n-1].g:=GRAPPAVar.mean_mag_g_fov/1000;
+       list[n-1].b:=GRAPPAVar.mean_mag_bp/1000;
+       list[n-1].r:=GRAPPAVar.mean_mag_rp/1000;
+       list[n-1].variclass:=Vari_Class[GRAPPAVar.best_class_name];
+       if n>=max_search then break;
+     end;
+  until (cpix>ipix)or(k>max_search)or(eof(fGrappaVar)); // be sure we not loop indefinitivelly
+  // set the result size
+  SetLength(list,n);
+  result:=(n>0);
+except
+  result:=false;
+end;
+end;
+
 
 end.
 
