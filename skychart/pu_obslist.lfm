@@ -25,6 +25,7 @@ object f_obslist: Tf_obslist
       Height = 28
       Top = 3
       Width = 192
+      Filter = 'text file|*.txt|all|*.*'
       FilterIndex = 0
       HideDirectories = False
       ButtonWidth = 23
@@ -104,6 +105,15 @@ object f_obslist: Tf_obslist
       OnClick = BtnImportMosaicClick
       TabOrder = 7
     end
+    object BtnLoadCSV: TButton
+      Left = 663
+      Height = 25
+      Top = 35
+      Width = 115
+      Caption = 'Load CSV'
+      OnClick = BtnLoadCSVClick
+      TabOrder = 8
+    end
   end
   object StringGrid1: TStringGrid
     Left = 0
@@ -154,7 +164,7 @@ object f_obslist: Tf_obslist
         MinSize = 100
         MaxSize = 500
         Title.Caption = 'Title'
-        Width = 204
+        Width = 208
       end    
       item
         MinSize = 3
@@ -182,7 +192,7 @@ object f_obslist: Tf_obslist
       96
       80
       80
-      204
+      208
       3
     )
   end
@@ -478,6 +488,6 @@ object f_obslist: Tf_obslist
     Filter = 'Circle file|*.cdcc|All|*'
     Options = [ofFileMustExist, ofEnableSizing, ofViewDetail]
     Left = 260
-    Top = 290
+    Top = 296
   end
 end

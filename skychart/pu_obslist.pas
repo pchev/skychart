@@ -45,6 +45,7 @@ type
     Button1: TButton;
     BtnTour: TButton;
     BtnImportMosaic: TButton;
+    BtnLoadCSV: TButton;
     ButtonLoad: TButton;
     AllLabels: TCheckBox;
     OpenDialog1: TOpenDialog;
@@ -85,6 +86,7 @@ type
     TabSheet2: TTabSheet;
     procedure AirmassComboChange(Sender: TObject);
     procedure AllLabelsChange(Sender: TObject);
+    procedure BtnLoadCSVClick(Sender: TObject);
     procedure BtnImportMosaicClick(Sender: TObject);
     procedure BtnTourClick(Sender: TObject);
     procedure Button1Click(Sender: TObject);
@@ -125,7 +127,7 @@ type
     procedure UpdAllCoordClick(Sender: TObject);
   private
     { private declarations }
-    title, FDefaultList, FListName, FObjName: string;
+    title, FDefaultList, FObjName: string;
     Faltitude: double;
     FMeridianSide: integer;
     gridchanged, limitairmass, limittransit, locktogglebox, locknewlist: boolean;
@@ -153,8 +155,9 @@ type
     procedure Newlist;
     procedure Add(obj: string; ra, de: double; upd:boolean=true);
     procedure LoadObsList;
-    procedure SaveObsList;
+    procedure SaveObsList(fn: string);
     procedure ImportMosaic(fn: string);
+    procedure LoadCSV(fn: string);
     procedure SelectRow(r: integer);
     function FirstObj: boolean;
     function LastObj: boolean;
@@ -260,7 +263,6 @@ begin
   gridchanged := False;
   FileNameEdit1.InitialDir := buf;
   FileNameEdit1.FileName := buf + DefaultList;
-  FListName := FileNameEdit1.FileName;
   UpdateLabels(nil);
 end;
 
@@ -332,6 +334,89 @@ begin
   end;
 end;
 
+procedure Tf_obslist.LoadCSV(fn: string);
+var
+  f: textfile;
+  obj, sra, sde, lbl, desc, buf: string;
+  ra, de: double;
+  r:Tstringlist;
+begin
+if FileExists(fn) then
+begin
+  try
+    StringGrid1.RowCount := 1;
+    gridchanged := False;
+    r:=Tstringlist.Create;
+    AssignFile(f, fn);
+    reset(f);
+    readln(f, title);
+    title:=StringReplace(title,';','',[rfReplaceAll]);
+    while not EOF(f) do
+    begin
+      ReadLn(f, buf);
+      SplitRec2(buf,';',r);
+      if r.count<1 then continue;
+      StringGrid1.RowCount := StringGrid1.RowCount + 1;
+      obj := trim(copy(r[0], 1, objl));
+      sra:='';sde:='';lbl:='';desc:='';
+      if r.count>1 then sra := trim(r[1]);
+      if r.count>2 then sde := trim(r[2]);
+      if r.count>3 then lbl := trim(copy(r[3], 1, objl));
+      if r.count>4 then desc:=trim(r[4]);
+      StringGrid1.Cells[1, StringGrid1.RowCount - 1] := obj;
+      ra := strtofloatdef(sra, -999);
+      de := strtofloatdef(sde, -999);
+      if ((ra < -900) or (de < -900)) and assigned(FGetObjectCoord) then
+      begin
+        FGetObjectCoord(obj, buf, ra, de);
+        if ra < 0 then
+        begin
+          FGetObjectCoord(lbl, buf, ra, de);
+          if ra < 0 then
+          begin
+            ra := -999;
+            de := -999;
+          end;
+        end;
+        if lbl='' then lbl:=buf;
+      end;
+      StringGrid1.Cells[7, StringGrid1.RowCount - 1] := lbl;
+      if ra > -900 then
+      begin
+        buf := ARpToStr(ra/15,0);
+        StringGrid1.Cells[2, StringGrid1.RowCount - 1] := buf;
+        buf := DEToStr3(de);
+        StringGrid1.Cells[3, StringGrid1.RowCount - 1] := buf;
+      end
+      else
+      begin
+        StringGrid1.Cells[2, StringGrid1.RowCount - 1] := '';
+        StringGrid1.Cells[3, StringGrid1.RowCount - 1] := '';
+      end;
+      StringGrid1.Cells[4, StringGrid1.RowCount - 1] := '';
+      StringGrid1.Cells[5, StringGrid1.RowCount - 1] := '';
+      StringGrid1.Cells[6, StringGrid1.RowCount - 1] := desc;
+    end;
+    CloseFile(f);
+    r.free;
+    StringGrid1.Invalidate;
+    edit1.Text := title;
+    buf:=ChangeFileExt(fn,'.txt');
+    SaveObsList(buf);
+    FileNameEdit1.FileName:=buf;
+    Refresh;
+    Application.ProcessMessages;
+    gridchanged := False;
+  except
+    on E: Exception do
+    begin
+      if Visible then
+        ShowMessage('Error: ' + E.Message);
+    end;
+  end;
+end;
+end;
+
 procedure Tf_obslist.LoadObsList;
 var
   f: textfile;
@@ -340,7 +425,6 @@ var
 begin
   if FileExistsUTF8(FileNameEdit1.FileName) then
   begin
-    FListName := FileNameEdit1.FileName;
     StringGrid1.RowCount := 1;
     gridchanged := False;
     try
@@ -406,7 +490,7 @@ begin
   end;
 end;
 
-procedure Tf_obslist.SaveObsList;
+procedure Tf_obslist.SaveObsList(fn: string);
 var
   f: textfile;
   buf, bl: string;
@@ -414,7 +498,7 @@ var
 begin
   try
     bl := blank15 + blank15 + blank15;
-    AssignFile(f, UTF8ToSys(FileNameEdit1.FileName));
+    AssignFile(f, fn);
     Rewrite(f);
     writeln(f, edit1.Text);
     for i := 1 to StringGrid1.RowCount - 1 do
@@ -843,7 +927,7 @@ begin
   begin
     if MessageDlg(Format(rsTheObserving, [FileNameEdit1.FileName]) + crlf + rsDoYouWantToS2,
       mtConfirmation, [mbYes, mbNo], 0) = mrYes then
-      SaveObsList;
+      SaveObsList(FileNameEdit1.FileName);
   end;
   for i := 0 to FObjLabels.Count - 1 do
     FObjLabels.Objects[i].Free;
@@ -1142,7 +1226,6 @@ procedure Tf_obslist.ButtonLoadClick(Sender: TObject);
 begin
   if locknewlist then
     exit;
-  //if FileNameEdit1.FileName=FListName then exit;
   FileNameEdit1.InitialDir := ExtractFilePath(FileNameEdit1.FileName);
   if assigned(cfgsc) then
     LoadObsList;
@@ -1150,7 +1233,7 @@ end;
 
 procedure Tf_obslist.ButtonSaveClick(Sender: TObject);
 begin
-  SaveObsList;
+  SaveObsList(FileNameEdit1.FileName);
 end;
 
 procedure Tf_obslist.AirmassComboChange(Sender: TObject);
@@ -1185,11 +1268,24 @@ begin
     FObjLabelChange(self);
 end;
 
+procedure Tf_obslist.BtnLoadCSVClick(Sender: TObject);
+var fn: string;
+begin
+  if OpenDialog1.InitialDir = '' then
+    OpenDialog1.InitialDir := HomeDir;
+  OpenDialog1.Filter:='csv file|*.csv|all|*.*';
+  if OpenDialog1.Execute then begin
+    fn:=OpenDialog1.FileName;
+    LoadCSV(fn);
+  end;
+end;
+
 procedure Tf_obslist.BtnImportMosaicClick(Sender: TObject);
 var fn: string;
 begin
   if OpenDialog1.InitialDir = '' then
     OpenDialog1.InitialDir := HomeDir;
+  OpenDialog1.Filter:='mosaic file|*.cdcc|all|*.*';
   if OpenDialog1.Execute then begin
     fn:=OpenDialog1.FileName;
     ImportMosaic(fn);
