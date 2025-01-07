@@ -1298,7 +1298,8 @@ type
     destructor Destroy; override;
   end;
 
-  TLabelCoord = class(TObject)
+  TObsLabel = class(TObject)
+    altlabel: string;
     ra, Dec: double;
   end;
 

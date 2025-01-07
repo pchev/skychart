@@ -1439,7 +1439,7 @@ var
   i, lid: integer;
   x1, y1, lra, lde: double;
   xx, yy: single;
-  buf, lbuf, lis: string;
+  buf, lbuf, lis, ltxt: string;
 begin
   if FObjectListLabels.Count > 0 then
   begin
@@ -1448,10 +1448,11 @@ begin
       lbuf := ';';
       for i := 0 to FObjectListLabels.Count - 1 do
       begin
-        with TLabelCoord(FObjectListLabels.Objects[i]) do
+        with TObsLabel(FObjectListLabels.Objects[i]) do
         begin
           if (ra > -1000) and (Dec > -1000) then
           begin
+            ltxt:=altlabel;
             lra := deg2rad * ra;
             lde := deg2rad * Dec;
             Precession(jd2000, cfgsc.CurJDUT, lra, lde);
@@ -1463,7 +1464,7 @@ begin
               buf := FObjectListLabels[i];
               lis := buf + FormatFloat(f6, ra) + FormatFloat(f6, Dec);
               lid := rshash(lis, $7FFFFFFF);
-              SetLabel(lid, xx, yy, 0, 2, 9, buf, laLeft, labrotation(lra, lde, 1, cfgsc), 0, False);
+              SetLabel(lid, xx, yy, 0, 2, 9, ltxt, laLeft, labrotation(lra, lde, 1, cfgsc), 0, False);
               lbuf := lbuf + buf + ';';
             end;
           end;

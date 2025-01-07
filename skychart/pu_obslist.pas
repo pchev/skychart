@@ -632,7 +632,7 @@ procedure Tf_obslist.UpdateLabels(Sender: TObject;upd:boolean=true);
 var
   i: integer;
   lbl: string;
-  crd: TLabelCoord;
+  crd: TObsLabel;
 begin
   for i := 0 to FObjLabels.Count - 1 do
     FObjLabels.Objects[i].Free;
@@ -645,7 +645,8 @@ begin
       lbl := trim(wordspace(StringGrid1.Cells[7, i]));
       if (lbl <> '') then
       begin
-        crd := TLabelCoord.Create;
+        crd := TObsLabel.Create;
+        crd.altlabel:=trim(StringGrid1.Cells[1, i]);
         crd.ra := Str3ToAR(trim(StringGrid1.Cells[2, i]))*15;
         crd.Dec := Str3ToDE(trim(StringGrid1.Cells[3, i]));
         FObjLabels.AddObject(lbl, crd);
@@ -1101,7 +1102,7 @@ begin
       StringGrid1.Cells[7, aRow] := NewValue;
       aCol := 7;
     end;
-    if aCol = 7 then
+    if (aCol = 1) or (aCol = 7) then
       UpdateLabels(nil);
   end;
 end;
