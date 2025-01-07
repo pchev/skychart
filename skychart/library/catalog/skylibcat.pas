@@ -1351,7 +1351,7 @@ var
 begin
 if x2<x1 then begin ra:=x2; x2:=x1; x1:=ra; end;
 if y2<y1 then begin ra:=y2; y2:=y1; y1:=ra; end;
-step:= 1;
+step:= 0.1;
 nSM:=0;
 de:=y1;
 repeat
