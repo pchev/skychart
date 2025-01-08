@@ -910,7 +910,7 @@ inc(CurCat);
 if CurCat<Ncat then begin
    catfile:=slash(VOCatpath)+VOcatlist[CurCat];
    deffile:=ChangeFileExt(catfile,'.config');
-   if (CurCat>0) and VODocOK then VODoc.Free;
+   if (CurCat>0) and VODocOK and (VODoc<>nil) then FreeAndNil(VODoc);
    ok:=ReadVOHeader;
    VOcatrec:=-1;
    if (not active)or(not ok) then NextVOCat(ok);
@@ -922,7 +922,7 @@ var i: integer;
 begin
 if VOopen then begin
   VOcatlist.Free;
-  if VODocOK then VODoc.Free;
+  if VODocOK and (VODoc<>nil) then FreeAndNil(VODoc);
   for i:=0 to VOFields.Count-1 do VOFields.Objects[i].Free;
   VOFields.Free;
   VOopen:=false;
@@ -957,7 +957,7 @@ ok:=false;
 while CurCat<Ncat do begin
    catfile:=slash(VOCatpath)+VOcatlist[CurCat];
    deffile:=ChangeFileExt(catfile,'.config');
-   if (CurCat>0) and VODocOK then VODoc.Free;
+   if (CurCat>0) and VODocOK and (VODoc<>nil) then FreeAndNil(VODoc);
    config:=TXMLConfig.Create(nil);
    config.Filename:=deffile;
    active:=config.GetValue('VOcat/plot/active',false);
@@ -966,7 +966,7 @@ while CurCat<Ncat do begin
    config.free;
    if active then begin
      if magmax=-99 then begin
-        if (CurCat>0) and VODocOK then VODoc.Free;
+        if (CurCat>0) and VODocOK and (VODoc<>nil) then FreeAndNil(VODoc);
         ok:=ReadVOHeader;
         while ok do begin
           ReadVOCat(rec,ok);
