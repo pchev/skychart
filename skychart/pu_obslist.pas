@@ -365,7 +365,14 @@ begin
       if r.count>4 then desc:=trim(r[4]);
       StringGrid1.Cells[1, StringGrid1.RowCount - 1] := obj;
       ra := strtofloatdef(sra, -999);
+      if ra < -900 then begin
+        ra := Str3ToAR(sra);
+        if ra > -900 then ra:= 15*ra;
+      end;
       de := strtofloatdef(sde, -999);
+      if de < -900 then begin
+        de := Str3ToDE(sde);
+      end;
       if ((ra < -900) or (de < -900)) and assigned(FGetObjectCoord) then
       begin
         FGetObjectCoord(obj, buf, ra, de);
