@@ -3197,7 +3197,7 @@ begin
     buf:=buf + tab + ARpToStr(rmod(rad2deg * cra / 15 + 24, 24));
     buf:=buf + tab + DEpToStr(rad2deg * cde);
     buf:=buf + tab + '  *';
-    buf:=buf + tab + 'Gaia DR3 '+IntToStr(list[i].source_id);
+    buf:=buf + tab + sc.catalog.cfgcat.GaiaVersion+' '+IntToStr(list[i].source_id);
     buf:=buf + tab + 'mG:'+FormatFloat(f3,list[i].g);
     buf:=buf + tab + 'mBP:'+FormatFloat(f3,list[i].b);
     buf:=buf + tab + 'mRP:'+FormatFloat(f3,list[i].r);
@@ -4073,10 +4073,11 @@ begin
     begin
       oname := s3 + ' ' + sc.catalog.GenitiveConst(s1);
     end;
-    if copy(oname,1,8)='Gaia DR3' then
-      gaiaid:=trim(copy(oname,9,99))
+    i:=length(sc.catalog.cfgcat.GaiaVersion);
+    if copy(oname,1,i)=sc.catalog.cfgcat.GaiaVersion then
+      gaiaid:=trim(copy(oname,i+1,99))
     else begin
-      s1 := GetDetailValue('GAIA DR3:');
+      s1 := GetDetailValue('GAIA DR3:'); // Gaia ref in XHIP
       if s1>'' then
         gaiaid:=trim(s1)
       else

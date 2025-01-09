@@ -240,6 +240,7 @@ type
     function LongLabelObj(txt: string): string;
     function Get290MagMax: double;
     function GetGaiaMagMax: double;
+    procedure GetGaiaVersion;
     procedure ClearSearch;
     procedure CleanCache;
     procedure AdjustStarForDistance(var rec:GCatrec; distfact:double);
@@ -4376,9 +4377,9 @@ begin
   // then the id not in the default catalog
   if uppercase(copy(Num, 1, 4)) = 'GAIA' then
   begin
-    // Use GetGaiaVersion because the Gaia catalog is maybe inactive
-    if GetGaiaVersion='' then SetGaiaPath(slash(cfgcat.starcatpath[gaia - BaseStar])+slash('gaia1'), 'gaia');
-    buf := StringReplace(Num, GetGaiaVersion, '', [rfReplaceAll, rfIgnoreCase]);
+    // Use GaiaVersion because the Gaia catalog is maybe inactive
+    if cfgcat.GaiaVersion='' then SetGaiaPath(slash(cfgcat.starcatpath[gaia - BaseStar])+slash('gaia1'), 'gaia');
+    buf := StringReplace(Num, cfgcat.GaiaVersion, '', [rfReplaceAll, rfIgnoreCase]);
     Result := FindGaia(buf, ar1, de1);
     if Result then
       exit;
@@ -6359,6 +6360,7 @@ begin
   cfgcat.GaiaLevel:=1;
   SetGaiaPath(slash(cfgcat.starcatpath[gaia - BaseStar])+slash('gaia'+inttostr(cfgcat.GaiaLevel)), 'gaia');
   GetGaiaInfo(h,info,version,filter,ok);
+  cfgcat.GaiaVersion:=GaiaVersion;
   Gaiawin:=true;
   OpenGaiawin(Result,cfgcat.MaxGaiaLevel);
 end;
@@ -6373,6 +6375,17 @@ begin
   Gaiade1:=de1;
   Gaiade2:=de2;
   OpenGaiap(ar1, ar2, de1, de2, ok,cfgcat.MaxGaiaLevel);
+end;
+
+procedure Tcatalog.GetGaiaVersion;
+var h : TCatHeader;
+    info:TCatHdrInfo;
+    version : integer;
+    filter,ok : boolean;
+begin
+  SetGaiaPath(slash(cfgcat.starcatpath[gaia - BaseStar])+slash('gaia1'), 'gaia');
+  GetGaiaInfo(h,info,version,filter,ok);
+  cfgcat.GaiaVersion:=GaiaVersion;
 end;
 
 function  Tcatalog.GetGaiaMagMax: double;

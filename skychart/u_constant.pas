@@ -1034,6 +1034,7 @@ type
     UseUSNOBrightStars, UseGSVSIr, Quick: boolean;
     // filter specific catalog entry
     Name290: string; // the hnsky catalog to use
+    GaiaVersion: string; // the current Gaia version (DR2, EDR3, DR3, ...)
     GaiaLevel: integer; // the current Gaia level 1..4
     MaxGaiaLevel: integer; // 3 or 4
     LimitGaiaCount: boolean; // apply the maximum number of star in max level
@@ -2042,6 +2043,7 @@ begin
   inherited Create;
   SampSelectIdent := False;
   SampSelectedNum := 0;
+  GaiaVersion:='';
 end;
 
 destructor Tconf_catalog.Destroy;
@@ -2110,6 +2112,7 @@ begin
   UseUSNOBrightStars := Source.UseUSNOBrightStars;
   UseGSVSIr := Source.UseGSVSIr;
   Name290 := Source.Name290;
+  GaiaVersion := Source.GaiaVersion;
   GaiaLevel := Source.GaiaLevel;
   LimitGaiaCount := Source.LimitGaiaCount;
   Quick := Source.Quick;

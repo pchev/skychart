@@ -38,7 +38,6 @@ type TGaiaRec = packed record
 function IsGaiapath(path : string) : Boolean;
 procedure SetGaiapath(path,catshortname : string);
 procedure GetGaiaInfo(var h : TCatHeader; var info:TCatHdrInfo; var version : integer; var filter,ok : boolean);
-function  GetGaiaVersion: String;
 Procedure OpenGaiap(ar1,ar2,de1,de2: double ; var ok : boolean; out maxlevel: integer);
 Procedure OpenGaiawin(var ok : boolean; out maxlevel: integer);
 Procedure ReadGaia(var lin : GCatrec; var ok : boolean);
@@ -50,6 +49,8 @@ var
    GaiaVersion: string;
 
 const
+   DefaultGaiaVersion='Gaia DR3';
+
 // Constant to find the healpix from the source_id
 // healpix = source_id div filterXX
 //                                        level  fov      source_id filter
@@ -220,7 +221,10 @@ if fileexists(GaiaPath+slashchar+catname+'.hdr') then begin
   cattype:=strtointdef(buf,0);
   GaiaVersion := trim(catheader.LongName);
 end
-else result:=false;
+else begin
+  GaiaVersion := DefaultGaiaVersion;
+  result:=false;
+end;
 except
   result:=false;
 end;
@@ -256,15 +260,6 @@ h:=catheader;
 version:=catversion;
 info:=catinfo;
 filter:=(cattype=ctBin);
-end;
-
-function GetGaiaVersion: String;
-begin
-  result:=trim(catheader.LongName);
-  if result='' then begin
-    ReadGaiaHeader;
-    result:=trim(catheader.LongName);
-  end;
 end;
 
 Procedure CloseGaiaRegion;

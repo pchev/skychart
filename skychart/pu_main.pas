@@ -1503,6 +1503,7 @@ begin
     catalog.LoadConstB(cfgm.ConstBfile);
     catalog.LoadMilkywaydot(slash(appdir) + slash('data') + slash('milkyway') + 'milkyway.dat');
     catalog.LoadStarName(slash(appdir) + slash('data') + slash('common_names'), Lang);
+    catalog.GetGaiaVersion;
     // open gaia grappavar
     if DirectoryExists(slash(PrivateCatalogDir)+'grappavar') then
       OpenGrappavar(slash(PrivateCatalogDir)+'grappavar');
