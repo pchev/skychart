@@ -79,6 +79,7 @@ type
     procedure Execute; override;
     procedure ShowSocket;
     procedure GetActiveChart;
+    property Terminated;
     property IPaddr: string read FIPaddr write FIPaddr;
     property IPport: string read FIPport write FIPport;
     property onGetACtiveChart: TStringProc read FGetActiveChart write FGetActiveChart;

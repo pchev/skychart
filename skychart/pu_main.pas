@@ -11159,7 +11159,7 @@ begin
     exit;
   for i := 1 to Maxwindow do
   begin
-    if (TCPDaemon <> nil) and (TCPDaemon.ThrdActive[i]) and
+    if (TCPDaemon <> nil) and (not TCPDaemon.Terminated) and (TCPDaemon.ThrdActive[i]) and
       (TCPDaemon.TCPThrd[i] <> nil) and (TCPDaemon.TCPThrd[i].sock <> nil) and
       (not TCPDaemon.TCPThrd[i].terminated) then
       TCPDaemon.TCPThrd[i].SendData('>' + tab + origin + ' :' + tab + str);
