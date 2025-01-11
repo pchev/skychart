@@ -59,6 +59,7 @@ T_ascommount = class(T_mount)
    function Connected: boolean;
    procedure StatusTimerTimer(sender: TObject);
    procedure CheckEqmod;
+   function WaitConnecting(maxtime:integer):boolean;
    function WaitMountSlewing(maxtime:integer):boolean;
    function WaitMountPark(maxtime:integer):boolean;
    procedure GetScopeRates(var nrates0, nrates1: integer; axis0rates, axis1rates: Pdoublearray);
@@ -157,8 +158,19 @@ begin
   if Assigned(FonStatusChange) then FonStatusChange(self);
   V:=Unassigned;
   V:=CreateOleObject(Fdevice);
-  V.connected:=true;
-  if V.connected then begin
+  try
+  FInterfaceVersion:=V.InterfaceVersion;
+  except
+    FInterfaceVersion:=1;
+  end;
+  msg('Interface version: '+inttostr(FInterfaceVersion),9);
+  if FInterfaceVersion>=4 then begin
+    V.Connect;
+    WaitConnecting(30000);
+  end
+  else
+    V.Connected:=true;
+  if V.Connected then begin
      if debug_msg then msg('Connect OK');
      FStatus := devConnected;
      try
@@ -170,12 +182,6 @@ begin
      except
        msg('Error: unknown driver version',9);
      end;
-     try
-     FInterfaceVersion:=V.InterfaceVersion;
-     except
-       FInterfaceVersion:=1;
-     end;
-     msg('Interface version: '+inttostr(FInterfaceVersion),9);
      CheckEqmod;
      if debug_msg then msg('Get park capability');
      CanPark:=V.CanPark;
@@ -237,19 +243,24 @@ procedure T_ascommount.Disconnect;
 begin
  {$ifdef mswindows}
    StatusTimer.Enabled:=false;
-   FStatus := devDisconnected;
-   Fcapability:='';
    if debug_msg then msg('Request to disconnect');
-   if Assigned(FonStatusChange) then FonStatusChange(self);
    try
    if not VarIsEmpty(V) then begin
-     msg(rsDisconnected3,1);
-     V.connected:=false;
+     if FInterfaceVersion>=4 then begin
+       V.Disconnect;
+       WaitConnecting(30000);
+     end
+     else
+       V.Connected:=false;
      V:=Unassigned;
    end;
    except
      on E: Exception do msg('Disconnection error: ' + E.Message,0);
    end;
+   FStatus := devDisconnected;
+   Fcapability:='';
+   if Assigned(FonStatusChange) then FonStatusChange(self);
+   msg(rsDisconnected3,1);
  {$endif}
 end;
 
@@ -259,7 +270,7 @@ result:=false;
 {$ifdef mswindows}
 if not VarIsEmpty(V) then begin
   try
-  result:=V.connected;
+  result:=V.Connected;
   except
    result:=false;
   end;
@@ -582,6 +593,29 @@ begin
   except
     on E: Exception do msg('Get slewing error: ' + E.Message,0);
   end;
+ {$endif}
+end;
+
+function T_ascommount.WaitConnecting(maxtime:integer):boolean;
+{$ifdef mswindows}
+var count,maxcount:integer;
+{$endif}
+begin
+ result:=true;
+ {$ifdef mswindows}
+ try
+   maxcount:=maxtime div waitpoll;
+   count:=0;
+   while (V.Connecting)and(count<maxcount) do begin
+      sleep(waitpoll);
+      if GetCurrentThreadId=MainThreadID then Application.ProcessMessages;
+      inc(count);
+   end;
+   result:=(count<maxcount);
+   if debug_msg then msg('finish to wait for connecting '+BoolToStr(result,true),9);
+ except
+   result:=false;
+ end;
  {$endif}
 end;
 

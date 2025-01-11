@@ -58,6 +58,7 @@ T_ascomrestmount = class(T_mount)
    function Connected: boolean;
    procedure StatusTimerTimer(sender: TObject);
    procedure CheckEqmod;
+   function WaitConnecting(maxtime:integer):boolean;
    function WaitMountSlewing(maxtime:integer):boolean;
    function WaitMountPark(maxtime:integer):boolean;
    procedure GetScopeRates(var nrates0, nrates1: integer; axis0rates, axis1rates: Pdoublearray);
@@ -162,7 +163,18 @@ begin
   if Assigned(FonStatusChange) then FonStatusChange(self);
   V.Device:=Fdevice;
   V.Timeout:=5000;
-  V.Put('Connected',true);
+  try
+  FInterfaceVersion:=V.Get('interfaceversion').AsInt;
+  except
+    FInterfaceVersion:=1;
+  end;
+  msg('Interface version: '+inttostr(FInterfaceVersion),9);
+  if FInterfaceVersion>=4 then begin
+    V.Put('Connect');
+    WaitConnecting(30000);
+  end
+  else
+     V.Put('Connected',true);
   if V.Get('connected').AsBool then begin
      V.Timeout:=120000;
      try
@@ -174,12 +186,6 @@ begin
      except
        msg('Error: unknown driver version',9);
      end;
-     try
-     FInterfaceVersion:=V.Get('interfaceversion').AsInt;
-     except
-       FInterfaceVersion:=1;
-     end;
-     msg('Interface version: '+inttostr(FInterfaceVersion),9);
      try
      FDeviceName:=V.Get('name').AsString;
      except
@@ -249,15 +255,20 @@ end;
 procedure T_ascomrestmount.Disconnect;
 begin
    StatusTimer.Enabled:=false;
+   try
+   if FInterfaceVersion>=4 then begin
+     V.Put('Disconnect');
+     WaitConnecting(30000);
+   end
+   else
+     V.Put('Connected',false);
+   except
+    on E: Exception do msg(Format(rsDisconnectio, [E.Message]),0);
+   end;
    FStatus := devDisconnected;
    Fcapability:='';
    if Assigned(FonStatusChange) then FonStatusChange(self);
-   try
-     msg(rsDisconnected3,1);
-     // the server is responsible for device disconnection
-   except
-     on E: Exception do msg(Format(rsDisconnectio, [E.Message]),0);
-   end;
+   msg(rsDisconnected3,1);
 end;
 
 function T_ascomrestmount.Connected: boolean;
@@ -564,6 +575,24 @@ begin
   except
     on E: Exception do msg('Get slewing error: ' + E.Message,0);
   end;
+end;
+
+function T_ascomrestmount.WaitConnecting(maxtime:integer):boolean;
+var count,maxcount:integer;
+begin
+ result:=true;
+ try
+   maxcount:=maxtime div waitpoll;
+   count:=0;
+   while (V.Get('connecting').AsBool)and(count<maxcount) do begin
+      sleep(waitpoll);
+      if GetCurrentThreadId=MainThreadID then Application.ProcessMessages;
+      inc(count);
+   end;
+   result:=(count<maxcount);
+ except
+   result:=false;
+ end;
 end;
 
 function T_ascomrestmount.WaitMountSlewing(maxtime:integer):boolean;
