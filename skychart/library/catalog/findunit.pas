@@ -481,6 +481,7 @@ if p>0 then begin      // must be at least two words (alpha cygni)
     end;
   end
   else b:=n;                      // flamsteed num case
+  if StrToIntDef(n,999)>9 then n:=''; // only flamsteed, not variable
   c:=trim(uppercase(c));
   for i:=1 to maxconst do begin    // replace full constellation name by abrev.
     if (c=constel[i,2])or(c=constel[i,3]) then begin // also test genitive form
