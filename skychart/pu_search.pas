@@ -578,7 +578,7 @@ begin
     0 : cat:='N';
     1 : cat:='S';
     2 : cat:='V';
-    3 : cat:='NSV';
+    3 : cat:='~SNVA';
   else
     cat:='';
   end;
