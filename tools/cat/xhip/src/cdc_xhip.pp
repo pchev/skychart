@@ -74,26 +74,6 @@ const
    Result := copy(t1 + blank, 1, last - First + 1);
   end;
 
-  function capitalize(txt: string): string;
-  var
-    i: integer;
-    up: boolean;
-    c: string;
-  begin
-    Result := '';
-    up := True;
-    for i := 1 to length(txt) do
-    begin
-      c := copy(txt, i, 1);
-      if up then
-        c := UpperCase(c)
-      else
-        c := LowerCase(c);
-      Result := Result + c;
-      up := (c = ' ') or (c = '-');
-    end;
-  end;
-
   procedure gethdbd;
   var
     hipmain: textfile;
@@ -152,7 +132,6 @@ const
       if hdid=68273 then buf:='gam';              //Fix Gam Vel
       if hdid=61555 then buf:='k';                //Fix k Pup
       bay := trim(buf);
-      if length(bay)>1 then bay := capitalize(bay);
       cst[hdid] := trim(copyp(bufin, 75, 77));   //Constellation
       chk:=flam+'-'+cst[hdid]+':';
       if pos(':'+chk,chkflam)<=0 then begin
@@ -226,7 +205,6 @@ const
         p := pos(';', buf);
         if p > 0 then
           buf := copy(buf, 1, p - 1);
-        starname[hr] := capitalize(buf);
         if length(starname[hr])>maxname then begin
            maxname := length(starname[hr]);
            writeln('Warning! star name length increased to '+inttostr(maxname));       
