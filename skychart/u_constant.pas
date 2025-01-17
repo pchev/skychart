@@ -284,9 +284,9 @@ const
 
   maxgreek = 25;
   greek: array[1..2, 1..maxgreek] of
-    string = (('Alpha', 'Beta', 'Gamma', 'Delta', 'Epsilon', 'Zeta', 'Eta',
-    'Theta', 'Iota', 'Kappa', 'Lambda', 'Mu', 'Nu', 'Xi', 'Omicron', 'Pi', 'Rho',
-    'Sigma', 'Tau', 'Upsilon', 'Phi', 'Chi', 'Psi', 'Omega', 'Xi'),
+    string = (('alpha', 'beta', 'gamma', 'delta', 'epsilon', 'zeta', 'eta',
+    'theta', 'iota', 'kappa', 'lambda', 'mu', 'nu', 'xi', 'omicron', 'pi', 'rho',
+    'sigma', 'tau', 'upsilon', 'phi', 'chi', 'psi', 'omega', 'xi'),
     ('alp', 'bet', 'gam', 'del', 'eps', 'zet', 'eta', 'the', 'iot',
     'kap', 'lam', 'mu', 'nu', 'xi', 'omi', 'pi', 'rho', 'sig', 'tau',
     'ups', 'phi', 'chi', 'psi', 'ome', 'ksi'));
