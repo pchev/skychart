@@ -481,7 +481,6 @@ if p>0 then begin      // must be at least two words (alpha cygni)
     end;
   end
   else b:=n;                      // flamsteed num case
-  if StrToIntDef(n,999)>9 then n:=''; // only flamsteed, not variable
   c:=trim(uppercase(c));
   for i:=1 to maxconst do begin    // replace full constellation name by abrev.
     if (c=constel[i,2])or(c=constel[i,3]) then begin // also test genitive form
@@ -495,8 +494,7 @@ SetGcatPath(XHIPpath,'star');
 GetGCatInfo(H,info,version,GCatFilter,ok);
 FindNumGcatRec(XHIPpath,'star',id,H.ixkeylen,rec,ok);
 if (not ok)and(b0>'')and(c>'') then begin
-  if n>'' then id:=b0+' '+c                       // try without numeric index
-          else id:=b0+'01 '+c;                 // try with first numeric index
+  id:=b0+'01 '+c;                 // try with first numeric index
   FindNumGcatRec(XHIPpath,'star',id,H.ixkeylen,rec,ok);
 end;
 if ok then begin
