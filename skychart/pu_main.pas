@@ -770,6 +770,7 @@ type
     procedure OpenCatalogSetupAsync(Data: PtrInt);
     procedure RunCatgen(Sender: TObject);
     procedure RunCatgenAsync(Data: PtrInt);
+    procedure quicksearchTop(data: PtrInt);
 
   public
     { Public declarations }
@@ -10429,13 +10430,17 @@ begin
     if i >= 0 then
       quicksearch.Items.Delete(i);
     quicksearch.Items.Insert(0, Num);
-    quicksearch.ItemIndex:=quicksearch.Items.Count-1;
-    quicksearch.ItemIndex := 0;
+    Application.QueueAsyncCall(quicksearchTop,0);
   end
   else
   begin
     SetLPanel1(Format(rsNotFoundInAn, [Num]));
   end;
+end;
+
+procedure Tf_main.quicksearchTop(data: PtrInt);
+begin
+  quicksearch.ItemIndex := 0;
 end;
 
 procedure Tf_main.GetObjectCoord(obj: string; var lbl: string; var ra, de: double);
