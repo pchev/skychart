@@ -8187,7 +8187,10 @@ begin
         begin
           cfgm.TleUrlList.Clear;
           for i := 1 to j do
-            cfgm.TleUrlList.Add(ReadString(section, 'TleUrl' + IntToStr(i), ''));
+            buf:=ReadString(section, 'TleUrl' + IntToStr(i), '');
+            if pos('qsmag.zip',buf)>0 then
+              buf:=URL_QSMAG;
+            cfgm.TleUrlList.Add(buf);
         end;
         j := ReadInteger(section, 'ObsNameListCount', 0);
         cfgm.ObsNameList.Clear;
