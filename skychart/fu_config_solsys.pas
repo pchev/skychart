@@ -1758,6 +1758,7 @@ begin
   obj:=StringReplace(obj,'=','%3D',[rfReplaceAll]);
   obj:=StringReplace(obj,';','%3B',[rfReplaceAll]);
   dl := TDownloadDialog.Create(self);
+  dl.UserAgent:='Skychart/'+cdcversion + '-' + RevisionStr;
   dl.ScaleDpi:=UScaleDPI.scale;
   try
     if cmain.HttpProxy then

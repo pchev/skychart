@@ -12729,6 +12729,7 @@ begin
   Result := False;
   dl := TDownloadDialog.Create(self);
   dl.ScaleDpi:=UScaleDPI.scale;
+  dl.UserAgent:='Skychart/'+cdcversion + '-' + RevisionStr;
   try
     if cfgm.HttpProxy then
     begin

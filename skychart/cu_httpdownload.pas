@@ -27,7 +27,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 
 interface
 
-uses  u_util, blcksock, HTTPsend, FTPSend, ssl_openssl3,
+uses  u_util, u_constant, blcksock, HTTPsend, FTPSend, ssl_openssl3,
   Classes, SysUtils;
 
 const FSpeedPosMax=50;
@@ -147,7 +147,7 @@ try
     FSpeedPos:=0;
     FSpeedNum:=0;
 
-    http.UserAgent:='Wget/1.16.1 (linux-gnu)';
+    http.UserAgent:='Skychart/'+cdcversion + '-' + RevisionStr;
     http.OutputStream := nil;
     FFileSize := HTTP_FileSize(http, Furl);
 

@@ -102,6 +102,8 @@ type
     http: THTTPSend;
     ftp: TFTPSend;
     Timer1: TTimer;
+    procedure SetUserAgent(value: string);
+    function  GetUserAgent: string;
   protected
     procedure BtnDownload(Sender: TObject);
     procedure BtnCancel(Sender: TObject);
@@ -130,6 +132,7 @@ type
     property HttpDirectDownload: boolean read FHttpDirectDownload write FHttpDirectDownload;
     property ResponseText: string read FResponse;
     property Timeout: integer read FTimeout write FTimeout;
+    property UserAgent: string read GetUserAgent write SetUserAgent;
     property HttpProxy: string read Fproxy write Fproxy;
     property HttpProxyPort: string read Fproxyport write Fproxyport;
     property HttpProxyUser: string read Fproxyuser write Fproxyuser;
@@ -185,7 +188,7 @@ begin
   inherited Create(AOwner);
 
   http := THTTPSend.Create;
-  http.UserAgent := 'Wget/1.16.1 (linux-gnu)';
+  http.UserAgent := 'Skychart/4';
   ftp := TFTPSend.Create;
   Timer1 := TTimer.Create(self);
   Timer1.Enabled := False;
@@ -229,6 +232,16 @@ end;
 function TDownloadDialog.doScaleDpi(x: integer): integer;
 begin
   Result := round(x*FScaleDpi);
+end;
+
+procedure TDownloadDialog.SetUserAgent(value: string);
+begin
+  if http<>nil then http.UserAgent:=value;
+end;
+
+function  TDownloadDialog.GetUserAgent: string;
+begin
+  if http<>nil then result:=http.UserAgent else result:='';
 end;
 
 function TDownloadDialog.Execute: boolean;

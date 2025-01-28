@@ -449,6 +449,7 @@ begin
   end;
   if doDownload then begin
     dl := TDownloadDialog.Create(self);
+    dl.UserAgent:='Skychart/'+cdcversion + '-' + RevisionStr;
     dl.ScaleDpi:=UScaleDPI.scale;
     try
       if Fcmain.HttpProxy then
@@ -1023,6 +1024,7 @@ begin
   fn := slash(TempDir)+'catalog.list';
   DeleteFile(fn);
   dl := TDownloadDialog.Create(self);
+  dl.UserAgent:='Skychart/'+cdcversion + '-' + RevisionStr;
   dl.ScaleDpi:=UScaleDPI.scale;
   try
     if Fcmain.HttpProxy then
