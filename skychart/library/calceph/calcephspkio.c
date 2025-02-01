@@ -118,7 +118,7 @@ static int calceph_bff_convert_int(int x, enum SPKBinaryFileFormat reqconvert);
      Read the comment block.
      Read the segment block.
 
-  @return  1 on sucess and 0 on failure
+  @return  1 on success and 0 on failure
 
   @param file (inout) file descriptor.
   @param filename (in) A character string giving the name of an ephemeris data
@@ -195,7 +195,7 @@ int calceph_spk_open(FILE * file, const char *filename, struct SPICEkernel *res)
 /*--------------------------------------------------------------------------*/
 /*! Close the SPICE ephemeris file.
 
-  @return  1 on sucess and 0 on failure
+  @return  1 on success and 0 on failure
 
   @param eph (inout) descriptor of the ephemeris.
 */
@@ -228,7 +228,7 @@ void calceph_spk_close(struct SPKfile *eph)
 /*--------------------------------------------------------------------------*/
 /*! Prefetch the SPICE ephemeris file.
 
-  @return  1 on sucess and 0 on failure
+  @return  1 on success and 0 on failure
 
   @param pspk (inout) descriptor of the ephemeris.
 */

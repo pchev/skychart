@@ -157,7 +157,7 @@ begin
     rval := jpl_pleph(@de_eph, @de_iinfo, julian_date, planet_id,
       planet_center, planet_arr, velocity);
 
-    {Results are transfered to vector in array 0..2 and velocity 3..5
+    {Results are transferred to vector in array 0..2 and velocity 3..5
      to find range do - val_range := sqrt(sqr(planet_arr[0]) +  sqr(planet_arr[1]) + sqr(planet_arr[2]))
      Maintain result using barycenter
      }
@@ -395,7 +395,7 @@ end;
 **           radians and radians/day.                                       **
 **                                                                          **
 **           The option is available to have the units in km and km/sec.    **
-**           for this, set km=TRUE at the begining of the program.          **
+**           for this, set km=TRUE at the beginning of the program.         **
 **                                                                          **
 **     calc_velocity = boolean ;  if true,  velocities will be              **
 **           computed,  otherwise not.                                      **
@@ -471,7 +471,7 @@ begin
       if k = 2 then
         lista[9] := list_val;  //for earth,  moon state is needed
       if k = 12 then
-        lista[2] := list_val; //EMBary state additionaly
+        lista[2] := list_val; //EMBary state additionally
     end;
     //make call to state
     jpl_state(eph, ephinfo, et, lista, pv, rrd, 1);

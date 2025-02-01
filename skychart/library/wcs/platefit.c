@@ -252,7 +252,7 @@ struct WorldCoor *wcs0;
 }
 
 
-/* Compute the chisqr of the vector v, where v[i]=plate fit coeffients
+/* Compute the chisqr of the vector v, where v[i]=plate fit coefficients
  * chisqr is in arcsec^2
  */
 

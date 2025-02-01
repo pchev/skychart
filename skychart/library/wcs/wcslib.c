@@ -369,7 +369,7 @@
 *      the discontinuities that occur in all map projections.
 *
 *      Once one solution has been determined others may be found by subsequent
-*      invokations of wcsmix() with suitably restricted solution intervals.
+*      invocations of wcsmix() with suitably restricted solution intervals.
 *
 *      Note the circumstance which arises when the solution point lies at a
 *      native pole of a projection in which the pole is represented as a

@@ -524,7 +524,7 @@ begin
   except
     on E: Exception do begin
       cfgsc.msg := 'Draw chart, '+step+' error: ' + E.Message;
-      WriteTrace(cfgsc.msg); // better to write the error two time than risk the message is overwriten
+      WriteTrace(cfgsc.msg); // better to write the error two time than risk the message is overwritten
     end;
   end;
 end;
@@ -732,7 +732,7 @@ begin
     (30 / 86400)))   // 30 sec. limit for moving objects
     ) then
   begin
-    cfgsc.FindOk := False;    // last search no longuer valid
+    cfgsc.FindOk := False;    // last search no longer valid
   end;
   if ((FUpdObsList) and (abs(cfgsc.CurJDTT - cfgsc.LastJD) > (1 / 1440))) then
   begin
@@ -826,7 +826,7 @@ begin
   end;
   // atmospheric absorption
   cfgsc.absorption := AtmAbsorption(cfgsc.ObsAltitude/1000,cfgsc.ObsRH);
-  // diurnal abberation
+  // diurnal aberration
   sla_GEOC(p, cfgsc.ObsAltitude, cfgsc.ObsRAU, cfgsc.ObsZAU);
   cfgsc.Diurab := PI2 * cfgsc.ObsRAU * SOLSID / C;
   // horizon drawing
@@ -2834,7 +2834,7 @@ begin
           11:
           begin
             moonflatten:=flatten;
-            magn := -10;  // better to alway show a bright dot for the Moon
+            magn := -10;  // better to always show a bright dot for the Moon
             dist := cfgsc.Planetlst[j, ipla, 6];
             fplanet.MoonOrientation(jdt, ra, Dec, dist, pa, poleincl, sunincl, w1);
             Fplot.PlotPlanet(xx, yy, cfgsc.FlipX, cfgsc.FlipY, ipla,
@@ -4161,7 +4161,7 @@ begin
   end;   // case  rec.options.rectype
   if trim(rec.options.ShortName) = 'd2k' then
   begin
-    // ds2000 specific fileds
+    // ds2000 specific fields
     Desc := Desc + 'desc:' + tab;
     for i := 1 to 10 do
     begin
@@ -7005,7 +7005,7 @@ var
   xxx, yyy: single;
   rr, xx, yy, o, hh: integer;
 begin
-  // no precession, the label position is already for the rigth equinox
+  // no precession, the label position is already for the right equinox
   projection(ra, Dec, x1, y1, false, cfgsc);
   WindowXY(x1, y1, xxx, yyy, cfgsc);
   rr := round(r * cfgsc.BxGlb);
@@ -7346,7 +7346,7 @@ begin
   et := 440;  // equation of time on the equinox day (7m20s)
   dd := eq + et / 240;  // day number corresponding to RA=0
 
-  // mask , use same polygone as date
+  // mask , use same polygon as date
   for i := 0 to 365 do
   begin
     ar := deg2rad * day2deg * (i - dd);

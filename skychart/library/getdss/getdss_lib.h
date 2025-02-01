@@ -38,7 +38,7 @@ extern "C" {
 
 #include "errcode.h"
 
-/* comment the folowing line in case of compilation problem */
+/* comment the following line in case of compilation problem */
 #ifdef  UNIX
  const int _MAX_PATH = 255;
 #endif

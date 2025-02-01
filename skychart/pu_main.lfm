@@ -4298,7 +4298,7 @@ object f_main: Tf_main
     object FileRenameChart: TAction
       Category = 'File'
       Caption = 'FileRenameChart'
-      Hint = 'Rename the curent chart'
+      Hint = 'Rename the current chart'
       ImageIndex = 135
       OnExecute = FileRenameChartExecute
       ShortCut = 24658

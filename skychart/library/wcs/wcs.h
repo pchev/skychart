@@ -440,7 +440,7 @@ extern "C" {
 	double *pc);	/* Rotation matrix, ignored if NULL */
 
     void setwcserr(	/* Set WCS error message for later printing */
-	char *errmsg);	/* Error mesage < 80 char */
+	char *errmsg);	/* Error message < 80 char */
     void wcserr(void);	/* Print WCS error message to stderr */
 
     void setdefwcs(	/* Set flag to use AIPS WCS instead of WCSLIB */

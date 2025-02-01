@@ -649,7 +649,7 @@ const
   CSIDL_PERSONAL = $0005;   // My Documents
   CSIDL_APPDATA = $001a;   // <user name>\Application Data
   CSIDL_LOCAL_APPDATA = $001c;
-  // <user name>\Local Settings\Applicaiton Data (non roaming)
+  // <user name>\Local Settings\Application Data (non roaming)
 {$endif}
 begin
   startdir := ExtractFilePath(ParamStr(0));

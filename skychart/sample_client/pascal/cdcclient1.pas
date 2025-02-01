@@ -255,7 +255,7 @@ var
   Folder: array[0..MAX_PATH] of char;
 const
   CSIDL_APPDATA  = $001a;   // <user name>\Application Data
-  CSIDL_LOCAL_APPDATA = $001c; // <user name>\Local Settings\Applicaiton Data (non roaming)
+  CSIDL_LOCAL_APPDATA = $001c; // <user name>\Local Settings\Application Data (non roaming)
 {$endif}
 begin
 {$ifdef unix}

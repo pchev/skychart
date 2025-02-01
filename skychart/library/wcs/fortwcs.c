@@ -319,7 +319,7 @@ double	*diff;		/* Distance in degrees */
     w = w / 4.0;
     if (w > 1.0) w = 1.0;
 
-    /* Angle beween the vectors */
+    /* Angle between the vectors */
     *diff = 2.0 * atan2 (sqrt (w), sqrt (1.0 - w));
     *diff = raddeg (*diff);
     return;

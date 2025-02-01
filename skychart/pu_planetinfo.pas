@@ -1336,7 +1336,7 @@ var
   i,x: integer;
 begin
 
-  // Avoding flickering and possible AV
+  // Avoiding flickering and possible AV
   if NAV_isPainting then exit;
 
   NAV_isPainting := true;

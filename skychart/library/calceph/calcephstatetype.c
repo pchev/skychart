@@ -1,7 +1,7 @@
 /*-----------------------------------------------------------------*/
 /*! 
   \file calcephstatetype.c
-  \brief perform operations on the data strcture statetype.
+  \brief perform operations on the data structure statetype.
 
   \author  M. Gastineau 
            Astronomie et Systemes Dynamiques, IMCCE, CNRS, Observatoire de Paris. 
@@ -306,7 +306,7 @@ void calceph_PV_fms_stateType(double PV[ /*<=12 */ ], treal factor, const stateT
  =1 : Position+Velocity  are computed
  =2 : Position+Velocity+Acceleration  are computed
  =3 : Position+Velocity+Acceleration+Jerk  are computed
- =-1 : default behavior : Position and velocity for position quantites and time for time scales
+ =-1 : default behavior : Position and velocity for position quantities and time for time scales
  */
 /*--------------------------------------------------------------------------*/
 void calceph_stateType_set_0(stateType * state, int order)

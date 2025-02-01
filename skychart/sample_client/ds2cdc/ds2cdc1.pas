@@ -242,7 +242,7 @@ with Registry1 do begin
 end;
 Registry1.Free;
 if SkyChartRunning and (tcpport<>'0') then begin       // is app running
-   sleep(500);                                   // a litle more time to initialize
+   sleep(500);                                   // a little more time to initialize
    InitTcpIp;                                     // start communication
    skychartok:=true;
 end

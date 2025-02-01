@@ -253,7 +253,7 @@ begin
   r := sqrt(pv[0]*pv[0]+pv[1]*pv[1]+pv[2]*pv[2]);
   lt := r / clight;
   jd0 := jd0-(lt/secday);
-  // satelite position with light time
+  // satellite position with light time
   res := calceph_compute_order(ephsat, jd0, t , target, 0, CALCEPH_USE_NAIFID+CALCEPH_UNIT_KM+CALCEPH_UNIT_SEC, 0, pvt);
   if res=0 then exit;
   // satellite position from earth

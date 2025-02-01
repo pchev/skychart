@@ -1861,7 +1861,7 @@ FILE *diskfile;		/* Descriptor of file for which to find size */
  * Jul 10 1996	Allocate all headers
  * Aug 13 1996	Add unistd.h to include list
  * Aug 26 1996	Allow 1-d images; fix comments; fix arguments after lint
- * Aug 26 1996	Add IRAF header lingth argument to IRAFWIMAGE and IRAFWHEAD
+ * Aug 26 1996	Add IRAF header length argument to IRAFWIMAGE and IRAFWHEAD
  * Aug 28 1996	Clean up code in IRAF2FITS
  * Aug 30 1996	Use write instead of fwrite
  * Sep  4 1996	Fix write mode bug

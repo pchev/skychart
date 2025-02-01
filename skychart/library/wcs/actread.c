@@ -1170,7 +1170,7 @@ char	*filename;	/* Name of file for which to find size */
  *
  * Jan 11 2001	All printing is to stderr
  * Jun 14 2001	Drop spectral type approximation
- * Sep 11 2001	Change to single magnitude argeument
+ * Sep 11 2001	Change to single magnitude argument
  * Sep 11 2001	Add sort magnitude argument to actread()
  *
  * Apr  8 2002	Fix extraneous declaration of actsize()

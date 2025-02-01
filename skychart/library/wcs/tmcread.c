@@ -1216,7 +1216,7 @@ tmcsdec (starcat, star, zone, decx0)
 
 struct StarCat *starcat; /* Star catalog descriptor */
 struct Star *star;	/* Current star entry */
-int	zone;		/* RA zone in which search is occuring */
+int	zone;		/* RA zone in which search is occurring */
 double	decx0;		/* Declination in degrees for which to search */
 {
     int istar, istar1, istar2, nrep;

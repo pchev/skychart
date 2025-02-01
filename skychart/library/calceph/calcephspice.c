@@ -194,7 +194,7 @@ struct SPICEkernel *calceph_spice_addfile(struct calcephbin_spice *eph)
 /*--------------------------------------------------------------------------*/
 /*! Close the SPICE ephemeris file.
 
-  @return  1 on sucess and 0 on failure
+  @return  1 on success and 0 on failure
 
   @param eph (inout) descriptor of the ephemeris.
 */
@@ -228,7 +228,7 @@ static void calceph_spicekernel_close(struct SPICEkernel *eph)
 /*--------------------------------------------------------------------------*/
 /*! Close the SPICE ephemeris file.
 
-  @return  1 on sucess and 0 on failure
+  @return  1 on success and 0 on failure
 
   @param eph (inout) descriptor of the ephemeris.
 */
@@ -255,7 +255,7 @@ void calceph_spice_close(struct calcephbin_spice *eph)
 /*--------------------------------------------------------------------------*/
 /*! Prefetch the SPICE ephemeris file.
 
-  @return  1 on sucess and 0 on failure
+  @return  1 on success and 0 on failure
 
   @param eph (inout) descriptor of the ephemeris.
 */
@@ -290,7 +290,7 @@ static int calceph_spicekernel_prefetch(struct SPICEkernel *eph)
 /*--------------------------------------------------------------------------*/
 /*! Prefetch for reading any SPICE file
 
-  @return  1 on sucess and 0 on failure
+  @return  1 on success and 0 on failure
 
   @param eph (inout) descriptor of the ephemeris.
 */

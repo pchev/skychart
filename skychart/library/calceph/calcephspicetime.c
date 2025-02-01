@@ -230,7 +230,7 @@ int calceph_spice_gettimespan(const struct calcephbin_spice *eph, double *firstt
                 /*
                    - create a list of objects : unique center->target
                    - add the beginning and final time for each object and set
-                   continous or not
+                   continuous or not
                    - check if all objects have the same time span
                  */
                 for (listseg = pspk->list_seg; listseg != NULL; listseg = listseg->next)

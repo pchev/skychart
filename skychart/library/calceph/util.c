@@ -3,7 +3,7 @@
   \file util.c 
   \brief supplementary tools.
   
-   Implemenation of :
+   Implementation of :
    - swap byte order
 
   \author  M. Gastineau 

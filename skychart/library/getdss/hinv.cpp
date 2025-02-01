@@ -135,16 +135,16 @@ extern int hinv( int a[], const int nx, const int ny)
          }
       }
    /*
-    * Last      pass (k=0) has some differences:
+    * Last pass (k=0) has some differences:
     *
-    * Shif     t by 2 instead of 1
+    * Shift by 2 instead of 1
     *
-   * Use e     xplicit values for all variables to avoid unnecessary shifts etc:
+   * Use explicit values for all variables to avoid unnecessary shifts etc:
     *
-    *   N         bitN maskN prndN nrndN
-    *   0          1    -1     0     0  (note nrnd0 != prnd0-1)
-    *   1          2    -2     1     0
-    *   2          4    -4     2     1
+    *   N   bitN maskN prndN nrndN
+    *   0    1    -1     0     0  (note nrnd0 != prnd0-1)
+    *   1    2    -2     1     0
+    *   2    4    -4     2     1
     */
 
    /*

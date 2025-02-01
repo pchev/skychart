@@ -544,7 +544,7 @@ struct SPICEtablelinkbody
     int *array_spiceid;         /*!< array of "count_body" spice ids (allocated memory for "reserved_memory" spice ids) */
     int count_body;             /*!< number of objects */
     int reserved_memory;        /*!< number of reserved objects for the memory : e.g., array_spiceid is an array of "reserved_memory" ids but only "count_body" are valids */
-    int line_size;              /*!< number of elemnt per line (equals to reserved_memory) */
+    int line_size;              /*!< number of element per line (equals to reserved_memory) */
     int initemrat;              /*!< =1 => earth-moon system is initialized */
     struct SPICEcache *array_cache; /*!< array of "count_body" cache (one per ids) (allocated memory for "reserved_memory" caches)  */
     int *shortestpathmaxlink;   /*!< array of "count_body" integers: each integer is the current maximal link
@@ -677,7 +677,7 @@ int calceph_txtmk_open(FILE * file, const char *filename, struct calcephbin_spic
 /*! close for reading any SPICE file */
 void calceph_spice_close(struct calcephbin_spice *eph);
 
-/*! prefecth for reading any SPICE file */
+/*! prefetch for reading any SPICE file */
 int calceph_spice_prefetch(struct calcephbin_spice *eph);
 
 /*! return a non-zero value if eph could be accessed by multiple threads */

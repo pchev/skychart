@@ -2600,7 +2600,7 @@ struct TabTable *tabtable;	/* Tab table structure */
 }
 
 
-/* Search table of column headings for a particlar entry (case-dependent) */
+/* Search table of column headings for a particular entry (case-dependent) */
 
 int
 tabcol (tabtable, keyword)
@@ -2624,7 +2624,7 @@ char	*keyword;		/* Column heading to find */
 
 
 
-/* Search table of column headings for a particlar entry (case-independent) */
+/* Search table of column headings for a particular entry (case-independent) */
 
 int
 tabccol (tabtable, keyword)
@@ -2903,7 +2903,7 @@ char    *filename;      /* Name of file to check */
  * Dec 10 2003	If magnitude ends in L and is a number, add 100.0
  * Dec 12 2003	Fix bug in wcs2pix() call in tabbin()
  *
- * Jan  5 2004	If more than 15 digits in numberic ID, drop excess off front
+ * Jan  5 2004	If more than 15 digits in numeric ID, drop excess off front
  * Mar 16 2004	Be more clever about reading by number
  * Mar 19 2004	Make verbose flag global
  * Nov 17 2004	Accept SpT and spt before type for spectral type

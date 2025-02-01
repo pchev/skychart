@@ -106,7 +106,7 @@ static void calceph_propagateTwoBody(const stateType* PV, double dt, double GM, 
 
 /*--------------------------------------------------------------------------*/
 /*  Two body propagtor : compute the position/veclocity
- at the time dt using the GM and the intial position PV.
+ at the time dt using the GM and the initial position PV.
 
 @details
 
@@ -182,9 +182,9 @@ static void calceph_propagateTwoBody(const stateType* PV, double dt, double GM, 
     from the Discrete states (two body propagation).
 
  @param t1 (in) time of PV1
- @param PV1 (in) positon/velocity of the body a the time t1
+ @param PV1 (in) position/velocity of the body a the time t1
  @param t2 (in) time of PV2
- @param PV2 (in) positon/velocity of the body a the time t2
+ @param PV2 (in) position/velocity of the body a the time t2
  @param GM (in) GM of the central body
  @param TimeJD0  (in) Time in seconds from J2000 for which position is desired (Julian Date)
  @param Timediff  (in) offset time from TimeJD0 for which position is desired (Julian Date)

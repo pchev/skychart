@@ -56,7 +56,7 @@ if [ -z "$fpcbin" ]; then
 fi
 #  Try to locate fpcbin
 if [ -z "$fpcbin" ]; then
-   echo Warning! try to use locate to find FPC path, the option may not work depending your version of locate and the result my be completly wrong. It is better if you specify fpcbin= on the command line.
+   echo Warning! try to use locate to find FPC path, the option may not work depending your version of locate and the result my be completely wrong. It is better if you specify fpcbin= on the command line.
    export fpcbin=$(locate -n1 '\fpcmake'  | sed 's#/fpcmake##')
    echo fpcbin=$fpcbin
    read -p "[Press Enter to continue]"
@@ -78,7 +78,7 @@ if [ -z "$fpc" ]; then
 fi
 #  Try to locate fpc unit 
 if [ -z "$fpc" ]; then
-   echo Warning! try to use locate to find fpc source/units path, the option may not work depending your version of locate and the result my be completly wrong. It is better if you specify fpc= on the command line.
+   echo Warning! try to use locate to find fpc source/units path, the option may not work depending your version of locate and the result my be completely wrong. It is better if you specify fpc= on the command line.
    export fpc=$(locate -n1 rtl/Package.fpc | sed 's#/rtl/Package.fpc##')
    echo fpc=$fpc
    read -p "[Press Enter to continue]"
@@ -100,7 +100,7 @@ if [ -z "$lazarus" ]; then
 fi
 #  Try to locate Lazarus lcl
 if [ -z "$lazarus" ]; then
-   echo Warning! try to use locate to find LAZARUS path, the option may not work depending your version of locate and the result my be completly wrong. It is better if you specify lazarus= on the command line.
+   echo Warning! try to use locate to find LAZARUS path, the option may not work depending your version of locate and the result my be completely wrong. It is better if you specify lazarus= on the command line.
    export lazarus=$(locate -n1 lcl/lclclasses.pp | sed 's#/lcl/lclclasses.pp##')
    echo lazarus=$lazarus
    read -p "[Press Enter to continue]"

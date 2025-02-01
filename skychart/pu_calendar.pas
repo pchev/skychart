@@ -1666,7 +1666,7 @@ procedure Tf_calendar.RefreshPlanetGraph;
   var
     xts, xte: integer;  {x pos of start and end of rise/set area}
     //xmidday,
-    //xmiddnight  : Integer;   { the x positon that midday would have if shown}
+    //xmiddnight  : Integer;   { the x position that midday would have if shown}
     //  tFst, tLst: Double; {first and last times of Graph Axis}
     ygtop, ygbtm: integer; {y pos of top and bottom of graph area}
     i, ix, iy, ily: integer;
@@ -1872,7 +1872,7 @@ procedure Tf_calendar.RefreshPlanetGraph;
                 end
               end;
             end
-            else {some valid, but not all - shoud be able to work back fron the valid ones}
+            else {some valid, but not all - should be able to work back from the valid ones}
             if r[2].Valid and r[5].Valid then
               {but not both r3 and r4 are, so assume no night, all ast twilight}
               for i := 3 to 4 do
@@ -1935,7 +1935,7 @@ procedure Tf_calendar.RefreshPlanetGraph;
       ygBtm := Height - 3 - txtsz.cy;
       ytick := (ygbtm - ygtop) / (gr.RowCount - 3);
       {rc-2 gives data rows, -1 for intervals}
-      {ytick needs to be float to adequately fill the range - calc float then trun}
+      {ytick needs to be float to adequately fill the range - calc float then turn}
       ySkip := trunc(txtsz.cy / ytick) + 1;
       // Set up constants for Rise/set - rise set is 70% of width
       xte := ((Width * 7) div 10) - 2; {-2 provides gutter to next}
@@ -1950,7 +1950,7 @@ procedure Tf_calendar.RefreshPlanetGraph;
       tsc := xtick / xSInc;
       //    xmidday := trunc((0.5 - tstrt) * tsc);
 
-      //Set up the canvas - first darw the whole canvas black
+      //Set up the canvas - first draw the whole canvas black
       Pen.Style := psClear;
       Brush.Color := clBlack;
       Brush.Style := bsSolid;
@@ -2619,7 +2619,7 @@ var
     begin
       for j := 0 to grid.ColCount - 1 do
         buf := buf + grid.Cells[j, i] + tab;
-      {it will have a spurious last cloumn, but too bad!}
+      {it will have a spurious last column, but too bad!}
       buf := buf + LineEnding;
     end;
     {Now have added titles}

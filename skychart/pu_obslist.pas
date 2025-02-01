@@ -172,7 +172,7 @@ type
     procedure Refresh(data:PtrInt=0);
     // total number of object added or loaded from the file
     property ObjCount: integer read GetObjCount;
-    // number of object within visibilty criterion
+    // number of object within visibility criterion
     property RowCount: integer read GetRowcount;
     property DefaultList: string read FDefaultList;
     property ObjLabels: TStringList read FObjLabels;

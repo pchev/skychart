@@ -219,7 +219,7 @@ object f_config_pictures: Tf_config_pictures
             Align = alBottom
             AutoSize = False
             BorderSpacing.Left = 8
-            Caption = 'The image directory contain sub-directories with the same name as the DSO catalog. Each sub-directory contain FITS files with the name of the catalog objects.  This images are used to replace the DSO symbole on the map'
+            Caption = 'The image directory contain sub-directories with the same name as the DSO catalog. Each sub-directory contain FITS files with the name of the catalog objects.  This images are used to replace the DSO symbol on the map'
             ParentColor = False
             ParentFont = False
             WordWrap = True

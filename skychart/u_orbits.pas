@@ -51,7 +51,7 @@ const
    C_Moon       = 11;
 
    ///////////////////////////
-   // Satelittes
+   // Satellites
    ///////////////////////////
 
     // Mars
@@ -127,7 +127,7 @@ const
    C_Charon     = 36;
 
 
-   // Planets and main sattelites
+   // Planets and main satellites
 
 
 const
@@ -459,7 +459,7 @@ begin
   if Aipla = C_moon then
     ScaledPlanetMapDir_Individual (C_Earth, ADiameter);
 
-  // If look on Jupiter, ensure 4 main sattelites exists
+  // If look on Jupiter, ensure 4 main satellites exists
   if Aipla = C_Jupiter then
   begin
     ScaledPlanetMapDir_Individual (C_Io,       ADiameter);
@@ -468,7 +468,7 @@ begin
     ScaledPlanetMapDir_Individual (C_Callisto, ADiameter);
   end;
 
-  // If look on Saturn, ensure 5 main sattelites exists
+  // If look on Saturn, ensure 5 main satellites exists
   if Aipla = C_Saturn then
   begin
     ScaledPlanetMapDir_Individual (C_Mimas,     ADiameter);
@@ -752,7 +752,7 @@ begin
     else
       gw:=0;
 
-    // with small sattelites, it is mandatory to use maps for parent planet if
+    // with small satellites, it is mandatory to use maps for parent planet if
     //   it is background, otherwise
     // TODO: determinate planet is a background or not.
 
@@ -1051,7 +1051,7 @@ begin
 
 end;
 
-// Distance from desired planets/satelittes in AU
+// Distance from desired planets/satellites in AU
 function TOrbits.PlanetDistance(pla1,pla2: integer; JD: double): double;
 var
   p1,p2: TPlanData;

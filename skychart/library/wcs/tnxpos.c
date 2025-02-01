@@ -709,7 +709,7 @@ double	*coeff;		/* the coefficients of the fit */
     int ncoeff;		/* the number of coefficients */
     int i;
 
-    /* Exctract coefficients from data structure and calculate their number */
+    /* Extract coefficients from data structure and calculate their number */
     ncoeff = sf->ncoeff;
     for (i = 0; i < ncoeff; i++)
 	coeff[i] = sf->coeff[i];

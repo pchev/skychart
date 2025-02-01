@@ -3277,7 +3277,7 @@ double	*stdev; 	/* Standard deviation of fit (returned) */
 	    }
 	}
 
-    /* Construct matrices and calculate coeffients */
+    /* Construct matrices and calculate coefficients */
     array = (double *) calloc (nterms*nterms, sizeof(double));
     for (j = 0; j < nterms; j++) {
 	for (k = 0; k < nterms; k++) {
@@ -3383,7 +3383,7 @@ polcomp (xi, x0, norder, a)
 double	xi;	/* Independent variable */
 double	x0;	/* Offset to independent variable */
 int	norder;	/* Number of coefficients */
-double	*a;	/* Vector containing coeffiecients */
+double	*a;	/* Vector containing coefficients */
 {
     double xterm, x, y;
     int iterm;
@@ -3499,7 +3499,7 @@ char *from, *last, *to;
  *
  * Feb 26 2002	Fix agets() to work with keywords at start of line
  * Feb 26 2002	Add option in agets() to return value to end of line or /
- * Mar 25 2002	Fix bug in agets() to find second occurence of string 
+ * Mar 25 2002	Fix bug in agets() to find second occurrence of string 
  * Apr 10 2002	Add CatMagNum() to translate single letters to mag sequence number
  * May 13 2002	In agets(), allow arbitrary number of spaces around : or =
  * Jun 10 2002	In isrange(), return 0 if string is null or empty

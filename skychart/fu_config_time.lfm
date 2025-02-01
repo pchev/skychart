@@ -1381,7 +1381,7 @@ object f_config_time: Tf_config_time
             Height = 18
             Top = 145
             Width = 124
-            Caption = 'Recording extention'
+            Caption = 'Recording extension'
             Constraints.MaxHeight = 28
             ParentColor = False
             ParentFont = False

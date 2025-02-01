@@ -20,7 +20,7 @@
   \note M. Gastineau 25/11/10 : fix warning with sun studio compiler
   \note M. Gastineau 02/02/11 : fix warning with oracle studio compiler 12
   \bug  M. Gastineau 16/02/11 : fix packing with gcc 64 bits on solaris
-  \note M. Gastineau 20/05/11 : remove explicit depedencies to record size for JPL DExxx
+  \note M. Gastineau 20/05/11 : remove explicit dependencies to record size for JPL DExxx
   \note M. Gastineau 21/05/11 : support ephemerids files with asteroids
 */
 /*-----------------------------------------------------------------*/

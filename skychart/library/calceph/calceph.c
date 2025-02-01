@@ -419,7 +419,7 @@ int calceph_compute(t_calcephbin* pephbin, treal JD0, treal time, int target, in
   @param type (in) possible value :
              1 : prints the message and the program continues (default)
              2 : prints the message and the program exits (call exit(1))
-             3 : call the function C or F2003 userfunc and the programm continues
+             3 : call the function C or F2003 userfunc and the program continues
   @param userfunc (in) pointer to a function
              useful only if type = 3
              This function is called on error with a message as the first argument
@@ -439,7 +439,7 @@ void calceph_seterrorhandler(int type, void (*userfunc)(const char*))
   depending on the value of calceph_sglobal.usertypeerror,
              1 : prints the message and the program continues (default)
              2 : prints the message and the program exits (call exit(1))
-             3 : call the function userfunc and the programm continues
+             3 : call the function userfunc and the program continues
 
   @param format (in) format of the message (like printf)
 */
