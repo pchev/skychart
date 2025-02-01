@@ -13,7 +13,7 @@ unit demovcl1;
    To use this demo :
 
    -  Enter the full path for the BSC files
-   -  Enter the decimal coordinates RA1 and DE1 of the lower rigth corner
+   -  Enter the decimal coordinates RA1 and DE1 of the lower right corner
    -  Enter the decimal coordinates RA2 and DE2 of the upper left corner
    -  Press the Search button to show all the stars between the two corner.
    -  Beware to not select a too large area, the number of stars can break
@@ -122,7 +122,7 @@ begin
     if abs(min)<10 then m:='0'+trim(m);
     str(sec:2:0,s);
     if abs(sec)<9.5 then s:='0'+trim(s);
-    result := d+'°'+m+chr(39)+s+'"';
+    result := d+'ï¿½'+m+chr(39)+s+'"';
 end;
 
 procedure TForm1.Button1Click(Sender: TObject);
@@ -155,7 +155,7 @@ repeat
   // from all the files containing at least one star between the corner.
   // But all stars in this file are not necessarily between the corner.
   if (ar<ar1)or(ar>ar2)or(de<de1)or(de>de2) then continue;
-  // formating the result for the list
+  // formatting the result for the list
   str(int(lin.flam):2:0,buf);
   buf :=lin.cons+' '+lin.bayer+' '+buf;
   str(lin.hd:6,buf2);

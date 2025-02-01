@@ -1503,7 +1503,7 @@ int nbytes = 12; /* Number of bytes to reverse */
  * Jun 27 2001	Use RefCat codes for ucat
  * Jun 27 2001	Print stars as found in uacread() if nstarmax < 1
  * Jun 27 2001	Allocate udist only when larger array is needed
- * Sep 11 2001	Change to single magnitude argeument
+ * Sep 11 2001	Change to single magnitude argument
  * Sep 11 2001	Add sort magnitude argument to uacread()
  * Sep 19 2001	Drop fitshead.h; it is in wcs.h
  * Sep 21 2001	Add commented-out URL of ESO web catalog server

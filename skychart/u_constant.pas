@@ -78,7 +78,7 @@ const
   maxjddt = 8295424.5;
   minyeardt = -15000;
   maxyeardt = 18000;
-  // 1800   //limit for abberation calculation using Meeus function
+  // 1800   //limit for aberration calculation using Meeus function
   minjdabe = 2378496.5;
   maxjdabe = 2524593.5; // 2200
   minjdnut = 2378496.5; // 1800   //limit for nutation calculation using Meeus function
@@ -1454,7 +1454,7 @@ var
   cdcwcs_sky2xy: Tcdcwcs_sky2xy;
 
 const
-  maxfitslist = 15;  // must corespond to value in cdcwcs.c
+  maxfitslist = 15;  // must correspond to value in cdcwcs.c
 
 //  libpasspice
 const
@@ -1590,7 +1590,7 @@ var
   xplanet_dir: string = 'data\planet';
 {$endif}
 
-// Text formating constant
+// Text formatting constant
 const
   html_h =
     '<HTML><HEAD><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /></HEAD><body><div>';
@@ -1625,7 +1625,7 @@ const
 
 const
   MaxCmdArg = 10;
-  // Main Commands, excuted form main form
+  // Main Commands, executed form main form
   numcmdmain = 20;
   maincmdlist: array[1..numcmdmain, 1..3] of string = (
     ('NEWCHART', '1', 'chart_name'),

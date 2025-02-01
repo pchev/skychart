@@ -1532,7 +1532,7 @@ imswapped ()
  * Apr  3 2006	Fix bad cast in unisigned int section of addvec()
  * May  3 2006	Code fixes in addpix and multpix suggested by Robert Lupton
  * Jun  8 2006	Drop erroneous second im2 assignment without offset in addvec()
- * Jun 20 2006	Fix typos masquerading as unitialized variables
+ * Jun 20 2006	Fix typos masquerading as uninitialized variables
  *
  * Jan  8 2007	Include fitsfile.h instead of imio.h
  * Jun 11 2007	Add minvec() and speed up maxvec()

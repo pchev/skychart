@@ -259,7 +259,7 @@ void calceph_interpolate_chebyshev_order_1_stride_3(double f[/*3*/], int N, cons
 /* ! interpolate the function f using the coefficients A[0:NA] and the chebychev polynomial using Up[1:N-1]
  for 3 components. The stride between the data is nstride
  @param A (in) array of N coefficients
- @param NA (in) number of elements per comonent of A
+ @param NA (in) number of elements per component of A
  @param Up (in) array of N polynomials evaluated at the same point
  @param N (in) degree of the chebyshev Polynomial (size of Up)
  @param f (out) array of 3 interpolated values

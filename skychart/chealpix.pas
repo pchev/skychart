@@ -56,7 +56,7 @@ interface
    * chealpix.h
     }
 {$ifndef CHEALPIX_H}
-{ C++ extern C conditionnal removed }
+{ C++ extern C conditional removed }
   {! \defgroup chealpix HEALPix C interface
       All angles are in radian, all \a theta values are colatitudes, i.e. counted
       downwards from the North Pole. \a Nside can be any positive number for

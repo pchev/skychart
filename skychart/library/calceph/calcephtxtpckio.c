@@ -139,7 +139,7 @@ void calceph_txtpck_debug(const struct TXTPCKfile *header)
 /*--------------------------------------------------------------------------*/
 /*!  Read the constants of the text PCK kernel file
 
-  @return  1 on sucess and 0 on failure
+  @return  1 on success and 0 on failure
 
  @param file (inout) file descriptor.
  @param filename (in) A character string giving the name of an ephemeris data file.
@@ -156,7 +156,7 @@ int calceph_txtpck_open(FILE * file, const char *filename, struct calceph_locale
 /*--------------------------------------------------------------------------*/
 /*!  Read the constants of the text PCK kernel file
 
-  @return  1 on sucess and 0 on failure
+  @return  1 on success and 0 on failure
 
  @param file (inout) file descriptor. the file is closed on success
  @param filename (in) A character string giving the name of an ephemeris data file.
@@ -393,7 +393,7 @@ int calceph_txtpck_load(FILE * file, const char *filename, const char *header, s
 
 /*--------------------------------------------------------------------------*/
 /*! append listvalue to the end of values of pnewcst 
- @param pnewcst (in) contant to update
+ @param pnewcst (in) constant to update
  @param listvalue (in) list value to move
 */
 /*--------------------------------------------------------------------------*/
@@ -1119,10 +1119,10 @@ static double calceph_strtod(const char *nptr, char **endptr, struct calceph_loc
 /*--------------------------------------------------------------------------*/
 /*! merge the incremental assignment from newkernel to the existing constants from the list
 
-   @return  1 on sucess and 0 on failure
+   @return  1 on success and 0 on failure
 
  @param list (inout) exiting list to update, except the element equals to newkernel
- @param newkernel (in) take increment assigment from this list
+ @param newkernel (in) take increment assignment from this list
 */
 /*--------------------------------------------------------------------------*/
 int calceph_txtpck_merge_incrementalassignment(struct SPICEkernel *list, struct SPICEkernel *newkernel)

@@ -879,7 +879,7 @@ begin
   readdatabase290:=true;
   repeat
     repeat
-      if  ( (file_open=0) or {file_open otherwise sometimes the file routine get stucked}
+      if  ( (file_open=0) or {file_open otherwise sometimes the file routine get stuck}
             (nr_records<=0) or {here otherwise star at 0:0}
             ((searchmode<>'T') and (mag2>maxmag))
            ) then
@@ -1050,13 +1050,13 @@ begin
     delta_ra:=abs(ra2-telescope_ra); if delta_ra>pi then delta_ra:=pi*2-delta_ra;
     if delta_ra>pi/3 then
     begin  {far away in ra}
-      ang_sep(telescope_ra,telescope_dec,ra2,dec2, sep );{seperation using rigorous method}
+      ang_sep(telescope_ra,telescope_dec,ra2,dec2, sep );{separation using rigorous method}
       in_sight:=sep<(field_diameter * 1.5/2);{star in sight?}
     end
     else
     begin {nearby in ra}
-      sep:=(sqr( delta_ra*cos(dec2) ) + sqr(dec2-telescope_dec));{calculate seperation using approximate method for shorter distances}
-      in_sight:=sep<sqr(field_diameter * 1.5/2); {{star in sight?  sqr(field_diameter) is faster then sqrt(seperation)}
+      sep:=(sqr( delta_ra*cos(dec2) ) + sqr(dec2-telescope_dec));{calculate separation using approximate method for shorter distances}
+      in_sight:=sep<sqr(field_diameter * 1.5/2); {{star in sight?  sqr(field_diameter) is faster then sqrt(separation)}
     end;
   until ((searchmode='T') or (in_sight)); {text search or in_sight, skip when too far from centre screen and go to next line}
    {searchmode=T text search}

@@ -315,7 +315,7 @@ function jupsat(jd: double; b: Tbody; var X, Y, Z: double): boolean;
     om3 := (119.194241 - 0.00717703155 * t) * deg_to_rad;
     om4 := (322.618633 - 0.00175933880 * t) * deg_to_rad;
 
-    // longitude of origin of coordingate (Jupiter's pole)
+    // longitude of origin of coordinate (Jupiter's pole)
     psi := (316.518203 - 2.08362E-06 * t) * deg_to_rad;
 
     // mean anomaly of Saturn

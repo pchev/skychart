@@ -56,7 +56,7 @@
  * Subroutine:  fk5prec (ep0, ep1, ra, dec) Precession ep0 to ep1, FK5 system
  * Subroutine:  fk4prec (ep0, ep1, ra, dec) Precession ep0 to ep1, FK4 system
  * Subroutine:  s2v3 (rra, rdec, r, pos) RA, Dec, Distance to Cartesian
- * Subroutine:  v2s3 (pos, rra, rdec, r) Cartesion to RA, Dec, Distance
+ * Subroutine:  v2s3 (pos, rra, rdec, r) Cartesian to RA, Dec, Distance
  * Subroutine:  rotmat (axes, rot1, rot2, rot3, matrix) Rotation angles to matrix
  */
 

@@ -353,7 +353,7 @@ Const
 
     WDT_OVRFLOW_SAFETYOUT = $8000; (* enable safteyout while WDT overflow *)
 (*-------- Constants for PCI-8554 -----------*)
-(*-- Clock Source of Cunter N --*)
+(*-- Clock Source of Counter N --*)
     ECKN    = 0;
     COUTN_1 = 1;
     CK1     = 2;
@@ -381,9 +381,9 @@ Const
     P9111_CHANNEL_EDI = 1;
 
 (*-- EDO function  --*)
-    P9111_EDO_INPUT   = 1;   (* EDO port set as Input port                *)
-    P9111_EDO_OUT_EDO = 2;   (* EDO port set as Output port               *)
-    P9111_EDO_OUT_CHN = 3;   (* EDO port set as channel number ouput port *)
+    P9111_EDO_INPUT   = 1;   (* EDO port set as Input port                 *)
+    P9111_EDO_OUT_EDO = 2;   (* EDO port set as Output port                *)
+    P9111_EDO_OUT_CHN = 3;   (* EDO port set as channel number output port *)
 
 (*-- Trigger Mode  --*)
     P9111_TRGMOD_SOFT = 0;   (* Software Trigger Mode  *)

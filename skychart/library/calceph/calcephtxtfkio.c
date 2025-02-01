@@ -138,7 +138,7 @@ static void calceph_txtfk_debug(const struct TXTFKfile *header)
 /*--------------------------------------------------------------------------*/
 /*!  Read the constants of the text Frame kernel (FK) file
 
-   @return  1 on sucess and 0 on failure
+   @return  1 on success and 0 on failure
 
    @param file (inout) file descriptor. Closed on exit if success.
    @param filename (in) A character string giving the name of an ephemeris data file.
@@ -830,7 +830,7 @@ static void calceph_txtfk_creatematrix_axes3(double matrix[3][3], const double A
 /*--------------------------------------------------------------------------*/
 /*! create the rotation matrix of angle A around the axis k
   return 0 if k is invalid
-  return 1 on sucess
+  return 1 on success
   @param matrix (out) rotation matrix (3x3)
   @param k (in) axis number (from 1 to 3)
   @param A (in) angles.

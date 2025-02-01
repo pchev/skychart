@@ -3006,7 +3006,7 @@ object f_catgen: Tf_catgen
         Top = 352
         Width = 349
         AutoSize = False
-        Caption = 'For a large catalog always select "Binary". For a small dataset that change frequently select "Text", this let you edit the file and see the result immediatly on the chart without the need to rerun this utility.'
+        Caption = 'For a large catalog always select "Binary". For a small dataset that change frequently select "Text", this let you edit the file and see the result immediately on the chart without the need to rerun this utility.'
         ParentColor = False
         WordWrap = True
       end

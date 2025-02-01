@@ -14,7 +14,7 @@
   History:
  \bug M. Gastineau 01/03/05 : thread-safe version
  \bug M. Gastineau 09/09/05 : support of the libration
- \bug M. Gastineau 18/11/05 : incrase the number of coefficients
+ \bug M. Gastineau 18/11/05 : increase the number of coefficients
  \bug M. Gastineau 22/03/06 : support of non-native "endian" files
  \bug M. Gastineau 11/05/06 : support of DE411 and DE414
  \bug M. Gastineau 13/11/06 : support of km or UA units for  INPOP
@@ -23,7 +23,7 @@
  \bug M. Gastineau 07/10/09 : fix i/o error detection and handle large files >2GB
     on 32-bits operating systems
  \note M. Gastineau 04/05/10 : support DE423
- \note M. Gastineau 20/05/11 : remove explicit depedencies to record size for JPL DExxx
+ \note M. Gastineau 20/05/11 : remove explicit dependencies to record size for JPL DExxx
  \note M. Gastineau 21/05/11 : support asteroid in INPOP file format 2.0
  \note M. Gastineau 10/06/11 : support SPICE kernel file
 */
@@ -129,7 +129,7 @@ t_calcephbin *calceph_open(const char *fileName)
 
   @return descriptor of the ephemeris
 
-  @param n (in) number of elemnts of the array fileName.
+  @param n (in) number of elements of the array fileName.
   @param fileName_array (in) array of character strings giving the name of the n ephemeris data files.
 */
 /*--------------------------------------------------------------------------*/
@@ -144,7 +144,7 @@ t_calcephbin *calceph_open_array(int n, const char *const fileName_array[ /*n */
 
   @return descriptor of the ephemeris
 
-  @param n (in) number of elemnts of the array fileName.
+  @param n (in) number of elements of the array fileName.
   @param fileName_array (in) array of character strings giving the name of the n ephemeris data files.
 */
 /*--------------------------------------------------------------------------*/

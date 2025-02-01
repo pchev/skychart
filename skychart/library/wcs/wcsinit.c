@@ -34,7 +34,7 @@
  * Subroutine:	wcsninitn (hstring,lh, name) sets a WCS structure for specified WCS
  * Subroutine:	wcsinitc (hstring, mchar) sets a WCS structure if multiple
  * Subroutine:	wcsninitc (hstring,lh,mchar) sets a WCS structure if multiple
- * Subroutine:	wcschar (hstring, name) returns suffix for specifed WCS
+ * Subroutine:	wcschar (hstring, name) returns suffix for specified WCS
  * Subroutine:	wcseq (hstring, wcs) set radecsys and equinox from image header
  * Subroutine:	wcseqm (hstring, wcs, mchar) set radecsys and equinox if multiple
  */

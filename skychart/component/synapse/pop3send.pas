@@ -106,7 +106,7 @@ type
 
     {:You can call any custom by this method. Call Command without trailing CRLF.
       If MultiLine parameter is @true, multilined response are expected.
-      Result is @true on sucess.}
+      Result is @true on success.}
     function CustomCommand(const Command: string; MultiLine: Boolean): boolean;
 
     {:Call CAPA command for get POP3 server capabilites.

@@ -374,7 +374,7 @@ int FC_FUNC_(f90calceph_sgettimespan, F90CALCEPH_SGETTIMESPAN) (double *firsttim
 /********************************************************/
 /*! store, in version, the file version of the ephemeris file.
    return 0 if the file version was not found.
-   return 1 on sucess.
+   return 1 on success.
 
   @param version (out) fortran string of the version of the ephemeris
   file
@@ -389,7 +389,7 @@ int FC_FUNC_(f90calceph_sgetfileversion, F90CALCEPH_SGETFILEVERSION) (char versi
 /********************************************************/
 /*! store, in version, the file version of the ephemeris file.
    return 0 if the file version was not found.
-   return 1 on sucess.
+   return 1 on success.
 
   @param version (out) fortran string of the version of the ephemeris
   file
@@ -1178,7 +1178,7 @@ int FC_FUNC_(f90calceph_getorientrecordindex2,
 /********************************************************/
 /*! store, in version, the file version of the ephemeris file.
    return 0 if the file version was not found.
-   return 1 on sucess.
+   return 1 on success.
 
   @param eph (inout) ephemeris descriptor
   @param version (out) fortran string of the version of the ephemeris
@@ -1195,7 +1195,7 @@ int FC_FUNC_(f90calceph_getfileversion,
 /********************************************************/
 /*! store, in version, the file version of the ephemeris file.
    return 0 if the file version was not found.
-   return 1 on sucess.
+   return 1 on success.
 
   @param eph (inout) ephemeris descriptor
   @param szversion (out) fortran string of the version of the ephemeris
@@ -1217,7 +1217,7 @@ int f2003calceph_getfileversion(t_calcephbin * eph, char version[CALCEPH_MAX_CON
   @param type (in) possible value :
              1 : prints the message and the program continues (default)
              2 : prints the message and the program exits (call exit(1))
-             3 : call the function userfunc and the programm continues
+             3 : call the function userfunc and the program continues
   @param userfunc (in) pointer to a function
              useful only if type = 3
              This function is called on error with a message as the first

@@ -938,7 +938,7 @@ int	h;	/* Original height of image */
     else if (rotate > 360)
 	rotate = rotate - 360;
 
-    /* Rotate star postions one at a time */
+    /* Rotate star position one at a time */
     for (istar = 0; istar < nstars; istar++)
 	rotstar (&xa[istar], &ya[istar], w, h);
 
@@ -964,7 +964,7 @@ int	h;	/* Original height of image */
     x2 = x1;
     y2 = y1;
 
-    /* Rotate star postions one at a time */
+    /* Rotate star position one at a time */
 
     /* Mirror coordinates without rotation */
     if (rotate < 45.0 && rotate > -45.0) {

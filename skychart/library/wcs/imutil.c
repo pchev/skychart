@@ -11,7 +11,7 @@
 /* char *FiltFITS(header, image, filter, xsize, ysize, nlog)
  *	Return filtered image buffer
  * char *FillFITS(header, image, filter, xsize, ysize, nlog)
- *	Return image bufer with bad pixels replaced by filter value
+ *	Return image buffer with bad pixels replaced by filter value
  * SetBadFITS (header, image, badheader, badimage, nlog)
  *	Set bad pixels in image to BLANK using bad pixel file
  * SetBadVal (header, image, minpixval, maxpixval, nlog)
@@ -1089,7 +1089,7 @@ int	ndy;	/* Number of rows over which to compute the median */
     if (jy2 > ny)
 	jy2 = ny;
 
-    /* Intitialize actual number of pixels used for this pixel */
+    /* Initialize actual number of pixels used for this pixel */
     n = 0;
 
     /* Set up working vector for this pixel */

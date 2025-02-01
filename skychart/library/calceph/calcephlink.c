@@ -275,7 +275,7 @@ int calceph_spice_tablelinkbody_locatelinktime_complex(struct SPICEtablelinkbody
     }
     if (res)
     {
-        /* acquire the ressource */
+        /* acquire the resource */
 #if HAVE_PTHREAD
         pthread_mutex_lock(&(table->mutex));
 #elif HAVE_WIN32API
@@ -285,7 +285,7 @@ int calceph_spice_tablelinkbody_locatelinktime_complex(struct SPICEtablelinkbody
         {
             res = calceph_spice_tablelinkbody_makecomplexlink(table, postarget, poscenter);
         }
-        /* release the ressource */
+        /* release the resource */
 #if HAVE_PTHREAD
         pthread_mutex_unlock(&(table->mutex));
 #elif HAVE_WIN32API

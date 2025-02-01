@@ -136,11 +136,11 @@ extern "C"
   CALCEPH_VERSION_BUILDERSTRING(CALCEPH_VERSION_BUILDERSTRING_CAT(                                      \
                   CALCEPH_VERSION_MAJOR, CALCEPH_VERSION_MINOR, CALCEPH_VERSION_PATCH))
 
-/*! define the maximum number of characters (includeing the trailing '\0')
+/*! define the maximum number of characters (including the trailing '\0')
  that the name of a constant could contain. */
 #define CALCEPH_MAX_CONSTANTNAME 33
 
-/*! define the maximum number of characters (includeing the trailing '\0')
+/*! define the maximum number of characters (including the trailing '\0')
  that the value of a constant could contain. */
 #define CALCEPH_MAX_CONSTANTVALUE 1024
 

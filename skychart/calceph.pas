@@ -80,10 +80,10 @@ interface
     CALCEPH_VERSION_PATCH = 1;
     CALCEPH_VERSION_STRING = '3.5.1';
 
-  {! define the maximum number of characters (includeing the trailing '\0')
+  {! define the maximum number of characters (including the trailing '\0')
    that the name of a constant could contain.  }
     CALCEPH_MAX_CONSTANTNAME = 33;    
-  {! define the maximum number of characters (includeing the trailing '\0')
+  {! define the maximum number of characters (including the trailing '\0')
    that the value of a constant could contain.  }
     CALCEPH_MAX_CONSTANTVALUE = 1024;
 

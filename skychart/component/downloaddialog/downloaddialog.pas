@@ -387,7 +387,7 @@ procedure TDownloadDialog.doCancel(Sender: TObject);
 begin
 
   if not okButton.Visible then
-  begin // transfert in progress
+  begin // transfer in progress
     DownloadDaemon.onProgress := nil;
     DownloadDaemon.onDownloadComplete := nil;
 

@@ -933,7 +933,7 @@ static void setCoordSysHP(char coordsys,char *coordsys9)
   else if (coordsys=='E')
     strcpy (coordsys9,"E       ");
   else if ((coordsys!='C')&&(coordsys!='Q'))
-    fprintf(stderr, "%s (%d): System Cordinates are not correct"
+    fprintf(stderr, "%s (%d): System Coordinates are not correct"
                     "(Galactic,Ecliptic,Celestial=Equatorial). "
                     " Celestial system was set.\n", __FILE__, __LINE__);
   }

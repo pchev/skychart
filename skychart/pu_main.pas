@@ -7219,7 +7219,7 @@ begin
     if MessageDlg('Wrong version','You are trying to run Skychart version '+cdcver+
                ' but the configuration file '+Configfile+' is for a more recent version '+Config_Version+crlf+
                'Please use the program options --config= and --userdir= to select another configuration '+
-               'if you realy want to do that.'+crlf+
+               'if you really want to do that.'+crlf+
                'Ignoring this error can break your setup!'
                ,mtError,[mbAbort,mbIgnore],0)
        = mrAbort

@@ -275,7 +275,7 @@ begin
             break;
           msg := 'RecvString';
           s := RecvString(500);
-          //if s<>'' then writetrace(s);   // for debuging only, not thread safe!
+          //if s<>'' then writetrace(s);   // for debugging only, not thread safe!
           if lastError = 0 then
           begin
             if (uppercase(s) = 'QUIT') or (uppercase(s) = 'EXIT') then

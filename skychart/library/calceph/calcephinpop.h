@@ -236,7 +236,7 @@ typedef struct
     /* following data for prefetching */
     double *mmap_buffer;        /*!< preallocated buffer with mmap */
     size_t mmap_size;           /*!< size of mmap_buffer in bytes */
-    int mmap_used;              /*!< = 1 if mmap was used instaed of malloc */
+    int mmap_used;              /*!< = 1 if mmap was used instead of malloc */
     int prefetch;               /*!< = 1 => the file is prefetched */
 } t_memarcoeff;
 
@@ -263,9 +263,9 @@ typedef struct
     int numAngMomPlaRecord;     /*!< number of records used for angular momentum of the planets in the file */
     int nCompAngMomPla;         /*!<  number of components used for each angular momentum of the planets */
     int locCoeffAngMomPlaRecord;    /*!<  location of the first record used for the coefficients of the
-                                       angular momemtum of the planets. */
+                                       angular momentum of the planets. */
     int coeffPtr[12][3];        /*!< location, number of coefficients and number of granules for the angular
-                                   momemtum of the planets inside a record */
+                                   momentum of the planets inside a record */
     int sizeAngMomPlaRecord;    /*!< record size of the angular momentum of the planets (unit: 64-bit
                                    floating-point numbers).  */
 } t_InfoPamRecord;

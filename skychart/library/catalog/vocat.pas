@@ -496,7 +496,7 @@ end else begin
             end;
          end;
       end;
-      if (field_size=j)or((field_size=-1)and(pos('phys.angSize',fielddata.ucd)=1)and(pos('error',fielddata.ucd)=0)) then begin  //first dimmension
+      if (field_size=j)or((field_size=-1)and(pos('phys.angSize',fielddata.ucd)=1)and(pos('error',fielddata.ucd)=0)) then begin  //first dimension
         u:=angleunits(fielddata.units,l);
         if (u>0) then begin
            field_size:=j;

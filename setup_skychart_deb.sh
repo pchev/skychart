@@ -62,5 +62,5 @@ sudo sh -c "echo deb [signed-by=/usr/local/share/keyrings/skychart.gpg] http://w
 
 echo ""
 echo "The repository is defined to use the $version packages."
-echo "You can now use your prefered package manager to install Skychart."
+echo "You can now use your preferred package manager to install Skychart."
 echo "If you want to continue from the command line do not forget to run: sudo apt update"

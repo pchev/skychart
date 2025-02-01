@@ -91,7 +91,7 @@ terms.
 /*--------------------------------------------------------------------------*/
 /*! store, in szversion, the file version of the ephemeris file.
    return 0 if the file version was not found.
-   return 1 on sucess.
+   return 1 on success.
 
   @param eph (inout) ephemeris descriptor
   @param szversion (out) null-terminated string of the version of the ephemeris

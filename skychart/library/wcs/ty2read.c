@@ -1429,7 +1429,7 @@ char	*filename;	/* Name of file for which to find size */
  * Jun 15 2001	In ty2reg(), add 0.1 to tabulated region limits
  * Jun 19 2001	When no region found, print RA and Dec limits used
  * Jun 27 2001	Allocate gdist only if needed
- * Sep 11 2001	Change to single magnitude argeument
+ * Sep 11 2001	Change to single magnitude argument
  * Sep 11 2001	Add sort magnitude argument to uacread()
  * Nov 20 2001	Change cos(degrad()) to cosdeg()
  * Dec  3 2001	Change default directory to /data/astrocat/tycho2

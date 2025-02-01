@@ -411,7 +411,7 @@ begin
       obmp.Transparent := False;
       obmp.Width := w;
       obmp.Height := h;
-      cnv := obmp.Canvas; // defered plot to bitmap
+      cnv := obmp.Canvas; // deferred plot to bitmap
     end;
 
   end;
@@ -1244,7 +1244,7 @@ begin
   Here's where we break out the plot routines for each type of deep sky object
   we do it this way so that we can (in future) plot using different symbol sets
   it also clears the way for introducing more deep sky object types based on the CdS
-  heirarchy.
+  hierarchy.
 }
   if not cfgplot.Invisible then  // if its above the horizon...
   begin
@@ -5032,7 +5032,7 @@ end;
 procedure TSplot.PlotDSOBN(Ax, Ay: single; Adim, Ama, Asbr, Apixscale: double;
   Atyp: integer; Amorph: string; forcecolor: boolean; col: Tcolor; alpha:byte);
 {
-  Plot bright nebula - both emmission and reflection are plotted the same
+  Plot bright nebula - both emission and reflection are plotted the same
   in the future, we'll separate these out, maybe even for Herbig-Haro and variable nebulae
 }
 var

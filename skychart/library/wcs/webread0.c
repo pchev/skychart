@@ -881,7 +881,7 @@ FileINetParse(file, port, adrinet)
     strcpy(hostname, file);
 
 #ifdef msdos
-    /* This is a DOS disk discriptor, not a machine name */
+    /* This is a DOS disk descriptor, not a machine name */
     if ((!(file[0] == '.')) && file[1] == ':')
 	return 0;
 #endif

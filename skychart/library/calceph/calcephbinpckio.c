@@ -109,7 +109,7 @@ static int calceph_binpck_readsegment_header(FILE * file, const char *filename, 
      Read the comment block.
      Read the segment block.
      
-  @return  1 on sucess and 0 on failure
+  @return  1 on success and 0 on failure
   
   @param file (inout) file descriptor.   
   @param filename (in) A character string giving the name of an ephemeris data file.   
@@ -185,7 +185,7 @@ int calceph_binpck_open(FILE * file, const char *filename, struct SPICEkernel *r
 /*--------------------------------------------------------------------------*/
 /*! Close the SPICE ephemeris file.
      
-  @return  1 on sucess and 0 on failure
+  @return  1 on success and 0 on failure
   
   @param eph (inout) descriptor of the ephemeris.  
 */
@@ -280,7 +280,7 @@ static int calceph_binpck_readlistsegment(FILE * file, const char *filename, str
     pnew = (struct SPKSegmentList *) malloc(sizeof(struct SPKSegmentList));
     if (pnew == NULL)
     {
-        fatalerror("Can't allocate memory for a segment descritor\n");
+        fatalerror("Can't allocate memory for a segment descriptor\n");
         return 0;
     }
     /* insert in the list */

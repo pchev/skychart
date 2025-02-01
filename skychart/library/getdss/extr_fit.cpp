@@ -351,9 +351,9 @@ int DLL_FUNC parse_image_line( ENVIRONMENT_DATA *edata, const char *iline)
 /* 2013-6-5 Han Kleijn=HK                                                */
 /* Changed the datatype of crpix1 and crpix2 to float and revised           */
 /* the old WCS and new WCS calculation to be accurate on sub pixel level    */
-/* for subsample=1 but also for subsample=2,4 ....                       */
-/* Brought the CRPIX1, 2 value to exact centre.                        */
-/* Corrected for difference in origin for plate postion at (0.0,0.0) and    */
+/* for subsample=1 but also for subsample=2,4 ....                          */
+/* Brought the CRPIX1, 2 value to exact centre.                             */
+/* Corrected for difference in origin for plate position at (0.0,0.0) and   */
 /* FITS origin at (0.5,0.5). This introduced in previous versions a 1.7/2   */
 /* arc seconds error in the WCS RA or DEC readings.                         */
 /* Note that calls to AMDPOS are based on plate coordinates with origin     */
@@ -762,7 +762,7 @@ int DLL_FUNC extract_realsky_as_fits( const PLATE_DATA *pdata,
       1 pixel -> 1.7 arcseconds we can ignore safely spherical effects.
       Check out one pixel just to the left and one just above the crpix: */
    // 05 june-2013,HK, WCS calculation heavily modified to add missing cos and sin terms in the CD matrix calculation.
-   //                  Corrected for orgin error by using plate coordinate system with 0,0 origin for centre calculation.
+   //                  Corrected for origin error by using plate coordinate system with 0,0 origin for centre calculation.
 
    double ra_2, dec_2, crota1, crota2, delta_ra, delta_dec, cdelt1,cdelt2;
 

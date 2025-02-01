@@ -222,7 +222,7 @@ extern "C" {
 	char* hstring,		/* FITS header string (modified) */
 	const char* keyword,	/* FITS keyword */
 	const char* cval);	/* Character string value */
-    int hputm(		/* Quoted character string, mutiple keywords */
+    int hputm(		/* Quoted character string, multiple keywords */
 	char* hstring,		/* FITS header string (modified) */
 	const char* keyword,	/* FITS keyword */
 	const char* cval);	/* Character string value */
@@ -354,7 +354,7 @@ extern int hputra();	/* Right ascension in degrees into hh:mm:ss.sss */
 extern int hputdec();	/* Declination in degrees into dd:mm:ss.ss */
 extern int hputl();	/* 0 -> F, else T FITS logical entry */
 extern int hputs();	/* Quoted character string */
-extern int hputm();	/* Quoted character string into mutiple keywords */
+extern int hputm();	/* Quoted character string into multiple keywords */
 extern int hputc();	/* Character string without quotes (returns 0 if OK) */
 extern int hputcom();	/* Comment after keyword=value (returns 0 if OK) */
 

@@ -224,7 +224,7 @@ int	debug;
 		}
 	    }
 
-	/* Find offset bin with maximim number of entries */
+	/* Find offset bin with maximum number of entries */
 	idxmax = 0;
 	idymax = 0;
 	nmatch = 0;

@@ -58,7 +58,7 @@ double	*stdev; 	/* Standard deviation of fit (returned) */
 	    }
 	}
 
-    /* Construct matrices and calculate coeffients */
+    /* Construct matrices and calculate coefficients */
     array = (double *) calloc (nterms*nterms, sizeof(double));
     for (j = 0; j < nterms; j++) {
 	for (k = 0; k < nterms; k++) {
@@ -164,7 +164,7 @@ polcomp (xi, x0, norder, a)
 double	xi;	/* Independent variable */
 double	x0;	/* Offset to independent variable */
 int	norder;	/* Number of coefficients */
-double	*a;	/* Vector containing coeffiecients */
+double	*a;	/* Vector containing coefficients */
 {
     double xterm, x, y;
     int iterm;

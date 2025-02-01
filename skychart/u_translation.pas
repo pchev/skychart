@@ -1075,7 +1075,7 @@ resourcestring
   rsTonight = 'Tonight';
   rsAlwaysSaveWi = 'Always save without asking.';
   rsArtificialSa2 = 'Artificial satellite';
-  rsPutTheFilesW = 'Put the files with a .tle extention to the %s folder';
+  rsPutTheFilesW = 'Put the files with a .tle extension to the %s folder';
   rsBeSureTheyUs = 'Be sure they use a DOS line end format.';
   rsCleanupMap = 'Cleanup map';
   rsGraphs = 'Graphs';
@@ -1572,7 +1572,7 @@ resourcestring
   rsPasteCoordin = 'Paste coordinates';
   rsRenameChart = 'Rename chart';
   rsChartName = 'Chart name';
-  rsRenameTheCur = 'Rename the curent chart';
+  rsRenameTheCur = 'Rename the current chart';
   rsOrientationF = 'Orientation from zenith in Alt/Az chart';
   rsSelection = 'Selection';
   rsPolePrecessi = 'Pole precession';

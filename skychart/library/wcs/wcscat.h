@@ -217,7 +217,7 @@ struct TabTable {
 
 #define EP_EP   1	/* Output epoch as fractional year */
 #define EP_JD   2	/* Output epoch as Julian Date */
-#define EP_MJD  3	/* Ouput epoch as Modified Julian Date */
+#define EP_MJD  3	/* Output epoch as Modified Julian Date */
 #define EP_FD   4	/* Output epoch in FITS format (yyyy-mm-dd) */
 #define EP_ISO  5	/* Output epoch in ISO format (yyyy-mm-ddThh:mm:ss) */
 
@@ -1093,7 +1093,7 @@ extern "C" {
     void FluxSortStars(	/* Sort image stars by decreasing flux */
 	double *sx,	/* Image X coordinate */
 	double *sy,	/* Image Y coordinate */
-	double *sb,	/* Brighness in counts */
+	double *sb,	/* Brightness in counts */
 	int *sc,	/* Other 4-byte information */
 	int ns);	/* Number of stars to sort */
     void MagSortStars(	/* Sort image stars by increasing magnitude */
@@ -1375,7 +1375,7 @@ extern "C" {
 	double xi,	/* Independent variable */
 	double x0,	/* Offset to independent variable */
 	int norder,	/* Number of coefficients */
-	double *a);	/* Vector containing coeffiecients */
+	double *a);	/* Vector containing coefficients */
 
 #else /* K&R prototypes */
 

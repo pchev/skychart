@@ -1204,7 +1204,7 @@ end;
 
 function T_indimount.GetMountRefraction: TMountRefraction;
 begin
-  // no propetry in INDI ?
+  // no property in INDI ?
   result:=refractUnknown;
 end;
 

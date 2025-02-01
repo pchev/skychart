@@ -108,7 +108,7 @@ static void calceph_txtmk_symbols_copy(char *dst, const char *buffer, const stru
 /*--------------------------------------------------------------------------*/
 /*!  Read the files of the text Meta kernel (MK) file
  
-   @return  1 on sucess and 0 on failure
+   @return  1 on success and 0 on failure
  
    @param file (inout) file descriptor.   
    @param filename (in) A character string giving the name of an ephemeris data file.   
@@ -302,7 +302,7 @@ int calceph_txtmk_open(FILE * file, const char *filename, struct calcephbin_spic
 /*--------------------------------------------------------------------------*/
 /*!  return in slen the length of the symbols ($...) that are present in the string kernel
    if they are several $..., 
-   @return  1 on sucess and 0 on failure
+   @return  1 on success and 0 on failure
  
    @param buffer (in) string. 
    @param kernel (in) position in the string to check.

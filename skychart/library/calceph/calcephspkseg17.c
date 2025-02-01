@@ -214,7 +214,7 @@ int calceph_spk_interpol_PV_segment_17(struct SPKfile *PARAMETER_UNUSED(pspk),
 
     double nfac, prate, vpnode[3];
 
-    double F;                   /* excentric longitude */
+    double F;                   /* eccentric longitude */
 
     int j;
 
@@ -244,7 +244,7 @@ int calceph_spk_interpol_PV_segment_17(struct SPKfile *PARAMETER_UNUSED(pspk),
     vg[1] = (1.0E0 + p * p - q * q) * dI;
     vg[2] = (2.0E0 * q) * dI;
 
-    /* compute the mean longitude and excentric longitude */
+    /* compute the mean longitude and eccentric longitude */
     ml = fmod(ml0 + dmldt * dt, twopi);
     F = calceph_solve_kepler(ml, h, k);
 
@@ -285,7 +285,7 @@ int calceph_spk_interpol_PV_segment_17(struct SPKfile *PARAMETER_UNUSED(pspk),
         Planet->Velocity[j] = XPeq[j];
     }
 
-    /* compute the positions and the velocities in the inertial refrence frame */
+    /* compute the positions and the velocities in the inertial reefrence frame */
     transeqtoinertial[0][0] = -sin(ra);
     transeqtoinertial[0][1] = -cos(ra) * sin(de);
     transeqtoinertial[0][2] = cos(ra) * cos(de);

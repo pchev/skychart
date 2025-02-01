@@ -337,12 +337,12 @@ int calceph_inpop_open(FILE * file, const char *fileName, struct calcephbin_inpo
     res->timescale = etimescale_TDB;
 
   /*--------------------------------------------------------------------------*/
-    /*  Intialize the asteroid information to empty .                           */
+    /*  Initialize the asteroid information to empty .                           */
   /*--------------------------------------------------------------------------*/
     calceph_empty_asteroid(&res->asteroids);
 
   /*--------------------------------------------------------------------------*/
-    /*  Intialize the Planetary Angular Momentum information to empty .        */
+    /*  Initialize the Planetary Angular Momentum information to empty .        */
   /*--------------------------------------------------------------------------*/
     calceph_empty_pam(&res->pam);
 
@@ -711,7 +711,7 @@ void calceph_inpop_close(struct calcephbin_inpop *eph)
 /*--------------------------------------------------------------------------*/
 /*! Prefetch for reading any INPOP file
      
-  @return  1 on sucess and 0 on failure
+  @return  1 on success and 0 on failure
   
   @param pcoeftime_array (inout) descriptor of the ephemeris.  
 */
@@ -822,7 +822,7 @@ static void calceph_inpop_prefetch_update_cfta(const struct calcephbin_inpop *ep
 /*--------------------------------------------------------------------------*/
 /*! Prefetch for reading any INPOP file
      
-  @return  1 on sucess and 0 on failure
+  @return  1 on success and 0 on failure
   
   @param eph (inout) descriptor of the ephemeris.  
 */
@@ -1340,7 +1340,7 @@ int calceph_inpop_interpol_PV(struct calcephbin_inpop *pephbin, treal TimeJD0, t
      It computes the value C, G, N, pncomp and ephunit
      
      return 0 if an error occurs
-     return 1 if successfull
+     return 1 if successful
                                                                           
   @param p_pbinfile (inout) descripteur de l'ephemeride                            
   @param Target   (in) Solar system body for which position is desired.         
