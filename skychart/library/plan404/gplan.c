@@ -1,4 +1,5 @@
 #include "plantbl.h"
+#include <math.h>
 #define TIMESCALE 3652500.0
 #define mods3600(x) ((x) - 1.296e6 * floor ((x)/1.296e6))
 
@@ -44,7 +45,7 @@ static double ss[9][24];
 static double cc[9][24];
 
 double cos (), sin (), floor (), fabs ();
-static int sscc ();
+static int sscc (int,double,int);
 
 int 
 gplan (J, plan, pobj)

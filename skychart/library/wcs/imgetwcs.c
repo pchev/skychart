@@ -31,6 +31,7 @@
 #include <stdlib.h>
 #include <math.h>
 #include <string.h>
+#include <strings.h>
 
 #include "wcs.h"
 #include "lwcs.h"

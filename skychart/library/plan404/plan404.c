@@ -34,6 +34,7 @@
 */
 
 #include <stdio.h>
+#include <math.h>
 #include "plantbl.h"
 #include "plan404.h"
 
@@ -52,12 +53,12 @@ struct plantbl *planets[] =
   &nep404,
   &plu404
 };
+typedef struct plantbl Plantbl;
 
 double sineps2k = 3.97777155754e-1; // ecliptic J2000
 double coseps2k = 9.17482062146e-1;
 
-double cos (), sin ();
-int gplan (), gmoon ();
+int gplan (double,Plantbl*,double*), gmoon (double,double*,double*);
 
 int Plan404 ( pla ) 
  struct PlanetData *pla;

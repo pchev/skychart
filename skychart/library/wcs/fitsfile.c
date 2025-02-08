@@ -83,6 +83,7 @@
 #include <sys/file.h>
 #include <errno.h>
 #include <string.h>
+#include <strings.h>
 #include "fitsfile.h"
 
 static int verbose=0;		/* Print diagnostics */

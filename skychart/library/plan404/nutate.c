@@ -21,6 +21,7 @@
  *                 tested against JPL DE403 ephemeris file.
  */
 #include "plantbl.h"
+#include <math.h>
 
 /* The answers are posted here by nutlo():
  */
@@ -173,9 +174,8 @@ short nt[105*9] = {
 double ss[5][8];
 double cc[5][8];
 extern double ss[5][8], cc[5][8];
-int sscc(), epsiln(), showcor();
+int sscc(int,double,int), epsiln(double), showcor();
 
-double sin(), cos(), floor();
 #define mod3600(x) ((x) - 1296000. * floor ((x)/1296000.))
 
 int nutlo(J)
@@ -317,7 +317,6 @@ double p[];
 double ce, se, cl, sl, sino, f;
 double dp[3], p1[3];
 int i;
-double sin(), cos();
 
 nutlo(J); /* be sure we calculated nutl and nuto */
 epsiln(J); /* and also the obliquity of date */
@@ -369,7 +368,6 @@ int n;
 {
 double cu, su, cv, sv, s;
 int i;
-double sin(), cos();
 
 su = sin(arg);
 cu = cos(arg);

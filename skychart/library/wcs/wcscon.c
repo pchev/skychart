@@ -71,6 +71,7 @@
 #include <stdio.h>	/* for fprintf() and sprintf() */
 #include <ctype.h>
 #include <string.h>
+#include <strings.h>
 #include "wcs.h"
 
 void fk524(), fk524e(), fk524m(), fk524pv();

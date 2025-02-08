@@ -1,4 +1,4 @@
-CFLAGS= -w -fPIC $(arch_flags)
+CFLAGS= -w -fPIC $(arch_flags) -std=c99 -D_XOPEN_SOURCE=500
 OSTYPE = $(shell uname)
 ifneq ($(findstring BSD,$(OSTYPE)),)
 CC            = cc

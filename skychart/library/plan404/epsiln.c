@@ -21,6 +21,7 @@
  * 
  */
  #include "plantbl.h"
+  #include <math.h>
 
 /* The results of the program are returned in these
  * global variables:
@@ -30,7 +31,6 @@ double eps = 0.0; /* The computed obliquity in radians */
 double coseps = 0.0; /* Cosine of the obliquity */
 double sineps = 0.0; /* Sine of the obliquity */
 extern double eps, coseps, sineps, STR;
-double sin(), cos(), fabs();
 
 int epsiln(J)
 double J; /* Julian date input */

@@ -3,6 +3,7 @@
  *
  * Program by Steve Moshier.  */
 #include "plantbl.h"
+#include <math.h>
 
 #define WILLIAMS 1
 /* James G. Williams, "Contributions to the Earth's obliquity rate,
@@ -62,13 +63,12 @@
  */
 
 #define DOUBLE double
-double cos(), sin();
 #define COS cos
 #define SIN sin
 extern DOUBLE J2000; /* = 2451545.0, 2000 January 1.5 */
 extern DOUBLE STR; /* = 4.8481368110953599359e-6 radians per arc second */
 extern DOUBLE coseps, sineps; /* see epsiln.c */
-extern int epsiln();
+extern int epsiln(double);
 
 /* In WILLIAMS and SIMON, Laskar's terms of order higher than t^4
    have been retained, because Simon et al mention that the solution
