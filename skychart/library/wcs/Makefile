@@ -1,3 +1,4 @@
+#
 CFLAGS= -w -fPIC $(arch_flags) -std=c99 -D_XOPEN_SOURCE=500
 OSTYPE = $(shell uname)
 ifneq ($(findstring BSD,$(OSTYPE)),)
@@ -9,8 +10,9 @@ ifneq ($(findstring Darwin,$(OSTYPE)),)
 SO_Name       = libcdcwcs.dylib
 LIBFLAGS      = $(arch_flags) -Wl,-single_module -dynamiclib  -lc -lm -mmacosx-version-min=10.10
 else
-SO_Name       = libcdcwcs.so
-LIBFLAGS      = -shared -Wl,-soname,$(SO_Name) -lc -lm
+SOName        = libpaswcs.so.1
+SO_Name       = libpaswcs.so.1.1
+LIBFLAGS      = -shared -Wl,-soname,$(SOName) -lc -lm
 endif
 ifneq ($(findstring W32,$(OSTYPE)),)
 SO_Name       = libcdcwcs.dll
@@ -28,11 +30,12 @@ OBJS =	cdcwcs.o imgetwcs.o daoread.o wcscon.o \
 	worldpos.o tnxpos.o zpxpos.o dsspos.o platepos.o \
 	sortstar.o iget.o fileutil.o \
 	wcslib.o lin.o cel.o proj.o sph.o wcstrig.o distort.o poly.o
+LIBS = -lm
 
 all: $(SO_Name)
 
 $(SO_Name): $(OBJS)
-	$(CC) $(CFLAGS) $(LIBFLAGS) -o $@ $(OBJS)
+	$(CC) $(CFLAGS) $(LIBFLAGS) -o $@ $(OBJS) $(LIBS)
 
 cdcwcs.o:	fitsfile.h wcs.h
 actread.o:	fitsfile.h wcscat.h wcs.h fitshead.h wcslib.h
