@@ -129,6 +129,8 @@
 #include "plantbl.h"
 #include <math.h>
 
+extern int epsiln(double J);
+
 /* The following coefficients were calculated by a simultaneous least
  * squares fit between the analytical theory and DE404 on the finite
  * interval from -3000 to +3000.

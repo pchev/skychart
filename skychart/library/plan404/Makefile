@@ -12,8 +12,9 @@ SO_Name       = libplan404.dylib
 CFLAGS        = -O3 -fPIC $(arch_flags) -Wno-implicit-function-declaration
 LIBFLAGS      = $(arch_flags) -Wl,-single_module -dynamiclib  -lc -lm -mmacosx-version-min=10.10
 else
-SO_Name       = libplan404.so
-LIBFLAGS      = -shared -Wl,-soname,$(SO_Name) -lc -lm
+SOName        = libpasplan404.so.1
+SO_Name       = libpasplan404.so.1.1
+LIBFLAGS      = -shared -Wl,-soname,$(SOName) -lc -lm
 endif
 ifneq ($(findstring W32,$(OSTYPE)),)
 SO_Name       = libplan404.dll
@@ -33,6 +34,7 @@ ura404.c nep404.c plu404.c gplan.c cmoon.c precess.c epsiln.c nutate.c
 # Object files
 OBJ_DIR = ./obj
 OBJ := $(patsubst %.c,$(OBJ_DIR)/%.o,$(SRC))
+LIBS = -lm
 
 all: $(SO_Name)
 
@@ -40,7 +42,7 @@ $(OBJ_DIR)/%.o: %.c
 	$(CC) $(CFLAGS) -c $< -o $@
 
 $(SO_Name): $(OBJ)
-	$(CC) $(CFLAGS) $(LIBFLAGS) -o $@ $(OBJ)
+	$(CC) $(CFLAGS) $(LIBFLAGS) -o $@ $(OBJ) $(LIBS)
 
 clean:
 	rm -f $(OBJ) $(SO_Name)

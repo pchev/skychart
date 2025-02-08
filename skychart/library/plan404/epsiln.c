@@ -21,7 +21,7 @@
  * 
  */
  #include "plantbl.h"
-  #include <math.h>
+ #include <math.h>
 
 /* The results of the program are returned in these
  * global variables:

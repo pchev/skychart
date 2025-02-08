@@ -44,7 +44,6 @@ static double phases[] =
 static double ss[9][24];
 static double cc[9][24];
 
-double cos (), sin (), floor (), fabs ();
 static int sscc (int,double,int);
 
 int 
