@@ -53,7 +53,11 @@ LCL_PLATFORM=carbon
 else
 LCL_PLATFORM=cocoa
 endif
+ifeq ($(CPU_TARGET),aarch64)
+opt_target= -k-macos_version_min -k11.0 -k-framework -kCocoa -k-weak_framework -kUserNotifications
+else
 opt_target= -k-macosx_version_min -k10.10
+endif
 else
 LCL_PLATFORM=qt5
 opt_target=-k--build-id
