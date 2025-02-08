@@ -42,5 +42,9 @@ install -v -m 755 skychart/library/calceph/libcalceph.dylib  $destdir/libcalceph
 
 install -d -m 755 $destdir/data
 install -d -m 755 $destdir/data/planet
-tar xvzf system_integration/MacOSX/data/xplanet-mac.tgz -C $destdir/data/planet/
+if [ $CPU_TARGET = aarch64 ]; then
+  tar xvzf system_integration/MacOSX/data/xplanet-mac-arm64.tgz -C $destdir/data/planet/
+else
+  tar xvzf system_integration/MacOSX/data/xplanet-mac.tgz -C $destdir/data/planet/
+fi
 
