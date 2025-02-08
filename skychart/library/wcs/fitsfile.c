@@ -74,6 +74,8 @@
  *  		Return size of FITS header in bytes
  */
 
+#define _DARWIN_C_SOURCE
+
 #include <stdlib.h>
 #ifndef VMS
 #include <unistd.h>

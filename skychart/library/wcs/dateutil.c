@@ -305,6 +305,7 @@
  *	Return Mod of floating point number
  */
 
+#define _DARWIN_C_SOURCE
 #define _GNU_SOURCE
 
 #include <stdlib.h>
