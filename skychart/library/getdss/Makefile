@@ -8,10 +8,17 @@ CC            = gcc
 endif
 ifneq ($(findstring Darwin,$(OSTYPE)),)
 SO_Name = libgetdss.dylib
-LDFLAGS=  $(arch_flags) -Wl,-single_module -dynamiclib  -lc -lm -lstdc++ -mmacosx-version-min=10.10
+OSARCH = $(shell uname -m)
+ifneq ($(findstring arm64,$(OSARCH)),)
+LDFLAGS = $(arch_flags) -Wl,-single_module -dynamiclib  -lc -mmacos-version-min=11.0
+CPPFLAGS = -I. -O3 -fPIC $(arch_flags) -mmacos-version-min=11.0
+else
+LDFLAGS = $(arch_flags) -Wl,-single_module -dynamiclib  -lc -mmacosx-version-min=10.10
+CPPFLAGS = -I. -O3 -fPIC $(arch_flags) -mmacosx-version-min=10.10
+endif
 else
 SO_Name = libgetdss.so
-LDFLAGS= -shared -lc -lm -lstdc++ -Wl,-soname,$(SO_Name) $(arch_flags)
+LDFLAGS= -shared -lc -Wl,-soname,$(SO_Name) $(arch_flags)
 endif
 
 OBJS = getdss_lib.o dss.o extr_fit.o getpiece.o \

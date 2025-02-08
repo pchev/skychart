@@ -8,7 +8,12 @@ CC            = gcc
 endif
 ifneq ($(findstring Darwin,$(OSTYPE)),)
 SO_Name       = libcdcwcs.dylib
+OSARCH = $(shell uname -m)
+ifneq ($(findstring arm64,$(OSARCH)),)
+LIBFLAGS      = $(arch_flags) -Wl,-single_module -dynamiclib  -lc -lm -mmacos-version-min=11.0
+else
 LIBFLAGS      = $(arch_flags) -Wl,-single_module -dynamiclib  -lc -lm -mmacosx-version-min=10.10
+endif
 else
 SOName        = libpaswcs.so.1
 SO_Name       = libpaswcs.so.1.1

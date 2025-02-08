@@ -13,7 +13,12 @@ LIBS = -lc -lm
 ifneq ($(findstring Darwin,$(OSTYPE)),)
 SO_Name       = libcalceph.dylib
 CFLAGS        = -DHAVE_CONFIG_H -I. -O2 -fPIC $(arch_flags) -Wno-implicit-function-declaration
-LIBFLAGS      = -Wl,-single_module -dynamiclib  -mmacosx-version-min=10.6
+OSARCH = $(shell uname -m)
+ifneq ($(findstring arm64,$(OSARCH)),)
+LIBFLAGS      = -Wl,-single_module -dynamiclib -mmacos-version-min=11.0
+else
+LIBFLAGS      = -Wl,-single_module -dynamiclib -mmacosx-version-min=10.10
+endif
 else
 SOName        = libcalceph.so.1
 SO_Name       = libcalceph.so.1.1

@@ -9,8 +9,14 @@ endif
 CFLAGS        = -O3 -fPIC $(arch_flags)
 ifneq ($(findstring Darwin,$(OSTYPE)),)
 SO_Name       = libplan404.dylib
+OSARCH = $(shell uname -m)
+ifneq ($(findstring arm64,$(OSARCH)),)
+CFLAGS        = -O3 -fPIC $(arch_flags) -Wno-implicit-function-declaration -mmacos-version-min=11.0
+LIBFLAGS      = $(arch_flags) -Wl,-single_module -dynamiclib  -lc -lm -mmacos-version-min=11.0
+else
 CFLAGS        = -O3 -fPIC $(arch_flags) -Wno-implicit-function-declaration
 LIBFLAGS      = $(arch_flags) -Wl,-single_module -dynamiclib  -lc -lm -mmacosx-version-min=10.10
+endif
 else
 SOName        = libpasplan404.so.1
 SO_Name       = libpasplan404.so.1.1
