@@ -343,17 +343,17 @@ function TCDCdb.checkDBConfig(cmain: Tconf_main): string;
 var
   msg, dbn: string;
   i: integer;
-label
-  dmsg;
 begin
   try
+    msg:='';
     dbn := UTF8Encode(cmain.db);
     if ((DB.database = dbn) or DB.use(dbn)) then
       msg := Format(rsDatabaseOpen, [msg, cmain.db, crlf])
     else
     begin
       msg := Format(rsCannotOpenDa, [msg, cmain.db, trim(DB.ErrorMessage) + crlf]);
-      goto dmsg;
+      Result := msg;
+      exit;
     end;
     for i := 1 to numsqltable do
     begin
@@ -363,12 +363,12 @@ begin
       else
       begin
         msg := Format(rsTableDoNotEx, [msg, sqltable[i, 1], crlf]);
-        goto dmsg;
+        Result := msg;
+        exit;
       end;
     end;
     msg := Format(rsAllTablesStr, [msg]);
-    dmsg:
-      Result := msg;
+    Result := msg;
   except
     Result := rsSQLDatabaseS;
   end;

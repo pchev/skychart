@@ -10511,8 +10511,6 @@ var
   mag: double;
   stype,buf, sr, sn, sd: string;
   itype: integer;
-label
-  findit;
 begin
   try
   screen.Cursor:=crHourGlass;
@@ -10547,118 +10545,104 @@ begin
       stype := 'N';
       itype := ftNeb;
       ok := catalog.SearchNebulae(Num, ar1, de1);
-      if ok then
-        goto findit;
-      if (gtype='') or (gtype='V*') then begin
+      if (not ok) and ((gtype='') or (gtype='V*')) then begin
         // variable star
         stype := 'V*';
         itype := ftVar;
         ok := catalog.SearchVarStar(Num, ar1, de1);
-        if ok then
-          goto findit;
       end;
-      if (gtype='') or (gtype='D*') then begin
+      if (not ok) and ((gtype='') or (gtype='D*')) then begin
         // double star
         stype := 'D*';
         itype := ftDbl;
         ok := catalog.SearchDblStar(Num, ar1, de1);
-        if ok then
-          goto findit;
       end;
-      // star
-      stype := '*';
-      itype := ftStar;
-      ok := catalog.SearchStar(Num, ar1, de1);
-      if ok then
-        goto findit;
-      // star common name exact
-      stype := '*';
-      itype := ftStar;
-      ok := catalog.SearchStarNameExact(Num, ar1, de1);
-      if ok then
-        goto findit;
+      if (not ok) then begin
+        // star
+        stype := '*';
+        itype := ftStar;
+        ok := catalog.SearchStar(Num, ar1, de1);
+      end;
+      if (not ok) then begin
+        // star common name exact
+        stype := '*';
+        itype := ftStar;
+        ok := catalog.SearchStarNameExact(Num, ar1, de1);
+      end;
       // planet
-      if sc.cfgsc.ShowPlanet then
+      if (not ok) and sc.cfgsc.ShowPlanet then
       begin
         stype := 'P';
         itype := ftPla;
         ok := planet.FindPlanetName(trim(Num), ar1, de1, sc.cfgsc);
-        if ok then
-          goto findit;
       end;
-      // nebula common name exact
-      stype := 'N';
-      itype := ftNeb;
-      ok := f_search.SearchNebNameExact(Num, ar1, de1);
-      if ok then
-        goto findit;
+      if (not ok) then begin
+        // nebula common name exact
+        stype := 'N';
+        itype := ftNeb;
+        ok := f_search.SearchNebNameExact(Num, ar1, de1);
+      end;
       // spk bodies, before comet and asteroid
-      if sc.cfgsc.ShowBodiesValid then
+      if (not ok) and sc.cfgsc.ShowBodiesValid then
       begin
         stype := 'Spk';
         itype := ftBody;
         ok := planet.FindBodyName(trim(Num), ar1, de1, mag, sc.cfgsc, True);
-        if ok then
-          goto findit;
       end;
       // comet
-      if sc.cfgsc.ShowComet then
+      if (not ok) and sc.cfgsc.ShowComet then
       begin
         stype := 'Cm';
         itype := ftCom;
         ok := planet.FindCometName(trim(Num), ar1, de1, mag, sc.cfgsc, True);
-        if ok then
-          goto findit;
       end;
-      // star common name generic
-      stype := '*';
-      itype := ftStar;
-      ok := catalog.SearchStarNameGeneric(Num, ar1, de1);
-      if ok then
-        goto findit;
-      // nebula common name generic
-      stype := 'N';
-      itype := ftNeb;
-      ok := f_search.SearchNebNameGeneric(Num, ar1, de1);
-      if ok then
-        goto findit;
+      if (not ok) then begin
+        // star common name generic
+        stype := '*';
+        itype := ftStar;
+        ok := catalog.SearchStarNameGeneric(Num, ar1, de1);
+      end;
+      if (not ok) then begin
+        // nebula common name generic
+        stype := 'N';
+        itype := ftNeb;
+        ok := f_search.SearchNebNameGeneric(Num, ar1, de1);
+      end;
       // asteroid
-      if sc.cfgsc.ShowAsteroid then
+      if (not ok) and sc.cfgsc.ShowAsteroid then
       begin
         stype := 'As';
         itype := ftAst;
         ok := planet.FindAsteroidName(trim(Num), ar1, de1, mag, sc.cfgsc, True);
-        if ok then
-          goto findit;
       end;
-      // variable star alias
-      stype := 'V*';
-      itype := ftVar;
-      ok := catalog.SearchVarAlias(Num, buf);
-      if ok then begin
-        num:=buf;
-        ok := catalog.SearchVarStar(Num, ar1, de1);
-        if ok then
-          goto findit;
+      if (not ok) then begin
+        // variable star alias
+        stype := 'V*';
+        itype := ftVar;
+        ok := catalog.SearchVarAlias(Num, buf);
+        if ok then begin
+          num:=buf;
+          ok := catalog.SearchVarStar(Num, ar1, de1);
+        end;
       end;
-      // online search
-      f_search.Num:=Num;
-      f_search.SesameCatNum:=3;
-      ok:=f_search.SearchOnline;
-      if ok then begin
-        num:=f_search.sesame_name;
-        ar1:=f_search.ra;
-        de1:=f_search.de;
-        itype := ftOnline;
-        stype := 'OSR';
-        sr := f_search.sesame_resolver;
-        sn := f_search.sesame_name;
-        sd := f_search.sesame_desc;
-        goto findit;
+      if (not ok) then begin
+        // online search
+        f_search.Num:=Num;
+        f_search.SesameCatNum:=3;
+        ok:=f_search.SearchOnline;
+        if ok then begin
+          num:=f_search.sesame_name;
+          ar1:=f_search.ra;
+          de1:=f_search.de;
+          itype := ftOnline;
+          stype := 'OSR';
+          sr := f_search.sesame_resolver;
+          sn := f_search.sesame_name;
+          sd := f_search.sesame_desc;
+        end;
       end;
 
-      Findit:
-        Result := ok;
+      Result := ok;
       if ok and idresult then
       begin
         IdentSearchResult(num, stype, itype, ar1, de1, sr, sn, sd);
