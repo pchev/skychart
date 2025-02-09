@@ -17,12 +17,12 @@ tar cvzf openssl-mac.tgz libcrypto.3.dylib libssl.3.dylib
 aarch64:
 
 cd openssl-3.4
-export MACOSX_DEPLOYMENT_TARGET=12.0
+export MACOSX_DEPLOYMENT_TARGET=11.0
 ./Configure darwin64-arm64-cc shared
 make
 install_name_tool -id @rpath/libcrypto.3.dylib libcrypto.3.dylib
 install_name_tool -id @rpath/libssl.3.dylib libssl.3.dylib
 install_name_tool -change /usr/local/lib/libcrypto.3.dylib @rpath/libcrypto.3.dylib libssl.3.dylib
 
-tar cvzf openssl-macarm.tgz libcrypto.3.dylib libssl.3.dylib 
+tar cvzf openssl-mac-arm64.tgz libcrypto.3.dylib libssl.3.dylib 
 
