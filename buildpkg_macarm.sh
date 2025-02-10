@@ -61,7 +61,7 @@ if [[ $lastrev -ne $currentrev ]]; then
   packagesbuild -v skychart64.pkgproj
   if [[ $? -ne 0 ]]; then exit 1;fi
   cp readme.txt build/
-  hdiutil create -anyowners -volname skychart-$version-$currentrev-arm64-macosx -imagekey zlib-level=9 -format UDZO -srcfolder ./build skychart-$version-$currentrev-arm64-macosx.dmg
+  hdiutil create -anyowners -volname skychart-$version-$currentrev-arm64-macos -imagekey zlib-level=9 -format UDZO -srcfolder ./build skychart-$version-$currentrev-arm64-macos.dmg
   if [[ $? -ne 0 ]]; then exit 1;fi
   mv skychart*.dmg $wd
   if [[ $? -ne 0 ]]; then exit 1;fi
@@ -78,7 +78,7 @@ if [[ $lastrev -ne $currentrev ]]; then
     cp varobs/varobs $basedir/debug/
     cd $basedir/debug/
     if [[ $? -ne 0 ]]; then exit 1;fi
-    tar cvjf bin-macosx-arm64-debug-$currentrev.tar.bz2 *
+    tar cvjf bin-macos-arm64-debug-$currentrev.tar.bz2 *
     if [[ $? -ne 0 ]]; then exit 1;fi
     mv bin-*.tar.bz2 $wd
     if [[ $? -ne 0 ]]; then exit 1;fi
