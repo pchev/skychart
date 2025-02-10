@@ -37,7 +37,7 @@ if [[ $lastrev -ne $currentrev ]]; then
   make CPU_TARGET=aarch64 clean
   fpcopts="-CX -XX -Xs -Cs8388608" make CPU_TARGET=aarch64
   if [[ $? -ne 0 ]]; then exit 1;fi
-  make install
+  make install CPU_TARGET=aarch64
   if [[ $? -ne 0 ]]; then exit 1;fi
   make install_data
   if [[ $? -ne 0 ]]; then exit 1;fi

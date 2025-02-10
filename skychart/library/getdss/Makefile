@@ -8,13 +8,12 @@ CC            = gcc
 endif
 ifneq ($(findstring Darwin,$(OSTYPE)),)
 SO_Name = libgetdss.dylib
-OSARCH = $(shell uname -m)
-ifneq ($(findstring arm64,$(OSARCH)),)
-LDFLAGS = $(arch_flags) -Wl,-single_module -dynamiclib  -lc -mmacos-version-min=11.0
-CPPFLAGS = -I. -O3 -fPIC $(arch_flags) -mmacos-version-min=11.0
+ifeq ($(CPU_TARGET),aarch64)
+  LDFLAGS = $(arch_flags) -arch arm64 -Wl,-single_module -dynamiclib  -lc -mmacos-version-min=11.0
+  CPPFLAGS = -I. -O3 -fPIC $(arch_flags) -arch arm64 -mmacos-version-min=11.0
 else
-LDFLAGS = $(arch_flags) -Wl,-single_module -dynamiclib  -lc -mmacosx-version-min=10.10
-CPPFLAGS = -I. -O3 -fPIC $(arch_flags) -mmacosx-version-min=10.10
+  LDFLAGS = $(arch_flags) -arch x86_64 -Wl,-single_module -dynamiclib  -lc -mmacos-version-min=10.14
+  CPPFLAGS = -I. -O3 -fPIC $(arch_flags) -arch x86_64 -mmacos-version-min=10.14
 endif
 else
 SO_Name = libgetdss.so

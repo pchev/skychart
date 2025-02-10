@@ -1,14 +1,14 @@
 ##############################################################################
 
 CC=gcc
-CFLAGS= -w -fPIC -m64
-SO_Name       = libchealpix.dylib
-OSARCH = $(shell uname -m)
-ifneq ($(findstring arm64,$(OSARCH)),)
-LIBFLAGS      = -Wl,-single_module -dynamiclib  -lc -lm -mmacos-version-min=11.0
+ifeq ($(CPU_TARGET),aarch64)
+  CFLAGS= -w -fPIC -m64 -arch arm64 -mmacos-version-min=11.0
+  LIBFLAGS      = -Wl,-single_module -dynamiclib  -lc -lm -mmacos-version-min=11.0
 else
-LIBFLAGS      = -Wl,-single_module -dynamiclib  -lc -lm -mmacosx-version-min=10.10
+  CFLAGS= -w -fPIC -m64 -arch x86_64 -mmacos-version-min=10.14
+  LIBFLAGS      = -Wl,-single_module -dynamiclib  -lc -lm -mmacos-version-min=10.14
 endif
+SO_Name       = libchealpix.dylib
 
 OBJS =	chealpix.o
 

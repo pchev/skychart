@@ -2,11 +2,12 @@
 
 version=4.3
 
-basedir=/Volumes/TmpInst/skychart    # Be sure this is set to a non existent directory, it is removed after the run!
+basedir=/tmp/skychart    # Be sure this is set to a non existent directory, it is removed after the run!
 
 builddir=$basedir/Cartes
 
 unset make_debug
+unset extratarget
 
 if [[ -n $1 ]]; then
   configopt="fpc=$1"
@@ -15,7 +16,12 @@ if [[ -n $2 ]]; then
   configopt=$configopt" lazarus=$2"
 fi
 
+arch=$(arch)
 wd=`pwd`
+
+if [[ $arch == arm64 ]]; then
+ extratarget=",aarch64-darwin"
+fi
 
 # check if new revision since last run
 read lastrev <last.build
@@ -32,12 +38,12 @@ if [[ $lastrev -ne $currentrev ]]; then
   rm -rf $basedir
 
 # make x86_64 Mac version
-  ./configure $configopt prefix=$builddir target=x86_64-darwin
+  ./configure $configopt prefix=$builddir target=x86_64-darwin$extratarget
   if [[ $? -ne 0 ]]; then exit 1;fi
   make CPU_TARGET=x86_64 clean
   fpcopts="-CX -XX -Xs -Cs8388608" make CPU_TARGET=x86_64
   if [[ $? -ne 0 ]]; then exit 1;fi
-  make install
+  make install CPU_TARGET=x86_64
   if [[ $? -ne 0 ]]; then exit 1;fi
   make install_data
   if [[ $? -ne 0 ]]; then exit 1;fi
