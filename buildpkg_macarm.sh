@@ -27,7 +27,7 @@ echo $lastrev ' - ' $currentrev
 if [[ $lastrev -ne $currentrev ]]; then
 
 # delete old files
-  rm skychart-*.dmg
+  rm skychart-*-arm64-macos.dmg
   rm bin-*.bz2
   rm -rf $basedir
 
