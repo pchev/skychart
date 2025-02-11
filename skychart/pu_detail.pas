@@ -312,7 +312,7 @@ try
       FSetPos := p;
     end
     else begin
-      FSetPos := 0;
+      FSetPos := 1;
     end;
     CanRetry:=true;
     Timer1.Enabled := True;

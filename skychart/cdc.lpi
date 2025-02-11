@@ -239,7 +239,6 @@
               <StackChecks Value="True"/>
             </Checks>
             <StackSize Value="8388608"/>
-            <TargetCPU Value="x86_64"/>
             <TargetOS Value="darwin"/>
             <Optimizations>
               <OptimizationLevel Value="0"/>
