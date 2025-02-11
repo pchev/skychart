@@ -54,11 +54,11 @@ if [[ $lastrev -ne $currentrev ]]; then
   rm $builddir/cdcicon.app/Contents/Info.plist.bak
   rm $builddir/varobs_lpv_bulletin.app/Contents/Info.plist.bak
   rm $builddir/varobs.app/Contents/Info.plist.bak
-  cp system_integration/MacOSX/skychart64.pkgproj $basedir
+  cp system_integration/MacOSX/skychartarm.pkgproj $basedir
   cp system_integration/MacOSX/readme.txt $basedir
   cd $basedir
   mv Cartes "Cartes du Ciel"
-  packagesbuild -v skychart64.pkgproj
+  packagesbuild -v skychartarm.pkgproj
   if [[ $? -ne 0 ]]; then exit 1;fi
   cp readme.txt build/
   hdiutil create -anyowners -volname skychart-$version-$currentrev-arm64-macos -imagekey zlib-level=9 -format UDZO -srcfolder ./build skychart-$version-$currentrev-arm64-macos.dmg
