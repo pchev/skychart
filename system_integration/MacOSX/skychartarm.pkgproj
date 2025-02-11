@@ -601,7 +601,7 @@
 						<key>IC_REQUIREMENT_OS_DISTRIBUTION_TYPE</key>
 						<integer>0</integer>
 						<key>IC_REQUIREMENT_OS_MINIMUM_VERSION</key>
-						<integer>101400</integer>
+						<integer>110000</integer>
 					</dict>
 					<key>IC_REQUIREMENT_CHECK_TYPE</key>
 					<integer>1</integer>
@@ -614,7 +614,7 @@
 							<string>English</string>
 							<key>VALUE</key>
 							<string>
-Skychart can be installed on macos 10.14 Mojave and above.</string>
+Skychart can be installed on macos 11.0 Big Sur and above.</string>
 						</dict>
 					</array>
 					<key>NAME</key>
@@ -624,13 +624,13 @@ Skychart can be installed on macos 10.14 Mojave and above.</string>
 				</dict>
 				<dict>
 					<key>BEHAVIOR</key>
-					<integer>2</integer>
+					<integer>3</integer>
 					<key>DICTIONARY</key>
 					<dict>
 						<key>IC_REQUIREMENT_CPU_ARCHITECTURE_FAMILY</key>
-						<integer>2</integer>
+						<integer>3</integer>
 						<key>IC_REQUIREMENT_CPU_INTEL_ARCHITECTURE_TYPE</key>
-						<integer>2</integer>
+						<integer>0</integer>
 						<key>IC_REQUIREMENT_CPU_MINIMUM_CPU_CORES_COUNT</key>
 						<integer>1</integer>
 						<key>IC_REQUIREMENT_CPU_MINIMUM_FREQUENCY</key>
@@ -648,10 +648,10 @@ Skychart can be installed on macos 10.14 Mojave and above.</string>
 							<key>LANGUAGE</key>
 							<string>English</string>
 							<key>SECONDARY_VALUE</key>
-							<string></string>
+							<string>This version can only be installed on Mac with arm64 processor, for your system install the x86_64 version.</string>
 							<key>VALUE</key>
-							<string>
-This is the version for Mac with Intel processor, for your system the arm64 version is prefered.</string>
+							<string>Incompatible processor.
+</string>
 						</dict>
 					</array>
 					<key>NAME</key>
