@@ -39,8 +39,8 @@ echo $lastrev ' - ' $currentrev
 if [[ $lastrev -ne $currentrev ]]; then
 
 # delete old files
-  rm skychart*.deb
-  rm skychart*.bz2
+  rm skychart_*_arm64.deb
+  rm skychart-*_arm64.tar.bz2
   rm -rf $builddir
 
 # make Linux arm version

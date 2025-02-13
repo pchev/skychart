@@ -10,6 +10,9 @@ arch=$(arch)
 # You MUST crosscompile Freepascal and Lazarus for this targets! 
 
 unset extratarget
+if [[ $arch == aarch64 ]]; then
+  extratarget=",aarch64-linux"
+fi
 
 make_linuxarm=1
 unset make_linuxarm_debug
@@ -34,8 +37,8 @@ echo $lastrev ' - ' $currentrev
 if [[ $lastrev -ne $currentrev ]]; then
 
 # delete old files
-  rm skychart*.deb
-  rm skychart*.bz2
+  rm skychart_*_armhf.deb
+  rm skychart-*_armhf.tar.bz2
   rm -rf $builddir
 
 # make Linux arm version
