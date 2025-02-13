@@ -11,19 +11,26 @@ CP = cp
 LIBS = -lc -lm
 
 ifneq ($(findstring Darwin,$(OSTYPE)),)
-SO_Name       = libcalceph.dylib
-ifeq ($(CPU_TARGET),aarch64)
-  CFLAGS        = -DHAVE_CONFIG_H -I. -O2 -fPIC $(arch_flags) -arch arm64 -Wno-implicit-function-declaration -mmacos-version-min=11.0
-  LIBFLAGS      = -arch arm64 -Wl,-single_module -dynamiclib -mmacos-version-min=11.0
-else
-  CFLAGS        = -DHAVE_CONFIG_H -I. -O2 -fPIC $(arch_flags) -arch x86_64 -Wno-implicit-function-declaration -mmacos-version-min=10.14
-  LIBFLAGS      = -arch x86_64 -Wl,-single_module -dynamiclib -mmacos-version-min=10.14
+  SO_Name       = libcalceph.dylib
+  ifeq ($(CPU_TARGET),aarch64)
+    CFLAGS        = -DHAVE_CONFIG_H -I. -O2 -fPIC $(arch_flags) -arch arm64 -Wno-implicit-function-declaration -mmacos-version-min=11.0
+    LIBFLAGS      = -arch arm64 -Wl,-single_module -dynamiclib -mmacos-version-min=11.0
+  else
+    CFLAGS        = -DHAVE_CONFIG_H -I. -O2 -fPIC $(arch_flags) -arch x86_64 -Wno-implicit-function-declaration -mmacos-version-min=10.14
+    LIBFLAGS      = -arch x86_64 -Wl,-single_module -dynamiclib -mmacos-version-min=10.14
 endif
 else
-SOName        = libcalceph.so.1
-SO_Name       = libcalceph.so.1.1
-CFLAGS        = -DHAVE_CONFIG_H -I. -O2 -fPIC 
-LIBFLAGS      = -shared -Wl,-soname,$(SOName)
+  # Linux
+  SOName        = libcalceph.so.1
+  SO_Name       = libcalceph.so.1.1
+  CFLAGS        = -DHAVE_CONFIG_H -I. -O2 -fPIC 
+  LIBFLAGS      = -shared -Wl,-soname,$(SOName)
+  ifeq ($(CPU_TARGET),aarch64)
+    CC = aarch64-linux-gnu-gcc
+  endif
+  ifeq ($(CPU_TARGET),arm)
+    CC = arm-linux-gnueabihf-gcc
+  endif
 endif
 
 .PHONY: all clean

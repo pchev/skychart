@@ -7,26 +7,33 @@ else
 CC            = gcc
 endif
 ifneq ($(findstring Darwin,$(OSTYPE)),)
-SO_Name       = libcdcwcs.dylib
-ifeq ($(CPU_TARGET),aarch64)
-  CFLAGS= -w -fPIC $(arch_flags) -arch arm64 -std=c99 -D_XOPEN_SOURCE=500 -mmacos-version-min=11.0
-  LIBFLAGS      = $(arch_flags) -arch arm64 -Wl,-single_module -dynamiclib  -lc -lm -mmacos-version-min=11.0
+  SO_Name       = libcdcwcs.dylib
+  ifeq ($(CPU_TARGET),aarch64)
+    CFLAGS= -w -fPIC $(arch_flags) -arch arm64 -std=c99 -D_XOPEN_SOURCE=500 -mmacos-version-min=11.0
+    LIBFLAGS      = $(arch_flags) -arch arm64 -Wl,-single_module -dynamiclib  -lc -lm -mmacos-version-min=11.0
+  else
+    CFLAGS= -w -fPIC $(arch_flags) -arch x86_64 -std=c99 -D_XOPEN_SOURCE=500 -mmacos-version-min=10.14
+    LIBFLAGS      = $(arch_flags) -arch x86_64 -Wl,-single_module -dynamiclib  -lc -lm -mmacos-version-min=10.14
+  endif
 else
-  CFLAGS= -w -fPIC $(arch_flags) -arch x86_64 -std=c99 -D_XOPEN_SOURCE=500 -mmacos-version-min=10.14
-  LIBFLAGS      = $(arch_flags) -arch x86_64 -Wl,-single_module -dynamiclib  -lc -lm -mmacos-version-min=10.14
-endif
-else
-SOName        = libpaswcs.so.1
-SO_Name       = libpaswcs.so.1.1
-LIBFLAGS      = -shared -Wl,-soname,$(SOName) -lc -lm
+  # linux
+  SOName        = libpaswcs.so.1
+  SO_Name       = libpaswcs.so.1.1
+  LIBFLAGS      = -shared -Wl,-soname,$(SOName) -lc -lm
+  ifeq ($(CPU_TARGET),aarch64)
+    CC = aarch64-linux-gnu-gcc
+  endif
+  ifeq ($(CPU_TARGET),arm)
+    CC = arm-linux-gnueabihf-gcc
+  endif
 endif
 ifneq ($(findstring W32,$(OSTYPE)),)
-SO_Name       = libcdcwcs.dll
-LIBFLAGS      = -shared -Wl,-soname,$(SO_Name)  -lm
+  SO_Name       = libcdcwcs.dll
+  LIBFLAGS      = -shared -Wl,-soname,$(SO_Name)  -lm
 endif
 ifneq ($(findstring MINGW,$(OSTYPE)),)
-SO_Name       = libcdcwcs.dll
-LIBFLAGS      = -shared -Wl,-soname,$(SO_Name)  -lm
+  SO_Name       = libcdcwcs.dll
+  LIBFLAGS      = -shared -Wl,-soname,$(SO_Name)  -lm
 endif
 
 OBJS =	cdcwcs.o imgetwcs.o daoread.o wcscon.o \
