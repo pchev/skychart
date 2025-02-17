@@ -769,6 +769,7 @@ begin
   MagLabel.Items[0] := rsName;
   MagLabel.Items[1] := rsCommonName;
   MagLabel.Items[2] := rsMagnitude;
+  DistLabel.Caption := rsDistance;
   constlabel.Caption := rsConstellatio6;
   constlabel.Items[0] := rsOfficialName;
   constlabel.Items[1] := rsAbbreviation;
