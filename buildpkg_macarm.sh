@@ -27,7 +27,7 @@ echo $lastrev ' - ' $currentrev
 if [[ $lastrev -ne $currentrev ]]; then
 
 # delete old files
-  rm skychart-*-arm64-macos.dmg
+  rm skychart-*-arm64.dmg
   rm bin-*.bz2
   rm -rf $basedir
 
@@ -61,7 +61,7 @@ if [[ $lastrev -ne $currentrev ]]; then
   packagesbuild -v skychartarm.pkgproj
   if [[ $? -ne 0 ]]; then exit 1;fi
   cp readme.txt build/
-  hdiutil create -anyowners -volname skychart-$version-$currentrev-arm64-macos -imagekey zlib-level=9 -format UDZO -srcfolder ./build skychart-$version-$currentrev-arm64-macos.dmg
+  hdiutil create -anyowners -volname skychart-$version-$currentrev-macos-arm64 -imagekey zlib-level=9 -format UDZO -srcfolder ./build skychart-$version-$currentrev-macos-arm64.dmg
   if [[ $? -ne 0 ]]; then exit 1;fi
   mv skychart*.dmg $wd
   if [[ $? -ne 0 ]]; then exit 1;fi

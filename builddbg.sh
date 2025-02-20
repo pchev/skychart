@@ -51,7 +51,7 @@ echo $version-$currentrev
   # tar
   cd $builddir
   cd ..
-  tar cvJf skychart-$version-$currentrev-linux_x86_64_dbg.tar.xz skychart
+  tar cvJf skychart-$version-${currentrev}_linux_x86_64_dbg.tar.xz skychart
   if [[ $? -ne 0 ]]; then exit 1;fi
   mv skychart*.tar.xz $wd
   if [[ $? -ne 0 ]]; then exit 1;fi

@@ -33,7 +33,7 @@ echo $lastrev ' - ' $currentrev
 if [[ $lastrev -ne $currentrev ]]; then
 
 # delete old files
-  rm skychart-*-x86_64-macos.dmg
+  rm skychart-*-x86_64.dmg
   rm bin-*.bz2
   rm -rf $basedir
 
@@ -67,7 +67,7 @@ if [[ $lastrev -ne $currentrev ]]; then
   packagesbuild -v skychart64.pkgproj
   if [[ $? -ne 0 ]]; then exit 1;fi
   cp readme.txt build/
-  hdiutil create -anyowners -volname skychart-$version-$currentrev-x86_64-macos -imagekey zlib-level=9 -format UDZO -srcfolder ./build skychart-$version-$currentrev-x86_64-macos.dmg
+  hdiutil create -anyowners -volname skychart-$version-$currentrev-macos-x86_64 -imagekey zlib-level=9 -format UDZO -srcfolder ./build skychart-$version-$currentrev-macos-x86_64.dmg
   if [[ $? -ne 0 ]]; then exit 1;fi
   mv skychart*.dmg $wd
   if [[ $? -ne 0 ]]; then exit 1;fi

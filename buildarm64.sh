@@ -61,7 +61,7 @@ if [[ $make_linuxarm ]]; then
   # tar
   cd $builddir
   cd ..
-  tar cvjf skychart-$version-$currentrev-linux_arm64.tar.bz2 skychart
+  tar cvjf skychart-$version-${currentrev}_linux_arm64.tar.bz2 skychart
   if [[ $? -ne 0 ]]; then exit 1;fi
   mv skychart*.tar.bz2 $wd
   if [[ $? -ne 0 ]]; then exit 1;fi

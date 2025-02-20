@@ -84,7 +84,7 @@ if [[ $make_linux32 ]]; then
   # tar
   cd $builddir
   cd ..
-  tar cvJf skychart-$version-$currentrev-linux_i386.tar.xz skychart
+  tar cvJf skychart-$version-${currentrev}_linux_i386.tar.xz skychart
   if [[ $? -ne 0 ]]; then exit 1;fi
   mv skychart*.tar.xz $wd
   if [[ $? -ne 0 ]]; then exit 1;fi
@@ -161,7 +161,7 @@ if [[ $make_linux64 ]]; then
   # tar
   cd $builddir
   cd ..
-  tar cvJf skychart-$version-$currentrev-linux_x86_64.tar.xz skychart
+  tar cvJf skychart-$version-${currentrev}_linux_x86_64.tar.xz skychart
   if [[ $? -ne 0 ]]; then exit 1;fi
   mv skychart*.tar.xz $wd
   if [[ $? -ne 0 ]]; then exit 1;fi
