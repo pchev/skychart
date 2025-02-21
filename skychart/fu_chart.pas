@@ -3922,7 +3922,7 @@ var
   bmp: TBGRAbitmap;
   ipla, isat: integer;
   i,ii, pii, p, l, y, m, d, precision, idx: integer;
-  isStar, isSolarSystem, isd2k, isvo, isOsr, isArtSat: boolean;
+  isStar, isVar, isSolarSystem, isd2k, isvo, isOsr, isArtSat: boolean;
   ApparentValid, supconj: boolean;
   ra, Dec, q, a, h, ag, airm, hg, hr, ht, hs, hrl,hsl, azr, azs, al, j1, j2, j3, rar, der, rat,
   det, ras, des, culmalt, lha: double;
@@ -4017,6 +4017,7 @@ begin
   else
     precision := 0;
   isStar := (otype = '*');
+  isVar := (otype = 'V*');
   isSolarSystem := ((otype = 'P') or (otype = 'Ps') or (otype = 'S*') or (otype = 'As') or (otype = 'Cm')or (otype = 'Spk'));
   isOsr := (otype = 'OSR');
   isArtSat := (otype = 'Sat');
@@ -4083,6 +4084,11 @@ begin
       else
         gaiaid:='';
     end;
+  end;
+  if isVar then
+  begin
+    if uppercase(copy(oname,1,8))='GAIA DR3' then
+      gaiaid:=trim(copy(oname,9,99))
   end;
   txt := txt + html_b + oname + htms_b + html_br;
   // Planet picture
