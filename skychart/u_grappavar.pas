@@ -190,7 +190,7 @@ try
 
         // the GAIA photometry, return an HTML table for display in CdC
         table:='<table>';
-        table:=table+'<tr><th> </th><th>nb_obs</th><th>min</th><th>max</th><th>mean</th><th>median</th></tr>';
+        table:=table+'<tr><th> </th><th>nb_obs</th><th>max</th><th>min</th><th>mean</th><th>median</th></tr>';
         Str(num_selected_g_fov:3,s1);
         Str(min_mag_g_fov/1000:6:3,s2);
         Str(max_mag_g_fov/1000:6:3,s3);
