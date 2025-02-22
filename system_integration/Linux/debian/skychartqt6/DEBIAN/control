@@ -1,0 +1,14 @@
+Package: skychart-qt6
+Version: 3
+Section: education
+Priority: optional
+Maintainer: Patrick Chevalley <pch@ap-i.net>
+Architecture: amd64
+Installed-Size: %size%
+Provides: skychart
+Conflicts: skychart
+Replaces: skychart
+Depends: libc6, libqt6pas6, libglib2.0-0, libsqlite3-0, libpasastro, libchealpix0, xplanet, espeak
+Description: Skychart / Cartes du Ciel planetarium software
+ Planetarium software for the advanced amateur astronomer.
+ .
