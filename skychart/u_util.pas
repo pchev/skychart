@@ -193,6 +193,7 @@ var
 {$ifdef lclgtk2} {$define cdcutf8} {$define greekutf8} {$endif}
 {$ifdef lclqt} {$define cdcutf8} {$define greekutf8} {$endif}
 {$ifdef lclqt5} {$define cdcutf8} {$define greekutf8} {$endif}
+{$ifdef lclqt6} {$define cdcutf8} {$define greekutf8} {$endif}
 {$ifdef lclcarbon} {$define cdcutf8} {$define greekutf8} {$endif}
 {$ifdef lclcocoa} {$define cdcutf8} {$define greekutf8} {$endif}
 {$ifdef lclwin32} {$define cdcutf8} {$endif}
@@ -3896,6 +3897,9 @@ var
 begin
   {$ifdef lclqt5}
   exit;              // make repeated Alt key press to crash
+  {$endif}
+  {$ifdef lclqt6}
+  exit;
   {$endif}
   {$ifdef lclcocoa}
   exit;

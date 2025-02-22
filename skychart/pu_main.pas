@@ -899,6 +899,9 @@ uses
     {$ifdef lclqt5}
   qtint,
     {$endif}
+    {$ifdef lclqt6}
+  qtint,
+    {$endif}
     {$if (lcl_fullversion >= 1070000)}
   lclplatformdef,
     {$endif}
@@ -1521,16 +1524,22 @@ begin
       WriteTrace('Cursor');
 
     {$ifdef lclqt5}
-    buf:=GetQtVersion;
-    WriteTrace('Running on Qt version: '+buf);
-    i:=pos('.',buf);               // do not use QtVersionMinor because of bug in qtint
-    if not TryStrToInt(copy(buf,1,i-1),i1) then i1:=5;
-    Delete(buf,1,i);
-    i:=pos('.',buf);
-    if not TryStrToInt(copy(buf,1,i-1),i2) then i2:=0;
-    usecursor:=(i1>=5)and(i2>=12); // cursor crash with old version, work with version in focal
+      buf:=GetQtVersion;
+      WriteTrace('Running on Qt version: '+buf);
+      i:=pos('.',buf);               // do not use QtVersionMinor because of bug in qtint
+      if not TryStrToInt(copy(buf,1,i-1),i1) then i1:=5;
+      Delete(buf,1,i);
+      i:=pos('.',buf);
+      if not TryStrToInt(copy(buf,1,i-1),i2) then i2:=0;
+      usecursor:=(i1>=5)and(i2>=12); // cursor crash with old version, work with version in focal
     {$else}
-    usecursor:=true;
+      {$ifdef lclqt6}
+        buf:=GetQtVersion;
+        WriteTrace('Running on Qt version: '+buf);
+        usecursor:=true;
+      {$else}
+        usecursor:=true;
+      {$endif}
     {$endif}
 
     if usecursor and fileexists(slash(appdir) + slash('data') + slash('Themes') + slash('default') + 'retic.cur') then
@@ -9846,11 +9855,15 @@ begin
   {$ifdef lclqt5}
   accel := '';          // make repeated Alt key press to crash
   {$else}
-  {$ifdef lclcocoa}
-  accel := '';
-  {$else}
-  accel := '&';
-  {$endif}
+    {$ifdef lclcocoa}
+    accel := '';
+    {$else}
+      {$ifdef lclqt6}
+        accel := '';
+      {$else}
+        accel := '&';
+      {$endif}
+    {$endif}
   {$endif}
   // Tool bar
   ToolBarMain.Caption := rsMainBar;
