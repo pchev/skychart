@@ -3238,7 +3238,6 @@ begin
           cells[3, i] := floattostrf(magn, ffFixed, 5, 1);
           cells[4, i] := demtostr(rad2deg * elong);
           cells[5, i] := demtostr(rad2deg * phase);
-          objects[0, i] := SetObjCoord(jda, ra, Dec);
           RiseSet(jd0, ra, Dec, hr1, ht1, hs1, azr, azs, irc, config);
           Fplanet.Asteroid(jd0 + rmod((hr1 - config.TimeZone) + 24, 24) / 24,
             False, ra1, dec1, dist, r, p1,p2,p3, xac, yac, zac);
