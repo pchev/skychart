@@ -217,7 +217,7 @@ begin
       p.b := arctan(z / qr);
     Feph_method := 'DE' + IntToStr(de_type);
   end
-  else if (t > jdmin404) and (t < jdmax404) then
+  else if (Plan404<>nil) and (t > jdmin404) and (t < jdmax404) then
   begin               // use Plan404
     pl.ipla := ipla;
     pl.JD := t;
@@ -366,7 +366,7 @@ begin
       z := planet_arr[2];
       Feph_method := 'DE' + IntToStr(de_type);
     end
-    else if (t0 > jdmin404) and (t0 < jdmax404) then
+    else if (Plan404<>nil) and (t0 > jdmin404) and (t0 < jdmax404) then
     begin    // use Plan404
       p.ipla := 3;
       p.JD := t0;
@@ -415,7 +415,7 @@ begin
       z := planet_arr[2];
       Feph_method := 'DE' + IntToStr(de_type);
     end
-    else if (t0 > jdmin404) and (t0 < jdmax404) then
+    else if (Plan404<>nil) and (t0 > jdmin404) and (t0 < jdmax404) then
     begin    // use Plan404
       p.ipla := 3;
       p.JD := t0;
@@ -1428,7 +1428,7 @@ begin
     dkm := dist * km_au;
     Feph_method := 'DE' + IntToStr(de_type);
   end
-  else if (t0 > jdmin404) and (t0 < jdmax404) then
+  else if (Plan404<>nil) and (t0 > jdmin404) and (t0 < jdmax404) then
   begin  // use plan404
     t0 := t0 - (1.27 / 3600 / 24); // mean lighttime
     p.JD := t0;

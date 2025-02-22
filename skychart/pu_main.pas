@@ -2898,17 +2898,13 @@ begin
     if VerboseMsg then
       WriteTrace(step);
     Plan404 := nil;
+    {$IFNDEF CPUAARCH64}
     Plan404lib := LoadLibrary(lib404);
     if Plan404lib <> 0 then
     begin
       Plan404 := TPlan404(GetProcedureAddress(Plan404lib, 'Plan404'));
     end;
-    if @Plan404 = nil then
-    begin
-      MessageDlg(rsCouldNotLoad + lib404 + crlf + rsPleaseTryToR,
-        mtError, [mbAbort], 0);
-      Halt;
-    end;
+    {$ENDIF}
     step := 'Load cdcwcs';
     if VerboseMsg then
       WriteTrace(step);
