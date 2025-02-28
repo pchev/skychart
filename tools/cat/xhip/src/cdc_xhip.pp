@@ -205,6 +205,7 @@ const
         p := pos(';', buf);
         if p > 0 then
           buf := copy(buf, 1, p - 1);
+        starname[hr] := buf;
         if length(starname[hr])>maxname then begin
            maxname := length(starname[hr]);
            writeln('Warning! star name length increased to '+inttostr(maxname));       
