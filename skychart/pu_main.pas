@@ -11995,7 +11995,11 @@ var tdir:string;
 begin
   ok:=true;
   CurrentTheme:=ThemeName;
-  tdir := slash(appdir) + slash('data') + slash('Themes') + slash(ThemeName);
+  tdir := slash(appdir) + slash('data') + slash('Themes') + slash(CurrentTheme);
+  if not DirectoryExists(tdir) then begin
+    CurrentTheme:='default';
+    tdir := slash(appdir) + slash('data') + slash('Themes') + slash(CurrentTheme);
+  end;
   Load1Theme(slash(tdir)+slash('daylight')+slash('16x16'),Img16Day);
   Load1Theme(slash(tdir)+slash('daylight')+slash('22x22'),Img22Day);
   Load1Theme(slash(tdir)+slash('daylight')+slash('32x32'),Img32Day);

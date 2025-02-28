@@ -30,15 +30,6 @@ data/Themes/default/night-vision
 data/Themes/default/night-vision/16x16
 data/Themes/default/night-vision/22x22
 data/Themes/default/night-vision/32x32
-data/Themes/old-ugly
-data/Themes/old-ugly/daylight
-data/Themes/old-ugly/daylight/16x16
-data/Themes/old-ugly/daylight/22x22
-data/Themes/old-ugly/daylight/32x32
-data/Themes/old-ugly/night-vision
-data/Themes/old-ugly/night-vision/16x16
-data/Themes/old-ugly/night-vision/22x22
-data/Themes/old-ugly/night-vision/32x32
 data/varobs
 doc
 
