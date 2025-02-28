@@ -446,6 +446,8 @@ begin
   sesame_resolver:='';
   sesame_name:='';
   sesame_desc:='';
+  ra:=NullCoord;
+  de:=NullCoord;
 
   Doc := nil;
 
@@ -541,7 +543,7 @@ begin
     if sesame_name = '' then
       sesame_name := num;
 
-    result := true;
+    result := (ra>-9000)and(de>-9000);
 
   finally
     Doc.Free;
