@@ -11998,6 +11998,7 @@ begin
   tdir := slash(appdir) + slash('data') + slash('Themes') + slash(CurrentTheme);
   if not DirectoryExists(tdir) then begin
     CurrentTheme:='default';
+    cfgm.ThemeName:=CurrentTheme;
     tdir := slash(appdir) + slash('data') + slash('Themes') + slash(CurrentTheme);
   end;
   Load1Theme(slash(tdir)+slash('daylight')+slash('16x16'),Img16Day);
