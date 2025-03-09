@@ -663,7 +663,7 @@ begin
     HTTPRequest.Free;
   end
   else begin
-    StatusLabel.Caption:=StatusLabel.Caption+' '+rsOnlineSearch;
+    StatusLabel.Caption:=StatusLabel.Caption+' '+'Server error: '+inttostr(HTTPRequest.http.ResultCode)+' '+HTTPRequest.http.ResultString;
     num:='Not found';
   end;
 end;
