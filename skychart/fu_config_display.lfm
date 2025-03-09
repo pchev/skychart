@@ -42,7 +42,6 @@ object f_config_display: Tf_config_display
           Top = 141
           Width = 504
           Align = alTop
-          Caption = 'Panel13'
           ClientHeight = 260
           ClientWidth = 504
           TabOrder = 3
@@ -4081,7 +4080,6 @@ object f_config_display: Tf_config_display
           Top = 418
           Width = 504
           Align = alBottom
-          Caption = 'Panel17'
           ClientHeight = 110
           ClientWidth = 504
           TabOrder = 2
