@@ -39,6 +39,31 @@ const
 
 type
 
+  { THTTPthread }
+
+  THTTPthread = class(TThread)
+    private
+      Fhttp: THTTPSend;
+      Furl,Fmethod: String;
+      FonStatus: TNotifyEvent;
+      FStatusReason: THookSocketReason;
+      FStatusValue: String;
+      Fok: boolean;
+      procedure sendstatus;
+      procedure httpstatus(Sender: TObject; Reason: THookSocketReason; const Value: String);
+    public
+      constructor Create;
+      destructor Destroy; override;
+      procedure Execute; override;
+      property http: THTTPSend read Fhttp write Fhttp;
+      property url: String read Furl write Furl;
+      property method: String read Fmethod write Fmethod;
+      property ok: boolean read Fok;
+      property StatusReason: THookSocketReason read FStatusReason;
+      property StatusValue: String read FStatusValue;
+      property onStatus:TNotifyEvent read FonStatus write FonStatus;
+  end;
+
   { Tf_search }
 
   Tf_search = class(TForm)
@@ -160,14 +185,15 @@ type
     NebNameDE : array of single;
     numNebName : integer;
     Fnightvision:boolean;
-    http: THTTPSend;
     pagespk: integer;
     procedure GetSearchText;
   protected
     Fproxy,Fproxyport,Fproxyuser,Fproxypass : string;
     FSocksproxy,FSockstype : string;
     Sockreadcount, LastRead: integer;
-    procedure httpstatus(Sender: TObject; Reason: THookSocketReason; const Value: String);
+    FTimeout: integer;
+    procedure httpstatus(Sender: TObject);
+    function WaitRequest(req: THTTPthread): boolean;
   public
     { Public declarations }
     cdb: Tcdcdb;
@@ -309,8 +335,7 @@ begin
   CometFilter.Text:='C/'+FormatDateTime('yyyy',now);
   RadioGroup1Click(Sender);
 
-  http := THTTPSend.Create;
-
+  FTimeout:=5000;
   Fproxy:='';
   FSocksproxy:='';
 
@@ -320,7 +345,6 @@ end;
 
 procedure Tf_search.FormDestroy(Sender: TObject);
 begin
-  http.Free;
 end;
 
 procedure Tf_search.btnCometFilterClick(Sender: TObject);
@@ -570,6 +594,7 @@ end;
 function Tf_search.SearchOnline: boolean;
 var
   url,cat,vo_sesame,n:string;
+  HTTPRequest: THTTPthread;
 begin
 
   result:=false;
@@ -589,55 +614,58 @@ begin
 
   url:=sesame_url[SesameUrlNum+1,1];
   url:=url+'/-oxFI/'+cat+'?'+trim(n);
-  http.Clear;
-  http.Sock.SocksIP:='';
-  http.ProxyHost:='';
 
+  HTTPRequest:=THTTPthread.Create;
+  HTTPRequest.http.Sock.SocksIP:='';
+  HTTPRequest.http.ProxyHost:='';
   if FSocksproxy<>'' then
   begin
-    http.Sock.SocksIP:=FSocksproxy;
-    if Fproxyport<>'' then http.Sock.SocksPort:=Fproxyport;
-    if FSockstype='Socks4' then http.Sock.SocksType:=ST_Socks4
-                           else http.Sock.SocksType:=ST_Socks5;
-    if Fproxyuser<>'' then http.Sock.SocksUsername:=Fproxyuser;
-    if Fproxypass<>'' then http.Sock.SocksPassword:=Fproxypass;
+    HTTPRequest.http.Sock.SocksIP:=FSocksproxy;
+    if Fproxyport<>'' then HTTPRequest.http.Sock.SocksPort:=Fproxyport;
+    if FSockstype='Socks4' then HTTPRequest.http.Sock.SocksType:=ST_Socks4
+                           else HTTPRequest.http.Sock.SocksType:=ST_Socks5;
+    if Fproxyuser<>'' then HTTPRequest.http.Sock.SocksUsername:=Fproxyuser;
+    if Fproxypass<>'' then HTTPRequest.http.Sock.SocksPassword:=Fproxypass;
   end
 
   else if Fproxy<>'' then  begin
-      http.ProxyHost:=Fproxy;
-      if Fproxyport<>'' then http.ProxyPort:=Fproxyport;
-      if Fproxyuser<>'' then http.ProxyUser :=Fproxyuser;
-      if Fproxypass<>'' then http.ProxyPass :=Fproxypass;
+      HTTPRequest.http.ProxyHost:=Fproxy;
+      if Fproxyport<>'' then HTTPRequest.http.ProxyPort:=Fproxyport;
+      if Fproxyuser<>'' then HTTPRequest.http.ProxyUser :=Fproxyuser;
+      if Fproxypass<>'' then HTTPRequest.http.ProxyPass :=Fproxypass;
   end;
-
-  http.Timeout:=10000;
-  http.Sock.ConnectionTimeout:=10000;
-  http.Sock.OnStatus:=httpstatus;
+  HTTPRequest.http.Document.Clear;
+  HTTPRequest.http.Headers.Clear;
+  HTTPRequest.http.Timeout:=FTimeout;
+  HTTPRequest.http.sock.SocksTimeout:=FTimeout;
+  if visible then
+    HTTPRequest.OnStatus:=httpstatus;
+  HTTPRequest.url:=url;
+  HTTPRequest.method:='GET';
   Sockreadcount:=0;
-
-  if http.HTTPMethod('GET', url) and
-    (
-      (http.ResultCode=200) or
-      (http.ResultCode=0)
-    )
-  then
+  HTTPRequest.Start;
+  if WaitRequest(HTTPRequest) then
   begin
-     StatusLabel.Caption:='Completed';
-     http.Document.SaveToFile(vo_sesame);
-     result:=LoadSesame(vo_sesame);
-
-     if not Result then begin
+   if((HTTPRequest.http.ResultCode=200)or(HTTPRequest.http.ResultCode=0)) then
+   begin
+      StatusLabel.Caption:='Completed';
+      HTTPRequest.http.Document.SaveToFile(vo_sesame);
+      result:=LoadSesame(vo_sesame);
+      if not Result then begin
         StatusLabel.Caption:=format(rsNotFound,[num]);
         num:='Not found';
-     end;
+      end;
+    end
+    else begin
+      StatusLabel.Caption:=StatusLabel.Caption+' '+rsOnlineSearch;
+      num:='Not found';
+    end;
+    HTTPRequest.Free;
   end
   else begin
     StatusLabel.Caption:=StatusLabel.Caption+' '+rsOnlineSearch;
     num:='Not found';
   end;
-
-  http.Clear;
-
 end;
 
 procedure Tf_search.GetSearchText;
@@ -908,22 +936,23 @@ begin
 
 end;
 
-procedure Tf_search.httpstatus(Sender: TObject; Reason: THookSocketReason; const Value: String);
+procedure Tf_search.httpstatus(Sender: TObject);
 var
   txt: string;
 begin
 
   txt:='';
 
-  case reason of
+  with THTTPthread(sender) do
+  case StatusReason of
 
-    HR_ResolvingBegin : txt:='Resolving '+value;
-    HR_Connect        : txt:='Connect '+value;
-    HR_Accept         : txt:='Accept '+value;
+    HR_ResolvingBegin : txt:='Resolving '+StatusValue;
+    HR_Connect        : txt:='Connect '+StatusValue;
+    HR_Accept         : txt:='Accept '+StatusValue;
 
     HR_ReadCount      :
       begin
-        Sockreadcount:=Sockreadcount+strtoint(value);
+        Sockreadcount:=Sockreadcount+strtoint(StatusValue);
 
         if (Sockreadcount-LastRead)>100000 then
         begin
@@ -938,13 +967,70 @@ begin
   else
     txt:='';
   end;
-
-  if (txt>'')then
-  begin
+  if txt<>'' then
     StatusLabel.Caption:=txt;
+  Application.ProcessMessages;
+end;
+
+function Tf_search.WaitRequest(req: THTTPthread): boolean;
+var endt: double;
+    aborted: boolean;
+begin
+  result:=false;
+  // ensure request time do not excess timeout
+  endt:=now+FTimeout/MSecsPerDay;
+  aborted:=false;
+  while (not req.Finished)and(not aborted) do begin
+    aborted:=(now>endt);
+    sleep(10);
     Application.ProcessMessages;
   end;
+  if aborted then begin
+     req.FreeOnTerminate:=true;
+     req.http.Abort;
+     req.http.Sock.AbortSocket;
+  end
+  else
+     result:=true;
+end;
 
+{ THTTPthread }
+
+constructor THTTPthread.Create;
+begin
+  inherited Create(True);
+  FreeOnTerminate:=False;
+  Furl:='';
+  Fmethod:='';
+  Fok:=False;
+  Fhttp:=THTTPSend.Create;
+  Fhttp.Sock.ConnectionTimeout:=5000;  // not too long if service is not available
+  Fhttp.Timeout:=5000;
+  Fhttp.UserAgent:='';
+end;
+
+destructor THTTPthread.Destroy;
+begin
+   Fhttp.Free;
+   inherited Destroy;
+end;
+
+procedure THTTPthread.Execute;
+begin
+  if Assigned(FonStatus) then Fhttp.Sock.OnStatus:=httpstatus;
+  Fok:=Fhttp.HTTPMethod(method, fURL);
+end;
+
+procedure THTTPthread.httpstatus(Sender: TObject; Reason: THookSocketReason; const Value: String);
+begin
+  FStatusReason:=Reason;
+  FStatusValue:=Value;
+  if Assigned(FonStatus) then Synchronize(sendstatus);
+end;
+
+procedure THTTPthread.sendstatus;
+begin
+  if Assigned(FonStatus) then FonStatus(self);
 end;
 
 end.
