@@ -23,19 +23,19 @@ begin
   repeat
     readln(fi,row);
 
-    varflag:=copy(row,40,1);
+    varflag:=copy(row,41,1);
     if varflag<>'0' then continue;  // not a variable
 
     writeln(fo1,row); // all variable
 
-    buf:=trim(copy(row,105,8))+' ';
+    buf:=trim(copy(row,106,7))+' ';
     band1:=buf[1];
     buf:=trim(copy(row,128,8))+' ';
     band2:=buf[1];
     if band1 in ['J','H','K','L','M'] then continue;  // IR var
     if band2 in ['J','H','K','L','M'] then continue;
 
-    m1:=StrToFloatDef(trim(copy(row,95,7)),-9999);
+    m1:=StrToFloatDef(trim(copy(row,96,7)),-9999);
     if m1>=13.0 then continue;  // too faint
     m2:=StrToFloatDef(trim(copy(row,118,7)),-9999);
     if (m1<-100)or(m2<-100) then continue; // missing magnitude

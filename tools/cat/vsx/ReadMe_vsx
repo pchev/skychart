@@ -34,7 +34,7 @@ File Summary:
  FileName    Lrecl   Records    Explanations
 --------------------------------------------------------------------------------
 ReadMe          80        .  this file
-vsx.dat        203  2278125  Variable Star indeX, Version 2023-12-11
+vsx.dat        206  9750415  Variable Star indeX, Version 2025-03-10
 
 refs.dat       27    830415  Bibliography (references) of VSX stars
 
@@ -43,24 +43,24 @@ Byte-by-byte Description of file: vsx.dat
 --------------------------------------------------------------------------------
  Bytes Format Units  Label     Explanations
 --------------------------------------------------------------------------------
-  1-  7   I7     ---    OID      [1/2388405] Internal identifier, can be used to
-                               link out to the VSX database (1)
-  9- 38   A30    ---    Name      Variable star identifier
- 40- 40   I1     ---    V         Variability flag (2) (VarFlag)
- 42- 50   F9.5   deg    RAdeg    [0.0/360.0] Right ascension (J2000)
- 52- 60   F9.5   deg    DEdeg    [-89.87/89.44] Declination (J2000)
- 62- 91   A30    ---    Type     ? Variability type, ariability type, as in GCVS
+  1-  8   I8     ---    OID       Internal identifier, can be used to link out
+                               to the VSX database (1)
+ 10- 39   A30    ---    Name      Variable star identifier
+ 41- 41   I1     ---    V         Variability flag (2) (VarFlag)
+ 43- 51   F9.5   deg    RAdeg    [0.0/360.0] Right ascension (J2000)
+ 53- 61   F9.5   deg    DEdeg    [-89.93/89.91] Declination (J2000)
+ 63- 92   A30    ---    Type     ? Variability type, ariability type, as in GCVS
                                catalog Variability type (see details of VSX type
                                list)
- 93- 93   A1     ---    l_max    ? Limit flag on max (LimitFlagOnMax)
- 95-101   F7.3   mag    max      [-6.0/25.2]? Magnitude at maximum, or amplitude
+ 94- 94   A1     ---    l_max    ? Limit flag on max (LimitFlagOnMax)
+ 96-102   F7.3   mag    max      [-6.0/25.2]? Magnitude at maximum, or amplitude
                                (MagMax)
-103-103   A1     ---    u_max    ? Uncertainty flag on max (MaxUncertaintyFlag)
-105-112   A8     ---    n_max    ? Passband on max magnitude (4) (MaxPassband)
+104-104   A1     ---    u_max    ? Uncertainty flag on max (MaxUncertaintyFlag)
+106-112   A7     ---    n_max    ? Passband on max magnitude (4) (MaxPassband)
 114-114   A1     ---    f_min    ? Flag to indicate an amplitude
                                (MinIsAmplitude)
 116-116   A1     ---    l_min    ? Limit flag on min (LimitFlagOnMin)
-118-124   F7.3   mag    min      [-15.75/28.0]? Magnitude at minimum, or
+118-124   F7.3   mag    min      [-0.02/28.0]? Magnitude at minimum, or
                                amplitude (MagMin)
 126-126   A1     ---    u_min    ? Uncertainty flag on min (MinUncertaintyFlag)
 128-135   A8     ---    n_min    ? Passband on min magnitude (MinPassband)
@@ -68,10 +68,10 @@ Byte-by-byte Description of file: vsx.dat
 152-152   A1     ---    u_Epoch  ? Uncertainty flag on epoch
                                (EpochUncertaintyFlag)
 154-154   A1     ---    l_Period ? Limit flag on period (3) (LimitFlagOnPeriod)
-156-174   F19.12 d      Period   ? Period of the variable in days
+156-174   F19.12 d      Period   [0.0/35320.0]? Period of the variable in days
 176-176   A1     ---    u_Period ? Uncertainty flag on Period (3)
                                (PeriodUncertaintyFlag)
-178-203   A26    ---    Sp       ? Spectral type (SpectralType)
+178-206   A29    ---    Sp       ? Spectral type (SpectralType)
 
 --------------------------------------------------------------------------------
 
@@ -658,5 +658,24 @@ History:
   * 2023-10-02: 2277881 stars, from http://www.aavso.org/vsx/
   * 2023-11-27: 2278089 stars, from http://www.aavso.org/vsx/
   * 2023-12-11: 2278125 stars, from http://www.aavso.org/vsx/
+  * 2024-01-15: 2278517 stars, from http://www.aavso.org/vsx/
+  * 2024-03-11: 2278714 stars, from http://www.aavso.org/vsx/
+  * 2024-03-25: 2278780 stars, from http://www.aavso.org/vsx/
+  * 2024-04-22: 2278885 stars, from http://www.aavso.org/vsx/
+  * 2024-06-03: 2279007 stars, from http://www.aavso.org/vsx/
+  * 2024-07-01: 2279174 stars, from http://www.aavso.org/vsx/
+  * 2024-08-12: 2279230 stars, from http://www.aavso.org/vsx/
+  * 2024-08-26: 2279218 stars, from http://www.aavso.org/vsx/
+  * 2024-09-23: 2279289 stars, from http://www.aavso.org/vsx/
+  * 2024-10-07: 2279310 stars, from http://www.aavso.org/vsx/
+  * 2024-10-21: 2279371 stars, from http://www.aavso.org/vsx/
+  * 2024-11-04: 2279383 stars, from http://www.aavso.org/vsx/
+  * 2024-12-02: 2279503 stars, from http://www.aavso.org/vsx/
+  * 2024-12-16: 2279564 stars, from http://www.aavso.org/vsx/
+  * 2025-01-13: 2279886 stars, from http://www.aavso.org/vsx/
+  * 2025-02-10: 8965496 stars, from http://www.aavso.org/vsx/
+  * 2025-02-24: 8965337 stars, from http://www.aavso.org/vsx/
+  * 2025-03-10: 9750415 stars, from http://www.aavso.org/vsx/
+  * 2025-03-10: 9750415 stars, from http://www.aavso.org/vsx/
 ================================================================================
 (End)   Christopher Watson, Patrick Wils; Francois Ochsenbein       30-May-2022
