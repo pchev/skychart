@@ -109,6 +109,7 @@ type
       var xsat, ysat: double20; var supconj: array of boolean): integer;
     function PluSat(jde, lighttime, xp, yp, zp: double; c:Tconf_skychart; var xsat, ysat: double20;
       var supconj: array of boolean): integer;
+    function MarsSolarLongitude(jde: double): double;
     procedure SatRing(jde: double; var P, a, b, be: double);
     function JupGRS(lon, drift, jdref, jdnow: double): double;
     procedure Moon(t0: double; var alpha, delta, dist, dkm, diam, phase, illum: double;c:Tconf_skychart);
@@ -1314,6 +1315,27 @@ begin
   llat := rad2deg * (llat);
 end;
 
+function TPlanet.MarsSolarLongitude(jde: double): double;
+var t, M, LS: double;
+const jdmin=2308004.5; // 1607/1/1
+      jdmax=2504138.5; // 2143/12/31
+begin
+  // Ref: Enumeration of Mars years and seasons since the beginning of telescopic exploration
+  // https://doi.org/10.1016/j.icarus.2014.12.014
+  // valid from 1607 to 2143.
+  // Simplified relation (8) and (9) , +/- 0.05°
+  if (jde>=jdmin) and (jde<=jdmax) then begin
+    t := jde - jd2000;
+    M := deg2rad * (19.38095 + 0.524020769 * t);
+    LS := 270.38859 + 0.524038542 * t + 10.67848 * sin(M) + 0.62077 * sin(2*M ) + 0.05031 * sin(3*M);
+    LS := rmod(LS+360.0,360.0);
+    result := LS;
+  end
+  else begin
+    result := NullCoord;
+  end;
+end;
+
 function TPlanet.JupGRS(lon, drift, jdref, jdnow: double): double;
 begin
   Result := rmod(360000 + lon + (jdnow - jdref) * drift, 360);
@@ -2166,7 +2188,7 @@ var
   yy, mm, dd: integer;
   ar, de: double;
   dist, illum, phase, diam, jdt, magn, dkm, hh, dp, p, pde, pds, w1, w2, w3, jd0,
-  st0, q, xp, yp, zp, vel, lighttime: double;
+  st0, q, xp, yp, zp, vel, lighttime, ls: double;
   sar, sde, sdist, skm, sillum, sphase, sdiam, smagn, shh, sdp, sdpkm, datett: string;
   sunv: Array_5D;
 const
@@ -2246,7 +2268,13 @@ begin
     PlanetOrientation(jdt, CurrentPlanet, p, pde, pds, w1, w2, w3);
     Desc := Desc + 'pa:' + formatfloat(d1, p) + tab + 'PoleIncl:' + formatfloat(
       d1, pde) + tab + 'SunIncl:' + formatfloat(d1, pds) + tab;
-    if Currentplanet = 5 then
+    if Currentplanet = 4 then
+    begin
+      ls := MarsSolarLongitude(jdt);
+      if ls > NullCoord then
+        Desc := Desc +'Ls:'+FormatFloat(d1,ls) + tab;
+    end
+    else if Currentplanet = 5 then
     begin
       Desc := Desc + 'CMI:' + formatfloat(d1, w1) + tab + 'CMII:' +
         formatfloat(d1, w2) + tab + 'CMIII:' + formatfloat(d1, w3) + tab;
