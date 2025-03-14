@@ -10441,9 +10441,13 @@ begin
     i := quicksearch.Items.IndexOf(Num);
     if (i < 0) and (quicksearch.Items.Count >= MaxQuickSearch) then
       i := MaxQuickSearch - 1;
-    if i >= 0 then
+    if i > 0 then begin
       quicksearch.Items.Delete(i);
-    quicksearch.Items.Insert(0, Num);
+      quicksearch.Items.Insert(0, Num);
+    end
+    else if i < 0 then begin
+      quicksearch.Items.Insert(0, Num);
+    end;
     Application.QueueAsyncCall(quicksearchTop,0);
   end
   else
