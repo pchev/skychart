@@ -196,7 +196,7 @@ object f_mosaic: Tf_mosaic
       Height = 32
       Top = 102
       Width = 51
-      MaxValue = 10
+      MaxValue = 50
       MinValue = 1
       OnChange = MosaicChange
       ParentFont = False
@@ -208,7 +208,7 @@ object f_mosaic: Tf_mosaic
       Height = 32
       Top = 102
       Width = 51
-      MaxValue = 10
+      MaxValue = 50
       MinValue = 1
       OnChange = MosaicChange
       ParentFont = False
