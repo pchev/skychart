@@ -1796,7 +1796,7 @@ begin
           chdir(appdir);
           if assigned(Fshowinfo) then
             Fshowinfo(rsSendChartToP, Caption);
-          execnowait(printcmd1 + ' "' + fname + '"');
+          execnowait(printcmd1 + ' "' + fname + '"','',false);
         end
         else if assigned(Fshowinfo) then
           Fshowinfo(rsInvalidPath + printpath, Caption);

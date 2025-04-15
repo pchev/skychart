@@ -3429,7 +3429,7 @@ end;
 
 procedure Tf_main.MenuVariableStarClick(Sender: TObject);
 begin
-  ExecNoWait(varobs);
+  ExecNoWait(varobs,'',false);
 end;
 
 procedure Tf_main.SubViewClick(Sender: TObject);
