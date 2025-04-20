@@ -4345,7 +4345,7 @@ end;
 
 function Tcatalog.SearchStar(Num: string; var ar1, de1: double): boolean;
 var
-  buf: string;
+  buf,buf2: string;
   rec: Gcatrec;
   ok: boolean;
 begin
@@ -4379,7 +4379,9 @@ begin
   begin
     // Use GaiaVersion because the Gaia catalog is maybe inactive
     if cfgcat.GaiaVersion='' then SetGaiaPath(slash(cfgcat.starcatpath[gaia - BaseStar])+slash('gaia1'), 'gaia');
-    buf := StringReplace(Num, cfgcat.GaiaVersion, '', [rfReplaceAll, rfIgnoreCase]);
+    buf:=StringReplace(Num,' ','',[rfReplaceAll]);
+    buf2:=StringReplace(cfgcat.GaiaVersion,' ','',[rfReplaceAll]);
+    buf := StringReplace(buf, buf2, '', [rfReplaceAll, rfIgnoreCase]);
     Result := FindGaia(buf, ar1, de1);
     if Result then
       exit;
