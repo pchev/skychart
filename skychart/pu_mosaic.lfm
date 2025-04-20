@@ -291,6 +291,15 @@ object f_mosaic: Tf_mosaic
       ParentFont = False
       TabOrder = 3
     end
+    object ButtonLoad: TButton
+      Left = 88
+      Height = 25
+      Top = 29
+      Width = 75
+      Caption = 'Load'
+      OnClick = ButtonLoadClick
+      TabOrder = 4
+    end
   end
   object GroupBox3: TGroupBox
     Left = 0
@@ -349,5 +358,12 @@ object f_mosaic: Tf_mosaic
     OnTimer = ApplyTimerTimer
     Left = 275
     Top = 340
+  end
+  object OpenDialog1: TOpenDialog
+    Title = 'Open mosaic settings'
+    DefaultExt = '.cdcm'
+    Filter = 'Mosaic settings|*.cdcm'
+    Left = 275
+    Top = 384
   end
 end

@@ -7130,6 +7130,7 @@ begin
   f_mosaic.onSendMosaic:=SendMosaic;
   f_mosaic.Ra.Value:=rad2deg*ra/15;
   f_mosaic.De.Value:=rad2deg*de;
+  f_mosaic.jdchart:=sc.cfgsc.JDChart;
   w := LoadMosaicFrameList;
   FormPos(f_mosaic,mouse.CursorPos.X, mouse.CursorPos.Y);
   f_mosaic.Show;
@@ -7291,6 +7292,10 @@ begin
         de := de - dyde;
     end;
   end;
+  if AngularDistance(sc.cfgsc.racentre,sc.cfgsc.decentre,cra,cde)>dx then begin
+    sc.cfgsc.racentre:=cra;
+    sc.cfgsc.decentre:=cde;
+  end;
   sc.cfgsc.NumCircle := n;
   // draw
   Refresh(True, False);
@@ -7365,6 +7370,21 @@ begin
                  + blank + DEToStr3(rad2deg * sc.cfgsc.CircleLst[i, 2]) + blank + rot + blank + w + blank +h);
     end;
     CloseFile(f);
+    if Sender is Tf_mosaic then begin
+       AssignFile(f, ChangeFileExt(SaveDialog1.FileName,'.cdcm'));
+       Rewrite(f);
+       WriteLn(f,'NAME='+Tf_mosaic(Sender).MosaicName.Text);
+       WriteLn(f,'EQUINOX='+FormatFloat(f1,sc.cfgsc.JDChart));
+       WriteLn(f,'RA='+FormatFloat(f5,Tf_mosaic(Sender).Ra.Value));
+       WriteLn(f,'DEC='+FormatFloat(f5,Tf_mosaic(Sender).De.Value));
+       WriteLn(f,'ROT='+FormatFloat(f2,Tf_mosaic(Sender).Rotation.Value));
+       WriteLn(f,'FRAME='+Tf_mosaic(Sender).FrameList.Text);
+       WriteLn(f,'SIZEX='+inttostr(Tf_mosaic(Sender).SizeX.Value));
+       WriteLn(f,'SIZEY='+inttostr(Tf_mosaic(Sender).SizeY.Value));
+       WriteLn(f,'HOROVERLAP='+inttostr(Tf_mosaic(Sender).Hoverlap.Value));
+       WriteLn(f,'VEROVERLAP='+inttostr(Tf_mosaic(Sender).Voverlap.Value));
+       CloseFile(f);
+    end;
   end;
 end;
 

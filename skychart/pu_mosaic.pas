@@ -24,7 +24,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 
 interface
 
-uses  u_constant, u_translation, UScaleDPI, u_util,
+uses  u_constant, u_translation, UScaleDPI, u_util, u_projection,
   Classes, SysUtils, Forms, Controls, Graphics, Dialogs, StdCtrls, ExtCtrls, Arrow, Spin, cu_radec;
 
 type
@@ -32,6 +32,7 @@ type
   { Tf_mosaic }
 
   Tf_mosaic = class(TForm)
+    ButtonLoad: TButton;
     ButtonSend: TButton;
     ButtonClear: TButton;
     ButtonSave: TButton;
@@ -42,6 +43,7 @@ type
     Label9: TLabel;
     MosaicName: TEdit;
     Label8: TLabel;
+    OpenDialog1: TOpenDialog;
     Panel1: TPanel;
     Rotation: TFloatSpinEdit;
     Rotdown: TButton;
@@ -67,6 +69,7 @@ type
     Voverlap: TSpinEdit;
     procedure ButtonClearClick(Sender: TObject);
     procedure ButtonCloseClick(Sender: TObject);
+    procedure ButtonLoadClick(Sender: TObject);
     procedure ButtonSaveClick(Sender: TObject);
     procedure ButtonSendClick(Sender: TObject);
     procedure DeChange(Sender: TObject);
@@ -86,10 +89,11 @@ type
     procedure RotupClick(Sender: TObject);
   private
     FClearMosaic,FApplyMosaic,FSaveMosaic,FonEndMosaic,FSendMosaic: TNotifyEvent;
-    dra,dde: double;
+    dra,dde,Fjdchart: double;
     procedure Apply;
   public
     procedure SetLang;
+    property jdchart: double read Fjdchart write Fjdchart;
     property onClearMosaic: TNotifyEvent read FClearMosaic write FClearMosaic;
     property onApplyMosaic: TNotifyEvent read FApplyMosaic write FApplyMosaic;
     property onSaveMosaic: TNotifyEvent read FSaveMosaic write FSaveMosaic;
@@ -149,6 +153,63 @@ procedure Tf_mosaic.ButtonCloseClick(Sender: TObject);
 begin
   ApplyTimer.Enabled := false;
   Close;
+end;
+
+procedure Tf_mosaic.ButtonLoadClick(Sender: TObject);
+var
+  buf,rot,w,h: string;
+  f: textfile;
+  row: TStringList;
+  meq,mra,mde: double;
+  i,n: integer;
+begin
+  if OpenDialog1.InitialDir = '' then
+    OpenDialog1.InitialDir := HomeDir;
+  if OpenDialog1.Execute then begin
+    meq:=NullCoord;
+    mra:=NullCoord;
+    mde:=NullCoord;
+    row:=TStringList.Create;
+    AssignFile(f, OpenDialog1.FileName);
+    Reset(f);
+    repeat
+      ReadLn(f,buf);
+      SplitRec2(buf,'=',row);
+      if row.Count<>2 then continue;
+      if row[0]='NAME' then
+         MosaicName.Text:=trim(row[1])
+      else if row[0]='EQUINOX' then
+         meq:=StrToFloatDef(row[1],NullCoord)
+      else if row[0]='RA' then
+         mra:=StrToFloatDef(row[1],NullCoord)
+      else if row[0]='DEC' then
+         mde:=StrToFloatDef(row[1],NullCoord)
+      else if row[0]='ROT' then
+         Rotation.Value:=StrToFloatDef(row[1],0)
+      else if row[0]='FRAME' then begin
+         i:=FrameList.Items.IndexOf(trim(row[1]));
+         if i>=0 then FrameList.ItemIndex:=i;
+      end
+      else if row[0]='SIZEX' then
+         SizeX.Value:=StrToIntDef(row[1],3)
+      else if row[0]='SIZEY' then
+         SizeY.Value:=StrToIntDef(row[1],3)
+      else if row[0]='HOROVERLAP' then
+         Hoverlap.Value:=StrToIntDef(row[1],10)
+      else if row[0]='VEROVERLAP' then
+         Voverlap.Value:=StrToIntDef(row[1],10);
+    until eof(f);
+    CloseFile(f);
+    row.Free;
+    if (meq<>NullCoord)and(mra<>NullCoord)and(mde<>NullCoord) then begin
+      mra:=deg2rad*mra*15;
+      mde:=deg2rad*mde;
+      Precession(meq,jdchart,mra,mde);
+      Ra.Value:=rad2deg*mra/15;
+      De.Value:=rad2deg*mde;
+    end;
+    Apply;
+  end;
 end;
 
 procedure Tf_mosaic.ButtonClearClick(Sender: TObject);
