@@ -7611,7 +7611,7 @@ function Tf_chart.cmd_LoadCircle(fn: string): string;
 var
   f: textfile;
   buf1, buf2: string;
-  x,y,eq: double;
+  x,y,eq,rot,w,h: double;
 begin
   if VerboseMsg then
     WriteTrace(Caption + ' Load Circles from ' + fn);
@@ -7628,6 +7628,16 @@ begin
          continue;
       end;
       Inc(sc.cfgsc.NumCircle);
+      if sc.cfgsc.NumCircle = 1 then begin
+        rot := StrToFloatDef(words(buf1, blank, 4, 1),NullCoord);
+        w := StrToFloatDef(words(buf1, blank, 5, 1),NullCoord);
+        h := StrToFloatDef(words(buf1, blank, 6, 1),NullCoord);
+        if (rot>NullCoord)and(w>NullCoord)and(h>NullCoord) then begin
+           cmd_DefRectangle('10', FormatFloat(f2,w), FormatFloat(f2,h), FormatFloat(f2,rot), '0');
+           cmd_ShowCircle('');
+           cmd_ShowRectangle('10');
+        end;
+      end;
       if sc.cfgsc.NumCircle >= MaxCircle then
         break;
       buf2 := words(buf1, blank, 2, 1);
