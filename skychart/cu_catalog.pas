@@ -4378,7 +4378,7 @@ begin
   if uppercase(copy(Num, 1, 4)) = 'GAIA' then
   begin
     // Use GaiaVersion because the Gaia catalog is maybe inactive
-    if cfgcat.GaiaVersion='' then SetGaiaPath(slash(cfgcat.starcatpath[gaia - BaseStar])+slash('gaia1'), 'gaia');
+    if cfgcat.GaiaVersion='' then GetGaiaVersion;
     buf:=StringReplace(Num,' ','',[rfReplaceAll]);
     buf2:=StringReplace(cfgcat.GaiaVersion,' ','',[rfReplaceAll]);
     buf := StringReplace(buf, buf2, '', [rfReplaceAll, rfIgnoreCase]);
@@ -5656,6 +5656,7 @@ var
   f: textfile;
   i, n, j, k: integer;
   ra1, ra2, de1, de2: single;
+  ras,des: double;
   buf, h1, h2: string;
   row: TStringList;
   filter, ok: boolean;
@@ -5720,8 +5721,21 @@ begin
                  else h2:=buf;
           FindNumGcatRec(cfgcat.StarCatPath[DefStar - BaseStar],
             'star', h1, H.ixkeylen, rec, ok);
-          if not ok then
-            continue;
+          if not ok then begin
+            if SearchStar(h1,ras,des) then begin
+              rec.star.valid[vsEpoch]:=false;
+              rec.options.Epoch:=0;
+              rec.star.valid[vsPx]:=false;
+              rec.ra:=rad2deg*ras;
+              rec.dec:=rad2deg*des;
+              rec.star.pmra:=0;
+              rec.star.pmdec:=0;
+              rec.star.px:=0;
+              rec.num[1]:=0;
+            end
+            else
+              continue;
+          end;
           if cfgshr.ConstLepoch = 0 then
           begin
             if rec.star.valid[vsEpoch] then
@@ -5741,8 +5755,21 @@ begin
           cfgshr.ConstL[i].rv1 := rec.num[1];
           FindNumGcatRec(cfgcat.StarCatPath[DefStar - BaseStar],
             'star', h2, H.ixkeylen, rec, ok);
-          if not ok then
-            continue;
+          if not ok then begin
+            if SearchStar(h2,ras,des) then begin
+              rec.star.valid[vsEpoch]:=false;
+              rec.options.Epoch:=0;
+              rec.star.valid[vsPx]:=false;
+              rec.ra:=rad2deg*ras;
+              rec.dec:=rad2deg*des;
+              rec.star.pmra:=0;
+              rec.star.pmdec:=0;
+              rec.star.px:=0;
+              rec.num[1]:=0;
+            end
+            else
+              continue;
+          end;
           cfgshr.ConstL[i].ra2 := deg2rad * rec.ra;
           cfgshr.ConstL[i].de2 := deg2rad * rec.Dec;
           cfgshr.ConstL[i].pmra2 := deg2rad * rec.star.pmra / 3600;
