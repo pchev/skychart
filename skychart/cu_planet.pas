@@ -2529,20 +2529,20 @@ var
 
   procedure hyperbolique;
   var
-    da, n0, m, U, U0, num, den: double;
+    da, m, u, u0, cnu: double;
   begin
-    da := comelem.Oq / abs(1.0 - comelem.Oe);
-    n0 := 0.01720209895 / (da * sqrt(da));
-    m := n0 * (jd - comelem.Ot);
-    U := 0.5;
+    // The calculation of comet ephemerides,  Tatum, J, 1982JRASC..76..157T
+    da := comelem.Oq / (comelem.Oe - 1);
+    m := (pi2*(jd - comelem.Ot)/365.256363004)/ power(abs(da),3/2);
+    u:=1.0;
     repeat
-      U0 := U;
-      U := (2 * U0 * (comelem.Oe - U0 * (1 - m - ln(abs(U0))))) / (comelem.Oe * (U0 * U0 + 1) - 2 * U0);
-    until abs(U - U0) < 1E-9;
-    num := sqrt(comelem.Oe * comelem.Oe - 1) * (U * U - 1) / (2 * U);
-    den := comelem.Oe - (U * U + 1) / (2 * U);
-    nu := arctan2(num, den);
-    rs := da * ((comelem.Oe * (U * U + 1) / (2 * U)) - 1);
+      u0 := u;
+      u := 2*u0*abs(comelem.Oe - u*(1-abs(m)-ln(u0))) / (u0*(comelem.Oe*u0-2)+comelem.Oe);
+    until abs(u - u0) < 1E-9;
+    cnu := - (u*(u-2*comelem.Oe)+1) / (u*(comelem.Oe*u-2)+comelem.Oe);
+    nu := arccos(cnu);
+    nu := sgn(m)*abs(nu);
+    rs := da*(comelem.Oe**2-1) / (1+(comelem.Oe*cnu));
   end;
 
 begin
