@@ -4533,7 +4533,10 @@ begin
           rad2deg * radate / 15, precision) + '   ' + rsDE + ':' + deptostr(rad2deg * dedate, precision) + html_br;
       if isStar and sc.cfgsc.PMon and sc.cfgsc.FindPM and (sc.cfgsc.YPmon = 0) then
         txt := txt + html_b + rsAstrometricJ + htms_b + ' ' + rsRA + ': ' + arptostr(
-          rad2deg * ra2000 / 15, precision) + '   ' + rsDE + ':' + deptostr(rad2deg * de2000, precision) + html_br
+          rad2deg * ra2000 / 15, 4) + '   ' + rsDE + ':' + deptostr(rad2deg * de2000, 4) + html_br
+      else if isStar then
+        txt := txt + html_b + rsMeanJ2000 + htms_b + ' ' + rsRA + ': ' + arptostr(
+          rad2deg * ra2000 / 15, 4) + '   ' + rsDE + ':' + deptostr(rad2deg * de2000, 4) + html_br
       else
         txt := txt + html_b + rsMeanJ2000 + htms_b + ' ' + rsRA + ': ' + arptostr(
           rad2deg * ra2000 / 15, precision) + '   ' + rsDE + ':' + deptostr(rad2deg * de2000, precision) + html_br;
