@@ -2723,7 +2723,7 @@ begin
         zf := 0.66667;
     end;
     sc.Zoom(zf);
-    if not (ssShift in Shift) then
+    if ssShift in Shift then
     begin
       x := MousePos.X;
       y := MousePos.Y;
