@@ -209,6 +209,43 @@ type
   end;
 {$ENDIF}
 
+{$IF FPC_FULLVERSION<30203}
+  {* Unit used to specify the resolution of a bitmap }
+  TResolutionUnit = (
+    {** No unit used, only aspect ratio specified }
+    ruNone,
+    {** Pixels per inch (DPI) }
+    ruPixelsPerInch,
+    {** Pixels per centimeters }
+    ruPixelsPerCentimeter);
+{$ELSE}
+   TResolutionUnit = FPImage.TResolutionUnit;
+
+const
+  ruNone = FPImage.ruNone;
+  ruPixelsPerInch = FPImage.ruPixelsPerInch;
+  ruPixelsPerCentimeter = FPImage.ruPixelsPerCentimeter;
+{$ENDIF}
+
+type
+   TImageResolutionInfo = record
+     ResolutionUnit: TResolutionUnit;
+     ResolutionX, ResolutionY: Single;
+   end;
+
+   function ImageResolutionInfo(AResolutionUnit: TResolutionUnit;
+     AResolutionX, AResolutionY: Single): TImageResolutionInfo;
+
+   {** Convert Resolution from/to dot per inch, dot per cm }
+   function ConvertResolution(AResolution: Single; ASourceUnit, ATargetUnit: TResolutionUnit): Single;
+
+   {** Guess resolution when not fully specified }
+   function FixImageResolutionInfo(const AResolution: TImageResolutionInfo): TImageResolutionInfo;
+
+const {** Equivalence for the denominator unit of a resolution and the physical unit }
+ ResolutionDenominatorUnit: array[TResolutionUnit] of TCSSUnit =
+       (cuCustom, cuInch, cuCentimeter);
+
 type
   {* Pointer to a TRectF structure }
   PRectF = ^TRectF;
@@ -403,7 +440,62 @@ type
     {** A tail repeat arrow style, depicting a series of repeated patterns typically used for the starting point of an arrow }
     asTailRepeat);
 
-  {* Generic class configuring and rendering an arrow }
+  {* @abstract(Generic class configuring and rendering an arrow.)
+
+**Example using different kind of arrows:**
+
+@image(../doc/img/arrows.png)
+
+```pascal
+uses BGRABitmap, BGRABitmapTypes;
+
+procedure TForm1.FormPaint(Sender: TObject);
+var bmp:TBGRABitmap;
+  w: single;
+begin
+  bmp := TBGRABitmap.Create(ClientWidth,ClientHeight,BGRAWhite);
+  w := sqrt(ClientWidth*ClientHeight)/50;
+
+  // diagonal arrow
+  bmp.Arrow.StartAsTail;
+  bmp.Arrow.StartRepeatCount := 2;
+  bmp.Arrow.EndAsTriangle(0.25,False,True);
+  bmp.DrawPolyLineAntialias(
+    bmp.ComputeOpenedSpline([PointF(80,80),PointF(ClientWidth-160,ClientHeight div 2),PointF(ClientWidth-80,ClientHeight-20)],ssCrossingWithEnds),
+    BGRABlack,w);
+  bmp.Arrow.StartRepeatCount := 1; //restore default value
+
+  // top arrow
+  bmp.Arrow.StartAsClassic(True,True,3);
+  bmp.Arrow.StartOffsetX := -8;
+  bmp.Arrow.EndAsClassic(False,True);
+  bmp.DrawPolyLineAntialias(
+    bmp.ComputeOpenedSpline([PointF(40,60),PointF(ClientWidth div 3,20),PointF(ClientWidth-80,40)],ssCrossingWithEnds),
+    BGRABlack,w);
+  bmp.Arrow.StartOffsetX := 0; //restore default value
+
+  // left arrow
+  bmp.Arrow.StartAsClassic(True,True);
+  bmp.Arrow.StartSize := PointF(1,2);
+  bmp.Arrow.StartOffsetX := -5.5;
+  bmp.Arrow.StartRepeatCount := 3;
+  bmp.Arrow.EndAsTriangle(0.75);
+  bmp.DrawLineAntialias(20,90, 80,ClientHeight-40,
+    BGRABlack,w);
+  bmp.Arrow.StartSize := PointF(2,2); //restore default values
+  bmp.Arrow.StartOffsetX := 0;
+  bmp.Arrow.StartRepeatCount := 1;
+
+  // right arrow
+  bmp.Arrow.StartAsClassic;
+  bmp.Arrow.EndAsClassic(False,False,2);
+  bmp.DrawLineAntialias(ClientWidth-40,40,ClientWidth-40,ClientHeight-80,BGRABlack,w);
+
+  bmp.Draw(Canvas,0,0);
+  bmp.Free;
+end;
+```
+}
   TBGRACustomArrow = class
   protected
     {** Retrieves the X-offset for the end of the arrow }
@@ -541,7 +633,31 @@ type
     property Arrow: TBGRACustomArrow read GetArrow write SetArrow;
     {** Is the arrow is owned by the pen stroker }
     property ArrowOwned: boolean read GetArrowOwned write SetArrowOwned;
-    {** Stroke transformation matrix (applied only to stroke and not to path points) }
+    {** @abstract(Stroke transformation matrix.)
+
+    This matrix is applied only to stroke and not to path points.
+
+**Example of skew transform:**
+
+@image(../doc/img/pen_skew.png)
+
+```pascal
+uses BGRABitmapTypes, BGRATransform;
+
+procedure TForm1.BGRAVirtualScreen1Redraw(Sender: TObject; Bitmap: TBGRABitmap);
+var
+  i: Integer;
+begin
+  for i := 0 to 5 do
+  begin
+    Bitmap.Pen.StrokeMatrix := AffineMatrixSkewXDeg(-10*i);
+    Bitmap.Pen.LineCap := pecSquare;
+    Bitmap.DrawLineAntialias(40,40+i*80,Bitmap.Width div 2-40,40+i*80, BGRABlack,30);
+    Bitmap.Pen.LineCap := pecRound;
+    Bitmap.DrawLineAntialias(Bitmap.Width div 2+40,40+i*80,Bitmap.Width-40,40+i*80, BGRABlack,30);
+  end;
+end;
+```}
     property StrokeMatrix: TAffineMatrix read GetStrokeMatrix write SetStrokeMatrix;
     {** Line cap style }
     property LineCap: TPenEndCap read GetLineCap write SetLineCap;
@@ -1468,6 +1584,73 @@ begin
   result.bottom := top+height;
 end;
 
+{********************** Size functions **************************}
+
+function ImageResolutionInfo(AResolutionUnit: TResolutionUnit; AResolutionX,
+  AResolutionY: Single): TImageResolutionInfo;
+begin
+  result.ResolutionUnit:= AResolutionUnit;
+  result.ResolutionX:= AResolutionX;
+  result.ResolutionY:= AResolutionY;
+end;
+
+function ConvertResolution(AResolution: Single; ASourceUnit, ATargetUnit: TResolutionUnit): Single;
+begin
+  if ASourceUnit = ATargetUnit then exit(AResolution);
+  if (ASourceUnit = ruNone) then raise EInvalidOpException.Create('Source resolution unit must be defined');
+  case ATargetUnit of
+    ruPixelsPerInch: result := AResolution*2.54;
+    ruPixelsPerCentimeter: result := AResolution/2.54;
+  else {ruNone}
+    raise EInvalidOpException.Create('Target resolution unit must be defined');
+  end;
+end;
+
+function FixImageResolutionInfo(const AResolution: TImageResolutionInfo): TImageResolutionInfo;
+var
+  ratio: Single;
+begin
+  if AResolution.ResolutionUnit = ruNone then
+  begin
+    result.ResolutionUnit := ruPixelsPerInch;
+    // if a ratio is specified
+    if (AResolution.ResolutionX <> 0) and (AResolution.ResolutionY <> 0) then
+    begin
+      // assume small resolution is legacy 96 DPI
+      ratio := 96 / min(AResolution.ResolutionX, AResolution.ResolutionY);
+      result.ResolutionX := AResolution.ResolutionX * ratio;
+      result.ResolutionY := AResolution.ResolutionY * ratio;
+    end else
+    begin
+      // assume legacy 96 DPI
+      result.ResolutionX := 96;
+      result.ResolutionY := 96;
+    end;
+  end else
+  begin
+    // keep specified resolution
+    result.ResolutionUnit := AResolution.ResolutionUnit;
+    // if no value is given for resolution
+    if (AResolution.ResolutionX = 0) and (AResolution.ResolutionY = 0) then
+    begin
+      // assume legacy 96 DPI
+      result.ResolutionX := ConvertResolution(96, ruPixelsPerInch, Result.ResolutionUnit);
+      result.ResolutionY := result.ResolutionX;
+    end else
+    begin
+      // if one resolution is missing, assume it is the same as the other one
+      if AResolution.ResolutionX = 0 then
+        result.ResolutionX := AResolution.ResolutionY
+      else
+        result.ResolutionX := AResolution.ResolutionX;
+      if AResolution.ResolutionY = 0 then
+        result.ResolutionY := AResolution.ResolutionX
+      else
+        result.ResolutionY := AResolution.ResolutionY;
+    end;
+  end;
+end;
+
 { Make a pen style. Need an even number of values. See TBGRAPenStyle }
 function BGRAPenStyle(dash1, space1: single; dash2: single; space2: single;
   dash3: single; space3: single; dash4: single; space4: single): TBGRAPenStyle;
@@ -1951,7 +2134,7 @@ var
 begin
   sum := 0;
   for i := 0 to high(pts) do
-    sum += (pts[(i+1) mod length(pts)].x-pts[i].x)*(pts[(i+1) mod length(pts)].y+pts[i].y);
+    IncF(sum, (pts[(i+1) mod length(pts)].x-pts[i].x)*(pts[(i+1) mod length(pts)].y+pts[i].y));
   result := sum <= 0;
 end;
 

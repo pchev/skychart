@@ -80,18 +80,10 @@ type
     PixelCenteredCoords: boolean;
   end;
 
-  {$IF FPC_FULLVERSION<30203}
-  {* Unit used to specify the resolution of a bitmap }
-  TResolutionUnit = (
-    {** No unit used, only aspect ratio specified }
-    ruNone,
-    {** Pixels per inch (DPI) }
-    ruPixelsPerInch,
-    {** Pixels per centimeters }
-    ruPixelsPerCentimeter);
-  {$ENDIF}
-
   {* Base class for the universal bitmap (of any colorspace) }
+
+  { TCustomUniversalBitmap }
+
   TCustomUniversalBitmap = class(TFPCustomImage, IBGRAScanner)
   private
     procedure PathStrokeAliasedCallback(const APoints: array of TPointF;
@@ -136,6 +128,10 @@ type
     function GetResolutionWidth: Single; virtual;
     function GetResolutionHeight: Single; virtual;
     {$ENDIF}
+
+    procedure SetResolutionInfo(AResolutionInfo: TImageResolutionInfo); virtual;
+    function GetResolutionInfo: TImageResolutionInfo; virtual;
+    function GetResolutionPhysicalUnit: TCSSUnit;
 
     //ReadWriteConfig: TBGRAReadWriteConfig;
 
@@ -226,13 +222,16 @@ type
     {** Clear all channels of transparent pixels }
     procedure ClearTransparentPixels; virtual;
 
+    {** Initializes a brush that erases (reduces the alpha channel) }
     class procedure EraseBrush(out {%H-}ABrush: TUniversalBrush; {%H-}AAlpha: Word); virtual;
+    {** Initializes a brush that sets the alpha channel }
     class procedure AlphaBrush(out {%H-}ABrush: TUniversalBrush; {%H-}AAlpha: Word); virtual;
     procedure SolidBrushBGRA(out ABrush: TUniversalBrush; ARed,AGreen,ABlue,AAlpha: Byte; ADrawMode: TDrawMode = dmDrawWithTransparency); overload; virtual;
     procedure SolidBrushBGRA(out ABrush: TUniversalBrush; AColor: TBGRAPixel; ADrawMode: TDrawMode = dmDrawWithTransparency); overload; virtual;
     procedure SolidBrushExpanded(out ABrush: TUniversalBrush; ARed,AGreen,ABlue,AAlpha: Word; ADrawMode: TDrawMode = dmDrawWithTransparency); overload; virtual;
     procedure SolidBrushExpanded(out ABrush: TUniversalBrush; AColor: TExpandedPixel; ADrawMode: TDrawMode = dmDrawWithTransparency); overload; virtual;
     procedure SolidBrushIndirect(out ABrush: TUniversalBrush; AColor: Pointer; ADrawMode: TDrawMode = dmDrawWithTransparency); virtual;
+    {** Initializes a brush that fills a texture from a scanner }
     class procedure ScannerBrush(out {%H-}ABrush: TUniversalBrush; {%H-}AScanner: IBGRAScanner; {%H-}ADrawMode: TDrawMode = dmDrawWithTransparency;
                                  {%H-}AOffsetX: integer = 0; {%H-}AOffsetY: integer = 0); virtual;
     class procedure MaskBrush(out {%H-}ABrush: TUniversalBrush; {%H-}AScanner: IBGRAScanner;
@@ -284,10 +283,14 @@ type
     procedure SaveToFile(const AFilename: string);overload; virtual;
     {** Save image to a file with the specified image writer. ''filename'' is an ANSI string }
     procedure SaveToFile(const AFilename: string; AHandler:TFPCustomImageWriter);overload; virtual;
+    {** Save image to a file in the specified image format }
+    procedure SaveToFile(const AFilename: string; AFormat: TBGRAImageFormat); overload; virtual;
     {** Save image to a file. The format is guessed from the file extension. ''filename'' is an ANSI string }
     procedure SaveToFileUTF8(const AFilenameUTF8: string);overload; virtual;
     {** Save image to a file with the specified image writer. ''filename'' is an UTF8 string }
     procedure SaveToFileUTF8(const AFilenameUTF8: string; AHandler:TFPCustomImageWriter);overload; virtual;
+    {** Save image to a file in the specified image format }
+    procedure SaveToFileUTF8(const AFilenameUTF8: string; AFormat: TBGRAImageFormat); overload; virtual;
 
     {** Save image to a stream with the specified image writer }{inherited
     procedure SaveToStream (Str:TStream; Handler:TFPCustomImageWriter);
@@ -548,6 +551,8 @@ type
     property ResolutionWidth: Single read GetResolutionWidth;
     property ResolutionHeight: Single read GetResolutionHeight;
     {$ENDIF}
+    property ResolutionInfo: TImageResolutionInfo read GetResolutionInfo write SetResolutionInfo;
+    property ResolutionPhysicalUnit: TCSSUnit read GetResolutionPhysicalUnit;
 
     {==== Pen style ====}
   protected
@@ -651,6 +656,28 @@ type
     procedure FillShapeAntialias(AShape: TBGRACustomFillInfo; ATexture: IBGRAScanner); overload; virtual;
     procedure EraseShapeAntialias(AShape: TBGRACustomFillInfo; AAlpha: Byte); overload; virtual;
     procedure FillPolyAntialias(const APoints: array of TPointF; const ABrush: TUniversalBrush; APixelCenteredCoordinates: boolean = true); overload; virtual;
+    {** @abstract(Fills a polygon with a texture and with antialiased borders.)
+
+    Texture will be repeated if smaller than output area.
+
+@image(../doc/img/fillpolyantialias_texture.png)
+
+```pascal
+procedure TForm1.FormPaint(Sender: TObject);
+var image: TBGRABitmap;
+    tex: TBGRABitmap;
+begin
+  //black background
+  image := TBGRABitmap.Create(ClientWidth,ClientHeight, BGRABlack );
+
+  tex:= TBGRABitmap.Create('image.png'); //load a bitmap
+  image.FillPolyAntialias( [PointF(110,10), PointF(250,10), PointF(350,160), PointF(10,160)], tex);
+  tex.Free;
+
+  image.Draw(Canvas,0,0,True); //draw on the screen
+  image.free;
+end;
+```}
     procedure FillPolyAntialias(const APoints: array of TPointF; ATexture: IBGRAScanner; APixelCenteredCoordinates: boolean = true); overload; virtual;
     procedure ErasePolyAntialias(const APoints: array of TPointF; AAlpha: Byte; APixelCenteredCoordinates: boolean = true); overload; virtual;
     {** Fills an ellipse which axes are parallel to X and Y axes }
@@ -769,10 +796,14 @@ type
     class procedure SaveToFile(ASource: TCustomUniversalBitmap; const AFilename: string); overload; virtual; abstract;
     {** Save image to a file with the specified image writer. ''filename'' is an ANSI string }
     class procedure SaveToFile(ASource: TCustomUniversalBitmap; const AFilename: string; AHandler:TFPCustomImageWriter); overload; virtual; abstract;
+    {** Save image to a file in the specified image format }
+    class procedure SaveToFile(ASource: TCustomUniversalBitmap; const AFilename: string; AFormat: TBGRAImageFormat); overload; virtual; abstract;
     {** Save image to a file. The format is guessed from the file extension. ''filename'' is an ANSI string }
     class procedure SaveToFileUTF8(ASource: TCustomUniversalBitmap; const AFilenameUTF8: string); overload; virtual; abstract;
     {** Save image to a file with the specified image writer. ''filename'' is an UTF8 string }
     class procedure SaveToFileUTF8(ASource: TCustomUniversalBitmap; const AFilenameUTF8: string; AHandler:TFPCustomImageWriter); overload; virtual; abstract;
+    {** Save image to a file in the specified image format }
+    class procedure SaveToFileUTF8(ASource: TCustomUniversalBitmap; const AFilenameUTF8: string; AFormat: TBGRAImageFormat); overload; virtual; abstract;
 
     {** Save image to a stream in the specified image format }
     class procedure SaveToStreamAs(ASource: TCustomUniversalBitmap; AStream: TStream; AFormat: TBGRAImageFormat); virtual; abstract;
@@ -1208,6 +1239,11 @@ function TCustomUniversalBitmap.GetPenStroker: TBGRACustomPenStroker;
 begin
   result := GetInternalPen;
   if result.Arrow = nil then GetArrow;
+end;
+
+function TCustomUniversalBitmap.GetResolutionPhysicalUnit: TCSSUnit;
+begin
+  result := ResolutionDenominatorUnit[ResolutionUnit];
 end;
 
 procedure TCustomUniversalBitmap.PathStrokeAliasedCallback(
@@ -2153,17 +2189,10 @@ procedure TCustomUniversalBitmap.SetResolutionUnit(AResolutionUnit: TResolutionU
 begin
   if (AResolutionUnit<>FResolutionUnit) then
   begin
-    Case AResolutionUnit of
-    ruPixelsPerInch : if (FResolutionUnit=ruPixelsPerCentimeter) then //Old Resolution is in Cm
-             begin
-               FResolutionX :=FResolutionX*2.54;
-               FResolutionY :=FResolutionY*2.54;
-             end;
-    ruPixelsPerCentimeter: if (FResolutionUnit=ruPixelsPerInch) then //Old Resolution is in Inch
-                  begin
-                    FResolutionX :=FResolutionX/2.54;
-                    FResolutionY :=FResolutionY/2.54;
-                  end;
+    if (AResolutionUnit <> ruNone) and (FResolutionUnit <> ruNone) then
+    begin
+      FResolutionX := ConvertResolution(FResolutionX, FResolutionUnit, AResolutionUnit);
+      FResolutionY := ConvertResolution(FResolutionY, FResolutionUnit, AResolutionUnit);
     end;
     FResolutionUnit :=AResolutionUnit;
   end;
@@ -2191,6 +2220,20 @@ begin
        end;
 end;
 {$ENDIF}
+
+procedure TCustomUniversalBitmap.SetResolutionInfo(AResolutionInfo: TImageResolutionInfo);
+begin
+  ResolutionUnit:= AResolutionInfo.ResolutionUnit;
+  ResolutionX := AResolutionInfo.ResolutionX;
+  ResolutionY := AResolutionInfo.ResolutionY;
+end;
+
+function TCustomUniversalBitmap.GetResolutionInfo: TImageResolutionInfo;
+begin
+  result.ResolutionUnit:= ResolutionUnit;
+  result.ResolutionX:= ResolutionX;
+  result.ResolutionY:= ResolutionY;
+end;
 
 procedure TCustomUniversalBitmap.Init;
 begin
@@ -2830,6 +2873,12 @@ begin
   UniDrawerClass.SaveToFile(self, AFilename, AHandler);
 end;
 
+procedure TCustomUniversalBitmap.SaveToFile(const AFilename: string; AFormat: TBGRAImageFormat);
+begin
+  if UniDrawerClass = nil then RaiseMissingUniDrawer;
+  UniDrawerClass.SaveToFile(self, AFilename, AFormat);
+end;
+
 procedure TCustomUniversalBitmap.SaveToFileUTF8(const AFilenameUTF8: string);
 begin
   if UniDrawerClass = nil then RaiseMissingUniDrawer;
@@ -2841,6 +2890,12 @@ procedure TCustomUniversalBitmap.SaveToFileUTF8(const AFilenameUTF8: string;
 begin
   if UniDrawerClass = nil then RaiseMissingUniDrawer;
   UniDrawerClass.SaveToFile(self, AFilenameUTF8, AHandler);
+end;
+
+procedure TCustomUniversalBitmap.SaveToFileUTF8(const AFilenameUTF8: string; AFormat: TBGRAImageFormat);
+begin
+  if UniDrawerClass = nil then RaiseMissingUniDrawer;
+  UniDrawerClass.SaveToFileUTF8(self, AFilenameUTF8, AFormat);
 end;
 
 procedure TCustomUniversalBitmap.SaveToStreamAs(AStream: TStream;
