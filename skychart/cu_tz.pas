@@ -41,7 +41,10 @@ uses
   Windows,
   {$endif}
   {$ifdef unix}
-  unixutil,
+   unixutil,
+   {$IF FPC_FULLVERSION > 30202} // FPC 3.2.4 moves TzSeconds from UnixUtil to Unix
+   unix,
+   {$ENDIF}
   {$endif}
   Classes, SysUtils, Math;
 
