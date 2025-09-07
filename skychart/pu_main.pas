@@ -11613,6 +11613,16 @@ begin
         if (resp <> msgOK) and (resp <> '') then
           WriteTrace(resp);
       end
+      else if cmd = '--savecdc3' then
+      begin
+        parm := 'SAVE ' + parm;
+        splitarg(parm, blank, pp);
+        for p := pp.Count to MaxCmdArg do
+          pp.add('');
+        resp := ExecuteCmd('', pp);
+        if (resp <> msgOK) and (resp <> '') then
+          WriteTrace(resp);
+      end
       else if cmd = '--print' then
       begin
         parm := 'PRINT ' + parm;
