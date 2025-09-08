@@ -691,6 +691,7 @@ type
     httpdownload: THTTPBigDownload;
     procedure ProcessParams1;
     procedure ProcessParams2;
+    procedure ProcessParams3;
     procedure ProcessParamsQuit;
     procedure ShowError(msg: string);
     procedure SetButtonImage(bsize,msize:integer);
@@ -1376,6 +1377,9 @@ begin
   if NoMenu then
     menu:=nil;
   if VerboseMsg then
+    WriteTrace('Read params 3');
+  ProcessParams3;
+  if VerboseMsg then
     WriteTrace('Exit Tf_main.InitTimerTimer');
 end;
 
@@ -1671,7 +1675,7 @@ begin
        if MultiFrame1.Childs[i].DockedObject is Tf_chart then
          Tf_chart(MultiFrame1.Childs[i].DockedObject).locked:=true;
     if VerboseMsg then
-      WriteTrace('Read params');
+      WriteTrace('Read params 2');
     ProcessParams2;
     if cfgm.AutostartServer then
     begin
@@ -11270,6 +11274,7 @@ begin
   WriteTrace('Receive from new instance: ' + buf);
   ProcessParamsQuit;
   ProcessParams2;
+  ProcessParams3;
 end;
 
 // Parameters that need to be set before program initialisation
@@ -11314,6 +11319,8 @@ begin
     begin
       showsplash := False;
       Application.ShowMainForm := False;
+      InitTimer.Interval:=2000;
+      InitTimer.Enabled:=true;
     end
     else if cmd = '--nosplash' then
     begin
@@ -11543,16 +11550,6 @@ begin
           WriteTrace(resp);
         chartchanged := True;
       end
-      else if cmd = '--resize' then
-      begin
-        parm := 'RESIZE ' + parm;
-        splitarg(parm, blank, pp);
-        for p := pp.Count to MaxCmdArg do
-          pp.add('');
-        resp := ExecuteCmd('', pp);
-        if (resp <> msgOK) and (resp <> '') then
-          WriteTrace(resp);
-      end;
     end;
     if chartchanged then
     begin
@@ -11587,7 +11584,49 @@ begin
           WriteTrace(resp);
       end;
     end;
-    // parameters that need to be processed after the chart is draw
+  finally
+    pp.Free;
+  end;
+end;
+
+procedure Tf_main.ProcessParams3;
+// parameters that need to be processed after the chart is draw
+var
+  i, p: integer;
+  cmd, parm, parms, resp: string;
+  pp: TStringList;
+begin
+  if MultiFrame1.ChildCount = 0 then
+    exit;
+  pp := TStringList.Create;
+  try
+    for i := 0 to Params.Count - 1 do
+    begin
+      pp.Clear;
+      parms := Params[i];
+      p := pos('=', parms);
+      if p > 0 then
+      begin
+        cmd := trim(copy(parms, 1, p - 1));
+        parm := trim(copy(parms, p + 1, 999));
+      end
+      else
+      begin
+        cmd := trim(parms);
+        parm := '';
+      end;
+      if cmd = '--resize' then
+      begin
+       parm := 'RESIZE ' + parm;
+        splitarg(parm, blank, pp);
+        for p := pp.Count to MaxCmdArg do
+          pp.add('');
+        resp := ExecuteCmd('', pp);
+        if (resp <> msgOK) and (resp <> '') then
+          WriteTrace(resp);
+      end;
+    end;
+    // finally save or print
     for i := 0 to Params.Count - 1 do
     begin
       pp.Clear;
