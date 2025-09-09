@@ -1248,6 +1248,7 @@ var fs,fc: TSearchRec;
 begin
   // Check that catalog installed in PrivateCatalogDir are defined in the current configuration
   // if not, it is added as inactive
+  modified:=false;
   i := FindFirst(slash(PrivateCatalogDir)+'*',faDirectory,fs);
   while i = 0 do begin
     if copy(fs.name,1,1)<>'.' then begin
