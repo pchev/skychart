@@ -250,6 +250,10 @@ var
   pos: TPoint;
   i: integer;
 begin
+  if SSLImplementation=TSSLNone then begin
+    ShowMessage('Please install the libssl3 package from your distribution');
+    exit;
+  end;
   FResponse := '';
   Ffirsturl := Furl;
   DF := TForm.Create(Self);

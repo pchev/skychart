@@ -910,6 +910,8 @@ uses
   pu_printsetup, pu_calendar, pu_position, pu_search, pu_zoom, pu_edittoolbar,
   pu_scriptconfig, pu_splash, pu_manualtelescope, pu_print, pu_clock, pu_mosaic;
 
+const msgnossl='Please install the libssl3 package from your distribution';
+
 procedure Tf_main.ShowError(msg: string);
 begin
   WriteTrace(msg);
@@ -12617,12 +12619,20 @@ end;
 
 procedure Tf_main.MenuUpdAsteroidClick(Sender: TObject);
 begin
+  if SSLImplementation=TSSLNone then begin
+    ShowMessage(msgnossl);
+    exit;
+  end;
   UpdateAstExt;
   SetupSolsysPage(3, True);
 end;
 
 procedure Tf_main.MenuUpdCatalogClick(Sender: TObject);
 begin
+  if SSLImplementation=TSSLNone then begin
+    ShowMessage(msgnossl);
+    exit;
+  end;
   if f_updcatalog.Running then exit;
   f_updcatalog.Show;
 end;
@@ -12725,6 +12735,10 @@ end;
 
 procedure Tf_main.MenuUpdCometClick(Sender: TObject);
 begin
+  if SSLImplementation=TSSLNone then begin
+    ShowMessage(msgnossl);
+    exit;
+  end;
   SetupSolsysPage(2, True);
 end;
 
@@ -12732,6 +12746,10 @@ procedure Tf_main.MenuUpdDeltaTClick(Sender: TObject);
 var
   fn: string;
 begin
+    if SSLImplementation=TSSLNone then begin
+      ShowMessage(msgnossl);
+      exit;
+    end;
     fn :=slash(privatedir)+'leap-seconds.list';
     if QuickDownload(URL_LEAPSECOND, fn) then begin
       LoadLeapseconds(false);
@@ -12753,6 +12771,10 @@ end;
 
 procedure Tf_main.MenuUpdGrsClick(Sender: TObject);
 begin
+  if SSLImplementation=TSSLNone then begin
+    ShowMessage(msgnossl);
+    exit;
+  end;
   SetupSolsysPage(1, True);
 end;
 
@@ -12760,6 +12782,10 @@ procedure Tf_main.MenuUpdSatelliteClick(Sender: TObject);
 var
   calvisible: boolean;
 begin
+  if SSLImplementation=TSSLNone then begin
+    ShowMessage(msgnossl);
+    exit;
+  end;
   calvisible := f_calendar.Visible;
   if not calvisible then
   begin
@@ -12828,6 +12854,10 @@ var
   ver, newver, newbeta, fn, url: string;
   f: textfile;
 begin
+  if SSLImplementation=TSSLNone then begin
+    ShowMessage(msgnossl);
+    exit;
+  end;
   ver := cdcversion + '-' + RevisionStr;
   if cdcbeta then
   {%H-}begin
