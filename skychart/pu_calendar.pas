@@ -3396,7 +3396,7 @@ begin
       ext := LowerCase(ExtractFileExt(DownloadDialog1.URL));
       zipfile := (ext = '.zip');
       qsmagfile := pos('qsmag',DownloadDialog1.URL)>0;
-      if (UpperCase(ext)='.TLE') or (UpperCase(ext)='.TXT') then
+      if (UpperCase(ext)='.TLE') or (UpperCase(ext)='.TXT') or (UpperCase(ext)='.ZIP') then
         fn := slash(SatDir) + ExtractFileName(DownloadDialog1.URL)
       else begin
         ext := '.txt';
