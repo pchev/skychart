@@ -529,7 +529,7 @@ end;
 procedure TDownloadDialog.HTTPComplete;
 var
   ok: boolean;
-  i: integer;
+  i,k: integer;
   newurl: string;
   abuf: string;
 begin
@@ -560,6 +560,11 @@ begin
       if UpperCase(copy(http.Headers[i], 1, 9)) = 'LOCATION:' then
       begin
         newurl := trim(copy(http.Headers[i], 10, 9999));
+        if uppercase(copy(newurl,1,4))<>'HTTP' then begin
+          // relative redirection
+          k:=pos(':',Furl);
+          newurl:=copy(Furl,1,k)+'//'+http.TargetHost+newurl;
+        end;
         if (newurl = Furl) or (newurl = Ffirsturl) then
           ok := False
         else
