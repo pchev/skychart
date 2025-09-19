@@ -3396,7 +3396,12 @@ begin
       ext := LowerCase(ExtractFileExt(DownloadDialog1.URL));
       zipfile := (ext = '.zip');
       qsmagfile := pos('qsmag',DownloadDialog1.URL)>0;
-      fn := slash(SatDir) + ExtractFileName(DownloadDialog1.URL);
+      if (UpperCase(ext)='.TLE') or (UpperCase(ext)='.TXT') then
+        fn := slash(SatDir) + ExtractFileName(DownloadDialog1.URL)
+      else begin
+        ext := '.txt';
+        fn := slash(SatDir) + 'tle'+inttostr(i)+ext;
+      end;
       DownloadDialog1.SaveToFile := fn;
       if DownloadDialog1.Execute then
       begin
