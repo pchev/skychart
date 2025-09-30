@@ -290,12 +290,7 @@ begin
  StatusTimer.Enabled:=false;
  StatusTimer.Interval:=statusinterval;
  try
-  if not Connected then begin
-     FStatus := devDisconnected;
-     if Assigned(FonStatusChange) then FonStatusChange(self);
-     msg(rsDisconnected3,1);
-  end
-  else begin
+  if Connected then begin
     try
     x:=GetRAReal;
     y:=GetDecReal;
