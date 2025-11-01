@@ -45,6 +45,7 @@ if [[ $? != 0 ]]; then exit; fi
 #First remove the existing key and repo list if it already exists
 sudo apt-key del $key 2>/dev/null
 sudo rm /etc/apt/sources.list.d/skychart.list 2>/dev/null
+sudo rm /etc/apt/sources.list.d/skychart.sources 2>/dev/null
 
 #Create the key with the right format for apt
 rm skychart-temp-keyring.gpg $key.key 2>/dev/null
@@ -58,7 +59,13 @@ rm skychart-temp-keyring.gpg skychart-temp-keyring.gpg~ $key.key 2>/dev/null
 #Install the key and set the new repo list:
 sudo mkdir /usr/local/share/keyrings 2>/dev/null
 sudo mv skychart.gpg /usr/local/share/keyrings/
-sudo sh -c "echo deb [signed-by=/usr/local/share/keyrings/skychart.gpg] http://www.ap-i.net/apt $version main > /etc/apt/sources.list.d/skychart.list"
+sudo sh -c "cat <<EOF  > /etc/apt/sources.list.d/skychart.sources
+Types: deb
+URIs: http://www.ap-i.net/apt/
+Suites: $version
+Components: main
+Signed-By: /usr/local/share/keyrings/skychart.gpg
+EOF"
 
 echo ""
 echo "The repository is defined to use the $version packages."
