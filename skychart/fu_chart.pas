@@ -7861,6 +7861,9 @@ begin
     Fpop_scope.ScopeSetObs(sc.cfgsc.ObsLatitude, -sc.cfgsc.ObsLongitude, sc.cfgsc.ObsAltitude);
     if autoconnect then
     begin
+      {$ifdef darwin}
+      Fpop_scope.ScopeShow; // show the form to prevent a crash with text box
+      {$endif}
       Fpop_scope.ScopeConnect(ok);
       Connect1.Checked := True;
     end
