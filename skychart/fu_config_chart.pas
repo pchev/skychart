@@ -621,6 +621,7 @@ procedure Tf_config_chart.ShowProjection;
     cb.items.add('HAI ' + rsHammerAitoff);
     cb.items.add('MER ' + rsMercator);
     cb.items.add('CAR ' + rsCartesian);
+    cb.items.add('STG ' + rsStereographic);
     cb.items.add('ARC ' + rsZenitalEquid);
     if cshr.fieldnum[n] <= 180 then
       cb.items.add('TAN ' + rsGnomonic);
@@ -1061,9 +1062,9 @@ begin
   csc.projname[4] := 'TAN';
   csc.projname[5] := 'TAN';
   csc.projname[6] := 'TAN';
-  csc.projname[7] := 'MER';
-  csc.projname[8] := 'MER';
-  csc.projname[9] := 'MER';
+  csc.projname[7] := 'STG';
+  csc.projname[8] := 'STG';
+  csc.projname[9] := 'STG';
   csc.projname[10] := 'MER';
   csc.ProjEquatorCentered := True;
   ShowProjection;

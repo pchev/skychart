@@ -4228,6 +4228,7 @@ object f_main: Tf_main
   object SampDownload: TDownloadDialog
     HttpDirectDownload = False
     Timeout = 5000
+    UserAgent = 'Skychart/4'
     FtpFwMode = 0
     FtpFwPassive = True
     ConfirmDownload = False

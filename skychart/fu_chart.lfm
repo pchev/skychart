@@ -482,6 +482,7 @@ object f_chart: Tf_chart
   object DownloadDialog1: TDownloadDialog
     HttpDirectDownload = False
     Timeout = 90000
+    UserAgent = 'Skychart/4'
     FtpFwMode = 0
     FtpFwPassive = True
     ConfirmDownload = True

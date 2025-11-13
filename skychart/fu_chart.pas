@@ -6781,9 +6781,9 @@ begin
   if field > 0 then
   begin
     if sc.cfgsc.windowratio > 1 then
-      sc.cfgsc.fov := field * sc.cfgsc.windowratio
+      sc.cfgsc.fov := min(359*deg2rad,field * sc.cfgsc.windowratio)
     else
-      sc.cfgsc.fov := field;
+      sc.cfgsc.fov := min(359*deg2rad,field);
   end;
   sc.cfgsc.ProjPole := Altaz;
   sc.cfgsc.EquinoxType    := sc.cfgsc.ProjOptions[sc.cfgsc.ProjPole].EquinoxType;

@@ -124,7 +124,7 @@ object f_config_chart: Tf_config_chart
               Left = 6
               Height = 22
               Top = 7
-              Width = 427
+              Width = 423
               Caption = 'Use the proper motion to correct the position for the given epoch'
               OnClick = PMBoxClick
               ParentFont = False
@@ -229,7 +229,7 @@ object f_config_chart: Tf_config_chart
           Left = 22
           Height = 22
           Top = 391
-          Width = 107
+          Width = 103
           Caption = 'Expert mode'
           OnClick = ExpertModeClick
           ParentFont = False
@@ -720,7 +720,7 @@ object f_config_chart: Tf_config_chart
         ParentFont = False
         object Bevel7: TBevel
           Left = 13
-          Height = 388
+          Height = 403
           Top = 21
           Width = 454
           Shape = bsFrame
@@ -1072,7 +1072,7 @@ object f_config_chart: Tf_config_chart
         object Button7: TButton
           Left = 197
           Height = 25
-          Top = 409
+          Top = 432
           Width = 74
           Caption = 'Default'
           OnClick = Button7Click
@@ -1083,7 +1083,7 @@ object f_config_chart: Tf_config_chart
           Left = 62
           Height = 22
           Top = 372
-          Width = 310
+          Width = 306
           Caption = 'Use oblique cylindrical projections  (CAR, MER)'
           OnChange = CheckBox1Change
           ParentFont = False
@@ -1119,7 +1119,7 @@ object f_config_chart: Tf_config_chart
             Height = 22
             Hint = 'Copy|Copies the selection and puts it on the Clipboard'
             Top = 4
-            Width = 96
+            Width = 92
             Caption = 'Filter stars '
             OnClick = StarBoxClick
             ParentFont = False
@@ -1451,7 +1451,7 @@ object f_config_chart: Tf_config_chart
               Left = 4
               Height = 22
               Top = 6
-              Width = 91
+              Width = 87
               Caption = 'Automatic'
               OnClick = StarAutoBoxClick
               ParentFont = False
@@ -1483,7 +1483,7 @@ object f_config_chart: Tf_config_chart
             Left = 8
             Height = 22
             Top = 4
-            Width = 112
+            Width = 108
             Caption = 'Filter nebulae'
             OnClick = NebBoxClick
             ParentFont = False
@@ -1939,7 +1939,7 @@ object f_config_chart: Tf_config_chart
               Left = 4
               Height = 22
               Top = 186
-              Width = 167
+              Width = 163
               Caption = 'Hide object wider than'
               OnClick = BigNebBoxClick
               ParentFont = False
@@ -1973,7 +1973,7 @@ object f_config_chart: Tf_config_chart
               Left = 4
               Height = 22
               Top = 133
-              Width = 200
+              Width = 196
               Caption = 'Do not filter Messier objects'
               OnClick = MessierBoxClick
               ParentFont = False
@@ -1983,7 +1983,7 @@ object f_config_chart: Tf_config_chart
               Left = 4
               Height = 22
               Top = 160
-              Width = 276
+              Width = 272
               Caption = 'Do not filter bright nebula by magnitude'
               OnClick = BrightMagBoxClick
               TabOrder = 23
@@ -2159,7 +2159,7 @@ object f_config_chart: Tf_config_chart
           Left = 256
           Height = 22
           Top = 391
-          Width = 149
+          Width = 145
           Caption = 'Show compass rose'
           OnClick = CheckBox13Click
           ParentFont = False
@@ -2194,9 +2194,9 @@ object f_config_chart: Tf_config_chart
         end
         object RaDec1: TRaDec
           Left = 59
-          Height = 23
+          Height = 28
           Top = 77
-          Width = 200
+          Width = 194
           kind = DE
           Enabled = True
           OnChange = DegSpacingChange
@@ -2207,9 +2207,9 @@ object f_config_chart: Tf_config_chart
         object RaDec2: TRaDec
           Tag = 1
           Left = 59
-          Height = 23
+          Height = 28
           Top = 102
-          Width = 200
+          Width = 194
           kind = DE
           Enabled = True
           OnChange = DegSpacingChange
@@ -2220,9 +2220,9 @@ object f_config_chart: Tf_config_chart
         object RaDec3: TRaDec
           Tag = 2
           Left = 59
-          Height = 23
+          Height = 28
           Top = 127
-          Width = 200
+          Width = 194
           kind = DE
           Enabled = True
           OnChange = DegSpacingChange
@@ -2233,9 +2233,9 @@ object f_config_chart: Tf_config_chart
         object RaDec4: TRaDec
           Tag = 3
           Left = 59
-          Height = 23
+          Height = 28
           Top = 153
-          Width = 200
+          Width = 194
           kind = DE
           Enabled = True
           OnChange = DegSpacingChange
@@ -2246,9 +2246,9 @@ object f_config_chart: Tf_config_chart
         object RaDec5: TRaDec
           Tag = 4
           Left = 59
-          Height = 23
+          Height = 28
           Top = 178
-          Width = 200
+          Width = 194
           kind = DE
           Enabled = True
           OnChange = DegSpacingChange
@@ -2259,9 +2259,9 @@ object f_config_chart: Tf_config_chart
         object RaDec6: TRaDec
           Tag = 5
           Left = 59
-          Height = 23
+          Height = 28
           Top = 203
-          Width = 200
+          Width = 194
           kind = DE
           Enabled = True
           OnChange = DegSpacingChange
@@ -2272,9 +2272,9 @@ object f_config_chart: Tf_config_chart
         object RaDec7: TRaDec
           Tag = 6
           Left = 59
-          Height = 23
+          Height = 28
           Top = 228
-          Width = 200
+          Width = 194
           kind = DE
           Enabled = True
           OnChange = DegSpacingChange
@@ -2285,9 +2285,9 @@ object f_config_chart: Tf_config_chart
         object RaDec8: TRaDec
           Tag = 7
           Left = 59
-          Height = 23
+          Height = 28
           Top = 254
-          Width = 200
+          Width = 194
           kind = DE
           Enabled = True
           OnChange = DegSpacingChange
@@ -2298,9 +2298,9 @@ object f_config_chart: Tf_config_chart
         object RaDec9: TRaDec
           Tag = 8
           Left = 59
-          Height = 23
+          Height = 28
           Top = 279
-          Width = 200
+          Width = 194
           kind = DE
           Enabled = True
           OnChange = DegSpacingChange
@@ -2311,9 +2311,9 @@ object f_config_chart: Tf_config_chart
         object RaDec10: TRaDec
           Tag = 9
           Left = 59
-          Height = 23
+          Height = 28
           Top = 304
-          Width = 200
+          Width = 194
           kind = DE
           Enabled = True
           OnChange = DegSpacingChange
@@ -2324,9 +2324,9 @@ object f_config_chart: Tf_config_chart
         object RaDec11: TRaDec
           Tag = 10
           Left = 59
-          Height = 23
+          Height = 28
           Top = 329
-          Width = 200
+          Width = 194
           kind = DE
           Enabled = True
           OnChange = DegSpacingChange
@@ -2336,9 +2336,9 @@ object f_config_chart: Tf_config_chart
         end
         object RaDec12: TRaDec
           Left = 284
-          Height = 23
+          Height = 28
           Top = 76
-          Width = 200
+          Width = 194
           kind = RA
           Enabled = True
           OnChange = HourSpacingChange
@@ -2349,9 +2349,9 @@ object f_config_chart: Tf_config_chart
         object RaDec13: TRaDec
           Tag = 1
           Left = 284
-          Height = 23
+          Height = 28
           Top = 101
-          Width = 200
+          Width = 194
           kind = RA
           Enabled = True
           OnChange = HourSpacingChange
@@ -2362,9 +2362,9 @@ object f_config_chart: Tf_config_chart
         object RaDec14: TRaDec
           Tag = 2
           Left = 284
-          Height = 23
+          Height = 28
           Top = 126
-          Width = 200
+          Width = 194
           kind = RA
           Enabled = True
           OnChange = HourSpacingChange
@@ -2375,9 +2375,9 @@ object f_config_chart: Tf_config_chart
         object RaDec15: TRaDec
           Tag = 3
           Left = 284
-          Height = 23
+          Height = 28
           Top = 152
-          Width = 200
+          Width = 194
           kind = RA
           Enabled = True
           OnChange = HourSpacingChange
@@ -2388,9 +2388,9 @@ object f_config_chart: Tf_config_chart
         object RaDec16: TRaDec
           Tag = 4
           Left = 284
-          Height = 23
+          Height = 28
           Top = 177
-          Width = 200
+          Width = 194
           kind = RA
           Enabled = True
           OnChange = HourSpacingChange
@@ -2401,9 +2401,9 @@ object f_config_chart: Tf_config_chart
         object RaDec17: TRaDec
           Tag = 5
           Left = 284
-          Height = 23
+          Height = 28
           Top = 202
-          Width = 200
+          Width = 194
           kind = RA
           Enabled = True
           OnChange = HourSpacingChange
@@ -2414,9 +2414,9 @@ object f_config_chart: Tf_config_chart
         object RaDec18: TRaDec
           Tag = 6
           Left = 284
-          Height = 23
+          Height = 28
           Top = 227
-          Width = 200
+          Width = 194
           kind = RA
           Enabled = True
           OnChange = HourSpacingChange
@@ -2427,9 +2427,9 @@ object f_config_chart: Tf_config_chart
         object RaDec19: TRaDec
           Tag = 7
           Left = 284
-          Height = 23
+          Height = 28
           Top = 253
-          Width = 200
+          Width = 194
           kind = RA
           Enabled = True
           OnChange = HourSpacingChange
@@ -2440,9 +2440,9 @@ object f_config_chart: Tf_config_chart
         object RaDec20: TRaDec
           Tag = 8
           Left = 284
-          Height = 23
+          Height = 28
           Top = 278
-          Width = 200
+          Width = 194
           kind = RA
           Enabled = True
           OnChange = HourSpacingChange
@@ -2453,9 +2453,9 @@ object f_config_chart: Tf_config_chart
         object RaDec21: TRaDec
           Tag = 9
           Left = 284
-          Height = 23
+          Height = 28
           Top = 303
-          Width = 200
+          Width = 194
           kind = RA
           Enabled = True
           OnChange = HourSpacingChange
@@ -2466,9 +2466,9 @@ object f_config_chart: Tf_config_chart
         object RaDec22: TRaDec
           Tag = 10
           Left = 284
-          Height = 23
+          Height = 28
           Top = 328
-          Width = 200
+          Width = 194
           kind = RA
           Enabled = True
           OnChange = HourSpacingChange
@@ -2480,7 +2480,7 @@ object f_config_chart: Tf_config_chart
           Left = 256
           Height = 22
           Top = 417
-          Width = 144
+          Width = 140
           Caption = 'Use simple pointer'
           OnClick = CheckBox2Click
           ParentFont = False
@@ -2515,7 +2515,7 @@ object f_config_chart: Tf_config_chart
             Left = 32
             Height = 22
             Top = 24
-            Width = 59
+            Width = 55
             Caption = 'Stars'
             OnClick = liststarClick
             ParentFont = False
@@ -2525,7 +2525,7 @@ object f_config_chart: Tf_config_chart
             Left = 32
             Height = 22
             Top = 59
-            Width = 80
+            Width = 76
             Caption = 'Nebulae'
             OnClick = listnebClick
             ParentFont = False
@@ -2535,7 +2535,7 @@ object f_config_chart: Tf_config_chart
             Left = 32
             Height = 22
             Top = 93
-            Width = 148
+            Width = 144
             Caption = 'Solar System object'
             OnClick = listplaClick
             ParentFont = False
@@ -2545,7 +2545,7 @@ object f_config_chart: Tf_config_chart
             Left = 32
             Height = 22
             Top = 127
-            Width = 112
+            Width = 108
             Caption = 'Variable Stars'
             OnClick = listvarClick
             ParentFont = False
@@ -2555,7 +2555,7 @@ object f_config_chart: Tf_config_chart
             Left = 32
             Height = 22
             Top = 162
-            Width = 107
+            Width = 103
             Caption = 'Double Stars'
             OnClick = listdblClick
             ParentFont = False

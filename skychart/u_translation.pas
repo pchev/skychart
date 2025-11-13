@@ -1228,6 +1228,7 @@ resourcestring
   rsHammerAitoff = 'Hammer-Aitoff';
   rsMercator = 'Mercator';
   rsCartesian = 'Cartesian';
+  rsStereographic = 'Stereographic';
   rsZenitalEquid = 'Zenital equidistant';
   rsGnomonic = 'Gnomonic';
   rsSlantOrthogr = 'Slant orthographic';

@@ -3685,7 +3685,7 @@ procedure Tf_main.allSkyExecute(Sender: TObject);
 begin
   if MultiFrame1.ActiveObject is Tf_chart then
     with MultiFrame1.ActiveObject as Tf_chart do
-      SetZenit(deg2rad * 200);
+      SetZenit(deg2rad * 255);
 end;
 
 

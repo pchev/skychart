@@ -850,12 +850,19 @@ begin
     h := cfgsc.fov / cfgsc.WindowRatio;
     w := MaxValue([w, h]);
     cfgsc.FieldNum := GetFieldNum(w - musec);
-    cfgsc.projtype := (cfgsc.projname[cfgsc.fieldnum] + 'A')[1];
+    if cfgsc.projname[cfgsc.fieldnum]='HAI' then cfgsc.projtype := 'H'
+    else if cfgsc.projname[cfgsc.fieldnum]='MER' then cfgsc.projtype := 'M'
+    else if cfgsc.projname[cfgsc.fieldnum]='CAR' then cfgsc.projtype := 'C'
+    else if cfgsc.projname[cfgsc.fieldnum]='STG' then cfgsc.projtype := 'G'
+    else if cfgsc.projname[cfgsc.fieldnum]='ARC' then cfgsc.projtype := 'A'
+    else if cfgsc.projname[cfgsc.fieldnum]='TAN' then cfgsc.projtype := 'T'
+    else if cfgsc.projname[cfgsc.fieldnum]='SIN' then cfgsc.projtype := 'S'
+    else cfgsc.projtype := 'A';
     // full sky button
     if (cfgsc.ProjPole = Altaz) and ((cfgsc.projtype = 'T') or
       (cfgsc.projtype = 'S') or (cfgsc.ProjEquatorCentered)) and (cfgsc.fov > pi) and
       (abs(cfgsc.hcentre) > pid4) then
-      cfgsc.projtype := 'A';
+      cfgsc.projtype := 'G';
   end;
   cfgsc.xmin := cfgsc.LeftMargin;
   cfgsc.ymin := cfgsc.TopMargin;
@@ -1272,12 +1279,19 @@ begin
   h := cfgsc.fov / cfgsc.WindowRatio;
   w := MaxValue([w, h]);
   cfgsc.FieldNum := GetFieldNum(w - musec);
-  cfgsc.projtype := (cfgsc.projname[cfgsc.fieldnum] + 'A')[1];
+  if cfgsc.projname[cfgsc.fieldnum]='HAI' then cfgsc.projtype := 'H'
+  else if cfgsc.projname[cfgsc.fieldnum]='MER' then cfgsc.projtype := 'M'
+  else if cfgsc.projname[cfgsc.fieldnum]='CAR' then cfgsc.projtype := 'C'
+  else if cfgsc.projname[cfgsc.fieldnum]='STG' then cfgsc.projtype := 'G'
+  else if cfgsc.projname[cfgsc.fieldnum]='ARC' then cfgsc.projtype := 'A'
+  else if cfgsc.projname[cfgsc.fieldnum]='TAN' then cfgsc.projtype := 'T'
+  else if cfgsc.projname[cfgsc.fieldnum]='SIN' then cfgsc.projtype := 'S'
+  else cfgsc.projtype := 'A';
   // full sky button
   if (cfgsc.ProjPole = Altaz) and (cfgsc.fov > pi) and
     (((cfgsc.projtype = 'T') or (cfgsc.projtype = 'S') or (cfgsc.ProjEquatorCentered)) and
     (abs(cfgsc.hcentre) > pid4) or (cfgsc.hcentre > (85 * deg2rad))) then
-    cfgsc.projtype := 'A';
+    cfgsc.projtype := 'G';
   // Mercator diverge near the pole
   if (not cfgsc.ProjEquatorCentered) and (cfgsc.projtype = 'M') then
   begin
@@ -1378,6 +1392,16 @@ begin
           cfgsc.haicy, cfgsc, True, True);
       Ecl: Proj2(cfgsc.lecentre, 0.0, cfgsc.lecentre, cfgsc.becentre,
           cfgsc.haicx, cfgsc.haicy, cfgsc, True, True);
+    end;
+  end;
+  // Stereographic limit for arcsin() invertion
+  if cfgsc.projtype = 'G' then
+  begin
+    case cfgsc.ProjPole of
+      Equat: Proj2(0,sgn(cfgsc.decentre)*pid2,cfgsc.racentre,cfgsc.decentre,v1,cfgsc.stgcy,cfgsc);
+      Altaz: Proj2(0,sgn(cfgsc.hcentre)*pid2,cfgsc.acentre,cfgsc.hcentre,v1,cfgsc.stgcy,cfgsc);
+      Gal: Proj2(0,sgn(cfgsc.bcentre)*pid2,cfgsc.lcentre,cfgsc.bcentre,v1,cfgsc.stgcy,cfgsc);
+      Ecl: Proj2(0,sgn(cfgsc.becentre)*pid2,cfgsc.lecentre,cfgsc.becentre,v1,cfgsc.stgcy,cfgsc);
     end;
   end;
   // is the pole in the chart
@@ -6135,6 +6159,7 @@ begin
         fill := cfgsc.FillHorizon;// and (cfgsc.fov>(0.5*deg2rad));
         case cfgsc.projtype of
           'C': fillfov := 357 * deg2rad;
+          'G': fillfov := 360 * deg2rad;
           'H': fillfov := 230 * deg2rad;
           'M': fillfov := 357 * deg2rad;
           else
@@ -9103,6 +9128,8 @@ begin
   dat := dat + ' (' + TzGMT2UTC(cfgsc.tz.ZoneName) + ')';
   if cfgsc.projtype = 'A' then
     pr := ' ARC'
+  else  if cfgsc.projtype = 'G' then  // for full sky view
+    pr := ' STG'
   else
     pr := ' ' + cfgsc.projname[cfgsc.fieldnum];
   case cfgsc.projpole of

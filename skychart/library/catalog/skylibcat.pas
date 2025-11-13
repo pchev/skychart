@@ -29,7 +29,7 @@ type
 
 Procedure InitCatWin(ax,ay,bx,by,st,ct,ac,dc,azc,hc,jdt,jdc,sidt,lat : double;
                      pjp,xs,ys,xi,xa,yi,ya : integer; projt : char; np,sp : boolean;
-                     peqc: boolean;hax,hay: double);
+                     peqc: boolean;hax,hay,stgy: double);
 procedure GetADxy(x,y:Integer ; var a,d : Double);
 PROCEDURE Precession(ti,tf : double; VAR ari,dei : double);
 Function sgn(x:Double):Double ;
@@ -154,7 +154,7 @@ var
   prec_r : rotmatrix;
   prec_j0, prec_j1: double;
   EqpMAT, EqtMAT: rotmatrix;
-  haicx, haicy: double;
+  haicx, haicy, stgcy: double;
 
 implementation
 
@@ -318,7 +318,7 @@ end;
 
 Procedure InitCatWin(ax,ay,bx,by,st,ct,ac,dc,azc,hc,jdt,jdc,sidt,lat : double;
                      pjp,xs,ys,xi,xa,yi,ya : integer; projt : char; np,sp : boolean;
-                     peqc: boolean;hax,hay: double);
+                     peqc: boolean;hax,hay,stgy: double);
 var acc,dcc: double;
 begin
    BxGlb:= bx;
@@ -346,6 +346,7 @@ begin
    ProjEquatorCentered:=peqc;
    haicx:=hax;
    haicy:=hay;
+   stgcy:=stgy;
    case ProjPole of
    0: begin
       acentre:=azc;    // equat
@@ -525,6 +526,19 @@ case projtype of
       de:=dc-y;
     end;
     if de>0 then de:=(min(de,pid2-0.00002)) else de:=(max(de,-pid2-0.00002));
+    end;
+'G': begin   // STG
+    sincos(dc, s1, c1);
+    x := -(x);
+    y := -(y);
+    c2:=(4-x*x-y*y)/(4+x*x+y*y);
+    r:=c2*s1 + y*c1*(1+c2)/2;
+    de := arcsin(r);
+    r:=x*(1+c2)/(2*cos(de));
+    hh:=arcsin(r);
+    if ((dc>0)and(y>stgcy)) or ((dc<=0)and(y<stgcy)) then
+      hh:=pi-hh;
+    ar := ac + hh;
     end;
 'H' : begin                 // Hammer-Aitoff
     if ProjEquatorCentered then begin

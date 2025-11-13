@@ -355,7 +355,7 @@ begin
     c.costheta, rad2deg * rac / 15, rad2deg * ddc, ac, dc, c.CurJDUT, c.JDChart,
     rad2deg * c.CurST / 15, c.ObsLatitude, c.ProjPole, c.xshift, c.yshift, c.xmin,
     c.xmax, c.ymin, c.ymax, c.projtype, northpole2000inmap(c), southpole2000inmap(
-    c), c.ProjEquatorCentered, c.haicx, c.haicy);
+    c), c.ProjEquatorCentered, c.haicx, c.haicy, c.stgcy);
 
   skylibcat.fov := c.fov*rad2deg;
 

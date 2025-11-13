@@ -272,6 +272,33 @@ begin
       xx := -xx;
       Result := True;
     end;
+    'G':
+    begin                  //  STG
+      hh := ar - ac;
+      sincos(dc, s1, c1);
+      sincos(de, s2, c2);
+      sincos(hh, s3, c3);
+      r := 1+s2*s1+c2*c1*c3;
+      if r <= 0 then
+      begin
+        xx := 200;
+        yy := 200;
+      end
+      else
+      begin
+        xx := -2* (c2 * s3) / r;
+        yy := 2* (s2 * c1 - c2 * s1 * c3) / r;
+        Result := True;
+      end;
+      if IsNan(xx) or (xx > 200) then
+        xx := 200
+      else if xx < -200 then
+        xx := -200;
+      if IsNan(yy) or (yy > 200) then
+        yy := 200
+      else if yy < -200 then
+        yy := -200;
+    end;
     'H':
     begin                 // Hammer-Aitoff
       if c.ProjEquatorCentered then
@@ -554,6 +581,20 @@ begin
         de := (min(de, pid2 - 0.00002))
       else
         de := (max(de, -pid2 - 0.00002));
+    end;
+    'G':              // STG
+    begin
+      sincos(dc, s1, c1);
+      x := -(x);
+      y := -(y);
+      c2:=(4-x*x-y*y)/(4+x*x+y*y);
+      r:=c2*s1 + y*c1*(1+c2)/2;
+      de := arcsin(r);
+      r:=x*(1+c2)/(2*cos(de));
+      hh:=arcsin(r);
+      if ((dc>0)and(y>c.stgcy)) or ((dc<=0)and(y<c.stgcy)) then
+        hh:=pi-hh;
+      ar := ac + hh;
     end;
     'H':
     begin                 // Hammer-Aitoff
