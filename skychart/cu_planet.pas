@@ -102,13 +102,13 @@ type
     function JupSat(jde, lighttime, xp, yp, zp: double; c:Tconf_skychart;
       var xsat, ysat: double20; var supconj: bool20): integer;
     function SatSat(jde, lighttime, xp, yp, zp: double; c:Tconf_skychart;
-      var xsat, ysat: double20; var supconj: array of boolean): integer;
+      var xsat, ysat: double20; var supconj: bool20): integer;
     function UraSat(jde, lighttime, xp, yp, zp: double; c:Tconf_skychart;
-      var xsat, ysat: double20; var supconj: array of boolean): integer;
+      var xsat, ysat: double20; var supconj: bool20): integer;
     function NepSat(jde, lighttime, xp, yp, zp: double; c:Tconf_skychart;
-      var xsat, ysat: double20; var supconj: array of boolean): integer;
+      var xsat, ysat: double20; var supconj: bool20): integer;
     function PluSat(jde, lighttime, xp, yp, zp: double; c:Tconf_skychart; var xsat, ysat: double20;
-      var supconj: array of boolean): integer;
+      var supconj: bool20): integer;
     function MarsSolarLongitude(jde: double): double;
     procedure SatRing(jde: double; var P, a, b, be: double);
     function JupGRS(lon, drift, jdref, jdnow: double): double;
@@ -833,7 +833,7 @@ end;
 
 
 function TPlanet.SatSat(jde, lighttime, xp, yp, zp: double; c:Tconf_skychart;
-  var xsat, ysat: double20; var supconj: array of boolean): integer;
+  var xsat, ysat: double20; var supconj: bool20): integer;
 var
   i, n: integer;
   xs, ys, zs, x, y, z, alpha, delta, qr, d1, d2: double;
@@ -889,7 +889,7 @@ begin
 end;
 
 function TPlanet.UraSat(jde, lighttime, xp, yp, zp: double; c:Tconf_skychart;
-  var xsat, ysat: double20; var supconj: array of boolean): integer;
+  var xsat, ysat: double20; var supconj: bool20): integer;
 var
   i, n: integer;
   xs, ys, zs, x, y, z, alpha, delta, qr, d1, d2: double;
@@ -945,7 +945,7 @@ begin
 end;
 
 function TPlanet.NepSat(jde, lighttime, xp, yp, zp: double; c:Tconf_skychart;
-  var xsat, ysat: double20; var supconj: array of boolean): integer;
+  var xsat, ysat: double20; var supconj: bool20): integer;
 var
   i, n: integer;
   xs, ys, zs, x, y, z, alpha, delta, qr, d1, d2: double;
@@ -1001,7 +1001,7 @@ begin
 end;
 
 function TPlanet.PluSat(jde, lighttime, xp, yp, zp: double; c:Tconf_skychart; var xsat, ysat: double20;
-  var supconj: array of boolean): integer;
+  var supconj: bool20): integer;
 var
   i,n: integer;
   xs, ys, zs, x, y, z, alpha, delta, qr, d1, d2: double;
