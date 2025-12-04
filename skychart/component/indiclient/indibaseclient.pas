@@ -126,6 +126,7 @@ type
     procedure DisconnectServer;
     procedure connectDevice(deviceName: string);
     procedure disconnectDevice(deviceName: string);
+    function DeviceConnected(deviceName: string): boolean;
     procedure Send(const Value: string);
     property devices: TObjectList read Fdevices;
     function getDevice(deviceName: string): Basedevice;
@@ -228,7 +229,7 @@ begin
   FreeOnTerminate := True;
   FlockBlobEvent := False;
   FMissedFrameCount := 0;
-  Ftrace := False;  // for debuging only
+  Ftrace := False;  // for debugging only
   Fdevices := TObjectList.Create;
   FwatchDevices := TStringList.Create;
 end;
@@ -1021,6 +1022,24 @@ begin
     drv_connection.sp[1].s := ISS_ON;
     sendNewSwitch(drv_connection);
   end;
+end;
+
+function TIndiBaseClient.DeviceConnected(deviceName: string): boolean;
+var
+  drv: BaseDevice;
+  drv_connection: ISwitchVectorProperty;
+begin
+  result:=false;
+  drv := getDevice(deviceName);
+  if drv = nil then
+    exit;
+
+  drv_connection := drv.getSwitch('CONNECTION');
+  if drv_connection = nil then
+    exit;
+
+  result := drv_connection.sp[0].s = ISS_ON;
+
 end;
 
 procedure TIndiBaseClient.RefreshProps;
