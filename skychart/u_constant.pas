@@ -755,12 +755,10 @@ const
     'https://sohowww.nascom.nasa.gov/data/realtime/hmi_igr/1024/latest.jpg',
     'https://sohowww.nascom.nasa.gov/data/realtime/hmi_mag/1024/latest.jpg',
     'https://sohowww.nascom.nasa.gov/data/synoptic/sunspots/mdi_sunspots_1024.jpg');
-  sesame_maxurl = 4;
+  sesame_maxurl = 2;
   sesame_url: array [1..sesame_maxurl, 1..2] of string = (
     ('https://cds.unistra.fr/cgi-bin/nph-sesame', 'CDS - Strasbourg, France'),
-    ('https://vizier.cfa.harvard.edu/viz-bin/nph-sesame', 'CFA Harvard - USA'),
-    ('https://vizier.hia.nrc.ca/viz-bin/nph-sesame', 'CADC - Canada'),
-    ('https://vizier.cds.unistra.fr/cgi-bin/nph-sesame', 'VizieR - Strasbourg, France'));
+    ('https://vizier.cfa.harvard.edu/viz-bin/nph-sesame', 'CFA Harvard - USA'));
   infoname_maxurl = 4;
   infoname_url: array [1..infoname_maxurl, 1..2] of string = (
     ('https://simbad.u-strasbg.fr/simbad/sim-id?Ident=$ID', 'Simbad'),
