@@ -422,7 +422,7 @@ object f_calendar: Tf_calendar
             Top = 0
             Width = 992
             Align = alClient
-            ColCount = 11
+            ColCount = 12
             DefaultColWidth = 100
             FixedRows = 2
             MouseWheelOption = mwGrid
@@ -830,7 +830,7 @@ object f_calendar: Tf_calendar
           Left = 464
           Height = 22
           Top = 6
-          Width = 161
+          Width = 157
           Caption = 'Include day time pass'
           ParentFont = False
           TabOrder = 4
@@ -946,6 +946,7 @@ object f_calendar: Tf_calendar
   object DownloadDialog1: TDownloadDialog
     HttpDirectDownload = False
     Timeout = 90000
+    UserAgent = 'Skychart/4'
     FtpFwMode = 0
     FtpFwPassive = True
     ConfirmDownload = True

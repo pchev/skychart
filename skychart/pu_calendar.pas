@@ -255,6 +255,7 @@ var
   yy, mm, dd: word;
   i: integer;
 begin
+  JupiterGrid.ColWidths[11] := 200;
   SatGrid.ColWidths[0] := 130;
   SatGrid.ColWidths[1] := 120;
   ScaleDPI(Self);
@@ -674,6 +675,7 @@ begin
     cells[8, 1] := appmsg[8];
     cells[9, 1] := appmsg[21];
     cells[10, 1] := appmsg[22];
+    cells[11, 1] := rsGRSTransit;
   end;
   with saturnegrid do
   begin
@@ -1453,11 +1455,12 @@ var
   jd1, jd2, jd0, h, jdr, jdt, jds, st0, hh: double;
   rar, der, rat, det, ras, des: double;
   jdt_ut: double;
-  mr, mt, ms, azr, azs: string;
+  mr, mt, ms, azr, azs, grst: string;
 
   procedure ComputeRow(gr: TstringGrid; ipla: integer);
   var
     PSat, aSat, bSat, beSat, sbSat: double;
+    tt0, p, pde, pds, w1, w2, w3: double;
   begin
     with gr do
     begin
@@ -1471,6 +1474,20 @@ var
             Paralaxe(st0, dist, ar, de, ar, de, q, config);
           if config.ApparentPos then
             apparent_equatorial(ar, de, config, True, False);
+          if ipla = 5 then
+          begin
+            tt0 := jd(a, m, d, 0 - config.TimeZone + config.DT_UT);
+            planet.PlanetOrientation(tt0, ipla, p, pde, pds, w1, w2, w3);
+            w1 := (planet.JupGRS(config.GRSlongitude, config.GRSdrift, config.GRSjd, jda + jdt_ut) - w2) * 24 / 870.27003539;
+            grst := '';
+            if w1 > 0 then
+              grst := ARmtoStr(w1);
+            repeat
+              w1 := w1 + 24 * 360 / 870.27003539;
+              if (w1 > 0) and (w1 < 24) then
+                grst := grst + blank + ARmtoStr(w1);
+            until w1 > 24;
+          end;
           if ipla = 6 then
           begin  // ring magn. correction
             planet.SatRing(jda + jdt_ut, PSat, aSat, bSat, beSat);
@@ -1517,6 +1534,7 @@ var
       cells[5, i] := floattostrf(illum, ffFixed, 6, 2);
       cells[9, i] := demtostr(rad2deg * az);
       cells[10, i] := demtostr(rad2deg * ha);
+      if ipla = 5 then cells[11, i] := grst;
       Planet.PlanetRiseSet(ipla, jd0, AzNorth, mr, mt, ms, azr, azs, jdr, jdt, jds,
         rar, der, rat, det, ras, des, irc, config);
       objects[0, i] := SetObjCoord(jda,ar,de,magn,diam,illum,0,0,jdr,jdt,jds,rad2deg*az,rad2deg*ha,irc);
