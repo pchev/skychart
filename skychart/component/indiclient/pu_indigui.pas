@@ -1095,6 +1095,7 @@ begin
           exit;
         btn := TSpeedButton(iprop.ctrl.Objects[j]);
         btn.Down := (svp.sp[i].s = ISS_ON);
+        btn.AllowAllUp:=true;
       end;
     end;
   end;
