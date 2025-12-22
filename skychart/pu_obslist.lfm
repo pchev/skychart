@@ -57,7 +57,7 @@ object f_obslist: Tf_obslist
       TabOrder = 2
     end
     object UpdAllCoord: TButton
-      Left = 241
+      Left = 274
       Height = 25
       Top = 35
       Width = 187
@@ -67,7 +67,7 @@ object f_obslist: Tf_obslist
       TabOrder = 3
     end
     object Button1: TButton
-      Left = 117
+      Left = 0
       Height = 25
       Top = 35
       Width = 75
@@ -97,22 +97,32 @@ object f_obslist: Tf_obslist
       TabOrder = 6
     end
     object BtnImportMosaic: TButton
-      Left = 453
+      Left = 467
       Height = 25
       Top = 35
-      Width = 195
+      Width = 206
       Caption = 'Import mosaic file'
       OnClick = BtnImportMosaicClick
       TabOrder = 7
     end
     object BtnLoadCSV: TButton
-      Left = 663
+      Left = 679
       Height = 25
       Top = 35
       Width = 115
       Caption = 'Load CSV'
       OnClick = BtnLoadCSVClick
       TabOrder = 8
+    end
+    object UpdAllConst: TButton
+      Left = 81
+      Height = 25
+      Top = 35
+      Width = 187
+      Caption = 'UpdAllConst'
+      OnClick = UpdAllConstClick
+      ParentFont = False
+      TabOrder = 9
     end
   end
   object StringGrid1: TStringGrid
@@ -164,7 +174,7 @@ object f_obslist: Tf_obslist
         MinSize = 100
         MaxSize = 500
         Title.Caption = 'Title'
-        Width = 208
+        Width = 204
       end    
       item
         MinSize = 3
@@ -192,7 +202,7 @@ object f_obslist: Tf_obslist
       96
       80
       80
-      208
+      204
       3
     )
   end

@@ -30,7 +30,7 @@ interface
 
 uses
   u_help, u_translation, u_constant, u_util, u_projection, cu_planet,
-  pu_tour, UScaleDPI,
+  pu_tour, UScaleDPI, u_constellation,
   Math, Classes, SysUtils, LazUTF8, LazFileUtils, Forms, Controls, Graphics,
   Dialogs, ExtCtrls, Grids, EditBtn, StdCtrls, Menus, ComCtrls;
 
@@ -84,6 +84,7 @@ type
     StringGrid1: TStringGrid;
     TabSheet1: TTabSheet;
     TabSheet2: TTabSheet;
+    UpdAllConst: TButton;
     procedure AirmassComboChange(Sender: TObject);
     procedure AllLabelsChange(Sender: TObject);
     procedure BtnLoadCSVClick(Sender: TObject);
@@ -124,6 +125,7 @@ type
       const OldValue: string; var NewValue: string);
     procedure ToggleBox1Click(Sender: TObject);
     procedure ToggleBox2Click(Sender: TObject);
+    procedure UpdAllConstClick(Sender: TObject);
     procedure UpdAllCoordClick(Sender: TObject);
   private
     { private declarations }
@@ -215,6 +217,7 @@ begin
   ButtonSave.Caption := rsSave;
   ButtonClear.Caption := rsClear;
   UpdAllCoord.Caption := rsUpdateCoordi;
+  UpdAllConst.Caption := rsAddConstella;
   ToggleBox1.Caption := rsAirmass;
   Label1.Caption := rsLimit;
   LimitAirmassTonight.Caption := rsOnlyObjectsW;
@@ -946,6 +949,29 @@ procedure Tf_obslist.FormShow(Sender: TObject);
 begin
   SetLang;
   Application.QueueAsyncCall(@Refresh,0);
+end;
+
+procedure Tf_obslist.UpdAllConstClick(Sender: TObject);
+var
+  i: integer;
+  ra,de: double;
+  cn: string;
+begin
+  for i := 1 to StringGrid1.RowCount - 1 do
+  begin
+    ra := deg2rad*Str3ToAR(trim(StringGrid1.Cells[2, i]))*15;
+    de := deg2rad*Str3ToDE(trim(StringGrid1.Cells[3, i]));
+    if (ra >= 0) then
+    begin
+      cn:=ConstellationCoord(ra,de);
+      if cn<>'' then
+      begin
+        cn:=cn+', ';
+        if pos(cn, StringGrid1.Cells[6, i])=0 then
+          StringGrid1.Cells[6, i]:=cn+StringGrid1.Cells[6, i];
+      end;
+    end;
+  end;
 end;
 
 procedure Tf_obslist.UpdAllCoordClick(Sender: TObject);
