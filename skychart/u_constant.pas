@@ -1624,7 +1624,7 @@ const
 const
   MaxCmdArg = 10;
   // Main Commands, executed form main form
-  numcmdmain = 20;
+  numcmdmain = 21;
   maincmdlist: array[1..numcmdmain, 1..3] of string = (
     ('NEWCHART', '1', 'chart_name'),
     ('CLOSECHART', '2', 'chart_name'),
@@ -1646,7 +1646,8 @@ const
     ('PLANETINFO', '17', 'page_num'),
     ('GETSELECTEDOBJECT', '18', ''),
     ('LOADMPCORB', '19', 'mpcorb_file_name'),
-    ('RENAMECHART', '20', 'chart_name')
+    ('RENAMECHART', '20', 'chart_name'),
+    ('SHOW', '21', '')
     );
 
   // Chart Commands

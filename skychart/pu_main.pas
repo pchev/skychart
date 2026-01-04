@@ -1313,6 +1313,7 @@ end;
 
 procedure Tf_main.FormShow(Sender: TObject);
 begin
+  if InitOK then exit;
   try
     if VerboseMsg then
       WriteTrace('Enter Tf_main.FormShow');
@@ -11098,6 +11099,12 @@ begin
     18: Result := GetSelectedObject;
     19: Result := LoadMPCORB(arg[1]);
     20: Result := RenameChart(arg[1]);
+    21:
+    begin
+      Hide;
+      Show;
+      Result := msgOK;
+    end;
     else
     begin
       Result := 'Bad chart name ' + cname;
