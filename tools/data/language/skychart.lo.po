@@ -1,15 +1,15 @@
-# Swedish translation for skychart
-# Copyright (c) 2012 Rosetta Contributors and Canonical Ltd 2012
+# Lao translation for skychart
+# Copyright (c) 2026 Rosetta Contributors and Canonical Ltd 2026
 # This file is distributed under the same license as the skychart package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, 2012.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2026.
 msgid ""
 msgstr ""
 "Project-Id-Version: skychart\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2026-01-09 20:03+0000\n"
-"PO-Revision-Date: 2024-01-29 07:14+0000\n"
-"Last-Translator: Karl Birgersson <Unknown>\n"
-"Language-Team: Swedish <sv@li.org>\n"
+"PO-Revision-Date: 2026-01-04 15:45+0000\n"
+"Last-Translator: boneni <Unknown>\n"
+"Language-Team: Lao <lo@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -22,137 +22,137 @@ msgstr "102 CD DSS"
 
 #: u_translation.rs184recommend
 msgid "184 (recommended up to 1,000,000 objects)"
-msgstr "184 (rekommenderas upp till 1.000.000 objekt)"
+msgstr "184 (ແນະນຳສຳລັບວັດຖຸບໍ່ເກີນ 1,000,000 ຊິ້ນ)"
 
 #: u_translation.rs50recommende
 msgid "50   (recommended up to 100,000 objects)"
-msgstr "50 (rekommenderas upp till 100.000 objekt)"
+msgstr "50 (ແນະນຳສຳລັບວັດຖຸບໍ່ເກີນ 100,000 ຊິ້ນ)"
 
 #: u_translation.rs63000billion
 msgid "63000 (for billion of objects)"
-msgstr "63 000 (för miljarder objekt)"
+msgstr "63000 (ສຳລັບວັດຖຸພັນລ້ານຊິ້ນ)"
 
 #: u_translation.rs732recommend
 msgid "732 (recommended up to 5,000,000 objects)"
-msgstr "732 (rekommenderas upp till 5.000.000 objekt)"
+msgstr "732 (ແນະນຳສຳລັບວັດຖຸບໍ່ເກີນ 5,000,000 ຊິ້ນ)"
 
 #: u_translation.rs9537largerda
 msgid "9537 (larger datasets)"
-msgstr "9537 (större datamängder)"
+msgstr "9537 (ຊຸດຂໍ້ມູນຂະໜາດໃຫຍ່)"
 
 #: u_translation.rsabandonyourc
 msgid "Abandon your changes?"
-msgstr "Ta bort dina ändringar?"
+msgstr "ຍົກເລີກການປ່ຽນແປງຂອງທ່ານຫຼືບໍ່?"
 
 #: u_translation.rsabbreviation
 msgid "Abbreviation"
-msgstr "Förkortning"
+msgstr "ຊື່ຫຍໍ້"
 
 #: u_translation.rsabort
 msgid "Abort"
-msgstr "Avbryt"
+msgstr "ຍົກເລີກ"
 
 #: u_translation.rsabortedbyuse
 msgid "Aborted by user"
-msgstr "Avbrutet av användaren"
+msgstr "ຍົກເລີກໂດຍຜູ້ໃຊ້"
 
 #: u_translation.rsabortslew
 msgid "Abort Slew"
-msgstr "Avbryt slew"
+msgstr "ຍົກເລີກການຫັນກ້ອງ"
 
 #: u_translation.rsabout
 msgid "About"
-msgstr "Om programmet"
+msgstr "ກ່ຽວກັບ"
 
 #: u_translation.rsabout2
 #, object-pascal-format
 msgid "About %s"
-msgstr "Om %s"
+msgstr "ກ່ຽວກັບ %s"
 
 #: u_translation.rsabove
 #, object-pascal-format
 msgid "Above %s"
-msgstr "Över %s"
+msgstr "ເໜືອ %s"
 
 #: u_translation.rsabrevasteroid
 msgid "Ast"
-msgstr "Ast"
+msgstr "ເຄາະນ້ອຍ"
 
 #: u_translation.rsabrevclusternebula
 msgid "C+N"
-msgstr "C+N"
+msgstr "ກະຈຸກ+ເນບິວລາ"
 
 #: u_translation.rsabrevcomet
 msgid "Com"
-msgstr "Com"
+msgstr "ຫາງ"
 
 #: u_translation.rsabrevdark
 msgid "Drk"
-msgstr "Drk"
+msgstr "ມືດ"
 
 #: u_translation.rsabrevdouble
 msgid "Dbl"
-msgstr "Dbl"
+msgstr "ຄູ່"
 
 #: u_translation.rsabrevgalaxy
 msgid "Gx"
-msgstr "Gx"
+msgstr "ກາແລັກຊີ"
 
 #: u_translation.rsabrevgalaxycluster
 msgid "Gcl"
-msgstr "Gcl"
+msgstr "ກະຈຸກກາແລັກຊີ"
 
 #: u_translation.rsabrevglobularcluster
 msgid "Gb"
-msgstr "Gb"
+msgstr "ກະຈຸກຊົງກົມ"
 
 #: u_translation.rsabrevnebula
 msgid "Nb"
-msgstr "Nb"
+msgstr "ເນບິວລາ"
 
 #: u_translation.rsabrevopencluster
 msgid "OC"
-msgstr "OC"
+msgstr "ກະຈຸກເປີດ"
 
 #: u_translation.rsabrevplanetarynebula
 msgid "Pl"
-msgstr "Pl"
+msgstr "ເນບິວລາດາວເຄາະ"
 
 #: u_translation.rsabrevvariable
 msgid "Var"
-msgstr "Var"
+msgstr "ແປແສງ"
 
 #: u_translation.rsaction
 msgid "Action"
-msgstr "Åtgärd"
+msgstr "ການດຳເນີນການ"
 
 #: u_translation.rsactivateallt
 msgid "Activate all the functions when hidden"
-msgstr "Aktivera alla funktioner när detta är dolt"
+msgstr "ເປີດໃຊ້ງານທຸກຟັງຊັນເມື່ອຖືກຊ່ອນ"
 
 #: u_translation.rsactivatethet
 msgid "Activate the timer event when hidden"
-msgstr "Aktivera timer vid avslut"
+msgstr "ເປີດໃຊ້ງານເຫດການເວລາເມື່ອຖືກຊ່ອນ"
 
 #: u_translation.rsactivatevoic
 msgid "Activate voice"
-msgstr "Aktivera röst"
+msgstr "ເປີດໃຊ້ສຽງ"
 
 #: u_translation.rsactualsystem
 msgid "Actual system time"
-msgstr "Aktuell systemtid"
+msgstr "ເວລາລະບົບປັດຈຸບັນ"
 
 #: u_translation.rsad
 msgid "AD"
-msgstr "e. kr."
+msgstr "ຄ.ສ."
 
 #: u_translation.rsadd
 msgid "Add"
-msgstr "Lägg till"
+msgstr "ເພີ່ມ"
 
 #: u_translation.rsaddasingleel
 msgid "Add a single element to the database. All fields are mandatory."
-msgstr "Lägg till ett enskilt element till databasen. Alla fält är obligatoriska."
+msgstr "ເພີ່ມອົງປະກອບດຽວລົງໃນຖານຂໍ້ມູນ. ຕ້ອງປ້ອນທຸກຊ່ອງ."
 
 #: u_translation.rsaddconstella
 msgid "Add constellations"
@@ -160,262 +160,262 @@ msgstr ""
 
 #: u_translation.rsaddcursorpos
 msgid "Add cursor position"
-msgstr "Lägg till pekarposition"
+msgstr "ເພີ່ມຕຳແໜ່ງເຄີເຊີ"
 
 #: u_translation.rsaddequatoria
 msgid "Show equatorial grid"
-msgstr "Visa ekvatoriellt rutnät"
+msgstr "ສະແດງເສັ້ນຕາໜ່າງເສັ້ນສູນສູດຟ້າ"
 
 #: u_translation.rsadditionalff
 msgid "Additional ffmpeg options"
-msgstr "Ytterligare ffmpeg alternativ"
+msgstr "ຕົວເລືອກ ffmpeg ເພີ່ມເຕີມ"
 
 #: u_translation.rsaddlabel
 msgid "Add label"
-msgstr "Lägg till etikett"
+msgstr "ເພີ່ມຊື່"
 
 #: u_translation.rsaddlabelfore
 msgid "Add label for every object in the list"
-msgstr "Lägg till etikett för varje objekt i listan"
+msgstr "ເພີ່ມປ້າຍຊື່ໃຫ້ທຸກວັດຖຸໃນລາຍການ"
 
 #: u_translation.rsaddtelescope
 msgid "Add telescope position"
-msgstr "Lägg till teleskopposition"
+msgstr "ເພີ່ມຕຳແໜ່ງກ້ອງໂທລະທັດ"
 
 #: u_translation.rsaddthealtern
 msgid "Add the alternative names to the index"
-msgstr "Lägg till alternativa namn till indexet"
+msgstr "ເພີ່ມຊື່ອື່ນໃສ່ໃນດັດຊະນີ"
 
 #: u_translation.rsaddtoobservi
 #, object-pascal-format
 msgid "Add %s to observing list"
-msgstr "Addera %s till observationslistan"
+msgstr "ເພີ່ມ %s ເຂົ້າໃນລາຍການສັງເກດການ"
 
 #: u_translation.rsadjustcolour
 msgid "Adjust colour brightness"
-msgstr "Justera färgintensitet"
+msgstr "ປັບຄວາມສະຫວ່າງຂອງສີ"
 
 #: u_translation.rsadjustthevis
 msgid "Adjust the visualisation scale"
-msgstr "Justera visningsskalan"
+msgstr "ປັບມາດຕາສ່ວນການສະແດງຜົນ"
 
 #: u_translation.rsadjustthewin
 msgid "Adjust the window size to the screen DPI"
-msgstr "Anpassa fönsterstorlek efter skärmupplösning"
+msgstr "ປັບຂະໜາດໜ້າຕ່າງຕາມ DPI ຂອງໜ້າຈໍ"
 
 #: u_translation.rsadministrato
 msgid "administrator"
-msgstr "administratör"
+msgstr "ຜູ້ດູແລລະບົບ"
 
 #: u_translation.rsadvanced
 msgid "Advanced"
-msgstr "Avancerat"
+msgstr "ຂັ້ນສູງ"
 
 #: u_translation.rsadvancedsear
 msgid "Advanced search"
-msgstr "Avancerad sökning"
+msgstr "ຄົ້ນຫາຂັ້ນສູງ"
 
 #: u_translation.rsage
 msgid "Age"
-msgstr "Ålder"
+msgstr "ອາຍຸ"
 
 #: u_translation.rsairmass
 msgid "Airmass"
-msgstr "Luftmassa"
+msgstr "ມວນອາກາດ (Airmass)"
 
 #: u_translation.rsalbedo
 msgid "Albedo"
-msgstr "Albedo"
+msgstr "ອັນບີໂດ (Albedo)"
 
 #: u_translation.rsalignment
 msgid "Alignment"
-msgstr "Justering"
+msgstr "ການຈັດວາງ"
 
 #: u_translation.rsall
 msgid "All"
-msgstr "Alla"
+msgstr "ທັງໝົດ"
 
 #: u_translation.rsallconfigura
 msgid "All configuration options"
-msgstr "Alla inställningar"
+msgstr "ຕົວເລືອກການຕັ້ງຄ່າທັງໝົດ"
 
 #: u_translation.rsallobjectsat
 msgid "All the objects at this position"
-msgstr "Alla objekt på denna position"
+msgstr "ວັດຖຸທັງໝົດໃນຕຳແໜ່ງນີ້"
 
 #: u_translation.rsallsampclien
 msgid "All SAMP clients"
-msgstr "Alla SAMP klienter"
+msgstr "ຄລາຍແອັນ SAMP ທັງໝົດ"
 
 #: u_translation.rsalltablesstr
 #, object-pascal-format
 msgid "%sAll table structures exist."
-msgstr "%sAlla tabellstrukturer finns."
+msgstr "%sໂຄງສ້າງຕາຕະລາງທັງໝົດມີຢູ່ແລ້ວ."
 
 #: u_translation.rsalltoolsbar
 msgid "All toolbars"
-msgstr "Alla verktygsfält"
+msgstr "ແຖບເຄື່ອງມືທັງໝົດ"
 
 #: u_translation.rsalsobesureth
-#, object-pascal-format
+#, object-pascal-format, fuzzy, badformat
 msgid "%sAlso be sure the required database software is installed.%sPlease consult the documentation if you are unsure.%sDo you want to continue?"
-msgstr "%sFörsäkra dig om att erforderligt databasprogram är installerat.%sLäs dokumentationen om du är osäker.%sVill du fortsätta?"
+msgstr "ກະລຸນາກວດສອບໃຫ້ແນ່ໃຈວ່າໄດ້ຕິດຕັ້ງຊອບແວຖານຂໍ້ມູນແລ້ວ. ຕ້ອງການສືບຕໍ່ບໍ?"
 
 #: u_translation.rsalt
 msgid "Alt"
-msgstr "Elev"
+msgstr "Alt"
 
 #: u_translation.rsaltazcoord
 msgid "Alt/Az coord. "
-msgstr "Alt/Az koord. "
+msgstr "ພິກັດ Alt/Az "
 
 #: u_translation.rsaltazcoord2
 msgid "Alt/Az coord."
-msgstr "Alt/Az koord."
+msgstr "ພິກັດ Alt/Az"
 
 #: u_translation.rsaltazcoordin
 msgid "Alt-Az coordinates"
-msgstr "Alt-Az koordinater"
+msgstr "ພິກັດມຸມເງີຍ-ມຸມທິດ"
 
 #: u_translation.rsaltazmount
 msgid "Alt/Az mount"
-msgstr "Alt/Az montering"
+msgstr "ຖານຕັ້ງກ້ອງແບບມຸມເງີຍ/ອາຊິມຸດ"
 
 #: u_translation.rsaltitude
 msgid "Altitude"
-msgstr "Elevation"
+msgstr "ມຸມເງີຍ"
 
 #: u_translation.rsaltturns
 #, object-pascal-format
 msgid "%sAlt turns:"
-msgstr "%sAlt varv:"
+msgstr "%sຮອບ Alt:"
 
 #: u_translation.rsalways
 msgid "always"
-msgstr "alltid"
+msgstr "ສະເໝີ"
 
 #: u_translation.rsalwaysaddmer
 msgid "Always add meridian"
-msgstr "Lägg alltid till meridian"
+msgstr "ເພີ່ມເສັ້ນເມຣິດຽນສະເໝີ"
 
 #: u_translation.rsalwaysontop
 msgid "Always on top"
-msgstr "Alltid överst"
+msgstr "ຢູ່ເທິງສຸດສະເໝີ"
 
 #: u_translation.rsalwayssavewi
 msgid "Always save without asking."
-msgstr "Spara alltid utan att fråga."
+msgstr "ບັນທຶກສະເໝີໂດຍບໍ່ຕ້ອງຖາມ."
 
 #: u_translation.rsamaximumoffi
 #, object-pascal-format
 msgid "A maximum of %s files can be selected"
-msgstr "Maximalt %s filer kan selekteras"
+msgstr "ເລືອກໄດ້ສູງສຸດ %s ໄຟລ໌"
 
 #: u_translation.rsamplitudemax
 msgid "Amplitude max."
-msgstr "Högsta amplitud"
+msgstr "ແອມພລິຈູດສູງສຸດ"
 
 #: u_translation.rsamplitudemin
 msgid "Amplitude min."
-msgstr "Minsta amplitud"
+msgstr "ແອມພລິຈູດຕ່ຳສຸດ"
 
 #: u_translation.rsanewversiono
 #, object-pascal-format
 msgid "A new version %s of Skychart is available.%sDo you want to download it now?"
-msgstr "En ny version %s av Skychart finns tillgänglig.%sVill du ladda ner den nu?"
+msgstr "Skychart ເວີຊັນໃໝ່ %s ພ້ອມໃຊ້ງານແລ້ວ. %s ທ່ານຕ້ອງການດາວໂຫຼດຕອນນີ້ຫຼືບໍ່?"
 
 #: u_translation.rsanimation
 msgid "Animation"
-msgstr "Animering"
+msgstr "ແອນິເມຊັນ"
 
 #: u_translation.rsannualproper
 msgid "Annual proper motion"
-msgstr "Årlig egenrörelse"
+msgstr "ການເຄື່ອນທີ່ຈິງລາຍປີ"
 
 #: u_translation.rsanonymouspas
 msgid "Anonymous password"
-msgstr "Anonymnt lösenord"
+msgstr "ລະຫັດຜ່ານນິລະນາມ"
 
 #: u_translation.rsantialiasdra
 msgid "Anti Alias drawing"
-msgstr "Använd kantutjämning"
+msgstr "ການແຕ້ມແບບລົບຮອຍຫຍັກ (Anti Alias)"
 
 #: u_translation.rsapparent
 msgid "Apparent"
-msgstr "Skenbar"
+msgstr "ປາກົດ"
 
 #: u_translation.rsappearance
 msgid "Appearance"
-msgstr "Utseende"
+msgstr "ຮູບລັກສະນະ"
 
 #: u_translation.rsappendtoanex
 msgid "Append to an existing catalog "
-msgstr "Lägg till till en befintlig katalog "
+msgstr "ເພີ່ມໃສ່ຄາຕາລັອກທີ່ມີຢູ່ "
 
 #: u_translation.rsappendtocurr
 msgid "Append to current file"
-msgstr "Bifoga till nuvarande fil"
+msgstr "ເພີ່ມຕໍ່ໃສ່ໄຟລ໌ປັດຈຸບັນ"
 
 #: u_translation.rsapply
 msgid "Apply"
-msgstr "Använd"
+msgstr "ນຳໃຊ້"
 
 #: u_translation.rsapplychanget
 msgid "Apply changes to all charts"
-msgstr "Använd ändringar på alla kartor"
+msgstr "ໃຊ້ການປ່ຽນແປງກັບທຸກແຜນທີ່"
 
 #: u_translation.rsapril
 msgid "April"
-msgstr "April"
+msgstr "ເມສາ"
 
 #: u_translation.rsarchivethisi
 msgid "Archive this image?"
-msgstr "Arkivera denna bild?"
+msgstr "ເກັບຮູບພາບນີ້ເຂົ້າຄັງຫຼືບໍ່?"
 
 #: u_translation.rsarchivetodir
 msgid "Archive to directory:"
-msgstr "Arkivkatalog:"
+msgstr "ເກັບເຂົ້າໂຟນເດີ:"
 
 #: u_translation.rsargumentofpe
 msgid "Argument of perihelion"
-msgstr "Periheliumargument"
+msgstr "ອາກິວເມນຂອງຈຸດໃກ້ດວງອາທິດທີ່ສຸດ"
 
 #: u_translation.rsaroundcurren
 msgid "Around current position"
-msgstr "Omkring aktuell position"
+msgstr "ອ້ອມຕຳແໜ່ງປັດຈຸບັນ"
 
 #: u_translation.rsartificialsa
 msgid "Artificial satellites"
-msgstr "Artificiella satelliter"
+msgstr "ດາວທຽມ"
 
 #: u_translation.rsartificialsa2
 msgid "Artificial satellite"
-msgstr "Artificiell satellit"
+msgstr "ດາວທຽມ"
 
 #: u_translation.rsartificialsa3
 msgid "Artificial satellites TLE (one URL by line)"
-msgstr "TLE för artificiella satelliter (en URL med linje)"
+msgstr "TLE ດາວທຽມ (ໜຶ່ງ URL ຕໍ່ແຖວ)"
 
 #: u_translation.rsasampapplica
 msgid "A SAMP application send a table to load"
-msgstr "En SAMP applikation skickade en tabell att ladda"
+msgstr "ແອັບພລິເຄຊັນ SAMP ສົ່ງຕາຕະລາງມາເພື່ອໂຫຼດ"
 
 #: u_translation.rsasampapplica2
 msgid "A SAMP application send an image to load"
-msgstr "En SAMP applikation skcikade en bild att ladda"
+msgstr "ແອັບພລິເຄຊັນ SAMP ສົ່ງຮູບພາບມາເພື່ອໂຫຼດ"
 
 #: u_translation.rsasampapplica3
 msgid "A SAMP application send coordinates location"
-msgstr "En SAMP applikation skickar platskoordinater"
+msgstr "ແອັບພລິເຄຊັນ SAMP ສົ່ງພິກັດຕຳແໜ່ງມາ"
 
 #: u_translation.rsascomdrivere
 msgid "The ASCOM driver report an error"
-msgstr "ASCOM-drivrutinen rapporterar ett fel"
+msgstr "ໄດຣເວີ ASCOM ລາຍງານຂໍ້ຜິດພາດ"
 
 #: u_translation.rsascomremote
 #, object-pascal-format
 msgid "ASCOM Alpaca is available on %s"
-msgstr "ASCOM Alpaca är tillgänglig på %s"
+msgstr "ASCOM Alpaca ພ້ອມໃຊ້ງານຢູ່ %s"
 
 #: u_translation.rsascomtelesc
 msgid "Telescope interface"
@@ -423,99 +423,99 @@ msgstr ""
 
 #: u_translation.rsaskconfirmat
 msgid "Ask confirmation before any Internet connection"
-msgstr "Fråga före alla anslutningar till Internet"
+msgstr "ຖາມເພື່ອຢືນຢັນກ່ອນເຊື່ອມຕໍ່ອິນເຕີເນັດທຸກຄັ້ງ"
 
 #: u_translation.rsaskforconfir
 msgid "Ask for confirmation before to jump to coordinates"
-msgstr "Fråga om godkännande före förflyttning till koordinaterna"
+msgstr "ຖາມເພື່ອຢືນຢັນກ່ອນຈະຂ້າມໄປຫາພິກັດ"
 
 #: u_translation.rsaskforconfir2
 msgid "Ask for confirmation before to load the image"
-msgstr "Fråga om godkännande före laddning av bilden"
+msgstr "ຖາມເພື່ອຢືນຢັນກ່ອນຈະໂຫຼດຮູບພາບ"
 
 #: u_translation.rsaskforconfir3
 msgid "Ask for confirmation before to load the table"
-msgstr "Fråga om gpdkännande före laddning av tabell"
+msgstr "ຖາມເພື່ອຢືນຢັນກ່ອນຈະໂຫຼດຕາຕະລາງ"
 
 #: u_translation.rsasonscreenbl
 msgid "As on screen (black background!)"
-msgstr "Som på skärmen (svart bakgrund!)"
+msgstr "ຕາມທີ່ປາກົດໃນໜ້າຈໍ (ພື້ນຫຼັງສີດຳ!)"
 
 #: u_translation.rsasterism
 msgid "Asterism"
-msgstr "Asterism"
+msgstr "ກຸ່ມດາວຍ່ອຍ"
 
 #: u_translation.rsasteroid
 msgid "Asteroid"
-msgstr "Asteroid"
+msgstr "ດາວເຄາະນ້ອຍ"
 
 #: u_translation.rsasteroidelem
 msgid "Sources for asteroid elements in MPC format (one URL per line)"
-msgstr "Källor för asteroidelement i MPC-format (en URL per rad)"
+msgstr "ແຫຼ່ງຂໍ້ມູນດາວເຄາະນ້ອຍໃນຮູບແບບ MPC (ໜຶ່ງ URL ຕໍ່ແຖວ)"
 
 #: u_translation.rsasteroidelem2
 msgid "Asteroid elements"
-msgstr "Asteroidelement"
+msgstr "ອົງປະກອບດາວເຄາະນ້ອຍ"
 
 #: u_translation.rsasteroidsfro
 msgid "asteroids from the file"
-msgstr "asteroiderna från filen"
+msgstr "ດາວເຄາະນ້ອຍຈາກໄຟລ໌"
 
 #: u_translation.rsasteroidupda
 msgid "Asteroid update successful"
-msgstr "Asteroiduppdatering lyckades"
+msgstr "ອັບເດດຂໍ້ມູນດາວເຄາະນ້ອຍສຳເລັດ"
 
 #: u_translation.rsastrometricj
 msgid "Astrometric J2000"
-msgstr "Astrometrisk J2000"
+msgstr "ພິກັດດາລາສາດ J2000"
 
 #: u_translation.rsastronomical
 msgid "Astronomical"
-msgstr "Astronomisk"
+msgstr "ທາງດາລາສາດ"
 
 #: u_translation.rsastronomical2
 msgid "Astronomical twilight"
-msgstr "Astronomisk skymning"
+msgstr "ແສງສົນທະຍາດາລາສາດ"
 
 #: u_translation.rsat
 msgid "at"
-msgstr "klockan"
+msgstr "ທີ່"
 
 #: u_translation.rsatmosphericr
 msgid "Atmospheric refraction"
-msgstr "Atmosfärisk refraktion"
+msgstr "ການຫັກເຫຂອງແສງໃນຊັ້ນບັນຍາກາດ"
 
 #: u_translation.rsaugust
 msgid "August"
-msgstr "Augusti"
+msgstr "ສິງຫາ"
 
 #: u_translation.rsauthors
 msgid "Authors"
-msgstr "Upphovsmän"
+msgstr "ຜູ້ຂຽນ"
 
 #: u_translation.rsautomatic
 msgid "Automatic"
-msgstr "Automatisk"
+msgstr "ອັດຕະໂນມັດ"
 
 #: u_translation.rsautomaticall2
 msgid "Automatically optimize the labels placement"
-msgstr "Optimera  etiketternas placering automatiskt"
+msgstr "ປັບຕຳແໜ່ງປ້າຍຊື່ໃຫ້ເໝາະສົມໂດຍອັດຕະໂນມັດ"
 
 #: u_translation.rsautorefresh
 msgid "Auto-refresh"
-msgstr "Uppdatera automatiskt"
+msgstr "ໂຫຼດໃໝ່ອັດຕະໂນມັດ"
 
 #: u_translation.rsautorefreshe
 msgid "Auto-refresh every "
-msgstr "Uppdatera automatiskt varje "
+msgstr "ໂຫຼດໃໝ່ອັດຕະໂນມັດທຸກໆ "
 
 #: u_translation.rsauxiliaryfil
 msgid "Auxiliary files"
-msgstr "Extra filer"
+msgstr "ໄຟລ໌ເສີມ"
 
 #: u_translation.rsavailableact
 msgid "Available actions"
-msgstr "Tillgängliga val"
+msgstr "ການດຳເນີນການທີ່ມີໃຫ້ເລືອກ"
 
 #: u_translation.rsaz
 msgid "Az"
@@ -523,20 +523,20 @@ msgstr "Az"
 
 #: u_translation.rsazimuth
 msgid "Azimuth"
-msgstr "Azimut"
+msgstr "ມຸມທິດ"
 
 #: u_translation.rsazimuthalcoo
 msgid "Azimuthal coordinates"
-msgstr "Azimutala koordinater"
+msgstr "ພິກັດອາຊິມຸດ"
 
 #: u_translation.rsazimuthorigi
 msgid "Azimuth origin"
-msgstr "Ursprunglig azimut"
+msgstr "ຈຸດເລີ່ມຕົ້ນອາຊິມຸດ"
 
 #: u_translation.rsazturns
 #, object-pascal-format
 msgid "%sAz turns:"
-msgstr "%sAz varv:"
+msgstr "%sຮອບ Az:"
 
 #: u_translation.rsb
 msgid "B"
@@ -544,36 +544,36 @@ msgstr "B"
 
 #: u_translation.rsback
 msgid "Back"
-msgstr "Bakåt"
+msgstr "ກັບຄືນ"
 
 #: u_translation.rsbackground
 msgid "Background"
-msgstr "Bakgrund"
+msgstr "ພື້ນຫຼັງ"
 
 #: u_translation.rsbackgroundpi
 msgid "Background picture"
-msgstr "Bakgrundsbild"
+msgstr "ຮູບພື້ນຫຼັງ"
 
 #: u_translation.rsbayerletter
 msgid "Bayer letter"
-msgstr "Bayer bokstav"
+msgstr "ອັກສອນ Bayer"
 
 #: u_translation.rsbc
 msgid "BC"
-msgstr "f. kr."
+msgstr "ກ່ອນ ຄ.ສ."
 
 #: u_translation.rsbeginprocess
 #, object-pascal-format
 msgid "Begin processing for jd=%s / %s"
-msgstr "Påbörja bearbetning för jd=%s / %s"
+msgstr "ເລີ່ມປະມວນຜົນສຳລັບ jd=%s / %s"
 
 #: u_translation.rsbesuretheyus
 msgid "Be sure they use a DOS line end format."
-msgstr "Säkerställ att de använder radsluttecken för DOS"
+msgstr "ໃຫ້ແນ່ໃຈວ່າໃຊ້ຮູບແບບການຂຶ້ນຕົ້ນແຖວໃໝ່ແບບ DOS."
 
 #: u_translation.rsbigstars
 msgid "Big stars"
-msgstr "Stora stjärnor"
+msgstr "ດາວຂະໜາດໃຫຍ່"
 
 #: u_translation.rsbii
 msgid "BII"
@@ -581,827 +581,827 @@ msgstr "BII"
 
 #: u_translation.rsbinaryindexe
 msgid "Binary indexed catalog"
-msgstr "Binärt indexerad katalog"
+msgstr "ແຄັດຕະລັອກດັດຊະນີໄບນາຣີ"
 
 #: u_translation.rsbitmap
 msgid "Bitmap"
-msgstr "Bitmap"
+msgstr "ບິດແມັບ"
 
 #: u_translation.rsbitmapfile
 msgid "Bitmap file"
-msgstr "Bitmap fil"
+msgstr "ໄຟລ໌ບິດແມັບ"
 
 #: u_translation.rsblackonwhite
 msgid "Black on white"
-msgstr "Svart på vit"
+msgstr "ສີດຳເທິງພື້ນສີຂາວ"
 
 #: u_translation.rsblackwhite
 msgid "Black/white"
-msgstr "Svart/vitt"
+msgstr "ດຳ/ຂາວ"
 
 #: u_translation.rsblackwhiteli
 msgid "Black/white, line mode"
-msgstr "Svart/vit, linje-mode"
+msgstr "ຂາວ-ດຳ, ໂໝດເສັ້ນ"
 
 #: u_translation.rsblinkingpict
 msgid "Blinking picture"
-msgstr "Blinkande bild"
+msgstr "ຮູບພາບກະພິບ"
 
 #: u_translation.rsbluemagnitud
 msgid "Blue magnitude"
-msgstr "Blå magnitud"
+msgstr "ໂຊຕິມາດແສງສີນ້ຳເງິນ"
 
 #: u_translation.rsblurred
 msgid "Blurred"
-msgstr "Utsmetad"
+msgstr "ມົວ"
 
 #: u_translation.rsbottom
 msgid "Bottom"
-msgstr "Längst ner"
+msgstr "ລຸ່ມ"
 
 #: u_translation.rsboundary
 msgid "Boundary"
-msgstr "Gräns"
+msgstr "ຂອບເຂດ"
 
 #: u_translation.rsbrighter
 msgid "Brighter"
-msgstr "Ljusare"
+msgstr "ສະຫວ່າງກວ່າ"
 
 #: u_translation.rsbrightest
 msgid "Brightest"
-msgstr "Ljusast"
+msgstr "ສະຫວ່າງທີ່ສຸດ"
 
 #: u_translation.rsbrighteststa
 msgid "Brightest star magnitude"
-msgstr "Ljusaste stjärnans magnitud"
+msgstr "ໂຊຕິມາດຂອງດາວທີ່ສະຫວ່າງທີ່ສຸດ"
 
 #: u_translation.rsbrightnebula
 msgid "Bright nebula"
-msgstr "Ljus nebulosa"
+msgstr "ເນບິວລາສະຫວ່າງ"
 
 #: u_translation.rsbrightness
 msgid "Brightness"
-msgstr "Ljusstyrka"
+msgstr "ຄວາມສະຫວ່າງ"
 
 #: u_translation.rsbrightstars
 msgid "Bright stars"
-msgstr "Ljusa stjärnor"
+msgstr "ດາວສະຫວ່າງ"
 
 #: u_translation.rsbrightstarss
 msgid "Bright star size"
-msgstr "Storlek på ljusa stjärnor"
+msgstr "ຂະໜາດດາວທີ່ສະຫວ່າງ"
 
 #: u_translation.rsbuildcatalog
 msgid "Build catalog"
-msgstr "Skapa katalog"
+msgstr "ສ້າງຄາຕາລັອກ"
 
 #: u_translation.rsbutneverfain
 msgid "But never fainter than magnitude"
-msgstr "Men aldrig svagare än magnitud"
+msgstr "ແຕ່ຕ້ອງບໍ່ມົວໄປກວ່າຄ່າຄວາມສະຫວ່າງ"
 
 #: u_translation.rsbutton
 msgid "Button"
-msgstr "Knapp"
+msgstr "ປຸ່ມ"
 
 #: u_translation.rsbuttonsize
 msgid "Button size"
-msgstr "Knappstorlek"
+msgstr "ຂະໜາດປຸ່ມ"
 
 #: u_translation.rsby
 msgid "by"
-msgstr "var"
+msgstr "ໂດຍ"
 
 #: u_translation.rsbyname
 msgid "By name"
-msgstr "Efter namn"
+msgstr "ຕາມຊື່"
 
 #: u_translation.rscalendar
 msgid "Calendar"
-msgstr "Kalender"
+msgstr "ປະຕິທິນ"
 
 #: u_translation.rscalendargrap
 msgid "Calendar graph setting"
-msgstr "Kalendergraf inställning"
+msgstr "ຕັ້ງຄ່າກຣາຟປະຕິທິນ"
 
 #: u_translation.rscancel
 msgid "Cancel"
-msgstr "Avsluta"
+msgstr "ຍົກເລີກ"
 
 #: u_translation.rscancel2
 #, object-pascal-format
 msgid "Cancel %s"
-msgstr "Avbryt %s"
+msgstr "ຍົກເລີກ %s"
 
 #: u_translation.rscancelwrongz
 #, object-pascal-format
 msgid "Cancel, wrong zip file ?? %s"
-msgstr "Avbryt, fel zipfil ?? %s"
+msgstr "ຍົກເລີກ, ໄຟລ໌ zip ຜິດພາດ ?? %s"
 
 #: u_translation.rscannotcomput
 msgid "Cannot compute satellites."
-msgstr "Kan inte beräkna satelliter"
+msgstr "ບໍ່ສາມາດຄຳນວນດາວທຽມໄດ້."
 
 #: u_translation.rscannotconnec
 #, object-pascal-format
 msgid "Cannot connect to server. %s"
-msgstr "Kan inte ansluta till servern. %s"
+msgstr "ບໍ່ສາມາດເຊື່ອມຕໍ່ກັບເຊີເວີ. %s"
 
 #: u_translation.rscannotdownlo
 msgid "Cannot download PDF help now"
-msgstr "Kan inte ladda ned PDF-hjälp nu"
+msgstr "ບໍ່ສາມາດດາວໂຫຼດຄູ່ມື PDF ໄດ້ໃນຕອນນີ້"
 
 #: u_translation.rscannotdraw
 msgid "Cannot draw"
-msgstr "Kan inre rita upp"
+msgstr "ບໍ່ສາມາດແຕ້ມໄດ້"
 
 #: u_translation.rscannotgetyou
 msgid "Cannot get your IP address, or no location found for this address."
-msgstr "Kan inte hämta din IP-adress, eller så fanns det ingen plats angiven för denna adress."
+msgstr "ບໍ່ສາມາດລະບຸ IP ຂອງທ່ານ ຫຼື ບໍ່ພົບຕຳແໜ່ງທີ່ຢູ່."
 
 #: u_translation.rscannotopenda
 #, object-pascal-format
 msgid "%sCannot open database %s! %s"
-msgstr "%sKan inte öppna databas %s! %s"
+msgstr "%sບໍ່ສາມາດເປີດຖານຂໍ້ມູນ %s ໄດ້! %s"
 
 #: u_translation.rscannotsyncwh
 msgid "Cannot Sync when the mount is not tracking"
-msgstr ""
+msgstr "ບໍ່ສາມາດຊິງຄ໌ (Sync) ໄດ້ໃນຂະນະທີ່ຖານຕັ້ງກ້ອງບໍ່ໄດ້ຕິດຕາມວັດຖຸ"
 
 #: u_translation.rscannotwritet
 msgid "Cannot write to"
-msgstr "Kan inte skriva till"
+msgstr "ບໍ່ສາມາດຂຽນໃສ່"
 
 #: u_translation.rscaption
 msgid "Caption"
-msgstr "Text"
+msgstr "ຄຳອະທິບາຍ"
 
 #: u_translation.rscartesian
 msgid "Cartesian"
-msgstr "Kartesisk"
+msgstr "Cartesian"
 
 #: u_translation.rscascade
 msgid "Cascade"
-msgstr "Överlappande"
+msgstr "ລຽງຊ້ອນ"
 
 #: u_translation.rscat
 msgid "Cat."
-msgstr "Kat."
+msgstr "ຄາຕາລັອກ"
 
 #: u_translation.rscatalog
 msgid "Catalog"
-msgstr "Katalog"
+msgstr "ຄາຕາລັອກ"
 
 #: u_translation.rscataloglongn
 msgid "Catalog long name"
-msgstr "Katalog (långt namn)"
+msgstr "ຊື່ເຕັມຄາຕາລັອກ"
 
 #: u_translation.rscatalogsavai
 #, object-pascal-format
 msgid "%s Catalogs available"
-msgstr "%s kataloger tillgängliga"
+msgstr "ມີ %s ແຄັດຕະລັອກໃຫ້ເລືອກ"
 
 #: u_translation.rscatalogshort
 msgid "Catalog short name"
-msgstr "Katalog (kortnamn)"
+msgstr "ຊື່ຫຍໍ້ຄາຕາລັອກ"
 
 #: u_translation.rscatalogstrin
 msgid "Catalog string"
-msgstr "Katalogsträng"
+msgstr "ຂໍ້ຄວາມຄາຕາລັອກ"
 
 #: u_translation.rscatalogtype
 msgid "Catalog type"
-msgstr "Katalogtyp"
+msgstr "ປະເພດຄາຕາລັອກ"
 
 #: u_translation.rsccw
 #, object-pascal-format
 msgid "%sCCW"
-msgstr "%sCCW"
+msgstr "%sທວນເຂັມ"
 
 #: u_translation.rscdcnebulae
 msgid "CdC deep sky"
-msgstr "CdC deep sky"
+msgstr "ວັດຖຸທ້ອງຟ້າ CdC"
 
 #: u_translation.rscdcnebulaeca
 msgid "CdC deep sky catalogs and settings"
-msgstr "CdC deep sky kataloger och inställningar"
+msgstr "ການຕັ້ງຄ່າ ແລະ ຄາຕາລັອກວັດຖຸທ້ອງຟ້າ CdC"
 
 #: u_translation.rscdcobsoletec
 msgid "Obsolete CdC catalogs and settings (you can still use them)"
-msgstr "Inaktiva CdC kataloger och inställningar"
+msgstr "ຄາຕາລັອກ CdC ທີ່ຫຼ້າສະໄໝ (ຍັງສາມາດໃຊ້ໄດ້)"
 
 #: u_translation.rscdcstars
 msgid "CdC stars"
-msgstr "CdC stjärnor"
+msgstr "ດາວ CdC"
 
 #: u_translation.rscdcstarscata
 msgid "CdC star catalogs and settings"
-msgstr "CdC stjärnkataloger och inställningar"
+msgstr "ການຕັ້ງຄ່າ ແລະ ຄາຕາລັອກດາວ CdC"
 
 #: u_translation.rscdctranslator
 msgid "Patrick Chevalley, Marc Fokker"
-msgstr "Kåre Lekebjer"
+msgstr "Patrick Chevalley, Marc Fokker"
 
 #: u_translation.rscenter
 msgid "Center"
-msgstr "Centrera"
+msgstr "ຈຸດສູນກາງ"
 
 #: u_translation.rscenterobject
 msgid "Centre on this object"
-msgstr "Centrera på objekt"
+msgstr "ຈັດໃຫ້ວັດຖຸນີ້ຢູ່ສູນກາງ"
 
 #: u_translation.rscentralmerid
 msgid "Central meridian"
-msgstr "Centralmeridian"
+msgstr "ເມຣິດຽນສູນກາງ"
 
 #: u_translation.rscentralstarb
 msgid "Central star B magnitude"
-msgstr "Centrumstjärnans B magnitud"
+msgstr "ໂຊຕິມາດ B ຂອງດາວສູນກາງ"
 
 #: u_translation.rscentralstarv
 msgid "Central star V magnitude"
-msgstr "Cenrumstjärnans V magnitud"
+msgstr "ໂຊຕິມາດ V ຂອງດາວສູນກາງ"
 
 #: u_translation.rscentre
 msgid "Centre on"
-msgstr "Centrera på"
+msgstr "ຈຸດສູນກາງທີ່"
 
 #: u_translation.rschangedrawin
 msgid "Change drawing mode"
-msgstr "Ändra visningsalternativ"
+msgstr "ປ່ຽນໂໝດການແຕ້ມ"
 
 #: u_translation.rschangemousem
 msgid "Change mouse mode"
-msgstr "Ändra mus-mode"
+msgstr "ປ່ຽນໂໝດເມົ້າ"
 
 #: u_translation.rschangetothis
 msgid "Change to this setting will restart the program now!"
-msgstr "Ändring till denna inställning kommer att starta om programmet nu!"
+msgstr "ການປ່ຽນແປງຄ່ານີ້ຈະເລີ່ມຕົ້ນໂປຣແກຣມໃໝ່ທັນທີ!"
 
 #: u_translation.rschart
 msgid "Chart"
-msgstr "Karta"
+msgstr "ແຜນທີ່"
 
 #: u_translation.rschart2
 msgid "chart:"
-msgstr "karta:"
+msgstr "ແຜນທີ່:"
 
 #: u_translation.rschartcenter
 msgid "Chart center"
-msgstr "Kartmitt"
+msgstr "ຈຸດສູນກາງແຜນທີ່"
 
 #: u_translation.rschartcenterc
 msgid "Add a crosshair to the chart center"
-msgstr "Lägg till ett hårkors på kartans mitt"
+msgstr "ເພີ່ມເສັ້ນກາກະບາດຢູ່ຈຸດສູນກາງແຜນທີ່"
 
 #: u_translation.rschartcoordin
 msgid "Chart, coordinates"
-msgstr "Karta, koordinater"
+msgstr "ແຜນທີ່, ພິກັດ"
 
 #: u_translation.rschartcoordin2
 msgid "Chart coordinate systems"
-msgstr "Kartans koordinatsystem"
+msgstr "ລະບົບພິກັດແຜນທີ່"
 
 #: u_translation.rschartinforma
 msgid "Chart information"
-msgstr "Kartinformation"
+msgstr "ຂໍ້ມູນແຜນທີ່"
 
 #: u_translation.rschartlegend
 msgid "Chart legend"
-msgstr "Kartbeskrivning"
+msgstr "ຄຳອະທິບາຍແຜນທີ່"
 
 #: u_translation.rschartname
 msgid "Chart name"
-msgstr "Kartnamn"
+msgstr "ຊື່ແຜນທີ່"
 
 #: u_translation.rschartsetting
 msgid "Chart settings"
-msgstr "Kartinställningar"
+msgstr "ຕັ້ງຄ່າແຜນທີ່"
 
 #: u_translation.rschartsync
 msgid "Time sync"
-msgstr "Tidssynk"
+msgstr "ຊິງຄ໌ເວລາ"
 
 #: u_translation.rschart_
 msgid "Chart_"
-msgstr "Karta_"
+msgstr "ແຜນທີ່_"
 
 #: u_translation.rscheck
 msgid "Check"
-msgstr "Kontrollera"
+msgstr "ກວດສອບ"
 
 #: u_translation.rschecklist
 msgid "CheckList"
-msgstr "Checklista"
+msgstr "ລາຍການກວດສອບ"
 
 #: u_translation.rschoosecolour
 msgid "Choose colours for the object types"
-msgstr "Välj färg för olika objekttyper"
+msgstr "ເລືອກສີສຳລັບປະເພດວັດຖຸ"
 
 #: u_translation.rscircle
 msgid "Circle"
-msgstr "Cirkel"
+msgstr "ວົງກົມ"
 
 #: u_translation.rscircumpolar
 msgid "Circumpolar"
-msgstr "Polär bana"
+msgstr "ດາວຄ້າງຟ້າ"
 
 #: u_translation.rscivil
 msgid "Civil"
-msgstr "Borgerlig"
+msgstr "ເວລາພົນລະເຮືອນ"
 
 #: u_translation.rsclass
 msgid "Class"
-msgstr "Klass"
+msgstr "ປະເພດ"
 
 #: u_translation.rscleanupmap
 msgid "Cleanup map"
-msgstr "Städa upp på kartan"
+msgstr "ລ້າງແຜນທີ່"
 
 #: u_translation.rsclear
 msgid "Clear"
-msgstr "Nollställ"
+msgstr "ລ້າງ"
 
 #: u_translation.rsclearall
 msgid "Clear all"
-msgstr "Rensa allt"
+msgstr "ລ້າງທັງໝົດ"
 
 #: u_translation.rscleartarget
 msgid "Clear Target"
-msgstr "Nollställ mål"
+msgstr "ລ້າງເປົ້າໝາຍ"
 
 #: u_translation.rsclicktochang
 msgid "Click to change the colour "
-msgstr "Klicka för att ändra färg "
+msgstr "ຄລິກເພື່ອປ່ຽນສີ "
 
 #: u_translation.rsclientconnec
 msgid "Client connection keep alive"
-msgstr "Klientanslutning keep alive"
+msgstr "ຮັກສາການເຊື່ອມຕໍ່ກັບໄຄລແອນ"
 
 #: u_translation.rsclientlist
 msgid "Client list"
-msgstr "Klientlista"
+msgstr "ລາຍຊື່ຄລາຍແອັນ"
 
 #: u_translation.rsclock
 msgid "Clock"
-msgstr "Klocka"
+msgstr "ໂມງ"
 
 #: u_translation.rsclose
 msgid "Close"
-msgstr "Stäng"
+msgstr "ປິດ"
 
 #: u_translation.rsclosechart
 msgid "Close chart"
-msgstr "Stäng karta"
+msgstr "ປິດແຜນທີ່"
 
 #: u_translation.rscloseconnect
 msgid "Close connection"
-msgstr "Stäng anslutningen"
+msgstr "ປິດການເຊື່ອມຕໍ່"
 
 #: u_translation.rsclosedcontou
 msgid "Closed contour"
-msgstr "Stängd kontur"
+msgstr "ເສັ້ນຂອບປິດ"
 
 #: u_translation.rsclosefiles
 msgid "Close files"
-msgstr "Stäng filer"
+msgstr "ປິດໄຟລ໌"
 
 #: u_translation.rsclosetheset2
 msgid "Close the Setup window and launch the catalog generation tool?"
-msgstr ""
+msgstr "ປິດໜ້າຕ່າງຕັ້ງຄ່າ ແລະ ເປີດເຄື່ອງມືສ້າງແຄັດຕະລັອກຫຼືບໍ່?"
 
 #: u_translation.rsclosethesetu
 msgid "Close the Setup window and launch the catalog installer tool?"
-msgstr "Vill du stänga installationsfönstret och köra verktyg för kataloginstallation?"
+msgstr "ປິດໜ້າຕ່າງຕັ້ງຄ່າ ແລະ ເປີດເຄື່ອງມືຕິດຕັ້ງແຄັດຕະລັອກຫຼືບໍ່?"
 
 #: u_translation.rsclusterandne
 msgid "Cluster and nebula"
-msgstr "Kluster och nebulosa"
+msgstr "ກະຈຸກດາວ ແລະ ເນບິວລາ"
 
 #: u_translation.rscollapse
 msgid "Collapse"
-msgstr "Komprimera"
+msgstr "ຫຍໍ້ເຂົ້າ"
 
 #: u_translation.rscolor
 msgid "Colour"
-msgstr "Färg"
+msgstr "ສີ"
 
 #: u_translation.rscolorindex
 msgid "Colour index"
-msgstr "Färgindex"
+msgstr "ດັດຊະນີສີ"
 
 #: u_translation.rscolorlinemod
 msgid "Colour, line mode"
-msgstr "Färg, linje-mode"
+msgstr "ສີ, ໂໝດເສັ້ນ"
 
 #: u_translation.rscolorsaturat
 msgid "Colour saturation"
-msgstr "Färgmättnad"
+msgstr "ຄວາມອີ່ມຕົວຂອງສີ"
 
 #: u_translation.rscolumns
 msgid "Columns"
-msgstr "Kolumner"
+msgstr "ຄໍລຳ"
 
 #: u_translation.rscombobox
 msgid "Combo box"
-msgstr "Kombinationsruta"
+msgstr "Combo box"
 
 #: u_translation.rscomet
 msgid "Comet"
-msgstr "Komet"
+msgstr "ດາວຫາງ"
 
 #: u_translation.rscometelement
 msgid "Sources for comet elements in MPC format (one URL per line)"
-msgstr "Källor för kometelement i MPC-format (en URL per rad)"
+msgstr "ແຫຼ່ງຂໍ້ມູນດາວຫາງໃນຮູບແບບ MPC (ໜຶ່ງ URL ຕໍ່ແຖວ)"
 
 #: u_translation.rscometelement2
 msgid "Comet elements"
-msgstr "Kometelement"
+msgstr "ອົງປະກອບດາວຫາງ"
 
 #: u_translation.rscometupdates
 msgid "Comet update successful"
-msgstr "Kometuppdatering lyckades"
+msgstr "ອັບເດດຂໍ້ມູນດາວຫາງສຳເລັດ"
 
 #: u_translation.rscommandfound
 msgid "Command found OK."
-msgstr "Kommandot OK."
+msgstr "ພົບຄຳສັ່ງແລ້ວ."
 
 #: u_translation.rscommandnotfo
 msgid "Command not found!"
-msgstr "Kommandot hittades inte!"
+msgstr "ບໍ່ພົບຄຳສັ່ງ!"
 
 #: u_translation.rscommandtouse
 msgid "Command to use to process the file."
-msgstr "Kommando för att processa filen."
+msgstr "ຄຳສັ່ງທີ່ໃຊ້ໃນການປະມວນຜົນໄຟລ໌."
 
 #: u_translation.rscommonname
 msgid "Common name"
-msgstr "Vanligt namn"
+msgstr "ຊື່ທົ່ວໄປ"
 
 #: u_translation.rscompassroses
 msgid "Compass rose size"
-msgstr "Storlek på kompassros"
+msgstr "ຂະໜາດເຂັມທິດ"
 
 #: u_translation.rscompilationa
 msgid "Compilation and save successful"
-msgstr "Kompilering och sparning lyckades"
+msgstr "ຄອມໄພລ໌ ແລະ ບັນທຶກສຳເລັດ"
 
 #: u_translation.rscompiledwith
 msgid "Compiled with:"
-msgstr "Kompilerad med:"
+msgstr "ຄອມໄພລ໌ດ້ວຍ:"
 
 #: u_translation.rscomponent
 msgid "Component"
-msgstr "Komponent"
+msgstr "ສ່ວນປະກອບ"
 
 #: u_translation.rscomponent1ma
 msgid "Component 1 magnitude"
-msgstr "Komponent 1 magnitud"
+msgstr "ໂຊຕິມາດດວງທີ່ 1"
 
 #: u_translation.rscomponent2ma
 msgid "Component 2 magnitude"
-msgstr "Komponent 2 magnitud"
+msgstr "ໂຊຕິມາດດວງທີ່ 2"
 
 #: u_translation.rscompute
 msgid "Compute"
-msgstr "Beräkna"
+msgstr "ຄຳນວນ"
 
 #: u_translation.rscomputeaster
 msgid "Compute asteroid data for this month"
-msgstr "Beräkna asteroiddata för denna månad"
+msgstr "ຄຳນວນຂໍ້ມູນດາວເຄາະນ້ອຍສຳລັບເດືອນນີ້"
 
 #: u_translation.rscomputefield
 msgid "Compute field"
-msgstr "Beräkna fält"
+msgstr "ຄຳນວນຟີລດ໌"
 
 #: u_translation.rscomputerises
 msgid "Compute rise/set time relative to this line"
-msgstr "Beräkna uppgång/nedgång i förhållande till denna linje"
+msgstr "ຄຳນວນເວລາຂຶ້ນ/ຕົກທຽບກັບເສັ້ນນີ້"
 
 #: u_translation.rsconfiguratio
 msgid "Configuration"
-msgstr "Inställningar"
+msgstr "ການກຳນົດຄ່າ"
 
 #: u_translation.rsconfigure
 msgid "Configure"
-msgstr "Inställningar"
+msgstr "ຕັ້ງຄ່າ"
 
 #: u_translation.rsconfigurethe
 msgid "Configure the program"
-msgstr "Konfigurera programmet"
+msgstr "ຕັ້ງຄ່າໂປຣແກຣມ"
 
 #: u_translation.rsconfirmation
 msgid "Confirmation prompt before saving a file."
-msgstr "Bekräfta innan en fil sparas."
+msgstr "ຖາມເພື່ອຢືນຢັນກ່ອນບັນທຶກໄຟລ໌."
 
 #: u_translation.rsconfirmfiled
 msgid "Confirm file delete: "
-msgstr "Bekräfta borttagning av fil: "
+msgstr "ຢືນຢັນການລຶບໄຟລ໌: "
 
 #: u_translation.rsconnect
 msgid "Connect"
-msgstr "Anslut"
+msgstr "ເຊື່ອມຕໍ່"
 
 #: u_translation.rsconnected3
 msgid "Connected"
-msgstr "Ansluten"
+msgstr "ເຊື່ອມຕໍ່ແລ້ວ"
 
 #: u_translation.rsconnectedfro
 #, object-pascal-format
 msgid "%s connected with %s, using chart %s, connected time:%s"
-msgstr "%s ansluten till %s, med karta %s, ansluten tid:%s"
+msgstr "%s ເຊື່ອມຕໍ່ກັບ %s, ໂດຍໃຊ້ແຜນທີ່ %s, ເວລາເຊື່ອມຕໍ່: %s"
 
 #: u_translation.rsconnectedtos
 #, object-pascal-format
 msgid "Connected to the SQL database %s"
-msgstr "Ansluten till SQL-databasen %s"
+msgstr "ເຊື່ອມຕໍ່ກັບຖານຂໍ້ມູນ SQL %s ແລ້ວ"
 
 #: u_translation.rsconnectioner
 #, object-pascal-format
 msgid "Connection error: %s"
-msgstr ""
+msgstr "ຂໍ້ຜິດພາດໃນການເຊື່ອມຕໍ່: %s"
 
 #: u_translation.rsconnectionli
 msgid "Connection lines between each position"
-msgstr "Linjer mellan varje position"
+msgstr "ເສັ້ນເຊື່ອມຕໍ່ລະຫວ່າງແຕ່ລະຕຳແໜ່ງ"
 
 #: u_translation.rsconnectionto
 msgid "Connection to INDI server failed!"
-msgstr "Uppkoppling till INDI-servern misslyckades!"
+msgstr "ການເຊື່ອມຕໍ່ກັບເຊີເວີ INDI ລົ້ມເຫຼວ!"
 
 #: u_translation.rsconnectteles
 msgid "Connect telescope"
-msgstr "Anslut teleskop"
+msgstr "ເຊື່ອມຕໍ່ກ້ອງດູດາວ"
 
 #: u_translation.rsconnecttosam
 msgid "Connect to SAMP hub"
-msgstr "Anslut till SAMP hubb"
+msgstr "ເຊື່ອມຕໍ່ກັບ SAMP hub"
 
 #: u_translation.rsconnecttosuc
 #, object-pascal-format
 msgid "Connection to %s, %s successful.%s"
-msgstr "Anslutning till %s, %s lyckades.%s"
+msgstr "ການເຊື່ອມຕໍ່ກັບ %s, %s ສຳເລັດແລ້ວ. %s"
 
 #: u_translation.rsconstellatio
 msgid "Constellation"
-msgstr "Stjärnbild"
+msgstr "ກຸ່ມດາວ"
 
 #: u_translation.rsconstellatio2
 msgid "Constellation figures"
-msgstr "Stjärnbildsfigurer"
+msgstr "ຮູບຮ່າງກຸ່ມດາວ"
 
 #: u_translation.rsconstellatio3
 msgid "Constellation figures file name: "
-msgstr "Stjärnbildsfigurer filnamn: "
+msgstr "ຊື່ໄຟລ໌ຮູບຮ່າງກຸ່ມດາວ: "
 
 #: u_translation.rsconstellatio4
 msgid "Constellation boundaries"
-msgstr "Stjärnbildsgränser"
+msgstr "ຂອບເຂດກຸ່ມດາວ"
 
 #: u_translation.rsconstellatio5
 msgid "Constellation boundaries file name: "
-msgstr "Stjärnbildsgränser filnamn: "
+msgstr "ຊື່ໄຟລ໌ຂອບເຂດກຸ່ມດາວ: "
 
 #: u_translation.rsconstellatio6
 msgid "Constellation label"
-msgstr "Stjärnbildsetikett"
+msgstr "ຊື່ກຸ່ມດາວ"
 
 #: u_translation.rsconstellatio7
 msgid "Constellation name"
-msgstr "Stjärnbildsnamn"
+msgstr "ຊື່ກຸ່ມດາວ"
 
 #: u_translation.rscontrast
 msgid "Contrast"
-msgstr "Kontrast"
+msgstr "ຄວາມຄົມຊັດ"
 
 #: u_translation.rscontrolpanel
 msgid "Control panel"
-msgstr "Anslut teleskop"
+msgstr "ແຜງຄວບຄຸມ"
 
 #: u_translation.rscontrolpanel2
 msgid "Control panel command "
-msgstr "Kontrollpanelkommando "
+msgstr "ຄຳສັ່ງແຜງຄວບຄຸມ "
 
 #: u_translation.rsconvertcatal
 #, object-pascal-format
 msgid "Convert catalog file %s"
-msgstr "Konvertera katalogfilen %s"
+msgstr "ແປງໄຟລ໌ຄາຕາລັອກ %s"
 
 #: u_translation.rsconvertcatal2
 msgid "Convert catalog files"
-msgstr "Konvertera katalogfiler"
+msgstr "ແປງໄຟລ໌ຄາຕາລັອກ"
 
 #: u_translation.rscooordinates
 msgid "Coordinate system to use with the clients"
-msgstr "Koordinatsystem att använda på klienterna"
+msgstr "ລະບົບພິກັດທີ່ຈະໃຊ້ກັບຄລາຍແອັນ"
 
 #: u_translation.rscoord
 msgid "Coord."
-msgstr "Koord."
+msgstr "ພິກັດ"
 
 #: u_translation.rscoordgrid
 msgid "Coord. grid"
-msgstr "Koordinatnät"
+msgstr "ຕາໜ່າງພິກັດ"
 
 #: u_translation.rscoordinates
 msgid "Coordinates:"
-msgstr "Koordinater"
+msgstr "ພິກັດ:"
 
 #: u_translation.rscoordinatese
 msgid "Coordinates equinox"
-msgstr "Koordinaters dagjämning"
+msgstr "ວິສຸວັດຂອງພິກັດ"
 
 #: u_translation.rscoordinatesg
 msgid "Coordinates grid"
-msgstr "Koordinat rutnät"
+msgstr "ຕາໜ່າງພິກັດ"
 
 #: u_translation.rscopy
 msgid "Copy"
-msgstr "Kopiera"
+msgstr "ສຳເນົາ"
 
 #: u_translation.rscopycoordina
 msgid "Copy coordinates"
-msgstr "Kopiera koordinater"
+msgstr "ຄັດລອກພິກັດ"
 
 #: u_translation.rscopyfrom
 msgid "Copy from:"
-msgstr "Kopiera från:"
+msgstr "ຄັດລອກຈາກ:"
 
 #: u_translation.rscoreradius
 msgid "Core radius"
-msgstr "Kärnans radie"
+msgstr "ລັດສະໝີແກນ"
 
 #: u_translation.rscorrelated
 msgid "Correlated"
-msgstr "Korrelerad"
+msgstr "ມີຄວາມສຳພັນກັນ"
 
 #: u_translation.rscouldnotload
 msgid "Could not load library "
-msgstr "Kunde inte ladda bibliotek "
+msgstr "ບໍ່ສາມາດໂຫຼດໄລບຣາຣີ "
 
 #: u_translation.rscount
 msgid "Count"
-msgstr "Antal"
+msgstr "ຈຳນວນ"
 
 #: u_translation.rscountrytimez
 msgid "Country timezone"
-msgstr "Tidszon"
+msgstr "ເຂດເວລາຂອງປະເທດ"
 
 #: u_translation.rscreateanewch
 msgid "Create a new chart"
-msgstr "Skapa ny karta"
+msgstr "ສ້າງແຜນທີ່ໃໝ່"
 
 #: u_translation.rscreateasearc
 msgid "Create a search index file"
-msgstr "Skapa en sökindexfil"
+msgstr "ສ້າງໄຟລ໌ດັດຊະນີຄົ້ນຫາ"
 
 #: u_translation.rscreatefiles
 msgid "Create files"
-msgstr "Skapa filer"
+msgstr "ສ້າງໄຟລ໌"
 
 #: u_translation.rscreateheader
 msgid "Create header"
-msgstr "Skapa rubrik"
+msgstr "ສ້າງສ່ວນຫົວ"
 
 #: u_translation.rscreatepostsc
 msgid "Create postscript chart. Please wait..."
-msgstr "Skapar postskriptkarta. Vänta..."
+msgstr "ກຳລັງສ້າງແຜນທີ່ postscript. ກະລຸນາລໍຖ້າ..."
 
 #: u_translation.rscreaterasterwh
 #, object-pascal-format
 msgid "Create raster chart %d x %d. Please wait..."
-msgstr "Skapa rasterkarta %d x %d. Var god vänta..."
+msgstr "ກຳລັງສ້າງແຜນທີ່ຣາສເຕີ %d x %d. ກະລຸນາລໍຖ້າ..."
 
 #: u_translation.rscrossmeridia
 msgid "Cross meridian"
-msgstr "Meridianpassage"
+msgstr "ຂ້າມເສັ້ນເມຣິດຽນ"
 
 #: u_translation.rsculmination
 msgid "Culmination"
-msgstr "Kulminerar"
+msgstr "ຈຸດສູງສຸດ"
 
 #: u_translation.rscurrentchart
 msgid "Current chart coordinate system"
-msgstr "Nuvarande kartkoordinatsystem"
+msgstr "ລະບົບພິກັດແຜນທີ່ປັດຈຸບັນ"
 
 #: u_translation.rscurrentdate
 msgid "Date of validity"
-msgstr "Giltighetsdatum"
+msgstr "ວັນທີທີ່ມີຜົນບັງຄັບໃຊ້"
 
 #: u_translation.rscursor
 msgid "Cursor"
-msgstr "Pekare"
+msgstr "ເຄີເຊີ"
 
 #: u_translation.rscursorpositi
 msgid "Cursor position"
-msgstr "Pekarposition"
+msgstr "ຕຳແໜ່ງເຄີເຊີ"
 
 #: u_translation.rscw
 #, object-pascal-format
 msgid "%sCW"
-msgstr "%sCW"
+msgstr "%sຕາມເຂັມ"
 
 #: u_translation.rsdarknebula
 msgid "Dark nebula"
-msgstr "Mörk nebulosa"
+msgstr "ເນບິວລາມືດ"
 
 #: u_translation.rsdarknight
 msgid "Dark night"
-msgstr "Mörk natt"
+msgstr "ຄືນທີ່ມືດສະນິດ"
 
 #: u_translation.rsdash1
 msgid "Dash"
-msgstr "Streck"
+msgstr "ເສັ້ນປະ"
 
 #: u_translation.rsdashdot1
 msgid "Dash dot"
-msgstr "Streck punkt"
+msgstr "ເສັ້ນປະສະຫຼັບຈຸດ"
 
 #: u_translation.rsdashdotdot1
 msgid "Dash dot dot"
-msgstr "Streck prick prick"
+msgstr "ເສັ້ນປະສະຫຼັບສອງຈຸດ"
 
 #: u_translation.rsdatabasefile
 msgid "Database file: "
-msgstr "Databasfil: "
+msgstr "ໄຟລ໌ຖານຂໍ້ມູນ: "
 
 #: u_translation.rsdatabaseopen
 #, object-pascal-format
 msgid "%sDatabase %s opened.%s"
-msgstr "%sDatabas %s öppnad.%s"
+msgstr "%sຖານຂໍ້ມູນ %s ຖືກເປີດແລ້ວ. %s"
 
 #: u_translation.rsdatabasesett
 msgid "Database setting..."
-msgstr "Databasinställning..."
+msgstr "ການຕັ້ງຄ່າຖານຂໍ້ມູນ..."
 
 #: u_translation.rsdatafiles
 msgid "Data files:"
-msgstr "Datafiler:"
+msgstr "ໄຟລ໌ຂໍ້ມູນ:"
 
 #: u_translation.rsdatafilescdr
 msgid "Data files, CD-ROM"
-msgstr "Datafiler, CD-ROM"
+msgstr "ໄຟລ໌ຂໍ້ມູນ, CD-ROM"
 
 #: u_translation.rsdatamaintena
 msgid "Data maintenance"
-msgstr "Dataunderhåll"
+msgstr "ການບຳລຸງຮັກສາຂໍ້ມູນ"
 
 #: u_translation.rsdatapreview
 msgid "Data preview"
-msgstr "Förhandsvisning av data"
+msgstr "ເບິ່ງຕົວຢ່າງຂໍ້ມູນ"
 
 #: u_translation.rsdatastartonl
 #, object-pascal-format
 msgid "Data starts on line %s"
-msgstr "Data börjar på rad %s"
+msgstr "ຂໍ້ມູນເລີ່ມຕົ້ນທີ່ແຖວທີ %s"
 
 #: u_translation.rsdatatype
 msgid "Data Type"
-msgstr "Datatyp"
+msgstr "ປະເພດຂໍ້ມູນ"
 
 #: u_translation.rsdate
 msgid "Date"
-msgstr "Datum"
+msgstr "ວັນທີ"
 
 #: u_translation.rsdateformat
 msgid "Date format"
-msgstr "Datumformat"
+msgstr "ຮູບແບບວັນທີ"
 
 #: u_translation.rsdatefrom
 msgid "Date from"
-msgstr "Datum från"
+msgstr "ວັນທີເລີ່ມ"
 
 #: u_translation.rsdatesmaytake
 msgid "dates may take a long time. Do you want to continue?"
-msgstr "datum kan ta lång tid. Vill du fortsätta?"
+msgstr "ວັນທີອາດໃຊ້ເວລາດົນ. ທ່ານຕ້ອງການສືບຕໍ່ບໍ?"
 
 #: u_translation.rsdatetime
 msgid "Date / time"
-msgstr "Datum/tid"
+msgstr "ວັນທີ / ເວລາ"
 
 #: u_translation.rsdatetime2
 msgid "Date/time"
-msgstr "Datum/tid"
+msgstr "ວັນທີ/ເວລາ"
 
 #: u_translation.rsday
 msgid "Day"
-msgstr "Dag"
+msgstr "ມື້"
 
 #: u_translation.rsdays
 msgid "days"
-msgstr "dygn"
+msgstr "ມື້"
 
 #: u_translation.rsdaytime
 msgid "Day Time"
-msgstr "Dag Tid"
+msgstr "ເວລາກາງເວັນ"
 
 #: u_translation.rsdbinsertfail
 #, object-pascal-format
 msgid "DB insert failed for %s: %s"
-msgstr "Infogning av DB misslyckades för %s: %s"
+msgstr "ການເພີ່ມຂໍ້ມູນລົງຖານຂໍ້ມູນລົ້ມເຫຼວສຳລັບ %s: %s"
 
 #: u_translation.rsdbname
 msgid "DB Name:"
-msgstr "DB Namn:"
+msgstr "ຊື່ຖານຂໍ້ມູນ:"
 
 #: u_translation.rsde
 msgid "DE"
@@ -1413,459 +1413,459 @@ msgstr "DEC"
 
 #: u_translation.rsdecember
 msgid "December"
-msgstr "December"
+msgstr "ທັນວາ"
 
 #: u_translation.rsdecimaldegre
 msgid "Decimal degrees"
-msgstr "Decimalgrader"
+msgstr "ອົງສາແບບທົດສະນິຍົມ"
 
 #: u_translation.rsdecimalhours
 msgid "Decimal hours"
-msgstr "Decimaltimmar"
+msgstr "ຊົ່ວໂມງແບບທົດສະນິຍົມ"
 
 #: u_translation.rsdecimalsouth
 msgid "Decimal south polar distance"
-msgstr "Decimalt sydpolsavstånd"
+msgstr "ໄລຍະຫ່າງຂົ້ວໃຕ້ແບບທົດສະນິຍົມ"
 
 #: u_translation.rsdeclination
 msgid "Declination"
-msgstr "Deklination (DEC)"
+msgstr "ເດັກລີເນຊັນ"
 
 #: u_translation.rsdeclinationl
 msgid "Declination label on center"
-msgstr ""
+msgstr "ປ້າຍຊື່ຄ່າເດັກລີເນຊັນຢູ່ຈຸດສູນກາງ"
 
 #: u_translation.rsdecoptions
 msgid "DEC options"
-msgstr "DEC alternativ"
+msgstr "ຕົວເລືອກ DEC"
 
 #: u_translation.rsdecrementtim
 msgid "Decrement time"
-msgstr "Stega tillbaka i tiden"
+msgstr "ຫຼຸດເວລາ"
 
 #: u_translation.rsdecturns
 msgid "DEC turns: "
-msgstr "DEC varv: "
+msgstr "ຮອບ DEC: "
 
 #: u_translation.rsdecturns2
 #, object-pascal-format
 msgid "%sDEC turns:"
-msgstr "%sDEC varv:"
+msgstr "%sຮອບ DEC:"
 
 #: u_translation.rsdeepskycolou
 msgid "Deep sky colour"
-msgstr "Deep sky färg"
+msgstr "ສີວັດຖຸທ້ອງຟ້າ"
 
 #: u_translation.rsdeepskyobjec
 msgid "Deep sky object colour"
-msgstr "Färg på deep sky objekt"
+msgstr "ສີວັດຖຸທ້ອງຟ້າ"
 
 #: u_translation.rsdefault
 msgid "Default"
-msgstr "Standard"
+msgstr "ມາດຕະຖານ"
 
 #: u_translation.rsdefaultcolor
 msgid "Default colour"
-msgstr "Standardfärg"
+msgstr "ສີມາດຕະຖານ"
 
 #: u_translation.rsdefaultlabel
 msgid "Default label"
-msgstr "Standardetikett"
+msgstr "ຊື່ມາດຕະຖານ"
 
 #: u_translation.rsdefaultmagni
 msgid "Default magnitude"
-msgstr "Standardmagnitud"
+msgstr "ຄ່າຄວາມສະຫວ່າງເລີ່ມຕົ້ນ"
 
 #: u_translation.rsdefaultmargi
 msgid "Default margin"
-msgstr "Standardmarginal"
+msgstr "ຂອບມາດຕະຖານ"
 
 #: u_translation.rsdefaultnebul
 msgid "Default nebulae parameters"
-msgstr "Standard nebulosaparametrar"
+msgstr "ຄ່າພະລາມິເຕີເນບິວລາມາດຕະຖານ"
 
 #: u_translation.rsdefaultoutli
 msgid "Default outline parameters"
-msgstr "Standardparametrar konturlinje"
+msgstr "ຄ່າເສັ້ນຂອບມາດຕະຖານ"
 
 #: u_translation.rsdefaultsizea
 msgid "Default size (arcsec)"
-msgstr "Standardstorlek (bågsekunder)"
+msgstr "ຂະໜາດເລີ່ມຕົ້ນ (ຟິລິບດາ)"
 
 #: u_translation.rsdegree
 msgid "Degree"
-msgstr "Grad"
+msgstr "ອົງສາ"
 
 #: u_translation.rsdegreegridsp
 msgid "Grid spacing in degree"
-msgstr "Mellanrum i grader för rutnät"
+msgstr "ໄລຍະຫ່າງຕາໜ່າງເປັນອົງສາ"
 
 #: u_translation.rsdegreesminut
 msgid "Degrees, minutes, seconds"
-msgstr "Grader, minuter, sekunder"
+msgstr "ອົງສາ, ລິບດາ, ຟິລິບດາ"
 
 #: u_translation.rsdelaybetween
 msgid "Delay between frame"
-msgstr "Fördröjning mellan bildrutor"
+msgstr "ຄວາມຊ້າລະຫວ່າງເຟຣມ"
 
 #: u_translation.rsdelete
 msgid "Delete"
-msgstr "Ta bort"
+msgstr "ລຶບ"
 
 #: u_translation.rsdeleteallexp
 msgid "Delete all expired ephemeris"
-msgstr "Radera alla utgångna efemerider"
+msgstr "ລຶບເອເຟເມຣິດທີ່ໝົດອາຍຸທັງໝົດ"
 
 #: u_translation.rsdeleteallthe
 #, object-pascal-format
 msgid "Delete %s, all the child nodes and the scripts?"
-msgstr "Radera %s, alla undernoder och skript?"
+msgstr "ລຶບ %s, ໂນດຍ່ອຍທັງໝົດ ແລະ ສະຄຣິບຫຼືບໍ່?"
 
 #: u_translation.rsdeletecomple
 msgid "Delete completed"
-msgstr "Borttagning klar"
+msgstr "ລຶບສຳເລັດແລ້ວ"
 
 #: u_translation.rsdeletedailyd
 msgid "Deleting the daily data"
-msgstr "Tar bort dagliga data"
+msgstr "ກຳລັງລຶບຂໍ້ມູນລາຍວັນ"
 
 #: u_translation.rsdeletedsucce
 msgid "Deleted successfully!"
-msgstr "Borttagning lyckades!"
+msgstr "ລຶບສຳເລັດແລ້ວ!"
 
 #: u_translation.rsdeletefromel
 msgid "Deleting from the element table..."
-msgstr "Tar bort från elementtabellen..."
+msgstr "ກຳລັງລຶບຂໍ້ມູນຈາກຕາຕະລາງອົງປະກອບ..."
 
 #: u_translation.rsdeletefromel2
 msgid "Deleting from the element list..."
-msgstr "Tar bort från elementlistan..."
+msgstr "ກຳລັງລຶບຂໍ້ມູນຈາກລາຍຊື່ອົງປະກອບ..."
 
 #: u_translation.rsdeletefrommo
 msgid "Deleting from the monthly table ..."
-msgstr "Tar bort från den månatliga tabellen..."
+msgstr "ກຳລັງລຶບຂໍ້ມູນຈາກຕາຕະລາງລາຍເດືອນ ..."
 
 #: u_translation.rsdeletefrommo2
 #, object-pascal-format
 msgid "Delete from monthly table for jd<%s"
-msgstr "Ta bort från månatliga tabellen för jd<%s"
+msgstr "ລຶບຂໍ້ມູນຈາກຕາຕະລາງລາຍເດືອນສຳລັບ jd<%s"
 
 #: u_translation.rsdeletefromna
 msgid "Deleting from the name list..."
-msgstr "Tar bort från namnlistan..."
+msgstr "ກຳລັງລຶບຂໍ້ມູນຈາກລາຍຊື່..."
 
 #: u_translation.rsdeletemonthl
 msgid "Delete monthly data "
-msgstr "Ta bort månatliga data "
+msgstr "ລຶບຂໍ້ມູນລາຍເດືອນ "
 
 #: u_translation.rsdeletemonthl2
 msgid "Delete monthly data older than "
-msgstr "Ta bort månatliga data äldre än "
+msgstr "ລຶບຂໍ້ມູນລາຍເດືອນທີ່ເກົ່າກວ່າ "
 
 #: u_translation.rsdeletempcdat
 msgid "Delete MPC data selectively"
-msgstr "Ta bort MPC-data selektivt"
+msgstr "ເລືອກລຶບຂໍ້ມູນ MPC"
 
 #: u_translation.rsdeleteprevio
 msgid "Delete previous data for this date."
-msgstr "Ta bort tidigare data för detta datum."
+msgstr "ລຶບຂໍ້ມູນເກົ່າຂອງວັນທີນີ້."
 
 #: u_translation.rsdeletethecur
 msgid "Delete the current location from the database?"
-msgstr "Ta bort nuvarande plats från databasen?"
+msgstr "ລຶບສະຖານທີ່ປັດຈຸບັນອອກຈາກຖານຂໍ້ມູນບໍ?"
 
 #: u_translation.rsdeltaterror
 msgid "DeltaT uncertainty"
-msgstr "DeltaT-osäkerhet"
+msgstr "ຄວາມບໍ່ແນ່ນອນຂອງ DeltaT"
 
 #: u_translation.rsdeltatrecent
 msgid "DeltaT recent value"
-msgstr "Senaste DeltaT-värde"
+msgstr "ຄ່າ DeltaT ລ້າສຸດ"
 
 #: u_translation.rsdepressionof
 msgid "Depression of the visible horizon"
-msgstr "Sänkning av den lokala horisonten"
+msgstr "ມຸມກົດຂອງຂອບຟ້າທີ່ເບິ່ງເຫັນ"
 
 #: u_translation.rsdesc
 msgid "desc:"
-msgstr "desc:"
+msgstr "ຄຳອະທິບາຍ:"
 
 #: u_translation.rsdescription
 msgid "Description"
-msgstr "Beskrivning"
+msgstr "ຄຳອະທິບາຍ"
 
 #: u_translation.rsdesignation
 msgid "Designation"
-msgstr "Benämning"
+msgstr "ຊື່ເອີ້ນ/ໝາຍເລກ"
 
 #: u_translation.rsdesktopenvir
 msgid "Desktop environment"
-msgstr "Skrivbordsmiljö"
+msgstr "ສະພາບແວດລ້ອມເດັສທັອບ"
 
 #: u_translation.rsdetails
 msgid "Details"
-msgstr "Detaljer"
+msgstr "ລາຍລະອຽດ"
 
 #: u_translation.rsdiam
 msgid "Diam."
-msgstr "Diam."
+msgstr "ສຜກ."
 
 #: u_translation.rsdiameter
 msgid "Diameter"
-msgstr "Diameter"
+msgstr "ເສັ້ນຜ່ານສູນກາງ"
 
 #: u_translation.rsdiconnected
 msgid "Diconnected"
-msgstr "Frånkopplad"
+msgstr "ຕັດການເຊື່ອມຕໍ່ແລ້ວ"
 
 #: u_translation.rsdifferencebe
 msgid "Difference between Terrestrial Time and Universal Time"
-msgstr "Skillnad mellan terrestrial tid och UT"
+msgstr "ຜົນຕ່າງລະຫວ່າງເວລາໂລກ ແລະ ເວລາສາກົນ"
 
 #: u_translation.rsdifferenttha
 #, object-pascal-format
 msgid "%s (different than the configured port, maybe busy or other error.)"
-msgstr "%s (annan än inställd port, kanske upptagen eller annat fel.)"
+msgstr "%s (ຕ່າງຈາກພອດທີ່ຕັ້ງໄວ້, ບາງທີອາດບໍ່ວ່າງ ຫຼື ມີຂໍ້ຜິດພາດອື່ນ.)"
 
 #: u_translation.rsdimension
 msgid "Dimension"
-msgstr "Storlek"
+msgstr "ຂະໜາດ"
 
 #: u_translation.rsdimensionand
 msgid "Dimension and units"
-msgstr "Dimension och enheter"
+msgstr "ຂະໜາດ ແລະ ຫົວໜ່ວຍ"
 
 #: u_translation.rsdir
 msgid "Dir"
-msgstr "Riktn."
+msgstr "ທິດ"
 
 #: u_translation.rsdirection2
 msgid "Direction"
-msgstr "Riktning"
+msgstr "ທິດທາງ"
 
 #: u_translation.rsdirectory
 msgid "Directory"
-msgstr "Mapp"
+msgstr "ໂຟນເດີ"
 
 #: u_translation.rsdirectorynot2
 msgid "Directory not found! Please install the Skychart Pictures package."
-msgstr "Mappen hittades inte! Installera Skychart Pictures paketet."
+msgstr "ບໍ່ພົບໂຟນເດີ! ກະລຸນາຕິດຕັ້ງແພັກເກັດຮູບພາບ Skychart."
 
 #: u_translation.rsdisconnect
 msgid "Disconnect"
-msgstr "Koppla från"
+msgstr "ຕັດການເຊື່ອມຕໍ່"
 
 #: u_translation.rsdisconnected3
 msgid "Disconnected"
-msgstr ""
+msgstr "ຕັດການເຊື່ອມຕໍ່ແລ້ວ"
 
 #: u_translation.rsdisconnectfr
 msgid "Disconnect from SAMP"
-msgstr "Koppla ifrån SAMP"
+msgstr "ຕັດການເຊື່ອມຕໍ່ຈາກ SAMP"
 
 #: u_translation.rsdisconnectio
 #, object-pascal-format
 msgid "Disconnection error: %s"
-msgstr ""
+msgstr "ຂໍ້ຜິດພາດໃນການຕັດການເຊື່ອມຕໍ່: %s"
 
 #: u_translation.rsdisplay
 msgid "Display"
-msgstr "Bildskärm"
+msgstr "ການສະແດງຜົນ"
 
 #: u_translation.rsdisplayasasy
 msgid "Display as a symbol"
-msgstr "Visa som symbol"
+msgstr "ສະແດງເປັນສັນຍະລັກ"
 
 #: u_translation.rsdisplaycolou
 msgid "Display colour"
-msgstr "Visa färg"
+msgstr "ສີການສະແດງຜົນ"
 
 #: u_translation.rsdisplayimage
 msgid "Display images of catalogued objects"
-msgstr "Visa bilder av objekten i katalogen"
+msgstr "ສະແດງຮູບພາບຂອງວັດຖຸໃນຄາຕາລັອກ"
 
 #: u_translation.rsdisplaylabel
 msgid "Display labels for all star catalogs"
-msgstr "Visa etiketter för alla stjärnkataloger"
+msgstr "ສະແດງປ້າຍຊື່ສຳລັບທຸກແຄັດຕະລັອກດາວ"
 
 #: u_translation.rsdisplaythech
 msgid "Display the chart information in the menu bar"
-msgstr "Visa kartinformation i menyfältet"
+msgstr "ສະແດງຂໍ້ມູນແຜນທີ່ໃນແຖບເມນູ"
 
 #: u_translation.rsdisplaytheho
 msgid "Display the horizon picture"
-msgstr "Visa horisontbilden"
+msgstr "ສະແດງຮູບພາບຂອບຟ້າ"
 
 #: u_translation.rsdisplaythela
 msgid "Display the labels"
-msgstr "Visa etiketterna"
+msgstr "ສະແດງຊື່"
 
 #: u_translation.rsdisplaythelo
 msgid "Display the local horizon line"
-msgstr "Visa lokal horisontlinje"
+msgstr "ສະແດງເສັ້ນຂອບຟ້າທ້ອງຖິ່ນ"
 
 #: u_translation.rsdistance
 msgid "Distance"
-msgstr "Avstånd"
+msgstr "ໄລຍະຫ່າງ"
 
 #: u_translation.rsdistancemeas
 msgid "Distance measurement"
-msgstr "Distansmätning"
+msgstr "ການວັດແທກໄລຍະທາງ"
 
 #: u_translation.rsdivider
 msgid "Divider"
-msgstr "Avdelare"
+msgstr "ເສັ້ນແບ່ງ"
 
 #: u_translation.rsdonotchangea
 msgid "Do not change anything here if you are not sure what you do!"
-msgstr "Ändra inget här om du inte är säker på vad du gör!"
+msgstr "ຢ່າປ່ຽນແປງຫຍັງຢູ່ນີ້ ຖ້າທ່ານບໍ່ແນ່ໃຈວ່າກຳລັງເຮັດຫຍັງ!"
 
 #: u_translation.rsdonotfilterb
 msgid "Do not filter bright nebula by magnitude"
-msgstr "Filtrera inte ljusa nebulosor efter magnitud"
+msgstr "ບໍ່ກັ່ນຕອງເນບິວລາທີ່ສະຫວ່າງຕາມຄ່າຄວາມສະຫວ່າງ"
 
 #: u_translation.rsdonotfilterm
 msgid "Do not filter Messier objects"
-msgstr "Filtrera inte Messierobjekt"
+msgstr "ບໍ່ຕ້ອງກັ່ນຕອງວັດຖຸເມສສິເອ (Messier)"
 
 #: u_translation.rsdonotrunasad
 #, object-pascal-format
 msgid "Do not run %s as %s!"
-msgstr "Kör inte %s som %s!"
+msgstr "ຢ່າເປີດ %s ໃນຖານະ %s!"
 
 #: u_translation.rsdonotuserow1
 #, object-pascal-format
 msgid "Do not use row %s, reserved for external software interface."
-msgstr "Använd inte rad %s, som är reserverad för externa mjukvarugränssnitt."
+msgstr "ຢ່າໃຊ້ແຖວ %s, ຖືກຈອງໄວ້ສຳລັບສ່ວນຕິດຕໍ່ຊອບແວພາຍນອກ."
 
 #: u_translation.rsdot1
 msgid "Dot"
-msgstr "Punkt"
+msgstr "ຈຸດ"
 
 #: u_translation.rsdoubles
 msgid "Doubles"
-msgstr "Dubbelstjärnor"
+msgstr "ດາວຄູ່"
 
 #: u_translation.rsdoublestar
 msgid "Double star"
-msgstr "Dubbelstjärna"
+msgstr "ດາວຄູ່"
 
 #: u_translation.rsdown
 msgid "Down"
-msgstr "Ned"
+msgstr "ລົງ"
 
 #: u_translation.rsdownload
 msgid "Download"
-msgstr "Hämta"
+msgstr "ດາວໂຫຼດ"
 
 #: u_translation.rsdownload2
 #, object-pascal-format
 msgid "Download %s"
-msgstr "Hämta %s"
+msgstr "ດາວໂຫຼດ %s"
 
 #: u_translation.rsdownloadarch
 msgid "Download archive"
-msgstr "Nedladdningsarkiv"
+msgstr "ດາວໂຫຼດຄັງຮູບພາບ"
 
 #: u_translation.rsdownloadcata
 msgid "Download catalog"
-msgstr "Hämta katalog"
+msgstr "ດາວໂຫຼດແຄັດຕະລັອກ"
 
 #: u_translation.rsdownloadcoun
 msgid "Download country details"
-msgstr "Hämta landsinformation"
+msgstr "ດາວໂຫຼດລາຍລະອຽດປະເທດ"
 
 #: u_translation.rsdownloadfile
 msgid "Download File"
-msgstr "Hämta fil"
+msgstr "ດາວໂຫຼດໄຟລ໌"
 
 #: u_translation.rsdownloadfull
 msgid "Download full catalog"
-msgstr "Hämta hela katalogen"
+msgstr "ດາວໂຫຼດແຄັດຕະລັອກທັງໝົດ"
 
 #: u_translation.rsdownloadlate
 msgid "Download the latest orbital elements"
-msgstr "Hämta de senaste kretsande elementen"
+msgstr "ດາວໂຫຼດອົງປະກອບວົງໂຄຈອນຫຼ້າສຸດ"
 
 #: u_translation.rsdownloadsola
 msgid "Download comet or asteroid SPICE kernel from JPL Horizon"
-msgstr ""
+msgstr "ດາວໂຫຼດ SPICE kernel ຂອງດາວຫາງ ຫຼື ດາວເຄາະນ້ອຍຈາກ JPL Horizon"
 
 #: u_translation.rsdownloadtle
 msgid "Download TLE"
-msgstr "Hämta TLE"
+msgstr "ດາວໂຫຼດ TLE"
 
 #: u_translation.rsdoyoureallyw
 msgid "Do you really want to park the mount now?"
-msgstr "Vill du verkligen parkera monteringen nu?"
+msgstr "ທ່ານຕ້ອງການເກັບຖານຕັ້ງກ້ອງຕອນນີ້ແທ້ຫຼືບໍ່?"
 
 #: u_translation.rsdoyouwanttol
 msgid "Do you want to load it?"
-msgstr "Vill du ladda den?"
+msgstr "ທ່ານຕ້ອງການໂຫຼດມັນຫຼືບໍ່?"
 
 #: u_translation.rsdoyouwanttom
 msgid "Do you want to move the chart there?"
-msgstr "Vill du flytta kartan dit?"
+msgstr "ທ່ານຕ້ອງການຍ້າຍແຜນທີ່ໄປບ່ອນນັ້ນຫຼືບໍ່?"
 
 #: u_translation.rsdoyouwanttos
 msgid "Do you want to save the program settings now?"
-msgstr "Vill du spara inställningarna nu?"
+msgstr "ທ່ານຕ້ອງການບັນທຶກການຕັ້ງຄ່າໂປຣແກຣມຕອນນີ້ເລີຍບໍ?"
 
 #: u_translation.rsdoyouwanttos2
 msgid "Do you want to save it?"
-msgstr "Vill du spara den?"
+msgstr "ທ່ານຕ້ອງການບັນທຶກມັນຫຼືບໍ່?"
 
 #: u_translation.rsdrawalinetha
 msgid "Draw a line that displays the proper motion for the next"
-msgstr "Dra en linje som visar egenrörelse för de nästkommande"
+msgstr "ແຕ້ມເສັ້ນສະແດງການເຄື່ອນທີ່ຈິງສຳລັບອີກ"
 
 #: u_translation.rsdrawas
 msgid "Draw as"
-msgstr ""
+msgstr "ແຕ້ມເປັນ"
 
 #: u_translation.rsdrawasdso
 msgid "Draw as DSO"
-msgstr "Rita som DSO"
+msgstr "ແຕ້ມເປັນວັດຖຸທ້ອງຟ້າຫ່າງໄກ (DSO)"
 
 #: u_translation.rsdrawasstar
 msgid "Draw as star"
-msgstr "Rita upp en stjärna"
+msgstr "ແຕ້ມເປັນດາວ"
 
 #: u_translation.rsdrawing
 msgid "Drawing"
-msgstr "Ritning"
+msgstr "ການແຕ້ມ"
 
 #: u_translation.rsdrawingtype
 msgid "Drawing type"
-msgstr "Ritningstyp"
+msgstr "ປະເພດການແຕ້ມ"
 
 #: u_translation.rsdrawline
 msgid "Draw line"
-msgstr "Rita linje"
+msgstr "ແຕ້ມເສັ້ນ"
 
 #: u_translation.rsdrawplanetas
 msgid "Draw planet as"
-msgstr "Rita planet som"
+msgstr "ແຕ້ມດາວເຄາະເປັນ"
 
 #: u_translation.rsdrawtheappar
 msgid "Draw the apparent depressed horizon line"
-msgstr "Rita den skenbara horisontlinjen"
+msgstr "ແຕ້ມເສັ້ນຂອບຟ້າປາກົດ"
 
 #: u_translation.rsdrawtheposit
 msgid "Draw the position of the pole between the following years"
-msgstr "Rita ut himmelspolens position mellan följande år"
+msgstr "ແຕ້ມຕຳແໜ່ງຂອງຂົ້ວຟ້າລະຫວ່າງປີຕໍ່ໄປນີ້"
 
 #: u_translation.rsdrift
 msgid "Yearly drift"
-msgstr "Årlig drift"
+msgstr "ການເຄື່ອນທີ່ສະເລ່ຍຕໍ່ປີ"
 
 #: u_translation.rsdriverselect
 msgid "Driver Selection"
-msgstr "Val av drivrutin"
+msgstr "ການເລືອກໄດຣເວີ"
 
 #: u_translation.rsdsocatalogpi
 msgid "DSO Catalog pictures"
-msgstr "DSO katalog bilder"
+msgstr "ຮູບພາບແຄັດຕະລັອກ DSO"
 
 #: u_translation.rsdssrealsky
 msgid "DSS RealSky"
@@ -1873,465 +1873,465 @@ msgstr "DSS RealSky"
 
 #: u_translation.rsduplicate
 msgid "Duplicate"
-msgstr "Kopiera"
+msgstr "ເຮັດຊ້ຳ"
 
 #: u_translation.rsduration
 msgid "Duration"
-msgstr "Varaktighet"
+msgstr "ໄລຍະເວລາ"
 
 #: u_translation.rsearth
 msgid "Earth"
-msgstr "Jorden"
+msgstr "ໂລກ"
 
 #: u_translation.rsearthshadow
 msgid "Earth shadow"
-msgstr "Jordskugga"
+msgstr "ເງົາຂອງໂລກ"
 
 #: u_translation.rseast
 msgid "East"
-msgstr "Öster"
+msgstr "ທິດຕາເວັນອອກ"
 
 #: u_translation.rseasthourangl
 msgid "East hour angle"
-msgstr "Östlig timvinkel"
+msgstr "ມຸມຊົ່ວໂມງທິດຕາເວັນອອກ"
 
 #: u_translation.rseastside
 msgid "East side"
-msgstr "Östra sidan"
+msgstr "ດ້ານທິດທັນວາ (ຕາເວັນອອກ)"
 
 #: u_translation.rseccentricity
 msgid "Eccentricity"
-msgstr "Excentricitet"
+msgstr "ຄວາມຮີ"
 
 #: u_translation.rseclipse
 msgid "Eclipse"
-msgstr "Förmörkelse"
+msgstr "ອຸປະລາຄາ"
 
 #: u_translation.rsecliptic
 msgid "Ecliptic"
-msgstr "Ekliptisk"
+msgstr "ເສັ້ນສຸລິຍະວິຖີ"
 
 #: u_translation.rseclipticcoor
 msgid "Ecliptic coordinates"
-msgstr "Ekliptiska koordinater"
+msgstr "ພິກັດເສັ້ນສຸລິຍະວິຖີ"
 
 #: u_translation.rseclipticcoor3
 msgid "Ecliptic coord."
-msgstr "Ekliptiska koord."
+msgstr "ພິກັດເສັ້ນສຸລິຍະວິຖີ"
 
 #: u_translation.rsedit
 msgid "Edit"
-msgstr "Ändra"
+msgstr "ແກ້ໄຂ"
 
 #: u_translation.rseditcolor
 msgid "Edit colour"
-msgstr "Ändra färg"
+msgstr "ແກ້ໄຂສີ"
 
 #: u_translation.rseditdsolines
 msgid "Edit nebulae lines color"
-msgstr "Ändra färg på DSO linjer"
+msgstr "ແກ້ໄຂສີເສັ້ນເນບິວລາ"
 
 #: u_translation.rseditlabel
 msgid "Edit label"
-msgstr "Ändra etikett"
+msgstr "ແກ້ໄຂຊື່"
 
 #: u_translation.rseditlineoper
 msgid "Edit line operation"
-msgstr "Ändra linjeoperation"
+msgstr "ແກ້ໄຂການເຮັດວຽກຂອງເສັ້ນ"
 
 #: u_translation.rseditobjectty
 msgid "Edit object types"
-msgstr "Ändra objekttyper"
+msgstr "ແກ້ໄຂປະເພດວັດຖຸ"
 
 #: u_translation.rseditscript
 msgid "Edit Script"
-msgstr "Redigera skript"
+msgstr "ແກ້ໄຂສະຄຣິບ"
 
 #: u_translation.rsedittimeincr
 msgid "Edit time increment"
-msgstr "Redigera stegning av tid"
+msgstr "ແກ້ໄຂການເພີ່ມເວລາ"
 
 #: u_translation.rseditunits
 msgid "Edit units"
-msgstr "Ändra enheter"
+msgstr "ແກ້ໄຂຫົວໜ່ວຍ"
 
 #: u_translation.rselong
 msgid "Elong."
-msgstr "Elong."
+msgstr "ມຸມຫ່າງ"
 
 #: u_translation.rsemail
 msgid "email"
-msgstr "e-post"
+msgstr "ອີເມລ"
 
 #: u_translation.rsemissionnebu
 msgid "Emission nebula"
-msgstr "Emissionsnebulosa"
+msgstr "ເນບິວລາປ່ອຍແສງ"
 
 #: u_translation.rsempty
 msgid "Empty"
-msgstr "Tom"
+msgstr "ວ່າງ"
 
 #: u_translation.rsend
 msgid "End"
-msgstr "Slut"
+msgstr "ສິ້ນສຸດ"
 
 #: u_translation.rsendofobject
 msgid "End of object"
-msgstr "Slutet på objekt"
+msgstr "ສິ້ນສຸດວັດຖຸ"
 
 #: u_translation.rsendprocessin
 #, object-pascal-format
 msgid "End of processing: %s asteroids"
-msgstr "Bearbetning slut: %s asteroider"
+msgstr "ສິ້ນສຸດການປະມວນຜົນ: ດາວເຄາະນ້ອຍ %s ດວງ"
 
 #: u_translation.rsephemeris
 msgid "Ephemeris"
-msgstr "Efemerid"
+msgstr "ເອເຟເມຣິດ (ຕາຕະລາງດາລາສາດ)"
 
 #: u_translation.rsephemeriscal
 msgid "Ephemeris calendar"
-msgstr "Ephemeridkalender"
+msgstr "ປະຕິທິນດາລາສາດ"
 
 #: u_translation.rsephemerispro
 msgid "Ephemeris probably out of range, disabling any solar system object"
-msgstr "Efemeriden ligger antagligen utanför intervallet, vilket inaktiverar alla solsystemobjekt"
+msgstr "ຂໍ້ມູນເອເຟເມຣິດອາດຈະຢູ່ນອກໄລຍະ, ກຳລັງປິດການສະແດງວັດຖຸໃນລະບົບສຸລິຍະ"
 
 #: u_translation.rsepoch
 msgid "Epoch"
-msgstr "Epok"
+msgstr "ອີພັອກ"
 
 #: u_translation.rsepochjd
 msgid "Epoch (JD)"
-msgstr "Epok (JD)"
+msgstr "ຍຸກສະໄໝ (JD)"
 
 #: u_translation.rsepochofmaxim
 msgid "Epoch of maxima"
-msgstr "Epok av maxima"
+msgstr "ຍຸກສະໄໝຂອງຄ່າສູງສຸດ"
 
 #: u_translation.rseqgrid
 msgid "Eq. grid"
-msgstr "Ekv. rutnät"
+msgstr "ຕາໜ່າງເສັ້ນສູນສູດ"
 
 #: u_translation.rsequator
 msgid "Equator"
-msgstr "Ekvator"
+msgstr "ເສັ້ນສູນສູດ"
 
 #: u_translation.rsequatorialco
 msgid "Equatorial coordinates"
-msgstr "Ekvatoriella koordinater"
+msgstr "ພິກັດເສັ້ນສູນສູດຟ້າ"
 
 #: u_translation.rsequatorialco2
 #, object-pascal-format
 msgid "Equatorial coordinates, equinox: %s"
-msgstr "Ekvatoriella koordinater, dagjämning= %s"
+msgstr "ພິກັດເສັ້ນສູນສູດຟ້າ, ວິສຸວັດ: %s"
 
 #: u_translation.rsequatorialco3
 msgid "Equatorial coord."
-msgstr "Ekvatoriella koord."
+msgstr "ພິກັດເສັ້ນສູນສູດ"
 
 #: u_translation.rsequatorialmo
 msgid "Equatorial mount"
-msgstr "Ekvatoriell montering"
+msgstr "ຖານຕັ້ງກ້ອງແບບສູນສູດ"
 
 #: u_translation.rsequinox
 msgid "Equinox:"
-msgstr "Dagjämning:"
+msgstr "ວິສຸວັດ:"
 
 #: u_translation.rsequinox2
 msgid "Equinox"
-msgstr "Dagjämning"
+msgstr "ວິສຸວັດ"
 
 #: u_translation.rserror2
 msgid "Error"
-msgstr "Fel"
+msgstr "ຂໍ້ຜິດພາດ"
 
 #: u_translation.rserrorcreatin
 #, object-pascal-format
 msgid "%sError creating table %s"
-msgstr "%sFel vid skapande av tabell %s"
+msgstr "%sຜິດພາດໃນການສ້າງຕາຕະລາງ %s"
 
 #: u_translation.rserrorfilenot
 msgid "Error, file not downloaded:"
-msgstr "Fel, fil laddades inte ner:"
+msgstr "ຂໍ້ຜິດພາດ, ໄຟລ໌ບໍ່ໄດ້ຖືກດາວໂຫຼດ:"
 
 #: u_translation.rserrorpleasec
 msgid "Error! Please check the database parameters."
-msgstr "Fel! Kontrollera parametrarna för databasen."
+msgstr "ຜິດພາດ! ກະລຸນາກວດສອບຄ່າພະລາມິເຕີຂອງຖານຂໍ້ມູນ."
 
 #: u_translation.rserrorpleasec2
 msgid "Error! Please check the database parameters and load the comete data file."
-msgstr "Fel! Kontrollera parametrarna för databasen och ladda datafilen för kometer."
+msgstr "ຜິດພາດ! ກະລຸນາກວດສອບຄ່າພະລາມິເຕີຖານຂໍ້ມູນ ແລະ ໂຫຼດໄຟລ໌ຂໍ້ມູນດາວຫາງ."
 
 #: u_translation.rserrorpleasec3
 msgid "Error! Please check the database parameters and load the picture package."
-msgstr "Fel! Kontrollera databasparametrarna och ladda bildpaketet."
+msgstr "ຜິດພາດ! ກະລຸນາກວດສອບຄ່າພະລາມິເຕີຖານຂໍ້ມູນ ແລະ ໂຫຼດແພັກເກັດຮູບພາບ."
 
 #: u_translation.rsestimatedfil
 #, object-pascal-format
 msgid "Estimated file size: %sMB %sDo you want to continue?"
-msgstr "Beräknad filstorlek: %sMB %s Vill du fortsätta?"
+msgstr "ຂະໜາດໄຟລ໌ໂດຍປະມານ: %sMB %sທ່ານຕ້ອງການສືບຕໍ່ບໍ?"
 
 #: u_translation.rsestimatedtai
 msgid "Estimated tail length"
-msgstr "Beräknad längd på svans"
+msgstr "ໄລຍະຫາງໂດຍປະມານ"
 
 #: u_translation.rsevening
 msgid "Evening"
-msgstr "Kväll"
+msgstr "ຕອນແລງ"
 
 #: u_translation.rseveningtwili
 msgid "Evening twilight"
-msgstr "Skymning"
+msgstr "ແສງທອງ"
 
 #: u_translation.rsevent
 msgid "Event"
-msgstr "Händelse"
+msgstr "ເຫດການ"
 
 #: u_translation.rsevery
 msgid "every "
-msgstr "varje "
+msgstr "ທຸກໆ "
 
 #: u_translation.rseverypositio
 msgid "Every position"
-msgstr "Varje position"
+msgstr "ທຸກໆຕຳແໜ່ງ"
 
 #: u_translation.rsexampleofuse
 msgid "Example of user defined object: North galactic pole"
-msgstr "Exempel på användardefinierat objekt: Galaktiska nordpolen"
+msgstr "ຕົວຢ່າງວັດຖຸທີ່ຜູ້ໃຊ້ກຳນົດ: ຂົ້ວດາລາຈັກເໜືອ"
 
 #: u_translation.rsexit
 msgid "Exit"
-msgstr "Avsluta"
+msgstr "ອອກ"
 
 #: u_translation.rsexiting
 msgid "Exiting ..."
-msgstr "Avslutar..."
+msgstr "ກຳລັງອອກ ..."
 
 #: u_translation.rsexpand
 msgid "Expand"
-msgstr "Expandera"
+msgstr "ຂະຫຍາຍອອກ"
 
 #: u_translation.rsexpertmode
 msgid "Expert mode"
-msgstr "Expertläge"
+msgstr "ໂໝດຜູ້ຊ່ຽວຊານ"
 
 #: u_translation.rsexternalcata
 msgid "External catalog object"
-msgstr "Externt katalogobjekt"
+msgstr "ວັດຖຸຈາກຄາຕາລັອກພາຍນອກ"
 
 #: u_translation.rseyepiece
 msgid "Eyepiece"
-msgstr "Okular"
+msgstr "ເລນໃກ້ຕາ"
 
 #: u_translation.rseyepieceappa
 msgid "Eyepiece apparent field of vision"
-msgstr "Okularets skenbara synfält"
+msgstr "ຂອບເຂດມຸມມອງປາກົດຂອງເລນຕາ"
 
 #: u_translation.rseyepiecefoca
 msgid "Eyepiece focal length"
-msgstr "Okularets fokallängd"
+msgstr "ຄວາມຍາວໂຟກັດຂອງເລນຕາ"
 
 #: u_translation.rseyepiecevisi
 msgid "Eyepiece vision"
-msgstr "Okularsyn"
+msgstr "ມຸມມອງຜ່ານເລນຕາ"
 
 #: u_translation.rsfailed
 #, object-pascal-format
 msgid "Failed: %s"
-msgstr "Misslyckades: %s"
+msgstr "ລົ້ມເຫຼວ: %s"
 
 #: u_translation.rsfainter
 msgid "Fainter"
-msgstr "Svagare"
+msgstr "ມົວກວ່າ"
 
 #: u_translation.rsfaintstarssi
 msgid "Faint Stars Size "
-msgstr "Storlek på svaga stjärnor "
+msgstr "ຂະໜາດດາວທີ່ມົວ "
 
 #: u_translation.rsfalse
 msgid "False"
-msgstr ""
+msgstr "ເທັດ"
 
 #: u_translation.rsfamily
 msgid "Family"
-msgstr "Familj"
+msgstr "ຕະກູນ"
 
 #: u_translation.rsfaq
 msgid "FAQ"
-msgstr "Vanliga frågor"
+msgstr "ຄຳຖາມທີ່ພົບເລື້ອຍ"
 
 #: u_translation.rsfaster
 msgid "Faster"
-msgstr "Snabbare"
+msgstr "ໄວຂຶ້ນ"
 
 #: u_translation.rsfavorite
 msgid "Favorite"
-msgstr "Favorit"
+msgstr "ທີ່ຊື່ນຊອບ"
 
 #: u_translation.rsfebruary
 msgid "February"
-msgstr "Februari"
+msgstr "ກຸມພາ"
 
 #: u_translation.rsfewerbuttons
 msgid "Fewer buttons for a cleaner space, access to other functions from the menu"
-msgstr ""
+msgstr "ຫຼຸດປຸ່ມລົງເພື່ອໃຫ້ໜ້າຈໍສະອາດຂຶ້ນ, ເຂົ້າເຖິງຟັງຊັນອື່ນໆຜ່ານເມນູ"
 
 #: u_translation.rsffmpegprogra
 msgid "ffmpeg program path"
-msgstr "Sökväg till ffmpeg program"
+msgstr "ເສັ້ນທາງໂປຣແກຣມ ffmpeg"
 
 #: u_translation.rsfieldname
 msgid "Field Name"
-msgstr "Fältnamn"
+msgstr "ຊື່ຟິວ (Field)"
 
 #: u_translation.rsfieldnumber
 msgid "Field Number"
-msgstr "Fältnummer"
+msgstr "ໝາຍເລກສະໜາມ"
 
 #: u_translation.rsfieldofvisio
 msgid "Field of vision"
-msgstr "Synfält"
+msgstr "ຂອບເຂດການເບິ່ງເຫັນ"
 
 #: u_translation.rsfieldofvisio3
 msgid "Field of vision settings"
-msgstr "Synfält inställningar"
+msgstr "ຕັ້ງຄ່າຂອບເຂດການເບິ່ງເຫັນ"
 
 #: u_translation.rsfieldofvisio5
 msgid "Field of vision number :"
-msgstr "Synfält nummer:"
+msgstr "ໝາຍເລກຂອບເຂດການເບິ່ງເຫັນ :"
 
 #: u_translation.rsfieldtoowidt
 #, object-pascal-format
 msgid "Field too wide! Maximum is %s"
-msgstr "Fältet är för stort! Max är %s"
+msgstr "ຂອບເຂດກວ້າງເກີນໄປ! ສູງສຸດແມ່ນ %s"
 
 #: u_translation.rsfile
 msgid "File"
-msgstr "Arkiv"
+msgstr "ໄຟລ໌"
 
 #: u_translation.rsfilenamewith
 msgid "Filename without path or extension"
-msgstr "Filnamn utan sökväg  och filtillägg"
+msgstr "ຊື່ໄຟລ໌ໂດຍບໍ່ມີເສັ້ນທາງ ຫຼື ນາມສະກຸນ"
 
 #: u_translation.rsfilenotfound
 msgid "File not found!"
-msgstr "Hittade inte filen!"
+msgstr "ບໍ່ພົບໄຟລ໌!"
 
 #: u_translation.rsfilespath
 msgid "Files path"
-msgstr "Sökväg till filer"
+msgstr "ເສັ້ນທາງໄຟລ໌"
 
 #: u_translation.rsfill
 msgid "Fill?"
-msgstr "Fyll?"
+msgstr "ລະບາຍສີບໍ?"
 
 #: u_translation.rsfillmilkyway
 msgid "Fill Milky Way"
-msgstr "Fyll vintergatan"
+msgstr "ລະບາຍສີທາງຊ້າງເຜືອກ"
 
 #: u_translation.rsfillnebulae
 msgid "Fill nebulae"
-msgstr "Fyll nebulosor"
+msgstr "ລະບາຍສີເນບິວລາ"
 
 #: u_translation.rsfillwithhori
 msgid "Fill with horizon colour"
-msgstr "Fyll med färg för horisont"
+msgstr "ເຕີມດ້ວຍສີຂອບຟ້າ"
 
 #: u_translation.rsfilter
 msgid "Filter ->"
-msgstr "Filter ->"
+msgstr "ຕົວກັອງ ->"
 
 #: u_translation.rsfilter2
 msgid "Filter"
-msgstr "Filtrera"
+msgstr "ຕົວກັ່ນຕອງ"
 
 #: u_translation.rsfilternebula
 msgid "Filter deep sky objects"
-msgstr "Filtrera deep sky objekt"
+msgstr "ກັອງວັດຖຸທ້ອງຟ້າ"
 
 #: u_translation.rsfilterstars
 msgid "Filter stars "
-msgstr "Filtrera stjärnor "
+msgstr "ກັອງດາວ "
 
 #: u_translation.rsfind
 msgid "Find"
-msgstr "Hitta"
+msgstr "ຄົ້ນຫາ"
 
 #: u_translation.rsfindercircle
 msgid "Finder circle (eyepiece)"
-msgstr "Sökarcirkel (okular)"
+msgstr "ວົງກົມຊ່ວຍຫາ (ເລນໃກ້ຕາ)"
 
 #: u_translation.rsfindercircle2
 msgid "Finder Circle"
-msgstr "Sökarcirkel"
+msgstr "ວົງກົມກ້ອງຊ່ອງນຳ"
 
 #: u_translation.rsfinderrectan
 msgid "Finder rectangle (CCD)"
-msgstr "Sökarrektangel (CCD)"
+msgstr "ສີ່ຫຼ່ຽມຊ່ວຍຫາ (CCD)"
 
 #: u_translation.rsfindinfo
 msgid "Find info"
-msgstr "Hitta info"
+msgstr "ຄົ້ນຫາຂໍ້ມູນ"
 
 #: u_translation.rsfirst
 msgid "First"
-msgstr "Första"
+msgstr "ທຳອິດ"
 
 #: u_translation.rsfirst5000
 msgid "First 5000"
-msgstr "Första 5000"
+msgstr "5000 ອັນດັບທຳອິດ"
 
 #: u_translation.rsfirstchar
 msgid "First char"
-msgstr "Första tecken"
+msgstr "ຕົວອັກສອນທຳອິດ"
 
 #: u_translation.rsfitsfile
 msgid "FITS file"
-msgstr "FITS fil"
+msgstr "ໄຟລ໌ FITS"
 
 #: u_translation.rsfixedblack
 msgid "Fixed black"
-msgstr "Svart"
+msgstr "ສີດຳຄົງທີ່"
 
 #: u_translation.rsfixedskycolo
 msgid "Fixed sky colour"
-msgstr "Fast himmelsfärg"
+msgstr "ສີທ້ອງຟ້າຄົງທີ່"
 
 #: u_translation.rsflamsteednum
 msgid "Flamsteed number"
-msgstr "Flamsteed nummer"
+msgstr "ໝາຍເລກ Flamsteed"
 
 #: u_translation.rsflipnsmoveme
 msgid "Flip N/S movement"
-msgstr "Vänd N/S-rörelse"
+msgstr "ກັບດ້ານການເຄື່ອນທີ່ ເໜືອ/ໃຕ້"
 
 #: u_translation.rsfonts
 msgid "Fonts"
-msgstr "Teckensnitt"
+msgstr "ຟອນຕ໌"
 
 #: u_translation.rsforalargecat
 msgid "For a large catalog, always select Binary. For a small dataset that changes frequently, select Text. This enables you to edit the file and see the result immediately on the chart without the need to rerun this utility."
-msgstr "Välj alltid Binärt för stora kataloger. För små som ofta ändras välj Text. Detta ger dig möjlighet att ändra i katalogen och se resultatet på kartan omedelbart, utan att behöva använda den här funktionen."
+msgstr "ສຳລັບຄາຕາລັອກຂະໜາດໃຫຍ່ ໃຫ້ເລືອກ Binary. ສຳລັບຂໍ້ມູນນ້ອຍໆ ໃຫ້ເລືອກ Text."
 
 #: u_translation.rsforcecolor
 msgid "Force color"
-msgstr "Tvinga färg"
+msgstr "ບັງຄັບໃຊ້ສີ"
 
 #: u_translation.rsforceeqsys
 msgid "Force EqSys"
-msgstr "Tvinga EqSys"
+msgstr "ບັງຄັບໃຊ້ EqSys"
 
 #: u_translation.rsforcej2000
 msgid "Force J2000"
-msgstr "Framtvinga J2000"
+msgstr "ບັງຄັບໃຊ້ J2000"
 
 #: u_translation.rsformoreinfor
 msgid "For more information, see :"
-msgstr "För mer information, se:"
+msgstr "ສຳລັບຂໍ້ມູນເພີ່ມເຕີມ, ເບິ່ງທີ່ :"
 
 #: u_translation.rsfov
 msgid "FOV"
-msgstr "Synfält"
+msgstr "FOV"
 
 #: u_translation.rsfov2
 msgid "FOV:"
@@ -2339,31 +2339,31 @@ msgstr "FOV:"
 
 #: u_translation.rsfovbar
 msgid "FOV bar"
-msgstr "FOV-fält"
+msgstr "ແຖບ FOV"
 
 #: u_translation.rsfovnumber
 msgid "FOV number:"
-msgstr "FOV nummer:"
+msgstr "ໝາຍເລກ FOV:"
 
 #: u_translation.rsframespersec
 msgid "Frames per second"
-msgstr "Bildrutor per sekund"
+msgstr "ເຟຣມຕໍ່ວິນາທີ"
 
 #: u_translation.rsframessize
 msgid "Frames size"
-msgstr "Storlek på bildrutor"
+msgstr "ຂະໜາດເຟຣມ"
 
 #: u_translation.rsfreesize
 msgid "Free size"
-msgstr "Ledigt utrymme"
+msgstr "ຂະໜາດອິດສະຫຼະ"
 
 #: u_translation.rsfriday
 msgid "Fri."
-msgstr "Fre."
+msgstr "ສຸກ"
 
 #: u_translation.rsfrom
 msgid "From"
-msgstr "Från"
+msgstr "ຈາກ"
 
 #: u_translation.rsftp
 msgid "FTP "
@@ -2371,11 +2371,11 @@ msgstr "FTP "
 
 #: u_translation.rsftppassivemo
 msgid "FTP passive mode"
-msgstr "FTP passiv mode"
+msgstr "ໂໝດ FTP passive"
 
 #: u_translation.rsfullscreen
 msgid "Full screen"
-msgstr "Helskärm"
+msgstr "ເຕັມຈໍ"
 
 #: u_translation.rsgaiavariable
 msgid "GAIA variable star information"
@@ -2383,163 +2383,163 @@ msgstr ""
 
 #: u_translation.rsgalactic
 msgid "Galactic"
-msgstr "Galaktisk"
+msgstr "ກາລັກຊີ"
 
 #: u_translation.rsgalacticcoor
 msgid "Galactic coordinates"
-msgstr "Galaktiska koordinater"
+msgstr "ພິກັດກາລັກຊີ"
 
 #: u_translation.rsgalacticcoor2
 msgid "Galactic coord."
-msgstr "Galaktiska koord."
+msgstr "ພິກັດກາລັກຊີ"
 
 #: u_translation.rsgalaxies
 msgid "Galaxies"
-msgstr "Galaxer"
+msgstr "ກາລັກຊີ"
 
 #: u_translation.rsgalaxy
 msgid "Galaxy"
-msgstr "Galax"
+msgstr "ກາລັກຊີ"
 
 #: u_translation.rsgalaxycluste
 msgid "Galaxy cluster"
-msgstr "Galaxkluster"
+msgstr "ກະຈຸກກາລັກຊີ"
 
 #: u_translation.rsgamma
 msgid "Gamma"
-msgstr "Gamma"
+msgstr "ແກມມາ"
 
 #: u_translation.rsgeneral
 msgid "General"
-msgstr "Allmänna"
+msgstr "ທົ່ວໄປ"
 
 #: u_translation.rsgeneralcatal
 msgid "General catalog options"
-msgstr "Allmänna kataloginställningar"
+msgstr "ຕົວເລືອກຄາຕາລັອກທົ່ວໄປ"
 
 #: u_translation.rsgeneralsetti
 msgid "General settings"
-msgstr "Allmänna inställningar"
+msgstr "ຕັ້ງຄ່າທົ່ວໄປ"
 
 #: u_translation.rsgeocentric
 msgid "Geocentric"
-msgstr "Geocentrisk"
+msgstr "ຈຸດສູນກາງໂລກ"
 
 #: u_translation.rsgeometricalt
 msgid "Geometric altitude"
-msgstr "Geometrisk höjd"
+msgstr "ມຸມເງີຍທາງເລຂາຄະນິດ"
 
 #: u_translation.rsget
 msgid "Get"
-msgstr "Hämta"
+msgstr "ດຶງຂໍ້ມູນ"
 
 #: u_translation.rsgetasteroidl
 msgid "Get the asteroids list."
-msgstr "Hämta asteroidlistan."
+msgstr "ດຶງລາຍຊື່ດາວເຄາະນ້ອຍ."
 
 #: u_translation.rsgetdssimage
 msgid "Get the DSS image"
-msgstr "Hämta DSS bild"
+msgstr "ດຶງຮູບພາບ DSS"
 
 #: u_translation.rsgetfromteles
 msgid "Get from telescope"
-msgstr "Ta från teleskop"
+msgstr "ດຶງຂໍ້ມູນຈາກກ້ອງໂທລະທັດ"
 
 #: u_translation.rsgetrecentmea
 msgid "Get the recent GRS measurement from JUPOS project."
-msgstr "Hämta senaste GRS mätningen från JUPOS projektet."
+msgstr "ດຶງຂໍ້ມູນການວັດແທກ GRS ລ້າສຸດຈາກໂຄງການ JUPOS."
 
 #: u_translation.rsglobularclus
 msgid "Globular cluster"
-msgstr "Klotformad stjärnhop"
+msgstr "ກະຈຸກດາວຊົງກົມ"
 
 #: u_translation.rsgnomonic
 msgid "Gnomonic"
-msgstr "Gnomonisk"
+msgstr "Gnomonic"
 
 #: u_translation.rsgraphheight
 msgid "Graph height"
-msgstr "Höjd på graf"
+msgstr "ຄວາມສູງຂອງກຣາຟ"
 
 #: u_translation.rsgraphic
 msgid "Graphic"
-msgstr "Grafisk"
+msgstr "ກຣາຟິກ"
 
 #: u_translation.rsgraphs
 msgid "Graphs"
-msgstr "Grafer"
+msgstr "ກຣາຟ"
 
 #: u_translation.rsgravitationa
 msgid "Gravitational lens"
-msgstr "Gravitationslins"
+msgstr "ເລນແຮງໂນ້ມຖ່ວງ"
 
 #: u_translation.rsgreatest
 msgid "Greatest"
-msgstr "Största"
+msgstr "ຫຼາຍທີ່ສຸດ"
 
 #: u_translation.rsgreeksymbol
 msgid "Greek symbols"
-msgstr "Grekiska symboler"
+msgstr "ສັນຍະລັກກຣີກ"
 
 #: u_translation.rsgreen
 msgid "Green"
-msgstr "Grön"
+msgstr "ສີຂຽວ"
 
 #: u_translation.rsgregoriancal
 msgid "Gregorian calendar start date"
-msgstr "Startdatum för gregoriansk kalender"
+msgstr "ວັນທີເລີ່ມຕົ້ນປະຕິທິນເກຣໂກຣຽນ"
 
 #: u_translation.rsgrids
 msgid "Grids"
-msgstr "Rutnät"
+msgstr "ເສັ້ນໂຄງພິກັດ (Grids)"
 
 #: u_translation.rsgridspacing
 msgid "Grid spacing"
-msgstr "Mellanrum rutnät"
+msgstr "ໄລຍະຫ່າງຕາໜ່າງ"
 
 #: u_translation.rsgroup
 msgid "Group"
-msgstr "Grupp"
+msgstr "ກຸ່ມ"
 
 #: u_translation.rsgrstransit
 msgid "GRS transit"
-msgstr "GRS-passage"
+msgstr "ການເຄື່ອນຜ່ານຂອງຈຸດແດງໃຫຍ່"
 
 #: u_translation.rsgslopeparame
 msgid "G slope parameter"
-msgstr "G slope parameter"
+msgstr "ພະລາມິເຕີຄວາມລາດຊັນ G"
 
 #: u_translation.rshabsolutemag
 msgid "H absolute magnitude"
-msgstr "H absolut magnitud"
+msgstr "ໂຊຕິມາດສຳບູນ H"
 
 #: u_translation.rshalfmassradi
 msgid "Half-mass radius"
-msgstr "Half-mass radie"
+msgstr "ລັດສະໝີເຄິ່ງມວນສານ"
 
 #: u_translation.rshaltafter100
 msgid "Halt after 1000 errors"
-msgstr "Stoppa efter 1000 fel"
+msgstr "ຢຸດຫຼັງຈາກພົບຂໍ້ຜິດພາດ 1000 ຄັ້ງ"
 
 #: u_translation.rshammeraitoff
 msgid "Hammer-Aitoff"
-msgstr "Hammer-Aitoff-projektion"
+msgstr "Hammer-Aitoff"
 
 #: u_translation.rshandpad
 msgid "HandPad"
-msgstr "HandPad"
+msgstr "ເຄື່ອງຄວບຄຸມມືຖື (HandPad)"
 
 #: u_translation.rshbetamagnitu
 msgid "H-Beta magnitude"
-msgstr "H-Beta magnitud"
+msgstr "ໂຊຕິມາດ H-Beta"
 
 #: u_translation.rsheight
 msgid "Height"
-msgstr "Höjd"
+msgstr "ຄວາມສູງ"
 
 #: u_translation.rshelp
 msgid "Help"
-msgstr "Hjälp"
+msgstr "ຊ່ວຍເຫຼືອ"
 
 #: u_translation.rshelpbasedir
 msgid "en/documentation/"
@@ -2547,319 +2547,319 @@ msgstr "en/documentation/"
 
 #: u_translation.rshelpcontents
 msgid "Help contents"
-msgstr "Innehåll i hjälp"
+msgstr "ເນື້ອຫາການຊ່ວຍເຫຼືອ"
 
 #: u_translation.rshide
 msgid "Hide"
-msgstr "Dölj"
+msgstr "ຊ່ອນ"
 
 #: u_translation.rshidelabel
 msgid "Hide label"
-msgstr "Dölj etikett"
+msgstr "ເຊື່ອງຊື່"
 
 #: u_translation.rshideobjectwi
 msgid "Hide objects wider than"
-msgstr "Göm objekt större än"
+msgstr "ເຊື່ອງວັດຖຸທີ່ກວ້າງກວ່າ"
 
 #: u_translation.rshighcolor
 msgid "High colour"
-msgstr "Hög färgkvalitet"
+msgstr "ສີສູງ"
 
 #: u_translation.rshighquality
 msgid "High quality"
-msgstr "Hög kvalitet"
+msgstr "ຄຸນນະພາບສູງ"
 
 #: u_translation.rshighsurfaceb
 msgid "High surface brightness"
-msgstr "Ljusstyrka på högt liggande yta"
+msgstr "ຄວາມສະຫວ່າງພື້ນຜິວສູງ"
 
 #: u_translation.rshorizon
 msgid "Horizon"
-msgstr "Horisont"
+msgstr "ຂອບຟ້າ"
 
 #: u_translation.rshorizontalov
 msgid "Horizontal overlap %"
-msgstr "Horisontöverlappning %"
+msgstr "ສ່ວນທີ່ທັບຊ້ອນກັນແນວນອນ %"
 
 #: u_translation.rshostname
 msgid "Hostname:"
-msgstr "Värddatornamn:"
+msgstr "ຊື່ໂຮສ:"
 
 #: u_translation.rshour
 msgid "Hour"
-msgstr "Timme"
+msgstr "ຊົ່ວໂມງ"
 
 #: u_translation.rshourangle
 msgid "Hour angle"
-msgstr "Timvinkel"
+msgstr "ມຸມຊົ່ວໂມງ"
 
 #: u_translation.rshourgridspac
 msgid "Grid spacing in hour for equatorial grid"
-msgstr "Mellanrum i timmar for ekvatoriellt rutnät"
+msgstr "ໄລຍະຫ່າງຕາໜ່າງເປັນຊົ່ວໂມງສຳລັບພິກັດເສັ້ນສູນສູດ"
 
 #: u_translation.rshourlymotion
 msgid "Hourly motion"
-msgstr "Förflyttning per timme"
+msgstr "ການເຄື່ອນທີ່ລາຍຊົ່ວໂມງ"
 
 #: u_translation.rshours
 msgid "hours"
-msgstr "timmar"
+msgstr "ຊົ່ວໂມງ"
 
 #: u_translation.rshoursminutes
 msgid "Hours, minutes, seconds"
-msgstr "Timmar, minuter, sekunder"
+msgstr "ຊົ່ວໂມງ, ນາທີ, ວິນາທີ"
 
 #: u_translation.rshttpproxy
 msgid "HTTP proxy"
-msgstr "HTTP proxy"
+msgstr "HTTP ພຣັອກຊີ"
 
 #: u_translation.rshumidity
 msgid "Humidity %"
-msgstr "Luftfuktighet (%)"
+msgstr "ຄວາມຊຸ່ມຊື່ນ %"
 
 #: u_translation.rsiconclickact
 msgid "Icon click action"
-msgstr "Ikon klickhändelse"
+msgstr "ການດຳເນີນການເມື່ອຄລິກໄອຄອນ"
 
 #: u_translation.rsicons
 msgid "Icons"
-msgstr "Ikoner"
+msgstr "ໄອຄອນ"
 
 #: u_translation.rsiconsize
 msgid "Icon size"
-msgstr "Ikonstorlek"
+msgstr "ຂະໜາດໄອຄອນ"
 
 #: u_translation.rsicontime
 msgid "Icon time display"
-msgstr "Ikon tidsvisning"
+msgstr "ການສະແດງເວລາໃນໄອຄອນ"
 
 #: u_translation.rsifitisnotins
 msgid "If it is not installed try the following depending on your system:"
-msgstr "Om det inte är installerat prova följande beroende på ditt system:"
+msgstr "ຖ້າຍັງບໍ່ໄດ້ຕິດຕັ້ງ ໃຫ້ລອງເຮັດຕາມຂັ້ນຕອນລຸ່ມນີ້ ຂຶ້ນກັບລະບົບຂອງທ່ານ:"
 
 #: u_translation.rsifyoucannotf
 msgid "If you cannot fix the error, please contact the telescope driver author for assistance."
-msgstr "Om du inte kan lösa problemet, vänligen kontakta upphovsmannen till teleskopets drivrutiner för hjälp."
+msgstr "ຖ້າທ່ານບໍ່ສາມາດແກ້ໄຂຂໍ້ຜິດພາດໄດ້, ກະລຸນາຕິດຕໍ່ຜູ້ຂຽນໄດຣເວີກ້ອງໂທລະທັດເພື່ອຂໍຄວາມຊ່ວຍເຫຼືອ."
 
 #: u_translation.rsillum
 msgid "Illum."
-msgstr "Belyst"
+msgstr "ຄວາມສະຫວ່າງ"
 
 #: u_translation.rsilluminatedf
 msgid "Illuminated fraction"
-msgstr "Belyst del"
+msgstr "ສ່ວນທີ່ໄດ້ຮັບແສງ"
 
 #: u_translation.rsimagearchive
 msgid "Image archive"
-msgstr "Bildarkiv"
+msgstr "ຄັງຮູບພາບ"
 
 #: u_translation.rsimagedirecto
 msgid "Image directory"
-msgstr "Bildkatalog"
+msgstr "ໂຟນເດີຮູບພາບ"
 
 #: u_translation.rsimagelist
 msgid "Image list"
-msgstr "Lista över bilder"
+msgstr "ລາຍຊື່ຮູບພາບ"
 
 #: u_translation.rsimportmosaic
 msgid "Import mosaic file"
-msgstr "Importera mosaikfil"
+msgstr "ນຳເຂົ້າໄຟລ໌ຮູບຕໍ່ (Mosaic)"
 
 #: u_translation.rsinclination
 msgid "Inclination"
-msgstr "Inklination"
+msgstr "ຄວາມອຽງ"
 
 #: u_translation.rsinclination2
 msgid "Inclination="
-msgstr "Inklination="
+msgstr "ຄວາມອຽງ="
 
 #: u_translation.rsincludedayti
 msgid "Include day time pass"
-msgstr "Inkludera dag tid passage"
+msgstr "ລວມການເຄື່ອນທີ່ຜ່ານໃນເວລາກາງເວັນ"
 
 #: u_translation.rsincrementfor
 msgid "Increment for bright stars"
-msgstr "Steg för ljusa stjärnor"
+msgstr "ການເພີ່ມຂະໜາດສຳລັບດາວສະຫວ່າງ"
 
 #: u_translation.rsincrementtim
 msgid "Increment time"
-msgstr "Stega framåt i tiden"
+msgstr "ເພີ່ມເວລາ"
 
 #: u_translation.rsindicatehere
 msgid "Indicate here how to compute the required values from the data stored in the catalog text file."
-msgstr "Ange här hur de erforderliga värdena som är sparade i katalogens textfil ska beräknas."
+msgstr "ລະບຸວິທີການຄຳນວນຄ່າທີ່ຕ້ອງການຈາກຂໍ້ມູນໃນໄຟລ໌ຄາຕາລັອກ."
 
 #: u_translation.rsindicatehowt
 msgid "Indicate how to recognize the object size unit:"
-msgstr "Ange enheten för objektets storlek"
+msgstr "ລະບຸວິທີການລະບຸຫົວໜ່ວຍຂະໜາດວັດຖຸ:"
 
 #: u_translation.rsindicatethes
 msgid "Indicate the string identifier for each type of object:"
-msgstr "Ange sträng-ID för varje typ av objekt"
+msgstr "ລະບຸຊື່ເອີ້ນສຳລັບວັດຖຸແຕ່ລະປະເພດ:"
 
 #: u_translation.rsindicatethes2
 msgid "Indicate the string for each draw operation"
-msgstr "Ange sträng för varje ritningsoperation"
+msgstr "ລະບຸຂໍ້ຄວາມສຳລັບແຕ່ລະການແຕ້ມ"
 
 #: u_translation.rsindicatethes3
 msgid "Indicate the string for each colour"
-msgstr "Ange sträng för varje färg"
+msgstr "ລະບຸຂໍ້ຄວາມສຳລັບແຕ່ລະສີ"
 
 #: u_translation.rsindidriver
 msgid "INDI driver"
-msgstr "INDI driver"
+msgstr "ໄດຣເວີ INDI"
 
 #: u_translation.rsindidriverse
 msgid "INDI driver settings"
-msgstr "INDI driver inställningar"
+msgstr "ຕັ້ງຄ່າໄດຣເວີ INDI"
 
 #: u_translation.rsindiready
 msgid "INDI server is ready"
-msgstr "INDI-servern är redo"
+msgstr "ເຊີເວີ INDI ພ້ອມແລ້ວ"
 
 #: u_translation.rsindiserverho
 msgid "INDI server host "
-msgstr "INDI server värd "
+msgstr "ໂຮສ INDI ເຊີບເວີ "
 
 #: u_translation.rsindiserverpo
 msgid "INDI server port"
-msgstr "INDI server port"
+msgstr "ພອດ INDI ເຊີບເວີ"
 
 #: u_translation.rsindrive
 msgid "in drive"
-msgstr "i CD-spelaren"
+msgstr "ໃນໄດຣຟ໌"
 
 #: u_translation.rsinfo
 msgid "Information"
-msgstr "Information"
+msgstr "ຂໍ້ມູນ"
 
 #: u_translation.rsinformationd
 msgid "Information detail"
-msgstr "Informationstext"
+msgstr "ລາຍລະອຽດຂໍ້ມູນ"
 
 #: u_translation.rsinformationf
 msgid "Information from catalog"
-msgstr "Information från katalog"
+msgstr "ຂໍ້ມູນຈາກແຄັດຕະລັອກ"
 
 #: u_translation.rsinformationf2
 msgid "Information from"
-msgstr "Information från"
+msgstr "ຂໍ້ມູນຈາກ"
 
 #: u_translation.rsinitializeda
 msgid "Initialize database"
-msgstr "Initiera databasen"
+msgstr "ກຳນົດຄ່າເລີ່ມຕົ້ນຖານຂໍ້ມູນ"
 
 #: u_translation.rsinnersolarsy
 msgid "Inner Solar System"
-msgstr "Inre solsystem"
+msgstr "ລະບົບສຸລິຍະຊັ້ນໃນ"
 
 #: u_translation.rsinputcatalog
 msgid "Input catalog files"
-msgstr "Filer för inläsning"
+msgstr "ໄຟລ໌ຄາຕາລັອກຂາເຂົ້າ"
 
 #: u_translation.rsinsertfailed
 #, object-pascal-format
 msgid "insert failed line %s: %s"
-msgstr "infoga rad %s: %s"
+msgstr "ການເພີ່ມຂໍ້ມູນລົ້ມເຫຼວໃນແຖວທີ %s: %s"
 
 #: u_translation.rsinsertfailed2
 #, object-pascal-format
 msgid "Insert failed! %s"
-msgstr "Infogning misslyckades! %s"
+msgstr "ການເພີ່ມຂໍ້ມູນລົ້ມເຫຼວ! %s"
 
 #: u_translation.rsinstall
 msgid "Install"
-msgstr "Installera"
+msgstr "ຕິດຕັ້ງ"
 
 #: u_translation.rsinstalladdit
 msgid "Install additional DSO catalog for the objects you want to observe"
-msgstr "Installera ytterligare DSO-kataloger för de objekt du vill observera"
+msgstr "ຕິດຕັ້ງແຄັດຕະລັອກ DSO ເພີ່ມເຕີມສຳລັບວັດຖຸທີ່ທ່ານຕ້ອງການສັງເກດການ"
 
 #: u_translation.rsinstalled
 msgid "Installed"
-msgstr "Installerad"
+msgstr "ຕິດຕັ້ງແລ້ວ"
 
 #: u_translation.rsinstallephem
 msgid "Install ephemeris data to improve the computation of solar system objects"
-msgstr "Installera efemeriddata för att förbättra beräkningen av positionen på solsystemsobjekt"
+msgstr "ຕິດຕັ້ງຂໍ້ມູນເອເຟເມຣິດເພື່ອປັບປຸງການຄຳນວນວັດຖຸໃນລະບົບສຸລິຍະ"
 
 #: u_translation.rsinstalling
 msgid "Installing"
-msgstr "Installerar"
+msgstr "ກຳລັງຕິດຕັ້ງ"
 
 #: u_translation.rsinstallnewve
 #, object-pascal-format
 msgid "Install new version %s over %s"
-msgstr "Installera ny version %s över %s"
+msgstr "ຕິດຕັ້ງເວີຊັນໃໝ່ %s ແທນທີ່ %s"
 
 #: u_translation.rsinstallobjec
 msgid "Install object catalog"
-msgstr "Installera objektkatalog"
+msgstr "ຕິດຕັ້ງແຄັດຕະລັອກວັດຖຸ"
 
 #: u_translation.rsinstalloneof
 msgid "Install one of the variable star catalog, depending on your interest and instrumentation"
-msgstr "Installera en av katalogerna för variabla stjärnor, beroende på intresse och instrument"
+msgstr "ຕິດຕັ້ງແຄັດຕະລັອກດາວແປແສງອັນໃດອັນໜຶ່ງ ຕາມຄວາມສົນໃຈ ແລະ ອຸປະກອນຂອງທ່ານ"
 
 #: u_translation.rsinstalloneof2
 msgid "Install one of the double star catalog, depending on your interest and instrumentation"
-msgstr "Installera en av katalogerna för dubbelstjärnor, beroende på intresse och instrument"
+msgstr "ຕິດຕັ້ງແຄັດຕະລັອກດາວຄູ່ອັນໃດອັນໜຶ່ງ ຕາມຄວາມສົນໃຈ ແລະ ອຸປະກອນຂອງທ່ານ"
 
 #: u_translation.rsinstallpictu
 msgid "Install pictures for this DSO catalog"
-msgstr "Installera bilder för denna DSO-katalog"
+msgstr "ຕິດຕັ້ງຮູບພາບສຳລັບແຄັດຕະລັອກ DSO ນີ້"
 
 #: u_translation.rsinstallspeci
 msgid "Specialized catalog for specific use"
-msgstr "Specialiserad katalog för specifikt nyttjande"
+msgstr "ແຄັດຕະລັອກສະເພາະທາງສຳລັບການໃຊ້ງານສະເພາະດ້ານ"
 
 #: u_translation.rsinstallstarc
 msgid "Install more stars down to the lowest required magnitude"
-msgstr "Installera fler stjärnor till lägsta nödvändiga magnitud"
+msgstr "ຕິດຕັ້ງດາວເພີ່ມເຕີມຈົນຮອດຄ່າຄວາມສະຫວ່າງຕ່ຳສຸດທີ່ຕ້ອງການ"
 
 #: u_translation.rsinternet
 msgid "Internet"
-msgstr "Internet"
+msgstr "ອິນເຕີເນັດ"
 
 #: u_translation.rsinternetloca
 msgid "Internet localization"
-msgstr "Internet localization"
+msgstr "ການລະບຸຕຳແໜ່ງຜ່ານອິນເຕີເນັດ"
 
 #: u_translation.rsinvalidepoch
 #, object-pascal-format
 msgid "invalid epoch on line%s: %s"
-msgstr "Ogiltig epok på rad%s: %s"
+msgstr "ຍຸກສະໄໝບໍ່ຖືກຕ້ອງໃນແຖວທີ %s: %s"
 
 #: u_translation.rsinvalidfitsf
 #, object-pascal-format
 msgid "Invalid FITS file: %s"
-msgstr "Ogiltig FITS-fil: %s"
+msgstr "ໄຟລ໌ FITS ບໍ່ຖືກຕ້ອງ: %s"
 
 #: u_translation.rsinvalidpath
 msgid "Invalid path: "
-msgstr "Ogiltig sökväg: "
+msgstr "ເສັ້ນທາງບໍ່ຖືກຕ້ອງ: "
 
 #: u_translation.rsinvisibleatt
 msgid "Invisible at this latitude"
-msgstr "Osynlig vid denna latitud"
+msgstr "ເບິ່ງບໍ່ເຫັນໃນລະຕິຈູດນີ້"
 
 #: u_translation.rsiscoordinate
 #, object-pascal-format
 msgid "Is the coordinates epoch really %s?"
-msgstr "Är koordinaternas epok verkligen %s?"
+msgstr "ຍຸກສະໄໝຂອງພິກັດແມ່ນ %s ແທ້ບໍ?"
 
 #: u_translation.rsisempty
 #, object-pascal-format
 msgid "%s is empty!"
-msgstr "%s är tom!"
+msgstr "%s ວ່າງເປົ່າ!"
 
 #: u_translation.rsittaketoolon
 #, object-pascal-format
 msgid "It take too long to draw the %s from catalog %s, please consider to not use this catalog for this FOV."
-msgstr "Det tar för lång tid att rita upp %s från katalog %s. Använd helst inte denna katalog för aktuell FOV"
+msgstr "ການແຕ້ມ %s ຈາກແແຄັດຕະລັອກ %s ໃຊ້ເວລາດົນເກີນໄປ, ກະລຸນາພິຈາລະນາບໍ່ໃຊ້ແຄັດຕະລັອກນີ້ສຳລັບ FOV ນີ້."
 
 #: u_translation.rsjanuary
 msgid "January"
-msgstr "Januari"
+msgstr "ມັງກອນ"
 
 #: u_translation.rsjd
 msgid "JD:"
@@ -2871,55 +2871,55 @@ msgstr "JD"
 
 #: u_translation.rsjdcalendar
 msgid "JD calendar"
-msgstr "JD kalender"
+msgstr "ປະຕິທິນວັນຈູລຽນ"
 
 #: u_translation.rsjplephemeris
 msgid "JPL ephemeris search order"
-msgstr "Sökordning för JPL-efemerid"
+msgstr "ລຳດັບການຄົ້ນຫາເອເຟເມຣິດ JPL"
 
 #: u_translation.rsjulianday
 msgid "Julian Day ="
-msgstr "Juliansk dag="
+msgstr "ວັນຈູລຽນ ="
 
 #: u_translation.rsjulianyear
 msgid "Julian Year"
-msgstr "Julianskt år"
+msgstr "ປີຈູລຽນ"
 
 #: u_translation.rsjuly
 msgid "July"
-msgstr "Juli"
+msgstr "ກໍລະກົດ"
 
 #: u_translation.rsjune
 msgid "June"
-msgstr "Juni"
+msgstr "ມິຖຸນາ"
 
 #: u_translation.rsjupiter
 msgid "Jupiter"
-msgstr "Jupiter"
+msgstr "ດາວພະຫັດ"
 
 #: u_translation.rsjupitergrslo
 msgid "Jupiter GRS longitude:"
-msgstr "Jupiter GRS longitud:"
+msgstr "ລອງຈິຈູດຈຸດແດງໃຫຍ່ຂອງດາວພະຫັດ:"
 
 #: u_translation.rskeepimageson
 msgid "Keep images on exit for later use"
-msgstr "Spara bilder vid avslut för senare användning"
+msgstr "ເກັບຮູບພາບໄວ້ເມື່ອປິດໂປຣແກຣມເພື່ອໃຊ້ໃນພາຍຫຼັງ"
 
 #: u_translation.rskeeptableson
 msgid "Keep tables on exit for later use"
-msgstr "Spara tabeller vid avslut för senare användning"
+msgstr "ເກັບຕາຕະລາງໄວ້ເມື່ອປິດໂປຣແກຣມເພື່ອໃຊ້ໃນພາຍຫຼັງ"
 
 #: u_translation.rskey
 msgid "Key"
-msgstr "Tangent"
+msgstr "ຄີ (Key)"
 
 #: u_translation.rskm
 msgid "Km."
-msgstr "Km."
+msgstr "ກມ."
 
 #: u_translation.rsknot
 msgid "Knot"
-msgstr "Knop"
+msgstr "ກະຈຸກແກສ"
 
 #: u_translation.rsl
 msgid "L"
@@ -2927,75 +2927,75 @@ msgstr "L"
 
 #: u_translation.rslabel
 msgid "Label:"
-msgstr "Beteckning:"
+msgstr "ຊື່:"
 
 #: u_translation.rslabel2
 msgid "Label"
-msgstr "Etikett"
+msgstr "ຊື່"
 
 #: u_translation.rslabelevery
 msgid "Label every"
-msgstr "Sätt etikett på varje"
+msgstr "ໃສ່ປ້າຍຊື່ທຸກໆ"
 
 #: u_translation.rslabelobject
 msgid "Label object"
-msgstr "Sätt etikett på objektet"
+msgstr "ຊື່ວັດຖຸ"
 
 #: u_translation.rslabels
 msgid "Labels"
-msgstr "Etiketter"
+msgstr "ຊື່"
 
 #: u_translation.rslabeltext
 msgid "Label text"
-msgstr "Etikettext"
+msgstr "ຂໍ້ຄວາມປ້າຍຊື່"
 
 #: u_translation.rslandscape
 msgid "Landscape"
-msgstr "Liggande"
+msgstr "ລວງນອນ"
 
 #: u_translation.rslanguage2
 msgid "Language"
-msgstr "Språk"
+msgstr "ພາສາ"
 
 #: u_translation.rslanguagesele
 msgid "Language selection"
-msgstr "Välj språk"
+msgstr "ເລືອກພາສາ"
 
 #: u_translation.rslast
 msgid "Last"
-msgstr "Sista"
+msgstr "ສຸດທ້າຍ"
 
 #: u_translation.rslatitude
 msgid "Latitude"
-msgstr "Latitud"
+msgstr "ລະຕິຈູດ"
 
 #: u_translation.rsleft
 msgid "Left"
-msgstr "Vänster"
+msgstr "ຊ້າຍ"
 
 #: u_translation.rsleftbar
 msgid "Left bar"
-msgstr "Fält till vänster"
+msgstr "ແຖບຊ້າຍ"
 
 #: u_translation.rslegal
 msgid "Legal"
-msgstr "Aktuell lokal"
+msgstr "ຂໍ້ກຳນົດທາງກົດໝາຍ"
 
 #: u_translation.rslegend
 msgid "Legend"
-msgstr "Beskrivning"
+msgstr "ຄຳອະທິບາຍສັນຍະລັກ"
 
 #: u_translation.rslength
 msgid "Length"
-msgstr "Längd"
+msgstr "ຄວາມຍາວ"
 
 #: u_translation.rslessnebulae
 msgid "Less deep sky"
-msgstr "Färre deep sky"
+msgstr "ວັດຖຸທ້ອງຟ້າຫ່າງໄກໜ້ອຍລົງ"
 
 #: u_translation.rslessstars
 msgid "Less stars"
-msgstr "Färre stjärnor"
+msgstr "ດາວໜ້ອຍລົງ"
 
 #: u_translation.rslha
 msgid "LHA"
@@ -3003,19 +3003,19 @@ msgstr "LHA"
 
 #: u_translation.rslibrationinl
 msgid "Libration in latitude"
-msgstr "Libration i latitud"
+msgstr "ການແກວ່ງໃນລະຕິຈູດ"
 
 #: u_translation.rslibrationinl2
 msgid "Libration in longitude"
-msgstr "Libration i longitud"
+msgstr "ການແກວ່ງໃນລອງຈິຈູດ"
 
 #: u_translation.rslicenseagree
 msgid "License agreement"
-msgstr "Licensavtal"
+msgstr "ຂໍ້ຕົກລົງການນຳໃຊ້"
 
 #: u_translation.rslightyears
 msgid "light years"
-msgstr "ljusår"
+msgstr "ປີແສງ"
 
 #: u_translation.rslii
 msgid "LII"
@@ -3023,519 +3023,519 @@ msgstr "LII"
 
 #: u_translation.rslimit
 msgid "Limit"
-msgstr "Gräns"
+msgstr "ຂີດຈຳກັດ"
 
 #: u_translation.rslimitingmagn
 msgid "Limiting magnitude, list:"
-msgstr "Gränsmagnitud, lista:"
+msgstr "ໂຊຕິມາດຈຳກັດ, ລາຍຊື່:"
 
 #: u_translation.rslimitingmagn2
 msgid "Limiting magnitude:"
-msgstr "Gränsmagnitud"
+msgstr "ໂຊຕິມາດຈຳກັດ:"
 
 #: u_translation.rslimitingsize
 msgid "Limiting size (arcminutes):"
-msgstr "Storleksgräns (bågminuter)"
+msgstr "ຂະໜາດຈຳກັດ (ລິບດາ):"
 
 #: u_translation.rsline1
 msgid "Line"
-msgstr "Linje"
+msgstr "ເສັ້ນ"
 
 #: u_translation.rslinear
 msgid "Linear"
-msgstr "Linjär"
+msgstr "ເສັ້ນຊື່"
 
 #: u_translation.rslineforteles
 msgid "Line for telescope pointing limit"
-msgstr "Linje för teleskopriktningsgräns"
+msgstr "ເສັ້ນສະແດງຂີດຈຳກັດການຊີ້ຂອງກ້ອງໂທລະທັດ"
 
 #: u_translation.rslinemode
 msgid "Line mode"
-msgstr "Linje-mode"
+msgstr "ໂໝດເສັ້ນ"
 
 #: u_translation.rslinemodedraw
 msgid "Line mode drawing"
-msgstr "Linje-mode teckning"
+msgstr "ການແຕ້ມແບບໂໝດເສັ້ນ"
 
 #: u_translation.rslineoperatio
 msgid "Line operation"
-msgstr "Linjeoperation"
+msgstr "ການເຮັດວຽກຂອງເສັ້ນ"
 
 #: u_translation.rslines
 msgid "Lines"
-msgstr "Linjer"
+msgstr "ເສັ້ນ"
 
 #: u_translation.rslinesgrid
 msgid "Lines / grid"
-msgstr "Linjer/rutnät"
+msgstr "ເສັ້ນ / ຕາໜ່າງ"
 
 #: u_translation.rslinewidth
 msgid "Line width "
-msgstr "Linjebredd "
+msgstr "ຄວາມກວ້າງຂອງເສັ້ນ "
 
 #: u_translation.rslinkallchart
 msgid "Link all charts"
-msgstr "Länka alla kartor"
+msgstr "ເຊື່ອມໂຍງທຸກແຜນທີ່"
 
 #: u_translation.rslist
 msgid "List"
-msgstr "Lista"
+msgstr "ລາຍຊື່"
 
 #: u_translation.rslistenonport
 #, object-pascal-format
 msgid "Listen on port: %s"
-msgstr "Lyssna på port: %s"
+msgstr "ລໍຖ້າການເຊື່ອມຕໍ່ຢູ່ພອດ: %s"
 
 #: u_translation.rslistofavaila
 msgid "List of available plates"
-msgstr "Lista över tillgängliga bilder"
+msgstr "ລາຍຊື່ແຜ່ນພາບທີ່ມີ"
 
 #: u_translation.rsload
 msgid "Load"
-msgstr "Läs in"
+msgstr "ໂຫຼດ"
 
 #: u_translation.rsloadfile
 msgid "Load file"
-msgstr "Ladda fil"
+msgstr "ໂຫຼດໄຟລ໌"
 
 #: u_translation.rsloadfromfile
 msgid "Load from file"
-msgstr "Ladda från fil"
+msgstr "ໂຫຼດຈາກໄຟລ໌"
 
 #: u_translation.rsloadindiconf
 msgid "Load INDI configuration"
-msgstr "Ladda INDI-konfiguration"
+msgstr "ໂຫຼດການຕັ້ງຄ່າ INDI"
 
 #: u_translation.rsloadingcatal
 msgid "Loading catalog list. Please wait ..."
-msgstr "Laddar kataloglista. Vänta..."
+msgstr "ກຳລັງໂຫຼດລາຍຊື່ແຄັດຕະລັອກ. ກະລຸນາລໍຖ້າ ..."
 
 #: u_translation.rsloadmpcfile
 msgid "Load MPC file"
-msgstr "Ladda MPC-fil"
+msgstr "ໂຫຼດໄຟລ໌ MPC"
 
 #: u_translation.rsloadmpcforma
 msgid "Load MPC format file"
-msgstr "Ladda MPC formatfil"
+msgstr "ໂຫຼດໄຟລ໌ຮູບແບບ MPC"
 
 #: u_translation.rsloadonlythef
 msgid "Load only the first "
-msgstr "Ladda endast de första "
+msgstr "ໂຫຼດສະເພາະ "
 
 #: u_translation.rsloadproject
 msgid "Load project"
-msgstr "Ladda projekt"
+msgstr "ໂຫຼດໂປຣເຈັກ"
 
 #: u_translation.rslocalhorizon
 msgid "Local horizon"
-msgstr "Lokal horisont"
+msgstr "ຂອບຟ້າທ້ອງຖິ່ນ"
 
 #: u_translation.rslocalizednam
 msgid "Localized name"
-msgstr "Översatt namn"
+msgstr "ຊື່ທ້ອງຖິ່ນ"
 
 #: u_translation.rslocalsideral
 msgid "Local sidereal time"
-msgstr "Lokal siderisk tid"
+msgstr "ເວລາດາລາຄະຕິທ້ອງຖິ່ນ"
 
 #: u_translation.rslocationcode
 msgid "Location code"
-msgstr "Platskod"
+msgstr "ລະຫັດຕຳແໜ່ງ"
 
 #: u_translation.rslocationtime
 msgid "Location / Time"
-msgstr "Plats / tid"
+msgstr "ຕຳແໜ່ງ / ເວລາ"
 
 #: u_translation.rslock
 msgid "Lock"
-msgstr "Lås"
+msgstr "ລັອກ"
 
 #: u_translation.rslockchartpos
 msgid "Lock chart position"
-msgstr "Lås kartposition"
+msgstr "ລັອກຕຳແໜ່ງແຜນທີ່"
 
 #: u_translation.rslockmagnitud
 msgid "Lock the magnitude filter"
-msgstr "Lås magnitudfilter"
+msgstr "ລັອກຕົວກັ່ນຕອງຄວາມສະຫວ່າງ"
 
 #: u_translation.rslockon
 #, object-pascal-format
 msgid "Lock on %s"
-msgstr "Lås på %s"
+msgstr "ລັອກທີ່ %s"
 
 #: u_translation.rslockthechart
 msgid "Lock the chart at this position"
-msgstr "Lås kartan på denna position"
+msgstr "ລັອກແຜນທີ່ໄວ້ທີ່ຕຳແໜ່ງນີ້"
 
 #: u_translation.rslog
 msgid "Log"
-msgstr "Logg"
+msgstr "ລັອກ (Log)"
 
 #: u_translation.rslogarithmics
 msgid "Logarithmic scale"
-msgstr "Logaritmisk skala"
+msgstr "ມາດຕາສ່ວນລໍກາຣິດ"
 
 #: u_translation.rslongitude
 msgid "Longitude"
-msgstr "Longitud"
+msgstr "ລອງຈິຈູດ"
 
 #: u_translation.rslongitudeasc
 msgid "Longitude ascending node"
-msgstr "Longitud stigande nod"
+msgstr "ລອງຈິຈູດຂອງຈຸດໂນດຂຶ້ນ"
 
 #: u_translation.rslookat
 msgid "Look at:"
-msgstr "Titta på:"
+msgstr "ເບິ່ງທີ່:"
 
 #: u_translation.rslosange
 msgid "Lozenge"
-msgstr "Romb"
+msgstr "ຮູບສີ່ຫຼ່ຽມເຂົ້າໜົມຕັດ"
 
 #: u_translation.rslowsurfacebr
 msgid "Low surface brightness"
-msgstr "Ljusstyrka på lågt liggande yta"
+msgstr "ຄວາມສະຫວ່າງພື້ນຜິວຕ່ຳ"
 
 #: u_translation.rsluminosity
 msgid "Luminosity"
-msgstr "Ljusstyrka"
+msgstr "ກຳລັງສ່ອງສະຫວ່າງ"
 
 #: u_translation.rslunareclipse
 msgid "Lunar eclipses"
-msgstr "Månförmörkelser"
+msgstr "ຈັນທະຄາດ"
 
 #: u_translation.rsly
 msgid "ly"
-msgstr "lå"
+msgstr "ປີແສງ"
 
 #: u_translation.rsmag
 msgid "Mag:"
-msgstr "Mag:"
+msgstr "ໂຊຕິມາດ:"
 
 #: u_translation.rsmagn
 msgid "Magn."
-msgstr "Magn."
+msgstr "ໂຊຕິມາດ"
 
 #: u_translation.rsmagnitude
 msgid "Magnitude"
-msgstr "Magnitud"
+msgstr "ໂຊຕິມາດ"
 
 #: u_translation.rsmagnitudeatm
 msgid "Magnitude at maxima"
-msgstr "Magnitud vid maxima"
+msgstr "ໂຊຕິມາດສູງສຸດ"
 
 #: u_translation.rsmagnitudeatm2
 msgid "Magnitude at minima"
-msgstr "Magnitud vid minima"
+msgstr "ໂຊຕິມາດຕ່ຳສຸດ"
 
 #: u_translation.rsmagnitudeban
 msgid "Magnitude band"
-msgstr "Magnitudband"
+msgstr "ແຖບໂຊຕິມາດ"
 
 #: u_translation.rsmagnitudedif
 msgid "Magnitude difference"
-msgstr "Magnitudskillnad"
+msgstr "ຜົນຕ່າງໂຊຕິມາດ"
 
 #: u_translation.rsmagnitudeecl
 msgid "Eclipse magnitude"
-msgstr "Förmörkelsens magnitud"
+msgstr "ຂະໜາດອຸປະລາຄາ"
 
 #: u_translation.rsmagnitudeerr
 msgid "Magnitude error"
-msgstr "Magnitudfel"
+msgstr "ຄວາມຄາດເຄື່ອນຂອງໂຊຕິມາດ"
 
 #: u_translation.rsmagnitudefai
 msgid "magnitudes fainter than the stars."
-msgstr "magnituder svagare än stjärnorna."
+msgstr "ໂຊຕິມາດທີ່ມົວກວ່າດາວ."
 
 #: u_translation.rsmagnitudetyc
 msgid "Magnitude Tycho BT"
-msgstr "Tycho BT magnitud"
+msgstr "ໂຊຕິມາດ Tycho BT"
 
 #: u_translation.rsmagnitudetyc2
 msgid "Magnitude Tycho VT"
-msgstr "Tycho VT magnitud"
+msgstr "ໂຊຕິມາດ Tycho VT"
 
 #: u_translation.rsmaillist
 msgid "Mail list, discussion group"
-msgstr "Mejllista, diskussiongrupp"
+msgstr "ກຸ່ມສົນທະນາທາງອີເມລ໌"
 
 #: u_translation.rsmainbar
 msgid "Main bar"
-msgstr "Huvudfält"
+msgstr "ແຖບຫຼັກ"
 
 #: u_translation.rsmainmenu
 msgid "Main menu"
-msgstr "Huvudmeny"
+msgstr "ເມນູຫຼັກ"
 
 #: u_translation.rsmakeselectio
 msgid "Make selection of the table and column you want to your catalog"
-msgstr "Välj tabell och kolumn som du vill ha i din katalog"
+msgstr "ເລືອກຕາຕະລາງ ແລະ ຄໍລຳທີ່ທ່ານຕ້ອງການໃສ່ໃນແຄັດຕະລັອກ"
 
 #: u_translation.rsmanagetoolbo
 msgid "Manage tool box script"
-msgstr "Hantera skript för verktygslåda"
+msgstr "ຈັດການສະຄຣິບກ່ອງເຄື່ອງມື"
 
 #: u_translation.rsmanual
 msgid "Manual"
-msgstr "Manuell"
+msgstr "ປັບເອງ (Manual)"
 
 #: u_translation.rsmanualmount
 msgid "Manual mount"
-msgstr "Manuell montering"
+msgstr "ຖານກ້ອງແບບປັບເອງ"
 
 #: u_translation.rsmanualtelesc
 msgid "Manual telescope"
-msgstr "Manuellt teleskop"
+msgstr "ກ້ອງດູດາວແບບປັບເອງ"
 
 #: u_translation.rsmap
 msgid "Map"
-msgstr "Karta"
+msgstr "ແຜນທີ່"
 
 #: u_translation.rsmarch
 msgid "March"
-msgstr "Mars"
+msgstr "ມີນາ"
 
 #: u_translation.rsmark
 msgid "Mark"
-msgstr "Markera"
+msgstr "ເຮັດເຄື່ອງໝາຍ"
 
 #: u_translation.rsmarksize
 msgid "Mark size"
-msgstr ""
+msgstr "ຂະໜາດເຄື່ອງໝາຍ"
 
 #: u_translation.rsmarkthechart
 msgid "Mark the centre of the chart"
-msgstr "Markera centrum av kartan"
+msgstr "ໝາຍຈຸດສູນກາງຂອງແຜນທີ່"
 
 #: u_translation.rsmars
 msgid "Mars"
-msgstr "Mars"
+msgstr "ດາວອັງຄານ"
 
 #: u_translation.rsmax
 msgid "Max."
-msgstr "Max."
+msgstr "ສູງສຸດ"
 
 #: u_translation.rsmax2
 msgid "max"
-msgstr "max"
+msgstr "ສູງສຸດ"
 
 #: u_translation.rsmaximize
 msgid "Maximize"
-msgstr "Maximera"
+msgstr "ຂະຫຍາຍເຕັມໜ້າຕ່າງ"
 
 #: u_translation.rsmaximumdecli
 msgid "Maximum declination"
-msgstr "Högsta deklination"
+msgstr "ຄ່າເດັກລີເນຊັນສູງສຸດ"
 
 #: u_translation.rsmaximummagni
 msgid "Maximum magnitude"
-msgstr "Maximum magnitud"
+msgstr "ໂຊຕິມາດສູງສຸດ"
 
 #: u_translation.rsmaximumnumbe
 msgid "Maximum number of image to show simultaneously"
-msgstr "Max antal bilder som visas samtidigt"
+msgstr "ຈຳນວນຮູບພາບສູງສຸດທີ່ຈະສະແດງພ້ອມກັນ"
 
 #: u_translation.rsmaximumrows
 msgid "Maximum rows"
-msgstr "Max antal rader"
+msgstr "ຈຳນວນແຖວສູງສຸດ"
 
 #: u_translation.rsmay
 msgid "May"
-msgstr "Maj"
+msgstr "ພຶດສະພາ"
 
 #: u_translation.rsmbytes
 msgid "MBytes"
-msgstr "MByte"
+msgstr "MB"
 
 #: u_translation.rsmean
 msgid "Mean"
-msgstr "Medelvärde"
+msgstr "ຄ່າສະເລ່ຍ"
 
 #: u_translation.rsmeananomaly
 msgid "Mean anomaly"
-msgstr "Medelavvikelse"
+msgstr "ຄ່ານົວມະລີສະເລ່ຍ"
 
 #: u_translation.rsmeanequatore
 msgid "mean equator, equinox and epoch of the date"
-msgstr "medelvärde för ekvator, dagjämning och epok för datumet"
+msgstr "ສູນສູດສະເລ່ຍ, ວິສຸວັດ ແລະ ອີພັອກ ຕາມວັນທີ"
 
 #: u_translation.rsmeanequinoxa
 msgid "mean equinox and epoch J2000"
-msgstr "medelvärde för dagjämning och epok för J2000"
+msgstr "ວິສຸວັດສະເລ່ຍ ແລະ ອີພັອກ J2000"
 
 #: u_translation.rsmeanequinoxj
 msgid "mean equinox J2000, epoch of the date"
-msgstr "medelvärde för dagjämning J2000, epok för datumet"
+msgstr "ວິສຸວັດສະເລ່ຍ J2000, ອີພັອກ ຕາມວັນທີ"
 
 #: u_translation.rsmeanj2000
 msgid "Mean J2000"
-msgstr "Medelvärde J2000"
+msgstr "ຄ່າສະເລ່ຍ J2000"
 
 #: u_translation.rsmeanlocal
 msgid "Mean local"
-msgstr "Normal lokal"
+msgstr "ເວລາທ້ອງຖິ່ນສະເລ່ຍ"
 
 #: u_translation.rsmeanofthedat
 msgid "Mean of the date"
-msgstr "Medelvärde datum"
+msgstr "ຄ່າສະເລ່ຍຕາມວັນທີ"
 
 #: u_translation.rsmeanposition
 msgid "Mean position"
-msgstr "Medelposition"
+msgstr "ຕຳແໜ່ງສະເລ່ຍ"
 
 #: u_translation.rsmeasurement
 msgid "Measurement"
-msgstr "Mätning"
+msgstr "ການວັດແທກ"
 
 #: u_translation.rsmemo
 msgid "Memo"
-msgstr "Anteckning"
+msgstr "ບັນທຶກຊ່ວຍຈຳ"
 
 #: u_translation.rsmercator
 msgid "Mercator"
-msgstr "Mercator-projektion"
+msgstr "Mercator"
 
 #: u_translation.rsmercury
 msgid "Mercury"
-msgstr "Merkurius"
+msgstr "ດາວພຸດ"
 
 #: u_translation.rsmessages
 msgid "Messages:"
-msgstr "Meddelanden:"
+msgstr "ຂໍ້ຄວາມ:"
 
 #: u_translation.rsmessages2
 msgid "Messages"
-msgstr ""
+msgstr "ຂໍ້ຄວາມ"
 
 #: u_translation.rsmeters
 msgid "Meters"
-msgstr "Meter"
+msgstr "ແມັດ"
 
 #: u_translation.rsmilkyway
 msgid "Milky Way"
-msgstr "Vintergatan"
+msgstr "ທາງຊ້າງເຜືອກ"
 
 #: u_translation.rsmillionkm
 msgid "million Km."
-msgstr "miljon(er) km."
+msgstr "ລ້ານ ກິໂລແມັດ"
 
 #: u_translation.rsmin2
 msgid "min"
-msgstr "min"
+msgstr "ຕ່ຳສຸດ"
 
 #: u_translation.rsminimal
 msgid "Minimal"
-msgstr "Minimal"
+msgstr "ນ້ອຍທີ່ສຸດ"
 
 #: u_translation.rsminimalaltit
 msgid "Minimal altitude"
-msgstr "Lägsta altitud"
+msgstr "ມຸມເງີຍຕ່ຳສຸດ"
 
 #: u_translation.rsminimumdecli
 msgid "Minimum declination"
-msgstr "Minsta deklination"
+msgstr "ຄ່າເດັກລີເນຊັນຕ່ຳສຸດ"
 
 #: u_translation.rsminute
 msgid "Minute"
-msgstr "Minut"
+msgstr "ນາທີ"
 
 #: u_translation.rsminutes
 msgid "minutes"
-msgstr "minuter"
+msgstr "ນາທີ"
 
 #: u_translation.rsmirrorhorizo
 msgid "Mirror horizontally"
-msgstr "Spegla horisontellt"
+msgstr "ສະທ້ອນແນວນອນ"
 
 #: u_translation.rsmirrorvertic
 msgid "Mirror vertically"
-msgstr "Spegla vertikalt"
+msgstr "ສະທ້ອນແນວຕັ້ງ"
 
 #: u_translation.rsmisclines
 msgid "Misc. lines"
-msgstr "Div. linjer"
+msgstr "ເສັ້ນອື່ນໆ"
 
 #: u_translation.rsmissingprere
 msgid "Missing prerequisites"
-msgstr "Saknar nödvändiga filer"
+msgstr "ຂາດສິ່ງທີ່ຈຳເປັນຕ້ອງມີກ່ອນ"
 
 #: u_translation.rsmissingscrip
 msgid "Missing script title!"
-msgstr "Scriptrubrik saknas!"
+msgstr "ຂາດຊື່ສະຄຣິບ!"
 
 #: u_translation.rsmodify
 msgid "Modify"
-msgstr "Ändra"
+msgstr "ແກ້ໄຂ"
 
 #: u_translation.rsmonday
 msgid "Mon."
-msgstr "Mån."
+msgstr "ຈັນ"
 
 #: u_translation.rsmonth
 msgid "Month"
-msgstr "Månad"
+msgstr "ເດືອນ"
 
 #: u_translation.rsmoon
 msgid "Moon"
-msgstr "Månen"
+msgstr "ດວງຈັນ"
 
 #: u_translation.rsmorebuttonsf
 msgid "More buttons for quick access to many functions"
-msgstr ""
+msgstr "ເພີ່ມປຸ່ມຫຼາຍຂຶ້ນເພື່ອເຂົ້າເຖິງຟັງຊັນຕ່າງໆໄດ້ໄວ"
 
 #: u_translation.rsmoreinformat
 msgid "More informations"
-msgstr "Ytterligare information"
+msgstr "ຂໍ້ມູນເພີ່ມເຕີມ"
 
 #: u_translation.rsmorenebulae
 msgid "More deep sky"
-msgstr "Fler deep sky"
+msgstr "ວັດຖຸທ້ອງຟ້າຫ່າງໄກຫຼາຍຂຶ້ນ"
 
 #: u_translation.rsmoreoptions
 msgid "More options"
-msgstr "Fler alternativ"
+msgstr "ຕົວເລືອກເພີ່ມເຕີມ"
 
 #: u_translation.rsmorestars
 msgid "More stars"
-msgstr "Fler stjärnor"
+msgstr "ດາວຫຼາຍຂຶ້ນ"
 
 #: u_translation.rsmorethan1000
 msgid "More than 1000 errors! The processing is aborted."
-msgstr "Mer än 1000 fel! Bearbetningen avbruten."
+msgstr "ພົບຂໍ້ຜິດພາດຫຼາຍກວ່າ 1000 ຄັ້ງ! ການປະມວນຜົນຖືກຍົກເລີກ."
 
 #: u_translation.rsmorethanobje
 #, object-pascal-format
 msgid "More than %s objects, the result is truncated."
-msgstr "Mer än %s objekt, resultatet beskärs."
+msgstr "ມີວັດຖຸຫຼາຍກວ່າ %s ຢ່າງ, ຜົນການຄົ້ນຫາຖືກຕັດອອກ."
 
 #: u_translation.rsmorning
 msgid "Morning"
-msgstr "Morgon"
+msgstr "ຕອນເຊົ້າ"
 
 #: u_translation.rsmorningtwili
 msgid "Morning twilight"
-msgstr "Gryning"
+msgstr "ແສງເງິນ"
 
 #: u_translation.rsmosaic
 msgid "Mosaic"
-msgstr "Mosaik"
+msgstr "ຮູບຕໍ່ (Mosaic)"
 
 #: u_translation.rsmosaiccenter
 msgid "Mosaic center"
-msgstr "Mosaikcentrum"
+msgstr "ຈຸດສູນກາງຮູບຕໍ່"
 
 #: u_translation.rsmosaicsize
 msgid "Mosaic size"
-msgstr "Mosaikstorlek"
+msgstr "ຂະໜາດຮູບຕໍ່"
 
 #: u_translation.rsmountcapabil
 #, object-pascal-format
 msgid "Mount capabilities: %s"
-msgstr ""
+msgstr "ຄວາມສາມາດຂອງຖານຕັ້ງກ້ອງ: %s"
 
 #: u_translation.rsmovelabel
 msgid "Move label"
-msgstr "Flytta etikett"
+msgstr "ຍ້າຍຊື່"
 
 #: u_translation.rsmpchttp
 msgid "MPC HTTP"
@@ -3543,884 +3543,884 @@ msgstr "MPC HTTP"
 
 #: u_translation.rsmultipleflag
 msgid "Multiple flag"
-msgstr "Flera flaggor"
+msgstr "ເຄື່ອງໝາຍລະບົບດາວຫຼາຍດວງ"
 
 #: u_translation.rsmultiplestar
 msgid "Multiple star"
-msgstr "Multipel stjärna"
+msgstr "ລະບົບດາວຫຼາຍດວງ"
 
 #: u_translation.rsnakedeye
 msgid "Naked eye"
-msgstr "Blotta ögat"
+msgstr "ຕາເປົ່າ"
 
 #: u_translation.rsnakedeyerefe
 msgid "Naked eye reference"
-msgstr "Blotta ögat referens"
+msgstr "ອ້າງອີງດ້ວຍຕາເປົ່າ"
 
 #: u_translation.rsname
 msgid "Name"
-msgstr "Namn"
+msgstr "ຊື່"
 
 #: u_translation.rsnautical
 msgid "Nautical"
-msgstr "Nautisk"
+msgstr "ທາງເດີນເຮືອ"
 
 #: u_translation.rsnebula
 msgid "Deep sky object"
-msgstr "Deep Sky objekt"
+msgstr "ວັດຖຸທ້ອງຟ້າ"
 
 #: u_translation.rsnebulacommon
 msgid "Deep sky common name"
-msgstr "Deep sky allmänt namn"
+msgstr "ຊື່ທົ່ວໄປຂອງວັດຖຸທ້ອງຟ້າຫ່າງໄກ"
 
 #: u_translation.rsnebuladispla
 msgid "Deep sky objects display"
-msgstr "Visning av deep sky objekt"
+msgstr "ການສະແດງວັດຖຸທ້ອງຟ້າ"
 
 #: u_translation.rsnebulae
 msgid "Deep sky objects"
-msgstr "Deep sky objekt"
+msgstr "ວັດຖຸທ້ອງຟ້າ"
 
 #: u_translation.rsnebulaefilte
 msgid "Deep sky filter"
-msgstr "Deep sky filter"
+msgstr "ຕົວກັອງວັດຖຸທ້ອງຟ້າ"
 
 #: u_translation.rsnebulaeoroth
 msgid "Deep sky or other objects"
-msgstr "Deep sky eller andra objekt"
+msgstr "ວັດຖຸທ້ອງຟ້າຫ່າງໄກ ຫຼື ວັດຖຸອື່ນໆ"
 
 #: u_translation.rsnebulaeoutli
 msgid "Nebulae outlines"
-msgstr "Nebulosabeskrivningar"
+msgstr "ເສັ້ນຂອບເນບິວລາ"
 
 #: u_translation.rsneighbor
 msgid "Neighbour"
-msgstr "Grannobjekt"
+msgstr "ວັດຖຸໃກ້ຄຽງ"
 
 #: u_translation.rsneptune
 msgid "Neptune"
-msgstr "Neptunus"
+msgstr "ດາວເນບຈູນ"
 
 #: u_translation.rsnever
 msgid "never"
-msgstr "aldrig"
+msgstr "ບໍ່ເຄີຍ"
 
 #: u_translation.rsnewbetaversi
 msgid "New beta version available"
-msgstr "Ny betaversion tillgänglig"
+msgstr "ມີເວີຊັນເບຕ້າໃໝ່ໃຫ້ໃຊ້ງານ"
 
 #: u_translation.rsnewchart
 msgid "New chart"
-msgstr "Ny karta"
+msgstr "ແຜນທີ່ໃໝ່"
 
 #: u_translation.rsnewfindercir
 msgid "New finder circle"
-msgstr "Ny sökarcirkel"
+msgstr "ວົງກົມຊ່ວຍຫາອັນໃໝ່"
 
 #: u_translation.rsnewlabel
 msgid "New label"
-msgstr "Ny etikett"
+msgstr "ຊື່ໃໝ່"
 
 #: u_translation.rsnewversionav
 msgid "New version available"
-msgstr "Ny version tillgänglig"
+msgstr "ມີເວີຊັນໃໝ່ໃຫ້ໃຊ້ງານ"
 
 #: u_translation.rsnext
 msgid "Next   >>"
-msgstr "Nästa>>"
+msgstr "ຖັດໄປ >>"
 
 #: u_translation.rsnext2
 msgid "Next"
-msgstr "Nästa"
+msgstr "ຖັດໄປ"
 
 #: u_translation.rsnextchart
 msgid "Next Chart"
-msgstr "Nästa karta"
+msgstr "ແຜນທີ່ຖັດໄປ"
 
 #: u_translation.rsnightvision
 msgid "Night vision"
-msgstr "Nattvisning"
+msgstr "ໂໝດກາງຄືນ"
 
 #: u_translation.rsnightvisionc
 msgid "Night vision color"
-msgstr "Nattvisning"
+msgstr "ສີສຳລັບເບິ່ງກາງຄືນ"
 
 #: u_translation.rsnoasteroidda
 #, object-pascal-format
 msgid "No asteroids data found!%sPlease load a MPC file first."
-msgstr "Hittade inga asterioddata!%sLadda en MPC-fil först."
+msgstr "ບໍ່ພົບຂໍ້ມູນດາວເຄາະນ້ອຍ! %sກະລຸນາໂຫຼດໄຟລ໌ MPC ກ່ອນ."
 
 #: u_translation.rsnoastronomic
 msgid "No astronomical twilight today!"
-msgstr "Ingen astronomisk skymning idag!"
+msgstr "ບໍ່ມີແສງເງິນແສງທອງທາງດາລາສາດໃນມື້ນີ້!"
 
 #: u_translation.rsnocatalogsel
 msgid "No catalog selected, or no table from the selected catalog contain coordinates information."
-msgstr "Ingen katalog vald, eller ingen tabell i vald katalog innehåller koordinatinformation."
+msgstr "ບໍ່ມີການເລືອກແຄັດຕະລັອກ ຫຼື ແຄັດຕະລັອກທີ່ເລືອກບໍ່ມີຂໍ້ມູນພິກັດ."
 
 #: u_translation.rsnochange
 msgid "No change"
-msgstr "Ingen ändring"
+msgstr "ບໍ່ມີການປ່ຽນແປງ"
 
 #: u_translation.rsnodata
 msgid "No Data"
-msgstr "Ingen data"
+msgstr "ບໍ່ມີຂໍ້ມູນ"
 
 #: u_translation.rsnodecimalsep
 msgid "No decimal separator"
-msgstr "Utan decimalavskiljare"
+msgstr "ບໍ່ມີຕົວແຍກທົດສະນິຍົມ"
 
 #: u_translation.rsnomargin
 msgid "No margin"
-msgstr "Ingen marginal"
+msgstr "ບໍ່ມີຂອບ"
 
 #: u_translation.rsnone1
 msgid "None"
-msgstr "Ingen"
+msgstr "ບໍ່ມີ"
 
 #: u_translation.rsnonexistant
 msgid "Non-existent"
-msgstr "Finns inte"
+msgstr "ບໍ່ມີຢູ່ຈິງ"
 
 #: u_translation.rsnonexistentu
 msgid "Non-existent/unknown"
-msgstr "Finns ej/okänd"
+msgstr "ບໍ່ມີຢູ່/ບໍ່ຮູ້ຈັກ"
 
 #: u_translation.rsnoobjecttolo
 msgid "No object to lock on"
-msgstr "Inget objekt att låsa på"
+msgstr "ບໍ່ມີວັດຖຸໃຫ້ລັອກ"
 
 #: u_translation.rsnopicture
 msgid "No picture"
-msgstr "Ingen bild"
+msgstr "ບໍ່ມີຮູບພາບ"
 
 #: u_translation.rsnoprinterfou
 msgid "No printer found!"
-msgstr "Hittade ingen skrivare!"
+msgstr "ບໍ່ພົບເຄື່ອງພິມ!"
 
 #: u_translation.rsnopropermo
 msgid "(uncorrected for proper motion, no pm data available from this catalog)"
-msgstr "(ej korrigerad för egenrörelse, det finns inga data för detta i katalogen)"
+msgstr "(ບໍ່ໄດ້ປັບແກ້ການເຄື່ອນທີ່ຈິງ, ບໍ່ມີຂໍ້ມູນ pm ໃນແຄັດຕະລັອກນີ້)"
 
 #: u_translation.rsnoresponsefr
 msgid "No response from server"
-msgstr ""
+msgstr "ບໍ່ມີການຕອບຮັບຈາກເຊີເວີ"
 
 #: u_translation.rsnorth
 msgid "North"
-msgstr "Norr"
+msgstr "ທິດເໜືອ"
 
 #: u_translation.rsnosamphubpro
 msgid "No SAMP hub profile found, no hub is running."
-msgstr "Ingen SAMP hub-profil hittades, ingen hub körs."
+msgstr "ບໍ່ພົບໂປຣໄຟລ໌ SAMP hub, ບໍ່ມີ hub ໃດກຳລັງເຮັດວຽກ."
 
 #: u_translation.rsnotafitsfile
 msgid "Not a FITS file, SIMPLE = T keyword missing"
-msgstr "Inte en FITS-fil, SIMPLE = T nyckelord saknas"
+msgstr "ບໍ່ແມ່ນໄຟລ໌ FITS, ບໍ່ພົບຄີເວີດ SIMPLE = T"
 
 #: u_translation.rsnotargetobje
 msgid "No target object"
-msgstr "Inget målobjekt"
+msgstr "ບໍ່ມີວັດຖຸເປົ້າໝາຍ"
 
 #: u_translation.rsnotavailable
 msgid "Not available"
-msgstr "Ej tillgänglig"
+msgstr "ບໍ່ພ້ອມໃຊ້ງານ"
 
 #: u_translation.rsnotconnected
 #, object-pascal-format
 msgid "%s not connected."
-msgstr "%s inte ansluten."
+msgstr "%s ບໍ່ໄດ້ເຊື່ອມຕໍ່."
 
 #: u_translation.rsnote
 msgid "Note"
-msgstr "Anteckning"
+msgstr "ໝາຍເຫດ"
 
 #: u_translation.rsnotfound
 #, object-pascal-format
 msgid "%s not found"
-msgstr "%s hittades ej"
+msgstr "ບໍ່ພົບ %s"
 
 #: u_translation.rsnotfoundinan
 #, object-pascal-format
 msgid "%s  Not found in any of the installed catalog indices."
-msgstr "%s Kunde inte hittas i någon av katalogerna."
+msgstr "%s ບໍ່ພົບໃນດັດຊະນີຄາຕາລັອກທີ່ຕິດຕັ້ງໄວ້."
 
 #: u_translation.rsnotfoundmayb
 #, object-pascal-format
 msgid "%s Not found!%sMaybe the catalog is not installed, or there is a wrong path in catalog setting."
-msgstr "%s Hittades ej!%sKatalogen kanske inte är installerad, eller så kan sökvägen vara felaktig."
+msgstr "%s ບໍ່ພົບ! %sບາງທີຄາຕາລັອກອາດຍັງບໍ່ໄດ້ຕິດຕັ້ງ ຫຼື ກຳນົດເສັ້ນທາງຜິດ."
 
 #: u_translation.rsnovember
 msgid "November"
-msgstr "November"
+msgstr "ພະຈິກ"
 
 #: u_translation.rsnow
 msgid "Now"
-msgstr "Nu"
+msgstr "ຕອນນີ້"
 
 #: u_translation.rsnumberofcopi
 msgid "Number of copies"
-msgstr "Antal kopior"
+msgstr "ຈຳນວນຊຸດທີ່ພິມ"
 
 #: u_translation.rsnumberofdays
 msgid "Number of days"
-msgstr "Antal dygn"
+msgstr "ຈຳນວນມື້"
 
 #: u_translation.rsnumberoffile
 msgid "Number of files"
-msgstr "Antal filer"
+msgstr "ຈຳນວນໄຟລ໌"
 
 #: u_translation.rsnumberofigno
 #, object-pascal-format
 msgid "Number of ignored invalid rows: %s"
-msgstr "Antal ignorerade ogiltiga rader: %s"
+msgstr "ຈຳນວນແຖວທີ່ບໍ່ຖືກຕ້ອງທີ່ຖືກລະເລີຍ: %s"
 
 #: u_translation.rsnumberofmont
 msgid "Number of months"
-msgstr "Antal månader"
+msgstr "ຈຳນວນເດືອນ"
 
 #: u_translation.rsnumberofstar
 msgid "Number of stars"
-msgstr "Antal stjärnor"
+msgstr "ຈຳນວນດາວ"
 
 #: u_translation.rsnumberofstep
 msgid "Number of steps"
-msgstr "Antal steg"
+msgstr "ຈຳນວນຂັ້ນຕອນ"
 
 #: u_translation.rsnutationaber
 msgid "Nutation, aberration"
-msgstr "Nutation, aberration"
+msgstr "ການສະແກວ່ງ, ການເບ່ຽງເບນ"
 
 #: u_translation.rsobject
 msgid "Object"
-msgstr "Objekt"
+msgstr "ວັດຖຸ"
 
 #: u_translation.rsobjectbar
 msgid "Object bar"
-msgstr "Objektfält"
+msgstr "ແຖບວັດຖຸ"
 
 #: u_translation.rsobjectfilter
 msgid "Object filter"
-msgstr "Objektfilter"
+msgstr "ຕົວກັອງວັດຖຸ"
 
 #: u_translation.rsobjectfilter2
 msgid "Object filter settings"
-msgstr "Objektfilter inställningar"
+msgstr "ຕັ້ງຄ່າຕົວກັອງວັດຖຸ"
 
 #: u_translation.rsobjectlist
 msgid "Object list"
-msgstr "Objektlista"
+msgstr "ລາຍຊື່ວັດຖຸ"
 
 #: u_translation.rsobjectlistse
 msgid "Object list settings"
-msgstr "Inställning av objektlista"
+msgstr "ຕັ້ງຄ່າລາຍຊື່ວັດຖຸ"
 
 #: u_translation.rsobjectname
 msgid "Object name"
-msgstr "Objektets namn"
+msgstr "ຊື່ວັດຖຸ"
 
 #: u_translation.rsobjectsizeun
 msgid "Object size unit"
-msgstr "Enhet för objektets storlek"
+msgstr "ຫົວໜ່ວຍຂະໜາດວັດຖຸ"
 
 #: u_translation.rsobjecttype
 msgid "Object type"
-msgstr "Objekttyp"
+msgstr "ປະເພດວັດຖຸ"
 
 #: u_translation.rsobsaltitude
 #, object-pascal-format
 msgid "%sAltitude"
-msgstr "%sElevation"
+msgstr "%sມຸມເງີຍ"
 
 #: u_translation.rsobservationt
 msgid "Observation time"
-msgstr "Observationstid"
+msgstr "ເວລາສັງເກດການ"
 
 #: u_translation.rsobservatory
 msgid "Observatory"
-msgstr "Observatorium"
+msgstr "ຫໍດູດາວ"
 
 #: u_translation.rsobservatoryd
 msgid "Observatory database"
-msgstr "Observatoriedatabas"
+msgstr "ຖານຂໍ້ມູນຫໍດູດາວ"
 
 #: u_translation.rsobservertool
 msgid "Observer tools"
-msgstr "Observerarverktyg"
+msgstr "ເຄື່ອງມືຜູ້ສັງເກດການ"
 
 #: u_translation.rsobservinglis
 msgid "Observing list"
-msgstr "Observationslista"
+msgstr "ລາຍການສັງເກດການ"
 
 #: u_translation.rsobservinglis2
 msgid "Observing list elements"
-msgstr "Detaljer i observationslistan"
+msgstr "ອົງປະກອບລາຍການສັງເກດການ"
 
 #: u_translation.rsobsolete
 msgid "Obsolete"
-msgstr "Föråldrade"
+msgstr "ຫຼ້າສະໄໝ"
 
 #: u_translation.rsoctober
 msgid "October"
-msgstr "Oktober"
+msgstr "ຕຸລາ"
 
 #: u_translation.rsofficialname
 msgid "Official name"
-msgstr "Officiellt namn"
+msgstr "ຊື່ທາງການ"
 
 #: u_translation.rsoffset
 msgid "Offset"
-msgstr "Offset"
+msgstr "ຄ່າເບ່ຽງເບນ"
 
 #: u_translation.rsoffsetlabel
 msgid "Offset label"
-msgstr "Offset etikett"
+msgstr "ໄລຍະຫ່າງປ້າຍຊື່"
 
 #: u_translation.rsok
 msgid "OK"
-msgstr "OK"
+msgstr "ຕົກລົງ"
 
 #: u_translation.rsoneevery
 msgid "One every"
-msgstr "En varje"
+msgstr "ໜຶ່ງອັນທຸກໆ"
 
 #: u_translation.rsonlinedss
 msgid "Online DSS"
-msgstr "Online DSS"
+msgstr "DSS ອອນລາຍ"
 
 #: u_translation.rsonlinedsspic
 msgid "Online DSS pictures"
-msgstr "Online DSS bilder"
+msgstr "ຮູບພາບ DSS ອອນລາຍ"
 
 #: u_translation.rsonlinepictur
 msgid "Online pictures servers"
-msgstr "Online bildservrar"
+msgstr "ເຊີບເວີຮູບພາບອອນລາຍ"
 
 #: u_translation.rsonlinesearch
 msgid "Online search failed!"
-msgstr "Onlinesökning misslyckades!"
+msgstr "ການຄົ້ນຫາອອນລາຍລົ້ມເຫຼວ!"
 
 #: u_translation.rsonlinesearch2
 msgid "Online search result"
-msgstr "Online sökresultat"
+msgstr "ຜົນການຄົ້ນຫາອອນລາຍ"
 
 #: u_translation.rsonlynumbered
 msgid "Only numbered asteroids"
-msgstr "Endast numrerade asteroider"
+msgstr "ສະເພາະດາວເຄາະນ້ອຍທີ່ມີໝາຍເລກ"
 
 #: u_translation.rsonlyobjectsw
 msgid "Only objects within airmass limits tonight"
-msgstr "Endast objekt inom kvällens luftmassagräns"
+msgstr "ສະເພາະວັດຖຸທີ່ຢູ່ໃນຂອບເຂດມວນອາກາດໃນຄືນນີ້"
 
 #: u_translation.rsonlyobjectsw2
 msgid "Only objects within airmass limits now"
-msgstr "Endast objekt inom nuvarande luftmassagräns"
+msgstr "ສະເພາະວັດຖຸທີ່ຢູ່ໃນຂອບເຂດມວນອາກາດໃນເວລານີ້"
 
 #: u_translation.rsonlyobjectsw3
 msgid "Only objects within hour angle limits tonight"
-msgstr "Endast objekt inom kvällens timvinkelgräns"
+msgstr "ສະເພາະວັດຖຸທີ່ຢູ່ໃນຂອບເຂດມຸມຊົ່ວໂມງໃນຄືນນີ້"
 
 #: u_translation.rsonlyobjectsw4
 msgid "Only objects within hour angle limits now"
-msgstr "Endast objekt inom nuvarande timvinkelgräns"
+msgstr "ສະເພາະວັດຖຸທີ່ຢູ່ໃນຂອບເຂດມຸມຊົ່ວໂມງໃນເວລານີ້"
 
 #: u_translation.rsonlythefirst
 msgid "Only the first"
-msgstr "Endast den första"
+msgstr "ສະເພາະອັນທຳອິດ"
 
 #: u_translation.rsonlythelast
 msgid "Only the last"
-msgstr "Endast den sista"
+msgstr "ສະເພາະອັນສຸດທ້າຍ"
 
 #: u_translation.rsopen
 msgid "Open"
-msgstr "Öppna"
+msgstr "ເປີດ"
 
 #: u_translation.rsopenachart
 msgid "Open a chart"
-msgstr "Öppna en karta"
+msgstr "ເປີດແຜນທີ່"
 
 #: u_translation.rsopencatalogs
 msgid "Open Catalog Setup"
-msgstr "Öppna kataloginstallation"
+msgstr "ເປີດການຕັ້ງຄ່າແຄັດຕະລັອກ"
 
 #: u_translation.rsopencluster
 msgid "Open cluster"
-msgstr "Öppen stjärnhop"
+msgstr "ກະຈຸກດາວເປີດ"
 
 #: u_translation.rsopenscript
 msgid "Open script"
-msgstr "Öppna skript"
+msgstr "ເປີດສະຄຣິບ"
 
 #: u_translation.rsopenthebitma
 msgid "Open the bitmap."
-msgstr "Öppna bitmapp"
+msgstr "ເປີດບິດແມັບ."
 
 #: u_translation.rsoptions
 msgid "Options"
-msgstr "Alternativ"
+msgstr "ຕົວເລືອກ"
 
 #: u_translation.rsorbit
 msgid "Orbit"
-msgstr "Bana"
+msgstr "ວົງໂຄຈອນ"
 
 #: u_translation.rsorbitaleleme
 msgid "Orbital elements"
-msgstr "Kretsande element"
+msgstr "ອົງປະກອບວົງໂຄຈອນ"
 
 #: u_translation.rsorientation
 msgid "Orientation"
-msgstr "Orientering"
+msgstr "ການວາງແນວ"
 
 #: u_translation.rsorientationf
 msgid "Orientation from zenith in Alt/Az chart"
-msgstr "Orientering från zenit med alt-/az-karta"
+msgstr "ການວາງທິດທາງຈາກຈຸດຈອມຟ້າໃນແຜນທີ່ Alt/Az"
 
 #: u_translation.rsorienttothep
 msgid "Orient to the pole or zenith"
-msgstr "Orientera efter poler"
+msgstr "ວາງທິດທາງໄປຫາຂົ້ວຟ້າ ຫຼື ຈຸດຈອມຟ້າ"
 
 #: u_translation.rsorusealocalf
 msgid "Or use a local file:"
-msgstr "Eller använd en lokal fil:"
+msgstr "ຫຼື ໃຊ້ໄຟລ໌ໃນເຄື່ອງ:"
 
 #: u_translation.rsother
 msgid "Other"
-msgstr "Annat"
+msgstr "ອື່ນໆ"
 
 #: u_translation.rsotherlabel
 msgid "Other label"
-msgstr "Annan beteckning"
+msgstr "ຊື່ອື່ນໆ"
 
 #: u_translation.rsothersoftwar
 msgid "Other software data"
-msgstr "Övriga programdata"
+msgstr "ຂໍ້ມູນຈາກຊອບແວອື່ນ"
 
 #: u_translation.rsoutersolarsy
 msgid "Outer Solar System"
-msgstr "Yttre solsystem"
+msgstr "ລະບົບສຸລິຍະຊັ້ນນອກ"
 
 #: u_translation.rsoutputcatalo
 msgid "Output catalog type"
-msgstr "Önskad katalogtyp"
+msgstr "ປະເພດຄາຕາລັອກຂາອອກ"
 
 #: u_translation.rsoutputcatalo2
 msgid "Output catalog options"
-msgstr "Alternativ för ny katalog"
+msgstr "ຕົວເລືອກຄາຕາລັອກຂາອອກ"
 
 #: u_translation.rsoutputdirect
 msgid "Output directory"
-msgstr "Målmapp"
+msgstr "ໂຟນເດີຂາອອກ"
 
 #: u_translation.rspagemarginin
 msgid "Page margin in millimeters"
-msgstr "Sidmarginal i millimeter"
+msgstr "ຂອບໜ້າເຈ້ຍເປັນມິນລິແມັດ"
 
 #: u_translation.rsparallax
 msgid "Parallax"
-msgstr "Parallax"
+msgstr "ພະລັນແລັກຊ໌"
 
 #: u_translation.rsparametric
 msgid "Parametric"
-msgstr "Parametrisk"
+msgstr "ພາຣາເມຕຣິກ"
 
 #: u_translation.rspark
 msgid "Park"
-msgstr "Parkera"
+msgstr "ເກັບຖານ (Park)"
 
 #: u_translation.rspartial
 msgid "Partial"
-msgstr "Partiell"
+msgstr "ບາງສ່ວນ"
 
 #: u_translation.rspassword
 msgid "Password"
-msgstr "Lösenord"
+msgstr "ລະຫັດຜ່ານ"
 
 #: u_translation.rspastecoordin
 msgid "Paste coordinates"
-msgstr "Klistra in koordinater"
+msgstr "ວາງພິກັດ"
 
 #: u_translation.rspastel
 msgid "Pastel"
-msgstr "Pastell"
+msgstr "ສີພາສເທວ"
 
 #: u_translation.rspath
 msgid "Path"
-msgstr "Sökväg"
+msgstr "ເສັ້ນທາງ"
 
 #: u_translation.rspathtosaveth
 msgid "Path to save the file:"
-msgstr "Sökväg för att spara filen:"
+msgstr "ເສັ້ນທາງບັນທຶກໄຟລ໌:"
 
 #: u_translation.rspathwidth
 msgid "Path width"
-msgstr "Bredd"
+msgstr "ຄວາມກວ້າງຂອງເສັ້ນທາງ"
 
 #: u_translation.rspause
 msgid "Pause"
-msgstr "Paus"
+msgstr "ພັກ"
 
 #: u_translation.rspenumbra
 msgid "Penumbra"
-msgstr "Halvskugga"
+msgstr "ເງົາມົວ"
 
 #: u_translation.rsperihelionda
 msgid "Perihelion date"
-msgstr "Perihelium datum"
+msgstr "ວັນທີໃກ້ດວງອາທິດທີ່ສຸດ"
 
 #: u_translation.rsperiheliondi
 msgid "Perihelion distance"
-msgstr "Periheliumavstånd"
+msgstr "ໄລຍະໃກ້ດວງອາທິດທີ່ສຸດ"
 
 #: u_translation.rsperiod
 msgid "Period"
-msgstr "Period"
+msgstr "ຄາບ"
 
 #: u_translation.rspersonaldata
 msgid "Personal data"
-msgstr "Egna data"
+msgstr "ຂໍ້ມູນສ່ວນຕົວ"
 
 #: u_translation.rsphaseangle
 msgid "Phase angle"
-msgstr "Fasvinkel"
+msgstr "ມຸມເຟສ"
 
 #: u_translation.rsphotographic
 msgid "Photographic plate"
-msgstr "Fotografisk bild"
+msgstr "ແຜ່ນພາບຖ່າຍ"
 
 #: u_translation.rsphotographic2
 msgid "Photographic"
-msgstr "Fotografisk"
+msgstr "ຮູບຖ່າຍ"
 
 #: u_translation.rspictureangle
 msgid "Picture angle offset"
-msgstr "Bildens vinkelförskjutning"
+msgstr "ໄລຍະຫ່າງມຸມຮູບພາບ"
 
 #: u_translation.rspictures
 msgid "Pictures"
-msgstr "Bilder"
+msgstr "ຮູບພາບ"
 
 #: u_translation.rspixelcount
 msgid "Pixel count"
-msgstr "Pixelantal"
+msgstr "ຈຳນວນພິກເຊວ"
 
 #: u_translation.rspixels
 msgid "pixels"
-msgstr "pixlar"
+msgstr "ພິກເຊລ"
 
 #: u_translation.rspixelsize
 msgid "Pixel size"
-msgstr "Pixelstorlek"
+msgstr "ຂະໜາດພິກເຊວ"
 
 #: u_translation.rsplanet
 msgid "Planet"
-msgstr "Planet"
+msgstr "ດາວເຄາະ"
 
 #: u_translation.rsplanetaryneb
 msgid "Planetary nebula"
-msgstr "Planetarisk nebulosa"
+msgstr "ເນບິວລາດາວເຄາະ"
 
 #: u_translation.rsplanetarysat
 msgid "Planetary satellite"
-msgstr "Planetarisk satellit"
+msgstr "ດາວບໍລິວານດາວເຄາະ"
 
 #: u_translation.rsplanetssetti
 msgid "Planet settings"
-msgstr "Planetinställningar"
+msgstr "ຕັ້ງຄ່າດາວເຄາະ"
 
 #: u_translation.rsplanetvisibi
 msgid "Planet visibility"
-msgstr "Planetsynlighet"
+msgstr "ການປາກົດຂອງດາວເຄາະ"
 
 #: u_translation.rsplatedefect
 msgid "Plate defect"
-msgstr "Bild felaktig"
+msgstr "ຂໍ້ຜິດພາດຂອງແຜ່ນພາບ"
 
 #: u_translation.rsplateiddatee
 msgid "Plate id.    Date  exp.   Margin  CD  Observatory"
-msgstr "Bild id. Utg.dat. Margin CD Observ."
+msgstr "ລະຫັດແຜ່ນ    ວັນທີ ຖ່າຍ   ຂອບ  CD  ຫໍດູດາວ"
 
 #: u_translation.rspleasechecky
 msgid "Please check your Internet connection and the URL definition"
-msgstr "Kontrollera din Internetanslutning och URL-adressen"
+msgstr "ກະລຸນາກວດສອບການເຊື່ອມຕໍ່ອິນເຕີເນັດ ແລະ URL"
 
 #: u_translation.rspleaseconfig
 msgid "Please configure your DSS file path first."
-msgstr "Ställ in sökvägen till DSS filer först."
+msgstr "ກະລຸນາຕັ້ງຄ່າເສັ້ນທາງໄຟລ໌ DSS ກ່ອນ."
 
 #: u_translation.rspleaseconfig2
 msgid "Please configure the orbital elements URL!"
-msgstr "Ställ in URL för kretsande element"
+msgstr "ກະລຸນາຕັ້ງຄ່າ URL ຂອງອົງປະກອບວົງໂຄຈອນ!"
 
 #: u_translation.rspleaseconfir
 #, object-pascal-format
 msgid "Please confirm that the telescope is pointed at %s"
-msgstr "Bekräfta att teleskopet pekar på %s"
+msgstr "ກະລຸນາຍືນຍັນວ່າກ້ອງດູດາວຊີ້ໄປທີ່ %s"
 
 #: u_translation.rspleasedownlo
 msgid "Please download and select TLE file"
-msgstr "Var god ladda ner och välj TLE-fil"
+msgstr "ກະລຸນາດາວໂຫຼດ ແລະ ເລືອກໄຟລ໌ TLE"
 
 #: u_translation.rspleaseensure
 msgid "Please ensure that ASCOM telescope drivers are installed properly."
-msgstr "Säkerställ att ASCOM teleskopdrivrutin är korrekt installerad."
+msgstr "ກະລຸນາກວດສອບໃຫ້ແນ່ໃຈວ່າໄດຣເວີກ້ອງໂທລະທັດ ASCOM ຖືກຕິດຕັ້ງຢ່າງຖືກຕ້ອງ."
 
 #: u_translation.rspleaseentera
 msgid "Please enter an object identifier."
-msgstr "Ange en identifierare för objektet"
+msgstr "ກະລຸນາປ້ອນຊື່ລະບຸວັດຖຸ."
 
 #: u_translation.rspleaseindica
 msgid "Please indicate a catalog short name"
-msgstr "Ange ett kortnamn för katalogen"
+msgstr "ກະລຸນາລະບຸຊື່ຫຍໍ້ຄາຕາລັອກ"
 
 #: u_translation.rspleaseindica2
 msgid "Please indicate a catalog long name"
-msgstr "Ange ett långt namn för katalogen"
+msgstr "ກະລຸນາລະບຸຊື່ເຕັມຄາຕາລັອກ"
 
 #: u_translation.rspleaseindica3
 msgid "Please indicate the directory where the catalog must be built"
-msgstr "Ange mappen som katalogen ska sparas i"
+msgstr "ກະລຸນາລະບຸໂຟນເດີທີ່ຈະສ້າງຄາຕາລັອກ"
 
 #: u_translation.rspleaseinstwine
 msgid "Please install wine http://www.winehq.org/ to compute artificial satellites on your computer."
-msgstr "Installera wine http://www.winehq.org/ för att beräkna artificiella satelliter på din dator.."
+msgstr "ກະລຸນາຕິດຕັ້ງ wine http://www.winehq.org/ ເພື່ອຄຳນວນດາວທຽມໃນຄອມພິວເຕີຂອງທ່ານ."
 
 #: u_translation.rspleasemountr
 msgid "Please mount RealSky CD number"
-msgstr "Sätt i RealSky CD nummer"
+msgstr "ກະລຸນາໃສ່ແຜ່ນ RealSky CD ໝາຍເລກ"
 
 #: u_translation.rspleasereport
 msgid "Please report any problem to:"
-msgstr "Vänligen rapportera eventuella problem till:"
+msgstr "ກະລຸນາລາຍງານບັນຫາຫາ:"
 
 #: u_translation.rspleasetrytoc
 msgid "Please try to create this directory yourself and restart the program."
-msgstr "Försök att skapa mappen själv och starta om programmet."
+msgstr "ກະລຸນາລອງສ້າງໂຟນເດີນີ້ດ້ວຍຕົນເອງ ແລະ ເລີ່ມຕົ້ນໂປຣແກຣມໃໝ່."
 
 #: u_translation.rspleasetrytor
 msgid "Please try to reinstall the program."
-msgstr "Försök att installera om programmet."
+msgstr "ກະລຸນາລອງຕິດຕັ້ງໂປຣແກຣມໃໝ່."
 
 #: u_translation.rspleasewait
 msgid "Please wait..."
-msgstr "Vänta..."
+msgstr "ກະລຸນາລໍຖ້າ..."
 
 #: u_translation.rsplottheposit
 msgid "Plot orbital motion of solar system objects."
-msgstr "Kartlägg banrörelser för solsystemsobjekt"
+msgstr "ວາດເສັ້ນທາງການເຄື່ອນທີ່ຂອງວັດຖຸໃນລະບົບສຸລິຍະ."
 
 #: u_translation.rspluto
 msgid "Pluto"
-msgstr "Pluto"
+msgstr "ດາວພລູໂຕ"
 
 #: u_translation.rsplutoisaplan
 msgid "Pluto is a planet."
-msgstr "Pluto är en planet."
+msgstr "ດາວພູໂຕແມ່ນດາວເຄາະ."
 
 #: u_translation.rspoleinclinat
 msgid "Pole inclination"
-msgstr "Polinklination"
+msgstr "ຄວາມອຽງຂອງຂົ້ວ"
 
 #: u_translation.rspoleprecessi
 msgid "Pole precession"
-msgstr "Polernas precession"
+msgstr "ການສ່າຍຂອງແກນຂົ້ວໂລກ"
 
 #: u_translation.rsport
 msgid "Port:"
-msgstr "Port:"
+msgstr "ພອດ:"
 
 #: u_translation.rsportrait
 msgid "Portrait"
-msgstr "Stående"
+msgstr "ລວງຕັ້ງ"
 
 #: u_translation.rsposition
 msgid "Position"
-msgstr "Position"
+msgstr "ຕຳແໜ່ງ"
 
 #: u_translation.rspositionangl
 msgid "Position angle"
-msgstr "Positionsvinkel"
+msgstr "ມຸມຕຳແໜ່ງ"
 
 #: u_translation.rspositionepoc
 msgid "Position epoch"
-msgstr "Position epok"
+msgstr "ຍຸກສະໄໝຂອງຕຳແໜ່ງ"
 
 #: u_translation.rspostscript
 msgid "PostScript"
-msgstr "PostScript fil"
+msgstr "PostScript"
 
 #: u_translation.rspower
 msgid "Power"
-msgstr "Power"
+msgstr "ກຳລັງຂະຫຍາຍ"
 
 #: u_translation.rsprefixnamewi
 msgid "Prefix name with catalog short name"
-msgstr "Sätt katalogens kortnamn som prefix för namn"
+msgstr "ນຳໜ້າຊື່ດ້ວຍຊື່ຫຍໍ້ຂອງແຄັດຕະລັອກ"
 
 #: u_translation.rsprepareacata
 msgid "Prepare a catalog with CatGen"
-msgstr "Skapa en katalog med CatGen"
+msgstr "ກຽມຄາຕາລັອກດ້ວຍ CatGen"
 
 #: u_translation.rspreparedata
 msgid "Prepare data "
-msgstr "Beräkna data "
+msgstr "ກຽມຂໍ້ມູນ "
 
 #: u_translation.rspreparemonth
 msgid "Prepare monthly data"
-msgstr "Beräkna månatliga data"
+msgstr "ກຽມຂໍ້ມູນລາຍເດືອນ"
 
 #: u_translation.rsprepointing
 msgid "Pre-Pointing"
-msgstr "Förriktning"
+msgstr "ການຊີ້ເປົ້າໝາຍລ່ວງໜ້າ"
 
 #: u_translation.rsprepointline
 msgid "Pre-point line duration in minutes"
-msgstr "Linjelängd på förriktning i minuter"
+msgstr "ໄລຍະເວລາຂອງເສັ້ນຊີ້ເປົ້າໝາຍເປັນນາທີ"
 
 #: u_translation.rspressuremill
 msgid "Pressure (millibar)"
-msgstr "Lufttryck (millibar)"
+msgstr "ຄວາມດັນ (ມິນລິບາ)"
 
 #: u_translation.rsprev
 msgid "<<   Prev"
-msgstr "<<Föregående"
+msgstr "<< ກ່ອນໜ້າ"
 
 #: u_translation.rspreview
 msgid "Preview"
-msgstr "Förhandsvisa"
+msgstr "ຕົວຢ່າງກ່ອນພິມ"
 
 #: u_translation.rsprevious
 msgid "Previous"
-msgstr "Föregående"
+msgstr "ກ່ອນໜ້າ"
 
 #: u_translation.rsprint
 msgid "Print"
-msgstr "Skriv ut"
+msgstr "ພິມ"
 
 #: u_translation.rsprintchart
 msgid "Print chart"
-msgstr "Skriv ut karta"
+msgstr "ພິມແຜນທີ່"
 
 #: u_translation.rsprintedchart
 msgid "Printed chart"
-msgstr "Utskriven karta"
+msgstr "ແຜນທີ່ທີ່ພິມອອກມາ"
 
 #: u_translation.rsprinter
 msgid "Printer:"
-msgstr "Skrivare"
+msgstr "ເຄື່ອງພິມ:"
 
 #: u_translation.rsprinterlegen
 msgid "Printer legend"
-msgstr "Förklaring"
+msgstr "ຄຳອະທິບາຍການພິມ"
 
 #: u_translation.rsprintersetup
 msgid "Printer setup"
-msgstr "Skrivarinställningar"
+msgstr "ຕັ້ງຄ່າເຄື່ອງພິມ"
 
 #: u_translation.rsprintfooter
 msgid "Print footer"
-msgstr "Sidfot"
+msgstr "ພິມສ່ວນທ້າຍ"
 
 #: u_translation.rsprintheader
 msgid "Print header"
-msgstr "Sidhuvud"
+msgstr "ພິມສ່ວນຫົວ"
 
 #: u_translation.rsprintmethod
 msgid "Print method"
-msgstr "Utskriftsmetod"
+msgstr "ວິທີການພິມ"
 
 #: u_translation.rsprintpreview
 msgid "Print Preview"
-msgstr "Skriv ut förhandsgranskning"
+msgstr "ເບິ່ງຕົວຢ່າງກ່ອນພິມ"
 
 #: u_translation.rsprintthechar
 msgid "Print the chart"
-msgstr "Skriv ut kartan"
+msgstr "ພິມແຜນທີ່"
 
 #: u_translation.rsprocessing
 #, object-pascal-format
 msgid "Processing... %s"
-msgstr "Bearbetar... %s"
+msgstr "ກຳລັງປະມວນຜົນ... %s"
 
 #: u_translation.rsprocessingen
 #, object-pascal-format
 msgid "Processing ended. Total number of comets: %s"
-msgstr "Bearbetning slut. Totalt antal kometer: %s"
+msgstr "ສິ້ນສຸດການປະມວນຜົນ. ຈຳນວນດາວຫາງທັງໝົດ: %s"
 
 #: u_translation.rsprocessingen2
 #, object-pascal-format
 msgid "Processing ended. Total number of asteroids: %s"
-msgstr "Bearbetningen klar. Totalt antal asteroider: %s"
+msgstr "ສິ້ນສຸດການປະມວນຜົນ. ຈຳນວນດາວເຄາະນ້ອຍທັງໝົດ: %s"
 
 #: u_translation.rsprocessingen3
 #, object-pascal-format
 msgid "Processing ended. Total number of location :%s"
-msgstr "Bearbetning avslutad. Totalt antal platser: %s"
+msgstr "ສິ້ນສຸດການປະມວນຜົນ. ຈຳນວນສະຖານທີ່ທັງໝົດ: %s"
 
 #: u_translation.rsprocessingli
 #, object-pascal-format
 msgid "Processing line %s"
-msgstr "Bearbetar rad %s"
+msgstr "ກຳລັງປະມວນຜົນແຖວທີ %s"
 
 #: u_translation.rsprograminfor
 msgid "Program information"
-msgstr "Programinformation"
+msgstr "ຂໍ້ມູນໂປຣແກຣມ"
 
 #: u_translation.rsprogrammer
 msgid "Programmer:"
-msgstr "Programmerare:"
+msgstr "ນັກພັດທະນາ:"
 
 #: u_translation.rsprogress
 msgid "Progress"
-msgstr "Arbetar"
+msgstr "ຄວາມຄືບໜ້າ"
 
 #: u_translation.rsprogressmess
 msgid "Progress messages"
-msgstr "Förloppsmeddelanden"
+msgstr "ຂໍ້ຄວາມສະແດງຄວາມຄືບໜ້າ"
 
 #: u_translation.rsprojection
 msgid "Projection"
-msgstr "Projektion"
+msgstr "ການສາຍພາບ"
 
 #: u_translation.rsprojectionse
 msgid "Projection settings"
-msgstr "Projektion inställningar"
+msgstr "ຕັ້ງຄ່າການສາຍພາບ"
 
 #: u_translation.rspropermotion
 msgid "Proper motion in right ascension"
-msgstr "Egenrörelse i rektascension"
+msgstr "ການເຄື່ອນທີ່ຈິງໃນແນວໄຣທ໌ແອດເຊັນຊັນ"
 
 #: u_translation.rspropermotion2
 msgid "Proper motion in declination"
-msgstr "Egenrörelse i deklination"
+msgstr "ການເຄື່ອນທີ່ຈິງໃນແນວເດັກລີເນຊັນ"
 
 #: u_translation.rspropermotion3
 msgid "Proper motion"
-msgstr "Egenrörelse"
+msgstr "ການເຄື່ອນທີ່ຈິງ"
 
 #: u_translation.rsproportional
 msgid "Proportional to the tail length"
-msgstr "Propotionell till svanslängd"
+msgstr "ເປັນສັດສ່ວນກັບຄວາມຍາວຂອງຫາງ"
 
 #: u_translation.rsproportional2
 msgid "Proportional to the magnitude"
-msgstr "Propotionell till magnitud"
+msgstr "ເປັນສັດສ່ວນກັບຄວາມສະຫວ່າງ (Magnitude)"
 
 #: u_translation.rsprotocoltrac
 msgid "Protocol trace"
-msgstr "Protokollspår"
+msgstr "ການຕິດຕາມໂປຣໂຕຄໍ"
 
 #: u_translation.rsproxy
 msgid "Proxy"
-msgstr "Proxy"
+msgstr "ພຣັອກຊີ"
 
 #: u_translation.rsproxyhost
 msgid "Proxy host"
-msgstr "Proxyvärd"
+msgstr "ໂຮສພຣັອກຊີ"
 
 #: u_translation.rsproxyport
 msgid "Proxy port"
-msgstr "Proxyport"
+msgstr "ພອດພຣັອກຊີ"
 
 #: u_translation.rsputthefilesw
 #, object-pascal-format
@@ -4429,27 +4429,27 @@ msgstr ""
 
 #: u_translation.rsqualityflag
 msgid "Quality flag"
-msgstr "Kvalitetsflagga"
+msgstr "ສະຖານະຄຸນນະພາບ"
 
 #: u_translation.rsquasar
 msgid "Quasar"
-msgstr "Kvasar"
+msgstr "ເຄວຊາ"
 
 #: u_translation.rsquickdelete
 msgid "Quick delete"
-msgstr "Snabbradering"
+msgstr "ລຶບດ່ວນ"
 
 #: u_translation.rsquicklydelet
 msgid "Quickly delete all data related to comets"
-msgstr "Snabbradera alla data relaterade till kometer"
+msgstr "ລຶບຂໍ້ມູນທັງໝົດທີ່ກ່ຽວກັບດາວຫາງຢ່າງວ່ອງໄວ"
 
 #: u_translation.rsquicklydelet2
 msgid "Quickly delete all data related to asteroids"
-msgstr "Snabbradera alla data relaterade till asterioder"
+msgstr "ລຶບຂໍ້ມູນທັງໝົດທີ່ກ່ຽວກັບດາວເຄາະນ້ອຍຢ່າງວ່ອງໄວ"
 
 #: u_translation.rsquickstartgu
 msgid "Quick start guide"
-msgstr "Snabbguide"
+msgstr "ຄູ່ມືເລີ່ມຕົ້ນໄວ"
 
 #: u_translation.rsra
 msgid "RA"
@@ -4457,173 +4457,173 @@ msgstr "RA"
 
 #: u_translation.rsradialveloci
 msgid "Radial velocity"
-msgstr "Radiell hastighet"
+msgstr "ຄວາມໄວໃນແນວສາຍຕາ"
 
 #: u_translation.rsrange
 msgid "Range"
-msgstr "Avstånd"
+msgstr "ໄລຍະ"
 
 #: u_translation.rsraoptions
 msgid "RA options"
-msgstr "RA alternativ"
+msgstr "ຕົວເລືອກ RA"
 
 #: u_translation.rsrasterresolu
 msgid "Raster resolution"
-msgstr "Rasterupplösning"
+msgstr "ຄວາມລະອຽດແບບຣາສເຕີ"
 
 #: u_translation.rsraturns
 msgid "RA turns: "
-msgstr "RA varv: "
+msgstr "ຮອບ RA: "
 
 #: u_translation.rsraturns2
 #, object-pascal-format
 msgid "%sRA turns:"
-msgstr "%s RA varv:"
+msgstr "%sຮອບ RA:"
 
 #: u_translation.rsrealisticsim
 msgid "Realistic images"
-msgstr "Riktiga bilder"
+msgstr "ຮູບພາບສະເໝືອນຈິງ"
 
 #: u_translation.rsrealskynorth
 msgid "RealSky North"
-msgstr "RealSky Norr"
+msgstr "RealSky ເໜືອ"
 
 #: u_translation.rsrealskysouth
 msgid "RealSky South"
-msgstr "RealSky Söder"
+msgstr "RealSky ໃຕ້"
 
 #: u_translation.rsrealtimeopti
 msgid "Real time options"
-msgstr "Realtidsalternativ"
+msgstr "ຕົວເລືອກເວລາຈິງ"
 
 #: u_translation.rsreceivecoord
 msgid "Receive coordinates from other applications"
-msgstr "Ta emot koordinater från andra applikationer"
+msgstr "ຮັບພິກັດຈາກແອັບພລິເຄຊັນອື່ນ"
 
 #: u_translation.rsreceivefitsi
 msgid "Receive FITS images from other applications"
-msgstr "Ta emot FITS-bilder från andra applikationer"
+msgstr "ຮັບຮູບພາບ FITS ອື່ນແອັບພລິເຄຊັນອື່ນ"
 
 #: u_translation.rsreceivevotab
 msgid "Receive VO table data from other applications"
-msgstr "Ta emot VO tabelldata från andra applikationer"
+msgstr "ຮັບຂໍ້ມູນຕາຕະລາງ VO ຈາກແອັບພລິເຄຊັນອື່ນ"
 
 #: u_translation.rsrecognizeuni
 msgid "Recognize units or object type from the file:"
-msgstr "Använd enheter och objekttyp från filen:"
+msgstr "ລະບຸຫົວໜ່ວຍ ຫຼື ປະເພດວັດຖຸຈາກໄຟລ໌:"
 
 #: u_translation.rsrecordanimat
 msgid "Record animation to file"
-msgstr "Spara animering till fil"
+msgstr "ບັນທຶກແອນິເມຊັນລົງໄຟລ໌"
 
 #: u_translation.rsrecordingdir
 msgid "Recording directory"
-msgstr "Inspelningsmapp"
+msgstr "ໂຟນເດີບັນທຶກ"
 
 #: u_translation.rsrecordingext
 msgid "Recording extension"
-msgstr "Extension för inspelning"
+msgstr "ນາມສະກຸນໄຟລ໌ບັນທຶກ"
 
 #: u_translation.rsrecordingopt
 msgid "Recording options"
-msgstr "Inspelningsalternativ"
+msgstr "ຕົວເລືອກການບັນທຶກ"
 
 #: u_translation.rsrecordingpre
 msgid "Recording prefix"
-msgstr "Prefix för inspelning"
+msgstr "ຄຳນຳໜ້າຊື່ໄຟລ໌ບັນທຶກ"
 
 #: u_translation.rsrecoverhidde
 msgid "Recover hidden label"
-msgstr "Återskapa dold etikett"
+msgstr "ຄືນຄ່າປ້າຍຊື່ທີ່ຊ່ອນໄວ້"
 
 #: u_translation.rsrectangular
 msgid "Rectangular"
-msgstr "Rektangulär"
+msgstr "ສີ່ຫຼ່ຽມຜືນຜ້າ"
 
 #: u_translation.rsred
 msgid "Red"
-msgstr "Röd"
+msgstr "ສີແດງ"
 
 #: u_translation.rsredmagnitude
 msgid "Red magnitude"
-msgstr "Röd magnitud"
+msgstr "ໂຊຕິມາດແສງສີແດງ"
 
 #: u_translation.rsredo
 msgid "Redo"
-msgstr "Gör om"
+msgstr "ເຮັດຄືນ"
 
 #: u_translation.rsredolastchan
 msgid "Redo last change"
-msgstr "Gör om senaste ändring"
+msgstr "ເຮັດຄືນການປ່ຽນແປງລ່າສຸດ"
 
 #: u_translation.rsreducedetail
 msgid "Reduce details when moving the chart"
-msgstr "Reducera detaljerna när kartan flyttas"
+msgstr "ຫຼຸດລາຍລະອຽດເວລາເຄື່ອນຍ້າຍແຜນທີ່"
 
 #: u_translation.rsreference
 msgid "Reference"
-msgstr "Referens"
+msgstr "ອ້າງອີງ"
 
 #: u_translation.rsreflectionne
 msgid "Reflection nebula"
-msgstr "Reflexionsnebulosa"
+msgstr "ເນບິວລາສະທ້ອນແສງ"
 
 #: u_translation.rsrefresh
 msgid "Refresh"
-msgstr "Uppdatera"
+msgstr "ໂຫຼດໃໝ່"
 
 #: u_translation.rsrefreshallep
 msgid "Refresh all ephemeris"
-msgstr "Uppdatera alla efemerider"
+msgstr "ໂຫຼດເອເຟເມຣິດທັງໝົດໃໝ່"
 
 #: u_translation.rsrefreshimage
 msgid "Refresh image every"
-msgstr "Uppdatera bild varje"
+msgstr "ໂຫຼດຮູບພາບໃໝ່ທຸກໆ"
 
 #: u_translation.rsrefreshrate
 msgid "Refresh rate"
-msgstr "Uppdat. frekv."
+msgstr "ອັດຕາການໂຫຼດໃໝ່"
 
 #: u_translation.rsrefreshtheli
 msgid "Refresh the list"
-msgstr "Uppdatera lista"
+msgstr "ໂຫຼດລາຍຊື່ໃໝ່"
 
 #: u_translation.rsreleasenotes
 msgid "Release notes"
-msgstr "Versionshistorik"
+msgstr "ບັນທຶກການປ່ຽນແປງ"
 
 #: u_translation.rsreload
 msgid "Reload"
-msgstr "Uppdatera"
+msgstr "ໂຫຼດໃໝ່"
 
 #: u_translation.rsreloadforcur
 #, object-pascal-format
 msgid "Reload %s for current chart"
-msgstr "Ladda om %s för aktuell karta"
+msgstr "ໂຫຼດ %s ໃໝ່ສຳລັບແຜນທີ່ປັດຈຸບັນ"
 
 #: u_translation.rsremoveallbre
 msgid "Remove all breakpoints"
-msgstr "Ta bort alla brytpunkter"
+msgstr "ລຶບຈຸດຢຸດ (Breakpoints) ທັງໝົດ"
 
 #: u_translation.rsremoveallcir
 msgid "Remove all circles"
-msgstr "Ta bort alla cirklar"
+msgstr "ລຶບວົງກົມທັງໝົດ"
 
 #: u_translation.rsremovealllab
 msgid "Remove all labels"
-msgstr "Ta bort alla etiketter"
+msgstr "ລຶບຊື່ທັງໝົດ"
 
 #: u_translation.rsremovelastci
 msgid "Remove last circle"
-msgstr "Ta bort senaste cirkel"
+msgstr "ລຶບວົງກົມລ່າສຸດ"
 
 #: u_translation.rsremovelastla
 msgid "Remove last label"
-msgstr "Ta bort senaste etikett"
+msgstr "ລຶບຊື່ລ່າສຸດ"
 
 #: u_translation.rsrenamechart
 msgid "Rename chart"
-msgstr "Döp om karta"
+msgstr "ປ່ຽນຊື່ແຜນທີ່"
 
 #: u_translation.rsrenamethecur
 msgid "Rename the current chart"
@@ -4631,976 +4631,976 @@ msgstr ""
 
 #: u_translation.rsreplacebytic
 msgid "Replace by tick mark"
-msgstr "Ersätt med kryssmarkering"
+msgstr "ແທນທີ່ດ້ວຍເຄື່ອງໝາຍຂີດ"
 
 #: u_translation.rsreplacedby
 msgid "Replaced by"
-msgstr "Ersatt med"
+msgstr "ແທນທີ່ໂດຍ"
 
 #: u_translation.rsreportaprobl
 msgid "Report a problem"
-msgstr "Rapportera ett problem"
+msgstr "ລາຍງານບັນຫາ"
 
 #: u_translation.rsrequesttimeo
 msgid "Request timeout. You probably asked a too wide area which demanded too much processing time on the remote server."
-msgstr "Begäran tog för lång tid. Förmodligen frågade du om ett för stort område, vilket medförde för lång bearbetningstid för fjärrservern."
+msgstr "ໝົດເວລາການຮ້ອງຂໍ. ທ່ານອາດຈະເລືອກພື້ນທີ່ກວ້າງເກີນໄປ ເຊິ່ງໃຊ້ເວລາປະມວນຜົນດົນເກີນໄປໃນເຊີເວີ."
 
 #: u_translation.rsrequiredfiel
 msgid "Required field missing!"
-msgstr "Obligatoriskt fält saknas!"
+msgstr "ຂໍ້ມູນທີ່ຈຳເປັນຫາຍໄປ!"
 
 #: u_translation.rsrequirexplan
 msgid "(requires Xplanet 1.2.0)"
-msgstr "(kräver Xplanet 1.2.0)"
+msgstr "(ຕ້ອງການ Xplanet 1.2.0)"
 
 #: u_translation.rsreset
 msgid "Reset"
-msgstr "Nollställ"
+msgstr "ຕັ້ງໃໝ່"
 
 #: u_translation.rsresetalllabe
 msgid "Reset all labels"
-msgstr "Återställ alla etiketter"
+msgstr "ຕັ້ງຄ່າຊື່ທັງໝົດໃໝ່"
 
 #: u_translation.rsresetchart
 msgid "Reset chart"
-msgstr "Återställ kartan"
+msgstr "ຕັ້ງຄ່າແຜນທີ່ໃໝ່"
 
 #: u_translation.rsresetchartan
 msgid "Reset chart and options"
-msgstr "Återställ karta och alternativ"
+msgstr "ລ້າງຄ່າແຜນທີ່ ແລະ ຕົວເລືອກ"
 
 #: u_translation.rsresetinitial
 msgid "Reset initial default and restart"
-msgstr "Återställ till standard och starta om"
+msgstr "ລ້າງຄ່າເລີ່ມຕົ້ນ ແລະ ເລີ່ມໂປຣແກຣມໃໝ່"
 
 #: u_translation.rsresetrotatio
 msgid "Reset rotation"
-msgstr "Återställ rotation"
+msgstr "ລ້າງຄ່າການໝູນ"
 
 #: u_translation.rsresettime
 msgid "Reset time"
-msgstr "Återställ tid"
+msgstr "ລ້າງຄ່າເວລາ"
 
 #: u_translation.rsresettolastt
 msgid "Reset to last time the chart was saved"
-msgstr "Återställ till senaste gången kartan sparades"
+msgstr "ຍ້ອນຄືນໄປຫາຄັ້ງສຸດທ້າຍທີ່ບັນທຶກແຜນທີ່"
 
 #: u_translation.rsresolution
 msgid "Resolution:"
-msgstr "Upplösning:"
+msgstr "ຄວາມລະອຽດ:"
 
 #: u_translation.rsreturn
 msgid "Return"
-msgstr "Gå tillbaka"
+msgstr "ກັບຄືນ"
 
 #: u_translation.rsrevertaltkno
 msgid "Reverse Alt knob"
-msgstr "Reversera ALT ratten"
+msgstr "ກັບທິດທາງປຸ່ມ Alt"
 
 #: u_translation.rsrevertazknob
 msgid "Reverse Az knob"
-msgstr "Reversera AZ ratten"
+msgstr "ກັບທິດທາງປຸ່ມ Az"
 
 #: u_translation.rsrevertdeckno
 msgid "Reverse DEC knob"
-msgstr "Reversera DEC ratten"
+msgstr "ກັບທິດທາງປຸ່ມ DEC"
 
 #: u_translation.rsrevertraknob
 msgid "Reverse RA knob"
-msgstr "Reversera RA ratten"
+msgstr "ກັບທິດທາງປຸ່ມ RA"
 
 #: u_translation.rsright
 msgid "Right"
-msgstr "Höger"
+msgstr "ຂວາ"
 
 #: u_translation.rsrightascensi
 msgid "Right Ascension"
-msgstr "Rektascension (RA)"
+msgstr "ໄຣທ໌ແອດເຊັນຊັນ"
 
 #: u_translation.rsrightbar
 msgid "Right Bar"
-msgstr "Fält till höger"
+msgstr "ແຖບຂວາ"
 
 #: u_translation.rsrise
 msgid "Rise"
-msgstr "Går upp"
+msgstr "ຂຶ້ນ"
 
 #: u_translation.rsrisetime
 msgid "Rise time"
-msgstr "Uppgångstid"
+msgstr "ເວລາຂຶ້ນ"
 
 #: u_translation.rsrotateby180d
 msgid "Rotate by 180 degrees"
-msgstr "Rotera 180 grader"
+msgstr "ໝູນ 180 ອົງສາ"
 
 #: u_translation.rsrotatecylind
 msgid "Use oblique cylindrical projections"
-msgstr "Använd snedställda cylindriska projektioner"
+msgstr "ໃຊ້ການສາຍແຜນທີ່ແບບຊົງກະບອກຂຽງ"
 
 #: u_translation.rsrotateleft
 msgid "Rotate left"
-msgstr "Rotera åt vänster"
+msgstr "ໝູນຊ້າຍ"
 
 #: u_translation.rsrotateright
 msgid "Rotate right"
-msgstr "Rotera åt höger"
+msgstr "ໝູນຂວາ"
 
 #: u_translation.rsrotation
 msgid "Rotation"
-msgstr "Rotation"
+msgstr "ການໝູນ"
 
 #: u_translation.rsrows
 msgid "Rows"
-msgstr "Rader"
+msgstr "ແຖວ"
 
 #: u_translation.rsrun
 msgid "Run"
-msgstr "Kör"
+msgstr "ດຳເນີນການ"
 
 #: u_translation.rssampconfirma
 msgid "SAMP Confirmation"
-msgstr "SAMP Bekräftelse"
+msgstr "ການຢືນຢັນ SAMP"
 
 #: u_translation.rssamphubprofi
 #, object-pascal-format
 msgid "SAMP hub profile %s found, but it is missing a required value."
-msgstr "SAMP hub-profil %s hittades, men den saknar ett obligatoriskt värde."
+msgstr "ພົບໂປຣໄຟລ໌ SAMP hub %s, ແຕ່ຂາດຄ່າທີ່ຈຳເປັນ."
 
 #: u_translation.rssampisamessa
 #, object-pascal-format
 msgid "SAMP is a messaging protocol that enables astronomy software tools to interoperate and communicate.%sSkychart can send and receive coordinates position, FITS images and VO tables."
-msgstr "SAMP är ett kommunikationsprotokoll som möjliggör för astronomiverktyg att samverka och kommunicera.%Skychart kan skicka och ta emot platskoordinater, FITS-bilder och VO tabeller."
+msgstr "SAMP ແມ່ນໂປຣໂຕຄໍການສົ່ງຂໍ້ຄວາມທີ່ຊ່ວຍໃຫ້ເຄື່ອງມືຊອບແວດາລາສາດເຮັດວຽກຮ່ວມກັນ ແລະ ສື່ສານກັນໄດ້. %s Skychart ສາມາດສົ່ງ ແລະ ຮັບພິກັດຕຳແໜ່ງ, ຮູບພາບ FITS ແລະ ຕາຕະລາງ VO ໄດ້."
 
 #: u_translation.rssampsendcoor
 msgid "SAMP send coordinates"
-msgstr "SAMP skicka koordinater"
+msgstr "SAMP ສົ່ງພິກັດ"
 
 #: u_translation.rssampsetup
 msgid "SAMP setup"
-msgstr "SAMP inställningar"
+msgstr "ຕັ້ງຄ່າ SAMP"
 
 #: u_translation.rssampstatus
 msgid "SAMP status"
-msgstr "SAMP status"
+msgstr "ສະຖານະ SAMP"
 
 #: u_translation.rssaros
 msgid "Saros"
-msgstr "Saros"
+msgstr "ສາໂຣສ"
 
 #: u_translation.rssatellite
 msgid "Satellite"
-msgstr "Satellit"
+msgstr "ດາວທຽມ"
 
 #: u_translation.rssatellitesca
 msgid "Satellites calculation:"
-msgstr "Satellitberäkning:"
+msgstr "ການຄຳນວນດາວທຽມ:"
 
 #: u_translation.rssatring
 msgid "Sat. ring"
-msgstr "Sat. ringar"
+msgstr "ວົງແຫວນດາວເສົາ"
 
 #: u_translation.rssaturday
 msgid "Sat."
-msgstr "Lör."
+msgstr "ເສົາ"
 
 #: u_translation.rssaturn
 msgid "Saturn"
-msgstr "Saturnus"
+msgstr "ດາວເສົາ"
 
 #: u_translation.rssave
 msgid "Save"
-msgstr "Spara"
+msgstr "ບັນທຶກ"
 
 #: u_translation.rssaveas
 msgid "Save as..."
-msgstr "Spara som..."
+msgstr "ບັນທຶກເປັນ..."
 
 #: u_translation.rssaveconfigur
 msgid "Save configuration now"
-msgstr "Spara inställningarna nu"
+msgstr "ບັນທຶກການກຳນົດຄ່າຕອນນີ້"
 
 #: u_translation.rssaveconfigur2
 msgid "Save configuration on exit"
-msgstr "Spara inställningarna  vid avslut"
+msgstr "ບັນທຶກການກຳນົດຄ່າເມື່ອອອກ"
 
 #: u_translation.rssaveimage
 msgid "Save image..."
-msgstr "Spara bild..."
+msgstr "ບັນທຶກຮູບພາບ..."
 
 #: u_translation.rssaveproject
 msgid "Save project"
-msgstr "Spara projekt"
+msgstr "ບັນທຶກໂປຣເຈັກ"
 
 #: u_translation.rssavethecurre
 msgid "Save the active chart"
-msgstr "Spara aktiv karta"
+msgstr "ບັນທຶກແຜນທີ່ທີ່ກຳລັງໃຊ້ຢູ່"
 
 #: u_translation.rssavetofile
 msgid "Save to file"
-msgstr "Spara till fil"
+msgstr "ບັນທຶກລົງໄຟລ໌"
 
 #: u_translation.rsscaled
 msgid "Scaled"
-msgstr "Skalad"
+msgstr "ປັບມາດຕາສ່ວນ"
 
 #: u_translation.rsscanarchives
 msgid "Scan archives"
-msgstr "Skanna arkiv"
+msgstr "ສະແກນຄັງຂໍ້ມູນ"
 
 #: u_translation.rsscandirector
 msgid "Scan directory"
-msgstr "Skanna katalogen"
+msgstr "ສະແກນໂຟນເດີ"
 
 #: u_translation.rsscreenresolu
 msgid "Screen resolution"
-msgstr "Skärmupplösning"
+msgstr "ຄວາມລະອຽດໜ້າຈໍ"
 
 #: u_translation.rsscript
 msgid "Script"
-msgstr "Skript"
+msgstr "ສະຄຣິບ"
 
 #: u_translation.rsscripteditor
 msgid "Script editor"
-msgstr "Skriptredigerare"
+msgstr "ເຄື່ອງມືແກ້ໄຂສະຄຣິບ"
 
 #: u_translation.rsscriptisalre
 #, object-pascal-format
 msgid "Script is already assigned to %s are you sure you want to duplicate it to %s ?"
-msgstr "Skriptet är redan knutet till %s , är du säker på att du vill kopiera det till %s ?"
+msgstr "ສະຄຣິບຖືກກຳນົດໃຫ້ %s ແລ້ວ ທ່ານແນ່ໃຈຫຼືບໍ່ວ່າຕ້ອງການເຮັດຊ້ຳໄປຫາ %s ?"
 
 #: u_translation.rsscrollbar
 msgid "Scroll bar"
-msgstr "Rullningslist"
+msgstr "ແຖບເລື່ອນ"
 
 #: u_translation.rssday
 msgid "D"
-msgstr "D"
+msgstr "ວ."
 
 #: u_translation.rssearch
 msgid "Search"
-msgstr "Sök"
+msgstr "ຄົ້ນຫາ"
 
 #: u_translation.rssearchbox
 msgid "Search box"
-msgstr "Sökruta"
+msgstr "ຊ່ອງຄົ້ນຫາ"
 
 #: u_translation.rssearchbyname
 msgid "Search by name"
-msgstr "Sök på namn"
+msgstr "ຄົ້ນຫາຕາມຊື່"
 
 #: u_translation.rssearchbyposi
 msgid "Search by position"
-msgstr "Sök på position"
+msgstr "ຄົ້ນຫາຕາມຕຳແໜ່ງ"
 
 #: u_translation.rssearchcatalo
 msgid "Search Catalogs"
-msgstr "Sök kataloger"
+msgstr "ຄົ້ນຫາແຄັດຕະລັອກ"
 
 #: u_translation.rssearchfor
 msgid "Search for"
-msgstr "Sök efter"
+msgstr "ຄົ້ນຫາ"
 
 #: u_translation.rssearchindex
 msgid "Search index"
-msgstr "Sökindex"
+msgstr "ດັດຊະນີຄົ້ນຫາ"
 
 #: u_translation.rssearchradius
 msgid "Search radius"
-msgstr "Sökradie"
+msgstr "ລັດສະໝີການຄົ້ນຫາ"
 
 #: u_translation.rssearchsoftwa
 msgid "Search software update"
-msgstr "Leta efter mjukvaruuppdatering"
+msgstr "ຄົ້ນຫາການອັບເດດຊອບແວ"
 
 #: u_translation.rssec2
 msgid "Sec."
-msgstr "Sek."
+msgstr "ວິນາທີ"
 
 #: u_translation.rssecond
 msgid "Second"
-msgstr "Sekund"
+msgstr "ວິນາທີ"
 
 #: u_translation.rsseconds
 msgid "Seconds"
-msgstr "Sekunder"
+msgstr "ວິນາທີ"
 
 #: u_translation.rsseehttpascom
 #, object-pascal-format
 msgid "See %s for more information."
-msgstr "Se %s för mer information"
+msgstr "ເບິ່ງ %s ສຳລັບຂໍ້ມູນເພີ່ມເຕີມ."
 
 #: u_translation.rsselect
 msgid "Select"
-msgstr "Välj"
+msgstr "ເລືອກ"
 
 #: u_translation.rsselectall
 msgid "Select all"
-msgstr "Välj alla"
+msgstr "ເລືອກທັງໝົດ"
 
 #: u_translation.rsselectcatalo
 msgid "Select Catalog"
-msgstr "Välj katalog"
+msgstr "ເລືອກແຄັດຕະລັອກ"
 
 #: u_translation.rsselectcircle
 msgid "Select Circle"
-msgstr "Välj cirkel"
+msgstr "ເລືອກວົງກົມ"
 
 #: u_translation.rsselectcolorb
 msgid "Select color (black for catalog default)"
-msgstr "Välj färg (svart är standardfärg)"
+msgstr "ເລືອກສີ (ສີດຳສຳລັບຄ່າເລີ່ມຕົ້ນຂອງແຄັດຕະລັອກ)"
 
 #: u_translation.rsselectedobje
 msgid "Selected object"
-msgstr "Valt objekt"
+msgstr "ວັດຖຸທີ່ຖືກເລືອກ"
 
 #: u_translation.rsselection
 msgid "Selection"
-msgstr "Urval"
+msgstr "ການເລືອກ"
 
 #: u_translation.rsselectlabels
 msgid "Select labels to recover"
-msgstr "Välj etiketter som ska återskapas"
+msgstr "ເລືອກປ້າຍຊື່ເພື່ອຄືນຄ່າ"
 
 #: u_translation.rsselectmirror
 msgid "Select mirror site"
-msgstr "Välj mirror site"
+msgstr "ເລືອກເວັບໄຊສຳຮອງ (Mirror)"
 
 #: u_translation.rsselectnone
 msgid "Select none"
-msgstr "Markera ingen"
+msgstr "ບໍ່ເລືອກຈັກອັນ"
 
 #: u_translation.rsselectplatef
 msgid "Select a plate from the list"
-msgstr "Välj en bild från listan"
+msgstr "ເລືອກແຜ່ນພາບຈາກລາຍຊື່"
 
 #: u_translation.rsselectrectan
 msgid "Select Rectangle"
-msgstr "Välj rektangel"
+msgstr "ເລືອກສີ່ຫຼ່ຽມ"
 
 #: u_translation.rsselectscript
 msgid "Select script"
-msgstr "Välj skript"
+msgstr "ເລືອກສະຄຣິບ"
 
 #: u_translation.rsselectthecat
 msgid "Select the catalog to install or remove"
-msgstr "Välj katalog att installera eller ta bort"
+msgstr "ເລືອກແຄັດຕະລັອກທີ່ຈະຕິດຕັ້ງ ຫຼື ຖອນອອກ"
 
 #: u_translation.rsselectthefie
 msgid "Select the fields to use and their position in the text file"
-msgstr "Välj fälten du vill använda och deras position i textfilen"
+msgstr "ເລືອກຟີລດ໌ທີ່ຈະໃຊ້ ແລະ ຕຳແໜ່ງໃນໄຟລ໌"
 
 #: u_translation.rsselectthesys
 msgid "Select the system printer and options you want to use"
-msgstr "Välj systemskrivare och de alternativ du vill använda"
+msgstr "ເລືອກເຄື່ອງພິມລະບົບ ແລະ ຕົວເລືອກທີ່ທ່ານຕ້ອງການ"
 
 #: u_translation.rsselectthetel
 msgid "Select the telescope interface"
-msgstr "Välj teleskopinterface"
+msgstr "ເລືອກສ່ວນຕິດຕໍ່ກ້ອງໂທລະທັດ"
 
 #: u_translation.rsselectthetyp
 msgid "Select the type of objects in your catalog"
-msgstr "Välj typ av objekt för din katalog"
+msgstr "ເລືອກປະເພດວັດຖຸໃນຄາຕາລັອກຂອງທ່ານ"
 
 #: u_translation.rsselecttimeun
 msgid "Select time units"
-msgstr "Välj tidsenheter"
+msgstr "ເລືອກຫົວໜ່ວຍເວລາ"
 
 #: u_translation.rsselectyourpr
 msgid "Select your preference for the button layout"
-msgstr ""
+msgstr "ເລືອກຮູບແບບການວາງປຸ່ມຕາມທີ່ທ່ານມັກ"
 
 #: u_translation.rssemi
 msgid "Semi"
-msgstr "Semi"
+msgstr "ເຄິ່ງ"
 
 #: u_translation.rssemimajoraxi
 msgid "Semimajor axis"
-msgstr "Semimajor axel"
+msgstr "ເຄິ່ງແກນເອກ"
 
 #: u_translation.rssendcharttop
 msgid "Send the chart to the printer."
-msgstr "Skicka kartan till skrivaren."
+msgstr "ສົ່ງແຜນທີ່ໄປຍັງເຄື່ອງພິມ."
 
 #: u_translation.rssendimageto
 msgid "Send image to"
-msgstr "Skicka bild till"
+msgstr "ສົ່ງຮູບພາບໄປຫາ"
 
 #: u_translation.rssendtableto
 msgid "Send table to"
-msgstr "Skicka tabell till"
+msgstr "ສົ່ງຕາຕະລາງໄປຫາ"
 
 #: u_translation.rssendviaserve
 msgid "Send via server"
-msgstr "Skicka via server"
+msgstr "ສົ່ງຜ່ານເຊີເວີ"
 
 #: u_translation.rsseparation
 msgid "Separation"
-msgstr "Separation"
+msgstr "ໄລຍະຫ່າງເຊິງມຸມ"
 
 #: u_translation.rsseparator
 msgid "Separator"
-msgstr "Avskiljare"
+msgstr "ຕົວແຍກ"
 
 #: u_translation.rsseptember
 msgid "September"
-msgstr "September"
+msgstr "ກັນຍາ"
 
 #: u_translation.rsserver
 msgid "Server"
-msgstr "Server"
+msgstr "ເຊີບເວີ"
 
 #: u_translation.rsserverinform
 msgid "Server information"
-msgstr "Serverstatus"
+msgstr "ຂໍ້ມູນເຊີບເວີ"
 
 #: u_translation.rsserveripinte
 msgid "Server IP interface:"
-msgstr "Server IP interface:"
+msgstr "ອິນເຕີເຟສ IP ເຊີບເວີ:"
 
 #: u_translation.rsserveripport
 msgid "Server IP port:"
-msgstr "Server IP port:"
+msgstr "ພອດ IP ເຊີບເວີ:"
 
 #: u_translation.rsserverrespon
 msgid "Server response: "
-msgstr "Serversvar: "
+msgstr "ການຕອບກັບຈາກເຊີເວີ: "
 
 #: u_translation.rsset
 msgid "Set"
-msgstr "Nedgångstid"
+msgstr "ຕົກ"
 
 #: u_translation.rssetdateandti
 msgid "Set date and time"
-msgstr "Ange datum och tid"
+msgstr "ຕັ້ງວັນທີ ແລະ ເວລາ"
 
 #: u_translation.rssetfov
 msgid "Set FOV"
-msgstr "Ange synfält"
+msgstr "ຕັ້ງຄ່າຂອບເຂດການເບິ່ງ"
 
 #: u_translation.rssetfovto
 msgid "Set FOV to"
-msgstr "Sätt FOV till"
+msgstr "ກຳນົດ FOV ເປັນ"
 
 #: u_translation.rssethowthemou
 msgid "Set how the mount moves for each axis when you turn the driving knob. From then on, a click on the 'Connect telescope' button will show you how many turns you must make to go from one object to another."
-msgstr "Ange hur monteringen rör sig för varje axel när du vrider på ratten. I fortsättningen när du klickar på \"Anslut teleskop\"-knappen visas hur många varv du måste vrida för att förflytta dig från ett objekt till ett annat."
+msgstr "ຕັ້ງຄ່າການເຄື່ອນທີ່ຂອງຖານກ້ອງໃນແຕ່ລະແກນ."
 
 #: u_translation.rssetobservato
 msgid "Set observatory location"
-msgstr "Ange observationsplats"
+msgstr "ຕັ້ງສະຖານທີ່ຫໍດູດາວ"
 
 #: u_translation.rssetoptionsfo
 msgid "Set options for best performance"
-msgstr "Ställ in inställningar för bästa prestanda"
+msgstr "ຕັ້ງຄ່າເພື່ອປະສິດທິພາບສູງສຸດ"
 
 #: u_translation.rssettargetto
 #, object-pascal-format
 msgid "Set target to %s"
-msgstr "Sätt mål till %s"
+msgstr "ກຳນົດເປົ້າໝາຍໄປທີ່ %s"
 
 #: u_translation.rssettime
 msgid "Set Time"
-msgstr "Ställ in tid"
+msgstr "ຕັ້ງເວລາ"
 
 #: u_translation.rssettotelesco
 msgid "Set to telescope"
-msgstr "Ställ in till teleskop"
+msgstr "ຕັ້ງຄ່າໄປຫາກ້ອງໂທລະທັດ"
 
 #: u_translation.rssetup
 msgid "Setup"
-msgstr "Inställningar"
+msgstr "ຕັ້ງຄ່າ"
 
 #: u_translation.rssetupoption
 msgid "Setup Options"
-msgstr "Inställningar"
+msgstr "ຕົວເລືອກການຕັ້ງຄ່າ"
 
 #: u_translation.rsshour
 msgid "H"
-msgstr "T"
+msgstr "ຊມ."
 
 #: u_translation.rsshow0horizon
 msgid "Show 0d horizon line"
-msgstr "Visa 0d horisontlinje"
+msgstr "ສະແດງເສັ້ນຂອບຟ້າ 0 ອົງສາ"
 
 #: u_translation.rsshowallsky
 msgid "Show all sky"
-msgstr "Visa hela himlen"
+msgstr "ສະແດງທ້ອງຟ້າທັງໝົດ"
 
 #: u_translation.rsshowasinglep
 msgid "Show a single picture on the map."
-msgstr "Visa en enskild bild på kartan."
+msgstr "ສະແດງຮູບພາບດຽວໃນແຜນທີ່."
 
 #: u_translation.rsshowasteroid
 msgid "Show asteroids"
-msgstr "Visa asteroider"
+msgstr "ສະແດງດາວເຄາະນ້ອຍ"
 
 #: u_translation.rsshowasteroid3
 msgid "Show asteroids on the chart"
-msgstr "Visa asteroider på kartan"
+msgstr "ສະແດງດາວເຄາະນ້ອຍໃນແຜນທີ່"
 
 #: u_translation.rsshowbuttonte
 msgid "Show button text"
-msgstr "Visa knapptext"
+msgstr "ສະແດງຂໍ້ຄວາມເທິງປຸ່ມ"
 
 #: u_translation.rsshowcelestia
 msgid "Show celestial equator"
-msgstr "Visa himmelsekvator"
+msgstr "ສະແດງເສັ້ນສູນສູດຟ້າ"
 
 #: u_translation.rsshowcomets
 msgid "Show comets"
-msgstr "Visa kometer"
+msgstr "ສະແດງດາວຫາງ"
 
 #: u_translation.rsshowcometson
 msgid "Show comets on the chart"
-msgstr "Visa kometer på kartan"
+msgstr "ສະແດງດາວຫາງໃນແຜນທີ່"
 
 #: u_translation.rsshowcompass
 msgid "Show the compass rose"
-msgstr "Visa kompassros"
+msgstr "ສະແດງເຂັມທິດ"
 
 #: u_translation.rsshowconstell
 msgid "Show constellation lines"
-msgstr "Visa linjer i stjärnbild"
+msgstr "ສະແດງເສັ້ນກຸ່ມດາວ"
 
 #: u_translation.rsshowconstell2
 msgid "Show constellation limits"
-msgstr "Visa gräns i stjärnbilder"
+msgstr "ສະແດງຂອບເຂດກຸ່ມດາວ"
 
 #: u_translation.rsshowconstell3
 msgid "Show constellation figures"
-msgstr "Visa stjärnbildsfigurer"
+msgstr "ສະແດງຮູບຮ່າງກຸ່ມດາວ"
 
 #: u_translation.rsshowconstell4
 msgid "Show constellation boundaries"
-msgstr "Visa gränser för stjärnbilder"
+msgstr "ສະແດງຂອບເຂດກຸ່ມດາວ"
 
 #: u_translation.rsshowcoordina
 msgid "Show coordinates grid"
-msgstr "Visa koordinatnät"
+msgstr "ສະແດງເສັ້ນຕາໜ່າງພິກັດ"
 
 #: u_translation.rsshowdsolines
 msgid "Show nebulae outlines"
-msgstr "Visa DSO linjer"
+msgstr "ສະແດງເສັ້ນຂອບເນບິວລາ"
 
 #: u_translation.rsshowearthsha
 msgid "Show Earth shadow (Lunar eclipses)"
-msgstr "Visa jordskugga (månförmörkelser)"
+msgstr "ສະແດງເງົາຂອງໂລກ (ຈັນທະຄາດ)"
 
 #: u_translation.rsshowecliptic
 msgid "Show ecliptic"
-msgstr "Visa ekliptikan"
+msgstr "ສະແດງເສັ້ນສຸລິຍະວິຖີ"
 
 #: u_translation.rsshowgalactic
 msgid "Show galactic equator"
-msgstr "Visa galaktiska ekvatorn"
+msgstr "ສະແດງເສັ້ນສູນສູດກາລັກຊີ"
 
 #: u_translation.rsshowgridlabe
 msgid "Show grid label"
-msgstr "Visa rutnätsetikett"
+msgstr "ສະແດງຊື່ຕາໜ່າງ"
 
 #: u_translation.rsshowhidedssi
 msgid "Show/hide DSS image"
-msgstr "Visa/dölj DSS bild"
+msgstr "ສະແດງ/ເຊື່ອງ ຮູບພາບ DSS"
 
 #: u_translation.rsshowimagenam
 msgid "Show image name label"
-msgstr "Visa namnetikett på bild"
+msgstr "ສະແດງປ້າຍຊື່ຮູບພາບ"
 
 #: u_translation.rsshowirvariab
 msgid "Show IR variables"
-msgstr "Visa IR variabler"
+msgstr "ສະແດງດາວແປແສງ IR"
 
 #: u_translation.rsshowlabels
 msgid "Show labels"
-msgstr "Visa etiketter"
+msgstr "ສະແດງຊື່"
 
 #: u_translation.rsshowlinefrom
 msgid "Show line from moved label to object"
-msgstr "Visa linje från flyttad etikett till objektet"
+msgstr "ສະແດງເສັ້ນຈາກປ້າຍຊື່ທີ່ຍ້າຍໄປຫາວັດຖຸ"
 
 #: u_translation.rsshowmark
 msgid "Show mark"
-msgstr "Visa markering"
+msgstr "ສະແດງເຄື່ອງໝາຍ"
 
 #: u_translation.rsshowmarkinde
 msgid "Show mark index"
-msgstr "Visa index för markering"
+msgstr "ສະແດງດັດຊະນີເຄື່ອງໝາຍ"
 
 #: u_translation.rsshowmilkyway
 msgid "Show Milky Way"
-msgstr "Visa Vintergatan"
+msgstr "ສະແດງທາງຊ້າງເຜືອກ"
 
 #: u_translation.rsshowneareart
 msgid "Show near Earth asteroids independently of the magnitude"
-msgstr "Visa jordnära asteroider oberoende av magnitud"
+msgstr "ສະແດງດາວເຄາະນ້ອຍໃກ້ໂລກໂດຍບໍ່ຄຳນຶງເຖິງຄວາມສະຫວ່າງ"
 
 #: u_translation.rsshownebulae
 msgid "Show deep sky objects"
-msgstr "Visa deep sky objekt"
+msgstr "ສະແດງວັດຖຸໃນຫ້ວງອະວກາດເລິກ"
 
 #: u_translation.rsshowobjectbe
 msgid "Show objects below the horizon"
-msgstr "Visa objekt under horisonten"
+msgstr "ສະແດງວັດຖຸທີ່ຢູ່ກ້ອງຂອບຟ້າ"
 
 #: u_translation.rsshowobjectpi
 msgid "Show object pictures on the chart"
-msgstr "Visa bilder av objekt på kartan"
+msgstr "ສະແດງຮູບວັດຖຸໃນແຜນທີ່"
 
 #: u_translation.rsshowobjects
 msgid "Show objects"
-msgstr "Visa objekt"
+msgstr "ສະແດງວັດຖຸ"
 
 #: u_translation.rsshowonlymeri
 msgid "Show only meridian"
-msgstr "Visa endast meridian"
+msgstr "ສະແດງສະເພາະເສັ້ນເມຣິດຽນ"
 
 #: u_translation.rsshowonlytext
 msgid "Show only text in detail window"
-msgstr "Visa endast text i informationsfönstret"
+msgstr "ສະແດງສະເພາະຂໍ້ຄວາມໃນໜ້າຕ່າງລາຍລະອຽດ"
 
 #: u_translation.rsshowpictures
 msgid "Show pictures"
-msgstr "Visa bilder"
+msgstr "ສະແດງຮູບພາບ"
 
 #: u_translation.rsshowplaneton
 msgid "Show planets on the chart"
-msgstr "Visa planeter på kartan"
+msgstr "ສະແດງດາວເຄາະໃນແຜນທີ່"
 
 #: u_translation.rsshowplanets
 msgid "Show planets"
-msgstr "Visa planeter"
+msgstr "ສະແດງດາວເຄາະ"
 
 #: u_translation.rsshowposition
 msgid "Show position in title bar"
-msgstr "Visa position i huvudfältet"
+msgstr "ສະແດງຕຳແໜ່ງໃນແຖບຊື່"
 
 #: u_translation.rsshowstars
 msgid "Show stars"
-msgstr "Visa stjärnor"
+msgstr "ສະແດງດາວ"
 
 #: u_translation.rsshowtheimage
 msgid "Show the images on the map"
-msgstr "Visa bilderna på kartan"
+msgstr "ສະແດງຮູບພາບໃນແຜນທີ່"
 
 #: u_translation.rsshowthesmall
 msgid "Show the faint satellites of the outer planets"
-msgstr "Visa de yttre planeternas \"faint satellites\""
+msgstr "ສະແດງດາວບໍລິວານທີ່ມົວໆຂອງດາວເຄາະຊັ້ນນອກ"
 
 #: u_translation.rsshowthispict
 msgid "Show this picture"
-msgstr "Visa den här bilden"
+msgstr "ສະແດງຮູບນີ້"
 
 #: u_translation.rsshowuserdefi
 msgid "Show User defined objects"
-msgstr "Visa användardefinierade objekt"
+msgstr "ສະແດງວັດຖຸທີ່ຜູ້ໃຊ້ກຳນົດເອງ"
 
 #: u_translation.rsshowvirtualo
 msgid "Show Virtual Observatory data"
-msgstr "Visa data för Virtuellt observatorium"
+msgstr "ສະແດງຂໍ້ມູນຫໍສັງເກດການສະເໝືອນ"
 
 #: u_translation.rssideral
 msgid "Sidereal"
-msgstr "Siderisk"
+msgstr "ຊິດເດຣຽວ (ເວລາຕາມດາວ)"
 
 #: u_translation.rssiderealday
 msgid "Sidereal day"
-msgstr "Siderisk dag"
+msgstr "ວັນດາລາຄະຕິ"
 
 #: u_translation.rssimulation
 msgid "Simulation"
-msgstr "Simulering"
+msgstr "ການຈຳລອງ"
 
 #: u_translation.rssize
 msgid "Size"
-msgstr "Storlek"
+msgstr "ຂະໜາດ"
 
 #: u_translation.rsskybackgroun
 msgid "Sky background colour"
-msgstr "Himlens bakgrundsfärg"
+msgstr "ສີພື້ນຫຼັງທ້ອງຟ້າ"
 
 #: u_translation.rsskycharthome
 msgid "Skychart homepage"
-msgstr "Skychart webbsida"
+msgstr "ເວັບໄຊຫຼັກ Skychart"
 
 #: u_translation.rsskycharticon
 msgid "Skychart icon setup"
-msgstr "Skychart ikoner"
+msgstr "ຕັ້ງຄ່າໄອຄອນ Skychart"
 
 #: u_translation.rsskycharts
 msgid "Sky Charts"
-msgstr "Sky Charts"
+msgstr "ແຜນທີ່ທ້ອງຟ້າ"
 
 #: u_translation.rsskycolour
 msgid "Sky colour"
-msgstr "Färg på himlen"
+msgstr "ສີທ້ອງຟ້າ"
 
 #: u_translation.rsslantorthogr
 msgid "Slant orthographic"
-msgstr "Snedställd ortografisk"
+msgstr "ການສາຍແຜນທີ່ແບບອໍໂທກຣາຟິກຂຽງ"
 
 #: u_translation.rsslew
 msgid "Slew"
-msgstr "Gå till objekt (slew)"
+msgstr "ຫັນກ້ອງ"
 
 #: u_translation.rsslewcomplete
 msgid "Slew complete"
-msgstr "Svepning klar"
+msgstr "ເຄື່ອນທີ່ໄປຫາເປົ້າໝາຍສຳເລັດແລ້ວ"
 
 #: u_translation.rsslewingto
 #, object-pascal-format
 msgid "Slewing to %s / %s"
-msgstr "Sväng till %s / %s"
+msgstr "ກຳລັງເຄື່ອນໄປຫາ %s / %s"
 
 #: u_translation.rsslewtochartc
 msgid "Slew to chart center"
-msgstr "Sväng till kartcentrum"
+msgstr "ເຄື່ອນໄປຫາຈຸດສູນກາງແຜນທີ່"
 
 #: u_translation.rsslewtocursor
 msgid "Slew to cursor position"
-msgstr "Gå till pekarens position"
+msgstr "ເຄື່ອນໄປຫາຕຳແໜ່ງເຄີເຊີ"
 
 #: u_translation.rsslewtoeq
 #, object-pascal-format
 msgid "Slewing to %s %s/%s"
-msgstr ""
+msgstr "ກຳລັງເຄື່ອນໄປຫາ %s %s/%s"
 
 #: u_translation.rsslower
 msgid "Slower"
-msgstr "Långsammare"
+msgstr "ຊ້າລົງ"
 
 #: u_translation.rssmallstars
 msgid "Small stars"
-msgstr "Små stjärnor"
+msgstr "ດາວຂະໜາດນ້ອຍ"
 
 #: u_translation.rssminute
 msgid "M"
-msgstr "M"
+msgstr "ນ."
 
 #: u_translation.rssmonth
 msgid "M."
-msgstr "M"
+msgstr "ດ."
 
 #: u_translation.rssocketerror
 #, object-pascal-format
 msgid "Socket error %s.  %s"
-msgstr "Socketfel %s. %s"
+msgstr "ຊັອກເກັດຜິດພາດ %s.  %s"
 
 #: u_translation.rssolardistanc
 msgid "Solar distance"
-msgstr "Avstånd från solen"
+msgstr "ໄລຍະຫ່າງຈາກດວງອາທິດ"
 
 #: u_translation.rssolareclipse
 msgid "Solar eclipses"
-msgstr "Solförmörkelser"
+msgstr "ສຸລິຍະຄາດ"
 
 #: u_translation.rssolarelongat
 msgid "Solar elongation"
-msgstr "Solelongation"
+msgstr "ມຸມຫ່າງຈາກດວງອາທິດ"
 
 #: u_translation.rssolarsystem
 msgid "Solar System"
-msgstr "Solsystemet"
+msgstr "ລະບົບສຸລິຍະ"
 
 #: u_translation.rssolarsystemb
 msgid "Solar system body"
-msgstr "Solsystemsobjekt"
+msgstr "ວັດຖຸໃນລະບົບສຸລິຍະ"
 
 #: u_translation.rssolarsystemi
 msgid "Solar System Information"
-msgstr "Solsystemsinformation"
+msgstr "ຂໍ້ມູນລະບົບສຸລິຍະ"
 
 #: u_translation.rssolarsystemo
 msgid "Solar system object"
-msgstr "Objekt i solsystemet"
+msgstr "ວັດຖຸໃນລະບົບສຸລິຍະ"
 
 #: u_translation.rssolarsystems
 msgid "Solar system settings"
-msgstr "Inställningar solsystemet"
+msgstr "ຕັ້ງຄ່າລະບົບສຸລິຍະ"
 
 #: u_translation.rssomerecordsw
 #, object-pascal-format
 msgid "Some records where rejected, see the file %sreject.txt for details."
-msgstr "Vissa poster avvisades, se filen %sreject.txt för information."
+msgstr "ບາງຂໍ້ມູນຖືກປະຕິເສດ, ເບິ່ງລາຍລະອຽດໃນໄຟລ໌ %sreject.txt."
 
 #: u_translation.rssomethinggow
 msgid "Something went wrong during the initialization of the program. The program needs to be closed."
-msgstr "Något gick fel vid initieringen av programmet. Programmet måste stängas."
+msgstr "ເກີດຂໍ້ຜິດພາດບາງຢ່າງໃນລະຫວ່າງການເລີ່ມຕົ້ນໂປຣແກຣມ. ຈຳເປັນຕ້ອງປິດໂປຣແກຣມ."
 
 #: u_translation.rssorrycopyisn
 msgid "Sorry, copy is not yet implemented for this page"
-msgstr "Beklagar, kopiering är inte implementerat för den här sidan"
+msgstr "ຂໍອະໄພ, ຍັງບໍ່ຮອງຮັບການຄັດລອກໃນໜ້ານີ້"
 
 #: u_translation.rssortby
 msgid "Sort by"
-msgstr "Sortera efter"
+msgstr "ລຽງຕາມ"
 
 #: u_translation.rssortingfiles
 msgid "Sorting files by magnitude"
-msgstr "Sorterar filer på magnitud"
+msgstr "ກຳລັງລຽງໄຟລ໌ຕາມໂຊຕິມາດ"
 
 #: u_translation.rssortingthein
 msgid "Sorting the index file "
-msgstr "Sorterar indexfilen "
+msgstr "ກຳລັງລຽງລຳດັບໄຟລ໌ດັດຊະນີ "
 
 #: u_translation.rssouth
 msgid "South"
-msgstr "Söder"
+msgstr "ທິດໃຕ້"
 
 #: u_translation.rsspacer
 msgid "Spacer"
-msgstr "Utfyllnad"
+msgstr "ຊ່ອງວ່າງ"
 
 #: u_translation.rsspecializedd
 msgid "Specialized data"
-msgstr "Specialiserad data"
+msgstr "ຂໍ້ມູນສະເພາະທາງ"
 
 #: u_translation.rsspectralclas
 msgid "Spectral class"
-msgstr "Spektralklass"
+msgstr "ປະເພດສະເປັກຕຣັມ"
 
 #: u_translation.rsspeed
 msgid "Speed"
-msgstr "Hastighet"
+msgstr "ຄວາມໄວ"
 
 #: u_translation.rsspiceephemer
 msgid "SPICE ephemeris"
-msgstr "SPICE-efemerid"
+msgstr "ເອເຟເມຣິດ SPICE"
 
 #: u_translation.rsspline
 msgid "Spline"
-msgstr "Spline"
+msgstr "ເສັ້ນໂຄ້ງ (Spline)"
 
 #: u_translation.rssqldatabasen
 msgid "SQL database not available."
-msgstr "SQL-databasen är inte tillgänglig."
+msgstr "ຖານຂໍ້ມູນ SQL ບໍ່ພ້ອມໃຊ້ງານ."
 
 #: u_translation.rssqldatabases
 msgid "SQL database software is probably not installed!"
-msgstr "SQL-databasprogram är förmodligen inte installerat!"
+msgstr "ອາດຈະຍັງບໍ່ໄດ້ຕິດຕັ້ງຊອບແວຖານຂໍ້ມູນ SQL!"
 
 #: u_translation.rssqlitedataba
 msgid "SQLite database"
-msgstr "SQLite databas"
+msgstr "ຖານຂໍ້ມູນ SQLite"
 
 #: u_translation.rssqrt
 msgid "Sqrt"
-msgstr "Kvadratrot"
+msgstr "ຮາກຂັ້ນສອງ"
 
 #: u_translation.rssquare
 msgid "Square"
-msgstr "Fyrkant"
+msgstr "ສີ່ຫຼ່ຽມຈະຕຸລັດ"
 
 #: u_translation.rsssecond
 msgid "S"
-msgstr "S"
+msgstr "ວ."
 
 #: u_translation.rsstandard
 msgid "Standard"
-msgstr "Standard"
+msgstr "ມາດຕະຖານ"
 
 #: u_translation.rsstandardcolo
 msgid "Standard  colour"
-msgstr "Standardfärg"
+msgstr "ສີມາດຕະຖານ"
 
 #: u_translation.rsstar
 msgid "Star"
-msgstr "Stjärna"
+msgstr "ດາວ"
 
 #: u_translation.rsstarandnebul
 msgid "Star and nebula limit"
-msgstr "Stjärn och nebulosa begränsning"
+msgstr "ຂີດຈຳກັດດາວ ແລະ ເນບິວລາ"
 
 #: u_translation.rsstarcatalogi
 msgid "Star catalog index"
-msgstr "Stjärnkatalogsindex"
+msgstr "ດັດຊະນີແຄັດຕະລັອກດາວ"
 
 #: u_translation.rsstarcolourbv
 msgid "Star colour (B-V):"
-msgstr "Färg på stjärnor (B-V)"
+msgstr "ສີຂອງດາວ (B-V):"
 
 #: u_translation.rsstarcommonna
 msgid "Star common name"
-msgstr "Stjärnor allmänt namn"
+msgstr "ຊື່ທົ່ວໄປຂອງດາວ"
 
 #: u_translation.rsstardisplay
 msgid "Star display"
-msgstr "Visning av stjärnor"
+msgstr "ການສະແດງດາວ"
 
 #: u_translation.rsstarlabel
 msgid "Star label"
-msgstr "Stjärnetikett"
+msgstr "ຊື່ດາວ"
 
 #: u_translation.rsstars
 msgid "Stars"
-msgstr "Stjärnor"
+msgstr "ດາວ"
 
 #: u_translation.rsstarsandnebu
 msgid "Stars and deep sky catalogs prepared with "
-msgstr "Stjärn- och deep sky kataloger skapade med "
+msgstr "ຄາຕາລັອກດາວ ແລະ ວັດຖຸທ້ອງຟ້າທີ່ກຽມດ້ວຍ "
 
 #: u_translation.rsstarsbitmapf
 msgid "Stars bitmap file"
-msgstr "Stjärnornas bitmap fil"
+msgstr "ໄຟລ໌ບິດແມັບຂອງດາວ"
 
 #: u_translation.rsstarsfilter
 msgid "Star filter"
-msgstr "Stjärnfilter"
+msgstr "ຕົວກັອງດາວ"
 
 #: u_translation.rsstarsproperm
 msgid "Stars proper motion options (if available in the catalog)"
-msgstr "Inställningar för stjärnors egenrörelser (om dessa finns tillgängliga i katalogen)"
+msgstr "ຕົວເລືອກການເຄື່ອນທີ່ຈິງຂອງດາວ"
 
 #: u_translation.rsstart
 msgid "Start"
-msgstr "Början"
+msgstr "ເລີ່ມ"
 
 #: u_translation.rsstartbackwar
 msgid "Animation backward"
-msgstr "Animation baklänges"
+msgstr "ແອນິເມຊັນຖອຍຫຼັງ"
 
 #: u_translation.rsstartdate
 msgid "Start date"
-msgstr "Startdatum"
+msgstr "ວັນທີເລີ່ມຕົ້ນ"
 
 #: u_translation.rsstartforward
 msgid "Animation forward"
-msgstr "Animation framlänges"
+msgstr "ແອນິເມຊັນໄປທາງໜ້າ"
 
 #: u_translation.rsstartgraphat
 msgid "Start graph at local noon"
-msgstr "Börja grafen kl. 12.00 lokal tid"
+msgstr "ເລີ່ມກຣາຟຕອນທ່ຽງວັນທ້ອງຖິ່ນ"
 
 #: u_translation.rsstartmonth
 msgid "Start month"
-msgstr "Startmånad"
+msgstr "ເດືອນເລີ່ມຕົ້ນ"
 
 #: u_translation.rsstartofobjec
 msgid "Start of object"
-msgstr "Början på objekt"
+msgstr "ເລີ່ມຕົ້ນວັດຖຸ"
 
 #: u_translation.rsstarttracking
 msgid "start tracking"
-msgstr ""
+msgstr "ເລີ່ມຕິດຕາມ"
 
 #: u_translation.rsstatus
 msgid "Status"
-msgstr "Status"
+msgstr "ສະຖານະ"
 
 #: u_translation.rsstatusbar
 msgid "Status bar"
-msgstr "Statusfält"
+msgstr "ແຖບສະຖານະ"
 
 #: u_translation.rsstepinto
 msgid "Step Into"
-msgstr "Stega in i"
+msgstr "Step Into"
 
 #: u_translation.rsstepover
 msgid "Step Over"
-msgstr "Stega förbi"
+msgstr "Step Over"
 
 #: u_translation.rsstepunit
 msgid "Step unit"
-msgstr "Stegenhet"
+msgstr "ຫົວໜ່ວຍຂັ້ນຕອນ"
 
 #: u_translation.rsstereographic
 msgid "Stereographic"
@@ -5608,383 +5608,383 @@ msgstr ""
 
 #: u_translation.rsstop
 msgid "Stop"
-msgstr "Stopp"
+msgstr "ຢຸດ"
 
 #: u_translation.rsstoptcpipser
 msgid "Stop TCP/IP server"
-msgstr "Stoppa TCP/IP servern"
+msgstr "ຢຸດເຊີເວີ TCP/IP"
 
 #: u_translation.rsstoptelescop
 msgid "Stop telescope motion."
-msgstr ""
+msgstr "ຢຸດການເຄື່ອນທີ່ຂອງກ້ອງໂທລະທັດ."
 
 #: u_translation.rssun
 msgid "Sun"
-msgstr "Solen"
+msgstr "ດວງອາທິດ"
 
 #: u_translation.rssunalt
 msgid "Sun alt."
-msgstr "Solhöjd"
+msgstr "ມຸມເງີຍ ດອ."
 
 #: u_translation.rssunday
 msgid "Sun."
-msgstr "Sön."
+msgstr "ທິດ"
 
 #: u_translation.rssunimagesour
 msgid "Sun image source"
-msgstr "Källa för bild på solen"
+msgstr "ແຫຼ່ງຮູບພາບດວງອາທິດ"
 
 #: u_translation.rssuninclinati
 msgid "Sun inclination"
-msgstr "Solinklination"
+msgstr "ຄວາມອຽງຂອງດວງອາທິດ"
 
 #: u_translation.rssupernovarem
 msgid "Supernova remnant"
-msgstr "Supernovarest"
+msgstr "ຊາກຊູເປີໂນວາ"
 
 #: u_translation.rssurface
 msgid "Surface"
-msgstr "Yta"
+msgstr "ພື້ນຜິວ"
 
 #: u_translation.rssurfacebrigh
 msgid "Surface brightness"
-msgstr "Ytljusstyrka"
+msgstr "ຄວາມສະຫວ່າງພື້ນຜິວ"
 
 #: u_translation.rsswapbutton
 msgid "Swap button"
-msgstr "Byt knapp"
+msgstr "ສະຫຼັບປຸ່ມ"
 
 #: u_translation.rssyear
 msgid "Y"
-msgstr "Å"
+msgstr "ປີ"
 
 #: u_translation.rssymbol
 msgid "Symbol"
-msgstr "Symbol"
+msgstr "ສັນຍະລັກ"
 
 #: u_translation.rssync
 msgid "Sync"
-msgstr "Synkronisera"
+msgstr "ຊິງຄ໌"
 
 #: u_translation.rssyncedto
 #, object-pascal-format
 msgid "Synced to %s / %s"
-msgstr "Synkad till %s / %s"
+msgstr "ຊິງຄ໌ກັບ %s / %s ແລ້ວ"
 
 #: u_translation.rssynctoeq
 #, object-pascal-format
 msgid "Sync to %s %s/%s"
-msgstr ""
+msgstr "ຊິງຄ໌ໄປທີ່ %s %s/%s"
 
 #: u_translation.rssynodicmonth
 msgid "Synodic month"
-msgstr "Synodisk månad"
+msgstr "ເດືອນຊິນອດດິກ"
 
 #: u_translation.rssystemprinte
 msgid "System printer"
-msgstr "Systemskrivare"
+msgstr "ເຄື່ອງພິມຂອງລະບົບ"
 
 #: u_translation.rstable
 msgid "Table"
-msgstr "Tabell"
+msgstr "ຕາຕະລາງ"
 
 #: u_translation.rstabledonotex
 #, object-pascal-format
 msgid "%sTable %s does not exist! %sPlease correct the error and retry."
-msgstr "%sTabell %s finns inte! %sRätta till felet och försök igen."
+msgstr "%sຕາຕະລາງ %s ບໍ່ມີຢູ່! %sກະລຸນາແກ້ໄຂ ແລະ ລອງໃໝ່."
 
 #: u_translation.rstableexist
 #, object-pascal-format
 msgid "%sThis table exists: %s"
-msgstr "%sTabellen finns: %s"
+msgstr "%sຕາຕະລາງນີ້ມີຢູ່ແລ້ວ: %s"
 
 #: u_translation.rstarget
 msgid "Target"
-msgstr "Mål"
+msgstr "ເປົ້າໝາຍ"
 
 #: u_translation.rstcpipconnect
 msgid "TCP/IP connection"
-msgstr "TCP/IP anslutning"
+msgstr "ການເຊື່ອມຕໍ່ TCP/IP"
 
 #: u_translation.rstcpipserver
 msgid "TCP/IP server"
-msgstr "TCP/IP server"
+msgstr "TCP/IP ເຊີບເວີ"
 
 #: u_translation.rstcpipservice
 msgid "TCP/IP service not available."
-msgstr "TCP/IP tjänsten är inte tillgänglig."
+msgstr "ບໍລິການ TCP/IP ບໍ່ພ້ອມໃຊ້ງານ."
 
 #: u_translation.rstelescope
 msgid "Telescope"
-msgstr "Teleskop"
+msgstr "ກ້ອງດູດາວ"
 
 #: u_translation.rstelescopefoc
 msgid "Telescope focal length"
-msgstr "Teleskopets fokallängd"
+msgstr "ຄວາມຍາວໂຟກັດຂອງກ້ອງໂທລະທັດ"
 
 #: u_translation.rstelescopenam
 msgid "Telescope name"
-msgstr "Teleskopnamn"
+msgstr "ຊື່ກ້ອງດູດາວ"
 
 #: u_translation.rstelescopenot
 msgid "Telescope not connected"
-msgstr "Teleskopet inte anslutet"
+msgstr "ກ້ອງດູດາວບໍ່ໄດ້ເຊື່ອມຕໍ່"
 
 #: u_translation.rstelescopeset
 msgid "Telescope settings"
-msgstr "Systeminställningar"
+msgstr "ຕັ້ງຄ່າກ້ອງດູດາວ"
 
 #: u_translation.rstemperaturec
 msgid "Temperature (Celsius)"
-msgstr "Temperatur (Celsius)"
+msgstr "ອຸນຫະພູມ (ເຊລຊຽສ)"
 
 #: u_translation.rstemporaryfil
 msgid "temporary file"
-msgstr "Temporär fil"
+msgstr "ໄຟລ໌ຊົ່ວຄາວ"
 
 #: u_translation.rstext
 msgid "Text"
-msgstr "Text"
+msgstr "ຂໍ້ຄວາມ"
 
 #: u_translation.rstextfilecata
 msgid "Text file catalog"
-msgstr "Textbaserad katalog"
+msgstr "ແຄັດຕະລັອກໄຟລ໌ຂໍ້ຄວາມ"
 
 #: u_translation.rstextsize
 msgid "Text size"
-msgstr "Textstorlek"
+msgstr "ຂະໜາດຂໍ້ຄວາມ"
 
 #: u_translation.rstheimagedire
 msgid "The image directory contains sub-directories with the same names as the DSO catalogs. Each sub-directory contains FITS files with the names of the catalog objects. These images are used to replace the DSO symbols on the map."
-msgstr "Bildkatalogen innehåller underkataloger med samma namn som DSO kataloger. Varje underkatalog innehåller FITS-filer med katalogobjektens namn. Bilderna används för att ersätta DSO symboler på kartan."
+msgstr "ໂຟນເດີຮູບພາບປະກອບດ້ວຍໂຟນເດີຍ່ອຍທີ່ມີຊື່ດຽວກັນກັບແຄັດຕະລັອກ DSO. ແຕ່ລະໂຟນເດີຍ່ອຍມີໄຟລ໌ FITS ທີ່ມີຊື່ຕາມວັດຖຸໃນແຄັດຕະລັອກ. ຮູບພາບເຫຼົ່ານີ້ຖືກໃຊ້ເພື່ອແທນທີ່ສັນຍະລັກ DSO ໃນແຜນທີ່."
 
 #: u_translation.rstheme
 msgid "Theme"
-msgstr "Tema"
+msgstr "ທີມ"
 
 #: u_translation.rsthenumberofr
 #, object-pascal-format
 msgid "The number of records for this catalog is unknow. The download will be limited to %s records"
-msgstr "Antalet poster i katalogen är okänt. Hämtningen kommer att begränsas till %s poster"
+msgstr "ບໍ່ຊາບຈຳນວນຂໍ້ມູນໃນແຄັດຕະລັອກນີ້. ຈະຈຳກັດການດາວໂຫຼດຢູ່ທີ່ %s ຂໍ້ມູນ"
 
 #: u_translation.rstheobserving
 #, object-pascal-format
 msgid "The observing list %s was modified."
-msgstr "Observationslistan %s ändrades"
+msgstr "ລາຍການສັງເກດການ %s ຖືກແກ້ໄຂ."
 
 #: u_translation.rstherearecata
 #, object-pascal-format
 msgid "There are %s catalogued images"
-msgstr "Det finns %s katalogiserade bilder"
+msgstr "ມີຮູບພາບໃນຄາຕາລັອກ %s ຮູບ"
 
 #: u_translation.rsthereareobjec
 #, object-pascal-format
 msgid "There are %s objects in this field."
-msgstr "Det finns %s objekt i fältet."
+msgstr "ມີວັດຖຸ %s ຢ່າງໃນຂອບເຂດນີ້."
 
 #: u_translation.rsthisactionre
-#, object-pascal-format
+#, object-pascal-format, fuzzy, badformat
 msgid "This action overwrites all the database content for the country %s, using fresh data from NGA and GNIS.%sAll your editing for this country will be lost, only locations that you added with a new name will be kept.%sDo you want to continue?"
-msgstr "Denna åtgärd skriver över allt innehåll i databasen för landet %s, och använder ny data från NGA och GNIS.%sAlla ändringar för detta land försvinner, och endast platser som du har lagt till med ett nytt namn finns kvar.%sVill du fortsätta?"
+msgstr "ການກະທຳນີ້ຈະຂຽນທັບຂໍ້ມູນທັງໝົດຂອງປະເທດ %s. ທ່ານຕ້ອງການສືບຕໍ່ບໍ?"
 
 #: u_translation.rsthiscatalogc
 #, object-pascal-format
 msgid "This catalog contain %s records. It is not possible to download in full for performance reason."
-msgstr "Katalogen innehåller %s poster. Den kan inte hämtas i sin helhet av prestandaskäl."
+msgstr "ແຄັດຕະລັອກນີ້ມີ %s ຂໍ້ມູນ. ບໍ່ສາມາດດາວໂຫຼດທັງໝົດໄດ້ຍ້ອນເຫດຜົນດ້ານປະສິດທິພາບ."
 
 #: u_translation.rsthisfilecont
 #, object-pascal-format
 msgid "This file contain %s elements.%sThis is probably a base file you want to load without the \"Append\" option.%sIt can affect the performance to append all this data to the current file%sDo you want to continue anyway?"
-msgstr "Denna fil innehåller %s element.%sDet är troligen en basfil du försöker ladda utan välja \"bifoga\".%sDet kan påverka prestandan att bifoga alla dessa data till nuvarande fil.%sVill du ändå fortsätta?"
+msgstr "ໄຟລ໌ນີ້ມີ %s ອົງປະກອບ. %s ນີ້ອາດຈະເປັນໄຟລ໌ຫຼັກທີ່ທ່ານຄວນໂຫຼດໂດຍບໍ່ໃຊ້ຕົວເລືອກ \"Append\". %s ມັນອາດຈະສົ່ງຜົນຕໍ່ປະສິດທິພາບຖ້າເພີ່ມຂໍ້ມູນທັງໝົດນີ້ເຂົ້າໃນໄຟລ໌ປັດຈຸບັນ %s ທ່ານຕ້ອງການດຳເນີນການຕໍ່ຫຼືບໍ່?"
 
 #: u_translation.rsthisfilewasn
 msgid "This file was not recognized as a MPCORB file."
-msgstr "Filen kändes inte igen som en MPCORB fil."
+msgstr "ໄຟລ໌ນີ້ບໍ່ແມ່ນໄຟລ໌ MPCORB."
 
 #: u_translation.rsthislayoutca
 msgid "This layout can be modified later using the menu Setup , Toolbar editor"
-msgstr ""
+msgstr "ຮູບແບບນີ້ສາມາດປັບປ່ຽນໄດ້ໃນພາຍຫຼັງໂດຍໃຊ້ເມນູ ຕັ້ງຄ່າ, ເຄື່ອງມືແກ້ໄຂແຖບເຄື່ອງມື"
 
 #: u_translation.rsthisprogrami
 msgid "This program is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License"
-msgstr "Programmet är fri programvara; du får distribuera och modifiera det under reglerna för GNU General Public License"
+msgstr "ໂປຣແກຣມນີ້ເປັນຊອບແວຟຣີ; ທ່ານສາມາດແຈກຈ່າຍ ຫຼື ແກ້ໄຂໄດ້ພາຍໃຕ້ເງື່ອນໄຂຂອງ GNU General Public License"
 
 #: u_translation.rsthursday
 msgid "Thu."
-msgstr "Tor."
+msgstr "ພະຫັດ"
 
 #: u_translation.rstilehorizont
 msgid "Tile horizontally"
-msgstr "Ordna fönster horisontellt"
+msgstr "ລຽງແນວນອນ"
 
 #: u_translation.rstilevertical
 msgid "Tile vertically"
-msgstr "Ordna fönster vertikalt"
+msgstr "ລຽງແນວຕັ້ງ"
 
 #: u_translation.rstime
 msgid "Time"
-msgstr "Tid"
+msgstr "ເວລາ"
 
 #: u_translation.rstimesimulati
 msgid "Time simulation"
-msgstr "Simulering av tid"
+msgstr "ການຈຳລອງເວລາ"
 
 #: u_translation.rstimeunits
 msgid "Time units"
-msgstr "Tidsenheter"
+msgstr "ຫົວໜ່ວຍເວລາ"
 
 #: u_translation.rstimezone
 msgid "Time zone"
-msgstr "Tidzon"
+msgstr "ເຂດເວລາ"
 
 #: u_translation.rstitle
 msgid "Title"
-msgstr "Rubrik"
+msgstr "ຊື່"
 
 #: u_translation.rstledownloado
 msgid "TLE download OK"
-msgstr "Nedladdning av TLE OK"
+msgstr "ດາວໂຫຼດ TLE ສຳເລັດ"
 
 #: u_translation.rsto
 msgid "to"
-msgstr "Till"
+msgstr "ເຖິງ"
 
 #: u_translation.rstoconfiguret
 msgid "To configure the catalog details"
-msgstr "Konfigurera katalogdetaljer"
+msgstr "ເພື່ອຕັ້ງຄ່າລາຍລະອຽດແຄັດຕະລັອກ"
 
 #: u_translation.rstoday
 msgid "Today"
-msgstr "Idag"
+msgstr "ມື້ນີ້"
 
 #: u_translation.rstofile
 msgid "to file:"
-msgstr "till fil:"
+msgstr "ໄປຫາໄຟລ໌:"
 
 #: u_translation.rstonight
 msgid "Tonight"
-msgstr "I natt"
+msgstr "ຄືນນີ້"
 
 #: u_translation.rstoolbar
 msgid "Toolbar"
-msgstr "Vertygsfält"
+msgstr "ແຖບເຄື່ອງມື"
 
 #: u_translation.rstoolbaredito
 msgid "Toolbar editor"
-msgstr "Redigerare för verktygsfält"
+msgstr "ເຄື່ອງມືແກ້ໄຂແຖບເຄື່ອງມື"
 
 #: u_translation.rstoolbox
 msgid "Tool box"
-msgstr "Verktygslåda"
+msgstr "ກ່ອງເຄື່ອງມື"
 
 #: u_translation.rstools
 msgid "Tools"
-msgstr "Verktyg"
+msgstr "ເຄື່ອງມື"
 
 #: u_translation.rstoomanyopenw
 msgid "Too many open windows, please close some charts."
-msgstr "För många fönster öppna, stäng några kartor."
+msgstr "ເປີດໜ້າຕ່າງຫຼາຍເກີນໄປ, ກະລຸນາປິດບາງແຜນທີ່."
 
 #: u_translation.rstop
 msgid "Top"
-msgstr "Högst upp"
+msgstr "ເທິງ"
 
 #: u_translation.rstopocentric
 msgid "Topocentric"
-msgstr "Topocentrisk"
+msgstr "ຈຸດສູນກາງຜູ້ສັງເກດ"
 
 #: u_translation.rstotal
 msgid "Totality"
-msgstr "Total"
+msgstr "ເຕັມດວງ"
 
 #: u_translation.rstotalasteroi
 msgid "Total asteroid count"
-msgstr "Totalt antal asteroider"
+msgstr "ຈຳນວນດາວເຄາະນ້ອຍທັງໝົດ"
 
 #: u_translation.rstotalradius
 msgid "Total radius"
-msgstr "Total radie"
+msgstr "ລັດສະໝີທັງໝົດ"
 
 #: u_translation.rstour
 msgid "Tour"
-msgstr "Tur"
+msgstr "ທັດສະນະສຶກສາ"
 
 #: u_translation.rstousethisnew
 msgid "Before you can use the new orbital elements, you must compute the monthly data."
-msgstr "Innan du kan använda de nya elementen, måste du beräkna månatliga data."
+msgstr "ກ່ອນທີ່ຈະໃຊ້ອົງປະກອບວົງໂຄຈອນໃໝ່, ທ່ານຕ້ອງຄຳນວນຂໍ້ມູນລາຍເດືອນກ່ອນ."
 
 #: u_translation.rstracking
 msgid "Tracking"
-msgstr "Följning på/av"
+msgstr "ກຳລັງຕິດຕາມ"
 
 #: u_translation.rstracktelesco
 msgid "Track telescope"
-msgstr "Följ teleskop på kartan"
+msgstr "ຕິດຕາມດ້ວຍກ້ອງໂທລະທັດ"
 
 #: u_translation.rstrajectories
 msgid "Trajectories simulation"
-msgstr "Trajektoriesimulering"
+msgstr "ການຈຳລອງເສັ້ນທາງການເຄື່ອນທີ່"
 
 #: u_translation.rstransformati
 msgid "Transformation"
-msgstr "Omvandla"
+msgstr "ການແປງພິກັດ"
 
 #: u_translation.rstransit
 msgid "Transit"
-msgstr "Passage"
+msgstr "ຜ່ານເມຣິດຽນ (Transit)"
 
 #: u_translation.rstranslator
 msgid "Translator:"
-msgstr "Översättare:"
+msgstr "ຜູ້ແປ:"
 
 #: u_translation.rstransparency
 msgid "Transparency"
-msgstr "Genomskinlighet"
+msgstr "ຄວາມໂປ່ງໃສ"
 
 #: u_translation.rstransparentl
 msgid "Transparent line mode (occultations)"
-msgstr "Transparent linje mode (ockultationer)"
+msgstr "ໂໝດເສັ້ນໂປ່ງໃສ (ການບັງກັນ)"
 
 #: u_translation.rstriplestar
 msgid "Triple star"
-msgstr "Trippelstjärna"
+msgstr "ດາວສາມດວງ"
 
 #: u_translation.rstropicalyear
 msgid "Tropical year"
-msgstr "Tropiskt år"
+msgstr "ປີທຣໍປິກຄໍ"
 
 #: u_translation.rstropospheret
 msgid "Troposphere temperature lapse rate (K/km)"
-msgstr "Troposfärens temperaturskiktningskurva (K/km)"
+msgstr "ອັດຕາການປ່ຽນແປງອຸນຫະພູມໃນຊັ້ນໂທຣໂພສເຟຍ (K/km)"
 
 #: u_translation.rstrue
 msgid "True"
-msgstr ""
+msgstr "ຈິງ"
 
 #: u_translation.rstrueequatore
 msgid "true equator, equinox and epoch of the date"
-msgstr "sann ekvator, dagjämning och epok för datumet"
+msgstr "ສູນສູດຈິງ, ວິສຸວັດ ແລະ ອີພັອກ ຕາມວັນທີ"
 
 #: u_translation.rstrueposition
 msgid "True position"
-msgstr "Verklig position"
+msgstr "ຕຳແໜ່ງຈິງ"
 
 #: u_translation.rstruesolar
 msgid "True solar"
-msgstr "Soltid"
+msgstr "ເວລາສຸລິຍະຈິງ"
 
 #: u_translation.rstrumplerclas
 msgid "Trumpler class"
-msgstr "Trumpler klass"
+msgstr "ປະເພດ Trumpler"
 
 #: u_translation.rstruncatedtos
 #, object-pascal-format
 msgid "Truncated to %s catalogs"
-msgstr "Avkortad till %s kataloger"
+msgstr "ຕັດຂໍ້ມູນໃຫ້ເຫຼືອ %s ແຄັດຕະລັອກ"
 
 #: u_translation.rstrytoautocon
 msgid "Try to auto-connect to a SAMP hub when the program start"
-msgstr "Försök att automatiskt ansluta till en SAMP hubb när programmet startar"
+msgstr "ພະຍາຍາມເຊື່ອມຕໍ່ກັບ SAMP hub ໂດຍອັດຕະໂນມັດເມື່ອເລີ່ມໂປຣແກຣມ"
 
 #: u_translation.rsttut
 msgid "DeltaT: "
@@ -5992,124 +5992,124 @@ msgstr "DeltaT: "
 
 #: u_translation.rstuesday
 msgid "Tue."
-msgstr "Tis."
+msgstr "ອັງຄານ"
 
 #: u_translation.rsturnsdegree
 msgid "turns / degree"
-msgstr "varv/grad"
+msgstr "ຮອບ / ອົງສາ"
 
 #: u_translation.rsturnshour
 msgid "turns / hour"
-msgstr "varv/timme"
+msgstr "ຮອບ / ຊົ່ວໂມງ"
 
 #: u_translation.rstwilight
 msgid "Twilight"
-msgstr "Skymning/gryning"
+msgstr "ແສງເງິນແສງທອງ"
 
 #: u_translation.rstype
 msgid "Type"
-msgstr "Typ"
+msgstr "ປະເພດ"
 
 #: u_translation.rstype2
 msgid "Type:"
-msgstr "Typ:"
+msgstr "ປະເພດ:"
 
 #: u_translation.rstypeofcoordi
 msgid "Type of coordinates"
-msgstr "Typ av koordinater"
+msgstr "ປະເພດຂອງພິກັດ"
 
 #: u_translation.rstypeofobject
 msgid "Object types to add to the list"
-msgstr "Objekttyper att lägga till listan"
+msgstr "ປະເພດວັດຖຸທີ່ຈະເພີ່ມໃນລາຍຊື່"
 
 #: u_translation.rstypeofvariab
 msgid "Type of variability"
-msgstr "Typ av variation"
+msgstr "ປະເພດການແປແສງ"
 
 #: u_translation.rsumbra
 msgid "Umbra"
-msgstr "Kärnskugga"
+msgstr "ເງົາມືດ"
 
 #: u_translation.rsunabletocrea
 msgid "Unable to create directory "
-msgstr "Kan inte skapa mapp "
+msgstr "ບໍ່ສາມາດສ້າງໂຟນເດີ "
 
 #: u_translation.rsunchecktoavo
 msgid "Uncheck to avoid duplicate with minor planet 134340"
-msgstr "Bocka ur för att undvika duplikat med dvärgplaneten 134340"
+msgstr "ຍົກເລີກການເລືອກເພື່ອຫຼີກລ່ຽງການຊ້ຳກັບດາວເຄາະນ້ອຍ 134340"
 
 #: u_translation.rsundo
 msgid "Undo"
-msgstr "Ångra"
+msgstr "ຍົກເລີກ"
 
 #: u_translation.rsundolastchan
 msgid "Undo last change"
-msgstr "Ångra senaste ändringen"
+msgstr "ຍົກເລີກການປ່ຽນແປງລ່າສຸດ"
 
 #: u_translation.rsuninstall
 msgid "Uninstall"
-msgstr "Avinstallera"
+msgstr "ຖອນການຕິດຕັ້ງ"
 
 #: u_translation.rsunits
 msgid "Units"
-msgstr "Enheter"
+msgstr "ຫົວໜ່ວຍ"
 
 #: u_translation.rsuniversaltim
 msgid "Universal Time"
-msgstr "UTC"
+msgstr "ເວລາສາກົນ"
 
 #: u_translation.rsunknow
 msgid "unknown"
-msgstr "okänd"
+msgstr "ບໍ່ຮູ້ຈັກ"
 
 #: u_translation.rsunknowobject
 msgid "Unknown object"
-msgstr "Okänt objekt"
+msgstr "ວັດຖຸທີ່ບໍ່ຮູ້ຈັກ"
 
 #: u_translation.rsunlockchart
 msgid "Unlock chart"
-msgstr "Lås upp karta"
+msgstr "ປົດລັອກແຜນທີ່"
 
 #: u_translation.rsunpark
 msgid "Unpark"
-msgstr "Avparkera"
+msgstr "ປົດລັອກຖານ (Unpark)"
 
 #: u_translation.rsunsupportedf
 #, object-pascal-format
 msgid "Unsupported file extension: %sPlease fix it."
-msgstr "Filändelsen stöds inte: %sVar god åtgärda."
+msgstr "ບໍ່ຮອງຮັບນາມສະກຸນໄຟລ໌: %s ກະລຸນາແກ້ໄຂ."
 
 #: u_translation.rsunsupporteds
 msgid "Unsupported SAMP hub profile. Must be a File URL"
-msgstr "SAMP hubprofil felaktig. Måste vara en fil-URL"
+msgstr "ບໍ່ຮອງຮັບໂປຣໄຟລ໌ SAMP hub ນີ້. ຕ້ອງເປັນ File URL"
 
 #: u_translation.rsunzipfile
 msgid "Unzip file"
-msgstr ""
+msgstr "ແຕກໄຟລ໌ (Unzip)"
 
 #: u_translation.rsup
 msgid "Up"
-msgstr "Upp"
+msgstr "ຂຶ້ນ"
 
 #: u_translation.rsupdate1
 msgid "Update"
-msgstr "Uppdatera"
+msgstr "ອັບເດດ"
 
 #: u_translation.rsupdatecoordi
 msgid "Update coordinates"
-msgstr "Uppdatera koordinater"
+msgstr "ອັບເດດພິກັດ"
 
 #: u_translation.rsupdatedsucce
 msgid "Updated successfully!"
-msgstr "Uppdateringen lyckades!"
+msgstr "ອັບເດດສຳເລັດແລ້ວ!"
 
 #: u_translation.rsupdateoraddt
 msgid "Update/add the current location to the database?"
-msgstr "Uppdatera/lägg till nuvarande plats till databasen?"
+msgstr "ອັບເດດ/ເພີ່ມ ສະຖານທີ່ປັດຈຸບັນລົງໃນຖານຂໍ້ມູນບໍ?"
 
 #: u_translation.rsuranus
 msgid "Uranus"
-msgstr "Uranus"
+msgstr "ດາວຍູເຣນັດ"
 
 #: u_translation.rsurl
 msgid "URL"
@@ -6117,90 +6117,90 @@ msgstr "URL"
 
 #: u_translation.rsurllaunchcom
 msgid "URL launch command"
-msgstr "URL startkommando"
+msgstr "ຄຳສັ່ງເປີດ URL"
 
 #: u_translation.rsuseanothertt
 msgid "Use another DeltaT value"
-msgstr "Använd annat DeltaT-värde"
+msgstr "ໃຊ້ຄ່າ DeltaT ອື່ນ"
 
 #: u_translation.rsuseapresetco
 msgid "Use a preset colour scheme:"
-msgstr "Använd ett fördefinierat färgschema:"
+msgstr "ໃຊ້ຊຸດສີທີ່ຕັ້ງໄວ້:"
 
 #: u_translation.rsuseasimplepo
 msgid "Use a simple pointer"
-msgstr "Använd en enkel pekare"
+msgstr "ໃຊ້ຕົວຊີ້ແບບງ່າຍ"
 
 #: u_translation.rsusefultorepr
 msgid "(useful to represent a flux)"
-msgstr "(användbart för att representera ett flöde)"
+msgstr "(ມີປະໂຫຍດໃນການສະແດງຄ່າຟລັກຊ໌)"
 
 #: u_translation.rsusehttpproxy
 msgid "Use HTTP proxy"
-msgstr "Använd HTTP proxy"
+msgstr "ໃຊ້ HTTP ພຣັອກຊີ"
 
 #: u_translation.rsuseonlinedss
 msgid "Use online DSS instead of RealSky"
-msgstr "Använd online DSS istället för RealSky"
+msgstr "ໃຊ້ DSS ອອນລາຍແທນ RealSky"
 
 #: u_translation.rsuseonlinesun
 msgid "Use online Sun image from SDO or SOHO"
-msgstr "Använd en onlinebild på solen från SDO eller SOHO"
+msgstr "ໃຊ້ຮູບພາບດວງອາທິດອອນລາຍຈາກ SDO ຫຼື SOHO"
 
 #: u_translation.rsuserdefinedo
 msgid "User defined objects"
-msgstr "Användardefinierade objekt"
+msgstr "ວັດຖຸທີ່ຜູ້ໃຊ້ກຳນົດເອງ"
 
 #: u_translation.rsuserid
 msgid "User id:"
-msgstr "Användar-ID:"
+msgstr "ໄອດີຜູ້ໃຊ້:"
 
 #: u_translation.rsusername
 msgid "User name"
-msgstr "Användarnamn"
+msgstr "ຊື່ຜູ້ໃຊ້"
 
 #: u_translation.rsusesocksprox
 msgid "Use Socks proxy"
-msgstr "Använd Socks proxy"
+msgstr "ໃຊ້ Socks proxy"
 
 #: u_translation.rsusesubsampli
 msgid "Use subsampling to limit the image size to"
-msgstr "Använd subsampling för att begränsa bildstorleken till"
+msgstr "ໃຊ້ການຫຼຸດຂະໜາດຕົວຢ່າງເພື່ອຈຳກັດຂະໜາດຮູບພາບທີ່"
 
 #: u_translation.rsusesystemtim
 msgid "Use system time"
-msgstr "Använd systemtid"
+msgstr "ໃຊ້ເວລາລະບົບ"
 
 #: u_translation.rsusetcpipserv
 msgid "Use TCP/IP server"
-msgstr "Använd TCP/IP server"
+msgstr "ໃຊ້ TCP/IP ເຊີບເວີ"
 
 #: u_translation.rsusethebutton
 #, object-pascal-format
 msgid "Use the button below or the menu \"%s/%s\" to install a double and variable star catalog"
-msgstr "Använd knappen nedan eller menyn \"%s/%s\" för att installera en katalog för dubbelstjärnor eller variabla stjärnor"
+msgstr "ໃຊ້ປຸ່ມລຸ່ມນີ້ ຫຼື ເມນູ \"%s/%s\" ເພື່ອຕິດຕັ້ງແຄັດຕະລັອກດາວຄູ່ ແລະ ດາວແປແສງ"
 
 #: u_translation.rsusetheintern
 msgid "Use the internal INDI gui panel"
-msgstr "Använd intern INDI gui-panel"
+msgstr "ໃຊ້ແຜງຄວບຄຸມ INDI ພາຍໃນ"
 
 #: u_translation.rsusethemenuor
 #, object-pascal-format
 msgid "Use the menu or button \"%s\" to configure this driver."
-msgstr "Använd menyn eller knappen \"%s\" för att ställa in drivrutinen."
+msgstr "ໃຊ້ເມນູ ຫຼື ປຸ່ມ \"%s\" ເພື່ອຕັ້ງຄ່າໄດຣເວີນີ້."
 
 #: u_translation.rsusetheproper
 msgid "Use the proper motion to correct the position for the given epoch"
-msgstr "Använd egenrörelse för att korrigera position för given epok"
+msgstr "ໃຊ້ການເຄື່ອນທີ່ຈິງເພື່ອແກ້ໄຂຕຳແໜ່ງຕາມຍຸກສະໄໝ"
 
 #: u_translation.rsusethisfield
 msgid "Use this field as an alternative name"
-msgstr "Använd fältet som ett alternativt namn"
+msgstr "ໃຊ້ຟີລດ໌ນີ້ເປັນຊື່ອື່ນ"
 
 #: u_translation.rsusingexistin
 #, object-pascal-format
 msgid "Using the existing file %s"
-msgstr "Använder befintlig fil %s"
+msgstr "ກຳລັງໃຊ້ໄຟລ໌ທີ່ມີຢູ່ %s"
 
 #: u_translation.rsut
 msgid "UT"
@@ -6208,212 +6208,212 @@ msgstr "UT"
 
 #: u_translation.rsvariables
 msgid "Variables"
-msgstr "Variabler"
+msgstr "ດາວແປແສງ"
 
 #: u_translation.rsvariablestar
 msgid "Variable star"
-msgstr "Variabel stjärna"
+msgstr "ດາວແປແສງ"
 
 #: u_translation.rsvariablestar2
 msgid "Variable stars"
-msgstr "Variabla stjärnor"
+msgstr "ດາວແປແສງ"
 
 #: u_translation.rsvelocity
 msgid "Velocity"
-msgstr "Banhastighet"
+msgstr "ຄວາມໄວ"
 
 #: u_translation.rsvenus
 msgid "Venus"
-msgstr "Venus"
+msgstr "ດາວສຸກ"
 
 #: u_translation.rsversion
 msgid "Version"
-msgstr "Version"
+msgstr "ເວີຊັນ"
 
 #: u_translation.rsverticalover
 msgid "Vertical overlap %"
-msgstr "Vertikal överlappning %"
+msgstr "ສ່ວນທີ່ທັບຊ້ອນກັນແນວຕັ້ງ %"
 
 #: u_translation.rsvicinity
 msgid "Vicinity"
-msgstr "Omgivning"
+msgstr "ບໍລິເວນໃກ້ຄຽງ"
 
 #: u_translation.rsview
 msgid "View"
-msgstr "Visningsalternativ"
+msgstr "ມຸມເບິ່ງ"
 
 #: u_translation.rsviewheader
 msgid "View header"
-msgstr "Visa rubrik"
+msgstr "ເບິ່ງສ່ວນຫົວ (Header)"
 
 #: u_translation.rsviewhorizon
 msgid "View horizon"
-msgstr "Visa horisonten"
+msgstr "ມຸມເບິ່ງຂອບຟ້າ"
 
 #: u_translation.rsviewobservin
 msgid "View observing list"
-msgstr "Visa observationslistan"
+msgstr "ເບິ່ງລາຍການສັງເກດການ"
 
 #: u_translation.rsviewonchart
 msgid "View on chart"
-msgstr "Visa på kartan"
+msgstr "ເບິ່ງໃນແຜນທີ່"
 
 #: u_translation.rsvirtualobser
 msgid "Virtual Observatory Catalog"
-msgstr "Katalog för Virtuellt observatorium"
+msgstr "ແຄັດຕະລັອກຫໍສັງເກດການສະເໝືອນ"
 
 #: u_translation.rsvisibilityfo
 msgid "Visibility for your observatory"
-msgstr "Synlighet från ditt observatorium"
+msgstr "ທັດສະນະວິໄສສຳລັບຫໍດູດາວຂອງທ່ານ"
 
 #: u_translation.rsvisualisatio
 msgid "Visualisation scale"
-msgstr "Visningsskala"
+msgstr "ມາດຕາສ່ວນການສະແດງຜົນ"
 
 #: u_translation.rsvisualmagnit
 msgid "Visual magnitude"
-msgstr "Visuell magnitud"
+msgstr "ໂຊຕິມາດປາກົດ"
 
 #: u_translation.rsvocatalog
 msgid "VO Catalog"
-msgstr "VO katalog"
+msgstr "ແຄັດຕະລັອກ VO"
 
 #: u_translation.rsvocatalogbro
 msgid "VO Catalog Browser"
-msgstr "VO katalogläsare"
+msgstr "ເຄື່ອງມືທ່ອງແຄັດຕະລັອກ VO"
 
 #: u_translation.rsvosampsettin
 msgid "VO SAMP settings"
-msgstr "VO SAMP inställningar"
+msgstr "ຕັ້ງຄ່າ VO SAMP"
 
 #: u_translation.rswanttotracka
 msgid "Do you want to track an object before it rises?"
-msgstr "Vill du följa ett objekt innan det kommer över horisonten?"
+msgstr "ທ່ານຕ້ອງການຕິດຕາມວັດຖຸກ່ອນທີ່ມັນຈະຂຶ້ນບໍ?"
 
 #: u_translation.rswarning
 msgid "Warning!"
-msgstr "Varning!"
+msgstr "ຄຳເຕືອນ!"
 
 #: u_translation.rswarningcalcu
 msgid "Warning! Calculation of"
-msgstr "Varning! Kalkylerar"
+msgstr "ຄຳເຕືອນ! ການຄຳນວນຂອງ"
 
 #: u_translation.rswarninglowre
 msgid "Warning! Low resolution mode. Use PostScript instead and print the result file."
-msgstr "Varning! Lågupplösningsläge. Använd PostScript istället och skriv ut resultatfilen."
+msgstr "ຄຳເຕືອນ! ໂໝດຄວາມລະອຽດຕ່ຳ. ກະລຸນາໃຊ້ PostScript ແທນ ແລະ ພິມໄຟລ໌ຜົນລັບ."
 
 #: u_translation.rswarningsomea
 msgid "Warning! Some asteroid elements are outdated. Load element valid for the current map date."
-msgstr "Varning! Vissa asteroidelement är föråldrade. Läs in element som är giltiga för det aktuella kartdatumet."
+msgstr "ຄຳເຕືອນ! ອົງປະກອບຂອງດາວເຄາະນ້ອຍບາງສ່ວນເກົ່າເກີນໄປ. ກະລຸນາໂຫຼດຂໍ້ມູນທີ່ຖືກຕ້ອງສຳລັບວັນທີປັດຈຸບັນ."
 
 #: u_translation.rswarningsomec
 msgid "Warning! Some comet elements are outdated. Load element valid for the current map date."
-msgstr "Varning! Vissa kometelement är föråldrade. Läs in element som är giltiga för det aktuella kartdatumet."
+msgstr "ຄຳເຕືອນ! ອົງປະກອບຂອງດາວຫາງບາງສ່ວນເກົ່າເກີນໄປ. ກະລຸນາໂຫຼດຂໍ້ມູນທີ່ຖືກຕ້ອງສຳລັບວັນທີປັດຈຸບັນ."
 
 #: u_translation.rswarningthecu
 #, object-pascal-format
 msgid "Warning! The used date or your observatory location have been changed from the previous settings. You can reply No now, and use the %s button to return to your original date/time and observation location, otherwise the changes will be applied. Do you want to continue?"
-msgstr "Varning! Använt datum eller observationsplatsen har ändrats från tidigare inställning. Du kan svara Nej nu, och använda %s knappen för att återgå till tidigare datum/tid och observationsplats, annars kommer ändringarna att verkställas. Vill du fortsätta?"
+msgstr "ຄຳເຕືອນ! ວັນທີ ຫຼື ຕຳແໜ່ງຫໍສັງເກດການຂອງທ່ານມີການປ່ຽນແປງຈາກຄ່າກ່ອນໜ້າ. ທ່ານສາມາດຕອບ 'ບໍ່' ແລະ ໃຊ້ປຸ່ມ %s ເພື່ອຫຼັບໄປຫາວັນທີ/ເວລາ ແລະ ຕຳແໜ່ງເດີມ, ບໍ່ດັ່ງນັ້ນການປ່ຽນແປງຈະຖືກນຳໃຊ້. ທ່ານຕ້ອງການດຳເນີນການຕໍ່ຫຼືບໍ່?"
 
 #: u_translation.rswarningyouar
-#, object-pascal-format
+#, object-pascal-format, fuzzy, badformat
 msgid "Warning!%sYou are about to destroy the database %s and all its content, even if this content is not related to this program.%sAre you sure you want to continue?"
-msgstr "Varning!%sDu håller på att förstöra databasen %s och dess innehåll, även om dess innehåll inte är relaterat till detta program.%sÄr du säker på att du vill fortsätta?"
+msgstr "ຄຳເຕືອນ! ທ່ານກຳລັງຈະລຶບຖານຂໍ້ມູນ %s. ທ່ານແນ່ໃຈບໍ?"
 
 #: u_translation.rswarningyouar2
 msgid "Warning! you are using multiple catalogs as sources for identical objects. You risk the display of duplicates. Be sure that this is what you want."
-msgstr "Varning! Du använder flera kataloger som källor för identiska objekt. Du riskerar att duplikat visas."
+msgstr "ຄຳເຕືອນ! ທ່ານກຳລັງໃຊ້ແຄັດຕະລັອກຫຼາຍອັນສຳລັບວັດຖຸອັນດຽວກັນ. ມັນອາດຈະສະແດງຜົນຊ້ຳຊ້ອນກັນ. ກະລຸນາກວດສອບໃຫ້ແນ່ໃຈວ່າທ່ານຕ້ອງການແບບນີ້."
 
 #: u_translation.rswarningyouha
-#, object-pascal-format
+#, object-pascal-format, fuzzy, badformat
 msgid "WARNING !%sYou have chosen to append the data to an existing catalog.%sThis existing catalog and index must be exactly of the same format, otherwise the catalog will be corrupted.%sIt is a good idea to backup the actual files before proceeding this operation.%sDo you want to continue?"
-msgstr "VARNING!%s Du har valt att att lägga till data till en befintlig katalog.%s Den befintliga katalogen och index måste ha exakt samma format, annars kommer katalogen att bli skadad.%s Det är en bra idé att göra en backup av filerna innan du fortsätter.%s Vill du fortsätta?"
+msgstr "ຄຳເຕືອນ! ທ່ານເລືອກທີ່ຈະເພີ່ມຂໍ້ມູນໃສ່ຄາຕາລັອກທີ່ມີຢູ່. ຄວນສຳຮອງຂໍ້ມູນກ່ອນ. ຕ້ອງການສືບຕໍ່ບໍ?"
 
 #: u_translation.rswednesday
 msgid "Wed."
-msgstr "Ons."
+msgstr "ພຸດ"
 
 #: u_translation.rswest
 msgid "West"
-msgstr "Väster"
+msgstr "ທິດຕາເວັນຕົກ"
 
 #: u_translation.rswesthourangl
 msgid "West hour angle"
-msgstr "Västlig timvinkel"
+msgstr "ມຸມຊົ່ວໂມງທິດຕາເວັນຕົກ"
 
 #: u_translation.rswestside
 msgid "West side"
-msgstr "Västra sidan"
+msgstr "ດ້ານທິດຕາເວັນຕົກ"
 
 #: u_translation.rswhiteonblack
 msgid "White on black"
-msgstr "Vit på svart"
+msgstr "ສີຂາວເທິງພື້ນສີດຳ"
 
 #: u_translation.rswidth
 msgid "Width"
-msgstr "Bredd"
+msgstr "ຄວາມກວ້າງ"
 
 #: u_translation.rswindow
 msgid "Window"
-msgstr "Fönster"
+msgstr "ໜ້າຕ່າງ"
 
 #: u_translation.rsyear
 msgid "Year"
-msgstr "År"
+msgstr "ປີ"
 
 #: u_translation.rsyears
 msgid "years"
-msgstr "År"
+msgstr "ປີ"
 
 #: u_translation.rsyoualreadyha
 msgid "You already have the latest available version!"
-msgstr "Du har redan den senaste tillgängliga versionen!"
+msgstr "ທ່ານມີເວີຊັນລ້າສຸດແລ້ວ!"
 
 #: u_translation.rsyouarenowrea
 msgid "You are now ready to display the asteroid for this time period."
-msgstr "Du kan nu visa asteroider för denna tidsperiod."
+msgstr "ຕອນນີ້ທ່ານພ້ອມທີ່ຈະສະແດງດາວເຄາະນ້ອຍສຳລັບໄລຍະເວລານີ້ແລ້ວ."
 
 #: u_translation.rsyouliveonabi
 msgid "If you observe high on a mountain, the horizon line will be lower than it would be at sea level."
-msgstr "Om du observerar från ett högt belägen plats, kommer horisontlinjen lägre än om du befunnit dig vid havsnivån."
+msgstr "ຖ້າທ່ານສັງເກດການເທິງພູສູງ, ເສັ້ນຂອບຟ້າຈະຕ່ຳກວ່າລະດັບນ້ຳທະເລ."
 
 #: u_translation.rszenitalequid
 msgid "Zenital equidistant"
-msgstr "Zenital ekvidistant"
+msgstr "ການສາຍແຜນທີ່ແບບໄລຍະຫ່າງເທົ່າກັນຈາກຈຸດຈອມຟ້າ"
 
 #: u_translation.rszenith
 msgid "Zenith"
-msgstr "Zenit"
+msgstr "ຈຸດຈອມຟ້າ"
 
 #: u_translation.rszoom
 msgid "Zoom +"
-msgstr "Zooma +"
+msgstr "ຂະຫຍາຍ +"
 
 #: u_translation.rszoom2
 msgid "Zoom -"
-msgstr "Zooma -"
+msgstr "ຂະຫຍາຍ -"
 
 #: u_translation.rszoom3
 msgid "Zoom"
-msgstr "Förstora"
+msgstr "ຊູມ"
 
 #: u_translation.rszoomcentre
 msgid "Zoom + and centre on"
-msgstr "Föstora+centrera på"
+msgstr "ຂະຫຍາຍເຂົ້າ ແລະ ຈຸດສູນກາງທີ່"
 
 #: u_translation.rszoomcentre2
 msgid "Zoom - and centre on"
-msgstr "Föstora+centrera på"
+msgstr "ຂະຫຍາຍອອກ ແລະ ຈຸດສູນກາງທີ່"
 
 #: u_translation.rszoomin
 msgid "Zoom in"
-msgstr "Förstora"
+msgstr "ຂະຫຍາຍເຂົ້າ"
 
 #: u_translation.rszoommoretovi
 msgid "Object too faint to show on the chart"
-msgstr "Objektet är för ljussvagt för att visas i kartan"
+msgstr "ວັດຖຸມົວເກີນໄປທີ່ຈະສະແດງໃນແຜນທີ່"
 
 #: u_translation.rszoomout
 msgid "Zoom out"
-msgstr "Förminska"
+msgstr "ຂະຫຍາຍອອກ"
 

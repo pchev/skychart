@@ -4107,7 +4107,7 @@ msgid "to file:"
 msgstr ""
 
 #: u_translation:rsascomtelesc
-msgid "ASCOM telescope interface"
+msgid "Telescope interface"
 msgstr ""
 
 #: u_translation:rsusethemenuor
@@ -4155,7 +4155,7 @@ msgid "Artificial satellite"
 msgstr ""
 
 #: u_translation:rsputthefilesw
-msgid "Put the files with a .tle extention to the %s folder"
+msgid "Put the files with a .tle extension to the %s folder"
 msgstr ""
 
 #: u_translation:rsbesuretheyus
@@ -4732,6 +4732,10 @@ msgstr ""
 
 #: u_translation:rscartesian
 msgid "Cartesian"
+msgstr ""
+
+#: u_translation:rsstereographic
+msgid "Stereographic"
 msgstr ""
 
 #: u_translation:rszenitalequid
@@ -6079,7 +6083,7 @@ msgid "Chart name"
 msgstr ""
 
 #: u_translation:rsrenamethecur
-msgid "Rename the curent chart"
+msgid "Rename the current chart"
 msgstr ""
 
 #: u_translation:rsorientationf
@@ -6288,5 +6292,13 @@ msgstr ""
 
 #: u_translation:rsdeclinationl
 msgid "Declination label on center"
+msgstr ""
+
+#: u_translation:rsgaiavariable
+msgid "GAIA variable star information"
+msgstr ""
+
+#: u_translation:rsaddconstella
+msgid "Add constellations"
 msgstr ""
 

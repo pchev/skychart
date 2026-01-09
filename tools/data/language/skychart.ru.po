@@ -2,15 +2,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: skychart.ru\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-11-19 10:01+0000\n"
-"PO-Revision-Date: 2024-09-28 17:05+0000\n"
-"Last-Translator: Sergey Tarantsov <tsn-ast@yandex.ru>\n"
+"POT-Creation-Date: 2026-01-09 20:03+0000\n"
+"PO-Revision-Date: 2024-12-12 13:38+0000\n"
+"Last-Translator: Aleksey Kabanov <Unknown>\n"
 "Language-Team: Zaporozhye Astronomical Club Altair <astroclub@ua.fm, http://astroclub.zp.ua>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2024-11-19 10:12+0000\n"
-"X-Generator: Launchpad (build 22ade00ab50b929fac63b8ee7252243aceda294a)\n"
+"X-Launchpad-Export-Date: 2026-01-09 20:12+0000\n"
+"X-Generator: Launchpad (build 99c00f518760bdd50fc6e353e7736d2fff8fba4a)\n"
 "Language: ru_UA\n"
 
 #: u_translation.rs102cddss
@@ -150,6 +150,10 @@ msgstr "Добавить"
 #: u_translation.rsaddasingleel
 msgid "Add a single element to the database. All fields are mandatory."
 msgstr "Добавить объект в базу данных. Все поля обязательны для заполнения."
+
+#: u_translation.rsaddconstella
+msgid "Add constellations"
+msgstr ""
 
 #: u_translation.rsaddcursorpos
 msgid "Add cursor position"
@@ -411,8 +415,8 @@ msgid "ASCOM Alpaca is available on %s"
 msgstr "ASCOM Alpaca доступен %s"
 
 #: u_translation.rsascomtelesc
-msgid "ASCOM telescope interface"
-msgstr "Интерфейс телескопа ASCOM"
+msgid "Telescope interface"
+msgstr ""
 
 #: u_translation.rsaskconfirmat
 msgid "Ask confirmation before any Internet connection"
@@ -1426,7 +1430,7 @@ msgstr "Склонение"
 
 #: u_translation.rsdeclinationl
 msgid "Declination label on center"
-msgstr ""
+msgstr "Метка склонения по центру"
 
 #: u_translation.rsdecoptions
 msgid "DEC options"
@@ -1782,7 +1786,7 @@ msgstr "Загрузить элементы орбит в формате MPC"
 
 #: u_translation.rsdownloadsola
 msgid "Download comet or asteroid SPICE kernel from JPL Horizon"
-msgstr ""
+msgstr "Загрузить ядро комет или астероидов SPICE с JPL Horizon"
 
 #: u_translation.rsdownloadtle
 msgid "Download TLE"
@@ -2369,6 +2373,10 @@ msgstr "Пассивный FTP"
 #: u_translation.rsfullscreen
 msgid "Full screen"
 msgstr "Полноэкранный режим"
+
+#: u_translation.rsgaiavariable
+msgid "GAIA variable star information"
+msgstr ""
 
 #: u_translation.rsgalactic
 msgid "Galactic"
@@ -3290,7 +3298,7 @@ msgstr "Отметить"
 
 #: u_translation.rsmarksize
 msgid "Mark size"
-msgstr ""
+msgstr "Размер метки"
 
 #: u_translation.rsmarkthechart
 msgid "Mark the centre of the chart"
@@ -4413,8 +4421,8 @@ msgstr "Порт"
 
 #: u_translation.rsputthefilesw
 #, object-pascal-format
-msgid "Put the files with a .tle extention to the %s folder"
-msgstr "Поместите файлы с расширением .tle в папку %s"
+msgid "Put the files with a .tle extension to the %s folder"
+msgstr ""
 
 #: u_translation.rsqualityflag
 msgid "Quality flag"
@@ -4615,8 +4623,8 @@ msgid "Rename chart"
 msgstr "Переименовать карту"
 
 #: u_translation.rsrenamethecur
-msgid "Rename the curent chart"
-msgstr "Переименовать текущую карту"
+msgid "Rename the current chart"
+msgstr ""
 
 #: u_translation.rsreplacebytic
 msgid "Replace by tick mark"
@@ -5590,6 +5598,10 @@ msgstr "шаг ->"
 #: u_translation.rsstepunit
 msgid "Step unit"
 msgstr "Единица шага"
+
+#: u_translation.rsstereographic
+msgid "Stereographic"
+msgstr ""
 
 #: u_translation.rsstop
 msgid "Stop"

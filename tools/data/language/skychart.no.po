@@ -4,15 +4,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: skychart.no\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-11-19 10:01+0000\n"
+"POT-Creation-Date: 2026-01-09 20:03+0000\n"
 "PO-Revision-Date: 2017-01-29 16:49+0000\n"
 "Last-Translator: ovl-1 <Unknown>\n"
 "Language-Team: <translation@ap-i.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2024-11-19 10:12+0000\n"
-"X-Generator: Launchpad (build 22ade00ab50b929fac63b8ee7252243aceda294a)\n"
+"X-Launchpad-Export-Date: 2026-01-09 20:12+0000\n"
+"X-Generator: Launchpad (build 99c00f518760bdd50fc6e353e7736d2fff8fba4a)\n"
 
 #: u_translation.rs102cddss
 msgid "102 CD DSS"
@@ -151,6 +151,10 @@ msgstr "Legg til"
 #: u_translation.rsaddasingleel
 msgid "Add a single element to the database. All fields are mandatory."
 msgstr "Legg til et enkeltobjekt i databasen. Alle felter er obligatoriske."
+
+#: u_translation.rsaddconstella
+msgid "Add constellations"
+msgstr ""
 
 #: u_translation.rsaddcursorpos
 msgid "Add cursor position"
@@ -412,8 +416,8 @@ msgid "ASCOM Alpaca is available on %s"
 msgstr ""
 
 #: u_translation.rsascomtelesc
-msgid "ASCOM telescope interface"
-msgstr "ASCOM - teleskopgrensesnitt"
+msgid "Telescope interface"
+msgstr ""
 
 #: u_translation.rsaskconfirmat
 msgid "Ask confirmation before any Internet connection"
@@ -2370,6 +2374,10 @@ msgstr "FTP passiv modus"
 #: u_translation.rsfullscreen
 msgid "Full screen"
 msgstr "Full skjerm"
+
+#: u_translation.rsgaiavariable
+msgid "GAIA variable star information"
+msgstr ""
 
 #: u_translation.rsgalactic
 msgid "Galactic"
@@ -4414,8 +4422,8 @@ msgstr "Proxy-port"
 
 #: u_translation.rsputthefilesw
 #, object-pascal-format
-msgid "Put the files with a .tle extention to the %s folder"
-msgstr "Plasser filene med endelsen .tle i mappen %s"
+msgid "Put the files with a .tle extension to the %s folder"
+msgstr ""
 
 #: u_translation.rsqualityflag
 msgid "Quality flag"
@@ -4616,7 +4624,7 @@ msgid "Rename chart"
 msgstr ""
 
 #: u_translation.rsrenamethecur
-msgid "Rename the curent chart"
+msgid "Rename the current chart"
 msgstr ""
 
 #: u_translation.rsreplacebytic
@@ -5591,6 +5599,10 @@ msgstr ""
 #: u_translation.rsstepunit
 msgid "Step unit"
 msgstr "Trinn-enhet"
+
+#: u_translation.rsstereographic
+msgid "Stereographic"
+msgstr ""
 
 #: u_translation.rsstop
 msgid "Stop"

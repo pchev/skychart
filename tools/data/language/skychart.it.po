@@ -3,15 +3,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: skychart\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-11-19 10:01+0000\n"
-"PO-Revision-Date: 2024-03-03 09:17+0000\n"
+"POT-Creation-Date: 2026-01-09 20:03+0000\n"
+"PO-Revision-Date: 2025-03-25 07:15+0000\n"
 "Last-Translator: Mattia Verga <Unknown>\n"
 "Language-Team: Italian <kde-i18n-it@kde.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2024-11-19 10:12+0000\n"
-"X-Generator: Launchpad (build 22ade00ab50b929fac63b8ee7252243aceda294a)\n"
+"X-Launchpad-Export-Date: 2026-01-09 20:12+0000\n"
+"X-Generator: Launchpad (build 99c00f518760bdd50fc6e353e7736d2fff8fba4a)\n"
 "Language: it\n"
 
 #: u_translation.rs102cddss
@@ -151,6 +151,10 @@ msgstr "Aggiungi"
 #: u_translation.rsaddasingleel
 msgid "Add a single element to the database. All fields are mandatory."
 msgstr "Aggiungi un singolo elemento al database. Tutti i campi sono obbligatori."
+
+#: u_translation.rsaddconstella
+msgid "Add constellations"
+msgstr ""
 
 #: u_translation.rsaddcursorpos
 msgid "Add cursor position"
@@ -412,8 +416,8 @@ msgid "ASCOM Alpaca is available on %s"
 msgstr "ASCOM Alpaca è disponibile su %s"
 
 #: u_translation.rsascomtelesc
-msgid "ASCOM telescope interface"
-msgstr "Interfaccia ASCOM"
+msgid "Telescope interface"
+msgstr ""
 
 #: u_translation.rsaskconfirmat
 msgid "Ask confirmation before any Internet connection"
@@ -719,7 +723,7 @@ msgstr "%sImpossibile aprire il database %s! %s"
 
 #: u_translation.rscannotsyncwh
 msgid "Cannot Sync when the mount is not tracking"
-msgstr ""
+msgstr "Impossibile sincronizzare quando la montatura non sta inseguendo"
 
 #: u_translation.rscannotwritet
 msgid "Cannot write to"
@@ -961,7 +965,7 @@ msgstr "Chiudi files"
 
 #: u_translation.rsclosetheset2
 msgid "Close the Setup window and launch the catalog generation tool?"
-msgstr ""
+msgstr "Chiudo la finestra delle impostazioni e apro il programma di creazione cataloghi?"
 
 #: u_translation.rsclosethesetu
 msgid "Close the Setup window and launch the catalog installer tool?"
@@ -1112,7 +1116,7 @@ msgstr "Connesso al database SQL %s"
 #: u_translation.rsconnectioner
 #, object-pascal-format
 msgid "Connection error: %s"
-msgstr ""
+msgstr "Errore di connessione: %s"
 
 #: u_translation.rsconnectionli
 msgid "Connection lines between each position"
@@ -1427,7 +1431,7 @@ msgstr "Declinazione"
 
 #: u_translation.rsdeclinationl
 msgid "Declination label on center"
-msgstr ""
+msgstr "Etichetta di declinazione al centro"
 
 #: u_translation.rsdecoptions
 msgid "DEC options"
@@ -1651,7 +1655,7 @@ msgstr "Disconnetti"
 
 #: u_translation.rsdisconnected3
 msgid "Disconnected"
-msgstr ""
+msgstr "Disconnesso"
 
 #: u_translation.rsdisconnectfr
 msgid "Disconnect from SAMP"
@@ -1660,7 +1664,7 @@ msgstr "Disconnetti da SAMP"
 #: u_translation.rsdisconnectio
 #, object-pascal-format
 msgid "Disconnection error: %s"
-msgstr ""
+msgstr "Errore di disconnessione: %s"
 
 #: u_translation.rsdisplay
 msgid "Display"
@@ -1783,7 +1787,7 @@ msgstr "Scarica elementi orbitali aggiornati"
 
 #: u_translation.rsdownloadsola
 msgid "Download comet or asteroid SPICE kernel from JPL Horizon"
-msgstr ""
+msgstr "Scarica kernel SPICE per comete o asteroidi da JPL Horizon"
 
 #: u_translation.rsdownloadtle
 msgid "Download TLE"
@@ -1815,7 +1819,7 @@ msgstr "Disegna una linea che rappresenti il moto proprio per i prossimi"
 
 #: u_translation.rsdrawas
 msgid "Draw as"
-msgstr ""
+msgstr "Disegna come"
 
 #: u_translation.rsdrawasdso
 msgid "Draw as DSO"
@@ -2144,7 +2148,7 @@ msgstr "Dimensione stelle deboli "
 
 #: u_translation.rsfalse
 msgid "False"
-msgstr ""
+msgstr "Falso"
 
 #: u_translation.rsfamily
 msgid "Family"
@@ -2168,7 +2172,7 @@ msgstr "Febbraio"
 
 #: u_translation.rsfewerbuttons
 msgid "Fewer buttons for a cleaner space, access to other functions from the menu"
-msgstr ""
+msgstr "Meno pulsanti per uno spazio lavoro più pulito, accesso ad altre funzionalità dai menu"
 
 #: u_translation.rsffmpegprogra
 msgid "ffmpeg program path"
@@ -2370,6 +2374,10 @@ msgstr "FTP Modalità Passiva"
 #: u_translation.rsfullscreen
 msgid "Full screen"
 msgstr "A pieno schermo"
+
+#: u_translation.rsgaiavariable
+msgid "GAIA variable star information"
+msgstr ""
 
 #: u_translation.rsgalactic
 msgid "Galactic"
@@ -3291,7 +3299,7 @@ msgstr "Segna"
 
 #: u_translation.rsmarksize
 msgid "Mark size"
-msgstr ""
+msgstr "Segna dimensione"
 
 #: u_translation.rsmarkthechart
 msgid "Mark the centre of the chart"
@@ -3395,7 +3403,7 @@ msgstr "Messaggi:"
 
 #: u_translation.rsmessages2
 msgid "Messages"
-msgstr ""
+msgstr "Messaggi"
 
 #: u_translation.rsmeters
 msgid "Meters"
@@ -3471,7 +3479,7 @@ msgstr "Luna"
 
 #: u_translation.rsmorebuttonsf
 msgid "More buttons for quick access to many functions"
-msgstr ""
+msgstr "Più pulsanti per accedere velocemente a molte funzionalità"
 
 #: u_translation.rsmoreinformat
 msgid "More informations"
@@ -3521,7 +3529,7 @@ msgstr "Dimensioni mosaico"
 #: u_translation.rsmountcapabil
 #, object-pascal-format
 msgid "Mount capabilities: %s"
-msgstr ""
+msgstr "Capacità montatura: %s"
 
 #: u_translation.rsmovelabel
 msgid "Move label"
@@ -3694,7 +3702,7 @@ msgstr ", nessun moto proprio"
 
 #: u_translation.rsnoresponsefr
 msgid "No response from server"
-msgstr ""
+msgstr "Nessuna risposta ricevuta dal server"
 
 #: u_translation.rsnorth
 msgid "North"
@@ -4414,8 +4422,8 @@ msgstr "Porta proxy"
 
 #: u_translation.rsputthefilesw
 #, object-pascal-format
-msgid "Put the files with a .tle extention to the %s folder"
-msgstr "Metti i files con estensione .tle nella cartella %s"
+msgid "Put the files with a .tle extension to the %s folder"
+msgstr ""
 
 #: u_translation.rsqualityflag
 msgid "Quality flag"
@@ -4616,8 +4624,8 @@ msgid "Rename chart"
 msgstr "Rinomina cartina"
 
 #: u_translation.rsrenamethecur
-msgid "Rename the curent chart"
-msgstr "Rinomina la cartina corrente"
+msgid "Rename the current chart"
+msgstr ""
 
 #: u_translation.rsreplacebytic
 msgid "Replace by tick mark"
@@ -4997,7 +5005,7 @@ msgstr "Seleziona unità di tempo"
 
 #: u_translation.rsselectyourpr
 msgid "Select your preference for the button layout"
-msgstr ""
+msgstr "Seleziona preferenze per la disposizione dei pulsanti"
 
 #: u_translation.rssemi
 msgid "Semi"
@@ -5352,7 +5360,7 @@ msgstr "Muovi alla posizione del cursore"
 #: u_translation.rsslewtoeq
 #, object-pascal-format
 msgid "Slewing to %s %s/%s"
-msgstr ""
+msgstr "In movimento a %s %s/%s"
 
 #: u_translation.rsslower
 msgid "Slower"
@@ -5570,7 +5578,7 @@ msgstr "Inizio dell'oggetto"
 
 #: u_translation.rsstarttracking
 msgid "start tracking"
-msgstr ""
+msgstr "Inizia a inseguire"
 
 #: u_translation.rsstatus
 msgid "Status"
@@ -5592,6 +5600,10 @@ msgstr "Passa oltre"
 msgid "Step unit"
 msgstr "Unità di passo"
 
+#: u_translation.rsstereographic
+msgid "Stereographic"
+msgstr ""
+
 #: u_translation.rsstop
 msgid "Stop"
 msgstr "Stop"
@@ -5602,7 +5614,7 @@ msgstr "Ferma server TCP/IP"
 
 #: u_translation.rsstoptelescop
 msgid "Stop telescope motion."
-msgstr ""
+msgstr "Ferma movimento telescopio."
 
 #: u_translation.rssun
 msgid "Sun"
@@ -5660,7 +5672,7 @@ msgstr "Sincronizzato a %s / %s"
 #: u_translation.rssynctoeq
 #, object-pascal-format
 msgid "Sync to %s %s/%s"
-msgstr ""
+msgstr "Sincronizzato a %s %s/%s"
 
 #: u_translation.rssynodicmonth
 msgid "Synodic month"
@@ -5789,7 +5801,7 @@ msgstr "Il file non è riconosciuto come un valido MPCORB file."
 
 #: u_translation.rsthislayoutca
 msgid "This layout can be modified later using the menu Setup , Toolbar editor"
-msgstr ""
+msgstr "Questa disposizione può essere modificata successivamente dal menu Configurazione, Modifica barre degli strumenti"
 
 #: u_translation.rsthisprogrami
 msgid "This program is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License"
@@ -5945,7 +5957,7 @@ msgstr "Decadimento temperatura della troposfera (K/km)"
 
 #: u_translation.rstrue
 msgid "True"
-msgstr ""
+msgstr "Vero"
 
 #: u_translation.rstrueequatore
 msgid "true equator, equinox and epoch of the date"
@@ -6071,7 +6083,7 @@ msgstr "Profilo hub SAMP non supportato. Deve essere il percorso a un file"
 
 #: u_translation.rsunzipfile
 msgid "Unzip file"
-msgstr ""
+msgstr "Scompatta file"
 
 #: u_translation.rsup
 msgid "Up"

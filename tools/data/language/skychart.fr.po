@@ -5,15 +5,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: skychart.fr\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-11-19 10:01+0000\n"
-"PO-Revision-Date: 2024-11-19 10:08+0000\n"
+"POT-Creation-Date: 2026-01-09 20:03+0000\n"
+"PO-Revision-Date: 2026-01-09 20:07+0000\n"
 "Last-Translator: Patrick Chevalley <Unknown>\n"
 "Language-Team: French <kde-i18n-doc@kde.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2024-11-19 10:12+0000\n"
-"X-Generator: Launchpad (build 22ade00ab50b929fac63b8ee7252243aceda294a)\n"
+"X-Launchpad-Export-Date: 2026-01-09 20:12+0000\n"
+"X-Generator: Launchpad (build 99c00f518760bdd50fc6e353e7736d2fff8fba4a)\n"
 "Language: fr\n"
 
 #: u_translation.rs102cddss
@@ -153,6 +153,10 @@ msgstr "Ajouter"
 #: u_translation.rsaddasingleel
 msgid "Add a single element to the database. All fields are mandatory."
 msgstr "Ajout d'un élément à la base de données. Tout les champs sont requis."
+
+#: u_translation.rsaddconstella
+msgid "Add constellations"
+msgstr "Ajout constellation"
 
 #: u_translation.rsaddcursorpos
 msgid "Add cursor position"
@@ -414,8 +418,8 @@ msgid "ASCOM Alpaca is available on %s"
 msgstr "ASCOM Alpaca est disponible pour %s"
 
 #: u_translation.rsascomtelesc
-msgid "ASCOM telescope interface"
-msgstr "Interface de télescope ASCOM"
+msgid "Telescope interface"
+msgstr "Interface télescope"
 
 #: u_translation.rsaskconfirmat
 msgid "Ask confirmation before any Internet connection"
@@ -2372,6 +2376,10 @@ msgstr "FTP passif"
 #: u_translation.rsfullscreen
 msgid "Full screen"
 msgstr "Affichage plein écran"
+
+#: u_translation.rsgaiavariable
+msgid "GAIA variable star information"
+msgstr "Informations de GAIA sur les étoiles variables"
 
 #: u_translation.rsgalactic
 msgid "Galactic"
@@ -4416,7 +4424,7 @@ msgstr "Port"
 
 #: u_translation.rsputthefilesw
 #, object-pascal-format
-msgid "Put the files with a .tle extention to the %s folder"
+msgid "Put the files with a .tle extension to the %s folder"
 msgstr "Mettre les fichiers avec l'extension .tle dans le répertoire %s"
 
 #: u_translation.rsqualityflag
@@ -4618,7 +4626,7 @@ msgid "Rename chart"
 msgstr "Renommer la carte"
 
 #: u_translation.rsrenamethecur
-msgid "Rename the curent chart"
+msgid "Rename the current chart"
 msgstr "Renomme la carte courante"
 
 #: u_translation.rsreplacebytic
@@ -5593,6 +5601,10 @@ msgstr "Pas à pas"
 #: u_translation.rsstepunit
 msgid "Step unit"
 msgstr "Unités"
+
+#: u_translation.rsstereographic
+msgid "Stereographic"
+msgstr "Stéréographique"
 
 #: u_translation.rsstop
 msgid "Stop"

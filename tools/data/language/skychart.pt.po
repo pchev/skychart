@@ -3,15 +3,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: skychart.pt\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-11-19 10:01+0000\n"
-"PO-Revision-Date: 2024-06-10 18:50+0000\n"
+"POT-Creation-Date: 2026-01-09 20:03+0000\n"
+"PO-Revision-Date: 2024-11-28 18:55+0000\n"
 "Last-Translator: Angelo Rober Pulici <Unknown>\n"
 "Language-Team: Angelo Rober Pulici <apulici@terra.com.br>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2024-11-19 10:12+0000\n"
-"X-Generator: Launchpad (build 22ade00ab50b929fac63b8ee7252243aceda294a)\n"
+"X-Launchpad-Export-Date: 2026-01-09 20:12+0000\n"
+"X-Generator: Launchpad (build 99c00f518760bdd50fc6e353e7736d2fff8fba4a)\n"
 "Language: pt_BR\n"
 
 #: u_translation.rs102cddss
@@ -151,6 +151,10 @@ msgstr "Adicionar"
 #: u_translation.rsaddasingleel
 msgid "Add a single element to the database. All fields are mandatory."
 msgstr "Adicionar um elemento simples no banco de dados. Todos os campos são obrigatórios."
+
+#: u_translation.rsaddconstella
+msgid "Add constellations"
+msgstr ""
 
 #: u_translation.rsaddcursorpos
 msgid "Add cursor position"
@@ -412,8 +416,8 @@ msgid "ASCOM Alpaca is available on %s"
 msgstr "ASCOM Alpaca está disponível em %s"
 
 #: u_translation.rsascomtelesc
-msgid "ASCOM telescope interface"
-msgstr "Interface do telescópio ASCOM"
+msgid "Telescope interface"
+msgstr ""
 
 #: u_translation.rsaskconfirmat
 msgid "Ask confirmation before any Internet connection"
@@ -1427,7 +1431,7 @@ msgstr "Declinação"
 
 #: u_translation.rsdeclinationl
 msgid "Declination label on center"
-msgstr ""
+msgstr "Legenda de declinação no centro"
 
 #: u_translation.rsdecoptions
 msgid "DEC options"
@@ -1783,7 +1787,7 @@ msgstr "Transferir os últimos elementos orbitais"
 
 #: u_translation.rsdownloadsola
 msgid "Download comet or asteroid SPICE kernel from JPL Horizon"
-msgstr ""
+msgstr "Baixe cometa ou asteroide do SPICE kernel do JPL Horizon"
 
 #: u_translation.rsdownloadtle
 msgid "Download TLE"
@@ -2370,6 +2374,10 @@ msgstr "Modo FTP passivo"
 #: u_translation.rsfullscreen
 msgid "Full screen"
 msgstr "Ecrã completo"
+
+#: u_translation.rsgaiavariable
+msgid "GAIA variable star information"
+msgstr ""
 
 #: u_translation.rsgalactic
 msgid "Galactic"
@@ -4414,8 +4422,8 @@ msgstr "Porta proxy"
 
 #: u_translation.rsputthefilesw
 #, object-pascal-format
-msgid "Put the files with a .tle extention to the %s folder"
-msgstr "Colocar os ficheiros com a extensão .tle na pasta %s"
+msgid "Put the files with a .tle extension to the %s folder"
+msgstr ""
 
 #: u_translation.rsqualityflag
 msgid "Quality flag"
@@ -4616,8 +4624,8 @@ msgid "Rename chart"
 msgstr "Renomear carta"
 
 #: u_translation.rsrenamethecur
-msgid "Rename the curent chart"
-msgstr "Renomear carta atual"
+msgid "Rename the current chart"
+msgstr ""
 
 #: u_translation.rsreplacebytic
 msgid "Replace by tick mark"
@@ -5591,6 +5599,10 @@ msgstr "Avançar sobre"
 #: u_translation.rsstepunit
 msgid "Step unit"
 msgstr "Unidade do Passo"
+
+#: u_translation.rsstereographic
+msgid "Stereographic"
+msgstr ""
 
 #: u_translation.rsstop
 msgid "Stop"

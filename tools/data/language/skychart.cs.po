@@ -3,15 +3,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: skychart.cs\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-11-19 10:01+0000\n"
-"PO-Revision-Date: 2024-06-06 07:24+0000\n"
+"POT-Creation-Date: 2026-01-09 20:03+0000\n"
+"PO-Revision-Date: 2024-11-20 16:14+0000\n"
 "Last-Translator: Stanislav Holub <Unknown>\n"
 "Language-Team: <translation@ap-i.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2024-11-19 10:12+0000\n"
-"X-Generator: Launchpad (build 22ade00ab50b929fac63b8ee7252243aceda294a)\n"
+"X-Launchpad-Export-Date: 2026-01-09 20:12+0000\n"
+"X-Generator: Launchpad (build 99c00f518760bdd50fc6e353e7736d2fff8fba4a)\n"
 "X-Poedit-Bookmarks: 99,-1,-1,-1,-1,-1,-1,-1,-1,-1\n"
 
 #: u_translation.rs102cddss
@@ -151,6 +151,10 @@ msgstr "Přidat"
 #: u_translation.rsaddasingleel
 msgid "Add a single element to the database. All fields are mandatory."
 msgstr "Přidat záznam do databáze. Všechny položky jsou povinné."
+
+#: u_translation.rsaddconstella
+msgid "Add constellations"
+msgstr ""
 
 #: u_translation.rsaddcursorpos
 msgid "Add cursor position"
@@ -412,8 +416,8 @@ msgid "ASCOM Alpaca is available on %s"
 msgstr "ASCOM Alpaca je k dispozici na %s"
 
 #: u_translation.rsascomtelesc
-msgid "ASCOM telescope interface"
-msgstr "Rozhraní ASCOM"
+msgid "Telescope interface"
+msgstr ""
 
 #: u_translation.rsaskconfirmat
 msgid "Ask confirmation before any Internet connection"
@@ -1427,7 +1431,7 @@ msgstr "Deklinace"
 
 #: u_translation.rsdeclinationl
 msgid "Declination label on center"
-msgstr ""
+msgstr "Deklinační značka na středu"
 
 #: u_translation.rsdecoptions
 msgid "DEC options"
@@ -1783,7 +1787,7 @@ msgstr "Stáhnout aktuální orbitální elementy"
 
 #: u_translation.rsdownloadsola
 msgid "Download comet or asteroid SPICE kernel from JPL Horizon"
-msgstr ""
+msgstr "Stáhněte si kometu nebo asteroid SPICE z JPL Horizon"
 
 #: u_translation.rsdownloadtle
 msgid "Download TLE"
@@ -2370,6 +2374,10 @@ msgstr "Pasivní mód"
 #: u_translation.rsfullscreen
 msgid "Full screen"
 msgstr "Celá obrazovka"
+
+#: u_translation.rsgaiavariable
+msgid "GAIA variable star information"
+msgstr ""
 
 #: u_translation.rsgalactic
 msgid "Galactic"
@@ -4414,8 +4422,8 @@ msgstr "Port proxy"
 
 #: u_translation.rsputthefilesw
 #, object-pascal-format
-msgid "Put the files with a .tle extention to the %s folder"
-msgstr "Dejte soubory s příponou .tle do složky %s"
+msgid "Put the files with a .tle extension to the %s folder"
+msgstr ""
 
 #: u_translation.rsqualityflag
 msgid "Quality flag"
@@ -4616,8 +4624,8 @@ msgid "Rename chart"
 msgstr "Přejmenovat graf"
 
 #: u_translation.rsrenamethecur
-msgid "Rename the curent chart"
-msgstr "Přejmenovat aktuální graf"
+msgid "Rename the current chart"
+msgstr ""
 
 #: u_translation.rsreplacebytic
 msgid "Replace by tick mark"
@@ -5591,6 +5599,10 @@ msgstr "Krok Přes"
 #: u_translation.rsstepunit
 msgid "Step unit"
 msgstr "Jednotka krokování"
+
+#: u_translation.rsstereographic
+msgid "Stereographic"
+msgstr ""
 
 #: u_translation.rsstop
 msgid "Stop"

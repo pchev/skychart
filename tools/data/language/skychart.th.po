@@ -6,15 +6,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: skychart\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2024-11-19 10:01+0000\n"
+"POT-Creation-Date: 2026-01-09 20:03+0000\n"
 "PO-Revision-Date: 2024-01-12 01:37+0000\n"
 "Last-Translator: Worachate Boonplod <Unknown>\n"
 "Language-Team: Thai <th@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2024-11-19 10:13+0000\n"
-"X-Generator: Launchpad (build 22ade00ab50b929fac63b8ee7252243aceda294a)\n"
+"X-Launchpad-Export-Date: 2026-01-09 20:12+0000\n"
+"X-Generator: Launchpad (build 99c00f518760bdd50fc6e353e7736d2fff8fba4a)\n"
 
 #: u_translation.rs102cddss
 msgid "102 CD DSS"
@@ -153,6 +153,10 @@ msgstr "เพิ่ม"
 #: u_translation.rsaddasingleel
 msgid "Add a single element to the database. All fields are mandatory."
 msgstr "เพิ่มรายละเอียดวงโคจรหนึ่งลงในฐานข้อมูล คุณจำเป็นต้องกรอกข้อมูลลงในทุกเขตข้อมูล"
+
+#: u_translation.rsaddconstella
+msgid "Add constellations"
+msgstr ""
 
 #: u_translation.rsaddcursorpos
 msgid "Add cursor position"
@@ -414,8 +418,8 @@ msgid "ASCOM Alpaca is available on %s"
 msgstr "ASCOM Alpaca อยู่ที่ %s"
 
 #: u_translation.rsascomtelesc
-msgid "ASCOM telescope interface"
-msgstr "ส่วนต่อประสานกล้องโทรทรรศน์ ASCOM"
+msgid "Telescope interface"
+msgstr ""
 
 #: u_translation.rsaskconfirmat
 msgid "Ask confirmation before any Internet connection"
@@ -2372,6 +2376,10 @@ msgstr "FTP passive mode"
 #: u_translation.rsfullscreen
 msgid "Full screen"
 msgstr "เต็มหน้าจอ"
+
+#: u_translation.rsgaiavariable
+msgid "GAIA variable star information"
+msgstr ""
 
 #: u_translation.rsgalactic
 msgid "Galactic"
@@ -4416,8 +4424,8 @@ msgstr "พอร์ตของพร็อกซี"
 
 #: u_translation.rsputthefilesw
 #, object-pascal-format
-msgid "Put the files with a .tle extention to the %s folder"
-msgstr "วางแฟ้มที่มีส่วนขยาย .tle ในโฟลเดอร์ %s"
+msgid "Put the files with a .tle extension to the %s folder"
+msgstr ""
 
 #: u_translation.rsqualityflag
 msgid "Quality flag"
@@ -4618,8 +4626,8 @@ msgid "Rename chart"
 msgstr "เปลี่ยนชื่อแผนที่"
 
 #: u_translation.rsrenamethecur
-msgid "Rename the curent chart"
-msgstr "เปลี่ยนชื่อแผนที่ปัจจุบัน"
+msgid "Rename the current chart"
+msgstr ""
 
 #: u_translation.rsreplacebytic
 msgid "Replace by tick mark"
@@ -5593,6 +5601,10 @@ msgstr "ทำทีละขั้น"
 #: u_translation.rsstepunit
 msgid "Step unit"
 msgstr "หน่วยเวลา"
+
+#: u_translation.rsstereographic
+msgid "Stereographic"
+msgstr ""
 
 #: u_translation.rsstop
 msgid "Stop"
