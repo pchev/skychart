@@ -353,14 +353,14 @@ begin
   try
     case MountType of
       0: begin  // ASCOM
-         DriverMsg:=rsFrom + ' ' + AscomDevice.Text+':'+crlf+StringReplace(rsASCOMDriverE, 'ASCOM', 'telescope', [])+': '+'%s'+crlf+rsIfYouCannotF;
+         DriverMsg:=rsFrom + ' ' + AscomDevice.Text+':'+crlf+StringReplace(rsASCOMDriverE, 'ASCOM', lowercase(rstelescope), [])+': '+'%s'+crlf+rsIfYouCannotF;
          Fmount:=T_ascommount.Create(self);
          Fmount.onStatusChange:=@MountStatus;
          Fmount.onMsg:=@MountMessage;
          Fmount.Connect(AscomDevice.Text);
       end;
       1: begin  // Alpaca
-         DriverMsg:=rsFrom + ' ' + 'telescope/'+ARestDevice.Text+':'+crlf+StringReplace(rsASCOMDriverE, 'ASCOM', 'telescope', [])+': '+'%s'+crlf+rsIfYouCannotF;
+         DriverMsg:=rsFrom + ' ' + 'telescope/'+ARestDevice.Text+':'+crlf+StringReplace(rsASCOMDriverE, 'ASCOM', lowercase(rstelescope), [])+': '+'%s'+crlf+rsIfYouCannotF;
          Fmount:=T_ascomrestmount.Create(self);
          Fmount.onStatusChange:=@MountStatus;
          Fmount.onMsg:=@MountMessage;
