@@ -112,7 +112,7 @@ T_mount = class(TComponent)
     function Track:boolean; virtual; abstract;
     procedure AbortMotion; virtual; abstract;
     procedure AbortSlew; virtual; abstract;
-    function FlipMeridian:boolean; virtual; abstract;
+    function FlipMeridian(belowthepole:boolean):boolean; virtual; abstract;
     function GetSite(var long,lat,elev: double): boolean; virtual; abstract;
     function SetSite(long,lat,elev: double): boolean; virtual; abstract;
     function GetDate(var utc,offset: double): boolean; virtual; abstract;

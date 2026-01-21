@@ -27,13 +27,22 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
   https://ascom-standards.org
 }
 
+{$define AppSkychart}
+//{$define AppCcdciel}
+
 interface
 
 uses
  {$IFDEF WINDOWS}
  Variants, comobj, ActiveX,
  {$ENDIF}
-  cu_ascomrest, u_util, synaip,
+ {$ifdef AppSkychart}
+ u_constant, u_util,
+ {$endif}
+ {$ifdef AppCcdciel}
+ u_global, u_utils,
+ {$endif}
+  cu_ascomrest,  synaip,
   httpsend, synautil, fpjson, jsonparser, blcksock, synsock,
   process, Forms, Dialogs, Classes, SysUtils;
 
@@ -80,6 +89,7 @@ function AlpacaApiVersions(ip,port: string): IIntArray;
 function AlpacaDevices(ip,port,apiversion: string):TAlpacaDeviceList;
 procedure AlpacaServerSetup(srv: TAlpacaServer);
 procedure AlpacaDeviceSetup(srv: TAlpacaServer; dev:TAlpacaDevice);
+function AlpacaScanServer(ip,port:string): TAlpacaServerList;
 
 implementation
 
@@ -116,7 +126,7 @@ begin
       if apiversions[j]=AlpacaCurrentVersion then result[i].apiversion:=AlpacaCurrentVersion;
     end;
     except
-      result[i].apiversion:=-1;
+      result[i].apiversion:=1;
     end;
     if result[i].apiversion=AlpacaCurrentVersion then begin
       try
@@ -543,6 +553,47 @@ begin
   ExecuteFile('http://'+srv.ip+':'+srv.port+'/setup/v'+IntToStr(srv.apiversion)+'/'+LowerCase(dev.DeviceType)+'/'+IntToStr(dev.DeviceNumber)+'/setup');
 end;
 
+function AlpacaScanServer(ip,port:string): TAlpacaServerList;
+var apiversions: array of integer;
+    i,j: integer;
+    ok: boolean;
+begin
+  // like discovery but for a single specific server
+  ok:=true;
+  setlength(result,1);
+  result[0].ip:=ip;
+  result[0].port:=port;
+  for i:=0 to Length(result)-1 do begin
+    result[i].apiversion:=-1;
+    result[i].devicecount:=0;
+    SetLength(result[i].devices,0);
+    SetLength(apiversions,0);
+    try
+    apiversions:=AlpacaApiVersions(result[i].ip,result[i].port);
+    for j:=0 to Length(apiversions)-1 do begin
+      if apiversions[j]=AlpacaCurrentVersion then result[i].apiversion:=AlpacaCurrentVersion;
+    end;
+    except
+      result[i].apiversion:=1;
+      ok:=false;
+    end;
+    if ok and (result[i].apiversion=AlpacaCurrentVersion) then begin
+      try
+      AlpacaServerDescription(result[i]);
+      result[i].devices:=AlpacaDevices(result[i].ip,result[i].port,IntToStr(result[i].apiversion));
+      result[i].devicecount:=length(result[i].devices);
+      except
+        on E: Exception do begin
+          result[i].errormsg:=E.Message;
+          ok:=false;
+        end;
+      end;
+    end;
+  end;
+  if not ok then setlength(result,0);
+end;
+
+
 //////////////////// TDiscoverThread /////////////////////////
 
 constructor TDiscoverThread.Create(CreateSuspended: boolean);
@@ -566,7 +617,6 @@ begin
   {$ENDIF}
   end;
 end;
-
 
 end.
 

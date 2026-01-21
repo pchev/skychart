@@ -150,7 +150,7 @@ T_indimount = class(T_mount)
    destructor  Destroy; override;
    Procedure Connect(cp1: string; cp2:string=''; cp3:string=''; cp4:string=''; cp5:string=''; cp6:string=''); override;
    Procedure Disconnect; override;
-   function FlipMeridian:boolean; override;
+   function FlipMeridian(belowthepole:boolean):boolean; override;
    function Slew(sra,sde: double):boolean; override;
    function SlewAsync(sra,sde: double):boolean; override;
    function Sync(sra,sde: double):boolean; override;
@@ -748,21 +748,26 @@ begin
   result:=(islewing or FMountSlewing);
 end;
 
-function T_indimount.FlipMeridian:boolean;
+function T_indimount.FlipMeridian(belowthepole:boolean):boolean;
 var sra,sde,ra1,ra2: double;
     pierside1,pierside2:TPierSide;
+    rightside: boolean;
 begin
   result:=false;
   {$ifdef AppCcdciel}
   sra:=GetRA;
   sde:=GetDec;
   pierside1:=GetPierSide;
-  if pierside1=pierEast then exit; // already right side
+  rightside:=((not belowthepole)and(pierside1=pierEast))or((belowthepole)and(pierside1=pierWest));
+  if rightside then exit; // already right side
   if (sra=NullCoord)or(sde=NullCoord) then exit;
   msg(rsMeridianFlip5);
   // Use Goto, TELESCOPE_PIER_SIDE property is always readonly
   // point one hour to the east of meridian
-  ra1:=rmod(24+1+rad2deg*CurrentSidTim/15,24);
+  if belowthepole then
+    ra1:=rmod(36+1+rad2deg*CurrentSidTim/15,24)
+  else
+    ra1:=rmod(24+1+rad2deg*CurrentSidTim/15,24);
   slew(ra1,sde);
   Wait(2);
   // point one hour to the west of target to force the flip

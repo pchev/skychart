@@ -29,8 +29,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 interface
 
-uses httpsend, synautil, fpjson, jsonparser, base64,
-  Forms, Classes, SysUtils;
+uses httpsend, synautil, synsock, fpjson, jsonparser, base64,
+     ctypes, Forms, Classes, SysUtils;
 
 type
 
@@ -70,9 +70,34 @@ type
   IStringArray = array of string;
   IIntArray = array of integer;
 
+  TImageBytesInfo = record
+    MetadataVersion: cint;         // Bytes 0..3 - Metadata version = 1
+    ErrorNumber: cint;             // Bytes 4..7 - Alpaca error number or zero for success
+    ClientTransactionID: cuint;    // Bytes 8..11 - Client's transaction ID
+    ServerTransactionID: cuint;    // Bytes 12..15 - Device's transaction ID
+    DataStart: cint;               // Bytes 16..19 - Offset of the start of the data bytes = 36 for version 1
+    ImageElementType: cint;        // Bytes 20..23 - Element type of the source image array
+    TransmissionElementType: cint; // Bytes 24..27 - Element type as sent over the network
+    Rank: cint;                    // Bytes 28..31 - Image array rank
+    Dimension1: cint;              // Bytes 32..35 - Length of image array first dimension
+    Dimension2: cint;              // Bytes 36..39 - Length of image array second dimension
+    Dimension3: cint;              // Bytes 40..43 - Length of image array third dimension (0 for 2D array)
+  end;
+  TArrayByte = array of byte;
+  TArrayInt16 = array of cint16;
+  TArrayInt32 = array of cint32;
+  TArrayUInt16 = array of cuint16;
+  TArrayUInt32 = array of cuint32;
+
   TAscomResult= class(TObject)
      protected
        Fdata: TJSONObject;
+       FImageBytesInfo: TImageBytesInfo;
+       FArrayByte: TArrayByte;
+       FArrayInt16: TArrayInt16;
+       FArrayInt32: TArrayInt32;
+       FArrayUInt16: TArrayUInt16;
+       FArrayUInt32: TArrayUInt32;
        function GetAsFloat: double;
        function GetAsInt: integer;
        function GetAsBool: boolean;
@@ -81,9 +106,16 @@ type
        function GetIntArray: IIntArray;
      public
        base64handoff: boolean;
+       imagebytes: boolean;
        constructor Create;
        destructor Destroy; override;
        function GetName(name: string): TJSONData;
+       property ImageBytesInfo: TImageBytesInfo read FImageBytesInfo;
+       property ArrayByte: TArrayByte read FArrayByte;
+       property ArrayInt16: TArrayInt16 read FArrayInt16;
+       property ArrayInt32: TArrayInt32 read FArrayInt32;
+       property ArrayUInt16: TArrayUInt16 read FArrayUInt16;
+       property ArrayUInt32: TArrayUInt32 read FArrayUInt32;
        property data: TJSONObject read Fdata write Fdata;
        property AsFloat: double read GetAsFloat;
        property AsInt: Integer read GetAsInt;
@@ -112,7 +144,6 @@ type
     function GetTimeout: integer;
     procedure SetTimeout(value:integer);
     function GetImagearrayBase64:TMemoryStream;
-    procedure WaitRequest(req: THTTPthread);
   public
     constructor Create(AOwner: TComponent); override;
     destructor Destroy; override;
@@ -125,7 +156,7 @@ type
     procedure Put(method,value:string); overload;
     procedure Put(method:string;value:double); overload;
     procedure Put(method:string;value:Boolean); overload;
-    function PutR(method: string; params:array of string):TAscomResult;
+    function PutR(method: string; params: array of string):TAscomResult;
     property Host: string read Fhost write SetHost;
     property Port: string read Fport write SetPort;
     property Protocol: string read Fprotocol write SetProtocol;
@@ -155,8 +186,9 @@ begin
   Fmethod:='';
   Fok:=False;
   Fhttp:=THTTPSend.Create;
+  Fhttp.KeepAlive:=false;              // always close connection
   Fhttp.Sock.ConnectionTimeout:=5000;  // not too long if service is not available
-  Fhttp.Timeout:=5000;
+  Fhttp.Timeout:=120000;               // 2 minutes for long sync request
   Fhttp.UserAgent:='';
 end;
 
@@ -167,9 +199,23 @@ begin
 end;
 
 procedure THTTPthread.Execute;
+var retry: integer;
 begin
-  Fok:=Fhttp.HTTPMethod(method, fURL);
+  retry:=0;
+  repeat
+    Fok:=Fhttp.HTTPMethod(method, fURL);
+    if not Fok then begin
+      if Fhttp.Sock.LastError=WSAECONNREFUSED then begin
+        sleep(1000);
+      end
+      else begin
+         break;
+      end;
+    end;
+    inc(retry);
+  until Fok or (retry>10);
 end;
+
 
 { TAscomResult }
 
@@ -178,11 +224,17 @@ begin
   inherited Create;
   data:=nil;
   base64handoff:=false;
+  imagebytes:=false;
 end;
 
 destructor TAscomResult.Destroy;
 begin
   if data<>nil then data.free;
+  SetLength(FArrayByte,0);
+  SetLength(FArrayInt16,0);
+  SetLength(FArrayInt32,0);
+  SetLength(FArrayUInt16,0);
+  SetLength(FArrayUInt32,0);
   inherited Destroy;
 end;
 
@@ -252,7 +304,7 @@ begin
   Fhost:='localhost';
   Fport:='11111';
   FRemoteIP:='';
-  FTimeout:=5000;
+  FTimeout:=120000;
   FDevice:='';
   Fuser:='';
   Fpassword:='';
@@ -275,21 +327,6 @@ end;
 procedure TAscomRest.SetTimeout(value:integer);
 begin
   FTimeout:=value;
-end;
-
-procedure TAscomRest.WaitRequest(req: THTTPthread);
-var endt: double;
-    aborted: boolean;
-begin
-  // ensure request time do not excess timeout
-  endt:=now+FTimeout/MSecsPerDay;
-  aborted:=false;
-  while (not req.Finished)and(not aborted) do begin
-    aborted:=(now>endt);
-    sleep(10);
-  end;
-  if aborted then
-     req.http.Abort;
 end;
 
 procedure TAscomRest.SetBaseUrl;
@@ -345,6 +382,7 @@ end;
 function TAscomRest.Get(method:string; param: string=''; hdr: string=''):TAscomResult;
  var ok: boolean;
      url,buf: string;
+     errmsg: array[0..1024] of char;
      i: integer;
      RESTRequest: THTTPthread;
  begin
@@ -353,7 +391,6 @@ function TAscomRest.Get(method:string; param: string=''; hdr: string=''):TAscomR
    RESTRequest.http.Document.Clear;
    RESTRequest.http.Headers.Clear;
    RESTRequest.http.Timeout:=FTimeout;
-   RESTRequest.http.sock.SocksTimeout:=FTimeout;
    url:=FbaseUrl+LowerCase(Fdevice)+'/'+LowerCase(method);
    if param>'' then begin
       url:=url+'?'+param+'&ClientID='+IntToStr(FClientId);
@@ -367,38 +404,98 @@ function TAscomRest.Get(method:string; param: string=''; hdr: string=''):TAscomR
    if hdr<>'' then RESTRequest.http.Headers.Add(hdr);
    RESTRequest.method:='GET';
    RESTRequest.Start;
-   WaitRequest(RESTRequest);
+   while not RESTRequest.Finished do begin
+     sleep(5);
+     if GetCurrentThreadId=MainThreadID then Application.ProcessMessages;
+   end;
    ok := RESTRequest.ok;
    if ok then begin
      if (RESTRequest.http.ResultCode=200) then begin
-       try
-       RESTRequest.http.Document.Position:=0;
        Result:=TAscomResult.Create;
-       Result.data:=TJSONObject(GetJSON(RESTRequest.http.Document));
        if hdr<>'' then begin
          for i:=0 to RESTRequest.http.Headers.Count-1 do
-           if Pos('base64handoff:', lowercase(RESTRequest.http.Headers[i])) = 1 then
+           if Pos('content-type', lowercase(RESTRequest.http.Headers[i])) = 1 then
            begin
              buf:=lowercase(trim(SeparateRight(RESTRequest.http.Headers[i], ':')));
-             Result.base64handoff:=(buf='true');
+             Result.imagebytes:=pos('application/imagebytes',buf)>=0;
            end;
        end;
-       except
-         FLastErrorCode:=500;
-         FLastError:='Unknown error response from server';
-         Result.Free;
-         raise EApiException.Create(FLastError);
-       end;
-       try
-       FLastErrorCode:=Result.GetName('ErrorNumber').AsInteger;
-       FLastError:=Result.GetName('ErrorMessage').AsString;
-       except
-        FLastErrorCode:=0;
-        FLastError:='Missing error message from server';
-       end;
-       if FLastErrorCode<>0 then begin
-          Result.Free;
-          raise EAscomException.Create(FLastError);
+       if Result.imagebytes then begin
+         /// ImageBytes
+         RESTRequest.http.Document.Position:=0;
+         try
+         RESTRequest.http.Document.Read(Result.FImageBytesInfo,SizeOf(Result.FImageBytesInfo));
+         except
+           FLastErrorCode:=500;
+           FLastError:='Unknown error response from server';
+           Result.Free;
+           raise EApiException.Create(FLastError);
+         end;
+         if Result.FImageBytesInfo.MetadataVersion<>1 then begin
+           FLastErrorCode:=500;
+           FLastError:='Unsupported Alpaca ImageBytes MetadataVersion='+inttostr(Result.FImageBytesInfo.MetadataVersion);
+           Result.Free;
+           raise EApiException.Create(FLastError);
+         end;
+         FLastErrorCode:=Result.FImageBytesInfo.ErrorNumber;
+         FLastError:='';
+         if FLastErrorCode<>0 then begin
+            RESTRequest.http.Document.Position:=Result.FImageBytesInfo.DataStart;
+            RESTRequest.http.Document.Read(errmsg, 1024);
+            FLastError:=string(UTF8Decode(errmsg));
+            Result.Free;
+            raise EAscomException.Create(FLastError);
+         end;
+         RESTRequest.http.Document.Position:=Result.FImageBytesInfo.DataStart;
+         i:=Result.FImageBytesInfo.dimension1*Result.FImageBytesInfo.dimension2;
+         if Result.FImageBytesInfo.dimension3<>0 then i:=i*Result.FImageBytesInfo.dimension3;
+         case Result.FImageBytesInfo.TransmissionElementType of
+           1: begin
+              SetLength(Result.FArrayInt16,i);
+              RESTRequest.http.Document.Read(Result.FArrayInt16[0], i*SizeOf(cint16));
+              end;
+           2: begin
+              SetLength(Result.FArrayInt32,i);
+              RESTRequest.http.Document.Read(Result.FArrayInt32[0], i*SizeOf(cint32));
+              end;
+           6: begin
+              SetLength(Result.FArrayByte,i);
+              RESTRequest.http.Document.Read(Result.FArrayByte[0],i*SizeOf(byte));
+              end;
+           8: begin
+              SetLength(Result.FArrayUInt16,i);
+              RESTRequest.http.Document.Read(Result.FArrayUInt16[0],i*SizeOf(cuint16));
+              end;
+           9: begin
+              SetLength(Result.FArrayUInt32,i);
+              RESTRequest.http.Document.Read(Result.FArrayUInt32[0],i*SizeOf(cuint32));
+              end;
+           else
+              raise exception.create('Not implemented Alpaca image array type '+inttostr(Result.FImageBytesInfo.TransmissionElementType));
+           end;
+       end
+       else begin
+         // JSON document
+         try
+         RESTRequest.http.Document.Position:=0;
+         Result.data:=TJSONObject(GetJSON(RESTRequest.http.Document));
+         except
+           FLastErrorCode:=500;
+           FLastError:='Unknown error response from server';
+           Result.Free;
+           raise EApiException.Create(FLastError);
+         end;
+         try
+         FLastErrorCode:=Result.GetName('ErrorNumber').AsInteger;
+         FLastError:=Result.GetName('ErrorMessage').AsString;
+         except
+          FLastErrorCode:=0;
+          FLastError:='Missing error message from server';
+         end;
+         if FLastErrorCode<>0 then begin
+            Result.Free;
+            raise EAscomException.Create(FLastError);
+         end;
        end;
      end
      else begin
@@ -479,7 +576,10 @@ function TAscomRest.GetImagearrayBase64:TMemoryStream;
    RESTRequest.url:=url;
    RESTRequest.method:='GET';
    RESTRequest.Start;
-   WaitRequest(RESTRequest);
+   while not RESTRequest.Finished do begin
+     sleep(5);
+     if GetCurrentThreadId=MainThreadID then Application.ProcessMessages;
+   end;
    ok := RESTRequest.ok;
    if ok then begin
      if (RESTRequest.http.ResultCode=200) then begin
@@ -509,16 +609,112 @@ function TAscomRest.GetImageArray: TImageArray;
 var J: TAscomResult;
     str1,img: TMemoryStream;
     b64str: TBase64DecodingStream;
-    x,y,k: integer;
+    x,y,i,k: integer;
 begin
-   J:=Get('imagearray','','base64handoff: true');
+   J:=Get('imagearray','','Accept: application/imagebytes');
    try
-   x:=J.GetName('Type').AsInteger;
-   if x<>2 then
-      raise EApiException.Create('Invalid ImageArray Type '+inttostr(x));
-
    Result:=TImageArray.Create;
-   if J.base64handoff then begin
+   if j.imagebytes then begin
+     // ImageBytes
+     Result.nplane:=J.FImageBytesInfo.Rank;
+     Result.width:=J.FImageBytesInfo.Dimension1;
+     Result.height:=J.FImageBytesInfo.Dimension2;
+     if Result.nplane=2 then begin
+        SetLength(Result.img,1,Result.height,Result.width);
+        i:=0;
+        case J.ImageBytesInfo.TransmissionElementType of
+           1: for x:=0 to Result.width-1 do begin
+                for y:=0 to Result.height-1 do begin
+                  Result.img[0,y,x]:=J.ArrayInt16[i];
+                  inc(i);
+               end;
+             end;
+           2: for x:=0 to Result.width-1 do begin
+                for y:=0 to Result.height-1 do begin
+                  Result.img[0,y,x]:=J.ArrayInt32[i];
+                  inc(i);
+               end;
+             end;
+           6: for x:=0 to Result.width-1 do begin
+                for y:=0 to Result.height-1 do begin
+                  Result.img[0,y,x]:=J.ArrayByte[i];
+                  inc(i);
+               end;
+             end;
+           8: for x:=0 to Result.width-1 do begin
+                for y:=0 to Result.height-1 do begin
+                  Result.img[0,y,x]:=J.ArrayUInt16[i];
+                  inc(i);
+               end;
+             end;
+           9: for x:=0 to Result.width-1 do begin
+                for y:=0 to Result.height-1 do begin
+                  Result.img[0,y,x]:=J.ArrayUInt32[i];
+                  inc(i);
+               end;
+             end;
+           else
+             raise exception.create('Not implemented Alpaca image array type '+inttostr(J.ImageBytesInfo.TransmissionElementType));
+        end;
+      end
+      else if Result.nplane=3 then begin
+        if J.ImageBytesInfo.Dimension3<>3 then
+          raise exception.create('Not implemented Alpaca image array dimension3='+inttostr(J.ImageBytesInfo.Dimension3));
+        SetLength(Result.img,3,Result.height,Result.width);
+        i:=0;
+        case J.ImageBytesInfo.TransmissionElementType of
+           1: for x:=0 to Result.width-1 do begin
+                for y:=0 to Result.height-1 do begin
+                  for k:=0 to 2 do begin
+                    Result.img[k,y,x]:=J.ArrayInt16[i];
+                    inc(i);
+                  end;
+               end;
+             end;
+           2: for x:=0 to Result.width-1 do begin
+                for y:=0 to Result.height-1 do begin
+                  for k:=0 to 2 do begin
+                    Result.img[k,y,x]:=J.ArrayInt32[i];
+                    inc(i);
+                  end;
+               end;
+             end;
+           6: for x:=0 to Result.width-1 do begin
+                for y:=0 to Result.height-1 do begin
+                  for k:=0 to 2 do begin
+                    Result.img[k,y,x]:=J.ArrayByte[i];
+                    inc(i);
+                  end;
+               end;
+             end;
+           8: for x:=0 to Result.width-1 do begin
+                for y:=0 to Result.height-1 do begin
+                  for k:=0 to 2 do begin
+                    Result.img[k,y,x]:=J.ArrayUInt16[i];
+                    inc(i);
+                  end;
+               end;
+             end;
+           9: for x:=0 to Result.width-1 do begin
+                for y:=0 to Result.height-1 do begin
+                  for k:=0 to 2 do begin
+                    Result.img[k,y,x]:=J.ArrayUInt32[i];
+                    inc(i);
+                  end;
+               end;
+             end;
+           else
+             raise exception.create('Not implemented Alpaca image array type '+inttostr(J.ImageBytesInfo.TransmissionElementType));
+        end;
+      end
+      else
+        raise exception.create('Not implemented Alpaca image array rank '+inttostr(J.ImageBytesInfo.Rank));
+   end
+   else if J.base64handoff then begin
+     // Base64
+     x:=J.GetName('Type').AsInteger;
+     if x<>2 then
+        raise EApiException.Create('Invalid ImageArray Type '+inttostr(x));
      str1:=GetImagearrayBase64;
      if (str1<>nil)and(str1.Size>0) then begin
        try
@@ -565,6 +761,10 @@ begin
      end;
    end
    else begin
+     // JSON array
+     x:=J.GetName('Type').AsInteger;
+     if x<>2 then
+        raise EApiException.Create('Invalid ImageArray Type '+inttostr(x));
      Result.nplane:=J.GetName('Rank').AsInteger;
      if result.nplane=2 then begin
        with TJSONArray(J.GetName('Value')) do begin
@@ -643,7 +843,10 @@ begin
   RESTRequest.url:=url;
   RESTRequest.method:='PUT';
   RESTRequest.Start;
-  WaitRequest(RESTRequest);
+  while not RESTRequest.Finished do begin
+     sleep(5);
+     if GetCurrentThreadId=MainThreadID then Application.ProcessMessages;
+  end;
   ok := RESTRequest.ok;
    if ok then begin
     if (RESTRequest.http.ResultCode=200) then begin
@@ -681,7 +884,7 @@ begin
 end;
 
 
-procedure TAscomRest.Put(method: string; params:array of string); overload;
+procedure TAscomRest.Put(method: string; params: array of string); overload;
 var J: TAscomResult;
     url,data: string;
     ok: boolean;
@@ -721,8 +924,11 @@ begin
   RESTRequest.url:=url;
   RESTRequest.method:='PUT';
   RESTRequest.Start;
-  WaitRequest(RESTRequest);
-  if method='Connected' then
+  while not RESTRequest.Finished do begin
+     sleep(5);
+     if GetCurrentThreadId=MainThreadID then Application.ProcessMessages;
+  end;
+  if (method='Connected')or(method='Connect') then
     FRemoteIP:=RESTRequest.http.Sock.GetRemoteSinIP;
   ok := RESTRequest.ok;
   if ok then begin

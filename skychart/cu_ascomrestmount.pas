@@ -100,7 +100,7 @@ public
    procedure Disconnect; override;
    function Slew(sra,sde: double):boolean; override;
    function SlewAsync(sra,sde: double):boolean; override;
-   function FlipMeridian: boolean; override;
+   function FlipMeridian(belowthepole:boolean): boolean; override;
    function Sync(sra,sde: double):boolean; override;
    function Track:boolean; override;
    procedure AbortMotion; override;
@@ -277,7 +277,10 @@ result:=false;
   try
   result:=V.Get('connected').AsBool;
   except
-   result:=false;
+   on E: Exception do begin
+     if debug_msg then msg('Error Connected : '+ E.Message);
+     result:=false;
+   end;
   end;
 end;
 
@@ -435,7 +438,7 @@ begin
    else raise Exception.Create('Invalid value');
  end;
  if debug_msg then msg('Set sideofpier = '+IntToStr(i));
- V.Put('sideofpier',i);
+ V.Put('SideOfPier',i);
  wait(5);
  WaitMountSlewing(SlewDelay);
  except
@@ -573,68 +576,84 @@ begin
 end;
 
 function T_ascomrestmount.WaitConnecting(maxtime:integer):boolean;
-var count,maxcount:integer;
+var timemax,lastcheck: double;
+    ok: boolean;
 begin
  result:=true;
  try
-   maxcount:=maxtime div waitpoll;
-   count:=0;
-   while (V.Get('connecting').AsBool)and(count<maxcount) do begin
-      sleep(waitpoll);
+   timemax:=now+maxtime/1000/SecsPerDay;
+   lastcheck:=0;
+   repeat
+      if now>(lastcheck+waitpoll/1000/SecsPerDay) then begin
+         ok:=not (V.Get('connecting').AsBool);
+         if ok then break;
+         lastcheck:=now;
+      end;
+      sleep(10);
       if GetCurrentThreadId=MainThreadID then Application.ProcessMessages;
-      inc(count);
-   end;
-   result:=(count<maxcount);
+   until ok or (now>timemax);
+   result:=(now<timemax);
  except
-   result:=false;
+   on E: Exception do begin
+     msg(Format(rsConnectionEr, [E.Message]),0);
+     result:=false;
+   end;
  end;
 end;
 
 function T_ascomrestmount.WaitMountSlewing(maxtime:integer):boolean;
-var count,maxcount:integer;
+var timemax,lastcheck: double;
+    ok: boolean;
 begin
  result:=true;
- if FStatus<>devConnected then exit;
  try
- if CanSlewAsync then begin
-   maxcount:=maxtime div waitpoll;
-   count:=0;
-   while (V.Get('slewing').AsBool)and(count<maxcount) do begin
-      sleep(waitpoll);
+   timemax:=now+maxtime/1000/SecsPerDay;
+   lastcheck:=0;
+   repeat
+      if now>(lastcheck+waitpoll/1000/SecsPerDay) then begin
+         ok:=not (V.Get('slewing').AsBool);
+         if ok then break;
+         lastcheck:=now;
+      end;
+      sleep(10);
       if GetCurrentThreadId=MainThreadID then Application.ProcessMessages;
-      inc(count);
-   end;
-   result:=(count<maxcount);
- end;
+   until ok or (now>timemax);
+   result:=(now<timemax);
  except
    result:=false;
  end;
 end;
 
 function T_ascomrestmount.WaitMountPark(maxtime:integer):boolean;
-var count,maxcount:integer;
+var timemax,lastcheck: double;
+    ok: boolean;
 begin
  result:=true;
  if FStatus<>devConnected then exit;
  try
- if CanPark then begin
-   maxcount:=maxtime div waitpoll;
-   count:=0;
-   while (not V.Get('atpark').AsBool)and(count<maxcount) do begin
-      sleep(waitpoll);
+  if CanPark then begin
+   timemax:=now+maxtime/1000/SecsPerDay;
+   lastcheck:=0;
+   repeat
+      if now>(lastcheck+waitpoll/1000/SecsPerDay) then begin
+         ok:=(V.Get('atpark').AsBool);
+         if ok then break;
+         lastcheck:=now;
+      end;
+      sleep(10);
       if GetCurrentThreadId=MainThreadID then Application.ProcessMessages;
-      inc(count);
-   end;
-   result:=(count<maxcount);
- end;
+   until ok or (now>timemax);
+   result:=(now<timemax);
+  end;
  except
    result:=false;
  end;
 end;
 
-function T_ascomrestmount.FlipMeridian:boolean;
+function T_ascomrestmount.FlipMeridian(belowthepole:boolean):boolean;
 var sra,sde,ra1,ra2: double;
-    pierside1,pierside2:TPierSide;
+    pierside1,pierside2,destside:TPierSide;
+    rightside: boolean;
 begin
   result:=false;
   {$ifdef AppCcdciel}
@@ -643,19 +662,27 @@ begin
     sra:=GetRA;
     sde:=GetDec;
     pierside1:=GetPierSideReal;
-    if pierside1=pierEast then exit; // already right side
+    rightside:=((not belowthepole)and(pierside1=pierEast))or((belowthepole)and(pierside1=pierWest));
+    if rightside then exit; // already right side
     if (sra=NullCoord)or(sde=NullCoord) then exit;
     msg(rsMeridianFlip5);
     if FUseSetPierSide and CanSetPierSide and CanSlewAsync then begin
+       if belowthepole then
+         destside:=pierWest
+       else
+         destside:=pierEast;
        // do the flip
-       SetPierSide(pierEast);
+       SetPierSide(destside);
        // check result
        pierside2:=GetPierSideReal;
        result:=(pierside2<>pierside1);
     end
     else begin
       // point one hour to the east of meridian
-      ra1:=rmod(24+1+rad2deg*CurrentSidTim/15,24);
+       if belowthepole then
+         ra1:=rmod(36+1+rad2deg*CurrentSidTim/15,24)
+       else
+         ra1:=rmod(24+1+rad2deg*CurrentSidTim/15,24);
       slew(ra1,sde);
       // point one hour to the west of target to force the flip
       ra2:=sra-1;
