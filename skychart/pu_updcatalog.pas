@@ -98,7 +98,7 @@ type
     InstallInfo: TCatInfo;
     httpdownload: THTTPBigDownload;
     FUnZipper: TUnZipper;
-    FRunning,FAbort,Falreadycomplete: boolean;
+    FRunning,FAbort,Falreadycomplete,FDownloadNow: boolean;
     flist,flistsum: TStringList;
     flistpos,ProgressIndex,ProgressCount: integer;
     ProgressMessage: string;
@@ -315,6 +315,7 @@ begin
   ButtonRefresh.Visible:=false;
   FAbort:=false;
   FRunning:=false;
+  FDownloadNow:=true;
 end;
 
 procedure Tf_updcatalog.FormShow(Sender: TObject);
@@ -377,7 +378,8 @@ var f: textfile;
     row: Tstringlist;
     grid: TStringGrid;
 begin
-  UpdateList(False,buf);
+  UpdateList(FDownloadNow,buf);
+  FDownloadNow:=false;
   ClearGrid(GridStar);
   ClearGrid(GridVar);
   ClearGrid(GridDouble);
