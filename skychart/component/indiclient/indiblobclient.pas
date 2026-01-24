@@ -326,7 +326,7 @@ end;
 
 procedure TIndiBlobClient.Execute;
 const
-  buffersize = 10240;
+  buffersize = 1048576;
 var
   buf: string;
   init: boolean;
@@ -414,7 +414,7 @@ begin
         repeat
           if terminated then
             break;
-          n := tcpclient.Sock.RecvBufferEx(@buffer, buffersize, 2*FTimeout);
+          n := tcpclient.Sock.RecvBufferEx(@buffer, buffersize, FTimeout);
           if (tcpclient.Sock.lastError <> 0) and
             (tcpclient.Sock.lastError <> WSAETIMEDOUT) then
             break;
