@@ -26,6 +26,8 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 
 {$mode objfpc}{$H+}
 
+//{$define timing_stdout}
+
 interface
 
 uses
@@ -788,7 +790,9 @@ var
   str1: TStringStream;
   b64str: TBase64DecodingStream;
   node, cnode, na, fa, sa: TDOMNode;
+  {$ifdef timing_stdout}tt: double; {$endif}
 begin
+  {$ifdef timing_stdout}writeln(FormatDateTime('yyyy"-"mm"-"dd"T"hh":"nn":"ss.zzz',Now)+' Decode IBLOBVectorProperty');{$endif}
   node := root.FirstChild;
   while node <> nil do
   begin
@@ -814,6 +818,7 @@ begin
         begin
           // Only base64 decoding. The eventual decompression is done in
           // the final client to avoid a dependency to zlib here.
+          {$ifdef timing_stdout}tt:=now;{$endif}
           str1 := TStringStream.Create(string(cnode.NodeValue));
           b64str := TBase64DecodingStream.Create(str1);
           try
@@ -826,6 +831,7 @@ begin
             str1.Free;
             b64str.Free;
           end;
+          {$ifdef timing_stdout}writeln(FormatDateTime('yyyy"-"mm"-"dd"T"hh":"nn":"ss.zzz',Now)+' base64 decode time = '+FormatFloat('0.000',86400*(now-tt)));{$endif}
           if assigned(FIndiBlobEvent) then
             FIndiBlobEvent(blobEL);
         end;

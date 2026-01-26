@@ -30,6 +30,8 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 
 {$mode objfpc}{$H+}
 
+//{$define timing_stdout}
+
 interface
 
 uses
@@ -336,6 +338,7 @@ var
   i, n, level, c, tl: integer;
   closing: boolean;
   lastc: char;
+  {$ifdef timing_stdout}isblob: boolean;{$endif}
 
   function ReadElement(newc: char): boolean; inline;
   begin
@@ -411,6 +414,7 @@ begin
         level := 0;
         s.WriteBuffer('<INDIMSG>', 9);
         c := 0;
+        {$ifdef timing_stdout}isblob:=false;{$endif}
         repeat
           if terminated then
             break;
@@ -420,6 +424,10 @@ begin
             break;
           if n > 0 then
           begin
+            {$ifdef timing_stdout}if copy(buffer,1,14)='<setBLOBVector' then begin
+              isblob:=true;
+              writeln(FormatDateTime('yyyy"-"mm"-"dd"T"hh":"nn":"ss.zzz',Now)+' receive 1st block of image blob: '+copy(buffer,1,200));
+            end;{$endif}
             if FProtocolTrace then
               WriteProtocolRaw('Receive buffer size=' + IntToStr(n) +
                 crlf + Copy(buffer,1,n));
@@ -440,6 +448,7 @@ begin
                       StringReplace(copy(tbuf, 1, tl), cr, '', [rfReplaceAll]),
                       lf, '', [rfReplaceAll]) + '...');
                 end;
+                {$ifdef timing_stdout}if isblob then writeln(FormatDateTime('yyyy"-"mm"-"dd"T"hh":"nn":"ss.zzz',Now)+' Full image blob received');{$endif}
                 ProcessDataThread(s);
                 s := TMemoryStream.Create;
                 s.WriteBuffer('<INDIMSG>', 9);
