@@ -28,19 +28,19 @@ begin
 
     writeln(fo1,row); // all variable
 
-    buf:=trim(copy(row,106,7))+' ';
+    buf:=trim(copy(row,106,10))+' ';
     band1:=buf[1];
-    buf:=trim(copy(row,128,8))+' ';
+    buf:=trim(copy(row,131,8))+' ';
     band2:=buf[1];
     if band1 in ['J','H','K','L','M'] then continue;  // IR var
     if band2 in ['J','H','K','L','M'] then continue;
 
     m1:=StrToFloatDef(trim(copy(row,96,7)),-9999);
     if m1>=13.0 then continue;  // too faint
-    m2:=StrToFloatDef(trim(copy(row,118,7)),-9999);
+    m2:=StrToFloatDef(trim(copy(row,121,7)),-9999);
     if (m1<-100)or(m2<-100) then continue; // missing magnitude
 
-    mflag:=copy(row,114,1);
+    mflag:=copy(row,117,1);
     if mflag='Y' then  // amplitude
       m2:=m1+m2;
 

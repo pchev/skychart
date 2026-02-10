@@ -36,7 +36,7 @@ File Summary:
  FileName    Lrecl  Records  Explanations
 --------------------------------------------------------------------------------
 ReadMe          80        .  This file
-vsx.dat        206 10297078  Variable Star indeX, Version 2025-09-07
+vsx.dat        209 10300781  Variable Star indeX, Version 2026-02-08
 refs.dat       27    830415  Bibliography (references) of VSX stars
 
 --------------------------------------------------------------------------------
@@ -44,36 +44,40 @@ Byte-by-byte Description of file: vsx.dat
 --------------------------------------------------------------------------------
   Bytes   Format Units  Label    Explanations
 --------------------------------------------------------------------------------
-  1-  8   I8     ---    OID      Internal identifier, can be used to link out
-                                  to the VSX database (1)
- 10- 39   A30    ---    Name     Variable star identifier
- 41- 41   I1     ---    V        Variability flag (VarFlag) (2)
+  1-  8   I8     ---    OID       Internal identifier, can be used to link out
+                                 to the VSX database (1)
+ 10- 39   A30    ---    Name      Variable star identifier
+ 41- 41   I1     ---    V         Variability flag (2) (VarFlag)
  43- 51   F9.5   deg    RAdeg    [0.0/360.0] Right ascension (J2000)
  53- 61   F9.5   deg    DEdeg    [-89.93/89.91] Declination (J2000)
  63- 92   A30    ---    Type     ? Variability type, ariability type, as in GCVS
                                  catalog Variability type (see details of VSX
                                  type list)
- 94- 94   A1     ---  l_max      ? Limit flag on max (LimitFlagOnMax)
+ 94- 94   A1     ---    l_max    ? Limit flag on max (LimitFlagOnMax)
  96-102   F7.3   mag    max      [-6.0/25.2]? Magnitude at maximum, or amplitude
                                  (MagMax)
-104-104   A1     ---  u_max      ? Uncertainty flag on max (MaxUncertaintyFlag)
-106-112   A7     ---  n_max      ? Passband on max magnitude (MaxPassband) (4)
-114-114   A1     ---  f_min      ? Flag to indicate an amplitude
+104-104   A1     ---    u_max    ? Uncertainty flag on max (MaxUncertaintyFlag)
+106-115   A10    ---    n_max    ? Passband on max magnitude (4) (MaxPassband)
+117-117   A1     ---    f_min    ? Flag to indicate an amplitude
                                  (MinIsAmplitude)
-116-116   A1     ---  l_min      ? Limit flag on min (LimitFlagOnMin)
-118-124   F7.3   mag    min      [-0.02/28.0]? Magnitude at minimum, or
+119-119   A1     ---    l_min    ? Limit flag on min (LimitFlagOnMin)
+121-127   F7.3   mag    min      [-0.02/28.0]? Magnitude at minimum, or
                                  amplitude (MagMin)
-126-126   A1     ---  u_min      ? Uncertainty flag on min (MinUncertaintyFlag)
-128-135   A8     ---  n_min      ? Passband on min magnitude (MinPassband)
-137-150   F14.5  d      Epoch    ? Epoch of maximum or minimum (HJD)
-152-152   A1     ---  u_Epoch    ? Uncertainty flag on epoch
+129-129   A1     ---    u_min    ? Uncertainty flag on min (MinUncertaintyFlag)
+131-138   A8     ---    n_min    ? Passband on min magnitude (MinPassband)
+140-153   F14.5  d      Epoch    ? Epoch of maximum or minimum (HJD)
+155-155   A1     ---    u_Epoch  ? Uncertainty flag on epoch
                                  (EpochUncertaintyFlag)
-154-154   A1     ---  l_Period   ? Limit flag on period (3) (LimitFlagOnPeriod)
-156-174   F19.12 d      Period   [0.0/27400.0]? Period of the variable in days
-176-176   A1     ---  u_Period   ? Uncertainty flag on Period 
-                                 (PeriodUncertaintyFlag) (3)
-178-206   A29    ---    Sp       ? Spectral type (SpectralType)
+157-157   A1     ---    l_Period ? Limit flag on period (3) (LimitFlagOnPeriod)
+159-177   F19.12 d      Period   [0.0/27400.0]? Period of the variable in days
+179-179   A1     ---    u_Period ? Uncertainty flag on Period (3)
+                                 (PeriodUncertaintyFlag)
+181-209   A29    ---    Sp       ? Spectral type (SpectralType)
+
 --------------------------------------------------------------------------------
+
+
+
 Note (1): To get the VSX URL, add the OID to
      http://www.aavso.org/vsx/index.php?view=detail.top&oid=
 
@@ -97,7 +101,7 @@ Note (3): The value of the period may be preceded by ">" or "<" if the
 
 Note (4): Passbands include the following:
      U B V R I   = Johnson broad-band
-     J H K L M   = Johnson infra-red (1.2, 1.6, 2.2, 3.5, 5um)
+     J H K L M   = Johnson infra-red (1.2, 1.6, 2.2, 3.5, 5µm)
      Rc Ic       = Cousins' red and infra-red
      u v b y     = Stroemgren intermediate-band
      u'g'r'i'z'  = Sloan (SDSS)
@@ -107,7 +111,6 @@ Note (4): Passbands include the following:
      Hp T        = Hipparcos and Tycho (Cat. I/239)
      NUV         = near-UV (Galex)
      H1A H1B     = STEREO mission filter (essentially 600-800nm)
---------------------------------------------------------------------------------
 
 Byte-by-byte Description of file: refs.dat
 --------------------------------------------------------------------------------
@@ -688,5 +691,14 @@ History:
   * 2025-08-10: 10297008 stars, from http://www.aavso.org/vsx/
   * 2025-08-24: 10297038 stars, from http://www.aavso.org/vsx/
   * 2025-09-07: 10297078 stars, from http://www.aavso.org/vsx/
+  * 2025-09-21: 10297098 stars, from http://www.aavso.org/vsx/
+  * 2025-10-05: 10297081 stars, from http://www.aavso.org/vsx/
+  * 2025-10-19: 10297125 stars, from http://www.aavso.org/vsx/
+  * 2025-11-30: 10297279 stars, from http://www.aavso.org/vsx/
+  * 2025-12-14: 10297173 stars, from http://www.aavso.org/vsx/
+  * 2025-12-28: 10297179 stars, from http://www.aavso.org/vsx/
+  * 2026-01-11: 10297170 stars, from http://www.aavso.org/vsx/
+  * 2026-01-25: 10300072 stars, from http://www.aavso.org/vsx/
+  * 2026-02-08: 10300781 stars, from http://www.aavso.org/vsx/
 ================================================================================
 (End)   Christopher Watson, Patrick Wils; Francois Ochsenbein       30-May-2022
