@@ -403,7 +403,7 @@ end;
 function  T_ascomrestmount.GetRA:double;
 begin
  if FStatus=devConnected then begin
-    if stRA=NullCoord then stRA:=GetRAReal;
+    {$ifdef AppCcdciel} if stRA=NullCoord then {$endif} stRA:=GetRAReal;
     result:=stRA;
  end
  else
@@ -413,7 +413,7 @@ end;
 function  T_ascomrestmount.GetDec:double;
 begin
  if FStatus=devConnected then begin
-    if stDE=NullCoord then stDE:=GetDecReal;
+    {$ifdef AppCcdciel}if stDE=NullCoord then {$endif} stDE:=GetDecReal;
     result:=stDE;
  end
  else

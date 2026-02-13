@@ -7997,7 +7997,7 @@ begin
           end;
           sc.cfgsc.scopemark := True;
         end;
-        TelescopeTimer.Interval := 500;
+        TelescopeTimer.Interval := Fpop_scope.csc.TelescopeInterval;
         TelescopeTimer.Enabled := True;
         Image1.Invalidate;
       end

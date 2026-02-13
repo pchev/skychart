@@ -186,7 +186,6 @@ type
     Fmount: T_mount;
     feqsys: TCheckBox;
     leqsys: TComboBox;
-    CoordLock: boolean;
     Initialized: boolean;
     FConnected: boolean;
     FCanSetTracking: boolean;
@@ -319,6 +318,7 @@ begin
   pos_y.Text := '';
   az_x.Text := '';
   alt_y.Text := '';
+  Wait(1);
   try
     Fmount.Disconnect;
     Fmount.Free;
@@ -348,7 +348,6 @@ begin
   timer1.Enabled := False;
   ButtonSelect.Enabled := True;
   ok := False;
-  CoordLock := False;
   MountType:=PageControl1.ActivePageIndex;
   try
     case MountType of
@@ -732,7 +731,6 @@ end;
 procedure Tpop_scope.FormCreate(Sender: TObject);
 begin
   ScaleDPI(Self);
-  CoordLock := False;
   Initialized := False;
   FConnected := False;
   FCanSetTracking := False;
@@ -771,18 +769,13 @@ begin
     exit;
   end;
   try
-    if (not CoordLock) then
-    begin
-      CoordLock := True;
-      timer1.Enabled := False;
-      ShowCoordinates;
-      if not FConnected then raise Exception.Create('Telescope disconnected on its own!');
-      FSlewing:=GetSlewing;
-      UpdTrackingButton;
-      UpdParkButton;
-      CoordLock := False;
-      timer1.Enabled := True;
-    end;
+    timer1.Enabled := False;
+    ShowCoordinates;
+    if not FConnected then raise Exception.Create('Telescope disconnected on its own!');
+    FSlewing:=GetSlewing;
+    UpdTrackingButton;
+    UpdParkButton;
+    timer1.Enabled := True;
   except
     on E:Exception do begin
       ShowMessage('Telescope connection error: '+E.Message);
