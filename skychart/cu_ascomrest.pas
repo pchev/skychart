@@ -173,6 +173,9 @@ type
 
   end;
 
+  const StdTimeout = 5000;     // 5 seconds for standard request
+        LongTimeout = 120000;  // 2 minutes for long synchronous request
+
 
 implementation
 
@@ -187,8 +190,8 @@ begin
   Fok:=False;
   Fhttp:=THTTPSend.Create;
   Fhttp.KeepAlive:=false;              // always close connection
-  Fhttp.Sock.ConnectionTimeout:=5000;  // not too long if service is not available
-  Fhttp.Timeout:=120000;               // 2 minutes for long sync request
+  Fhttp.Sock.ConnectionTimeout:=StdTimeout;
+  Fhttp.Timeout:=StdTimeout;
   Fhttp.UserAgent:='';
 end;
 
@@ -304,7 +307,7 @@ begin
   Fhost:='localhost';
   Fport:='11111';
   FRemoteIP:='';
-  FTimeout:=120000;
+  FTimeout:=StdTimeout;
   FDevice:='';
   Fuser:='';
   Fpassword:='';
