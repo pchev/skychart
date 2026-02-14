@@ -257,13 +257,15 @@ end;
 
 procedure Tpop_scope.ShowCoordinates;
 var ok: boolean;
-    st: double;
+    st,r,d: double;
 begin
   if ScopeInitialized then
   begin
     try
-      Curdeg_x := Fmount.RA * 15;
-      Curdeg_y := Fmount.Dec;
+      r := Fmount.RA * 15;
+      d := Fmount.Dec;
+      Curdeg_x := r;
+      Curdeg_y := d;
     except
       on E: Exception do begin
         MessageDlg(format(DriverMsg,[E.Message]), mtWarning, [mbOK], 0);
