@@ -93,6 +93,8 @@ function AlpacaScanServer(ip,port:string): TAlpacaServerList;
 
 implementation
 
+uses sockets;
+
 function AlpacaDiscover(dport:integer=DefaultPort): TAlpacaServerList;
 var thread:TDiscoverThread;
     timelimit: double;
@@ -100,7 +102,7 @@ begin
   thread:=TDiscoverThread.Create(true);
   thread.port:=dport;
   thread.Start;
-  timelimit:=now+15/SecsPerDay;
+  timelimit:=now+30/SecsPerDay;
   repeat
     sleep(50);
     Application.ProcessMessages;
@@ -145,18 +147,19 @@ var
   sl: TStringList;
   s: string;
   i: integer;
-  f_loopback,f_broadcast: boolean;
+  f_loopback: boolean;
+  buf: string;
   {$IFDEF UNIX}
+  f_broadcast,f_multicast: boolean;
   AProcess: TProcess;
   processok,newformat: boolean;
-  buf: string;
   jl,ja,jf: TJSONData;
-  j,n,l: integer;
+  j,n: integer;
   {$ENDIF}
   {$IFDEF WINDOWS}
   ip,mask: string;
   ipb,maskb,br: Integer;
-  hasIP, hasMask: boolean;
+  hasMask: boolean;
   FSWbemLocator : OLEVariant;
   FWMIService   : OLEVariant;
   FWbemObjectSet: OLEVariant;
@@ -177,31 +180,33 @@ begin
   // loop all interfaces
   while oEnum.Next(1, FWbemObject, iValue) = 0 do
   begin
-    hasIP:=false;
     hasMask:=false;
+    if not VarIsClear(FWbemObject.IPSubnet) and not VarIsNull(FWbemObject.IPSubnet) then begin
+     // mask assigned
+     for i := VarArrayLowBound(FWbemObject.IPSubnet, 1) to VarArrayHighBound(FWbemObject.IPSubnet, 1) do begin
+       buf:=String(FWbemObject.IPSubnet[i]);
+       if pos('.',buf)=0 then continue;
+       mask:=buf;
+       hasMask:=true;
+       break;
+     end;
+    end;
     if not VarIsClear(FWbemObject.IPAddress) and not VarIsNull(FWbemObject.IPAddress) then begin
      // this interface address is assigned
      for i := VarArrayLowBound(FWbemObject.IPAddress, 1) to VarArrayHighBound(FWbemObject.IPAddress, 1) do begin
        ip:=String(FWbemObject.IPAddress[i]);
-       if pos(':',ip)>0 then continue; // TODO: IPv6
-       hasIP:=true;
-       break;
-     end;
-     if not VarIsClear(FWbemObject.IPSubnet) and not VarIsNull(FWbemObject.IPSubnet) then begin
-      // mask assigned
-      for i := VarArrayLowBound(FWbemObject.IPSubnet, 1) to VarArrayHighBound(FWbemObject.IPSubnet, 1) do begin
-        mask:=String(FWbemObject.IPSubnet[i]);
-        if pos('.',mask)=0 then continue; // TODO: IPv6
-        hasMask:=true;
-        break;
-      end;
-     end;
-     if hasIP and hasMask then begin
-       ipb:=StrToIp(ip);
-       maskb:=StrToIp(mask);
-       br:=(ipb and maskb) or (not maskb);
-       s:=IpToStr(br);
-       Result.Add(Trim(s));
+       if pos(':',ip)>0 then begin // IPv6
+         Result.Add(Trim(ip));
+       end
+       else begin  //IPv4
+         if hasMask then begin
+           ipb:=StrToIp(ip);
+           maskb:=StrToIp(mask);
+           br:=(ipb and maskb) or (not maskb);
+           s:=IpToStr(br);
+           Result.Add(Trim(s));
+         end;
+       end;
      end;
     end;
     FWbemObject:=Unassigned;
@@ -232,13 +237,14 @@ begin
     jl:=GetJSON(buf);
     try
     for i:=0 to jl.Count-1 do begin
-      f_loopback:=false; f_broadcast:=false;
+      f_loopback:=false; f_broadcast:=false; f_multicast:=false;
       if jl.Items[i].FindPath('flags')<>nil then begin
         jf:=jl.Items[i].FindPath('flags');
         for j:=0 to jf.Count-1 do begin
           buf:=jf.Items[j].AsString;
           if buf='LOOPBACK' then f_loopback:=true;
           if buf='BROADCAST' then f_broadcast:=true;
+          if buf='MULTICAST' then f_multicast:=true;
         end;
       end;
       ja:=jl.Items[i].FindPath('addr_info');
@@ -256,7 +262,21 @@ begin
           s:=ja.Items[j].FindPath('broadcast').AsString;
           Result.Add(Trim(s));
          end;
+        end
+        {$ifndef darwin}   { #todo : IPv6 discovery on Mac }
+        else if buf='inet6' then begin
+         if f_loopback then begin
+          if ja.Items[j].FindPath('local')=nil then Continue;
+          s:=ja.Items[j].FindPath('local').AsString;
+          Result.Add(Trim(s));
+         end
+         else if f_multicast then begin
+            if ja.Items[j].FindPath('local')=nil then Continue;
+            s:=ja.Items[j].FindPath('local').AsString;
+            Result.Add(Trim(s));
+         end;
         end;
+        {$endif}
       end;
     end;
     finally
@@ -289,23 +309,46 @@ begin
           if n>0 then begin // new interface
             f_loopback:=pos('LOOPBACK',sl[i])>0;
             f_broadcast:=pos('BROADCAST',sl[i])>0;
+            f_multicast:=pos('MULTICAST',sl[i])>0;
           end;
-          if f_broadcast then begin
-            n:=Pos('broadcast ', sl[i]);
-            if n=0 then Continue;
-            s:=Copy(sl[i], n+10, 999);
-            n:=Pos(' ', s);
-            if n>0 then s:=Copy(s, 1, n);
-            Result.Add(Trim(s));
+          if pos('inet ',sl[i])>0 then begin
+            if f_broadcast then begin
+              n:=Pos('broadcast ', sl[i]);
+              if n=0 then Continue;
+              s:=Copy(sl[i], n+10, 999);
+              n:=Pos(' ', s);
+              if n>0 then s:=Copy(s, 1, n);
+              Result.Add(Trim(s));
+            end;
+            if f_loopback then begin
+              n:=Pos('inet ', sl[i]);
+              if n=0 then Continue;
+              s:=Copy(sl[i], n+5, 999);
+              n:=Pos(' ', s);
+              if n>0 then s:=Copy(s, 1, n);
+              Result.Add(Trim(s));
+            end;
           end;
-          if f_loopback then begin
-            n:=Pos('inet ', sl[i]);
-            if n=0 then Continue;
-            s:=Copy(sl[i], n+5, 999);
-            n:=Pos(' ', s);
-            if n>0 then s:=Copy(s, 1, n);
-            Result.Add(Trim(s));
+          {$ifndef darwin}   { #todo : IPv6 discovery on Mac }
+          if pos('inet6 ',sl[i])>0 then begin
+            if f_multicast then begin
+              n:=Pos('inet6 ', sl[i]);
+              if n=0 then Continue;
+              s:=Copy(sl[i], n+6, 999);
+              n:=Pos(' ', s);
+              if n>0 then s:=Copy(s, 1, n);
+              Result.Add(Trim(s));
+            end;
+            if f_loopback then begin
+              n:=Pos('inet6 ', sl[i]);
+              if n=0 then Continue;
+              s:=Copy(sl[i], n+6, 999);
+              n:=Pos(' ', s);
+              if n>0 then s:=Copy(s, 1, n);
+              Result.Add(Trim(s));
+            end;
           end;
+          {$endif}
         end;
       end
       else begin // old format
@@ -343,6 +386,11 @@ begin
     if copy(Result[i],1,3)='127' then f_loopback:=true;
   end;
   if not f_loopback then Result.Add('127.0.0.1');
+  f_loopback:=false;
+  for i:=0 to Result.Count-1 do begin
+    if copy(Result[i],1,3)='::1' then f_loopback:=true;
+  end;
+  if not f_loopback then Result.Add('::1');
 end;
 
 function GetInsensitivePath(src:TJSONData; path:string):TJSONData;
@@ -357,39 +405,51 @@ end;
 
 function AlpacaDiscoverServer: TAlpacaServerList;
 var sock : TUDPBlockSocket;
-    brip,ip,port,id:string;
+    brip,ip,port:string;
     data: array[0..1024] of char;
     p: pointer;
     i,n,k: integer;
-    ok,duplicate: boolean;
+    ok,duplicate,ip6: boolean;
     blist: TStringList;
     Fjson: TJSONData;
 begin
   blist:=GetBroadcastAddrList;
   sock := TUDPBlockSocket.create;
-  sock.enablebroadcast(true);
   setlength(result,0);
   k:=0;
   for n:=0 to blist.Count-1 do begin
+    sock.free;
     brip:=blist[n];
-    sock.Connect(brip, AlpacaDiscPort);
+    ip6:=pos(':',brip)>0;
+    sock := TUDPBlockSocket.create;
+    if ip6 then begin
+       if brip='::1' then
+          sock.connect('::1', AlpacaDiscPort)
+       else begin
+         sock.bind(brip, '0');
+         sock.connect('ff12::a1:9aca', AlpacaDiscPort);
+       end;
+    end
+    else begin
+       sock.Connect(brip, AlpacaDiscPort);
+       sock.enablebroadcast(true);
+    end;
     data:=AlpacaDiscStr;
     p:=@data;
-    sock.SendBuffer(p,length(AlpacaDiscStr));
-    sock.SendBuffer(p,length(AlpacaDiscStr));
+    sock.SendBufferTo(p,length(AlpacaDiscStr));
+    sock.SendBufferTo(p,length(AlpacaDiscStr));
     repeat
       ok:=sock.CanRead(DiscoverTimeout);
       if ok then begin
         i:=sock.RecvBuffer(p,1024);
         if i<=0 then Continue;
-        ip:=''; port:=''; id:=''; duplicate:=false;
-        {$IFDEF WINDOWS}
-        for i:=0 to 3 do   // TODO: synapse or rtl bug?
-        {$ELSE}
-        for i:=1 to 4 do
-        {$ENDIF}
-          ip:=ip+inttostr(sock.RemoteSin.sin_addr.s_bytes[i])+'.';
-        delete(ip,length(ip),1);
+        ip:=''; port:=''; duplicate:=false;
+        if ip6 then begin
+          ip:='['+NetAddrToStr6(Tin6_addr(sock.RemoteSin.sin6_addr))+']';
+        end
+        else begin
+          ip:=NetAddrToStr(Tin_addr(sock.RemoteSin.sin_addr));
+        end;
         Fjson:=GetJSON(data);
         if Fjson<>nil then begin
             try
