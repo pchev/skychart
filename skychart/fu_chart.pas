@@ -7897,8 +7897,8 @@ begin
       precession(sc.cfgsc.JDChart, sc.cfgsc.TelescopeJD, ra, Dec);
     end;
     ra := rmod(ra + pi2, pi2);
-    Fpop_scope.ScopeGoto(ra * rad2deg / 15, Dec * rad2deg, ok);
     Fshowinfo(Format(rsSlewingTo, [ARtoStr(ra * rad2deg / 15), DEToStr(dec * rad2deg)]));
+    Fpop_scope.ScopeGoto(ra * rad2deg / 15, Dec * rad2deg, ok);
   end
   else
     Fshowinfo(rsNoTargetObje);
