@@ -247,6 +247,8 @@ type
 
 implementation
 
+const listsep='; ';
+
 {$R *.lfm}
 
 procedure Tpop_scope.SetRefreshRate(rate: integer);
@@ -1002,7 +1004,7 @@ begin
           devtype:=UpperCase(AlpacaServerList[i].devices[j].DeviceType);
           devid:=AlpacaServerList[i].devices[j].DeviceId;
           if devtype='TELESCOPE' then begin
-            k:=AlpacaMountList.Items.Add(AlpacaServerList[i].devices[j].DeviceName+tab+AlpacaServerList[i].ip+tab+AlpacaServerList[i].port+tab+'telescope/'+tab+IntToStr(AlpacaServerList[i].devices[j].DeviceNumber)+tab+AlpacaServerList[i].devices[j].DeviceId);
+            k:=AlpacaMountList.Items.Add(AlpacaServerList[i].devices[j].DeviceName+listsep+AlpacaServerList[i].ip+listsep+AlpacaServerList[i].port+listsep+'telescope/'+listsep+IntToStr(AlpacaServerList[i].devices[j].DeviceNumber)+listsep+AlpacaServerList[i].devices[j].DeviceId);
             if (id<>'')and(devid=id) then begin
               p:=k;
               result:=true;
@@ -1136,7 +1138,7 @@ begin
   i:=AlpacaMountList.ItemIndex;
   if i>0 then begin
     lst:=TStringList.Create;
-    SplitRec(AlpacaMountList.Items[i],tab,lst);
+    SplitRec(AlpacaMountList.Items[i],listsep,lst);
     ARestHost.Text:=lst[1];
     ARestPort.Text:=lst[2];
     ARestDevice.Value:=StrToInt(lst[4]);

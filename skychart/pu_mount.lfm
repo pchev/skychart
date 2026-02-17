@@ -120,7 +120,7 @@ object pop_scope: Tpop_scope
       Left = 8
       Height = 20
       Top = 60
-      Width = 28
+      Width = 20
       OnChange = ShowAltAzChange
       ParentFont = False
       TabOrder = 2
@@ -557,6 +557,7 @@ object pop_scope: Tpop_scope
           Height = 28
           Top = 114
           Width = 192
+          Anchors = [akTop, akLeft, akRight]
           Constraints.MaxHeight = 28
           OnChange = ARestIdChange
           TabOrder = 8
@@ -575,6 +576,7 @@ object pop_scope: Tpop_scope
           Height = 28
           Top = 32
           Width = 320
+          Anchors = [akTop, akLeft, akRight]
           Constraints.MaxHeight = 28
           ItemHeight = 18
           OnChange = AlpacaMountListChange
@@ -953,7 +955,7 @@ object pop_scope: Tpop_scope
       Left = 8
       Height = 22
       Top = 54
-      Width = 114
+      Width = 110
       Caption = 'Always on top'
       OnChange = CheckBoxOnTopChange
       TabOrder = 4
@@ -962,7 +964,7 @@ object pop_scope: Tpop_scope
       Left = 8
       Height = 22
       Top = 32
-      Width = 231
+      Width = 227
       Caption = 'Connect automatically on startup'
       OnChange = cbAutoconnectChange
       TabOrder = 5
