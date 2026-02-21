@@ -98,7 +98,7 @@ object f_config_time: Tf_config_time
             Left = 18
             Height = 22
             Top = 107
-            Width = 178
+            Width = 174
             Caption = 'Use another TT-UT value'
             OnClick = CheckBox4Click
             ParentFont = False
@@ -323,11 +323,11 @@ object f_config_time: Tf_config_time
             ParentFont = False
           end
           object ADBC: TRadioGroup
-            AnchorSideTop.Control = d_yearEdit
+            AnchorSideTop.Control = d_dayEdit
             AnchorSideTop.Side = asrCenter
             Left = 283
-            Height = 39
-            Top = 15
+            Height = 50
+            Top = 9
             Width = 138
             AutoFill = True
             ChildSizing.LeftRightSpacing = 6
@@ -338,7 +338,7 @@ object f_config_time: Tf_config_time
             ChildSizing.ShrinkVertical = crsScaleChilds
             ChildSizing.Layout = cclLeftToRightThenTopToBottom
             ChildSizing.ControlsPerLine = 2
-            ClientHeight = 35
+            ClientHeight = 46
             ClientWidth = 134
             Columns = 2
             Items.Strings = (
@@ -486,7 +486,7 @@ object f_config_time: Tf_config_time
           object d_dayEdit: TEdit
             AnchorSideTop.Control = d_yearEdit
             AnchorSideTop.Side = asrCenter
-            Left = 207
+            Left = 208
             Height = 28
             Top = 20
             Width = 47
@@ -498,7 +498,7 @@ object f_config_time: Tf_config_time
           object d_day: TMouseUpDown
             AnchorSideTop.Control = d_yearEdit
             AnchorSideTop.Side = asrCenter
-            Left = 254
+            Left = 255
             Height = 28
             Top = 20
             Width = 13
@@ -673,7 +673,7 @@ object f_config_time: Tf_config_time
             Left = 18
             Height = 22
             Top = 24
-            Width = 129
+            Width = 125
             Caption = 'Use system time'
             OnClick = CheckBox1Click
             ParentFont = False
@@ -683,7 +683,7 @@ object f_config_time: Tf_config_time
             Left = 18
             Height = 22
             Top = 57
-            Width = 145
+            Width = 141
             Caption = 'Auto-refresh every '
             OnClick = CheckBox2Click
             ParentFont = False
@@ -1163,7 +1163,7 @@ object f_config_time: Tf_config_time
             Left = 8
             Height = 22
             Top = 6
-            Width = 274
+            Width = 270
             Caption = 'Connection lines between each position '
             OnClick = steplineClick
             ParentFont = False
@@ -1173,7 +1173,7 @@ object f_config_time: Tf_config_time
             Left = 321
             Height = 22
             Top = 6
-            Width = 86
+            Width = 82
             Caption = 'stepmark'
             OnClick = stepmarkClick
             ParentFont = False
@@ -1380,7 +1380,7 @@ object f_config_time: Tf_config_time
             Left = 3
             Height = 18
             Top = 145
-            Width = 124
+            Width = 125
             Caption = 'Recording extension'
             Constraints.MaxHeight = 28
             ParentColor = False
