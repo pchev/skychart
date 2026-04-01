@@ -36,6 +36,7 @@ type
     Button1: TButton;
     Button2: TButton;
     cbLabel: TCheckBox;
+    cbAlwaysLabel: TCheckBox;
     ColorBox1: TColorBox;
     Label1: TLabel;
     Label24: TLabel;
@@ -47,6 +48,7 @@ type
     Drawing: TComboBox;
     DrawingSize: TSpinEdit;
     TabSheetStar: TTabSheet;
+    procedure cbLabelChange(Sender: TObject);
     procedure DrawingChange(Sender: TObject);
     procedure FormCreate(Sender: TObject);
   private
@@ -78,14 +80,23 @@ begin
   Drawing.Items[1] := rsCircle;
   Drawing.Items[2] := rsSquare;
   Drawing.Items[3] := rsLosange;
+  Drawing.Items[4] := rsNone1;
   Label25.Caption := rsMarkSize;
   Label1.Caption := rsColor;
   cbLabel.Caption := rsShowLabels;
+  cbAlwaysLabel.Caption := rsBypassLabelF;
 end;
 
 procedure Tf_catalog_detail.DrawingChange(Sender: TObject);
 begin
-  PanelStar.Visible := Drawing.ItemIndex > 0;
+  PanelStar.Visible := (Drawing.ItemIndex > 0) and (Drawing.ItemIndex < 4);
+end;
+
+procedure Tf_catalog_detail.cbLabelChange(Sender: TObject);
+begin
+  cbAlwaysLabel.Enabled:=cbLabel.Checked;
+  if not cbAlwaysLabel.Enabled then
+     cbAlwaysLabel.Checked:=false;
 end;
 
 

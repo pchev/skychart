@@ -855,6 +855,7 @@ begin
     Fcatalog.cfgcat.GCatLst[i].starsize := 0;
     Fcatalog.cfgcat.GCatLst[i].ForceColor := False;
     Fcatalog.cfgcat.GCatLst[i].ForceLabel := False;
+    Fcatalog.cfgcat.GCatLst[i].AlwaysLabel := False;
     Fcatalog.cfgcat.GCatLst[i].col := 0;
     if not Fcatalog.GetInfo(Fcatalog.cfgcat.GCatLst[i].path,
       Fcatalog.cfgcat.GCatLst[i].shortname, Fcatalog.cfgcat.GCatLst[i].magmax,
@@ -1283,6 +1284,7 @@ begin
           Fcatalog.cfgcat.GCatLst[m].starsize := 0;
           Fcatalog.cfgcat.GCatLst[m].ForceColor := False;
           Fcatalog.cfgcat.GCatLst[m].ForceLabel := False;
+          Fcatalog.cfgcat.GCatLst[m].AlwaysLabel := False;
           Fcatalog.cfgcat.GCatLst[m].col := 0;
           Fcatalog.GetInfo(Fcatalog.cfgcat.GCatLst[m].path,
             Fcatalog.cfgcat.GCatLst[m].shortname, Fcatalog.cfgcat.GCatLst[m].magmax,

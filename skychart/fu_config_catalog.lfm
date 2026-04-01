@@ -290,16 +290,16 @@ object f_config_catalog: Tf_config_catalog
           TabOrder = 2
           object TabSheetGcatStar: TTabSheet
             Caption = 'TabSheetGcatStar'
-            ClientHeight = 291
+            ClientHeight = 292
             ClientWidth = 494
             object CatalogGridStar: TStringGrid
               Tag = 1
               Left = 0
-              Height = 291
+              Height = 292
               Top = 0
               Width = 494
               Align = alClient
-              ColCount = 12
+              ColCount = 13
               Columns = <              
                 item
                   MaxSize = 202
@@ -356,6 +356,11 @@ object f_config_catalog: Tf_config_catalog
                 item
                   Title.Caption = 'shortname'
                   Visible = False
+                end              
+                item
+                  SizePriority = 0
+                  Title.Caption = 'AlwaysLabel'
+                  Visible = False
                 end>
               DefaultColWidth = 24
               DefaultRowHeight = 24
@@ -379,16 +384,16 @@ object f_config_catalog: Tf_config_catalog
           end
           object TabSheetGcatVar: TTabSheet
             Caption = 'TabSheetGcatVar'
-            ClientHeight = 291
+            ClientHeight = 292
             ClientWidth = 494
             object CatalogGridVar: TStringGrid
               Tag = 2
               Left = 0
-              Height = 291
+              Height = 292
               Top = 0
               Width = 494
               Align = alClient
-              ColCount = 12
+              ColCount = 13
               Columns = <              
                 item
                   MaxSize = 202
@@ -443,6 +448,11 @@ object f_config_catalog: Tf_config_catalog
                 end              
                 item
                   Title.Caption = 'shortname'
+                  Visible = False
+                end              
+                item
+                  SizePriority = 0
+                  Title.Caption = 'AlwaysLabel'
                   Visible = False
                 end>
               DefaultColWidth = 24
@@ -466,16 +476,16 @@ object f_config_catalog: Tf_config_catalog
           end
           object TabSheetGcatDbl: TTabSheet
             Caption = 'TabSheetGcatDbl'
-            ClientHeight = 291
+            ClientHeight = 292
             ClientWidth = 494
             object CatalogGridDbl: TStringGrid
               Tag = 3
               Left = 0
-              Height = 291
+              Height = 292
               Top = 0
               Width = 494
               Align = alClient
-              ColCount = 12
+              ColCount = 13
               Columns = <              
                 item
                   MaxSize = 202
@@ -530,6 +540,11 @@ object f_config_catalog: Tf_config_catalog
                 end              
                 item
                   Title.Caption = 'shortname'
+                  Visible = False
+                end              
+                item
+                  SizePriority = 0
+                  Title.Caption = 'AlwaysLabel'
                   Visible = False
                 end>
               DefaultColWidth = 24
@@ -553,16 +568,16 @@ object f_config_catalog: Tf_config_catalog
           end
           object TabSheetGcatNeb: TTabSheet
             Caption = 'TabSheetGcatNeb'
-            ClientHeight = 291
+            ClientHeight = 292
             ClientWidth = 494
             object CatalogGridNeb: TStringGrid
               Tag = 4
               Left = 0
-              Height = 291
+              Height = 292
               Top = 0
               Width = 494
               Align = alClient
-              ColCount = 12
+              ColCount = 13
               Columns = <              
                 item
                   MaxSize = 202
@@ -617,6 +632,11 @@ object f_config_catalog: Tf_config_catalog
                 end              
                 item
                   Title.Caption = 'shortname'
+                  Visible = False
+                end              
+                item
+                  SizePriority = 0
+                  Title.Caption = 'AlwaysLabel'
                   Visible = False
                 end>
               DefaultColWidth = 24
@@ -640,16 +660,16 @@ object f_config_catalog: Tf_config_catalog
           end
           object TabSheetGcatLin: TTabSheet
             Caption = 'TabSheetGcatLin'
-            ClientHeight = 291
+            ClientHeight = 292
             ClientWidth = 494
             object CatalogGridLin: TStringGrid
               Tag = 5
               Left = 0
-              Height = 291
+              Height = 292
               Top = 0
               Width = 494
               Align = alClient
-              ColCount = 12
+              ColCount = 13
               Columns = <              
                 item
                   MaxSize = 202
@@ -704,6 +724,11 @@ object f_config_catalog: Tf_config_catalog
                 end              
                 item
                   Title.Caption = 'shortname'
+                  Visible = False
+                end              
+                item
+                  SizePriority = 0
+                  Title.Caption = 'AlwaysLabel'
                   Visible = False
                 end>
               DefaultColWidth = 24

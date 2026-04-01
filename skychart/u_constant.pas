@@ -947,7 +947,7 @@ type
   TGCatLst = record
     min, max, magmax: single;
     cattype, col, startype, starsize: integer;
-    Actif, CatOn, ForceColor, Search, ForceLabel: boolean;
+    Actif, CatOn, ForceColor, Search, ForceLabel, AlwaysLabel: boolean;
     shortname, Name, path, version: string;
   end;
 

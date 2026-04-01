@@ -1628,6 +1628,7 @@ resourcestring
   rsDeclinationL = 'Declination label on center';
   rsGAIAVariable = 'GAIA variable star information';
   rsAddConstella = 'Add constellations';
+  rsBypassLabelF = 'Bypass label filter';
 
 // also update upsi_translation
 

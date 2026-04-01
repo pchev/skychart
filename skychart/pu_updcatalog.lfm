@@ -84,7 +84,7 @@ object f_updcatalog: Tf_updcatalog
             MaxSize = 400
             ReadOnly = True
             Title.Caption = 'Description'
-            Width = 427
+            Width = 431
           end        
           item
             MinSize = 80
@@ -116,7 +116,7 @@ object f_updcatalog: Tf_updcatalog
           25
           150
           100
-          427
+          431
           80
           80
         )
@@ -164,7 +164,7 @@ object f_updcatalog: Tf_updcatalog
             MaxSize = 400
             ReadOnly = True
             Title.Caption = 'Description'
-            Width = 427
+            Width = 431
           end        
           item
             MinSize = 80
@@ -196,7 +196,7 @@ object f_updcatalog: Tf_updcatalog
           25
           150
           100
-          427
+          431
           80
           80
         )
@@ -244,7 +244,7 @@ object f_updcatalog: Tf_updcatalog
             MaxSize = 400
             ReadOnly = True
             Title.Caption = 'Description'
-            Width = 427
+            Width = 431
           end        
           item
             MinSize = 80
@@ -276,7 +276,7 @@ object f_updcatalog: Tf_updcatalog
           25
           150
           100
-          427
+          431
           80
           80
         )
@@ -324,7 +324,7 @@ object f_updcatalog: Tf_updcatalog
             MaxSize = 400
             ReadOnly = True
             Title.Caption = 'Description'
-            Width = 427
+            Width = 431
           end        
           item
             MinSize = 80
@@ -356,7 +356,7 @@ object f_updcatalog: Tf_updcatalog
           25
           150
           100
-          427
+          431
           80
           80
         )
@@ -404,7 +404,7 @@ object f_updcatalog: Tf_updcatalog
             MaxSize = 400
             ReadOnly = True
             Title.Caption = 'Description'
-            Width = 427
+            Width = 431
           end        
           item
             MinSize = 80
@@ -436,7 +436,7 @@ object f_updcatalog: Tf_updcatalog
           25
           150
           100
-          427
+          431
           80
           80
         )
@@ -484,7 +484,7 @@ object f_updcatalog: Tf_updcatalog
             MaxSize = 400
             ReadOnly = True
             Title.Caption = 'Description'
-            Width = 427
+            Width = 431
           end        
           item
             MinSize = 80
@@ -516,7 +516,7 @@ object f_updcatalog: Tf_updcatalog
           25
           150
           100
-          427
+          431
           80
           80
         )
@@ -564,7 +564,7 @@ object f_updcatalog: Tf_updcatalog
             MaxSize = 400
             ReadOnly = True
             Title.Caption = 'Description'
-            Width = 427
+            Width = 431
           end        
           item
             MinSize = 80
@@ -596,7 +596,7 @@ object f_updcatalog: Tf_updcatalog
           25
           150
           100
-          427
+          431
           80
           80
         )

@@ -633,6 +633,10 @@ begin
       g.cells[10, i] := '1'
     else
       g.cells[10, i] := '0';
+    if ccat.GCatLst[j].AlwaysLabel then
+      g.cells[12, i] := '1'
+    else
+      g.cells[12, i] := '0';
     if ccat.GCatLst[j].actif then
       g.cells[0, i] := '1'
     else if ccat.GCatLst[j].Search then
@@ -888,7 +892,7 @@ var
 begin
   TStringGrid(sender).MouseToCell(X, Y, Col, Row);
   RowMouseDown:=row;
-  TStringGrid(sender).Selection:=Rect(0,row,4,row);
+  TStringGrid(sender).Selection:=Rect(4,row,4,row);
 end;
 
 procedure Tf_config_catalog.CatalogGridGetCellHint(Sender: TObject; ACol, ARow: Integer; var HintText: String);
@@ -946,6 +950,7 @@ begin
           f_catalog_detail.DrawingSize.Value:=StrToInt(TStringGrid(sender).Cells[9, row]);
           f_catalog_detail.ColorBox1.Selected:=StrToIntDef(TStringGrid(sender).Cells[col, row], clBlack);
           f_catalog_detail.cbLabel.Checked:=(TStringGrid(sender).Cells[10, row]='1');
+          f_catalog_detail.cbAlwaysLabel.Checked:=(TStringGrid(sender).Cells[12, row]='1');
           f_catalog_detail.DrawingChange(nil);
           f_catalog_detail.ShowModal;
           if f_catalog_detail.ModalResult = mrOK then
@@ -953,6 +958,7 @@ begin
             TStringGrid(sender).Cells[8, row] := IntToStr(f_catalog_detail.Drawing.ItemIndex);
             TStringGrid(sender).Cells[9, row] := IntToStr(f_catalog_detail.DrawingSize.Value);
             TStringGrid(sender).Cells[10, row] := BoolToStr(f_catalog_detail.cbLabel.Checked,'1','0');
+            TStringGrid(sender).Cells[12, row] := BoolToStr(f_catalog_detail.cbAlwaysLabel.Checked,'1','0');
             if f_catalog_detail.ColorBox1.Selected = 0 then
               TStringGrid(sender).Cells[col, row] := ''
             else
@@ -1490,6 +1496,7 @@ begin
       ccat.GCatLst[i].startype := StrToIntDef(grid.cells[8, j],0);
       ccat.GCatLst[i].starsize := StrToIntDef(grid.cells[9, j],0);
       ccat.GCatLst[i].ForceLabel := grid.cells[10, j] = '1';
+      ccat.GCatLst[i].AlwaysLabel := grid.cells[12, j] = '1';
       buf := grid.cells[6, j];
       val(buf, x, v);
       if v = 0 then

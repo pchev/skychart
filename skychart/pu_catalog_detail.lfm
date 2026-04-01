@@ -1,15 +1,15 @@
 object f_catalog_detail: Tf_catalog_detail
   Left = 369
-  Height = 236
+  Height = 253
   Top = 30
   Width = 279
   Caption = 'f_catalog_detail'
-  ClientHeight = 236
+  ClientHeight = 253
   ClientWidth = 279
   OnCreate = FormCreate
   object PageControl1: TPageControl
     Left = 0
-    Height = 194
+    Height = 211
     Top = 0
     Width = 279
     ActivePage = TabSheetStar
@@ -19,7 +19,7 @@ object f_catalog_detail: Tf_catalog_detail
     TabOrder = 0
     object TabSheetStar: TTabSheet
       Caption = 'TabSheetStar'
-      ClientHeight = 190
+      ClientHeight = 207
       ClientWidth = 275
       object Label24: TLabel
         Left = 24
@@ -35,16 +35,15 @@ object f_catalog_detail: Tf_catalog_detail
         Top = 16
         Width = 113
         ItemHeight = 24
-        ItemIndex = 0
         Items.Strings = (
           'Star'
           'Circle'
           'Square'
           'Losange'
+          'None'
         )
         OnChange = DrawingChange
         TabOrder = 0
-        Text = 'Star'
       end
       object PanelStar: TPanel
         Left = 24
@@ -103,16 +102,25 @@ object f_catalog_detail: Tf_catalog_detail
         Left = 24
         Height = 22
         Top = 160
-        Width = 94
+        Width = 90
         Caption = 'Show label'
+        OnChange = cbLabelChange
         TabOrder = 2
+      end
+      object cbAlwaysLabel: TCheckBox
+        Left = 24
+        Height = 22
+        Top = 184
+        Width = 133
+        Caption = 'Bypass label filter'
+        TabOrder = 3
       end
     end
   end
   object Panel1: TPanel
     Left = 0
     Height = 42
-    Top = 194
+    Top = 211
     Width = 279
     Align = alBottom
     ClientHeight = 42

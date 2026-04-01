@@ -1570,7 +1570,10 @@ begin
           break;
         end;
         lnum := 1;
-        lp := 2;
+        if (j>=0)and(j<Fcatalog.cfgcat.GCatNum)and(Fcatalog.cfgcat.GCatLst[j].AlwaysLabel) then
+          lp := 0
+        else
+          lp := 2;
         if catalog.cfgshr.StarFilter and (rec.star.magv > catalog.cfgcat.StarMagMax) then
           continue;
         if First then
@@ -1628,8 +1631,8 @@ begin
           else  // draw as star
             rs := Fplot.PlotStar(xx, yy, rec.star.magv, rec.star.b_v);
 
-          if ((cfgsc.DrawAllStarLabel or (rec.options.ShortName = firstcat) or ((j>=0)and(j<Fcatalog.cfgcat.GCatNum)and(Fcatalog.cfgcat.GCatLst[j].ForceLabel))) and
-            (rec.star.magv < cfgsc.StarmagMax - cfgsc.LabelMagDiff[1])) then
+          if ( (cfgsc.DrawAllStarLabel or (rec.options.ShortName = firstcat) or ((j>=0)and(j<Fcatalog.cfgcat.GCatNum)and(Fcatalog.cfgcat.GCatLst[j].ForceLabel))) and
+            ((j>=0)and(j<Fcatalog.cfgcat.GCatNum)and(Fcatalog.cfgcat.GCatLst[j].AlwaysLabel) or (rec.star.magv < (cfgsc.StarmagMax - cfgsc.LabelMagDiff[1]))) ) then
           begin
             lis := rec.star.id + FormatFloat(f6, lra) + FormatFloat(f6, ldec);
             lid := rshash(lis, $7FFFFFFF);
