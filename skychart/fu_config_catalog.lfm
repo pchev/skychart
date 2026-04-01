@@ -290,12 +290,12 @@ object f_config_catalog: Tf_config_catalog
           TabOrder = 2
           object TabSheetGcatStar: TTabSheet
             Caption = 'TabSheetGcatStar'
-            ClientHeight = 292
+            ClientHeight = 291
             ClientWidth = 494
             object CatalogGridStar: TStringGrid
               Tag = 1
               Left = 0
-              Height = 292
+              Height = 291
               Top = 0
               Width = 494
               Align = alClient
@@ -384,12 +384,12 @@ object f_config_catalog: Tf_config_catalog
           end
           object TabSheetGcatVar: TTabSheet
             Caption = 'TabSheetGcatVar'
-            ClientHeight = 292
+            ClientHeight = 291
             ClientWidth = 494
             object CatalogGridVar: TStringGrid
               Tag = 2
               Left = 0
-              Height = 292
+              Height = 291
               Top = 0
               Width = 494
               Align = alClient
@@ -427,7 +427,8 @@ object f_config_catalog: Tf_config_catalog
                 item
                   MaxSize = 202
                   Title.Caption = 'Color'
-                  Width = 45
+                  Width = 0
+                  Visible = False
                 end              
                 item
                   MaxSize = 202
@@ -476,12 +477,12 @@ object f_config_catalog: Tf_config_catalog
           end
           object TabSheetGcatDbl: TTabSheet
             Caption = 'TabSheetGcatDbl'
-            ClientHeight = 292
+            ClientHeight = 291
             ClientWidth = 494
             object CatalogGridDbl: TStringGrid
               Tag = 3
               Left = 0
-              Height = 292
+              Height = 291
               Top = 0
               Width = 494
               Align = alClient
@@ -519,7 +520,8 @@ object f_config_catalog: Tf_config_catalog
                 item
                   MaxSize = 202
                   Title.Caption = 'Color'
-                  Width = 45
+                  Width = 0
+                  Visible = False
                 end              
                 item
                   MaxSize = 202
@@ -568,12 +570,12 @@ object f_config_catalog: Tf_config_catalog
           end
           object TabSheetGcatNeb: TTabSheet
             Caption = 'TabSheetGcatNeb'
-            ClientHeight = 292
+            ClientHeight = 291
             ClientWidth = 494
             object CatalogGridNeb: TStringGrid
               Tag = 4
               Left = 0
-              Height = 292
+              Height = 291
               Top = 0
               Width = 494
               Align = alClient
@@ -660,12 +662,12 @@ object f_config_catalog: Tf_config_catalog
           end
           object TabSheetGcatLin: TTabSheet
             Caption = 'TabSheetGcatLin'
-            ClientHeight = 292
+            ClientHeight = 291
             ClientWidth = 494
             object CatalogGridLin: TStringGrid
               Tag = 5
               Left = 0
-              Height = 292
+              Height = 291
               Top = 0
               Width = 494
               Align = alClient
