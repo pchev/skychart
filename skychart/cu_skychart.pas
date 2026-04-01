@@ -1556,6 +1556,16 @@ begin
         First := False;
       end;
     end;
+    for j := 0 to Fcatalog.cfgcat.GCatNum - 1 do
+    begin
+      if (Fcatalog.cfgcat.GCatLst[j].CatOn and
+        Fcatalog.cfgcat.GCatLst[j].ForceLabel and
+        Fcatalog.cfgcat.GCatLst[j].AlwaysLabel) then
+      begin
+        firstcat := 'NoStarLabel';
+        First := False;
+      end;
+    end;
     j:=-99;
     timelimit := now + 10 / secday;
     if Fcatalog.OpenStar then

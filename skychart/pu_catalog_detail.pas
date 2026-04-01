@@ -84,7 +84,7 @@ begin
   Label25.Caption := rsMarkSize;
   Label1.Caption := rsColor;
   cbLabel.Caption := rsShowLabels;
-  cbAlwaysLabel.Caption := rsBypassLabelF;
+  cbAlwaysLabel.Caption := rsPriorityLabe;
 end;
 
 procedure Tf_catalog_detail.DrawingChange(Sender: TObject);
