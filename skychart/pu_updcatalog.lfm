@@ -17,20 +17,7 @@ object f_updcatalog: Tf_updcatalog
     Width = 870
     Align = alTop
     Caption = 'Select catalog to install or remove'
-    ClientHeight = 34
-    ClientWidth = 870
     TabOrder = 0
-    object ButtonRefresh: TButton
-      Left = 677
-      Height = 25
-      Top = 4
-      Width = 171
-      Anchors = [akTop, akRight]
-      Caption = 'Refresh the list'
-      OnClick = ButtonRefreshClick
-      TabOrder = 0
-      Visible = False
-    end
   end
   object PageControl1: TPageControl
     Left = 0

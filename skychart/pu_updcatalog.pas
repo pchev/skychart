@@ -47,7 +47,6 @@ type
 
   Tf_updcatalog = class(TForm)
     ButtonSetup: TButton;
-    ButtonRefresh: TButton;
     ButtonClose: TButton;
     ButtonAbort: TButton;
     GridExpert: TStringGrid;
@@ -78,7 +77,6 @@ type
     EndInstallTimer: TTimer;
     procedure ButtonAbortClick(Sender: TObject);
     procedure ButtonCloseClick(Sender: TObject);
-    procedure ButtonRefreshClick(Sender: TObject);
     procedure ButtonSetupClick(Sender: TObject);
     procedure EndInstallTimerTimer(Sender: TObject);
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
@@ -104,7 +102,7 @@ type
     ProgressMessage: string;
     procedure ClearGrid(g:TStringGrid);
     procedure LoadCatalogList;
-    function UpdateList(ForceDownload: boolean; out txt: string): boolean;
+    function UpdateList: boolean;
     procedure ShowStatus(grid: TStringGrid);
     procedure InstallDlg(info: TCatInfo);
     procedure UninstallDlg(info: TCatInfo);
@@ -252,7 +250,6 @@ procedure Tf_updcatalog.SetLang;
 begin
   Caption:=rsInstallObjec;
   panel1.Caption:=rsSelectTheCat;
-  ButtonRefresh.Caption:=rsRefreshTheLi;
   TabSheetStar.Caption:=rsStars;
   TabSheetVar.Caption:=rsVariableStar2;
   TabSheetDouble.Caption:=rsDoubleStar;
@@ -312,7 +309,6 @@ begin
   LabelInfo.Caption:=rsInstallStarC;
   PanelInfo.Visible:=true;
   PanelDownload.Visible:=false;
-  ButtonRefresh.Visible:=false;
   FAbort:=false;
   FRunning:=false;
   FDownloadNow:=true;
@@ -324,6 +320,7 @@ begin
   PanelInfo.Visible:=true;
   PanelDownload.Visible:=false;
   LoadCatalogList;
+  FDownloadNow:=false;
 end;
 
 procedure Tf_updcatalog.FormDestroy(Sender: TObject);
@@ -378,8 +375,7 @@ var f: textfile;
     row: Tstringlist;
     grid: TStringGrid;
 begin
-  UpdateList(FDownloadNow,buf);
-  FDownloadNow:=false;
+  UpdateList;
   ClearGrid(GridStar);
   ClearGrid(GridVar);
   ClearGrid(GridDouble);
@@ -433,7 +429,7 @@ begin
   end;
 end;
 
-function Tf_updcatalog.UpdateList(ForceDownload: boolean; out txt: string): boolean;
+function Tf_updcatalog.UpdateList: boolean;
 var
   dl: TDownloadDialog;
   fn: string;
@@ -441,10 +437,9 @@ var
   doDownload: boolean;
 begin
   result:=false;
-  txt:='';
   fn := slash(PrivateCatalogDir)+catalog_list;
   doDownload:=true;
-  if (not ForceDownload) and FileExists(fn) then begin
+  if (not FDownloadNow) and FileExists(fn) then begin
     if FileAge(fn,ft) then begin
       doDownload:=(ft<(now-1));
     end;
@@ -492,22 +487,10 @@ begin
         dl.SaveToFile := fn;
         result:=dl.Execute;
       end;
-      txt:=dl.ResponseText;
     finally
       dl.Free;
     end;
   end;
-end;
-
-procedure Tf_updcatalog.ButtonRefreshClick(Sender: TObject);
-var txt: string;
-begin
-  if UpdateList(True,txt) then begin
-    LoadCatalogList;
-    ShowMessage(rsUpdatedSucce);
-  end
-  else
-    ShowMessage(rsError2+': '+txt);
 end;
 
 procedure Tf_updcatalog.ShowStatus(grid: TStringGrid);
@@ -550,7 +533,6 @@ begin
       FRunning:=True;
       FAbort:=false;
       ButtonClose.Enabled:=false;
-      ButtonRefresh.Enabled:=false;
       ButtonSetup.Enabled:=false;
       info:=TCatInfo(Objects[colinstall,aRow]);
       if info.installed then
@@ -567,7 +549,6 @@ begin
           ShowMessage(rsMissingPrere+' '+info.prereq);
           FRunning:=False;
           ButtonClose.Enabled:=true;
-          ButtonRefresh.Enabled:=true;
           ButtonSetup.Enabled:=true;
         end;
       end;
@@ -934,7 +915,6 @@ begin
   LoadCatalogList;
   FRunning:=False;
   ButtonClose.Enabled:=true;
-  ButtonRefresh.Enabled:=true;
   ButtonSetup.Enabled:=true;
   ProgressIndex:=0;
   if assigned(FChartRefresh) then FChartRefresh(self);
