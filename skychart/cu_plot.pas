@@ -1089,7 +1089,7 @@ begin
       1: PlotDSOCircle(xx, yy, size, 0, 0, 1, 0, true, color);
       2: PlotDSORectangle(xx, yy, size, 0, 0, 1, 0, true, color);
       3: PlotDSOlozenge(xx, yy, size, 0, 0, 1, 0, true, color);
-      4:
+      4: Result := round(cfgplot.MinDsoSize * cfgchart.drawpen);
     end;
 
 end;

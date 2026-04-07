@@ -8089,24 +8089,24 @@ begin
     y := labels[i].y;
     // TopLeft
     labbox[i, 1].Top := round(y - ts.cy - r) - 1;
-    labbox[i, 1].Bottom := round(y + r) + 1;
-    labbox[i, 1].Left := round(x + r) - 1;
-    labbox[i, 1].Right := round(x + ts.cx + r) + 1;
+    labbox[i, 1].Bottom := round(y - r) + 1;
+    labbox[i, 1].Left := round(x - r - ts.cx) - 1;
+    labbox[i, 1].Right := round(x - r) + 1;
     // BottomLeft
-    labbox[i, 2].Top := round(y - r) - 1;
+    labbox[i, 2].Top := round(y + r) - 1;
     labbox[i, 2].Bottom := round(y + ts.cy + r) + 1;
-    labbox[i, 2].Left := round(x + r) - 1;
-    labbox[i, 2].Right := round(x + ts.cx + r) + 1;
+    labbox[i, 2].Left := round(x - r - ts.cx) - 1;
+    labbox[i, 2].Right := round(x - r) + 1;
     // TopRight
     labbox[i, 3].Top := round(y - ts.cy - r) - 1;
-    labbox[i, 3].Bottom := round(y + r) + 1;
-    labbox[i, 3].Left := round(x - ts.cx - r) - 1;
-    labbox[i, 3].Right := round(x - r) + 1;
+    labbox[i, 3].Bottom := round(y - r) + 1;
+    labbox[i, 3].Left := round(x + r) - 1;
+    labbox[i, 3].Right := round(x + r + ts.cx) + 1;
     // BottomRight
-    labbox[i, 4].Top := round(y - r) - 1;
+    labbox[i, 4].Top := round(y + r) - 1;
     labbox[i, 4].Bottom := round(y + ts.cy + r) + 1;
-    labbox[i, 4].Left := round(x - ts.cx - r) - 1;
-    labbox[i, 4].Right := round(x - r) + 1;
+    labbox[i, 4].Left := round(x + r) - 1;
+    labbox[i, 4].Right := round(x + r + ts.cx) + 1;
   end;
   obmp.Free;
   safedistance := max(2 * maxtl, 200.0 * Fplot.cfgchart.drawpen);
