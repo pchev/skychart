@@ -450,7 +450,7 @@ const
   Ecl = 3;
   ProjectionName = 'HAI MER CAR STG ARC TAN SIN';
   DefAutoStarFilterMag = 7.5;
-  DefStarMagFilter: array[0..MaxField] of double = (21,21,18,14,11,9,8,7,6,5,4);
+  DefStarMagFilter: array[0..MaxField] of double = (99,21,18,14,11,9,8,7,6,5,4);
   DefNebMagFilter: array [0..MaxField] of double = (99,99,99,99,20,15,13,10.5,9,6,6);
   DefNebSizeFilter: array [0..MaxField] of double = (0,0,0,1,1,2,3,6,20,30,60);
   ftAll = 0;
