@@ -331,14 +331,62 @@ var
   buf: string;
   init: boolean;
   buffer: array[0..buffersize-1] of char;
+  tbuf: array[0..1024] of char;
   s: TMemoryStream;
-  n, c: integer;
-  err,tm: boolean;
+  i, n, level, c, tl: integer;
+  closing: boolean;
+  lastc: char;
+
+  function ReadElement(newc: char): boolean; inline;
+  begin
+    Result := False;
+    case newc of
+      chr(0):
+      begin
+        s.Clear;
+        s.WriteBuffer('<INDIMSG>', 9);
+        level := 0;
+      end;
+      '/':
+      begin
+        s.Write(newc, 1);
+        if (lastc = '<') then
+        begin
+          Dec(level);
+          closing := True;
+        end;
+      end;
+      '<':
+      begin
+        Inc(level);
+        closing := False;
+        s.Write(newc, 1);
+      end;
+      '>':
+      begin
+        s.Write(newc, 1);
+        if (lastc = '/') or closing then
+        begin
+          Dec(level);
+          if level = 0 then
+          begin
+            s.WriteBuffer('</INDIMSG>', 10);
+            Result := True;
+          end;
+        end;
+      end;
+      else
+      begin
+        s.Write(newc, 1);
+      end;
+    end;
+    lastc := newc;
+  end;
+
 begin
   try
     tcpclient := TTCPClient.Create;
     s := TMemoryStream.Create;
-    err:=false;
     try
       OpenProtocolTrace;
       {$ifdef withCriticalsection}
@@ -360,35 +408,43 @@ begin
         RefreshProps;
         // main loop
         buf := '';
+        level := 0;
         s.WriteBuffer('<INDIMSG>', 9);
         c := 0;
         repeat
           if terminated then
             break;
-          // read a complete block
-          repeat
-            n := tcpclient.Sock.RecvBufferEx(@buffer, buffersize, 20);
-            if (tcpclient.Sock.lastError <> 0) and
-              (tcpclient.Sock.lastError <> WSAETIMEDOUT) then begin
-                 err:=true;
-                 break;
-              end;
-            tm:=tcpclient.Sock.lastError=WSAETIMEDOUT;
-            if n>0 then begin
-              if FProtocolTrace then
-                WriteProtocolRaw('Receive buffer size=' + IntToStr(n) + crlf + Copy(buffer,1,n));
-              s.WriteBuffer(buffer,n);
-            end;
-          until tm;
-          if err then
-             break;
-          if s.Size > 10 then
+          n := tcpclient.Sock.RecvBufferEx(@buffer, buffersize, FTimeout);
+          if (tcpclient.Sock.lastError <> 0) and
+            (tcpclient.Sock.lastError <> WSAETIMEDOUT) then
+            break;
+          if n > 0 then
           begin
-              // process data block
-              s.WriteBuffer('</INDIMSG>', 10);
-              ProcessDataThread(s);
-              s := TMemoryStream.Create;
-              s.WriteBuffer('<INDIMSG>', 9);
+            if FProtocolTrace then
+              WriteProtocolRaw('Receive buffer size=' + IntToStr(n) +
+                crlf + Copy(buffer,1,n));
+            for i := 0 to n - 1 do
+            begin
+              if ReadElement(buffer[i]) then
+              begin
+                if FProtocolTrace then
+                begin
+                  s.Position := 0;
+                  tl := s.Read(tbuf, 1024);
+                  if tl<=1024 then
+                    WriteProtocolTrace('Process data=' + StringReplace(
+                      StringReplace(copy(tbuf, 1, tl), cr, '', [rfReplaceAll]),
+                      lf, '', [rfReplaceAll]))
+                  else
+                    WriteProtocolTrace('Process data=' + StringReplace(
+                      StringReplace(copy(tbuf, 1, tl), cr, '', [rfReplaceAll]),
+                      lf, '', [rfReplaceAll]) + '...');
+                end;
+                ProcessDataThread(s);
+                s := TMemoryStream.Create;
+                s.WriteBuffer('<INDIMSG>', 9);
+              end;
+            end;
           end;
           if init then
           begin
