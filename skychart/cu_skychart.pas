@@ -8748,6 +8748,7 @@ begin
   begin
     projection(ra, de, x1, y1, False, cfgsc);
     rot:=rectanglerotation(ra,de,cfgsc,num<0);
+    rot := rot - cfgsc.RotMark;
     // crosshair
     if cfgsc.ShowCrosshair and (num < 0) and (not moving) then
     begin

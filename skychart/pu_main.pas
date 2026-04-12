@@ -6786,6 +6786,7 @@ begin
   def_cfgsc.ObsCountry := 'Switzerland';
   def_cfgsc.horizonopaque := True;
   def_cfgsc.ShowScale := False;
+  def_cfgsc.RotMark:=0;
   def_cfgsc.FillHorizon := True;
   def_cfgsc.ShowHorizon := False;
   def_cfgsc.ShowHorizonPicture := True;
@@ -7748,6 +7749,7 @@ begin
         csc.ShowHorizon0 := ReadBool(section, 'ShowHorizon0', csc.ShowHorizon0);
         csc.horizonfile := ReadString(section, 'horizonfile', csc.horizonfile);
         csc.HorizonPictureFile := ReadString(section, 'HorizonPictureFile', csc.HorizonPictureFile);
+        csc.RotMark:=ReadFloat(section, 'RotMark', csc.RotMark);
         csc.ShowEqGrid := ReadBool(section, 'ShowEqGrid', csc.ShowEqGrid);
         csc.ShowLabelAll := ReadBool(section, 'ShowLabelAll', csc.ShowLabelAll);
         csc.EditLabels := ReadBool(section, 'EditLabels', csc.EditLabels);
@@ -9224,6 +9226,7 @@ begin
         WriteBool(section, 'MeridianWideLine', csc.MeridianWideLine);
         WriteString(section, 'horizonfile', csc.horizonfile);
         WriteString(section, 'HorizonPictureFile', csc.HorizonPictureFile);
+        WriteFloat(section, 'RotMark', csc.RotMark);
         WriteBool(section, 'ShowEqGrid', csc.ShowEqGrid);
         WriteBool(section, 'ShowLabelAll', csc.ShowLabelAll);
         WriteBool(section, 'EditLabels', csc.EditLabels);

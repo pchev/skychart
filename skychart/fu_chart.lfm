@@ -305,6 +305,10 @@ object f_chart: Tf_chart
     end
     object MenuFinderCircle: TMenuItem
       Caption = 'Finder Circle'
+      object MarkRotation: TMenuItem
+        Caption = 'Rotation'
+        OnClick = MarkRotationClick
+      end
       object SelectCircle: TMenuItem
         Caption = 'Select Circle'
       end

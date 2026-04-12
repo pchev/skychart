@@ -38,7 +38,7 @@ uses
   contnrs, LCLType, UScaleDPI,
   PostscriptCanvas, FileUtil, Clipbrd, LCLIntf, Classes, Graphics, Dialogs, Types,
   Forms, Controls, StdCtrls, ExtCtrls, Menus, ActnList, SysUtils,
-  LResources, CheckLst;
+  LResources, CheckLst, ComCtrls;
 
 const
   maxundo = 10;
@@ -80,6 +80,7 @@ type
     CopyCoord1: TMenuItem;
     CopyCoord2: TMenuItem;
     CopyCoord2000: TMenuItem;
+    MarkRotation: TMenuItem;
     MenuSAMP2: TMenuItem;
     MenuSAMP3: TMenuItem;
     PrePointMeasure: TMenuItem;
@@ -182,6 +183,7 @@ type
     procedure HorScrollBarScroll(Sender: TObject; ScrollCode: TScrollCode;
       var ScrollPos: integer);
     procedure chart_imglistExecute(Sender: TObject);
+    procedure MarkRotationClick(Sender: TObject);
     procedure MenuCircleClick(Sender: TObject);
     procedure MenuAddToObsListClick(Sender: TObject);
     procedure MenuCursorToObsListClick(Sender: TObject);
@@ -318,6 +320,8 @@ type
     procedure PrePointCenter(Sender: TObject);
     procedure PrePointCenterNow(Sender: TObject);
     procedure SetSAMPmenu(menu:Tmenuitem; num: integer);
+    procedure MarkRotationChange(Sender: TObject);
+    procedure MarkRotationClose(Sender: TObject; var Action: TCloseAction);
   public
     { Public declarations }
     Image1: TChartDrawingControl;
@@ -519,6 +523,7 @@ begin
   Zoom1.Caption := rsZoomCentre;
   Zoom2.Caption := rsZoomCentre2;
   MenuFinderCircle.Caption := rsFinderCircle2;
+  MarkRotation.Caption:=rsRotation;
   SelectCircle.Caption := rsSelectCircle;
   SelectRectangle.Caption := rsSelectRectan;
   EyepieceMask.Caption := rsEyepieceVisi;
@@ -5981,6 +5986,61 @@ begin
     if assigned(FImageSetup) then
       FImageSetup(self);
   end;
+end;
+
+procedure Tf_chart.MarkRotationClick(Sender: TObject);
+var f:TForm;
+    r: TTrackBar;
+    l: Tlabel;
+begin
+  f:=TForm.Create(self);
+  f.Caption:=rsRotation;
+  f.AutoSize:=true;
+  f.OnClose:=MarkRotationClose;
+  r:=TTrackBar.Create(f);
+  r.Top:=DoScaleX(4);
+  r.Left:=DoScaleY(4);
+  r.Width:=DoScaleY(360);
+  r.Parent:=f;
+  r.Min:=0;
+  r.Max:=360;
+  r.Frequency:=45;
+  r.LineSize:=1;
+  r.PageSize:=15;
+  r.TickMarks:=tmTopLeft;
+  r.Position:=round(rad2deg*sc.cfgsc.RotMark);
+  r.OnChange:=MarkRotationChange;
+  l:=TLabel.Create(f);
+  l.Name:='Label1';
+  l.Parent:=f;
+  l.BorderSpacing.Top := 4;
+  l.AnchorSideLeft.Control := r;
+  l.AnchorSideLeft.Side := asrCenter;
+  l.AnchorSideTop.Control := r;
+  l.AnchorSideTop.Side := asrBottom;
+  l.Caption:=IntToStr(r.Position)+ldeg;
+  FormPos(f, mouse.CursorPos.X, mouse.CursorPos.Y);;
+  f.ShowModal;
+end;
+
+procedure Tf_chart.MarkRotationChange(Sender: TObject);
+begin
+try
+  if sender is TTrackBar then begin
+    sc.cfgsc.RotMark:=deg2rad*TTrackBar(sender).Position;
+    with TTrackBar(sender).Parent do
+      with Tlabel(FindComponent('Label1')) do
+         Caption:=IntToStr(TTrackBar(sender).Position)+ldeg;
+    RefreshTimer.Enabled:=false;
+    RefreshTimer.Enabled:=true;
+  end;
+except
+end;
+end;
+
+procedure Tf_chart.MarkRotationClose(Sender: TObject; var Action: TCloseAction);
+begin
+  Action:=caFree;
 end;
 
 procedure Tf_chart.MenuCircleClick(Sender: TObject);

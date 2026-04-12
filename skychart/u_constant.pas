@@ -1132,7 +1132,7 @@ type
     ShowEcliptic, ShowGalactic, ShowEquator, ShowMilkyWay, FillMilkyWay, LinemodeMilkyway,
     ShowHorizon, ShowHorizonPicture, HorizonPictureLowQuality, FillHorizon,
     ShowHorizon0, ShowHorizonDepression, MeridianWideLine: boolean;
-    PrePointRA, PrePointDEC, PrePointTime, PrePointMarkRA, PrePointMarkDEC: double;
+    PrePointRA, PrePointDEC, PrePointTime, PrePointMarkRA, PrePointMarkDEC, RotMark: double;
     PrePointLength: integer;
     DrawPrePoint, DarkenHorizonPicture: Boolean;
     CurTime, DT_UT_val, GRSlongitude, GRSjd, GRSdrift, TelescopeTurnsX,
@@ -2533,6 +2533,7 @@ begin
   ObsPHI := Source.ObsPHI;
   ObsDAZ := Source.ObsDAZ;
   Diurab := Source.Diurab;
+  RotMark := Source.RotMark;
   WindowRatio := Source.WindowRatio;
   BxGlb := Source.BxGlb;
   ByGlb := Source.ByGlb;
