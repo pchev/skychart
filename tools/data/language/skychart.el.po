@@ -3,15 +3,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: skychart.en\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-01-09 20:03+0000\n"
-"PO-Revision-Date: 2017-01-14 17:41+0000\n"
-"Last-Translator: Patrick Chevalley <Unknown>\n"
+"POT-Creation-Date: 2026-04-16 11:24+0000\n"
+"PO-Revision-Date: 2026-02-18 11:04+0000\n"
+"Last-Translator: Andreas Vossinakis <Unknown>\n"
 "Language-Team: <translation@ap-i.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2026-01-09 20:12+0000\n"
-"X-Generator: Launchpad (build 99c00f518760bdd50fc6e353e7736d2fff8fba4a)\n"
+"X-Launchpad-Export-Date: 2026-04-16 11:28+0000\n"
+"X-Generator: Launchpad (build 866d07beecca8ac2e3326342adf6c1740cd3e7b3)\n"
 
 #: u_translation.rs102cddss
 msgid "102 CD DSS"
@@ -1266,7 +1266,7 @@ msgstr "Δημιουργία χάρτη postscript. Παρακαλώ περιμ�
 #: u_translation.rscreaterasterwh
 #, object-pascal-format
 msgid "Create raster chart %d x %d. Please wait..."
-msgstr ""
+msgstr "Δημιουργία χάρτη ράστερ %d x %d. Παρακαλώ περιμένετε..."
 
 #: u_translation.rscrossmeridia
 msgid "Cross meridian"
@@ -1495,7 +1495,7 @@ msgstr "Μοίρα"
 
 #: u_translation.rsdegreegridsp
 msgid "Grid spacing in degree"
-msgstr ""
+msgstr "Διάκενο πλέγματος σε μοίρες"
 
 #: u_translation.rsdegreesminut
 msgid "Degrees, minutes, seconds"
@@ -2592,7 +2592,7 @@ msgstr "Ωριαία γωνία"
 
 #: u_translation.rshourgridspac
 msgid "Grid spacing in hour for equatorial grid"
-msgstr ""
+msgstr "Διάκενο πλέγματος σε ώρες για το ισημερινό πλέγμα"
 
 #: u_translation.rshourlymotion
 msgid "Hourly motion"
@@ -4079,7 +4079,7 @@ msgstr "Δεδομένα χρήστη"
 
 #: u_translation.rsphaseangle
 msgid "Phase angle"
-msgstr ""
+msgstr "Γωνία φάσης"
 
 #: u_translation.rsphotographic
 msgid "Photographic plate"
@@ -4204,7 +4204,7 @@ msgstr ""
 
 #: u_translation.rsplottheposit
 msgid "Plot orbital motion of solar system objects."
-msgstr ""
+msgstr "Σχεδιασμός τροχιακής κίνησης αντικειμένων Ηλιακού Συστήματος"
 
 #: u_translation.rspluto
 msgid "Pluto"
@@ -4333,6 +4333,10 @@ msgstr "Προεπισκόπηση εκτύπωσης"
 #: u_translation.rsprintthechar
 msgid "Print the chart"
 msgstr "Εκτύπωση του χάρτη"
+
+#: u_translation.rsprioritylabe
+msgid "Priority label"
+msgstr ""
 
 #: u_translation.rsprocessing
 #, object-pascal-format
@@ -4580,10 +4584,6 @@ msgstr "Ανανέωση εικόνας κάθε"
 #: u_translation.rsrefreshrate
 msgid "Refresh rate"
 msgstr "Ρυθμός ανανέωσης"
-
-#: u_translation.rsrefreshtheli
-msgid "Refresh the list"
-msgstr ""
 
 #: u_translation.rsreleasenotes
 msgid "Release notes"
@@ -5473,7 +5473,7 @@ msgstr "Βάση SQL μη διαθέσιμη"
 
 #: u_translation.rssqldatabases
 msgid "SQL database software is probably not installed!"
-msgstr ""
+msgstr "Η βάση δεδομένων SQL πιθανόν δεν είναι εγκατεστημένη!"
 
 #: u_translation.rssqlitedataba
 msgid "SQLite database"
@@ -5721,7 +5721,7 @@ msgstr "Εστιακό μήκος τηλεσκοπίου"
 
 #: u_translation.rstelescopenam
 msgid "Telescope name"
-msgstr ""
+msgstr "Όνομα τηλεσκοπίου"
 
 #: u_translation.rstelescopenot
 msgid "Telescope not connected"
@@ -5796,7 +5796,7 @@ msgstr ""
 
 #: u_translation.rsthisfilewasn
 msgid "This file was not recognized as a MPCORB file."
-msgstr ""
+msgstr "Το αρχείο δεν αναγνωρίζεται ως αρχείο MPCORB"
 
 #: u_translation.rsthislayoutca
 msgid "This layout can be modified later using the menu Setup , Toolbar editor"

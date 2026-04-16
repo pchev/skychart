@@ -3,15 +3,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: skychart.en\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-01-09 20:03+0000\n"
+"POT-Creation-Date: 2026-04-16 11:24+0000\n"
 "PO-Revision-Date: 2023-12-23 14:16+0000\n"
 "Last-Translator: grofaty <Unknown>\n"
 "Language-Team: American English <kde-i18n-doc@kde.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2026-01-09 20:12+0000\n"
-"X-Generator: Launchpad (build 99c00f518760bdd50fc6e353e7736d2fff8fba4a)\n"
+"X-Launchpad-Export-Date: 2026-04-16 11:28+0000\n"
+"X-Generator: Launchpad (build 866d07beecca8ac2e3326342adf6c1740cd3e7b3)\n"
 "Language: en_US\n"
 
 #: u_translation.rs102cddss
@@ -4335,6 +4335,10 @@ msgstr "Predogled tiskanja"
 msgid "Print the chart"
 msgstr "Natisni karto"
 
+#: u_translation.rsprioritylabe
+msgid "Priority label"
+msgstr ""
+
 #: u_translation.rsprocessing
 #, object-pascal-format
 msgid "Processing... %s"
@@ -4581,10 +4585,6 @@ msgstr "Osveži sliko vsakih"
 #: u_translation.rsrefreshrate
 msgid "Refresh rate"
 msgstr "Hitrost osveževanja"
-
-#: u_translation.rsrefreshtheli
-msgid "Refresh the list"
-msgstr ""
 
 #: u_translation.rsreleasenotes
 msgid "Release notes"

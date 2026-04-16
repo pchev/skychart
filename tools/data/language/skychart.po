@@ -6150,10 +6150,6 @@ msgstr ""
 msgid "Close the Setup window and launch the catalog generation tool?"
 msgstr ""
 
-#: u_translation:rsrefreshtheli
-msgid "Refresh the list"
-msgstr ""
-
 #: u_translation:rsusethebutton
 msgid "Use the button below or the menu \"%s/%s\" to install a double and variable star catalog"
 msgstr ""
@@ -6300,5 +6296,9 @@ msgstr ""
 
 #: u_translation:rsaddconstella
 msgid "Add constellations"
+msgstr ""
+
+#: u_translation:rsprioritylabe
+msgid "Priority label"
 msgstr ""
 

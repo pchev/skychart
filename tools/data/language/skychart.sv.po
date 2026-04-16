@@ -6,15 +6,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: skychart\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2026-01-09 20:03+0000\n"
+"POT-Creation-Date: 2026-04-16 11:24+0000\n"
 "PO-Revision-Date: 2024-01-29 07:14+0000\n"
 "Last-Translator: Karl Birgersson <Unknown>\n"
 "Language-Team: Swedish <sv@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2026-01-09 20:12+0000\n"
-"X-Generator: Launchpad (build 99c00f518760bdd50fc6e353e7736d2fff8fba4a)\n"
+"X-Launchpad-Export-Date: 2026-04-16 11:28+0000\n"
+"X-Generator: Launchpad (build 866d07beecca8ac2e3326342adf6c1740cd3e7b3)\n"
 
 #: u_translation.rs102cddss
 msgid "102 CD DSS"
@@ -4337,6 +4337,10 @@ msgstr "Skriv ut förhandsgranskning"
 msgid "Print the chart"
 msgstr "Skriv ut kartan"
 
+#: u_translation.rsprioritylabe
+msgid "Priority label"
+msgstr ""
+
 #: u_translation.rsprocessing
 #, object-pascal-format
 msgid "Processing... %s"
@@ -4583,10 +4587,6 @@ msgstr "Uppdatera bild varje"
 #: u_translation.rsrefreshrate
 msgid "Refresh rate"
 msgstr "Uppdat. frekv."
-
-#: u_translation.rsrefreshtheli
-msgid "Refresh the list"
-msgstr "Uppdatera lista"
 
 #: u_translation.rsreleasenotes
 msgid "Release notes"

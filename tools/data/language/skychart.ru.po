@@ -2,15 +2,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: skychart.ru\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-01-09 20:03+0000\n"
-"PO-Revision-Date: 2024-12-12 13:38+0000\n"
+"POT-Creation-Date: 2026-04-16 11:24+0000\n"
+"PO-Revision-Date: 2026-01-19 13:03+0000\n"
 "Last-Translator: Aleksey Kabanov <Unknown>\n"
 "Language-Team: Zaporozhye Astronomical Club Altair <astroclub@ua.fm, http://astroclub.zp.ua>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2026-01-09 20:12+0000\n"
-"X-Generator: Launchpad (build 99c00f518760bdd50fc6e353e7736d2fff8fba4a)\n"
+"X-Launchpad-Export-Date: 2026-04-16 11:28+0000\n"
+"X-Generator: Launchpad (build 866d07beecca8ac2e3326342adf6c1740cd3e7b3)\n"
 "Language: ru_UA\n"
 
 #: u_translation.rs102cddss
@@ -153,7 +153,7 @@ msgstr "Добавить объект в базу данных. Все поля 
 
 #: u_translation.rsaddconstella
 msgid "Add constellations"
-msgstr ""
+msgstr "Добавить созвездия"
 
 #: u_translation.rsaddcursorpos
 msgid "Add cursor position"
@@ -416,7 +416,7 @@ msgstr "ASCOM Alpaca доступен %s"
 
 #: u_translation.rsascomtelesc
 msgid "Telescope interface"
-msgstr ""
+msgstr "Интерфейс телескопа"
 
 #: u_translation.rsaskconfirmat
 msgid "Ask confirmation before any Internet connection"
@@ -4334,6 +4334,10 @@ msgstr "Просмотр печати"
 msgid "Print the chart"
 msgstr "Распечатать карту"
 
+#: u_translation.rsprioritylabe
+msgid "Priority label"
+msgstr ""
+
 #: u_translation.rsprocessing
 #, object-pascal-format
 msgid "Processing... %s"
@@ -4422,7 +4426,7 @@ msgstr "Порт"
 #: u_translation.rsputthefilesw
 #, object-pascal-format
 msgid "Put the files with a .tle extension to the %s folder"
-msgstr ""
+msgstr "Поместите файлы с расширением .tle в папку %s"
 
 #: u_translation.rsqualityflag
 msgid "Quality flag"
@@ -4580,10 +4584,6 @@ msgstr "Обновлять каждые"
 #: u_translation.rsrefreshrate
 msgid "Refresh rate"
 msgstr "Обновление, мс"
-
-#: u_translation.rsrefreshtheli
-msgid "Refresh the list"
-msgstr "Обновить список"
 
 #: u_translation.rsreleasenotes
 msgid "Release notes"
@@ -5601,7 +5601,7 @@ msgstr "Единица шага"
 
 #: u_translation.rsstereographic
 msgid "Stereographic"
-msgstr ""
+msgstr "Стереографическая"
 
 #: u_translation.rsstop
 msgid "Stop"

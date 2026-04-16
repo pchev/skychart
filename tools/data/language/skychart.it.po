@@ -3,15 +3,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: skychart\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-01-09 20:03+0000\n"
-"PO-Revision-Date: 2025-03-25 07:15+0000\n"
+"POT-Creation-Date: 2026-04-16 11:24+0000\n"
+"PO-Revision-Date: 2026-04-14 16:40+0000\n"
 "Last-Translator: Mattia Verga <Unknown>\n"
 "Language-Team: Italian <kde-i18n-it@kde.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2026-01-09 20:12+0000\n"
-"X-Generator: Launchpad (build 99c00f518760bdd50fc6e353e7736d2fff8fba4a)\n"
+"X-Launchpad-Export-Date: 2026-04-16 11:28+0000\n"
+"X-Generator: Launchpad (build 866d07beecca8ac2e3326342adf6c1740cd3e7b3)\n"
 "Language: it\n"
 
 #: u_translation.rs102cddss
@@ -154,7 +154,7 @@ msgstr "Aggiungi un singolo elemento al database. Tutti i campi sono obbligatori
 
 #: u_translation.rsaddconstella
 msgid "Add constellations"
-msgstr ""
+msgstr "Aggiungi costellazioni"
 
 #: u_translation.rsaddcursorpos
 msgid "Add cursor position"
@@ -417,7 +417,7 @@ msgstr "ASCOM Alpaca è disponibile su %s"
 
 #: u_translation.rsascomtelesc
 msgid "Telescope interface"
-msgstr ""
+msgstr "Interfaccia telescopio"
 
 #: u_translation.rsaskconfirmat
 msgid "Ask confirmation before any Internet connection"
@@ -2261,7 +2261,7 @@ msgstr "Campi circolari (Oculari)"
 
 #: u_translation.rsfindercircle2
 msgid "Finder Circle"
-msgstr "Campo Circolare"
+msgstr "Campi Inquadratura"
 
 #: u_translation.rsfinderrectan
 msgid "Finder rectangle (CCD)"
@@ -2377,7 +2377,7 @@ msgstr "A pieno schermo"
 
 #: u_translation.rsgaiavariable
 msgid "GAIA variable star information"
-msgstr ""
+msgstr "Informazioni GAIA stella variabile"
 
 #: u_translation.rsgalactic
 msgid "Galactic"
@@ -4335,6 +4335,10 @@ msgstr "Anteprima di stampa"
 msgid "Print the chart"
 msgstr "Stampa la cartina"
 
+#: u_translation.rsprioritylabe
+msgid "Priority label"
+msgstr ""
+
 #: u_translation.rsprocessing
 #, object-pascal-format
 msgid "Processing... %s"
@@ -4423,7 +4427,7 @@ msgstr "Porta proxy"
 #: u_translation.rsputthefilesw
 #, object-pascal-format
 msgid "Put the files with a .tle extension to the %s folder"
-msgstr ""
+msgstr "Metti i file con estensione .tle nella cartella %s"
 
 #: u_translation.rsqualityflag
 msgid "Quality flag"
@@ -4582,10 +4586,6 @@ msgstr "Aggiorna immagine ogni"
 msgid "Refresh rate"
 msgstr "Intervallo di aggiornamento"
 
-#: u_translation.rsrefreshtheli
-msgid "Refresh the list"
-msgstr "Aggiorna la lista"
-
 #: u_translation.rsreleasenotes
 msgid "Release notes"
 msgstr "Note di versione"
@@ -4625,7 +4625,7 @@ msgstr "Rinomina cartina"
 
 #: u_translation.rsrenamethecur
 msgid "Rename the current chart"
-msgstr ""
+msgstr "Rinomina cartina corrente"
 
 #: u_translation.rsreplacebytic
 msgid "Replace by tick mark"
@@ -5602,7 +5602,7 @@ msgstr "Unità di passo"
 
 #: u_translation.rsstereographic
 msgid "Stereographic"
-msgstr ""
+msgstr "Stereografica"
 
 #: u_translation.rsstop
 msgid "Stop"

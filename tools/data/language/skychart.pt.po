@@ -3,15 +3,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: skychart.pt\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-01-09 20:03+0000\n"
-"PO-Revision-Date: 2024-11-28 18:55+0000\n"
+"POT-Creation-Date: 2026-04-16 11:24+0000\n"
+"PO-Revision-Date: 2026-02-03 13:14+0000\n"
 "Last-Translator: Angelo Rober Pulici <Unknown>\n"
 "Language-Team: Angelo Rober Pulici <apulici@terra.com.br>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2026-01-09 20:12+0000\n"
-"X-Generator: Launchpad (build 99c00f518760bdd50fc6e353e7736d2fff8fba4a)\n"
+"X-Launchpad-Export-Date: 2026-04-16 11:28+0000\n"
+"X-Generator: Launchpad (build 866d07beecca8ac2e3326342adf6c1740cd3e7b3)\n"
 "Language: pt_BR\n"
 
 #: u_translation.rs102cddss
@@ -154,7 +154,7 @@ msgstr "Adicionar um elemento simples no banco de dados. Todos os campos são ob
 
 #: u_translation.rsaddconstella
 msgid "Add constellations"
-msgstr ""
+msgstr "Adicionar constelações"
 
 #: u_translation.rsaddcursorpos
 msgid "Add cursor position"
@@ -417,7 +417,7 @@ msgstr "ASCOM Alpaca está disponível em %s"
 
 #: u_translation.rsascomtelesc
 msgid "Telescope interface"
-msgstr ""
+msgstr "Interface do telescópio"
 
 #: u_translation.rsaskconfirmat
 msgid "Ask confirmation before any Internet connection"
@@ -2377,7 +2377,7 @@ msgstr "Ecrã completo"
 
 #: u_translation.rsgaiavariable
 msgid "GAIA variable star information"
-msgstr ""
+msgstr "Informações de estrelas variáveis ​​GAIA"
 
 #: u_translation.rsgalactic
 msgid "Galactic"
@@ -4335,6 +4335,10 @@ msgstr "Pré-visualizar impressão"
 msgid "Print the chart"
 msgstr "Imprimir a carta"
 
+#: u_translation.rsprioritylabe
+msgid "Priority label"
+msgstr ""
+
 #: u_translation.rsprocessing
 #, object-pascal-format
 msgid "Processing... %s"
@@ -4423,7 +4427,7 @@ msgstr "Porta proxy"
 #: u_translation.rsputthefilesw
 #, object-pascal-format
 msgid "Put the files with a .tle extension to the %s folder"
-msgstr ""
+msgstr "Coloque os arquivos com extensão .tle na pasta %s"
 
 #: u_translation.rsqualityflag
 msgid "Quality flag"
@@ -4582,10 +4586,6 @@ msgstr "Atualizar imagem"
 msgid "Refresh rate"
 msgstr "Taxa de atualização"
 
-#: u_translation.rsrefreshtheli
-msgid "Refresh the list"
-msgstr "Atualizar a lista"
-
 #: u_translation.rsreleasenotes
 msgid "Release notes"
 msgstr "Notas de publicação"
@@ -4625,7 +4625,7 @@ msgstr "Renomear carta"
 
 #: u_translation.rsrenamethecur
 msgid "Rename the current chart"
-msgstr ""
+msgstr "Renomeie a carta atual"
 
 #: u_translation.rsreplacebytic
 msgid "Replace by tick mark"
@@ -5602,7 +5602,7 @@ msgstr "Unidade do Passo"
 
 #: u_translation.rsstereographic
 msgid "Stereographic"
-msgstr ""
+msgstr "Estereográfica"
 
 #: u_translation.rsstop
 msgid "Stop"
