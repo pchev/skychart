@@ -1335,6 +1335,8 @@ begin
   tour.onSlew := @TourSlew;
   tour.TourName.Caption := Edit1.Text;
   tour.ObjectName.Caption := FObjName;
+  tour.Top := Top;
+  tour.Left := Left;
   Visible := False;
   tour.Show;
   while tour.Visible do
