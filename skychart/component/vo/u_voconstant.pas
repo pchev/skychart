@@ -48,26 +48,15 @@ const
   vo_list: array [Tvo_source] of string = ('vo_vizier_list.xml', '');
   vo_types: array [Tvo_source] of Tvo_type = (VizierMeta, ConeSearch);
   vo_meta = 'vo_meta.xml';
-  vo_maxurl = 10;
+  vo_maxurl = 5;
   //      http://vizier.u-strasbg.fr/viz-bin/votable?-source=*&-meta&-meta.max=100000
   vo_url: array [Tvo_source, 1..vo_maxurl, 1..2] of string = ((
-    ('http://vizier.u-strasbg.fr/viz-bin/votable?',
-    'VizieR at CDS - Strasbourg, France'),
-    ('http://vizier.cfa.harvard.edu/viz-bin/votable?', 'VizieR at CFA Harvard - USA'),
-    ('http://vizier.hia.nrc.ca/viz-bin/votable?', 'VizieR at CADC - Canada'),
+    ('https://vizier.cds.unistra.fr/viz-bin/votable?', 'VizieR at CDS - Strasbourg, France'),
+    ('https://vizier.cfa.harvard.edu/viz-bin/votable?', 'VizieR at CFA Harvard - USA'),
     ('http://vizier.nao.ac.jp/viz-bin/votable?', 'VizieR at ADAC - Tokyo, Japan'),
-    ('https://vizier.iucaa.in/viz-bin/votable?', 'VizieR at IUCAA - Pune, India'),
     ('http://vizier.china-vo.org/viz-bin/votable?', 'VizieR at Bejing Obs. - China'),
-    ('http://vizier.ast.cam.ac.uk/viz-bin/votable?', 'VizieR at Cambridge - UK'),
-    ('http://vizier.idia.ac.za/vizier/votable?', 'VizieR at IDIA, South Africa'),
-    ('https://vizier.inasan.ru/viz-bin/votable?', 'VizieR at INASAN, Moscow, Russia'),
     ('', '')
     ), (
-    ('', ''),
-    ('', ''),
-    ('', ''),
-    ('', ''),
-    ('', ''),
     ('', ''),
     ('', ''),
     ('', ''),
