@@ -259,26 +259,34 @@ end;
 
 procedure Tf_voconfig.FillCatList;
 var
-  i, p: integer;
-  buf: string;
+  i, p, n: integer;
+  buf,nam: string;
 begin
-  CatList.RowCount := VO_Catalogs1.CatList.Count + 1;
-  for i := 0 to VO_Catalogs1.CatList.Count - 1 do
-  begin
-    buf := VO_Catalogs1.CatList[i];
-    p := pos(tab, buf);
-    CatList.Cells[0, i + 1] := copy(buf, 1, p - 1);
-    Delete(buf, 1, p);
-    p := pos(tab, buf);
-    CatList.Cells[1, i + 1] := copy(buf, 1, p - 1);
-    Delete(buf, 1, p);
-    p := pos(tab, buf);
-    //CatList.Cells[2,i+1]:=copy(buf,1,p-1);
-    Delete(buf, 1, p);
-    CatList.Cells[2, i + 1] := buf;
+  CatList.RowCount := 1;
+  n:=VO_Catalogs1.CatList.Count;
+  if n>0 then begin
+    for i := 0 to VO_Catalogs1.CatList.Count - 1 do
+    begin
+      buf := VO_Catalogs1.CatList[i];
+      p := pos(tab, buf);
+      nam:= trim(copy(buf, 1, p - 1));
+      if nam='' then break;
+      CatList.RowCount := CatList.RowCount+1;
+      CatList.Cells[0, i + 1] := nam;
+      Delete(buf, 1, p);
+      p := pos(tab, buf);
+      CatList.Cells[1, i + 1] := copy(buf, 1, p - 1);
+      Delete(buf, 1, p);
+      p := pos(tab, buf);
+      //CatList.Cells[2,i+1]:=copy(buf,1,p-1);
+      Delete(buf, 1, p);
+      CatList.Cells[2, i + 1] := buf;
+    end;
+    CatList.SortColRow(True, 0);
   end;
-  CatList.SortColRow(True, 0);
-  if VO_Catalogs1.CatList.Count < 1000 then
+  if CatList.RowCount = 1 then
+    msg.Caption := Format(rsNotFound,[CatDescEdit.Text])
+  else if VO_Catalogs1.CatList.Count < 1000 then
     msg.Caption := Format(rsCatalogsAvai, [IntToStr(CatList.RowCount - 1)])
   else
     msg.Caption := Format(rsTruncatedToS, [IntToStr(CatList.RowCount - 1)]);
