@@ -2327,8 +2327,11 @@ begin
         cfgcat.GCatLst[i].shortname + '.ixr') then
       begin
         // new index format
-        FindNumGcatRec(cfgcat.GCatLst[i].path, cfgcat.GCatLst[i].shortname, iid,
-          H.ixkeylen, rec, ok);
+        FindNumGcatRec(cfgcat.GCatLst[i].path, cfgcat.GCatLst[i].shortname, iid, H.ixkeylen, rec, ok);
+        if (not ok)and(ctype=rtDbl)and(uppercase(copy(cfgcat.GCatLst[i].shortname,1,3))='DSD') then begin
+          iid:='discov_num'+iid;
+          FindNumGcatRec(cfgcat.GCatLst[i].path, cfgcat.GCatLst[i].shortname, iid, H.ixkeylen, rec, ok);
+        end;
         if ok then
         begin
           ar := rec.ra / 15;
