@@ -2204,7 +2204,11 @@ begin
       (abs(FCacheBMP.GetJD(idx) - jdt) > 0.000693) or
       (FCacheBMP.GetDiameter(idx) <> ds) or
       (abs(FCacheBMP.GetProt(idx) - pa) > 0.2) or
-      ((idx = C_Jupiter) and (FCacheBMP.GetGRS(idx) <> gw));
+      // Bug fix: the test was written as (idx = C_Jupiter). idx is the position
+      // of the entry in the FCacheBMP hash list, not the body number, so the
+      // Great Red Spot longitude was compared for whichever object happened to
+      // sit in cache slot 5 instead of for Jupiter. The body number is ipla.
+      ((ipla = C_Jupiter) and (FCacheBMP.GetGRS(idx) <> gw));
 
     if NewScan then
     begin

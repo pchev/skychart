@@ -5536,16 +5536,23 @@ begin
   begin
     n0 := 0;
     srate := TStringList.Create;
-    Fpop_scope.GetScopeRates(n0, srate);
-    if n0 > 0 then
-    begin
-      Result := msgOK + tab + IntToStr(n0) + tab;
-      Result := Result + '0' + tab;
-      for i := 0 to n0 - 1 do
-        Result := Result + srate[i] + tab;
-    end
-    else
-      Result := msgFailed;
+    { Bug fix: srate was never freed on any path. This function is reachable from
+      the TCP and script interfaces, so a client polling the scope rates leaked a
+      TStringList on every call. }
+    try
+      Fpop_scope.GetScopeRates(n0, srate);
+      if n0 > 0 then
+      begin
+        Result := msgOK + tab + IntToStr(n0) + tab;
+        Result := Result + '0' + tab;
+        for i := 0 to n0 - 1 do
+          Result := Result + srate[i] + tab;
+      end
+      else
+        Result := msgFailed;
+    finally
+      srate.Free;
+    end;
   end;
 end;
 

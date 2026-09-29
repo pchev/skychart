@@ -993,6 +993,8 @@ begin
 
   PlanetImage.Free;
 
+  inherited Destroy;   // Bug fix: overridden destructor did not chain to the ancestor
+
 end;
 
 function TOrbits.PointXY( ipla: integer; jdt:double):TPointF;

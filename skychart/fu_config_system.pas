@@ -78,7 +78,6 @@ type
     Page5: TTabSheet;
     TelescopeManualLabel: TLabel;
     Label14: TLabel;
-    Language: TTabSheet;
     Page1: TTabSheet;
     TelescopeManual: TPanel;
     Label12: TLabel;

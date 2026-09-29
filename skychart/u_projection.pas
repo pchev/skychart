@@ -1003,13 +1003,20 @@ begin
       sincos(de1, s1, c1);
       sincos(de2, s2, c2);
       c3 := (s1 * s2) + (c1 * c2 * cos((ar1 - ar2)));
-      if abs(c3) <= 1 then
-        Result := double(arccos(c3))
-      else
-        Result := pi2;
+      { Bug fix: an argument marginally outside [-1,1] - which rounding produces
+        for any two positions that are close but not bit-identical - used to
+        return pi2, i.e. the largest possible value, when the true separation is
+        almost zero. That made an object sitting on the search centre look
+        infinitely far away. Clamp instead of bailing out. pi2 is not a legal
+        separation anyway: the maximum on a sphere is pi. }
+      if c3 > 1 then
+        c3 := 1
+      else if c3 < -1 then
+        c3 := -1;
+      Result := double(arccos(c3));
     end;
   except
-    Result := pi2;
+    Result := pi;   // Bug fix: was pi2, which is not a possible angular distance
   end;
 end;
 

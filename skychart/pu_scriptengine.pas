@@ -2521,10 +2521,16 @@ begin
     if (txt = 'Button') or (txt = 'Combo_') or (txt = 'Event_') then
     begin
       node := TreeView1.Selected;
+      { Bug fix: when a new list was created here it only became owned by the
+        node if the dialog was confirmed. Cancelling leaked it. Attach it to the
+        node straight away, so ownership never depends on the dialog result. }
       if (node.Data <> nil) and (TObject(node.Data) is TStringList) then
         s := (TStringList(node.Data))
       else
+      begin
         s := TStringList.Create;
+        node.Data := s;
+      end;
       if Fpascaleditor = nil then
       begin
         Fpascaleditor := Tf_pascaleditor.Create(self);

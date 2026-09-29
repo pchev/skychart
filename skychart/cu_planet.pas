@@ -2497,6 +2497,7 @@ end;
 procedure TPlanet.OrbRect(jd: double; var xc, yc, zc, rs: double);
 var
   nu: double;
+  saveoe: double;   // Bug fix: original eccentricity, restored before returning
 
   procedure eliptique;
   var
@@ -2547,19 +2548,32 @@ var
 
 begin
   nu := 0;
-  if comelem.oe < 1 then
-    try
-    eliptique;
-    except
-      if (comelem.oe>0.9999) then
-        comelem.oe:=1 // retry with parabolic orbit
-      else
-        raise;
-    end;
-  if comelem.oe = 1 then
-    parabolique;
-  if comelem.oe > 1 then
-    hyperbolique;
+  { Bug fix: the except handler below writes comelem.oe:=1 so that the parabolic
+    solver is used for this call. That value used to stay behind, which meant the
+    comet permanently reported an eccentricity of exactly 1 in the object info
+    panel and in any element export, and every later ephemeris took the parabolic
+    branch even at epochs where the elliptic solver converges. Save the real
+    eccentricity and put it back, so the fallback stays local to this call.
+    The nested solvers read comelem.Oe directly, so the field still has to carry
+    the substituted value while they run. }
+  saveoe := comelem.Oe;
+  try
+    if comelem.oe < 1 then
+      try
+      eliptique;
+      except
+        if (comelem.oe>0.9999) then
+          comelem.oe:=1 // retry with parabolic orbit
+        else
+          raise;
+      end;
+    if comelem.oe = 1 then
+      parabolique;
+    if comelem.oe > 1 then
+      hyperbolique;
+  finally
+    comelem.Oe := saveoe;
+  end;
   xc := rs * comelem.Oa * sin(comelem.Oaa + comelem.Oomi + nu); { meeus 25.14 }
   yc := rs * comelem.Ob * sin(comelem.Obb + comelem.Oomi + nu);
   zc := rs * comelem.Oc * sin(comelem.Occ + comelem.Oomi + nu);
@@ -2686,6 +2700,7 @@ procedure TPlanet.Asteroid(jd: double; highprec: boolean;
 var
   xs, ys, zs, rr: double;
   nu, da, n0, m, ex, num, den: double;
+  n1: double;   // Bug fix: used to clamp the arccos arguments below
 
   procedure AstGeom;
   begin
@@ -2718,8 +2733,27 @@ begin
   ar := Rmod(ar + pi2, pi2);
   de := arcsin((zc + zs) / dist);
   rr := sqrt(xs * xs + ys * ys + zs * zs);
-  elong := arccos((rr * rr + dist * dist - r * r) / (2.0 * rr * dist));
-  phase := arccos((r * r + dist * dist - rr * rr) / (2.0 * r * dist));
+  { Bug fix: these two arccos calls were unguarded, unlike the identical pair in
+    TPlanet.Comet above. Rounding in the law-of-cosines form routinely pushes the
+    argument just past +-1, and arccos is implemented as arctan2(sqrt(1-x*x),x),
+    so sqrt() of a negative value raised a floating point exception. The zero
+    denominators are guarded for the same reason. Same fallbacks as TPlanet.Comet. }
+  if (rr > 0) and (dist > 0) then
+    n1 := (rr * rr + dist * dist - r * r) / (2.0 * rr * dist)
+  else
+    n1 := 2;
+  if abs(n1) <= 1 then
+    elong := arccos(n1)
+  else
+    elong := 0;
+  if (r > 0) and (dist > 0) then
+    n1 := (r * r + dist * dist - rr * rr) / (2.0 * r * dist)
+  else
+    n1 := 2;
+  if abs(n1) <= 1 then
+    phase := arccos(n1)
+  else
+    phase := 0;
   magn:=AsteroidMag(phase,dist,r,astelem.Ah,astelem.Ag);
 end;
 

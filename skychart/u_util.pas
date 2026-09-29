@@ -829,10 +829,10 @@ end;
 
 function striphtml(html: string): string;
 var
-  i: integer;
+  i, j: integer;
   c: char;
   intag: boolean;
-  tag: string;
+  tag, tagname: string;
 begin
 
   Result := '';
@@ -854,9 +854,18 @@ begin
       '>':
       begin
         intag := False;
-        if tag = 'p' then
+        { Bug fix: tag holds everything between < and >, so it equalled 'p' only
+          for a bare <p>. Real markup such as <p class="note">, <P> or <br/>
+          never matched and no line break was emitted. Reduce the tag to its
+          name, lower case and without a closing slash, before comparing. }
+        tagname := trim(lowercase(tag));
+        j := pos(blank, tagname);
+        if j > 0 then
+          tagname := copy(tagname, 1, j - 1);
+        tagname := StringReplace(tagname, '/', '', [rfReplaceAll]);
+        if tagname = 'p' then
           Result := Result + crlf;
-        if tag = 'br' then
+        if tagname = 'br' then
           Result := Result + crlf;
       end;
 

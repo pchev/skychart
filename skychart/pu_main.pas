@@ -12013,7 +12013,9 @@ end;
 
 procedure Tf_main.KillTCPClient(i: integer);
 begin
-  if (i > 0) and (TCPDaemon.ThrdActive[i]) and (TCPDaemon <> nil) and
+  { Bug fix: TCPDaemon.ThrdActive[i] was read before TCPDaemon was tested for
+    nil, so the nil check could never do its job. Test the object first. }
+  if (i > 0) and (TCPDaemon <> nil) and (TCPDaemon.ThrdActive[i]) and
     (TCPDaemon.TCPThrd[i] <> nil) then
     TCPDaemon.TCPThrd[i].Terminate;
 end;

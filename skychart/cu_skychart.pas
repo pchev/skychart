@@ -9217,7 +9217,12 @@ begin
     exit;
   cfgsc.HorizonMax := musec;  // require in cfgsc for horizon clipping in u_projection
   cfgsc.HorizonMin := pid2;
-  for i := 1 to 360 do
+  { Bug fix: horizonlist is array[0..361]; entries 0 and 361 are the wrap-around
+    guard cells used by the projection code. They were only written in the
+    finally block below, which is reached only when the file exists, so after a
+    switch to a missing or unreadable horizon file they still held the previous
+    file's values and left a spike at due north. Clear the whole array. }
+  for i := 0 to 361 do
     cfgsc.horizonlist[i] := 0;
   if fileexists(fname) then
   begin
@@ -9230,10 +9235,16 @@ begin
       assignfile(f, fname);
       reset(f);
       // get first point
+      { Bug fix: the blank test used trim(buf) but the comment test used buf[1],
+        the raw first character. An indented comment line therefore passed both
+        tests and was handed to StrToFloat, which raised - and the exception was
+        swallowed by the handler at the end of this routine, leaving a flat
+        horizon and no diagnostic. Test the trimmed text in both places. }
       repeat
-        readln(f, buf)
-      until EOF(f) or ((trim(buf) <> '') and (buf[1] <> '#'));
-      if (trim(buf) = '') or (buf[1] = '#') then
+        readln(f, buf);
+        buf := trim(buf)
+      until EOF(f) or ((buf <> '') and (buf[1] <> '#'));
+      if (buf = '') or (buf[1] = '#') then
         exit;
       i1 := round(StrToFloat(trim(words(buf, blank, 1, 1))));
       d1 := strtofloat(trim(words(buf, blank, 2, 1)));
@@ -9253,9 +9264,10 @@ begin
       while (not EOF(f)) and (i2 < 359) do
       begin
         repeat
-          readln(f, buf)
-        until EOF(f) or ((trim(buf) <> '') and (buf[1] <> '#'));
-        if (trim(buf) = '') or (buf[1] = '#') then
+          readln(f, buf);
+          buf := trim(buf)    // Bug fix: see the comment on the first point above
+        until EOF(f) or ((buf <> '') and (buf[1] <> '#'));
+        if (buf = '') or (buf[1] = '#') then
           break;
         i2 := round(StrToFloat(trim(words(buf, blank, 1, 1))));
         d2 := strtofloat(trim(words(buf, blank, 2, 1)));

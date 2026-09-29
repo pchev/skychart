@@ -45,11 +45,13 @@ type
     FConnectTime: double;
     FTerminate: TIntProc;
     FExecuteCmd: TExCmd;
+    procedure SyncTerminate;   // Bug fix: runs FTerminate on the main thread
   public
     id: integer;
     abort, lockexecutecmd, stoping: boolean;
     active_chart, remoteip, remoteport: string;
     constructor Create(hsock: tSocket);
+    destructor Destroy; override;   // Bug fix: owns cmd, which Execute used to free
     procedure Execute; override;
     procedure SendData(str: string);
     procedure ExecuteCmd;
@@ -126,7 +128,16 @@ end;
 
 procedure TTCPDaemon.ThrdTerminate(var i: integer);
 begin
-  ThrdActive[i] := False;
+  { Bug fix: the slot was marked inactive but the pointer was left in place.
+    The threads are FreeOnTerminate, so TCPThrd[i] became a dangling pointer that
+    the main thread kept dereferencing behind a separate, unsynchronised boolean.
+    Clear the pointer as well; this now runs on the main thread (see
+    TTCPThrd.SyncTerminate), so the two arrays stay consistent with each other. }
+  if (i >= low(TCPThrd)) and (i <= high(TCPThrd)) then
+  begin
+    ThrdActive[i] := False;
+    TCPThrd[i] := nil;
+  end;
 end;
 
 procedure TTCPDaemon.GetActiveChart;
@@ -193,12 +204,17 @@ begin
               TCPThrd[n].id := n;
               TCPThrd[n].Start;
               i := 0;
-              while (TCPThrd[n].Fsock = nil) and (i < 100) do
+              { Bug fix: ThrdTerminate now clears TCPThrd[n] as soon as the
+                thread has finished, so every access from here on has to
+                tolerate nil. Before this change the slot kept a pointer to a
+                freed object instead, which is why the original tests looked
+                safe but were not. }
+              while (TCPThrd[n] <> nil) and (TCPThrd[n].Fsock = nil) and (i < 100) do
               begin
                 sleep(100);
                 Inc(i);
               end;
-              if not TCPThrd[n].terminated then
+              if (TCPThrd[n] <> nil) and (not TCPThrd[n].terminated) then
               begin
                 TCPThrd[n].id := n;
                 ThrdActive[n] := True;
@@ -245,12 +261,34 @@ end;
 
 constructor TTCPThrd.Create(Hsock: TSocket);
 begin
-  FreeOnTerminate := True;
+  { Bug fix: inherited Create now runs first. Setting a TThread field before the
+    ancestor constructor has run only works by accident of the current RTL. }
   inherited Create(True);
+  FreeOnTerminate := True;
+  FSock := nil;
   Csock := Hsock;
   cmd := TStringList.Create;
   abort := False;
   lockexecutecmd := False;
+end;
+
+destructor TTCPThrd.Destroy;
+begin
+  { Bug fix: cmd was created here but freed at the end of Execute. If the thread
+    was created and then destroyed without Execute ever running, it leaked.
+    FreeAndNil rather than Free so that a stale reference cannot be used. }
+  FreeAndNil(cmd);
+  FreeAndNil(FSock);
+  inherited Destroy;
+end;
+
+procedure TTCPThrd.SyncTerminate;
+begin
+  { Bug fix: called through Synchronize so that the daemon's TCPThrd/ThrdActive
+    arrays, which the main thread also reads, are only ever touched from one
+    thread. This used to be a direct FTerminate(id) call from Execute. }
+  if assigned(FTerminate) then
+    FTerminate(id);
 end;
 
 procedure TTCPThrd.Execute;
@@ -309,12 +347,18 @@ begin
         WriteTrace('Stop tcp/ip server:' + crlf + msg + crlf + s + crlf + IntToStr(
           fsock.LastError) + ' ' + FSock.LastErrorDesc);
       end;
-      if assigned(FTerminate) then
-        FTerminate(id);
       Fsock.SendString(msgBye + crlf);
       Fsock.CloseSocket;
-      Fsock.Free;
-      cmd.Free;
+      { Bug fix: FSock was freed but left dangling, and SendData - which the main
+        thread calls - only tests "FSock <> nil". FreeAndNil makes that guard
+        mean something. FSock is cleared before the termination callback runs, so
+        that by the time the main thread learns this connection is gone it can no
+        longer be handed a live-looking socket. }
+      FreeAndNil(FSock);
+      { Bug fix: cmd is freed in the destructor now, not here. }
+      { Bug fix: the termination callback is the last thing done, and goes through
+        Synchronize instead of being called directly on this thread. }
+      Synchronize(SyncTerminate);
     end;
   except
   end;

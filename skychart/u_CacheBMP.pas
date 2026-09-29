@@ -91,6 +91,7 @@ destructor TCacheBMP.Destroy;
 begin
   Self.Clear;
   FList.Free;
+  inherited Destroy;   // Bug fix: overridden destructor did not chain to the ancestor
 end;
 
 function TCacheBMP.Count: integer;

@@ -225,7 +225,6 @@ type
     Page4: TTabSheet;
     Page5: TTabSheet;
     Page6: TTabSheet;
-    Panel1: TPanel;
     PanelExpert: TPanel;
     PanelCoord: TPanel;
     Panel2: TPanel;

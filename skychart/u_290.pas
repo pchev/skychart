@@ -810,6 +810,15 @@ filenames290 : array[1..290] of string= {}
 
 const
    record_size:integer=11;{default}
+   {Bug fix: record sizes this reader can actually decode, used to validate the
+    value taken from the file header before it is used as a read length.
+    Note that 7 is listed as a legal size by the .290 format but the case
+    statement in readdatabase290 has never had an arm for it, so a 7 byte file
+    is rejected here rather than silently decoded as garbage. If a decoder for
+    size 7 is added, set the entry below to true and add the matching case arm.}
+   valid_record_sizes: array[0..11] of boolean =
+     (false,false,false,false,false,true,true,false,false,true,true,true);
+                     { 0     1     2     3     4    5    6    7     8    9   10   11 }
 var
   p11       : ^hnskyhdr290_11;	    { pointer to hns0kyrecord }
   p10       : ^hnskyhdr290_10;	    { pointer to hns0kyrecord }
@@ -943,6 +952,21 @@ begin
            else
            record_size:=ord(database2[109]);{5,6,7,9,10 or 11 bytes record}
 
+           {Bug fix: record_size comes straight out of the file header and was
+            used unchecked. A zero divided by zero in the nr_records expression
+            below, and any value above SizeOf(buf2) made the reader_stars.read
+            further down overflow buf2 into the neighbouring globals. Reject a
+            header we do not understand rather than trusting it.}
+           if (record_size<low(valid_record_sizes)) or
+              (record_size>high(valid_record_sizes)) or
+              (not valid_record_sizes[record_size]) or
+              (record_size>sizeof(buf2)) then
+           begin
+             closedatabase;
+             readdatabase290:=false;
+             exit;
+           end;
+
            nr_records:= trunc((thefile_stars.size-110)/record_size);{110 header size, correct for above read}
 
            mag2:=0;{temporary fix 2019-8-18. Remove in 2021 after release DR3 based database files}
@@ -1042,6 +1066,12 @@ begin
              if mag0>-20 then mag2:=mag0 else  mag2:=256+mag0;{new magn 12.8 is -12.8, 12.9 = -12.7}
            end;{with P11^}
          end; {record size 11}
+      else
+        begin {Bug fix: never fall through the case silently - see above.}
+          closedatabase;
+          readdatabase290:=false;
+          exit;
+        end;
       end;{case}
 
       dec(nr_records); {faster then  (thefile_stars.size-thefile_stars.position<sizeofhnskyhdr) !!!)}
@@ -1071,7 +1101,11 @@ begin
       nr_star:= (nr32store and $000FFFFF);  {zone is multiply of $100000, maximum nr of UCAC4 stars in a zone is 286.833 This allow 1.048.576 stars in a zone and 4096 zones using a cardinal or 2024 zones  using an integer (Tycho .290 is using negative numbers)}
       str(nr_regio,name_regio);
       str(nr_star+1000000:7,naamst);{add zeros by 1000000 and later remove 1, faster then formatfloat}
-      naam2:=name_regio+'-'+naamst[1]+naamst[2]+naamst[3]+naamst[4]+naamst[5]+naamst[6];{naamst[0]contains the "1" and skip this one}
+      {Bug fix: Pascal strings are 1-based, so the padding "1" added above sits
+       at naamst[1], not at naamst[0]. Taking naamst[1]..naamst[6] therefore kept
+       the padding digit and dropped the last real digit: star 286833 was reported
+       as 128683. Take the six digits that follow the padding instead.}
+      naam2:=name_regio+'-'+copy(naamst,2,6);
     end
     else
     begin {tycho style}
