@@ -245,7 +245,7 @@ begin
     buf := 'B   N        ';
     //B   N        Output format flag, R/P option, D/C/N option, Azimuth option
     writeln(satctl, buf);
-    buf := 'qs.mag';        //quicksat.mag      Intrinsic magnitudes input file
+    buf := 'quicksat.mag';  //quicksat.mag      Intrinsic magnitudes input file
     writeln(satctl, buf);
     buf := 'none        ';  //none              Intrinsic magnitudes override file
     writeln(satctl, buf);

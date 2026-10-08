@@ -1,6 +1,6 @@
 
         QuickSat Satellite Prediction Program
-        Version 2.15O            May 23, 2020
+        Version 2.22            July 22, 2026
 
 
         Description of the Documentation
@@ -8,12 +8,12 @@
 This documentation consists of the following parts:
 
 1. Introduction                                     line  20
-2. Operation of the program                         line  69
-3. How to run the test                              line 128
-4. Description of the control file                  line 144
-5. Description of the intrinsic magnitudes file(s)  line 577
-6. Description of the orbital elements file(s)      line 670
-7. Description of the prediction output             line 708
+2. Operation of the program                         line  70
+3. How to run the test                              line 127
+4. Description of the control file                  line 143
+5. Description of the intrinsic magnitudes file(s)  line 576
+6. Description of the orbital elements file(s)      line 669
+7. Description of the prediction output             line 707
 
 
 
@@ -36,11 +36,11 @@ the Earth's shadow, RA and Dec.
 This program is freeware.  There are no restrictions on its distribution.
 
 The program is written in Fortran. This version requires the use of a
-coprocessor.  This is a "DOS" program.
+coprocessor.
 
-The program has certain "built-in" limits:  1) No more than 10000 names and
+The program has certain "built-in" limits:  1) No more than 30000 names and
 magnitudes may be stored from the "intrinsic magnitudes" file.  2) If the
-"store elements in memory" option is chosen, no more than 10000 element sets
+"store elements in memory" option is chosen, no more than 30000 element sets
 may be stored from the orbital elements files.  3) No more than 4000 different
 set of "size" values can be stored.
 
@@ -49,23 +49,22 @@ The following files are provided:
 2. quicksat.exe - the executable
 3. quicksat.mag - a file of intrinsic magnitudes, sizes, and RCS values
 4. quicksat.ctl - an input test control file
-5. quicksat.dat - an input test elements file (these elsets are 11 years old)
+5. quicksat.dat - an input test elements file (these elsets are very old)
 6. quicksat.ref - the output file from the test
 
 The author of the program is Mike McCants.  I can be reached at
-"mmccants@prismnet.com" on the Internet.  The current version of Quicksat is
+"mmccants@mmccants.org" on the Internet.  The current version of Quicksat is
 located in my web area, which can be accessed from my home page.
-(http://www.prismnet.com/~mmccants/)
+(http://www.mmccants.org/programs/)
 
-Changes for version 2.15O:  Limits have been increased to 10,000 for all three
+Changes for version 2.20:  The program can now handle Axxxx catalog numbers.
+
+Changes for version 2.15O:  Limits have been increased to 30,000 for all three
 
 Changes for version 2.15N:  This is a 32-bit executable.  It was generated
 by using f2c to convert the Fortran files to C and then by using Digital
 Mars C to generate the program.  The limit on the number of input tles has
-been increased to 5000.  The limit on the number of satellite names has
-been increased to 5000.  The limit on the number of output predictions
-that can be generated has been increased to 5000.
-
+been increased to 5000.
 
 
         Operation of the Program

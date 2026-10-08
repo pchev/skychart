@@ -1097,9 +1097,9 @@ begin
     wrkdir := SysToUTF8(slash(satdir));
     DeleteFile(slash(satdir) + 'satlist.out');
     DeleteFile(slash(satdir) + 'quicksat.ctl');
-    DeleteFile(slash(satdir) + 'quicksat.mag');
-    if not fileexists(slash(satdir) + 'qs.mag') then
-      CopyFile(srcdir + 'qs.mag', wrkdir + 'qs.mag');
+    DeleteFile(slash(satdir) + 'qs.mag');
+    if not fileexists(slash(satdir) + 'quicksat.mag') then
+      CopyFile(srcdir + 'quicksat.mag', wrkdir + 'quicksat.mag');
     SatelliteList(IntToStr(j), IntToStr(m), IntToStr(a), ed, maglimit.Text,
       tle1.Text, SatDir, prgdir, formatfloat(f1, config.tz.SecondsOffset / 3600),
       config.ObsName, MinSatAlt.Text, config.ObsLatitude, config.ObsLongitude,
