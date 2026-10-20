@@ -93,3 +93,5 @@ bin-*.tar.bz2
 bin-*.tar.xz
 bin-*.zip
 update-bin-*.zip
+system_integration/Windows/data/zoneinfo.zip
+system_integration/Windows/data/zoneinfo

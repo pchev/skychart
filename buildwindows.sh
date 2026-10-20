@@ -43,6 +43,11 @@ echo $version-$currentrev > beta.txt
   rm skychart*.zip
   rm skychart*.exe
   rm -rf $builddir
+  
+# update timezone files
+  cd $wd/system_integration/Windows/data
+  ./mkzoneinfo.sh
+  cd $wd
 
 # make Windows i386 version
   rsync -a --exclude=.svn system_integration/Windows/installer/skychart/* $builddir
