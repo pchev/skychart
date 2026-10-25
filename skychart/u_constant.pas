@@ -1142,7 +1142,7 @@ type
     PMon, DrawPMon, ApparentPos, CoordExpertMode, SunOnline, DSLforcecolor, DSLsurface, SurfaceBlure: boolean;
     TelescopeInterface,ManualTelescopeType, CoordType, DSLcolor, SurfaceAlpha: integer;
     IndiServerHost, IndiServerPort, IndiDevice, AscomDevice, AlpacaHost, AlpacaId, AlpacaUser, AlpacaPass : string;
-    TelescopeInterval, AlpacaProtocol, AlpacaPort, AlpacaDevice, TelescopeLeft, TelescopeTop : integer;
+    TelescopeInterval, IndiReadTimeout, AlpacaProtocol, AlpacaPort, AlpacaDevice, TelescopeLeft, TelescopeTop : integer;
     TelescopeAltAz, TelescopeAutoconnect: boolean;
     ShowCircle, ShowCrosshair, ManualTelescope, ShowImages,
     EyepieceMask, ShowImageList, ShowImageLabel, ShowBackgroundImage,
@@ -2491,6 +2491,7 @@ begin
   IndiServerHost := Source.IndiServerHost;
   IndiServerPort := Source.IndiServerPort;
   IndiDevice := Source.IndiDevice;
+  IndiReadTimeout := Source.IndiReadTimeout;
   AscomDevice := Source.AscomDevice ;
   AlpacaId := Source.AlpacaId ;
   AlpacaHost := Source.AlpacaHost ;

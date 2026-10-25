@@ -174,6 +174,7 @@ begin
 if csDestroying in ComponentState then exit;
   indiclient:=TIndiBaseClient.Create;
   indiclient.Timeout:=FTimeOut;
+  indiclient.ReadTimeout:=FReadTimeout;
   indiclient.onNewDevice:=@NewDevice;
   indiclient.onNewMessage:=@NewMessage;
   indiclient.onNewProperty:=@NewProperty;

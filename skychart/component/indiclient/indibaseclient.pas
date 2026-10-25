@@ -53,7 +53,7 @@ type
   private
     FinitProps: boolean;
     FTargetHost, FTargetPort, FErrorDesc, FRecvData, Fsendbuffer: string;
-    FTimeout: integer;
+    FTimeout, FReadTimeout: integer;
     FConnected: boolean;
     FProtocolTrace: boolean;
     FProtocolRawFile, FProtocolTraceFile, FProtocolErrorFile: string;
@@ -140,7 +140,10 @@ type
       minwait: integer = 0): boolean;
     function WaitBusy(svp: ISwitchVectorProperty; timeout: integer = 5000;
       minwait: integer = 0): boolean;
+    // the timeout for the socket
     property Timeout: integer read FTimeout write FTimeout;
+    // the time we wait for a message
+    property ReadTimeout: integer read FReadTimeout write FReadTimeout;
     property ProtocolTrace: boolean read FProtocolTrace write FProtocolTrace;
     property ProtocolRawFile: string read FProtocolRawFile write FProtocolRawFile;
     property ProtocolTraceFile: string read FProtocolTraceFile write FProtocolTraceFile;
@@ -221,6 +224,7 @@ begin
 {$else}
   FTimeout := 200;
 {$endif}
+  FReadTimeout := 20;
   FConnected := False;
   FProtocolTrace := False;
   FProtocolRawFile := '';
@@ -392,7 +396,7 @@ begin
             break;
           // read a complete block
           repeat
-            rbuf := tcpclient.Sock.RecvTerminated(20, LF);
+            rbuf := tcpclient.Sock.RecvTerminated(FReadTimeout, LF);
             if (tcpclient.Sock.lastError <> 0) and
               (tcpclient.Sock.lastError <> WSAETIMEDOUT) then begin
                  err:=true;

@@ -3554,6 +3554,7 @@ begin
     f_indigui.IndiServer := def_cfgsc.IndiServerHost;
     f_indigui.IndiPort := def_cfgsc.IndiServerPort;
     f_indigui.IndiDevice := '';
+    f_indigui.ReadTimeout := def_cfgsc.IndiReadTimeout;
     IndiGUIready := True;
   end;
   f_indigui.Show;
@@ -6991,6 +6992,7 @@ begin
   def_cfgsc.IndiServerHost := 'localhost';
   def_cfgsc.IndiServerPort := '7624';
   def_cfgsc.IndiDevice := 'Telescope Simulator';
+  def_cfgsc.IndiReadTimeout := 20;
   def_cfgsc.ManualTelescope := False;
   def_cfgsc.ManualTelescopeType := 0;
   def_cfgsc.TelescopeTurnsX := 6;    // Vixen GP
@@ -8291,19 +8293,14 @@ begin
         def_cfgsc.AlpacaDevice := ReadInteger(section, 'AlpacaDevice', def_cfgsc.AlpacaDevice);
         def_cfgsc.TelescopeLeft := ReadInteger(section, 'TelescopeLeft', def_cfgsc.TelescopeLeft);
         def_cfgsc.TelescopeTop := ReadInteger(section, 'TelescopeTop', def_cfgsc.TelescopeTop);
-        def_cfgsc.IndiServerHost :=
-          ReadString(section, 'IndiServerHost', def_cfgsc.IndiServerHost);
-        def_cfgsc.IndiServerPort :=
-          ReadString(section, 'IndiServerPort', def_cfgsc.IndiServerPort);
+        def_cfgsc.IndiServerHost := ReadString(section, 'IndiServerHost', def_cfgsc.IndiServerHost);
+        def_cfgsc.IndiServerPort := ReadString(section, 'IndiServerPort', def_cfgsc.IndiServerPort);
         def_cfgsc.IndiDevice := ReadString(section, 'IndiDevice', def_cfgsc.IndiDevice);
-        def_cfgsc.ManualTelescope :=
-          ReadBool(section, 'ManualTelescope', def_cfgsc.ManualTelescope);
-        def_cfgsc.ManualTelescopeType :=
-          ReadInteger(section, 'ManualTelescopeType', def_cfgsc.ManualTelescopeType);
-        def_cfgsc.TelescopeTurnsX :=
-          ReadFloat(section, 'TelescopeTurnsX', def_cfgsc.TelescopeTurnsX);
-        def_cfgsc.TelescopeTurnsY :=
-          ReadFloat(section, 'TelescopeTurnsY', def_cfgsc.TelescopeTurnsY);
+        def_cfgsc.IndiReadTimeout := ReadInteger(section, 'IndiReadTimeout', def_cfgsc.IndiReadTimeout);
+        def_cfgsc.ManualTelescope := ReadBool(section, 'ManualTelescope', def_cfgsc.ManualTelescope);
+        def_cfgsc.ManualTelescopeType := ReadInteger(section, 'ManualTelescopeType', def_cfgsc.ManualTelescopeType);
+        def_cfgsc.TelescopeTurnsX := ReadFloat(section, 'TelescopeTurnsX', def_cfgsc.TelescopeTurnsX);
+        def_cfgsc.TelescopeTurnsY := ReadFloat(section, 'TelescopeTurnsY', def_cfgsc.TelescopeTurnsY);
         def_cfgsc.TelLimitDecMax := ReadFloat(section, 'TelLimitDecMax', def_cfgsc.TelLimitDecMax);
         def_cfgsc.TelLimitDecMin := ReadFloat(section, 'TelLimitDecMin', def_cfgsc.TelLimitDecMin);
         def_cfgsc.TelLimitHaE := ReadFloat(section, 'TelLimitHaE', def_cfgsc.TelLimitHaE);
@@ -9618,9 +9615,7 @@ begin
           WriteString(section, 'IndiServerHost', cfgsc.IndiServerHost);
           WriteString(section, 'IndiServerPort', cfgsc.IndiServerPort);
           WriteString(section, 'IndiDevice', cfgsc.IndiDevice);
-          WriteString(section, 'IndiServerHost', cfgsc.IndiServerHost);
-          WriteString(section, 'IndiServerPort', cfgsc.IndiServerPort);
-          WriteString(section, 'IndiDevice', cfgsc.IndiDevice);
+          WriteInteger(section, 'IndiReadTimeout', cfgsc.IndiReadTimeout);
         end
         else begin
           WriteString(section, 'AscomDevice', def_cfgsc.AscomDevice);
@@ -9640,6 +9635,7 @@ begin
           WriteString(section, 'IndiServerHost', def_cfgsc.IndiServerHost);
           WriteString(section, 'IndiServerPort', def_cfgsc.IndiServerPort);
           WriteString(section, 'IndiDevice', def_cfgsc.IndiDevice);
+          WriteInteger(section, 'IndiReadTimeout', def_cfgsc.IndiReadTimeout);
         end;
         WriteFloat(section, 'TelLimitDecMax', def_cfgsc.TelLimitDecMax);
         WriteFloat(section, 'TelLimitDecMin', def_cfgsc.TelLimitDecMin);

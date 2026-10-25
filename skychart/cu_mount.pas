@@ -58,7 +58,7 @@ T_mount = class(TComponent)
     FStatus: TDeviceStatus;
     Fdevice, Fcapability: string;
     FMountSlewing: boolean;
-    FTimeOut: integer;
+    FTimeOut, FReadTimeout: integer;
     FAutoLoadConfig: boolean;
     FIsEqmod, FIsGem: boolean;
     FEquinox,FEquinoxJD: double;
@@ -150,6 +150,7 @@ T_mount = class(TComponent)
     property CanPulseGuide: boolean read FCanPulseGuide;
     property PulseGuiding: boolean read GetPulseGuiding;
     property Timeout: integer read FTimeout write SetTimeout;
+    property ReadTimeout: integer read FReadTimeout write FReadTimeout;
     property CanMoveAxis: boolean read FCanMoveAxis;
     Property SlewRates: TstringList read GetSlewRates;
     property AutoLoadConfig: boolean read FAutoLoadConfig write FAutoLoadConfig;

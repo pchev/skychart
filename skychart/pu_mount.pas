@@ -387,6 +387,7 @@ begin
          Fmount.onStatusChange:=@MountStatus;
          Fmount.onMsg:=@MountMessage;
          Fmount.AutoLoadConfig:=true;
+         Fmount.ReadTimeout:=csc.IndiReadTimeout;
          Fmount.Connect(csc.IndiServerHost,csc.IndiServerPort,csc.IndiDevice);
       end;
      end;
@@ -1041,6 +1042,7 @@ begin
   indiclient.onNewDevice := @IndiNewDevice;
   indiclient.onServerDisconnected:=@IndiDisconnected;
   indiclient.SetServer(IndiServerHost.Text, IndiServerPort.Text);
+  indiclient.ReadTimeout:=csc.IndiReadTimeout;
   indiclient.ConnectServer;
   IndiTimer.Interval:=5000; // wait 5 sec for initial connection
   IndiTimer.Enabled := True;
@@ -1057,6 +1059,7 @@ begin
     f_indigui.IndiServer := csc.IndiServerHost;
     f_indigui.IndiPort := csc.IndiServerPort;
     f_indigui.IndiDevice := '';
+    f_indigui.ReadTimeout:=csc.IndiReadTimeout;
     IndiGUIready := True;
   end;
   f_indigui.Show;
