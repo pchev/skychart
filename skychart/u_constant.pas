@@ -602,7 +602,7 @@ const
   URL_TLEINFO1 = 'https://www.idb.com.au/files/TLE_DATA/visual.txt';
   URL_TLEINFO2 = 'https://www.idb.com.au/files/TLE_DATA/TLE.ZIP';
 
-  URL_CELESTRAK1 = 'https://celestrak.org/NORAD/elements/visual.txt';
+  URL_CELESTRAK1 = 'https://celestrak.org/NORAD/elements/gp.php?GROUP=visual&FORMAT=tle';
 
 
   URL_GRS = 'https://www.ap-i.net/pub/virtualplanet/grs.txt';
