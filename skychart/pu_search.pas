@@ -600,20 +600,35 @@ begin
   result:=false;
 
   vo_sesame:=slash(VODir)+'vo_sesame.xml';
-
-  case SesameCatNum of
-    0 : cat:='N';
-    1 : cat:='S';
-    2 : cat:='V';
-    3 : cat:='~SNVA';
-  else
-    cat:='';
-  end;
-
-  n := EncodeURLElement(num);
-
   url:=sesame_url[SesameUrlNum+1,1];
-  url:=url+'/-oxFI/'+cat+'?'+trim(n);
+  cat:='';
+
+  case SesameUrlNum of
+   0: begin  // CDS Strasbourg
+       case SesameCatNum of   // can select a source
+         0 : cat:='N';        // NED
+         1 : cat:='S';        // Simbad
+         2 : cat:='V';        // Vizier
+         3 : cat:='~SNVA';    // All
+       end;
+       n := EncodeURLElement(num);
+       url:=url+'/-oxFI/'+cat+'?'+trim(n);
+      end;
+   1: begin  // Hardward
+       case SesameCatNum of
+         0 : cat:='N';    // source parameter required, can only be N or S, but ignored
+         1 : cat:='S';
+         2 : cat:='S';
+         3 : cat:='SN';
+       end;
+       n := EncodeURLElement(num);
+       url:=url+'/-oxFI/'+cat+'?'+trim(n);
+      end;
+   2: begin  // IDA       no source parameter is accepted, space encoding is not accepted
+       url:=url+'/'+'-ox'+'/?'+StringReplace(num,' ','',[rfReplaceAll]);
+      end;
+   else exit;
+  end;
 
   HTTPRequest:=THTTPthread.Create;
   HTTPRequest.http.Sock.SocksIP:='';
@@ -636,6 +651,7 @@ begin
   end;
   HTTPRequest.http.Document.Clear;
   HTTPRequest.http.Headers.Clear;
+  HTTPRequest.http.Headers.add('Accept: application/xml');
   HTTPRequest.http.Timeout:=FTimeout;
   HTTPRequest.http.sock.SocksTimeout:=FTimeout;
   if visible then
@@ -657,7 +673,7 @@ begin
       end;
     end
     else begin
-      StatusLabel.Caption:=StatusLabel.Caption+' '+rsOnlineSearch;
+      StatusLabel.Caption:=StatusLabel.Caption+' '+'Server error: '+inttostr(HTTPRequest.http.ResultCode)+' '+HTTPRequest.http.ResultString;
       num:='Not found';
     end;
     HTTPRequest.Free;
