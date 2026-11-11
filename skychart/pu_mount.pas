@@ -70,6 +70,8 @@ type
     ARestId: TEdit;
     elev: TEdit;
     FlipNS: TRadioGroup;
+    PanelIndiSetup: TPanel;
+    PanelAscomSetup: TPanel;
     PanelIndi: TPanel;
     IndiServerHost: TEdit;
     IndiServerPort: TEdit;
@@ -104,7 +106,7 @@ type
     PageControl1: TPageControl;
     Pagecontrol2: TPageControl;
     PanelCredential: TPanel;
-    Panel3: TPanel;
+    PanelAlpacaSetup: TPanel;
     parkled: TShape;
     ASCOMLocal: TTabSheet;
     ASCOMRemote: TTabSheet;
@@ -332,6 +334,9 @@ begin
         MessageDlg(format(DriverMsg,[E.Message]), mtWarning, [mbOK], 0);
     end;
     led.brush.color := clRed;
+    PanelAscomSetup.Enabled:=True;
+    PanelAlpacaSetup.Enabled:=True;
+    PanelIndiSetup.Enabled:=True;
     ButtonConnect.Enabled := True;
     ButtonDisconnect.Enabled := False;
     ButtonSelect.Enabled := True;
@@ -440,6 +445,9 @@ begin
       FSlewing:=GetSlewing;
       led.brush.color := clLime;
       timer1.Enabled := True;
+      PanelAscomSetup.Enabled:=False;
+      PanelAlpacaSetup.Enabled:=False;
+      PanelIndiSetup.Enabled:=False;
       ButtonConnect.Enabled := False;
       ButtonDisconnect.Enabled := True;
       ButtonSelect.Enabled := False;
@@ -455,6 +463,9 @@ begin
     end;
     devDisconnected:  begin
       led.brush.color := clRed;
+      PanelAscomSetup.Enabled:=True;
+      PanelAlpacaSetup.Enabled:=True;
+      PanelIndiSetup.Enabled:=True;
       ButtonConnect.Enabled := True;
       ButtonDisconnect.Enabled := False;
       ButtonSelect.Enabled := True;
