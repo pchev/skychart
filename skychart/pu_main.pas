@@ -756,7 +756,6 @@ type
     procedure TelescopeMove(origin: string; ra, de: double);
     procedure TelescopeChange(origin: string; tc: boolean);
     procedure ApplyScript(Sender: TObject);
-    procedure IndiGUIdestroy(Sender: TObject);
     procedure PositionApply(Sender: TObject);
     procedure ZoomBarApply(Sender: TObject);
     function QuickDownload(url, fn: string): boolean;
@@ -3546,23 +3545,9 @@ end;
 
 procedure Tf_main.TelescopePanelExecute(Sender: TObject);
 begin
-  if not IndiGUIready then
-  begin
-    f_indigui := Tf_indigui.Create(self);
-    ScaleDPI(f_indigui);
-    f_indigui.onDestroy := IndiGUIdestroy;
-    f_indigui.IndiServer := def_cfgsc.IndiServerHost;
-    f_indigui.IndiPort := def_cfgsc.IndiServerPort;
-    f_indigui.IndiDevice := '';
-    f_indigui.ReadTimeout := def_cfgsc.IndiReadTimeout;
-    IndiGUIready := True;
-  end;
-  f_indigui.Show;
-end;
-
-procedure Tf_main.IndiGUIdestroy(Sender: TObject);
-begin
-  IndiGUIready := False;
+  if MultiFrame1.ActiveObject is Tf_chart then
+    with MultiFrame1.ActiveObject as Tf_chart do
+      ShowIndiGui(Sender);
 end;
 
 procedure Tf_main.ListObjExecute(Sender: TObject);

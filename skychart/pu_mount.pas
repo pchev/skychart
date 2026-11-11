@@ -199,7 +199,7 @@ type
     cur_az, cur_alt: double;           // current alt-az position in degrees
     FSlewing: boolean;
     FLastArrow: integer;
-    FObservatoryCoord: TNotifyEvent;
+    FObservatoryCoord, FonIndiPanel: TNotifyEvent;
     AlpacaServerList: TAlpacaServerList;
     mountsavedev: string;
     receiveindidevice: boolean;
@@ -214,7 +214,6 @@ type
     procedure MountMessage(msg:string; level: integer=1);
     procedure IndiNewDevice(dp: Basedevice);
     procedure IndiDisconnected(Sender: TObject);
-    procedure IndiGUIdestroy(Sender: TObject);
     function SearchAlpacaDevice(id: string): boolean;
   public
     { Public declarations }
@@ -242,6 +241,7 @@ type
     property Elevation: double read FElevation;
     property Slewing: boolean read FSlewing;
     property onObservatoryCoord: TNotifyEvent read FObservatoryCoord write FObservatoryCoord;
+    property onIndiPanel: TNotifyEvent read FonIndiPanel write FonIndiPanel;
   end;
 
 
@@ -1051,18 +1051,7 @@ end;
 
 procedure Tpop_scope.BtnIndiGuiClick(Sender: TObject);
 begin
-  if not IndiGUIready then
-  begin
-    f_indigui := Tf_indigui.Create(self);
-    ScaleDPI(f_indigui);
-    f_indigui.onDestroy := @IndiGUIdestroy;
-    f_indigui.IndiServer := csc.IndiServerHost;
-    f_indigui.IndiPort := csc.IndiServerPort;
-    f_indigui.IndiDevice := '';
-    f_indigui.ReadTimeout:=csc.IndiReadTimeout;
-    IndiGUIready := True;
-  end;
-  f_indigui.Show;
+  if assigned(FonIndiPanel) then FonIndiPanel(self);
 end;
 
 procedure Tpop_scope.IndiNewDevice(dp: Basedevice);
@@ -1078,11 +1067,6 @@ begin
   IndiTimer.Interval:=100; // not connect, stop immediately
   IndiTimer.Enabled:=false;
   IndiTimer.Enabled:=true;
-end;
-
-procedure Tpop_scope.IndiGUIdestroy(Sender: TObject);
-begin
-  IndiGUIready := False;
 end;
 
 procedure Tpop_scope.IndiTimerTimer(Sender: TObject);

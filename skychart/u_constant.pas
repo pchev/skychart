@@ -1530,7 +1530,6 @@ var
   WideLine: integer = 2;
   MarkWidth: integer = 1;
   MarkType: integer = 1;
-  IndiGUIready: boolean;
   SampConnected: boolean;
   SampClientId, SampClientName, SampClientDesc: TStringList;
   SampClientCoordpointAtsky, SampClientImageLoadFits, SampClientTableLoadVotable:

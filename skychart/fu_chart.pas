@@ -31,7 +31,7 @@ interface
 
 uses
   BGRABitmap, BGRABitmapTypes, u_orbits, u_grappavar,
-  pu_mount, pu_getdss, pu_imglist, pu_prepoint,
+  pu_mount, pu_getdss, pu_imglist, pu_prepoint, pu_indigui,
   u_translation, pu_detail, cu_skychart, u_constant, u_util, pu_image,
   gcatunit, pu_obslist, pu_mosaic, synacode,
   u_projection, Printers, Math, downloaddialog, IntfGraphics,
@@ -280,6 +280,8 @@ type
     SaveLabelColor: array[1..numlabtype] of Tcolor;
     PrintPreview: Tf_image;
     Fpop_scope: Tpop_scope;
+    Findigui: Tf_indigui;
+    FIndiGUIready: boolean;
     ScopeSlewing: boolean;
     FSendImageFits: TSendImageFits;
     FSendSelectRow: TSendSelectRow;
@@ -363,6 +365,8 @@ type
     procedure NewMosaic(ra,de: double; resizechart: boolean);
     procedure EndMosaic(Sender: TObject);
     procedure SendMosaic(Sender: TObject);
+    procedure ShowIndiGui(Sender: TObject);
+    procedure IndiGUIdestroy(Sender: TObject);
     function cmd_SetCursorPosition(x, y: integer): string;
     function cmd_SetGridEQ(onoff: string): string;
     function cmd_SetGrid(onoff: string): string;
@@ -7151,6 +7155,40 @@ begin
   Refresh(true,true);
 end;
 
+procedure Tf_chart.ShowIndiGui(Sender: TObject);
+begin
+  if FIndiGUIready and (
+    (Findigui.IndiServer<>sc.cfgsc.IndiServerHost) or
+    (Findigui.IndiPort<>sc.cfgsc.IndiServerPort))
+  then
+  begin
+    Findigui.Close;
+    while FIndiGUIready do begin
+      sleep(100);
+      Application.ProcessMessages;
+    end;
+    Wait(2);
+  end;
+
+  if not FIndiGUIready then begin
+    Findigui := Tf_indigui.Create(self);
+    ScaleDPI(Findigui);
+    Findigui.onGuiDestroy := IndiGUIdestroy;
+    Findigui.IndiServer := sc.cfgsc.IndiServerHost;
+    Findigui.IndiPort := sc.cfgsc.IndiServerPort;
+    Findigui.IndiDevice := '';
+    Findigui.ReadTimeout := sc.cfgsc.IndiReadTimeout;
+    FIndiGUIready := True;
+  end;
+
+  Findigui.Show;
+end;
+
+procedure Tf_chart.IndiGUIdestroy(Sender: TObject);
+begin
+  FIndiGUIready := False;
+end;
+
 procedure Tf_chart.NewMosaic(ra,de: double; resizechart: boolean);
 var i:integer;
     w: double;
@@ -7915,6 +7953,7 @@ begin
     Fpop_scope.SetLang;
     Fpop_scope.csc:=sc.cfgsc;
     Fpop_scope.onObservatoryCoord:=ObservatoryFromTelescope;
+    Fpop_scope.onIndiPanel:=ShowIndiGui;
   end;
   sc.cfgsc.autorefresh:=true;
   sc.cfgsc.UseSystemTime:=true;
