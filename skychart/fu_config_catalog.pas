@@ -1657,7 +1657,7 @@ begin
   p := stringgrid4.selection.top;
   tname := stringgrid4.cells[1, p];
   tid := 'skychart_' + ExtractFileNameOnly(stringgrid4.cells[2, p]);
-  url := 'file://' + slash(VODir) + stringgrid4.cells[2, p];
+  url := 'file://' + StringReplace(VODir,'\','/',[rfReplaceAll]) + '/' + stringgrid4.cells[2, p];
   if assigned(FSendVoTable) then
     FSendVoTable(client, tname, tid, url);
 end;
