@@ -109,6 +109,7 @@ begin
   {$else}
   url := 'file://' + img;
   {$endif}
+  url:=StringReplace(url,' ','%20',[rfReplaceAll]);
   if assigned(FSendImageFits) then
     FSendImageFits(client, imgname, imgid, url);
 end;

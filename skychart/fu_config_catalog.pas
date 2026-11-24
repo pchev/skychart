@@ -1665,6 +1665,7 @@ begin
   {$else}
   url := 'file://' + slash(VODir) + stringgrid4.cells[2, p];
   {$endif}
+  url:=StringReplace(url,' ','%20',[rfReplaceAll]);
   if assigned(FSendVoTable) then
     FSendVoTable(client, tname, tid, url);
 end;
