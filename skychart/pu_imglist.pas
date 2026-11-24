@@ -81,7 +81,7 @@ end;
 
 procedure Tf_imglist.Button5Click(Sender: TObject);
 var
-  cn, client, imgname, imgid, url: string;
+  cn, client, imgname, imgid, url, img: string;
   i: integer;
 begin
   client := '';
@@ -98,9 +98,17 @@ begin
     ListIndex := CheckListBox1.Items.Count - 1;
   if (ListIndex < 0) then
     exit;
-  imgname := ExtractFileNameOnly(CheckListBox1.Items[ListIndex]);
+  img:=CheckListBox1.Items[ListIndex];
+  imgname := ExtractFileNameOnly(img);
   imgid := 'skychart_' + imgname;
-  url := 'file://' + CheckListBox1.Items[ListIndex];
+  {$ifdef mswindows}
+  if img[1]<>'\' then
+     url := 'file:///' + StringReplace(img,'\','/',[rfReplaceAll])
+  else
+     url := 'file://' + StringReplace(img,'\','/',[rfReplaceAll]);
+  {$else}
+  url := 'file://' + img;
+  {$endif}
   if assigned(FSendImageFits) then
     FSendImageFits(client, imgname, imgid, url);
 end;
