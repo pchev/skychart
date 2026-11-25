@@ -2069,6 +2069,7 @@ begin
     CloseFile(f);
     str.Free;
     ShowUserObjects;
+    cmain.UOforceactive := True;
   end;
 end;
 
