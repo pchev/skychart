@@ -41,7 +41,7 @@ uses
   pu_config_solsys, pu_config_chart, pu_config_system, pu_config_internet, pu_updcatalog,
   cu_radec, pu_config_calendar, pu_planetinfo, cu_sampclient, cu_vodata, pu_catgen,
   pu_obslist, fu_script, pu_scriptengine, u_constant, u_util, UScaleDPI, pu_configdirect,
-  u_ccdconfig, blcksock, synsock, dynlibs, FileUtil, ExtendedNotebook, LCLVersion, LCLType,
+  u_ccdconfig, blcksock, synsock, dynlibs, FileUtil, ExtendedNotebook, LCLVersion, LCLType, LazVersion,
   InterfaceBase, LCLIntf, SysUtils, Classes, Graphics, Forms, Controls, Menus,
   Math, StdCtrls, Dialogs, Buttons, ExtCtrls, ComCtrls, StdActns, types, cu_httpdownload,
   Printers, ActnList, IniFiles, Spin, Clipbrd, MultiFrame, ChildFrame, pu_selectlayout,
